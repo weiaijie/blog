@@ -4,3 +4,7 @@
 ``` javaScript
 return parseInt(number.toString().split("").reverse().join(""))
 ```
+将一个字符由小写字母转换为大写字母
+``` 
+return String.fromCharCode(parseInt(character.charCodeAt()) - 32)
+```
