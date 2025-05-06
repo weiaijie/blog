@@ -1,0 +1,52 @@
+/* 代码高亮样式 */
+pre {
+    background: #272822;
+    color: #f8f8f2;
+    padding: 10px;
+    border-radius: 5px;
+    overflow: auto;
+}
+
+.comment {
+    color: #75715e;
+}
+
+.keyword {
+    color: #f92672;
+}
+
+.string {
+    color: #e6db74;
+}
+
+.number {
+    color: #ae81ff;
+}
+
+.function {
+    color: #a6e22e;
+}
+
+.tag {
+    color: #f92672;
+}
+
+.attribute {
+    color: #a6e22e;
+}
+
+.selector {
+    color: #f92672;
+}
+
+.property {
+    color: #66d9ef;
+}
+
+.variable {
+    color: #f8f8f2;
+}
+
+.operator {
+    color: #f92672;
+}
