@@ -1,2 +1,15 @@
 
-LearningProjects/nestapp/node_modules
+# Jekyll 生成的文件
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+
+# 依赖目录
+node_modules/
+LearningProjects/nestapp/node_modules/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+/vendor

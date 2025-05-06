@@ -1,1 +1,24 @@
-theme: jekyll-theme-dinky
+title: 魏爱杰的个人网站
+description: 全栈开发工程师 | 专注于创建优雅高效的数字体验
+baseurl: ""
+url: ""
+markdown: kramdown
+highlighter: rouge
+
+# 自定义变量
+author:
+  name: 魏爱杰
+  email: your-email@example.com
+
+# 社交媒体链接
+social:
+  github: https://github.com/weiaijie
+  linkedin: https://linkedin.com/in/your-linkedin
+  twitter: https://twitter.com/your-twitter
+
+# 构建设置
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
