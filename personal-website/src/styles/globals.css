@@ -1,12 +1,15 @@
 :root {
   /* 现代化配色方案 */
   --primary-color: #3B82F6; /* 明亮的蓝色 */
+  --primary-rgb: 59, 130, 246; /* 用于rgba() */
   --primary-dark: #2563EB;
   --primary-light: #60A5FA;
   --secondary-color: #10B981; /* 清新的绿色 */
+  --secondary-rgb: 16, 185, 129; /* 用于rgba() */
   --secondary-dark: #059669;
   --secondary-light: #34D399;
   --accent-color: #8B5CF6; /* 紫色强调色 */
+  --accent-rgb: 139, 92, 246; /* 用于rgba() */
 
   /* 中性色 */
   --text-color: #1F2937;
