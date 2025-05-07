@@ -5,8 +5,8 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>陈明的个人网站</title>
-        <meta name="description" content="前端开发工程师 | 用代码构建美好数字世界" />
+        <title>saber的个人网站</title>
+        <meta name="description" content="全栈开发 | 用代码构建美好数字世界" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />

@@ -1,12 +1,15 @@
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import styles from '@/styles/Header.module.css';
+import Typewriter from '@/components/common/Typewriter';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [currentPath, setCurrentPath] = useState('/');
-  const [isLoaded, setIsLoaded] = useState(false);
+  // 直接使用常量，不需要状态变量
+  const isLoaded = true; // 内容始终显示
+  const [isSearchActive, setIsSearchActive] = useState(false);
 
   // 监听滚动事件，用于改变头部样式
   useEffect(() => {
@@ -16,9 +19,6 @@ const Header = () => {
 
     // 获取当前路径
     setCurrentPath(window.location.pathname);
-
-    // 页面加载完成后的动画效果
-    setIsLoaded(true);
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -35,6 +35,13 @@ const Header = () => {
   const closeMenu = useCallback(() => {
     setIsMenuOpen(false);
     document.body.style.overflow = 'auto';
+  }, []);
+
+  // 处理搜索按钮点击
+  const handleSearchClick = useCallback(() => {
+    setIsSearchActive(prev => !prev);
+    // 这里可以添加搜索功能的实现，例如显示搜索框等
+    alert('搜索功能即将上线');
   }, []);
 
   // 导航菜单项
@@ -77,7 +84,12 @@ const Header = () => {
         {/* 右侧操作区域 */}
         <div className={styles.actionArea}>
           {/* 搜索按钮 */}
-          <button className={styles.searchButton} aria-label="搜索">
+          <button
+            className={`${styles.searchButton} ${isSearchActive ? styles.active : ''}`}
+            aria-label="搜索"
+            onClick={handleSearchClick}
+            aria-expanded={isSearchActive}
+          >
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="11" cy="11" r="8"></circle>
               <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
@@ -85,7 +97,7 @@ const Header = () => {
           </button>
 
           {/* 移动端汉堡菜单按钮 */}
-          <button
+          <div
             className={`${styles.menuButton} ${isMenuOpen ? styles.open : ''}`}
             onClick={toggleMenu}
             aria-label="菜单"
@@ -93,15 +105,15 @@ const Header = () => {
           >
             <span></span>
             <span></span>
-          </button>
+          </div>
         </div>
 
         {/* 移动端导航菜单 */}
         <div className={`${styles.mobileNav} ${isMenuOpen ? styles.open : ''}`}>
           <div className={styles.mobileNavHeader}>
             <div className={styles.mobileNavLogo}>
-              <span className={styles.mobileNavName}>陈明</span>
-              <span className={styles.mobileNavTitle}>前端开发工程师</span>
+              <span className={styles.mobileNavName}>saber</span>
+              <span className={styles.mobileNavTitle}>全栈开发</span>
             </div>
           </div>
 
@@ -154,9 +166,16 @@ const Header = () => {
       <div className={styles.tagline}>
         <div className={styles.taglineContent}>
           <div className={styles.taglineMain}>
-            <h2 className={styles.taglineHeading}>创造优雅的数字体验</h2>
+            <h2 className={styles.taglineHeading}>
+              <Typewriter
+                texts={['创造优雅的数字体验', '构建直观的用户界面', '开发高效的应用程序']}
+                typingSpeed={80}
+                deletingSpeed={40}
+                delayAfterType={3000}
+              />
+            </h2>
             <p className={styles.taglineSubheading}>
-              <span className={styles.taglineHighlight}>前端开发工程师</span>，专注于构建直观、高效且美观的用户界面
+              <span className={styles.taglineHighlight}>全栈开发</span>，专注于构建直观、高效且美观的用户界面
             </p>
             <div className={styles.taglineActions}>
               <a href="#projects" className={styles.taglinePrimaryButton}>
