@@ -1,7 +1,16 @@
 /* 布局样式 */
+.layoutWrapper {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden; /* 防止水平滚动 */
+  background-color: var(--bg-color);
+  transition: var(--theme-transition);
+}
+
 .mainContainer {
   position: relative;
   min-height: 100vh;
   overflow-x: hidden; /* 防止水平滚动 */
-  background-color: #fff;
+  background-color: var(--bg-color);
+  transition: var(--theme-transition);
 }

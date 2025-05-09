@@ -1,6 +1,6 @@
 /* 个人标语/口号 - 苹果风格 */
 .tagline {
-  background-color: #fff;
+  background-color: var(--tagline-bg);
   width: 100%;
   padding: 80px 0;
   position: absolute; /* 改为绝对定位，不影响文档流 */
@@ -15,6 +15,7 @@
   transform: translateZ(0); /* 启用GPU加速 */
   backface-visibility: hidden; /* 防止闪烁 */
   -webkit-font-smoothing: antialiased; /* 文字渲染优化 */
+  transition: background-color 0.3s ease;
 }
 
 /* 标语内容容器 */
@@ -41,8 +42,9 @@
   font-weight: 600;
   line-height: 1.1;
   letter-spacing: -0.015em; /* 苹果字体特有的字间距 */
-  color: #1d1d1f;
+  color: var(--tagline-heading);
   margin-bottom: 16px;
+  transition: color 0.3s ease;
 }
 
 /* 标语副标题 */
@@ -52,14 +54,16 @@
   font-weight: 400;
   line-height: 1.4;
   letter-spacing: -0.01em;
-  color: #86868b; /* 苹果风格的次要文字颜色 */
+  color: var(--tagline-subheading); /* 使用CSS变量 */
   margin-bottom: 32px;
+  transition: color 0.3s ease;
 }
 
 /* 高亮文本 */
 .taglineHighlight {
-  color: #1d1d1f;
+  color: var(--tagline-highlight);
   font-weight: 500;
+  transition: color 0.3s ease;
 }
 
 /* 按钮容器 */
@@ -71,7 +75,7 @@
 
 /* 主要按钮 */
 .taglinePrimaryButton {
-  background: #0071e3; /* 苹果风格的蓝色按钮 */
+  background: var(--primary-color); /* 使用CSS变量 */
   color: white;
   font-family: 'SF Pro Text', var(--font-sans);
   font-size: 17px;
@@ -82,15 +86,15 @@
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: all 0.2s ease, background-color 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
 }
 
 .taglinePrimaryButton:hover {
-  background: #0077ED; /* 悬停时稍微亮一点 */
+  background: var(--primary-dark); /* 使用CSS变量 */
   color: white; /* 确保文字颜色保持白色 */
   text-decoration: none;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1); /* 添加轻微阴影增强悬停效果 */
+  box-shadow: 0 1px 4px var(--card-shadow); /* 使用CSS变量 */
   transform: translateY(-1px); /* 轻微上移效果 */
 }
 
@@ -101,12 +105,12 @@
 
 /* 次要按钮 */
 .taglineSecondaryButton {
-  color: #0071e3;
+  color: var(--primary-color);
   font-family: 'SF Pro Text', var(--font-sans);
   font-size: 17px;
   font-weight: 400;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: all 0.2s ease, color 0.3s ease, background-color 0.3s ease;
   padding: 8px 16px;
   border-radius: 980px;
   cursor: pointer;
@@ -117,8 +121,8 @@
 
 .taglineSecondaryButton:hover {
   text-decoration: none;
-  background-color: rgba(0, 113, 227, 0.05); /* 苹果风格的轻微背景色变化 */
-  color: #0077ED; /* 稍微亮一点的蓝色 */
+  background-color: rgba(var(--primary-rgb), 0.05); /* 使用CSS变量 */
+  color: var(--primary-dark); /* 使用CSS变量 */
 }
 
 /* 视觉元素容器 */
@@ -136,14 +140,14 @@
   position: relative;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  box-shadow: 0 8px 16px var(--card-shadow);
+  transition: all 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
 }
 
 .taglineImageContainer:hover {
   transform: scale(1.02);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 12px 24px var(--card-shadow-hover);
 }
 
 /* 图片 */

@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 import styles from '@/styles/BriefIntro.module.css';
 import ScrollAnimation from '@/components/common/ScrollAnimation';

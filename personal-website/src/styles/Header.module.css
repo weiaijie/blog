@@ -26,13 +26,13 @@
   left: 0;
   width: 100%;
   height: 44px; /* 苹果导航栏高度 */
-  background-color: rgba(255, 255, 255, 0.8); /* 半透明背景 */
+  background-color: var(--header-bg); /* 使用CSS变量 */
   backdrop-filter: saturate(180%) blur(20px); /* 苹果特有的模糊效果 */
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   z-index: 1000;
   transition: all 0.3s cubic-bezier(0.28, 0.11, 0.32, 1); /* 苹果风格的过渡曲线 */
   opacity: 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid var(--header-border);
 }
 
 .header.loaded {
@@ -40,7 +40,7 @@
 }
 
 .header.scrolled {
-  background-color: rgba(255, 255, 255, 0.95); /* 滚动时背景更不透明 */
+  background-color: var(--header-bg-scrolled); /* 使用CSS变量 */
 }
 
 .container {
@@ -65,9 +65,9 @@
   font-family: 'SF Pro Display', var(--font-heading);
   font-size: 1.2rem;
   font-weight: 600;
-  color: #333333; /* 苹果风格的深灰色 */
+  color: var(--text-color); /* 使用CSS变量 */
   letter-spacing: -0.01em; /* 苹果字体特有的字间距 */
-  transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease, color 0.3s ease;
   position: relative;
 }
 
@@ -93,8 +93,8 @@
   font-family: 'SF Pro Text', var(--font-sans);
   font-size: 0.8rem;
   font-weight: 400;
-  color: rgba(0, 0, 0, 0.8); /* 苹果风格的文字颜色 */
-  transition: opacity 0.2s ease;
+  color: var(--nav-text); /* 使用CSS变量 */
+  transition: opacity 0.2s ease, color 0.3s ease;
   position: relative;
   padding: 0 0.1rem;
   letter-spacing: -0.01em;
@@ -103,11 +103,11 @@
 
 .desktopNav a:hover {
   opacity: 0.7; /* 苹果风格的悬停效果 */
-  color: rgba(0, 0, 0, 0.8); /* 保持颜色不变，只改变透明度 */
+  color: var(--nav-text-hover); /* 使用CSS变量 */
 }
 
 .desktopNav a.active {
-  color: rgba(0, 0, 0, 0.8);
+  color: var(--nav-text-active); /* 使用CSS变量 */
   font-weight: 500; /* 苹果风格的当前页面标识 */
 }
 
@@ -118,6 +118,11 @@
   gap: 1rem;
 }
 
+/* 主题切换按钮 */
+.themeToggle {
+  margin-right: 0.5rem;
+}
+
 /* 搜索按钮 - 苹果风格 (macOS Big Sur/Monterey) */
 .searchButton {
   background: none;
@@ -126,11 +131,11 @@
   height: 36px;
   border-radius: 50%;
   cursor: pointer;
-  color: rgba(0, 0, 0, 0.8);
+  color: var(--nav-text);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s cubic-bezier(0.28, 0.11, 0.32, 1); /* 苹果风格的过渡曲线 */
+  transition: all 0.2s cubic-bezier(0.28, 0.11, 0.32, 1), color 0.3s ease; /* 苹果风格的过渡曲线 */
   position: relative;
   margin-right: 8px;
   -webkit-backdrop-filter: blur(20px);
@@ -145,14 +150,14 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: var(--header-border);
   transform: scale(0);
-  transition: transform 0.2s cubic-bezier(0.28, 0.11, 0.32, 1);
+  transition: transform 0.2s cubic-bezier(0.28, 0.11, 0.32, 1), background-color 0.3s ease;
   opacity: 0;
 }
 
 .searchButton:hover {
-  color: rgba(0, 0, 0, 0.9);
+  color: var(--nav-text-hover);
 }
 
 .searchButton:hover::before {
@@ -161,7 +166,7 @@
 }
 
 .searchButton:active::before {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: var(--border-color);
 }
 
 .searchButton svg {
@@ -176,12 +181,12 @@
 
 /* 搜索按钮激活状态 */
 .searchButton.active {
-  color: #0071e3; /* 苹果蓝色 */
+  color: var(--primary-color);
 }
 
 .searchButton.active::before {
   transform: scale(1);
-  background-color: rgba(0, 113, 227, 0.1); /* 苹果蓝色背景 */
+  background-color: rgba(var(--primary-rgb), 0.1);
   opacity: 1;
 }
 
@@ -209,16 +214,16 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background-color: rgba(0, 0, 0, 0);
+  background-color: transparent;
   transition: background-color 0.2s cubic-bezier(0.4, 0.01, 0.165, 0.99);
 }
 
 .menuButton:hover::before {
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: var(--header-border);
 }
 
 .menuButton:active::before {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: var(--border-color);
 }
 
 .menuButton span {
@@ -226,8 +231,8 @@
   left: 6px;
   height: 1.5px; /* 稍微粗一点的线条 */
   width: 16px;
-  background: rgba(0, 0, 0, 0.8); /* 苹果风格的颜色 */
-  transition: all 0.3s cubic-bezier(0.4, 0.01, 0.165, 0.99); /* 苹果风格的动画曲线 */
+  background: var(--nav-text); /* 使用CSS变量 */
+  transition: all 0.3s cubic-bezier(0.4, 0.01, 0.165, 0.99), background-color 0.3s ease; /* 苹果风格的动画曲线 */
   border-radius: 1px; /* 轻微圆角 */
 }
 
@@ -261,15 +266,15 @@
   left: 0;
   width: 100%;
   height: calc(100vh - 44px);
-  background-color: rgba(255, 255, 255, 0.98);
+  background-color: var(--header-bg-scrolled);
   backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   z-index: 999;
   transform: translateY(-100%);
-  transition: transform 0.35s cubic-bezier(0.52, 0.16, 0.24, 1); /* 苹果风格的动画曲线 */
+  transition: transform 0.35s cubic-bezier(0.52, 0.16, 0.24, 1), background-color 0.3s ease; /* 苹果风格的动画曲线 */
   overflow-y: auto;
   flex-direction: column;
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  border-top: 1px solid var(--header-border);
 }
 
 .mobileNav.open {
@@ -280,8 +285,9 @@
 .mobileNavHeader {
   padding: 2rem 1rem 1rem;
   text-align: center;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid var(--header-border);
   margin-bottom: 1rem;
+  transition: border-color 0.3s ease;
 }
 
 .mobileNavLogo {
@@ -294,23 +300,26 @@
   font-family: 'SF Pro Display', var(--font-heading);
   font-size: 1.2rem;
   font-weight: 600;
-  color: #333333;
+  color: var(--text-color);
   letter-spacing: -0.01em;
   margin-bottom: 0.25rem;
+  transition: color 0.3s ease;
 }
 
 .mobileNavTitle {
   font-size: 0.8rem;
-  color: rgba(0, 0, 0, 0.6);
+  color: var(--text-light);
   font-weight: 400;
+  transition: color 0.3s ease;
 }
 
 /* 移动导航菜单 - 苹果风格 */
 .mobileNavSectionTitle {
   font-size: 0.7rem;
-  color: rgba(0, 0, 0, 0.5);
+  color: var(--text-lighter);
   margin: 1.5rem 1rem 0.5rem;
   font-weight: 500;
+  transition: color 0.3s ease;
 }
 
 .mobileNavMenu {
@@ -324,9 +333,9 @@
 .mobileNav li {
   opacity: 0;
   transform: translateY(10px);
-  transition: all 0.35s cubic-bezier(0.52, 0.16, 0.24, 1);
+  transition: all 0.35s cubic-bezier(0.52, 0.16, 0.24, 1), border-color 0.3s ease;
   transition-delay: calc(0.05s * var(--item-index, 0));
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid var(--header-border);
 }
 
 .mobileNav.open li {
@@ -338,8 +347,8 @@
   font-family: 'SF Pro Text', var(--font-sans);
   font-size: 1rem;
   font-weight: 400;
-  color: rgba(0, 0, 0, 0.8);
-  transition: opacity 0.2s ease;
+  color: var(--text-color);
+  transition: opacity 0.2s ease, color 0.3s ease;
   display: block;
   padding: 0.8rem 1rem;
   position: relative;
@@ -353,6 +362,7 @@
 
 .mobileNav a.active {
   font-weight: 500;
+  color: var(--primary-color);
 }
 
 .mobileNav a.active::after {
@@ -363,9 +373,11 @@
   transform: translateY(-50%);
   width: 7px;
   height: 12px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7' height='12' viewBox='0 0 7 12' fill='none'%3E%3Cpath d='M1 1L6 6L1 11' stroke='%23000000' stroke-opacity='0.8' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  /* 使用内联SVG，颜色通过currentColor继承 */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7' height='12' viewBox='0 0 7 12' fill='none'%3E%3Cpath d='M1 1L6 6L1 11' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: center;
+  filter: var(--primary-color); /* 使用CSS变量控制颜色 */
 }
 
 /* 移动导航页脚 - 苹果风格 */
@@ -374,8 +386,30 @@
   padding: 1.5rem 1rem;
   text-align: center;
   width: 100%;
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
-  background-color: rgba(255, 255, 255, 0.8);
+  border-top: 1px solid var(--header-border);
+  background-color: var(--header-bg);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* 移动导航设置 */
+.mobileNavSettings {
+  margin-bottom: 1.5rem;
+  padding: 0 1rem;
+}
+
+.mobileNavThemeToggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--header-border);
+}
+
+.mobileNavSettingLabel {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 0.9rem;
+  color: var(--text-color);
+  transition: color 0.3s ease;
 }
 
 .mobileNavContact {
@@ -388,16 +422,16 @@
 
 .mobileNavContactItem {
   display: inline-block;
-  color: rgba(0, 0, 0, 0.6);
+  color: var(--text-light);
   font-size: 0.8rem;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease, color 0.3s ease, background-color 0.3s ease;
   padding: 0.5rem 1rem;
   border-radius: 980px;
 }
 
 .mobileNavContactItem:hover {
   opacity: 0.7;
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: var(--header-border);
 }
 
 .mobileNavSocial {
@@ -412,8 +446,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(0, 0, 0, 0.8);
-  transition: all 0.2s ease;
+  color: var(--text-color);
+  transition: all 0.2s ease, color 0.3s ease, background-color 0.3s ease;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -421,7 +455,7 @@
 
 .mobileNavSocialIcon:hover {
   opacity: 0.7;
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: var(--header-border);
 }
 
 /* 个人标语/口号 - 苹果风格 */

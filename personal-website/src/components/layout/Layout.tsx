@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import Header from './Header';
 import styles from '@/styles/Layout.module.css';
+import { ThemeProvider } from '@/contexts/ThemeContext';
 
 interface LayoutProps {
   children: ReactNode;
@@ -8,12 +9,14 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <>
-      <Header />
-      <main className={styles.mainContainer}>
-        {children}
-      </main>
-    </>
+    <ThemeProvider>
+      <div className={styles.layoutWrapper}>
+        <Header />
+        <main className={styles.mainContainer}>
+          {children}
+        </main>
+      </div>
+    </ThemeProvider>
   );
 };
 

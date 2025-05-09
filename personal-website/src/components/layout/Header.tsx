@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styles from '@/styles/Header.module.css';
 import { mainNavRoutes } from '@/config/routes';
+import ThemeToggle from '@/components/common/ThemeToggle';
 
 interface HeaderProps {}
 
@@ -68,6 +69,7 @@ const Header: React.FC<HeaderProps> = () => {
                   href={item.path}
                   className={router.pathname === item.path ? styles.active : ''}
                   aria-current={router.pathname === item.path ? 'page' : undefined}
+                  style={{ color: 'currentColor' }} // 确保颜色过渡效果
                 >
                   {item.name}
                 </Link>
@@ -78,6 +80,9 @@ const Header: React.FC<HeaderProps> = () => {
 
         {/* 右侧操作区域 */}
         <div className={styles.actionArea}>
+          {/* 主题切换按钮 */}
+          <ThemeToggle className={styles.themeToggle} />
+
           {/* 搜索按钮 */}
           <button
             className={`${styles.searchButton} ${isSearchActive ? styles.active : ''}`}
@@ -124,6 +129,7 @@ const Header: React.FC<HeaderProps> = () => {
                     href={item.path}
                     className={router.pathname === item.path ? styles.active : ''}
                     onClick={closeMenu}
+                    style={{ color: 'currentColor' }} // 确保SVG图标继承当前文本颜色
                   >
                     {item.name}
                   </Link>
@@ -133,6 +139,14 @@ const Header: React.FC<HeaderProps> = () => {
           </nav>
 
           <div className={styles.mobileNavFooter}>
+            <h3 className={styles.mobileNavSectionTitle}>设置</h3>
+            <div className={styles.mobileNavSettings}>
+              <div className={styles.mobileNavThemeToggle}>
+                <span className={styles.mobileNavSettingLabel}>主题模式</span>
+                <ThemeToggle />
+              </div>
+            </div>
+
             <h3 className={styles.mobileNavSectionTitle}>联系我</h3>
             <div className={styles.mobileNavContact}>
               <a href="mailto:contact@example.com" className={styles.mobileNavContactItem}>
