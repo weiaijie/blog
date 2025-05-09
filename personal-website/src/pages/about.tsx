@@ -13,7 +13,7 @@ export default function About() {
         <div className={styles.aboutPage}>
           <div className={styles.container}>
             <h1 className={styles.pageTitle}>关于我</h1>
-            
+
             <section className={styles.section}>
               <h2 className={styles.sectionTitle}>个人简介</h2>
               <div className={styles.profileContent}>
@@ -33,20 +33,9 @@ export default function About() {
                     我相信持续学习和知识共享是技术进步的关键。
                   </p>
                 </div>
-                <div className={styles.profileImage}>
-                  <div className={styles.imageWrapper}>
-                    {/* 这里可以放置个人照片 */}
-                    <div className={styles.placeholder}>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="12" cy="7" r="4"></circle>
-                      </svg>
-                    </div>
-                  </div>
-                </div>
               </div>
             </section>
-            
+
             <section className={styles.section}>
               <h2 className={styles.sectionTitle}>教育背景</h2>
               <div className={styles.timeline}>
@@ -72,7 +61,7 @@ export default function About() {
                 </div>
               </div>
             </section>
-            
+
             <section className={styles.section}>
               <h2 className={styles.sectionTitle}>工作经历</h2>
               <div className={styles.timeline}>

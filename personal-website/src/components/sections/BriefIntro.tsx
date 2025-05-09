@@ -47,42 +47,6 @@ const BriefIntro: React.FC = () => {
             </motion.div>
           </motion.div>
         </ScrollAnimation>
-        <ScrollAnimation
-          className={styles.imageContainer}
-          delay={0.2}
-          variants={{
-            hidden: { opacity: 0, scale: 0.8, rotate: -5 },
-            visible: {
-              opacity: 1,
-              scale: 1,
-              rotate: 0,
-              transition: {
-                duration: 0.7,
-                ease: [0.16, 1, 0.3, 1]
-              }
-            }
-          }}
-        >
-          <motion.div
-            className={styles.imageWrapper}
-            whileHover={{
-              scale: 1.05,
-              boxShadow: "0 15px 30px rgba(0, 0, 0, 0.15)",
-              rotate: 2
-            }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className={styles.image}>
-              {/* 这里可以放置个人照片或头像 */}
-              <div className={styles.placeholder}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                  <circle cx="12" cy="7" r="4"></circle>
-                </svg>
-              </div>
-            </div>
-          </motion.div>
-        </ScrollAnimation>
       </div>
     </section>
   );
