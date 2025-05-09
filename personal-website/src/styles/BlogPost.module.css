@@ -1,0 +1,256 @@
+/* 博客文章详情页样式 - 苹果风格 */
+.blogPost {
+  padding: 0 0 80px;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 22px;
+}
+
+/* 文章头部 */
+.postHeader {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.postMeta {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.postDate, .postReadTime {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 14px;
+  color: #86868b;
+  letter-spacing: -0.01em;
+}
+
+.postTitle {
+  font-family: 'SF Pro Display', var(--font-heading);
+  font-size: 40px;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin-bottom: 16px;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+}
+
+.postTags {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.postTag {
+  display: inline-block;
+  padding: 4px 10px;
+  background-color: rgba(0, 113, 227, 0.1);
+  color: #0071e3;
+  border-radius: 980px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+/* 文章图片 */
+.postImageContainer {
+  margin-bottom: 40px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.postImage {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 宽高比 */
+  background-color: #f5f5f7;
+}
+
+.placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(0, 0, 0, 0.2);
+}
+
+/* 文章内容 */
+.postContent {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 17px;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 40px;
+}
+
+.postContent h1 {
+  font-family: 'SF Pro Display', var(--font-heading);
+  font-size: 32px;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin: 40px 0 20px;
+  letter-spacing: -0.015em;
+}
+
+.postContent h2 {
+  font-family: 'SF Pro Display', var(--font-heading);
+  font-size: 24px;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin: 30px 0 15px;
+  letter-spacing: -0.01em;
+}
+
+.postContent h3 {
+  font-family: 'SF Pro Display', var(--font-heading);
+  font-size: 20px;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin: 25px 0 10px;
+  letter-spacing: -0.01em;
+}
+
+.postContent p {
+  margin-bottom: 20px;
+}
+
+.postContent a {
+  color: #0071e3;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.postContent a:hover {
+  opacity: 0.7;
+}
+
+.postContent ul, .postContent ol {
+  margin-bottom: 20px;
+  padding-left: 20px;
+}
+
+.postContent li {
+  margin-bottom: 8px;
+}
+
+.postContent blockquote {
+  border-left: 4px solid #0071e3;
+  padding-left: 16px;
+  margin-left: 0;
+  margin-right: 0;
+  font-style: italic;
+  color: #666;
+}
+
+.postContent code {
+  font-family: 'SF Mono', monospace;
+  background-color: #f5f5f7;
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.postContent pre {
+  background-color: #f5f5f7;
+  padding: 16px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin-bottom: 20px;
+}
+
+.postContent pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+/* 文章导航 */
+.postNavigation {
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+}
+
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 16px;
+  font-weight: 500;
+  color: #0071e3;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+  padding: 8px 16px;
+  border-radius: 980px;
+}
+
+.backButton:hover {
+  opacity: 0.7;
+  background-color: rgba(0, 113, 227, 0.05);
+}
+
+.backButton svg {
+  margin-right: 8px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .blogPost {
+    padding: 0 0 60px;
+  }
+  
+  .postTitle {
+    font-size: 32px;
+  }
+  
+  .postContent {
+    font-size: 16px;
+  }
+  
+  .postContent h1 {
+    font-size: 28px;
+  }
+  
+  .postContent h2 {
+    font-size: 22px;
+  }
+  
+  .postContent h3 {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .blogPost {
+    padding: 0 0 40px;
+  }
+  
+  .postTitle {
+    font-size: 28px;
+  }
+  
+  .postContent {
+    font-size: 15px;
+  }
+  
+  .postContent h1 {
+    font-size: 24px;
+  }
+  
+  .postContent h2 {
+    font-size: 20px;
+  }
+  
+  .postContent h3 {
+    font-size: 17px;
+  }
+}

@@ -461,7 +461,7 @@
 /* 标语标题 */
 .taglineHeading {
   font-family: 'SF Pro Display', var(--font-heading);
-  font-size: 48px;
+  font-size: 46px;
   font-weight: 600;
   line-height: 1.1;
   letter-spacing: -0.015em; /* 苹果字体特有的字间距 */
