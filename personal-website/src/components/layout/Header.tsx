@@ -92,7 +92,7 @@ const Header: React.FC<HeaderProps> = () => {
           </button>
 
           {/* 移动端汉堡菜单按钮 */}
-          <button
+          <div
             className={`${styles.menuButton} ${isMenuOpen ? styles.open : ''}`}
             onClick={toggleMenu}
             aria-label="菜单"
@@ -100,7 +100,7 @@ const Header: React.FC<HeaderProps> = () => {
           >
             <span></span>
             <span></span>
-          </button>
+          </div>
         </div>
 
         {/* 移动端导航菜单 */}
