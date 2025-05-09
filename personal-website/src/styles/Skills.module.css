@@ -1,6 +1,6 @@
 /* 技能页面样式 - 苹果风格 */
 .skillsPage {
-  padding: 0 0 80px;
+  padding: 100px 0 80px; /* 增加顶部内边距，避免被页面头部挡住 */
 }
 
 .container {
@@ -108,28 +108,28 @@
 /* 响应式设计 */
 @media (max-width: 768px) {
   .skillsPage {
-    padding: 0 0 60px;
+    padding: 80px 0 60px; /* 调整顶部内边距，但仍保持足够空间 */
   }
-  
+
   .pageTitle {
     font-size: 36px;
     margin-bottom: 30px;
   }
-  
+
   .section {
     margin-bottom: 40px;
   }
-  
+
   .sectionTitle {
     font-size: 28px;
     margin-bottom: 20px;
   }
-  
+
   .skillsGrid {
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 16px;
   }
-  
+
   .skillItem {
     padding: 20px;
   }
@@ -137,26 +137,26 @@
 
 @media (max-width: 480px) {
   .skillsPage {
-    padding: 0 0 40px;
+    padding: 70px 0 40px; /* 在小屏幕上稍微减少顶部内边距，但仍保持足够空间 */
   }
-  
+
   .pageTitle {
     font-size: 32px;
     margin-bottom: 24px;
   }
-  
+
   .sectionTitle {
     font-size: 24px;
   }
-  
+
   .skillsGrid {
     grid-template-columns: 1fr;
   }
-  
+
   .skillName {
     font-size: 16px;
   }
-  
+
   .skillDescription {
     font-size: 13px;
   }

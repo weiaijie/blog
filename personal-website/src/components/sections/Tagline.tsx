@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from '@/styles/Tagline.module.css';
@@ -9,46 +9,57 @@ interface TaglineProps {
 }
 
 const Tagline: React.FC<TaglineProps> = ({ visible }) => {
-  // 定义动画变体
+  const prevVisibleRef = useRef(visible);
+
+  // 定义动画变体 - 进一步优化过渡效果，避免影响滚动和页面跳动
   const containerVariants = {
     hidden: {
       opacity: 0,
-      y: -50
+      y: 0, // 不使用垂直位移，只使用透明度变化
+      transition: {
+        duration: 0.4,
+        ease: "easeInOut"
+      }
     },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.8,
-        ease: [0.16, 1, 0.3, 1],
+        duration: 0.4, // 进一步缩短动画时间
+        ease: "easeInOut",
         when: "beforeChildren",
-        staggerChildren: 0.2
+        staggerChildren: 0.05 // 减少子元素动画间隔
       }
     },
     exit: {
       opacity: 0,
-      y: -30,
+      y: 0, // 不使用垂直位移，只使用透明度变化
       transition: {
-        duration: 0.5,
-        ease: [0.16, 1, 0.3, 1]
+        duration: 0.3,
+        ease: "easeInOut"
       }
     }
   };
 
+  // 更新visible状态引用，但不再尝试手动管理滚动位置
+  useEffect(() => {
+    prevVisibleRef.current = visible;
+  }, [visible]);
+
   const childVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 10 }, // 减小位移距离
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.5,
-        ease: [0.16, 1, 0.3, 1]
+        duration: 0.3, // 缩短动画时间
+        ease: "easeOut"
       }
     }
   };
 
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="sync">
       {visible && (
         <motion.div
           className={styles.tagline}
@@ -56,6 +67,14 @@ const Tagline: React.FC<TaglineProps> = ({ visible }) => {
           animate="visible"
           exit="exit"
           variants={containerVariants}
+          layout={false} // 防止布局变化
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            pointerEvents: visible ? 'auto' : 'none'
+          }}
         >
           <div className={styles.taglineContent}>
         <motion.div className={styles.taglineMain} variants={childVariants}>

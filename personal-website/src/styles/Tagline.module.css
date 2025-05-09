@@ -3,11 +3,18 @@
   background-color: #fff;
   width: 100%;
   padding: 80px 0;
-  position: relative;
+  position: absolute; /* 改为绝对定位，不影响文档流 */
+  top: 0;
+  left: 0;
   z-index: 20;
   min-height: 500px; /* 增加最小高度 */
   display: flex;
   align-items: center;
+  will-change: opacity, transform; /* 优化动画性能 */
+  pointer-events: auto; /* 确保可以点击 */
+  transform: translateZ(0); /* 启用GPU加速 */
+  backface-visibility: hidden; /* 防止闪烁 */
+  -webkit-font-smoothing: antialiased; /* 文字渲染优化 */
 }
 
 /* 标语内容容器 */
