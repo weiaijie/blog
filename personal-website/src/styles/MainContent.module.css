@@ -1,0 +1,36 @@
+/* 主要内容区域 - 苹果风格 */
+.mainContent {
+  background-color: #fff;
+  position: relative;
+  padding: 60px 0;
+  z-index: 10;
+}
+
+.container {
+  max-width: 980px; /* 苹果网站的内容宽度 */
+  margin: 0 auto;
+  padding: 0 22px; /* 苹果风格的内边距 */
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+  .container {
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 768px) {
+  .mainContent {
+    padding: 40px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .mainContent {
+    padding: 30px 0;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+}

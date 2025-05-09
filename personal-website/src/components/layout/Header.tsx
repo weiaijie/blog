@@ -1,12 +1,18 @@
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import styles from '@/styles/Header.module.css';
 import Typewriter from '@/components/common/Typewriter';
+import { mainNavRoutes } from '@/config/routes';
 
-const Header = () => {
+interface HeaderProps {
+  showTagline?: boolean;
+}
+
+const Header: React.FC<HeaderProps> = ({ showTagline = false }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [currentPath, setCurrentPath] = useState('/');
+  // 不再需要currentPath状态，使用router.pathname代替
   // 直接使用常量，不需要状态变量
   const isLoaded = true; // 内容始终显示
   const [isSearchActive, setIsSearchActive] = useState(false);
@@ -17,8 +23,7 @@ const Header = () => {
       setIsScrolled(window.scrollY > 50);
     };
 
-    // 获取当前路径
-    setCurrentPath(window.location.pathname);
+    // 不再需要手动设置当前路径，使用router.pathname代替
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -44,15 +49,8 @@ const Header = () => {
     alert('搜索功能即将上线');
   }, []);
 
-  // 导航菜单项
-  const navItems = [
-    { name: '首页', path: '/' },
-    { name: '关于我', path: '/about' },
-    { name: '技能', path: '/skills' },
-    { name: '项目', path: '/projects' },
-    { name: '博客', path: '/blog' },
-    { name: '联系', path: '/contact' },
-  ];
+  // 使用集中管理的路由配置
+  const router = useRouter();
 
   return (
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''} ${isLoaded ? styles.loaded : ''}`}>
@@ -67,12 +65,12 @@ const Header = () => {
         {/* 桌面导航菜单 - 苹果风格 */}
         <nav className={styles.desktopNav}>
           <ul>
-            {navItems.map((item) => (
+            {mainNavRoutes.map((item) => (
               <li key={item.path}>
                 <Link
                   href={item.path}
-                  className={currentPath === item.path ? styles.active : ''}
-                  aria-current={currentPath === item.path ? 'page' : undefined}
+                  className={router.pathname === item.path ? styles.active : ''}
+                  aria-current={router.pathname === item.path ? 'page' : undefined}
                 >
                   {item.name}
                 </Link>
@@ -97,7 +95,7 @@ const Header = () => {
           </button>
 
           {/* 移动端汉堡菜单按钮 */}
-          <div
+          <button
             className={`${styles.menuButton} ${isMenuOpen ? styles.open : ''}`}
             onClick={toggleMenu}
             aria-label="菜单"
@@ -105,7 +103,7 @@ const Header = () => {
           >
             <span></span>
             <span></span>
-          </div>
+          </button>
         </div>
 
         {/* 移动端导航菜单 */}
@@ -120,14 +118,14 @@ const Header = () => {
           <nav>
             <h3 className={styles.mobileNavSectionTitle}>导航菜单</h3>
             <ul className={styles.mobileNavMenu}>
-              {navItems.map((item, index) => (
+              {mainNavRoutes.map((item, index) => (
                 <li
                   key={item.path}
                   style={{ '--item-index': index } as React.CSSProperties}
                 >
                   <Link
                     href={item.path}
-                    className={currentPath === item.path ? styles.active : ''}
+                    className={router.pathname === item.path ? styles.active : ''}
                     onClick={closeMenu}
                   >
                     {item.name}
@@ -162,41 +160,43 @@ const Header = () => {
         </div>
       </div>
 
-      {/* 个人标语/口号 - 苹果风格 */}
-      <div className={styles.tagline}>
-        <div className={styles.taglineContent}>
-          <div className={styles.taglineMain}>
-            <h2 className={styles.taglineHeading}>
-              <Typewriter
-                texts={['创造优雅的数字体验', '构建直观的用户界面', '开发高效的应用程序']}
-                typingSpeed={80}
-                deletingSpeed={40}
-                delayAfterType={3000}
-              />
-            </h2>
-            <p className={styles.taglineSubheading}>
-              <span className={styles.taglineHighlight}>全栈开发</span>，专注于构建直观、高效且美观的用户界面
-            </p>
-            <div className={styles.taglineActions}>
-              <a href="#projects" className={styles.taglinePrimaryButton}>
-                查看作品
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={styles.taglineButtonIcon}>
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </a>
-              <a href="#contact" className={styles.taglineSecondaryButton}>
-                联系我
-              </a>
+      {/* 个人标语/口号 - 苹果风格，只在首页显示 */}
+      {showTagline && (
+        <div className={styles.tagline}>
+          <div className={styles.taglineContent}>
+            <div className={styles.taglineMain}>
+              <h2 className={styles.taglineHeading}>
+                <Typewriter
+                  texts={['创造优雅的数字体验', '构建直观的用户界面', '开发高效的应用程序']}
+                  typingSpeed={80}
+                  deletingSpeed={40}
+                  delayAfterType={3000}
+                />
+              </h2>
+              <p className={styles.taglineSubheading}>
+                <span className={styles.taglineHighlight}>全栈开发</span>，专注于构建直观、高效且美观的用户界面
+              </p>
+              <div className={styles.taglineActions}>
+                <Link href="/projects" className={styles.taglinePrimaryButton}>
+                  查看作品
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={styles.taglineButtonIcon}>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </Link>
+                <Link href="/contact" className={styles.taglineSecondaryButton}>
+                  联系我
+                </Link>
+              </div>
             </div>
-          </div>
-          <div className={styles.taglineVisual}>
-            <div className={styles.taglineImageContainer}>
-              <div className={styles.taglineImage}></div>
+            <div className={styles.taglineVisual}>
+              <div className={styles.taglineImageContainer}>
+                <div className={styles.taglineImage}></div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </header>
   );
 };

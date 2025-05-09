@@ -1,0 +1,296 @@
+/* 联系页面样式 - 苹果风格 */
+.contactPage {
+  padding: 0 0 80px;
+}
+
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 22px;
+}
+
+.pageTitle {
+  font-family: 'SF Pro Display', var(--font-heading);
+  font-size: 48px;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin-bottom: 40px;
+  letter-spacing: -0.015em;
+  text-align: center;
+}
+
+.contactContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+/* 联系信息部分 */
+.contactInfo {
+  padding: 30px;
+  background-color: #f5f5f7;
+  border-radius: 16px;
+}
+
+.contactText {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 17px;
+  line-height: 1.5;
+  color: #1d1d1f;
+  margin-bottom: 30px;
+  letter-spacing: -0.01em;
+}
+
+.contactMethods {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.contactMethod {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.contactIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: rgba(0, 113, 227, 0.1);
+  color: #0071e3;
+}
+
+.contactDetails {
+  flex: 1;
+}
+
+.contactMethodTitle {
+  font-family: 'SF Pro Display', var(--font-heading);
+  font-size: 16px;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin: 0 0 4px;
+  letter-spacing: -0.01em;
+}
+
+.contactLink {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 15px;
+  color: #0071e3;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.contactLink:hover {
+  opacity: 0.7;
+}
+
+/* 联系表单部分 */
+.contactForm {
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.formTitle {
+  font-family: 'SF Pro Display', var(--font-heading);
+  font-size: 24px;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin-bottom: 24px;
+  letter-spacing: -0.01em;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.formLabel {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: #1d1d1f;
+  letter-spacing: -0.01em;
+}
+
+.formInput,
+.formSelect,
+.formTextarea {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 15px;
+  color: #1d1d1f;
+  padding: 12px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background-color: #fff;
+  transition: all 0.2s ease;
+}
+
+.formInput:focus,
+.formSelect:focus,
+.formTextarea:focus {
+  outline: none;
+  border-color: #0071e3;
+  box-shadow: 0 0 0 2px rgba(0, 113, 227, 0.2);
+}
+
+.formTextarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.submitButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  background-color: #0071e3;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 10px;
+}
+
+.submitButton:hover {
+  background-color: #0058b9;
+}
+
+.submitButton:disabled {
+  background-color: #86868b;
+  cursor: not-allowed;
+}
+
+.buttonIcon {
+  transition: transform 0.2s ease;
+}
+
+.submitButton:hover .buttonIcon {
+  transform: translateX(3px);
+}
+
+.errorMessage {
+  color: #ff3b30;
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 14px;
+  margin-top: -10px;
+}
+
+.successMessage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 20px;
+  gap: 16px;
+}
+
+.successMessage svg {
+  color: #34c759;
+  width: 48px;
+  height: 48px;
+}
+
+.successMessage p {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 17px;
+  color: #1d1d1f;
+  letter-spacing: -0.01em;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .contactPage {
+    padding: 0 0 60px;
+  }
+  
+  .pageTitle {
+    font-size: 36px;
+    margin-bottom: 30px;
+  }
+  
+  .contactContent {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .contactInfo,
+  .contactForm {
+    padding: 24px;
+  }
+  
+  .contactText {
+    font-size: 16px;
+  }
+  
+  .formTitle {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contactPage {
+    padding: 0 0 40px;
+  }
+  
+  .pageTitle {
+    font-size: 32px;
+    margin-bottom: 24px;
+  }
+  
+  .contactInfo,
+  .contactForm {
+    padding: 20px;
+  }
+  
+  .contactText {
+    font-size: 15px;
+  }
+  
+  .contactMethodTitle {
+    font-size: 15px;
+  }
+  
+  .contactLink {
+    font-size: 14px;
+  }
+  
+  .formTitle {
+    font-size: 20px;
+  }
+  
+  .formLabel {
+    font-size: 13px;
+  }
+  
+  .formInput,
+  .formSelect,
+  .formTextarea {
+    font-size: 14px;
+    padding: 10px 14px;
+  }
+  
+  .submitButton {
+    font-size: 15px;
+    padding: 10px 20px;
+  }
+}

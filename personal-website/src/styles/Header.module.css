@@ -427,13 +427,14 @@
 /* 个人标语/口号 - 苹果风格 */
 .tagline {
   background-color: #fff; /* 白色背景 */
-  position: relative;
+  position: absolute;
   top: 44px; /* 苹果导航栏高度 */
   left: 0;
   width: 100%;
   z-index: 900;
   opacity: 1; /* 立即显示，不使用动画 */
   padding: 80px 0; /* 更大的垂直内边距 */
+  height: 200px; /* 固定高度 */
 }
 
 .header.scrolled + .tagline {
@@ -668,6 +669,7 @@
 
   .tagline {
     padding: 60px 0;
+    height: 180px;
   }
 
   .taglineContent {
@@ -712,6 +714,7 @@
 
   .tagline {
     padding: 40px 0;
+    height: 160px;
   }
 
   .taglineHeading {
