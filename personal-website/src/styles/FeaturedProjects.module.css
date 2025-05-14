@@ -1,17 +1,19 @@
 /* 精选项目部分 - 苹果风格 */
 .featuredProjects {
   padding: 60px 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid var(--border-color);
+  transition: border-color 0.3s ease;
 }
 
 .sectionTitle {
   font-family: 'SF Pro Display', var(--font-heading);
   font-size: 32px;
   font-weight: 600;
-  color: #1d1d1f;
+  color: var(--tagline-heading);
   margin-bottom: 32px;
   text-align: center;
   letter-spacing: -0.015em;
+  transition: color 0.3s ease;
 }
 
 .projectsGrid {
@@ -22,11 +24,11 @@
 }
 
 .projectCard {
-  background-color: #fff;
+  background-color: var(--card-bg);
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 20px var(--card-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -34,14 +36,15 @@
 
 .projectCard:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 30px var(--card-shadow-hover);
 }
 
 .projectImageContainer {
   position: relative;
   width: 100%;
   padding-bottom: 56.25%; /* 16:9 宽高比 */
-  background-color: #f5f5f7;
+  background-color: var(--bg-light);
+  transition: background-color 0.3s ease;
 }
 
 .projectImage {
@@ -61,7 +64,8 @@
   justify-content: center;
   width: 100%;
   height: 100%;
-  color: rgba(0, 0, 0, 0.2);
+  color: var(--text-lighter);
+  transition: color 0.3s ease;
 }
 
 .projectContent {
@@ -75,19 +79,21 @@
   font-family: 'SF Pro Display', var(--font-heading);
   font-size: 20px;
   font-weight: 600;
-  color: #1d1d1f;
+  color: var(--text-color);
   margin-bottom: 8px;
   letter-spacing: -0.01em;
+  transition: color 0.3s ease;
 }
 
 .projectDescription {
   font-family: 'SF Pro Text', var(--font-sans);
   font-size: 14px;
   line-height: 1.4;
-  color: #86868b;
+  color: var(--text-light);
   margin-bottom: 16px;
   flex: 1;
   letter-spacing: -0.01em;
+  transition: color 0.3s ease;
 }
 
 .projectTags {
@@ -99,12 +105,13 @@
 .projectTag {
   display: inline-block;
   padding: 4px 10px;
-  background-color: rgba(0, 113, 227, 0.1);
-  color: #0071e3;
+  background-color: rgba(var(--primary-rgb), 0.1);
+  color: var(--primary-color);
   border-radius: 980px;
   font-size: 12px;
   font-weight: 500;
   letter-spacing: -0.01em;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .viewAllContainer {
@@ -119,16 +126,16 @@
   font-family: 'SF Pro Text', var(--font-sans);
   font-size: 17px;
   font-weight: 500;
-  color: #0071e3;
+  color: var(--primary-color);
   text-decoration: none;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease, color 0.3s ease, background-color 0.3s ease;
   padding: 8px 16px;
   border-radius: 980px;
 }
 
 .viewAllButton:hover {
   opacity: 0.7;
-  background-color: rgba(0, 113, 227, 0.05);
+  background-color: rgba(var(--primary-rgb), 0.05);
 }
 
 .buttonIcon {
@@ -145,21 +152,21 @@
   .featuredProjects {
     padding: 40px 0;
   }
-  
+
   .sectionTitle {
     font-size: 28px;
     margin-bottom: 24px;
   }
-  
+
   .projectsGrid {
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 16px;
   }
-  
+
   .projectContent {
     padding: 16px;
   }
-  
+
   .projectTitle {
     font-size: 18px;
   }
@@ -169,11 +176,11 @@
   .featuredProjects {
     padding: 30px 0;
   }
-  
+
   .sectionTitle {
     font-size: 24px;
   }
-  
+
   .projectsGrid {
     grid-template-columns: 1fr;
   }

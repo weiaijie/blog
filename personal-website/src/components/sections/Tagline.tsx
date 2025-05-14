@@ -133,12 +133,10 @@ const Tagline: React.FC<TaglineProps> = ({ visible }) => {
           >
             <motion.div
               className={styles.taglineImage}
+              // 不再使用硬编码的颜色值，而是使用CSS变量
+              // 动画效果通过CSS类和opacity变化实现
               animate={{
-                background: [
-                  "linear-gradient(135deg, #42a5f5, #2196f3, #1976d2)",
-                  "linear-gradient(135deg, #4dabf5, #2196f3, #2180d2)",
-                  "linear-gradient(135deg, #42a5f5, #2196f3, #1976d2)"
-                ]
+                opacity: [0.9, 1, 0.9]
               }}
               transition={{
                 duration: 5,

@@ -1,6 +1,6 @@
 /* 主要内容区域 - 苹果风格 */
 .mainContent {
-  background-color: #fff;
+  background-color: var(--bg-color);
   position: relative;
   padding: 60px 0;
   z-index: 10;
@@ -9,6 +9,7 @@
   backface-visibility: hidden; /* 防止闪烁 */
   transform: translateZ(0); /* 启用GPU加速 */
   -webkit-font-smoothing: antialiased; /* 文字渲染优化 */
+  transition: var(--theme-transition);
 }
 
 .container {

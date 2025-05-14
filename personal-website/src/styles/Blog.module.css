@@ -95,10 +95,10 @@
 }
 
 .postCard {
-  background-color: #fff;
+  background-color: var(--card-bg);
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 20px var(--card-shadow);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   height: 100%;
   display: flex;
@@ -154,7 +154,7 @@
 .postDate, .postReadTime {
   font-family: 'SF Pro Text', var(--font-sans);
   font-size: 13px;
-  color: #86868b;
+  color: var(--text-light);
   letter-spacing: -0.01em;
 }
 
@@ -172,7 +172,7 @@
   font-family: 'SF Pro Text', var(--font-sans);
   font-size: 14px;
   line-height: 1.4;
-  color: #86868b;
+  color: var(--text-light);
   margin-bottom: 16px;
   flex: 1;
   letter-spacing: -0.01em;

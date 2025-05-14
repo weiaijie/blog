@@ -154,14 +154,15 @@
 .taglineImage {
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #42a5f5, #2196f3, #1976d2);
+  background: linear-gradient(135deg, var(--primary-light), var(--primary-color), var(--primary-dark));
   position: relative;
   overflow: hidden;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease, background 0.3s ease;
 }
 
 .taglineImageContainer:hover .taglineImage {
-  background: linear-gradient(135deg, #4dabf5, #2196f3, #2180d2);
+  background: linear-gradient(135deg, var(--primary-light), var(--primary-color), var(--primary-dark));
+  opacity: 0.9;
 }
 
 .taglineImage::before {
