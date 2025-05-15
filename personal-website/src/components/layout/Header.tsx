@@ -4,6 +4,8 @@ import { useRouter } from 'next/router';
 import styles from '@/styles/Header.module.css';
 import { mainNavRoutes } from '@/config/routes';
 import ThemeToggle from '@/components/common/ThemeToggle';
+// 用于存储是否是首次加载的全局变量
+const isFirstLoad = typeof window !== 'undefined' ? !window.sessionStorage.getItem('hasVisited') : true;
 
 interface HeaderProps {}
 
@@ -12,14 +14,18 @@ const Header: React.FC<HeaderProps> = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   // 添加客户端挂载状态
   const [mounted, setMounted] = useState(false);
-  // 不再需要currentPath状态，使用router.pathname代替
-  // 直接使用常量，不需要状态变量
-  const isLoaded = true; // 内容始终显示
+  // 添加首次加载状态
+  const [showAnimation, setShowAnimation] = useState(isFirstLoad);
   const [isSearchActive, setIsSearchActive] = useState(false);
 
   // 在客户端挂载后设置状态
   useEffect(() => {
     setMounted(true);
+
+    // 标记用户已访问过网站，下次不再显示动画
+    if (typeof window !== 'undefined' && isFirstLoad) {
+      window.sessionStorage.setItem('hasVisited', 'true');
+    }
   }, []);
 
   // 监听滚动事件，用于改变头部样式
@@ -69,7 +75,7 @@ const Header: React.FC<HeaderProps> = () => {
   const router = useRouter();
 
   // 在服务器端渲染时，不应用任何依赖客户端状态的类名
-  const headerClasses = `${styles.header} ${mounted && isScrolled ? styles.scrolled : ''} ${isLoaded ? styles.loaded : ''}`;
+  const headerClasses = `${styles.header} ${mounted && isScrolled ? styles.scrolled : ''} ${showAnimation ? styles.loaded : ''}`;
 
   return (
     <header className={headerClasses}>
