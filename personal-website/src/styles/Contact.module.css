@@ -13,10 +13,11 @@
   font-family: 'SF Pro Display', var(--font-heading);
   font-size: 48px;
   font-weight: 600;
-  color: #1d1d1f;
+  color: var(--tagline-heading);
   margin-bottom: 40px;
   letter-spacing: -0.015em;
   text-align: center;
+  transition: color 0.3s ease;
 }
 
 .contactContent {
@@ -28,17 +29,19 @@
 /* 联系信息部分 */
 .contactInfo {
   padding: 30px;
-  background-color: #f5f5f7;
+  background-color: var(--bg-dark);
   border-radius: 16px;
+  transition: background-color 0.3s ease;
 }
 
 .contactText {
   font-family: 'SF Pro Text', var(--font-sans);
   font-size: 17px;
   line-height: 1.5;
-  color: #1d1d1f;
+  color: var(--tagline-heading);
   margin-bottom: 30px;
   letter-spacing: -0.01em;
+  transition: color 0.3s ease;
 }
 
 .contactMethods {
@@ -60,8 +63,9 @@
   width: 40px;
   height: 40px;
   border-radius: 10px;
-  background-color: rgba(0, 113, 227, 0.1);
-  color: #0071e3;
+  background-color: rgba(var(--primary-rgb), 0.1);
+  color: var(--primary-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .contactDetails {
@@ -72,17 +76,18 @@
   font-family: 'SF Pro Display', var(--font-heading);
   font-size: 16px;
   font-weight: 600;
-  color: #1d1d1f;
+  color: var(--tagline-heading);
   margin: 0 0 4px;
   letter-spacing: -0.01em;
+  transition: color 0.3s ease;
 }
 
 .contactLink {
   font-family: 'SF Pro Text', var(--font-sans);
   font-size: 15px;
-  color: #0071e3;
+  color: var(--primary-color);
   text-decoration: none;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease, color 0.3s ease;
 }
 
 .contactLink:hover {
@@ -91,19 +96,21 @@
 
 /* 联系表单部分 */
 .contactForm {
-  background-color: #fff;
+  background-color: var(--card-bg);
   border-radius: 16px;
   padding: 30px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 20px var(--card-shadow);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .formTitle {
   font-family: 'SF Pro Display', var(--font-heading);
   font-size: 24px;
   font-weight: 600;
-  color: #1d1d1f;
+  color: var(--tagline-heading);
   margin-bottom: 24px;
   letter-spacing: -0.01em;
+  transition: color 0.3s ease;
 }
 
 .form {
@@ -122,8 +129,9 @@
   font-family: 'SF Pro Text', var(--font-sans);
   font-size: 14px;
   font-weight: 500;
-  color: #1d1d1f;
+  color: var(--tagline-heading);
   letter-spacing: -0.01em;
+  transition: color 0.3s ease;
 }
 
 .formInput,
@@ -131,20 +139,20 @@
 .formTextarea {
   font-family: 'SF Pro Text', var(--font-sans);
   font-size: 15px;
-  color: #1d1d1f;
+  color: var(--tagline-heading);
   padding: 12px 16px;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--border-color);
   border-radius: 8px;
-  background-color: #fff;
-  transition: all 0.2s ease;
+  background-color: var(--card-bg);
+  transition: all 0.3s ease;
 }
 
 .formInput:focus,
 .formSelect:focus,
 .formTextarea:focus {
   outline: none;
-  border-color: #0071e3;
-  box-shadow: 0 0 0 2px rgba(0, 113, 227, 0.2);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.2);
 }
 
 .formTextarea {
@@ -161,21 +169,21 @@
   font-size: 16px;
   font-weight: 500;
   color: #fff;
-  background-color: #0071e3;
+  background-color: var(--primary-color);
   border: none;
   border-radius: 8px;
   padding: 12px 24px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   margin-top: 10px;
 }
 
 .submitButton:hover {
-  background-color: #0058b9;
+  background-color: var(--primary-dark);
 }
 
 .submitButton:disabled {
-  background-color: #86868b;
+  background-color: var(--text-lighter);
   cursor: not-allowed;
 }
 
@@ -213,8 +221,9 @@
 .successMessage p {
   font-family: 'SF Pro Text', var(--font-sans);
   font-size: 17px;
-  color: #1d1d1f;
+  color: var(--tagline-heading);
   letter-spacing: -0.01em;
+  transition: color 0.3s ease;
 }
 
 /* 响应式设计 */
