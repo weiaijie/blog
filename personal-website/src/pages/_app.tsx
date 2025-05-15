@@ -6,16 +6,27 @@ import { useEffect } from 'react';
 export default function App({ Component, pageProps }: AppProps) {
   // 在客户端初始化主题
   useEffect(() => {
-    // 尝试从 localStorage 读取主题偏好
-    const savedTheme = localStorage.getItem('theme');
+    // 确保代码在客户端运行
+    if (typeof window === 'undefined') return;
 
-    // 如果有保存的主题偏好，则应用它
-    if (savedTheme) {
-      document.documentElement.setAttribute('data-theme', savedTheme);
-    }
-    // 否则，检查系统主题偏好
-    else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      document.documentElement.setAttribute('data-theme', 'dark');
+    try {
+      // 尝试从 localStorage 读取主题偏好
+      const savedTheme = localStorage.getItem('theme');
+
+      // 如果有保存的主题偏好，则应用它
+      if (savedTheme && (savedTheme === 'light' || savedTheme === 'dark')) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        console.log('useEffect: Applied saved theme:', savedTheme);
+      }
+      // 否则，检查系统主题偏好
+      else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        console.log('useEffect: Applied system theme: dark');
+      } else {
+        console.log('useEffect: Using default theme: light');
+      }
+    } catch (err) {
+      console.error('useEffect: Error applying theme:', err);
     }
   }, []);
 
@@ -32,14 +43,31 @@ export default function App({ Component, pageProps }: AppProps) {
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
+                // 确保代码在客户端运行
+                if (typeof window === 'undefined') return;
+
                 try {
+                  // 尝试从 localStorage 读取主题偏好
                   var savedTheme = localStorage.getItem('theme');
-                  if (savedTheme) {
+
+                  // 如果有保存的主题偏好，则应用它
+                  if (savedTheme && (savedTheme === 'light' || savedTheme === 'dark')) {
                     document.documentElement.setAttribute('data-theme', savedTheme);
-                  } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                    document.documentElement.setAttribute('data-theme', 'dark');
+                    console.log('Inline script: Applied saved theme:', savedTheme);
                   }
-                } catch (err) {}
+                  // 否则，检查系统主题偏好
+                  else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    console.log('Inline script: Applied system theme: dark');
+                  } else {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                    console.log('Inline script: Using default theme: light');
+                  }
+                } catch (err) {
+                  console.error('Inline script: Error applying theme:', err);
+                  // 出错时使用默认主题
+                  document.documentElement.setAttribute('data-theme', 'light');
+                }
               })();
             `,
           }}

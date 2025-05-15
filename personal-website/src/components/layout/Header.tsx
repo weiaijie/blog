@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styles from '@/styles/Header.module.css';
@@ -10,48 +10,69 @@ interface HeaderProps {}
 const Header: React.FC<HeaderProps> = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  // 添加客户端挂载状态
+  const [mounted, setMounted] = useState(false);
   // 不再需要currentPath状态，使用router.pathname代替
   // 直接使用常量，不需要状态变量
   const isLoaded = true; // 内容始终显示
   const [isSearchActive, setIsSearchActive] = useState(false);
 
+  // 在客户端挂载后设置状态
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   // 监听滚动事件，用于改变头部样式
   useEffect(() => {
+    // 确保代码在客户端运行
+    if (typeof window === 'undefined') return;
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
 
-    // 不再需要手动设置当前路径，使用router.pathname代替
+    // 初始检查滚动位置
+    handleScroll();
 
+    // 不再需要手动设置当前路径，使用router.pathname代替
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [mounted]); // 只在客户端挂载后运行
 
   // 切换菜单状态
   const toggleMenu = useCallback(() => {
     setIsMenuOpen((prev) => !prev);
     // 当菜单打开时，禁止背景滚动
-    document.body.style.overflow = isMenuOpen ? 'auto' : 'hidden';
+    if (typeof document !== 'undefined') {
+      document.body.style.overflow = isMenuOpen ? 'auto' : 'hidden';
+    }
   }, [isMenuOpen]);
 
   // 关闭菜单
   const closeMenu = useCallback(() => {
     setIsMenuOpen(false);
-    document.body.style.overflow = 'auto';
+    if (typeof document !== 'undefined') {
+      document.body.style.overflow = 'auto';
+    }
   }, []);
 
   // 处理搜索按钮点击
   const handleSearchClick = useCallback(() => {
     setIsSearchActive(prev => !prev);
     // 这里可以添加搜索功能的实现，例如显示搜索框等
-    alert('搜索功能即将上线');
+    if (typeof window !== 'undefined') {
+      alert('搜索功能即将上线');
+    }
   }, []);
 
   // 使用集中管理的路由配置
   const router = useRouter();
 
+  // 在服务器端渲染时，不应用任何依赖客户端状态的类名
+  const headerClasses = `${styles.header} ${mounted && isScrolled ? styles.scrolled : ''} ${isLoaded ? styles.loaded : ''}`;
+
   return (
-    <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''} ${isLoaded ? styles.loaded : ''}`}>
+    <header className={headerClasses}>
       <div className={styles.container}>
         {/* 品牌标识/Logo */}
         <div className={styles.logo}>
