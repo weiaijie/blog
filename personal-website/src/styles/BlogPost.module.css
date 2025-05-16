@@ -25,7 +25,7 @@
 .postDate, .postReadTime {
   font-family: 'SF Pro Text', var(--font-sans);
   font-size: 14px;
-  color: #86868b;
+  color: var(--text-lighter);
   letter-spacing: -0.01em;
 }
 
@@ -33,7 +33,7 @@
   font-family: 'SF Pro Display', var(--font-heading);
   font-size: 40px;
   font-weight: 600;
-  color: #1d1d1f;
+  color: var(--text-color);
   margin-bottom: 16px;
   letter-spacing: -0.015em;
   line-height: 1.2;
@@ -49,8 +49,8 @@
 .postTag {
   display: inline-block;
   padding: 4px 10px;
-  background-color: rgba(0, 113, 227, 0.1);
-  color: #0071e3;
+  background-color: rgba(var(--primary-rgb), 0.1);
+  color: var(--primary-color);
   border-radius: 980px;
   font-size: 12px;
   font-weight: 500;
@@ -69,7 +69,7 @@
   position: relative;
   width: 100%;
   padding-bottom: 56.25%; /* 16:9 宽高比 */
-  background-color: #f5f5f7;
+  background-color: var(--bg-light);
 }
 
 .placeholder {
@@ -81,7 +81,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(0, 0, 0, 0.2);
+  color: var(--text-lighter);
 }
 
 /* 文章内容 */
@@ -89,7 +89,7 @@
   font-family: 'SF Pro Text', var(--font-sans);
   font-size: 17px;
   line-height: 1.6;
-  color: #333;
+  color: var(--text-color);
   margin-bottom: 40px;
 }
 
@@ -97,7 +97,7 @@
   font-family: 'SF Pro Display', var(--font-heading);
   font-size: 32px;
   font-weight: 600;
-  color: #1d1d1f;
+  color: var(--text-color);
   margin: 40px 0 20px;
   letter-spacing: -0.015em;
 }
@@ -106,7 +106,7 @@
   font-family: 'SF Pro Display', var(--font-heading);
   font-size: 24px;
   font-weight: 600;
-  color: #1d1d1f;
+  color: var(--text-color);
   margin: 30px 0 15px;
   letter-spacing: -0.01em;
 }
@@ -115,7 +115,7 @@
   font-family: 'SF Pro Display', var(--font-heading);
   font-size: 20px;
   font-weight: 600;
-  color: #1d1d1f;
+  color: var(--text-color);
   margin: 25px 0 10px;
   letter-spacing: -0.01em;
 }
@@ -125,7 +125,7 @@
 }
 
 .postContent a {
-  color: #0071e3;
+  color: var(--primary-color);
   text-decoration: none;
   transition: opacity 0.2s ease;
 }
@@ -144,24 +144,24 @@
 }
 
 .postContent blockquote {
-  border-left: 4px solid #0071e3;
+  border-left: 4px solid var(--primary-color);
   padding-left: 16px;
   margin-left: 0;
   margin-right: 0;
   font-style: italic;
-  color: #666;
+  color: var(--text-light);
 }
 
 .postContent code {
-  font-family: 'SF Mono', monospace;
-  background-color: #f5f5f7;
+  font-family: 'SF Mono', var(--font-mono);
+  background-color: var(--bg-light);
   padding: 2px 4px;
   border-radius: 4px;
   font-size: 0.9em;
 }
 
 .postContent pre {
-  background-color: #f5f5f7;
+  background-color: var(--bg-light);
   padding: 16px;
   border-radius: 8px;
   overflow-x: auto;
@@ -186,7 +186,7 @@
   font-family: 'SF Pro Text', var(--font-sans);
   font-size: 16px;
   font-weight: 500;
-  color: #0071e3;
+  color: var(--primary-color);
   text-decoration: none;
   transition: opacity 0.2s ease;
   padding: 8px 16px;
@@ -195,7 +195,7 @@
 
 .backButton:hover {
   opacity: 0.7;
-  background-color: rgba(0, 113, 227, 0.05);
+  background-color: rgba(var(--primary-rgb), 0.05);
 }
 
 .backButton svg {
@@ -207,23 +207,23 @@
   .blogPost {
     padding: 0 0 60px;
   }
-  
+
   .postTitle {
     font-size: 32px;
   }
-  
+
   .postContent {
     font-size: 16px;
   }
-  
+
   .postContent h1 {
     font-size: 28px;
   }
-  
+
   .postContent h2 {
     font-size: 22px;
   }
-  
+
   .postContent h3 {
     font-size: 18px;
   }
@@ -233,23 +233,23 @@
   .blogPost {
     padding: 0 0 40px;
   }
-  
+
   .postTitle {
     font-size: 28px;
   }
-  
+
   .postContent {
     font-size: 15px;
   }
-  
+
   .postContent h1 {
     font-size: 24px;
   }
-  
+
   .postContent h2 {
     font-size: 20px;
   }
-  
+
   .postContent h3 {
     font-size: 17px;
   }

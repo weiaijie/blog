@@ -8,6 +8,8 @@
  * - 展示文章标题、日期、阅读时间、标签和内容
  * - 使用静态生成（SSG）预渲染文章页面
  * - 提供返回博客列表的导航
+ * - 使用react-markdown解析和渲染Markdown内容
+ * - 支持GFM（GitHub Flavored Markdown）语法
  *
  * 主要组件：
  * - BlogPostPage：博客文章详情页面的主要组件
@@ -18,6 +20,8 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import Layout from '@/components/layout/Layout';
 import styles from '@/styles/BlogPost.module.css';
 
@@ -243,8 +247,11 @@ export default function BlogPostPage({ post }: BlogPostPageProps) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              dangerouslySetInnerHTML={{ __html: post.content ? post.content.replace(/\n/g, '<br>') : '' }}
-            />
+            >
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                {post.content || ''}
+              </ReactMarkdown>
+            </motion.div>
 
             <div className={styles.postNavigation}>
               <Link href="/blog" className={styles.backButton}>
