@@ -16,6 +16,7 @@
 import Head from 'next/head';
 import { useState } from 'react';
 import Layout from '@/components/layout/Layout';
+import siteConfig from '@/config/site';
 import styles from '@/styles/Contact.module.css';
 
 export default function Contact() {
@@ -70,7 +71,7 @@ export default function Contact() {
   return (
     <>
       <Head>
-        <title>联系 - saber的个人网站</title>
+        <title>联系 - {siteConfig.title}</title>
         <meta name="description" content="联系我，讨论项目合作或技术交流" />
       </Head>
       <Layout>
@@ -94,8 +95,8 @@ export default function Contact() {
                     </div>
                     <div className={styles.contactDetails}>
                       <h3 className={styles.contactMethodTitle}>电子邮件</h3>
-                      <a href="mailto:contact@example.com" className={styles.contactLink}>
-                        contact@example.com
+                      <a href={`mailto:${siteConfig.contact.email}`} className={styles.contactLink}>
+                        {siteConfig.contact.email}
                       </a>
                     </div>
                   </div>
@@ -108,8 +109,8 @@ export default function Contact() {
                     </div>
                     <div className={styles.contactDetails}>
                       <h3 className={styles.contactMethodTitle}>GitHub</h3>
-                      <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className={styles.contactLink}>
-                        github.com/username
+                      <a href={siteConfig.social.github.url} target="_blank" rel="noopener noreferrer" className={styles.contactLink}>
+                        github.com/{siteConfig.social.github.username}
                       </a>
                     </div>
                   </div>
@@ -124,8 +125,8 @@ export default function Contact() {
                     </div>
                     <div className={styles.contactDetails}>
                       <h3 className={styles.contactMethodTitle}>LinkedIn</h3>
-                      <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" className={styles.contactLink}>
-                        linkedin.com/in/username
+                      <a href={siteConfig.social.linkedin.url} target="_blank" rel="noopener noreferrer" className={styles.contactLink}>
+                        linkedin.com/in/{siteConfig.social.linkedin.username}
                       </a>
                     </div>
                   </div>

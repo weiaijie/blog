@@ -21,6 +21,8 @@
  * - mainNavRoutes（默认导出）
  */
 
+import siteConfig from './site';
+
 // 路由配置文件
 export interface RouteItem {
   name: string;
@@ -49,24 +51,24 @@ export const footerNavRoutes: RouteItem[] = [
   { name: '博客', path: '/blog' },
   { name: '联系', path: '/contact' },
   { name: '隐私政策', path: '/privacy' },
-  { name: '条款和条件', path: '/terms' },
+  { name: '使用条款', path: '/terms' },
 ];
 
 // 社交媒体链接（如果需要）
 export const socialLinks: RouteItem[] = [
   {
     name: 'GitHub',
-    path: 'https://github.com/username',
+    path: siteConfig.social.github.url,
     isExternal: true
   },
   {
     name: 'LinkedIn',
-    path: 'https://linkedin.com/in/username',
+    path: siteConfig.social.linkedin.url,
     isExternal: true
   },
   {
     name: 'Twitter',
-    path: 'https://twitter.com/username',
+    path: siteConfig.social.twitter.url,
     isExternal: true
   },
 ];

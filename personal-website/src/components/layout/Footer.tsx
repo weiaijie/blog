@@ -23,6 +23,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { motion, AnimatePresence } from 'framer-motion';
 import { socialLinks, footerNavRoutes } from '@/config/routes';
+import siteConfig from '@/config/site';
 import styles from '@/styles/Footer.module.css';
 import { useTheme } from '@/contexts/ThemeContext';
 
@@ -240,8 +241,8 @@ const Footer: React.FC<FooterProps> = () => {
                       duration: 0.2
                     }}
                   >
-                    <a href="mailto:contact@example.com" className={styles.contactLink}>
-                      contact@example.com
+                    <a href={`mailto:${siteConfig.contact.email}`} className={styles.contactLink}>
+                      {siteConfig.contact.email}
                     </a>
                   </motion.li>
                   <motion.li
@@ -317,8 +318,8 @@ const Footer: React.FC<FooterProps> = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.5 }}
           >
-            <p>Copyright © {currentYear} saber. 保留所有权利。</p>
-            <p className={styles.techStack}>使用 Next.js、React 和 TypeScript 构建</p>
+            <p>Copyright © {currentYear} {siteConfig.author}. {siteConfig.copyright.text}</p>
+            <p className={styles.techStack}>{siteConfig.techStack}</p>
           </motion.div>
         </motion.div>
       </div>

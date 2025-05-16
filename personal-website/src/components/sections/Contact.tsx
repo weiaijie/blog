@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from '@/styles/Contact.module.css';
+import siteConfig from '@/config/site';
 
 const Contact: React.FC = () => {
   return (
@@ -20,8 +21,8 @@ const Contact: React.FC = () => {
               </div>
               <div className={styles.contactDetails}>
                 <h3 className={styles.contactMethodTitle}>电子邮件</h3>
-                <a href="mailto:contact@example.com" className={styles.contactLink}>
-                  contact@example.com
+                <a href={`mailto:${siteConfig.contact.email}`} className={styles.contactLink}>
+                  {siteConfig.contact.email}
                 </a>
               </div>
             </div>
@@ -33,8 +34,8 @@ const Contact: React.FC = () => {
               </div>
               <div className={styles.contactDetails}>
                 <h3 className={styles.contactMethodTitle}>GitHub</h3>
-                <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className={styles.contactLink}>
-                  github.com/username
+                <a href={siteConfig.social.github.url} target="_blank" rel="noopener noreferrer" className={styles.contactLink}>
+                  github.com/{siteConfig.social.github.username}
                 </a>
               </div>
             </div>
@@ -48,8 +49,8 @@ const Contact: React.FC = () => {
               </div>
               <div className={styles.contactDetails}>
                 <h3 className={styles.contactMethodTitle}>LinkedIn</h3>
-                <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" className={styles.contactLink}>
-                  linkedin.com/in/username
+                <a href={siteConfig.social.linkedin.url} target="_blank" rel="noopener noreferrer" className={styles.contactLink}>
+                  linkedin.com/in/{siteConfig.social.linkedin.username}
                 </a>
               </div>
             </div>
