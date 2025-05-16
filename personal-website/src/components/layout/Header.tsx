@@ -5,7 +5,8 @@ import styles from '@/styles/Header.module.css';
 import { mainNavRoutes } from '@/config/routes';
 import ThemeToggle from '@/components/common/ThemeToggle';
 // 用于存储是否是首次加载的全局变量
-const isFirstLoad = typeof window !== 'undefined' ? !window.sessionStorage.getItem('hasVisited') : true;
+// 在服务器端渲染时，始终将 isFirstLoad 设置为 false，避免服务器/客户端不匹配
+const isFirstLoad = false;
 
 interface HeaderProps {}
 
@@ -22,9 +23,14 @@ const Header: React.FC<HeaderProps> = () => {
   useEffect(() => {
     setMounted(true);
 
-    // 标记用户已访问过网站，下次不再显示动画
-    if (typeof window !== 'undefined' && isFirstLoad) {
-      window.sessionStorage.setItem('hasVisited', 'true');
+    // 在客户端检测是否是首次访问
+    if (typeof window !== 'undefined') {
+      const hasVisited = window.sessionStorage.getItem('hasVisited');
+      if (!hasVisited) {
+        // 首次访问，显示动画并标记已访问
+        setShowAnimation(true);
+        window.sessionStorage.setItem('hasVisited', 'true');
+      }
     }
   }, []);
 
