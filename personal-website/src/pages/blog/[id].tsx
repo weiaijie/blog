@@ -379,17 +379,18 @@ export default function BlogPostPage({ post }: BlogPostPageProps) {
                     // 在客户端渲染时，添加语言类名和主题相关的类名
                     return !inline && match ? (
                       <div className={styles.codeBlockWrapper}>
-                        {/* 语言标记 - 样式根据当前主题变化 */}
-                        <div
-                          className={styles.languageLabel}
-                          style={{
-                            backgroundColor: currentTheme === 'dark'
-                              ? 'rgba(var(--primary-rgb), 0.6)'
-                              : 'rgba(var(--primary-rgb), 0.7)',
-                            backdropFilter: 'blur(4px)',
-                          }}
-                        >
-                          {getLanguageDisplayName(match[1])}
+                        {/* 语言标记 - 放在代码块上方，不会挡住代码 */}
+                        <div className={styles.languageLabelContainer}>
+                          <div
+                            className={styles.languageLabel}
+                            style={{
+                              backgroundColor: currentTheme === 'dark'
+                                ? 'rgba(var(--primary-rgb), 0.5)'
+                                : 'rgba(var(--primary-rgb), 0.6)',
+                            }}
+                          >
+                            {getLanguageDisplayName(match[1])}
+                          </div>
                         </div>
                         <pre className={`language-${match[1]}`} data-theme={currentTheme}>
                           <code className={`language-${match[1]}`}>
