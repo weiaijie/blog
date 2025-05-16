@@ -1,0 +1,238 @@
+/* 页脚样式 - 苹果风格 */
+.footer {
+  background-color: var(--bg-light);
+  padding: 20px 0;
+  border-top: 1px solid var(--border-color);
+  font-size: 12px;
+  transition: var(--theme-transition);
+}
+
+.container {
+  max-width: 980px; /* 苹果网站的内容宽度 */
+  margin: 0 auto;
+  padding: 0 22px; /* 苹果风格的内边距 */
+}
+
+/* 页脚目录部分 - 多列导航 */
+.footerDirectory {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border-color);
+  transition: border-color 0.3s ease;
+}
+
+.directoryColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.directoryTitle {
+  font-family: 'SF Pro Text', var(--font-heading);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 14px;
+  letter-spacing: -0.01em;
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* 可切换的标题样式（移动端） */
+.toggleable {
+  cursor: pointer;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 0;
+  transition: color 0.2s ease;
+}
+
+.toggleable:hover {
+  color: var(--primary-color);
+}
+
+/* 箭头图标样式 */
+.chevronIcon {
+  transition: transform 0.3s ease;
+}
+
+.chevronIcon.expanded {
+  transform: rotate(180deg);
+}
+
+.directoryList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.directoryItem {
+  font-size: 12px;
+  line-height: 1.33337;
+}
+
+.directoryItem a {
+  color: var(--text-light);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.directoryItem a:hover,
+.directoryItem a.active {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+/* 社交媒体链接 */
+.socialLinks {
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-light);
+  transition: color 0.2s ease;
+}
+
+.socialLink:hover {
+  color: var(--primary-color);
+}
+
+/* 联系链接 */
+.contactLink {
+  color: var(--text-light);
+  transition: color 0.2s ease;
+}
+
+.contactLink:hover {
+  color: var(--primary-color);
+}
+
+/* 页脚法律和版权部分 */
+.footerLegal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 17px 0;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.legalLinks {
+  display: flex;
+  gap: 20px;
+}
+
+.legalLink {
+  color: var(--text-light);
+  font-size: 12px;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  position: relative;
+}
+
+.legalLink:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 12px;
+  background-color: var(--border-color);
+}
+
+.legalLink:hover {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.copyright {
+  color: var(--text-lighter);
+  font-size: 12px;
+  text-align: right;
+}
+
+.copyright p {
+  margin: 0;
+  line-height: 1.33337;
+}
+
+.techStack {
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--text-lighter);
+}
+
+/* 响应式设计 */
+@media (max-width: 833px) {
+  .footer {
+    padding: 0;
+  }
+
+  .footerDirectory {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 0;
+    border-bottom: none;
+  }
+
+  .directoryColumn {
+    border-bottom: none;
+  }
+
+  /* 移动端列表样式 */
+  .directoryList {
+    padding: 10px 0;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .directoryItem {
+    padding: 8px 0;
+  }
+
+  /* 移动端社交链接样式 */
+  .socialLinks {
+    padding: 8px 0;
+  }
+
+  .footerLegal {
+    padding: 20px 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .copyright {
+    text-align: left;
+  }
+}
+
+@media (max-width: 640px) {
+  .legalLinks {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .legalLinks {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .legalLink:not(:last-child)::after {
+    display: none;
+  }
+}
