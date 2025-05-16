@@ -1,0 +1,170 @@
+/**
+ * Grid.module.css
+ *
+ * 描述：网格系统样式，提供灵活的布局结构
+ *
+ * 功能：
+ * - 提供12列网格系统
+ * - 支持不同的列宽和间距
+ * - 支持响应式布局
+ * - 提供常用的布局辅助类
+ */
+
+/* 网格容器 */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--spacing-lg);
+  width: 100%;
+}
+
+/* 网格间距变体 */
+.gridGapSm {
+  gap: var(--spacing-sm);
+}
+
+.gridGapMd {
+  gap: var(--spacing-md);
+}
+
+.gridGapLg {
+  gap: var(--spacing-lg);
+}
+
+.gridGapXl {
+  gap: var(--spacing-xl);
+}
+
+/* 列宽类 - 从1到12列 */
+.col1 { grid-column: span 1; }
+.col2 { grid-column: span 2; }
+.col3 { grid-column: span 3; }
+.col4 { grid-column: span 4; }
+.col5 { grid-column: span 5; }
+.col6 { grid-column: span 6; }
+.col7 { grid-column: span 7; }
+.col8 { grid-column: span 8; }
+.col9 { grid-column: span 9; }
+.col10 { grid-column: span 10; }
+.col11 { grid-column: span 11; }
+.col12 { grid-column: span 12; }
+
+/* 列偏移类 - 从1到11列 */
+.offset1 { grid-column-start: 2; }
+.offset2 { grid-column-start: 3; }
+.offset3 { grid-column-start: 4; }
+.offset4 { grid-column-start: 5; }
+.offset5 { grid-column-start: 6; }
+.offset6 { grid-column-start: 7; }
+.offset7 { grid-column-start: 8; }
+.offset8 { grid-column-start: 9; }
+.offset9 { grid-column-start: 10; }
+.offset10 { grid-column-start: 11; }
+.offset11 { grid-column-start: 12; }
+
+/* 行高类 */
+.row1 { grid-row: span 1; }
+.row2 { grid-row: span 2; }
+.row3 { grid-row: span 3; }
+.row4 { grid-row: span 4; }
+
+/* 对齐类 */
+.alignStart { align-items: start; }
+.alignCenter { align-items: center; }
+.alignEnd { align-items: end; }
+.justifyStart { justify-content: start; }
+.justifyCenter { justify-content: center; }
+.justifyEnd { justify-content: end; }
+.justifyBetween { justify-content: space-between; }
+.justifyAround { justify-content: space-around; }
+
+/* 自动流动布局 - 用于卡片网格等 */
+.autoFit {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.autoFill {
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+/* 响应式列宽 */
+@media (max-width: 1068px) {
+  .lgCol1 { grid-column: span 1; }
+  .lgCol2 { grid-column: span 2; }
+  .lgCol3 { grid-column: span 3; }
+  .lgCol4 { grid-column: span 4; }
+  .lgCol5 { grid-column: span 5; }
+  .lgCol6 { grid-column: span 6; }
+  .lgCol7 { grid-column: span 7; }
+  .lgCol8 { grid-column: span 8; }
+  .lgCol9 { grid-column: span 9; }
+  .lgCol10 { grid-column: span 10; }
+  .lgCol11 { grid-column: span 11; }
+  .lgCol12 { grid-column: span 12; }
+}
+
+@media (max-width: 834px) {
+  .mdCol1 { grid-column: span 1; }
+  .mdCol2 { grid-column: span 2; }
+  .mdCol3 { grid-column: span 3; }
+  .mdCol4 { grid-column: span 4; }
+  .mdCol5 { grid-column: span 5; }
+  .mdCol6 { grid-column: span 6; }
+  .mdCol7 { grid-column: span 7; }
+  .mdCol8 { grid-column: span 8; }
+  .mdCol9 { grid-column: span 9; }
+  .mdCol10 { grid-column: span 10; }
+  .mdCol11 { grid-column: span 11; }
+  .mdCol12 { grid-column: span 12; }
+}
+
+@media (max-width: 734px) {
+  .smCol1 { grid-column: span 1; }
+  .smCol2 { grid-column: span 2; }
+  .smCol3 { grid-column: span 3; }
+  .smCol4 { grid-column: span 4; }
+  .smCol5 { grid-column: span 5; }
+  .smCol6 { grid-column: span 6; }
+  .smCol7 { grid-column: span 7; }
+  .smCol8 { grid-column: span 8; }
+  .smCol9 { grid-column: span 9; }
+  .smCol10 { grid-column: span 10; }
+  .smCol11 { grid-column: span 11; }
+  .smCol12 { grid-column: span 12; }
+}
+
+@media (max-width: 480px) {
+  .xsCol1 { grid-column: span 1; }
+  .xsCol2 { grid-column: span 2; }
+  .xsCol3 { grid-column: span 3; }
+  .xsCol4 { grid-column: span 4; }
+  .xsCol5 { grid-column: span 5; }
+  .xsCol6 { grid-column: span 6; }
+  .xsCol7 { grid-column: span 7; }
+  .xsCol8 { grid-column: span 8; }
+  .xsCol9 { grid-column: span 9; }
+  .xsCol10 { grid-column: span 10; }
+  .xsCol11 { grid-column: span 11; }
+  .xsCol12 { grid-column: span 12; }
+}
+
+/* 容器类 */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+/* 部分类 */
+.section {
+  padding: var(--spacing-2xl) 0;
+}
+
+.sectionLg {
+  padding: var(--spacing-3xl) 0;
+}
+
+.sectionSm {
+  padding: var(--spacing-xl) 0;
+}

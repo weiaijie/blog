@@ -1,0 +1,210 @@
+/**
+ * Card.module.css
+ *
+ * 描述：卡片组件样式，提供各种卡片变体
+ *
+ * 功能：
+ * - 提供基础卡片样式
+ * - 支持不同的卡片变体（基本、突出、项目、博客等）
+ * - 支持悬停效果和交互状态
+ * - 支持亮色/暗色主题
+ */
+
+/* 基础卡片样式 */
+.card {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: var(--spacing-xl);
+  transition: transform 0.3s cubic-bezier(0.28, 0.11, 0.32, 1), 
+              box-shadow 0.3s cubic-bezier(0.28, 0.11, 0.32, 1);
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--box-shadow-hover);
+}
+
+/* 卡片内容 */
+.cardContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 卡片标题 */
+.cardTitle {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  margin-bottom: var(--spacing-md);
+  color: var(--text-color);
+  letter-spacing: -0.02em;
+}
+
+/* 卡片描述 */
+.cardDescription {
+  font-size: var(--font-size-md);
+  color: var(--text-light);
+  margin-bottom: var(--spacing-lg);
+  line-height: 1.6;
+  flex: 1;
+}
+
+/* 卡片页脚 */
+.cardFooter {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* 卡片链接 */
+.cardLink {
+  color: var(--primary-color);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.cardLink:hover {
+  color: var(--primary-dark);
+}
+
+.cardLink svg {
+  margin-left: var(--spacing-xs);
+  transition: transform 0.2s ease;
+}
+
+.cardLink:hover svg {
+  transform: translateX(4px);
+}
+
+/* 卡片标签 */
+.cardTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-md);
+}
+
+.cardTag {
+  background-color: rgba(var(--primary-rgb), 0.1);
+  color: var(--primary-color);
+  font-size: var(--font-size-sm);
+  padding: 0.25rem 0.75rem;
+  border-radius: 980px;
+  display: inline-block;
+}
+
+/* 卡片变体 */
+
+/* 突出卡片 */
+.cardFeatured {
+  border-left: 4px solid var(--primary-color);
+}
+
+/* 项目卡片 */
+.cardProject {
+  padding: 0;
+}
+
+.cardProjectImage {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
+}
+
+.cardProjectContent {
+  padding: var(--spacing-lg);
+}
+
+/* 博客卡片 */
+.cardBlog {
+  padding: 0;
+}
+
+.cardBlogImage {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
+}
+
+.cardBlogContent {
+  padding: var(--spacing-lg);
+}
+
+.cardBlogMeta {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  font-size: var(--font-size-sm);
+  color: var(--text-lighter);
+}
+
+.cardBlogDate {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.cardBlogReadTime {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+/* 技能卡片 */
+.cardSkill {
+  text-align: center;
+  padding: var(--spacing-lg);
+}
+
+.cardSkillIcon {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-md);
+}
+
+/* 联系卡片 */
+.cardContact {
+  text-align: center;
+  padding: var(--spacing-xl);
+}
+
+.cardContactIcon {
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-md);
+  display: inline-block;
+  background-color: rgba(var(--primary-rgb), 0.1);
+  padding: var(--spacing-md);
+  border-radius: 50%;
+}
+
+/* 响应式调整 */
+@media (max-width: 734px) {
+  .card {
+    padding: var(--spacing-lg);
+  }
+  
+  .cardProjectContent,
+  .cardBlogContent {
+    padding: var(--spacing-md);
+  }
+  
+  .cardTitle {
+    font-size: var(--font-size-lg);
+  }
+}
