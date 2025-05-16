@@ -1,3 +1,19 @@
+/**
+ * blog.tsx
+ *
+ * 描述：博客页面，展示个人技术博客文章列表
+ *
+ * 功能：
+ * - 展示不同类别的博客文章（技术教程、项目案例、行业趋势、经验分享）
+ * - 提供文章分类筛选功能
+ * - 提供文章搜索功能（标题、摘要和标签）
+ * - 展示文章卡片，包括标题、摘要、日期、阅读时间和标签
+ *
+ * 主要组件：
+ * - Blog：博客页面的主要组件
+ * - 包含博客文章数据模型定义和筛选逻辑
+ */
+
 import Head from 'next/head';
 import { useState } from 'react';
 import Link from 'next/link';
@@ -92,12 +108,12 @@ export default function Blog() {
   // 状态管理
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
-  
+
   // 根据分类和搜索筛选文章
   const filteredPosts = allPosts
     .filter(post => activeCategory === 'all' || post.category === activeCategory)
-    .filter(post => 
-      post.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+    .filter(post =>
+      post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
       post.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
     );
@@ -112,7 +128,7 @@ export default function Blog() {
         <div className={styles.blogPage}>
           <div className={styles.container}>
             <h1 className={styles.pageTitle}>博客</h1>
-            
+
             <div className={styles.blogControls}>
               <div className={styles.searchBar}>
                 <input
@@ -127,7 +143,7 @@ export default function Blog() {
                   <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                 </svg>
               </div>
-              
+
               <div className={styles.categoryFilter}>
                 {categories.map(category => (
                   <button
@@ -140,7 +156,7 @@ export default function Blog() {
                 ))}
               </div>
             </div>
-            
+
             <div className={styles.postsGrid}>
               {filteredPosts.length > 0 ? (
                 filteredPosts.map(post => (

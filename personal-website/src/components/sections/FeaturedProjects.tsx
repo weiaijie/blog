@@ -1,3 +1,22 @@
+/**
+ * FeaturedProjects.tsx
+ *
+ * 描述：首页的精选项目部分，展示个人代表性项目
+ *
+ * 功能：
+ * - 展示精选的个人项目
+ * - 显示项目标题、描述和技术标签
+ * - 提供项目图片展示
+ * - 提供"查看更多项目"按钮链接到详细的项目页面
+ *
+ * 主要组件/接口：
+ * - FeaturedProjects：精选项目组件
+ * - Project：项目数据接口
+ *
+ * 导出：
+ * - FeaturedProjects 组件（默认导出）
+ */
+
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';

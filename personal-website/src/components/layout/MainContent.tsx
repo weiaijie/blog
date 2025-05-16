@@ -1,3 +1,23 @@
+/**
+ * MainContent.tsx
+ *
+ * 描述：首页主要内容组件，包含个人简介、技能亮点、精选项目和最新博客文章
+ *
+ * 功能：
+ * - 组织和展示首页的主要内容部分
+ * - 提供内容显示/隐藏的动画效果
+ * - 使用Framer Motion实现平滑的过渡动画
+ * - 优化动画性能，避免闪烁和页面跳动
+ *
+ * 主要组件/接口：
+ * - MainContent：首页主要内容组件
+ * - MainContentProps：组件属性接口
+ * - 包含多个子部分组件：BriefIntro、SkillsHighlight、FeaturedProjects、LatestPosts
+ *
+ * 导出：
+ * - MainContent 组件（默认导出）
+ */
+
 import React, { useEffect, useRef } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import styles from '@/styles/MainContent.module.css';

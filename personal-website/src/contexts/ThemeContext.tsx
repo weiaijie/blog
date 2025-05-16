@@ -1,3 +1,26 @@
+/**
+ * ThemeContext.tsx
+ *
+ * 描述：主题上下文组件，用于管理网站的亮色/暗色主题模式
+ *
+ * 功能：
+ * - 提供全局主题状态管理
+ * - 支持手动切换主题模式
+ * - 自动检测并应用系统主题偏好
+ * - 将主题偏好保存到本地存储
+ * - 监听系统主题变化并相应更新
+ *
+ * 主要组件/接口：
+ * - ThemeProvider：主题提供者组件，包装应用以提供主题上下文
+ * - useTheme：自定义钩子，用于在组件中访问主题状态和方法
+ * - ThemeContextType：定义主题上下文的接口
+ *
+ * 导出：
+ * - Theme 类型：'light' | 'dark'
+ * - ThemeProvider 组件
+ * - useTheme 钩子
+ */
+
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 // 定义主题类型

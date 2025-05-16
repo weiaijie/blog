@@ -1,3 +1,19 @@
+/**
+ * blog/[id].tsx
+ *
+ * 描述：博客文章详情页面，展示单篇博客文章的完整内容
+ *
+ * 功能：
+ * - 使用动态路由展示特定博客文章
+ * - 展示文章标题、日期、阅读时间、标签和内容
+ * - 使用静态生成（SSG）预渲染文章页面
+ * - 提供返回博客列表的导航
+ *
+ * 主要组件：
+ * - BlogPostPage：博客文章详情页面的主要组件
+ * - 包含getStaticPaths和getStaticProps函数用于静态生成
+ */
+
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -36,7 +52,7 @@ const blogPosts: BlogPost[] = [
       ## 组件优化
 
       ### 使用React.memo
-      
+
       React.memo是一个高阶组件，它可以帮助你的组件避免不必要的重新渲染。当组件的props没有变化时，React.memo会复用最近一次渲染的结果，而不是重新渲染组件。
 
       \`\`\`jsx
@@ -46,13 +62,13 @@ const blogPosts: BlogPost[] = [
       \`\`\`
 
       ### 使用useMemo和useCallback
-      
+
       useMemo和useCallback钩子可以帮助你缓存计算结果和函数引用，避免在每次渲染时重新创建。
 
       \`\`\`jsx
       // 缓存计算结果
       const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);
-      
+
       // 缓存函数引用
       const memoizedCallback = useCallback(() => {
         doSomething(a, b);
@@ -62,25 +78,25 @@ const blogPosts: BlogPost[] = [
       ## 状态管理优化
 
       ### 使用合适的状态管理方案
-      
+
       根据应用的复杂度选择合适的状态管理方案：
-      
+
       - 对于简单应用，使用React的内置状态管理（useState, useReducer）
       - 对于中等复杂度的应用，可以考虑使用Context API
       - 对于复杂应用，可以使用Redux, MobX等状态管理库
 
       ### 避免状态冗余
-      
+
       确保你的状态是DRY（Don't Repeat Yourself）的，避免存储可以从现有状态派生的数据。
 
       ## 渲染优化
 
       ### 虚拟列表
-      
+
       对于长列表，使用虚拟列表技术（如react-window或react-virtualized）只渲染可见区域的项目。
 
       ### 代码分割
-      
+
       使用React.lazy和Suspense进行代码分割，只加载当前需要的代码。
 
       \`\`\`jsx
@@ -133,7 +149,7 @@ const blogPosts: BlogPost[] = [
       条件类型可以根据条件选择不同的类型：
 
       \`\`\`typescript
-      type TypeName<T> = 
+      type TypeName<T> =
         T extends string ? "string" :
         T extends number ? "number" :
         T extends boolean ? "boolean" :

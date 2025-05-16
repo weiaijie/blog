@@ -1,3 +1,18 @@
+/**
+ * projects.tsx
+ *
+ * 描述：项目展示页面，用于展示个人开发的项目作品集
+ *
+ * 功能：
+ * - 展示不同类别的项目（网站开发、应用程序、设计项目、开源贡献）
+ * - 提供项目分类筛选功能
+ * - 展示项目详情，包括标题、描述、技术标签和相关链接
+ *
+ * 主要组件：
+ * - Projects：项目页面的主要组件
+ * - 包含项目数据模型定义和分类筛选逻辑
+ */
+
 import Head from 'next/head';
 import { useState } from 'react';
 import Layout from '@/components/layout/Layout';
@@ -87,10 +102,10 @@ export default function Projects() {
 
   // 状态管理
   const [activeCategory, setActiveCategory] = useState('all');
-  
+
   // 根据分类筛选项目
-  const filteredProjects = activeCategory === 'all' 
-    ? allProjects 
+  const filteredProjects = activeCategory === 'all'
+    ? allProjects
     : allProjects.filter(project => project.category === activeCategory);
 
   return (
@@ -103,7 +118,7 @@ export default function Projects() {
         <div className={styles.projectsPage}>
           <div className={styles.container}>
             <h1 className={styles.pageTitle}>项目</h1>
-            
+
             <div className={styles.categoryFilter}>
               {categories.map(category => (
                 <button
@@ -115,7 +130,7 @@ export default function Projects() {
                 </button>
               ))}
             </div>
-            
+
             <div className={styles.projectsGrid}>
               {filteredProjects.map(project => (
                 <div className={styles.projectCard} key={project.id}>

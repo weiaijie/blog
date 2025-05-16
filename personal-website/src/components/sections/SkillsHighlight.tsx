@@ -1,3 +1,22 @@
+/**
+ * SkillsHighlight.tsx
+ *
+ * 描述：首页的技能亮点部分，展示个人主要技能和熟练度
+ *
+ * 功能：
+ * - 展示主要技能类别（前端开发、后端开发、UI/UX设计、DevOps）
+ * - 使用动画效果展示技能熟练度条
+ * - 通过IntersectionObserver实现滚动时的技能条动画
+ * - 提供"查看全部技能"按钮链接到详细的技能页面
+ *
+ * 主要组件/接口：
+ * - SkillsHighlight：技能亮点组件
+ * - Skill：技能数据接口
+ *
+ * 导出：
+ * - SkillsHighlight 组件（默认导出）
+ */
+
 import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import styles from '@/styles/SkillsHighlight.module.css';

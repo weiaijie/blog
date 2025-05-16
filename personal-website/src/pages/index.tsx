@@ -1,3 +1,20 @@
+/**
+ * index.tsx
+ *
+ * 描述：个人网站首页，展示个人介绍、技能亮点、精选项目和最新博客文章
+ *
+ * 功能：
+ * - 展示网站标语(Tagline)和主要内容
+ * - 实现滚动时标语的显示/隐藏效果
+ * - 使用防抖和节流优化滚动事件处理
+ * - 响应式设计，适配不同设备尺寸
+ *
+ * 主要组件：
+ * - Home：主页组件，控制标语和主内容的显示逻辑
+ * - Tagline：标语组件，展示在首屏
+ * - MainContent：主要内容组件，包含个人介绍、技能、项目和博客文章
+ */
+
 import { useState, useEffect, useCallback, useRef } from 'react';
 import Head from 'next/head';
 import Layout from '@/components/layout/Layout';

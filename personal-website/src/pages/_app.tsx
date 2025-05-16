@@ -1,3 +1,19 @@
+/**
+ * _app.tsx
+ *
+ * 描述：Next.js应用程序的入口文件，用于初始化页面和全局配置
+ *
+ * 功能：
+ * - 初始化全局样式和字体
+ * - 管理网站主题（亮色/暗色模式）
+ * - 在页面加载前应用保存的主题偏好，避免闪烁
+ * - 设置全局元数据和视口配置
+ *
+ * 主要组件：
+ * - App：Next.js应用程序的主组件
+ * - 包含主题初始化和全局配置逻辑
+ */
+
 import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';

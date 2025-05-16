@@ -1,3 +1,23 @@
+/**
+ * ThemeToggle.tsx
+ *
+ * 描述：主题切换按钮组件，用于切换网站的亮色/暗色主题模式
+ *
+ * 功能：
+ * - 提供直观的主题切换按钮
+ * - 根据当前主题显示对应的图标（太阳/月亮）
+ * - 支持动画效果
+ * - 处理服务器端渲染和客户端渲染的差异
+ * - 提供无障碍支持（aria标签）
+ *
+ * 主要组件/接口：
+ * - ThemeToggle：主题切换按钮组件
+ * - ThemeToggleProps：组件属性接口
+ *
+ * 导出：
+ * - ThemeToggle 组件（默认导出）
+ */
+
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from '@/contexts/ThemeContext';

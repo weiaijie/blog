@@ -1,3 +1,18 @@
+/**
+ * contact.tsx
+ *
+ * 描述：联系页面，提供联系方式和消息发送表单
+ *
+ * 功能：
+ * - 展示联系信息（电子邮件、GitHub、LinkedIn）
+ * - 提供消息发送表单，包含姓名、电子邮件、主题和消息内容
+ * - 表单提交状态管理（提交中、成功、错误）
+ *
+ * 主要组件：
+ * - Contact：联系页面的主要组件
+ * - 包含表单状态管理和提交逻辑
+ */
+
 import Head from 'next/head';
 import { useState } from 'react';
 import Layout from '@/components/layout/Layout';
@@ -11,12 +26,12 @@ export default function Contact() {
     subject: '',
     message: ''
   });
-  
+
   // 表单提交状态
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState('');
-  
+
   // 处理输入变化
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -25,18 +40,18 @@ export default function Contact() {
       [name]: value
     }));
   };
-  
+
   // 处理表单提交
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitError('');
-    
+
     // 模拟表单提交
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitSuccess(true);
-      
+
       // 重置表单
       setFormData({
         name: '',
@@ -44,7 +59,7 @@ export default function Contact() {
         subject: '',
         message: ''
       });
-      
+
       // 5秒后重置成功状态
       setTimeout(() => {
         setSubmitSuccess(false);
@@ -62,13 +77,13 @@ export default function Contact() {
         <div className={styles.contactPage}>
           <div className={styles.container}>
             <h1 className={styles.pageTitle}>联系我</h1>
-            
+
             <div className={styles.contactContent}>
               <div className={styles.contactInfo}>
                 <p className={styles.contactText}>
                   如果您有任何问题或合作意向，欢迎随时与我联系。我会尽快回复您的消息。
                 </p>
-                
+
                 <div className={styles.contactMethods}>
                   <div className={styles.contactMethod}>
                     <div className={styles.contactIcon}>
@@ -84,7 +99,7 @@ export default function Contact() {
                       </a>
                     </div>
                   </div>
-                  
+
                   <div className={styles.contactMethod}>
                     <div className={styles.contactIcon}>
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -98,7 +113,7 @@ export default function Contact() {
                       </a>
                     </div>
                   </div>
-                  
+
                   <div className={styles.contactMethod}>
                     <div className={styles.contactIcon}>
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -116,10 +131,10 @@ export default function Contact() {
                   </div>
                 </div>
               </div>
-              
+
               <div className={styles.contactForm}>
                 <h2 className={styles.formTitle}>发送消息</h2>
-                
+
                 {submitSuccess ? (
                   <div className={styles.successMessage}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -143,7 +158,7 @@ export default function Contact() {
                         required
                       />
                     </div>
-                    
+
                     <div className={styles.formGroup}>
                       <label htmlFor="email" className={styles.formLabel}>电子邮件</label>
                       <input
@@ -157,7 +172,7 @@ export default function Contact() {
                         required
                       />
                     </div>
-                    
+
                     <div className={styles.formGroup}>
                       <label htmlFor="subject" className={styles.formLabel}>主题</label>
                       <select
@@ -175,7 +190,7 @@ export default function Contact() {
                         <option value="other">其他</option>
                       </select>
                     </div>
-                    
+
                     <div className={styles.formGroup}>
                       <label htmlFor="message" className={styles.formLabel}>消息</label>
                       <textarea
@@ -189,11 +204,11 @@ export default function Contact() {
                         required
                       ></textarea>
                     </div>
-                    
+
                     {submitError && (
                       <div className={styles.errorMessage}>{submitError}</div>
                     )}
-                    
+
                     <button
                       type="submit"
                       className={styles.submitButton}

@@ -1,3 +1,17 @@
+/**
+ * skills.tsx
+ *
+ * 描述：技能展示页面，用于展示个人的技术技能和专业能力
+ *
+ * 功能：
+ * - 展示不同类别的技能（前端开发、后端开发、其他技术技能）
+ * - 使用动画效果展示技能熟练度条
+ * - 通过 IntersectionObserver 实现滚动时的技能条动画
+ *
+ * 主要组件：
+ * - Skills：主要组件，包含技能展示逻辑和布局
+ */
+
 import Head from 'next/head';
 import { useEffect, useRef } from 'react';
 import Layout from '@/components/layout/Layout';
@@ -37,7 +51,7 @@ export default function Skills() {
         <div className={styles.skillsPage} ref={skillsRef}>
           <div className={styles.container}>
             <h1 className={styles.pageTitle}>技能</h1>
-            
+
             <section className={styles.section}>
               <h2 className={styles.sectionTitle}>前端开发</h2>
               <div className={styles.skillsGrid}>
@@ -47,8 +61,8 @@ export default function Skills() {
                     <span className={styles.skillLevel}>⭐⭐⭐⭐⭐</span>
                   </div>
                   <div className={styles.skillBarContainer}>
-                    <div 
-                      className={styles.skillBar} 
+                    <div
+                      className={styles.skillBar}
                       style={{ '--skill-level': '95%' } as React.CSSProperties}
                     ></div>
                   </div>
@@ -58,15 +72,15 @@ export default function Skills() {
                     擅长响应式设计和移动优先原则。
                   </p>
                 </div>
-                
+
                 <div className={styles.skillItem}>
                   <div className={styles.skillHeader}>
                     <h3 className={styles.skillName}>JavaScript/TypeScript</h3>
                     <span className={styles.skillLevel}>⭐⭐⭐⭐</span>
                   </div>
                   <div className={styles.skillBarContainer}>
-                    <div 
-                      className={styles.skillBar} 
+                    <div
+                      className={styles.skillBar}
                       style={{ '--skill-level': '85%' } as React.CSSProperties}
                     ></div>
                   </div>
@@ -76,15 +90,15 @@ export default function Skills() {
                     以及模块化开发方法。
                   </p>
                 </div>
-                
+
                 <div className={styles.skillItem}>
                   <div className={styles.skillHeader}>
                     <h3 className={styles.skillName}>前端框架</h3>
                     <span className={styles.skillLevel}>⭐⭐⭐⭐</span>
                   </div>
                   <div className={styles.skillBarContainer}>
-                    <div 
-                      className={styles.skillBar} 
+                    <div
+                      className={styles.skillBar}
                       style={{ '--skill-level': '80%' } as React.CSSProperties}
                     ></div>
                   </div>
@@ -93,15 +107,15 @@ export default function Skills() {
                     擅长组件设计和状态管理，了解前端性能优化技巧。
                   </p>
                 </div>
-                
+
                 <div className={styles.skillItem}>
                   <div className={styles.skillHeader}>
                     <h3 className={styles.skillName}>响应式设计</h3>
                     <span className={styles.skillLevel}>⭐⭐⭐⭐⭐</span>
                   </div>
                   <div className={styles.skillBarContainer}>
-                    <div 
-                      className={styles.skillBar} 
+                    <div
+                      className={styles.skillBar}
                       style={{ '--skill-level': '90%' } as React.CSSProperties}
                     ></div>
                   </div>
@@ -112,7 +126,7 @@ export default function Skills() {
                 </div>
               </div>
             </section>
-            
+
             <section className={styles.section}>
               <h2 className={styles.sectionTitle}>后端开发</h2>
               <div className={styles.skillsGrid}>
@@ -122,8 +136,8 @@ export default function Skills() {
                     <span className={styles.skillLevel}>⭐⭐⭐⭐</span>
                   </div>
                   <div className={styles.skillBarContainer}>
-                    <div 
-                      className={styles.skillBar} 
+                    <div
+                      className={styles.skillBar}
                       style={{ '--skill-level': '80%' } as React.CSSProperties}
                     ></div>
                   </div>
@@ -132,15 +146,15 @@ export default function Skills() {
                     了解Node.js性能优化和最佳实践。
                   </p>
                 </div>
-                
+
                 <div className={styles.skillItem}>
                   <div className={styles.skillHeader}>
                     <h3 className={styles.skillName}>数据库</h3>
                     <span className={styles.skillLevel}>⭐⭐⭐</span>
                   </div>
                   <div className={styles.skillBarContainer}>
-                    <div 
-                      className={styles.skillBar} 
+                    <div
+                      className={styles.skillBar}
                       style={{ '--skill-level': '70%' } as React.CSSProperties}
                     ></div>
                   </div>
@@ -151,7 +165,7 @@ export default function Skills() {
                 </div>
               </div>
             </section>
-            
+
             <section className={styles.section}>
               <h2 className={styles.sectionTitle}>其他技术技能</h2>
               <div className={styles.skillsGrid}>
@@ -161,8 +175,8 @@ export default function Skills() {
                     <span className={styles.skillLevel}>⭐⭐⭐⭐⭐</span>
                   </div>
                   <div className={styles.skillBarContainer}>
-                    <div 
-                      className={styles.skillBar} 
+                    <div
+                      className={styles.skillBar}
                       style={{ '--skill-level': '95%' } as React.CSSProperties}
                     ></div>
                   </div>
@@ -171,15 +185,15 @@ export default function Skills() {
                     以及代码审查最佳实践。
                   </p>
                 </div>
-                
+
                 <div className={styles.skillItem}>
                   <div className={styles.skillHeader}>
                     <h3 className={styles.skillName}>DevOps</h3>
                     <span className={styles.skillLevel}>⭐⭐⭐</span>
                   </div>
                   <div className={styles.skillBarContainer}>
-                    <div 
-                      className={styles.skillBar} 
+                    <div
+                      className={styles.skillBar}
                       style={{ '--skill-level': '65%' } as React.CSSProperties}
                     ></div>
                   </div>

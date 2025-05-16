@@ -1,3 +1,24 @@
+/**
+ * Header.tsx
+ *
+ * 描述：网站头部组件，包含导航菜单、主题切换按钮和搜索功能
+ *
+ * 功能：
+ * - 提供桌面端和移动端的导航菜单
+ * - 支持主题切换
+ * - 提供搜索功能入口
+ * - 根据滚动位置改变头部样式
+ * - 首次加载时显示动画效果
+ * - 移动端菜单的开关控制
+ *
+ * 主要组件/接口：
+ * - Header：头部组件
+ * - HeaderProps：组件属性接口
+ *
+ * 导出：
+ * - Header 组件（默认导出）
+ */
+
 import { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';

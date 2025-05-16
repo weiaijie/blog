@@ -1,3 +1,23 @@
+/**
+ * Tagline.tsx
+ *
+ * 描述：网站标语组件，展示在首页顶部的主要宣传语和行动按钮
+ *
+ * 功能：
+ * - 展示网站的主要标语和副标语
+ * - 使用打字机效果展示多个标语文本
+ * - 提供"查看作品"和"联系我"的行动按钮
+ * - 支持平滑的显示/隐藏动画效果
+ * - 响应滚动事件，在向下滚动时隐藏
+ *
+ * 主要组件/接口：
+ * - Tagline：标语组件
+ * - TaglineProps：组件属性接口
+ *
+ * 导出：
+ * - Tagline 组件（默认导出）
+ */
+
 import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';

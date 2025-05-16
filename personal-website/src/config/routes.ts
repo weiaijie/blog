@@ -1,3 +1,26 @@
+/**
+ * routes.ts
+ *
+ * 描述：路由配置文件，定义网站的导航结构和路由信息
+ *
+ * 功能：
+ * - 定义网站的主导航菜单路由
+ * - 定义页脚导航菜单路由
+ * - 定义社交媒体链接
+ * - 提供路由查询和管理的辅助函数
+ *
+ * 主要接口/常量：
+ * - RouteItem：路由项目接口
+ * - mainNavRoutes：主导航菜单路由
+ * - footerNavRoutes：页脚导航菜单路由
+ * - socialLinks：社交媒体链接
+ *
+ * 导出：
+ * - RouteItem 接口
+ * - 各种路由常量和辅助函数
+ * - mainNavRoutes（默认导出）
+ */
+
 // 路由配置文件
 export interface RouteItem {
   name: string;
@@ -31,20 +54,20 @@ export const footerNavRoutes: RouteItem[] = [
 
 // 社交媒体链接（如果需要）
 export const socialLinks: RouteItem[] = [
-  { 
-    name: 'GitHub', 
-    path: 'https://github.com/username', 
-    isExternal: true 
+  {
+    name: 'GitHub',
+    path: 'https://github.com/username',
+    isExternal: true
   },
-  { 
-    name: 'LinkedIn', 
-    path: 'https://linkedin.com/in/username', 
-    isExternal: true 
+  {
+    name: 'LinkedIn',
+    path: 'https://linkedin.com/in/username',
+    isExternal: true
   },
-  { 
-    name: 'Twitter', 
-    path: 'https://twitter.com/username', 
-    isExternal: true 
+  {
+    name: 'Twitter',
+    path: 'https://twitter.com/username',
+    isExternal: true
   },
 ];
 
@@ -52,7 +75,7 @@ export const socialLinks: RouteItem[] = [
 export const getAllRoutes = (): RouteItem[] => {
   return [
     ...mainNavRoutes,
-    ...footerNavRoutes.filter(route => 
+    ...footerNavRoutes.filter(route =>
       !mainNavRoutes.some(mainRoute => mainRoute.path === route.path)
     ),
   ];

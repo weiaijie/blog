@@ -1,3 +1,22 @@
+/**
+ * Layout.tsx
+ *
+ * 描述：网站布局组件，提供统一的页面结构和主题支持
+ *
+ * 功能：
+ * - 提供统一的页面布局结构
+ * - 包含网站头部组件
+ * - 提供主题上下文支持
+ * - 包装页面内容
+ *
+ * 主要组件/接口：
+ * - Layout：布局组件
+ * - LayoutProps：组件属性接口
+ *
+ * 导出：
+ * - Layout 组件（默认导出）
+ */
+
 import React, { ReactNode } from 'react';
 import Header from './Header';
 import styles from '@/styles/Layout.module.css';

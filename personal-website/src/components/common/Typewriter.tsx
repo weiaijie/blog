@@ -1,3 +1,23 @@
+/**
+ * Typewriter.tsx
+ *
+ * 描述：打字机效果组件，用于创建文字逐字显示和删除的动画效果
+ *
+ * 功能：
+ * - 实现文字逐字显示的打字效果
+ * - 实现文字逐字删除的效果
+ * - 支持多段文本循环显示
+ * - 可自定义打字速度、删除速度和延迟时间
+ * - 支持循环播放或单次播放
+ *
+ * 主要组件/接口：
+ * - Typewriter：打字机效果组件
+ * - TypewriterProps：组件属性接口
+ *
+ * 导出：
+ * - Typewriter 组件（默认导出）
+ */
+
 import { useState, useEffect, useRef } from 'react';
 import styles from '@/styles/Typewriter.module.css';
 

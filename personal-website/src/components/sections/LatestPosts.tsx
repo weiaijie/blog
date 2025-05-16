@@ -1,3 +1,22 @@
+/**
+ * LatestPosts.tsx
+ *
+ * 描述：首页的最新博客文章部分，展示最新的博客文章
+ *
+ * 功能：
+ * - 展示最新的博客文章
+ * - 显示文章标题、摘要、日期和图标
+ * - 提供文章链接跳转到详细页面
+ * - 提供"阅读更多"按钮链接到博客列表页面
+ *
+ * 主要组件/接口：
+ * - LatestPosts：最新博客文章组件
+ * - BlogPost：博客文章数据接口
+ *
+ * 导出：
+ * - LatestPosts 组件（默认导出）
+ */
+
 import React from 'react';
 import Link from 'next/link';
 import styles from '@/styles/LatestPosts.module.css';

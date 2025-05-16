@@ -1,3 +1,21 @@
+/**
+ * BriefIntro.tsx
+ *
+ * 描述：首页的简短个人介绍部分，展示个人简介和"了解更多"按钮
+ *
+ * 功能：
+ * - 展示个人简介文本
+ * - 提供"了解更多"按钮链接到详细的关于页面
+ * - 使用滚动动画效果增强用户体验
+ * - 使用Framer Motion实现平滑的动画效果
+ *
+ * 主要组件/接口：
+ * - BriefIntro：简短个人介绍组件
+ *
+ * 导出：
+ * - BriefIntro 组件（默认导出）
+ */
+
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';

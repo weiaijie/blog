@@ -1,3 +1,17 @@
+/**
+ * about.tsx
+ *
+ * 描述：关于我页面，展示个人简介、教育背景和工作经历
+ *
+ * 功能：
+ * - 展示个人简介信息
+ * - 使用时间线展示教育背景
+ * - 使用时间线展示工作经历
+ *
+ * 主要组件：
+ * - About：关于我页面的主要组件
+ */
+
 import Head from 'next/head';
 import Layout from '@/components/layout/Layout';
 import styles from '@/styles/About.module.css';
