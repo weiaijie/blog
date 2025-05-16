@@ -10,6 +10,7 @@
  * - 提供返回博客列表的导航
  * - 使用react-markdown解析和渲染Markdown内容
  * - 支持GFM（GitHub Flavored Markdown）语法
+ * - 使用Prism.js实现代码语法高亮
  *
  * 主要组件：
  * - BlogPostPage：博客文章详情页面的主要组件
@@ -22,6 +23,15 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { useEffect } from 'react';
+import Prism from 'prismjs';
+import 'prismjs/themes/prism-tomorrow.css'; // 导入Prism主题
+import 'prismjs/components/prism-javascript'; // 导入JavaScript语法
+import 'prismjs/components/prism-typescript'; // 导入TypeScript语法
+import 'prismjs/components/prism-jsx'; // 导入JSX语法
+import 'prismjs/components/prism-tsx'; // 导入TSX语法
+import 'prismjs/components/prism-css'; // 导入CSS语法
+import 'prismjs/components/prism-bash'; // 导入Bash语法
 import Layout from '@/components/layout/Layout';
 import styles from '@/styles/BlogPost.module.css';
 
@@ -183,6 +193,12 @@ interface BlogPostPageProps {
 }
 
 export default function BlogPostPage({ post }: BlogPostPageProps) {
+  // 使用 useEffect 在组件挂载后初始化 Prism
+  useEffect(() => {
+    // 在组件挂载后高亮代码块
+    Prism.highlightAll();
+  }, [post]); // 当文章内容变化时重新高亮
+
   if (!post) {
     return (
       <Layout>
@@ -248,7 +264,26 @@ export default function BlogPostPage({ post }: BlogPostPageProps) {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                components={{
+                  // @ts-ignore - react-markdown类型定义问题
+                  code({node, inline, className, children, ...props}: any) {
+                    const match = /language-(\w+)/.exec(className || '');
+                    return !inline && match ? (
+                      <pre className={`language-${match[1]}`}>
+                        <code className={`language-${match[1]}`} {...props}>
+                          {children}
+                        </code>
+                      </pre>
+                    ) : (
+                      <code className={className} {...props}>
+                        {children}
+                      </code>
+                    );
+                  }
+                }}
+              >
                 {post.content || ''}
               </ReactMarkdown>
             </motion.div>

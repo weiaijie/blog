@@ -169,6 +169,51 @@
   margin-bottom: 20px;
 }
 
+/* 添加对 Markdown 内容的更多样式支持 */
+.postContent ul, .postContent ol {
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.postContent li {
+  margin-bottom: 8px;
+}
+
+.postContent p {
+  margin-bottom: 16px;
+  line-height: 1.7;
+}
+
+.postContent img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.postContent table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.postContent th, .postContent td {
+  border: 1px solid var(--border-color);
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.postContent th {
+  background-color: var(--bg-light);
+  font-weight: 600;
+}
+
+.postContent hr {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 30px 0;
+}
+
 .postContent pre code {
   background-color: transparent;
   padding: 0;
