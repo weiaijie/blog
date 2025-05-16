@@ -25,7 +25,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { useEffect } from 'react';
 import Prism from 'prismjs';
-import 'prismjs/themes/prism-tomorrow.css'; // 导入Prism主题
+import '@/styles/prism-custom.css'; // 导入自定义Prism主题
 import 'prismjs/components/prism-javascript'; // 导入JavaScript语法
 import 'prismjs/components/prism-typescript'; // 导入TypeScript语法
 import 'prismjs/components/prism-jsx'; // 导入JSX语法
@@ -59,76 +59,76 @@ const blogPosts: BlogPost[] = [
     readTime: '8分钟',
     image: '/placeholder-blog.jpg',
     content: `
-      # 如何构建高性能React应用
+# 如何构建高性能React应用
 
-      在当今的Web开发中，用户体验至关重要，而性能是用户体验的核心组成部分。React作为一个流行的前端库，提供了许多优化性能的方法和工具。本文将探讨如何构建高性能的React应用。
+在当今的Web开发中，用户体验至关重要，而性能是用户体验的核心组成部分。React作为一个流行的前端库，提供了许多优化性能的方法和工具。本文将探讨如何构建高性能的React应用。
 
-      ## 组件优化
+## 组件优化
 
-      ### 使用React.memo
+### 使用React.memo
 
-      React.memo是一个高阶组件，它可以帮助你的组件避免不必要的重新渲染。当组件的props没有变化时，React.memo会复用最近一次渲染的结果，而不是重新渲染组件。
+React.memo是一个高阶组件，它可以帮助你的组件避免不必要的重新渲染。当组件的props没有变化时，React.memo会复用最近一次渲染的结果，而不是重新渲染组件。
 
-      \`\`\`jsx
-      const MyComponent = React.memo(function MyComponent(props) {
-        // 组件逻辑
-      });
-      \`\`\`
+\`\`\`jsx
+const MyComponent = React.memo(function MyComponent(props) {
+  // 组件逻辑
+});
+\`\`\`
 
-      ### 使用useMemo和useCallback
+### 使用useMemo和useCallback
 
-      useMemo和useCallback钩子可以帮助你缓存计算结果和函数引用，避免在每次渲染时重新创建。
+useMemo和useCallback钩子可以帮助你缓存计算结果和函数引用，避免在每次渲染时重新创建。
 
-      \`\`\`jsx
-      // 缓存计算结果
-      const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);
+\`\`\`jsx
+// 缓存计算结果
+const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);
 
-      // 缓存函数引用
-      const memoizedCallback = useCallback(() => {
-        doSomething(a, b);
-      }, [a, b]);
-      \`\`\`
+// 缓存函数引用
+const memoizedCallback = useCallback(() => {
+  doSomething(a, b);
+}, [a, b]);
+\`\`\`
 
-      ## 状态管理优化
+## 状态管理优化
 
-      ### 使用合适的状态管理方案
+### 使用合适的状态管理方案
 
-      根据应用的复杂度选择合适的状态管理方案：
+根据应用的复杂度选择合适的状态管理方案：
 
-      - 对于简单应用，使用React的内置状态管理（useState, useReducer）
-      - 对于中等复杂度的应用，可以考虑使用Context API
-      - 对于复杂应用，可以使用Redux, MobX等状态管理库
+- 对于简单应用，使用React的内置状态管理（useState, useReducer）
+- 对于中等复杂度的应用，可以考虑使用Context API
+- 对于复杂应用，可以使用Redux, MobX等状态管理库
 
-      ### 避免状态冗余
+### 避免状态冗余
 
-      确保你的状态是DRY（Don't Repeat Yourself）的，避免存储可以从现有状态派生的数据。
+确保你的状态是DRY（Don't Repeat Yourself）的，避免存储可以从现有状态派生的数据。
 
-      ## 渲染优化
+## 渲染优化
 
-      ### 虚拟列表
+### 虚拟列表
 
-      对于长列表，使用虚拟列表技术（如react-window或react-virtualized）只渲染可见区域的项目。
+对于长列表，使用虚拟列表技术（如react-window或react-virtualized）只渲染可见区域的项目。
 
-      ### 代码分割
+### 代码分割
 
-      使用React.lazy和Suspense进行代码分割，只加载当前需要的代码。
+使用React.lazy和Suspense进行代码分割，只加载当前需要的代码。
 
-      \`\`\`jsx
-      const OtherComponent = React.lazy(() => import('./OtherComponent'));
+\`\`\`jsx
+const OtherComponent = React.lazy(() => import('./OtherComponent'));
 
-      function MyComponent() {
-        return (
-          <React.Suspense fallback={<div>Loading...</div>}>
-            <OtherComponent />
-          </React.Suspense>
-        );
-      }
-      \`\`\`
+function MyComponent() {
+  return (
+    <React.Suspense fallback={<div>Loading...</div>}>
+      <OtherComponent />
+    </React.Suspense>
+  );
+}
+\`\`\`
 
-      ## 总结
+## 总结
 
-      构建高性能的React应用需要从多个方面入手，包括组件优化、状态管理和渲染优化。通过合理使用React提供的API和工具，可以显著提升应用的性能和用户体验。
-    `
+构建高性能的React应用需要从多个方面入手，包括组件优化、状态管理和渲染优化。通过合理使用React提供的API和工具，可以显著提升应用的性能和用户体验。
+`
   },
   {
     id: 'post-2',
@@ -140,50 +140,50 @@ const blogPosts: BlogPost[] = [
     readTime: '10分钟',
     image: '/placeholder-blog.jpg',
     content: `
-      # TypeScript高级类型技巧
+# TypeScript高级类型技巧
 
-      TypeScript的类型系统非常强大，掌握高级类型技巧可以帮助你编写更安全、更可维护的代码。本文将介绍一些TypeScript的高级类型技巧。
+TypeScript的类型系统非常强大，掌握高级类型技巧可以帮助你编写更安全、更可维护的代码。本文将介绍一些TypeScript的高级类型技巧。
 
-      ## 联合类型和交叉类型
+## 联合类型和交叉类型
 
-      联合类型（Union Types）表示一个值可以是几种类型之一：
+联合类型（Union Types）表示一个值可以是几种类型之一：
 
-      \`\`\`typescript
-      type StringOrNumber = string | number;
-      \`\`\`
+\`\`\`typescript
+type StringOrNumber = string | number;
+\`\`\`
 
-      交叉类型（Intersection Types）将多个类型合并为一个类型：
+交叉类型（Intersection Types）将多个类型合并为一个类型：
 
-      \`\`\`typescript
-      type Person = { name: string } & { age: number };
-      \`\`\`
+\`\`\`typescript
+type Person = { name: string } & { age: number };
+\`\`\`
 
-      ## 条件类型
+## 条件类型
 
-      条件类型可以根据条件选择不同的类型：
+条件类型可以根据条件选择不同的类型：
 
-      \`\`\`typescript
-      type TypeName<T> =
-        T extends string ? "string" :
-        T extends number ? "number" :
-        T extends boolean ? "boolean" :
-        "object";
-      \`\`\`
+\`\`\`typescript
+type TypeName<T> =
+  T extends string ? "string" :
+  T extends number ? "number" :
+  T extends boolean ? "boolean" :
+  "object";
+\`\`\`
 
-      ## 映射类型
+## 映射类型
 
-      映射类型可以从现有类型创建新类型：
+映射类型可以从现有类型创建新类型：
 
-      \`\`\`typescript
-      type Readonly<T> = {
-        readonly [P in keyof T]: T[P];
-      };
-      \`\`\`
+\`\`\`typescript
+type Readonly<T> = {
+  readonly [P in keyof T]: T[P];
+};
+\`\`\`
 
-      ## 总结
+## 总结
 
-      TypeScript的高级类型系统提供了强大的工具，可以帮助你创建更精确的类型定义，提高代码的安全性和可维护性。
-    `
+TypeScript的高级类型系统提供了强大的工具，可以帮助你创建更精确的类型定义，提高代码的安全性和可维护性。
+`
   },
   // 其他文章数据...
 ];
@@ -273,7 +273,7 @@ export default function BlogPostPage({ post }: BlogPostPageProps) {
                     return !inline && match ? (
                       <pre className={`language-${match[1]}`}>
                         <code className={`language-${match[1]}`} {...props}>
-                          {children}
+                          {String(children).replace(/\n$/, '')}
                         </code>
                       </pre>
                     ) : (
@@ -284,7 +284,7 @@ export default function BlogPostPage({ post }: BlogPostPageProps) {
                   }
                 }}
               >
-                {post.content || ''}
+                {(post.content || '').trim()}
               </ReactMarkdown>
             </motion.div>
 

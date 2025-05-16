@@ -153,21 +153,7 @@
   color: var(--text-light);
 }
 
-.postContent code {
-  font-family: 'SF Mono', var(--font-mono);
-  background-color: var(--bg-light);
-  padding: 2px 4px;
-  border-radius: 4px;
-  font-size: 0.9em;
-}
-
-.postContent pre {
-  background-color: var(--bg-light);
-  padding: 16px;
-  border-radius: 8px;
-  overflow-x: auto;
-  margin-bottom: 20px;
-}
+/* 代码样式由 prism-custom.css 控制 */
 
 /* 添加对 Markdown 内容的更多样式支持 */
 .postContent ul, .postContent ol {

@@ -1,0 +1,205 @@
+/**
+ * prism-custom.css
+ * 自定义的 Prism.js 代码高亮样式
+ */
+
+/* 代码块容器 */
+pre[class*="language-"] {
+  background-color: var(--bg-code);
+  color: var(--text-code);
+  margin: 1.5em 0;
+  padding: 1em;
+  border-radius: 8px;
+  overflow: auto;
+  font-family: 'SF Mono', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-size: 0.9em;
+  line-height: 1.5;
+  tab-size: 2;
+  hyphens: none;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 行内代码 */
+:not(pre) > code {
+  background-color: var(--bg-code-inline);
+  color: var(--text-code-inline);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-family: 'SF Mono', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-size: 0.9em;
+  white-space: normal;
+}
+
+/* 代码块内的代码 */
+code[class*="language-"] {
+  color: var(--text-code);
+  font-family: 'SF Mono', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  line-height: 1.5;
+  tab-size: 2;
+  hyphens: none;
+}
+
+/* 语法高亮 - 亮色主题 */
+:root {
+  --bg-code: #f5f7fa;
+  --bg-code-inline: rgba(0, 0, 0, 0.05);
+  --text-code: #333;
+  --text-code-inline: #0071e3;
+  --comment: #6a737d;
+  --punctuation: #5e6687;
+  --property: #0071e3;
+  --selector: #22863a;
+  --operator: #d73a49;
+  --keyword: #d73a49;
+  --function: #6f42c1;
+  --string: #22863a;
+  --number: #005cc5;
+  --boolean: #005cc5;
+  --constant: #005cc5;
+  --variable: #e36209;
+  --class-name: #6f42c1;
+  --builtin: #6f42c1;
+  --attr-name: #005cc5;
+  --attr-value: #22863a;
+  --regex: #22863a;
+  --important: #e36209;
+}
+
+/* 语法高亮 - 暗色主题 */
+[data-theme='dark'] {
+  --bg-code: #1e1e1e;
+  --bg-code-inline: rgba(255, 255, 255, 0.1);
+  --text-code: #e6e6e6;
+  --text-code-inline: #0a84ff;
+  --comment: #6a9955;
+  --punctuation: #d4d4d4;
+  --property: #9cdcfe;
+  --selector: #4ec9b0;
+  --operator: #d4d4d4;
+  --keyword: #569cd6;
+  --function: #dcdcaa;
+  --string: #ce9178;
+  --number: #b5cea8;
+  --boolean: #569cd6;
+  --constant: #4fc1ff;
+  --variable: #9cdcfe;
+  --class-name: #4ec9b0;
+  --builtin: #dcdcaa;
+  --attr-name: #9cdcfe;
+  --attr-value: #ce9178;
+  --regex: #d16969;
+  --important: #d7ba7d;
+}
+
+/* 语法高亮 - 标记 */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: var(--comment);
+}
+
+.token.punctuation {
+  color: var(--punctuation);
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol {
+  color: var(--property);
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin {
+  color: var(--selector);
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: var(--operator);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: var(--keyword);
+}
+
+.token.function,
+.token.class-name {
+  color: var(--function);
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  color: var(--regex);
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+/* 代码块行号 */
+pre[class*="language-"].line-numbers {
+  position: relative;
+  padding-left: 3.8em;
+  counter-reset: linenumber;
+}
+
+pre[class*="language-"].line-numbers > code {
+  position: relative;
+  white-space: inherit;
+}
+
+.line-numbers .line-numbers-rows {
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  font-size: 100%;
+  left: -3.8em;
+  width: 3em;
+  letter-spacing: -1px;
+  border-right: 1px solid #999;
+  user-select: none;
+}
+
+.line-numbers-rows > span {
+  display: block;
+  counter-increment: linenumber;
+}
+
+.line-numbers-rows > span:before {
+  content: counter(linenumber);
+  color: #999;
+  display: block;
+  padding-right: 0.8em;
+  text-align: right;
+}
