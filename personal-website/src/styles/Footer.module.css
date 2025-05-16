@@ -5,18 +5,21 @@
   border-top: 1px solid var(--border-color);
   font-size: 12px;
   transition: var(--theme-transition);
+  width: 100%;
+  flex-shrink: 0; /* 防止页脚被压缩 */
 }
 
 .container {
   max-width: 980px; /* 苹果网站的内容宽度 */
   margin: 0 auto;
   padding: 0 22px; /* 苹果风格的内边距 */
+  width: 100%;
 }
 
 /* 页脚目录部分 - 多列导航 */
 .footerDirectory {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   padding: 20px 0;
   border-bottom: 1px solid var(--border-color);
@@ -180,6 +183,10 @@
     padding: 0;
   }
 
+  .container {
+    padding: 0 16px;
+  }
+
   .footerDirectory {
     grid-template-columns: 1fr;
     gap: 0;
@@ -216,6 +223,7 @@
 
   .copyright {
     text-align: left;
+    width: 100%;
   }
 }
 
@@ -230,9 +238,18 @@
   .legalLinks {
     flex-direction: column;
     gap: 10px;
+    width: 100%;
   }
 
   .legalLink:not(:last-child)::after {
     display: none;
+  }
+
+  .footerLegal {
+    padding: 16px 0;
+  }
+
+  .copyright {
+    margin-top: 10px;
   }
 }

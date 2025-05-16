@@ -1,6 +1,5 @@
 /* 个人标语/口号 - 苹果风格 */
 .tagline {
-  background-color: var(--tagline-bg);
   width: 100%;
   padding: 80px 0;
   position: absolute; /* 改为绝对定位，不影响文档流 */
@@ -15,7 +14,58 @@
   transform: translateZ(0); /* 启用GPU加速 */
   backface-visibility: hidden; /* 防止闪烁 */
   -webkit-font-smoothing: antialiased; /* 文字渲染优化 */
+  overflow: hidden; /* 确保浮动元素不会溢出 */
+}
+
+/* 动态背景 */
+.taglineBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--tagline-bg);
+  z-index: -1;
   transition: background-color 0.3s ease;
+  overflow: hidden;
+}
+
+/* 渐变动画背景 */
+.taglineBackground::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(-45deg,
+    rgba(var(--primary-rgb), 0.03),
+    rgba(var(--primary-rgb), 0.05),
+    rgba(var(--secondary-rgb), 0.03),
+    rgba(var(--accent-rgb), 0.02)
+  );
+  background-size: 400% 400%;
+  animation: gradientAnimation 15s ease infinite;
+  z-index: -1;
+}
+
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 浮动元素 */
+.floatingElement {
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(135deg,
+    rgba(var(--primary-rgb), 0.1),
+    rgba(var(--primary-rgb), 0.2)
+  );
+  backdrop-filter: blur(5px);
+  z-index: 0;
+  pointer-events: none;
 }
 
 /* 标语内容容器 */
@@ -26,6 +76,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
+  z-index: 1;
 }
 
 /* 标语主要内容 */
@@ -33,6 +85,8 @@
   flex: 1;
   max-width: 500px;
   text-align: left;
+  transform-style: preserve-3d;
+  perspective: 1000px;
 }
 
 /* 标语标题 */
@@ -44,7 +98,10 @@
   letter-spacing: -0.015em; /* 苹果字体特有的字间距 */
   color: var(--tagline-heading);
   margin-bottom: 16px;
-  transition: color 0.3s ease;
+  transition: color 0.3s ease, transform 0.3s ease;
+  transform-style: preserve-3d;
+  transform: translateZ(20px);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 /* 标语副标题 */
@@ -56,7 +113,9 @@
   letter-spacing: -0.01em;
   color: var(--tagline-subheading); /* 使用CSS变量 */
   margin-bottom: 32px;
-  transition: color 0.3s ease;
+  transition: color 0.3s ease, transform 0.3s ease;
+  transform-style: preserve-3d;
+  transform: translateZ(10px);
 }
 
 /* 高亮文本 */
@@ -64,6 +123,25 @@
   color: var(--tagline-highlight);
   font-weight: 500;
   transition: color 0.3s ease;
+  position: relative;
+  display: inline-block;
+}
+
+.taglineHighlight::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--tagline-highlight);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.taglineHighlight:hover::after {
+  transform: scaleX(1);
 }
 
 /* 按钮容器 */
@@ -71,6 +149,8 @@
   display: flex;
   gap: 16px;
   align-items: center;
+  transform-style: preserve-3d;
+  transform: translateZ(5px);
 }
 
 /* 主要按钮 */
@@ -86,21 +166,32 @@
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  transition: all 0.2s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
+  box-shadow: 0 2px 8px rgba(var(--primary-rgb), 0.2);
 }
 
 .taglinePrimaryButton:hover {
   background: var(--primary-dark); /* 使用CSS变量 */
   color: white; /* 确保文字颜色保持白色 */
   text-decoration: none;
-  box-shadow: 0 1px 4px var(--card-shadow); /* 使用CSS变量 */
-  transform: translateY(-1px); /* 轻微上移效果 */
+  box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.3); /* 使用CSS变量 */
+  transform: translateY(-3px) scale(1.05); /* 上移和放大效果 */
+}
+
+.taglinePrimaryButton:active {
+  transform: translateY(0) scale(0.95);
+  box-shadow: 0 1px 4px rgba(var(--primary-rgb), 0.2);
 }
 
 /* 按钮图标 */
 .taglineButtonIcon {
   margin-left: 6px;
+  transition: transform 0.2s ease;
+}
+
+.taglinePrimaryButton:hover .taglineButtonIcon {
+  transform: translateX(3px);
 }
 
 /* 次要按钮 */
@@ -110,19 +201,26 @@
   font-size: 17px;
   font-weight: 400;
   text-decoration: none;
-  transition: all 0.2s ease, color 0.3s ease, background-color 0.3s ease;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.3s ease, background-color 0.3s ease;
   padding: 8px 16px;
   border-radius: 980px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid transparent;
 }
 
 .taglineSecondaryButton:hover {
   text-decoration: none;
   background-color: rgba(var(--primary-rgb), 0.05); /* 使用CSS变量 */
   color: var(--primary-dark); /* 使用CSS变量 */
+  border: 1px solid rgba(var(--primary-rgb), 0.1);
+  transform: translateY(-3px) scale(1.05);
+}
+
+.taglineSecondaryButton:active {
+  transform: translateY(0) scale(0.95);
 }
 
 /* 视觉元素容器 */
@@ -131,6 +229,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  transform-style: preserve-3d;
 }
 
 /* 图片容器 */
@@ -141,12 +240,14 @@
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 8px 16px var(--card-shadow);
-  transition: all 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
   cursor: pointer;
+  transform-style: preserve-3d;
+  transform: translateZ(30px);
 }
 
 .taglineImageContainer:hover {
-  transform: scale(1.02);
+  transform: translateZ(40px) scale(1.05);
   box-shadow: 0 12px 24px var(--card-shadow-hover);
 }
 
@@ -158,6 +259,9 @@
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease, background 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .taglineImageContainer:hover .taglineImage {
@@ -193,6 +297,51 @@
   }
 }
 
+/* 代码片段样式 */
+.codeSnippet {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 8px;
+  padding: 16px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.5;
+  color: #f8f8f2;
+  width: 90%;
+  max-width: 320px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 1;
+}
+
+.codeSnippet pre {
+  margin: 0;
+}
+
+.codeSnippet code {
+  display: block;
+}
+
+/* 代码高亮 */
+.keyword {
+  color: #ff79c6;
+}
+
+.variable {
+  color: #50fa7b;
+}
+
+.string {
+  color: #f1fa8c;
+}
+
+.punctuation {
+  color: #f8f8f2;
+}
+
+.operator {
+  color: #ff79c6;
+}
+
 /* 响应式设计 - 苹果风格 */
 @media (max-width: 1068px) { /* 苹果网站的断点 */
   .taglineContent {
@@ -211,11 +360,15 @@
     width: 320px;
     height: 240px;
   }
+
+  .floatingElement {
+    opacity: 0.7; /* 减少浮动元素的显示度 */
+  }
 }
 
 @media (max-width: 734px) { /* 苹果网站的断点 */
   .tagline {
-    padding: 80px 0;
+    padding: 100px 0 80px; /* 增加顶部间距 */
     min-height: 100vh; /* 占满整个视口高度 */
     display: flex;
     align-items: center;
@@ -234,11 +387,18 @@
     max-width: none;
     text-align: center;
     order: 2;
+    transform: none !important; /* 移动端禁用3D变换 */
+  }
+
+  .taglineHeading,
+  .taglineSubheading {
+    transform: none !important; /* 移动端禁用3D变换 */
   }
 
   .taglineVisual {
     justify-content: center;
     order: 1;
+    transform: none !important; /* 移动端禁用3D变换 */
   }
 
   .taglineHeading {
@@ -251,18 +411,32 @@
 
   .taglineActions {
     justify-content: center;
+    transform: none !important; /* 移动端禁用3D变换 */
   }
 
   .taglineImageContainer {
     width: 320px;
     height: 240px;
     margin-top: 20px;
+    transform: none !important; /* 移动端禁用3D变换 */
+  }
+
+  /* 调整浮动元素在移动端的位置 */
+  .floatingElement {
+    opacity: 0.5;
+    transform: scale(0.8);
+  }
+
+  /* 代码片段在移动端的样式 */
+  .codeSnippet {
+    max-width: 280px;
+    font-size: 12px;
   }
 }
 
 @media (max-width: 480px) {
   .tagline {
-    padding: 60px 0;
+    padding: 80px 0 60px;
     min-height: 100vh; /* 占满整个视口高度 */
     display: flex;
     align-items: center;
@@ -300,5 +474,16 @@
   .taglinePrimaryButton:hover,
   .taglineSecondaryButton:hover {
     transform: none; /* 移动端不使用上移效果 */
+  }
+
+  /* 隐藏部分浮动元素 */
+  .floatingElement:nth-child(odd) {
+    display: none;
+  }
+
+  /* 代码片段在小屏幕上的样式 */
+  .codeSnippet {
+    max-width: 240px;
+    padding: 12px;
   }
 }

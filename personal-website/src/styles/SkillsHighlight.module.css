@@ -1,8 +1,9 @@
 /* 技能亮点部分 - 苹果风格 */
 .skillsHighlight {
-  padding: 60px 0;
+  padding: 80px 0;
   border-bottom: 1px solid var(--border-color);
   transition: border-color 0.3s ease;
+  overflow: hidden; /* 确保动画不会导致滚动条出现 */
 }
 
 .sectionTitle {
@@ -10,93 +11,219 @@
   font-size: 32px;
   font-weight: 600;
   color: var(--tagline-heading);
-  margin-bottom: 32px;
+  margin-bottom: 40px;
   text-align: center;
   letter-spacing: -0.015em;
   transition: color 0.3s ease;
+  position: relative;
+}
+
+/* 标题下划线效果 */
+.sectionTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+  transform: translateX(-50%);
+  border-radius: 3px;
 }
 
 .skillsGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 24px;
-  margin-bottom: 40px;
+  gap: 30px;
+  margin-bottom: 50px;
+  perspective: 1000px; /* 为子元素提供3D视角 */
 }
 
+/* 技能卡片容器 */
+.skillCardContainer {
+  perspective: 1000px;
+  height: 100%;
+}
+
+/* 技能卡片 - 支持翻转效果 */
 .skillCard {
-  background-color: var(--card-bg);
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+}
+
+/* 翻转效果 */
+.skillCard.flipped {
+  transform: rotateY(180deg);
+}
+
+/* 卡片正面 */
+.skillCardFront,
+.skillCardBack {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
   border-radius: 16px;
   padding: 24px;
+  background-color: var(--card-bg);
   box-shadow: 0 4px 20px var(--card-shadow);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+  display: flex;
+  flex-direction: column;
 }
 
-.skillCard:hover {
-  transform: translateY(-5px);
+.skillCardFront:hover,
+.skillCardBack:hover {
   box-shadow: 0 8px 30px var(--card-shadow-hover);
 }
 
+/* 卡片背面 */
+.skillCardBack {
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* 技能图标 */
 .skillIcon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
   background-color: rgba(var(--primary-rgb), 0.1);
   color: var(--primary-color);
-  margin-bottom: 16px;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.1);
 }
 
+.skillCardFront:hover .skillIcon {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 6px 16px rgba(var(--primary-rgb), 0.15);
+}
+
+/* 技能名称 */
 .skillName {
   font-family: 'SF Pro Display', var(--font-heading);
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 600;
   color: var(--text-color);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   letter-spacing: -0.01em;
   transition: color 0.3s ease;
 }
 
+/* 技能描述 */
 .skillDescription {
   font-family: 'SF Pro Text', var(--font-sans);
   font-size: 14px;
-  line-height: 1.4;
+  line-height: 1.5;
   color: var(--text-light);
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   letter-spacing: -0.01em;
   transition: color 0.3s ease;
+  flex: 1;
 }
 
+/* 技能条容器 */
 .skillBarContainer {
-  height: 6px;
+  height: 8px;
   background-color: var(--bg-light);
-  border-radius: 3px;
+  border-radius: 4px;
   overflow: hidden;
   transition: background-color 0.3s ease;
+  margin-bottom: 20px;
+  position: relative;
 }
 
+/* 技能条 */
 .skillBar {
   height: 100%;
-  width: var(--skill-level, 0%);
   background-color: var(--primary-color);
-  border-radius: 3px;
-  transform: scaleX(0);
+  border-radius: 4px;
   transform-origin: left;
-  transition: transform 1s cubic-bezier(0.4, 0.01, 0.165, 0.99), background-color 0.3s ease;
+  transition: width 1s cubic-bezier(0.4, 0.01, 0.165, 0.99), background-color 0.3s ease;
 }
 
-.skillBar.animate {
-  transform: scaleX(1);
+/* 技能等级标签 */
+.skillLevel {
+  position: absolute;
+  right: 0;
+  top: -20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--primary-color);
 }
 
+/* 翻转按钮 */
+.flipButton {
+  background-color: rgba(var(--primary-rgb), 0.1);
+  color: var(--primary-color);
+  border: none;
+  border-radius: 980px;
+  padding: 8px 16px;
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: auto;
+  align-self: center;
+}
+
+.flipButton:hover {
+  background-color: rgba(var(--primary-rgb), 0.2);
+  transform: translateY(-2px);
+}
+
+.flipButton:active {
+  transform: translateY(0);
+}
+
+/* 技能详情列表 */
+.skillDetailsList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+  flex: 1;
+}
+
+.skillDetailItem {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-light);
+}
+
+.skillDetailItem::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+}
+
+/* 查看全部按钮容器 */
 .viewAllContainer {
   display: flex;
   justify-content: center;
-  margin-top: 32px;
+  margin-top: 40px;
 }
 
+/* 查看全部按钮 */
 .viewAllButton {
   display: inline-flex;
   align-items: center;
@@ -105,56 +232,163 @@
   font-weight: 500;
   color: var(--primary-color);
   text-decoration: none;
-  transition: opacity 0.2s ease, color 0.3s ease, background-color 0.3s ease;
-  padding: 8px 16px;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  padding: 10px 20px;
   border-radius: 980px;
+  background-color: rgba(var(--primary-rgb), 0.05);
+  box-shadow: 0 2px 8px rgba(var(--primary-rgb), 0.1);
 }
 
 .viewAllButton:hover {
-  opacity: 0.7;
-  background-color: rgba(var(--primary-rgb), 0.05);
+  background-color: rgba(var(--primary-rgb), 0.1);
+  box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.2);
+  transform: translateY(-3px);
 }
 
 .buttonIcon {
-  margin-left: 6px;
-  transition: transform 0.2s ease;
+  margin-left: 8px;
+  transition: transform 0.3s ease;
 }
 
 .viewAllButton:hover .buttonIcon {
-  transform: translateX(3px);
+  transform: translateX(5px);
 }
 
 /* 响应式设计 */
+@media (max-width: 1068px) {
+  .skillsGrid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 24px;
+  }
+
+  .skillCard {
+    min-height: 340px;
+  }
+}
+
 @media (max-width: 768px) {
   .skillsHighlight {
-    padding: 40px 0;
+    padding: 60px 0;
   }
 
   .sectionTitle {
     font-size: 28px;
-    margin-bottom: 24px;
+    margin-bottom: 30px;
+  }
+
+  .sectionTitle::after {
+    width: 50px;
+    height: 2px;
   }
 
   .skillsGrid {
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 16px;
+    gap: 20px;
+    perspective: none; /* 移动端禁用3D视角 */
+  }
+
+  .skillCardContainer {
+    perspective: none;
   }
 
   .skillCard {
+    min-height: 360px;
+    transform-style: flat !important; /* 移动端禁用3D变换 */
+  }
+
+  .skillCardFront,
+  .skillCardBack {
     padding: 20px;
+  }
+
+  .skillIcon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .skillName {
+    font-size: 18px;
+  }
+
+  .skillDescription {
+    font-size: 13px;
+    margin-bottom: 16px;
+  }
+
+  .skillBarContainer {
+    height: 6px;
+    margin-bottom: 16px;
+  }
+
+  .skillLevel {
+    font-size: 11px;
+    top: -18px;
+  }
+
+  .flipButton {
+    padding: 6px 14px;
+    font-size: 13px;
+  }
+
+  .skillDetailItem {
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
+
+  .viewAllButton {
+    padding: 8px 16px;
+    font-size: 16px;
   }
 }
 
 @media (max-width: 480px) {
   .skillsHighlight {
-    padding: 30px 0;
+    padding: 40px 0;
   }
 
   .sectionTitle {
     font-size: 24px;
+    margin-bottom: 25px;
+  }
+
+  .sectionTitle::after {
+    width: 40px;
   }
 
   .skillsGrid {
     grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .skillCard {
+    min-height: 340px;
+  }
+
+  /* 在小屏幕上禁用翻转效果，改为点击显示详情 */
+  .skillCard.flipped {
+    transform: none;
+  }
+
+  .skillCardBack {
+    position: relative;
+    transform: none;
+    display: none;
+  }
+
+  .skillCard.flipped .skillCardFront {
+    display: none;
+  }
+
+  .skillCard.flipped .skillCardBack {
+    display: flex;
+  }
+
+  .viewAllContainer {
+    margin-top: 30px;
+  }
+
+  .viewAllButton {
+    width: 100%;
+    justify-content: center;
   }
 }

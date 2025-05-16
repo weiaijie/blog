@@ -1,8 +1,9 @@
 /* 精选项目部分 - 苹果风格 */
 .featuredProjects {
-  padding: 60px 0;
+  padding: 80px 0;
   border-bottom: 1px solid var(--border-color);
   transition: border-color 0.3s ease;
+  overflow: hidden; /* 确保动画不会导致滚动条出现 */
 }
 
 .sectionTitle {
@@ -10,17 +11,32 @@
   font-size: 32px;
   font-weight: 600;
   color: var(--tagline-heading);
-  margin-bottom: 32px;
+  margin-bottom: 40px;
   text-align: center;
   letter-spacing: -0.015em;
   transition: color 0.3s ease;
+  position: relative;
+}
+
+/* 标题下划线效果 */
+.sectionTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+  transform: translateX(-50%);
+  border-radius: 3px;
 }
 
 .projectsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 24px;
-  margin-bottom: 40px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+  margin-bottom: 50px;
+  perspective: 1000px; /* 为子元素提供3D视角 */
 }
 
 .projectCard {
@@ -28,15 +44,17 @@
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 4px 20px var(--card-shadow);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   height: 100%;
   display: flex;
   flex-direction: column;
+  transform-style: preserve-3d;
+  will-change: transform, box-shadow;
+  cursor: pointer;
 }
 
 .projectCard:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 30px var(--card-shadow-hover);
+  box-shadow: 0 15px 30px var(--card-shadow-hover);
 }
 
 .projectImageContainer {
@@ -45,6 +63,7 @@
   padding-bottom: 56.25%; /* 16:9 宽高比 */
   background-color: var(--bg-light);
   transition: background-color 0.3s ease;
+  overflow: hidden;
 }
 
 .projectImage {
@@ -56,6 +75,46 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.5s ease;
+}
+
+.projectCard:hover .projectImage {
+  transform: scale(1.05);
+}
+
+/* 项目悬停覆盖层 */
+.projectOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.projectCard:hover .projectOverlay {
+  opacity: 1;
+}
+
+.viewProject {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--primary-color);
+  padding: 8px 16px;
+  border-radius: 980px;
+  font-size: 14px;
+  font-weight: 500;
+  transform: translateY(20px);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.projectCard:hover .viewProject {
+  transform: translateY(0);
 }
 
 .placeholder {
@@ -64,7 +123,7 @@
   justify-content: center;
   width: 100%;
   height: 100%;
-  color: var(--text-lighter);
+  color: rgba(255, 255, 255, 0.8);
   transition: color 0.3s ease;
 }
 
@@ -73,6 +132,12 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  transform: translateZ(20px); /* 3D效果 */
+  transition: transform 0.3s ease;
+}
+
+.projectCard:hover .projectContent {
+  transform: translateZ(30px);
 }
 
 .projectTitle {
@@ -80,17 +145,21 @@
   font-size: 20px;
   font-weight: 600;
   color: var(--text-color);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   letter-spacing: -0.01em;
-  transition: color 0.3s ease;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.projectCard:hover .projectTitle {
+  color: var(--primary-color);
 }
 
 .projectDescription {
   font-family: 'SF Pro Text', var(--font-sans);
   font-size: 14px;
-  line-height: 1.4;
+  line-height: 1.5;
   color: var(--text-light);
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   flex: 1;
   letter-spacing: -0.01em;
   transition: color 0.3s ease;
@@ -111,13 +180,18 @@
   font-size: 12px;
   font-weight: 500;
   letter-spacing: -0.01em;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.projectCard:hover .projectTag {
+  background-color: rgba(var(--primary-rgb), 0.15);
+  transform: translateZ(5px);
 }
 
 .viewAllContainer {
   display: flex;
   justify-content: center;
-  margin-top: 32px;
+  margin-top: 40px;
 }
 
 .viewAllButton {
@@ -128,60 +202,138 @@
   font-weight: 500;
   color: var(--primary-color);
   text-decoration: none;
-  transition: opacity 0.2s ease, color 0.3s ease, background-color 0.3s ease;
-  padding: 8px 16px;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  padding: 10px 20px;
   border-radius: 980px;
+  background-color: rgba(var(--primary-rgb), 0.05);
+  box-shadow: 0 2px 8px rgba(var(--primary-rgb), 0.1);
 }
 
 .viewAllButton:hover {
-  opacity: 0.7;
-  background-color: rgba(var(--primary-rgb), 0.05);
+  background-color: rgba(var(--primary-rgb), 0.1);
+  box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.2);
+  transform: translateY(-3px);
 }
 
 .buttonIcon {
-  margin-left: 6px;
-  transition: transform 0.2s ease;
+  margin-left: 8px;
+  transition: transform 0.3s ease;
 }
 
 .viewAllButton:hover .buttonIcon {
-  transform: translateX(3px);
+  transform: translateX(5px);
 }
 
 /* 响应式设计 */
+@media (max-width: 1068px) {
+  .projectsGrid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+  }
+
+  .projectContent {
+    transform: translateZ(10px);
+  }
+
+  .projectCard:hover .projectContent {
+    transform: translateZ(15px);
+  }
+}
+
 @media (max-width: 768px) {
   .featuredProjects {
-    padding: 40px 0;
+    padding: 60px 0;
   }
 
   .sectionTitle {
     font-size: 28px;
-    margin-bottom: 24px;
+    margin-bottom: 30px;
+  }
+
+  .sectionTitle::after {
+    width: 50px;
+    height: 2px;
   }
 
   .projectsGrid {
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 16px;
+    gap: 20px;
+    perspective: none; /* 移动端禁用3D视角 */
+  }
+
+  .projectCard {
+    transform-style: flat !important; /* 移动端禁用3D变换 */
+    transform: none !important;
   }
 
   .projectContent {
     padding: 16px;
+    transform: none !important;
+  }
+
+  .projectCard:hover .projectContent {
+    transform: none !important;
   }
 
   .projectTitle {
     font-size: 18px;
   }
+
+  .projectTag {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+
+  .projectCard:hover .projectTag {
+    transform: none;
+  }
+
+  .viewAllButton {
+    padding: 8px 16px;
+    font-size: 16px;
+  }
 }
 
 @media (max-width: 480px) {
   .featuredProjects {
-    padding: 30px 0;
+    padding: 40px 0;
   }
 
   .sectionTitle {
     font-size: 24px;
+    margin-bottom: 25px;
+  }
+
+  .sectionTitle::after {
+    width: 40px;
   }
 
   .projectsGrid {
     grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .projectImageContainer {
+    padding-bottom: 60%; /* 调整图片容器高度 */
+  }
+
+  .viewProject {
+    transform: none;
+    font-size: 13px;
+    padding: 6px 14px;
+  }
+
+  .projectOverlay {
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .viewAllContainer {
+    margin-top: 30px;
+  }
+
+  .viewAllButton {
+    width: 100%;
+    justify-content: center;
   }
 }
