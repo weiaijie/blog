@@ -1,6 +1,6 @@
 /* 博客文章详情页样式 - 苹果风格 */
 .blogPost {
-  padding: 0 0 80px;
+  padding: 80px 0 80px; /* 增加顶部内边距，避免被固定头部遮挡 */
 }
 
 .container {
@@ -13,6 +13,7 @@
 .postHeader {
   margin-bottom: 40px;
   text-align: center;
+  padding-top: 20px; /* 增加顶部内边距，提供更好的视觉间距 */
 }
 
 .postMeta {
@@ -205,7 +206,7 @@
 /* 响应式设计 */
 @media (max-width: 768px) {
   .blogPost {
-    padding: 0 0 60px;
+    padding: 70px 0 60px; /* 调整顶部内边距，适应中等屏幕 */
   }
 
   .postTitle {
@@ -231,7 +232,7 @@
 
 @media (max-width: 480px) {
   .blogPost {
-    padding: 0 0 40px;
+    padding: 60px 0 40px; /* 调整顶部内边距，适应小屏幕 */
   }
 
   .postTitle {
