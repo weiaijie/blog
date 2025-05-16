@@ -162,18 +162,19 @@
 /* 语言标记 */
 .languageLabel {
   position: absolute;
-  top: 0;
-  right: 0;
-  background-color: var(--primary-color);
+  top: 8px;
+  right: 8px;
   color: white;
   font-family: var(--font-mono);
   font-size: 12px;
-  padding: 2px 8px;
-  border-radius: 0 8px 0 4px;
+  padding: 3px 8px;
+  border-radius: 4px;
   z-index: 1;
-  opacity: 0.9;
   font-weight: 500;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 /* 代码样式由 prism-custom.css 控制 */

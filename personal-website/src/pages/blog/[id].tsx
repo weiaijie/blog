@@ -383,7 +383,10 @@ export default function BlogPostPage({ post }: BlogPostPageProps) {
                         <div
                           className={styles.languageLabel}
                           style={{
-                            backgroundColor: currentTheme === 'dark' ? 'var(--primary-dark)' : 'var(--primary-color)',
+                            backgroundColor: currentTheme === 'dark'
+                              ? 'rgba(var(--primary-rgb), 0.6)'
+                              : 'rgba(var(--primary-rgb), 0.7)',
+                            backdropFilter: 'blur(4px)',
                           }}
                         >
                           {getLanguageDisplayName(match[1])}
