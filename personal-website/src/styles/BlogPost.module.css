@@ -173,6 +173,7 @@
   z-index: 1;
   opacity: 0.9;
   font-weight: 500;
+  transition: background-color 0.3s ease;
 }
 
 /* 代码样式由 prism-custom.css 控制 */
