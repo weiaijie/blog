@@ -153,6 +153,28 @@
   color: var(--text-light);
 }
 
+/* 代码块包装器 */
+.codeBlockWrapper {
+  position: relative;
+  margin: 1.5em 0;
+}
+
+/* 语言标记 */
+.languageLabel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: var(--primary-color);
+  color: white;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 0 8px 0 4px;
+  z-index: 1;
+  opacity: 0.9;
+  font-weight: 500;
+}
+
 /* 代码样式由 prism-custom.css 控制 */
 
 /* 添加对 Markdown 内容的更多样式支持 */

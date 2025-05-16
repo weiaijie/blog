@@ -11,6 +11,9 @@
  * - 使用react-markdown解析和渲染Markdown内容
  * - 支持GFM（GitHub Flavored Markdown）语法
  * - 使用Prism.js实现代码语法高亮
+ * - 支持代码块与网站主题（亮色/暗色）联动
+ * - 使用MutationObserver监听主题变化并更新代码高亮
+ * - 在代码块右上角显示语言标记，提高可读性
  *
  * 主要组件：
  * - BlogPostPage：博客文章详情页面的主要组件
@@ -23,7 +26,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Prism from 'prismjs';
 // 导入语法高亮支持
 import 'prismjs/components/prism-javascript';
@@ -192,12 +195,99 @@ interface BlogPostPageProps {
   post: BlogPost;
 }
 
+// 获取语言显示名称
+const getLanguageDisplayName = (langKey: string): string => {
+  const languageMap: Record<string, string> = {
+    'js': 'JavaScript',
+    'javascript': 'JavaScript',
+    'ts': 'TypeScript',
+    'typescript': 'TypeScript',
+    'jsx': 'JSX',
+    'tsx': 'TSX',
+    'css': 'CSS',
+    'html': 'HTML',
+    'bash': 'Bash',
+    'shell': 'Shell',
+    'json': 'JSON',
+    'md': 'Markdown',
+    'markdown': 'Markdown',
+    'py': 'Python',
+    'python': 'Python',
+    'java': 'Java',
+    'c': 'C',
+    'cpp': 'C++',
+    'cs': 'C#',
+    'go': 'Go',
+    'rust': 'Rust',
+    'php': 'PHP',
+    'ruby': 'Ruby',
+    'swift': 'Swift',
+    'kotlin': 'Kotlin',
+    'sql': 'SQL',
+    'yaml': 'YAML',
+    'yml': 'YAML',
+    'xml': 'XML',
+    'graphql': 'GraphQL',
+  };
+
+  return languageMap[langKey.toLowerCase()] || langKey.toUpperCase();
+};
+
 export default function BlogPostPage({ post }: BlogPostPageProps) {
-  // 使用 useEffect 在组件挂载后初始化 Prism
+  // 使用状态来控制客户端渲染
+  const [isClient, setIsClient] = useState(false);
+  // 使用状态来跟踪当前主题
+  const [currentTheme, setCurrentTheme] = useState<string>('light');
+
+  // 在组件挂载后设置isClient为true并初始化Prism
   useEffect(() => {
-    // 在组件挂载后高亮代码块
-    Prism.highlightAll();
+    setIsClient(true);
+
+    // 确保只在客户端执行
+    if (typeof window === 'undefined') return;
+
+    // 获取当前主题
+    const theme = document.documentElement.getAttribute('data-theme') || 'light';
+    setCurrentTheme(theme);
+
+    // 监听主题变化
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'data-theme') {
+          const newTheme = document.documentElement.getAttribute('data-theme') || 'light';
+          setCurrentTheme(newTheme);
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, { attributes: true });
+
+    // 使用setTimeout确保DOM已完全渲染
+    const timer = setTimeout(() => {
+      try {
+        // 高亮代码块
+        Prism.highlightAll();
+      } catch (e) {
+        console.error('代码高亮出错:', e);
+      }
+    }, 100);
+
+    return () => {
+      clearTimeout(timer);
+      observer.disconnect();
+    };
   }, [post]); // 当文章内容变化时重新高亮
+
+  // 当主题变化时重新高亮代码块
+  useEffect(() => {
+    if (!isClient) return;
+
+    try {
+      Prism.highlightAll();
+    } catch (e) {
+      console.error('主题变化时代码高亮出错:', e);
+    }
+  }, [currentTheme, isClient]);
 
   if (!post) {
     return (
@@ -268,16 +358,39 @@ export default function BlogPostPage({ post }: BlogPostPageProps) {
                 remarkPlugins={[remarkGfm]}
                 components={{
                   // @ts-ignore - react-markdown类型定义问题
-                  code({node, inline, className, children, ...props}: any) {
+                  code({inline, className, children}: any) {
                     const match = /language-(\w+)/.exec(className || '');
-                    return !inline && match ? (
-                      <pre className={`language-${match[1]}`}>
-                        <code className={`language-${match[1]}`} {...props}>
-                          {String(children).replace(/\n$/, '')}
+
+                    // 在服务器端渲染时，不添加任何类名
+                    if (!isClient) {
+                      return !inline ? (
+                        <pre>
+                          <code>
+                            {String(children).replace(/\n$/, '')}
+                          </code>
+                        </pre>
+                      ) : (
+                        <code>
+                          {children}
                         </code>
-                      </pre>
+                      );
+                    }
+
+                    // 在客户端渲染时，添加语言类名和主题相关的类名
+                    return !inline && match ? (
+                      <div className={styles.codeBlockWrapper}>
+                        {/* 语言标记 */}
+                        <div className={styles.languageLabel}>
+                          {getLanguageDisplayName(match[1])}
+                        </div>
+                        <pre className={`language-${match[1]}`} data-theme={currentTheme}>
+                          <code className={`language-${match[1]}`}>
+                            {String(children).replace(/\n$/, '')}
+                          </code>
+                        </pre>
+                      </div>
                     ) : (
-                      <code className={className} {...props}>
+                      <code className={className}>
                         {children}
                       </code>
                     );
@@ -286,6 +399,8 @@ export default function BlogPostPage({ post }: BlogPostPageProps) {
               >
                 {(post.content || '').trim()}
               </ReactMarkdown>
+
+
             </motion.div>
 
             <div className={styles.postNavigation}>
