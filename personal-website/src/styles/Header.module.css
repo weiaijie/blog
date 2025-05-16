@@ -25,7 +25,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 44px; /* 苹果导航栏高度 */
+  height: var(--header-height); /* 使用变量控制高度 */
   background-color: var(--header-bg); /* 使用CSS变量 */
   backdrop-filter: saturate(180%) blur(20px); /* 苹果特有的模糊效果 */
   -webkit-backdrop-filter: saturate(180%) blur(20px);
@@ -33,6 +33,12 @@
   transition: all 0.3s cubic-bezier(0.28, 0.11, 0.32, 1); /* 苹果风格的过渡曲线 */
   opacity: 1; /* 默认可见，不需要动画 */
   border-bottom: 1px solid var(--header-border);
+  display: grid;
+  grid-template-columns:
+    [full-start] minmax(var(--spacing-lg), 1fr)
+    [main-start] minmax(0, var(--max-width))
+    [main-end] minmax(var(--spacing-lg), 1fr)
+    [full-end];
 }
 
 .header.loaded {
@@ -49,9 +55,9 @@
   align-items: center;
   justify-content: space-between;
   height: 100%;
-  max-width: 980px; /* 苹果网站的内容宽度 */
-  margin: 0 auto;
-  padding: 0 22px; /* 苹果风格的内边距 */
+  grid-column: main-start / main-end;
+  width: 100%;
+  padding: 0 var(--spacing-md); /* 使用变量控制内边距 */
 }
 
 /* Logo 样式 - 苹果风格 */
@@ -91,25 +97,39 @@
 }
 
 .desktopNav a {
-  font-family: 'SF Pro Text', var(--font-sans);
-  font-size: 0.8rem;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-sm);
   font-weight: 400;
   color: var(--nav-text); /* 使用CSS变量 */
-  transition: opacity 0.2s ease, color 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.28, 0.11, 0.32, 1);
   position: relative;
-  padding: 0 0.1rem;
+  padding: var(--spacing-xs) var(--spacing-sm);
   letter-spacing: -0.01em;
   white-space: nowrap;
+  border-radius: 980px; /* 苹果风格的圆角 */
 }
 
 .desktopNav a:hover {
-  opacity: 0.7; /* 苹果风格的悬停效果 */
   color: var(--nav-text-hover); /* 使用CSS变量 */
+  background-color: rgba(0, 0, 0, 0.05); /* 轻微背景色变化 */
 }
 
 .desktopNav a.active {
-  color: var(--nav-text-active); /* 使用CSS变量 */
+  color: var(--primary-color); /* 使用主色 */
   font-weight: 500; /* 苹果风格的当前页面标识 */
+}
+
+.desktopNav a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  transition: all 0.3s cubic-bezier(0.28, 0.11, 0.32, 1);
 }
 
 /* 右侧操作区域 */
@@ -461,29 +481,31 @@
 
 /* 个人标语/口号 - 苹果风格 */
 .tagline {
-  background-color: #fff; /* 白色背景 */
-  position: absolute;
-  top: 44px; /* 苹果导航栏高度 */
-  left: 0;
+  background-color: var(--tagline-bg); /* 使用变量 */
+  position: relative;
   width: 100%;
   z-index: 900;
   opacity: 1; /* 立即显示，不使用动画 */
-  padding: 80px 0; /* 更大的垂直内边距 */
-  height: 200px; /* 固定高度 */
-}
-
-.header.scrolled + .tagline {
-  top: 44px; /* 苹果导航栏高度保持不变 */
+  padding: var(--spacing-3xl) 0; /* 更大的垂直内边距 */
+  min-height: 80vh; /* 占据大部分视口高度 */
+  display: grid;
+  grid-template-columns:
+    [full-start] minmax(var(--spacing-lg), 1fr)
+    [main-start] minmax(0, var(--max-width))
+    [main-end] minmax(var(--spacing-lg), 1fr)
+    [full-end];
+  align-items: center;
 }
 
 /* 标语内容容器 */
 .taglineContent {
-  max-width: 980px; /* 苹果网站的内容宽度 */
-  margin: 0 auto;
-  padding: 0 22px; /* 苹果风格的内边距 */
+  grid-column: main-start / main-end;
+  width: 100%;
+  padding: 0 var(--spacing-md); /* 使用变量控制内边距 */
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: var(--spacing-2xl);
 }
 
 /* 标语主要内容 */
@@ -495,89 +517,114 @@
 
 /* 标语标题 */
 .taglineHeading {
-  font-family: 'SF Pro Display', var(--font-heading);
-  font-size: 46px;
+  font-family: var(--font-heading);
+  font-size: var(--font-size-5xl);
   font-weight: 600;
   line-height: 1.1;
-  letter-spacing: -0.015em; /* 苹果字体特有的字间距 */
-  color: #1d1d1f;
-  margin-bottom: 16px;
+  letter-spacing: -0.03em; /* 苹果字体特有的字间距 */
+  color: var(--tagline-heading);
+  margin-bottom: var(--spacing-lg);
+  animation: fadeIn 0.8s ease-out forwards;
+  animation-delay: 0.2s;
+  opacity: 0;
 }
 
 /* 标语副标题 */
 .taglineSubheading {
-  font-family: 'SF Pro Text', var(--font-sans);
-  font-size: 21px;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-xl);
   font-weight: 400;
   line-height: 1.4;
   letter-spacing: -0.01em;
-  color: #86868b; /* 苹果风格的次要文字颜色 */
-  margin-bottom: 32px;
+  color: var(--tagline-subheading); /* 苹果风格的次要文字颜色 */
+  margin-bottom: var(--spacing-xl);
+  animation: fadeIn 0.8s ease-out forwards;
+  animation-delay: 0.4s;
+  opacity: 0;
 }
 
 /* 高亮文本 */
 .taglineHighlight {
-  color: #1d1d1f;
+  color: var(--tagline-highlight);
   font-weight: 500;
 }
 
 /* 按钮容器 */
 .taglineActions {
   display: flex;
-  gap: 16px;
+  gap: var(--spacing-md);
   align-items: center;
+  animation: fadeIn 0.8s ease-out forwards;
+  animation-delay: 0.6s;
+  opacity: 0;
 }
 
 /* 主要按钮 */
 .taglinePrimaryButton {
-  background: #0071e3; /* 苹果风格的蓝色按钮 */
+  background: var(--primary-color); /* 使用变量 */
   color: white;
-  font-family: 'SF Pro Text', var(--font-sans);
-  font-size: 17px;
-  font-weight: 400;
-  padding: 8px 16px;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-md);
+  font-weight: 500;
+  padding: var(--spacing-sm) var(--spacing-lg);
   border-radius: 980px; /* 苹果风格的圆角 */
   display: inline-flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.28, 0.11, 0.32, 1);
   cursor: pointer;
+  letter-spacing: -0.01em;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .taglinePrimaryButton:hover {
-  background: #0077ED; /* 悬停时稍微亮一点 */
+  background: var(--primary-dark); /* 使用变量 */
   color: white; /* 确保文字颜色保持白色 */
   text-decoration: none;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1); /* 添加轻微阴影增强悬停效果 */
-  transform: translateY(-1px); /* 轻微上移效果 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加轻微阴影增强悬停效果 */
+  transform: translateY(-2px); /* 轻微上移效果 */
+}
+
+.taglinePrimaryButton:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 /* 按钮图标 */
 .taglineButtonIcon {
-  margin-left: 6px;
+  margin-left: var(--spacing-xs);
 }
 
 /* 次要按钮 */
 .taglineSecondaryButton {
-  color: #0071e3;
-  font-family: 'SF Pro Text', var(--font-sans);
-  font-size: 17px;
-  font-weight: 400;
+  color: var(--primary-color);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-md);
+  font-weight: 500;
   text-decoration: none;
-  transition: all 0.2s ease;
-  padding: 8px 16px;
+  transition: all 0.3s cubic-bezier(0.28, 0.11, 0.32, 1);
+  padding: var(--spacing-sm) var(--spacing-lg);
   border-radius: 980px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  letter-spacing: -0.01em;
+  border: 1px solid var(--primary-color);
 }
 
 .taglineSecondaryButton:hover {
   text-decoration: none;
-  background-color: rgba(0, 113, 227, 0.05); /* 苹果风格的轻微背景色变化 */
-  color: #0077ED; /* 稍微亮一点的蓝色 */
+  background-color: rgba(var(--primary-rgb), 0.05); /* 使用变量 */
+  color: var(--primary-dark); /* 使用变量 */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.taglineSecondaryButton:active {
+  transform: translateY(0);
+  box-shadow: none;
 }
 
 /* 视觉元素容器 */
@@ -586,37 +633,50 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  animation: fadeIn 0.8s ease-out forwards;
+  animation-delay: 0.4s;
+  opacity: 0;
 }
 
 /* 图片容器 */
 .taglineImageContainer {
-  width: 380px;
-  height: 280px;
+  width: 480px;
+  height: 320px;
   position: relative;
-  border-radius: 12px;
+  border-radius: var(--border-radius);
   overflow: hidden;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  box-shadow: var(--box-shadow);
+  transition: all 0.5s cubic-bezier(0.28, 0.11, 0.32, 1);
   cursor: pointer;
+  background-color: var(--card-bg);
 }
 
 .taglineImageContainer:hover {
-  transform: scale(1.02);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  transform: scale(1.02) translateY(-4px);
+  box-shadow: var(--box-shadow-hover);
 }
 
 /* 图片 */
 .taglineImage {
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #42a5f5, #2196f3, #1976d2);
+  background: linear-gradient(135deg,
+    rgba(var(--primary-rgb), 0.8),
+    rgba(var(--primary-rgb), 0.6),
+    rgba(var(--primary-rgb), 0.4));
   position: relative;
   overflow: hidden;
-  transition: all 0.3s ease;
+  transition: all 0.5s cubic-bezier(0.28, 0.11, 0.32, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .taglineImageContainer:hover .taglineImage {
-  background: linear-gradient(135deg, #4dabf5, #2196f3, #2180d2);
+  background: linear-gradient(135deg,
+    rgba(var(--primary-rgb), 0.9),
+    rgba(var(--primary-rgb), 0.7),
+    rgba(var(--primary-rgb), 0.5));
 }
 
 .taglineImage::before {
@@ -638,6 +698,19 @@
   animation: shimmer 3s infinite linear;
 }
 
+/* 图片内容 */
+.taglineImageContent {
+  position: relative;
+  z-index: 2;
+  color: white;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-md);
+  text-align: center;
+  padding: var(--spacing-lg);
+  max-width: 80%;
+  line-height: 1.6;
+}
+
 @keyframes shimmer {
   0% {
     transform: translateX(-100%) rotate(45deg);
@@ -649,36 +722,53 @@
 
 /* 响应式设计 - 苹果风格 */
 @media (max-width: 1068px) { /* 苹果网站的断点 */
-  .container {
-    max-width: 692px; /* 苹果中等屏幕宽度 */
-  }
-
-  .taglineContent {
-    max-width: 692px;
-  }
-
   .taglineHeading {
-    font-size: 40px;
+    font-size: var(--font-size-4xl);
   }
 
   .taglineSubheading {
-    font-size: 19px;
+    font-size: var(--font-size-lg);
   }
 
   .taglineImageContainer {
-    width: 320px;
-    height: 240px;
+    width: 400px;
+    height: 280px;
   }
 
   .desktopNav ul {
-    gap: 1.5rem;
+    gap: var(--spacing-lg);
+  }
+}
+
+@media (max-width: 834px) { /* iPad断点 */
+  .taglineContent {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--spacing-2xl);
+  }
+
+  .taglineMain {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .taglineVisual {
+    justify-content: center;
+  }
+
+  .taglineImageContainer {
+    width: 360px;
+    height: 240px;
+  }
+
+  .taglineActions {
+    justify-content: center;
   }
 }
 
 @media (max-width: 734px) { /* 苹果网站的断点 */
   .container {
-    max-width: none;
-    padding: 0 16px; /* 苹果小屏幕内边距 */
+    padding: 0 var(--spacing-md);
   }
 
   .desktopNav {
@@ -703,78 +793,53 @@
   }
 
   .tagline {
-    padding: 60px 0;
-    height: 180px;
-  }
-
-  .taglineContent {
-    flex-direction: column;
-    text-align: center;
-    gap: 40px;
-  }
-
-  .taglineMain {
-    max-width: none;
-    text-align: center;
-    order: 2;
-  }
-
-  .taglineVisual {
-    justify-content: center;
-    order: 1;
+    padding: var(--spacing-2xl) 0;
+    min-height: 70vh;
   }
 
   .taglineHeading {
-    font-size: 32px;
+    font-size: var(--font-size-3xl);
   }
 
   .taglineSubheading {
-    font-size: 17px;
+    font-size: var(--font-size-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .name {
+    font-size: var(--font-size-lg);
   }
 
-  .taglineActions {
-    justify-content: center;
+  .tagline {
+    padding: var(--spacing-xl) 0;
+    min-height: 60vh;
+  }
+
+  .taglineHeading {
+    font-size: var(--font-size-2xl);
+  }
+
+  .taglineSubheading {
+    font-size: var(--font-size-md);
+    margin-bottom: var(--spacing-lg);
   }
 
   .taglineImageContainer {
     width: 280px;
     height: 200px;
   }
-}
-
-@media (max-width: 480px) {
-  .name {
-    font-size: 1.1rem;
-  }
-
-  .tagline {
-    padding: 40px 0;
-    height: 160px;
-  }
-
-  .taglineHeading {
-    font-size: 28px;
-  }
-
-  .taglineSubheading {
-    font-size: 16px;
-    margin-bottom: 24px;
-  }
-
-  .taglineImageContainer {
-    width: 240px;
-    height: 180px;
-  }
 
   .taglineActions {
     flex-direction: column;
-    gap: 12px;
+    gap: var(--spacing-sm);
+    width: 100%;
   }
 
   .taglinePrimaryButton,
   .taglineSecondaryButton {
     width: 100%;
-    padding: 12px 16px;
+    padding: var(--spacing-sm) var(--spacing-md);
     justify-content: center;
   }
 

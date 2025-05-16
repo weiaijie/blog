@@ -1,26 +1,26 @@
 /* 亮色主题变量 - 默认主题 */
 :root {
-  /* 现代化配色方案 */
-  --primary-color: #3B82F6; /* 明亮的蓝色 */
-  --primary-rgb: 59, 130, 246; /* 用于rgba() */
-  --primary-dark: #2563EB;
-  --primary-light: #60A5FA;
-  --secondary-color: #10B981; /* 清新的绿色 */
-  --secondary-rgb: 16, 185, 129; /* 用于rgba() */
-  --secondary-dark: #059669;
-  --secondary-light: #34D399;
-  --accent-color: #8B5CF6; /* 紫色强调色 */
-  --accent-rgb: 139, 92, 246; /* 用于rgba() */
+  /* 苹果风格配色方案 */
+  --primary-color: #0071e3; /* 苹果蓝 */
+  --primary-rgb: 0, 113, 227; /* 用于rgba() */
+  --primary-dark: #0058b0;
+  --primary-light: #2997ff;
+  --secondary-color: #06c; /* 苹果辅助蓝 */
+  --secondary-rgb: 0, 102, 204; /* 用于rgba() */
+  --secondary-dark: #004d99;
+  --secondary-light: #0080ff;
+  --accent-color: #86b9ff; /* 浅蓝色强调 */
+  --accent-rgb: 134, 185, 255; /* 用于rgba() */
 
   /* 中性色 */
-  --text-color: #1F2937;
-  --text-light: #4B5563;
-  --text-lighter: #9CA3AF;
-  --bg-color: #FFFFFF;
-  --bg-light: #F9FAFB;
-  --bg-dark: #F3F4F6;
-  --border-color: #E5E7EB;
-  --border-dark: #D1D5DB;
+  --text-color: #1d1d1f; /* 苹果深灰 */
+  --text-light: #515154; /* 苹果中灰 */
+  --text-lighter: #86868b; /* 苹果浅灰 */
+  --bg-color: #ffffff;
+  --bg-light: #f5f5f7; /* 苹果浅灰背景 */
+  --bg-dark: #fbfbfd; /* 苹果次级背景 */
+  --border-color: #d2d2d7; /* 苹果边框色 */
+  --border-dark: #a1a1a6; /* 苹果深边框色 */
 
   /* 头部和导航 */
   --header-bg: rgba(255, 255, 255, 0.8);
@@ -34,7 +34,7 @@
   --tagline-bg: #fff;
   --tagline-heading: #1d1d1f;
   --tagline-subheading: #86868b;
-  --tagline-highlight: #1d1d1f;
+  --tagline-highlight: #0071e3;
 
   /* 卡片和容器 */
   --card-bg: #fff;
@@ -44,13 +44,34 @@
   /* 布局变量 */
   --header-height: 70px;
   --max-width: 1200px;
-  --border-radius: 8px;
-  --box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --border-radius: 12px; /* 更大的圆角，符合苹果风格 */
+  --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* 更柔和的阴影 */
+  --box-shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.1); /* 悬停时的阴影 */
+
+  /* 间距系统 */
+  --spacing-xs: 0.25rem; /* 4px */
+  --spacing-sm: 0.5rem;  /* 8px */
+  --spacing-md: 1rem;    /* 16px */
+  --spacing-lg: 1.5rem;  /* 24px */
+  --spacing-xl: 2rem;    /* 32px */
+  --spacing-2xl: 3rem;   /* 48px */
+  --spacing-3xl: 4rem;   /* 64px */
 
   /* 字体 */
-  --font-sans: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  --font-mono: 'Fira Code', 'JetBrains Mono', 'Source Code Pro', monospace;
-  --font-heading: 'Poppins', var(--font-sans);
+  --font-sans: 'SF Pro Text', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --font-mono: 'SF Mono', 'Fira Code', 'JetBrains Mono', 'Source Code Pro', monospace;
+  --font-heading: 'SF Pro Display', var(--font-sans);
+
+  /* 字体大小 */
+  --font-size-xs: 0.75rem;  /* 12px */
+  --font-size-sm: 0.875rem; /* 14px */
+  --font-size-md: 1rem;     /* 16px */
+  --font-size-lg: 1.125rem; /* 18px */
+  --font-size-xl: 1.25rem;  /* 20px */
+  --font-size-2xl: 1.5rem;  /* 24px */
+  --font-size-3xl: 1.875rem; /* 30px */
+  --font-size-4xl: 2.25rem;  /* 36px */
+  --font-size-5xl: 3rem;     /* 48px */
 
   /* 主题切换过渡 */
   --theme-transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
@@ -58,44 +79,44 @@
 
 /* 暗色主题变量 */
 [data-theme='dark'] {
-  /* 现代化配色方案 - 暗色调整 */
-  --primary-color: #60A5FA; /* 更亮的蓝色 */
-  --primary-rgb: 96, 165, 250; /* 用于rgba() */
-  --primary-dark: #3B82F6;
-  --primary-light: #93C5FD;
-  --secondary-color: #34D399; /* 更亮的绿色 */
-  --secondary-rgb: 52, 211, 153; /* 用于rgba() */
-  --secondary-dark: #10B981;
-  --secondary-light: #6EE7B7;
-  --accent-color: #A78BFA; /* 更亮的紫色 */
-  --accent-rgb: 167, 139, 250; /* 用于rgba() */
+  /* 苹果风格配色方案 - 暗色调整 */
+  --primary-color: #2997ff; /* 苹果暗色模式蓝 */
+  --primary-rgb: 41, 151, 255; /* 用于rgba() */
+  --primary-dark: #0071e3;
+  --primary-light: #6cb8ff;
+  --secondary-color: #0080ff; /* 苹果暗色模式辅助蓝 */
+  --secondary-rgb: 0, 128, 255; /* 用于rgba() */
+  --secondary-dark: #0066cc;
+  --secondary-light: #409cff;
+  --accent-color: #a2d6f9; /* 暗色模式浅蓝色强调 */
+  --accent-rgb: 162, 214, 249; /* 用于rgba() */
 
   /* 中性色 - 暗色调整 */
-  --text-color: #F9FAFB;
-  --text-light: #E5E7EB;
-  --text-lighter: #9CA3AF;
-  --bg-color: #111827;
-  --bg-light: #1F2937;
-  --bg-dark: #0F172A;
-  --border-color: #374151;
-  --border-dark: #4B5563;
+  --text-color: #f5f5f7; /* 苹果暗色模式文本 */
+  --text-light: #a1a1a6; /* 苹果暗色模式次要文本 */
+  --text-lighter: #86868b; /* 苹果暗色模式辅助文本 */
+  --bg-color: #000000; /* 苹果暗色模式背景 */
+  --bg-light: #1d1d1f; /* 苹果暗色模式次级背景 */
+  --bg-dark: #151516; /* 苹果暗色模式深色背景 */
+  --border-color: #424245; /* 苹果暗色模式边框 */
+  --border-dark: #6e6e73; /* 苹果暗色模式深边框 */
 
   /* 头部和导航 - 暗色调整 */
-  --header-bg: rgba(17, 24, 39, 0.8);
-  --header-bg-scrolled: rgba(17, 24, 39, 0.95);
+  --header-bg: rgba(0, 0, 0, 0.8);
+  --header-bg-scrolled: rgba(0, 0, 0, 0.95);
   --header-border: rgba(255, 255, 255, 0.05);
   --nav-text: rgba(255, 255, 255, 0.8);
   --nav-text-hover: rgba(255, 255, 255, 0.8);
   --nav-text-active: rgba(255, 255, 255, 0.8);
 
   /* 标语部分 - 暗色调整 */
-  --tagline-bg: #111827;
-  --tagline-heading: #F9FAFB;
-  --tagline-subheading: #D1D5DB;
-  --tagline-highlight: #F9FAFB;
+  --tagline-bg: #000000;
+  --tagline-heading: #f5f5f7;
+  --tagline-subheading: #a1a1a6;
+  --tagline-highlight: #2997ff;
 
   /* 卡片和容器 - 暗色调整 */
-  --card-bg: #1F2937;
+  --card-bg: #1d1d1f;
   --card-shadow: rgba(0, 0, 0, 0.3);
   --card-shadow-hover: rgba(0, 0, 0, 0.4);
 
@@ -138,34 +159,45 @@ a:hover {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  font-weight: 700;
+  font-weight: 600; /* 苹果风格使用较轻的字重 */
   line-height: 1.2;
   margin-bottom: 1rem;
   color: var(--text-color);
+  letter-spacing: -0.02em; /* 苹果风格的字间距 */
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-size: var(--font-size-5xl);
+  letter-spacing: -0.03em;
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: var(--font-size-4xl);
+  letter-spacing: -0.025em;
 }
 
 h3 {
-  font-size: 1.75rem;
+  font-size: var(--font-size-3xl);
 }
 
 h4 {
-  font-size: 1.5rem;
+  font-size: var(--font-size-2xl);
 }
 
 h5 {
-  font-size: 1.25rem;
+  font-size: var(--font-size-xl);
 }
 
 h6 {
-  font-size: 1rem;
+  font-size: var(--font-size-lg);
+}
+
+/* 特殊标题样式 */
+.display-title {
+  font-size: 4rem; /* 64px */
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
 }
 
 p {
@@ -184,16 +216,49 @@ button, .button {
   background-color: var(--primary-color);
   color: white;
   border: none;
-  border-radius: var(--border-radius);
+  border-radius: 980px; /* 苹果风格的圆角按钮 */
   padding: 0.75rem 1.5rem;
-  font-weight: 600;
+  font-size: var(--font-size-md);
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  transition: all 0.3s ease;
+  text-align: center;
+  letter-spacing: -0.01em;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 button:hover, .button:hover {
   background-color: var(--primary-dark);
   transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button:active, .button:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* 次要按钮 */
+button.secondary, .button.secondary {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+button.secondary:hover, .button.secondary:hover {
+  background-color: rgba(var(--primary-rgb), 0.05);
+}
+
+/* 大按钮 */
+button.large, .button.large {
+  padding: 0.875rem 2rem;
+  font-size: var(--font-size-lg);
+}
+
+/* 小按钮 */
+button.small, .button.small {
+  padding: 0.5rem 1rem;
+  font-size: var(--font-size-sm);
 }
 
 /* 响应式设计 */
