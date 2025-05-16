@@ -15,6 +15,7 @@
  */
 
 import '@/styles/globals.css';
+import '@/styles/prism-custom.css'; // 导入Prism.js代码高亮样式
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { useEffect } from 'react';

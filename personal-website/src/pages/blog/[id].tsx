@@ -25,13 +25,13 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { useEffect } from 'react';
 import Prism from 'prismjs';
-import '@/styles/prism-custom.css'; // 导入自定义Prism主题
-import 'prismjs/components/prism-javascript'; // 导入JavaScript语法
-import 'prismjs/components/prism-typescript'; // 导入TypeScript语法
-import 'prismjs/components/prism-jsx'; // 导入JSX语法
-import 'prismjs/components/prism-tsx'; // 导入TSX语法
-import 'prismjs/components/prism-css'; // 导入CSS语法
-import 'prismjs/components/prism-bash'; // 导入Bash语法
+// 导入语法高亮支持
+import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-typescript';
+import 'prismjs/components/prism-jsx';
+import 'prismjs/components/prism-tsx';
+import 'prismjs/components/prism-css';
+import 'prismjs/components/prism-bash';
 import Layout from '@/components/layout/Layout';
 import styles from '@/styles/BlogPost.module.css';
 
