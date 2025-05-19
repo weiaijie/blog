@@ -36,7 +36,8 @@ import 'prismjs/components/prism-tsx';
 import 'prismjs/components/prism-css';
 import 'prismjs/components/prism-bash';
 import Layout from '@/components/layout/Layout';
-import styles from '@/styles/BlogPost.module.css';
+import Image from 'next/image';
+import styles from '@/styles/NewBlogPost.module.css';
 
 interface BlogPost {
   id: string;
@@ -300,6 +301,35 @@ export default function BlogPostPage({ post }: BlogPostPageProps) {
     );
   }
 
+  // 获取分类显示名称
+  const getCategoryDisplayName = (categoryId: string): string => {
+    const categoryMap: Record<string, string> = {
+      'tutorial': '技术教程',
+      'case-study': '项目案例',
+      'trend': '行业趋势',
+      'experience': '经验分享'
+    };
+
+    return categoryMap[categoryId] || categoryId;
+  };
+
+  // 获取默认封面图
+  const getDefaultCoverImage = (category: string): string => {
+    // 使用简单的颜色背景作为默认封面
+    switch (category) {
+      case 'tutorial':
+        return 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="338" viewBox="0 0 600 338"><rect width="600" height="338" fill="%23f0f7ff"/><text x="300" y="169" font-family="Arial" font-size="24" text-anchor="middle" fill="%230071e3">技术教程</text></svg>';
+      case 'case-study':
+        return 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="338" viewBox="0 0 600 338"><rect width="600" height="338" fill="%23f0fff7"/><text x="300" y="169" font-family="Arial" font-size="24" text-anchor="middle" fill="%2300a67e">项目案例</text></svg>';
+      case 'trend':
+        return 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="338" viewBox="0 0 600 338"><rect width="600" height="338" fill="%23fff7f0"/><text x="300" y="169" font-family="Arial" font-size="24" text-anchor="middle" fill="%23e36500">行业趋势</text></svg>';
+      case 'experience':
+        return 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="338" viewBox="0 0 600 338"><rect width="600" height="338" fill="%23f7f0ff"/><text x="300" y="169" font-family="Arial" font-size="24" text-anchor="middle" fill="%236500e3">经验分享</text></svg>';
+      default:
+        return 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="338" viewBox="0 0 600 338"><rect width="600" height="338" fill="%23f5f5f7"/><text x="300" y="169" font-family="Arial" font-size="24" text-anchor="middle" fill="%231d1d1f">博客文章</text></svg>';
+    }
+  };
+
   return (
     <>
       <Head>
@@ -319,6 +349,9 @@ export default function BlogPostPage({ post }: BlogPostPageProps) {
                   <span className={styles.postDate}>{post.date}</span>
                   <span className={styles.postReadTime}>{post.readTime}</span>
                 </div>
+                <span className={styles.postCategory}>
+                  {getCategoryDisplayName(post.category)}
+                </span>
                 <h1 className={styles.postTitle}>{post.title}</h1>
                 <div className={styles.postTags}>
                   {post.tags.map((tag, index) => (
@@ -328,25 +361,48 @@ export default function BlogPostPage({ post }: BlogPostPageProps) {
               </header>
             </motion.div>
 
-            {post.image && (
-              <motion.div
-                className={styles.postImageContainer}
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                <div className={styles.postImage}>
-                  {/* 文章图片占位符 */}
-                  <div className={styles.placeholder}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                      <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                      <polyline points="21 15 16 10 5 21"></polyline>
-                    </svg>
-                  </div>
-                </div>
-              </motion.div>
-            )}
+            <motion.div
+              className={styles.postImageContainer}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <div className={styles.postImage}>
+                {post.image ? (
+                  // 使用Next.js的Image组件处理真实图片
+                  <Image
+                    src={post.image.endsWith('.jpg') || post.image.endsWith('.png') ? post.image : '/placeholder-blog.svg'}
+                    alt={post.title}
+                    className={styles.defaultCover}
+                    width={800}
+                    height={450}
+                    onError={(e) => {
+                      // 图片加载失败时显示占位符
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      target.parentElement!.classList.add(styles.placeholder);
+                      target.parentElement!.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+                          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                          <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                          <polyline points="21 15 16 10 5 21"></polyline>
+                        </svg>
+                      `;
+                    }}
+                  />
+                ) : (
+                  // 使用普通img标签处理SVG文件
+                  <img
+                    src={getDefaultCoverImage(post.category)}
+                    alt={post.title}
+                    className={styles.defaultCover}
+                  />
+                )}
+              </div>
+              <span className={styles.categoryBadge}>
+                {getCategoryDisplayName(post.category)}
+              </span>
+            </motion.div>
 
             <motion.div
               className={styles.postContent}
@@ -412,7 +468,12 @@ export default function BlogPostPage({ post }: BlogPostPageProps) {
 
             </motion.div>
 
-            <div className={styles.postNavigation}>
+            <motion.div
+              className={styles.postNavigation}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+            >
               <Link href="/blog" className={styles.backButton}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="19" y1="12" x2="5" y2="12"></line>
@@ -420,7 +481,7 @@ export default function BlogPostPage({ post }: BlogPostPageProps) {
                 </svg>
                 返回博客列表
               </Link>
-            </div>
+            </motion.div>
           </div>
         </article>
       </Layout>

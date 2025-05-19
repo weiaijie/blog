@@ -1,0 +1,399 @@
+/**
+ * NewBlogPost.module.css
+ *
+ * 描述：博客文章详情页面样式 - 苹果风格设计
+ * 
+ * 功能：
+ * - 提供博客文章详情页面的布局和样式
+ * - 适配不同设备尺寸的响应式设计
+ * - 与博客列表页面风格保持一致
+ * - 支持代码块与网站主题（亮色/暗色）联动
+ */
+
+/* 博客文章页面容器 */
+.blogPost {
+  padding-top: 120px; /* 为固定头部留出足够空间 */
+  padding-bottom: 80px;
+  width: 100%;
+}
+
+/* 文章容器 */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 30px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 文章头部 */
+.postHeader {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+/* 文章元数据 */
+.postMeta {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.postDate, .postReadTime {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 14px;
+  color: var(--text-lighter);
+  letter-spacing: -0.01em;
+}
+
+/* 文章分类标识 */
+.postCategory {
+  display: inline-block;
+  padding: 4px 10px;
+  background-color: rgba(var(--primary-rgb), 0.8);
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 文章标题 */
+.postTitle {
+  font-family: 'SF Pro Display', var(--font-heading);
+  font-size: 40px;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 16px;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  position: relative;
+  display: inline-block;
+}
+
+.postTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  width: 40px;
+  height: 3px;
+  background-color: var(--primary-color);
+  transform: translateX(-50%);
+  border-radius: 3px;
+}
+
+/* 文章标签 */
+.postTags {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.postTag {
+  display: inline-block;
+  padding: 4px 12px;
+  background-color: rgba(var(--primary-rgb), 0.08);
+  color: var(--primary-color);
+  border-radius: 980px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* 文章图片 */
+.postImageContainer {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 宽高比 */
+  margin-bottom: 40px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  background-color: var(--bg-light);
+}
+
+.postImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.defaultCover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: var(--text-lighter);
+  background: linear-gradient(135deg, rgba(var(--primary-rgb), 0.05) 0%, rgba(var(--primary-rgb), 0.15) 100%);
+}
+
+/* 分类标识 */
+.categoryBadge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px 10px;
+  background-color: rgba(var(--primary-rgb), 0.8);
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 4px;
+  z-index: 10;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 文章内容 */
+.postContent {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--text-color);
+  margin-bottom: 40px;
+}
+
+.postContent h1 {
+  font-family: 'SF Pro Display', var(--font-heading);
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 40px 0 20px;
+  letter-spacing: -0.015em;
+}
+
+.postContent h2 {
+  font-family: 'SF Pro Display', var(--font-heading);
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 30px 0 15px;
+  letter-spacing: -0.01em;
+}
+
+.postContent h3 {
+  font-family: 'SF Pro Display', var(--font-heading);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 25px 0 10px;
+  letter-spacing: -0.01em;
+}
+
+.postContent p {
+  margin-bottom: 20px;
+  line-height: 1.7;
+}
+
+.postContent a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.postContent a:hover {
+  opacity: 0.7;
+}
+
+.postContent ul, .postContent ol {
+  margin-bottom: 20px;
+  padding-left: 20px;
+  margin-left: 20px;
+}
+
+.postContent li {
+  margin-bottom: 8px;
+}
+
+.postContent blockquote {
+  border-left: 4px solid var(--primary-color);
+  padding-left: 16px;
+  margin-left: 0;
+  margin-right: 0;
+  font-style: italic;
+  color: var(--text-light);
+}
+
+.postContent img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.postContent table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.postContent th, .postContent td {
+  border: 1px solid var(--border-color);
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.postContent th {
+  background-color: var(--bg-light);
+  font-weight: 600;
+}
+
+.postContent hr {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 30px 0;
+}
+
+/* 代码块包装器 */
+.codeBlockWrapper {
+  position: relative;
+  margin: 1.5em 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* 语言标记 */
+.languageLabel {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  color: white;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  z-index: 10;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  opacity: 0.8;
+}
+
+.postContent pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+/* 文章导航 */
+.postNavigation {
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+}
+
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  padding: 10px 20px;
+  border-radius: 980px;
+  background-color: rgba(var(--primary-rgb), 0.05);
+}
+
+.backButton:hover {
+  background-color: rgba(var(--primary-rgb), 0.1);
+  transform: translateY(-2px);
+}
+
+.backButton svg {
+  margin-right: 8px;
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+  .blogPost {
+    padding-top: 100px;
+  }
+  
+  .postTitle {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 768px) {
+  .blogPost {
+    padding-top: 90px;
+    padding-bottom: 60px;
+  }
+  
+  .postTitle {
+    font-size: 32px;
+  }
+  
+  .postContent {
+    font-size: 16px;
+  }
+  
+  .postContent h1 {
+    font-size: 28px;
+  }
+  
+  .postContent h2 {
+    font-size: 22px;
+  }
+  
+  .postContent h3 {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .blogPost {
+    padding-top: 80px;
+    padding-bottom: 50px;
+  }
+  
+  .container {
+    padding: 0 20px;
+  }
+  
+  .postTitle {
+    font-size: 28px;
+  }
+  
+  .postContent {
+    font-size: 15px;
+  }
+  
+  .postContent h1 {
+    font-size: 24px;
+  }
+  
+  .postContent h2 {
+    font-size: 20px;
+  }
+  
+  .postContent h3 {
+    font-size: 17px;
+  }
+}
