@@ -45,16 +45,14 @@ const SkillCard: React.FC<{ skill: Skill; index: number }> = ({ skill, index }) 
   const cardVariants = {
     hidden: {
       opacity: 0,
-      y: 30,
-      scale: 0.9
+      y: 20
     },
     visible: {
       opacity: 1,
       y: 0,
-      scale: 1,
       transition: {
         duration: 0.6,
-        delay: index * 0.2,
+        delay: index * 0.15,
         ease: [0.16, 1, 0.3, 1]
       }
     }
@@ -81,7 +79,7 @@ const SkillCard: React.FC<{ skill: Skill; index: number }> = ({ skill, index }) 
       scaleX: 1,
       transition: {
         duration: 1,
-        delay: index * 0.2 + 0.5,
+        delay: index * 0.15 + 0.3,
         ease: [0.16, 1, 0.3, 1]
       }
     }
@@ -105,30 +103,37 @@ const SkillCard: React.FC<{ skill: Skill; index: number }> = ({ skill, index }) 
         <div className={styles.skillCardFront}>
           <motion.div
             className={styles.skillIcon}
-            style={{ backgroundColor: `rgba(${skill.color || 'var(--primary-rgb)'}, 0.1)` }}
+            style={{ backgroundColor: `rgba(${skill.color || 'var(--primary-rgb)'}, 0.08)` }}
             variants={iconVariants}
             initial="initial"
             whileHover="hover"
           >
             {skill.icon}
           </motion.div>
-          <h3 className={styles.skillName}>{skill.name}</h3>
-          <p className={styles.skillDescription}>{skill.description}</p>
-          <motion.div
-            className={styles.skillBarContainer}
-            variants={barVariants}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-          >
-            <div
-              className={styles.skillBar}
-              style={{
-                width: `${skill.level}%`,
-                backgroundColor: skill.color || 'var(--primary-color)'
-              }}
-            ></div>
-            <span className={styles.skillLevel}>{skill.level}%</span>
-          </motion.div>
+
+          <div className={styles.skillContent}>
+            <div className={styles.skillTextContent}>
+              <h3 className={styles.skillName}>{skill.name}</h3>
+              <p className={styles.skillDescription}>{skill.description}</p>
+            </div>
+
+            <motion.div
+              className={styles.skillBarContainer}
+              variants={barVariants}
+              initial="hidden"
+              animate={isInView ? "visible" : "hidden"}
+            >
+              <div
+                className={styles.skillBar}
+                style={{
+                  width: `${skill.level}%`,
+                  backgroundColor: skill.color ? `rgb(${skill.color})` : 'var(--primary-color)'
+                }}
+              ></div>
+              <span className={styles.skillLevel}>{skill.level}%</span>
+            </motion.div>
+          </div>
+
           <motion.button
             className={styles.flipButton}
             onClick={handleFlip}
