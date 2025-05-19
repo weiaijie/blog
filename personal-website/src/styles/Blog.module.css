@@ -1,12 +1,12 @@
 /* 博客页面样式 - 苹果风格杂志布局 */
 .blogPage {
   padding: 100px 0 80px; /* 增加顶部内边距，避免被页面头部挡住 */
+  width: 100%; /* 确保占据整个可用宽度 */
 }
 
 .container {
-  max-width: 1400px; /* 增加内容区域宽度，与首页保持一致 */
-  margin: 0 auto;
-  padding: 0 40px; /* 增加内边距 */
+  width: 100%; /* 确保容器占据可用宽度 */
+  box-sizing: border-box; /* 确保内边距不会增加总宽度 */
 }
 
 .pageTitle {
@@ -19,6 +19,11 @@
   text-align: center;
   transition: color 0.3s ease;
   position: relative;
+  max-width: var(--max-width); /* 使用全局最大宽度变量 */
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 var(--spacing-lg); /* 使用全局间距变量 */
+  width: 100%;
 }
 
 /* 标题下划线效果 */
@@ -39,6 +44,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%; /* 确保控制区域占据容器的全部宽度 */
+  max-width: var(--max-width); /* 使用全局最大宽度变量 */
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 var(--spacing-lg); /* 使用全局间距变量 */
 }
 
 /* 搜索栏 */
@@ -152,6 +162,11 @@
   grid-auto-rows: minmax(100px, auto);
   gap: 40px;
   margin-bottom: 60px;
+  width: 100%; /* 确保网格占据容器的全部宽度 */
+  max-width: var(--max-width); /* 使用全局最大宽度变量 */
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 var(--spacing-lg); /* 使用全局间距变量 */
 }
 
 /* 特色文章 - 占据两行和更多列 */
@@ -371,9 +386,10 @@
 
 /* 响应式设计 */
 @media (max-width: 1280px) {
-  .container {
-    max-width: 1200px;
-    padding: 0 30px;
+  .blogControls,
+  .postsGrid,
+  .pageTitle {
+    padding: 0 var(--spacing-md);
   }
 
   .pageTitle {
@@ -411,9 +427,10 @@
 }
 
 @media (max-width: 1068px) {
-  .container {
-    max-width: 900px;
-    padding: 0 24px;
+  .blogControls,
+  .postsGrid,
+  .pageTitle {
+    padding: 0 var(--spacing-sm);
   }
 
   .blogPage {
@@ -548,8 +565,10 @@
     margin-bottom: 24px;
   }
 
-  .container {
-    padding: 0 20px;
+  .blogControls,
+  .postsGrid,
+  .pageTitle {
+    padding: 0 var(--spacing-xs);
   }
 
   .searchInput {

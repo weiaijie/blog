@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="600" height="338" viewBox="0 0 600 338" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="338" fill="#F5F5F7"/>
+  <path d="M300 169C300 186.673 285.673 201 268 201C250.327 201 236 186.673 236 169C236 151.327 250.327 137 268 137C285.673 137 300 151.327 300 169Z" fill="#0071E3" fill-opacity="0.1"/>
+  <path d="M364 169C364 186.673 349.673 201 332 201C314.327 201 300 186.673 300 169C300 151.327 314.327 137 332 137C349.673 137 364 151.327 364 169Z" fill="#0071E3" fill-opacity="0.2"/>
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M300 169C300 186.673 285.673 201 268 201C250.327 201 236 186.673 236 169C236 151.327 250.327 137 268 137C285.673 137 300 151.327 300 169ZM268 193C281.255 193 292 182.255 292 169C292 155.745 281.255 145 268 145C254.745 145 244 155.745 244 169C244 182.255 254.745 193 268 193Z" fill="#0071E3" fill-opacity="0.3"/>
+  <text x="300" y="250" font-family="SF Pro Display, -apple-system, BlinkMacSystemFont, sans-serif" font-size="24" font-weight="600" fill="#1D1D1F" text-anchor="middle">博客文章</text>
+</svg>

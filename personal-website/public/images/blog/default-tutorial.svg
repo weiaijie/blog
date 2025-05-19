@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="600" height="338" viewBox="0 0 600 338" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="338" fill="#F5F5F7"/>
+  <rect x="200" y="119" width="200" height="100" rx="8" fill="#0071E3" fill-opacity="0.1"/>
+  <path d="M250 169L270 149L290 169L270 189L250 169Z" fill="#0071E3" fill-opacity="0.5"/>
+  <path d="M310 169L330 149L350 169L330 189L310 169Z" fill="#0071E3" fill-opacity="0.3"/>
+  <text x="300" y="250" font-family="SF Pro Display, -apple-system, BlinkMacSystemFont, sans-serif" font-size="24" font-weight="600" fill="#1D1D1F" text-anchor="middle">技术教程</text>
+</svg>

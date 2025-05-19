@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="600" height="338" viewBox="0 0 600 338" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="338" fill="#F5F5F7"/>
+  <path d="M200 219L240 179L280 199L320 159L360 179L400 139" stroke="#0071E3" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="240" cy="179" r="6" fill="#0071E3"/>
+  <circle cx="280" cy="199" r="6" fill="#0071E3"/>
+  <circle cx="320" cy="159" r="6" fill="#0071E3"/>
+  <circle cx="360" cy="179" r="6" fill="#0071E3"/>
+  <circle cx="400" cy="139" r="6" fill="#0071E3"/>
+  <text x="300" y="250" font-family="SF Pro Display, -apple-system, BlinkMacSystemFont, sans-serif" font-size="24" font-weight="600" fill="#1D1D1F" text-anchor="middle">行业趋势</text>
+</svg>

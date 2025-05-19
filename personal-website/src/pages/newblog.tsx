@@ -1,7 +1,7 @@
 /**
- * blog.tsx
+ * newblog.tsx
  *
- * 描述：博客页面，展示个人技术博客文章列表
+ * 描述：重新设计的博客页面，展示个人技术博客文章列表
  *
  * 功能：
  * - 展示不同类别的博客文章（技术教程、项目案例、行业趋势、经验分享）
@@ -11,7 +11,7 @@
  * - 使用苹果风格的设计，提供更好的视觉体验
  *
  * 主要组件：
- * - Blog：博客页面的主要组件
+ * - NewBlog：博客页面的主要组件
  * - 包含博客文章数据模型定义和筛选逻辑
  */
 
@@ -51,7 +51,7 @@ const getDefaultCoverImage = (category: string): string => {
   }
 };
 
-export default function Blog() {
+export default function NewBlog() {
   // 博客分类
   const categories = [
     { id: 'all', name: '全部' },

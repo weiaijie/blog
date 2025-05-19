@@ -1,0 +1,412 @@
+/**
+ * NewBlog.module.css
+ *
+ * 描述：博客页面样式 - 苹果风格设计
+ *
+ * 功能：
+ * - 提供博客页面的布局和样式
+ * - 适配不同设备尺寸的响应式设计
+ * - 与网站整体风格保持一致
+ */
+
+/* 博客页面容器 */
+.blogPage {
+  padding-top: 120px; /* 为固定头部留出足够空间 */
+  padding-bottom: 80px;
+  width: 100%;
+}
+
+/* 页面标题区域 */
+.titleSection {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.pageTitle {
+  font-family: 'SF Pro Display', var(--font-heading);
+  font-size: 48px;
+  font-weight: 600;
+  color: var(--tagline-heading);
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+  position: relative;
+  display: inline-block;
+}
+
+.pageTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  width: 40px;
+  height: 3px;
+  background-color: var(--primary-color);
+  transform: translateX(-50%);
+  border-radius: 3px;
+}
+
+.pageDescription {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 18px;
+  color: var(--text-light);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+/* 博客控制区域 */
+.controlsSection {
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 搜索栏 */
+.searchBar {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 30px;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 14px 20px;
+  padding-right: 50px;
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 16px;
+  color: var(--text-color);
+  background-color: var(--bg-light);
+  border: none;
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.searchInput:focus {
+  outline: none;
+  background-color: var(--bg-color);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.searchIcon {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-lighter);
+  transition: all 0.3s ease;
+  width: 18px;
+  height: 18px;
+}
+
+.searchInput:focus + .searchIcon {
+  color: var(--primary-color);
+}
+
+/* 分类筛选 */
+.categoryFilter {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.categoryButton {
+  background: none;
+  border: none;
+  padding: 10px 20px;
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-light);
+  border-radius: 980px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.categoryButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(var(--primary-rgb), 0.08);
+  border-radius: 980px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.categoryButton:hover {
+  color: var(--primary-color);
+}
+
+.categoryButton:hover::before {
+  opacity: 1;
+}
+
+.categoryButton.active {
+  color: white;
+  background-color: var(--primary-color);
+  box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.2);
+}
+
+.categoryButton.active::before {
+  display: none;
+}
+
+/* 博客文章列表 */
+.postsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* 文章卡片 */
+.postCard {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: var(--bg-color);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+.postCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* 文章图片 */
+.postImageContainer {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 宽高比 */
+  background-color: var(--bg-light);
+  overflow: hidden;
+  /* 确保分类标识能够正确显示 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.postImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.5s ease;
+}
+
+.postCard:hover .postImage {
+  transform: scale(1.05);
+}
+
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: var(--text-lighter);
+  background: linear-gradient(135deg, rgba(var(--primary-rgb), 0.05) 0%, rgba(var(--primary-rgb), 0.15) 100%);
+}
+
+/* 默认封面图样式 */
+.defaultCover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  z-index: 1; /* 确保图片在底层 */
+}
+
+/* 分类标识 */
+.categoryBadge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px 10px;
+  background-color: rgba(var(--primary-rgb), 0.8);
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 4px;
+  z-index: 10; /* 提高z-index，确保显示在图片上方 */
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  pointer-events: none; /* 确保不会阻止点击事件 */
+}
+
+/* 文章内容 */
+.postContent {
+  padding: 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 文章元数据 */
+.postMeta {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.postDate, .postReadTime {
+  font-size: 14px;
+  color: var(--text-lighter);
+}
+
+/* 文章标题 */
+.postTitle {
+  font-family: 'SF Pro Display', var(--font-heading);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 12px;
+  line-height: 1.3;
+  transition: color 0.3s ease;
+}
+
+.postCard:hover .postTitle {
+  color: var(--primary-color);
+}
+
+/* 文章摘要 */
+.postExcerpt {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--text-light);
+  margin-bottom: 16px;
+  flex: 1;
+}
+
+/* 文章标签 */
+.postTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.postTag {
+  display: inline-block;
+  padding: 4px 12px;
+  background-color: rgba(var(--primary-rgb), 0.08);
+  color: var(--primary-color);
+  border-radius: 980px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* 无结果提示 */
+.noResults {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 0;
+}
+
+.noResults p {
+  font-size: 18px;
+  color: var(--text-light);
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+  .blogPage {
+    padding-top: 100px;
+  }
+
+  .pageTitle {
+    font-size: 42px;
+  }
+
+  .postsContainer {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .blogPage {
+    padding-top: 90px;
+    padding-bottom: 60px;
+  }
+
+  .titleSection {
+    margin-bottom: 40px;
+  }
+
+  .pageTitle {
+    font-size: 36px;
+  }
+
+  .pageDescription {
+    font-size: 16px;
+    padding: 0 20px;
+  }
+
+  .categoryFilter {
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding-bottom: 10px;
+    margin: 0 -20px;
+    padding: 0 20px 10px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .categoryButton {
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .blogPage {
+    padding-top: 80px;
+    padding-bottom: 50px;
+  }
+
+  .pageTitle {
+    font-size: 32px;
+  }
+
+  .pageDescription {
+    font-size: 15px;
+  }
+
+  .searchInput {
+    padding: 12px 16px;
+    font-size: 15px;
+  }
+
+  .postContent {
+    padding: 20px;
+  }
+
+  .postTitle {
+    font-size: 18px;
+  }
+
+  .postExcerpt {
+    font-size: 14px;
+  }
+}
