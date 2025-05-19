@@ -43,7 +43,7 @@
 
   /* 布局变量 */
   --header-height: 70px;
-  --max-width: 1200px;
+  --max-width: 1440px; /* 增加最大宽度，更符合现代网站设计 */
   --border-radius: 12px; /* 更大的圆角，符合苹果风格 */
   --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* 更柔和的阴影 */
   --box-shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.1); /* 悬停时的阴影 */

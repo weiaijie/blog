@@ -36,10 +36,10 @@
   flex-direction: column;
   gap: 0;
   margin-bottom: 60px;
-  max-width: 1000px;
+  max-width: 1400px; /* 增加内容区域宽度 */
   margin-left: auto;
   margin-right: auto;
-  padding: 0 20px;
+  padding: 0 40px; /* 增加内边距 */
 }
 
 /* 技能卡片容器 */
@@ -150,7 +150,7 @@
   color: var(--text-light);
   letter-spacing: -0.01em;
   transition: color 0.3s ease;
-  max-width: 500px;
+  max-width: 700px; /* 增加描述文本的最大宽度 */
 }
 
 /* 技能条容器 */
@@ -278,6 +278,44 @@
 }
 
 /* 响应式设计 */
+@media (max-width: 1280px) {
+  .skillsHighlight {
+    padding: 90px 0;
+  }
+
+  .sectionTitle {
+    font-size: 38px;
+    margin-bottom: 55px;
+  }
+
+  .skillsGrid {
+    max-width: 1200px;
+  }
+
+  .skillCardFront,
+  .skillCardBack {
+    padding: 35px 0;
+  }
+
+  .skillIcon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .skillName {
+    font-size: 23px;
+  }
+
+  .skillDescription {
+    font-size: 16px;
+    max-width: 600px;
+  }
+
+  .skillBarContainer {
+    width: 180px;
+  }
+}
+
 @media (max-width: 1068px) {
   .skillsHighlight {
     padding: 80px 0;
@@ -289,7 +327,8 @@
   }
 
   .skillsGrid {
-    padding: 0 40px;
+    padding: 0 30px;
+    max-width: 1000px;
   }
 
   .skillCardFront,
@@ -308,7 +347,7 @@
 
   .skillDescription {
     font-size: 15px;
-    max-width: 400px;
+    max-width: 500px;
   }
 
   .skillBarContainer {
