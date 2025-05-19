@@ -1,12 +1,12 @@
-/* 博客页面样式 - 苹果风格 */
+/* 博客页面样式 - 苹果风格杂志布局 */
 .blogPage {
   padding: 100px 0 80px; /* 增加顶部内边距，避免被页面头部挡住 */
 }
 
 .container {
-  max-width: 980px;
+  max-width: 1400px; /* 增加内容区域宽度，与首页保持一致 */
   margin: 0 auto;
-  padding: 0 22px;
+  padding: 0 40px; /* 增加内边距 */
 }
 
 .pageTitle {
@@ -14,48 +14,75 @@
   font-size: 48px;
   font-weight: 600;
   color: var(--tagline-heading);
-  margin-bottom: 40px;
-  letter-spacing: -0.015em;
+  margin-bottom: 60px;
+  letter-spacing: -0.02em;
   text-align: center;
   transition: color 0.3s ease;
+  position: relative;
+}
+
+/* 标题下划线效果 */
+.pageTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  width: 40px;
+  height: 2px;
+  background-color: var(--primary-color);
+  transform: translateX(-50%);
 }
 
 /* 博客控制区域 */
 .blogControls {
-  margin-bottom: 40px;
+  margin-bottom: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+/* 搜索栏 */
 .searchBar {
   position: relative;
-  margin-bottom: 24px;
+  margin-bottom: 30px;
+  width: 100%;
+  max-width: 600px;
 }
 
 .searchInput {
   width: 100%;
-  padding: 12px 16px;
-  padding-right: 40px;
+  padding: 14px 20px;
+  padding-right: 50px;
   font-family: 'SF Pro Text', var(--font-sans);
-  font-size: 15px;
+  font-size: 16px;
   color: var(--tagline-heading);
   background-color: var(--bg-dark);
   border: none;
-  border-radius: 8px;
-  transition: all 0.3s ease;
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .searchInput:focus {
   outline: none;
-  background-color: var(--card-bg);
-  box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.2);
+  background-color: var(--bg-light);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
 }
 
 .searchIcon {
   position: absolute;
-  right: 16px;
+  right: 20px;
   top: 50%;
   transform: translateY(-50%);
   color: var(--tagline-subheading);
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
+  width: 18px;
+  height: 18px;
+}
+
+.searchInput:focus + .searchIcon {
+  color: var(--primary-color);
 }
 
 /* 分类筛选 */
@@ -63,64 +90,120 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 16px;
+  position: relative;
+  padding: 10px 0;
 }
 
+/* 分类按钮 */
 .categoryButton {
   background: none;
-  border: none;
-  padding: 8px 16px;
+  border: 1px solid transparent;
+  padding: 10px 20px;
   font-family: 'SF Pro Text', var(--font-sans);
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 500;
   color: var(--tagline-subheading);
   border-radius: 980px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+.categoryButton::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background-color: rgba(var(--primary-rgb), 0.08);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.5s ease, height 0.5s ease;
+  z-index: -1;
 }
 
 .categoryButton:hover {
-  background-color: rgba(var(--primary-rgb), 0.1);
-  color: var(--tagline-heading);
+  color: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+.categoryButton:hover::before {
+  width: 300px;
+  height: 300px;
 }
 
 .categoryButton.active {
   background-color: var(--primary-color);
   color: white;
+  box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.2);
 }
 
-/* 文章网格 */
+.categoryButton.active::before {
+  display: none;
+}
+
+/* 文章网格 - 杂志风格布局 */
 .postsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: minmax(100px, auto);
+  gap: 40px;
+  margin-bottom: 60px;
 }
 
+/* 特色文章 - 占据两行和更多列 */
+.postsGrid > a:first-child {
+  grid-column: span 8;
+  grid-row: span 2;
+}
+
+/* 常规文章 - 交错布局 */
+.postsGrid > a:not(:first-child) {
+  grid-column: span 4;
+}
+
+/* 每三个文章后的文章占据更多空间 */
+.postsGrid > a:nth-child(3n+2) {
+  grid-column: span 6;
+}
+
+/* 文章卡片 - 杂志风格 */
 .postCard {
-  background-color: var(--card-bg);
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 4px 20px var(--card-shadow);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  height: 100%;
+  position: relative;
   display: flex;
   flex-direction: column;
   text-decoration: none;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border-radius: 0; /* 移除圆角 */
+  background-color: transparent; /* 移除背景色 */
+  box-shadow: none; /* 移除阴影 */
 }
 
 .postCard:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 30px var(--card-shadow-hover);
 }
 
+/* 文章图片容器 */
 .postImageContainer {
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%; /* 16:9 宽高比 */
+  padding-bottom: 66.67%; /* 3:2 宽高比 */
   background-color: var(--bg-dark);
-  transition: background-color 0.3s ease;
+  transition: all 0.4s ease;
+  overflow: hidden;
+  border-radius: 8px;
 }
 
+/* 特色文章的图片容器 */
+.postsGrid > a:first-child .postImageContainer {
+  padding-bottom: 56.25%; /* 16:9 宽高比 */
+}
+
+/* 文章图片 */
 .postImage {
   position: absolute;
   top: 0;
@@ -130,8 +213,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.5s ease;
 }
 
+.postCard:hover .postImage {
+  transform: scale(1.05);
+}
+
+/* 图片占位符 */
 .placeholder {
   display: flex;
   align-items: center;
@@ -140,65 +229,130 @@
   height: 100%;
   color: var(--text-lighter);
   transition: color 0.3s ease;
+  background-color: rgba(var(--primary-rgb), 0.05);
 }
 
+/* 文章内容 */
 .postContent {
-  padding: 24px;
+  padding: 24px 0;
   flex: 1;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
+/* 文章元数据 */
 .postMeta {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 16px;
   margin-bottom: 12px;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.postCard:hover .postMeta {
+  opacity: 1;
 }
 
 .postDate, .postReadTime {
   font-family: 'SF Pro Text', var(--font-sans);
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text-light);
   letter-spacing: -0.01em;
+  position: relative;
 }
 
+.postDate::after {
+  content: '•';
+  position: absolute;
+  right: -10px;
+  color: var(--text-lighter);
+}
+
+/* 文章标题 */
 .postTitle {
   font-family: 'SF Pro Display', var(--font-heading);
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 600;
   color: var(--tagline-heading);
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   letter-spacing: -0.01em;
   line-height: 1.3;
   transition: color 0.3s ease;
+  position: relative;
+  display: inline-block;
 }
 
+/* 特色文章的标题 */
+.postsGrid > a:first-child .postTitle {
+  font-size: 32px;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.postTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary-color);
+  transition: width 0.3s ease;
+}
+
+.postCard:hover .postTitle {
+  color: var(--primary-color);
+}
+
+.postCard:hover .postTitle::after {
+  width: 100%;
+}
+
+/* 文章摘要 */
 .postExcerpt {
   font-family: 'SF Pro Text', var(--font-sans);
-  font-size: 14px;
-  line-height: 1.4;
+  font-size: 16px;
+  line-height: 1.5;
   color: var(--text-light);
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   flex: 1;
   letter-spacing: -0.01em;
+  transition: color 0.3s ease;
+  max-width: 90%;
 }
 
+/* 文章标签 */
 .postTags {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform: translateY(0);
+  opacity: 0.9;
+}
+
+.postCard:hover .postTags {
+  transform: translateY(-3px);
+  opacity: 1;
 }
 
 .postTag {
   display: inline-block;
-  padding: 4px 10px;
-  background-color: rgba(var(--primary-rgb), 0.1);
+  padding: 6px 12px;
+  background-color: rgba(var(--primary-rgb), 0.08);
   color: var(--primary-color);
   border-radius: 980px;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
   letter-spacing: -0.01em;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.postCard:hover .postTag {
+  background-color: rgba(var(--primary-rgb), 0.12);
+  transform: scale(1.05);
 }
 
 /* 无结果提示 */
@@ -216,9 +370,106 @@
 }
 
 /* 响应式设计 */
-@media (max-width: 768px) {
+@media (max-width: 1280px) {
+  .container {
+    max-width: 1200px;
+    padding: 0 30px;
+  }
+
+  .pageTitle {
+    font-size: 44px;
+    margin-bottom: 50px;
+  }
+
+  .postsGrid {
+    gap: 30px;
+  }
+
+  .postsGrid > a:first-child {
+    grid-column: span 6;
+  }
+
+  .postsGrid > a:not(:first-child) {
+    grid-column: span 6;
+  }
+
+  .postsGrid > a:nth-child(3n+2) {
+    grid-column: span 6;
+  }
+
+  .postTitle {
+    font-size: 20px;
+  }
+
+  .postsGrid > a:first-child .postTitle {
+    font-size: 28px;
+  }
+
+  .postExcerpt {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 1068px) {
+  .container {
+    max-width: 900px;
+    padding: 0 24px;
+  }
+
   .blogPage {
-    padding: 80px 0 60px; /* 调整顶部内边距，但仍保持足够空间 */
+    padding: 90px 0 70px;
+  }
+
+  .pageTitle {
+    font-size: 40px;
+    margin-bottom: 40px;
+  }
+
+  .postsGrid {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 24px;
+  }
+
+  .postsGrid > a:first-child {
+    grid-column: span 6;
+    grid-row: span 1;
+  }
+
+  .postsGrid > a:not(:first-child) {
+    grid-column: span 3;
+  }
+
+  .postsGrid > a:nth-child(3n+2) {
+    grid-column: span 3;
+  }
+
+  .postContent {
+    padding: 20px 0;
+  }
+
+  .postTitle {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .postsGrid > a:first-child .postTitle {
+    font-size: 24px;
+  }
+
+  .postExcerpt {
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+
+  .postTag {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 834px) {
+  .blogPage {
+    padding: 80px 0 60px;
   }
 
   .pageTitle {
@@ -230,23 +481,66 @@
     margin-bottom: 30px;
   }
 
+  .searchBar {
+    max-width: 100%;
+  }
+
+  .searchInput {
+    padding: 12px 16px;
+    font-size: 15px;
+  }
+
   .postsGrid {
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 16px;
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .postsGrid > a:first-child,
+  .postsGrid > a:not(:first-child),
+  .postsGrid > a:nth-child(3n+2) {
+    grid-column: span 1;
+  }
+
+  .postImageContainer {
+    padding-bottom: 56.25%; /* 所有文章使用16:9比例 */
   }
 
   .postContent {
-    padding: 16px;
+    padding: 20px 0;
   }
 
   .postTitle {
-    font-size: 18px;
+    font-size: 20px;
+  }
+
+  .postsGrid > a:first-child .postTitle {
+    font-size: 24px;
+  }
+
+  .postExcerpt {
+    font-size: 15px;
+    max-width: 100%;
+  }
+
+  .categoryFilter {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 5px 0 15px;
+    justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 10px;
+  }
+
+  .categoryButton {
+    flex-shrink: 0;
+    padding: 8px 16px;
+    font-size: 15px;
   }
 }
 
 @media (max-width: 480px) {
   .blogPage {
-    padding: 70px 0 40px; /* 在小屏幕上稍微减少顶部内边距，但仍保持足够空间 */
+    padding: 70px 0 40px;
   }
 
   .pageTitle {
@@ -254,20 +548,67 @@
     margin-bottom: 24px;
   }
 
-  .categoryButton {
-    font-size: 13px;
-    padding: 6px 12px;
+  .container {
+    padding: 0 20px;
+  }
+
+  .searchInput {
+    padding: 10px 14px;
+    font-size: 14px;
+    border-radius: 8px;
+  }
+
+  .searchIcon {
+    right: 14px;
+    width: 16px;
+    height: 16px;
   }
 
   .postsGrid {
+    gap: 30px;
     grid-template-columns: 1fr;
+  }
+
+  .postContent {
+    padding: 16px 0;
   }
 
   .postTitle {
     font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  .postsGrid > a:first-child .postTitle {
+    font-size: 22px;
   }
 
   .postExcerpt {
     font-size: 13px;
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+
+  .postMeta {
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .postDate, .postReadTime {
+    font-size: 12px;
+  }
+
+  .postTags {
+    gap: 6px;
+  }
+
+  .postTag {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+
+  .categoryButton {
+    padding: 6px 12px;
+    font-size: 13px;
+    flex-shrink: 0;
   }
 }
