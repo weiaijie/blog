@@ -182,6 +182,16 @@ const Tagline: React.FC<TaglineProps> = ({ visible }) => {
           { text: 'align-items: center;', indent: 2 },
           { text: '}', indent: 0 }
         ]
+      },
+      // PHP 示例
+      {
+        language: 'PHP',
+        lines: [
+          { text: 'function createExperience() {', indent: 0 },
+          { text: '$result = "Amazing";', indent: 2 },
+          { text: 'return $result;', indent: 2 },
+          { text: '}', indent: 0 }
+        ]
       }
     ];
 
@@ -500,6 +510,71 @@ const Tagline: React.FC<TaglineProps> = ({ visible }) => {
               highlightedText = <>{displayedText}</>;
             }
           }
+          // PHP 高亮
+          else if (language === 'PHP') {
+            if (line.text.includes('function')) {
+              if (typedLength >= 8) { // 'function'
+                highlightedText = (
+                  <>
+                    <span className={styles.keyword}>function</span>
+                    {typedLength > 8 && ' '}
+                    {typedLength > 9 && (
+                      <span className={styles.variable}>
+                        {displayedText.substring(9, Math.min(typedLength, 25))}
+                      </span>
+                    )}
+                    {typedLength > 25 && <span className={styles.punctuation}>()</span>}
+                    {typedLength > 27 && ' '}
+                    {typedLength > 28 && <span className={styles.punctuation}>{'{'}</span>}
+                  </>
+                );
+              } else {
+                highlightedText = <>{displayedText}</>;
+              }
+            } else if (line.text.includes('$result')) {
+              if (typedLength >= 1) { // '$'
+                highlightedText = (
+                  <>
+                    <span className={styles.variable}>
+                      {displayedText.substring(0, Math.min(typedLength, 7))}
+                    </span>
+                    {typedLength > 7 && ' '}
+                    {typedLength > 8 && <span className={styles.operator}>=</span>}
+                    {typedLength > 9 && ' '}
+                    {typedLength > 10 && (
+                      <span className={styles.string}>
+                        {displayedText.substring(10, Math.min(typedLength, 19))}
+                      </span>
+                    )}
+                    {typedLength > 19 && <span className={styles.punctuation}>;</span>}
+                  </>
+                );
+              } else {
+                highlightedText = <>{displayedText}</>;
+              }
+            } else if (line.text.includes('return')) {
+              if (typedLength >= 6) { // 'return'
+                highlightedText = (
+                  <>
+                    <span className={styles.keyword}>return</span>
+                    {typedLength > 6 && ' '}
+                    {typedLength > 7 && (
+                      <span className={styles.variable}>
+                        {displayedText.substring(7, Math.min(typedLength, 14))}
+                      </span>
+                    )}
+                    {typedLength > 14 && <span className={styles.punctuation}>;</span>}
+                  </>
+                );
+              } else {
+                highlightedText = <>{displayedText}</>;
+              }
+            } else if (line.text === '}') {
+              highlightedText = <span className={styles.punctuation}>{'}'}</span>;
+            } else {
+              highlightedText = <>{displayedText}</>;
+            }
+          }
           // 默认情况
           else {
             highlightedText = <>{displayedText}</>;
@@ -572,6 +647,19 @@ const Tagline: React.FC<TaglineProps> = ({ visible }) => {
           return <><span className={styles.keyword}>justify-content</span><span className={styles.punctuation}>:</span> <span className={styles.string}>center</span><span className={styles.punctuation}>;</span></>;
         } else if (text.includes('align-items')) {
           return <><span className={styles.keyword}>align-items</span><span className={styles.punctuation}>:</span> <span className={styles.string}>center</span><span className={styles.punctuation}>;</span></>;
+        } else if (text === '}') {
+          return <><span className={styles.punctuation}>{'}'}</span></>;
+        }
+      }
+
+      // PHP 高亮
+      else if (language === 'PHP') {
+        if (text.includes('function')) {
+          return <><span className={styles.keyword}>function</span> <span className={styles.variable}>createExperience</span><span className={styles.punctuation}>()</span> <span className={styles.punctuation}>{'{'}</span></>;
+        } else if (text.includes('$result')) {
+          return <><span className={styles.variable}>$result</span> <span className={styles.operator}>=</span> <span className={styles.string}>"Amazing"</span><span className={styles.punctuation}>;</span></>;
+        } else if (text.includes('return')) {
+          return <><span className={styles.keyword}>return</span> <span className={styles.variable}>$result</span><span className={styles.punctuation}>;</span></>;
         } else if (text === '}') {
           return <><span className={styles.punctuation}>{'}'}</span></>;
         }
