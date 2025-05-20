@@ -141,18 +141,214 @@ const Tagline: React.FC<TaglineProps> = ({ visible }) => {
     })
   };
 
-  // 代码片段元素
-  const CodeSnippet = () => (
-    <div className={styles.codeSnippet}>
-      <pre>
-        <code>
-          <span className={styles.keyword}>const</span> <span className={styles.variable}>createExperience</span> = <span className={styles.punctuation}>()</span> <span className={styles.operator}>=></span> <span className={styles.punctuation}>{'{'}</span>
-          <br/>  <span className={styles.keyword}>return</span> <span className={styles.string}>"Amazing"</span><span className={styles.punctuation}>;</span>
-          <br/><span className={styles.punctuation}>{'}'}</span>
-        </code>
-      </pre>
-    </div>
-  );
+  // 代码片段元素 - 使用简单的打字机效果
+  const CodeSnippet = () => {
+    // 定义代码行
+    const codeLines = [
+      { text: 'const createExperience = () => {', indent: 0 },
+      { text: 'return "Amazing";', indent: 2 },
+      { text: '}', indent: 0 }
+    ];
+
+    // 跟踪当前显示的行数
+    const [currentLineIndex, setCurrentLineIndex] = useState(0);
+    const [currentCharIndex, setCurrentCharIndex] = useState(0);
+    const [showCursor, setShowCursor] = useState(true);
+    const [typingSpeed, setTypingSpeed] = useState(50); // 打字速度
+    const timerRef = useRef<NodeJS.Timeout | null>(null);
+
+    // 清除定时器
+    const clearTimer = () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+        timerRef.current = null;
+      }
+    };
+
+    // 闪烁光标效果
+    useEffect(() => {
+      const cursorInterval = setInterval(() => {
+        setShowCursor(prev => !prev);
+      }, 500);
+
+      return () => clearInterval(cursorInterval);
+    }, []);
+
+    // 打字效果
+    useEffect(() => {
+      // 如果已经完成所有行，重新开始
+      if (currentLineIndex >= codeLines.length) {
+        clearTimer();
+        timerRef.current = setTimeout(() => {
+          setCurrentLineIndex(0);
+          setCurrentCharIndex(0);
+        }, 3000);
+        return;
+      }
+
+      // 获取当前行
+      const currentLine = codeLines[currentLineIndex];
+      const lineText = currentLine.text;
+
+      // 如果已经完成当前行
+      if (currentCharIndex >= lineText.length) {
+        clearTimer();
+        timerRef.current = setTimeout(() => {
+          setCurrentLineIndex(prev => prev + 1);
+          setCurrentCharIndex(0);
+        }, 500);
+        return;
+      }
+
+      // 继续打字当前行
+      clearTimer();
+      timerRef.current = setTimeout(() => {
+        setCurrentCharIndex(prev => prev + 1);
+      }, typingSpeed);
+
+      return () => clearTimer();
+    }, [currentLineIndex, currentCharIndex]);
+
+    // 组件卸载时清除定时器
+    useEffect(() => {
+      return () => clearTimer();
+    }, []);
+
+    // 监听窗口大小变化，调整打字速度
+    useEffect(() => {
+      const handleResize = () => {
+        // 在移动设备上使用更快的打字速度
+        setTypingSpeed(window.innerWidth <= 768 ? 30 : 50);
+      };
+
+      // 初始化
+      handleResize();
+
+      // 添加事件监听器
+      window.addEventListener('resize', handleResize);
+
+      // 清理
+      return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    // 渲染代码行
+    const renderCodeLines = () => {
+      return codeLines.map((line, lineIndex) => {
+        // 如果还没到这一行，不显示
+        if (lineIndex > currentLineIndex) {
+          return null;
+        }
+
+        // 当前正在打字的行
+        if (lineIndex === currentLineIndex) {
+          const displayedText = line.text.substring(0, currentCharIndex);
+          const indentSpaces = '\u00A0\u00A0'.repeat(line.indent);
+
+          // 如果已经完成了整行，使用高亮版本
+          if (currentCharIndex >= line.text.length) {
+            return (
+              <div key={lineIndex} className={styles.codeLine} style={{ textAlign: 'left' }}>
+                {line.indent > 0 && <span>{indentSpaces}</span>}
+                {getHighlightedText(line.text)}
+                {showCursor && <span className={styles.cursor}></span>}
+              </div>
+            );
+          }
+
+          // 为当前正在打字的行添加语法高亮
+          let highlightedText;
+
+          if (line.text.includes('const')) {
+            const typedLength = displayedText.length;
+            if (typedLength >= 5) { // 'const'
+              highlightedText = (
+                <>
+                  <span className={styles.keyword}>const</span>
+                  {typedLength > 5 && ' '}
+                  {typedLength > 6 && (
+                    <span className={styles.variable}>
+                      {displayedText.substring(6, Math.min(typedLength, 22))}
+                    </span>
+                  )}
+                  {typedLength > 22 && ' '}
+                  {typedLength > 23 && <span className={styles.operator}>=</span>}
+                  {typedLength > 24 && ' '}
+                  {typedLength > 25 && <span className={styles.punctuation}>()</span>}
+                  {typedLength > 27 && ' '}
+                  {typedLength > 28 && <span className={styles.operator}>=&gt;</span>}
+                  {typedLength > 30 && ' '}
+                  {typedLength > 31 && <span className={styles.punctuation}>{'{'}</span>}
+                </>
+              );
+            } else {
+              highlightedText = <>{displayedText}</>;
+            }
+          } else if (line.text.includes('return')) {
+            const typedLength = displayedText.length;
+            if (typedLength >= 6) { // 'return'
+              highlightedText = (
+                <>
+                  <span className={styles.keyword}>return</span>
+                  {typedLength > 6 && ' '}
+                  {typedLength > 7 && (
+                    <span className={styles.string}>
+                      {displayedText.substring(7, Math.min(typedLength, 16))}
+                    </span>
+                  )}
+                  {typedLength > 16 && <span className={styles.punctuation}>;</span>}
+                </>
+              );
+            } else {
+              highlightedText = <>{displayedText}</>;
+            }
+          } else if (line.text === '}') {
+            highlightedText = <span className={styles.punctuation}>{'}'}</span>;
+          } else {
+            highlightedText = <>{displayedText}</>;
+          }
+
+          return (
+            <div key={lineIndex} className={styles.codeLine} style={{ textAlign: 'left' }}>
+              {line.indent > 0 && <span>{indentSpaces}</span>}
+              {highlightedText}
+              {showCursor && <span className={styles.cursor}></span>}
+            </div>
+          );
+        }
+
+        // 已完成的行
+        const indentSpaces = '\u00A0\u00A0'.repeat(line.indent);
+        return (
+          <div key={lineIndex} className={styles.codeLine} style={{ textAlign: 'left' }}>
+            {line.indent > 0 && <span>{indentSpaces}</span>}
+            {getHighlightedText(line.text)}
+          </div>
+        );
+      });
+    };
+
+    // 添加语法高亮的辅助函数
+    const getHighlightedText = (text: string) => {
+      if (text.includes('const')) {
+        return <><span className={styles.keyword}>const</span> <span className={styles.variable}>createExperience</span> <span className={styles.operator}>=</span> <span className={styles.punctuation}>()</span> <span className={styles.operator}>=&gt;</span> <span className={styles.punctuation}>{'{'}</span></>;
+      } else if (text.includes('return')) {
+        return <><span className={styles.keyword}>return</span> <span className={styles.string}>"Amazing"</span><span className={styles.punctuation}>;</span></>;
+      } else if (text === '}') {
+        return <><span className={styles.punctuation}>{'}'}</span></>;
+      }
+      return <>{text}</>;
+    };
+
+    return (
+      <div className={styles.codeSnippet}>
+        <pre className={styles.codeBlock}>
+          <code>
+            {renderCodeLines()}
+          </code>
+        </pre>
+      </div>
+    );
+  };
 
   return (
     <AnimatePresence mode="sync">

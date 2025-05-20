@@ -305,14 +305,101 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   position: relative;
   z-index: 1;
+  overflow: hidden; /* 确保内容不会溢出 */
 }
 
 .codeSnippet pre {
   margin: 0;
+  white-space: pre; /* 保持原始格式 */
+  text-align: left;
 }
 
 .codeSnippet code {
   display: block;
+}
+
+/* 代码块样式 */
+.codeBlock {
+  display: block;
+  min-height: 4.5em; /* 确保有足够的高度容纳3行代码 */
+  font-family: var(--font-mono);
+  position: relative;
+  overflow: hidden; /* 确保内容不会溢出 */
+  text-align: left; /* 确保代码左对齐 */
+}
+
+/* 代码行样式 */
+.codeLine {
+  display: block;
+  line-height: 1.5;
+  position: relative;
+  padding-left: 0; /* 不使用padding，而是在内容中添加空格 */
+  white-space: pre-wrap; /* 允许换行但保留空格 */
+  word-break: break-all; /* 在任何字符处换行 */
+  word-wrap: break-word; /* 允许长单词换行 */
+  text-align: left; /* 确保代码左对齐 */
+}
+
+/* 代码内容样式 */
+.codeContent {
+  white-space: pre-wrap; /* 允许换行但保留空格 */
+  font-family: var(--font-mono);
+  tab-size: 2; /* 设置制表符宽度 */
+  text-align: left; /* 确保代码左对齐 */
+}
+
+/* 缩进样式 */
+.indent {
+  display: inline-block;
+  white-space: pre;
+  font-family: var(--font-mono);
+}
+
+/* 光标样式 */
+.cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background-color: currentColor;
+  margin-left: 2px;
+  vertical-align: middle;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  from, to {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* 代码高亮样式 */
+.codeContent .keyword,
+.codeLine .keyword {
+  color: #ff79c6;
+  font-weight: 500;
+}
+
+.codeContent .variable,
+.codeLine .variable {
+  color: #50fa7b;
+}
+
+.codeContent .string,
+.codeLine .string {
+  color: #f1fa8c;
+}
+
+.codeContent .punctuation,
+.codeLine .punctuation {
+  color: #f8f8f2;
+}
+
+.codeContent .operator,
+.codeLine .operator {
+  color: #ff79c6;
 }
 
 /* 代码高亮 */
@@ -453,6 +540,33 @@
   .codeSnippet {
     max-width: 280px;
     font-size: 12px;
+    padding: 14px;
+    text-align: left !important; /* 确保在移动端强制左对齐 */
+  }
+
+  /* 移动端代码块样式 */
+  .codeBlock {
+    min-height: 4em;
+    font-size: 12px;
+  }
+
+  /* 移动端代码行样式 */
+  .codeLine {
+    line-height: 1.4;
+    margin-bottom: 2px;
+    animation-delay: calc(var(--line-index, 0) * 0.6s); /* 移动端更快的动画延迟 */
+  }
+
+  /* 移动端代码内容样式 */
+  .codeContent {
+    font-size: 12px;
+    letter-spacing: -0.2px; /* 稍微减小字母间距，使代码更紧凑 */
+    text-align: left !important; /* 确保在移动端强制左对齐 */
+  }
+
+  /* 移动端缩进样式 */
+  .indent {
+    width: 16px; /* 确保移动端缩进宽度固定 */
   }
 }
 
@@ -507,5 +621,37 @@
   .codeSnippet {
     max-width: 240px;
     padding: 12px;
+    font-size: 11px;
+    text-align: left !important; /* 确保在小屏幕强制左对齐 */
+  }
+
+  /* 小屏幕代码块样式 */
+  .codeBlock {
+    min-height: 3.8em;
+    font-size: 11px;
+  }
+
+  /* 小屏幕代码行样式 */
+  .codeLine {
+    line-height: 1.3;
+    margin-bottom: 1px;
+    animation-delay: calc(var(--line-index, 0) * 0.5s); /* 小屏幕更快的动画延迟 */
+  }
+
+  /* 小屏幕代码内容样式 */
+  .codeContent {
+    font-size: 11px;
+    letter-spacing: -0.3px; /* 进一步减小字母间距 */
+    text-align: left !important; /* 确保在小屏幕强制左对齐 */
+  }
+
+  /* 小屏幕缩进样式 */
+  .indent {
+    width: 12px; /* 确保小屏幕缩进宽度更小 */
+  }
+
+  /* 小屏幕光标样式 */
+  .cursor {
+    height: 0.9em;
   }
 }

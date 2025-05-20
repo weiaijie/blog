@@ -29,6 +29,8 @@ interface TypewriterProps {
   delayAfterDelete?: number;
   loop?: boolean;
   className?: string;
+  onTypingComplete?: () => void; // 打字完成时的回调函数
+  dangerouslySetInnerHTML?: boolean; // 是否使用dangerouslySetInnerHTML
 }
 
 const Typewriter = ({
@@ -39,6 +41,8 @@ const Typewriter = ({
   delayAfterDelete = 500,
   loop = true,
   className = '',
+  onTypingComplete,
+  dangerouslySetInnerHTML = false,
 }: TypewriterProps) => {
   const [displayText, setDisplayText] = useState('');
   const [isTyping, setIsTyping] = useState(true);
@@ -46,6 +50,7 @@ const Typewriter = ({
   const currentTextRef = useRef('');
   const currentIndexRef = useRef(0);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const typingCompleteCalledRef = useRef(false);
 
   // 清除定时器
   const clearTimer = () => {
@@ -75,6 +80,13 @@ const Typewriter = ({
       } else {
         // 打字完成，等待一段时间后开始删除
         clearTimer();
+
+        // 如果有回调函数且尚未调用，则调用它
+        if (onTypingComplete && !typingCompleteCalledRef.current) {
+          onTypingComplete();
+          typingCompleteCalledRef.current = true;
+        }
+
         timerRef.current = setTimeout(() => {
           setIsTyping(false);
         }, delayAfterType);
@@ -93,6 +105,10 @@ const Typewriter = ({
         clearTimer();
         timerRef.current = setTimeout(() => {
           setIsTyping(true);
+          // 如果开始新的循环，重置typingCompleteCalledRef
+          if (textIndex === texts.length - 1) {
+            typingCompleteCalledRef.current = false;
+          }
           setTextIndex((prevIndex) => (loop || prevIndex < texts.length - 1 ? (prevIndex + 1) % texts.length : prevIndex));
         }, delayAfterDelete);
       }
@@ -100,11 +116,16 @@ const Typewriter = ({
 
     // 组件卸载时清除定时器
     return () => clearTimer();
-  }, [displayText, isTyping, textIndex, texts, typingSpeed, deletingSpeed, delayAfterType, delayAfterDelete, loop]);
+  }, [displayText, isTyping, textIndex, texts, typingSpeed, deletingSpeed, delayAfterType, delayAfterDelete, loop, onTypingComplete]);
 
+  // 根据dangerouslySetInnerHTML属性决定如何渲染内容
   return (
     <span className={`${styles.typewriter} ${className}`}>
-      {displayText}
+      {dangerouslySetInnerHTML ? (
+        <span dangerouslySetInnerHTML={{ __html: displayText }} />
+      ) : (
+        displayText
+      )}
       <span className={styles.cursor}></span>
     </span>
   );
