@@ -141,14 +141,56 @@ const Tagline: React.FC<TaglineProps> = ({ visible }) => {
     })
   };
 
-  // 代码片段元素 - 使用简单的打字机效果
+  // 代码片段元素 - 使用简单的打字机效果，展示多种编程语言
   const CodeSnippet = () => {
-    // 定义代码行
-    const codeLines = [
-      { text: 'const createExperience = () => {', indent: 0 },
-      { text: 'return "Amazing";', indent: 2 },
-      { text: '}', indent: 0 }
+    // 定义多个代码示例
+    const codeExamples = [
+      // JavaScript/React 示例
+      {
+        language: 'JavaScript',
+        lines: [
+          { text: 'const createExperience = () => {', indent: 0 },
+          { text: 'return "Amazing";', indent: 2 },
+          { text: '}', indent: 0 }
+        ]
+      },
+      // Python 示例
+      {
+        language: 'Python',
+        lines: [
+          { text: 'def create_experience():', indent: 0 },
+          { text: 'return "Amazing"', indent: 4 }
+        ]
+      },
+      // TypeScript 示例
+      {
+        language: 'TypeScript',
+        lines: [
+          { text: 'function processData<T>(data: T): T {', indent: 0 },
+          { text: 'console.log("Processing...");', indent: 2 },
+          { text: 'return data;', indent: 2 },
+          { text: '}', indent: 0 }
+        ]
+      },
+      // CSS 示例
+      {
+        language: 'CSS',
+        lines: [
+          { text: '.container {', indent: 0 },
+          { text: 'display: flex;', indent: 2 },
+          { text: 'justify-content: center;', indent: 2 },
+          { text: 'align-items: center;', indent: 2 },
+          { text: '}', indent: 0 }
+        ]
+      }
     ];
+
+    // 当前显示的代码示例索引
+    const [currentExampleIndex, setCurrentExampleIndex] = useState(0);
+
+    // 获取当前代码示例
+    const currentExample = codeExamples[currentExampleIndex];
+    const codeLines = currentExample.lines;
 
     // 跟踪当前显示的行数
     const [currentLineIndex, setCurrentLineIndex] = useState(0);
@@ -174,12 +216,15 @@ const Tagline: React.FC<TaglineProps> = ({ visible }) => {
       return () => clearInterval(cursorInterval);
     }, []);
 
-    // 打字效果
+    // 切换代码示例
     useEffect(() => {
-      // 如果已经完成所有行，重新开始
+      // 当完成一个示例后，等待一段时间再切换到下一个示例
       if (currentLineIndex >= codeLines.length) {
         clearTimer();
         timerRef.current = setTimeout(() => {
+          // 切换到下一个代码示例
+          setCurrentExampleIndex((prevIndex) => (prevIndex + 1) % codeExamples.length);
+          // 重置行和字符索引
           setCurrentLineIndex(0);
           setCurrentCharIndex(0);
         }, 3000);
@@ -207,7 +252,7 @@ const Tagline: React.FC<TaglineProps> = ({ visible }) => {
       }, typingSpeed);
 
       return () => clearTimer();
-    }, [currentLineIndex, currentCharIndex]);
+    }, [currentLineIndex, currentCharIndex, codeLines.length, codeExamples.length]);
 
     // 组件卸载时清除定时器
     useEffect(() => {
@@ -257,53 +302,206 @@ const Tagline: React.FC<TaglineProps> = ({ visible }) => {
 
           // 为当前正在打字的行添加语法高亮
           let highlightedText;
+          const typedLength = displayedText.length;
+          const language = currentExample.language;
 
-          if (line.text.includes('const')) {
-            const typedLength = displayedText.length;
-            if (typedLength >= 5) { // 'const'
-              highlightedText = (
-                <>
-                  <span className={styles.keyword}>const</span>
-                  {typedLength > 5 && ' '}
-                  {typedLength > 6 && (
+          // 如果打字长度很短，直接显示文本
+          if (typedLength <= 2) {
+            highlightedText = <>{displayedText}</>;
+          }
+          // JavaScript 高亮
+          else if (language === 'JavaScript') {
+            if (line.text.includes('const')) {
+              if (typedLength >= 5) { // 'const'
+                highlightedText = (
+                  <>
+                    <span className={styles.keyword}>const</span>
+                    {typedLength > 5 && ' '}
+                    {typedLength > 6 && (
+                      <span className={styles.variable}>
+                        {displayedText.substring(6, Math.min(typedLength, 22))}
+                      </span>
+                    )}
+                    {typedLength > 22 && ' '}
+                    {typedLength > 23 && <span className={styles.operator}>=</span>}
+                    {typedLength > 24 && ' '}
+                    {typedLength > 25 && <span className={styles.punctuation}>()</span>}
+                    {typedLength > 27 && ' '}
+                    {typedLength > 28 && <span className={styles.operator}>=&gt;</span>}
+                    {typedLength > 30 && ' '}
+                    {typedLength > 31 && <span className={styles.punctuation}>{'{'}</span>}
+                  </>
+                );
+              } else {
+                highlightedText = <>{displayedText}</>;
+              }
+            } else if (line.text.includes('return')) {
+              if (typedLength >= 6) { // 'return'
+                highlightedText = (
+                  <>
+                    <span className={styles.keyword}>return</span>
+                    {typedLength > 6 && ' '}
+                    {typedLength > 7 && (
+                      <span className={styles.string}>
+                        {displayedText.substring(7, Math.min(typedLength, 16))}
+                      </span>
+                    )}
+                    {typedLength > 16 && <span className={styles.punctuation}>;</span>}
+                  </>
+                );
+              } else {
+                highlightedText = <>{displayedText}</>;
+              }
+            } else if (line.text === '}') {
+              highlightedText = <span className={styles.punctuation}>{'}'}</span>;
+            } else {
+              highlightedText = <>{displayedText}</>;
+            }
+          }
+          // Python 高亮
+          else if (language === 'Python') {
+            if (line.text.includes('def')) {
+              if (typedLength >= 3) { // 'def'
+                highlightedText = (
+                  <>
+                    <span className={styles.keyword}>def</span>
+                    {typedLength > 3 && ' '}
+                    {typedLength > 4 && (
+                      <span className={styles.variable}>
+                        {displayedText.substring(4, Math.min(typedLength, 20))}
+                      </span>
+                    )}
+                    {typedLength > 20 && <span className={styles.punctuation}>()</span>}
+                    {typedLength > 22 && <span className={styles.punctuation}>:</span>}
+                  </>
+                );
+              } else {
+                highlightedText = <>{displayedText}</>;
+              }
+            } else if (line.text.includes('return')) {
+              if (typedLength >= 6) { // 'return'
+                highlightedText = (
+                  <>
+                    <span className={styles.keyword}>return</span>
+                    {typedLength > 6 && ' '}
+                    {typedLength > 7 && (
+                      <span className={styles.string}>
+                        {displayedText.substring(7, Math.min(typedLength, 16))}
+                      </span>
+                    )}
+                  </>
+                );
+              } else {
+                highlightedText = <>{displayedText}</>;
+              }
+            } else {
+              highlightedText = <>{displayedText}</>;
+            }
+          }
+          // TypeScript 高亮
+          else if (language === 'TypeScript') {
+            if (line.text.includes('function')) {
+              if (typedLength >= 8) { // 'function'
+                highlightedText = (
+                  <>
+                    <span className={styles.keyword}>function</span>
+                    {typedLength > 8 && ' '}
+                    {typedLength > 9 && (
+                      <span className={styles.variable}>
+                        {displayedText.substring(9, Math.min(typedLength, 20))}
+                      </span>
+                    )}
+                    {/* 其余部分省略，根据需要添加 */}
+                  </>
+                );
+              } else {
+                highlightedText = <>{displayedText}</>;
+              }
+            } else if (line.text.includes('console')) {
+              if (typedLength >= 7) { // 'console'
+                highlightedText = (
+                  <>
+                    <span className={styles.variable}>console</span>
+                    {typedLength > 7 && <span className={styles.punctuation}>.</span>}
+                    {typedLength > 8 && (
+                      <span className={styles.variable}>
+                        {displayedText.substring(8, Math.min(typedLength, 11))}
+                      </span>
+                    )}
+                    {/* 其余部分省略，根据需要添加 */}
+                  </>
+                );
+              } else {
+                highlightedText = <>{displayedText}</>;
+              }
+            } else if (line.text.includes('return')) {
+              if (typedLength >= 6) { // 'return'
+                highlightedText = (
+                  <>
+                    <span className={styles.keyword}>return</span>
+                    {typedLength > 6 && ' '}
+                    {typedLength > 7 && (
+                      <span className={styles.variable}>
+                        {displayedText.substring(7, Math.min(typedLength, 11))}
+                      </span>
+                    )}
+                    {typedLength > 11 && <span className={styles.punctuation}>;</span>}
+                  </>
+                );
+              } else {
+                highlightedText = <>{displayedText}</>;
+              }
+            } else if (line.text === '}') {
+              highlightedText = <span className={styles.punctuation}>{'}'}</span>;
+            } else {
+              highlightedText = <>{displayedText}</>;
+            }
+          }
+          // CSS 高亮
+          else if (language === 'CSS') {
+            if (line.text.includes('.container')) {
+              if (typedLength >= 1) {
+                highlightedText = (
+                  <>
                     <span className={styles.variable}>
-                      {displayedText.substring(6, Math.min(typedLength, 22))}
+                      {displayedText.substring(0, Math.min(typedLength, 10))}
                     </span>
-                  )}
-                  {typedLength > 22 && ' '}
-                  {typedLength > 23 && <span className={styles.operator}>=</span>}
-                  {typedLength > 24 && ' '}
-                  {typedLength > 25 && <span className={styles.punctuation}>()</span>}
-                  {typedLength > 27 && ' '}
-                  {typedLength > 28 && <span className={styles.operator}>=&gt;</span>}
-                  {typedLength > 30 && ' '}
-                  {typedLength > 31 && <span className={styles.punctuation}>{'{'}</span>}
-                </>
-              );
+                    {typedLength > 10 && ' '}
+                    {typedLength > 11 && <span className={styles.punctuation}>{'{'}</span>}
+                  </>
+                );
+              } else {
+                highlightedText = <>{displayedText}</>;
+              }
+            } else if (line.text.includes('display') ||
+                      line.text.includes('justify-content') ||
+                      line.text.includes('align-items')) {
+              // 简化处理CSS属性
+              const colonIndex = displayedText.indexOf(':');
+              if (colonIndex > 0) {
+                highlightedText = (
+                  <>
+                    <span className={styles.keyword}>
+                      {displayedText.substring(0, colonIndex)}
+                    </span>
+                    <span className={styles.punctuation}>:</span>
+                    {displayedText.substring(colonIndex + 1, displayedText.indexOf(';') > 0 ?
+                      displayedText.indexOf(';') : displayedText.length)}
+                    {displayedText.indexOf(';') > 0 &&
+                      <span className={styles.punctuation}>;</span>}
+                  </>
+                );
+              } else {
+                highlightedText = <>{displayedText}</>;
+              }
+            } else if (line.text === '}') {
+              highlightedText = <span className={styles.punctuation}>{'}'}</span>;
             } else {
               highlightedText = <>{displayedText}</>;
             }
-          } else if (line.text.includes('return')) {
-            const typedLength = displayedText.length;
-            if (typedLength >= 6) { // 'return'
-              highlightedText = (
-                <>
-                  <span className={styles.keyword}>return</span>
-                  {typedLength > 6 && ' '}
-                  {typedLength > 7 && (
-                    <span className={styles.string}>
-                      {displayedText.substring(7, Math.min(typedLength, 16))}
-                    </span>
-                  )}
-                  {typedLength > 16 && <span className={styles.punctuation}>;</span>}
-                </>
-              );
-            } else {
-              highlightedText = <>{displayedText}</>;
-            }
-          } else if (line.text === '}') {
-            highlightedText = <span className={styles.punctuation}>{'}'}</span>;
-          } else {
+          }
+          // 默认情况
+          else {
             highlightedText = <>{displayedText}</>;
           }
 
@@ -329,18 +527,63 @@ const Tagline: React.FC<TaglineProps> = ({ visible }) => {
 
     // 添加语法高亮的辅助函数
     const getHighlightedText = (text: string) => {
-      if (text.includes('const')) {
-        return <><span className={styles.keyword}>const</span> <span className={styles.variable}>createExperience</span> <span className={styles.operator}>=</span> <span className={styles.punctuation}>()</span> <span className={styles.operator}>=&gt;</span> <span className={styles.punctuation}>{'{'}</span></>;
-      } else if (text.includes('return')) {
-        return <><span className={styles.keyword}>return</span> <span className={styles.string}>"Amazing"</span><span className={styles.punctuation}>;</span></>;
-      } else if (text === '}') {
-        return <><span className={styles.punctuation}>{'}'}</span></>;
+      const language = currentExample.language;
+
+      // JavaScript 高亮
+      if (language === 'JavaScript') {
+        if (text.includes('const')) {
+          return <><span className={styles.keyword}>const</span> <span className={styles.variable}>createExperience</span> <span className={styles.operator}>=</span> <span className={styles.punctuation}>()</span> <span className={styles.operator}>=&gt;</span> <span className={styles.punctuation}>{'{'}</span></>;
+        } else if (text.includes('return')) {
+          return <><span className={styles.keyword}>return</span> <span className={styles.string}>"Amazing"</span><span className={styles.punctuation}>;</span></>;
+        } else if (text === '}') {
+          return <><span className={styles.punctuation}>{'}'}</span></>;
+        }
       }
+
+      // Python 高亮
+      else if (language === 'Python') {
+        if (text.includes('def')) {
+          return <><span className={styles.keyword}>def</span> <span className={styles.variable}>create_experience</span><span className={styles.punctuation}>()</span><span className={styles.punctuation}>:</span></>;
+        } else if (text.includes('return')) {
+          return <><span className={styles.keyword}>return</span> <span className={styles.string}>"Amazing"</span></>;
+        }
+      }
+
+      // TypeScript 高亮
+      else if (language === 'TypeScript') {
+        if (text.includes('function')) {
+          return <><span className={styles.keyword}>function</span> <span className={styles.variable}>processData</span><span className={styles.operator}>&lt;</span><span className={styles.variable}>T</span><span className={styles.operator}>&gt;</span><span className={styles.punctuation}>(</span><span className={styles.variable}>data</span><span className={styles.punctuation}>:</span> <span className={styles.variable}>T</span><span className={styles.punctuation}>)</span><span className={styles.punctuation}>:</span> <span className={styles.variable}>T</span> <span className={styles.punctuation}>{'{'}</span></>;
+        } else if (text.includes('console')) {
+          return <><span className={styles.variable}>console</span><span className={styles.punctuation}>.</span><span className={styles.variable}>log</span><span className={styles.punctuation}>(</span><span className={styles.string}>"Processing..."</span><span className={styles.punctuation}>)</span><span className={styles.punctuation}>;</span></>;
+        } else if (text.includes('return')) {
+          return <><span className={styles.keyword}>return</span> <span className={styles.variable}>data</span><span className={styles.punctuation}>;</span></>;
+        } else if (text === '}') {
+          return <><span className={styles.punctuation}>{'}'}</span></>;
+        }
+      }
+
+      // CSS 高亮
+      else if (language === 'CSS') {
+        if (text.includes('.container')) {
+          return <><span className={styles.variable}>.container</span> <span className={styles.punctuation}>{'{'}</span></>;
+        } else if (text.includes('display')) {
+          return <><span className={styles.keyword}>display</span><span className={styles.punctuation}>:</span> <span className={styles.string}>flex</span><span className={styles.punctuation}>;</span></>;
+        } else if (text.includes('justify-content')) {
+          return <><span className={styles.keyword}>justify-content</span><span className={styles.punctuation}>:</span> <span className={styles.string}>center</span><span className={styles.punctuation}>;</span></>;
+        } else if (text.includes('align-items')) {
+          return <><span className={styles.keyword}>align-items</span><span className={styles.punctuation}>:</span> <span className={styles.string}>center</span><span className={styles.punctuation}>;</span></>;
+        } else if (text === '}') {
+          return <><span className={styles.punctuation}>{'}'}</span></>;
+        }
+      }
+
+      // 默认情况
       return <>{text}</>;
     };
 
     return (
       <div className={styles.codeSnippet}>
+        <div className={styles.languageLabel}>{currentExample.language}</div>
         <pre className={styles.codeBlock}>
           <code>
             {renderCodeLines()}

@@ -308,6 +308,20 @@
   overflow: hidden; /* 确保内容不会溢出 */
 }
 
+/* 语言标签样式 */
+.languageLabel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #f8f8f2;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-bottom-left-radius: 6px;
+  font-family: var(--font-mono);
+  opacity: 0.8;
+}
+
 .codeSnippet pre {
   margin: 0;
   white-space: pre; /* 保持原始格式 */
