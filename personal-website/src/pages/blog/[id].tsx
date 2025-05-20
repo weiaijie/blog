@@ -61,7 +61,7 @@ const blogPosts: BlogPost[] = [
     category: 'tutorial',
     tags: ['React', '性能优化', '前端开发'],
     readTime: '8分钟',
-    image: '/placeholder-blog.jpg',
+    // 没有图片
     content: `
 # 如何构建高性能React应用
 
@@ -363,6 +363,7 @@ export default function BlogPostPage({ post }: BlogPostPageProps) {
               </header>
             </motion.div>
 
+            {/* 文章图片区域 - 有图片时显示图片，没有图片时显示默认封面 */}
             <motion.div
               className={styles.postImageContainer}
               initial={{ opacity: 0, scale: 0.95 }}
