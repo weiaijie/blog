@@ -172,6 +172,16 @@ const Tagline: React.FC<TaglineProps> = ({ visible }) => {
           { text: '}', indent: 0 }
         ]
       },
+      // PHP 示例
+      {
+        language: 'PHP',
+        lines: [
+          { text: 'function createExperience() {', indent: 0 },
+          { text: '$result = "Amazing";', indent: 2 },
+          { text: 'return $result;', indent: 2 },
+          { text: '}', indent: 0 }
+        ]
+      },
       // CSS 示例
       {
         language: 'CSS',
@@ -180,16 +190,6 @@ const Tagline: React.FC<TaglineProps> = ({ visible }) => {
           { text: 'display: flex;', indent: 2 },
           { text: 'justify-content: center;', indent: 2 },
           { text: 'align-items: center;', indent: 2 },
-          { text: '}', indent: 0 }
-        ]
-      },
-      // PHP 示例
-      {
-        language: 'PHP',
-        lines: [
-          { text: 'function createExperience() {', indent: 0 },
-          { text: '$result = "Amazing";', indent: 2 },
-          { text: 'return $result;', indent: 2 },
           { text: '}', indent: 0 }
         ]
       }
