@@ -244,14 +244,18 @@ export default function Blog() {
                               // 图片加载失败时显示占位符
                               const target = e.target as HTMLImageElement;
                               target.style.display = 'none';
-                              target.parentElement!.classList.add(styles.placeholder);
-                              target.parentElement!.innerHTML = `
-                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-                                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                                  <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                                  <polyline points="21 15 16 10 5 21"></polyline>
-                                </svg>
-                              `;
+
+                              // 安全地访问parentElement
+                              if (target.parentElement) {
+                                target.parentElement.classList.add(styles.placeholder);
+                                target.parentElement.innerHTML = `
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                    <polyline points="21 15 16 10 5 21"></polyline>
+                                  </svg>
+                                `;
+                              }
                             }}
                           />
                         ) : (
