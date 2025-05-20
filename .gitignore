@@ -13,3 +13,9 @@ LearningProjects/nestapp/node_modules/
 .DS_Store
 Thumbs.db
 /vendor
+
+# 编辑器配置
+.vscode/
+.idea/
+*.sublime-*
+/.vscode
