@@ -349,9 +349,11 @@ export default function BlogPostPage({ post }: BlogPostPageProps) {
                   <span className={styles.postDate}>{post.date}</span>
                   <span className={styles.postReadTime}>{post.readTime}</span>
                 </div>
-                <span className={styles.postCategory}>
-                  {getCategoryDisplayName(post.category)}
-                </span>
+                <div style={{ marginBottom: '20px', textAlign: 'center' }}>
+                  <span className={styles.postCategory}>
+                    {getCategoryDisplayName(post.category)}
+                  </span>
+                </div>
                 <h1 className={styles.postTitle}>{post.title}</h1>
                 <div className={styles.postTags}>
                   {post.tags.map((tag, index) => (

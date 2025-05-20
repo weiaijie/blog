@@ -2,7 +2,7 @@
  * NewBlogPost.module.css
  *
  * 描述：博客文章详情页面样式 - 苹果风格设计
- * 
+ *
  * 功能：
  * - 提供博客文章详情页面的布局和样式
  * - 适配不同设备尺寸的响应式设计
@@ -60,6 +60,8 @@
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  min-width: 80px;
 }
 
 /* 文章标题 */
@@ -273,6 +275,7 @@
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  background-color: var(--bg-code);
 }
 
 /* 语言标记 */
@@ -334,7 +337,7 @@
   .blogPost {
     padding-top: 100px;
   }
-  
+
   .postTitle {
     font-size: 36px;
   }
@@ -345,23 +348,23 @@
     padding-top: 90px;
     padding-bottom: 60px;
   }
-  
+
   .postTitle {
     font-size: 32px;
   }
-  
+
   .postContent {
     font-size: 16px;
   }
-  
+
   .postContent h1 {
     font-size: 28px;
   }
-  
+
   .postContent h2 {
     font-size: 22px;
   }
-  
+
   .postContent h3 {
     font-size: 18px;
   }
@@ -372,27 +375,27 @@
     padding-top: 80px;
     padding-bottom: 50px;
   }
-  
+
   .container {
     padding: 0 20px;
   }
-  
+
   .postTitle {
     font-size: 28px;
   }
-  
+
   .postContent {
     font-size: 15px;
   }
-  
+
   .postContent h1 {
     font-size: 24px;
   }
-  
+
   .postContent h2 {
     font-size: 20px;
   }
-  
+
   .postContent h3 {
     font-size: 17px;
   }
