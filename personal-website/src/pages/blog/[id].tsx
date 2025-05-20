@@ -313,23 +313,6 @@ export default function BlogPostPage({ post }: BlogPostPageProps) {
     return categoryMap[categoryId] || categoryId;
   };
 
-  // 获取默认封面图
-  const getDefaultCoverImage = (category: string): string => {
-    // 使用简单的颜色背景作为默认封面
-    switch (category) {
-      case 'tutorial':
-        return 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="338" viewBox="0 0 600 338"><rect width="600" height="338" fill="%23f0f7ff"/><text x="300" y="169" font-family="Arial" font-size="24" text-anchor="middle" fill="%230071e3">技术教程</text></svg>';
-      case 'case-study':
-        return 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="338" viewBox="0 0 600 338"><rect width="600" height="338" fill="%23f0fff7"/><text x="300" y="169" font-family="Arial" font-size="24" text-anchor="middle" fill="%2300a67e">项目案例</text></svg>';
-      case 'trend':
-        return 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="338" viewBox="0 0 600 338"><rect width="600" height="338" fill="%23fff7f0"/><text x="300" y="169" font-family="Arial" font-size="24" text-anchor="middle" fill="%23e36500">行业趋势</text></svg>';
-      case 'experience':
-        return 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="338" viewBox="0 0 600 338"><rect width="600" height="338" fill="%23f7f0ff"/><text x="300" y="169" font-family="Arial" font-size="24" text-anchor="middle" fill="%236500e3">经验分享</text></svg>';
-      default:
-        return 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="338" viewBox="0 0 600 338"><rect width="600" height="338" fill="%23f5f5f7"/><text x="300" y="169" font-family="Arial" font-size="24" text-anchor="middle" fill="%231d1d1f">博客文章</text></svg>';
-    }
-  };
-
   return (
     <>
       <Head>
@@ -363,16 +346,15 @@ export default function BlogPostPage({ post }: BlogPostPageProps) {
               </header>
             </motion.div>
 
-            {/* 文章图片区域 - 有图片时显示图片，没有图片时显示默认封面 */}
-            <motion.div
-              className={styles.postImageContainer}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <div className={styles.postImage}>
-                {post.image ? (
-                  // 使用Next.js的Image组件处理真实图片
+            {/* 文章图片区域 - 只在有图片时显示 */}
+            {post.image && (
+              <motion.div
+                className={styles.postImageContainer}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                <div className={styles.postImage}>
                   <Image
                     src={post.image.endsWith('.jpg') || post.image.endsWith('.png') ? post.image : '/placeholder-blog.svg'}
                     alt={post.title}
@@ -397,19 +379,12 @@ export default function BlogPostPage({ post }: BlogPostPageProps) {
                       }
                     }}
                   />
-                ) : (
-                  // 使用普通img标签处理SVG文件
-                  <img
-                    src={getDefaultCoverImage(post.category)}
-                    alt={post.title}
-                    className={styles.defaultCover}
-                  />
-                )}
-              </div>
-              <span className={styles.categoryBadge}>
-                {getCategoryDisplayName(post.category)}
-              </span>
-            </motion.div>
+                </div>
+                <span className={styles.categoryBadge}>
+                  {getCategoryDisplayName(post.category)}
+                </span>
+              </motion.div>
+            )}
 
             <motion.div
               className={styles.postContent}
