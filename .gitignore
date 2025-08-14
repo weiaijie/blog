@@ -13,3 +13,6 @@ LearningProjects/nestapp/node_modules/
 .DS_Store
 Thumbs.db
 /vendor
+LearningProjects/nestapp/node_modules
+/app/node_modules
+/app/.expo/web
