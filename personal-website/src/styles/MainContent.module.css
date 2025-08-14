@@ -1,0 +1,44 @@
+/* 主要内容区域 - 苹果风格 */
+.mainContent {
+  background-color: var(--bg-color);
+  position: relative;
+  padding: 60px 0;
+  z-index: 10;
+  margin-top: 500px; /* 为Tagline预留空间，避免布局跳动 */
+  will-change: opacity, transform; /* 优化动画性能 */
+  backface-visibility: hidden; /* 防止闪烁 */
+  transform: translateZ(0); /* 启用GPU加速 */
+  -webkit-font-smoothing: antialiased; /* 文字渲染优化 */
+  transition: var(--theme-transition);
+}
+
+.container {
+  max-width: 980px; /* 苹果网站的内容宽度 */
+  margin: 0 auto;
+  padding: 0 22px; /* 苹果风格的内边距 */
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+  .container {
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 768px) {
+  .mainContent {
+    padding: 40px 0;
+    margin-top: 100vh; /* 在移动设备上，Tagline 占满整个视口高度 */
+  }
+}
+
+@media (max-width: 480px) {
+  .mainContent {
+    padding: 30px 0;
+    margin-top: 100vh; /* 在移动设备上，Tagline 占满整个视口高度 */
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+}

@@ -1,0 +1,55 @@
+<header class="site-header">
+  <div class="container">
+    <div class="header-content">
+      <!-- 个人姓名/品牌标识 -->
+      <div class="logo">
+        <a href="{{ '/' | relative_url }}" class="logo-link">
+          <div class="logo-container">
+            <div class="logo-icon">
+              <span class="logo-letter">W</span>
+            </div>
+            <span class="logo-text">魏爱杰</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- 导航菜单 -->
+      <nav class="main-nav">
+        <button class="menu-toggle" aria-label="切换菜单">
+          <span class="hamburger-icon"></span>
+        </button>
+        <ul class="nav-list">
+          <li class="nav-item {% if page.url == '/' %}active{% endif %}">
+            <a href="{{ '/' | relative_url }}"><i class="fas fa-home nav-icon"></i><span>首页</span></a>
+          </li>
+          <li class="nav-item {% if page.url contains '/about/' %}active{% endif %}">
+            <a href="{{ '/about/' | relative_url }}"><i class="fas fa-user nav-icon"></i><span>关于我</span></a>
+          </li>
+          <li class="nav-item {% if page.url contains '/skills/' %}active{% endif %}">
+            <a href="{{ '/skills/' | relative_url }}"><i class="fas fa-code nav-icon"></i><span>技能</span></a>
+          </li>
+          <li class="nav-item {% if page.url contains '/projects/' %}active{% endif %}">
+            <a href="{{ '/projects/' | relative_url }}"><i class="fas fa-project-diagram nav-icon"></i><span>项目</span></a>
+          </li>
+          <li class="nav-item {% if page.url contains '/blog/' %}active{% endif %}">
+            <a href="{{ '/blog/' | relative_url }}"><i class="fas fa-blog nav-icon"></i><span>博客</span></a>
+          </li>
+          <li class="nav-item {% if page.url contains '/contact/' %}active{% endif %}">
+            <a href="{{ '/contact/' | relative_url }}"><i class="fas fa-envelope nav-icon"></i><span>联系方式</span></a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- 简短的个人标语/口号 -->
+    <div class="tagline">
+      <div class="tagline-content">
+        <div class="tagline-prefix">我是</div>
+        <div class="typewriter-container">
+          <span id="typewriter-text" class="typewriter">全栈开发工程师</span>
+        </div>
+        <div class="tagline-suffix">专注于创建优雅高效的数字体验</div>
+      </div>
+    </div>
+  </div>
+</header>

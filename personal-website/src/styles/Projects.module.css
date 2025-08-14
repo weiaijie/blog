@@ -1,0 +1,238 @@
+/* 项目页面样式 - 苹果风格 */
+.projectsPage {
+  padding: 100px 0 80px; /* 增加顶部内边距，避免被页面头部挡住 */
+}
+
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 22px;
+}
+
+.pageTitle {
+  font-family: 'SF Pro Display', var(--font-heading);
+  font-size: 48px;
+  font-weight: 600;
+  color: var(--tagline-heading);
+  margin-bottom: 40px;
+  letter-spacing: -0.015em;
+  text-align: center;
+  transition: color 0.3s ease;
+}
+
+/* 分类筛选 */
+.categoryFilter {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.categoryButton {
+  background: none;
+  border: none;
+  padding: 8px 16px;
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--tagline-subheading);
+  border-radius: 980px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.categoryButton:hover {
+  background-color: rgba(var(--primary-rgb), 0.1);
+  color: var(--tagline-heading);
+}
+
+.categoryButton.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* 项目网格 */
+.projectsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.projectCard {
+  background-color: var(--card-bg);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px var(--card-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.projectCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px var(--card-shadow-hover);
+}
+
+.projectImageContainer {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 宽高比 */
+  background-color: var(--bg-dark);
+  transition: background-color 0.3s ease;
+}
+
+.projectImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: var(--text-lighter);
+  transition: color 0.3s ease;
+}
+
+.projectContent {
+  padding: 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.projectTitle {
+  font-family: 'SF Pro Display', var(--font-heading);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--tagline-heading);
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+  transition: color 0.3s ease;
+}
+
+.projectDescription {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--tagline-subheading);
+  margin-bottom: 16px;
+  flex: 1;
+  letter-spacing: -0.01em;
+  transition: color 0.3s ease;
+}
+
+.projectTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.projectTag {
+  display: inline-block;
+  padding: 4px 10px;
+  background-color: rgba(var(--primary-rgb), 0.1);
+  color: var(--primary-color);
+  border-radius: 980px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.projectLinks {
+  display: flex;
+  gap: 16px;
+}
+
+.projectLink {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: opacity 0.2s ease, color 0.3s ease;
+}
+
+.projectLink:hover {
+  opacity: 0.7;
+}
+
+.linkIcon {
+  margin-left: 6px;
+  transition: transform 0.2s ease;
+}
+
+.projectLink:hover .linkIcon {
+  transform: translateX(2px);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .projectsPage {
+    padding: 80px 0 60px; /* 调整顶部内边距，但仍保持足够空间 */
+  }
+
+  .pageTitle {
+    font-size: 36px;
+    margin-bottom: 30px;
+  }
+
+  .categoryFilter {
+    margin-bottom: 30px;
+  }
+
+  .projectsGrid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+  }
+
+  .projectContent {
+    padding: 16px;
+  }
+
+  .projectTitle {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .projectsPage {
+    padding: 70px 0 40px; /* 在小屏幕上稍微减少顶部内边距，但仍保持足够空间 */
+  }
+
+  .pageTitle {
+    font-size: 32px;
+    margin-bottom: 24px;
+  }
+
+  .categoryButton {
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+
+  .projectsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .projectTitle {
+    font-size: 16px;
+  }
+
+  .projectDescription {
+    font-size: 13px;
+  }
+}

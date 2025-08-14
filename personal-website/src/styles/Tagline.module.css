@@ -1,0 +1,304 @@
+/* 个人标语/口号 - 苹果风格 */
+.tagline {
+  background-color: var(--tagline-bg);
+  width: 100%;
+  padding: 80px 0;
+  position: absolute; /* 改为绝对定位，不影响文档流 */
+  top: 0;
+  left: 0;
+  z-index: 20;
+  min-height: 500px; /* 增加最小高度 */
+  display: flex;
+  align-items: center;
+  will-change: opacity, transform; /* 优化动画性能 */
+  pointer-events: auto; /* 确保可以点击 */
+  transform: translateZ(0); /* 启用GPU加速 */
+  backface-visibility: hidden; /* 防止闪烁 */
+  -webkit-font-smoothing: antialiased; /* 文字渲染优化 */
+  transition: background-color 0.3s ease;
+}
+
+/* 标语内容容器 */
+.taglineContent {
+  max-width: 980px; /* 苹果网站的内容宽度 */
+  margin: 0 auto;
+  padding: 0 22px; /* 苹果风格的内边距 */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* 标语主要内容 */
+.taglineMain {
+  flex: 1;
+  max-width: 500px;
+  text-align: left;
+}
+
+/* 标语标题 */
+.taglineHeading {
+  font-family: 'SF Pro Display', var(--font-heading);
+  font-size: 46px;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.015em; /* 苹果字体特有的字间距 */
+  color: var(--tagline-heading);
+  margin-bottom: 16px;
+  transition: color 0.3s ease;
+}
+
+/* 标语副标题 */
+.taglineSubheading {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 21px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: var(--tagline-subheading); /* 使用CSS变量 */
+  margin-bottom: 32px;
+  transition: color 0.3s ease;
+}
+
+/* 高亮文本 */
+.taglineHighlight {
+  color: var(--tagline-highlight);
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+/* 按钮容器 */
+.taglineActions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+/* 主要按钮 */
+.taglinePrimaryButton {
+  background: var(--primary-color); /* 使用CSS变量 */
+  color: white;
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 17px;
+  font-weight: 400;
+  padding: 8px 16px;
+  border-radius: 980px; /* 苹果风格的圆角 */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.2s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.taglinePrimaryButton:hover {
+  background: var(--primary-dark); /* 使用CSS变量 */
+  color: white; /* 确保文字颜色保持白色 */
+  text-decoration: none;
+  box-shadow: 0 1px 4px var(--card-shadow); /* 使用CSS变量 */
+  transform: translateY(-1px); /* 轻微上移效果 */
+}
+
+/* 按钮图标 */
+.taglineButtonIcon {
+  margin-left: 6px;
+}
+
+/* 次要按钮 */
+.taglineSecondaryButton {
+  color: var(--primary-color);
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 17px;
+  font-weight: 400;
+  text-decoration: none;
+  transition: all 0.2s ease, color 0.3s ease, background-color 0.3s ease;
+  padding: 8px 16px;
+  border-radius: 980px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.taglineSecondaryButton:hover {
+  text-decoration: none;
+  background-color: rgba(var(--primary-rgb), 0.05); /* 使用CSS变量 */
+  color: var(--primary-dark); /* 使用CSS变量 */
+}
+
+/* 视觉元素容器 */
+.taglineVisual {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* 图片容器 */
+.taglineImageContainer {
+  width: 380px;
+  height: 280px;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 16px var(--card-shadow);
+  transition: all 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.taglineImageContainer:hover {
+  transform: scale(1.02);
+  box-shadow: 0 12px 24px var(--card-shadow-hover);
+}
+
+/* 图片 */
+.taglineImage {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--primary-light), var(--primary-color), var(--primary-dark));
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease, background 0.3s ease;
+}
+
+.taglineImageContainer:hover .taglineImage {
+  background: linear-gradient(135deg, var(--primary-light), var(--primary-color), var(--primary-dark));
+  opacity: 0.9;
+}
+
+.taglineImage::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 40%,
+    rgba(255, 255, 255, 0) 50%,
+    rgba(255, 255, 255, 0.05) 60%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  transform: rotate(45deg);
+  animation: shimmer 3s infinite linear;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) rotate(45deg);
+  }
+}
+
+/* 响应式设计 - 苹果风格 */
+@media (max-width: 1068px) { /* 苹果网站的断点 */
+  .taglineContent {
+    max-width: 692px;
+  }
+
+  .taglineHeading {
+    font-size: 40px;
+  }
+
+  .taglineSubheading {
+    font-size: 19px;
+  }
+
+  .taglineImageContainer {
+    width: 320px;
+    height: 240px;
+  }
+}
+
+@media (max-width: 734px) { /* 苹果网站的断点 */
+  .tagline {
+    padding: 80px 0;
+    min-height: 100vh; /* 占满整个视口高度 */
+    display: flex;
+    align-items: center;
+  }
+
+  .taglineContent {
+    flex-direction: column;
+    text-align: center;
+    gap: 40px;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+  }
+
+  .taglineMain {
+    max-width: none;
+    text-align: center;
+    order: 2;
+  }
+
+  .taglineVisual {
+    justify-content: center;
+    order: 1;
+  }
+
+  .taglineHeading {
+    font-size: 32px;
+  }
+
+  .taglineSubheading {
+    font-size: 17px;
+  }
+
+  .taglineActions {
+    justify-content: center;
+  }
+
+  .taglineImageContainer {
+    width: 320px;
+    height: 240px;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tagline {
+    padding: 60px 0;
+    min-height: 100vh; /* 占满整个视口高度 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .taglineHeading {
+    font-size: 28px;
+  }
+
+  .taglineSubheading {
+    font-size: 16px;
+    margin-bottom: 24px;
+  }
+
+  .taglineImageContainer {
+    width: 280px;
+    height: 210px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+
+  .taglineActions {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .taglinePrimaryButton,
+  .taglineSecondaryButton {
+    width: 100%;
+    padding: 12px 16px;
+    justify-content: center;
+  }
+
+  .taglinePrimaryButton:hover,
+  .taglineSecondaryButton:hover {
+    transform: none; /* 移动端不使用上移效果 */
+  }
+}

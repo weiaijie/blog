@@ -1,0 +1,119 @@
+/* 基本样式 */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #fffae8;
+}
+
+.header {
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.header h1 {
+    margin: 0;
+    color: #333;
+}
+
+.nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav ul li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.nav ul li a {
+    text-decoration: none;
+    color: #333;
+    padding: 5px 10px;
+}
+
+.nav ul li.on a {
+    color: #41a863;
+    font-weight: bold;
+}
+
+.main {
+    padding: 20px;
+}
+
+.content {
+    margin-bottom: 20px;
+}
+
+.block {
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.block h3 {
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.contents {
+    padding: 15px;
+}
+
+.snippet {
+    position: fixed;
+    top: 50px;
+    right: 50px;
+    width: 300px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+.snippet h6 {
+    margin: 0;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+}
+
+.close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.box {
+    padding: 10px;
+}
+
+/* 其他样式 */
+a {
+    color: #41a863;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.contact {
+    font-size: 12px;
+    color: #666;
+}
+
+.contact a {
+    color: #666;
+}
+
+.contact img {
+    vertical-align: middle;
+}

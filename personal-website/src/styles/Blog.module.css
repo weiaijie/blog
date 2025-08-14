@@ -1,0 +1,273 @@
+/* 博客页面样式 - 苹果风格 */
+.blogPage {
+  padding: 100px 0 80px; /* 增加顶部内边距，避免被页面头部挡住 */
+}
+
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 22px;
+}
+
+.pageTitle {
+  font-family: 'SF Pro Display', var(--font-heading);
+  font-size: 48px;
+  font-weight: 600;
+  color: var(--tagline-heading);
+  margin-bottom: 40px;
+  letter-spacing: -0.015em;
+  text-align: center;
+  transition: color 0.3s ease;
+}
+
+/* 博客控制区域 */
+.blogControls {
+  margin-bottom: 40px;
+}
+
+.searchBar {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 12px 16px;
+  padding-right: 40px;
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 15px;
+  color: var(--tagline-heading);
+  background-color: var(--bg-dark);
+  border: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.searchInput:focus {
+  outline: none;
+  background-color: var(--card-bg);
+  box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.2);
+}
+
+.searchIcon {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--tagline-subheading);
+  transition: color 0.3s ease;
+}
+
+/* 分类筛选 */
+.categoryFilter {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.categoryButton {
+  background: none;
+  border: none;
+  padding: 8px 16px;
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--tagline-subheading);
+  border-radius: 980px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.categoryButton:hover {
+  background-color: rgba(var(--primary-rgb), 0.1);
+  color: var(--tagline-heading);
+}
+
+.categoryButton.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* 文章网格 */
+.postsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.postCard {
+  background-color: var(--card-bg);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px var(--card-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+}
+
+.postCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px var(--card-shadow-hover);
+}
+
+.postImageContainer {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 宽高比 */
+  background-color: var(--bg-dark);
+  transition: background-color 0.3s ease;
+}
+
+.postImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: var(--text-lighter);
+  transition: color 0.3s ease;
+}
+
+.postContent {
+  padding: 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.postMeta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.postDate, .postReadTime {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 13px;
+  color: var(--text-light);
+  letter-spacing: -0.01em;
+}
+
+.postTitle {
+  font-family: 'SF Pro Display', var(--font-heading);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--tagline-heading);
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  transition: color 0.3s ease;
+}
+
+.postExcerpt {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--text-light);
+  margin-bottom: 16px;
+  flex: 1;
+  letter-spacing: -0.01em;
+}
+
+.postTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.postTag {
+  display: inline-block;
+  padding: 4px 10px;
+  background-color: rgba(var(--primary-rgb), 0.1);
+  color: var(--primary-color);
+  border-radius: 980px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* 无结果提示 */
+.noResults {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px 0;
+}
+
+.noResults p {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 16px;
+  color: var(--tagline-subheading);
+  transition: color 0.3s ease;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .blogPage {
+    padding: 80px 0 60px; /* 调整顶部内边距，但仍保持足够空间 */
+  }
+
+  .pageTitle {
+    font-size: 36px;
+    margin-bottom: 30px;
+  }
+
+  .blogControls {
+    margin-bottom: 30px;
+  }
+
+  .postsGrid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+  }
+
+  .postContent {
+    padding: 16px;
+  }
+
+  .postTitle {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .blogPage {
+    padding: 70px 0 40px; /* 在小屏幕上稍微减少顶部内边距，但仍保持足够空间 */
+  }
+
+  .pageTitle {
+    font-size: 32px;
+    margin-bottom: 24px;
+  }
+
+  .categoryButton {
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+
+  .postsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .postTitle {
+    font-size: 16px;
+  }
+
+  .postExcerpt {
+    font-size: 13px;
+  }
+}

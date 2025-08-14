@@ -1,0 +1,94 @@
+/**
+ * Legal.module.css
+ *
+ * 描述：法律页面（隐私政策、使用条款等）的样式
+ *
+ * 功能：
+ * - 定义法律页面的布局和样式
+ * - 提供清晰的内容结构和排版
+ * - 支持亮色/暗色主题模式
+ */
+
+.legalPage {
+  padding: 120px 0 60px;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.pageTitle {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  font-weight: 600;
+  color: var(--text-color);
+  text-align: center;
+}
+
+.legalContent {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+}
+
+.lastUpdated {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  text-align: right;
+  font-style: italic;
+}
+
+.section {
+  margin-bottom: 2rem;
+}
+
+.section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: var(--text-color);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+.section p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  color: var(--text-color);
+}
+
+.section ul {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+.section li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+  color: var(--text-color);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .legalPage {
+    padding: 100px 0 40px;
+  }
+  
+  .pageTitle {
+    font-size: 2rem;
+  }
+  
+  .legalContent {
+    padding: 1.5rem;
+  }
+  
+  .section h2 {
+    font-size: 1.3rem;
+  }
+}

@@ -1,0 +1,187 @@
+/* 关于我页面样式 - 苹果风格 */
+.aboutPage {
+  padding: 100px 0 80px; /* 增加顶部内边距，避免被页面头部挡住 */
+}
+
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 22px;
+}
+
+.pageTitle {
+  font-family: 'SF Pro Display', var(--font-heading);
+  font-size: 48px;
+  font-weight: 600;
+  color: var(--tagline-heading);
+  margin-bottom: 40px;
+  letter-spacing: -0.015em;
+  text-align: center;
+}
+
+.section {
+  margin-bottom: 60px;
+}
+
+.sectionTitle {
+  font-family: 'SF Pro Display', var(--font-heading);
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--tagline-heading);
+  margin-bottom: 24px;
+  letter-spacing: -0.015em;
+}
+
+/* 个人简介部分 */
+.profileContent {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.profileText {
+  width: 100%;
+}
+
+.paragraph {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--tagline-subheading);
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+
+/* 时间线样式 */
+.timeline {
+  position: relative;
+  padding-left: 30px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 6px;
+  height: 100%;
+  width: 2px;
+  background-color: rgba(var(--primary-rgb), 0.2);
+}
+
+.timelineItem {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.timelineItem:last-child {
+  margin-bottom: 0;
+}
+
+.timelineDot {
+  position: absolute;
+  left: -30px;
+  top: 6px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(var(--primary-rgb), 0.2);
+}
+
+.timelineContent {
+  background-color: var(--card-bg);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 20px var(--card-shadow);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timelineTitle {
+  font-family: 'SF Pro Display', var(--font-heading);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--tagline-heading);
+  margin-bottom: 4px;
+  letter-spacing: -0.01em;
+  transition: color 0.3s ease;
+}
+
+.timelineSubtitle {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 15px;
+  color: var(--primary-color);
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+  transition: color 0.3s ease;
+}
+
+.timelineText {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--tagline-subheading);
+  letter-spacing: -0.01em;
+  transition: color 0.3s ease;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .aboutPage {
+    padding: 80px 0 60px; /* 调整顶部内边距，但仍保持足够空间 */
+  }
+
+  .pageTitle {
+    font-size: 36px;
+    margin-bottom: 30px;
+  }
+
+  .section {
+    margin-bottom: 40px;
+  }
+
+  .sectionTitle {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+
+  .profileContent {
+    max-width: 100%;
+  }
+
+  .paragraph {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .aboutPage {
+    padding: 70px 0 40px; /* 在小屏幕上稍微减少顶部内边距，但仍保持足够空间 */
+  }
+
+  .pageTitle {
+    font-size: 32px;
+    margin-bottom: 24px;
+  }
+
+  .sectionTitle {
+    font-size: 24px;
+  }
+
+
+
+  .paragraph {
+    font-size: 15px;
+  }
+
+  .timelineContent {
+    padding: 20px;
+  }
+
+  .timelineTitle {
+    font-size: 18px;
+  }
+
+  .timelineSubtitle,
+  .timelineText {
+    font-size: 14px;
+  }
+}
