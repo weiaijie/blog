@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Component should match snapshot 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "alignItems": "center",
+      "backgroundColor": "#007AFF",
+      "borderRadius": 8,
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "minHeight": 40,
+      "opacity": 1,
+      "paddingHorizontal": 16,
+      "paddingVertical": 10,
+    }
+  }
+>
+  <Text
+    style={
+      {
+        "color": "#FFFFFF",
+        "fontSize": 14,
+        "fontWeight": "600",
+        "textAlign": "center",
+      }
+    }
+  >
+    Snapshot Button
+  </Text>
+</View>
+`;

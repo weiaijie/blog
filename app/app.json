@@ -1,0 +1,61 @@
+{
+  "name": "RNLearningApp",
+  "displayName": "RN学习测试应用",
+  "version": "1.0.0",
+  "versionCode": 1,
+  "buildNumber": "1",
+  "description": "React Native学习测试应用",
+  "author": "开发者",
+  "bundleId": "com.rnlearning.app",
+  "packageName": "com.rnlearning.app",
+  "orientation": "portrait",
+  "icon": "./src/assets/images/icon.png",
+  "splash": {
+    "image": "./src/assets/images/splash.png",
+    "resizeMode": "contain",
+    "backgroundColor": "#ffffff"
+  },
+  "platforms": ["ios", "android"],
+  "ios": {
+    "bundleIdentifier": "com.rnlearning.app",
+    "buildNumber": "1",
+    "supportsTablet": true,
+    "infoPlist": {
+      "NSCameraUsageDescription": "此应用需要访问相机来拍照",
+      "NSPhotoLibraryUsageDescription": "此应用需要访问相册来选择图片",
+      "NSLocationWhenInUseUsageDescription": "此应用需要访问位置信息",
+      "NSMicrophoneUsageDescription": "此应用需要访问麦克风来录音",
+      "NSContactsUsageDescription": "此应用需要访问通讯录",
+      "NSCalendarsUsageDescription": "此应用需要访问日历",
+      "NSRemindersUsageDescription": "此应用需要访问提醒事项",
+      "NSFaceIDUsageDescription": "此应用使用Face ID进行身份验证"
+    }
+  },
+  "android": {
+    "package": "com.rnlearning.app",
+    "versionCode": 1,
+    "permissions": [
+      "CAMERA",
+      "WRITE_EXTERNAL_STORAGE",
+      "READ_EXTERNAL_STORAGE",
+      "ACCESS_FINE_LOCATION",
+      "ACCESS_COARSE_LOCATION",
+      "RECORD_AUDIO",
+      "READ_CONTACTS",
+      "WRITE_CONTACTS",
+      "READ_CALENDAR",
+      "WRITE_CALENDAR",
+      "USE_FINGERPRINT",
+      "USE_BIOMETRIC",
+      "INTERNET",
+      "ACCESS_NETWORK_STATE",
+      "VIBRATE",
+      "RECEIVE_BOOT_COMPLETED",
+      "WAKE_LOCK"
+    ],
+    "adaptiveIcon": {
+      "foregroundImage": "./src/assets/images/adaptive-icon.png",
+      "backgroundColor": "#ffffff"
+    }
+  }
+}

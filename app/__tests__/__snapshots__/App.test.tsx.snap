@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App Component should match snapshot 1`] = `
+<View
+  testID="app-navigator"
+>
+  <Text>
+    Mock App Navigator
+  </Text>
+</View>
+`;
