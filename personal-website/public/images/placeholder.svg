@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#f5f5f7"/>
+  <g opacity="0.3">
+    <rect x="50" y="50" width="300" height="200" rx="8" fill="none" stroke="#86868b" stroke-width="2" stroke-dasharray="5,5"/>
+    <circle cx="120" cy="120" r="20" fill="#86868b"/>
+    <polygon points="160,180 200,140 240,160 280,120 320,140 320,200 160,200" fill="#86868b"/>
+  </g>
+  <text x="200" y="250" font-family="SF Pro Text, -apple-system, BlinkMacSystemFont, sans-serif" font-size="14" text-anchor="middle" fill="#86868b">加载中...</text>
+</svg>

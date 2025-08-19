@@ -16,12 +16,16 @@
  */
 
 import { useState, useEffect, useCallback, useRef } from 'react';
-import Head from 'next/head';
 import Layout from '@/components/layout/Layout';
 import MainContent from '@/components/layout/MainContent';
 import Tagline from '@/components/sections/Tagline';
+import SEOHead from '@/components/common/SEOHead';
+import useReducedMotion from '@/hooks/useReducedMotion';
 
 export default function Home() {
+  // 检测用户动画偏好
+  const prefersReducedMotion = useReducedMotion();
+
   // 控制标语和主内容的显示
   const [showTagline, setShowTagline] = useState(true);
   const [showMainContent, setShowMainContent] = useState(false);
@@ -114,10 +118,13 @@ export default function Home() {
 
   return (
     <>
-      <Head>
-        <title>saber的个人网站</title>
-        <meta name="description" content="全栈开发 | 用代码构建美好数字世界" />
-      </Head>
+      <SEOHead
+        title="首页"
+        description="7年经验全栈开发工程师 | Vue.js + React + Next.js + Node.js | 用代码构建美好数字世界"
+        type="website"
+        keywords={['全栈开发', '前端开发', '后端开发', 'React', 'Vue.js', 'Next.js', 'Node.js', '个人网站', '许辉', 'saber']}
+        image="/images/home-og.jpg"
+      />
       <Layout>
         <Tagline visible={showTagline} />
         <MainContent visible={showMainContent} />

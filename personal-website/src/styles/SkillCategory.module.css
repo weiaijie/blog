@@ -1,0 +1,279 @@
+/* 技能分类组件样式 - 苹果风格 */
+.skillCategory {
+  margin-bottom: 80px;
+  position: relative;
+}
+
+.skillCategory:last-child {
+  margin-bottom: 0;
+}
+
+/* 分类头部 */
+.categoryHeader {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 40px;
+  padding: 24px;
+  background-color: var(--card-bg);
+  border-radius: 20px;
+  box-shadow: 
+    0 4px 20px var(--card-shadow),
+    0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(var(--primary-rgb), 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 分类头部装饰渐变 */
+.categoryHeader::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--primary-color),
+    var(--primary-light),
+    var(--primary-color)
+  );
+}
+
+.categoryIcon {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--primary-light)
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  box-shadow: 
+    0 8px 24px rgba(var(--primary-rgb), 0.3),
+    0 2px 6px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.categoryHeader:hover .categoryIcon {
+  transform: scale(1.05) rotate(5deg);
+}
+
+.categoryInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.categoryTitle {
+  font-family: 'SF Pro Display', var(--font-heading);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--tagline-heading);
+  margin: 0 0 8px 0;
+  letter-spacing: -0.02em;
+  transition: color 0.3s ease;
+}
+
+.categoryDescription {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--tagline-subheading);
+  margin: 0;
+  letter-spacing: -0.01em;
+  transition: color 0.3s ease;
+}
+
+.categoryStats {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.skillCount {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary-color);
+  background-color: rgba(var(--primary-rgb), 0.1);
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(var(--primary-rgb), 0.2);
+  letter-spacing: -0.01em;
+  transition: all 0.3s ease;
+}
+
+.skillCount:hover {
+  background-color: rgba(var(--primary-rgb), 0.15);
+  transform: translateY(-1px);
+}
+
+/* 技能网格 */
+.skillsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  position: relative;
+}
+
+/* 网格装饰性背景 */
+.skillsGrid::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(var(--primary-rgb), 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(var(--primary-rgb), 0.02) 0%, transparent 50%);
+  border-radius: 24px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+  .skillsGrid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .categoryHeader {
+    padding: 20px;
+  }
+
+  .categoryIcon {
+    width: 56px;
+    height: 56px;
+    font-size: 28px;
+  }
+
+  .categoryTitle {
+    font-size: 24px;
+  }
+
+  .categoryDescription {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .skillCategory {
+    margin-bottom: 60px;
+  }
+
+  .categoryHeader {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+    padding: 24px 20px;
+  }
+
+  .categoryStats {
+    align-items: center;
+  }
+
+  .skillsGrid {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+  }
+
+  .categoryIcon {
+    width: 48px;
+    height: 48px;
+    font-size: 24px;
+  }
+
+  .categoryTitle {
+    font-size: 22px;
+  }
+
+  .categoryDescription {
+    font-size: 14px;
+  }
+
+  .skillCount {
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .skillCategory {
+    margin-bottom: 48px;
+  }
+
+  .categoryHeader {
+    padding: 20px 16px;
+    border-radius: 16px;
+  }
+
+  .skillsGrid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .categoryIcon {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    border-radius: 12px;
+  }
+
+  .categoryTitle {
+    font-size: 20px;
+  }
+
+  .categoryDescription {
+    font-size: 13px;
+  }
+
+  .skillCount {
+    font-size: 12px;
+    padding: 4px 10px;
+  }
+}
+
+/* 深色主题适配 */
+@media (prefers-color-scheme: dark) {
+  .categoryHeader::before {
+    background: linear-gradient(
+      90deg,
+      var(--primary-light),
+      var(--primary-color),
+      var(--primary-light)
+    );
+  }
+
+  .skillsGrid::before {
+    background: 
+      radial-gradient(circle at 20% 20%, rgba(var(--primary-rgb), 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(var(--primary-rgb), 0.03) 0%, transparent 50%);
+  }
+}
+
+/* 打印样式 */
+@media print {
+  .skillCategory {
+    margin-bottom: 40px;
+    break-inside: avoid;
+  }
+
+  .categoryHeader {
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+
+  .skillsGrid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+  }
+}

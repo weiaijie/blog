@@ -66,11 +66,6 @@ export const socialLinks: RouteItem[] = [
     path: siteConfig.social.linkedin.url,
     isExternal: true
   },
-  {
-    name: 'Twitter',
-    path: siteConfig.social.twitter.url,
-    isExternal: true
-  },
 ];
 
 // 获取所有路由的辅助函数

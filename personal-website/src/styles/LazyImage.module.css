@@ -1,0 +1,109 @@
+/* LazyImage.module.css */
+
+.lazyImageContainer {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-background-secondary);
+  border-radius: 8px;
+}
+
+.placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-background-secondary);
+  z-index: 1;
+}
+
+.placeholderImage {
+  opacity: 0.6;
+  filter: blur(2px);
+}
+
+.loadingSpinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--color-border);
+  border-top: 3px solid var(--color-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.imageWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease;
+}
+
+.image:hover {
+  transform: scale(1.05);
+}
+
+.errorWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-background-secondary);
+  z-index: 2;
+}
+
+.errorImage {
+  opacity: 0.5;
+  filter: grayscale(100%);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .spinner {
+    width: 24px;
+    height: 24px;
+    border-width: 2px;
+  }
+}
+
+/* 减少动画偏好支持 */
+@media (prefers-reduced-motion: reduce) {
+  .image {
+    transition: none;
+  }
+  
+  .image:hover {
+    transform: none;
+  }
+  
+  .spinner {
+    animation: none;
+  }
+}

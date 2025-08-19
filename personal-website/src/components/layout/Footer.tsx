@@ -106,7 +106,7 @@ const Footer: React.FC<FooterProps> = () => {
   );
 
   return (
-    <footer className={styles.footer}>
+    <footer className={styles.footer} role="contentinfo" aria-label="网站页脚">
       <div className={styles.container}>
         {/* 页脚主要内容 - 多列导航 */}
         <div className={styles.footerDirectory}>

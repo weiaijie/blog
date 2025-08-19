@@ -1,0 +1,281 @@
+/* 项目筛选组件样式 - 苹果风格 */
+.projectFilter {
+  background-color: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: 
+    0 4px 20px var(--card-shadow),
+    0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(var(--primary-rgb), 0.08);
+  margin-bottom: 32px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.projectFilter:hover {
+  box-shadow: 
+    0 6px 25px var(--card-shadow-hover),
+    0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* 筛选器头部 */
+.filterHeader {
+  padding: 0;
+}
+
+.toggleButton {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.toggleButton:hover {
+  background-color: rgba(var(--primary-rgb), 0.05);
+}
+
+.toggleIcon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.toggleText {
+  font-family: 'SF Pro Display', var(--font-heading);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--tagline-heading);
+  letter-spacing: -0.01em;
+  flex: 1;
+  text-align: left;
+  transition: color 0.3s ease;
+}
+
+.filterBadge {
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 10px;
+  min-width: 20px;
+  text-align: center;
+  line-height: 1;
+}
+
+.expandIcon {
+  font-size: 12px;
+  color: var(--tagline-subheading);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+/* 筛选器内容 */
+.filterContent {
+  border-top: 1px solid rgba(var(--primary-rgb), 0.1);
+}
+
+.filterControls {
+  padding: 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  align-items: end;
+}
+
+/* 筛选组 */
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filterLabel {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--tagline-heading);
+  letter-spacing: -0.01em;
+  transition: color 0.3s ease;
+}
+
+/* 搜索输入框 */
+.searchInput {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 15px;
+  padding: 12px 16px;
+  border: 1px solid rgba(var(--primary-rgb), 0.2);
+  border-radius: 12px;
+  background-color: var(--bg-color);
+  color: var(--tagline-heading);
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.searchInput:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.1);
+}
+
+.searchInput::placeholder {
+  color: var(--tagline-subheading);
+}
+
+/* 选择框 */
+.filterSelect {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 15px;
+  padding: 12px 16px;
+  border: 1px solid rgba(var(--primary-rgb), 0.2);
+  border-radius: 12px;
+  background-color: var(--bg-color);
+  color: var(--tagline-heading);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 40px;
+}
+
+.filterSelect:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.1);
+}
+
+.filterSelect:hover {
+  border-color: rgba(var(--primary-rgb), 0.3);
+}
+
+/* 重置按钮 */
+.resetButton {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 12px 20px;
+  background-color: rgba(var(--primary-rgb), 0.1);
+  color: var(--primary-color);
+  border: 1px solid rgba(var(--primary-rgb), 0.2);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+  white-space: nowrap;
+}
+
+.resetButton:hover {
+  background-color: rgba(var(--primary-rgb), 0.15);
+  border-color: rgba(var(--primary-rgb), 0.3);
+}
+
+.resetButton:active {
+  transform: translateY(1px);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .filterControls {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 20px;
+  }
+
+  .toggleButton {
+    padding: 16px 20px;
+  }
+
+  .toggleText {
+    font-size: 16px;
+  }
+
+  .searchInput,
+  .filterSelect {
+    font-size: 14px;
+    padding: 10px 14px;
+  }
+
+  .filterSelect {
+    padding-right: 36px;
+    background-size: 14px;
+    background-position: right 10px center;
+  }
+
+  .resetButton {
+    font-size: 13px;
+    padding: 10px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .projectFilter {
+    border-radius: 12px;
+    margin-bottom: 24px;
+  }
+
+  .toggleButton {
+    padding: 14px 16px;
+  }
+
+  .toggleText {
+    font-size: 15px;
+  }
+
+  .filterControls {
+    padding: 16px;
+    gap: 14px;
+  }
+
+  .filterLabel {
+    font-size: 13px;
+  }
+
+  .searchInput,
+  .filterSelect {
+    font-size: 13px;
+    padding: 8px 12px;
+    border-radius: 10px;
+  }
+
+  .filterSelect {
+    padding-right: 32px;
+    background-size: 12px;
+    background-position: right 8px center;
+  }
+
+  .resetButton {
+    font-size: 12px;
+    padding: 8px 14px;
+    border-radius: 10px;
+  }
+}
+
+/* 深色主题适配 */
+@media (prefers-color-scheme: dark) {
+  .filterContent {
+    border-top-color: rgba(var(--primary-rgb), 0.15);
+  }
+
+  .searchInput,
+  .filterSelect {
+    border-color: rgba(var(--primary-rgb), 0.25);
+  }
+
+  .searchInput:focus,
+  .filterSelect:focus {
+    box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.15);
+  }
+}
+
+/* 打印样式 */
+@media print {
+  .projectFilter {
+    display: none;
+  }
+}

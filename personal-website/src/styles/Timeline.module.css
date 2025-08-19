@@ -1,0 +1,260 @@
+/* 时间线组件样式 - 苹果风格 */
+.timeline {
+  position: relative;
+  padding-left: 40px;
+  margin: 32px 0;
+}
+
+/* 时间线主线 */
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 20px;
+  height: 100%;
+  width: 3px;
+  background: linear-gradient(
+    to bottom,
+    var(--primary-color),
+    rgba(var(--primary-rgb), 0.6),
+    rgba(var(--primary-rgb), 0.3)
+  );
+  border-radius: 2px;
+  box-shadow: 0 0 10px rgba(var(--primary-rgb), 0.3);
+}
+
+/* 时间线项目 */
+.timelineItem {
+  position: relative;
+  margin-bottom: 48px;
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.timelineItem.lastItem {
+  margin-bottom: 0;
+}
+
+/* 时间线圆点和图标 */
+.timelineDot {
+  position: absolute;
+  left: -40px;
+  top: 8px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 
+    0 4px 12px rgba(var(--primary-rgb), 0.3),
+    0 0 0 4px var(--bg-color),
+    0 0 0 6px rgba(var(--primary-rgb), 0.2);
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.timelineItem:hover .timelineDot {
+  transform: scale(1.1);
+  box-shadow: 
+    0 6px 16px rgba(var(--primary-rgb), 0.4),
+    0 0 0 4px var(--bg-color),
+    0 0 0 8px rgba(var(--primary-rgb), 0.3);
+}
+
+.timelineIcon {
+  font-size: 18px;
+  filter: brightness(0) invert(1);
+}
+
+/* 时间线内容卡片 */
+.timelineContent {
+  background-color: var(--card-bg);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 
+    0 4px 20px var(--card-shadow),
+    0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(var(--primary-rgb), 0.1);
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 卡片装饰性渐变 */
+.timelineContent::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--primary-color),
+    var(--primary-light),
+    var(--primary-color)
+  );
+  opacity: 0.8;
+}
+
+.timelineContent:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 30px var(--card-shadow-hover),
+    0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* 时间线头部 */
+.timelineHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+  gap: 16px;
+}
+
+.timelineTitle {
+  font-family: 'SF Pro Display', var(--font-heading);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--tagline-heading);
+  margin: 0;
+  letter-spacing: -0.01em;
+  transition: color 0.3s ease;
+  flex: 1;
+}
+
+.timelineDate {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--primary-color);
+  background-color: rgba(var(--primary-rgb), 0.1);
+  padding: 4px 12px;
+  border-radius: 12px;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.timelineSubtitle {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--primary-color);
+  margin: 0 0 12px 0;
+  letter-spacing: -0.01em;
+  transition: color 0.3s ease;
+}
+
+.timelineDescription {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--tagline-subheading);
+  margin: 0;
+  letter-spacing: -0.01em;
+  transition: color 0.3s ease;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .timeline {
+    padding-left: 32px;
+  }
+
+  .timeline::before {
+    left: 16px;
+    width: 2px;
+  }
+
+  .timelineDot {
+    left: -32px;
+    width: 32px;
+    height: 32px;
+    box-shadow: 
+      0 3px 8px rgba(var(--primary-rgb), 0.3),
+      0 0 0 3px var(--bg-color),
+      0 0 0 5px rgba(var(--primary-rgb), 0.2);
+  }
+
+  .timelineIcon {
+    font-size: 14px;
+  }
+
+  .timelineContent {
+    padding: 20px;
+  }
+
+  .timelineHeader {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .timelineTitle {
+    font-size: 18px;
+  }
+
+  .timelineDate {
+    align-self: flex-start;
+    font-size: 13px;
+    padding: 3px 10px;
+  }
+
+  .timelineSubtitle {
+    font-size: 15px;
+  }
+
+  .timelineDescription {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .timeline {
+    padding-left: 28px;
+  }
+
+  .timeline::before {
+    left: 14px;
+  }
+
+  .timelineDot {
+    left: -28px;
+    width: 28px;
+    height: 28px;
+  }
+
+  .timelineIcon {
+    font-size: 12px;
+  }
+
+  .timelineContent {
+    padding: 16px;
+  }
+
+  .timelineTitle {
+    font-size: 16px;
+  }
+
+  .timelineDate {
+    font-size: 12px;
+    padding: 2px 8px;
+  }
+
+  .timelineSubtitle {
+    font-size: 14px;
+  }
+
+  .timelineDescription {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .timelineItem {
+    margin-bottom: 36px;
+  }
+}

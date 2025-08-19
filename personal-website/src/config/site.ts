@@ -18,29 +18,30 @@
 // 网站配置对象
 export const siteConfig = {
   // 基本信息
-  title: 'saber的个人网站',
-  description: '全栈开发 | 用代码构建美好数字世界',
-  author: 'saber',
+  title: '许辉的个人网站',
+  description: '7年经验全栈开发工程师 | Vue.js + React + Next.js + Node.js',
+  author: '许辉',
 
   // 联系信息
   contact: {
-    email: 'contact@example.com',
-    phone: '', // 如果需要添加电话号码
+    email: 'weiaijie@outlook.com',
+    phone: '18930523857',
+    location: '上海',
   },
 
   // 社交媒体信息
   social: {
     github: {
-      username: 'username',
-      url: 'https://github.com/username'
+      username: 'xuhui',
+      url: 'https://github.com/xuhui'
     },
     linkedin: {
-      username: 'username',
-      url: 'https://linkedin.com/in/username'
+      username: 'xuhui',
+      url: 'https://linkedin.com/in/xuhui'
     },
-    twitter: {
-      username: 'username',
-      url: 'https://twitter.com/username'
+    wechat: {
+      username: 'xuhui_dev',
+      qrcode: '/images/wechat-qr.png'
     }
   },
 

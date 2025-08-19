@@ -1,114 +1,187 @@
-/* 项目页面样式 - 苹果风格 */
+/* 项目页面样式 - 简约苹果风格 */
 .projectsPage {
-  padding: 100px 0 80px; /* 增加顶部内边距，避免被页面头部挡住 */
-}
-
-.container {
-  max-width: 980px;
-  margin: 0 auto;
-  padding: 0 22px;
-}
-
-.pageTitle {
-  font-family: 'SF Pro Display', var(--font-heading);
-  font-size: 48px;
-  font-weight: 600;
-  color: var(--tagline-heading);
-  margin-bottom: 40px;
-  letter-spacing: -0.015em;
-  text-align: center;
-  transition: color 0.3s ease;
-}
-
-/* 分类筛选 */
-.categoryFilter {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 40px;
-}
-
-.categoryButton {
-  background: none;
-  border: none;
-  padding: 8px 16px;
-  font-family: 'SF Pro Text', var(--font-sans);
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--tagline-subheading);
-  border-radius: 980px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.categoryButton:hover {
-  background-color: rgba(var(--primary-rgb), 0.1);
-  color: var(--tagline-heading);
-}
-
-.categoryButton.active {
-  background-color: var(--primary-color);
-  color: white;
-}
-
-/* 项目网格 */
-.projectsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 24px;
-}
-
-.projectCard {
-  background-color: var(--card-bg);
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 4px 20px var(--card-shadow);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.projectCard:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 30px var(--card-shadow-hover);
-}
-
-.projectImageContainer {
-  position: relative;
-  width: 100%;
-  padding-bottom: 56.25%; /* 16:9 宽高比 */
-  background-color: var(--bg-dark);
+  min-height: 100vh;
+  padding: 120px 0 80px;
+  background-color: var(--bg-color);
   transition: background-color 0.3s ease;
 }
 
-.projectImage {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
 }
 
-.placeholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  color: var(--text-lighter);
+/* 页面标题 */
+.pageTitle {
+  font-family: 'SF Pro Display', var(--font-heading);
+  font-size: 56px;
+  font-weight: 700;
+  color: var(--tagline-heading);
+  text-align: center;
+  margin-bottom: 64px;
+  letter-spacing: -0.02em;
+  position: relative;
   transition: color 0.3s ease;
 }
 
-.projectContent {
-  padding: 24px;
-  flex: 1;
+.pageTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--primary-color),
+    var(--primary-light)
+  );
+  border-radius: 2px;
+}
+
+/* 介绍部分 */
+.projectsIntro {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.introText {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--tagline-subheading);
+  max-width: 600px;
+  margin: 0 auto;
+  letter-spacing: -0.01em;
+  transition: color 0.3s ease;
+}
+
+/* 章节标题 */
+.sectionTitle {
+  font-family: 'SF Pro Display', var(--font-heading);
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--tagline-heading);
+  margin-bottom: 32px;
+  letter-spacing: -0.015em;
+  transition: color 0.3s ease;
+}
+
+/* 精选项目部分 */
+.featuredSection {
+  margin-bottom: 64px;
+}
+
+/* 项目链接 */
+.projectLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+/* 筛选结果统计 */
+.filterResults {
+  background-color: rgba(var(--primary-rgb), 0.05);
+  border: 1px solid rgba(var(--primary-rgb), 0.1);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.resultsText {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--primary-color);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.sortInfo {
+  color: var(--tagline-subheading);
+  font-weight: 400;
+}
+
+/* 无结果状态 */
+.noResults {
+  text-align: center;
+  padding: 60px 20px;
+  background-color: var(--card-bg);
+  border-radius: 20px;
+  box-shadow:
+    0 4px 20px var(--card-shadow),
+    0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(var(--primary-rgb), 0.08);
+}
+
+.noResultsIcon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  opacity: 0.6;
+}
+
+.noResultsTitle {
+  font-family: 'SF Pro Display', var(--font-heading);
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--tagline-heading);
+  margin: 0 0 12px 0;
+  letter-spacing: -0.01em;
+  transition: color 0.3s ease;
+}
+
+.noResultsText {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--tagline-subheading);
+  margin: 0;
+  letter-spacing: -0.01em;
+  transition: color 0.3s ease;
+}
+
+.featuredGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 32px;
+}
+
+.featuredCard {
+  background-color: var(--card-bg);
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow:
+    0 4px 20px var(--card-shadow),
+    0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(var(--primary-rgb), 0.08);
+  transition: all 0.3s ease;
+}
+
+.featuredCard:hover,
+.featuredCard:focus-within {
+  box-shadow:
+    0 8px 30px var(--card-shadow-hover),
+    0 2px 6px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.cardHeader {
   display: flex;
-  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.projectIcon {
+  font-size: 32px;
+  flex-shrink: 0;
+}
+
+.projectMeta {
+  flex: 1;
 }
 
 .projectTitle {
@@ -116,123 +189,368 @@
   font-size: 20px;
   font-weight: 600;
   color: var(--tagline-heading);
-  margin-bottom: 8px;
+  margin: 0 0 4px 0;
   letter-spacing: -0.01em;
   transition: color 0.3s ease;
+}
+
+.projectPeriod {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 14px;
+  color: var(--tagline-subheading);
+  margin: 0;
+  letter-spacing: -0.01em;
+  transition: color 0.3s ease;
+}
+
+.statusBadge {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.statusBadge[data-status="completed"] {
+  background-color: rgba(82, 196, 26, 0.1);
+  color: #52c41a;
+  border: 1px solid rgba(82, 196, 26, 0.2);
+}
+
+.statusBadge[data-status="in-progress"] {
+  background-color: rgba(24, 144, 255, 0.1);
+  color: #1890ff;
+  border: 1px solid rgba(24, 144, 255, 0.2);
+}
+
+.statusBadge[data-status="archived"] {
+  background-color: rgba(140, 140, 140, 0.1);
+  color: #8c8c8c;
+  border: 1px solid rgba(140, 140, 140, 0.2);
 }
 
 .projectDescription {
   font-family: 'SF Pro Text', var(--font-sans);
-  font-size: 14px;
-  line-height: 1.4;
+  font-size: 15px;
+  line-height: 1.5;
   color: var(--tagline-subheading);
-  margin-bottom: 16px;
-  flex: 1;
+  margin: 0 0 20px 0;
   letter-spacing: -0.01em;
   transition: color 0.3s ease;
 }
 
-.projectTags {
+.techStack {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
-.projectTag {
-  display: inline-block;
-  padding: 4px 10px;
-  background-color: rgba(var(--primary-rgb), 0.1);
-  color: var(--primary-color);
-  border-radius: 980px;
+.techTag {
+  font-family: 'SF Pro Text', var(--font-sans);
   font-size: 12px;
   font-weight: 500;
-  letter-spacing: -0.01em;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  color: var(--primary-color);
+  background-color: rgba(var(--primary-rgb), 0.1);
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(var(--primary-rgb), 0.2);
 }
 
-.projectLinks {
+.techMore {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--tagline-subheading);
+  background-color: rgba(var(--primary-rgb), 0.05);
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(var(--primary-rgb), 0.1);
+}
+
+.projectHighlights {
   display: flex;
-  gap: 16px;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.projectLink {
-  display: inline-flex;
+.highlight {
+  display: flex;
   align-items: center;
+  gap: 8px;
+}
+
+.highlightIcon {
+  font-size: 12px;
+  color: #52c41a;
+  flex-shrink: 0;
+}
+
+.highlightText {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 13px;
+  color: var(--tagline-subheading);
+  letter-spacing: -0.01em;
+  transition: color 0.3s ease;
+}
+
+/* 分类容器 */
+.categoriesContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.categorySection {
+  background-color: var(--card-bg);
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 
+    0 4px 20px var(--card-shadow),
+    0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(var(--primary-rgb), 0.08);
+  transition: all 0.3s ease;
+}
+
+.categorySection:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 30px var(--card-shadow-hover),
+    0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.categoryHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.categoryIcon {
+  font-size: 32px;
+  flex-shrink: 0;
+}
+
+.categoryInfo {
+  flex: 1;
+}
+
+.categoryTitle {
+  font-family: 'SF Pro Display', var(--font-heading);
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--tagline-heading);
+  margin: 0 0 4px 0;
+  letter-spacing: -0.01em;
+  transition: color 0.3s ease;
+}
+
+.categoryDescription {
   font-family: 'SF Pro Text', var(--font-sans);
   font-size: 14px;
+  color: var(--tagline-subheading);
+  margin: 0;
+  letter-spacing: -0.01em;
+  transition: color 0.3s ease;
+}
+
+.projectCount {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 12px;
   font-weight: 500;
   color: var(--primary-color);
-  text-decoration: none;
-  transition: opacity 0.2s ease, color 0.3s ease;
+  background-color: rgba(var(--primary-rgb), 0.1);
+  padding: 6px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(var(--primary-rgb), 0.2);
+  flex-shrink: 0;
 }
 
-.projectLink:hover {
-  opacity: 0.7;
+.projectsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
 }
 
-.linkIcon {
-  margin-left: 6px;
-  transition: transform 0.2s ease;
+.projectCard {
+  background-color: rgba(var(--primary-rgb), 0.02);
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid rgba(var(--primary-rgb), 0.08);
+  transition: all 0.3s ease;
 }
 
-.projectLink:hover .linkIcon {
-  transform: translateX(2px);
+.projectCard:hover,
+.projectCard:focus-within {
+  background-color: rgba(var(--primary-rgb), 0.05);
+  border-color: rgba(var(--primary-rgb), 0.15);
+  transform: translateY(-1px);
+}
+
+.cardContent {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.projectHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.projectName {
+  font-family: 'SF Pro Display', var(--font-heading);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--tagline-heading);
+  margin: 0;
+  letter-spacing: -0.01em;
+  transition: color 0.3s ease;
+}
+
+.projectDesc {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--tagline-subheading);
+  margin: 0 0 16px 0;
+  letter-spacing: -0.01em;
+  flex: 1;
+  transition: color 0.3s ease;
+}
+
+.projectDetails {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.role,
+.team,
+.duration {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 8px;
+  border-radius: 8px;
+  background-color: rgba(var(--primary-rgb), 0.05);
+  color: var(--tagline-subheading);
+  border: 1px solid rgba(var(--primary-rgb), 0.1);
+}
+
+.technologies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tech {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--primary-color);
+  background-color: rgba(var(--primary-rgb), 0.1);
+  padding: 3px 6px;
+  border-radius: 6px;
+  border: 1px solid rgba(var(--primary-rgb), 0.2);
 }
 
 /* 响应式设计 */
 @media (max-width: 768px) {
   .projectsPage {
-    padding: 80px 0 60px; /* 调整顶部内边距，但仍保持足够空间 */
+    padding: 100px 0 80px;
+  }
+
+  .container {
+    padding: 0 20px;
   }
 
   .pageTitle {
-    font-size: 36px;
-    margin-bottom: 30px;
+    font-size: 40px;
+    margin-bottom: 48px;
   }
 
-  .categoryFilter {
-    margin-bottom: 30px;
+  .projectsIntro {
+    margin-bottom: 48px;
+  }
+
+  .introText {
+    font-size: 16px;
+  }
+
+  .sectionTitle {
+    font-size: 28px;
+    margin-bottom: 24px;
+  }
+
+  .featuredGrid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .featuredCard,
+  .categorySection {
+    padding: 24px;
+  }
+
+  .categoriesContainer {
+    gap: 32px;
   }
 
   .projectsGrid {
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    grid-template-columns: 1fr;
     gap: 16px;
-  }
-
-  .projectContent {
-    padding: 16px;
-  }
-
-  .projectTitle {
-    font-size: 18px;
   }
 }
 
 @media (max-width: 480px) {
   .projectsPage {
-    padding: 70px 0 40px; /* 在小屏幕上稍微减少顶部内边距，但仍保持足够空间 */
+    padding: 90px 0 60px;
+  }
+
+  .container {
+    padding: 0 16px;
   }
 
   .pageTitle {
     font-size: 32px;
-    margin-bottom: 24px;
+    margin-bottom: 32px;
   }
 
-  .categoryButton {
-    font-size: 13px;
-    padding: 6px 12px;
+  .projectsIntro {
+    margin-bottom: 32px;
   }
 
-  .projectsGrid {
-    grid-template-columns: 1fr;
+  .introText {
+    font-size: 15px;
   }
 
-  .projectTitle {
-    font-size: 16px;
+  .sectionTitle {
+    font-size: 24px;
+    margin-bottom: 20px;
   }
 
-  .projectDescription {
-    font-size: 13px;
+  .featuredCard,
+  .categorySection {
+    padding: 20px;
+    border-radius: 16px;
+  }
+
+  .categoriesContainer {
+    gap: 24px;
+  }
+
+  .categoryHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .projectCard {
+    padding: 20px;
   }
 }

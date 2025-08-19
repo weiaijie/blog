@@ -1,0 +1,39 @@
+# robots.txt for Personal Website
+# 允许所有搜索引擎爬虫访问网站
+
+User-agent: *
+Allow: /
+
+# 禁止访问的路径
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+Disallow: /private/
+
+# 特别允许的路径
+Allow: /api/sitemap
+
+# 网站地图位置
+Sitemap: https://weiaijie.com/sitemap.xml
+
+# 爬取延迟（可选，单位：秒）
+Crawl-delay: 1
+
+# 针对特定搜索引擎的规则
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 2
+
+# 禁止访问某些文件类型
+Disallow: /*.json$
+Disallow: /*.xml$
+Allow: /sitemap.xml
+Allow: /robots.txt

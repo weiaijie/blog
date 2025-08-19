@@ -21,7 +21,6 @@
  */
 
 import { GetStaticPaths, GetStaticProps } from 'next';
-import Head from 'next/head';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
@@ -36,6 +35,8 @@ import 'prismjs/components/prism-tsx';
 import 'prismjs/components/prism-css';
 import 'prismjs/components/prism-bash';
 import Layout from '@/components/layout/Layout';
+import SEOHead from '@/components/common/SEOHead';
+import ReadingProgress from '@/components/common/ReadingProgress';
 import Image from 'next/image';
 import styles from '@/styles/NewBlogPost.module.css';
 
@@ -332,11 +333,24 @@ export default function BlogPostPage({ post }: BlogPostPageProps) {
 
   return (
     <>
-      <Head>
-        <title>{post.title} - saber的个人网站</title>
-        <meta name="description" content={post.excerpt} />
-      </Head>
+      <SEOHead
+        title={post.title}
+        description={post.excerpt}
+        type="article"
+        keywords={post.tags}
+        image={post.image}
+        publishedTime={new Date(post.date).toISOString()}
+        author="许辉"
+        section={getCategoryDisplayName(post.category)}
+        tags={post.tags}
+      />
       <Layout>
+        {/* 阅读进度指示器 */}
+        <ReadingProgress
+          target=".blog-content"
+          showTimeEstimate={true}
+          position="fixed"
+        />
         <article className={styles.blogPost}>
           <div className={styles.container}>
             <motion.div
@@ -412,7 +426,7 @@ export default function BlogPostPage({ post }: BlogPostPageProps) {
             </motion.div>
 
             <motion.div
-              className={styles.postContent}
+              className={`${styles.postContent} blog-content`}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.4 }}

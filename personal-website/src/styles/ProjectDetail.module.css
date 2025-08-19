@@ -1,0 +1,476 @@
+/* 项目详情页面样式 - 简约苹果风格 */
+.projectDetailPage {
+  min-height: 100vh;
+  padding: 120px 0 80px;
+  background-color: var(--bg-color);
+  transition: background-color 0.3s ease;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* 返回按钮 */
+.backButton {
+  margin-bottom: 32px;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--primary-color);
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 12px;
+  background-color: rgba(var(--primary-rgb), 0.1);
+  border: 1px solid rgba(var(--primary-rgb), 0.2);
+  transition: all 0.3s ease;
+}
+
+.backLink:hover {
+  background-color: rgba(var(--primary-rgb), 0.15);
+  border-color: rgba(var(--primary-rgb), 0.3);
+  transform: translateX(-2px);
+}
+
+.backIcon {
+  font-size: 16px;
+  transition: transform 0.3s ease;
+}
+
+.backLink:hover .backIcon {
+  transform: translateX(-2px);
+}
+
+/* 项目头部 */
+.projectHeader {
+  background-color: var(--card-bg);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 
+    0 4px 20px var(--card-shadow),
+    0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(var(--primary-rgb), 0.08);
+  margin-bottom: 48px;
+  transition: all 0.3s ease;
+}
+
+.headerContent {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.projectIcon {
+  font-size: 48px;
+  flex-shrink: 0;
+}
+
+.headerInfo {
+  flex: 1;
+}
+
+.projectTitle {
+  font-family: 'SF Pro Display', var(--font-heading);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--tagline-heading);
+  margin: 0 0 12px 0;
+  letter-spacing: -0.02em;
+  transition: color 0.3s ease;
+}
+
+.projectSubtitle {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--tagline-subheading);
+  margin: 0 0 24px 0;
+  letter-spacing: -0.01em;
+  transition: color 0.3s ease;
+}
+
+.projectMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+}
+
+.metaItem {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 14px;
+  color: var(--tagline-subheading);
+  letter-spacing: -0.01em;
+  transition: color 0.3s ease;
+}
+
+.statusBadge {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 12px;
+}
+
+.statusBadge[data-status="completed"] {
+  background-color: rgba(82, 196, 26, 0.1);
+  color: #52c41a;
+  border: 1px solid rgba(82, 196, 26, 0.2);
+}
+
+.statusBadge[data-status="in-progress"] {
+  background-color: rgba(24, 144, 255, 0.1);
+  color: #1890ff;
+  border: 1px solid rgba(24, 144, 255, 0.2);
+}
+
+.statusBadge[data-status="archived"] {
+  background-color: rgba(140, 140, 140, 0.1);
+  color: #8c8c8c;
+  border: 1px solid rgba(140, 140, 140, 0.2);
+}
+
+/* 项目内容 */
+.projectContent {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.section {
+  background-color: var(--card-bg);
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 
+    0 4px 20px var(--card-shadow),
+    0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(var(--primary-rgb), 0.08);
+  transition: all 0.3s ease;
+}
+
+.section:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 30px var(--card-shadow-hover),
+    0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.sectionTitle {
+  font-family: 'SF Pro Display', var(--font-heading);
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--tagline-heading);
+  margin: 0 0 24px 0;
+  letter-spacing: -0.015em;
+  transition: color 0.3s ease;
+}
+
+.detailedDescription {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--tagline-subheading);
+  margin: 0;
+  letter-spacing: -0.01em;
+  transition: color 0.3s ease;
+}
+
+/* 技术栈 */
+.techStack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.techTag {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--primary-color);
+  background-color: rgba(var(--primary-rgb), 0.1);
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(var(--primary-rgb), 0.2);
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.techTag:hover {
+  background-color: rgba(var(--primary-rgb), 0.15);
+  border-color: rgba(var(--primary-rgb), 0.3);
+}
+
+/* 项目亮点 */
+.highlightsList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.highlightItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  background-color: rgba(82, 196, 26, 0.05);
+  border-radius: 12px;
+  border: 1px solid rgba(82, 196, 26, 0.1);
+  transition: all 0.3s ease;
+}
+
+.highlightItem:hover {
+  background-color: rgba(82, 196, 26, 0.08);
+  border-color: rgba(82, 196, 26, 0.2);
+}
+
+.highlightIcon {
+  font-size: 16px;
+  color: #52c41a;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.highlightText {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--tagline-subheading);
+  letter-spacing: -0.01em;
+  transition: color 0.3s ease;
+}
+
+/* 挑战与解决方案 */
+.challengesGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+.challengesColumn,
+.solutionsColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.columnTitle {
+  font-family: 'SF Pro Display', var(--font-heading);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--tagline-heading);
+  margin: 0 0 16px 0;
+  letter-spacing: -0.01em;
+  transition: color 0.3s ease;
+}
+
+.itemsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.challengeItem,
+.solutionItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.challengeItem {
+  background-color: rgba(255, 77, 79, 0.05);
+  border: 1px solid rgba(255, 77, 79, 0.1);
+}
+
+.challengeItem:hover {
+  background-color: rgba(255, 77, 79, 0.08);
+  border-color: rgba(255, 77, 79, 0.2);
+}
+
+.solutionItem {
+  background-color: rgba(24, 144, 255, 0.05);
+  border: 1px solid rgba(24, 144, 255, 0.1);
+}
+
+.solutionItem:hover {
+  background-color: rgba(24, 144, 255, 0.08);
+  border-color: rgba(24, 144, 255, 0.2);
+}
+
+.itemIcon {
+  font-size: 16px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.itemText {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--tagline-subheading);
+  letter-spacing: -0.01em;
+  transition: color 0.3s ease;
+}
+
+/* 项目成果 */
+.resultsList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.resultItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  background-color: rgba(var(--primary-rgb), 0.05);
+  border-radius: 12px;
+  border: 1px solid rgba(var(--primary-rgb), 0.1);
+  transition: all 0.3s ease;
+}
+
+.resultItem:hover {
+  background-color: rgba(var(--primary-rgb), 0.08);
+  border-color: rgba(var(--primary-rgb), 0.2);
+}
+
+.resultIcon {
+  font-size: 16px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.resultText {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--tagline-subheading);
+  letter-spacing: -0.01em;
+  transition: color 0.3s ease;
+}
+
+/* 404状态 */
+.notFound {
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.notFound h1 {
+  font-family: 'SF Pro Display', var(--font-heading);
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--tagline-heading);
+  margin-bottom: 20px;
+}
+
+.notFound a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .projectDetailPage {
+    padding: 100px 0 80px;
+  }
+
+  .container {
+    padding: 0 20px;
+  }
+
+  .projectHeader {
+    padding: 32px 24px;
+  }
+
+  .headerContent {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+
+  .projectIcon {
+    font-size: 40px;
+  }
+
+  .projectTitle {
+    font-size: 28px;
+  }
+
+  .projectMeta {
+    justify-content: center;
+  }
+
+  .section {
+    padding: 24px;
+  }
+
+  .sectionTitle {
+    font-size: 20px;
+  }
+
+  .challengesGrid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .techStack {
+    gap: 8px;
+  }
+
+  .techTag {
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .projectDetailPage {
+    padding: 90px 0 60px;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+
+  .projectHeader {
+    padding: 24px 20px;
+    border-radius: 16px;
+  }
+
+  .projectTitle {
+    font-size: 24px;
+  }
+
+  .projectSubtitle {
+    font-size: 16px;
+  }
+
+  .section {
+    padding: 20px;
+    border-radius: 16px;
+  }
+
+  .sectionTitle {
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+
+  .projectContent {
+    gap: 32px;
+  }
+
+  .backLink {
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+}

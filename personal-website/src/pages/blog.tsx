@@ -15,12 +15,12 @@
  * - 包含博客文章数据模型定义和筛选逻辑
  */
 
-import Head from 'next/head';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 import Layout from '@/components/layout/Layout';
+import SEOHead from '@/components/common/SEOHead';
+import LazyImage from '@/components/common/LazyImage';
 import styles from '@/styles/NewBlog.module.css';
 
 interface BlogPost {
@@ -169,10 +169,13 @@ export default function Blog() {
 
   return (
     <>
-      <Head>
-        <title>博客 - saber的个人网站</title>
-        <meta name="description" content="技术教程、项目案例分析、行业趋势和个人经验分享" />
-      </Head>
+      <SEOHead
+        title="博客"
+        description="技术教程、项目案例分析、行业趋势和个人经验分享 - 分享前端开发、后端技术、项目实践经验"
+        type="website"
+        keywords={['技术博客', '前端开发', '后端开发', 'React', 'Vue.js', 'Next.js', 'Node.js', '项目案例', '技术教程']}
+        image="/images/blog-og.jpg"
+      />
       <Layout>
         <div className={styles.blogPage}>
           <motion.div
@@ -232,40 +235,15 @@ export default function Blog() {
                   <Link href={`/blog/${post.id}`} className={styles.postCard}>
                     <div className={styles.postImageContainer}>
                       <div className={styles.postImage}>
-                        {post.image ? (
-                          // 使用Next.js的Image组件处理真实图片
-                          <Image
-                            src={post.image.endsWith('.jpg') || post.image.endsWith('.png') ? post.image : '/placeholder-blog.svg'}
-                            alt={post.title}
-                            className={styles.defaultCover}
-                            width={600}
-                            height={338}
-                            onError={(e) => {
-                              // 图片加载失败时显示占位符
-                              const target = e.target as HTMLImageElement;
-                              target.style.display = 'none';
-
-                              // 安全地访问parentElement
-                              if (target.parentElement) {
-                                target.parentElement.classList.add(styles.placeholder);
-                                target.parentElement.innerHTML = `
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                                    <polyline points="21 15 16 10 5 21"></polyline>
-                                  </svg>
-                                `;
-                              }
-                            }}
-                          />
-                        ) : (
-                          // 使用普通img标签处理SVG文件
-                          <img
-                            src={getDefaultCoverImage(post.category)}
-                            alt={post.title}
-                            className={styles.defaultCover}
-                          />
-                        )}
+                        <LazyImage
+                          src={post.image || getDefaultCoverImage(post.category)}
+                          alt={post.title}
+                          width={600}
+                          height={338}
+                          className={styles.defaultCover}
+                          placeholder="/images/placeholder.svg"
+                          fallback="/images/image-error.svg"
+                        />
                       </div>
                       {/* 将分类标识移到图片容器中，确保它始终显示 */}
                       <span className={styles.categoryBadge}>

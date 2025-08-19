@@ -19,6 +19,8 @@ import '@/styles/prism-custom.css'; // 导入Prism.js代码高亮样式
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { useEffect } from 'react';
+import ErrorBoundary from '@/components/common/ErrorBoundary';
+import { performanceMonitor } from '@/utils/performance';
 
 export default function App({ Component, pageProps }: AppProps) {
   // 在客户端初始化主题
@@ -122,7 +124,15 @@ export default function App({ Component, pageProps }: AppProps) {
           }
         ` }} />
       </Head>
-      <Component {...pageProps} />
+      <ErrorBoundary
+        onError={(error, errorInfo) => {
+          // 在这里可以添加错误上报逻辑
+          console.error('App Error Boundary:', error, errorInfo);
+        }}
+        showDetails={process.env.NODE_ENV === 'development'}
+      >
+        <Component {...pageProps} />
+      </ErrorBoundary>
     </>
   );
 }

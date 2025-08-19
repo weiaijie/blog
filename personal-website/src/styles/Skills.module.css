@@ -1,63 +1,189 @@
 /* 技能页面样式 - 苹果风格 */
 .skillsPage {
-  padding: 100px 0 80px; /* 增加顶部内边距，避免被页面头部挡住 */
+  padding: 120px 0 100px; /* 增加顶部内边距，避免被页面头部挡住 */
+  background: linear-gradient(
+    135deg,
+    var(--bg-color) 0%,
+    rgba(var(--primary-rgb), 0.02) 50%,
+    var(--bg-color) 100%
+  );
+  min-height: 100vh;
+  position: relative;
+}
+
+/* 添加装饰性背景元素 */
+.skillsPage::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(var(--primary-rgb), 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 70% 70%, rgba(var(--primary-rgb), 0.03) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 .container {
-  max-width: 980px;
+  max-width: 1200px; /* 增加最大宽度以适应新的布局 */
   margin: 0 auto;
-  padding: 0 22px;
+  padding: 0 32px;
+  position: relative;
+  z-index: 1;
 }
 
 .pageTitle {
   font-family: 'SF Pro Display', var(--font-heading);
-  font-size: 48px;
-  font-weight: 600;
+  font-size: 56px; /* 增大标题字体 */
+  font-weight: 700; /* 增加字重 */
   color: var(--tagline-heading);
-  margin-bottom: 40px;
-  letter-spacing: -0.015em;
+  margin-bottom: 24px; /* 减少底部间距 */
+  letter-spacing: -0.02em;
   text-align: center;
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    var(--tagline-heading) 0%,
+    var(--primary-color) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: all 0.3s ease;
+}
+
+/* 为页面标题添加装饰线 */
+.pageTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--primary-color),
+    transparent
+  );
+  border-radius: 2px;
+}
+
+/* 技能介绍部分 */
+.skillsIntro {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.introText {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--tagline-subheading);
+  max-width: 600px;
+  margin: 0 auto;
+  letter-spacing: -0.01em;
   transition: color 0.3s ease;
 }
 
-.section {
-  margin-bottom: 60px;
+/* 简约技能网格 */
+.skillsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  margin-top: 48px;
+}
+
+/* 技能分类 */
+.skillSection {
+  background-color: var(--card-bg);
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow:
+    0 4px 20px var(--card-shadow),
+    0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(var(--primary-rgb), 0.08);
+  transition: all 0.3s ease;
+}
+
+.skillSection:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 30px var(--card-shadow-hover),
+    0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* 分类头部 */
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.sectionIcon {
+  font-size: 32px;
+  flex-shrink: 0;
 }
 
 .sectionTitle {
   font-family: 'SF Pro Display', var(--font-heading);
-  font-size: 32px;
-  font-weight: 600;
+  font-size: 28px;
+  font-weight: 700;
   color: var(--tagline-heading);
-  margin-bottom: 24px;
-  letter-spacing: -0.015em;
+  margin: 0;
+  letter-spacing: -0.02em;
   transition: color 0.3s ease;
 }
 
-.skillsGrid {
+.sectionDescription {
+  font-family: 'SF Pro Text', var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--tagline-subheading);
+  margin: 0 0 32px 0;
+  letter-spacing: -0.01em;
+  transition: color 0.3s ease;
+}
+
+/* 技能列表 */
+.skillsList {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 24px;
 }
 
+/* 技能项目 */
 .skillItem {
-  background-color: var(--card-bg);
+  background-color: rgba(var(--primary-rgb), 0.02);
   border-radius: 16px;
   padding: 24px;
-  box-shadow: 0 4px 20px var(--card-shadow);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  border: 1px solid rgba(var(--primary-rgb), 0.08);
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
-.skillItem:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 30px var(--card-shadow-hover);
+.skillItem:hover,
+.skillItem:focus-within {
+  background-color: rgba(var(--primary-rgb), 0.05);
+  border-color: rgba(var(--primary-rgb), 0.15);
+  transform: translateY(-1px);
 }
 
+/* 技能头部 */
 .skillHeader {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.skillIcon {
+  font-size: 20px;
+  flex-shrink: 0;
 }
 
 .skillName {
@@ -65,42 +191,35 @@
   font-size: 18px;
   font-weight: 600;
   color: var(--tagline-heading);
-  letter-spacing: -0.01em;
   margin: 0;
+  letter-spacing: -0.01em;
+  flex: 1;
   transition: color 0.3s ease;
 }
 
 .skillLevel {
-  font-family: 'SF Pro Text', var(--font-sans);
   font-size: 14px;
-  color: var(--primary-color);
-  letter-spacing: -0.01em;
-  transition: color 0.3s ease;
+  line-height: 1;
+  flex-shrink: 0;
 }
 
-.skillBarContainer {
-  height: 6px;
-  background-color: var(--bg-dark);
-  border-radius: 3px;
+/* 技能进度条 */
+.skillProgress {
+  width: 100%;
+  height: 4px;
+  background-color: rgba(var(--primary-rgb), 0.1);
+  border-radius: 2px;
   overflow: hidden;
   margin-bottom: 16px;
-  transition: background-color 0.3s ease;
 }
 
-.skillBar {
+.progressBar {
   height: 100%;
-  width: var(--skill-level, 0%);
-  background-color: var(--primary-color);
-  border-radius: 3px;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 1s cubic-bezier(0.4, 0.01, 0.165, 0.99), background-color 0.3s ease;
+  border-radius: 2px;
+  transition: width 1s ease-out;
 }
 
-.skillBar.animate {
-  transform: scaleX(1);
-}
-
+/* 技能描述 */
 .skillDescription {
   font-family: 'SF Pro Text', var(--font-sans);
   font-size: 14px;
@@ -112,58 +231,183 @@
 }
 
 /* 响应式设计 */
-@media (max-width: 768px) {
-  .skillsPage {
-    padding: 80px 0 60px; /* 调整顶部内边距，但仍保持足够空间 */
+@media (max-width: 1024px) {
+  .container {
+    max-width: 95%;
+    padding: 0 24px;
   }
 
   .pageTitle {
-    font-size: 36px;
-    margin-bottom: 30px;
+    font-size: 48px;
   }
 
-  .section {
-    margin-bottom: 40px;
-  }
-
-  .sectionTitle {
-    font-size: 28px;
-    margin-bottom: 20px;
-  }
-
-  .skillsGrid {
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 16px;
-  }
-
-  .skillItem {
-    padding: 20px;
+  .introText {
+    font-size: 16px;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .skillsPage {
-    padding: 70px 0 40px; /* 在小屏幕上稍微减少顶部内边距，但仍保持足够空间 */
+    padding: 100px 0 80px;
+  }
+
+  .container {
+    padding: 0 20px;
   }
 
   .pageTitle {
-    font-size: 32px;
-    margin-bottom: 24px;
+    font-size: 40px;
+    margin-bottom: 20px;
+  }
+
+  .pageTitle::after {
+    width: 60px;
+    height: 3px;
+    bottom: -15px;
+  }
+
+  .skillsIntro {
+    margin-bottom: 40px;
+  }
+
+  .introText {
+    font-size: 15px;
+  }
+
+  .skillsGrid {
+    gap: 32px;
+    margin-top: 32px;
+  }
+
+  .skillSection {
+    padding: 24px;
   }
 
   .sectionTitle {
     font-size: 24px;
   }
 
-  .skillsGrid {
+  .skillsList {
     grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .skillItem {
+    padding: 20px;
   }
 
   .skillName {
     font-size: 16px;
   }
+}
+
+@media (max-width: 480px) {
+  .skillsPage {
+    padding: 90px 0 60px;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+
+  .pageTitle {
+    font-size: 32px;
+    margin-bottom: 16px;
+  }
+
+  .pageTitle::after {
+    width: 50px;
+    height: 2px;
+    bottom: -12px;
+  }
+
+  .skillsIntro {
+    margin-bottom: 32px;
+  }
+
+  .introText {
+    font-size: 14px;
+  }
+
+  .skillsGrid {
+    gap: 24px;
+    margin-top: 24px;
+  }
+
+  .skillSection {
+    padding: 20px;
+    border-radius: 16px;
+  }
+
+  .sectionHeader {
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .sectionIcon {
+    font-size: 24px;
+  }
+
+  .sectionTitle {
+    font-size: 20px;
+  }
+
+  .sectionDescription {
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+
+  .skillItem {
+    padding: 16px;
+  }
+
+  .skillHeader {
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .skillIcon {
+    font-size: 16px;
+  }
+
+  .skillName {
+    font-size: 15px;
+  }
+
+  .skillLevel {
+    font-size: 12px;
+  }
 
   .skillDescription {
     font-size: 13px;
+  }
+}
+
+/* 深色主题适配 */
+@media (prefers-color-scheme: dark) {
+  .skillsPage::before {
+    background:
+      radial-gradient(circle at 30% 30%, rgba(var(--primary-rgb), 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 70% 70%, rgba(var(--primary-rgb), 0.05) 0%, transparent 50%);
+  }
+}
+
+/* 打印样式 */
+@media print {
+  .skillsPage {
+    padding: 20px 0;
+    background: none;
+  }
+
+  .skillsPage::before {
+    display: none;
+  }
+
+  .pageTitle::after {
+    display: none;
+  }
+
+  .skillsContainer {
+    gap: 20px;
   }
 }

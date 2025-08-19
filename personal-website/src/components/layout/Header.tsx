@@ -105,18 +105,22 @@ const Header: React.FC<HeaderProps> = () => {
   const headerClasses = `${styles.header} ${mounted && isScrolled ? styles.scrolled : ''} ${showAnimation ? styles.loaded : ''}`;
 
   return (
-    <header className={headerClasses}>
+    <header
+      className={headerClasses}
+      role="banner"
+      aria-label="网站主导航"
+    >
       <div className={styles.container}>
         {/* 品牌标识/Logo */}
         <div className={styles.logo}>
-          <Link href="/" onClick={closeMenu}>
+          <Link href="/" onClick={closeMenu} aria-label="返回首页">
             <span className={styles.name}>saber</span>
           </Link>
         </div>
 
         {/* 桌面导航菜单 - 苹果风格 */}
-        <nav className={styles.desktopNav}>
-          <ul>
+        <nav className={styles.desktopNav} role="navigation" aria-label="主导航菜单">
+          <ul role="menubar">
             {mainNavRoutes.map((item) => (
               <li key={item.path}>
                 <Link
@@ -140,9 +144,10 @@ const Header: React.FC<HeaderProps> = () => {
           {/* 搜索按钮 */}
           <button
             className={`${styles.searchButton} ${isSearchActive ? styles.active : ''}`}
-            aria-label="搜索"
+            aria-label={isSearchActive ? '关闭搜索' : '打开搜索'}
             onClick={handleSearchClick}
             aria-expanded={isSearchActive}
+            aria-controls="search-panel"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="11" cy="11" r="8"></circle>
@@ -151,19 +156,27 @@ const Header: React.FC<HeaderProps> = () => {
           </button>
 
           {/* 移动端汉堡菜单按钮 */}
-          <div
+          <button
             className={`${styles.menuButton} ${isMenuOpen ? styles.open : ''}`}
             onClick={toggleMenu}
-            aria-label="菜单"
+            aria-label={isMenuOpen ? '关闭菜单' : '打开菜单'}
             aria-expanded={isMenuOpen}
+            aria-controls="mobile-nav"
+            type="button"
           >
             <span></span>
             <span></span>
-          </div>
+          </button>
         </div>
 
         {/* 移动端导航菜单 */}
-        <div className={`${styles.mobileNav} ${isMenuOpen ? styles.open : ''}`}>
+        <div
+          id="mobile-nav"
+          className={`${styles.mobileNav} ${isMenuOpen ? styles.open : ''}`}
+          role="navigation"
+          aria-label="移动端导航菜单"
+          aria-hidden={!isMenuOpen}
+        >
           <div className={styles.mobileNavHeader}>
             <div className={styles.mobileNavLogo}>
               <span className={styles.mobileNavName}>saber</span>

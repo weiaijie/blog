@@ -31,8 +31,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <ThemeProvider>
       <div className={styles.layoutWrapper}>
+        {/* 跳过链接 - 可访问性改进 */}
+        <a href="#main-content" className="skip-link">
+          跳转到主要内容
+        </a>
         <Header />
-        <main className={styles.mainContainer}>
+        <main id="main-content" className={styles.mainContainer}>
           {children}
         </main>
         <Footer />

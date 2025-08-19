@@ -13,9 +13,9 @@
  * - 包含表单状态管理和提交逻辑
  */
 
-import Head from 'next/head';
 import { useState } from 'react';
 import Layout from '@/components/layout/Layout';
+import SEOHead from '@/components/common/SEOHead';
 import siteConfig from '@/config/site';
 import styles from '@/styles/Contact.module.css';
 
@@ -70,10 +70,13 @@ export default function Contact() {
 
   return (
     <>
-      <Head>
-        <title>联系 - {siteConfig.title}</title>
-        <meta name="description" content="联系我，讨论项目合作或技术交流" />
-      </Head>
+      <SEOHead
+        title="联系我"
+        description="联系我，讨论项目合作或技术交流 - 全栈开发工程师，欢迎技术交流与合作"
+        type="website"
+        keywords={['联系方式', '项目合作', '技术交流', '全栈开发', '前端开发', '后端开发']}
+        image="/images/contact-og.svg"
+      />
       <Layout>
         <div className={styles.contactPage}>
           <div className={styles.container}>
