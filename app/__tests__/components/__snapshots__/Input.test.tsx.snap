@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input Component should match snapshot 1`] = `
+<View
+  style={
+    {
+      "marginBottom": 16,
+    }
+  }
+>
+  <Text
+    style={
+      {
+        "color": "#374151",
+        "fontSize": 14,
+        "fontWeight": "500",
+        "marginBottom": 6,
+      }
+    }
+  >
+    Snapshot Input
+  </Text>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "backgroundColor": "#FFFFFF",
+        "borderColor": "#D1D5DB",
+        "borderRadius": 8,
+        "borderWidth": 1,
+        "flexDirection": "row",
+        "minHeight": 44,
+      }
+    }
+  >
+    <TextInput
+      onBlur={[Function]}
+      onChangeText={[MockFunction]}
+      onFocus={[Function]}
+      placeholder="Enter text"
+      placeholderTextColor="#9CA3AF"
+      style={
+        {
+          "color": "#111827",
+          "flex": 1,
+          "fontSize": 16,
+          "paddingHorizontal": 12,
+          "paddingVertical": 10,
+        }
+      }
+    />
+  </View>
+</View>
+`;
