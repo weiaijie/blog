@@ -41,9 +41,9 @@ const BriefIntro: React.FC = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
-            我是一名热衷于创造优质用户体验的全栈开发者。拥有多年的前后端开发经验，
-            专注于构建高性能、可扩展的Web应用程序。我相信技术的力量在于解决实际问题，
-            并且始终保持对新技术的学习热情。
+            我是一名专注于前端技术的全栈开发工程师，拥有7年丰富的项目开发经验。
+            深度掌握Vue生态系统，熟练运用TypeScript、JavaScript ES6+，精通主流UI框架。
+            曾参与医疗SaaS、金融交易、建筑管理等多个行业的核心系统开发，具备全栈项目架构能力和团队技术指导经验。
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}

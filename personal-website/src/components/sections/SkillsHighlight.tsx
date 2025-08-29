@@ -176,14 +176,14 @@ const SkillsHighlight: React.FC = () => {
   const skills: Skill[] = [
     {
       name: "前端开发",
-      description: "精通HTML5, CSS3, JavaScript/TypeScript, React, Vue等现代前端技术",
-      level: 90,
+      description: "Vue生态系统专家，精通现代前端技术栈和开发工具",
+      level: 95,
       color: "65, 105, 225", // 蓝色
       details: [
-        "精通React和Vue框架，构建响应式用户界面",
-        "熟练使用TypeScript进行类型安全的开发",
-        "掌握现代CSS技术，包括Flexbox、Grid和动画",
-        "了解前端性能优化和最佳实践"
+        "深度掌握Vue2/Vue3、Vuex/Pinia、Vue Router全家桶",
+        "熟练使用TypeScript、JavaScript ES6+进行开发",
+        "精通Element-UI、Ant-Design、Vant等主流UI框架",
+        "具备UniApp跨平台移动端开发经验"
       ],
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -197,14 +197,14 @@ const SkillsHighlight: React.FC = () => {
     },
     {
       name: "后端开发",
-      description: "熟练使用Node.js, Express, Python, Django等构建高效的服务端应用",
+      description: "具备Node.js全栈开发能力，熟悉数据库设计和API开发",
       level: 80,
       color: "46, 139, 87", // 绿色
       details: [
         "熟练使用Node.js和Express构建RESTful API",
-        "了解Python和Django框架开发",
-        "掌握数据库设计和优化技术",
-        "具备服务器端性能调优经验"
+        "掌握MySQL、Redis等数据库技术",
+        "具备ThinkPHP框架开发经验",
+        "了解服务器端性能优化和系统架构"
       ],
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -216,36 +216,33 @@ const SkillsHighlight: React.FC = () => {
       )
     },
     {
-      name: "UI/UX设计",
-      description: "了解设计原则和用户体验最佳实践，能够创建直观美观的界面",
-      level: 75,
+      name: "移动端开发",
+      description: "熟练使用UniApp进行跨平台移动应用开发，具备小程序和App开发经验",
+      level: 80,
       color: "218, 112, 214", // 紫色
       details: [
-        "掌握用户界面设计原则和最佳实践",
-        "了解用户体验研究和测试方法",
-        "能够使用设计工具创建原型和界面",
-        "关注可访问性和包容性设计"
+        "熟练使用UniApp进行跨平台移动应用开发",
+        "掌握uView、Vant等移动端UI框架",
+        "具备微信小程序和H5应用开发经验",
+        "了解移动端性能优化和适配方案"
       ],
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <circle cx="12" cy="12" r="10"></circle>
-          <circle cx="12" cy="12" r="4"></circle>
-          <line x1="21.17" y1="8" x2="12" y2="8"></line>
-          <line x1="3.95" y1="6.06" x2="8.54" y2="14"></line>
-          <line x1="10.88" y1="21.94" x2="15.46" y2="14"></line>
+          <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+          <line x1="12" y1="18" x2="12.01" y2="18"></line>
         </svg>
       )
     },
     {
-      name: "DevOps",
-      description: "熟悉Git, Docker, CI/CD流程，能够实现自动化部署和维护",
-      level: 70,
+      name: "开发工具",
+      description: "熟练使用现代开发工具和流程，提升开发效率",
+      level: 85,
       color: "255, 140, 0", // 橙色
       details: [
-        "熟练使用Git进行版本控制和协作开发",
-        "了解Docker容器化技术和微服务架构",
-        "掌握CI/CD流程和自动化部署工具",
-        "具备基本的服务器管理和监控经验"
+        "精通Git版本控制和团队协作开发",
+        "熟练使用Webpack、Vite等现代构建工具",
+        "掌握ECharts数据可视化开发",
+        "具备Linux、Nginx等服务器环境配置经验"
       ],
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">

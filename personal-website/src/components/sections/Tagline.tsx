@@ -755,7 +755,7 @@ const Tagline: React.FC<TaglineProps> = ({ visible }) => {
                   transformStyle: "preserve-3d"
                 }}
               >
-                <span className={styles.taglineHighlight}>全栈开发</span>，专注于构建直观、高效且美观的用户界面
+                <span className={styles.taglineHighlight}>7年经验全栈开发工程师</span>，Vue生态系统专家，专注前端技术
               </motion.p>
               <motion.div className={styles.taglineActions} variants={childVariants}>
                 <motion.div

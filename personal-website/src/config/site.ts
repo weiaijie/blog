@@ -19,8 +19,11 @@
 export const siteConfig = {
   // 基本信息
   title: '许辉的个人网站',
-  description: '7年经验全栈开发工程师 | Vue.js + React + Next.js + Node.js',
+  description: '7年经验全栈开发工程师 | 专注前端技术 | Vue生态系统专家 | 具备全栈开发和团队协作能力',
   author: '许辉',
+  age: 29,
+  currentLocation: '铜陵',
+  targetLocation: '上海',
 
   // 联系信息
   contact: {
@@ -32,8 +35,8 @@ export const siteConfig = {
   // 社交媒体信息
   social: {
     github: {
-      username: 'xuhui',
-      url: 'https://github.com/xuhui'
+      username: 'weiaijie',
+      url: 'https://github.com/weiaijie'
     },
     linkedin: {
       username: 'xuhui',
@@ -48,7 +51,7 @@ export const siteConfig = {
   // 版权信息
   copyright: {
     text: '保留所有权利',
-    startYear: 2023, // 如果需要显示版权年份范围，例如 2023-2024
+    startYear: 2018, // 从开始工作年份算起
   },
 
   // 技术栈信息

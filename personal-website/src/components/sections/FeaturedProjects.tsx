@@ -145,31 +145,31 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, i
 };
 
 const FeaturedProjects: React.FC = () => {
-  // 示例项目数据
+  // 精选项目数据 - 基于真实项目经验
   const projects: Project[] = [
     {
-      id: 'project-1',
-      title: '智能家居控制系统',
-      description: '基于React和Node.js的智能家居控制平台，支持多设备管理和自动化场景设置',
+      id: 'hospital-education-system',
+      title: '医院教育管理系统',
+      description: '大型医院教育管理SaaS系统，涵盖学员管理、课程管理、考试评价等完整业务流程',
       image: '/placeholder-project.jpg',
-      tags: ['React', 'Node.js', 'IoT'],
-      color: 'linear-gradient(135deg, #6a11cb, #2575fc)'
+      tags: ['Vue2/Vue3', 'Element-UI', 'TypeScript', 'Node.js'],
+      color: 'linear-gradient(135deg, #1890ff, #36cfc9)'
     },
     {
-      id: 'project-2',
-      title: '电子商务平台',
-      description: '全栈电商网站，包含商品展示、购物车、支付集成和订单管理功能',
+      id: 'construction-project-system',
+      title: '建筑项目管理系统',
+      description: '专为建筑装修行业开发的项目管理系统，支持PC端和移动端，提升作业效率50%',
       image: '/placeholder-project.jpg',
-      tags: ['Vue.js', 'Express', 'MongoDB'],
-      color: 'linear-gradient(135deg, #f83600, #f9d423)'
+      tags: ['Vue3', 'Ant-Design', 'UniApp', 'MySQL'],
+      color: 'linear-gradient(135deg, #52c41a, #73d13d)'
     },
     {
-      id: 'project-3',
-      title: '数据可视化仪表板',
-      description: '企业级数据分析和可视化平台，支持多种图表类型和实时数据更新',
+      id: 'trading-platform',
+      title: '数字货币交易平台管理系统',
+      description: '支撑5-6万用户的交易平台后台管理系统，包含权限控制、数据可视化等功能',
       image: '/placeholder-project.jpg',
-      tags: ['D3.js', 'TypeScript', 'GraphQL'],
-      color: 'linear-gradient(135deg, #00b09b, #96c93d)'
+      tags: ['Vue2', 'Element-UI', 'ECharts', 'Redis'],
+      color: 'linear-gradient(135deg, #722ed1, #eb2f96)'
     }
   ];
 

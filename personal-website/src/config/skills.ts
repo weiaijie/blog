@@ -57,7 +57,7 @@ export const skillsData: SkillCategory[] = [
         percentage: 95,
         description: '7年Vue 2.x开发经验，精通Vue全家桶（Vue Router、Vuex），熟练掌握组件化开发、生命周期管理、指令系统等核心概念，具备大型项目架构设计能力。',
         technologies: ['Vue 2.x', 'Vue Router', 'Vuex', 'Vue CLI', 'Vue Devtools'],
-        projects: ['SaaS后台管理系统', '项目管理系统', '中台系统'],
+        projects: ['医院教育管理系统', '数字货币交易平台', '项目管理系统'],
         icon: '💚',
         color: '#4FC08D'
       },
@@ -68,7 +68,7 @@ export const skillsData: SkillCategory[] = [
         percentage: 85,
         description: '熟练掌握Vue 3 Composition API、响应式系统重构、Teleport、Fragments等新特性，了解Pinia状态管理，具备Vue 2到Vue 3的迁移经验。',
         technologies: ['Vue 3.x', 'Composition API', 'Pinia', 'Vite', 'Vue 3 CLI'],
-        projects: ['现代化后台系统', '移动端应用', '组件库'],
+        projects: ['建筑项目管理系统', '移动端应用', '组件库'],
         icon: '🚀',
         color: '#42b883'
       },
@@ -117,6 +117,17 @@ export const skillsData: SkillCategory[] = [
         color: '#1890ff'
       },
       {
+        id: 'uniapp',
+        name: 'UniApp',
+        level: 4,
+        percentage: 80,
+        description: '熟练使用UniApp进行跨平台移动应用开发，具备小程序和App开发经验，能够实现一套代码多端运行。',
+        technologies: ['UniApp', 'uView', '微信小程序', 'H5', 'App'],
+        projects: ['建筑项目管理移动端', '项目管理小程序'],
+        icon: '📱',
+        color: '#2B9939'
+      },
+      {
         id: 'responsive-design',
         name: '响应式设计',
         level: 5,
@@ -142,7 +153,7 @@ export const skillsData: SkillCategory[] = [
         percentage: 80,
         description: '熟练使用Node.js和Express框架进行后端开发，具备RESTful API设计和开发经验，了解中间件开发和错误处理机制。',
         technologies: ['Node.js', 'Express', 'npm', 'yarn'],
-        projects: ['SaaS后台API', '项目管理系统后端', '文件上传服务'],
+        projects: ['数字货币交易平台API', '建筑项目管理系统后端', '前端调试工具'],
         icon: '🟢',
         color: '#339933'
       },
@@ -151,20 +162,20 @@ export const skillsData: SkillCategory[] = [
         name: 'PHP',
         level: 3,
         percentage: 70,
-        description: '具备PHP Web开发经验，了解基础的PHP语法和Web开发流程，有LAMP环境开发经验。',
-        technologies: ['PHP', 'Apache', 'LAMP'],
-        projects: ['医疗美容官网', '后台管理系统'],
+        description: '具备PHP Web开发经验，熟悉ThinkPHP框架开发，了解MVC架构和Web开发流程，有完整的项目开发经验。',
+        technologies: ['PHP', 'ThinkPHP', 'MVC', 'Apache'],
+        projects: ['医疗美容官网', '商品展示系统'],
         icon: '🐘',
         color: '#777BB4'
       },
       {
         id: 'database',
         name: '数据库技术',
-        level: 3,
-        percentage: 75,
-        description: '熟悉MySQL数据库的使用，了解基本的SQL查询、数据库设计和性能优化，具备数据库操作和维护经验。',
-        technologies: ['MySQL', 'SQL', 'Database Design'],
-        projects: ['用户数据管理', '业务数据存储', '报表查询'],
+        level: 4,
+        percentage: 80,
+        description: '熟练使用MySQL数据库进行数据设计和查询优化，掌握Redis缓存应用，具备数据库性能调优和维护经验。',
+        technologies: ['MySQL', 'Redis', 'SQL', 'Database Design', 'Query Optimization'],
+        projects: ['用户数据管理', '缓存系统设计', '业务数据存储'],
         icon: '🗄️',
         color: '#336791'
       }

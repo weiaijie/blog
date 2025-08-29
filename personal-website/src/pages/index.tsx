@@ -120,7 +120,7 @@ export default function Home() {
     <>
       <SEOHead
         title="首页"
-        description="7年经验全栈开发工程师 | Vue.js + React + Next.js + Node.js | 用代码构建美好数字世界"
+        description="7年经验全栈开发工程师 | Vue生态系统专家 | 专注前端技术，具备全栈开发能力"
         type="website"
         keywords={['全栈开发', '前端开发', '后端开发', 'React', 'Vue.js', 'Next.js', 'Node.js', '个人网站', '许辉', 'saber']}
         image="/images/home-og.jpg"
