@@ -9,19 +9,26 @@
 - 已有后端服务，至少可提供 `POST /v1/runs`。
 - Runner 机器可访问 OpenAI 与你的后端 API。
 - `codex` 命令可执行。
+- 支持平台为以下之一：
+  - WSL2 (Ubuntu 22.04/24.04 推荐)
+  - macOS 13+ (Intel/Apple Silicon)
 
 ## 输入
 
 - 用户任务描述 `prompt`
 - 执行目录 `workdir`
 - 设备身份信息（runner_id, machine_id）
+- 能力需求标签（例如 `requires_windows_ui`, `capabilities[]`）
 
 ## 执行动作
 
 1. 调用 `POST /v1/runs`，获取 `run_id` 与流地址。
+   - 同时传递能力标签，供调度器选择 WSL/macOS/Windows Runner。
 2. 校验 `workdir`：
    - 推荐为 Git 仓库根目录。
    - 非 Git 仓库仅在明确风险可控时允许继续。
+   - WSL 使用 Linux 路径（例如 `/home/<user>/...`），避免直接在 `/mnt/c` 上跑高 I/O 流程。
+   - macOS 确认 `workdir` 在本地磁盘可读写且具备执行权限。
 3. 构建最小权限策略：
    - 默认 `read-only`
    - 需要文件改动时启用 `--full-auto`
@@ -30,6 +37,9 @@
    - `CODEX_API_KEY`（或等价密钥来源）
    - `RUN_ID`
    - `RUNNER_ID`
+5. 平台自检：
+   - WSL: `uname -a` 包含 `microsoft-standard-WSL`
+   - macOS: `sw_vers` 可执行，`uname -s` 返回 `Darwin`
 
 ## 产出
 
@@ -47,4 +57,3 @@
 
 - `POST /v1/runs` 失败：指数退避重试，超过阈值直接失败退出。
 - `workdir` 不可读或不存在：直接标记 `run.failed`，不要启动 Codex。
-

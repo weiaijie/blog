@@ -28,6 +28,17 @@
 - 存储：对象存储 + 关系数据库（事件索引与 run 元信息）。
 - 前端：以 SSE 为主，WebSocket 作为控制通道可选。
 
+## 平台兼容建议（WSL + macOS）
+
+1. WSL2
+   - 使用 Ubuntu 发行版，Runner 与浏览器依赖都安装在 WSL 内。
+   - 避免将高频读写目录放在 `/mnt/c`，优先放在 Linux 文件系统。
+   - CI 与本地保持同版本 Node/Python，避免 Playwright 浏览器驱动漂移。
+2. macOS
+   - 统一用 `bash` 或 `zsh` 启动 Runner，避免 shell 差异导致 env 丢失。
+   - Apple Silicon 机器固定依赖版本，避免原生模块编译差异。
+   - Playwright 浏览器缓存目录与 artifact 目录分离，便于清理和归档。
+
 ## 产出
 
 - 安全配置基线文档
@@ -37,4 +48,3 @@
 
 - 关键密钥不会出现在普通日志。
 - 任何高权限 run 都能被审计追溯。
-

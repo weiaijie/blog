@@ -7,6 +7,7 @@
 - AI 输出停止后，Runner 继续记录自动化执行过程。
 - 监控端实时判断 `CLI 是否在工作`，区分 `running/idle/stall/offline/finished`。
 - 全程保留审计链：事件、截图、视频、trace、上传记录、最终结论。
+- 平台覆盖：优先支持 `WSL (Ubuntu)` 与 `macOS`，并提供 `Windows Desktop Runner` 处理原生 Windows UI 任务。
 
 ## 执行顺序
 
@@ -19,10 +20,11 @@
 7. `step-07-finalize-and-recovery.md`：收尾、失败恢复、重放
 8. `step-08-security-and-deploy.md`：安全与部署
 9. `step-09-acceptance.md`：验收标准与压测
+10. `platform-support.md`：WSL 与 macOS 兼容基线
+11. `windows-runner.md`：Windows 界面自动化与截图执行节点
 
 ## 最低交付标准
 
 - 事件不丢失：Runner 异常重启后可重放本地 spool。
 - 监控可解释：前端看到状态变化必须能追溯到具体事件。
 - 证据完整：失败场景至少保留 `stderr + screenshot + trace`。
-
