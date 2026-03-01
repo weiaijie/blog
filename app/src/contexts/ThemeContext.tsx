@@ -10,7 +10,7 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { lightTheme, darkTheme, Theme, ThemeMode } from '../styles/theme'; // 主题配置
-import AsyncStorage from '@react-native-async-storage/async-storage'; // 本地存储
+import { StorageUtil } from '../utils/storage'; // 跨平台存储工具
 
 /**
  * 主题Context的类型定义
@@ -69,7 +69,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const loadThemeFromStorage = async () => {
     try {
       // 从本地存储读取主题设置
-      const savedTheme = await AsyncStorage.getItem(THEME_STORAGE_KEY);
+      const savedTheme = await StorageUtil.getString(THEME_STORAGE_KEY);
 
       // 验证读取的值是否为有效的主题模式
       if (savedTheme && (savedTheme === 'light' || savedTheme === 'dark')) {
@@ -91,8 +91,8 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
    */
   const saveThemeToStorage = async (mode: ThemeMode) => {
     try {
-      // 将主题模式保存到AsyncStorage
-      await AsyncStorage.setItem(THEME_STORAGE_KEY, mode);
+      // 将主题模式保存到存储
+      await StorageUtil.setString(THEME_STORAGE_KEY, mode);
     } catch (error) {
       // 保存失败时输出警告
       console.warn('Failed to save theme to storage:', error);

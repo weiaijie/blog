@@ -12,6 +12,7 @@
 ## 功能特性
 
 ### 已实现功能
+
 - ✅ 项目基础架构搭建
 - ✅ TypeScript配置
 - ✅ ESLint和Prettier代码规范
@@ -21,6 +22,7 @@
 - ✅ 存储工具
 
 ### 计划实现功能
+
 - 🔄 用户认证系统
 - 🔄 导航系统
 - 🔄 状态管理
@@ -53,6 +55,7 @@ app/
 ## 开发环境要求
 
 ### 必需软件
+
 - Node.js 18.0+
 - npm 8.0+
 - React Native CLI
@@ -60,6 +63,7 @@ app/
 - Xcode (iOS开发，仅macOS)
 
 ### 推荐工具
+
 - VS Code
 - React Native Debugger
 - Flipper
@@ -68,22 +72,26 @@ app/
 ## 快速开始
 
 ### 1. 安装依赖
+
 ```bash
 npm install
 ```
 
 ### 2. iOS开发 (仅macOS)
+
 ```bash
 cd ios && pod install && cd ..
 npm run ios
 ```
 
 ### 3. Android开发
+
 ```bash
 npm run android
 ```
 
 ### 4. 启动Metro服务器
+
 ```bash
 npm start
 ```
@@ -102,16 +110,19 @@ npm start
 ## 代码规范
 
 ### 命名规范
+
 - 组件文件使用PascalCase: `LoginScreen.tsx`
 - 工具文件使用camelCase: `helpers.ts`
 - 常量使用UPPER_SNAKE_CASE: `API_BASE_URL`
 
 ### 文件组织
+
 - 每个组件一个文件
 - 相关文件放在同一目录
 - 使用index.ts文件导出
 
 ### 提交规范
+
 - feat: 新功能
 - fix: 修复bug
 - docs: 文档更新
@@ -123,17 +134,20 @@ npm start
 ## 技术栈详情
 
 ### 核心技术
+
 - **React Native**: 跨平台移动应用框架
 - **TypeScript**: 类型安全的JavaScript
 - **Redux Toolkit**: 状态管理
 - **React Navigation**: 导航库
 
 ### UI和样式
+
 - **React Native Elements**: UI组件库
 - **Styled Components**: CSS-in-JS样式
 - **React Native Vector Icons**: 图标库
 
 ### 开发工具
+
 - **ESLint**: 代码检查
 - **Prettier**: 代码格式化
 - **Jest**: 测试框架
@@ -142,11 +156,13 @@ npm start
 ## 学习资源
 
 ### 官方文档
+
 - [React Native官方文档](https://reactnative.dev/)
 - [TypeScript官方文档](https://www.typescriptlang.org/)
 - [Redux Toolkit文档](https://redux-toolkit.js.org/)
 
 ### 推荐教程
+
 - React Native中文网
 - 掘金React Native专栏
 - YouTube React Native教程
@@ -166,6 +182,7 @@ MIT License
 ## 联系方式
 
 如有问题或建议，请通过以下方式联系：
+
 - 邮箱: developer@example.com
 - GitHub Issues
 

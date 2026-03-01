@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qoder 历史记录查看器</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-robot"></i> Qoder 历史记录查看器</h1>
+            <div class="stats" id="stats">
+                <!-- 统计信息将通过JavaScript加载 -->
+            </div>
+        </header>
+
+        <div class="search-section">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="搜索历史记录内容...">
+                <button id="searchBtn"><i class="fas fa-search"></i> 搜索</button>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="sidebar">
+                <nav>
+                    <ul>
+                        <li class="active" data-tab="chat-sessions">
+                            <i class="fas fa-comments"></i> 聊天会话
+                            <span class="count" id="chat-sessions-count">0</span>
+                        </li>
+                        <li data-tab="editing-sessions">
+                            <i class="fas fa-edit"></i> 编辑会话
+                            <span class="count" id="editing-sessions-count">0</span>
+                        </li>
+                        <li data-tab="history-files">
+                            <i class="fas fa-history"></i> 历史文件
+                            <span class="count" id="history-files-count">0</span>
+                        </li>
+                        <li data-tab="search-results">
+                            <i class="fas fa-search"></i> 搜索结果
+                            <span class="count" id="search-results-count">0</span>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="content-area">
+                <!-- 聊天会话标签页 -->
+                <div class="tab-content active" id="chat-sessions-tab">
+                    <h2><i class="fas fa-comments"></i> 聊天会话</h2>
+                    <div class="content-list" id="chat-sessions-list">
+                        <div class="loading">加载中...</div>
+                    </div>
+                </div>
+
+                <!-- 编辑会话标签页 -->
+                <div class="tab-content" id="editing-sessions-tab">
+                    <h2><i class="fas fa-edit"></i> 编辑会话</h2>
+                    <div class="content-list" id="editing-sessions-list">
+                        <div class="loading">加载中...</div>
+                    </div>
+                </div>
+
+                <!-- 历史文件标签页 -->
+                <div class="tab-content" id="history-files-tab">
+                    <h2><i class="fas fa-history"></i> 历史文件</h2>
+                    <div class="content-list" id="history-files-list">
+                        <div class="loading">加载中...</div>
+                    </div>
+                </div>
+
+                <!-- 搜索结果标签页 -->
+                <div class="tab-content" id="search-results-tab">
+                    <h2><i class="fas fa-search"></i> 搜索结果</h2>
+                    <div class="content-list" id="search-results-list">
+                        <div class="no-results">请输入搜索词开始搜索</div>
+                    </div>
+                </div>
+
+                <!-- 文件内容查看器 -->
+                <div class="content-viewer" id="content-viewer" style="display: none;">
+                    <div class="viewer-header">
+                        <h3 id="viewer-title">文件内容</h3>
+                        <button id="close-viewer"><i class="fas fa-times"></i></button>
+                    </div>
+                    <div class="viewer-content" id="viewer-content">
+                        <!-- 文件内容将在这里显示 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 消息发送窗口 -->
+        <div class="message-panel">
+            <div class="panel-header">
+                <h3><i class="fas fa-paper-plane"></i> 发送消息</h3>
+                <button id="toggle-panel"><i class="fas fa-chevron-down"></i></button>
+            </div>
+            <div class="panel-content">
+                <textarea id="message-input" placeholder="输入要发送的消息..."></textarea>
+                <div class="panel-actions">
+                    <button id="send-message" class="send-btn">
+                        <i class="fas fa-paper-plane"></i> 发送
+                    </button>
+                    <button id="clear-message" class="clear-btn">
+                        <i class="fas fa-trash"></i> 清空
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

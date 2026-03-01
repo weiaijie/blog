@@ -32,22 +32,31 @@ import {
 } from 'react-native';
 
 import { Button, Input, Card, Loading } from '../../components/common'; // 自定义通用组件
-import { useAuth } from '../../store/slices/authSlice'; // 认证状态管理Hook
+import { useAuthContext } from '../../contexts/AuthContext'; // 认证状态管理Hook
+
+import { useNavigation } from '@react-navigation/native';
+import type { AuthStackScreenProps } from '../../navigation/navigation.types';
 
 /**
  * 登录页面组件属性接口
  */
 interface LoginScreenProps {
-  onLoginSuccess?: () => void;  // 登录成功回调函数（可选）
+  onLoginSuccess?: () => void;     // 登录成功回调函数（可选）
+  onSwitchToRegister?: () => void; // 切换到注册页面回调函数（可选）
 }
 
-const LoginScreen: React.FC<LoginScreenProps> = ({ onLoginSuccess }) => {
+const LoginScreen: React.FC<LoginScreenProps> = ({
+  onLoginSuccess,
+  onSwitchToRegister
+}) => {
+  // React Navigation导航对象
+  const navigation = useNavigation<AuthStackScreenProps<'Login'>['navigation']>();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
-  
-  const { login, loading, error } = useAuth();
+
+  const { login, loading, error } = useAuthContext();
 
   // 验证邮箱格式
   const validateEmail = (email: string): boolean => {
@@ -88,19 +97,21 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLoginSuccess }) => {
     }
 
     try {
+      console.log('开始登录，邮箱:', email, '密码:', password);
       const result = await login(email, password);
-      
+      console.log('登录结果:', result);
+
       if (result.success) {
-        Alert.alert('登录成功', '欢迎回来！', [
-          {
-            text: '确定',
-            onPress: onLoginSuccess,
-          },
-        ]);
+        console.log('登录成功，调用回调函数');
+        // 登录成功，直接调用回调函数
+        if (onLoginSuccess) {
+          onLoginSuccess();
+        }
       } else {
         Alert.alert('登录失败', result.error || '登录过程中发生错误');
       }
     } catch (err) {
+      console.error('登录异常:', err);
       Alert.alert('登录失败', '网络错误，请稍后重试');
     }
   };
@@ -112,7 +123,14 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLoginSuccess }) => {
 
   // 处理注册
   const handleRegister = () => {
-    Alert.alert('注册账户', '注册功能正在开发中...');
+    if (onSwitchToRegister) {
+      onSwitchToRegister();
+    } else if (navigation) {
+      // 使用React Navigation导航到注册页面
+      navigation.navigate('Register');
+    } else {
+      Alert.alert('注册账户', '注册功能正在开发中...');
+    }
   };
 
   // 快速登录（演示用）

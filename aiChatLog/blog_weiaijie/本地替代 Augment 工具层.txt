@@ -1,0 +1,342 @@
+````md
+# 本地替代 Augment 工具层（5k+ 文件规模）执行清单｜整理版
+
+> 目标：本地实现「项目索引 + 工具链」，达到 Augment 工具层约 70–85% 效果  
+> 关键能力：可持续增量索引 / 可检索 / 可生成&应用 patch / 可做影响面分析 / 可规则门禁
+
+---
+
+## 0. 最终交付形态（你完成后应该能做到）
+
+一条命令或 VS Code 一键完成：
+
+1) 定位：`order_id 在哪用到？支付→分账链路有哪些文件？`
+- 输出：文件列表 + 行号 + 代码片段 +（可选）调用链/跳转信息
+
+2) 改动：`把逻辑重构为 xxx，生成最小 diff`
+- 输出：可 apply 的 `changes.patch` + 风险点 + 回滚方式
+
+3) 影响面：`这次改动影响哪些路由/API/测试？`
+- 输出：引用列表 + 依赖上下游 + 可能受影响的路由/API/测试
+
+4) 提交前门禁：规则不通过阻止提交/合并
+- 输出：规则名 + 命中文件/行范围 + 修复建议
+
+---
+
+## 1. 目录与产物（必须创建）
+
+在项目根目录创建：
+
+```text
+.local-augment/
+  config.yaml
+  index/
+    file_index.jsonl
+    symbol_index.jsonl
+    deps_graph.json              # 可选
+    vector_store/
+  cache/
+  rules/
+    rules.yaml
+    allowlist.txt
+    denylist.txt
+  reports/
+    impact_report.md
+    changes.patch
+  prompts/
+    system.md
+    templates.md
+````
+
+### 验收
+
+* `.local-augment/index/` 索引可复用（支持增量，不是每次全量）
+* `.local-augment/reports/changes.patch` 可 `git apply` 成功
+
+---
+
+## 2. 六大模块（做什么 / 产物 / 验收）
+
+### 模块 A：项目索引（Indexing）
+
+**A1. 做什么**
+
+* 扫描项目文件，过滤无关目录（node_modules/vendor/dist 等）
+* 建立文件索引：路径、语言、大小、mtime、hash
+* 建立符号索引：函数/类/接口/字段，行号范围
+* 代码切 chunk（按函数/类优先；否则 200–400 行）
+* 对 chunk 计算 embedding，写入向量库
+* 支持增量索引：只更新改动文件（mtime/hash）
+
+**A2. 产物**
+
+* `index/file_index.jsonl`
+* `index/symbol_index.jsonl`
+* `index/vector_store/`
+
+**A3. 验收**
+
+* 关键词（如 `actual_pay_order_id`）1–3 秒返回相关 chunk
+* 函数名（如 `processSupplierWechatTransfer`）能返回定义 + 引用（≥70%）
+* 重新运行索引只处理改动文件
+
+---
+
+### 模块 B：代码搜索（Search）
+
+**B1. 做什么**
+
+* 统一三类搜索入口：
+
+  * 文本搜索：精确定位（rg/grep）
+  * 符号搜索：定义/引用（symbol_index）
+  * 语义搜索：找类似实现/链路（向量库 topK）
+
+**B2. 产物（统一 CLI/接口）**
+
+```bash
+search --text "foo"
+search --symbol "OrderService"
+search --semantic "where refund updates supplier settlement"
+```
+
+**B3. 验收**
+
+* 文本搜索命中率 100%
+* 符号搜索能区分定义/引用（≥70% 可用）
+* 语义搜索 top10 能给出合理结果（5k+ 文件仍可用）
+
+---
+
+### 模块 C：依赖分析（Dependency Graph）
+
+**C1. 做什么**
+
+* 解析 import/require/use（按语言分别处理）
+* 构建依赖图 A->B（A 依赖 B）
+* 支持反向查询：谁依赖我、我依赖谁
+* 处理 TS/JS 路径别名（如 `@/`）
+
+**C2. 产物**
+
+* `index/deps_graph.json`（可选但建议）
+* 命令：
+
+```bash
+deps --who-uses path/to/file
+deps --depends-on path/to/file
+```
+
+**C3. 验收**
+
+* 任意核心文件输出：
+
+  * 1 跳依赖
+  * 2–3 跳依赖
+* TS/JS 项目能正确识别别名路径
+
+---
+
+### 模块 D：diff / patch（Patch Engine）
+
+**D1. 做什么**
+
+* 生成最小 diff（避免整文件重写）
+* 支持 apply / revert
+* 支持 dry-run（只输出 patch）
+
+**D2. 产物**
+
+* `reports/changes.patch`
+* 命令：
+
+```bash
+patch --from HEAD --to WORKTREE
+patch --apply reports/changes.patch
+patch --revert reports/changes.patch
+```
+
+**D3. 验收**
+
+* `git apply reports/changes.patch` 成功
+* patch 只包含必要改动（不膨胀）
+* revert 后工作区回到改动前状态
+
+---
+
+### 模块 E：影响面分析（Impact Analysis）
+
+**E1. 做什么**
+
+* 输入：变更文件/符号（来自 diff/patch）
+* 计算：
+
+  * 直接引用（符号索引 + 文本补充）
+  * 依赖上下游（deps_graph，2 跳为主）
+  * 路由/API 影响（路由表/控制器映射规则提取）
+  * 测试影响（按目录/命名规则）
+
+**E2. 产物**
+
+* `reports/impact_report.md`
+* 命令：
+
+```bash
+impact --patch reports/changes.patch
+```
+
+**E3. 报告模板（必须固定格式）**
+
+```md
+# Impact Report
+
+## Changed Files
+- fileA (lines ...)
+- fileB (lines ...)
+
+## Changed Symbols
+- Class/Function/Field ...
+
+## Direct References (who uses)
+- fileX:line
+- fileY:line
+
+## Dependency Upstream/Downstream
+- upstream: ...
+- downstream: ...
+
+## API/Routes Potentially Affected
+- GET /api/...
+- POST /api/...
+
+## Tests Potentially Affected
+- tests/...
+
+## Risk Notes
+- ...
+```
+
+**E4. 验收**
+
+* 改一个核心 service：
+
+  * 输出直接引用文件列表
+  * 输出依赖上下游 2 跳范围
+* 生成时间：5k+ 文件 < 30 秒（可接受）
+
+---
+
+### 模块 F：规则校验（Rules & Guardrails）
+
+**F1. 做什么**
+基于 patch 做“变更门禁”校验：
+
+* 禁止修改目录（vendor/dist/migrations 等）
+* 禁止修改关键接口签名/响应结构（AST 或约定扫描）
+* 禁止 SQL 字段语义变更（维护 schema baseline）
+* 强制更新日志/文档（例如改支付逻辑必须改 docs/payment.md）
+
+**F2. 产物**
+
+* `rules/rules.yaml`
+* 命令：
+
+```bash
+rules --patch reports/changes.patch
+```
+
+**F3. 验收**
+
+* 命中规则输出：
+
+  * 规则名
+  * 文件 + 行范围
+  * 修复建议
+* 可接入 git hook / CI：
+
+  * pre-commit / pre-push / pipeline step
+
+---
+
+## 3. 约束文件（让 LLM 正确使用工具层）
+
+创建：`prompts/system.md`，必须写清楚：
+
+* 项目结构与目录职责
+* 核心业务链路（支付/分账/退款/结算）
+* 禁止事项（不得改哪些目录/接口）
+* 输出规范（必须引用文件路径+行号；必须给 patch；必须给风险点与回滚）
+
+### 验收
+
+* 模型输出包含：
+
+  * 文件路径
+  * 符号名
+  * 行号范围
+  * 风险点
+  * 回滚建议
+  * 可 apply 的 patch
+
+---
+
+## 4. MVP 顺序（按周拆解）
+
+* 第 1 周：A + B（索引 + 搜索）
+* 第 2 周：D（patch）
+* 第 3 周：C + E（依赖 + 影响面闭环）
+* 第 4 周：F（规则门禁）
+
+---
+
+## 5. 验收用例（用于判定达到 8 成效果）
+
+1. 定位链路
+
+* 输入：`search --semantic "支付成功后如何触发分账"`
+* 期望：top10 返回关键 service/controller/job 文件
+
+2. 字段影响面
+
+* 输入：`search --symbol "actual_pay_order_id"`
+* 期望：字段定义 + 引用列表（≥70% 位置准确）
+
+3. 生成 patch
+
+* 输入：让模型做一个小改动（校验/日志）
+* 期望：输出 `changes.patch` 且可 `git apply`
+
+4. 影响面报告
+
+* 输入：`impact --patch reports/changes.patch`
+* 期望：引用列表 + 依赖上下游 + 风险提示
+
+5. 规则门禁
+
+* 输入：故意改禁止目录或接口签名
+* 期望：`rules` 报错并阻止提交
+
+---
+
+## 6. 最终命令集合（建议固定）
+
+```text
+index        # 建索引（支持增量）
+search       # 搜索（text/symbol/semantic）
+deps         # 依赖分析（who-uses/depends-on）
+patch        # 生成/应用/回滚 patch
+impact       # 影响面报告
+rules        # 规则校验（基于 patch）
+```
+
+---
+
+## 7. 立即开始的 3 件事（最具体）
+
+1. 创建 `.local-augment/` 目录结构
+2. 写 `config.yaml`：明确索引白名单/黑名单
+3. 先把模块 A 做可用：生成 `file_index / symbol_index / vector_store`
+
+```
+```

@@ -12,33 +12,66 @@ import {
   Alert,
   Switch,
 } from 'react-native';
+import { useTheme } from '../../contexts/ThemeContext';
+import { useAuthContext } from '../../contexts/AuthContext';
 
 const ProfileScreen: React.FC = () => {
+  const { theme, themeMode, toggleTheme } = useTheme();
+  const { user, logout } = useAuthContext();
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
-  const [darkModeEnabled, setDarkModeEnabled] = useState(false);
 
   const handleMenuPress = (menuName: string) => {
     Alert.alert('菜单', `${menuName} 功能正在开发中...`);
+  };
+
+  // 处理退出登录
+  const handleLogout = () => {
+    Alert.alert(
+      '退出登录',
+      '确定要退出登录吗？',
+      [
+        {
+          text: '取消',
+          style: 'cancel',
+        },
+        {
+          text: '确定',
+          style: 'destructive',
+          onPress: () => {
+            logout();
+          },
+        },
+      ]
+    );
   };
 
   const menuItems = [
     { id: 1, title: '编辑个人信息', icon: '✏️', action: () => handleMenuPress('编辑个人信息') },
     { id: 2, title: '账户安全', icon: '🔒', action: () => handleMenuPress('账户安全') },
     { id: 3, title: '隐私设置', icon: '🛡️', action: () => handleMenuPress('隐私设置') },
-    { id: 4, title: '帮助与反馈', icon: '❓', action: () => handleMenuPress('帮助与反馈') },
-    { id: 5, title: '关于应用', icon: 'ℹ️', action: () => handleMenuPress('关于应用') },
+    { id: 4, title: '主题切换', icon: '🌓', action: toggleTheme },
+    { id: 5, title: '帮助与反馈', icon: '❓', action: () => handleMenuPress('帮助与反馈') },
+    { id: 6, title: '关于应用', icon: 'ℹ️', action: () => handleMenuPress('关于应用') },
+    { id: 7, title: '退出登录', icon: '🚪', action: handleLogout, isDestructive: true },
   ];
 
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+    <ScrollView
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
+      showsVerticalScrollIndicator={false}
+    >
       <View style={styles.content}>
         {/* 用户信息卡片 */}
-        <View style={styles.userCard}>
+        <View style={[styles.userCard, { backgroundColor: theme.colors.surface }]}>
           <View style={styles.avatar}>
             <Text style={styles.avatarText}>👤</Text>
           </View>
-          <Text style={styles.userName}>学习者</Text>
-          <Text style={styles.userEmail}>learner@example.com</Text>
+          <Text style={[styles.userName, { color: theme.colors.text }]}>
+            {user?.username || '学习者'}
+          </Text>
+          <Text style={[styles.userEmail, { color: theme.colors.textSecondary }]}>
+            {user?.email || 'learner@example.com'}
+          </Text>
           <TouchableOpacity 
             style={styles.editButton}
             onPress={() => handleMenuPress('编辑资料')}
@@ -79,8 +112,8 @@ const ProfileScreen: React.FC = () => {
         </View>
 
         {/* 菜单列表 */}
-        <View style={styles.menuSection}>
-          <Text style={styles.sectionTitle}>更多功能</Text>
+        <View style={[styles.menuSection, { backgroundColor: theme.colors.surface }]}>
+          <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>更多功能</Text>
           {menuItems.map((item) => (
             <TouchableOpacity
               key={item.id}
@@ -90,9 +123,14 @@ const ProfileScreen: React.FC = () => {
             >
               <View style={styles.menuLeft}>
                 <Text style={styles.menuIcon}>{item.icon}</Text>
-                <Text style={styles.menuTitle}>{item.title}</Text>
+                <Text style={[
+                  styles.menuTitle,
+                  { color: (item as any).isDestructive ? theme.colors.error : theme.colors.text }
+                ]}>
+                  {item.title}
+                </Text>
               </View>
-              <Text style={styles.menuArrow}>›</Text>
+              <Text style={[styles.menuArrow, { color: theme.colors.textSecondary }]}>›</Text>
             </TouchableOpacity>
           ))}
         </View>

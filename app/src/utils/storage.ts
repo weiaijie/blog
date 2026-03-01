@@ -1,6 +1,59 @@
 // 本地存储工具
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Platform } from 'react-native';
 import { STORAGE_KEYS } from './constants';
+
+// 跨平台存储适配器
+let AsyncStorage: any;
+
+try {
+  if (Platform.OS === 'web') {
+    // Web平台使用localStorage
+    AsyncStorage = {
+      getItem: async (key: string) => {
+        try {
+          return localStorage.getItem(key);
+        } catch (error) {
+          console.warn('localStorage getItem error:', error);
+          return null;
+        }
+      },
+      setItem: async (key: string, value: string) => {
+        try {
+          localStorage.setItem(key, value);
+        } catch (error) {
+          console.warn('localStorage setItem error:', error);
+        }
+      },
+      removeItem: async (key: string) => {
+        try {
+          localStorage.removeItem(key);
+        } catch (error) {
+          console.warn('localStorage removeItem error:', error);
+        }
+      },
+      clear: async () => {
+        try {
+          localStorage.clear();
+        } catch (error) {
+          console.warn('localStorage clear error:', error);
+        }
+      },
+    };
+  } else {
+    // React Native平台使用AsyncStorage
+    AsyncStorage = require('@react-native-async-storage/async-storage').default;
+  }
+} catch (error) {
+  console.warn('Storage initialization error:', error);
+  // 回退到内存存储
+  const memoryStorage = new Map();
+  AsyncStorage = {
+    getItem: async (key: string) => memoryStorage.get(key) || null,
+    setItem: async (key: string, value: string) => memoryStorage.set(key, value),
+    removeItem: async (key: string) => memoryStorage.delete(key),
+    clear: async () => memoryStorage.clear(),
+  };
+}
 
 // 存储工具类
 export class StorageUtil {

@@ -13,13 +13,17 @@
     "test:ci": "jest --ci --coverage --watchAll=false"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
     "framer-motion": "^12.10.4",
     "next": "^13.4.19",
+    "nodemailer": "^7.0.9",
     "prismjs": "^1.30.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.65.0",
     "react-markdown": "^10.1.0",
-    "remark-gfm": "^4.0.1"
+    "remark-gfm": "^4.0.1",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.17.0",
@@ -27,6 +31,7 @@
     "@testing-library/user-event": "^14.6.1",
     "@types/jest": "^29.5.14",
     "@types/node": "^20.5.9",
+    "@types/nodemailer": "^6.4.20",
     "@types/prismjs": "^1.26.5",
     "@types/react": "^18.2.21",
     "eslint": "^8.48.0",

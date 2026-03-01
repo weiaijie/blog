@@ -20,7 +20,6 @@
  */
 
 import { configureStore } from '@reduxjs/toolkit';
-import authReducer from './slices/authSlice';
 
 /**
  * 创建Redux Store
@@ -29,11 +28,16 @@ import authReducer from './slices/authSlice';
  * - reducer: 组合所有功能模块的reducer
  * - middleware: 配置中间件，包括序列化检查
  * - devTools: 自动启用Redux DevTools（仅开发环境）
+ *
+ * 注意：目前为简化版本，主要用于学习目的
+ * 实际的状态管理通过Context和自定义Hooks实现
  */
 export const store = configureStore({
   reducer: {
-    auth: authReducer,  // 用户认证状态管理
+    // 暂时使用一个简单的reducer来避免空reducer错误
+    app: (state = { initialized: true }, action) => state,
     // 可以在这里添加更多的reducer
+    // auth: authReducer,  // 用户认证状态管理（目前使用自定义Hook）
     // theme: themeReducer,  // 主题状态管理（目前使用Context）
     // todos: todosReducer,  // 待办事项状态管理（目前使用本地状态）
   },
@@ -64,3 +68,12 @@ export type RootState = ReturnType<typeof store.getState>;
  * const dispatch: AppDispatch = useDispatch();
  */
 export type AppDispatch = typeof store.dispatch;
+
+// ==================== 导出认证相关功能 ====================
+
+/**
+ * 导出认证Hook和类型
+ * 虽然我们使用了简化的Redux store，但认证功能通过自定义Hook实现
+ */
+export { default as useAuth } from './slices/authSlice';
+export type { User, AuthState } from './slices/authSlice';

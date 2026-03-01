@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="280" height="280" viewBox="0 0 280 280">
+  <defs>
+    <radialGradient id="wheelGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff6c1" />
+      <stop offset="100%" stop-color="#f2c94c" />
+    </radialGradient>
+  </defs>
+  <circle cx="140" cy="140" r="138" fill="url(#wheelGlow)" stroke="#b36b00" stroke-width="4" />
+  <g stroke="#b36b00" stroke-width="3">
+    <line x1="140" y1="140" x2="140" y2="2" />
+    <line x1="140" y1="140" x2="259.5" y2="71" />
+    <line x1="140" y1="140" x2="259.5" y2="209" />
+    <line x1="140" y1="140" x2="140" y2="278" />
+    <line x1="140" y1="140" x2="20.5" y2="209" />
+    <line x1="140" y1="140" x2="20.5" y2="71" />
+  </g>
+  <circle cx="140" cy="140" r="8" fill="#b36b00" />
+</svg>

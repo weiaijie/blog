@@ -11,7 +11,9 @@ import React from 'react';
 import { Provider } from 'react-redux'; // Redux状态管理Provider
 import { store } from './store'; // Redux store配置
 import { ThemeProvider } from './contexts/ThemeContext'; // 主题管理Context
-import AppNavigator from './navigation/AppNavigator'; // 应用导航组件
+import { AuthProvider } from './contexts/AuthContext'; // 认证上下文提供者
+// import MainAppNavigator from './navigation/components/MainAppNavigator'; // 旧的导航组件
+import RNAppNavigator from './navigation/RNAppNavigator'; // React Navigation导航组件
 
 /**
  * 应用主组件
@@ -32,8 +34,11 @@ const App: React.FC = () => {
     <Provider store={store}>
       {/* 主题Provider: 为整个应用提供主题管理功能 */}
       <ThemeProvider>
-        {/* 应用导航: 管理页面间的切换和路由 */}
-        <AppNavigator />
+        {/* 认证提供者: 为整个应用提供认证状态管理 */}
+        <AuthProvider>
+          {/* React Navigation导航: 根据登录状态显示不同界面，支持URL路由 */}
+          <RNAppNavigator />
+        </AuthProvider>
       </ThemeProvider>
     </Provider>
   );

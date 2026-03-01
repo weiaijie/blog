@@ -19,3 +19,4 @@ Thumbs.db
 .idea/
 *.sublime-*
 /.vscode
+/app/.expo
