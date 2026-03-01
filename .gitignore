@@ -17,3 +17,5 @@ LearningProjects/nestapp/node_modules
 /app/node_modules
 /app/.expo/web
 .venv
+
+*:Zone.Identifier
