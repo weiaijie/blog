@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Qoder Mobile</title>
+  <style>
+    :root {
+      --bg: #f3f0ea;
+      --panel: #fffaf2;
+      --accent: #1d4e89;
+      --muted: #6b6b6b;
+      --ink: #222;
+      --border: #e3dccf;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Space Grotesk", "Avenir Next", "PingFang SC", sans-serif;
+      background: linear-gradient(180deg, #f7f2e9 0%, #efe7d9 100%);
+      color: var(--ink);
+    }
+    header {
+      padding: 12px 16px;
+      background: var(--panel);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    header h1 {
+      font-size: 16px;
+      margin: 0;
+      letter-spacing: 0.6px;
+      white-space: nowrap;
+    }
+    header .actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    button {
+      border: 1px solid var(--border);
+      background: #fff;
+      padding: 8px 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      padding: 12px;
+    }
+    @media (min-width: 900px) {
+      .layout {
+        grid-template-columns: 320px 1fr;
+        height: calc(100vh - 56px);
+      }
+      .list, .detail { height: 100%; }
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 12px;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.06);
+    }
+    .list {
+      overflow: auto;
+    }
+    .session {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      background: #fff;
+    }
+    .session.active { border-color: var(--accent); }
+    .session .title { font-weight: 700; margin-bottom: 6px; }
+    .session .preview { color: #444; font-size: 12px; margin-bottom: 6px; }
+    .session .meta { color: var(--muted); font-size: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
+    .session .tag { border: 1px solid var(--border); border-radius: 999px; padding: 2px 8px; font-size: 11px; background: #fff; }
+
+    .detail {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-height: 0;
+    }
+    .detail-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding-bottom: 6px;
+      border-bottom: 1px dashed var(--border);
+    }
+    .detail-title { font-weight: 700; font-size: 16px; }
+    .detail-meta { color: var(--muted); font-size: 12px; margin-top: 4px; }
+    .messages {
+      flex: 1;
+      overflow: auto;
+      padding-right: 6px;
+      min-height: 0;
+    }
+    .msg {
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #fff;
+    }
+    .msg.user { border-left: 4px solid var(--accent); }
+    .msg.summary { border-left: 4px solid #b07a00; background: #fff7e6; }
+    .msg .role { font-weight: 700; font-size: 12px; color: var(--muted); }
+    .msg .text { white-space: pre-wrap; }
+
+    .input {
+      position: sticky;
+      bottom: 0;
+      display: flex;
+      gap: 8px;
+      align-items: flex-end;
+      padding-top: 8px;
+      background: var(--panel);
+      border-top: 1px solid var(--border);
+      z-index: 2;
+    }
+    .input textarea {
+      flex: 1;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      padding: 10px;
+      min-height: 60px;
+      font-family: inherit;
+    }
+    .input button {
+      min-width: 84px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+    }
+    .hint { font-size: 12px; color: var(--muted); }
+    .row { display: flex; gap: 8px; align-items: center; }
+    .search { width: 180px; padding: 6px 8px; border-radius: 8px; border: 1px solid var(--border); }
+    .qr {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      font-size: 12px;
+      color: var(--muted);
+      flex-wrap: wrap;
+    }
+    .qr img { border: 1px solid var(--border); border-radius: 8px; }
+    .mini { font-size: 12px; color: var(--muted); }
+    .focus { width: 140px; padding: 6px 8px; border-radius: 8px; border: 1px solid var(--border); }
+    .cmd { width: 220px; padding: 6px 8px; border-radius: 8px; border: 1px solid var(--border); }
+    .pre { width: 220px; padding: 6px 8px; border-radius: 8px; border: 1px solid var(--border); }
+    .win { width: 200px; padding: 6px 8px; border-radius: 8px; border: 1px solid var(--border); }
+  </style>
+</head>
+<body>
+<header>
+  <h1>Qoder Mobile</h1>
+  <div class="actions">
+    <input id="search" class="search" placeholder="搜索会话/消息" />
+    <select id="windowSelect" class="win"></select>
+    <button id="refreshWindows">窗口</button>
+    <input id="preKeys" class="pre" placeholder="预操作按键 如 cmd+1@1,cmd+l@1,cmd+l@1" />
+    <input id="keyDelay" class="focus" placeholder="按键间隔 如 1" />
+    <input id="preWait" class="focus" placeholder="粘贴前等待 如 1" />
+    <input id="postWait" class="focus" placeholder="回车前等待 如 1" />
+    <input id="focusKey" class="focus" placeholder="聚焦快捷键 如 cmd+l" />
+    <input id="paletteCmd" class="cmd" placeholder="命令面板指令，可多条用 ;; 分隔" />
+    <label class="row"><input type="checkbox" id="clearInput" checked />清空输入框</label>
+    <label class="row"><input type="checkbox" id="hideEncrypted" checked />隐藏加密</label>
+    <label class="row"><input type="checkbox" id="hideTool" checked />隐藏工具</label>
+    <label class="row"><input type="checkbox" id="autoRefresh" checked />自动刷新</label>
+    <button id="refresh">刷新</button>
+  </div>
+</header>
+
+<div class="layout">
+  <div class="panel list" id="sessionList"></div>
+  <div class="panel detail">
+    <div class="detail-head">
+      <div>
+        <div class="detail-title" id="sessionTitle">选择一个会话</div>
+        <div class="detail-meta" id="sessionMeta"></div>
+        <div class="mini" id="detailStatus"></div>
+      </div>
+      <div>
+        <div class="qr" id="qrBox"></div>
+        <div class="mini" id="stats"></div>
+      </div>
+    </div>
+    <div class="messages" id="messages"></div>
+    <div class="input">
+      <textarea id="input" placeholder="在这里输入，然后发送到 Qoder"></textarea>
+      <button id="send">发送</button>
+    </div>
+    <div class="hint">发送会自动切回 Qoder 并粘贴回车（需要系统辅助功能权限）。</div>
+  </div>
+</div>
+
+<script>
+  const sessionList = document.getElementById('sessionList');
+  const messagesEl = document.getElementById('messages');
+  const refreshBtn = document.getElementById('refresh');
+  const sendBtn = document.getElementById('send');
+  const inputEl = document.getElementById('input');
+  const searchEl = document.getElementById('search');
+  const autoRefreshEl = document.getElementById('autoRefresh');
+  const qrBox = document.getElementById('qrBox');
+  const statsEl = document.getElementById('stats');
+  const sessionTitleEl = document.getElementById('sessionTitle');
+  const sessionMetaEl = document.getElementById('sessionMeta');
+  const detailStatusEl = document.getElementById('detailStatus');
+  const windowSelectEl = document.getElementById('windowSelect');
+  const refreshWindowsBtn = document.getElementById('refreshWindows');
+  const keyDelayEl = document.getElementById('keyDelay');
+  const preWaitEl = document.getElementById('preWait');
+  const postWaitEl = document.getElementById('postWait');
+  const focusKeyEl = document.getElementById('focusKey');
+  const paletteCmdEl = document.getElementById('paletteCmd');
+  const preKeysEl = document.getElementById('preKeys');
+  const clearInputEl = document.getElementById('clearInput');
+  const hideEncryptedEl = document.getElementById('hideEncrypted');
+  const hideToolEl = document.getElementById('hideTool');
+
+  let currentSessionKey = null;
+  let sessionMap = {};
+  let timer = null;
+
+  function buildQr() {
+    const url = location.origin;
+    const imgUrl = `https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${encodeURIComponent(url)}`;
+    qrBox.innerHTML = `<img src="${imgUrl}" width="160" height="160" alt="QR" /> <div>${url}</div>`;
+  }
+
+  async function loadWindows() {
+    try {
+      const res = await fetch('/api/windows');
+      const data = await res.json();
+      const selected = localStorage.getItem('qoderWindow') || '';
+      windowSelectEl.innerHTML = '';
+      const opt0 = document.createElement('option');
+      opt0.value = '';
+      opt0.textContent = '自动选择窗口';
+      windowSelectEl.appendChild(opt0);
+      (data.windows || []).forEach(w => {
+        const opt = document.createElement('option');
+        opt.value = w;
+        opt.textContent = w;
+        if (w === selected) opt.selected = true;
+        windowSelectEl.appendChild(opt);
+      });
+    } catch (e) {
+      windowSelectEl.innerHTML = '<option value="">自动选择窗口</option>';
+    }
+  }
+
+  async function loadStats() {
+    const res = await fetch('/api/stats');
+    const data = await res.json();
+    statsEl.textContent = `源: ${data.sources.length} · 自动扫描: ${data.auto_scan} · 额外文件: ${data.extra_files} · 本地历史: ${data.local_history || 0} · LocalDB: ${data.local_db_messages || 0} · 会话: ${data.sessions} · 消息: ${data.messages}`;
+  }
+
+  async function loadSessions(refresh=false) {
+    const q = searchEl.value.trim();
+    const res = await fetch(`/api/sessions?q=${encodeURIComponent(q)}&refresh=${refresh ? 1 : 0}`);
+    const data = await res.json();
+    sessionList.innerHTML = '';
+    sessionMap = {};
+    data.sessions.forEach(s => {
+      sessionMap[s.session_key] = s;
+      const div = document.createElement('div');
+      div.className = 'session' + (s.session_key === currentSessionKey ? ' active' : '');
+      const start = s.start ? s.start.replace('T', ' ') : '';
+      const end = s.end ? s.end.replace('T', ' ') : '';
+      let sourceTag = 'log';
+      if (s.source_file && s.source_file.includes('state.vscdb')) sourceTag = 'local';
+      if (s.source_file && s.source_file.includes('local.db')) sourceTag = 'localdb';
+      const preview = s.preview || (sourceTag === 'local' ? '仅历史摘要' : '');
+      div.innerHTML = `
+        <div class="title">${escapeHtml(s.title || 'Untitled')}</div>
+        <div class="preview">${escapeHtml(preview)}</div>
+        <div class="meta">
+          <span class="tag">${sourceTag}</span>
+          <span>${s.count || 0} 条</span>
+          <span>${end || start || ''}</span>
+        </div>
+      `;
+      div.onclick = () => selectSession(s.session_key);
+      sessionList.appendChild(div);
+    });
+    if (!currentSessionKey && data.sessions.length) {
+      selectSession(data.sessions[0].session_key);
+    }
+  }
+
+  async function selectSession(sessionKey) {
+    currentSessionKey = sessionKey;
+    await loadMessages(sessionKey, true);
+    await loadSessions(false);
+  }
+
+  async function loadMessages(sessionKey, refresh=false) {
+    const q = searchEl.value.trim();
+    let data = {messages: []};
+    try {
+      const res = await fetch(`/api/session?session_key=${encodeURIComponent(sessionKey)}&q=${encodeURIComponent(q)}&refresh=${refresh ? 1 : 0}`);
+      data = await res.json();
+    } catch (e) {
+      data = {messages: [], error: String(e)};
+    }
+    messagesEl.innerHTML = '';
+    const meta = sessionMap[sessionKey];
+    if (meta) {
+      sessionTitleEl.textContent = meta.title || 'Untitled';
+      const end = meta.end ? meta.end.replace('T', ' ') : '';
+      const start = meta.start ? meta.start.replace('T', ' ') : '';
+      const count = meta.count || 0;
+      const src = meta.source_file || '';
+      const tail = src ? src.split('/').slice(-2).join('/') : '';
+      let localTag = '完整';
+      if (src.includes('state.vscdb')) localTag = '仅历史';
+      if (src.includes('local.db')) localTag = 'localdb';
+      sessionMetaEl.textContent = `${start || ''}${end ? ' ~ ' + end : ''} · ${count} 条 · ${localTag} · ${tail}`;
+    }
+    const msgCount = Array.isArray(data.messages) ? data.messages.length : 0;
+    detailStatusEl.textContent = data.error ? `加载失败: ${data.error}` : `消息数: ${msgCount}`;
+    if (!msgCount) {
+      const empty = document.createElement('div');
+      empty.className = 'msg summary';
+      const err = data.error ? `错误: ${data.error}` : '该会话暂无详细内容，可能仅有标题/历史摘要。';
+      empty.innerHTML = `<div class="role">summary</div><div class="text">${escapeHtml(err)}</div>`;
+      messagesEl.appendChild(empty);
+    }
+    const hideEncrypted = hideEncryptedEl.checked;
+    const hideTool = hideToolEl.checked;
+    (data.messages || []).forEach(m => {
+      const div = document.createElement('div');
+      const role = (m.role || '').toLowerCase();
+      if (hideTool && role === 'tool') return;
+      if (hideEncrypted && (m.content || '') === '[encrypted]') return;
+      div.className = 'msg ' + (role === 'user' ? 'user' : (role === 'summary' ? 'summary' : ''));
+      const text = (m.content || '').toString().replace(/\n/g, '\n');
+      div.innerHTML = `
+        <div class="role">${m.role} · ${m.timestamp || ''}</div>
+        <div class="text">${escapeHtml(text)}</div>
+      `;
+      messagesEl.appendChild(div);
+    });
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+
+  async function sendMessage() {
+    const text = inputEl.value.trim();
+    if (!text) return;
+    const focusKey = (focusKeyEl.value || '').trim();
+    const paletteCmd = (paletteCmdEl.value || '').trim();
+    const preKeys = (preKeysEl.value || '').trim();
+    const targetWindow = (windowSelectEl.value || '').trim();
+    const keyDelay = parseFloat((keyDelayEl.value || '0.1').trim()) || 0.1;
+    const preWait = parseFloat((preWaitEl.value || '0').trim()) || 0.0;
+    const postWait = parseFloat((postWaitEl.value || '0.1').trim()) || 0.1;
+    const clearInput = clearInputEl.checked;
+    localStorage.setItem('qoderFocusKey', focusKey);
+    localStorage.setItem('qoderPaletteCmd', paletteCmd);
+    localStorage.setItem('qoderPreKeys', preKeys);
+    localStorage.setItem('qoderKeyDelay', String(keyDelay));
+    localStorage.setItem('qoderPreWait', String(preWait));
+    localStorage.setItem('qoderPostWait', String(postWait));
+    localStorage.setItem('qoderClearInput', clearInput ? '1' : '0');
+    localStorage.setItem('qoderWindow', targetWindow);
+    sendBtn.disabled = true;
+    try {
+      await fetch('/api/send', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({text, focus_key: focusKey, palette_cmd: paletteCmd, pre_keys: preKeys, target_window: targetWindow, clear_input: clearInput, key_delay: keyDelay, pre_wait: preWait, post_wait: postWait})
+      });
+      inputEl.value = '';
+    } finally {
+      sendBtn.disabled = false;
+    }
+  }
+
+  function escapeHtml(str) {
+    str = (str || '').toString();
+    return str
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;');
+  }
+
+  function startAutoRefresh() {
+    if (timer) clearInterval(timer);
+    if (!autoRefreshEl.checked) return;
+    timer = setInterval(async () => {
+      await loadSessions(true);
+      await loadStats();
+      if (currentSessionKey) {
+        await loadMessages(currentSessionKey, true);
+      }
+    }, 5000);
+  }
+
+  refreshBtn.onclick = () => { loadSessions(true); loadStats(); };
+  sendBtn.onclick = sendMessage;
+  searchEl.oninput = () => { loadSessions(false); if (currentSessionKey) loadMessages(currentSessionKey, false); };
+  autoRefreshEl.onchange = startAutoRefresh;
+  refreshWindowsBtn.onclick = loadWindows;
+  hideEncryptedEl.onchange = () => { if (currentSessionKey) loadMessages(currentSessionKey, false); localStorage.setItem('qoderHideEncrypted', hideEncryptedEl.checked ? '1' : '0'); };
+  hideToolEl.onchange = () => { if (currentSessionKey) loadMessages(currentSessionKey, false); localStorage.setItem('qoderHideTool', hideToolEl.checked ? '1' : '0'); };
+
+  buildQr();
+  focusKeyEl.value = localStorage.getItem('qoderFocusKey') || '';
+  paletteCmdEl.value = localStorage.getItem('qoderPaletteCmd') || '';
+  preKeysEl.value = localStorage.getItem('qoderPreKeys') || 'cmd+1@1,cmd+l@1,cmd+l@1';
+  keyDelayEl.value = localStorage.getItem('qoderKeyDelay') || '1';
+  preWaitEl.value = localStorage.getItem('qoderPreWait') || '1';
+  postWaitEl.value = localStorage.getItem('qoderPostWait') || '1';
+  clearInputEl.checked = (localStorage.getItem('qoderClearInput') || '1') === '1';
+  hideEncryptedEl.checked = (localStorage.getItem('qoderHideEncrypted') || '1') === '1';
+  hideToolEl.checked = (localStorage.getItem('qoderHideTool') || '1') === '1';
+  loadWindows();
+  loadSessions(false);
+  loadStats();
+  startAutoRefresh();
+</script>
+</body>
+</html>

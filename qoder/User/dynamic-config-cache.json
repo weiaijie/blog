@@ -1,0 +1,634 @@
+{
+  "version": "1.0.1",
+  "fetchTime": 1770279112297,
+  "publishTime": "2026-02-05T08:05:11.034Z",
+  "content": {
+    "quest-examples": [
+      {
+        "id": "spec-1",
+        "modeId": "spec",
+        "scenario": "spec",
+        "title": {
+          "zh": "异步任务队列系统",
+          "en": "Async Task Queue System"
+        },
+        "prefillText": {
+          "zh": "我需要一个后台任务处理系统。用户会触发一些耗时操作，比如发邮件、生成报告、处理上传的文件，这些不能阻塞主请求。\n\n需求：\n- 任务可以设置优先级（高/普通/低）\n- 失败的任务自动重试最多3次，每次等待时间递增\n- 跟踪任务状态（等待中/执行中/完成/失败）\n- 并发处理任务（worker数量可配置）\n- 保存执行结果和错误信息\n\n用Redis做队列。做一个简单的管理页面，可以看到哪些任务在跑，哪些失败了，需要的话可以手动重试。",
+          "en": "I need a background job processing system for our web application. Users trigger long-running tasks like sending emails, generating reports, or processing uploads, and these shouldn't block the main request.\n\nRequirements:\n- Queue tasks with priorities (high/normal/low)\n- Retry failed tasks up to 3 times with backoff\n- Track task status (pending/running/completed/failed)\n- Process tasks concurrently (configurable worker count)\n- Store results and error messages\n\nUse Redis for the queue. Include a simple admin page to monitor jobs - see what's running, what failed, retry manually if needed."
+        }
+      },
+      {
+        "id": "spec-2",
+        "modeId": "spec",
+        "scenario": "spec",
+        "title": {
+          "zh": "API限流中间件",
+          "en": "API Rate Limiting Middleware"
+        },
+        "prefillText": {
+          "zh": "我们的API被一些用户刷得太厉害了，需要限流中间件来保护服务。\n\n需要的功能：\n- 按用户（已登录）和IP（未登录）分别限流\n- 不同接口不同限制（有些接口开销大）\n- 返回清楚的错误信息，告诉用户多久后可以重试\n- 记录违规行为\n- 可以给信任的IP开白名单\n\n用滑动窗口算法，Redis存储。触发限流时返回429状态码和友好的提示。做个仪表板显示请求最多的用户和违规情况。",
+          "en": "Our API is getting hammered by some users making too many requests. I need rate limiting middleware to protect the service.\n\nWhat I need:\n- Limit requests per user (authenticated) and per IP (anonymous)\n- Different limits for different endpoints (some are more expensive)\n- Return clear error messages with \"retry-after\" info\n- Track violations in logs\n- Allow whitelist for trusted IPs\n\nUse sliding window algorithm with Redis. When limit is hit, return 429 status with a helpful message. Include a dashboard showing top requesters and violation patterns."
+        }
+      },
+      {
+        "id": "spec-3",
+        "modeId": "spec",
+        "scenario": "spec",
+        "title": {
+          "zh": "多级缓存服务",
+          "en": "Multi-tier Cache Service"
+        },
+        "prefillText": {
+          "zh": "数据库查询太慢了，拖累了响应速度。想加缓存，但需要智能地决定缓存什么、什么时候失效。\n\n实现要求：\n- 第一层：内存缓存（快，但容量小）\n- 第二层：Redis缓存（多台服务器共享）\n- 自动缓存频繁访问的数据\n- 数据更新时让缓存失效\n- 不同类型数据可以设置不同的过期时间\n\n比如用户资料缓存1小时，商品列表缓存5分钟。当商品更新时，立即清除该商品的缓存。要能看到缓存命中率统计。",
+          "en": "Database queries are killing our response time. I want to add caching but need it to be smart about what to cache and when to invalidate.\n\nImplementation needs:\n- L1: In-memory cache (fast, small capacity)\n- L2: Redis cache (shared across servers)\n- Cache frequently accessed data automatically\n- Invalidate cache when data updates\n- Configurable TTL per data type\n\nFor example, user profiles cache for 1 hour, product listings for 5 minutes. When a product is updated, clear that product's cache immediately. Include cache hit/miss stats."
+        }
+      },
+      {
+        "id": "spec-4",
+        "modeId": "spec",
+        "scenario": "spec",
+        "title": {
+          "zh": "日志聚合平台",
+          "en": "Log Aggregation Platform"
+        },
+        "prefillText": {
+          "zh": "我们有好几个服务，日志分散在各处，排查问题太头疼了。需要一个集中收集和查询日志的平台。\n\n核心功能：\n- 各服务通过HTTP或文件监控方式发送日志\n- 解析常见日志格式（JSON、纯文本）\n- 按时间范围、服务名、级别（错误/警告/普通）搜索日志\n- 实时查看日志（类似tail -f）\n- 设置告警规则，匹配到特定错误模式就通知\n\n最近7天的日志存到Elasticsearch，方便快速搜索。做个简单的web界面可以搜索和筛选。出现严重错误时发送通知。",
+          "en": "We have multiple services logging to different places and it's a nightmare to debug issues. Need a central platform to collect and search logs.\n\nCore functionality:\n- Services send logs via HTTP or file watching\n- Parse common log formats (JSON, plain text)\n- Search logs by time range, service name, level (error/warn/info)\n- View logs in real-time (like tail -f)\n- Set up alerts for error patterns\n\nStore recent logs (last 7 days) in Elasticsearch for fast search. Show a simple web UI where I can search and filter. When critical errors happen, send notifications."
+        }
+      },
+      {
+        "id": "spec-5",
+        "modeId": "spec",
+        "scenario": "spec",
+        "title": {
+          "zh": "用户行为分析SDK",
+          "en": "User Analytics SDK"
+        },
+        "prefillText": {
+          "zh": "我们需要了解用户怎么使用产品，想做一个SDK让应用可以集成进去追踪用户行为。\n\n要追踪的内容：\n- 页面浏览和点击\n- 功能使用情况（哪些按钮、哪些页面）\n- 用户路径（他们怎么浏览的）\n- 在不同区域停留的时间\n- 关键流程中的流失点\n\n做得轻量 - 事件批量发送到后端。做个仪表板展示转化漏斗、最常用的功能、用户在哪里卡住了。不能拖慢应用 - 事件异步上报。",
+          "en": "We need to understand how users interact with our product. Want to create an SDK that apps can integrate to track user behavior.\n\nWhat to track:\n- Page views and clicks\n- Feature usage (which buttons, which pages)\n- User journey (how they navigate)\n- Time spent on different sections\n- Drop-off points in key flows\n\nMake it lightweight - events get batched and sent to our backend. Build a dashboard showing funnels, most used features, and where users get stuck. Don't slow down the app - events should fire asynchronously."
+        }
+      },
+      {
+        "id": "spec-6",
+        "modeId": "spec",
+        "scenario": "spec",
+        "title": {
+          "zh": "实时推送服务",
+          "en": "Real-time Push Service"
+        },
+        "prefillText": {
+          "zh": "用户需要及时收到通知 - 新消息、状态更新、提醒等。需要一个可靠的推送服务。\n\n技术要求：\n- 用WebSocket实现实时推送\n- WebSocket连不上时降级到轮询\n- 优雅处理重连\n- 消息按频道/主题分组\n- 保证消息送达（至少一次）\n\n支持成千上万个并发连接。用Redis pub/sub在多台服务器间分发消息。包含在线状态追踪（谁在线）。消息从发送到收到不超过1秒。",
+          "en": "Users need instant notifications when things happen - new messages, status updates, alerts. Need a reliable push service.\n\nTechnical requirements:\n- WebSocket connections for real-time delivery\n- Fall back to polling if WebSocket fails\n- Handle reconnections gracefully\n- Group messages by channel/topic\n- Guarantee message delivery (at least once)\n\nScale to thousands of concurrent connections. Use Redis pub/sub for message distribution across servers. Include presence tracking (who's online). Messages should arrive within 1 second of being sent."
+        }
+      },
+      {
+        "id": "spec-7",
+        "modeId": "spec",
+        "scenario": "spec",
+        "title": {
+          "zh": "OAuth认证服务",
+          "en": "OAuth Authentication Service"
+        },
+        "prefillText": {
+          "zh": "添加OAuth服务，让我们的应用支持Google、GitHub等第三方登录，不用存储密码。\n\n实现内容：\n- 支持多个提供商的OAuth2流程\n- 多种登录方式关联到同一账号\n- 自动处理token刷新\n- 只存必要的用户信息（邮箱、姓名、头像）\n- 安全存储和加密token\n\n登录后创建一个在各服务间通用的会话。首次登录的用户需要简单设置下资料。老用户应该顺畅登录。包含一个管理后台管理OAuth应用凭证和监控认证活动。",
+          "en": "Adding OAuth service so our app can support login with Google, GitHub, and other providers without storing passwords.\n\nImplementation:\n- OAuth2 flow for multiple providers\n- Link multiple login methods to same account\n- Handle token refresh automatically\n- Store minimal user info (email, name, avatar)\n- Secure token storage and encryption\n\nAfter login, create a session that works across our services. First-time users should see a simple profile setup. Existing users should just log in smoothly. Include an admin panel to manage OAuth app credentials and monitor auth activity."
+        }
+      },
+      {
+        "id": "spec-8",
+        "modeId": "spec",
+        "scenario": "spec",
+        "title": {
+          "zh": "全文搜索引擎",
+          "en": "Full-text Search Engine"
+        },
+        "prefillText": {
+          "zh": "用户需要搜索我们的内容 - 文章、商品、用户帖子。普通数据库的LIKE查询太慢而且不够智能。\n\n需要的搜索功能：\n- 跨多个字段搜索（标题、描述、正文）\n- 处理拼写错误和同义词\n- 按相关性排序结果\n- 按日期、分类、作者筛选\n- 用户输入时自动补全建议\n\n用Elasticsearch建索引。内容变化时更新索引。搜索要快（<100毫秒），即使有百万级文档。结果中高亮匹配的词。提供搜索查询的API接口。",
+          "en": "Users need to search through our content - articles, products, user posts. Regular database LIKE queries are too slow and not smart enough.\n\nSearch features needed:\n- Search across multiple fields (title, description, content)\n- Handle typos and synonyms\n- Rank results by relevance\n- Filter by date, category, author\n- Autocomplete suggestions as user types\n\nIndex content in Elasticsearch. Update index when content changes. Search should be fast (<100ms) even with millions of documents. Highlight matching terms in results. Provide API endpoints for search queries."
+        }
+      },
+      {
+        "id": "spec-9",
+        "modeId": "spec",
+        "scenario": "spec",
+        "title": {
+          "zh": "数据ETL管道",
+          "en": "Data ETL Pipeline"
+        },
+        "prefillText": {
+          "zh": "老系统里有数据需要同步到新数据库。不是一次性迁移 - 需要数据变化时持续ETL。\n\n管道要求：\n- 检测源数据库的变化（新增/更新/删除的记录）\n- 转换数据格式（老结构到新结构）\n- 插入前验证数据\n- 处理大量数据（百万级记录）\n- 中断后能从断点继续\n\n每小时运行一次同步，或者手动触发。记录同步了什么、什么失败了、为什么失败。失败的记录单独保存起来，方便人工检查。做个监控仪表板追踪管道健康状况。",
+          "en": "We have data in an old system that needs to sync to our new database. Not a one-time migration - need continuous ETL as data changes.\n\nPipeline requirements:\n- Detect changes in source database (new/updated/deleted records)\n- Transform data format (old schema to new schema)\n- Validate data before inserting\n- Handle large volumes (millions of records)\n- Resume from where it stopped if interrupted\n\nRun sync every hour or trigger manually. Log what was synced, what failed, and why. For failed records, save them aside for manual review. Build monitoring dashboard to track pipeline health."
+        }
+      },
+      {
+        "id": "spec-10",
+        "modeId": "spec",
+        "scenario": "spec",
+        "title": {
+          "zh": "配置中心服务",
+          "en": "Config Center Service"
+        },
+        "prefillText": {
+          "zh": "在开发、测试、生产环境管理配置很乱。需要一个中心化的配置服务，能在不重启应用的情况下更新配置。\n\n需要的功能：\n- 按环境和服务存储配置\n- 通过web界面或API更新配置\n- 应用拉取并缓存配置\n- 应用实时感知配置变化\n- 版本历史和回滚能力\n\n配置存数据库，Redis做缓存。配置改变时，通过WebSocket或轮询通知已连接的应用。包含校验规则，防止错误配置被保存。记录审计日志，谁在什么时候改了什么。",
+          "en": "Managing configuration across development, staging, and production is messy. Need a central config service that updates without restarting apps.\n\nFeatures needed:\n- Store configs by environment and service\n- Update configs through web UI or API\n- Apps fetch and cache configs\n- Apps detect config changes in real-time\n- Version history and rollback capability\n\nStore configs in database with Redis cache. When config changes, notify connected apps via WebSocket or polling. Include validation rules so bad configs can't be saved. Keep audit log of who changed what and when."
+        }
+      },
+      {
+        "id": "spec-11",
+        "modeId": "spec",
+        "scenario": "spec",
+        "title": {
+          "zh": "对象存储服务",
+          "en": "Object Storage Service"
+        },
+        "prefillText": {
+          "zh": "需要一个服务来处理文件上传和存储。用户上传图片、视频、文档 - 需要可靠的存储和快速分发。\n\n核心功能：\n- 大文件分片上传（中断后可续传）\n- 自动验证文件类型\n- 图片自动生成缩略图\n- 集成CDN实现快速分发\n- 访问控制（公开/私密/签名URL）\n\n支持直传云存储（S3或兼容）。追踪上传进度。用bucket/文件夹组织文件。为临时文件设置过期时间。包含带宽和存储用量统计。",
+          "en": "Need a service to handle file uploads and storage. Users upload images, videos, documents - need reliable storage with fast delivery.\n\nCore features:\n- Chunked upload for large files (resume if interrupted)\n- Automatic file type validation\n- Generate thumbnails for images\n- Integrate with CDN for fast delivery\n- Access control (public/private/signed URLs)\n\nSupport direct upload to cloud storage (S3 or compatible). Track upload progress. Organize files in buckets/folders. Set expiration for temporary files. Include bandwidth and storage usage stats."
+        }
+      },
+      {
+        "id": "spec-12",
+        "modeId": "spec",
+        "scenario": "spec",
+        "title": {
+          "zh": "URL缩短服务",
+          "en": "URL Shortener Service"
+        },
+        "prefillText": {
+          "zh": "做一个短链接服务。用户粘贴长网址，获得短的易记链接并有统计分析。\n\n服务功能：\n- 生成短代码（随机或自定义）\n- 追踪点击数及时间戳和地理位置\n- 为每个链接生成二维码\n- 可选链接过期时间\n- 支持自定义域名\n\n用base62编码生成短代码。映射关系存数据库，Redis做缓存。追踪来源和用户代理。提供API供程序化访问。仪表板显示热门链接和流量模式。通过合理缓存处理高流量。",
+          "en": "Build a URL shortening service. Users paste long URLs and get short, memorable links with analytics.\n\nService features:\n- Generate short codes (random or custom)\n- Track clicks with timestamps and locations\n- QR code generation for each link\n- Optional link expiration\n- Custom domains support\n\nUse base62 encoding for short codes. Store mappings in database with Redis cache. Track referrers and user agents. Provide API for programmatic access. Dashboard showing top links and traffic patterns. Handle high traffic with proper caching."
+        }
+      },
+      {
+        "id": "spec-13",
+        "modeId": "spec",
+        "scenario": "spec",
+        "title": {
+          "zh": "JWT认证中间件",
+          "en": "JWT Auth Middleware"
+        },
+        "prefillText": {
+          "zh": "为我们的API实现基于JWT的认证中间件。需要无状态的认证，扩展性好。\n\n中间件功能：\n- 登录时生成JWT令牌\n- 受保护路由验证令牌\n- 刷新令牌机制\n- 令牌黑名单用于登出\n- 基于角色的访问控制\n\n令牌1小时过期，刷新令牌保持30天。在令牌payload中包含用户ID和角色。中间件应该把用户信息附加到请求上下文。优雅处理令牌过期并返回清晰的错误信息。支持API密钥作为备选认证方式。",
+          "en": "Implement JWT-based authentication middleware for our APIs. Need stateless auth that scales well.\n\nMiddleware features:\n- Generate JWT tokens on login\n- Verify tokens on protected routes\n- Refresh token mechanism\n- Token blacklist for logout\n- Role-based access control\n\nTokens expire after 1 hour, refresh tokens last 30 days. Include user ID and roles in token payload. Middleware should attach user info to request context. Handle token expiration gracefully with clear error messages. Support API key authentication as alternative."
+        }
+      },
+      {
+        "id": "spec-14",
+        "modeId": "spec",
+        "scenario": "spec",
+        "title": {
+          "zh": "邮件发送服务",
+          "en": "Email Service"
+        },
+        "prefillText": {
+          "zh": "做一个邮件服务处理事务性邮件和营销邮件。需要可靠的投递和追踪。\n\n邮件功能：\n- 支持变量的模板系统\n- 发送单封或批量邮件\n- 邮件入队批量处理\n- 追踪投递状态和打开率\n- 处理退信和取消订阅\n\n支持多个邮件提供商（一个失败时切换）。模板用简单语法实现个性化。营销邮件包含退订链接。记录所有邮件活动。管理后台显示发送率、退信率和投递统计。",
+          "en": "Build an email service that handles transactional and marketing emails. Need reliable delivery with tracking.\n\nEmail features:\n- Template system with variables\n- Send individual or bulk emails\n- Queue emails for batch processing\n- Track delivery status and opens\n- Handle bounces and unsubscribes\n\nSupport multiple email providers (fallback if one fails). Templates use simple syntax for personalization. Include unsubscribe link in marketing emails. Log all email activity. Admin dashboard showing send rates, bounce rates, and delivery stats."
+        }
+      },
+      {
+        "id": "spec-15",
+        "modeId": "spec",
+        "scenario": "spec",
+        "title": {
+          "zh": "图片处理服务",
+          "en": "Image Processing Service"
+        },
+        "prefillText": {
+          "zh": "用户上传各种格式和尺寸的图片。需要一个服务来实时处理和优化图片。\n\n处理功能：\n- 调整图片尺寸（宽度、高度、裁剪模式）\n- 格式转换（JPEG、PNG、WebP）\n- 添加水印（文字或图片）\n- 在不损失质量的前提下优化文件大小\n- 从原图生成多个尺寸\n\n后台异步处理图片。用CDN缓存处理后的图片。支持基于URL的转换参数。处理常见图片格式加上HEIC。包含图片元数据提取（EXIF数据）。",
+          "en": "Users upload images in various formats and sizes. Need a service to process and optimize images on-the-fly.\n\nProcessing features:\n- Resize images (width, height, crop modes)\n- Convert between formats (JPEG, PNG, WebP)\n- Add watermarks (text or image)\n- Optimize file size without losing quality\n- Generate multiple sizes from original\n\nProcess images asynchronously in background. Cache processed images with CDN. Support URL-based transformation parameters. Handle common image formats plus HEIC. Include image metadata extraction (EXIF data)."
+        }
+      },
+      {
+        "id": "website-1",
+        "modeId": "vibe",
+        "scenario": "website",
+        "title": {
+          "zh": "个人博客网站",
+          "en": "Personal Blog Website"
+        },
+        "prefillText": {
+          "zh": "我想在互联网上有自己的空间来写作和分享想法。不是在别人控制的平台上 - 是我自己的网站。\n\n网站功能：\n- 用Markdown写作并发布文章\n- 按分类和标签组织文章\n- 读者可以留言评论\n- RSS订阅源\n- 关于页面和联系表单\n\n干净、可读的设计，专注于内容。文章显示发布日期和阅读时间。分类页面列出相关文章。简单的评论系统带审核。管理后台可以写新文章和管理现有文章。加载快，在手机上表现好。",
+          "en": "I want my own space on the internet to write and share thoughts. Not on a platform someone else controls - my own site.\n\nWebsite features:\n- Write and publish articles with Markdown\n- Organize posts by categories and tags\n- Readers can leave comments\n- RSS feed for subscribers\n- About page and contact form\n\nClean, readable design that focuses on the content. Posts show publication date and reading time. Category pages list related posts. Simple comment system with moderation. Admin dashboard to write new posts and manage existing ones. Fast loading, works well on mobile."
+        }
+      },
+      {
+        "id": "website-2",
+        "modeId": "vibe",
+        "scenario": "website",
+        "title": {
+          "zh": "在线社区论坛",
+          "en": "Online Community Forum"
+        },
+        "prefillText": {
+          "zh": "想围绕一个话题建立社区论坛。需要一个网站，人们可以讨论、提问和分享知识。\n\n论坛功能：\n- 创建主题和回复帖子\n- 为有用的帖子点赞/踩\n- 用户资料和声誉系统\n- 用分类和标签组织内容\n- 搜索讨论内容\n\n用户注册并创建个人资料。发布新主题或回复现有帖子。根据投票让最佳回复上升到顶部。为有帮助的贡献获得声誉积分。按类别组织讨论。管理员工具管理垃圾内容。回复的邮件通知。移动响应式设计。",
+          "en": "Want to build a community forum around a topic. Need a website where people can discuss, ask questions, and share knowledge.\n\nForum features:\n- Create topics and reply to threads\n- Upvote/downvote helpful posts\n- User profiles with reputation system\n- Categories and tags for organization\n- Search through discussions\n\nUsers sign up and create profiles. Post new topics or reply to existing threads. Best replies rise to top based on votes. Earn reputation points for helpful contributions. Organize discussions by category. Moderator tools to manage spam. Email notifications for replies. Mobile-responsive design."
+        }
+      },
+      {
+        "id": "website-3",
+        "modeId": "vibe",
+        "scenario": "website",
+        "title": {
+          "zh": "云端笔记平台",
+          "en": "Cloud Note Platform"
+        },
+        "prefillText": {
+          "zh": "需要一个无干扰的网站来写和组织笔记。能在我所有设备间同步。\n\n平台功能：\n- 用Markdown写笔记并实时预览\n- 在文件夹/笔记本中组织\n- 给笔记打标签便于交叉引用\n- 全文搜索所有笔记\n- 离线工作，连接时同步\n\n简洁的写作界面带暗黑模式选项。创建笔记本来分组相关笔记。快速搜索立即找到笔记。每几秒自动保存。导出笔记为Markdown或PDF。一切都有键盘快捷键。需要时可以通过链接分享单个笔记。",
+          "en": "Need a distraction-free website to write and organize notes. Something that syncs across all my devices.\n\nPlatform features:\n- Write notes in Markdown with live preview\n- Organize in folders/notebooks\n- Tag notes for cross-referencing\n- Full-text search across all notes\n- Works offline, syncs when connected\n\nClean writing interface with dark mode option. Create notebooks to group related notes. Fast search finds notes instantly. Auto-save every few seconds. Export notes as Markdown or PDF. Keyboard shortcuts for everything. Share individual notes via link if needed."
+        }
+      },
+      {
+        "id": "website-4",
+        "modeId": "vibe",
+        "scenario": "website",
+        "title": {
+          "zh": "家庭相册网站",
+          "en": "Family Photo Website"
+        },
+        "prefillText": {
+          "zh": "想要一个私人相册网站和家人分享照片，不用社交媒体。\n\n网站功能：\n- 上传照片和视频\n- 按事件或日期创建相册\n- 通过链接与特定的人分享相册\n- 在照片上评论\n- 下载全分辨率原图\n\n拖放照片上传。按日期自动组织或手动创建相册。通过私密链接分享整个相册 - 查看者不需要账号。每个相册的隐私控制（公开/私密/仅链接）。幻灯片模式查看。在移动设备上表现很好。",
+          "en": "Want a private photo gallery website to share photos with family without using social media.\n\nWebsite features:\n- Upload photos and videos\n- Create albums by event or date\n- Share albums with specific people via link\n- Comment on photos\n- Download originals in full resolution\n\nDrag and drop photos to upload. Auto-organize by date or manually create albums. Share entire albums via private links - viewers don't need accounts. Privacy controls per album (public/private/link-only). Slideshow mode for viewing. Works great on mobile devices."
+        }
+      },
+      {
+        "id": "website-5",
+        "modeId": "vibe",
+        "scenario": "website",
+        "title": {
+          "zh": "书签管理平台",
+          "en": "Bookmark Management Platform"
+        },
+        "prefillText": {
+          "zh": "我的浏览器书签很混乱。需要一个更好的网站来保存和组织链接。\n\n平台功能：\n- 保存带标题和描述的链接\n- 标记和分类书签\n- 全文搜索所有书签\n- 浏览器扩展快速保存\n- 导出/导入书签\n\n从浏览器扩展一键保存。自动抓取页面标题和描述。添加自定义标签和备注。组织到合集中。搜索所有保存的链接包括备注。定期检查损坏的链接。简洁的网格或列表视图。需要时可以公开分享合集。",
+          "en": "My browser bookmarks are a mess. Need a better website to save and organize links.\n\nPlatform features:\n- Save links with title and description\n- Tag and categorize bookmarks\n- Full-text search through all bookmarks\n- Browser extension for quick saving\n- Export/import bookmarks\n\nOne-click save from browser extension. Automatically grab page title and description. Add custom tags and notes. Organize into collections. Search through all saved links including notes. Check for broken links periodically. Clean grid or list view. Share collections publicly if wanted."
+        }
+      },
+      {
+        "id": "website-6",
+        "modeId": "vibe",
+        "scenario": "website",
+        "title": {
+          "zh": "待办事项网站",
+          "en": "Todo List Website"
+        },
+        "prefillText": {
+          "zh": "需要一个更好的在线方式管理待办事项。想要简单但智能的东西。\n\n网站功能：\n- 用键盘快捷键快速添加任务\n- 设置截止日期和优先级\n- 将任务组织到项目中\n- 今日视图显示需要做的事\n- 例行事务的重复任务\n\n快速输入任务 - 输入并按回车。分配优先级和截止日期。将任务分组到项目或列表中。今日视图筛选今天到期的任务。逾期任务高亮显示。完成的任务显示删除线和动画。搜索和筛选功能。简洁界面支持移动端。",
+          "en": "Need a better way to manage my todos online. Want something simple but smart.\n\nWebsite features:\n- Quick add tasks with keyboard shortcuts\n- Set due dates and priorities\n- Organize tasks into projects\n- Today view showing what needs doing\n- Recurring tasks for routine items\n\nFast task entry - type and hit enter. Assign priority levels and due dates. Group tasks into projects or lists. Today view filters tasks due today. Overdue tasks highlighted. Completed tasks show with strikethrough and animation. Search and filter capabilities. Clean interface with mobile support."
+        }
+      },
+      {
+        "id": "website-7",
+        "modeId": "vibe",
+        "scenario": "website",
+        "title": {
+          "zh": "个人财务管理网站",
+          "en": "Personal Finance Website"
+        },
+        "prefillText": {
+          "zh": "想了解钱都花在哪儿了，更好地做预算。需要一个支出追踪网站并有洞察。\n\n网站功能：\n- 快速记录收入和支出\n- 自动分类交易\n- 按类别设置月度预算\n- 可视化图表显示支出分解\n- 带趋势的月度报告\n\n快速输入交易并智能分类。仪表板显示月度支出 vs 预算。图表显示各类别支出随时间变化。带搜索和筛选的交易历史。接近预算限额时警报。导出数据做记录。安全私密 - 所有数据加密。",
+          "en": "Want to understand where my money goes and budget better. Need a website for expense tracking with insights.\n\nWebsite features:\n- Log income and expenses quickly\n- Categorize transactions automatically\n- Set monthly budgets per category\n- Visual charts showing spending breakdown\n- Monthly reports with trends\n\nQuick transaction entry with smart categorization. Dashboard shows monthly spending vs budget. Charts display spending by category over time. Transaction history with search and filters. Budget alerts when approaching limits. Export data for records. Secure and private - all data encrypted."
+        }
+      },
+      {
+        "id": "website-8",
+        "modeId": "vibe",
+        "scenario": "website",
+        "title": {
+          "zh": "在线问卷调查平台",
+          "en": "Online Survey Platform"
+        },
+        "prefillText": {
+          "zh": "需要在线创建调查问卷并收集回复。可能用于工作、研究或收集意见。\n\n平台功能：\n- 拖放式问卷构建器\n- 多种问题类型（选择、文本、评分等）\n- 通过链接分享问卷\n- 收集匿名或记名回复\n- 以图表查看结果并导出数据\n\n简单的问卷构建器带问题模板。添加不同问题类型 - 多选、文本输入、评分量表。自定义设计和品牌。随处分享问卷链接。实时回复追踪。结果仪表板带图表和表格。导出到电子表格分析。",
+          "en": "Need to create surveys and collect responses online. Could be for work, research, or gathering opinions.\n\nPlatform features:\n- Drag-and-drop survey builder\n- Multiple question types (choice, text, rating, etc)\n- Share surveys via link\n- Collect anonymous or identified responses\n- View results as charts and export data\n\nEasy survey builder with question templates. Add different question types - multiple choice, text input, rating scales. Customize design and branding. Share survey link anywhere. Real-time response tracking. Results dashboard with charts and tables. Export to spreadsheet for analysis."
+        }
+      },
+      {
+        "id": "website-9",
+        "modeId": "vibe",
+        "scenario": "website",
+        "title": {
+          "zh": "活动报名网站",
+          "en": "Event Registration Website"
+        },
+        "prefillText": {
+          "zh": "组织活动，需要一个网站让人们在线报名。可能是研讨会、会议或任何聚会。\n\n网站功能：\n- 创建带详情的活动页面\n- 自定义报名表\n- 多种票种并设限额\n- 自动确认邮件\n- 二维码签到系统\n\n创建活动包含描述、日期、地点和图片。设置带自定义字段的报名表。提供不同票种（免费、付费、VIP）。报名者自动收到确认邮件。管理后台显示谁报名了。生成二维码用于签到。导出参会者名单。",
+          "en": "Organizing events and need a website for people to register online. Could be workshops, conferences, or any gatherings.\n\nWebsite features:\n- Create event pages with details\n- Custom registration forms\n- Multiple ticket types with limits\n- Automated confirmation emails\n- QR code check-in system\n\nCreate event with description, date, location, and images. Set up registration form with custom fields. Offer different ticket types (free, paid, VIP). Registrants receive confirmation emails automatically. Admin dashboard shows who registered. Generate QR codes for check-in. Export attendee lists."
+        }
+      },
+      {
+        "id": "website-10",
+        "modeId": "vibe",
+        "scenario": "website",
+        "title": {
+          "zh": "习惯养成平台",
+          "en": "Habit Building Platform"
+        },
+        "prefillText": {
+          "zh": "想要一个网站帮助养成好习惯。追踪每日进度并通过视觉反馈保持动力。\n\n平台功能：\n- 创建和追踪多个习惯\n- 每日打卡并日历视图\n- 连续天数计数器\n- 里程碑成就徽章\n- 进度统计和图表\n\n添加想养成的习惯。完成后每天打卡。连续天数突出显示。日历视图一目了然显示所有打卡。达到里程碑获得徽章（7天、30天等）。统计数据显示随时间的完成率。提醒让你保持轨道。",
+          "en": "Want a website to help build good habits. Track daily progress and stay motivated with visual feedback.\n\nPlatform features:\n- Create and track multiple habits\n- Daily check-in with calendar view\n- Streak counter showing consecutive days\n- Achievement badges for milestones\n- Progress statistics and charts\n\nAdd habits you want to build. Check in each day when completed. See streak count prominently displayed. Calendar view shows all check-ins at a glance. Earn badges for milestones (7 days, 30 days, etc). Stats show completion rates over time. Reminders to keep you on track."
+        }
+      },
+      {
+        "id": "website-11",
+        "modeId": "vibe",
+        "scenario": "website",
+        "title": {
+          "zh": "时间追踪仪表板",
+          "en": "Time Tracking Dashboard"
+        },
+        "prefillText": {
+          "zh": "想知道每天的时间实际都花在哪儿了。需要一个网站记录活动并可视化时间使用。\n\n仪表板功能：\n- 为活动启动/停止计时器\n- 手动输入过去的活动时间\n- 按工作、个人等分类\n- 每日和每周分解\n- 可视化时间线和图表\n\n一键开始追踪活动。或者手动添加时间记录。根据关键词自动分类。时间线显示一天的颜色编码。周视图对比各类别时间。图表揭示时间分布模式。帮助识别时间黑洞并提高生产力。",
+          "en": "Want to see where my time actually goes each day. Need a website to log activities and visualize time usage.\n\nDashboard features:\n- Start/stop timer for activities\n- Manual time entry for past activities\n- Categorize by work, personal, etc\n- Daily and weekly breakdowns\n- Visual timeline and charts\n\nOne-click to start tracking an activity. Or manually add time entries. Categorize automatically based on keywords. Timeline shows your entire day color-coded. Weekly view compares time across categories. Charts reveal time distribution patterns. Help identify time sinks and improve productivity."
+        }
+      },
+      {
+        "id": "website-12",
+        "modeId": "vibe",
+        "scenario": "website",
+        "title": {
+          "zh": "心情日记网站",
+          "en": "Mood Journal Website"
+        },
+        "prefillText": {
+          "zh": "想在一个地方追踪情绪并写日记。了解随时间的情绪模式。\n\n网站功能：\n- 快速每日心情签到\n- 用富文本写日记\n- 给记录附加照片\n- 显示情绪趋势的心情日历\n- 隐私控制和加密\n\n用表情符号或颜色快速选择心情。需要时写详细的日记。添加照片捕捉时刻。日历视图显示每天的心情。热图揭示几个月的模式。识别影响心情的因素。一切私密和加密。",
+          "en": "Want to track my emotions and write journal entries in one place. Understand my mood patterns over time.\n\nWebsite features:\n- Quick daily mood check-in\n- Write journal entries with rich text\n- Attach photos to entries\n- Mood calendar showing emotional trends\n- Privacy controls and encryption\n\nQuick mood selector with emoji or colors. Write detailed journal entries if desired. Add photos to capture moments. Calendar view shows mood for each day. Heatmap reveals patterns over months. Identify what affects your mood. Everything private and encrypted."
+        }
+      },
+      {
+        "id": "website-13",
+        "modeId": "vibe",
+        "scenario": "website",
+        "title": {
+          "zh": "阅读挑战平台",
+          "en": "Reading Challenge Platform"
+        },
+        "prefillText": {
+          "zh": "想多读书并追踪进度。需要一个网站设定阅读目标并保持动力。\n\n平台功能：\n- 添加书籍到阅读列表\n- 追踪已读页数和完成度\n- 设置年度阅读目标\n- 查看阅读统计和连续天数\n- 发现书籍推荐\n\n手动添加书籍或按标题搜索。记录阅读进度（页数或章节）。设置目标如\"今年读50本书\"。查看阅读连续天数。统计数据显示完成的书、读过的页数、喜欢的类型。根据你喜欢的获得推荐。",
+          "en": "Want to read more books and track my progress. Need a website to set reading goals and stay motivated.\n\nPlatform features:\n- Add books to reading list\n- Track pages read and completion\n- Set yearly reading goals\n- See reading statistics and streaks\n- Discover book recommendations\n\nAdd books manually or search by title. Log reading progress (pages or chapters). Set goals like \"50 books this year\". See reading streak (consecutive days). Stats show books completed, pages read, favorite genres. Get recommendations based on what you enjoyed."
+        }
+      },
+      {
+        "id": "website-14",
+        "modeId": "vibe",
+        "scenario": "website",
+        "title": {
+          "zh": "家庭回忆录网站",
+          "en": "Family Memory Website"
+        },
+        "prefillText": {
+          "zh": "想把家庭回忆和故事保存在一个地方。创建一个所有人都能贡献的数字家庭档案。\n\n网站功能：\n- 上传带故事和说明的照片\n- 创建家庭事件时间线\n- 在照片中标记家庭成员\n- 与家人分享回忆\n- 下载合集为相册\n\n上传照片并添加背后的故事。构建带主要事件的家庭时间线。在照片中标记人物来连接回忆。家庭成员可以查看和贡献。为特定事件或人物创建合集。生成照片书或时间线以打印。仅限家庭私密访问。",
+          "en": "Want to preserve family memories and stories in one place. Create a digital family archive that everyone can contribute to.\n\nWebsite features:\n- Upload photos with stories and captions\n- Create timeline of family events\n- Tag family members in photos\n- Share memories with family members\n- Download collections as albums\n\nUpload photos and add stories behind them. Build family timeline with major events. Tag people in photos to connect memories. Family members can view and contribute. Create collections for specific events or people. Generate photo books or timelines to print. Private family access only."
+        }
+      },
+      {
+        "id": "website-15",
+        "modeId": "vibe",
+        "scenario": "website",
+        "title": {
+          "zh": "个人成长档案网站",
+          "en": "Personal Growth Portfolio Website"
+        },
+        "prefillText": {
+          "zh": "想记录个人成长历程。追踪我在学的技能、实现的目标，并看到随时间的进步。\n\n网站功能：\n- 用进度条追踪多个技能\n- 设置和管理带截止日期的目标\n- 记录成就和里程碑\n- 生成年终回顾\n- 私密或公开作品集选项\n\n添加你在学的技能及熟练度。设置带目标日期的目标并追踪完成度。记录大大小小的成就。技能图表显示随时间的成长。年终回顾总结完成的一切。保持私密自用或公开作为作品集。",
+          "en": "Want to document my personal growth journey. Track skills I'm learning, goals I achieve, and see my progress over time.\n\nWebsite features:\n- Track multiple skills with progress bars\n- Set and manage goals with deadlines\n- Log achievements and milestones\n- Generate year-end review\n- Private or public portfolio option\n\nAdd skills you're learning with proficiency levels. Set goals with target dates and track completion. Log wins both big and small. Skill charts show growth over time. Year-end review summarizes everything accomplished. Keep private for yourself or make public as portfolio."
+        }
+      },
+      {
+        "id": "prototype-1",
+        "modeId": "vibe",
+        "scenario": "prototype",
+        "title": {
+          "zh": "倒计时小工具",
+          "en": "Countdown Widget"
+        },
+        "prefillText": {
+          "zh": "我有一些重要日期要来了 - 考试、生日、截止日。想要一个简单的倒计时小工具让它们可见。\n\n小工具功能：\n- 添加事件名称和日期\n- 显示剩余天数/小时数\n- 按紧急程度颜色编码\n- 桌面或移动小工具\n- 简单通知\n\n显示倒计时卡片如\"距离生日23天\"或\"距离截止6小时\"。按紧急程度排序。让我选择颜色。提前一周和提前一天发送提醒通知。保持极简和干净 - 只有必需的。",
+          "en": "I have important dates coming up - exams, birthdays, deadlines. Want a simple countdown widget to keep them visible.\n\nWidget features:\n- Add event name and date\n- Show days/hours remaining\n- Color-code by urgency\n- Desktop or mobile widget\n- Simple notifications\n\nDisplay as countdown cards showing \"23 days until birthday\" or \"6 hours until deadline\". Sort by urgency. Let me choose colors. Send notification reminders a week before and day before. Keep it minimal and clean - just the essentials."
+        }
+      },
+      {
+        "id": "prototype-2",
+        "modeId": "vibe",
+        "scenario": "prototype",
+        "title": {
+          "zh": "极简投票器",
+          "en": "Minimal Poll Tool"
+        },
+        "prefillText": {
+          "zh": "需要最快的方式获取群体意见。去哪吃饭？选哪个选项？只想快速投票。\n\n工具功能：\n- 10秒创建投票\n- 立即分享链接\n- 一键投票\n- 查看实时结果\n- 不需要注册\n\n输入问题，添加2-5个选项，获得可分享链接。人们点击选择并立即看到结果。显示票数和简单的条形图。24小时后自动关闭。就这样 - 超级简单快速。",
+          "en": "Need the fastest way to get group opinions. Where to eat? Which option to choose? Just want quick votes.\n\nTool features:\n- Create poll in 10 seconds\n- Share link instantly\n- Vote with one tap\n- See live results\n- No signup needed\n\nType a question, add 2-5 options, get shareable link. People tap their choice and see results immediately. Show vote counts and simple bar chart. Auto-close after 24 hours. That's it - super simple and fast."
+        }
+      },
+      {
+        "id": "prototype-3",
+        "modeId": "vibe",
+        "scenario": "prototype",
+        "title": {
+          "zh": "专注计时器",
+          "en": "Focus Timer"
+        },
+        "prefillText": {
+          "zh": "我需要帮助保持专注。番茄工作法有效 - 工作25分钟，休息5分钟。但我总忘记。\n\n计时器功能：\n- 25分钟工作时段\n- 5分钟休息\n- 4个时段后15分钟长休息\n- 声音通知\n- 时段计数器\n\n大计时器倒计时。工作结束时自动开始休息。4个时段后，更长的休息。显示今天完成了多少个\"番茄\"。极简界面 - 只有计时器和控制。这就是我需要的全部。",
+          "en": "I need help staying focused. The Pomodoro Technique works - 25 minutes work, 5 minutes break. But I keep forgetting.\n\nTimer features:\n- 25 minute work sessions\n- 5 minute breaks\n- 15 minute long break after 4 sessions\n- Sound notifications\n- Session counter\n\nBig timer counting down. Automatically start break when work ends. After 4 sessions, longer break. Show how many \"tomatoes\" completed today. Minimal interface - just the timer and controls. That's all I need."
+        }
+      },
+      {
+        "id": "prototype-4",
+        "modeId": "vibe",
+        "scenario": "prototype",
+        "title": {
+          "zh": "决策转盘",
+          "en": "Decision Wheel"
+        },
+        "prefillText": {
+          "zh": "有时我就是决定不了。吃什么、看什么电影、做什么。想要一个有趣的转盘旋转让命运决定。\n\n转盘功能：\n- 添加2-10个选项\n- 带动画旋转\n- 声音效果\n- 清楚显示获胜者\n- 保存喜欢的转盘\n\n输入选项，按旋转。转盘流畅动画旋转并落在一个选项上。把获胜者显示得大而清楚。保存决策模板如\"餐厅\"或\"电影\"供重复使用。让它好玩有趣。",
+          "en": "Sometimes I just can't decide. What to eat, what movie to watch, what to do. Want a fun wheel to spin and let fate decide.\n\nWheel features:\n- Add 2-10 options\n- Spin with animation\n- Sound effects\n- Show winner clearly\n- Save favorite wheels\n\nEnter your options, press spin. Wheel spins with smooth animation and lands on one option. Show the winner big and clear. Save decision templates like \"restaurants\" or \"movies\" for reuse. Make it playful and fun."
+        }
+      },
+      {
+        "id": "prototype-5",
+        "modeId": "vibe",
+        "scenario": "prototype",
+        "title": {
+          "zh": "灵感词卡",
+          "en": "Idea Word Cards"
+        },
+        "prefillText": {
+          "zh": "当我创意卡住时，随机词组合有帮助。需要生成意想不到的配对。\n\n工具功能：\n- 生成随机词组合\n- 多个类别（名词、动词、主题）\n- 精美卡片设计\n- 保存喜欢的\n- 分享组合\n\n显示组合如\"海洋 + 科技 + 低语\"或\"城市 + 复古 + 成长\"。点击生成新的。混合不同类别的词。在优雅的卡片上显示。保存激发想法的组合。保持简单和鼓舞人心。",
+          "en": "When I'm stuck creatively, random word combinations help. Need something to generate unexpected pairings.\n\nTool features:\n- Generate random word combinations\n- Multiple categories (nouns, verbs, themes)\n- Beautiful card design\n- Save favorites\n- Share combinations\n\nShow combinations like \"Ocean + Technology + Whisper\" or \"Urban + Vintage + Growth\". Tap to generate new ones. Mix words from different categories. Display on elegant cards. Save combinations that spark ideas. Keep it simple and inspiring."
+        }
+      },
+      {
+        "id": "prototype-6",
+        "modeId": "vibe",
+        "scenario": "prototype",
+        "title": {
+          "zh": "每日金句",
+          "en": "Daily Quote"
+        },
+        "prefillText": {
+          "zh": "想用一些鼓舞人心的东西开始每一天。一句有共鸣的名言或想法。\n\n工具功能：\n- 每日新名言\n- 精美排版\n- 保存喜欢的\n- 作为图片分享\n- 不同主题\n\n用精美设计和漂亮背景显示名言。滑动查看新名言。点击收藏。分享按钮创建精美图片用于社交。可选择不同的视觉主题。简单而令人振奋。",
+          "en": "Want to start each day with something inspiring. A quote or thought that resonates.\n\nTool features:\n- New quote daily\n- Beautiful typography\n- Save favorites\n- Share as image\n- Different themes\n\nDisplay quote in beautiful design with nice background. Swipe for new quote. Tap to favorite. Share button creates pretty image for social. Different visual themes to choose from. Simple and uplifting."
+        }
+      },
+      {
+        "id": "prototype-7",
+        "modeId": "vibe",
+        "scenario": "prototype",
+        "title": {
+          "zh": "语音记事本",
+          "en": "Voice Notepad"
+        },
+        "prefillText": {
+          "zh": "想快速捕捉想法不用打字。只是说话并保存下来。\n\n记事本功能：\n- 一键语音录制\n- 自动转录\n- 简单组织\n- 快速回放\n- 搜索转录文本\n\n点击录制，说话，完成。后台转录。按日期列出所有语音备忘。点击回放。搜索转录内容。这就是核心 - 快速捕捉无摩擦。",
+          "en": "Want to capture thoughts quickly without typing. Just speak and have it saved.\n\nNotepad features:\n- One-tap voice recording\n- Automatic transcription\n- Simple organization\n- Quick playback\n- Search transcripts\n\nTap to record, speak, done. Transcribe in background. List all voice notes by date. Tap to play back. Search through transcriptions. That's the core - quick capture without friction."
+        }
+      },
+      {
+        "id": "prototype-8",
+        "modeId": "vibe",
+        "scenario": "prototype",
+        "title": {
+          "zh": "年度色块图",
+          "en": "Year in Pixels"
+        },
+        "prefillText": {
+          "zh": "想要一个令人满意的方式追踪我的一年。每一天是一个我填色的方格。\n\n工具功能：\n- 365个方格网格\n- 点击用颜色填充\n- 颜色代表心情/活动\n- 放大查看详情\n- 年终可视化\n\n把一整年显示为小方格网格。每天，点击今天的方格并选择颜色。随时间推移，美丽的图案浮现。点击任何方格添加备注。年底显示你一年的马赛克。简单而令人满意。",
+          "en": "Want a satisfying way to track my year. Each day is a colored square I fill in.\n\nTool features:\n- 365 squares grid\n- Tap to fill with color\n- Colors represent mood/activity\n- Zoom for details\n- Year-end visualization\n\nDisplay whole year as grid of tiny squares. Each day, tap today's square and pick a color. Over time, beautiful pattern emerges. Tap any square to add notes. End of year shows mosaic of your year. Simple and satisfying."
+        }
+      },
+      {
+        "id": "prototype-9",
+        "modeId": "vibe",
+        "scenario": "prototype",
+        "title": {
+          "zh": "快速决策工具",
+          "en": "Quick Decision Tool"
+        },
+        "prefillText": {
+          "zh": "我们团队在决策上浪费太多时间来回讨论。该做A还是B？大家都有想法但就是定不下来。\n\n帮我们更快决策：\n- 快速列出选项\n- 所有人投票或排序\n- 立即看到结果\n- 设置截止时间\n- 清楚显示获胜者\n\n极其简单 - 创建决策，分享链接，大家投票。计时器倒计时到截止时间。时间到了，显示获胜者。也许为每个选项添加快速优缺点。只是帮我们决定并继续前进。",
+          "en": "Our team wastes so much time going back and forth on decisions. Should we do A or B? Everyone has opinions but we never decide.\n\nHelp us decide faster:\n- List out options quickly\n- Everyone votes or ranks\n- See results immediately\n- Set a deadline\n- Show winner clearly\n\nDead simple - create decision, share link, people vote. Timer counts down to deadline. When time's up, show winner. Maybe add quick pros/cons for each option. Just help us decide and move on."
+        }
+      },
+      {
+        "id": "prototype-10",
+        "modeId": "vibe",
+        "scenario": "prototype",
+        "title": {
+          "zh": "购物清单提醒",
+          "en": "Shopping List Reminder"
+        },
+        "prefillText": {
+          "zh": "我总是家里的东西用完了才想起来买 - 卫生纸、咖啡、洗涤剂。然后紧急跑商店。太烦了！\n\n帮我记住：\n- 我用的家居用品清单\n- 标记快用完时\n- 在用完前提醒\n- 建议什么时候该买\n- 按商店分组\n\n快速添加物品。标记\"快没了\"它就计算什么时候会用完。提前几天提醒我。显示按商店分组的购物清单（超市、药店）。买完后，重置。帮我提前做好准备。",
+          "en": "I always run out of stuff at home - toilet paper, coffee, detergent. Then emergency store run. So annoying!\n\nHelp me remember:\n- List of household items I use\n- Mark when running low\n- Remind before it runs out\n- Suggest when to buy\n- Group by store\n\nQuick add items. Mark \"running low\" and it calculates when I'll run out. Remind me a few days before. Show shopping list grouped by store (grocery, pharmacy). After buying, reset. Help me stay ahead."
+        }
+      },
+      {
+        "id": "prototype-11",
+        "modeId": "vibe",
+        "scenario": "prototype",
+        "title": {
+          "zh": "语音记账本",
+          "en": "Voice Expense Log"
+        },
+        "prefillText": {
+          "zh": "我想追踪支出但填表格太麻烦。等回到家，都忘了买了什么。\n\n让它毫不费力：\n- 只是说：\"咖啡5块钱\"\n- 自动分类\n- 走路时3秒添加\n- 查看每日/每周/每月总计\n- 超支时警报\n\n语音是关键 - 几秒内添加支出。理解随意的说法如\"午饭12块\"。显示简单图表。设置预算，接近限额时警告。就这样 - 让追踪真正发生。",
+          "en": "I want to track spending but forms are tedious. By the time I'm home, I forgot what I bought.\n\nMake it effortless:\n- Just speak: \"Coffee 5 dollars\"\n- Auto-categorize\n- Add in 3 seconds while walking\n- See daily/weekly/monthly totals\n- Alert when overspending\n\nVoice is key - add expense in seconds. Understand casual language like \"lunch $12\". Show simple charts. Set budgets and warn if close to limit. That's it - make tracking actually happen."
+        }
+      },
+      {
+        "id": "prototype-12",
+        "modeId": "vibe",
+        "scenario": "prototype",
+        "title": {
+          "zh": "时区转换器",
+          "en": "Timezone Converter"
+        },
+        "prefillText": {
+          "zh": "我们团队分布在各国。约会议是噩梦 - 我的早上9点是别人的半夜。\n\n帮助协调：\n- 查看每个人的当地时间\n- 找出重叠的工作时间\n- 建议最佳会议时间\n- 自动转换时间\n- 显示谁需要很早/很晚参加\n\n显示团队及他们的当前时间。选一个时间，立即看到对所有人是几点。如果有人在奇怪时间参加就高亮。建议2-3个对大多数人合适的时段。让安排会议不再痛苦。",
+          "en": "Our team is spread across countries. Scheduling meetings is a nightmare - my 9am is someone's midnight.\n\nHelp coordinate:\n- See everyone's local times\n- Find overlapping work hours\n- Suggest best meeting times\n- Convert times automatically\n- Show who'd join early/late\n\nShow team with their current times. Pick a time, instantly see what it is for everyone. Highlight if someone joins at weird hour. Suggest 2-3 slots that work for most. Make scheduling painless."
+        }
+      },
+      {
+        "id": "prototype-13",
+        "modeId": "vibe",
+        "scenario": "prototype",
+        "title": {
+          "zh": "家庭互动小游戏",
+          "en": "Family Mini Games"
+        },
+        "prefillText": {
+          "zh": "我们在网上聊天但感觉很肤浅。想要一些有趣和有意义的方式一起互动。\n\n互动想法：\n- 简单游戏（问答、文字游戏）\n- 每日挑战或话题\n- 分享照片或回忆\n- 发送惊喜消息\n- 一起庆祝时刻\n\n让它温暖和个性化。每日话题如\"今天什么让你笑了？\"。简单游戏我们随时能玩。超越表情符号的简单反应。专注于连接，不是花哨功能。",
+          "en": "We chat online but it feels shallow. Want something fun and meaningful to do together.\n\nIdeas for interaction:\n- Simple games (trivia, word games)\n- Daily challenges or prompts\n- Share photos or memories\n- Send surprise messages\n- Celebrate moments together\n\nMake it warm and personal. Daily prompts like \"What made you laugh today?\". Simple games we can play anytime. Easy reactions beyond just emoji. Focus on connection, not fancy features."
+        }
+      },
+      {
+        "id": "prototype-14",
+        "modeId": "vibe",
+        "scenario": "prototype",
+        "title": {
+          "zh": "数字时光胶囊",
+          "en": "Digital Time Capsule"
+        },
+        "prefillText": {
+          "zh": "想保留回忆和给未来的建议。一些我或我的家人可以回顾的东西。\n\n胶囊功能：\n- 给未来的自己/家人写信\n- 设定什么时候可以打开\n- 附加照片、视频、语音消息\n- 记录建议或故事\n- 安全和私密\n\n给未来的我或我的孩子写信。设置打开日期（特定日期或里程碑如\"18岁生日\"）。添加照片和语音消息。存储家族食谱及故事。让它感觉重要。时间到了提醒。",
+          "en": "Want to preserve memories and advice for the future. Something I or my family can look back on.\n\nCapsule features:\n- Write letters to future self/family\n- Set when they can be opened\n- Attach photos, videos, voice messages\n- Record advice or stories\n- Secure and private\n\nWrite letter to future me or my kids. Set open date (specific date or milestone like \"18th birthday\"). Add photos and voice messages. Store family recipes with stories. Make it feel significant. Remind when time comes."
+        }
+      }
+    ],
+    "mode-intro-configs": [
+      {
+        "scenario": "spec",
+        "modeId": "spec",
+        "label": {
+          "zh": "Spec 驱动",
+          "en": "Code with Spec"
+        },
+        "title": {
+          "zh": "Spec",
+          "en": "Spec"
+        },
+        "placeholder": {
+          "zh": "Quest 会先与你对齐需求范围，设计实施方案和验收标准，再开始执行",
+          "en": "Quest will first align on the scope, design the implementation and acceptance criteria, then start execution"
+        },
+        "iconV1": "Spec"
+      },
+      {
+        "scenario": "website",
+        "modeId": "vibe",
+        "label": {
+          "zh": "搭建网站",
+          "en": "Build a Website"
+        },
+        "title": {
+          "zh": "网站",
+          "en": "Website"
+        },
+        "placeholder": {
+          "zh": "描述你要搭建的网站，Quest 会搭建页面和整体结构",
+          "en": "Describe the website you want to build. Quest will set up the pages and structure"
+        },
+        "iconV1": "website"
+      },
+      {
+        "scenario": "prototype",
+        "modeId": "vibe",
+        "label": {
+          "zh": "原型探索",
+          "en": "Prototype Ideas"
+        },
+        "title": {
+          "zh": "原型",
+          "en": "Prototype"
+        },
+        "placeholder": {
+          "zh": "从一个想法开始，Quest 会将其转化为可运行的原型",
+          "en": "Start from an idea. Quest will turn it into a working prototype"
+        },
+        "iconV1": "Prototype"
+      }
+    ]
+  }
+}

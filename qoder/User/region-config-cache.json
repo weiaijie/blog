@@ -1,0 +1,15 @@
+{
+  "version": "vaise5r",
+  "fetchTime": 1770262006243,
+  "content": {
+    "preferredInferenceNode": {
+      "endpoint": "https://api1.qoder.sh"
+    },
+    "preferredNesNode": {
+      "endpoint": "https://api1.qoder.sh"
+    },
+    "preferredCodebaseNode": {
+      "endpoint": "https://repo1.qoder.sh"
+    }
+  }
+}

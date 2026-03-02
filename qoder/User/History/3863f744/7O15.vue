@@ -1,0 +1,860 @@
+<template>
+  <div class="app-container">
+    <menubar :left-buttons="[$menuButton.query, $menuButton.reset]"
+             :right-buttons="[
+        pageType === 'page' && {
+          ...$menuButton.new, policy: 'Order.OrderHeader.Create'
+        },
+        // pageType === 'page' && $menuButton.custom({code: 'jdOrderImport', text: '京东订单导入', type:'upload',uploadSuccess: importSuccess,uploadError: importError,uploadUrl: importJDUrl,beforeUpload:beforeUpload}),
+        pageType === 'page' && $menuButton.custom({code: 'batchOrderAudit', text: '批量审核', policy: 'Order.OrderHeader.Create'}),
+        pageType === 'page' && $menuButton.custom({code: 'batchOrderCancel', text: '批量取消', policy: 'Order.OrderHeader.Create'}),
+        pageType === 'page' && $menuButton.custom({code: 'batchOrderImport', text: '订单导入', policy: 'Order.OrderHeader.Create'}),
+        // pageType === 'page' && {
+        //   code: 'exportOrder', text: '按订单导出'
+        // },
+        // pageType === 'page' && {
+        //   ...$menuButton.export
+        // }
+        pageType === 'page' && { code: 'export', text: '订单导出', icon: 'el-icon-download', loading: exportLoading },
+        pageType === 'page' && { code: 'exportDetails', text: '订单明细导出', icon: 'el-icon-download', policy: 'Order.OrderHeader.ExportOrderDetail', loading: exportDetailsLoading }
+      ]"
+             :fixed="pageType === 'page'"
+             @menu-button-click="handleButtonClick">
+    </menubar>
+    <table-list-card ref="dataListView"
+                     table-name="order-order-list"
+                     :api="getOrderHeader"
+                     sortable="custom"
+                     height="auto"
+                     paging
+                     highlight-current-row
+                     :query-params="queryParams"
+                     :columns="columns"
+                     :use-filter-bar="true"
+                     :selection="true"
+                     :selection-fixed="true"
+                     title="订单列表"
+                     @selectChange="getSelectChangeData">
+    </table-list-card>
+    <cancel-order-dialog ref="cancelOrderDialog"
+                         @save-success="getList"></cancel-order-dialog>
+    <batch-cancel-order-dialog ref="batchCancelOrderDialog" @save-success="getList"></batch-cancel-order-dialog>
+    <print-dialog ref="printDialog"></print-dialog>
+    <popup-view :visible.sync="exportVisible"
+                title="导出下载">
+      <collapse-card-view title="导出下载">
+        <div style="margin: 20px">
+          <a :href="exportUrl"
+             target="_blank">导出成功，点击下载</a>
+        </div>
+      </collapse-card-view>
+    </popup-view>
+    <order-import-dialog ref="orderImportDialog" @import-success="getList"></order-import-dialog>
+  </div>
+</template>
+
+<script>
+import {
+  createOrderHeaderAuditOrder, createOrderHeaderBatchAuditOrder,
+  // createOrderHeaderUnAuditOrder,
+  // deleteOrderHeaderById,
+  getOrderHeader,
+  getOrderHeaderExport,
+  getOrderSource,
+  getOrderHeaderOrderItemSkuRedundantExport
+} from '@/api/gens-api/order'
+
+import {
+  getConsumerByMobileOrNo
+  // ,
+  // getMemberShipWhole
+} from '@/api/gens-api/crm'
+import mixinQuery from '@/libs/mixin-query'
+import CancelOrderDialog from './components/CancelOrderDialog'
+import PrintDialog from './components/PrintDialog'
+import OrderImportDialog from './components/OrderImportDialog'
+import { getWarehouseInfo } from '@/api/gens-api/wms'
+import BatchCancelOrderDialog from '@/views/order/components/BatchCancelOrderDialog'
+export default {
+  name: 'order-list',
+  components: { BatchCancelOrderDialog, OrderImportDialog, CancelOrderDialog, PrintDialog },
+  mixins: [mixinQuery],
+  props: {
+    pageType: {
+      type: String,
+      default: 'page'
+    }
+  },
+  data() {
+    return {
+      uploading: false,
+      importJDUrl: `${process.env[`VUE_APP_EXHIBITION_API`]}/api/order/order-header/jd-po-order-import`,
+      jdOrderTemplate: 'JdOrderImportTemplate.xlsx',
+      importBatchUrl: `${process.env[`VUE_APP_EXHIBITION_API`]}/api/order/order-header/other-order-import`,
+      exportUrl: '',
+      exportVisible: false,
+      fileList: [],
+      selectChangeData: [],
+      exportLoading: false,
+      exportDetailsLoading: false
+    }
+  },
+  computed: {
+    columns() {
+      return [
+        {
+          label: '订单编号',
+          prop: 'orderNo',
+          width: 100,
+          type: 'linkButton',
+          copy: true,
+          click: (row) => this.$router.push(`/order/order-detail/${row.id}`),
+          filter: {
+            key: 'orderNo',
+            type: 'text',
+            quick: true
+          }
+        },
+        {
+          label: '订单挂起',
+          prop: 'isHold',
+          width: 60,
+          align: 'center',
+          html: true,
+          formatter: (item, row) => {
+            return row.isHold ? '<span style="color: red;font-weight: bold;">是</span>' : '否'
+          },
+          filter: {
+            key: 'isHold',
+            type: 'checkbox',
+            datas: {
+              list: this.$commonData.COMMON_TYPE_BOOLEAN,
+              remote: false,
+              filter: false
+            },
+            multiple: false,
+            quick: true
+          }
+        },
+        {
+          label: '订单外部编号',
+          prop: 'externalNo',
+          width: 100,
+          copy: true,
+          filter: {
+            key: 'externalNo',
+            type: 'text',
+            quick: true
+          }
+        },
+        {
+          label: '客户编号',
+          prop: 'consumerNo',
+          minWidth: 100,
+          show: false,
+          hideSetting: true,
+          filter: {
+            key: 'consumerNo',
+            type: 'text',
+            quick: true
+          }
+        },
+        {
+          label: '客户',
+          prop: 'consumerId',
+          minWidth: 120,
+          copy: true,
+          display: 'consumerNo',
+          type: 'customerLabel',
+          filter: {
+            key: 'consumerId',
+            type: 'select',
+            datas: {
+              api: getConsumerByMobileOrNo,
+              remote: true,
+              remoteKey: 'mobileOrNo',
+              labelKey: data => `${data.loginName}/${data.loginName}/${data.companyName || '-'}`,
+              valueKey: 'id'
+            },
+            placeholder: '请输入手机号或者客户编号或公司名称查询',
+            quick: true
+          }
+        },
+        {
+          label: '订单类型',
+          prop: 'orderTypeText',
+          align: 'center',
+          minWidth: 80,
+          filter: {
+            key: 'orderType',
+            type: 'checkbox',
+            datas: {
+              list: this.$commonData.ORDER_ORDERTYPE,
+              remote: false,
+              filter: false
+            },
+            multiple: false,
+            quick: true
+          }
+        },
+        {
+          label: '公司名称',
+          prop: 'companyName',
+          minWidth: 120
+        },
+        // {
+        //   label: '会员等级',
+        //   prop: 'memberShipName',
+        //   align: 'center',
+        //   minWidth: 100,
+        //   formatter: (item, data) => data.memberShipName || '--',
+        //   filter: {
+        //     key: 'memberShipId',
+        //     type: 'checkbox',
+        //     datas: {
+        //       list: [],
+        //       remote: true,
+        //       api: getMemberShipWhole,
+        //       customRequestParams: {
+        //         fiter: true,
+        //         parentColumn: null
+        //       },
+        //       remoteKey: '',
+        //       labelKey: 'name',
+        //       valueKey: 'id'
+        //     },
+        //     multiple: false
+        //   }
+        // },
+        // {
+        //   label: '客户结算方式',
+        //   prop: 'settleTypeText',
+        //   align: 'center',
+        //   minWidth: 100,
+        //   filter: {
+        //     key: 'settleType',
+        //     type: 'checkbox',
+        //     datas: {
+        //       list: this.$commonData.SETTLE_TYPE.filter(i => i.value === '1' || i.value === '2'),
+        //       remote: false,
+        //       filter: false
+        //     },
+        //     multiple: false,
+        //     quick: true
+        //   }
+        // },
+        {
+          label: '支付状态',
+          prop: 'payStatus',
+          align: 'center',
+          minWidth: 80,
+          filter: {
+            key: 'isPayed',
+            type: 'checkbox',
+            datas: {
+              list: this.$commonData.PAY_STATUS,
+              remote: false,
+              filter: false
+            },
+            multiple: false,
+            quick: true
+          }
+        },
+        {
+          label: '仓库名称',
+          prop: 'warehouseName',
+          align: 'center',
+          minWidth: 80,
+          filter: {
+            key: 'warehouseId',
+            type: 'checkbox',
+            datas: {
+              list: [],
+              remote: true,
+              api: getWarehouseInfo,
+              remoteKey: '',
+              customRequestParams: {
+                page: 1,
+                limit: 999
+              },
+              labelKey: 'warehouseName',
+              valueKey: 'id'
+            },
+            multiple: false,
+            quick: true
+          }
+        },
+        {
+          label: '已支付金额',
+          prop: 'payedAmount',
+          formatter: 'money',
+          width: 100,
+          align: 'right'
+        },
+        {
+          prop: 'totalAmount',
+          label: '总金额',
+          formatter: 'money',
+          width: 100,
+          align: 'right',
+          filter: {
+            key: 'totalAmount',
+            type: 'number'
+          }
+        },
+        {
+          prop: 'itemAmount',
+          label: '商品金额',
+          formatter: 'money',
+          width: 100,
+          align: 'right',
+          filter: {
+            key: 'itemAmount',
+            type: 'number'
+          }
+        },
+        {
+          prop: 'totalQty',
+          label: '总数量',
+          align: 'right',
+          filter: {
+            key: 'totalQty',
+            type: 'number'
+          }
+        },
+        // {
+        //   prop: 'deliveryCharges',
+        //   label: '运费',
+        //   formatter: 'money',
+        //   width: 100,
+        //   align: 'right',
+        //   filter: {
+        //     key: 'deliveryCharges',
+        //     type: 'number'
+        //   }
+        // },
+        {
+          label: '收货人',
+          prop: 'receiverName',
+          minWidth: 100,
+          filter: {
+            key: 'receiverName',
+            type: 'text'
+          }
+        },
+        {
+          label: '收货电话',
+          prop: 'receiverMobile',
+          minWidth: 120,
+          filter: {
+            key: 'receiverMobile',
+            type: 'text'
+          }
+        },
+        {
+          label: '订单状态',
+          prop: 'statusText',
+          minWidth: 100,
+          align: 'center',
+          filter: {
+            key: 'status',
+            type: 'checkbox',
+            defaultValue: ['1', '2', '3', '7'],
+            datas: {
+              list: this.getOrderStatusList(),
+              remote: false,
+              filter: false
+            },
+            multiple: true,
+            quick: true
+          }
+        },
+        // {
+        //   label: '缺货下单商品',
+        //   prop: 'hasOutOfStock',
+        //   minWidth: 100,
+        //   hidden: true,
+        //   filter: {
+        //     key: 'hasOutOfStock',
+        //     type: 'checkbox',
+        //     datas: {
+        //       list: [{ label: '含缺货可下单商品', value: '1' }],
+        //       remote: false,
+        //       filter: false
+        //     },
+        //     multiple: false,
+        //     quick: true
+        //   }
+        // },
+        {
+          label: '下单时间',
+          prop: 'creationTime',
+          minWidth: 140,
+          filter: {
+            key: 'createTime',
+            type: 'datetime',
+            defaultValue: {
+              begin: `${new Date().getFullYear()}-${new Date().getMonth() + 1}-01 00:00:00`,
+              end: `${new Date().getFullYear()}-${new Date().getMonth() + 2}-01 00:00:00`
+            },
+            quick: true
+          }
+        },
+        {
+          label: '审核时间',
+          prop: 'auditedTime',
+          minWidth: 140,
+          formatter: (item, data) =>
+            data.auditedTime && data.auditedTime.startsWith('0001')
+              ? '--'
+              : data.auditedTime,
+          filter: {
+            key: 'auditTime',
+            type: 'datetime'
+          }
+        },
+        {
+          label: '订单来源',
+          prop: 'orderSourceName',
+          align: 'center',
+          minWidth: 80,
+          filter: {
+            key: 'orderSourceId',
+            type: 'checkbox',
+            datas: {
+              list: [],
+              remote: true,
+              api: getOrderSource,
+              remoteKey: '',
+              customRequestParams: {
+                page: 1,
+                limit: 999,
+                status: 1
+              },
+              labelKey: 'sourceName',
+              valueKey: 'id'
+            },
+            multiple: false,
+            quick: true
+          }
+        },
+        {
+          label: '自动分配库存',
+          prop: 'isAutoAllocateStock',
+          minWidth: 100,
+          align: 'center',
+          formatter: 'boolean',
+          filter: {
+            key: 'isAutoAllocateStock',
+            type: 'checkbox',
+            datas: {
+              list: this.$commonData.COMMON_TYPE_BOOLEAN,
+              remote: false,
+              filter: false
+            },
+            multiple: false,
+            quick: true
+          }
+        },
+        {
+          label: '是否启用多仓',
+          prop: 'isMultiWarehouse',
+          minWidth: 100,
+          align: 'center',
+          formatter: 'boolean',
+          filter: {
+            key: 'isMultiWarehouse',
+            type: 'checkbox',
+            datas: {
+              list: this.$commonData.COMMON_TYPE_BOOLEAN,
+              remote: false,
+              filter: false
+            },
+            multiple: false,
+            quick: true
+          }
+        },
+        {
+          label: '发货类型',
+          prop: 'deliveryType',
+          minWidth: 100,
+          align: 'center',
+          formatter: (item, row) => {
+            const deliveryTypeMap = {
+              '1': '包装发货',
+              '2': '整箱发货',
+              '3': '散装发货'
+            }
+            return deliveryTypeMap[row.deliveryType] || '-'
+          },
+          filter: {
+            key: 'deliveryType',
+            type: 'checkbox',
+            datas: {
+              list: this.$commonData.ORDER_DELIVERYTYPE,
+              remote: false,
+              filter: false
+            },
+            multiple: false,
+            quick: true
+          }
+        },
+        {
+          label: '备注',
+          prop: 'remark',
+          minWidth: 100,
+          align: 'center',
+          filter: {
+            key: 'remark',
+            type: 'text',
+            quick: true
+          }
+        },
+        {
+          width: 160,
+          label: '操作',
+          prop: 'action',
+          type: 'button',
+          fixed: 'right',
+          buttons: [
+            {
+              id: 'view',
+              text: '查看',
+              eventType: 'primary',
+              show: this.pageType === 'page',
+              click: (row) =>
+                this.$router.push(`/order/order-detail/${row.id}?view=true`)
+            },
+            {
+              id: 'edit',
+              text: '编辑',
+              eventType: 'primary',
+              show: this.pageType === 'page',
+              click: (row) =>
+                this.$router.push(`/order/order-detail/${row.id}`),
+              policy: 'Order.OrderHeader.Update'
+            },
+            {
+              id: 'b',
+              text: '审核',
+              eventType: 'success',
+              actionType: 'confirm',
+              confirmText: (row) =>
+                `确认审核通过订单’<span style="color: red;">${row.orderNo}</span>‘？`,
+              loading: false,
+              show: (row) => row.status === 1 && this.pageType === 'page',
+              click: (row, button, closeConfirm) =>
+                this.handleRowStatus(
+                  createOrderHeaderAuditOrder({ id: row.id }),
+                  row,
+                  button,
+                  closeConfirm
+                ),
+              policy: 'Order.OrderHeader.Audit'
+            },
+            // {
+            //   id: 'c',
+            //   text: '反审核',
+            //   eventType: 'warning',
+            //   actionType: 'confirm',
+            //   confirmText: (row) =>
+            //     `确认反审核订单’<span style="color: red;">${row.orderNo}</span>‘？`,
+            //   loading: false,
+            //   show: (row) => row.status === 2 && this.pageType === 'page',
+            //   click: (row, button, closeConfirm) =>
+            //     this.handleRowStatus(
+            //       createOrderHeaderUnAuditOrder({ id: row.id }),
+            //       row,
+            //       button,
+            //       closeConfirm
+            //     ),
+            //   policy: 'Order.OrderHeader.UnAudit'
+            // },
+            // {
+            //   id: 'fh',
+            //   text: '发货',
+            //   eventType: 'primary',
+            //   actionType: 'confirm',
+            //   confirmText: (row) =>
+            //     `确认发货订单’<span style="color: red;">${row.orderNo}</span>‘？`,
+            //   loading: false,
+            //   show: (row) => row.status === 2 && this.pageType === 'page',
+            //   // click: (row, button, closeConfirm) =>
+            //   // this.handleRowStatus(
+            //   //   createPackingSlipOnceShip({ orderHeaderId: row.id }),
+            //   //   row,
+            //   //   button,
+            //   //   closeConfirm
+            //   // ),
+            //   policy: 'Order.OrderHeader.UnAudit'
+            // },
+            {
+              id: 'd',
+              text: '取消',
+              eventType: 'danger',
+              show: (row) => row.isCanCancel && this.pageType === 'page',
+              click: (row) => {
+                this.$refs.cancelOrderDialog.open({
+                  id: row.id,
+                  orderNo: row.orderNo
+                })
+              },
+              policy: 'Order.OrderHeader.Cancel'
+            },
+            // {
+            //   id: 'f',
+            //   text: '删除',
+            //   eventType: 'danger',
+            //   actionType: 'confirm',
+            //   confirmText: (row) =>
+            //     `确认删除订单’<span style="color: red;">${row.orderNo}</span>‘？`,
+            //   loading: false,
+            //   show: (row) => row.status === 6 && this.pageType === 'page',
+            //   click: (row, button, closeConfirm) =>
+            //     this.handleRowStatus(
+            //       deleteOrderHeaderById(row.id),
+            //       row,
+            //       button,
+            //       closeConfirm
+            //     ),
+            //   policy: 'Order.OrderHeader.Delete'
+            // },
+            // {
+            //   id: 'g',
+            //   text: '打印销售单',
+            //   eventType: 'primary',
+            //   show: () => this.pageType === 'page',
+            //   click: (row) => {
+            //     this.handlePrintOpen(row, 1)
+            //   },
+            //   policy: 'Order.OrderHeader.Print'
+            // },
+            // {
+            //   id: 'h',
+            //   text: '打印出库单',
+            //   eventType: 'primary',
+            //   show: () => this.pageType === 'page',
+            //   click: (row) => {
+            //     this.handlePrintOpen(row, 2)
+            //   },
+            //   policy: 'Order.OrderHeader.Print'
+            // },
+            {
+              id: 's',
+              text: '选择',
+              eventType: 'primary',
+              show: this.pageType === 'select',
+              click: (row) => {
+                this.$emit('select', row)
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  methods: {
+    getOrderStatusList() {
+      const originalList = this.$commonData.ORDER_ORDERHEADERSTATUS || []
+      const statusMap = Object.fromEntries(originalList.map(item => [item.value, item]))
+      
+      // 定义固定顺序的状态，将 7 插入到 2 之后
+      const fixedOrder = ['1', '2', '7']
+      const result = []
+      
+      // 添加固定顺序的状态
+      fixedOrder.forEach(value => {
+        if (statusMap[value]) result.push(statusMap[value])
+      })
+      
+      // 添加其他状态，保持原有相对顺序
+      originalList.forEach(item => {
+        if (!fixedOrder.includes(item.value)) {
+          result.push(item)
+        }
+      })
+      
+      return result
+    },
+    getOrderHeader,
+    getList() {
+      this.$refs['dataListView'].load()
+    },
+    getSelectChangeData(data){
+      this.selectChangeData = data
+    },
+    onUploadSuccess(response) {
+      this.fileList = []
+      this.uploading = false
+      this.importVisible = false
+      this.getList()
+      // let err = ''
+      // if (response.errorMsg && response.errorMsg.length) {
+      //   err = `<p>错误：</p >`
+      //   err += response.errorMsg.map(i => `<p style="width: 400px">${i}</p >`)
+      // }
+      // this.$alert(`
+      //   <p>导入数量：${response.totalCount}</p >
+      //   <p>成功数量：${response.succeedCount}</p >
+      //   ${err}
+      //     `, '提示', {
+      //   dangerouslyUseHTMLString: true,
+      //   confirmButtonText: '确认'
+      // })
+    },
+    onUploadError(response) {
+      // const ex = JSON.parse(response.message)
+      // var messages = ex.error.message.split(',').join('<br/>')
+      // this.$message.error({
+      //   message: messages || '批量修改价格导入失败，请稍后重试',
+      //   dangerouslyUseHTMLString: true
+      // })
+      this.fileList = []
+      this.uploading = false
+      this.$message.error((JSON.parse(response.message)).error.message)
+    },
+    beforeUpload() {
+      if (this.uploading) return
+      this.uploading = true
+    },
+    // beforeUpload() {
+    //   this.uploading = true
+    // },
+    // importSuccess(response, file, fileList) {
+    //   this.uploading = false
+    //   this.getList()
+    // },
+    // importError(response, file, fileList) {
+    //   this.uploading = false
+    //   this.fileList = []
+    //   this.$message.error((JSON.parse(response.message)).error.message)
+    // },
+    handlePrintOpen(row, type){
+      //判断订单商品中是否存在缺货商品
+      const isExit = (row.orderItemSkus || []).some(i => i.stockStatus === 2)
+      if (isExit) {
+        this.$confirm(`该订单中含有缺货商品,确认继续打印当前订单?`, '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning',
+          beforeClose: (action, instance, done) => {
+            if (action === 'confirm') {
+              instance.confirmButtonLoading = true
+              this.$refs.printDialog.open(row.id, type)
+              done()
+              instance.confirmButtonLoading = false
+            } else {
+              done()
+            }
+          }
+        })
+      } else {
+        this.$refs.printDialog.open(row.id, type)
+      }
+    },
+    handleCreate() {
+      this.$router.push(`/order/order-create`)
+    },
+    handleRowEdit({ id }) {
+      this.$router.push(`/order/order-detail/${id}`)
+    },
+    handleRowStatus(api, row, button, closeConfirm) {
+      button.loading = true
+      api
+        .then(() => {
+          this.$showOperationSuccessfulNotify()
+          this.$refs['dataListView'].query()
+        })
+        .finally(() => {
+          button.loading = false
+          closeConfirm()
+        })
+    },
+    cancelOrder() {
+      this.$refs.cancelOrderDialog.open({
+        id: this.id,
+        orderNo: this.orderInfo.orderNo
+      })
+    },
+    handleExport() {
+      this.exportLoading = true
+      getOrderHeaderExport({ ...this.$refs.dataListView.getFilterValues(), exportByNo: false }).then((res) => {
+        this.$utils.createDownload(res)
+      }).finally(() => {
+        this.exportLoading = false
+      })
+    },
+    // 订单明细导出
+    handleExportDetails() {
+      this.exportDetailsLoading = true
+      getOrderHeaderOrderItemSkuRedundantExport({ ...this.$refs.dataListView.getFilterValues() }).then((res) => {
+        this.$utils.createDownload(res)
+      }).finally(() => {
+        this.exportDetailsLoading = false
+      })
+    },
+    handleOrderExport() {
+      getOrderHeaderExport({ ...this.$refs.dataListView.getFilterValues(), exportByNo: true }).then((res) => {
+        this.$utils.createDownload(res)
+      })
+    },
+    handleBatchOrderAudit(){
+      const toAuditOrderIds = this.selectChangeData.filter(i => i.status === 1).map(j => j.id)
+      if (!toAuditOrderIds.length) {
+        this.$message.error('请至少选择一个待审核的订单')
+        return
+      }
+      this.$confirm(`确认批量审核通过吗？`, '提示', {
+        distinguishCancelAndClose: true,
+        confirmButtonText: '确认',
+        cancelButtonText: '取消',
+        beforeClose: (action, instance, done) => {
+          if (action === 'confirm') {
+            instance.confirmButtonLoading = true
+            this.loading = true
+            createOrderHeaderBatchAuditOrder({
+              orderIds: toAuditOrderIds
+            }).then(res => {
+              this.getList()
+              this.$showOperationSuccessfulNotify()
+            }).finally(() => {
+              this.loading = false
+            })
+            instance.confirmButtonLoading = false
+            done()
+          } else {
+            done()
+          }
+        }
+      })
+    },
+    handleBatchOrderCancel(){
+      const toCancelOrderIds = this.selectChangeData.filter(i => i.isCanCancel).map(j => j.id)
+      if (!toCancelOrderIds.length) {
+        this.$message.error('请至少选择一个可取消的订单')
+        return
+      }
+      this.$refs.batchCancelOrderDialog.open(toCancelOrderIds)
+    },
+    handleButtonClick(code) {
+      if (code === 'query') {
+        this.getList()
+      } else if (code === 'reset') {
+        this.$refs.dataListView.reset()
+      } else if (code === 'new') {
+        this.handleCreate()
+      } else if (code === 'batchOrderAudit') {
+        this.handleBatchOrderAudit()
+      } else if (code === 'batchOrderCancel') {
+        this.handleBatchOrderCancel()
+      } else if (code === 'export') {
+        this.handleExport()
+      } else if (code === 'exportDetails') {
+        this.handleExportDetails()
+      } else if (code === 'batchOrderImport') {
+        this.$refs.orderImportDialog.open()
+      }
+    }
+  }
+}
+</script>

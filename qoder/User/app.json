@@ -1,0 +1,43 @@
+{
+  "config": {
+    "general": {
+      "displayLanguage": "zh-cn",
+      "aiResponseLanguage": "zh-cn",
+      "improvementPlan": "disagree",
+      "importSettings": "VS Code"
+    },
+    "completion": {
+      "enableNES": true,
+      "disabledLanguages": [],
+      "triggerInComment": true,
+      "autoImport": true
+    },
+    "chat": {
+      "webToolsMode": "Ask every time",
+      "askModeUseTools": true,
+      "editFileTool": false,
+      "terminalRunMode": "askEveryTime",
+      "commandDenyList": "rm,mv,sudo,wget,curl,chown",
+      "commandAllowlist": "",
+      "autoRunMcpTools": true,
+      "methodQuickOperation": false,
+      "showSelectionToolbar": true
+    },
+    "quest": {
+      "defaultLayout": true
+    },
+    "memory": {
+      "autoGenerate": true
+    },
+    "integrations": {
+      "browserRunMode": "Auto-run",
+      "browserToolsRunMode": "Auto-run",
+      "planModeRunConfig": "Auto-run"
+    },
+    "advanced": {
+      "autoUpdate": true,
+      "proxyMode": "system",
+      "proxyURL": ""
+    }
+  }
+}

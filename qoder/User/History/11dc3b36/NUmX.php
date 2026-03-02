@@ -1,0 +1,584 @@
+<?php
+// +----------------------------------------------------------------------
+// | CRMEB [ CRMEB赋能开发者，助力企业发展 ]
+// +----------------------------------------------------------------------
+// | Copyright (c) 2016~2020 https://www.crmeb.com All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed CRMEB并不是自由软件，未经许可不能去掉CRMEB相关版权
+// +----------------------------------------------------------------------
+// | Author: CRMEB Team <admin@crmeb.com>
+// +----------------------------------------------------------------------
+declare (strict_types=1);
+
+namespace app\services\pay;
+
+use crmeb\services\AliPayService;
+use crmeb\services\wechat\Payment;
+use crmeb\services\HuifuPayService;
+use crmeb\services\UmsPayService;
+use EasyWeChat\Kernel\Exceptions\InvalidArgumentException;
+use EasyWeChat\Kernel\Exceptions\InvalidConfigException;
+use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
+use think\exception\ValidateException;
+
+/**
+ * 支付统一入口
+ * Class PayServices
+ * @package app\services\pay
+ */
+class PayServices
+{
+    /**
+     * 微信支付类型
+     */
+    const WEIXIN_PAY = 'weixin';
+
+	/**
+     * 积分支付
+     */
+    const INTEGRAL_PAY = 'integral';
+
+    /**
+     * 余额支付
+     */
+    const YUE_PAY = 'yue';
+
+    /**
+     * 线下支付
+     */
+    const OFFLINE_PAY = 'offline';
+
+    /**
+     * 支付宝
+     */
+    const ALIPAY_PAY = 'alipay';
+
+    /**
+     * 现金支付
+     */
+    const CASH_PAY = 'cash';
+
+    /**
+     * 金币支付(企业福利金)
+     */
+    const WELFARE_PAY = 'welfare';
+
+    /**
+     * 支付方式
+     * @var string[]
+     */
+    const PAY_TYPE = [
+        PayServices::WEIXIN_PAY => '微信支付',
+        PayServices::YUE_PAY => '余额支付',
+        PayServices::OFFLINE_PAY => '线下支付',
+        PayServices::ALIPAY_PAY => '支付宝',
+        PayServices::CASH_PAY => '现金支付',
+        PayServices::INTEGRAL_PAY => '积分支付',
+        PayServices::WELFARE_PAY => '金币支付',
+    ];
+
+    /**
+     * 二维码条码值
+     * @var string
+     */
+    protected string $authCode = '';
+
+    /**
+     * 设置二维码条码值
+     * @param string $authCode
+     * @return $this
+     */
+    public function setAuthCode(string $authCode)
+    {
+        $this->authCode = $authCode;
+        return $this;
+    }
+
+    /**
+     * 发起支付
+     * @param string $payType
+     * @param string $openid
+     * @param string $orderId
+     * @param string $price
+     * @param string $successAction
+     * @param string $body
+     * @param string $quitUrl 支付完成后的跳转地址(可选)
+     * @param bool $isCode
+     * @return \Alipay\EasySDK\Payment\Wap\Models\AlipayTradeWapPayResponse|array|string
+     * @throws InvalidArgumentException
+     * @throws InvalidConfigException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws TransportExceptionInterface
+     */
+    public function pay(string $payType, string $openid, string $orderId, string $price, string $successAction, string $body, string $quitUrl = '', bool $isCode = false)
+    {
+		$body = filter_emoji($body);
+
+        // ========== 生成支付单号(支持重复发起支付) ==========
+        // 对于银联支付(routine和weixinh5),生成新的支付单号
+        // 支付单号格式: 业务订单号_支付次数
+        $businessOrderId = $orderId; // 业务订单号
+        $payOrderId = $orderId; // 默认使用业务订单号
+
+        if (in_array($payType, ['routine', 'weixinh5'])) {
+            $payOrderId = $this->generatePayOrderId($businessOrderId);
+        }
+
+        // ========== 检查是否需要分账 ==========
+        // 注意: 必须在生成支付单号之后调用,因为子订单号需要基于支付单号生成
+        $divisionData = $this->buildDivisionData($businessOrderId, $payOrderId);
+
+        switch ($payType) {
+            case 'routine':
+                //微信支付，从APP端请求过来
+                if (request()->isApp()) {
+                    return Payment::appPay($openid, $payOrderId, $price, $successAction, $body);
+                } else {
+                    // ========== 使用银联商务支付 - 小程序支付 ==========
+                    $umsPay = new UmsPayService('mini');  // 指定小程序支付类型
+                    // 优先使用配置的site_url,其次使用请求域名
+                    $siteUrl = sys_config('site_url') ?: request()->domain();
+                    \think\facade\Log::info('=== 银联小程序支付 ===');
+                    \think\facade\Log::info('site_url配置: ' . sys_config('site_url'));
+                    \think\facade\Log::info('request domain: ' . request()->domain());
+                    \think\facade\Log::info('最终使用: ' . $siteUrl);
+                    $notifyUrl = $siteUrl . '/api/pay/ums/notify';
+                    \think\facade\Log::info('完整通知URL: ' . $notifyUrl);
+                    if (!empty($divisionData)) {
+                        \think\facade\Log::info('订单需要分账: ' . json_encode($divisionData, JSON_UNESCAPED_UNICODE));
+                    }
+                    return $umsPay->miniPay($payOrderId, $price, $body, $openid, $notifyUrl, $divisionData);
+                }
+            case 'weixinh5':
+                // ========== 使用银联商务支付 - H5支付 ==========
+                $umsPay = new UmsPayService('h5');  // 指定H5支付类型,使用productionH5配置
+                // 优先使用配置的site_url,其次使用请求域名
+                $siteUrl = sys_config('site_url') ?: request()->domain();
+                // 获取H5前端返回地址配置
+                $h5ReturnUrl = env('H5_RETURN_URL', '');
+                
+                \think\facade\Log::info('=== 银联H5支付 ===');
+                \think\facade\Log::info('site_url配置: ' . sys_config('site_url'));
+                \think\facade\Log::info('request domain: ' . request()->domain());
+                \think\facade\Log::info('最终使用: ' . $siteUrl);
+                \think\facade\Log::info('H5_RETURN_URL配置: ' . $h5ReturnUrl);
+                $notifyUrl = $siteUrl . '/api/pay/ums/notify';
+
+                // 构建 returnUrl: 支付完成后跳转到订单状态页面
+                $returnUrl = '';
+                if (!empty($quitUrl)) {
+                    // 如果传入了 quitUrl,使用传入的URL
+                    if (strpos($quitUrl, 'http') !== 0) {
+                        $returnUrl = $siteUrl . $quitUrl;
+                    } else {
+                        $returnUrl = $quitUrl;
+                    }
+                } elseif (!empty($h5ReturnUrl)) {
+                    // 如果配置了 H5_RETURN_URL,使用配置的地址
+                    $returnUrl = rtrim($h5ReturnUrl, '/') . '/pages/goods/order_pay_status/index?order_id=' . $businessOrderId;
+                } else {
+                    // 如果没有传入 quitUrl且没有配置H5_RETURN_URL,默认跳转到订单状态页面
+                    $returnUrl = $siteUrl . '/pages/goods/order_pay_status/index?order_id=' . $businessOrderId;
+                }
+
+                \think\facade\Log::info('完整通知URL: ' . $notifyUrl);
+                \think\facade\Log::info('返回URL: ' . $returnUrl);
+                if (!empty($divisionData)) {
+                    \think\facade\Log::info('订单需要分账: ' . json_encode($divisionData, JSON_UNESCAPED_UNICODE));
+                }
+                return $umsPay->h5Pay($payOrderId, $price, $body, $notifyUrl, $returnUrl, $divisionData);
+            case self::WEIXIN_PAY:
+                //微信支付，付款码支付，付款码支付使用v2支付接口
+                if ($this->authCode) {
+                    return Payment::microPay($this->authCode, $payOrderId, $price, $successAction, $body);
+                } else {
+                    //微信支付，从APP端请求过来
+                    if (request()->isApp()) {
+                        return Payment::appPay($openid, $payOrderId, $price, $successAction, $body);
+                    } else {
+                        //开启了v3支付
+                        if (Payment::instance()->isV3PAy) {
+                            return Payment::instance()->payClient()->jsapiPay($openid, $payOrderId, $price, $body, $successAction);
+                        }
+                        //使用v2旧版支付接口
+                        return Payment::jsPay($openid, $payOrderId, $price, $successAction, $body);
+                    }
+                }
+            case self::ALIPAY_PAY:
+                if ($this->authCode) {
+                    return AliPayService::instance()->microPay($this->authCode, $body, $payOrderId, $price, $successAction);
+                } else {
+                    return AliPayService::instance()->create($body, $payOrderId, $price, $successAction, $openid, $openid, $isCode);
+                }
+            case 'pc':
+            case 'store':
+                //方法内部已经做了区分v2和v3
+                return Payment::nativePay($openid, $payOrderId, $price, $successAction, $body);
+            default:
+                throw new ValidateException('支付方式不存在');
+        }
+    }
+
+
+
+    /**
+     * 从支付单号解析业务订单号
+     * 支付单号格式: wx733284677992841216_1
+     * 业务订单号格式: wx733284677992841216
+     * @param string $payOrderId 支付单号
+     * @return string 业务订单号
+     */
+    public static function parseBusinessOrderId(string $payOrderId): string
+    {
+        // 支付单号格式: 业务订单号_支付次数
+        // 去掉最后一个下划线部分即可得到业务订单号
+        $lastUnderscorePos = strrpos($payOrderId, '_');
+        if ($lastUnderscorePos !== false) {
+            $lastPart = substr($payOrderId, $lastUnderscorePos + 1);
+            // 如果最后一部分是纯数字(支付次数),则去掉
+            if (is_numeric($lastPart)) {
+                return substr($payOrderId, 0, $lastUnderscorePos);
+            }
+        }
+        // 如果不是支付单号格式,直接返回
+        return $payOrderId;
+    }
+
+    /**
+     * 生成支付单号
+     * 格式: 业务订单号_支付次数
+     * 例如: wx733284677992841216_1
+     * @param string $orderId 业务订单号
+     * @return string
+     */
+    protected function generatePayOrderId(string $orderId): string
+    {
+        /** @var \app\services\order\StoreOrderServices $orderServices */
+        $orderServices = app()->make(\app\services\order\StoreOrderServices::class);
+
+        // 获取当前订单的支付尝试次数
+        $orderInfo = $orderServices->getOne(['order_id' => $orderId], 'pay_attempt_count');
+        $attemptCount = $orderInfo['pay_attempt_count'] ?? 0;
+
+        // 增加尝试次数
+        $attemptCount++;
+        $orderServices->update(['order_id' => $orderId], ['pay_attempt_count' => $attemptCount], 'order_id');
+
+        // 生成支付单号: 业务订单号_支付次数
+        $payOrderId = $orderId . '_' . $attemptCount;
+
+        \think\facade\Log::info('生成支付单号: ' . $payOrderId . ' (业务订单号: ' . $orderId . ', 支付次数: ' . $attemptCount . ')');
+
+        return $payOrderId;
+    }
+
+    /**
+     * 构建分账数据 - 多供应商支持版本
+     * 所有订单都作为分账订单处理:
+     * - 多供应商订单: 按供应商分别生成分账子订单
+     * - 单供应商订单: 传统供应商分账 + 平台分账
+     * - 平台订单: 仅平台分账(使用platform_division.mid)
+     *
+     * @param string $orderId 业务订单号(原始订单号,用于查询订单信息)
+     * @param string $payOrderId 支付单号(用于生成子订单号,可能包含3HD3前缀)
+     * @return array
+     */
+    protected function buildDivisionData(string $orderId, string $payOrderId = ''): array
+    {
+        try {
+            // 如果没有传入支付单号,则使用业务订单号
+            if (empty($payOrderId)) {
+                $payOrderId = $orderId;
+            }
+
+            // 查询订单信息 (包含组合支付字段)
+            /** @var \app\services\order\StoreOrderServices $orderServices */
+            $orderServices = app()->make(\app\services\order\StoreOrderServices::class);
+            $orderInfo = $orderServices->getOne(['order_id' => $orderId],
+                'id,supplier_id,settle_price,pay_price,online_pay_price,welfare_pay_price,balance_pay_price');
+
+            if (!$orderInfo) {
+                \think\facade\Log::warning("订单 {$orderId} 不存在,无法构建分账数据");
+                return [];
+            }
+
+            // 读取平台分账配置
+            $configFile = config_path() . 'UmsPayConfig.json';
+            if (!file_exists($configFile)) {
+                \think\facade\Log::error("平台分账配置文件不存在: {$configFile}");
+                return [];
+            }
+
+            $config = json_decode(file_get_contents($configFile), true);
+            $platformDivision = $config['platform_division'] ?? null;
+
+            if (!$platformDivision || empty($platformDivision['mid'])) {
+                \think\facade\Log::error("未配置平台分账商户号 platform_division.mid");
+                return [];
+            }
+
+            // 判断是否为组合支付
+            $welfarePayPrice = floatval($orderInfo['welfare_pay_price'] ?? 0);
+            $balancePayPrice = floatval($orderInfo['balance_pay_price'] ?? 0);
+            $onlinePayPrice = floatval($orderInfo['online_pay_price'] ?? 0);
+            $isCombo = ($welfarePayPrice > 0 || $balancePayPrice > 0);
+
+            // 组合支付: 只对在线支付部分进行分账
+            if ($isCombo && $onlinePayPrice <= 0) {
+                \think\facade\Log::info("订单 {$orderId} 为纯余额/福利金支付,无需银联分账");
+                return [];
+            }
+
+            // 计算实际需要分账的总金额
+            $totalDivisionAmount = $isCombo ? $onlinePayPrice : $orderInfo['pay_price'];
+
+            if (bccomp((string)$totalDivisionAmount, '0', 2) <= 0) {
+                \think\facade\Log::info("订单 {$orderId} 分账总金额为0或负数,无需分账");
+                return [];
+            }
+
+            // 生成子订单号基础部分
+            // 使用原始订单ID(去掉支付次数后缀),避免子订单号过长
+            // 支付单号格式: wx740228190735171584_1 (业务订单号_支付次数)
+            // 子订单号基础: wx740228190735171584 (只保留业务订单号)
+            $subOrderBase = $orderId;
+
+            // 构造分账子订单列表
+            $subOrders = [];
+
+            // ========== 检查订单是否为多供应商订单 ==========
+            // 如果订单本身有明确的供应商ID和结算价，则按原订单信息处理
+            $originalSupplierId = $orderInfo['supplier_id'] ?? 0;
+            $originalSettlePrice = $orderInfo['settle_price'] ?? '0.00';
+            
+            // 按供应商汇总结算金额
+            $supplierSettleTotals = [];  // [supplier_id => settle_total]
+            $supplierInfoMap = [];      // [supplier_id => supplier_info]
+            
+            // 如果是子订单或具有明确供应商信息的订单，直接使用原始数据
+            if ($originalSupplierId > 0 && bccomp($originalSettlePrice, '0.00', 2) > 0) {
+                $supplierSettleTotals[$originalSupplierId] = $originalSettlePrice;
+            } else {
+                // ========== 查询订单商品的供应商归属与结算价（仅用于平台订单）=========
+                /** @var \app\services\order\StoreOrderCartInfoServices $cartInfoServices */
+                $cartInfoServices = app()->make(\app\services\order\StoreOrderCartInfoServices::class);
+                
+                // 获取订单商品信息，按供应商维度进行聚合
+                $cartInfos = $cartInfoServices->getCartColunm(['oid' => $orderInfo['id']], 'cart_id,relation_id,type,cart_num,cart_info', 'cart_id');
+                
+                foreach ($cartInfos as $cart) {
+                    $cartInfo = is_string($cart['cart_info']) ? json_decode($cart['cart_info'], true) : $cart['cart_info'];
+                    
+                    // 根据商品类型确定供应商ID
+                    $supplierId = 0;
+                    if ($cart['type'] == 0 || $cart['type'] == 2) { // 供应商商品
+                        $supplierId = $cart['relation_id'];
+                    }
+                    
+                    if ($supplierId > 0) {
+                        // 计算该商品的结算价
+                        $itemSettlePrice = $cartInfo['productInfo']['attrInfo']['settle_price'] ?? 0;
+                        $itemTotalSettle = bcmul((string)$itemSettlePrice, (string)$cart['cart_num'], 2);
+                        
+                        // 汇总供应商结算总价
+                        if (!isset($supplierSettleTotals[$supplierId])) {
+                            $supplierSettleTotals[$supplierId] = '0.00';
+                        }
+                        $supplierSettleTotals[$supplierId] = bcadd($supplierSettleTotals[$supplierId], $itemTotalSettle, 2);
+                    }
+                }
+            }
+            
+            // 如果没有任何供应商商品，按平台订单处理
+            if (empty($supplierSettleTotals)) {
+                \think\facade\Log::info("订单 {$orderId} 没有供应商商品,按平台订单处理");
+                
+                $platformSubOrderId = 'PLAT_' . $subOrderBase;
+                if (str_starts_with($subOrderBase, '3HD3')) {
+                    $platformSubOrderId = '3HD3PLAT_' . substr($subOrderBase, 4);
+                }
+
+                $subOrders[] = [
+                    'mid' => $platformDivision['mid'],
+                    'merOrderId' => $platformSubOrderId,
+                    'totalAmount' => bcmul((string)$totalDivisionAmount, '100', 0),
+                ];
+
+                \think\facade\Log::info("订单 {$orderId} 平台订单,全额分账到平台: 金额={$totalDivisionAmount}元");
+            } else {
+                // ========== 多供应商分账处理 ==========
+                \think\facade\Log::info("订单 {$orderId} 为多供应商订单，供应商数量: " . count($supplierSettleTotals));
+                
+                // 获取供应商信息
+                $supplierIds = array_keys($supplierSettleTotals);
+                /** @var \app\services\supplier\SystemSupplierServices $supplierServices */
+                $supplierServices = app()->make(\app\services\supplier\SystemSupplierServices::class);
+                $suppliers = $supplierServices->getColumn([['id', 'in', $supplierIds]], 'id,supplier_name,unionpay_mid', 'id');
+                
+                // 计算总的结算金额和无法分账的金额
+                $totalSettleAmount = array_sum(array_map('floatval', $supplierSettleTotals));
+                
+                // 先筛选出有银联商户号的供应商，重新计算有效结算金额
+                $validSupplierSettleTotals = [];
+                $unallocatedAmount = '0.00'; // 无法分账给供应商的金额（因为没有银联商户号）
+                foreach ($supplierSettleTotals as $supplierId => $supplierSettleTotal) {
+                    $supplierInfo = $suppliers[$supplierId] ?? null;
+                    if ($supplierInfo && !empty($supplierInfo['unionpay_mid'])) {
+                        $validSupplierSettleTotals[$supplierId] = $supplierSettleTotal;
+                    } else {
+                        // 累计没有银联商户号的供应商金额
+                        $unallocatedAmount = bcadd($unallocatedAmount, $supplierSettleTotal, 2);
+                    }
+                }
+                
+                $totalValidSettleAmount = array_sum(array_map('floatval', $validSupplierSettleTotals));
+                
+                // 遍历每个有效的供应商，计算其分账金额
+                $totalSupplierShare = '0.00';
+                $allocatedOnlinePay = '0.00'; // 已分配的在线支付金额
+                $supplierShares = []; // 临时存储所有供应商的份额
+                                
+                foreach ($validSupplierSettleTotals as $supplierId => $supplierSettleTotal) {
+                    $supplierInfo = $suppliers[$supplierId] ?? null;
+                                    
+                    // 计算供应商分账比例（基于有效供应商的总金额）
+                    $settleRatio = $totalValidSettleAmount > 0 ? bcdiv($supplierSettleTotal, (string)$totalValidSettleAmount, 10) : '0.0000000000';
+                                        
+                    // 计算供应商应得的在线支付分账金额
+                    $supplierOnlineShare = '0.00';
+                    if ($isCombo) {
+                        // 使用供应商结算价占订单结算价的比例来分配在线支付金额，但不能超过供应商的结算价总额
+                        $rawShare = (float)$onlinePayPrice * (float)$settleRatio;
+                        // 限制分账金额不能超过供应商的结算价
+                        $potentialShare = min($rawShare, (float)$supplierSettleTotal);
+                        $supplierOnlineShare = number_format($potentialShare, 2, '.', '');
+                                            
+                        // 转换为分再转回元，确保与银联分账金额一致
+                        $supplierOnlineShareFen = bcmul($supplierOnlineShare, '100', 0);
+                        $supplierOnlineShare = bcdiv($supplierOnlineShareFen, '100', 2);
+                                            
+                        // 累计已分配金额
+                        $allocatedOnlinePay = bcadd($allocatedOnlinePay, $supplierOnlineShare, 2);
+                                            
+                        $supplierShares[] = [
+                            'supplierId' => $supplierId,
+                            'supplierInfo' => $supplierInfo,
+                            'supplierOnlineShare' => $supplierOnlineShare,
+                            'supplierSettleTotal' => $supplierSettleTotal
+                        ];
+                    } else {
+                        // 单一支付：供应商分账金额就是其结算价
+                        $supplierOnlineShare = $supplierSettleTotal;
+                                        
+                        $supplierShares[] = [
+                            'supplierId' => $supplierId,
+                            'supplierInfo' => $supplierInfo,
+                            'supplierOnlineShare' => $supplierOnlineShare,
+                            'supplierSettleTotal' => $supplierSettleTotal
+                        ];
+                    }
+                                    
+                    // 累计供应商分账总额
+                    $totalSupplierShare = bcadd($totalSupplierShare, $supplierOnlineShare, 2);
+                    
+                }
+                                
+                // 如果是组合支付，需要处理分配逻辑
+                if ($isCombo) {
+                    // 重新计算实际分配的金额总和
+                    $actualAllocated = '0.00';
+                    foreach ($supplierShares as $shareInfo) {
+                        $actualAllocated = bcadd($actualAllocated, $shareInfo['supplierOnlineShare'], 2);
+                    }
+                                    
+                    // 计算未分配的在线支付金额
+                    $remainingOnlinePay = bcsub((string)$onlinePayPrice, $actualAllocated, 2);
+                                    
+                    // 如果还有剩余金额且大于0，分配给最后一个供应商（但不超过其结算价）
+                    if (bccomp($remainingOnlinePay, '0', 2) > 0 && !empty($supplierShares)) {
+                        $lastIndex = count($supplierShares) - 1;
+                        $lastSupplierInfo = &$supplierShares[$lastIndex];
+                                        
+                        // 计算该供应商最多还能接收多少金额（不超过其结算价）
+                        $maxAdditional = bcsub($lastSupplierInfo['supplierSettleTotal'], $lastSupplierInfo['supplierOnlineShare'], 2);
+                        $additionalAmount = min((float)$remainingOnlinePay, (float)$maxAdditional);
+                                        
+                        if ($additionalAmount > 0) {
+                            $additionalAmount = number_format($additionalAmount, 2, '.', '');
+                            $newShare = bcadd($lastSupplierInfo['supplierOnlineShare'], $additionalAmount, 2);
+                            $lastSupplierInfo['supplierOnlineShare'] = $newShare;
+                                            
+                            \think\facade\Log::info("订单 {$orderId} 调整最后供应商分账金额以分配剩余在线支付: {$additionalAmount}元");
+                        }
+                    }
+                }
+                                
+                // 添加供应商分账子订单
+                foreach ($supplierShares as $shareInfo) {
+                    $supplierId = $shareInfo['supplierId'];
+                    $supplierInfo = $shareInfo['supplierInfo'];
+                    $supplierOnlineShare = $shareInfo['supplierOnlineShare'];
+                                
+                    $supplierSubOrderId = 'SUB_' . $subOrderBase . '_' . $supplierId;
+                    if (str_starts_with($subOrderBase, '3HD3')) {
+                        $supplierSubOrderId = '3HD3SUB_' . substr($subOrderBase, 4) . '_' . $supplierId;
+                    }
+                
+                    $subOrders[] = [
+                        'mid' => $supplierInfo['unionpay_mid'],
+                        'merOrderId' => $supplierSubOrderId,
+                        'totalAmount' => bcmul((string)$supplierOnlineShare, '100', 0),
+                    ];
+                
+                    \think\facade\Log::info("订单 {$orderId} 添加供应商分账: {$supplierInfo['supplier_name']}(ID:{$supplierId}), 金额={$supplierOnlineShare}元");
+                }
+                                
+                // 重新计算供应商分账总额（可能已被调整）
+                $totalSupplierShare = '0.00';
+                foreach ($supplierShares as $shareInfo) {
+                    $totalSupplierShare = bcadd($totalSupplierShare, $shareInfo['supplierOnlineShare'], 2);
+                }
+                                
+                // 计算平台应得金额（剩余部分 + 无法分账给供应商的金额）
+                $platformAmount = bcadd(bcsub((string)$totalDivisionAmount, $totalSupplierShare, 2), $unallocatedAmount, 2);
+                
+                if (bccomp($platformAmount, '0', 2) > 0) {
+                    $platformSubOrderId = 'PLAT_' . $subOrderBase;
+                    if (str_starts_with($subOrderBase, '3HD3')) {
+                        $platformSubOrderId = '3HD3PLAT_' . substr($subOrderBase, 4);
+                    }
+
+                    $subOrders[] = [
+                        'mid' => $platformDivision['mid'],
+                        'merOrderId' => $platformSubOrderId,
+                        'totalAmount' => bcmul((string)$platformAmount, '100', 0),
+                    ];
+
+                    \think\facade\Log::info("订单 {$orderId} 添加平台分账: 金额={$platformAmount}元");
+                }
+            }
+
+            // 检查是否有分账子订单
+            if (empty($subOrders)) {
+                \think\facade\Log::info("订单 {$orderId} 没有有效的分账子订单");
+                return [];
+            }
+
+            // 构造分账参数
+            $divisionData = [
+                'divisionFlag' => true,
+                'asynDivisionFlag' => true,  // 启用异步分账
+                'platformAmount' => 0,
+                'subOrders' => $subOrders
+            ];
+
+            \think\facade\Log::info("订单 {$orderId} 构建分账数据成功: 分账子订单数=" . count($subOrders));
+
+            return $divisionData;
+
+        } catch (\Exception $e) {
+            \think\facade\Log::error("构建分账数据失败: " . $e->getMessage());
+            return [];
+        }
+    }
+}

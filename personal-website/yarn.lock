@@ -573,6 +573,13 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
+"@lottiefiles/react-lottie-player@^3.6.0":
+  "integrity" "sha512-WK5TriLJT93VF3w4IjSVyveiedraZCnDhKzCPhpbeLgQeMi6zufxa3dXNc4HmAFRXq+LULPAy+Idv1rAfkReMA=="
+  "resolved" "https://registry.npmjs.org/@lottiefiles/react-lottie-player/-/react-lottie-player-3.6.0.tgz"
+  "version" "3.6.0"
+  dependencies:
+    "lottie-web" "^5.12.2"
+
 "@next/env@13.5.11":
   "integrity" "sha512-fbb2C7HChgM7CemdCY+y3N1n8pcTKdqtQLbC7/EQtPdLvlMUT9JX/dBYl8MMZAtYG4uVMyPFHXckb68q/NRwqg=="
   "resolved" "https://registry.npmjs.org/@next/env/-/env-13.5.11.tgz"
@@ -2469,6 +2476,11 @@
   "resolved" "https://registry.npmjs.org/graphemer/-/graphemer-1.4.0.tgz"
   "version" "1.4.0"
 
+"gsap@^3.13.0":
+  "integrity" "sha512-QL7MJ2WMjm1PHWsoFrAQH/J8wUeqZvMtHO58qdekHpCfhvhSL4gSiz6vJf5EeMP0LOn3ZCprL2ki/gjED8ghVw=="
+  "resolved" "https://registry.npmjs.org/gsap/-/gsap-3.13.0.tgz"
+  "version" "3.13.0"
+
 "harmony-reflect@^1.4.6":
   "integrity" "sha512-HIp/n38R9kQjDEziXyDTuW3vvoxxyxjxFzXLrBr18uB47GnSt+G9D29fqrpM5ZkspMcPICud3XsBJQ4Y2URg8g=="
   "resolved" "https://registry.npmjs.org/harmony-reflect/-/harmony-reflect-1.6.2.tgz"
@@ -3535,6 +3547,11 @@
   dependencies:
     "js-tokens" "^3.0.0 || ^4.0.0"
 
+"lottie-web@^5.12.2":
+  "integrity" "sha512-+gfBXl6sxXMPe8tKQm7qzLnUy5DUPJPKIyRHwtpCpyUEYjHYRJC/5gjUvdkuO2c3JllrPtHXH5UJJK8LRYl5yQ=="
+  "resolved" "https://registry.npmjs.org/lottie-web/-/lottie-web-5.13.0.tgz"
+  "version" "5.13.0"
+
 "lru-cache@^5.1.1":
   "integrity" "sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w=="
   "resolved" "https://registry.npmjs.org/lru-cache/-/lru-cache-5.1.1.tgz"
@@ -4546,7 +4563,7 @@
     "unist-util-visit" "^5.0.0"
     "vfile" "^6.0.0"
 
-"react@^18.0.0", "react@^18.0.0 || ^19.0.0", "react@^18.2.0", "react@^18.3.1", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", "react@>=18":
+"react@^18.0.0", "react@^18.0.0 || ^19.0.0", "react@^18.2.0", "react@^18.3.1", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", "react@>=18", "react@16 - 19":
   "integrity" "sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.3.1.tgz"
   "version" "18.3.1"

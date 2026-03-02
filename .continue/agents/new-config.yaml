@@ -1,0 +1,54 @@
+name: Saber Continue Config
+version: 1.0.0
+schema: v1
+
+models:
+  # =========================
+  # OpenAI / OpenAI-Compatible（可指定 API 地址）
+  # =========================
+  - name: GPT-5 (Proxy)
+    provider: openai
+    model: gpt-5
+    apiKey: sk-z2t7jWA7exyKTecwD2zgABgCA5zjkH1yma61zqZkp8YxVgfW
+    apiBase: https://your-openai-proxy.com/v1
+    default: true
+
+  # =========================
+  # 本地模型（Ollama / LM Studio）
+  # =========================
+  - name: Qwen2.5 Coder 7B (Local)
+    provider: openai
+    model: qwen2.5-coder-7b-instruct
+    apiKey: sk-z2t7jWA7exyKTecwD2zgABgCA5zjkH1yma61zqZkp8YxVgfW
+    apiBase: https://www.dmxapi.cn/v1
+
+  # =========================
+  # Claude（Anthropic，支持直连或反代）
+  # =========================
+  - name: Claude 4 Sonnet (Proxy)
+    provider: anthropic
+    model: claude-4-sonnet
+    apiKey: sk-z2t7jWA7exyKTecwD2zgABgCA5zjkH1yma61zqZkp8YxVgfW
+    apiBase: https://www.dmxapi.cn/v1
+
+  - name: mimo-v2-flash-free
+    provider: openai
+    model: mimo-v2-flash-free
+    apiKey: sk-z2t7jWA7exyKTecwD2zgABgCA5zjkH1yma61zqZkp8YxVgfW          # 如果平台要求随便填也行
+    apiBase: https://www.dmxapi.cn/v1
+    default: true
+
+  - name: wen3-8B
+    provider: openai
+    model: Qwen3-8B
+    apiKey: sk-z2t7jWA7exyKTecwD2zgABgCA5zjkH1yma61zqZkp8YxVgfW 
+    roles:
+      - chat
+      - edit
+      - apply         # 如果平台要求随便填也行
+    apiBase: https://www.dmxapi.cn/v1
+    default: true
+
+# MCP Servers（可选，不需要可以删）
+mcpServers:
+  - uses: anthropic/memory-mcp

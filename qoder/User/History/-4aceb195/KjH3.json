@@ -1,0 +1,30 @@
+{
+    "app": {
+        "configGeneralDisplayLanguage": "en-us",
+        "configGeneralAiResponseLanguage": "en-us",
+        "configGeneralImprovementPlan": "agree",
+        "configGeneralImportSettings": "VS Code",
+        "configCompletionEnableNES": true,
+        "configCompletionDisabledLanguages": [],
+        "configCompletionTriggerInComment": true,
+        "configCompletionAutoImport": true,
+        "configChatWebToolsMode": "Ask every time",
+        "configChatAskModeUseTools": true,
+        "configChatEditFileTool": false,
+        "configChatTerminalRunMode": "askEveryTime",
+        "configChatCommandDenyList": "rm,mv,sudo,wget,curl,chown",
+        "configChatCommandAllowlist": "",
+        "configChatAutoRunMcpTools": true,
+        "configChatMethodQuickOperation": false,
+        "configChatShowSelectionToolbar": true,
+        "configQuestDefaultLayout": false,
+        "configMemoryAutoGenerate": true,
+        "configIntegrationsBrowserRunMode": "Ask every time",
+        "configIntegrationsBrowserToolsRunMode": "Auto-run",
+        "configIntegrationsPlanModeRunConfig": "Ask every time",
+        "configAdvancedAutoUpdate": true,
+        "configAdvancedProxyMode": "system",
+        "configAdvancedProxyURL": ""
+    },
+    "workbench.colorTheme": "Qoder Dark"
+}

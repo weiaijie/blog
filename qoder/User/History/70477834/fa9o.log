@@ -1,0 +1,760 @@
+[2026-02-04T16:07:06+08:00][info] 计算签名: 93181C7D0D923FC83DB87062D58FA0917AF090622B45FDA2A6970CC229D1578D
+[2026-02-04T16:07:06+08:00][info] 签名验证成功
+[2026-02-04T16:07:06+08:00][info] 记录退款资金流水: 订单=wx735167146723639296, 支付方式=combination, 退款金额=0.10
+[2026-02-04T17:32:50+08:00][info] 订单创建-购物车商品信息: {"product_id":20,"product_type":2,"relation_id":3,"settle_price":"0.03","cart_num":1}
+[2026-02-04T17:32:50+08:00][info] 订单创建-计算结算价: {"supplier_id":3,"attr_settle_price":"0.03","item_settle_price":"0.03","total_settle_price":"0.03"}
+[2026-02-04T17:32:50+08:00][info] 订单创建-购物车商品信息: {"product_id":14,"product_type":2,"relation_id":2,"settle_price":"0.02","cart_num":1}
+[2026-02-04T17:32:50+08:00][info] 订单创建-计算结算价: {"supplier_id":2,"attr_settle_price":"0.02","item_settle_price":"0.02","total_settle_price":"0.05"}
+[2026-02-04T17:32:50+08:00][info] 订单创建-供应商详细信息: [{"id":3,"name":"\u5c0f\u5706\u4f9b\u5e94\u5546","amount":"0.03"},{"id":2,"name":"\u4e0a\u6d77\u8fbe\u8fbe123\u516c\u53f8","amount":"0.02"}]
+[2026-02-04T17:32:50+08:00][info] 订单创建-最终结算价: supplier_id=0, settle_price=0.05, 供应商数量=2
+[2026-02-04T17:32:59+08:00][info] 生成支付单号: wx750407836026011648_1 (业务订单号: wx750407836026011648, 支付次数: 1)
+[2026-02-04T17:32:59+08:00][info] 订单 wx750407836026011648 为多供应商订单，供应商数量: 2
+[2026-02-04T17:32:59+08:00][info] 订单 wx750407836026011648 添加供应商分账: 小圆供应商(ID:3), 金额=0.03元
+[2026-02-04T17:32:59+08:00][info] 订单 wx750407836026011648 添加供应商分账: 上海达达123公司(ID:2), 金额=0.02元
+[2026-02-04T17:32:59+08:00][info] 订单 wx750407836026011648 添加平台分账: 金额=0.02元
+[2026-02-04T17:32:59+08:00][info] 订单 wx750407836026011648 构建分账数据成功: 分账子订单数=3
+[2026-02-04T17:32:59+08:00][info] === 银联商务支付初始化 ===
+[2026-02-04T17:32:59+08:00][info] 支付类型: mini
+[2026-02-04T17:32:59+08:00][info] AppId: 8a81c1bd96cf23aa019b078242721f2a
+[2026-02-04T17:32:59+08:00][info] 商户号: 898310100010854
+[2026-02-04T17:32:59+08:00][info] 终端号: 41AUZ7C6
+[2026-02-04T17:32:59+08:00][info] API地址: https://api-mop.chinaums.com
+[2026-02-04T17:32:59+08:00][info] 环境: 生产
+[2026-02-04T17:32:59+08:00][info] === 银联小程序支付 ===
+[2026-02-04T17:32:59+08:00][info] site_url配置: https://test.wx.sunnycloudtop.com
+[2026-02-04T17:32:59+08:00][info] request domain: http://test.wx.sunnycloudtop.com
+[2026-02-04T17:32:59+08:00][info] 最终使用: https://test.wx.sunnycloudtop.com
+[2026-02-04T17:32:59+08:00][info] 完整通知URL: https://test.wx.sunnycloudtop.com/api/pay/ums/notify
+[2026-02-04T17:32:59+08:00][info] 订单需要分账: {"divisionFlag":true,"asynDivisionFlag":true,"platformAmount":0,"subOrders":[{"mid":"898310100011808","merOrderId":"SUB_wx750407836026011648_1_3","totalAmount":"3"},{"mid":"898310100011808","merOrderId":"SUB_wx750407836026011648_1_2","totalAmount":"2"},{"mid":"898310100011808","merOrderId":"PLAT_wx750407836026011648_1","totalAmount":"2"}]}
+[2026-02-04T17:32:59+08:00][info] === 银联小程序支付下单 ===
+[2026-02-04T17:32:59+08:00][info] 原始订单号: wx750407836026011648_1
+[2026-02-04T17:32:59+08:00][info] 金额: 0.07元
+[2026-02-04T17:32:59+08:00][info] OpenID: ofxai7SpEkwo7L9Ugo0JTEterfZA
+[2026-02-04T17:32:59+08:00][info] 通知URL: https://test.wx.sunnycloudtop.com/api/pay/ums/notify
+[2026-02-04T17:32:59+08:00][info] 分账数据: {"divisionFlag":true,"asynDivisionFlag":true,"platformAmount":0,"subOrders":[{"mid":"898310100011808","merOrderId":"SUB_wx750407836026011648_1_3","totalAmount":"3"},{"mid":"898310100011808","merOrderId":"SUB_wx750407836026011648_1_2","totalAmount":"2"},{"mid":"898310100011808","merOrderId":"PLAT_wx750407836026011648_1","totalAmount":"2"}]}
+[2026-02-04T17:32:59+08:00][info] 金额(分): 7
+[2026-02-04T17:32:59+08:00][info] 银联订单号: 3HD3wx750407836026011648_1
+[2026-02-04T17:32:59+08:00][info] 分账子订单: [{"mid":"898310100011808","merOrderId":"3HD3SUB_wx750407836026011648_1","totalAmount":"3"},{"mid":"898310100011808","merOrderId":"3HD3SUB_wx750407836026011648_1","totalAmount":"2"},{"mid":"898310100011808","merOrderId":"3HD3PLAT_wx750407836026011648_1","totalAmount":"2"}]
+[2026-02-04T17:32:59+08:00][info] 分账金额计算: 主订单=7分, 子订单总额=7分, 平台=0分
+[2026-02-04T17:32:59+08:00][info] 小程序AppId: wxb5fc16b55f439205
+[2026-02-04T17:32:59+08:00][info] 用户OpenId: ofxai7SpEkwo7L9Ugo0JTEterfZA
+[2026-02-04T17:32:59+08:00][info] 注意: 如果是服务商模式,需要联系银联确认openid字段
+[2026-02-04T17:32:59+08:00][info] 请求参数: {"requestTimestamp":"2026-02-04 17:32:59","merOrderId":"3HD3wx750407836026011648_1","mid":"898310100010854","tid":"41AUZ7C6","totalAmount":"7","tradeType":"MINI","orderDesc":"儿童水枪|蒙牛纯牛奶【供应商】","notifyUrl":"https:\/\/test.wx.sunnycloudtop.com\/api\/pay\/ums\/notify","divisionFlag":true,"subOrders":[{"mid":"898310100011808","merOrderId":"3HD3SUB_wx750407836026011648_1","totalAmount":"3"},{"mid":"898310100011808","merOrderId":"3HD3SUB_wx750407836026011648_1","totalAmount":"2"},{"mid":"898310100011808","merOrderId":"3HD3PLAT_wx750407836026011648_1","totalAmount":"2"}],"platformAmount":0,"subAppId":"wxb5fc16b55f439205","subOpenId":"ofxai7SpEkwo7L9Ugo0JTEterfZA","openid":"ofxai7SpEkwo7L9Ugo0JTEterfZA"}
+[2026-02-04T17:32:59+08:00][info] 报文体: {"requestTimestamp":"2026-02-04 17:32:59","merOrderId":"3HD3wx750407836026011648_1","mid":"898310100010854","tid":"41AUZ7C6","totalAmount":"7","tradeType":"MINI","orderDesc":"\u513f\u7ae5\u6c34\u67aa|\u8499\u725b\u7eaf\u725b\u5976\u3010\u4f9b\u5e94\u5546\u3011","notifyUrl":"https:\/\/test.wx.sunnycloudtop.com\/api\/pay\/ums\/notify","divisionFlag":true,"subOrders":[{"mid":"898310100011808","merOrderId":"3HD3SUB_wx750407836026011648_1","totalAmount":"3"},{"mid":"898310100011808","merOrderId":"3HD3SUB_wx750407836026011648_1","totalAmount":"2"},{"mid":"898310100011808","merOrderId":"3HD3PLAT_wx750407836026011648_1","totalAmount":"2"}],"platformAmount":0,"subAppId":"wxb5fc16b55f439205","subOpenId":"ofxai7SpEkwo7L9Ugo0JTEterfZA","openid":"ofxai7SpEkwo7L9Ugo0JTEterfZA"}
+[2026-02-04T17:32:59+08:00][info] 报文体SHA256: 5a521fe7ca75e0cd56aefa01909a70575da8ee81b2f3261ff467bcaa287525d4
+[2026-02-04T17:32:59+08:00][info] 签名原串: 8a81c1bd96cf23aa019b078242721f2a20260204173259882d0ff72b276c32eec5245fafa669795a521fe7ca75e0cd56aefa01909a70575da8ee81b2f3261ff467bcaa287525d4
+[2026-02-04T17:32:59+08:00][info] 签名结果: Y5hD5JLyvsO+/uVa7cKfLRI+q8tp/b0ME2B/YjC8Qls=
+[2026-02-04T17:32:59+08:00][info] Authorization: OPEN-BODY-SIG AppId="8a81c1bd96cf23aa019b078242721f2a",Timestamp="20260204173259",Nonce="882d0ff72b276c32eec5245fafa66979",Signature="Y5hD5JLyvsO+/uVa7cKfLRI+q8tp/b0ME2B/YjC8Qls="
+[2026-02-04T17:32:59+08:00][info] 响应数据: {"responseTimestamp":"2026-02-04 17:32:59","errCode":"BAD_REQUEST","errMsg":"子订单号3HD3SUB_wx750407836026011648_1重复"}
+[2026-02-04T17:49:17+08:00][info] 生成支付单号: wx750407836026011648_2 (业务订单号: wx750407836026011648, 支付次数: 2)
+[2026-02-04T17:49:17+08:00][info] 订单 wx750407836026011648 为多供应商订单，供应商数量: 2
+[2026-02-04T17:49:17+08:00][info] 订单 wx750407836026011648 添加供应商分账: 小圆供应商(ID:3), 金额=0.03元
+[2026-02-04T17:49:17+08:00][info] 订单 wx750407836026011648 添加供应商分账: 上海达达123公司(ID:2), 金额=0.02元
+[2026-02-04T17:49:17+08:00][info] 订单 wx750407836026011648 添加平台分账: 金额=0.02元
+[2026-02-04T17:49:17+08:00][info] 订单 wx750407836026011648 构建分账数据成功: 分账子订单数=3
+[2026-02-04T17:49:17+08:00][info] === 银联商务支付初始化 ===
+[2026-02-04T17:49:17+08:00][info] 支付类型: mini
+[2026-02-04T17:49:17+08:00][info] AppId: 8a81c1bd96cf23aa019b078242721f2a
+[2026-02-04T17:49:17+08:00][info] 商户号: 898310100010854
+[2026-02-04T17:49:17+08:00][info] 终端号: 41AUZ7C6
+[2026-02-04T17:49:17+08:00][info] API地址: https://api-mop.chinaums.com
+[2026-02-04T17:49:17+08:00][info] 环境: 生产
+[2026-02-04T17:49:17+08:00][info] === 银联小程序支付 ===
+[2026-02-04T17:49:17+08:00][info] site_url配置: https://test.wx.sunnycloudtop.com
+[2026-02-04T17:49:17+08:00][info] request domain: http://test.wx.sunnycloudtop.com
+[2026-02-04T17:49:17+08:00][info] 最终使用: https://test.wx.sunnycloudtop.com
+[2026-02-04T17:49:17+08:00][info] 完整通知URL: https://test.wx.sunnycloudtop.com/api/pay/ums/notify
+[2026-02-04T17:49:17+08:00][info] 订单需要分账: {"divisionFlag":true,"asynDivisionFlag":true,"platformAmount":0,"subOrders":[{"mid":"898310100011808","merOrderId":"SUB_wx750407836026011648_3","totalAmount":"3"},{"mid":"898310100011808","merOrderId":"SUB_wx750407836026011648_2","totalAmount":"2"},{"mid":"898310100011808","merOrderId":"PLAT_wx750407836026011648","totalAmount":"2"}]}
+[2026-02-04T17:49:17+08:00][info] === 银联小程序支付下单 ===
+[2026-02-04T17:49:17+08:00][info] 原始订单号: wx750407836026011648_2
+[2026-02-04T17:49:17+08:00][info] 金额: 0.07元
+[2026-02-04T17:49:17+08:00][info] OpenID: ofxai7SpEkwo7L9Ugo0JTEterfZA
+[2026-02-04T17:49:17+08:00][info] 通知URL: https://test.wx.sunnycloudtop.com/api/pay/ums/notify
+[2026-02-04T17:49:17+08:00][info] 分账数据: {"divisionFlag":true,"asynDivisionFlag":true,"platformAmount":0,"subOrders":[{"mid":"898310100011808","merOrderId":"SUB_wx750407836026011648_3","totalAmount":"3"},{"mid":"898310100011808","merOrderId":"SUB_wx750407836026011648_2","totalAmount":"2"},{"mid":"898310100011808","merOrderId":"PLAT_wx750407836026011648","totalAmount":"2"}]}
+[2026-02-04T17:49:17+08:00][info] 金额(分): 7
+[2026-02-04T17:49:17+08:00][info] 银联订单号: 3HD3wx750407836026011648_2
+[2026-02-04T17:49:17+08:00][info] 分账子订单: [{"mid":"898310100011808","merOrderId":"3HD3SUB_wx750407836026011648_2","totalAmount":"3"},{"mid":"898310100011808","merOrderId":"3HD3SUB_wx750407836026011648_2","totalAmount":"2"},{"mid":"898310100011808","merOrderId":"3HD3PLAT_wx750407836026011648_2","totalAmount":"2"}]
+[2026-02-04T17:49:17+08:00][info] 分账金额计算: 主订单=7分, 子订单总额=7分, 平台=0分
+[2026-02-04T17:49:17+08:00][info] 小程序AppId: wxb5fc16b55f439205
+[2026-02-04T17:49:17+08:00][info] 用户OpenId: ofxai7SpEkwo7L9Ugo0JTEterfZA
+[2026-02-04T17:49:17+08:00][info] 注意: 如果是服务商模式,需要联系银联确认openid字段
+[2026-02-04T17:49:17+08:00][info] 请求参数: {"requestTimestamp":"2026-02-04 17:49:17","merOrderId":"3HD3wx750407836026011648_2","mid":"898310100010854","tid":"41AUZ7C6","totalAmount":"7","tradeType":"MINI","orderDesc":"儿童水枪|蒙牛纯牛奶【供应商】","notifyUrl":"https:\/\/test.wx.sunnycloudtop.com\/api\/pay\/ums\/notify","divisionFlag":true,"subOrders":[{"mid":"898310100011808","merOrderId":"3HD3SUB_wx750407836026011648_2","totalAmount":"3"},{"mid":"898310100011808","merOrderId":"3HD3SUB_wx750407836026011648_2","totalAmount":"2"},{"mid":"898310100011808","merOrderId":"3HD3PLAT_wx750407836026011648_2","totalAmount":"2"}],"platformAmount":0,"subAppId":"wxb5fc16b55f439205","subOpenId":"ofxai7SpEkwo7L9Ugo0JTEterfZA","openid":"ofxai7SpEkwo7L9Ugo0JTEterfZA"}
+[2026-02-04T17:49:17+08:00][info] 报文体: {"requestTimestamp":"2026-02-04 17:49:17","merOrderId":"3HD3wx750407836026011648_2","mid":"898310100010854","tid":"41AUZ7C6","totalAmount":"7","tradeType":"MINI","orderDesc":"\u513f\u7ae5\u6c34\u67aa|\u8499\u725b\u7eaf\u725b\u5976\u3010\u4f9b\u5e94\u5546\u3011","notifyUrl":"https:\/\/test.wx.sunnycloudtop.com\/api\/pay\/ums\/notify","divisionFlag":true,"subOrders":[{"mid":"898310100011808","merOrderId":"3HD3SUB_wx750407836026011648_2","totalAmount":"3"},{"mid":"898310100011808","merOrderId":"3HD3SUB_wx750407836026011648_2","totalAmount":"2"},{"mid":"898310100011808","merOrderId":"3HD3PLAT_wx750407836026011648_2","totalAmount":"2"}],"platformAmount":0,"subAppId":"wxb5fc16b55f439205","subOpenId":"ofxai7SpEkwo7L9Ugo0JTEterfZA","openid":"ofxai7SpEkwo7L9Ugo0JTEterfZA"}
+[2026-02-04T17:49:17+08:00][info] 报文体SHA256: 56af9f4bd27c2922c03f11ed6d8f87354331fc685afa5ac225aed7316766b4d3
+[2026-02-04T17:49:17+08:00][info] 签名原串: 8a81c1bd96cf23aa019b078242721f2a20260204174917df235458b1cd83b2c254cc41fb398f9556af9f4bd27c2922c03f11ed6d8f87354331fc685afa5ac225aed7316766b4d3
+[2026-02-04T17:49:17+08:00][info] 签名结果: HeqbibWOxjv2kgfNyNVm6VlRdirXLi7Dr4HtSccnpAA=
+[2026-02-04T17:49:17+08:00][info] Authorization: OPEN-BODY-SIG AppId="8a81c1bd96cf23aa019b078242721f2a",Timestamp="20260204174917",Nonce="df235458b1cd83b2c254cc41fb398f95",Signature="HeqbibWOxjv2kgfNyNVm6VlRdirXLi7Dr4HtSccnpAA="
+[2026-02-04T17:49:17+08:00][info] 响应数据: {"responseTimestamp":"2026-02-04 17:49:17","errCode":"BAD_REQUEST","errMsg":"子订单号3HD3SUB_wx750407836026011648_2重复"}
+[2026-02-04T17:52:25+08:00][info] 生成支付单号: wx750407836026011648_3 (业务订单号: wx750407836026011648, 支付次数: 3)
+[2026-02-04T17:52:25+08:00][info] 订单 wx750407836026011648 为多供应商订单，供应商数量: 2
+[2026-02-04T17:52:25+08:00][info] 订单 wx750407836026011648 添加供应商分账: 小圆供应商(ID:3), 金额=0.03元
+[2026-02-04T17:52:25+08:00][info] 订单 wx750407836026011648 添加供应商分账: 上海达达123公司(ID:2), 金额=0.02元
+[2026-02-04T17:52:25+08:00][info] 订单 wx750407836026011648 添加平台分账: 金额=0.02元
+[2026-02-04T17:52:25+08:00][info] 订单 wx750407836026011648 构建分账数据成功: 分账子订单数=3
+[2026-02-04T17:52:25+08:00][info] === 银联商务支付初始化 ===
+[2026-02-04T17:52:25+08:00][info] 支付类型: mini
+[2026-02-04T17:52:25+08:00][info] AppId: 8a81c1bd96cf23aa019b078242721f2a
+[2026-02-04T17:52:25+08:00][info] 商户号: 898310100010854
+[2026-02-04T17:52:25+08:00][info] 终端号: 41AUZ7C6
+[2026-02-04T17:52:25+08:00][info] API地址: https://api-mop.chinaums.com
+[2026-02-04T17:52:25+08:00][info] 环境: 生产
+[2026-02-04T17:52:25+08:00][info] === 银联小程序支付 ===
+[2026-02-04T17:52:25+08:00][info] site_url配置: https://test.wx.sunnycloudtop.com
+[2026-02-04T17:52:25+08:00][info] request domain: http://test.wx.sunnycloudtop.com
+[2026-02-04T17:52:25+08:00][info] 最终使用: https://test.wx.sunnycloudtop.com
+[2026-02-04T17:52:25+08:00][info] 完整通知URL: https://test.wx.sunnycloudtop.com/api/pay/ums/notify
+[2026-02-04T17:52:25+08:00][info] 订单需要分账: {"divisionFlag":true,"asynDivisionFlag":true,"platformAmount":0,"subOrders":[{"mid":"898310100011808","merOrderId":"SUB_wx750407836026011648_3","totalAmount":"3"},{"mid":"898310100011808","merOrderId":"SUB_wx750407836026011648_2","totalAmount":"2"},{"mid":"898310100011808","merOrderId":"PLAT_wx750407836026011648","totalAmount":"2"}]}
+[2026-02-04T17:52:25+08:00][info] === 银联小程序支付下单 ===
+[2026-02-04T17:52:25+08:00][info] 原始订单号: wx750407836026011648_3
+[2026-02-04T17:52:25+08:00][info] 金额: 0.07元
+[2026-02-04T17:52:25+08:00][info] OpenID: ofxai7SpEkwo7L9Ugo0JTEterfZA
+[2026-02-04T17:52:25+08:00][info] 通知URL: https://test.wx.sunnycloudtop.com/api/pay/ums/notify
+[2026-02-04T17:52:25+08:00][info] 分账数据: {"divisionFlag":true,"asynDivisionFlag":true,"platformAmount":0,"subOrders":[{"mid":"898310100011808","merOrderId":"SUB_wx750407836026011648_3","totalAmount":"3"},{"mid":"898310100011808","merOrderId":"SUB_wx750407836026011648_2","totalAmount":"2"},{"mid":"898310100011808","merOrderId":"PLAT_wx750407836026011648","totalAmount":"2"}]}
+[2026-02-04T17:52:25+08:00][info] 金额(分): 7
+[2026-02-04T17:52:25+08:00][info] 银联订单号: 3HD3wx750407836026011648_3
+[2026-02-04T17:52:25+08:00][info] 分账子订单: [{"mid":"898310100011808","merOrderId":"3HD3SUB_wx750407836026011648_3","totalAmount":"3"},{"mid":"898310100011808","merOrderId":"3HD3SUB_wx750407836026011648_3","totalAmount":"2"},{"mid":"898310100011808","merOrderId":"3HD3PLAT_wx750407836026011648_3","totalAmount":"2"}]
+[2026-02-04T17:52:25+08:00][info] 分账金额计算: 主订单=7分, 子订单总额=7分, 平台=0分
+[2026-02-04T17:52:25+08:00][info] 小程序AppId: wxb5fc16b55f439205
+[2026-02-04T17:52:25+08:00][info] 用户OpenId: ofxai7SpEkwo7L9Ugo0JTEterfZA
+[2026-02-04T17:52:25+08:00][info] 注意: 如果是服务商模式,需要联系银联确认openid字段
+[2026-02-04T17:52:25+08:00][info] 请求参数: {"requestTimestamp":"2026-02-04 17:52:25","merOrderId":"3HD3wx750407836026011648_3","mid":"898310100010854","tid":"41AUZ7C6","totalAmount":"7","tradeType":"MINI","orderDesc":"儿童水枪|蒙牛纯牛奶【供应商】","notifyUrl":"https:\/\/test.wx.sunnycloudtop.com\/api\/pay\/ums\/notify","divisionFlag":true,"subOrders":[{"mid":"898310100011808","merOrderId":"3HD3SUB_wx750407836026011648_3","totalAmount":"3"},{"mid":"898310100011808","merOrderId":"3HD3SUB_wx750407836026011648_3","totalAmount":"2"},{"mid":"898310100011808","merOrderId":"3HD3PLAT_wx750407836026011648_3","totalAmount":"2"}],"platformAmount":0,"subAppId":"wxb5fc16b55f439205","subOpenId":"ofxai7SpEkwo7L9Ugo0JTEterfZA","openid":"ofxai7SpEkwo7L9Ugo0JTEterfZA"}
+[2026-02-04T17:52:25+08:00][info] 报文体: {"requestTimestamp":"2026-02-04 17:52:25","merOrderId":"3HD3wx750407836026011648_3","mid":"898310100010854","tid":"41AUZ7C6","totalAmount":"7","tradeType":"MINI","orderDesc":"\u513f\u7ae5\u6c34\u67aa|\u8499\u725b\u7eaf\u725b\u5976\u3010\u4f9b\u5e94\u5546\u3011","notifyUrl":"https:\/\/test.wx.sunnycloudtop.com\/api\/pay\/ums\/notify","divisionFlag":true,"subOrders":[{"mid":"898310100011808","merOrderId":"3HD3SUB_wx750407836026011648_3","totalAmount":"3"},{"mid":"898310100011808","merOrderId":"3HD3SUB_wx750407836026011648_3","totalAmount":"2"},{"mid":"898310100011808","merOrderId":"3HD3PLAT_wx750407836026011648_3","totalAmount":"2"}],"platformAmount":0,"subAppId":"wxb5fc16b55f439205","subOpenId":"ofxai7SpEkwo7L9Ugo0JTEterfZA","openid":"ofxai7SpEkwo7L9Ugo0JTEterfZA"}
+[2026-02-04T17:52:25+08:00][info] 报文体SHA256: cb03529c5642a5cd2fda743c8343aa59594ce21e46e4c2cd75ea8c355123b06c
+[2026-02-04T17:52:25+08:00][info] 签名原串: 8a81c1bd96cf23aa019b078242721f2a202602041752252b0e7e1bcc2798dd030a36cb5571ab14cb03529c5642a5cd2fda743c8343aa59594ce21e46e4c2cd75ea8c355123b06c
+[2026-02-04T17:52:25+08:00][info] 签名结果: UWbcV80vNcpOdhCssITPaxeFJHE2OsOFmhp9ruY1tBk=
+[2026-02-04T17:52:25+08:00][info] Authorization: OPEN-BODY-SIG AppId="8a81c1bd96cf23aa019b078242721f2a",Timestamp="20260204175225",Nonce="2b0e7e1bcc2798dd030a36cb5571ab14",Signature="UWbcV80vNcpOdhCssITPaxeFJHE2OsOFmhp9ruY1tBk="
+[2026-02-04T17:52:26+08:00][info] 响应数据: {"responseTimestamp":"2026-02-04 17:52:26","errCode":"BAD_REQUEST","errMsg":"子订单号3HD3SUB_wx750407836026011648_3重复"}
+[2026-02-04T17:58:24+08:00][info] 生成支付单号: wx750407836026011648_4 (业务订单号: wx750407836026011648, 支付次数: 4)
+[2026-02-04T17:58:24+08:00][info] 订单 wx750407836026011648 为多供应商订单，供应商数量: 2
+[2026-02-04T17:58:24+08:00][info] 订单 wx750407836026011648 添加供应商分账: 小圆供应商(ID:3), 金额=0.03元
+[2026-02-04T17:58:24+08:00][info] 订单 wx750407836026011648 添加供应商分账: 上海达达123公司(ID:2), 金额=0.02元
+[2026-02-04T17:58:24+08:00][info] 订单 wx750407836026011648 添加平台分账: 金额=0.02元
+[2026-02-04T17:58:24+08:00][info] 订单 wx750407836026011648 构建分账数据成功: 分账子订单数=3
+[2026-02-04T17:58:24+08:00][info] === 银联商务支付初始化 ===
+[2026-02-04T17:58:24+08:00][info] 支付类型: mini
+[2026-02-04T17:58:24+08:00][info] AppId: 8a81c1bd96cf23aa019b078242721f2a
+[2026-02-04T17:58:24+08:00][info] 商户号: 898310100010854
+[2026-02-04T17:58:24+08:00][info] 终端号: 41AUZ7C6
+[2026-02-04T17:58:24+08:00][info] API地址: https://api-mop.chinaums.com
+[2026-02-04T17:58:24+08:00][info] 环境: 生产
+[2026-02-04T17:58:24+08:00][info] === 银联小程序支付 ===
+[2026-02-04T17:58:24+08:00][info] site_url配置: https://test.wx.sunnycloudtop.com
+[2026-02-04T17:58:24+08:00][info] request domain: http://test.wx.sunnycloudtop.com
+[2026-02-04T17:58:24+08:00][info] 最终使用: https://test.wx.sunnycloudtop.com
+[2026-02-04T17:58:24+08:00][info] 完整通知URL: https://test.wx.sunnycloudtop.com/api/pay/ums/notify
+[2026-02-04T17:58:24+08:00][info] 订单需要分账: {"divisionFlag":true,"asynDivisionFlag":true,"platformAmount":0,"subOrders":[{"mid":"898310100011808","merOrderId":"SUB_wx750407836026011648_3","totalAmount":"3"},{"mid":"898310100011808","merOrderId":"SUB_wx750407836026011648_2","totalAmount":"2"},{"mid":"898310100011808","merOrderId":"PLAT_wx750407836026011648","totalAmount":"2"}]}
+[2026-02-04T17:58:24+08:00][info] === 银联小程序支付下单 ===
+[2026-02-04T17:58:24+08:00][info] 原始订单号: wx750407836026011648_4
+[2026-02-04T17:58:24+08:00][info] 金额: 0.07元
+[2026-02-04T17:58:24+08:00][info] OpenID: ofxai7SpEkwo7L9Ugo0JTEterfZA
+[2026-02-04T17:58:24+08:00][info] 通知URL: https://test.wx.sunnycloudtop.com/api/pay/ums/notify
+[2026-02-04T17:58:24+08:00][info] 分账数据: {"divisionFlag":true,"asynDivisionFlag":true,"platformAmount":0,"subOrders":[{"mid":"898310100011808","merOrderId":"SUB_wx750407836026011648_3","totalAmount":"3"},{"mid":"898310100011808","merOrderId":"SUB_wx750407836026011648_2","totalAmount":"2"},{"mid":"898310100011808","merOrderId":"PLAT_wx750407836026011648","totalAmount":"2"}]}
+[2026-02-04T17:58:24+08:00][info] 金额(分): 7
+[2026-02-04T17:58:24+08:00][info] 银联订单号: 3HD3wx750407836026011648_4
+[2026-02-04T17:58:24+08:00][info] 分账子订单: [{"mid":"898310100011808","merOrderId":"3HD3SUB_wx750407836026011648_3","totalAmount":"3"},{"mid":"898310100011808","merOrderId":"3HD3SUB_wx750407836026011648_2","totalAmount":"2"},{"mid":"898310100011808","merOrderId":"3HD3PLAT_wx750407836026011648","totalAmount":"2"}]
+[2026-02-04T17:58:24+08:00][info] 分账金额计算: 主订单=7分, 子订单总额=7分, 平台=0分
+[2026-02-04T17:58:24+08:00][info] 小程序AppId: wxb5fc16b55f439205
+[2026-02-04T17:58:24+08:00][info] 用户OpenId: ofxai7SpEkwo7L9Ugo0JTEterfZA
+[2026-02-04T17:58:24+08:00][info] 注意: 如果是服务商模式,需要联系银联确认openid字段
+[2026-02-04T17:58:24+08:00][info] 请求参数: {"requestTimestamp":"2026-02-04 17:58:24","merOrderId":"3HD3wx750407836026011648_4","mid":"898310100010854","tid":"41AUZ7C6","totalAmount":"7","tradeType":"MINI","orderDesc":"儿童水枪|蒙牛纯牛奶【供应商】","notifyUrl":"https:\/\/test.wx.sunnycloudtop.com\/api\/pay\/ums\/notify","divisionFlag":true,"subOrders":[{"mid":"898310100011808","merOrderId":"3HD3SUB_wx750407836026011648_3","totalAmount":"3"},{"mid":"898310100011808","merOrderId":"3HD3SUB_wx750407836026011648_2","totalAmount":"2"},{"mid":"898310100011808","merOrderId":"3HD3PLAT_wx750407836026011648","totalAmount":"2"}],"platformAmount":0,"subAppId":"wxb5fc16b55f439205","subOpenId":"ofxai7SpEkwo7L9Ugo0JTEterfZA","openid":"ofxai7SpEkwo7L9Ugo0JTEterfZA"}
+[2026-02-04T17:58:24+08:00][info] 报文体: {"requestTimestamp":"2026-02-04 17:58:24","merOrderId":"3HD3wx750407836026011648_4","mid":"898310100010854","tid":"41AUZ7C6","totalAmount":"7","tradeType":"MINI","orderDesc":"\u513f\u7ae5\u6c34\u67aa|\u8499\u725b\u7eaf\u725b\u5976\u3010\u4f9b\u5e94\u5546\u3011","notifyUrl":"https:\/\/test.wx.sunnycloudtop.com\/api\/pay\/ums\/notify","divisionFlag":true,"subOrders":[{"mid":"898310100011808","merOrderId":"3HD3SUB_wx750407836026011648_3","totalAmount":"3"},{"mid":"898310100011808","merOrderId":"3HD3SUB_wx750407836026011648_2","totalAmount":"2"},{"mid":"898310100011808","merOrderId":"3HD3PLAT_wx750407836026011648","totalAmount":"2"}],"platformAmount":0,"subAppId":"wxb5fc16b55f439205","subOpenId":"ofxai7SpEkwo7L9Ugo0JTEterfZA","openid":"ofxai7SpEkwo7L9Ugo0JTEterfZA"}
+[2026-02-04T17:58:24+08:00][info] 报文体SHA256: def5697b76fbe29288725ef55051988945232cbaf69f3eed0cd02f66ac5f1a97
+[2026-02-04T17:58:24+08:00][info] 签名原串: 8a81c1bd96cf23aa019b078242721f2a2026020417582444048c91eea9551b235f58122146bbdedef5697b76fbe29288725ef55051988945232cbaf69f3eed0cd02f66ac5f1a97
+[2026-02-04T17:58:24+08:00][info] 签名结果: PFJTFo96U1HzK0AYz+2MdT4QOJZJUfQJGeATxPrnVDc=
+[2026-02-04T17:58:24+08:00][info] Authorization: OPEN-BODY-SIG AppId="8a81c1bd96cf23aa019b078242721f2a",Timestamp="20260204175824",Nonce="44048c91eea9551b235f58122146bbde",Signature="PFJTFo96U1HzK0AYz+2MdT4QOJZJUfQJGeATxPrnVDc="
+[2026-02-04T17:58:25+08:00][info] 响应数据: {"connectSys":"UNIONPAY","delegatedFlag":"N","merName":"香溢乐享优选","mid":"898310100010854","settleRefId":"56694578454N","tid":"41AUZ7C6","totalAmount":7,"targetMid":"842088674","responseTimestamp":"2026-02-04 17:58:25","errCode":"SUCCESS","miniPayRequest":{"timeStamp":"1770199105","package":"prepay_id=wx041758249333060c8b42f051acddb40000","paySign":"NJU\/z+BsIqulDFqRXcastrwtHQEw1IwHTAH0JjNQKJCMTYOPNzqtcfrPalu\/+B9OogPuqsylqA49vJGieaggmHJ7+hC8x4\/Cz\/bx0hg0Ji7lHkRdyatcnTyrHQM0huVh0y6YNyUzKJXQKaxIpdOcFS0Gu8QUur9X72Wfk10zaq28Q66k\/ZPlxKC5h5bb7PPHhDIynJF3UUxWRpyBlCBeg2xY+oq5bq8J3uo0ebpq9tGfu0IC6Rx60jf0vzf37hUSk3knickfFPhSoBYsira6\/sCPR0nNJa7jua+ccpATPiNBinS4k5wuAxqN0rwwqzHasDI0aTK3IluBwHESNMkpqg==","appId":"wxb5fc16b55f439205","signType":"RSA","nonceStr":"79841ccb43eb459daa68542b2cc12cba"},"targetStatus":"SUCCESS|SUCCESS","seqId":"56694578454N","merOrderId":"3HD3wx750407836026011648_4","status":"WAIT_BUYER_PAY","targetSys":"WXPay"}
+[2026-02-04T17:59:07+08:00][info] === 银联商务支付回调 ===
+[2026-02-04T17:59:07+08:00][info] 回调数据: {"msgType":"wx.notify","payTime":"2026-02-04 17:59:07","buyerCashPayAmt":"7","connectSys":"UNIONPAY","sign":"7DC560C7BAD8E470D47B95C464D86B49C10E4313E10293936BCE4063F9EB28C4","merName":"香溢乐享优选","mid":"898310100010854","invoiceAmount":"7","settleDate":"2026-02-04","billFunds":"现金:7","buyerId":"otdJ_uNR6GRFVnlDOVtnk9nZF5yg","mchntUuid":"92041d5a554c4ea09ff03b9204db78fb","tid":"41AUZ7C6","instMid":"MINIDEFAULT","receiptAmount":"7","couponAmount":"0","ul":"Tnvo","cardAttr":"DEBIT_CARD","targetOrderId":"4200003008202602046644640994","signType":"SHA256","billFundsDesc":"现金支付0.07元。","subBuyerId":"ofxai7SpEkwo7L9Ugo0JTEterfZA","orderDesc":"儿童水枪|蒙牛纯牛奶【供应商】","seqId":"56694578454N","merOrderId":"3HD3wx750407836026011648_4","targetSys":"WXPay","bankInfo":"招商银行(借记卡)","totalAmount":"7","createTime":"2026-02-04 17:58:24","buyerPayAmount":"7","notifyId":"0aa2e42a-e183-4107-a6a1-a4f6dae68e16","subInst":"104200","status":"TRADE_SUCCESS"}
+[2026-02-04T17:59:07+08:00][info] 回调Header: {"connection":"upgrade","host":"test.wx.sunnycloudtop.com","x-real-ip":"180.169.109.227","x-forwarded-for":"180.169.109.227","remote-host":"180.169.109.227","content-length":"1095","content-type":"application\/x-www-form-urlencoded;charset=utf-8","accept":"*\/*","user-agent":"AHC\/2.1"}
+[2026-02-04T17:59:07+08:00][info] === 银联商务支付初始化 ===
+[2026-02-04T17:59:07+08:00][info] 支付类型: mini
+[2026-02-04T17:59:07+08:00][info] AppId: 8a81c1bd96cf23aa019b078242721f2a
+[2026-02-04T17:59:07+08:00][info] 商户号: 898310100010854
+[2026-02-04T17:59:07+08:00][info] 终端号: 41AUZ7C6
+[2026-02-04T17:59:07+08:00][info] API地址: https://api-mop.chinaums.com
+[2026-02-04T17:59:07+08:00][info] 环境: 生产
+[2026-02-04T17:59:07+08:00][info] === 银联支付回调处理 ===
+[2026-02-04T17:59:07+08:00][info] 回调数据: {"msgType":"wx.notify","payTime":"2026-02-04 17:59:07","buyerCashPayAmt":"7","connectSys":"UNIONPAY","sign":"7DC560C7BAD8E470D47B95C464D86B49C10E4313E10293936BCE4063F9EB28C4","merName":"香溢乐享优选","mid":"898310100010854","invoiceAmount":"7","settleDate":"2026-02-04","billFunds":"现金:7","buyerId":"otdJ_uNR6GRFVnlDOVtnk9nZF5yg","mchntUuid":"92041d5a554c4ea09ff03b9204db78fb","tid":"41AUZ7C6","instMid":"MINIDEFAULT","receiptAmount":"7","couponAmount":"0","ul":"Tnvo","cardAttr":"DEBIT_CARD","targetOrderId":"4200003008202602046644640994","signType":"SHA256","billFundsDesc":"现金支付0.07元。","subBuyerId":"ofxai7SpEkwo7L9Ugo0JTEterfZA","orderDesc":"儿童水枪|蒙牛纯牛奶【供应商】","seqId":"56694578454N","merOrderId":"3HD3wx750407836026011648_4","targetSys":"WXPay","bankInfo":"招商银行(借记卡)","totalAmount":"7","createTime":"2026-02-04 17:58:24","buyerPayAmount":"7","notifyId":"0aa2e42a-e183-4107-a6a1-a4f6dae68e16","subInst":"104200","status":"TRADE_SUCCESS"}
+[2026-02-04T17:59:07+08:00][info] 签名类型: SHA256
+[2026-02-04T17:59:07+08:00][info] 原始签名: 7DC560C7BAD8E470D47B95C464D86B49C10E4313E10293936BCE4063F9EB28C4
+[2026-02-04T17:59:07+08:00][info] 待签名字符串: bankInfo=招商银行(借记卡)&billFunds=现金:7&billFundsDesc=现金支付0.07元。&buyerCashPayAmt=7&buyerId=otdJ_uNR6GRFVnlDOVtnk9nZF5yg&buyerPayAmount=7&cardAttr=DEBIT_CARD&connectSys=UNIONPAY&couponAmount=0&createTime=2026-02-04 17:58:24&instMid=MINIDEFAULT&invoiceAmount=7&mchntUuid=92041d5a554c4ea09ff03b9204db78fb&merName=香溢乐享优选&merOrderId=3HD3wx750407836026011648_4&mid=898310100010854&msgType=wx.notify&notifyId=0aa2e42a-e183-4107-a6a1-a4f6dae68e16&orderDesc=儿童水枪|蒙牛纯牛奶【供应商】&payTime=2026-02-04 17:59:07&receiptAmount=7&seqId=56694578454N&settleDate=2026-02-04&signType=SHA256&status=TRADE_SUCCESS&subBuyerId=ofxai7SpEkwo7L9Ugo0JTEterfZA&subInst=104200&targetOrderId=4200003008202602046644640994&targetSys=WXPay&tid=41AUZ7C6&totalAmount=7&ul=TnvobW3kxKW4dQmzYaNzj4DZS84H2fe6rzYfMY6TSXbSQ2y7WQYn
+[2026-02-04T17:59:07+08:00][info] 计算签名: 7DC560C7BAD8E470D47B95C464D86B49C10E4313E10293936BCE4063F9EB28C4
+[2026-02-04T17:59:07+08:00][info] 签名验证成功
+[2026-02-04T17:59:07+08:00][info] UMS notify uses targetOrderId as trade_no: 4200003008202602046644640994
+[2026-02-04T17:59:07+08:00][info] 银联支付回调: 支付单号=3HD3wx750407836026011648_4, 业务订单号=3HD3wx750407836026011648, 支付系统=WXPay, 支付渠道=
+[2026-02-04T17:59:07+08:00][info] === PaySuccessListener 处理支付成功事件 ===
+[2026-02-04T17:59:07+08:00][info] 事件数据: {"order_id":"3HD3wx750407836026011648","pay_order_id":"3HD3wx750407836026011648_4","trade_no":"4200003008202602046644640994","pay_type":"ums","target_sys":"WXPay","pay_channel":"","pay_time":1770199147,"notify_id":"0aa2e42a-e183-4107-a6a1-a4f6dae68e16"}
+[2026-02-04T17:59:07+08:00][info] 实际支付单号: 3HD3wx750407836026011648_4
+[2026-02-04T17:59:07+08:00][info] 调用 paySuccess 方法: order_id=wx750407836026011648, pay_type=ums, trade_no=4200003008202602046644640994, pay_channel=
+[2026-02-04T17:59:07+08:00][info] 在线支付订单,设置 online_pay_price: 0.07, pay_type: ums
+[2026-02-04T17:59:07+08:00][info] 记录实际支付单号: 3HD3wx750407836026011648_4
+[2026-02-04T17:59:08+08:00][info] 支付成功处理完成: wx750407836026011648
+[2026-02-04T17:59:08+08:00][info] 银联商务支付成功: 业务订单号=3HD3wx750407836026011648, 支付单号=3HD3wx750407836026011648_4, 流水号=4200003008202602046644640994, 通知ID=0aa2e42a-e183-4107-a6a1-a4f6dae68e16, 支付系统=WXPay, 支付渠道=
+[2026-02-04T17:59:10+08:00][info] ShareOrderJob-拆分订单更新结算价: order_id=282, settle_price=0.02
+[2026-02-04T17:59:10+08:00][info] 子订单支付方式统计: 订单=wx750407836026011648_1, 在线=0.03, 福利金=0, 余额=0, 支付方式数=1, 是否组合=
+[2026-02-04T17:59:10+08:00][info] 单一在线支付子订单对齐主订单分账: 订单=wx750407836026011648_1, 原始结算价=0.02, 对齐后分账=0.02
+[2026-02-04T17:59:10+08:00][info] 未发现重复记录，继续创建: order_no=wx750407836026011648_1, division_type=online
+[2026-02-04T17:59:10+08:00][info] 创建子订单单一支付分账记录: 订单=wx750407836026011648_1, 类型=online, 分账金额=0.02, 平台实收=0.01
+[2026-02-04T17:59:11+08:00][info] 组合支付流水创建检查: order_id=wx750407836026011648_1, payment_count=1, existing_types=[], missing_types=["online"]
+[2026-02-04T17:59:11+08:00][info] 订单缺失部分支付方式的供应商流水,继续创建: order_id=wx750407836026011648_1, missing_types=["online"]
+[2026-02-04T17:59:11+08:00][info] 单一支付方式,创建对应流水: payment_count=1, actual_pay_type=weixin
+[2026-02-04T17:59:11+08:00][info] 创建单一支付流水: order_id=wx750407836026011648_1, pay_type=weixin
+[2026-02-04T17:59:11+08:00][info] 单一支付流水从分账记录镜像获取金额: supplier_amount=0.02, platform_amount=0.01
+[2026-02-04T17:59:11+08:00][info] 创建单一支付流水成功: order_id=wx750407836026011648_1, pay_type=weixin, supplier_amount=0.02, platform_amount=0.01, status=2
+[2026-02-04T17:59:11+08:00][info] 子订单供应商流水创建成功: 订单号=wx750407836026011648_1
+[2026-02-04T17:59:11+08:00][info] 记录支付资金流水: 订单=wx750407836026011648, 支付方式=ums, 支付金额=0.07
+[2026-02-04T17:59:11+08:00][info] 开始批量处理自动标签:array (
+  'user_ids' => 4,
+  'trigger_type' => '',
+  'label_ids' => 
+  array (
+  ),
+)
+[2026-02-04T17:59:11+08:00][info] 开始批量处理自动标签2:array (
+  'user_count' => 1,
+  'trigger_type' => '',
+  'label_ids' => 
+  array (
+  ),
+)
+[2026-02-04T17:59:11+08:00][info] 开始批量处理自动标签:array (
+  'user_count' => 1,
+  'trigger_type' => '',
+  'label_ids' => 
+  array (
+  ),
+)
+[2026-02-04T17:59:11+08:00][info] 没有找到自动标签:array (
+  'label_ids' => 
+  array (
+  ),
+)
+[2026-02-04T17:59:11+08:00][info] ShareOrderJob-更新订单供应商信息: order_id=283, supplier_id=3, settle_price=0.03
+[2026-02-04T17:59:11+08:00][info] 子订单支付方式统计: 订单=wx750407836026011648_2, 在线=0.04, 福利金=0, 余额=0, 支付方式数=1, 是否组合=
+[2026-02-04T17:59:11+08:00][info] 单一在线支付子订单对齐主订单分账: 订单=wx750407836026011648_2, 原始结算价=0.03, 对齐后分账=0.03
+[2026-02-04T17:59:11+08:00][info] 未发现重复记录，继续创建: order_no=wx750407836026011648_2, division_type=online
+[2026-02-04T17:59:11+08:00][info] 创建子订单单一支付分账记录: 订单=wx750407836026011648_2, 类型=online, 分账金额=0.03, 平台实收=0.01
+[2026-02-04T17:59:11+08:00][info] 组合支付流水创建检查: order_id=wx750407836026011648_2, payment_count=1, existing_types=[], missing_types=["online"]
+[2026-02-04T17:59:11+08:00][info] 订单缺失部分支付方式的供应商流水,继续创建: order_id=wx750407836026011648_2, missing_types=["online"]
+[2026-02-04T17:59:11+08:00][info] 单一支付方式,创建对应流水: payment_count=1, actual_pay_type=weixin
+[2026-02-04T17:59:11+08:00][info] 创建单一支付流水: order_id=wx750407836026011648_2, pay_type=weixin
+[2026-02-04T17:59:11+08:00][info] 单一支付流水从分账记录镜像获取金额: supplier_amount=0.03, platform_amount=0.01
+[2026-02-04T17:59:11+08:00][info] 创建单一支付流水成功: order_id=wx750407836026011648_2, pay_type=weixin, supplier_amount=0.03, platform_amount=0.01, status=2
+[2026-02-04T17:59:11+08:00][info] 子订单供应商流水创建成功: 订单号=wx750407836026011648_2
+[2026-02-04T18:00:20+08:00][info] 整单退款状态判断: order_id=282, pay_price=0.03, total_refund=0.03, refund_status=1
+[2026-02-04T18:00:20+08:00][info] 开始处理退款: {"order_id":281,"order_no":"wx750407836026011648","pay_type":"ums","pay_price":"0.07","online_pay_price":"0.07","balance_pay_price":"0.00","welfare_pay_price":"0.00","pay_type_detail":"empty","refund_price":"0.03"}
+[2026-02-04T18:00:20+08:00][info] 进入单一支付方式退款流程,pay_type: ums
+[2026-02-04T18:00:20+08:00][info] 匹配到银联支付退款 case, pay_type: ums
+[2026-02-04T18:00:20+08:00][info] isH5Payment判断 - order_id=wx750407836026011648, pay_type=ums, pay_channel=, pay_type_detail="N\/A"
+[2026-02-04T18:00:20+08:00][info] isH5Payment判断结果: false
+[2026-02-04T18:00:20+08:00][info] 退款使用配置类型: mini
+[2026-02-04T18:00:20+08:00][info] 银联退款参数 - 业务订单号: wx750407836026011648, 实际支付单号: 3HD3wx750407836026011648_4, 退款单号: wx750407836026011648_1818, 订单总金额: 0.07, 退款金额: 0.03, instMid: 
+[2026-02-04T18:00:20+08:00][info] === 银联商务支付初始化 ===
+[2026-02-04T18:00:20+08:00][info] 支付类型: mini
+[2026-02-04T18:00:20+08:00][info] AppId: 8a81c1bd96cf23aa019b078242721f2a
+[2026-02-04T18:00:20+08:00][info] 商户号: 898310100010854
+[2026-02-04T18:00:20+08:00][info] 终端号: 41AUZ7C6
+[2026-02-04T18:00:20+08:00][info] API地址: https://api-mop.chinaums.com
+[2026-02-04T18:00:20+08:00][info] 环境: 生产
+[2026-02-04T18:00:20+08:00][info] === 银联退款 ===
+[2026-02-04T18:00:20+08:00][info] 原订单号: 3HD3wx750407836026011648_4
+[2026-02-04T18:00:20+08:00][info] 退款订单号: wx750407836026011648_1818
+[2026-02-04T18:00:20+08:00][info] 订单总金额: 0.07元
+[2026-02-04T18:00:20+08:00][info] 退款金额: 0.03元
+[2026-02-04T18:00:20+08:00][info] 银联订单号: 3HD3wx750407836026011648_4
+[2026-02-04T18:00:20+08:00][info] 银联退款订单号: 3HD3wx750407836026011648_1818
+[2026-02-04T18:00:20+08:00][info] 订单总金额(分): 7
+[2026-02-04T18:00:20+08:00][info] 退款金额(分): 3
+[2026-02-04T18:00:20+08:00][info] 请求参数: {"requestTimestamp":"2026-02-04 18:00:20","mid":"898310100010854","tid":"41AUZ7C6","merOrderId":"3HD3wx750407836026011648_4","refundOrderId":"3HD3wx750407836026011648_1818","refundAmount":"3","totalAmount":"7","orderDesc":"订单退款"}
+[2026-02-04T18:00:20+08:00][info] 报文体: {"requestTimestamp":"2026-02-04 18:00:20","mid":"898310100010854","tid":"41AUZ7C6","merOrderId":"3HD3wx750407836026011648_4","refundOrderId":"3HD3wx750407836026011648_1818","refundAmount":"3","totalAmount":"7","orderDesc":"\u8ba2\u5355\u9000\u6b3e"}
+[2026-02-04T18:00:20+08:00][info] 报文体SHA256: b7a3c9b4562b13eac1d8f34fee26fe13c773a465725df2e1dd933e97d0092371
+[2026-02-04T18:00:20+08:00][info] 签名原串: 8a81c1bd96cf23aa019b078242721f2a20260204180020f4a49fd6b83a6be0c5d3dba68639da1fb7a3c9b4562b13eac1d8f34fee26fe13c773a465725df2e1dd933e97d0092371
+[2026-02-04T18:00:20+08:00][info] 签名结果: rs/tlISfRnOSCy16NOD9QBcV34A6DurclPXCOrGcLlo=
+[2026-02-04T18:00:20+08:00][info] Authorization: OPEN-BODY-SIG AppId="8a81c1bd96cf23aa019b078242721f2a",Timestamp="20260204180020",Nonce="f4a49fd6b83a6be0c5d3dba68639da1f",Signature="rs/tlISfRnOSCy16NOD9QBcV34A6DurclPXCOrGcLlo="
+[2026-02-04T18:00:20+08:00][info] 响应数据: {"responseTimestamp":"2026-02-04 18:00:20","errCode":"BAD_REQUEST","errMsg":"子订单信息和平台商户退款金额为空需全额退款"}
+[2026-02-04T18:00:20+08:00][info] 银联退款调用失败: 退款失败: 子订单信息和平台商户退款金额为空需全额退款
+[2026-02-04T18:00:20+08:00][info] 异常堆栈: #0 /var/www/app/services/order/StoreOrderRefundServices.php(989): crmeb\services\UmsPayService->refund()
+#1 /var/www/vendor/topthink/think-orm/src/db/PDOConnection.php(1521): app\services\order\StoreOrderRefundServices->app\services\order\{closure}()
+#2 /var/www/vendor/topthink/think-swoole/src/pool/Proxy.php(83): think\db\PDOConnection->transaction()
+#3 /var/www/vendor/topthink/think-swoole/src/pool/proxy/Connection.php(188): think\swoole\pool\Proxy->__call()
+#4 [internal function]: think\swoole\pool\proxy\Connection->transaction()
+#5 /var/www/vendor/topthink/think-orm/src/DbManager.php(409): call_user_func_array()
+#6 [internal function]: think\DbManager->__call()
+#7 /var/www/vendor/topthink/framework/src/think/Facade.php(97): call_user_func_array()
+#8 /var/www/app/services/BaseServices.php(56): think\Facade::__callStatic()
+#9 /var/www/app/services/order/StoreOrderRefundServices.php(1045): app\services\BaseServices->transaction()
+#10 /var/www/app/common/controller/Order.php(957): app\services\order\StoreOrderRefundServices->agreeRefund()
+#11 [internal function]: app\controller\admin\v1\order\StoreOrder->open_order_refund()
+#12 /var/www/vendor/topthink/framework/src/think/Container.php(345): ReflectionMethod->invokeArgs()
+#13 /var/www/vendor/topthink/framework/src/think/route/dispatch/Controller.php(110): think\Container->invokeReflectMethod()
+#14 /var/www/vendor/topthink/framework/src/think/Pipeline.php(59): think\route\dispatch\Controller->think\route\dispatch\{closure}()
+#15 /var/www/vendor/topthink/framework/src/think/Pipeline.php(66): think\Pipeline->think\{closure}()
+#16 /var/www/vendor/topthink/framework/src/think/route/dispatch/Controller.php(113): think\Pipeline->then()
+#17 /var/www/vendor/topthink/framework/src/think/route/Dispatch.php(52): think\route\dispatch\Controller->exec()
+#18 /var/www/vendor/topthink/framework/src/think/Route.php(755): think\route\Dispatch->run()
+#19 /var/www/vendor/topthink/framework/src/think/Pipeline.php(59): think\Route->think\{closure}()
+#20 /var/www/app/http/middleware/admin/AdminLogMiddleware.php(40): think\Pipeline->think\{closure}()
+#21 [internal function]: app\http\middleware\admin\AdminLogMiddleware->handle()
+#22 /var/www/vendor/topthink/framework/src/think/Middleware.php(134): call_user_func()
+#23 /var/www/vendor/topthink/framework/src/think/Pipeline.php(85): think\Middleware->think\{closure}()
+#24 /var/www/app/http/middleware/admin/AdminCkeckRoleMiddleware.php(57): think\Pipeline->think\{closure}()
+#25 [internal function]: app\http\middleware\admin\AdminCkeckRoleMiddleware->handle()
+#26 /var/www/vendor/topthink/framework/src/think/Middleware.php(134): call_user_func()
+#27 /var/www/vendor/topthink/framework/src/think/Pipeline.php(85): think\Middleware->think\{closure}()
+#28 /var/www/app/http/middleware/admin/AdminAuthTokenMiddleware.php(39): think\Pipeline->think\{closure}()
+#29 [internal function]: app\http\middleware\admin\AdminAuthTokenMiddleware->handle()
+#30 /var/www/vendor/topthink/framework/src/think/Middleware.php(134): call_user_func()
+#31 /var/www/vendor/topthink/framework/src/think/Pipeline.php(85): think\Middleware->think\{closure}()
+#32 /var/www/app/http/middleware/AllowOriginMiddleware.php(50): think\Pipeline->think\{closure}()
+#33 [internal function]: app\http\middleware\AllowOriginMiddleware->handle()
+#34 /var/www/vendor/topthink/framework/src/think/Middleware.php(134): call_user_func()
+#35 /var/www/vendor/topthink/framework/src/think/Pipeline.php(85): think\Middleware->think\{closure}()
+#36 /var/www/app/http/middleware/InstallMiddleware.php(32): think\Pipeline->think\{closure}()
+#37 [internal function]: app\http\middleware\InstallMiddleware->handle()
+#38 /var/www/vendor/topthink/framework/src/think/Middleware.php(134): call_user_func()
+#39 /var/www/vendor/topthink/framework/src/think/Pipeline.php(85): think\Middleware->think\{closure}()
+#40 /var/www/vendor/topthink/framework/src/think/Pipeline.php(66): think\Pipeline->think\{closure}()
+#41 /var/www/vendor/topthink/framework/src/think/Route.php(756): think\Pipeline->then()
+#42 /var/www/vendor/topthink/framework/src/think/Http.php(208): think\Route->dispatch()
+#43 /var/www/vendor/topthink/framework/src/think/Http.php(198): think\Http->dispatchToRoute()
+#44 /var/www/vendor/topthink/framework/src/think/Pipeline.php(59): think\Http->think\{closure}()
+#45 /var/www/vendor/topthink/framework/src/think/middleware/LoadLangPack.php(53): think\Pipeline->think\{closure}()
+#46 [internal function]: think\middleware\LoadLangPack->handle()
+#47 /var/www/vendor/topthink/framework/src/think/Middleware.php(134): call_user_func()
+#48 /var/www/vendor/topthink/framework/src/think/Pipeline.php(85): think\Middleware->think\{closure}()
+#49 /var/www/vendor/topthink/framework/src/think/middleware/SessionInit.php(58): think\Pipeline->think\{closure}()
+#50 [internal function]: think\middleware\SessionInit->handle()
+#51 /var/www/vendor/topthink/framework/src/think/Middleware.php(134): call_user_func()
+#52 /var/www/vendor/topthink/framework/src/think/Pipeline.php(85): think\Middleware->think\{closure}()
+#53 /var/www/crmeb/topthink/TraceDebug.php(43): think\Pipeline->think\{closure}()
+#54 [internal function]: crmeb\topthink\TraceDebug->handle()
+#55 /var/www/vendor/topthink/framework/src/think/Middleware.php(134): call_user_func()
+#56 /var/www/vendor/topthink/framework/src/think/Pipeline.php(85): think\Middleware->think\{closure}()
+#57 /var/www/vendor/topthink/framework/src/think/Pipeline.php(66): think\Pipeline->think\{closure}()
+#58 /var/www/vendor/topthink/framework/src/think/Http.php(199): think\Pipeline->then()
+#59 /var/www/vendor/topthink/framework/src/think/Http.php(162): think\Http->runWithRequest()
+#60 /var/www/vendor/topthink/think-swoole/src/concerns/InteractsWithHttp.php(143): think\Http->run()
+#61 /var/www/vendor/topthink/think-swoole/src/concerns/InteractsWithHttp.php(125): think\swoole\Manager->handleRequest()
+#62 /var/www/vendor/topthink/framework/src/think/Container.php(295): think\swoole\Manager->think\swoole\concerns\{closure}()
+#63 /var/www/vendor/topthink/framework/src/think/Container.php(359): think\Container->invokeFunction()
+#64 /var/www/vendor/topthink/think-swoole/src/Sandbox.php(87): think\Container->invoke()
+#65 /var/www/vendor/topthink/think-swoole/src/concerns/WithApplication.php(84): think\swoole\Sandbox->run()
+#66 /var/www/vendor/topthink/think-swoole/src/concerns/InteractsWithHttp.php(134): think\swoole\Manager->runInSandbox()
+#67 {main}
+[2026-02-04T18:00:27+08:00][info] 整单退款状态判断: order_id=283, pay_price=0.04, total_refund=0.04, refund_status=1
+[2026-02-04T18:00:27+08:00][info] 开始处理退款: {"order_id":281,"order_no":"wx750407836026011648","pay_type":"ums","pay_price":"0.07","online_pay_price":"0.07","balance_pay_price":"0.00","welfare_pay_price":"0.00","pay_type_detail":"empty","refund_price":"0.04"}
+[2026-02-04T18:00:27+08:00][info] 进入单一支付方式退款流程,pay_type: ums
+[2026-02-04T18:00:27+08:00][info] 匹配到银联支付退款 case, pay_type: ums
+[2026-02-04T18:00:27+08:00][info] isH5Payment判断 - order_id=wx750407836026011648, pay_type=ums, pay_channel=, pay_type_detail="N\/A"
+[2026-02-04T18:00:27+08:00][info] isH5Payment判断结果: false
+[2026-02-04T18:00:27+08:00][info] 退款使用配置类型: mini
+[2026-02-04T18:00:27+08:00][info] 银联退款参数 - 业务订单号: wx750407836026011648, 实际支付单号: 3HD3wx750407836026011648_4, 退款单号: wx750407836026011648_2445, 订单总金额: 0.07, 退款金额: 0.04, instMid: 
+[2026-02-04T18:00:27+08:00][info] === 银联商务支付初始化 ===
+[2026-02-04T18:00:27+08:00][info] 支付类型: mini
+[2026-02-04T18:00:27+08:00][info] AppId: 8a81c1bd96cf23aa019b078242721f2a
+[2026-02-04T18:00:27+08:00][info] 商户号: 898310100010854
+[2026-02-04T18:00:27+08:00][info] 终端号: 41AUZ7C6
+[2026-02-04T18:00:27+08:00][info] API地址: https://api-mop.chinaums.com
+[2026-02-04T18:00:27+08:00][info] 环境: 生产
+[2026-02-04T18:00:27+08:00][info] === 银联退款 ===
+[2026-02-04T18:00:27+08:00][info] 原订单号: 3HD3wx750407836026011648_4
+[2026-02-04T18:00:27+08:00][info] 退款订单号: wx750407836026011648_2445
+[2026-02-04T18:00:27+08:00][info] 订单总金额: 0.07元
+[2026-02-04T18:00:27+08:00][info] 退款金额: 0.04元
+[2026-02-04T18:00:27+08:00][info] 银联订单号: 3HD3wx750407836026011648_4
+[2026-02-04T18:00:27+08:00][info] 银联退款订单号: 3HD3wx750407836026011648_2445
+[2026-02-04T18:00:27+08:00][info] 订单总金额(分): 7
+[2026-02-04T18:00:27+08:00][info] 退款金额(分): 4
+[2026-02-04T18:00:27+08:00][info] 请求参数: {"requestTimestamp":"2026-02-04 18:00:27","mid":"898310100010854","tid":"41AUZ7C6","merOrderId":"3HD3wx750407836026011648_4","refundOrderId":"3HD3wx750407836026011648_2445","refundAmount":"4","totalAmount":"7","orderDesc":"订单退款"}
+[2026-02-04T18:00:27+08:00][info] 报文体: {"requestTimestamp":"2026-02-04 18:00:27","mid":"898310100010854","tid":"41AUZ7C6","merOrderId":"3HD3wx750407836026011648_4","refundOrderId":"3HD3wx750407836026011648_2445","refundAmount":"4","totalAmount":"7","orderDesc":"\u8ba2\u5355\u9000\u6b3e"}
+[2026-02-04T18:00:27+08:00][info] 报文体SHA256: 770bf7f51b90d3b29de220ac45c81555fb1e5de82d629372ac69d5c9548e4ea8
+[2026-02-04T18:00:27+08:00][info] 签名原串: 8a81c1bd96cf23aa019b078242721f2a202602041800272dbaf7a1341be3aff89359f29f76745a770bf7f51b90d3b29de220ac45c81555fb1e5de82d629372ac69d5c9548e4ea8
+[2026-02-04T18:00:27+08:00][info] 签名结果: 4ZbtDwg3jRt1/G2utOeQFNRYvi7wFU7G42ePoZQs1JI=
+[2026-02-04T18:00:27+08:00][info] Authorization: OPEN-BODY-SIG AppId="8a81c1bd96cf23aa019b078242721f2a",Timestamp="20260204180027",Nonce="2dbaf7a1341be3aff89359f29f76745a",Signature="4ZbtDwg3jRt1/G2utOeQFNRYvi7wFU7G42ePoZQs1JI="
+[2026-02-04T18:00:27+08:00][info] 响应数据: {"responseTimestamp":"2026-02-04 18:00:27","errCode":"BAD_REQUEST","errMsg":"子订单信息和平台商户退款金额为空需全额退款"}
+[2026-02-04T18:00:27+08:00][info] 银联退款调用失败: 退款失败: 子订单信息和平台商户退款金额为空需全额退款
+[2026-02-04T18:00:27+08:00][info] 异常堆栈: #0 /var/www/app/services/order/StoreOrderRefundServices.php(989): crmeb\services\UmsPayService->refund()
+#1 /var/www/vendor/topthink/think-orm/src/db/PDOConnection.php(1521): app\services\order\StoreOrderRefundServices->app\services\order\{closure}()
+#2 /var/www/vendor/topthink/think-swoole/src/pool/Proxy.php(83): think\db\PDOConnection->transaction()
+#3 /var/www/vendor/topthink/think-swoole/src/pool/proxy/Connection.php(188): think\swoole\pool\Proxy->__call()
+#4 [internal function]: think\swoole\pool\proxy\Connection->transaction()
+#5 /var/www/vendor/topthink/think-orm/src/DbManager.php(409): call_user_func_array()
+#6 [internal function]: think\DbManager->__call()
+#7 /var/www/vendor/topthink/framework/src/think/Facade.php(97): call_user_func_array()
+#8 /var/www/app/services/BaseServices.php(56): think\Facade::__callStatic()
+#9 /var/www/app/services/order/StoreOrderRefundServices.php(1045): app\services\BaseServices->transaction()
+#10 /var/www/app/common/controller/Order.php(957): app\services\order\StoreOrderRefundServices->agreeRefund()
+#11 [internal function]: app\controller\admin\v1\order\StoreOrder->open_order_refund()
+#12 /var/www/vendor/topthink/framework/src/think/Container.php(345): ReflectionMethod->invokeArgs()
+#13 /var/www/vendor/topthink/framework/src/think/route/dispatch/Controller.php(110): think\Container->invokeReflectMethod()
+#14 /var/www/vendor/topthink/framework/src/think/Pipeline.php(59): think\route\dispatch\Controller->think\route\dispatch\{closure}()
+#15 /var/www/vendor/topthink/framework/src/think/Pipeline.php(66): think\Pipeline->think\{closure}()
+#16 /var/www/vendor/topthink/framework/src/think/route/dispatch/Controller.php(113): think\Pipeline->then()
+#17 /var/www/vendor/topthink/framework/src/think/route/Dispatch.php(52): think\route\dispatch\Controller->exec()
+#18 /var/www/vendor/topthink/framework/src/think/Route.php(755): think\route\Dispatch->run()
+#19 /var/www/vendor/topthink/framework/src/think/Pipeline.php(59): think\Route->think\{closure}()
+#20 /var/www/app/http/middleware/admin/AdminLogMiddleware.php(40): think\Pipeline->think\{closure}()
+#21 [internal function]: app\http\middleware\admin\AdminLogMiddleware->handle()
+#22 /var/www/vendor/topthink/framework/src/think/Middleware.php(134): call_user_func()
+#23 /var/www/vendor/topthink/framework/src/think/Pipeline.php(85): think\Middleware->think\{closure}()
+#24 /var/www/app/http/middleware/admin/AdminCkeckRoleMiddleware.php(57): think\Pipeline->think\{closure}()
+#25 [internal function]: app\http\middleware\admin\AdminCkeckRoleMiddleware->handle()
+#26 /var/www/vendor/topthink/framework/src/think/Middleware.php(134): call_user_func()
+#27 /var/www/vendor/topthink/framework/src/think/Pipeline.php(85): think\Middleware->think\{closure}()
+#28 /var/www/app/http/middleware/admin/AdminAuthTokenMiddleware.php(39): think\Pipeline->think\{closure}()
+#29 [internal function]: app\http\middleware\admin\AdminAuthTokenMiddleware->handle()
+#30 /var/www/vendor/topthink/framework/src/think/Middleware.php(134): call_user_func()
+#31 /var/www/vendor/topthink/framework/src/think/Pipeline.php(85): think\Middleware->think\{closure}()
+#32 /var/www/app/http/middleware/AllowOriginMiddleware.php(50): think\Pipeline->think\{closure}()
+#33 [internal function]: app\http\middleware\AllowOriginMiddleware->handle()
+#34 /var/www/vendor/topthink/framework/src/think/Middleware.php(134): call_user_func()
+#35 /var/www/vendor/topthink/framework/src/think/Pipeline.php(85): think\Middleware->think\{closure}()
+#36 /var/www/app/http/middleware/InstallMiddleware.php(32): think\Pipeline->think\{closure}()
+#37 [internal function]: app\http\middleware\InstallMiddleware->handle()
+#38 /var/www/vendor/topthink/framework/src/think/Middleware.php(134): call_user_func()
+#39 /var/www/vendor/topthink/framework/src/think/Pipeline.php(85): think\Middleware->think\{closure}()
+#40 /var/www/vendor/topthink/framework/src/think/Pipeline.php(66): think\Pipeline->think\{closure}()
+#41 /var/www/vendor/topthink/framework/src/think/Route.php(756): think\Pipeline->then()
+#42 /var/www/vendor/topthink/framework/src/think/Http.php(208): think\Route->dispatch()
+#43 /var/www/vendor/topthink/framework/src/think/Http.php(198): think\Http->dispatchToRoute()
+#44 /var/www/vendor/topthink/framework/src/think/Pipeline.php(59): think\Http->think\{closure}()
+#45 /var/www/vendor/topthink/framework/src/think/middleware/LoadLangPack.php(53): think\Pipeline->think\{closure}()
+#46 [internal function]: think\middleware\LoadLangPack->handle()
+#47 /var/www/vendor/topthink/framework/src/think/Middleware.php(134): call_user_func()
+#48 /var/www/vendor/topthink/framework/src/think/Pipeline.php(85): think\Middleware->think\{closure}()
+#49 /var/www/vendor/topthink/framework/src/think/middleware/SessionInit.php(58): think\Pipeline->think\{closure}()
+#50 [internal function]: think\middleware\SessionInit->handle()
+#51 /var/www/vendor/topthink/framework/src/think/Middleware.php(134): call_user_func()
+#52 /var/www/vendor/topthink/framework/src/think/Pipeline.php(85): think\Middleware->think\{closure}()
+#53 /var/www/crmeb/topthink/TraceDebug.php(43): think\Pipeline->think\{closure}()
+#54 [internal function]: crmeb\topthink\TraceDebug->handle()
+#55 /var/www/vendor/topthink/framework/src/think/Middleware.php(134): call_user_func()
+#56 /var/www/vendor/topthink/framework/src/think/Pipeline.php(85): think\Middleware->think\{closure}()
+#57 /var/www/vendor/topthink/framework/src/think/Pipeline.php(66): think\Pipeline->think\{closure}()
+#58 /var/www/vendor/topthink/framework/src/think/Http.php(199): think\Pipeline->then()
+#59 /var/www/vendor/topthink/framework/src/think/Http.php(162): think\Http->runWithRequest()
+#60 /var/www/vendor/topthink/think-swoole/src/concerns/InteractsWithHttp.php(143): think\Http->run()
+#61 /var/www/vendor/topthink/think-swoole/src/concerns/InteractsWithHttp.php(125): think\swoole\Manager->handleRequest()
+#62 /var/www/vendor/topthink/framework/src/think/Container.php(295): think\swoole\Manager->think\swoole\concerns\{closure}()
+#63 /var/www/vendor/topthink/framework/src/think/Container.php(359): think\Container->invokeFunction()
+#64 /var/www/vendor/topthink/think-swoole/src/Sandbox.php(87): think\Container->invoke()
+#65 /var/www/vendor/topthink/think-swoole/src/concerns/WithApplication.php(84): think\swoole\Sandbox->run()
+#66 /var/www/vendor/topthink/think-swoole/src/concerns/InteractsWithHttp.php(134): think\swoole\Manager->runInSandbox()
+#67 {main}
+[2026-02-04T19:23:57+08:00][info] 订单创建-购物车商品信息: {"product_id":14,"product_type":2,"relation_id":2,"settle_price":"0.02","cart_num":1}
+[2026-02-04T19:23:57+08:00][info] 订单创建-计算结算价: {"supplier_id":2,"attr_settle_price":"0.02","item_settle_price":"0.02","total_settle_price":"0.02"}
+[2026-02-04T19:23:57+08:00][info] 订单创建-供应商详细信息: [{"id":2,"name":"\u4e0a\u6d77\u8fbe\u8fbe123\u516c\u53f8","amount":"0.02"}]
+[2026-02-04T19:23:57+08:00][info] 订单创建-最终结算价: supplier_id=2, settle_price=0.02, 供应商数量=1
+[2026-02-04T19:24:02+08:00][info] 生成支付单号: wx750435803397619712_1 (业务订单号: wx750435803397619712, 支付次数: 1)
+[2026-02-04T19:24:02+08:00][info] 订单 wx750435803397619712 为多供应商订单，供应商数量: 1
+[2026-02-04T19:24:02+08:00][info] 订单 wx750435803397619712 添加供应商分账: 上海达达123公司(ID:2), 金额=0.02元
+[2026-02-04T19:24:02+08:00][info] 订单 wx750435803397619712 添加平台分账: 金额=0.01元
+[2026-02-04T19:24:02+08:00][info] 订单 wx750435803397619712 构建分账数据成功: 分账子订单数=2
+[2026-02-04T19:24:02+08:00][info] === 银联商务支付初始化 ===
+[2026-02-04T19:24:02+08:00][info] 支付类型: mini
+[2026-02-04T19:24:02+08:00][info] AppId: 8a81c1bd96cf23aa019b078242721f2a
+[2026-02-04T19:24:02+08:00][info] 商户号: 898310100010854
+[2026-02-04T19:24:02+08:00][info] 终端号: 41AUZ7C6
+[2026-02-04T19:24:02+08:00][info] API地址: https://api-mop.chinaums.com
+[2026-02-04T19:24:02+08:00][info] 环境: 生产
+[2026-02-04T19:24:02+08:00][info] === 银联小程序支付 ===
+[2026-02-04T19:24:02+08:00][info] site_url配置: https://test.wx.sunnycloudtop.com
+[2026-02-04T19:24:02+08:00][info] request domain: http://test.wx.sunnycloudtop.com
+[2026-02-04T19:24:02+08:00][info] 最终使用: https://test.wx.sunnycloudtop.com
+[2026-02-04T19:24:02+08:00][info] 完整通知URL: https://test.wx.sunnycloudtop.com/api/pay/ums/notify
+[2026-02-04T19:24:02+08:00][info] 订单需要分账: {"divisionFlag":true,"asynDivisionFlag":true,"platformAmount":0,"subOrders":[{"mid":"898310100011808","merOrderId":"SUB_wx750435803397619712_2","totalAmount":"2"},{"mid":"898310100011808","merOrderId":"PLAT_wx750435803397619712","totalAmount":"1"}]}
+[2026-02-04T19:24:02+08:00][info] === 银联小程序支付下单 ===
+[2026-02-04T19:24:02+08:00][info] 原始订单号: wx750435803397619712_1
+[2026-02-04T19:24:02+08:00][info] 金额: 0.03元
+[2026-02-04T19:24:02+08:00][info] OpenID: ofxai7bdKjP4cN2KgynwWK7ThNxk
+[2026-02-04T19:24:02+08:00][info] 通知URL: https://test.wx.sunnycloudtop.com/api/pay/ums/notify
+[2026-02-04T19:24:02+08:00][info] 分账数据: {"divisionFlag":true,"asynDivisionFlag":true,"platformAmount":0,"subOrders":[{"mid":"898310100011808","merOrderId":"SUB_wx750435803397619712_2","totalAmount":"2"},{"mid":"898310100011808","merOrderId":"PLAT_wx750435803397619712","totalAmount":"1"}]}
+[2026-02-04T19:24:02+08:00][info] 金额(分): 3
+[2026-02-04T19:24:02+08:00][info] 银联订单号: 3HD3wx750435803397619712_1
+[2026-02-04T19:24:02+08:00][info] 分账子订单: [{"mid":"898310100011808","merOrderId":"3HD3SUB_wx750435803397619712_2","totalAmount":"2"},{"mid":"898310100011808","merOrderId":"3HD3PLAT_wx750435803397619712","totalAmount":"1"}]
+[2026-02-04T19:24:02+08:00][info] 分账金额计算: 主订单=3分, 子订单总额=3分, 平台=0分
+[2026-02-04T19:24:02+08:00][info] 小程序AppId: wxb5fc16b55f439205
+[2026-02-04T19:24:02+08:00][info] 用户OpenId: ofxai7bdKjP4cN2KgynwWK7ThNxk
+[2026-02-04T19:24:02+08:00][info] 注意: 如果是服务商模式,需要联系银联确认openid字段
+[2026-02-04T19:24:02+08:00][info] 请求参数: {"requestTimestamp":"2026-02-04 19:24:02","merOrderId":"3HD3wx750435803397619712_1","mid":"898310100010854","tid":"41AUZ7C6","totalAmount":"3","tradeType":"MINI","orderDesc":"儿童水枪","notifyUrl":"https:\/\/test.wx.sunnycloudtop.com\/api\/pay\/ums\/notify","divisionFlag":true,"subOrders":[{"mid":"898310100011808","merOrderId":"3HD3SUB_wx750435803397619712_2","totalAmount":"2"},{"mid":"898310100011808","merOrderId":"3HD3PLAT_wx750435803397619712","totalAmount":"1"}],"platformAmount":0,"subAppId":"wxb5fc16b55f439205","subOpenId":"ofxai7bdKjP4cN2KgynwWK7ThNxk","openid":"ofxai7bdKjP4cN2KgynwWK7ThNxk"}
+[2026-02-04T19:24:02+08:00][info] 报文体: {"requestTimestamp":"2026-02-04 19:24:02","merOrderId":"3HD3wx750435803397619712_1","mid":"898310100010854","tid":"41AUZ7C6","totalAmount":"3","tradeType":"MINI","orderDesc":"\u513f\u7ae5\u6c34\u67aa","notifyUrl":"https:\/\/test.wx.sunnycloudtop.com\/api\/pay\/ums\/notify","divisionFlag":true,"subOrders":[{"mid":"898310100011808","merOrderId":"3HD3SUB_wx750435803397619712_2","totalAmount":"2"},{"mid":"898310100011808","merOrderId":"3HD3PLAT_wx750435803397619712","totalAmount":"1"}],"platformAmount":0,"subAppId":"wxb5fc16b55f439205","subOpenId":"ofxai7bdKjP4cN2KgynwWK7ThNxk","openid":"ofxai7bdKjP4cN2KgynwWK7ThNxk"}
+[2026-02-04T19:24:02+08:00][info] 报文体SHA256: 2dd2f8f6ec30936996a34b3cbc9152370bab7007acb387f086fbb5a23d35f9f1
+[2026-02-04T19:24:02+08:00][info] 签名原串: 8a81c1bd96cf23aa019b078242721f2a20260204192402e0b0da6526b0053bf59b01fad69af0042dd2f8f6ec30936996a34b3cbc9152370bab7007acb387f086fbb5a23d35f9f1
+[2026-02-04T19:24:02+08:00][info] 签名结果: NpsXbiMLauRDNfjmmeU7CnMsIMz9cY6+Ldi9NzsVrO8=
+[2026-02-04T19:24:02+08:00][info] Authorization: OPEN-BODY-SIG AppId="8a81c1bd96cf23aa019b078242721f2a",Timestamp="20260204192402",Nonce="e0b0da6526b0053bf59b01fad69af004",Signature="NpsXbiMLauRDNfjmmeU7CnMsIMz9cY6+Ldi9NzsVrO8="
+[2026-02-04T19:24:02+08:00][info] 响应数据: {"connectSys":"UNIONPAY","delegatedFlag":"N","merName":"香溢乐享优选","mid":"898310100010854","settleRefId":"56695975720N","tid":"41AUZ7C6","totalAmount":3,"targetMid":"842088674","responseTimestamp":"2026-02-04 19:24:02","errCode":"SUCCESS","miniPayRequest":{"timeStamp":"1770204242","package":"prepay_id=wx04192402578623bd25f3cd442ec5f00001","paySign":"toaDNYQHE5Cu\/Ja3\/oECCMsgRvfsBFA6SF5VXeJqqftBNxSmuykcBmWnu15HB3K+gglViaBOij3y1CWtY\/Cw8iugv2FdZA7Bd3jSShrU0RMnS5Zy8WJLpImPbHlx5feSIOiHwIkSYgu6ZrCs5gwCzHKqFfOK0BKEbC3o+SnzzkfPSCBd6ghnpECfTS5XSuJmIKiW9d3jNlHRggmWD4vJSNYLibQsHRlJMCcuvY+SzX7wLfxWXo2YG6g7qMVmN4HYeTI1syY27LHTgILtGHXqm2XY7Y7\/hVeVZgQuS\/AqXTAdD5NN8Gti9AZ29o+56OOVhHEBtw+KAp0BIabrDMFdtg==","appId":"wxb5fc16b55f439205","signType":"RSA","nonceStr":"291f63d747fd40b2bd659cb3498c8937"},"targetStatus":"SUCCESS|SUCCESS","seqId":"56695975720N","merOrderId":"3HD3wx750435803397619712_1","status":"WAIT_BUYER_PAY","targetSys":"WXPay"}
+[2026-02-04T19:24:07+08:00][info] === 银联商务支付回调 ===
+[2026-02-04T19:24:07+08:00][info] 回调数据: {"msgType":"wx.notify","payTime":"2026-02-04 19:24:07","buyerCashPayAmt":"3","connectSys":"UNIONPAY","sign":"2846B240FD25FF5BA8C7BC5684ECE20C94BAFB0474D979B15E89BF9FBBCA9D3D","merName":"香溢乐享优选","mid":"898310100010854","invoiceAmount":"3","settleDate":"2026-02-04","billFunds":"现金:3","buyerId":"otdJ_uI5UEd_yTH_mMdt6pLNoWFo","mchntUuid":"92041d5a554c4ea09ff03b9204db78fb","tid":"41AUZ7C6","instMid":"MINIDEFAULT","receiptAmount":"3","couponAmount":"0","WI":"iMFJ","cardAttr":"BALANCE","targetOrderId":"4200003096202602043218775108","signType":"SHA256","billFundsDesc":"现金支付0.03元。","subBuyerId":"ofxai7bdKjP4cN2KgynwWK7ThNxk","orderDesc":"儿童水枪","seqId":"56695975720N","merOrderId":"3HD3wx750435803397619712_1","targetSys":"WXPay","bankInfo":"OTHERS","totalAmount":"3","createTime":"2026-02-04 19:24:02","buyerPayAmount":"3","notifyId":"6583fad0-db44-43c5-a3b5-268028faea34","subInst":"104200","status":"TRADE_SUCCESS"}
+[2026-02-04T19:24:07+08:00][info] 回调Header: {"connection":"upgrade","host":"test.wx.sunnycloudtop.com","x-real-ip":"180.169.109.227","x-forwarded-for":"180.169.109.227","remote-host":"180.169.109.227","content-length":"936","content-type":"application\/x-www-form-urlencoded;charset=utf-8","accept":"*\/*","user-agent":"AHC\/2.1"}
+[2026-02-04T19:24:07+08:00][info] === 银联商务支付初始化 ===
+[2026-02-04T19:24:07+08:00][info] 支付类型: mini
+[2026-02-04T19:24:07+08:00][info] AppId: 8a81c1bd96cf23aa019b078242721f2a
+[2026-02-04T19:24:07+08:00][info] 商户号: 898310100010854
+[2026-02-04T19:24:07+08:00][info] 终端号: 41AUZ7C6
+[2026-02-04T19:24:07+08:00][info] API地址: https://api-mop.chinaums.com
+[2026-02-04T19:24:07+08:00][info] 环境: 生产
+[2026-02-04T19:24:07+08:00][info] === 银联支付回调处理 ===
+[2026-02-04T19:24:07+08:00][info] 回调数据: {"msgType":"wx.notify","payTime":"2026-02-04 19:24:07","buyerCashPayAmt":"3","connectSys":"UNIONPAY","sign":"2846B240FD25FF5BA8C7BC5684ECE20C94BAFB0474D979B15E89BF9FBBCA9D3D","merName":"香溢乐享优选","mid":"898310100010854","invoiceAmount":"3","settleDate":"2026-02-04","billFunds":"现金:3","buyerId":"otdJ_uI5UEd_yTH_mMdt6pLNoWFo","mchntUuid":"92041d5a554c4ea09ff03b9204db78fb","tid":"41AUZ7C6","instMid":"MINIDEFAULT","receiptAmount":"3","couponAmount":"0","WI":"iMFJ","cardAttr":"BALANCE","targetOrderId":"4200003096202602043218775108","signType":"SHA256","billFundsDesc":"现金支付0.03元。","subBuyerId":"ofxai7bdKjP4cN2KgynwWK7ThNxk","orderDesc":"儿童水枪","seqId":"56695975720N","merOrderId":"3HD3wx750435803397619712_1","targetSys":"WXPay","bankInfo":"OTHERS","totalAmount":"3","createTime":"2026-02-04 19:24:02","buyerPayAmount":"3","notifyId":"6583fad0-db44-43c5-a3b5-268028faea34","subInst":"104200","status":"TRADE_SUCCESS"}
+[2026-02-04T19:24:07+08:00][info] 签名类型: SHA256
+[2026-02-04T19:24:07+08:00][info] 原始签名: 2846B240FD25FF5BA8C7BC5684ECE20C94BAFB0474D979B15E89BF9FBBCA9D3D
+[2026-02-04T19:24:07+08:00][info] 待签名字符串: WI=iMFJ&bankInfo=OTHERS&billFunds=现金:3&billFundsDesc=现金支付0.03元。&buyerCashPayAmt=3&buyerId=otdJ_uI5UEd_yTH_mMdt6pLNoWFo&buyerPayAmount=3&cardAttr=BALANCE&connectSys=UNIONPAY&couponAmount=0&createTime=2026-02-04 19:24:02&instMid=MINIDEFAULT&invoiceAmount=3&mchntUuid=92041d5a554c4ea09ff03b9204db78fb&merName=香溢乐享优选&merOrderId=3HD3wx750435803397619712_1&mid=898310100010854&msgType=wx.notify&notifyId=6583fad0-db44-43c5-a3b5-268028faea34&orderDesc=儿童水枪&payTime=2026-02-04 19:24:07&receiptAmount=3&seqId=56695975720N&settleDate=2026-02-04&signType=SHA256&status=TRADE_SUCCESS&subBuyerId=ofxai7bdKjP4cN2KgynwWK7ThNxk&subInst=104200&targetOrderId=4200003096202602043218775108&targetSys=WXPay&tid=41AUZ7C6&totalAmount=3bW3kxKW4dQmzYaNzj4DZS84H2fe6rzYfMY6TSXbSQ2y7WQYn
+[2026-02-04T19:24:07+08:00][info] 计算签名: 2846B240FD25FF5BA8C7BC5684ECE20C94BAFB0474D979B15E89BF9FBBCA9D3D
+[2026-02-04T19:24:07+08:00][info] 签名验证成功
+[2026-02-04T19:24:07+08:00][info] UMS notify uses targetOrderId as trade_no: 4200003096202602043218775108
+[2026-02-04T19:24:07+08:00][info] 银联支付回调: 支付单号=3HD3wx750435803397619712_1, 业务订单号=3HD3wx750435803397619712, 支付系统=WXPay, 支付渠道=
+[2026-02-04T19:24:07+08:00][info] === PaySuccessListener 处理支付成功事件 ===
+[2026-02-04T19:24:07+08:00][info] 事件数据: {"order_id":"3HD3wx750435803397619712","pay_order_id":"3HD3wx750435803397619712_1","trade_no":"4200003096202602043218775108","pay_type":"ums","target_sys":"WXPay","pay_channel":"","pay_time":1770204247,"notify_id":"6583fad0-db44-43c5-a3b5-268028faea34"}
+[2026-02-04T19:24:07+08:00][info] 实际支付单号: 3HD3wx750435803397619712_1
+[2026-02-04T19:24:07+08:00][info] 调用 paySuccess 方法: order_id=wx750435803397619712, pay_type=ums, trade_no=4200003096202602043218775108, pay_channel=
+[2026-02-04T19:24:07+08:00][info] 在线支付订单,设置 online_pay_price: 0.03, pay_type: ums
+[2026-02-04T19:24:07+08:00][info] 记录实际支付单号: 3HD3wx750435803397619712_1
+[2026-02-04T19:24:08+08:00][info] 订单支付方式统计: 订单=wx750435803397619712, 在线=0.03, 福利金=0, 余额=0, 支付方式数=1, 是否组合=
+[2026-02-04T19:24:08+08:00][info] 未发现重复记录，继续创建: order_no=wx750435803397619712, division_type=online
+[2026-02-04T19:24:08+08:00][info] 创建单一支付分账记录: 订单=wx750435803397619712, 类型=online, 分账金额=0.02, 平台实收=0.01
+[2026-02-04T19:24:08+08:00][info] 开始创建供应商流水: 订单号=wx750435803397619712, 支付类型=ums, 福利金=0.00, 余额=0.00, 在线=0.03
+[2026-02-04T19:24:08+08:00][info] 组合支付流水创建检查: order_id=wx750435803397619712, payment_count=1, existing_types=[], missing_types=["online"]
+[2026-02-04T19:24:08+08:00][info] 订单缺失部分支付方式的供应商流水,继续创建: order_id=wx750435803397619712, missing_types=["online"]
+[2026-02-04T19:24:08+08:00][info] 单一支付方式,创建对应流水: payment_count=1, actual_pay_type=weixin
+[2026-02-04T19:24:08+08:00][info] 创建单一支付流水: order_id=wx750435803397619712, pay_type=weixin
+[2026-02-04T19:24:08+08:00][info] 单一支付流水从分账记录镜像获取金额: supplier_amount=0.02, platform_amount=0.01
+[2026-02-04T19:24:08+08:00][info] 创建单一支付流水成功: order_id=wx750435803397619712, pay_type=weixin, supplier_amount=0.02, platform_amount=0.01, status=2
+[2026-02-04T19:24:08+08:00][info] 供应商流水创建结束: 订单号=wx750435803397619712
+[2026-02-04T19:24:08+08:00][info] 支付成功处理完成: wx750435803397619712
+[2026-02-04T19:24:08+08:00][info] 银联商务支付成功: 业务订单号=3HD3wx750435803397619712, 支付单号=3HD3wx750435803397619712_1, 流水号=4200003096202602043218775108, 通知ID=6583fad0-db44-43c5-a3b5-268028faea34, 支付系统=WXPay, 支付渠道=
+[2026-02-04T19:24:08+08:00][info] ShareOrderJob-更新订单供应商信息: order_id=284, supplier_id=2, settle_price=0.02
+[2026-02-04T19:24:08+08:00][info] 子订单支付方式统计: 订单=wx750435803397619712, 在线=0.03, 福利金=0, 余额=0, 支付方式数=1, 是否组合=
+[2026-02-04T19:24:08+08:00][info] 创建子订单单一支付分账记录: 订单=wx750435803397619712, 类型=online, 分账金额=0.02, 平台实收=0.01
+[2026-02-04T19:24:08+08:00][info] 组合支付流水创建检查: order_id=wx750435803397619712, payment_count=1, existing_types=["weixin"], missing_types=[]
+[2026-02-04T19:24:08+08:00][info] 订单所有支付方式的供应商流水已存在,跳过创建: order_id=wx750435803397619712, existing_types=["weixin"]
+[2026-02-04T19:24:08+08:00][info] 子订单供应商流水创建成功: 订单号=wx750435803397619712
+[2026-02-04T19:24:08+08:00][info] 记录支付资金流水: 订单=wx750435803397619712, 支付方式=ums, 支付金额=0.03
+[2026-02-04T19:24:08+08:00][info] 开始批量处理自动标签:array (
+  'user_ids' => 9,
+  'trigger_type' => '',
+  'label_ids' => 
+  array (
+  ),
+)
+[2026-02-04T19:24:08+08:00][info] 开始批量处理自动标签2:array (
+  'user_count' => 1,
+  'trigger_type' => '',
+  'label_ids' => 
+  array (
+  ),
+)
+[2026-02-04T19:24:08+08:00][info] 开始批量处理自动标签:array (
+  'user_count' => 1,
+  'trigger_type' => '',
+  'label_ids' => 
+  array (
+  ),
+)
+[2026-02-04T19:24:08+08:00][info] 没有找到自动标签:array (
+  'label_ids' => 
+  array (
+  ),
+)
+[2026-02-04T19:56:13+08:00][info] 整单退款状态判断: order_id=282, pay_price=0.03, total_refund=0.03, refund_status=1
+[2026-02-04T19:56:13+08:00][info] 开始处理退款: {"order_id":281,"order_no":"wx750407836026011648","pay_type":"ums","pay_price":"0.07","online_pay_price":"0.07","balance_pay_price":"0.00","welfare_pay_price":"0.00","pay_type_detail":"empty","refund_price":"0.03"}
+[2026-02-04T19:56:13+08:00][info] 进入单一支付方式退款流程,pay_type: ums
+[2026-02-04T19:56:13+08:00][info] 匹配到银联支付退款 case, pay_type: ums
+[2026-02-04T19:56:13+08:00][info] isH5Payment判断 - order_id=wx750407836026011648, pay_type=ums, pay_channel=, pay_type_detail="N\/A"
+[2026-02-04T19:56:13+08:00][info] isH5Payment判断结果: false
+[2026-02-04T19:56:13+08:00][info] 退款使用配置类型: mini
+[2026-02-04T19:56:13+08:00][info] 订单 wx750407836026011648 开始构建多供应商退款分账数据
+[2026-02-04T19:56:13+08:00][info] 订单 wx750407836026011648 没有供应商商品，按平台订单处理退款
+[2026-02-04T19:56:13+08:00][info] 银联退款参数 - 业务订单号: wx750407836026011648, 实际支付单号: 3HD3wx750407836026011648_4, 退款单号: wx750407836026011648_1258, 订单总金额: 0.07, 退款金额: 0.03, instMid: 
+[2026-02-04T19:56:13+08:00][info] === 银联商务支付初始化 ===
+[2026-02-04T19:56:13+08:00][info] 支付类型: mini
+[2026-02-04T19:56:13+08:00][info] AppId: 8a81c1bd96cf23aa019b078242721f2a
+[2026-02-04T19:56:13+08:00][info] 商户号: 898310100010854
+[2026-02-04T19:56:13+08:00][info] 终端号: 41AUZ7C6
+[2026-02-04T19:56:13+08:00][info] API地址: https://api-mop.chinaums.com
+[2026-02-04T19:56:13+08:00][info] 环境: 生产
+[2026-02-04T19:56:13+08:00][info] === 银联退款 ===
+[2026-02-04T19:56:13+08:00][info] 原订单号: 3HD3wx750407836026011648_4
+[2026-02-04T19:56:13+08:00][info] 退款订单号: wx750407836026011648_1258
+[2026-02-04T19:56:13+08:00][info] 订单总金额: 0.07元
+[2026-02-04T19:56:13+08:00][info] 退款金额: 0.03元
+[2026-02-04T19:56:13+08:00][info] 银联订单号: 3HD3wx750407836026011648_4
+[2026-02-04T19:56:13+08:00][info] 银联退款订单号: 3HD3wx750407836026011648_1258
+[2026-02-04T19:56:13+08:00][info] 订单总金额(分): 7
+[2026-02-04T19:56:13+08:00][info] 退款金额(分): 3
+[2026-02-04T19:56:13+08:00][info] 请求参数: {"requestTimestamp":"2026-02-04 19:56:13","mid":"898310100010854","tid":"41AUZ7C6","merOrderId":"3HD3wx750407836026011648_4","refundOrderId":"3HD3wx750407836026011648_1258","refundAmount":"3","totalAmount":"7","orderDesc":"订单退款"}
+[2026-02-04T19:56:13+08:00][info] 报文体: {"requestTimestamp":"2026-02-04 19:56:13","mid":"898310100010854","tid":"41AUZ7C6","merOrderId":"3HD3wx750407836026011648_4","refundOrderId":"3HD3wx750407836026011648_1258","refundAmount":"3","totalAmount":"7","orderDesc":"\u8ba2\u5355\u9000\u6b3e"}
+[2026-02-04T19:56:13+08:00][info] 报文体SHA256: 18ca2eb9b11c1543f27e9534d9dc53783e681e7920a95e7f1f9794bb4f1d0550
+[2026-02-04T19:56:13+08:00][info] 签名原串: 8a81c1bd96cf23aa019b078242721f2a2026020419561354a3fc053f9acafcf72aa9b4808970f018ca2eb9b11c1543f27e9534d9dc53783e681e7920a95e7f1f9794bb4f1d0550
+[2026-02-04T19:56:13+08:00][info] 签名结果: gBVKai3aob9ebaKfFTgV3CxCQ0nwzwTFO/gWW8huP3U=
+[2026-02-04T19:56:13+08:00][info] Authorization: OPEN-BODY-SIG AppId="8a81c1bd96cf23aa019b078242721f2a",Timestamp="20260204195613",Nonce="54a3fc053f9acafcf72aa9b4808970f0",Signature="gBVKai3aob9ebaKfFTgV3CxCQ0nwzwTFO/gWW8huP3U="
+[2026-02-04T19:56:13+08:00][info] 响应数据: {"responseTimestamp":"2026-02-04 19:56:13","errCode":"BAD_REQUEST","errMsg":"子订单信息和平台商户退款金额为空需全额退款"}
+[2026-02-04T19:56:13+08:00][info] 银联退款调用失败: 退款失败: 子订单信息和平台商户退款金额为空需全额退款
+[2026-02-04T19:56:13+08:00][info] 异常堆栈: #0 /var/www/app/services/order/StoreOrderRefundServices.php(989): crmeb\services\UmsPayService->refund()
+#1 /var/www/vendor/topthink/think-orm/src/db/PDOConnection.php(1521): app\services\order\StoreOrderRefundServices->app\services\order\{closure}()
+#2 /var/www/vendor/topthink/think-swoole/src/pool/Proxy.php(83): think\db\PDOConnection->transaction()
+#3 /var/www/vendor/topthink/think-swoole/src/pool/proxy/Connection.php(188): think\swoole\pool\Proxy->__call()
+#4 [internal function]: think\swoole\pool\proxy\Connection->transaction()
+#5 /var/www/vendor/topthink/think-orm/src/DbManager.php(409): call_user_func_array()
+#6 [internal function]: think\DbManager->__call()
+#7 /var/www/vendor/topthink/framework/src/think/Facade.php(97): call_user_func_array()
+#8 /var/www/app/services/BaseServices.php(56): think\Facade::__callStatic()
+#9 /var/www/app/services/order/StoreOrderRefundServices.php(1045): app\services\BaseServices->transaction()
+#10 /var/www/app/common/controller/Order.php(957): app\services\order\StoreOrderRefundServices->agreeRefund()
+#11 [internal function]: app\controller\admin\v1\order\StoreOrder->open_order_refund()
+#12 /var/www/vendor/topthink/framework/src/think/Container.php(345): ReflectionMethod->invokeArgs()
+#13 /var/www/vendor/topthink/framework/src/think/route/dispatch/Controller.php(110): think\Container->invokeReflectMethod()
+#14 /var/www/vendor/topthink/framework/src/think/Pipeline.php(59): think\route\dispatch\Controller->think\route\dispatch\{closure}()
+#15 /var/www/vendor/topthink/framework/src/think/Pipeline.php(66): think\Pipeline->think\{closure}()
+#16 /var/www/vendor/topthink/framework/src/think/route/dispatch/Controller.php(113): think\Pipeline->then()
+#17 /var/www/vendor/topthink/framework/src/think/route/Dispatch.php(52): think\route\dispatch\Controller->exec()
+#18 /var/www/vendor/topthink/framework/src/think/Route.php(755): think\route\Dispatch->run()
+#19 /var/www/vendor/topthink/framework/src/think/Pipeline.php(59): think\Route->think\{closure}()
+#20 /var/www/app/http/middleware/admin/AdminLogMiddleware.php(40): think\Pipeline->think\{closure}()
+#21 [internal function]: app\http\middleware\admin\AdminLogMiddleware->handle()
+#22 /var/www/vendor/topthink/framework/src/think/Middleware.php(134): call_user_func()
+#23 /var/www/vendor/topthink/framework/src/think/Pipeline.php(85): think\Middleware->think\{closure}()
+#24 /var/www/app/http/middleware/admin/AdminCkeckRoleMiddleware.php(57): think\Pipeline->think\{closure}()
+#25 [internal function]: app\http\middleware\admin\AdminCkeckRoleMiddleware->handle()
+#26 /var/www/vendor/topthink/framework/src/think/Middleware.php(134): call_user_func()
+#27 /var/www/vendor/topthink/framework/src/think/Pipeline.php(85): think\Middleware->think\{closure}()
+#28 /var/www/app/http/middleware/admin/AdminAuthTokenMiddleware.php(39): think\Pipeline->think\{closure}()
+#29 [internal function]: app\http\middleware\admin\AdminAuthTokenMiddleware->handle()
+#30 /var/www/vendor/topthink/framework/src/think/Middleware.php(134): call_user_func()
+#31 /var/www/vendor/topthink/framework/src/think/Pipeline.php(85): think\Middleware->think\{closure}()
+#32 /var/www/app/http/middleware/AllowOriginMiddleware.php(50): think\Pipeline->think\{closure}()
+#33 [internal function]: app\http\middleware\AllowOriginMiddleware->handle()
+#34 /var/www/vendor/topthink/framework/src/think/Middleware.php(134): call_user_func()
+#35 /var/www/vendor/topthink/framework/src/think/Pipeline.php(85): think\Middleware->think\{closure}()
+#36 /var/www/app/http/middleware/InstallMiddleware.php(32): think\Pipeline->think\{closure}()
+#37 [internal function]: app\http\middleware\InstallMiddleware->handle()
+#38 /var/www/vendor/topthink/framework/src/think/Middleware.php(134): call_user_func()
+#39 /var/www/vendor/topthink/framework/src/think/Pipeline.php(85): think\Middleware->think\{closure}()
+#40 /var/www/vendor/topthink/framework/src/think/Pipeline.php(66): think\Pipeline->think\{closure}()
+#41 /var/www/vendor/topthink/framework/src/think/Route.php(756): think\Pipeline->then()
+#42 /var/www/vendor/topthink/framework/src/think/Http.php(208): think\Route->dispatch()
+#43 /var/www/vendor/topthink/framework/src/think/Http.php(198): think\Http->dispatchToRoute()
+#44 /var/www/vendor/topthink/framework/src/think/Pipeline.php(59): think\Http->think\{closure}()
+#45 /var/www/vendor/topthink/framework/src/think/middleware/LoadLangPack.php(53): think\Pipeline->think\{closure}()
+#46 [internal function]: think\middleware\LoadLangPack->handle()
+#47 /var/www/vendor/topthink/framework/src/think/Middleware.php(134): call_user_func()
+#48 /var/www/vendor/topthink/framework/src/think/Pipeline.php(85): think\Middleware->think\{closure}()
+#49 /var/www/vendor/topthink/framework/src/think/middleware/SessionInit.php(58): think\Pipeline->think\{closure}()
+#50 [internal function]: think\middleware\SessionInit->handle()
+#51 /var/www/vendor/topthink/framework/src/think/Middleware.php(134): call_user_func()
+#52 /var/www/vendor/topthink/framework/src/think/Pipeline.php(85): think\Middleware->think\{closure}()
+#53 /var/www/crmeb/topthink/TraceDebug.php(43): think\Pipeline->think\{closure}()
+#54 [internal function]: crmeb\topthink\TraceDebug->handle()
+#55 /var/www/vendor/topthink/framework/src/think/Middleware.php(134): call_user_func()
+#56 /var/www/vendor/topthink/framework/src/think/Pipeline.php(85): think\Middleware->think\{closure}()
+#57 /var/www/vendor/topthink/framework/src/think/Pipeline.php(66): think\Pipeline->think\{closure}()
+#58 /var/www/vendor/topthink/framework/src/think/Http.php(199): think\Pipeline->then()
+#59 /var/www/vendor/topthink/framework/src/think/Http.php(162): think\Http->runWithRequest()
+#60 /var/www/vendor/topthink/think-swoole/src/concerns/InteractsWithHttp.php(143): think\Http->run()
+#61 /var/www/vendor/topthink/think-swoole/src/concerns/InteractsWithHttp.php(125): think\swoole\Manager->handleRequest()
+#62 /var/www/vendor/topthink/framework/src/think/Container.php(295): think\swoole\Manager->think\swoole\concerns\{closure}()
+#63 /var/www/vendor/topthink/framework/src/think/Container.php(359): think\Container->invokeFunction()
+#64 /var/www/vendor/topthink/think-swoole/src/Sandbox.php(87): think\Container->invoke()
+#65 /var/www/vendor/topthink/think-swoole/src/concerns/WithApplication.php(84): think\swoole\Sandbox->run()
+#66 /var/www/vendor/topthink/think-swoole/src/concerns/InteractsWithHttp.php(134): think\swoole\Manager->runInSandbox()
+#67 {main}
+[2026-02-04T19:56:32+08:00][info] 整单退款状态判断: order_id=283, pay_price=0.04, total_refund=0.04, refund_status=1
+[2026-02-04T19:56:32+08:00][info] 开始处理退款: {"order_id":281,"order_no":"wx750407836026011648","pay_type":"ums","pay_price":"0.07","online_pay_price":"0.07","balance_pay_price":"0.00","welfare_pay_price":"0.00","pay_type_detail":"empty","refund_price":"0.04"}
+[2026-02-04T19:56:32+08:00][info] 进入单一支付方式退款流程,pay_type: ums
+[2026-02-04T19:56:32+08:00][info] 匹配到银联支付退款 case, pay_type: ums
+[2026-02-04T19:56:32+08:00][info] isH5Payment判断 - order_id=wx750407836026011648, pay_type=ums, pay_channel=, pay_type_detail="N\/A"
+[2026-02-04T19:56:32+08:00][info] isH5Payment判断结果: false
+[2026-02-04T19:56:32+08:00][info] 退款使用配置类型: mini
+[2026-02-04T19:56:32+08:00][info] 订单 wx750407836026011648 开始构建多供应商退款分账数据
+[2026-02-04T19:56:32+08:00][info] 订单 wx750407836026011648 没有供应商商品，按平台订单处理退款
+[2026-02-04T19:56:32+08:00][info] 银联退款参数 - 业务订单号: wx750407836026011648, 实际支付单号: 3HD3wx750407836026011648_4, 退款单号: wx750407836026011648_2626, 订单总金额: 0.07, 退款金额: 0.04, instMid: 
+[2026-02-04T19:56:32+08:00][info] === 银联商务支付初始化 ===
+[2026-02-04T19:56:32+08:00][info] 支付类型: mini
+[2026-02-04T19:56:32+08:00][info] AppId: 8a81c1bd96cf23aa019b078242721f2a
+[2026-02-04T19:56:32+08:00][info] 商户号: 898310100010854
+[2026-02-04T19:56:32+08:00][info] 终端号: 41AUZ7C6
+[2026-02-04T19:56:32+08:00][info] API地址: https://api-mop.chinaums.com
+[2026-02-04T19:56:32+08:00][info] 环境: 生产
+[2026-02-04T19:56:32+08:00][info] === 银联退款 ===
+[2026-02-04T19:56:32+08:00][info] 原订单号: 3HD3wx750407836026011648_4
+[2026-02-04T19:56:32+08:00][info] 退款订单号: wx750407836026011648_2626
+[2026-02-04T19:56:32+08:00][info] 订单总金额: 0.07元
+[2026-02-04T19:56:32+08:00][info] 退款金额: 0.04元
+[2026-02-04T19:56:32+08:00][info] 银联订单号: 3HD3wx750407836026011648_4
+[2026-02-04T19:56:32+08:00][info] 银联退款订单号: 3HD3wx750407836026011648_2626
+[2026-02-04T19:56:32+08:00][info] 订单总金额(分): 7
+[2026-02-04T19:56:32+08:00][info] 退款金额(分): 4
+[2026-02-04T19:56:32+08:00][info] 请求参数: {"requestTimestamp":"2026-02-04 19:56:32","mid":"898310100010854","tid":"41AUZ7C6","merOrderId":"3HD3wx750407836026011648_4","refundOrderId":"3HD3wx750407836026011648_2626","refundAmount":"4","totalAmount":"7","orderDesc":"订单退款"}
+[2026-02-04T19:56:32+08:00][info] 报文体: {"requestTimestamp":"2026-02-04 19:56:32","mid":"898310100010854","tid":"41AUZ7C6","merOrderId":"3HD3wx750407836026011648_4","refundOrderId":"3HD3wx750407836026011648_2626","refundAmount":"4","totalAmount":"7","orderDesc":"\u8ba2\u5355\u9000\u6b3e"}
+[2026-02-04T19:56:32+08:00][info] 报文体SHA256: 5e3e63bbe6ed96869ec9200961b7fbc8dde38d2e117023382d61cf3e92c0026b
+[2026-02-04T19:56:32+08:00][info] 签名原串: 8a81c1bd96cf23aa019b078242721f2a202602041956320fac32450ed3e74d5bc8d6577c8e7c485e3e63bbe6ed96869ec9200961b7fbc8dde38d2e117023382d61cf3e92c0026b
+[2026-02-04T19:56:32+08:00][info] 签名结果: xmisOXaEa9lnzMXS11EsXSFUYYFabiiOR/AP5yqrxhc=
+[2026-02-04T19:56:32+08:00][info] Authorization: OPEN-BODY-SIG AppId="8a81c1bd96cf23aa019b078242721f2a",Timestamp="20260204195632",Nonce="0fac32450ed3e74d5bc8d6577c8e7c48",Signature="xmisOXaEa9lnzMXS11EsXSFUYYFabiiOR/AP5yqrxhc="
+[2026-02-04T19:56:32+08:00][info] 响应数据: {"responseTimestamp":"2026-02-04 19:56:32","errCode":"BAD_REQUEST","errMsg":"子订单信息和平台商户退款金额为空需全额退款"}
+[2026-02-04T19:56:32+08:00][info] 银联退款调用失败: 退款失败: 子订单信息和平台商户退款金额为空需全额退款
+[2026-02-04T19:56:32+08:00][info] 异常堆栈: #0 /var/www/app/services/order/StoreOrderRefundServices.php(989): crmeb\services\UmsPayService->refund()
+#1 /var/www/vendor/topthink/think-orm/src/db/PDOConnection.php(1521): app\services\order\StoreOrderRefundServices->app\services\order\{closure}()
+#2 /var/www/vendor/topthink/think-swoole/src/pool/Proxy.php(83): think\db\PDOConnection->transaction()
+#3 /var/www/vendor/topthink/think-swoole/src/pool/proxy/Connection.php(188): think\swoole\pool\Proxy->__call()
+#4 [internal function]: think\swoole\pool\proxy\Connection->transaction()
+#5 /var/www/vendor/topthink/think-orm/src/DbManager.php(409): call_user_func_array()
+#6 [internal function]: think\DbManager->__call()
+#7 /var/www/vendor/topthink/framework/src/think/Facade.php(97): call_user_func_array()
+#8 /var/www/app/services/BaseServices.php(56): think\Facade::__callStatic()
+#9 /var/www/app/services/order/StoreOrderRefundServices.php(1045): app\services\BaseServices->transaction()
+#10 /var/www/app/common/controller/Order.php(957): app\services\order\StoreOrderRefundServices->agreeRefund()
+#11 [internal function]: app\controller\admin\v1\order\StoreOrder->open_order_refund()
+#12 /var/www/vendor/topthink/framework/src/think/Container.php(345): ReflectionMethod->invokeArgs()
+#13 /var/www/vendor/topthink/framework/src/think/route/dispatch/Controller.php(110): think\Container->invokeReflectMethod()
+#14 /var/www/vendor/topthink/framework/src/think/Pipeline.php(59): think\route\dispatch\Controller->think\route\dispatch\{closure}()
+#15 /var/www/vendor/topthink/framework/src/think/Pipeline.php(66): think\Pipeline->think\{closure}()
+#16 /var/www/vendor/topthink/framework/src/think/route/dispatch/Controller.php(113): think\Pipeline->then()
+#17 /var/www/vendor/topthink/framework/src/think/route/Dispatch.php(52): think\route\dispatch\Controller->exec()
+#18 /var/www/vendor/topthink/framework/src/think/Route.php(755): think\route\Dispatch->run()
+#19 /var/www/vendor/topthink/framework/src/think/Pipeline.php(59): think\Route->think\{closure}()
+#20 /var/www/app/http/middleware/admin/AdminLogMiddleware.php(40): think\Pipeline->think\{closure}()
+#21 [internal function]: app\http\middleware\admin\AdminLogMiddleware->handle()
+#22 /var/www/vendor/topthink/framework/src/think/Middleware.php(134): call_user_func()
+#23 /var/www/vendor/topthink/framework/src/think/Pipeline.php(85): think\Middleware->think\{closure}()
+#24 /var/www/app/http/middleware/admin/AdminCkeckRoleMiddleware.php(57): think\Pipeline->think\{closure}()
+#25 [internal function]: app\http\middleware\admin\AdminCkeckRoleMiddleware->handle()
+#26 /var/www/vendor/topthink/framework/src/think/Middleware.php(134): call_user_func()
+#27 /var/www/vendor/topthink/framework/src/think/Pipeline.php(85): think\Middleware->think\{closure}()
+#28 /var/www/app/http/middleware/admin/AdminAuthTokenMiddleware.php(39): think\Pipeline->think\{closure}()
+#29 [internal function]: app\http\middleware\admin\AdminAuthTokenMiddleware->handle()
+#30 /var/www/vendor/topthink/framework/src/think/Middleware.php(134): call_user_func()
+#31 /var/www/vendor/topthink/framework/src/think/Pipeline.php(85): think\Middleware->think\{closure}()
+#32 /var/www/app/http/middleware/AllowOriginMiddleware.php(50): think\Pipeline->think\{closure}()
+#33 [internal function]: app\http\middleware\AllowOriginMiddleware->handle()
+#34 /var/www/vendor/topthink/framework/src/think/Middleware.php(134): call_user_func()
+#35 /var/www/vendor/topthink/framework/src/think/Pipeline.php(85): think\Middleware->think\{closure}()
+#36 /var/www/app/http/middleware/InstallMiddleware.php(32): think\Pipeline->think\{closure}()
+#37 [internal function]: app\http\middleware\InstallMiddleware->handle()
+#38 /var/www/vendor/topthink/framework/src/think/Middleware.php(134): call_user_func()
+#39 /var/www/vendor/topthink/framework/src/think/Pipeline.php(85): think\Middleware->think\{closure}()
+#40 /var/www/vendor/topthink/framework/src/think/Pipeline.php(66): think\Pipeline->think\{closure}()
+#41 /var/www/vendor/topthink/framework/src/think/Route.php(756): think\Pipeline->then()
+#42 /var/www/vendor/topthink/framework/src/think/Http.php(208): think\Route->dispatch()
+#43 /var/www/vendor/topthink/framework/src/think/Http.php(198): think\Http->dispatchToRoute()
+#44 /var/www/vendor/topthink/framework/src/think/Pipeline.php(59): think\Http->think\{closure}()
+#45 /var/www/vendor/topthink/framework/src/think/middleware/LoadLangPack.php(53): think\Pipeline->think\{closure}()
+#46 [internal function]: think\middleware\LoadLangPack->handle()
+#47 /var/www/vendor/topthink/framework/src/think/Middleware.php(134): call_user_func()
+#48 /var/www/vendor/topthink/framework/src/think/Pipeline.php(85): think\Middleware->think\{closure}()
+#49 /var/www/vendor/topthink/framework/src/think/middleware/SessionInit.php(58): think\Pipeline->think\{closure}()
+#50 [internal function]: think\middleware\SessionInit->handle()
+#51 /var/www/vendor/topthink/framework/src/think/Middleware.php(134): call_user_func()
+#52 /var/www/vendor/topthink/framework/src/think/Pipeline.php(85): think\Middleware->think\{closure}()
+#53 /var/www/crmeb/topthink/TraceDebug.php(43): think\Pipeline->think\{closure}()
+#54 [internal function]: crmeb\topthink\TraceDebug->handle()
+#55 /var/www/vendor/topthink/framework/src/think/Middleware.php(134): call_user_func()
+#56 /var/www/vendor/topthink/framework/src/think/Pipeline.php(85): think\Middleware->think\{closure}()
+#57 /var/www/vendor/topthink/framework/src/think/Pipeline.php(66): think\Pipeline->think\{closure}()
+#58 /var/www/vendor/topthink/framework/src/think/Http.php(199): think\Pipeline->then()
+#59 /var/www/vendor/topthink/framework/src/think/Http.php(162): think\Http->runWithRequest()
+#60 /var/www/vendor/topthink/think-swoole/src/concerns/InteractsWithHttp.php(143): think\Http->run()
+#61 /var/www/vendor/topthink/think-swoole/src/concerns/InteractsWithHttp.php(125): think\swoole\Manager->handleRequest()
+#62 /var/www/vendor/topthink/framework/src/think/Container.php(295): think\swoole\Manager->think\swoole\concerns\{closure}()
+#63 /var/www/vendor/topthink/framework/src/think/Container.php(359): think\Container->invokeFunction()
+#64 /var/www/vendor/topthink/think-swoole/src/Sandbox.php(87): think\Container->invoke()
+#65 /var/www/vendor/topthink/think-swoole/src/concerns/WithApplication.php(84): think\swoole\Sandbox->run()
+#66 /var/www/vendor/topthink/think-swoole/src/concerns/InteractsWithHttp.php(134): think\swoole\Manager->runInSandbox()
+#67 {main}
