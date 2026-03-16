@@ -24,7 +24,6 @@ import styles from '@/styles/MainContent.module.css';
 import BriefIntro from '@/components/sections/BriefIntro';
 import SkillsHighlight from '@/components/sections/SkillsHighlight';
 import FeaturedProjects from '@/components/sections/FeaturedProjects';
-import LatestPosts from '@/components/sections/LatestPosts';
 
 interface MainContentProps {
   visible?: boolean;
@@ -111,9 +110,6 @@ const MainContent: React.FC<MainContentProps> = ({ visible = false }) => {
         </motion.div>
         <motion.div variants={sectionVariants}>
           <FeaturedProjects />
-        </motion.div>
-        <motion.div variants={sectionVariants}>
-          <LatestPosts />
         </motion.div>
       </div>
     </motion.div>
