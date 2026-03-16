@@ -19,3 +19,8 @@ LearningProjects/nestapp/node_modules
 .venv
 
 *:Zone.Identifier
+/docs/wechat-decrypt-analysis/exports/by_chat
+/案例
+/docs
+/ai-agent-ppt
+/personal-website
