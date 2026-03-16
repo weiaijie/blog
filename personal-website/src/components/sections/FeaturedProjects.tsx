@@ -6,14 +6,16 @@
 
 import Link from 'next/link';
 import styles from '@/styles/FeaturedProjects.module.css';
-import { featuredProjectCaseStudies } from '@/data/projects';
+import { projectCaseStudies } from '@/data/projects';
 
 const FeaturedProjects = () => {
+  const homepageProjects = projectCaseStudies.slice(0, 3);
+
   return (
     <section id="projects" className={styles.featuredProjects}>
       <h2 className={styles.sectionTitle}>精选案例</h2>
       <div className={styles.projectsGrid}>
-        {featuredProjectCaseStudies.map((project) => (
+        {homepageProjects.map((project) => (
           <div className={styles.projectCard} key={project.id}>
             <div className={styles.projectImageContainer}>
               <div className={styles.projectBadge}>{project.categoryLabel}</div>

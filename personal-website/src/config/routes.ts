@@ -11,7 +11,7 @@ export interface RouteItem {
 export const mainNavRoutes: RouteItem[] = [
   { name: '首页', path: '/' },
   { name: '关于我', path: '/about' },
-  { name: '技能', path: '/skills' },
+  // { name: '技能', path: '/skills' },
   { name: '项目', path: '/projects' },
   { name: '联系', path: '/contact' },
 ];
@@ -19,7 +19,7 @@ export const mainNavRoutes: RouteItem[] = [
 export const footerNavRoutes: RouteItem[] = [
   { name: '首页', path: '/' },
   { name: '关于我', path: '/about' },
-  { name: '技能', path: '/skills' },
+  // { name: '技能', path: '/skills' },
   { name: '项目', path: '/projects' },
   { name: '联系', path: '/contact' },
   { name: '隐私政策', path: '/privacy' },
@@ -32,11 +32,11 @@ export const socialLinks: RouteItem[] = [
     path: siteConfig.social.github.url,
     isExternal: true,
   },
-  {
-    name: 'LinkedIn',
-    path: siteConfig.social.linkedin.url,
-    isExternal: true,
-  },
+  // {
+  //   name: 'LinkedIn',
+  //   path: siteConfig.social.linkedin.url,
+  //   isExternal: true,
+  // },
   ...(siteConfig.social.twitter.url
     ? [
         {

@@ -34,7 +34,7 @@ export default function Projects() {
               <p className={styles.eyebrow}>Project Case Studies</p>
               <h1 className={styles.pageTitle}>项目案例</h1>
               <p className={styles.pageDescription}>
-                这里展示的是按真实项目分析结构整理的案例，而不是简单的项目名称列表。每个案例都围绕项目定位、关键问题、技术方案与项目成果展开，重点体现复杂业务的落地能力。
+                这里整理的是我做过的一些真实项目案例，不只是项目名称的简单罗列。每个案例都会从项目背景、遇到的问题、解决思路和最终结果几个方面展开，希望更清楚地展示我的项目经验和实际解决问题的能力。
               </p>
             </div>
 

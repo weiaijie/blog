@@ -21,7 +21,7 @@ export interface ProfileEducation {
 export const siteConfig = {
   title: '许辉的个人网站',
   description:
-    '7年经验全栈开发工程师，专注前端技术与复杂业务系统落地，具备 Vue 生态、Node.js 和跨端开发经验。',
+    '7年经验全栈开发工程师，做过 Vue、UniApp、PHP、ThinkPHP、MySQL、Redis 等项目，重点落在企业后台、系统对接和复杂业务落地。',
   author: '许辉',
   age: 29,
   currentLocation: '铜陵',
@@ -53,35 +53,35 @@ export const siteConfig = {
     text: '保留所有权利。',
     startYear: 2018,
   },
-  techStack: '使用 Next.js、React 和 TypeScript 构建',
+  // techStack: 'Vue / UniApp / PHP / ThinkPHP / MySQL / Redis / Next.js',
   profile: {
     briefIntro:
-      '我是许辉，一名专注前端体验与复杂业务系统建设的全栈开发工程师。长期深耕 Vue 生态，也具备 Node.js、UniApp 和 Next.js 项目落地经验，参与过医院 SaaS、金融交易、工程管理和企业官网等多类项目。',
+      '我是许辉，一名做过前端、后端和跨端项目的全栈开发工程师。近几年除了 Vue、UniApp 和后台系统开发，也持续参与 PHP、ThinkPHP、MySQL、Redis 相关项目，重点处理企业后台、系统对接和复杂业务场景。',
     aboutIntro: [
-      '你好，我是许辉，一名以前端为核心能力的全栈开发工程师，拥有 7 年项目开发经验。长期负责复杂后台系统、SaaS 平台和跨端应用的方案设计与交付。',
-      '技术上我深度使用 Vue2 / Vue3、TypeScript、JavaScript ES6+，熟悉 Element UI、Ant Design、Vant、uView 等组件体系，也能独立完成 Node.js、Express、MySQL、Redis 等后端配套开发。',
-      '我参与过医院教育 SaaS、数字货币交易平台、建筑项目管理系统、医疗美容官网等项目，既做过大型团队协作，也独立负责过全栈交付，能够从业务抽象、架构设计到落地实施完整推进。',
-      '我重视代码质量、可维护性和用户体验，做过动态表单、权限系统、数据同步、性能优化等关键能力建设，也有带新人、做技术规范和推进团队协作的经验。',
+      '你好，我是许辉，一名拥有 8 年项目经验的全栈开发工程师。近几年主要做企业后台系统、小程序项目、系统对接和复杂业务交付。',
+      '技术上我主要使用 Vue2 / Vue3、UniApp、React、Next.js，也做过 PHP、ThinkPHP、Node.js、MySQL、Redis 相关项目，能从前端页面一路推进到接口、数据结构和后台流程。',
+      '我参与过医院 SaaS、企业小程序、福利商城、数据同步中台、官网后台等多类项目，做过团队协作开发，也独立负责过完整交付。',
+      '相比单纯页面开发，我更擅长把复杂业务落成可运行、可维护的系统，包括权限、动态表单、数据同步、支付链路、日志排查和后台配置能力。',
     ],
     skillGroups: [
       {
-        title: '前端开发',
-        items: ['Vue2', 'Vue3', 'TypeScript', 'JavaScript', 'React', 'Next.js', 'UniApp'],
+        title: '前端与跨端',
+        items: ['Vue2', 'Vue3', 'UniApp', 'React', 'Next.js'],
       },
       {
-        title: 'UI 与工程化',
-        items: ['Element UI', 'Ant Design', 'Vant', 'uView', 'Webpack', 'Vite', 'ECharts'],
+        title: '后端与数据',
+        items: ['PHP', 'ThinkPHP', 'Node.js', 'Express', 'MySQL', 'Redis'],
       },
       {
-        title: '后端与基础设施',
-        items: ['Node.js', 'Express', 'MySQL', 'Redis', 'ThinkPHP', 'Linux', 'Nginx'],
+        title: '框架与交付',
+        items: ['CRMEB', 'Element UI', 'Ant Design', 'uView', 'Vite', 'Webpack', 'ECharts', 'Nginx', 'Docker', '宝塔'],
       },
     ] as ProfileSkillGroup[],
     experience: [
       {
         role: '前端开发工程师',
         company: '上海墨安信息科技有限公司',
-        period: '2022.06 - 2024.10',
+        period: '2022.06 - 2025.01',
         project: '医院教育管理 SaaS 系统',
         highlights: [
           '负责用户管理、档案管理、评价体系等核心模块前端开发。',

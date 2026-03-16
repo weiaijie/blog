@@ -1,8 +1,20 @@
-/* 技能亮点部分 - 苹果风格 */
+/* 技能亮点，与关于我 section 保持同一表达方式 */
 .skillsHighlight {
   padding: 60px 0;
   border-bottom: 1px solid var(--border-color);
   transition: border-color 0.3s ease;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.textContent {
+  flex: 1;
+  max-width: 600px;
 }
 
 .sectionTitle {
@@ -10,94 +22,31 @@
   font-size: 32px;
   font-weight: 600;
   color: var(--tagline-heading);
-  margin-bottom: 32px;
-  text-align: center;
+  margin-bottom: 16px;
   letter-spacing: -0.015em;
   transition: color 0.3s ease;
 }
 
-.skillsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 24px;
-  margin-bottom: 40px;
+.groupList {
+  margin-bottom: 24px;
 }
 
-.skillCard {
-  background-color: var(--card-bg);
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 4px 20px var(--card-shadow);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-}
-
-.skillCard:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 30px var(--card-shadow-hover);
-}
-
-.skillIcon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
-  background-color: rgba(var(--primary-rgb), 0.1);
-  color: var(--primary-color);
-  margin-bottom: 16px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.skillName {
-  font-family: 'SF Pro Display', var(--font-heading);
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--text-color);
-  margin-bottom: 8px;
-  letter-spacing: -0.01em;
-  transition: color 0.3s ease;
-}
-
-.skillDescription {
+.description {
   font-family: 'SF Pro Text', var(--font-sans);
-  font-size: 14px;
-  line-height: 1.4;
-  color: var(--text-light);
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--tagline-subheading);
   margin-bottom: 16px;
   letter-spacing: -0.01em;
   transition: color 0.3s ease;
 }
 
-.skillBarContainer {
-  height: 6px;
-  background-color: var(--bg-light);
-  border-radius: 3px;
-  overflow: hidden;
-  transition: background-color 0.3s ease;
+.groupTitle {
+  color: var(--tagline-heading);
+  font-weight: 600;
 }
 
-.skillBar {
-  height: 100%;
-  width: var(--skill-level, 0%);
-  background-color: var(--primary-color);
-  border-radius: 3px;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 1s cubic-bezier(0.4, 0.01, 0.165, 0.99), background-color 0.3s ease;
-}
-
-.skillBar.animate {
-  transform: scaleX(1);
-}
-
-.viewAllContainer {
-  display: flex;
-  justify-content: center;
-  margin-top: 32px;
-}
-
-.viewAllButton {
+.moreButton {
   display: inline-flex;
   align-items: center;
   font-family: 'SF Pro Text', var(--font-sans);
@@ -105,14 +54,11 @@
   font-weight: 500;
   color: var(--primary-color);
   text-decoration: none;
-  transition: opacity 0.2s ease, color 0.3s ease, background-color 0.3s ease;
-  padding: 8px 16px;
-  border-radius: 980px;
+  transition: opacity 0.2s ease, color 0.3s ease;
 }
 
-.viewAllButton:hover {
+.moreButton:hover {
   opacity: 0.7;
-  background-color: rgba(var(--primary-rgb), 0.05);
 }
 
 .buttonIcon {
@@ -120,28 +66,30 @@
   transition: transform 0.2s ease;
 }
 
-.viewAllButton:hover .buttonIcon {
+.moreButton:hover .buttonIcon {
   transform: translateX(3px);
 }
 
-/* 响应式设计 */
 @media (max-width: 768px) {
   .skillsHighlight {
     padding: 40px 0;
   }
 
+  .content {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .textContent {
+    max-width: 100%;
+  }
+
   .sectionTitle {
     font-size: 28px;
-    margin-bottom: 24px;
   }
 
-  .skillsGrid {
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 16px;
-  }
-
-  .skillCard {
-    padding: 20px;
+  .description {
+    font-size: 16px;
   }
 }
 
@@ -154,7 +102,7 @@
     font-size: 24px;
   }
 
-  .skillsGrid {
-    grid-template-columns: 1fr;
+  .description {
+    font-size: 15px;
   }
 }

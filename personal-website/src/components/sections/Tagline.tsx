@@ -93,13 +93,7 @@ const Tagline: React.FC<TaglineProps> = ({ visible }) => {
           exit="exit"
           variants={containerVariants}
           layout={false} // 防止布局变化
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            pointerEvents: visible ? 'auto' : 'none'
-          }}
+          style={{ pointerEvents: visible ? 'auto' : 'none' }}
         >
           <div className={styles.taglineContent}>
             <motion.div className={styles.taglineMain} variants={childVariants}>

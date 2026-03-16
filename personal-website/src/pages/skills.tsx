@@ -53,23 +53,22 @@ export default function Skills() {
             <h1 className={styles.pageTitle}>技能</h1>
 
             <section className={styles.section}>
-              <h2 className={styles.sectionTitle}>前端开发</h2>
+              <h2 className={styles.sectionTitle}>前端与跨端</h2>
               <div className={styles.skillsGrid}>
                 <div className={styles.skillItem}>
                   <div className={styles.skillHeader}>
-                    <h3 className={styles.skillName}>HTML/CSS</h3>
+                    <h3 className={styles.skillName}>Vue / UniApp</h3>
                     <span className={styles.skillLevel}>⭐⭐⭐⭐⭐</span>
                   </div>
                   <div className={styles.skillBarContainer}>
                     <div
                       className={styles.skillBar}
-                      style={{ '--skill-level': '95%' } as React.CSSProperties}
+                      style={{ '--skill-level': '92%' } as React.CSSProperties}
                     ></div>
                   </div>
                   <p className={styles.skillDescription}>
-                    精通HTML5语义化标签和结构，CSS3高级特性（动画、过渡、变换），
-                    熟练使用预处理器（Sass/LESS）和CSS框架（Bootstrap、Tailwind CSS），
-                    擅长响应式设计和移动优先原则。
+                    长期使用 Vue2、Vue3 和 UniApp 交付后台系统与小程序项目，
+                    熟悉组件拆分、状态流转、表单交互和多端页面组织方式。
                   </p>
                 </div>
 
@@ -81,47 +80,46 @@ export default function Skills() {
                   <div className={styles.skillBarContainer}>
                     <div
                       className={styles.skillBar}
-                      style={{ '--skill-level': '85%' } as React.CSSProperties}
+                      style={{ '--skill-level': '88%' } as React.CSSProperties}
                     ></div>
                   </div>
                   <p className={styles.skillDescription}>
-                    熟练掌握ES6+特性和语法，TypeScript类型系统和接口，
-                    DOM操作和事件处理，异步编程（Promise、async/await），
-                    以及模块化开发方法。
+                    熟悉 ES6+、TypeScript、异步流程、接口封装和工程化开发，
+                    能独立完成中后台和跨端项目的前端实现。
                   </p>
                 </div>
 
                 <div className={styles.skillItem}>
                   <div className={styles.skillHeader}>
-                    <h3 className={styles.skillName}>前端框架</h3>
+                    <h3 className={styles.skillName}>React / Next.js</h3>
                     <span className={styles.skillLevel}>⭐⭐⭐⭐</span>
                   </div>
                   <div className={styles.skillBarContainer}>
                     <div
                       className={styles.skillBar}
-                      style={{ '--skill-level': '80%' } as React.CSSProperties}
+                      style={{ '--skill-level': '72%' } as React.CSSProperties}
                     ></div>
                   </div>
                   <p className={styles.skillDescription}>
-                    精通React生态系统（Redux、React Router），熟悉Vue.js（Vuex、Vue Router），
-                    擅长组件设计和状态管理，了解前端性能优化技巧。
+                    能使用 React 和 Next.js 搭建个人站、内容页和展示型项目，
+                    也能在现有项目中完成组件开发和页面重构。
                   </p>
                 </div>
 
                 <div className={styles.skillItem}>
                   <div className={styles.skillHeader}>
-                    <h3 className={styles.skillName}>响应式设计</h3>
-                    <span className={styles.skillLevel}>⭐⭐⭐⭐⭐</span>
+                    <h3 className={styles.skillName}>后台 UI 与可视化</h3>
+                    <span className={styles.skillLevel}>⭐⭐⭐⭐</span>
                   </div>
                   <div className={styles.skillBarContainer}>
                     <div
                       className={styles.skillBar}
-                      style={{ '--skill-level': '90%' } as React.CSSProperties}
+                      style={{ '--skill-level': '82%' } as React.CSSProperties}
                     ></div>
                   </div>
                   <p className={styles.skillDescription}>
-                    熟练掌握媒体查询和断点设计，Flexbox和Grid布局，
-                    移动优先策略，以及跨设备兼容性测试方法。
+                    熟悉 Element UI、Ant Design、uView、ECharts，
+                    做过后台管理系统、运营后台和数据看板类页面。
                   </p>
                 </div>
               </div>
@@ -132,7 +130,41 @@ export default function Skills() {
               <div className={styles.skillsGrid}>
                 <div className={styles.skillItem}>
                   <div className={styles.skillHeader}>
-                    <h3 className={styles.skillName}>Node.js</h3>
+                    <h3 className={styles.skillName}>PHP / ThinkPHP</h3>
+                    <span className={styles.skillLevel}>⭐⭐⭐⭐</span>
+                  </div>
+                  <div className={styles.skillBarContainer}>
+                    <div
+                      className={styles.skillBar}
+                      style={{ '--skill-level': '78%' } as React.CSSProperties}
+                    ></div>
+                  </div>
+                  <p className={styles.skillDescription}>
+                    做过基于 PHP、ThinkPHP、CRMEB 的企业项目和二次开发，
+                    参与过后台系统、数据同步、商城改造和业务链路实现。
+                  </p>
+                </div>
+
+                <div className={styles.skillItem}>
+                  <div className={styles.skillHeader}>
+                    <h3 className={styles.skillName}>Node.js / Express</h3>
+                    <span className={styles.skillLevel}>⭐⭐⭐⭐</span>
+                  </div>
+                  <div className={styles.skillBarContainer}>
+                    <div
+                      className={styles.skillBar}
+                      style={{ '--skill-level': '76%' } as React.CSSProperties}
+                    ></div>
+                  </div>
+                  <p className={styles.skillDescription}>
+                    能使用 Node.js 和 Express 完成接口、中间层和调试工具开发，
+                    支撑前后端分离项目的联调和业务落地。
+                  </p>
+                </div>
+
+                <div className={styles.skillItem}>
+                  <div className={styles.skillHeader}>
+                    <h3 className={styles.skillName}>MySQL / Redis</h3>
                     <span className={styles.skillLevel}>⭐⭐⭐⭐</span>
                   </div>
                   <div className={styles.skillBarContainer}>
@@ -142,32 +174,32 @@ export default function Skills() {
                     ></div>
                   </div>
                   <p className={styles.skillDescription}>
-                    熟练使用Express和Nest.js框架构建RESTful API，
-                    了解Node.js性能优化和最佳实践。
+                    做过表结构设计、业务字段扩展、查询优化、缓存使用和数据同步相关处理，
+                    能配合后端链路做问题排查和落地。
                   </p>
                 </div>
 
                 <div className={styles.skillItem}>
                   <div className={styles.skillHeader}>
-                    <h3 className={styles.skillName}>数据库</h3>
-                    <span className={styles.skillLevel}>⭐⭐⭐</span>
+                    <h3 className={styles.skillName}>业务系统设计</h3>
+                    <span className={styles.skillLevel}>⭐⭐⭐⭐</span>
                   </div>
                   <div className={styles.skillBarContainer}>
                     <div
                       className={styles.skillBar}
-                      style={{ '--skill-level': '70%' } as React.CSSProperties}
+                      style={{ '--skill-level': '78%' } as React.CSSProperties}
                     ></div>
                   </div>
                   <p className={styles.skillDescription}>
-                    熟悉关系型数据库（MySQL、PostgreSQL）和NoSQL数据库（MongoDB、Redis），
-                    了解SQL查询优化和ORM工具。
+                    参与过权限体系、动态表单、数据同步、组合支付、运营后台等复杂业务模块设计，
+                    更关注系统的可运行、可维护和可排查。
                   </p>
                 </div>
               </div>
             </section>
 
             <section className={styles.section}>
-              <h2 className={styles.sectionTitle}>其他技术技能</h2>
+              <h2 className={styles.sectionTitle}>工程化与协作</h2>
               <div className={styles.skillsGrid}>
                 <div className={styles.skillItem}>
                   <div className={styles.skillHeader}>
@@ -181,25 +213,42 @@ export default function Skills() {
                     ></div>
                   </div>
                   <p className={styles.skillDescription}>
-                    精通Git工作流（分支策略、合并请求），GitHub/GitLab协作，
-                    以及代码审查最佳实践。
+                    熟悉 Git 工作流、分支管理、代码评审和多人协作开发，
+                    能在已有项目中稳定推进迭代与问题修复。
                   </p>
                 </div>
 
                 <div className={styles.skillItem}>
                   <div className={styles.skillHeader}>
-                    <h3 className={styles.skillName}>DevOps</h3>
+                    <h3 className={styles.skillName}>部署与运行环境</h3>
                     <span className={styles.skillLevel}>⭐⭐⭐</span>
                   </div>
                   <div className={styles.skillBarContainer}>
                     <div
                       className={styles.skillBar}
-                      style={{ '--skill-level': '65%' } as React.CSSProperties}
+                      style={{ '--skill-level': '68%' } as React.CSSProperties}
                     ></div>
                   </div>
                   <p className={styles.skillDescription}>
-                    了解CI/CD流程（Jenkins、GitHub Actions），自动化测试，
-                    以及监控和日志（ELK Stack）。
+                    接触过 Linux、Nginx、基础部署流程和线上问题排查，
+                    能配合完成项目上线、环境配置和简单运维支持。
+                  </p>
+                </div>
+
+                <div className={styles.skillItem}>
+                  <div className={styles.skillHeader}>
+                    <h3 className={styles.skillName}>团队协作</h3>
+                    <span className={styles.skillLevel}>⭐⭐⭐⭐</span>
+                  </div>
+                  <div className={styles.skillBarContainer}>
+                    <div
+                      className={styles.skillBar}
+                      style={{ '--skill-level': '82%' } as React.CSSProperties}
+                    ></div>
+                  </div>
+                  <p className={styles.skillDescription}>
+                    做过技术规范、需求拆解、联调沟通和新人带教，
+                    能在复杂项目里兼顾开发推进与协作效率。
                   </p>
                 </div>
               </div>

@@ -2,15 +2,16 @@
 .layoutWrapper {
   position: relative;
   min-height: 100vh;
-  overflow-x: hidden; /* 防止水平滚动 */
+  overflow-x: clip;
   background-color: var(--bg-color);
   transition: var(--theme-transition);
 }
 
 .mainContainer {
+  display: flow-root;
   position: relative;
   min-height: 100vh;
-  overflow-x: hidden; /* 防止水平滚动 */
+  overflow-x: clip;
   background-color: var(--bg-color);
   transition: var(--theme-transition);
 }
