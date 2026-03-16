@@ -18,7 +18,7 @@
  * - Typewriter 组件（默认导出）
  */
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import styles from '@/styles/Typewriter.module.css';
 
 interface TypewriterProps {
@@ -43,64 +43,53 @@ const Typewriter = ({
   const [displayText, setDisplayText] = useState('');
   const [isTyping, setIsTyping] = useState(true);
   const [textIndex, setTextIndex] = useState(0);
-  const currentTextRef = useRef('');
-  const currentIndexRef = useRef(0);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
-
-  // 清除定时器
-  const clearTimer = () => {
-    if (timerRef.current) {
-      clearTimeout(timerRef.current);
-      timerRef.current = null;
-    }
-  };
+  const [charIndex, setCharIndex] = useState(0);
 
   // 打字效果
   useEffect(() => {
-    // 确保有文本可以显示
     if (!texts || texts.length === 0) return;
 
     const currentText = texts[textIndex];
-    currentTextRef.current = currentText;
+    const timer = window.setTimeout(() => {
+      if (isTyping) {
+        if (charIndex < currentText.length) {
+          const nextIndex = charIndex + 1;
+          setCharIndex(nextIndex);
+          setDisplayText(currentText.slice(0, nextIndex));
+          return;
+        }
 
-    // 打字过程
-    if (isTyping) {
-      if (currentIndexRef.current < currentText.length) {
-        // 继续打字
-        clearTimer();
-        timerRef.current = setTimeout(() => {
-          currentIndexRef.current += 1;
-          setDisplayText(currentText.substring(0, currentIndexRef.current));
-        }, typingSpeed);
-      } else {
-        // 打字完成，等待一段时间后开始删除
-        clearTimer();
-        timerRef.current = setTimeout(() => {
-          setIsTyping(false);
-        }, delayAfterType);
+        setIsTyping(false);
+        return;
       }
-    } else {
-      // 删除过程
-      if (currentIndexRef.current > 0) {
-        // 继续删除
-        clearTimer();
-        timerRef.current = setTimeout(() => {
-          currentIndexRef.current -= 1;
-          setDisplayText(currentText.substring(0, currentIndexRef.current));
-        }, deletingSpeed);
-      } else {
-        // 删除完成，准备打字下一个文本
-        clearTimer();
-        timerRef.current = setTimeout(() => {
-          setIsTyping(true);
-          setTextIndex((prevIndex) => (loop || prevIndex < texts.length - 1 ? (prevIndex + 1) % texts.length : prevIndex));
-        }, delayAfterDelete);
-      }
-    }
 
-    // 组件卸载时清除定时器
-    return () => clearTimer();
-  }, [displayText, isTyping, textIndex, texts, typingSpeed, deletingSpeed, delayAfterType, delayAfterDelete, loop]);
+      if (charIndex > 0) {
+        const nextIndex = charIndex - 1;
+        setCharIndex(nextIndex);
+        setDisplayText(currentText.slice(0, nextIndex));
+        return;
+      }
+
+      if (loop || textIndex < texts.length - 1) {
+        setTextIndex((prevIndex) => (prevIndex + 1) % texts.length);
+      } else {
+        setDisplayText(currentText);
+        setCharIndex(currentText.length);
+      }
+      setIsTyping(true);
+    }, isTyping
+      ? (charIndex < currentText.length ? typingSpeed : delayAfterType)
+      : (charIndex > 0 ? deletingSpeed : delayAfterDelete));
+
+    return () => window.clearTimeout(timer);
+  }, [charIndex, isTyping, textIndex, texts, typingSpeed, deletingSpeed, delayAfterType, delayAfterDelete, loop]);
+
+  useEffect(() => {
+    setDisplayText('');
+    setCharIndex(0);
+    setIsTyping(true);
+    setTextIndex(0);
+  }, [texts]);
 
   return (
     <span className={`${styles.typewriter} ${className}`}>

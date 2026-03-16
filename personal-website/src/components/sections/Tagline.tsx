@@ -30,6 +30,11 @@ interface TaglineProps {
 
 const Tagline: React.FC<TaglineProps> = ({ visible }) => {
   const prevVisibleRef = useRef(visible);
+  const codeSnippets = [
+    "const idea = 'Elegant digital experiences';",
+    "const stack = ['Next.js', 'TypeScript', 'Node.js'];",
+    "export const build = () => createProduct(idea, stack);",
+  ];
 
   // 定义动画变体 - 进一步优化过渡效果，避免影响滚动和页面跳动
   const containerVariants = {
@@ -97,76 +102,119 @@ const Tagline: React.FC<TaglineProps> = ({ visible }) => {
           }}
         >
           <div className={styles.taglineContent}>
-        <motion.div className={styles.taglineMain} variants={childVariants}>
-          <motion.h2 className={styles.taglineHeading} variants={childVariants}>
-            <Typewriter
-              texts={['创造优雅的数字体验', '构建直观的用户界面', '开发高效的应用程序']}
-              typingSpeed={80}
-              deletingSpeed={40}
-              delayAfterType={3000}
-            />
-          </motion.h2>
-          <motion.p className={styles.taglineSubheading} variants={childVariants}>
-            <span className={styles.taglineHighlight}>全栈开发</span>，专注于构建直观、高效且美观的用户界面
-          </motion.p>
-          <motion.div className={styles.taglineActions} variants={childVariants}>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Link href="/projects" className={styles.taglinePrimaryButton}>
-                查看作品
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={styles.taglineButtonIcon}>
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </Link>
+            <motion.div className={styles.taglineMain} variants={childVariants}>
+              <motion.h2 className={styles.taglineHeading} variants={childVariants}>
+                <Typewriter
+                  texts={['创造优雅的数字体验', '构建直观的用户界面', '开发高效的应用程序']}
+                  typingSpeed={72}
+                  deletingSpeed={32}
+                  delayAfterType={4800}
+                />
+              </motion.h2>
+              <motion.p className={styles.taglineSubheading} variants={childVariants}>
+                <span className={styles.taglineHighlight}>全栈开发</span>，专注于构建直观、高效且美观的产品体验
+              </motion.p>
+              <motion.div className={styles.taglineActions} variants={childVariants}>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Link href="/projects" className={styles.taglinePrimaryButton}>
+                    查看作品
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={styles.taglineButtonIcon}>
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </Link>
+                </motion.div>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Link href="/contact" className={styles.taglineSecondaryButton}>
+                    联系我
+                  </Link>
+                </motion.div>
+              </motion.div>
             </motion.div>
             <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Link href="/contact" className={styles.taglineSecondaryButton}>
-                联系我
-              </Link>
-            </motion.div>
-          </motion.div>
-        </motion.div>
-        <motion.div
-          className={styles.taglineVisual}
-          variants={childVariants}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{
-            duration: 0.8,
-            delay: 0.3,
-            ease: [0.16, 1, 0.3, 1]
-          }}
-        >
-          <motion.div
-            className={styles.taglineImageContainer}
-            whileHover={{
-              scale: 1.05,
-              boxShadow: "0 15px 30px rgba(0, 0, 0, 0.15)"
-            }}
-            transition={{ duration: 0.3 }}
-          >
-            <motion.div
-              className={styles.taglineImage}
-              // 不再使用硬编码的颜色值，而是使用CSS变量
-              // 动画效果通过CSS类和opacity变化实现
-              animate={{
-                opacity: [0.9, 1, 0.9]
-              }}
+              className={styles.taglineVisual}
+              variants={childVariants}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{
-                duration: 5,
-                repeat: Infinity,
-                repeatType: "reverse"
+                duration: 0.8,
+                delay: 0.3,
+                ease: [0.16, 1, 0.3, 1]
               }}
-            ></motion.div>
-          </motion.div>
-        </motion.div>
-      </div>
+            >
+              <motion.div
+                className={styles.codePanel}
+                whileHover={{
+                  scale: 1.03,
+                  boxShadow: "0 18px 40px rgba(15, 23, 42, 0.22)"
+                }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className={styles.codePanelHeader}>
+                  <div className={styles.windowControls}>
+                    <span className={`${styles.windowDot} ${styles.windowDotRed}`}></span>
+                    <span className={`${styles.windowDot} ${styles.windowDotYellow}`}></span>
+                    <span className={`${styles.windowDot} ${styles.windowDotGreen}`}></span>
+                  </div>
+                  <span className={styles.codePanelTitle}>hero.ts</span>
+                </div>
+                <div className={styles.codePanelBody}>
+                  <div className={styles.codeLine}>
+                    <span className={styles.lineNumber}>1</span>
+                    <span className={styles.lineContent}>
+                      <span className={styles.codeKeyword}>import</span>{' '}
+                      <span className={styles.codeIdentifier}>createProduct</span>{' '}
+                      <span className={styles.codeKeyword}>from</span>{' '}
+                      <span className={styles.codeString}>'./studio'</span>
+                    </span>
+                  </div>
+                  <div className={styles.codeLine}>
+                    <span className={styles.lineNumber}>2</span>
+                    <span className={styles.lineContent}></span>
+                  </div>
+                  <div className={styles.codeLine}>
+                    <span className={styles.lineNumber}>3</span>
+                    <span className={styles.lineContent}>
+                      <Typewriter
+                        texts={codeSnippets}
+                        typingSpeed={38}
+                        deletingSpeed={18}
+                        delayAfterType={999999}
+                        delayAfterDelete={500}
+                        loop={false}
+                        className={styles.codeTyping}
+                      />
+                    </span>
+                  </div>
+                  <div className={styles.codeLine}>
+                    <span className={styles.lineNumber}>4</span>
+                    <span className={styles.lineContent}>
+                      <span className={styles.codeKeyword}>if</span> (
+                      <span className={styles.codeIdentifier}>user</span>.
+                      <span className={styles.codeProperty}>needsExperience</span>) {'{'}
+                    </span>
+                  </div>
+                  <div className={styles.codeLine}>
+                    <span className={styles.lineNumber}>5</span>
+                    <span className={styles.lineContent}>
+                      &nbsp;&nbsp;<span className={styles.codeKeyword}>return</span>{' '}
+                      <span className={styles.codeIdentifier}>build</span>()
+                    </span>
+                  </div>
+                  <div className={styles.codeLine}>
+                    <span className={styles.lineNumber}>6</span>
+                    <span className={styles.lineContent}>{'}'}</span>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          </div>
         </motion.div>
       )}
     </AnimatePresence>

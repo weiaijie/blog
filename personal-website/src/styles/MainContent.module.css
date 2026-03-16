@@ -4,7 +4,7 @@
   position: relative;
   padding: 60px 0;
   z-index: 10;
-  margin-top: 500px; /* 为Tagline预留空间，避免布局跳动 */
+  margin-top: 440px; /* 为Tagline预留空间，避免布局跳动 */
   will-change: opacity, transform; /* 优化动画性能 */
   backface-visibility: hidden; /* 防止闪烁 */
   transform: translateZ(0); /* 启用GPU加速 */
