@@ -53,7 +53,7 @@ export const siteConfig = {
     text: '保留所有权利。',
     startYear: 2018,
   },
-  // techStack: 'Vue / UniApp / PHP / ThinkPHP / MySQL / Redis / Next.js',
+  techStack: 'Vue / UniApp / PHP / ThinkPHP / MySQL / Redis / Next.js',
   profile: {
     briefIntro:
       '我是许辉，一名做过前端、后端和跨端项目的全栈开发工程师。近几年除了 Vue、UniApp 和后台系统开发，也持续参与 PHP、ThinkPHP、MySQL、Redis 相关项目，重点处理企业后台、系统对接和复杂业务场景。',

@@ -293,15 +293,24 @@
 }
 
 .modalClose {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 40px;
   height: 40px;
   flex: 0 0 auto;
+  align-self: flex-start;
+  padding: 0;
   border: 1px solid rgba(var(--primary-rgb), 0.08);
   border-radius: 50%;
   background-color: transparent;
   color: var(--tagline-heading);
+  appearance: none;
+  -webkit-appearance: none;
+  font-family: inherit;
   font-size: 24px;
   line-height: 1;
+  font-weight: 400;
   cursor: pointer;
   transition: background-color 0.2s ease, transform 0.2s ease;
 }
