@@ -19,7 +19,7 @@
  */
 
 import React, { useEffect, useRef } from 'react';
-import { motion, useAnimation } from 'framer-motion';
+import { motion, useAnimation, type Variants } from 'framer-motion';
 import styles from '@/styles/MainContent.module.css';
 import BriefIntro from '@/components/sections/BriefIntro';
 import SkillsHighlight from '@/components/sections/SkillsHighlight';
@@ -36,7 +36,7 @@ const MainContent: React.FC<MainContentProps> = ({ visible = false }) => {
   const hasAnimated = useRef(false);
 
   // 定义动画变体 - 优化以避免闪烁
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: {
       opacity: 0,
       y: 20 // 减小位移距离
@@ -46,7 +46,7 @@ const MainContent: React.FC<MainContentProps> = ({ visible = false }) => {
       y: 0,
       transition: {
         duration: 0.6, // 缩短动画时间
-        ease: [0.16, 1, 0.3, 1],
+        ease: [0.16, 1, 0.3, 1] as const,
         when: "beforeChildren",
         staggerChildren: 0.1 // 减少子元素动画间隔
       }
@@ -57,7 +57,7 @@ const MainContent: React.FC<MainContentProps> = ({ visible = false }) => {
     }
   };
 
-  const sectionVariants = {
+  const sectionVariants: Variants = {
     hidden: {
       opacity: 0,
       y: 15 // 减小位移距离
@@ -67,7 +67,7 @@ const MainContent: React.FC<MainContentProps> = ({ visible = false }) => {
       y: 0,
       transition: {
         duration: 0.4, // 缩短动画时间
-        ease: [0.16, 1, 0.3, 1]
+        ease: [0.16, 1, 0.3, 1] as const
       }
     },
     stable: { // 新增稳定状态
