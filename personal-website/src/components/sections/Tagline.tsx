@@ -20,7 +20,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import styles from '@/styles/Tagline.module.css';
 import Typewriter from '@/components/common/Typewriter';
 
@@ -37,13 +37,13 @@ const Tagline: React.FC<TaglineProps> = ({ visible }) => {
   ];
 
   // 定义动画变体 - 进一步优化过渡效果，避免影响滚动和页面跳动
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: {
       opacity: 0,
       y: 0, // 不使用垂直位移，只使用透明度变化
       transition: {
         duration: 0.4,
-        ease: "easeInOut"
+        ease: "easeInOut" as const
       }
     },
     visible: {
@@ -51,7 +51,7 @@ const Tagline: React.FC<TaglineProps> = ({ visible }) => {
       y: 0,
       transition: {
         duration: 0.4, // 进一步缩短动画时间
-        ease: "easeInOut",
+        ease: "easeInOut" as const,
         when: "beforeChildren",
         staggerChildren: 0.05 // 减少子元素动画间隔
       }
@@ -61,7 +61,7 @@ const Tagline: React.FC<TaglineProps> = ({ visible }) => {
       y: 0, // 不使用垂直位移，只使用透明度变化
       transition: {
         duration: 0.3,
-        ease: "easeInOut"
+        ease: "easeInOut" as const
       }
     }
   };
@@ -71,14 +71,14 @@ const Tagline: React.FC<TaglineProps> = ({ visible }) => {
     prevVisibleRef.current = visible;
   }, [visible]);
 
-  const childVariants = {
+  const childVariants: Variants = {
     hidden: { opacity: 0, y: 10 }, // 减小位移距离
     visible: {
       opacity: 1,
       y: 0,
       transition: {
         duration: 0.3, // 缩短动画时间
-        ease: "easeOut"
+        ease: "easeOut" as const
       }
     }
   };
@@ -139,7 +139,7 @@ const Tagline: React.FC<TaglineProps> = ({ visible }) => {
               transition={{
                 duration: 0.8,
                 delay: 0.3,
-                ease: [0.16, 1, 0.3, 1]
+                ease: [0.16, 1, 0.3, 1] as const
               }}
             >
               <motion.div
