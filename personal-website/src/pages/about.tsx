@@ -10,85 +10,116 @@ export default function About() {
         <title>关于我 - {siteConfig.title}</title>
         <meta
           name="description"
-          content="7年全栈开发经验，聚焦 Vue 生态、复杂业务系统、跨端应用与工程化建设。"
+          content="8年全栈开发经验，聚焦 Vue 生态、复杂业务系统、跨端应用与工程化建设。"
         />
       </Head>
       <Layout>
         <div className={styles.aboutPage}>
           <div className={styles.container}>
-            <h1 className={styles.pageTitle}>关于我</h1>
+            <div className={styles.hero}>
+              <h1 className={styles.pageTitle}>关于我</h1>
+            </div>
 
-            <section className={styles.section}>
-              <h2 className={styles.sectionTitle}>个人介绍</h2>
-              <div className={styles.profileContent}>
-                <div className={styles.profileText}>
-                  {siteConfig.profile.aboutIntro.map((paragraph) => (
-                    <p key={paragraph} className={styles.paragraph}>
-                      {paragraph}
-                    </p>
-                  ))}
-                </div>
-              </div>
-            </section>
+            <div className={styles.layout}>
+              {/* 左侧边栏：基本信息与技能 */}
+              <aside className={styles.sidebar}>
+                <div className={styles.sidebarSticky}>
+                  <div className={styles.sidebarBlock}>
+                    <h3 className={styles.sidebarTitle}>联系方式</h3>
+                    <ul className={styles.contactList}>
+                      <li>
+                        <span className={styles.contactLabel}>Email</span>
+                        <a href={`mailto:${siteConfig.contact.email}`}>{siteConfig.contact.email}</a>
+                      </li>
+                      <li>
+                        <span className={styles.contactLabel}>Phone</span>
+                        <a href={`tel:${siteConfig.contact.phone}`}>{siteConfig.contact.phone}</a>
+                      </li>
+                      <li>
+                        <span className={styles.contactLabel}>Location</span>
+                        <span>{siteConfig.contact.location}</span>
+                      </li>
+                      <li>
+                        <span className={styles.contactLabel}>GitHub</span>
+                        <a href={siteConfig.social.github.url} target="_blank" rel="noopener noreferrer">
+                          @{siteConfig.social.github.username}
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
 
-            <section className={styles.section}>
-              <h2 className={styles.sectionTitle}>核心技能</h2>
-              <div className={styles.profileContent}>
-                <div className={styles.profileText}>
-                  {siteConfig.profile.skillGroups.map((group) => (
-                    <p key={group.title} className={styles.paragraph}>
-                      <strong>{group.title}：</strong>
-                      {group.items.join('、')}
-                    </p>
-                  ))}
-                </div>
-              </div>
-            </section>
-
-            <section className={styles.section}>
-              <h2 className={styles.sectionTitle}>工作经历</h2>
-              <div className={styles.timeline}>
-                {siteConfig.profile.experience.map((item) => (
-                  <div key={`${item.company}-${item.period}`} className={styles.timelineItem}>
-                    <div className={styles.timelineDot}></div>
-                    <div className={styles.timelineContent}>
-                      <h3 className={styles.timelineTitle}>{item.role}</h3>
-                      <p className={styles.timelineSubtitle}>
-                        {item.company} | {item.period}
-                      </p>
-                      <p className={styles.timelineText}>
-                        <strong>项目：</strong>
-                        {item.project}
-                      </p>
-                      <p className={styles.timelineText}>
-                        <strong>技术栈：</strong>
-                        {item.techStack}
-                      </p>
-                      {item.highlights.map((highlight) => (
-                        <p key={highlight} className={styles.timelineText}>
-                          • {highlight}
-                        </p>
+                  <div className={styles.sidebarBlock}>
+                    <h3 className={styles.sidebarTitle}>技能专长</h3>
+                    <div className={styles.skillGroups}>
+                      {siteConfig.profile.skillGroups.map((group) => (
+                        <div key={group.title} className={styles.skillGroup}>
+                          <h4 className={styles.skillGroupTitle}>{group.title}</h4>
+                          <div className={styles.skillTags}>
+                            {group.items.map((item) => (
+                              <span key={item} className={styles.skillTag}>{item}</span>
+                            ))}
+                          </div>
+                        </div>
                       ))}
                     </div>
                   </div>
-                ))}
-              </div>
-            </section>
-
-            <section className={styles.section}>
-              <h2 className={styles.sectionTitle}>教育背景</h2>
-              <div className={styles.timeline}>
-                <div className={styles.timelineItem}>
-                  <div className={styles.timelineDot}></div>
-                  <div className={styles.timelineContent}>
-                    <h3 className={styles.timelineTitle}>{siteConfig.profile.education.degree}</h3>
-                    <p className={styles.timelineSubtitle}>
-                      {siteConfig.profile.education.school} | {siteConfig.profile.education.period}
-                    </p>
-                  </div>
                 </div>
-              </div>
-            </section>
+              </aside>
+
+              {/* 右侧主内容区：自述与工作经历 */}
+              <main className={styles.mainContent}>
+                <section className={styles.section}>
+                  <h2 className={styles.sectionTitle}>个人自述</h2>
+                  <div className={styles.introText}>
+                    {siteConfig.profile.aboutIntro.map((paragraph, index) => (
+                      <p key={index}>{paragraph}</p>
+                    ))}
+                  </div>
+                </section>
+
+                <section className={styles.section}>
+                  <h2 className={styles.sectionTitle}>工作经历</h2>
+                  <div className={styles.timeline}>
+                    {siteConfig.profile.experience.map((item, index) => (
+                      <div key={`${item.company}-${index}`} className={styles.timelineItem}>
+                        <div className={styles.timelineHeader}>
+                          <div className={styles.timelineHeaderLeft}>
+                            <h3 className={styles.timelineRole}>{item.role}</h3>
+                            <div className={styles.timelineCompany}>{item.company}</div>
+                          </div>
+                          <div className={styles.timelinePeriod}>{item.period}</div>
+                        </div>
+                        
+                        <div className={styles.timelineBody}>
+                          <div className={styles.timelineProject}>
+                            <strong>核心项目：</strong>{item.project}
+                          </div>
+                          <ul className={styles.timelineHighlights}>
+                            {item.highlights.map((highlight, hIndex) => (
+                              <li key={hIndex}>{highlight}</li>
+                            ))}
+                          </ul>
+                          <div className={styles.timelineTech}>
+                            <strong>技术栈：</strong>{item.techStack}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+
+                <section className={styles.section}>
+                  <h2 className={styles.sectionTitle}>教育背景</h2>
+                  <div className={styles.educationItem}>
+                    <div className={styles.educationHeader}>
+                      <h3 className={styles.educationDegree}>{siteConfig.profile.education.degree}</h3>
+                      <div className={styles.educationPeriod}>{siteConfig.profile.education.period}</div>
+                    </div>
+                    <div className={styles.educationSchool}>{siteConfig.profile.education.school}</div>
+                  </div>
+                </section>
+              </main>
+            </div>
           </div>
         </div>
       </Layout>

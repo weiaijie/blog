@@ -1,187 +1,329 @@
-/* 关于我页面样式 - 苹果风格 */
 .aboutPage {
-  padding: 100px 0 80px; /* 增加顶部内边距，避免被页面头部挡住 */
+  padding: 100px 0;
+  min-height: 100vh;
 }
 
 .container {
-  max-width: 980px;
+  max-width: 960px;
   margin: 0 auto;
-  padding: 0 22px;
+  padding: 0 24px;
+}
+
+.hero {
+  margin-bottom: 64px;
 }
 
 .pageTitle {
   font-family: 'SF Pro Display', var(--font-heading);
-  font-size: 48px;
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+
+.layout {
+  display: flex;
+  gap: 64px;
+  align-items: flex-start;
+}
+
+/* 左侧边栏 */
+.sidebar {
+  flex: 0 0 280px;
+}
+
+.sidebarSticky {
+  position: sticky;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.sidebarBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sidebarTitle {
+  font-family: 'SF Pro Display', var(--font-heading);
+  font-size: 14px;
   font-weight: 600;
-  color: var(--tagline-heading);
-  margin-bottom: 40px;
-  letter-spacing: -0.015em;
-  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-lighter);
+  margin: 0;
+}
+
+.contactList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contactList li {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.contactLabel {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.contactList a, .contactList span {
+  font-size: 15px;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.contactList a:hover {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+.skillGroups {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.skillGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.skillGroupTitle {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.skillTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skillTag {
+  padding: 4px 10px;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* 右侧主内容区 */
+.mainContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
 }
 
 .section {
-  margin-bottom: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .sectionTitle {
   font-family: 'SF Pro Display', var(--font-heading);
-  font-size: 32px;
+  font-size: 24px;
   font-weight: 600;
-  color: var(--tagline-heading);
-  margin-bottom: 24px;
-  letter-spacing: -0.015em;
+  color: var(--text-primary);
+  margin: 0;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-color);
 }
 
-/* 个人简介部分 */
-.profileContent {
-  max-width: 800px;
-  margin: 0 auto;
+.introText {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-.profileText {
-  width: 100%;
-}
-
-.paragraph {
+.introText p {
   font-family: 'SF Pro Text', var(--font-sans);
-  font-size: 17px;
-  line-height: 1.5;
-  color: var(--tagline-subheading);
-  margin-bottom: 20px;
-  letter-spacing: -0.01em;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin: 0;
 }
 
-/* 时间线样式 */
+/* 工作经历时间轴 */
 .timeline {
-  position: relative;
-  padding-left: 30px;
-}
-
-.timeline::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 6px;
-  height: 100%;
-  width: 2px;
-  background-color: rgba(var(--primary-rgb), 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
 }
 
 .timelineItem {
-  position: relative;
-  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-.timelineItem:last-child {
-  margin-bottom: 0;
+.timelineHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
 }
 
-.timelineDot {
-  position: absolute;
-  left: -30px;
-  top: 6px;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background-color: var(--primary-color);
-  box-shadow: 0 0 0 4px rgba(var(--primary-rgb), 0.2);
+.timelineHeaderLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.timelineContent {
-  background-color: var(--card-bg);
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 4px 20px var(--card-shadow);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.timelineTitle {
+.timelineRole {
   font-family: 'SF Pro Display', var(--font-heading);
   font-size: 20px;
   font-weight: 600;
-  color: var(--tagline-heading);
-  margin-bottom: 4px;
-  letter-spacing: -0.01em;
-  transition: color 0.3s ease;
+  color: var(--text-primary);
+  margin: 0;
 }
 
-.timelineSubtitle {
+.timelineCompany {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.timelinePeriod {
   font-family: 'SF Pro Text', var(--font-sans);
-  font-size: 15px;
-  color: var(--primary-color);
-  margin-bottom: 12px;
-  letter-spacing: -0.01em;
-  transition: color 0.3s ease;
+  font-size: 14px;
+  color: var(--text-lighter);
+  white-space: nowrap;
 }
 
-.timelineText {
-  font-family: 'SF Pro Text', var(--font-sans);
-  font-size: 15px;
-  line-height: 1.5;
-  color: var(--tagline-subheading);
-  letter-spacing: -0.01em;
-  transition: color 0.3s ease;
+.timelineBody {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-/* 响应式设计 */
+.timelineProject {
+  font-size: 15px;
+  color: var(--text-secondary);
+}
+
+.timelineProject strong {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.timelineHighlights {
+  margin: 0;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.timelineHighlights li {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.timelineTech {
+  font-size: 14px;
+  color: var(--text-secondary);
+  padding: 12px 16px;
+  background-color: var(--bg-secondary);
+  border-radius: 8px;
+}
+
+.timelineTech strong {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* 教育背景 */
+.educationItem {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.educationHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.educationDegree {
+  font-family: 'SF Pro Display', var(--font-heading);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.educationPeriod {
+  font-size: 14px;
+  color: var(--text-lighter);
+}
+
+.educationSchool {
+  font-size: 16px;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 900px) {
+  .layout {
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .sidebar {
+    flex: none;
+    width: 100%;
+  }
+
+  .sidebarSticky {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 48px;
+  }
+
+  .sidebarBlock {
+    flex: 1;
+    min-width: 280px;
+  }
+}
+
 @media (max-width: 768px) {
   .aboutPage {
-    padding: 80px 0 60px; /* 调整顶部内边距，但仍保持足够空间 */
-  }
-
-  .pageTitle {
-    font-size: 36px;
-    margin-bottom: 30px;
-  }
-
-  .section {
-    margin-bottom: 40px;
-  }
-
-  .sectionTitle {
-    font-size: 28px;
-    margin-bottom: 20px;
-  }
-
-  .profileContent {
-    max-width: 100%;
-  }
-
-  .paragraph {
-    font-size: 16px;
-  }
-}
-
-@media (max-width: 480px) {
-  .aboutPage {
-    padding: 70px 0 40px; /* 在小屏幕上稍微减少顶部内边距，但仍保持足够空间 */
+    padding: 60px 0;
   }
 
   .pageTitle {
     font-size: 32px;
-    margin-bottom: 24px;
   }
 
-  .sectionTitle {
-    font-size: 24px;
+  .timelineHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
   }
 
-
-
-  .paragraph {
-    font-size: 15px;
-  }
-
-  .timelineContent {
-    padding: 20px;
-  }
-
-  .timelineTitle {
-    font-size: 18px;
-  }
-
-  .timelineSubtitle,
-  .timelineText {
-    font-size: 14px;
+  .educationHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
   }
 }

@@ -7,7 +7,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import Layout from '@/components/layout/Layout';
@@ -22,43 +21,12 @@ export default function BlogPostPage({ post }: BlogPostPageProps) {
   return (
     <>
       <Head>
-        <title>{post.title} - saber的个人网站</title>
+        <title>{post.title} - 许辉的个人网站</title>
         <meta name="description" content={post.excerpt} />
       </Head>
       <Layout>
         <article className={styles.blogPost}>
           <div className={styles.container}>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <header className={styles.postHeader}>
-                <div className={styles.postMeta}>
-                  <span className={styles.postDate}>{post.date}</span>
-                  <span className={styles.postReadTime}>{post.readTime}</span>
-                </div>
-                <h1 className={styles.postTitle}>{post.title}</h1>
-                <div className={styles.postTags}>
-                  <span className={styles.postTag}>{post.categoryLabel}</span>
-                  {post.tags.map((tag) => (
-                    <span className={styles.postTag} key={tag}>
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </header>
-            </motion.div>
-
-            <motion.div
-              className={styles.postContent}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.content.trim()}</ReactMarkdown>
-            </motion.div>
-
             <div className={styles.postNavigation}>
               <Link href="/blog" className={styles.backButton}>
                 <svg
@@ -75,8 +43,29 @@ export default function BlogPostPage({ post }: BlogPostPageProps) {
                   <line x1="19" y1="12" x2="5" y2="12"></line>
                   <polyline points="12 19 5 12 12 5"></polyline>
                 </svg>
-                返回博客列表
+                返回列表
               </Link>
+            </div>
+
+            <header className={styles.postHeader}>
+              <h1 className={styles.postTitle}>{post.title}</h1>
+              <div className={styles.postMeta}>
+                <span className={styles.postDate}>{post.date}</span>
+                <span className={styles.postCategory}>{post.categoryLabel}</span>
+                <span className={styles.postReadTime}>{post.readTime}</span>
+              </div>
+            </header>
+
+            <div className={styles.postContent}>
+              <ReactMarkdown 
+                remarkPlugins={[remarkGfm]}
+                components={{
+                  // 忽略 markdown 中的 h1，因为我们已经在 header 中渲染了标题
+                  h1: () => null
+                }}
+              >
+                {post.content.trim()}
+              </ReactMarkdown>
             </div>
           </div>
         </article>

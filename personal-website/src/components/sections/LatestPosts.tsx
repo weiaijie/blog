@@ -12,16 +12,16 @@ const LatestPosts = () => {
   return (
     <section id="blog" className={styles.latestPosts}>
       <h2 className={styles.sectionTitle}>最新文章</h2>
-      <div className={styles.postsGrid}>
+      <div className={styles.postsList}>
         {featuredBlogPosts.map((post) => (
-          <Link href={`/blog/${post.id}`} key={post.id} className={styles.postCard}>
+          <Link href={`/blog/${post.id}`} key={post.id} className={styles.postItem}>
+            <div className={styles.postDate}>{post.date}</div>
             <div className={styles.postContent}>
-              <div className={styles.postMeta}>
-                <span className={styles.postDate}>{post.date}</span>
-                <span className={styles.postDate}>{post.categoryLabel}</span>
-              </div>
               <h3 className={styles.postTitle}>{post.title}</h3>
-              <p className={styles.postExcerpt}>{post.excerpt}</p>
+              <div className={styles.postMeta}>
+                <span className={styles.postCategory}>{post.categoryLabel}</span>
+                <span className={styles.postReadTime}>{post.readTime}</span>
+              </div>
             </div>
           </Link>
         ))}

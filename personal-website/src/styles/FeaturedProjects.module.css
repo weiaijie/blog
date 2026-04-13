@@ -1,6 +1,6 @@
-/* 精选项目部分 */
+/* 精选项目部分 - 极简通栏列表风格 */
 .featuredProjects {
-  padding: 60px 0;
+  padding: 80px 0;
   border-bottom: 1px solid var(--border-color);
   transition: border-color 0.3s ease;
 }
@@ -8,167 +8,143 @@
 .sectionTitle {
   font-family: 'SF Pro Display', var(--font-heading);
   font-size: 32px;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--tagline-heading);
-  margin-bottom: 32px;
-  text-align: center;
-  letter-spacing: -0.015em;
+  margin-bottom: 48px;
+  text-align: left;
+  letter-spacing: -0.02em;
   transition: color 0.3s ease;
 }
 
-.projectsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 24px;
-  margin-bottom: 40px;
-}
-
-.projectCard {
-  background-color: var(--card-bg);
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 4px 20px var(--card-shadow);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-  height: 100%;
+.projectsList {
   display: flex;
   flex-direction: column;
+  gap: 0;
 }
 
-.projectCard:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 30px var(--card-shadow-hover);
-}
-
-.projectImageContainer {
-  min-height: 150px;
+.projectItem {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 20px 24px;
-  background:
-    radial-gradient(circle at top right, rgba(var(--primary-rgb), 0.18), transparent 42%),
-    linear-gradient(135deg, rgba(var(--primary-rgb), 0.16), rgba(var(--primary-rgb), 0.04));
-  border-bottom: 1px solid rgba(var(--primary-rgb), 0.12);
+  flex-direction: row;
+  gap: 48px;
+  padding: 40px 0;
+  border-bottom: 1px solid var(--border-color);
+  transition: border-color 0.3s ease;
 }
 
-.projectBadge {
-  align-self: flex-start;
-  padding: 6px 12px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.7);
-  color: var(--primary-color);
-  font-size: 12px;
-  font-weight: 600;
+.projectItem:first-child {
+  border-top: 1px solid var(--border-color);
 }
 
-.projectMeta {
-  font-size: 18px;
-  line-height: 1.4;
-  color: var(--tagline-heading);
-  max-width: 220px;
-}
-
-.projectContent {
-  padding: 24px;
-  flex: 1;
+.projectLeft {
+  flex: 0 0 300px;
   display: flex;
   flex-direction: column;
 }
 
 .projectTitle {
   font-family: 'SF Pro Display', var(--font-heading);
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 600;
-  color: var(--text-color);
-  margin-bottom: 8px;
+  color: var(--text-primary);
+  margin-bottom: 12px;
   letter-spacing: -0.01em;
-  transition: color 0.3s ease;
 }
 
-.projectSubtitle {
+.projectMeta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
   font-size: 14px;
-  line-height: 1.5;
-  color: var(--primary-color);
-  margin-bottom: 10px;
+  color: var(--text-secondary);
+}
+
+.projectCategory {
+  padding: 2px 8px;
+  background-color: var(--bg-secondary);
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.projectRight {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .projectDescription {
   font-family: 'SF Pro Text', var(--font-sans);
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.7;
-  color: var(--text-light);
-  margin-bottom: 16px;
-  flex: 1;
-  letter-spacing: -0.01em;
-  transition: color 0.3s ease;
+  color: var(--text-secondary);
+}
+
+.projectDescription strong {
+  color: var(--text-primary);
+  font-weight: 600;
 }
 
 .projectTags {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 16px;
+  margin-top: auto;
 }
 
 .projectTag {
   display: inline-block;
   padding: 4px 10px;
-  background-color: rgba(var(--primary-rgb), 0.1);
-  color: var(--primary-color);
-  border-radius: 980px;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  border-radius: 4px;
   font-size: 12px;
   font-weight: 500;
-  letter-spacing: -0.01em;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .projectLinks {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px;
+  margin-top: 8px;
 }
 
 .projectLink {
   display: inline-flex;
   align-items: center;
-  min-height: 34px;
-  padding: 0 14px;
-  border-radius: 999px;
-  background: rgba(var(--primary-rgb), 0.08);
+  font-size: 14px;
+  font-weight: 500;
   color: var(--primary-color);
-  font-size: 13px;
-  font-weight: 600;
   text-decoration: none;
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  transition: opacity 0.2s ease;
 }
 
 .projectLink:hover {
-  background: rgba(var(--primary-rgb), 0.14);
-  transform: translateY(-1px);
+  opacity: 0.7;
+  text-decoration: underline;
 }
 
 .viewAllContainer {
   display: flex;
-  justify-content: center;
-  margin-top: 32px;
+  justify-content: flex-start;
+  margin-top: 40px;
 }
 
 .viewAllButton {
   display: inline-flex;
   align-items: center;
   font-family: 'SF Pro Text', var(--font-sans);
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 500;
   color: var(--primary-color);
   text-decoration: none;
-  transition: opacity 0.2s ease, color 0.3s ease, background-color 0.3s ease;
-  padding: 8px 16px;
-  border-radius: 980px;
+  transition: opacity 0.2s ease;
 }
 
 .viewAllButton:hover {
   opacity: 0.7;
-  background-color: rgba(var(--primary-rgb), 0.05);
 }
 
 .buttonIcon {
@@ -182,43 +158,35 @@
 
 @media (max-width: 768px) {
   .featuredProjects {
-    padding: 40px 0;
+    padding: 60px 0;
   }
 
   .sectionTitle {
     font-size: 28px;
-    margin-bottom: 24px;
+    margin-bottom: 32px;
   }
 
-  .projectsGrid {
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 16px;
+  .projectItem {
+    flex-direction: column;
+    gap: 24px;
+    padding: 32px 0;
   }
 
-  .projectImageContainer {
-    min-height: 132px;
-    padding: 16px;
+  .projectLeft {
+    flex: none;
   }
 
-  .projectContent {
-    padding: 16px;
-  }
-
-  .projectTitle {
-    font-size: 18px;
+  .projectTags {
+    margin-top: 16px;
   }
 }
 
 @media (max-width: 480px) {
   .featuredProjects {
-    padding: 30px 0;
+    padding: 40px 0;
   }
 
   .sectionTitle {
     font-size: 24px;
-  }
-
-  .projectsGrid {
-    grid-template-columns: 1fr;
   }
 }

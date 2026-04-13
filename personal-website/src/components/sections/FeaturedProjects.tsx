@@ -14,37 +14,45 @@ const FeaturedProjects = () => {
   return (
     <section id="projects" className={styles.featuredProjects}>
       <h2 className={styles.sectionTitle}>精选案例</h2>
-      <div className={styles.projectsGrid}>
+      <div className={styles.projectsList}>
         {homepageProjects.map((project) => (
-          <div className={styles.projectCard} key={project.id}>
-            <div className={styles.projectImageContainer}>
-              <div className={styles.projectBadge}>{project.categoryLabel}</div>
-              <div className={styles.projectMeta}>{project.year}</div>
-            </div>
-            <div className={styles.projectContent}>
+          <div className={styles.projectItem} key={project.id}>
+            <div className={styles.projectLeft}>
               <h3 className={styles.projectTitle}>{project.title}</h3>
-              <p className={styles.projectSubtitle}>{project.subtitle}</p>
-              <p className={styles.projectDescription}>{project.summary}</p>
+              <div className={styles.projectMeta}>
+                <span className={styles.projectYear}>{project.year.split(' / ')[0]}</span>
+                <span className={styles.projectCategory}>{project.categoryLabel}</span>
+              </div>
               <div className={styles.projectTags}>
-                {project.tags.map((tag) => (
+                {project.tags.slice(0, 3).map((tag) => (
                   <span className={styles.projectTag} key={tag}>
                     {tag}
                   </span>
                 ))}
               </div>
-              <div className={styles.projectLinks}>
-                {project.links.map((link) => (
-                  <a
-                    key={link.url}
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.projectLink}
-                  >
-                    {link.label}
-                  </a>
-                ))}
+            </div>
+            <div className={styles.projectRight}>
+              <div className={styles.projectDescription}>
+                <strong>业务定位：</strong>{project.positioning}
               </div>
+              <div className={styles.projectDescription}>
+                <strong>项目概述：</strong>{project.summary}
+              </div>
+              {project.links.length > 0 && (
+                <div className={styles.projectLinks}>
+                  {project.links.map((link) => (
+                    <a
+                      key={link.url}
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.projectLink}
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         ))}

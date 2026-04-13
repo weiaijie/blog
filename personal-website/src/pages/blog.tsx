@@ -27,13 +27,18 @@ export default function Blog() {
   return (
     <>
       <Head>
-        <title>博客 - saber的个人网站</title>
+        <title>博客 - 许辉的个人网站</title>
         <meta name="description" content="项目复盘、架构实践和工程经验文章。" />
       </Head>
       <Layout>
         <div className={styles.blogPage}>
           <div className={styles.container}>
-            <h1 className={styles.pageTitle}>博客</h1>
+            <div className={styles.hero}>
+              <h1 className={styles.pageTitle}>博客</h1>
+              <p className={styles.pageDescription}>
+                记录技术思考、项目复盘与工程实践。
+              </p>
+            </div>
 
             <div className={styles.blogControls}>
               <div className={styles.searchBar}>
@@ -74,24 +79,17 @@ export default function Blog() {
               </div>
             </div>
 
-            <div className={styles.postsGrid}>
+            <div className={styles.postsList}>
               {filteredPosts.length > 0 ? (
                 filteredPosts.map((post) => (
-                  <Link href={`/blog/${post.id}`} key={post.id} className={styles.postCard}>
+                  <Link href={`/blog/${post.id}`} key={post.id} className={styles.postItem}>
+                    <div className={styles.postDate}>{post.date}</div>
                     <div className={styles.postContent}>
-                      <div className={styles.postMeta}>
-                        <span className={styles.postDate}>{post.date}</span>
-                        <span className={styles.postReadTime}>{post.readTime}</span>
-                      </div>
                       <h2 className={styles.postTitle}>{post.title}</h2>
                       <p className={styles.postExcerpt}>{post.excerpt}</p>
-                      <div className={styles.postTags}>
-                        <span className={styles.postTag}>{post.categoryLabel}</span>
-                        {post.tags.map((tag) => (
-                          <span className={styles.postTag} key={tag}>
-                            {tag}
-                          </span>
-                        ))}
+                      <div className={styles.postMeta}>
+                        <span className={styles.postCategory}>{post.categoryLabel}</span>
+                        <span className={styles.postReadTime}>{post.readTime}</span>
                       </div>
                     </div>
                   </Link>

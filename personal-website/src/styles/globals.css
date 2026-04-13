@@ -14,9 +14,12 @@
 
   /* 中性色 */
   --text-color: #1F2937;
-  --text-light: #4B5563;
+  --text-primary: #111827;
+  --text-secondary: #4B5563;
+  --text-light: #6B7280;
   --text-lighter: #9CA3AF;
   --bg-color: #FFFFFF;
+  --bg-secondary: #F9FAFB;
   --bg-light: #F9FAFB;
   --bg-dark: #F3F4F6;
   --border-color: #E5E7EB;
@@ -72,9 +75,12 @@
 
   /* 中性色 - 暗色调整 */
   --text-color: #F9FAFB;
-  --text-light: #E5E7EB;
-  --text-lighter: #9CA3AF;
+  --text-primary: #F9FAFB;
+  --text-secondary: #D1D5DB;
+  --text-light: #9CA3AF;
+  --text-lighter: #6B7280;
   --bg-color: #111827;
+  --bg-secondary: #1F2937;
   --bg-light: #1F2937;
   --bg-dark: #0F172A;
   --border-color: #374151;
