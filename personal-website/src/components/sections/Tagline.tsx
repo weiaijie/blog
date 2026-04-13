@@ -22,6 +22,7 @@ import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import styles from '@/styles/Tagline.module.css';
+import Typewriter from '@/components/common/Typewriter';
 import siteConfig from '@/config/site';
 
 interface TaglineProps {
@@ -30,6 +31,11 @@ interface TaglineProps {
 
 const Tagline: React.FC<TaglineProps> = ({ visible }) => {
   const prevVisibleRef = useRef(visible);
+  const codeSnippets = [
+    "const focus = 'Enterprise Systems';",
+    "const stack = ['Vue', 'React', 'Node.js'];",
+    "export const build = () => createProduct(focus, stack);",
+  ];
 
   // 定义动画变体
   const containerVariants: Variants = {
@@ -95,6 +101,67 @@ const Tagline: React.FC<TaglineProps> = ({ visible }) => {
                   联系我
                 </Link>
               </motion.div>
+            </motion.div>
+            <motion.div
+              className={styles.taglineVisual}
+              variants={childVariants}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+            >
+              <div className={styles.codePanel}>
+                <div className={styles.codePanelHeader}>
+                  <span className={styles.codePanelTitle}>developer.ts</span>
+                </div>
+                <div className={styles.codePanelBody}>
+                  <div className={styles.codeLine}>
+                    <span className={styles.lineNumber}>1</span>
+                    <span className={styles.lineContent}>
+                      <span className={styles.codeKeyword}>import</span>{' '}
+                      <span className={styles.codeIdentifier}>createProduct</span>{' '}
+                      <span className={styles.codeKeyword}>from</span>{' '}
+                      <span className={styles.codeString}>'@/core/engineering'</span>
+                    </span>
+                  </div>
+                  <div className={styles.codeLine}>
+                    <span className={styles.lineNumber}>2</span>
+                    <span className={styles.lineContent}></span>
+                  </div>
+                  <div className={styles.codeLine}>
+                    <span className={styles.lineNumber}>3</span>
+                    <span className={styles.lineContent}>
+                      <Typewriter
+                        texts={codeSnippets}
+                        typingSpeed={38}
+                        deletingSpeed={18}
+                        delayAfterType={999999}
+                        delayAfterDelete={500}
+                        loop={false}
+                        className={styles.codeTyping}
+                      />
+                    </span>
+                  </div>
+                  <div className={styles.codeLine}>
+                    <span className={styles.lineNumber}>4</span>
+                    <span className={styles.lineContent}>
+                      <span className={styles.codeKeyword}>if</span> (
+                      <span className={styles.codeIdentifier}>business</span>.
+                      <span className={styles.codeProperty}>isComplex</span>) {'{'}
+                    </span>
+                  </div>
+                  <div className={styles.codeLine}>
+                    <span className={styles.lineNumber}>5</span>
+                    <span className={styles.lineContent}>
+                      &nbsp;&nbsp;<span className={styles.codeKeyword}>return</span>{' '}
+                      <span className={styles.codeIdentifier}>build</span>()
+                    </span>
+                  </div>
+                  <div className={styles.codeLine}>
+                    <span className={styles.lineNumber}>6</span>
+                    <span className={styles.lineContent}>{'}'}</span>
+                  </div>
+                </div>
+              </div>
             </motion.div>
           </div>
         </motion.div>
