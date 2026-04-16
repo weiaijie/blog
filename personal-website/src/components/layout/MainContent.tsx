@@ -8,6 +8,7 @@ import React, { useEffect, useRef } from 'react';
 import { motion, useAnimation, type Variants } from 'framer-motion';
 import styles from '@/styles/MainContent.module.css';
 import FeaturedProjects from '@/components/sections/FeaturedProjects';
+import LatestPosts from '@/components/sections/LatestPosts';
 
 interface MainContentProps {
   visible?: boolean;
@@ -88,6 +89,9 @@ const MainContent: React.FC<MainContentProps> = ({ visible = false }) => {
       <div className={styles.container}>
         <motion.div variants={sectionVariants}>
           <FeaturedProjects />
+        </motion.div>
+        <motion.div variants={sectionVariants}>
+          <LatestPosts />
         </motion.div>
       </div>
     </motion.div>

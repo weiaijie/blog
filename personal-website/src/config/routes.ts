@@ -13,6 +13,7 @@ export const mainNavRoutes: RouteItem[] = [
   { name: '关于我', path: '/about' },
   // { name: '技能', path: '/skills' },
   { name: '项目', path: '/projects' },
+  { name: '博客', path: '/blog' },
   { name: '联系', path: '/contact' },
 ];
 
@@ -21,6 +22,7 @@ export const footerNavRoutes: RouteItem[] = [
   { name: '关于我', path: '/about' },
   // { name: '技能', path: '/skills' },
   { name: '项目', path: '/projects' },
+  { name: '博客', path: '/blog' },
   { name: '联系', path: '/contact' },
   { name: '隐私政策', path: '/privacy' },
   { name: '使用条款', path: '/terms' },

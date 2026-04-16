@@ -19,10 +19,10 @@ export interface ProfileEducation {
 }
 
 export const siteConfig = {
-  title: '许辉的个人网站',
+  title: 'saber 的个人网站',
   description:
-    '7年经验全栈开发工程师，做过 Vue、UniApp、PHP、ThinkPHP、MySQL、Redis 等项目，重点落在企业后台、系统对接和复杂业务落地。',
-  author: '许辉',
+    '8年经验全栈开发工程师，做过 Vue、UniApp、PHP、ThinkPHP、MySQL、Redis 等项目，重点落在企业后台、系统对接和复杂业务落地。',
+  author: 'saber',
   age: 29,
   currentLocation: '铜陵',
   targetLocation: '上海',
@@ -56,9 +56,9 @@ export const siteConfig = {
   techStack: 'Vue / UniApp / PHP / ThinkPHP / MySQL / Redis / Next.js',
   profile: {
     briefIntro:
-      '我是许辉，一名做过前端、后端和跨端项目的全栈开发工程师。近几年除了 Vue、UniApp 和后台系统开发，也持续参与 PHP、ThinkPHP、MySQL、Redis 相关项目，重点处理企业后台、系统对接和复杂业务场景。',
+      '我是 saber，一名做过前端、后端和跨端项目的全栈开发工程师。近几年除了 Vue、UniApp 和后台系统开发，也持续参与 PHP、ThinkPHP、MySQL、Redis 相关项目，重点处理企业后台、系统对接和复杂业务场景。',
     aboutIntro: [
-      '你好，我是许辉，一名拥有 8 年项目经验的全栈开发工程师。近几年主要做企业后台系统、小程序项目、系统对接和复杂业务交付。',
+      '你好，我是 saber，一名拥有 8 年项目经验的全栈开发工程师。近几年主要做企业后台系统、小程序项目、系统对接和复杂业务交付。',
       '技术上我主要使用 Vue2 / Vue3、UniApp、React、Next.js，也做过 PHP、ThinkPHP、Node.js、MySQL、Redis 相关项目，能从前端页面一路推进到接口、数据结构和后台流程。',
       '我参与过医院 SaaS、企业小程序、福利商城、数据同步中台、官网后台等多类项目，做过团队协作开发，也独立负责过完整交付。',
       '相比单纯页面开发，我更擅长把复杂业务落成可运行、可维护的系统，包括权限、动态表单、数据同步、支付链路、日志排查和后台配置能力。',

@@ -19,6 +19,7 @@ import '@/styles/prism-custom.css'; // 导入Prism.js代码高亮样式
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { useEffect } from 'react';
+import siteConfig from '@/config/site';
 
 export default function App({ Component, pageProps }: AppProps) {
   // 在客户端初始化主题
@@ -50,8 +51,10 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
+        <title>{siteConfig.title}</title>
+        <meta name="description" content={siteConfig.description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />

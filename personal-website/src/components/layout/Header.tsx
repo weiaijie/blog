@@ -25,6 +25,7 @@ import { useRouter } from 'next/router';
 import styles from '@/styles/Header.module.css';
 import { mainNavRoutes } from '@/config/routes';
 import ThemeToggle from '@/components/common/ThemeToggle';
+import siteConfig from '@/config/site';
 // 用于存储是否是首次加载的全局变量
 // 在服务器端渲染时，始终将 isFirstLoad 设置为 false，避免服务器/客户端不匹配
 const isFirstLoad = false;
@@ -110,7 +111,7 @@ const Header: React.FC<HeaderProps> = () => {
         {/* 品牌标识/Logo */}
         <div className={styles.logo}>
           <Link href="/" onClick={closeMenu}>
-            <span className={styles.name}>saber</span>
+            <span className={styles.name}>{siteConfig.author}</span>
           </Link>
         </div>
 
@@ -137,19 +138,6 @@ const Header: React.FC<HeaderProps> = () => {
           {/* 主题切换按钮 */}
           <ThemeToggle className={styles.themeToggle} />
 
-          {/* 搜索按钮 */}
-          <button
-            className={`${styles.searchButton} ${isSearchActive ? styles.active : ''}`}
-            aria-label="搜索"
-            onClick={handleSearchClick}
-            aria-expanded={isSearchActive}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-          </button>
-
           {/* 移动端汉堡菜单按钮 */}
           <div
             className={`${styles.menuButton} ${isMenuOpen ? styles.open : ''}`}
@@ -166,7 +154,7 @@ const Header: React.FC<HeaderProps> = () => {
         <div className={`${styles.mobileNav} ${isMenuOpen ? styles.open : ''}`}>
           <div className={styles.mobileNavHeader}>
             <div className={styles.mobileNavLogo}>
-              <span className={styles.mobileNavName}>saber</span>
+              <span className={styles.mobileNavName}>{siteConfig.author}</span>
               <span className={styles.mobileNavTitle}>全栈开发</span>
             </div>
           </div>
@@ -203,22 +191,15 @@ const Header: React.FC<HeaderProps> = () => {
 
             <h3 className={styles.mobileNavSectionTitle}>联系我</h3>
             <div className={styles.mobileNavContact}>
-              <a href="mailto:contact@example.com" className={styles.mobileNavContactItem}>
-                contact@example.com
+              <a href={`mailto:${siteConfig.contact.email}`} className={styles.mobileNavContactItem}>
+                {siteConfig.contact.email}
               </a>
               <div className={styles.mobileNavSocial}>
-                <a href="#" className={styles.mobileNavSocialIcon} aria-label="GitHub">
+                <a href={siteConfig.social.github.url} target="_blank" rel="noreferrer" className={styles.mobileNavSocialIcon} aria-label="GitHub">
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
                   </svg>
                 </a>
-                {/* <a href="#" className={styles.mobileNavSocialIcon} aria-label="LinkedIn">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                    <rect x="2" y="9" width="4" height="12"></rect>
-                    <circle cx="4" cy="4" r="2"></circle>
-                  </svg>
-                </a> */}
               </div>
             </div>
           </div>
