@@ -13,7 +13,13 @@ const FeaturedProjects = () => {
 
   return (
     <section id="projects" className={styles.featuredProjects}>
-      <h2 className={styles.sectionTitle}>精选案例</h2>
+      <div className={styles.sectionIntro}>
+        <span className={styles.sectionLabel}>Selected Work</span>
+        <h2 className={styles.sectionTitle}>精选案例</h2>
+        <p className={styles.sectionSummary}>
+          放几段我实际参与过的项目。尽量写清楚当时要解决什么、我做了哪部分。
+        </p>
+      </div>
       <div className={styles.projectsList}>
         {homepageProjects.map((project) => (
           <div className={styles.projectItem} key={project.id}>
@@ -33,10 +39,10 @@ const FeaturedProjects = () => {
             </div>
             <div className={styles.projectRight}>
               <div className={styles.projectDescription}>
-                <strong>业务定位：</strong>{project.positioning}
+                {project.summary}
               </div>
               <div className={styles.projectDescription}>
-                <strong>项目概述：</strong>{project.summary}
+                {project.positioning}
               </div>
               {project.links.length > 0 && (
                 <div className={styles.projectLinks}>
@@ -59,7 +65,7 @@ const FeaturedProjects = () => {
       </div>
       <div className={styles.viewAllContainer}>
         <Link href="/projects" className={styles.viewAllButton}>
-          查看完整案例
+          查看更多项目
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="12"

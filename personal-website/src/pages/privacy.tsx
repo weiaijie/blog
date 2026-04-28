@@ -12,19 +12,20 @@
  * - Privacy：隐私政策页面的主要组件
  */
 
-import Head from 'next/head';
 import Layout from '@/components/layout/Layout';
+import SeoHead from '@/components/common/SeoHead';
 import siteConfig from '@/config/site';
 import styles from '@/styles/Legal.module.css';
 
 export default function Privacy() {
   return (
     <>
-      <Head>
-        <title>隐私政策 - {siteConfig.title}</title>
-        <meta name="description" content="了解我们如何收集、使用和保护您的个人信息" />
-        <meta name="robots" content="noindex" />
-      </Head>
+      <SeoHead
+        title="隐私政策 - 许辉"
+        description="说明许辉个人网站会保存哪些基础访问信息，以及通过邮件联系时信息如何被使用。"
+        path="/privacy/"
+        noindex
+      />
       <Layout>
         <div className={styles.legalPage}>
           <div className={styles.container}>
@@ -36,83 +37,72 @@ export default function Privacy() {
               <section className={styles.section}>
                 <h2>概述</h2>
                 <p>
-                  本隐私政策描述了我们在您使用本网站时如何收集、使用和保护您的个人信息。
-                  我们重视您的隐私，并致力于保护您的个人数据。请仔细阅读本政策，以了解我们的做法。
+                  本网站是许辉的个人展示站，采用静态方式部署。这里不会提供账号注册、在线下单或站内留言系统，
+                  因此本页主要说明浏览访问和邮件联系两种场景下可能涉及的信息。
                 </p>
               </section>
 
               <section className={styles.section}>
                 <h2>信息收集</h2>
-                <p>我们可能收集的信息包括：</p>
+                <p>当前可能涉及的信息主要包括：</p>
                 <ul>
-                  <li>基本信息：当您通过联系表单与我们联系时，我们会收集您的姓名和电子邮件地址。</li>
-                  <li>使用数据：我们可能会收集有关您如何使用我们网站的信息，包括访问时间、浏览页面和停留时间。</li>
-                  <li>设备信息：我们可能会收集有关您使用的设备的信息，如IP地址、浏览器类型和操作系统。</li>
+                  <li>访问日志：站点托管平台可能会记录基础访问日志，例如访问时间、请求路径、IP、浏览器和设备信息。</li>
+                  <li>主题偏好：网站会在浏览器本地保存主题模式设置，用于记住亮色或暗色偏好。</li>
+                  <li>主动联系信息：如果您通过电子邮件联系我，邮件中提供的姓名、联系方式和项目说明会出现在对应的邮箱服务中。</li>
                 </ul>
               </section>
 
               <section className={styles.section}>
                 <h2>信息使用</h2>
-                <p>我们使用收集的信息：</p>
+                <p>这些信息仅会用于：</p>
                 <ul>
-                  <li>回复您的咨询和请求</li>
-                  <li>改进我们的网站和服务</li>
-                  <li>分析网站使用情况和趋势</li>
-                  <li>保护网站安全并防止欺诈活动</li>
+                  <li>维持站点基本可用性和访问安全</li>
+                  <li>记住主题模式等本地浏览偏好</li>
+                  <li>在您主动来信时回复咨询、沟通合作或说明项目情况</li>
                 </ul>
               </section>
 
               <section className={styles.section}>
                 <h2>信息共享</h2>
                 <p>
-                  我们不会出售、出租或交易您的个人信息给第三方。在以下情况下，我们可能会共享您的信息：
+                  我不会主动出售或转让您的个人信息。访问过程中涉及的数据可能由托管服务商、CDN 或邮箱服务商按其基础设施流程处理，
+                  但不会被我额外用于无关用途。
                 </p>
-                <ul>
-                  <li>经您同意</li>
-                  <li>为遵守法律要求</li>
-                  <li>保护我们的权利和财产</li>
-                </ul>
               </section>
 
               <section className={styles.section}>
                 <h2>Cookie使用</h2>
                 <p>
-                  我们的网站可能使用Cookie和类似技术来增强您的浏览体验。这些技术帮助我们了解访问者如何使用我们的网站，
-                  并允许某些功能，如保存您的主题偏好设置。
+                  当前网站不会接入广告、埋点或营销型 Cookie。浏览器本地可能只会保存主题模式等最小必要偏好，
+                  用于改善阅读体验。
                 </p>
                 <p>
-                  您可以通过浏览器设置控制Cookie的使用，但这可能会影响某些网站功能的可用性。
+                  您可以通过浏览器设置清除这些本地数据，但这可能导致主题偏好失效。
                 </p>
               </section>
 
               <section className={styles.section}>
                 <h2>数据安全</h2>
                 <p>
-                  我们采取合理的安全措施来保护您的个人信息不被未经授权的访问、使用或披露。
-                  然而，请注意互联网传输不是完全安全的，我们不能保证通过网络传输的信息的绝对安全性。
+                  我会尽量减少不必要的数据收集，并依赖托管平台和邮箱服务的基础安全能力。但任何网络传输都无法保证绝对安全，
+                  因此如果您需要发送敏感资料，建议先通过邮件确认沟通方式。
                 </p>
               </section>
 
               <section className={styles.section}>
                 <h2>您的权利</h2>
-                <p>根据适用的数据保护法律，您可能拥有以下权利：</p>
+                <p>如果您曾主动通过邮件联系，并希望我删除相关沟通信息，可以直接来信说明：</p>
                 <ul>
-                  <li>访问您的个人数据</li>
-                  <li>更正不准确的数据</li>
-                  <li>要求删除您的数据</li>
-                  <li>限制或反对处理您的数据</li>
-                  <li>数据可携带性</li>
+                  <li>您发送过的大致时间</li>
+                  <li>使用的联系邮箱</li>
+                  <li>希望处理的内容范围</li>
                 </ul>
-                <p>
-                  如果您希望行使这些权利，请通过网站上提供的联系方式与我们联系。
-                </p>
               </section>
 
               <section className={styles.section}>
                 <h2>政策更新</h2>
                 <p>
-                  我们可能会不时更新本隐私政策。任何变更将在本页面上发布，并在重大变更时通过适当方式通知您。
-                  我们鼓励您定期查看本政策以了解最新信息。
+                  如果站点能力或数据处理方式发生明显变化，我会在本页更新说明。
                 </p>
               </section>
 

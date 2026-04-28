@@ -1,18 +1,16 @@
-import Head from 'next/head';
 import Layout from '@/components/layout/Layout';
 import siteConfig from '@/config/site';
+import SeoHead from '@/components/common/SeoHead';
 import styles from '@/styles/About.module.css';
 
 export default function About() {
   return (
     <>
-      <Head>
-        <title>关于我 - {siteConfig.title}</title>
-        <meta
-          name="description"
-          content="8年全栈开发经验，聚焦 Vue 生态、复杂业务系统、跨端应用与工程化建设。"
-        />
-      </Head>
+      <SeoHead
+        title="关于我 - 许辉"
+        description="了解许辉的项目经历、技术栈、交付方式，以及在企业后台、小程序和系统对接项目中的真实经验。"
+        path="/about/"
+      />
       <Layout>
         <div className={styles.aboutPage}>
           <div className={styles.container}>

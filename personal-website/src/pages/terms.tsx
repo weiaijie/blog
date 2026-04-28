@@ -12,19 +12,20 @@
  * - Terms：使用条款页面的主要组件
  */
 
-import Head from 'next/head';
 import Layout from '@/components/layout/Layout';
+import SeoHead from '@/components/common/SeoHead';
 import siteConfig from '@/config/site';
 import styles from '@/styles/Legal.module.css';
 
 export default function Terms() {
   return (
     <>
-      <Head>
-        <title>使用条款 - {siteConfig.title}</title>
-        <meta name="description" content="了解使用本网站的条款和条件" />
-        <meta name="robots" content="noindex" />
-      </Head>
+      <SeoHead
+        title="使用条款 - 许辉"
+        description="说明访问许辉个人网站时适用的基础使用规则、内容版权和免责声明。"
+        path="/terms/"
+        noindex
+      />
       <Layout>
         <div className={styles.legalPage}>
           <div className={styles.container}>
@@ -36,26 +37,22 @@ export default function Terms() {
               <section className={styles.section}>
                 <h2>接受条款</h2>
                 <p>
-                  欢迎访问{siteConfig.author}的个人网站。通过访问和使用本网站，您同意接受并遵守这些条款和条件。
-                  如果您不同意这些条款的任何部分，请不要使用本网站。
+                  欢迎访问{siteConfig.author}的个人网站。继续浏览本网站，即表示您理解本网站主要用于展示项目经历、
+                  技术能力和公开联系方式，并同意在合法、合理的前提下使用这里的内容。
                 </p>
               </section>
 
               <section className={styles.section}>
                 <h2>使用许可</h2>
                 <p>
-                  在遵守这些使用条款的前提下，我们授予您访问和个人使用本网站的有限许可。此许可不包括：
+                  您可以正常浏览、分享和引用本网站中的公开内容，但不应将其用于误导性用途。以下行为不被允许：
                 </p>
                 <ul>
-                  <li>本网站或其内容的商业使用</li>
-                  <li>对本网站或其内容的修改或复制</li>
-                  <li>尝试反编译或逆向工程网站的任何部分</li>
-                  <li>移除网站上的版权或其他所有权声明</li>
-                  <li>将网站内容用于任何公共展示或商业目的</li>
+                  <li>冒用本站内容、项目经历或身份信息</li>
+                  <li>在未经说明来源的情况下大段复制页面内容用于商业宣传</li>
+                  <li>恶意抓取、攻击或干扰网站的正常访问</li>
+                  <li>将站内示例、文章或代码片段包装成您自己的原创成果</li>
                 </ul>
-                <p>
-                  违反这些条款将导致此许可的自动终止，我们可能会采取适当的法律行动。
-                </p>
               </section>
 
               <section className={styles.section}>
@@ -65,7 +62,7 @@ export default function Terms() {
                   这些内容受版权法和其他知识产权法保护。
                 </p>
                 <p>
-                  您可以查看和下载本网站的内容，仅供个人、非商业用途，前提是您保留所有版权和其他所有权声明。
+                  如需转载、二次发布或用于对外材料，建议先通过邮件沟通确认。
                 </p>
               </section>
 
@@ -84,31 +81,31 @@ export default function Terms() {
               <section className={styles.section}>
                 <h2>外部链接</h2>
                 <p>
-                  本网站可能包含指向第三方网站的链接。这些链接仅为方便用户而提供，不构成对这些网站或其内容的认可。
-                  我们对这些外部网站的内容、隐私政策或做法不负任何责任。
+                  本网站可能包含指向第三方网站的链接，例如 GitHub 或其他外部资源。这些链接仅作为补充说明或作品展示入口，
+                  我无法控制第三方站点后续的内容与政策变化。
                 </p>
               </section>
 
               <section className={styles.section}>
                 <h2>免责声明</h2>
                 <p>
-                  本网站及其内容按"原样"提供，不提供任何明示或暗示的保证。在法律允许的最大范围内，我们不对网站的可用性、
-                  可靠性或准确性，或因使用本网站而产生的任何直接、间接、附带、特殊或后果性损害承担责任。
+                  本网站内容会尽量保持真实和及时，但不承诺所有信息在任何时间点都完全准确或持续有效。
+                  站内案例、文章和说明主要用于展示思路与经验，不构成正式商业承诺或法律、财务建议。
                 </p>
               </section>
 
               <section className={styles.section}>
-                <h2>赔偿</h2>
+                <h2>联系与合作说明</h2>
                 <p>
-                  您同意赔偿并使我们免受因您违反这些使用条款或您使用本网站而产生的任何索赔、损失、责任、费用和开支的影响。
+                  联系页展示的是公开联系方式，不代表任何需求都会承接，也不代表来信后一定形成合作。
+                  是否继续推进，会根据项目类型、时间安排和沟通结果综合判断。
                 </p>
               </section>
 
               <section className={styles.section}>
                 <h2>条款修改</h2>
                 <p>
-                  我们保留随时修改这些使用条款的权利。修改后的条款将在本页面上发布，并在发布后立即生效。
-                  继续使用本网站将被视为接受修改后的条款。
+                  如果网站结构、内容使用方式或联系方式发生明显变化，我可能会同步更新本页说明。
                 </p>
               </section>
 

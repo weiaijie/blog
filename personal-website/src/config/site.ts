@@ -19,10 +19,11 @@ export interface ProfileEducation {
 }
 
 export const siteConfig = {
-  title: 'saber 的个人网站',
+  siteUrl: 'https://blog.weiaijie.top',
+  title: '许辉 - 全栈开发工程师',
   description:
-    '8年经验全栈开发工程师，做过 Vue、UniApp、PHP、ThinkPHP、MySQL、Redis 等项目，重点落在企业后台、系统对接和复杂业务落地。',
-  author: 'saber',
+    '许辉的个人网站，整理一些做过的后台、小程序、官网和系统对接项目。',
+  author: '许辉',
   age: 29,
   currentLocation: '铜陵',
   targetLocation: '上海',
@@ -55,13 +56,18 @@ export const siteConfig = {
   },
   techStack: 'Vue / UniApp / PHP / ThinkPHP / MySQL / Redis / Next.js',
   profile: {
+    heroRole: '全栈开发工程师',
+    heroSummary: [
+      '主要做企业后台、小程序、官网和系统对接类项目',
+      '也会记录一些项目里遇到的问题和处理方式',
+    ],
     briefIntro:
-      '我是 saber，一名做过前端、后端和跨端项目的全栈开发工程师。近几年除了 Vue、UniApp 和后台系统开发，也持续参与 PHP、ThinkPHP、MySQL、Redis 相关项目，重点处理企业后台、系统对接和复杂业务场景。',
+      '我是许辉，一名全栈开发工程师，主要做企业后台、小程序、官网展示站、系统对接和中小型业务系统。平时也会用 Codex、OpenCode、Claude Code 这类工具辅助写代码、查问题和整理资料，但项目怎么改、质量怎么样，还是我自己负责。',
     aboutIntro: [
-      '你好，我是 saber，一名拥有 8 年项目经验的全栈开发工程师。近几年主要做企业后台系统、小程序项目、系统对接和复杂业务交付。',
-      '技术上我主要使用 Vue2 / Vue3、UniApp、React、Next.js，也做过 PHP、ThinkPHP、Node.js、MySQL、Redis 相关项目，能从前端页面一路推进到接口、数据结构和后台流程。',
-      '我参与过医院 SaaS、企业小程序、福利商城、数据同步中台、官网后台等多类项目，做过团队协作开发，也独立负责过完整交付。',
-      '相比单纯页面开发，我更擅长把复杂业务落成可运行、可维护的系统，包括权限、动态表单、数据同步、支付链路、日志排查和后台配置能力。',
+      '你好，我是许辉，一名全栈开发工程师，目前主要做企业后台、小程序、官网展示站、系统对接和中小型业务系统。',
+      '我可以自己处理前端页面、接口、数据库和基础部署，也可以配合团队接手功能迭代、问题修复和旧项目调整。比起只把页面做出来，我更在意后面好不好维护、出问题能不能查。',
+      '技术上我主要使用 Vue2 / Vue3、UniApp、React、Next.js，也做过 PHP、ThinkPHP、Node.js、MySQL、Redis 相关项目。接触过医院培训系统、企业小程序、福利商城、数据同步、官网后台等项目。',
+      '现在开发时我也会用 Codex、OpenCode、Claude Code 这类 AI 工具辅助整理需求、写代码和排查问题。但工具只是辅助，项目怎么改、代码能不能长期维护，还是我自己来判断。',
     ],
     skillGroups: [
       {
@@ -73,7 +79,7 @@ export const siteConfig = {
         items: ['PHP', 'ThinkPHP', 'Node.js', 'Express', 'MySQL', 'Redis'],
       },
       {
-        title: '框架与交付',
+        title: '框架与工具',
         items: ['CRMEB', 'Element UI', 'Ant Design', 'uView', 'Vite', 'Webpack', 'ECharts', 'Nginx', 'Docker', '宝塔'],
       },
     ] as ProfileSkillGroup[],
@@ -84,10 +90,10 @@ export const siteConfig = {
         period: '2022.06 - 2025.01',
         project: '医院教育管理 SaaS 系统',
         highlights: [
-          '负责用户管理、档案管理、评价体系等核心模块前端开发。',
-          '设计并落地 JSON 驱动的动态表单能力，提升复杂表单开发效率。',
-          '开发 Node.js 中间层调试工具，改善前后端分离场景下的联调效率。',
-          '参与团队技术规范、代码评审和新人培养，推动前端协作方式稳定化。',
+          '负责用户管理、档案管理、评价体系等模块的前端开发。',
+          '做过 JSON 驱动的动态表单，减少重复表单页面开发。',
+          '开发过 Node.js 联调工具，方便前后端分离项目排查问题。',
+          '参与代码评审和新人带教，整理过一些团队常用写法。',
         ],
         techStack: 'Vue2 / Vue3、Element UI、TypeScript、Node.js',
       },
@@ -97,10 +103,10 @@ export const siteConfig = {
         period: '2021.09 - 2022.05',
         project: '建筑装修项目管理系统',
         highlights: [
-          '独立完成系统架构、数据库、接口和前端页面设计。',
-          '同时交付 PC 管理端和 UniApp 移动端，覆盖现场管理场景。',
-          '实现复杂 Excel 批量导入和甘特图交互组件，支撑项目计划管理。',
-          '通过离线缓存与数据同步提升现场作业效率。',
+          '独立完成数据库、接口、后台页面和移动端开发。',
+          '同时做 PC 管理端和 UniApp 移动端，处理现场管理相关流程。',
+          '实现复杂 Excel 批量导入和甘特图交互组件。',
+          '给移动端做过离线缓存和数据同步处理。',
         ],
         techStack: 'Vue3、Ant Design、UniApp、Node.js、Express、MySQL',
       },
@@ -110,10 +116,10 @@ export const siteConfig = {
         period: '2019.10 - 2021.06',
         project: '数字货币交易平台后台管理系统',
         highlights: [
-          '参与用户、营销、理财、权限等核心后台模块建设。',
-          '设计多角色权限体系和数据可视化看板，支撑运营管理。',
-          '建立系统监控与预警能力，保障平台稳定运行。',
-          '通过性能优化缩短页面加载与接口响应时间。',
+          '参与用户、营销、理财、权限等后台模块开发。',
+          '做过多角色权限和数据看板相关功能。',
+          '参与系统监控、预警和一些性能问题处理。',
+          '长期在运营后台里改功能、修问题。',
         ],
         techStack: 'Vue2、Element UI、ECharts、Node.js、Express、MySQL、Redis',
       },
@@ -126,7 +132,7 @@ export const siteConfig = {
           '独立完成官网前端开发与商品展示系统搭建。',
           '实现分类、检索、详情展示和后台内容管理。',
           '在医疗行业规范约束下兼顾展示效果与内容合规。',
-          '积累了完整的独立交付与问题解决经验。',
+          '这段经历让我比较早接触到从页面到后台再到上线的完整流程。',
         ],
         techStack: 'JavaScript、Vue、HTML/CSS、ThinkPHP、MySQL',
       },

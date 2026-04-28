@@ -1,79 +1,16 @@
-/**
- * contact.tsx
- *
- * 描述：联系页面，提供联系方式和消息发送表单
- *
- * 功能：
- * - 展示联系信息（电子邮件、GitHub、LinkedIn）
- * - 提供消息发送表单，包含姓名、电子邮件、主题和消息内容
- * - 表单提交状态管理（提交中、成功、错误）
- *
- * 主要组件：
- * - Contact：联系页面的主要组件
- * - 包含表单状态管理和提交逻辑
- */
-
-import Head from 'next/head';
-import { useState } from 'react';
 import Layout from '@/components/layout/Layout';
+import SeoHead from '@/components/common/SeoHead';
 import siteConfig from '@/config/site';
 import styles from '@/styles/Contact.module.css';
 
 export default function Contact() {
-  // 表单状态
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
-
-  // 表单提交状态
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
-  const [submitError, setSubmitError] = useState('');
-
-  // 处理输入变化
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  // 处理表单提交
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitError('');
-
-    // 模拟表单提交
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitSuccess(true);
-
-      // 重置表单
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-      });
-
-      // 5秒后重置成功状态
-      setTimeout(() => {
-        setSubmitSuccess(false);
-      }, 5000);
-    }, 1500);
-  };
-
   return (
     <>
-      <Head>
-        <title>联系 - {siteConfig.title}</title>
-        <meta name="description" content="联系我，讨论项目合作或技术交流" />
-      </Head>
+      <SeoHead
+        title="联系 - 许辉"
+        description="通过邮件或 GitHub 联系许辉，讨论企业后台、小程序、官网展示站、系统对接和项目迭代合作。"
+        path="/contact/"
+      />
       <Layout>
         <div className={styles.contactPage}>
           <div className={styles.container}>
@@ -82,7 +19,7 @@ export default function Contact() {
             <div className={styles.contactContent}>
               <div className={styles.contactInfo}>
                 <p className={styles.contactText}>
-                  如果您有任何问题或合作意向，欢迎随时与我联系。我会尽快回复您的消息。
+                  如果你想聊项目合作、现有系统迭代、问题排查，或者只是想确认需求是否值得做，直接发邮件会更高效。
                 </p>
 
                 <div className={styles.contactMethods}>
@@ -114,117 +51,38 @@ export default function Contact() {
                       </a>
                     </div>
                   </div>
-
-                  {/* <div className={styles.contactMethod}>
-                    <div className={styles.contactIcon}>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                        <rect x="2" y="9" width="4" height="12"></rect>
-                        <circle cx="4" cy="4" r="2"></circle>
-                      </svg>
-                    </div>
-                    <div className={styles.contactDetails}>
-                      <h3 className={styles.contactMethodTitle}>LinkedIn</h3>
-                      <a href={siteConfig.social.linkedin.url} target="_blank" rel="noopener noreferrer" className={styles.contactLink}>
-                        linkedin.com/in/{siteConfig.social.linkedin.username}
-                      </a>
-                    </div>
-                  </div> */}
                 </div>
               </div>
 
               <div className={styles.contactForm}>
-                <h2 className={styles.formTitle}>发送消息</h2>
+                <h2 className={styles.formTitle}>联系前可以直接带上这些信息</h2>
 
-                {submitSuccess ? (
-                  <div className={styles.successMessage}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                      <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                    </svg>
-                    <p>消息已发送！我会尽快回复您。</p>
-                  </div>
-                ) : (
-                  <form onSubmit={handleSubmit} className={styles.form}>
-                    <div className={styles.formGroup}>
-                      <label htmlFor="name" className={styles.formLabel}>姓名</label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        className={styles.formInput}
-                        placeholder="请输入您的姓名"
-                        required
-                      />
-                    </div>
+                <div className={styles.contactCard}>
+                  <p className={styles.contactCardIntro}>
+                    这是一个纯静态站点，目前没有在线表单。你可以直接发邮件，简单说明下面几项，我会更快判断是否适合继续沟通。
+                  </p>
 
-                    <div className={styles.formGroup}>
-                      <label htmlFor="email" className={styles.formLabel}>电子邮件</label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        className={styles.formInput}
-                        placeholder="请输入您的电子邮件"
-                        required
-                      />
-                    </div>
+                  <ul className={styles.contactChecklist}>
+                    <li>项目类型：后台、小程序、官网、系统对接，还是现有项目接手</li>
+                    <li>当前状态：从 0 开始，还是已有项目需要迭代 / 修复 / 重构</li>
+                    <li>你最在意的问题：进度、稳定性、交付质量，还是后续维护成本</li>
+                    <li>期望时间：是否有明确上线时间，或者先做评估和拆解</li>
+                  </ul>
 
-                    <div className={styles.formGroup}>
-                      <label htmlFor="subject" className={styles.formLabel}>主题</label>
-                      <select
-                        id="subject"
-                        name="subject"
-                        value={formData.subject}
-                        onChange={handleChange}
-                        className={styles.formSelect}
-                        required
-                      >
-                        <option value="" disabled>请选择主题</option>
-                        <option value="project">项目合作</option>
-                        <option value="job">工作机会</option>
-                        <option value="question">技术咨询</option>
-                        <option value="other">其他</option>
-                      </select>
-                    </div>
-
-                    <div className={styles.formGroup}>
-                      <label htmlFor="message" className={styles.formLabel}>消息</label>
-                      <textarea
-                        id="message"
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        className={styles.formTextarea}
-                        placeholder="请输入您的消息"
-                        rows={5}
-                        required
-                      ></textarea>
-                    </div>
-
-                    {submitError && (
-                      <div className={styles.errorMessage}>{submitError}</div>
-                    )}
-
-                    <button
-                      type="submit"
-                      className={styles.submitButton}
-                      disabled={isSubmitting}
+                  <div className={styles.contactActions}>
+                    <a href={`mailto:${siteConfig.contact.email}`} className={styles.primaryAction}>
+                      直接发邮件
+                    </a>
+                    <a
+                      href={siteConfig.social.github.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.secondaryAction}
                     >
-                      {isSubmitting ? '发送中...' : '发送消息'}
-                      {!isSubmitting && (
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={styles.buttonIcon}>
-                          <line x1="5" y1="12" x2="19" y2="12"></line>
-                          <polyline points="12 5 19 12 12 19"></polyline>
-                        </svg>
-                      )}
-                    </button>
-                  </form>
-                )}
+                      查看 GitHub
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

@@ -12,11 +12,11 @@
  * - Sitemap：网站地图页面的主要组件
  */
 
-import Head from 'next/head';
 import Link from 'next/link';
 import Layout from '@/components/layout/Layout';
 import { getAllRoutes } from '@/config/routes';
-import siteConfig from '@/config/site';
+import SeoHead from '@/components/common/SeoHead';
+import { blogPosts } from '@/data/blog';
 import styles from '@/styles/Sitemap.module.css';
 
 export default function Sitemap() {
@@ -40,11 +40,12 @@ export default function Sitemap() {
 
   return (
     <>
-      <Head>
-        <title>网站地图 - {siteConfig.title}</title>
-        <meta name="description" content="浏览网站的所有页面和内容" />
-        <meta name="robots" content="noindex" />
-      </Head>
+      <SeoHead
+        title="网站地图 - 许辉"
+        description="浏览许辉个人网站中的主要页面、案例文章和法律说明。"
+        path="/sitemap/"
+        noindex
+      />
       <Layout>
         <div className={styles.sitemapPage}>
           <div className={styles.container}>
@@ -71,6 +72,19 @@ export default function Sitemap() {
                     <li key={route.path} className={styles.linkItem}>
                       <Link href={route.path} className={styles.link}>
                         {route.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+
+              <section className={styles.section}>
+                <h2>项目记录</h2>
+                <ul className={styles.linkList}>
+                  {blogPosts.map((post) => (
+                    <li key={post.id} className={styles.linkItem}>
+                      <Link href={`/blog/${post.id}`} className={styles.link}>
+                        {post.title}
                       </Link>
                     </li>
                   ))}

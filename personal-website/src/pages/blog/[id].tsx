@@ -1,15 +1,15 @@
 /**
  * blog/[id].tsx
  *
- * 描述：博客文章详情页
+ * 描述：项目记录详情页
  */
 
 import { GetStaticPaths, GetStaticProps } from 'next';
-import Head from 'next/head';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import Layout from '@/components/layout/Layout';
+import SeoHead from '@/components/common/SeoHead';
 import styles from '@/styles/BlogPost.module.css';
 import { blogPosts, BlogPost } from '@/data/blog';
 
@@ -20,10 +20,13 @@ interface BlogPostPageProps {
 export default function BlogPostPage({ post }: BlogPostPageProps) {
   return (
     <>
-      <Head>
-        <title>{post.title} - 许辉的个人网站</title>
-        <meta name="description" content={post.excerpt} />
-      </Head>
+      <SeoHead
+        title={`${post.title} - 许辉`}
+        description={post.excerpt}
+        path={`/blog/${post.id}/`}
+        type="article"
+        publishedTime={post.date}
+      />
       <Layout>
         <article className={styles.blogPost}>
           <div className={styles.container}>

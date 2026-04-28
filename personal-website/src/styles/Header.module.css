@@ -19,7 +19,7 @@
   }
 }
 
-/* 苹果风格的头部导航 */
+/* 轻量固定导航 */
 .header {
   position: fixed;
   top: 0;
@@ -54,7 +54,7 @@
   padding: 0 22px; /* 苹果风格的内边距 */
 }
 
-/* Logo 样式 - 苹果风格 */
+/* Logo 样式 */
 .logo {
   display: flex;
   align-items: center;
@@ -63,11 +63,11 @@
 }
 
 .name {
-  font-family: 'SF Pro Display', var(--font-heading);
+  font-family: var(--font-heading);
   font-size: 1.2rem;
   font-weight: 600;
   color: var(--text-color); /* 使用CSS变量 */
-  letter-spacing: -0.01em; /* 苹果字体特有的字间距 */
+  letter-spacing: 0;
   transition: opacity 0.2s ease, color 0.3s ease;
   position: relative;
 }
@@ -76,7 +76,7 @@
   opacity: 0.7; /* 苹果风格的悬停效果 */
 }
 
-/* 桌面导航菜单 - 苹果风格 */
+/* 桌面导航菜单 */
 .desktopNav {
   display: flex;
   position: absolute;
@@ -91,14 +91,14 @@
 }
 
 .desktopNav a {
-  font-family: 'SF Pro Text', var(--font-sans);
+  font-family: var(--font-sans);
   font-size: 0.8rem;
   font-weight: 400;
   color: var(--nav-text); /* 使用CSS变量 */
   transition: opacity 0.2s ease, color 0.3s ease;
   position: relative;
   padding: 0 0.1rem;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
   white-space: nowrap;
 }
 
@@ -282,7 +282,7 @@
   transform: translateY(0);
 }
 
-/* 移动导航头部 - 苹果风格 */
+/* 移动导航头部 */
 .mobileNavHeader {
   padding: 2rem 1rem 1rem;
   text-align: center;
@@ -298,11 +298,11 @@
 }
 
 .mobileNavName {
-  font-family: 'SF Pro Display', var(--font-heading);
+  font-family: var(--font-heading);
   font-size: 1.2rem;
   font-weight: 600;
   color: var(--text-color);
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
   margin-bottom: 0.25rem;
   transition: color 0.3s ease;
 }
@@ -314,7 +314,7 @@
   transition: color 0.3s ease;
 }
 
-/* 移动导航菜单 - 苹果风格 */
+/* 移动导航菜单 */
 .mobileNavSectionTitle {
   font-size: 0.7rem;
   color: var(--text-lighter);
@@ -345,7 +345,7 @@
 }
 
 .mobileNav a {
-  font-family: 'SF Pro Text', var(--font-sans);
+  font-family: var(--font-sans);
   font-size: 1rem;
   font-weight: 400;
   color: var(--text-color);
@@ -354,7 +354,7 @@
   padding: 0.8rem 1rem;
   position: relative;
   background: transparent;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
 
 .mobileNav a:hover {
@@ -407,7 +407,7 @@
 }
 
 .mobileNavSettingLabel {
-  font-family: 'SF Pro Text', var(--font-sans);
+  font-family: var(--font-sans);
   font-size: 0.9rem;
   color: var(--text-color);
   transition: color 0.3s ease;

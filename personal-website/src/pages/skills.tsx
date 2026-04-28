@@ -12,9 +12,9 @@
  * - Skills：主要组件，包含技能展示逻辑和布局
  */
 
-import Head from 'next/head';
 import { useEffect, useRef } from 'react';
 import Layout from '@/components/layout/Layout';
+import SeoHead from '@/components/common/SeoHead';
 import styles from '@/styles/Skills.module.css';
 
 export default function Skills() {
@@ -43,10 +43,11 @@ export default function Skills() {
 
   return (
     <>
-      <Head>
-        <title>技能 - saber的个人网站</title>
-        <meta name="description" content="我的技术技能和专业能力" />
-      </Head>
+      <SeoHead
+        title="技能 - 许辉"
+        description="查看许辉在前端、后端、业务系统设计和工程协作方面的技术能力与项目经验。"
+        path="/skills/"
+      />
       <Layout>
         <div className={styles.skillsPage} ref={skillsRef}>
           <div className={styles.container}>
@@ -158,7 +159,7 @@ export default function Skills() {
                   </div>
                   <p className={styles.skillDescription}>
                     能使用 Node.js 和 Express 完成接口、中间层和调试工具开发，
-                    支撑前后端分离项目的联调和业务落地。
+                    主要用在接口补充、联调辅助和问题排查这类场景。
                   </p>
                 </div>
 
@@ -175,7 +176,7 @@ export default function Skills() {
                   </div>
                   <p className={styles.skillDescription}>
                     做过表结构设计、业务字段扩展、查询优化、缓存使用和数据同步相关处理，
-                    能配合后端链路做问题排查和落地。
+                    也会配合接口和日志一起查数据问题。
                   </p>
                 </div>
 
@@ -191,8 +192,8 @@ export default function Skills() {
                     ></div>
                   </div>
                   <p className={styles.skillDescription}>
-                    参与过权限体系、动态表单、数据同步、组合支付、运营后台等复杂业务模块设计，
-                    更关注系统的可运行、可维护和可排查。
+                    参与过权限、动态表单、数据同步、组合支付、运营后台等模块，
+                    写功能时会顺手考虑后面怎么查问题、怎么继续改。
                   </p>
                 </div>
               </div>
@@ -214,7 +215,7 @@ export default function Skills() {
                   </div>
                   <p className={styles.skillDescription}>
                     熟悉 Git 工作流、分支管理、代码评审和多人协作开发，
-                    能在已有项目中稳定推进迭代与问题修复。
+                    在已有项目里主要做功能迭代、问题修复和代码合并。
                   </p>
                 </div>
 
@@ -248,7 +249,7 @@ export default function Skills() {
                   </div>
                   <p className={styles.skillDescription}>
                     做过技术规范、需求拆解、联调沟通和新人带教，
-                    能在复杂项目里兼顾开发推进与协作效率。
+                    也习惯把容易反复出错的地方整理成固定做法。
                   </p>
                 </div>
               </div>

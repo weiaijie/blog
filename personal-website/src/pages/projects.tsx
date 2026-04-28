@@ -4,9 +4,9 @@
  * 描述：项目案例页，默认展示摘要，点击后通过弹窗查看完整案例分析
  */
 
-import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import Layout from '@/components/layout/Layout';
+import SeoHead from '@/components/common/SeoHead';
 import styles from '@/styles/Projects.module.css';
 import { projectCaseStudies, projectCategories, type ProjectCaseStudy } from '@/data/projects';
 
@@ -20,20 +20,18 @@ export default function Projects() {
 
   return (
     <>
-      <Head>
-        <title>项目案例 - 许辉的个人网站</title>
-        <meta
-          name="description"
-          content="项目案例页，展示系统对接、企业小程序和企业福利商城改造等真实项目案例分析。"
-        />
-      </Head>
+      <SeoHead
+        title="项目案例 - 许辉"
+        description="整理许辉参与过的系统对接、企业小程序、福利商城和后台系统项目。"
+        path="/projects/"
+      />
       <Layout>
         <div className={styles.projectsPage}>
           <div className={styles.container}>
             <div className={styles.hero}>
               <h1 className={styles.pageTitle}>项目案例</h1>
               <p className={styles.pageDescription}>
-                这里整理的是我主导或参与的核心项目。重点不在于罗列技术栈，而是展示在复杂业务场景下的架构思考、问题拆解与最终交付价值。
+                这里放一些我实际做过、维护过的项目。尽量少写套话，多写当时要解决什么、我负责哪块。
               </p>
             </div>
 
@@ -70,12 +68,12 @@ export default function Projects() {
 
                   <div className={styles.projectContent}>
                     <div className={styles.projectText}>
-                      <p><strong>项目概述：</strong>{project.summary}</p>
-                      <p><strong>业务定位：</strong>{project.positioning}</p>
+                      <p>{project.summary}</p>
+                      <p>{project.positioning}</p>
                     </div>
 
                     <div className={styles.projectHighlights}>
-                      <h3 className={styles.highlightsTitle}>核心亮点</h3>
+                      <h3 className={styles.highlightsTitle}>我主要处理的部分</h3>
                       <ul className={styles.highlightsList}>
                         {project.highlights.map((item) => (
                           <li key={item}>

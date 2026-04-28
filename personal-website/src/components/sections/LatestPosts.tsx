@@ -1,7 +1,7 @@
 /**
  * LatestPosts.tsx
  *
- * 描述：首页的最新文章部分，展示真实文章摘要
+ * 描述：首页的项目记录部分，展示项目备忘摘要
  */
 
 import Link from 'next/link';
@@ -11,7 +11,13 @@ import { featuredBlogPosts } from '@/data/blog';
 const LatestPosts = () => {
   return (
     <section id="blog" className={styles.latestPosts}>
-      <h2 className={styles.sectionTitle}>最新文章</h2>
+      <div className={styles.sectionIntro}>
+        <span className={styles.sectionLabel}>Project Notes</span>
+        <h2 className={styles.sectionTitle}>项目记录</h2>
+        <p className={styles.sectionSummary}>
+          不是正式写作，更像项目做完之后留给自己的备忘。
+        </p>
+      </div>
       <div className={styles.postsList}>
         {featuredBlogPosts.map((post) => (
           <Link href={`/blog/${post.id}`} key={post.id} className={styles.postItem}>
@@ -28,7 +34,7 @@ const LatestPosts = () => {
       </div>
       <div className={styles.viewAllContainer}>
         <Link href="/blog" className={styles.viewAllButton}>
-          查看全部文章
+          查看全部记录
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="12"

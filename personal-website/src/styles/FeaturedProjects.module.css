@@ -1,89 +1,107 @@
-/* 精选项目部分 - 极简通栏列表风格 */
 .featuredProjects {
   padding: 80px 0;
+  border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
-  transition: border-color 0.3s ease;
+}
+
+.sectionIntro {
+  margin-bottom: 40px;
+}
+
+.sectionLabel {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--primary-color);
+  margin-bottom: 12px;
 }
 
 .sectionTitle {
-  font-family: 'SF Pro Display', var(--font-heading);
-  font-size: 32px;
+  font-size: 36px;
   font-weight: 700;
   color: var(--tagline-heading);
-  margin-bottom: 48px;
-  text-align: left;
-  letter-spacing: -0.02em;
-  transition: color 0.3s ease;
+  margin-bottom: 14px;
+  letter-spacing: 0;
+}
+
+.sectionSummary {
+  max-width: 720px;
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: 0;
 }
 
 .projectsList {
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 18px;
 }
 
 .projectItem {
-  display: flex;
-  flex-direction: row;
-  gap: 48px;
-  padding: 40px 0;
-  border-bottom: 1px solid var(--border-color);
-  transition: border-color 0.3s ease;
-}
-
-.projectItem:first-child {
-  border-top: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: minmax(240px, 300px) minmax(0, 1fr);
+  gap: 34px;
+  padding: 30px 28px;
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  background: var(--card-bg);
+  box-shadow: var(--card-shadow);
 }
 
 .projectLeft {
-  flex: 0 0 300px;
   display: flex;
   flex-direction: column;
 }
 
 .projectTitle {
-  font-family: 'SF Pro Display', var(--font-heading);
-  font-size: 22px;
-  font-weight: 600;
+  font-size: 24px;
+  font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: 12px;
-  letter-spacing: -0.01em;
+  margin-bottom: 14px;
+  letter-spacing: 0;
 }
 
 .projectMeta {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 12px;
-  margin-bottom: 20px;
-  font-size: 14px;
+  margin-bottom: 18px;
+  font-size: 13px;
   color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .projectCategory {
-  padding: 2px 8px;
-  background-color: var(--bg-secondary);
-  border-radius: 4px;
-  font-size: 13px;
-  font-weight: 500;
+  padding: 5px 10px;
+  background-color: rgba(var(--accent-rgb), 0.18);
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--secondary-dark);
 }
 
 .projectRight {
-  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
 .projectDescription {
-  font-family: 'SF Pro Text', var(--font-sans);
   font-size: 15px;
-  line-height: 1.7;
+  line-height: 1.8;
   color: var(--text-secondary);
+  margin-bottom: 0;
 }
 
 .projectDescription strong {
   color: var(--text-primary);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .projectTags {
@@ -95,56 +113,51 @@
 
 .projectTag {
   display: inline-block;
-  padding: 4px 10px;
+  padding: 6px 10px;
   border: 1px solid var(--border-color);
   color: var(--text-secondary);
-  border-radius: 4px;
+  border-radius: 999px;
   font-size: 12px;
-  font-weight: 500;
-  transition: all 0.2s ease;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.36);
 }
 
 .projectLinks {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 8px;
+  margin-top: 4px;
 }
 
 .projectLink {
   display: inline-flex;
   align-items: center;
+  min-height: 38px;
+  padding: 0 14px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--primary-color);
-  text-decoration: none;
-  transition: opacity 0.2s ease;
+  border-radius: 999px;
+  border: 1px solid rgba(var(--primary-rgb), 0.18);
+  background: rgba(var(--primary-rgb), 0.06);
 }
 
 .projectLink:hover {
-  opacity: 0.7;
-  text-decoration: underline;
+  background: rgba(var(--primary-rgb), 0.12);
 }
 
 .viewAllContainer {
   display: flex;
   justify-content: flex-start;
-  margin-top: 40px;
+  margin-top: 36px;
 }
 
 .viewAllButton {
   display: inline-flex;
   align-items: center;
-  font-family: 'SF Pro Text', var(--font-sans);
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 700;
   color: var(--primary-color);
-  text-decoration: none;
-  transition: opacity 0.2s ease;
-}
-
-.viewAllButton:hover {
-  opacity: 0.7;
 }
 
 .buttonIcon {
@@ -162,31 +175,22 @@
   }
 
   .sectionTitle {
-    font-size: 28px;
-    margin-bottom: 32px;
+    font-size: 30px;
   }
 
   .projectItem {
-    flex-direction: column;
-    gap: 24px;
-    padding: 32px 0;
-  }
-
-  .projectLeft {
-    flex: none;
-  }
-
-  .projectTags {
-    margin-top: 16px;
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding: 24px 20px;
   }
 }
 
 @media (max-width: 480px) {
-  .featuredProjects {
-    padding: 40px 0;
+  .sectionTitle {
+    font-size: 26px;
   }
 
-  .sectionTitle {
-    font-size: 24px;
+  .sectionSummary {
+    font-size: 16px;
   }
 }

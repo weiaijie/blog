@@ -82,12 +82,23 @@ const Tagline: React.FC<TaglineProps> = ({ visible }) => {
         >
           <div className={styles.taglineContent}>
             <motion.div className={styles.taglineMain} variants={childVariants}>
+              <motion.div className={styles.taglineEyebrow} variants={childVariants}>
+                Shanghai-ready / Remote-friendly / AI-assisted delivery
+              </motion.div>
               <motion.h1 className={styles.taglineHeading} variants={childVariants}>
-                {siteConfig.author} <span className={styles.taglineRole}>/ 全栈开发工程师</span>
+                <span className={styles.taglineName}>{siteConfig.author}</span>
+                <span className={styles.taglineRole}>{siteConfig.profile.heroRole}</span>
               </motion.h1>
               <motion.div className={styles.taglineSubheading} variants={childVariants}>
-                <p>{siteConfig.profile.aboutIntro[0]}</p>
-                <p>{siteConfig.profile.aboutIntro[3]}</p>
+                {siteConfig.profile.heroSummary.map((line) => (
+                  <p key={line}>{line}</p>
+                ))}
+              </motion.div>
+              <motion.div className={styles.taglineSignals} variants={childVariants}>
+                <span>企业后台</span>
+                <span>小程序交付</span>
+                <span>系统对接</span>
+                <span>长期维护</span>
               </motion.div>
               <motion.div className={styles.taglineActions} variants={childVariants}>
                 <Link href="/projects" className={styles.taglinePrimaryButton}>

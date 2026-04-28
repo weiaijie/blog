@@ -1,13 +1,13 @@
 /**
  * blog.tsx
  *
- * 描述：博客页面，展示文章列表
+ * 描述：项目记录页面，展示项目备忘列表
  */
 
-import Head from 'next/head';
 import { useState } from 'react';
 import Link from 'next/link';
 import Layout from '@/components/layout/Layout';
+import SeoHead from '@/components/common/SeoHead';
 import styles from '@/styles/Blog.module.css';
 import { blogPosts, blogCategories } from '@/data/blog';
 
@@ -26,17 +26,18 @@ export default function Blog() {
 
   return (
     <>
-      <Head>
-        <title>博客 - 许辉的个人网站</title>
-        <meta name="description" content="项目复盘、架构实践和工程经验文章。" />
-      </Head>
+      <SeoHead
+        title="项目记录 - 许辉"
+        description="记录一些项目里遇到的问题、处理方式和后续想法。"
+        path="/blog/"
+      />
       <Layout>
         <div className={styles.blogPage}>
           <div className={styles.container}>
             <div className={styles.hero}>
-              <h1 className={styles.pageTitle}>博客</h1>
+              <h1 className={styles.pageTitle}>项目记录</h1>
               <p className={styles.pageDescription}>
-                记录技术思考、项目复盘与工程实践。
+                不按文章来写，主要是把项目里踩过的坑和处理方式先记下来。
               </p>
             </div>
 
