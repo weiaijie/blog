@@ -1,0 +1,45 @@
+{
+  "name": "civlike-web",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "perf:map16": "npm run build && node scripts/run-map-perf-case.mjs PERF-MAP-16-PAN",
+    "perf:map20": "npm run build && node scripts/run-map-perf-case.mjs PERF-MAP-20-ZOOM",
+    "perf:map32:pan": "npm run build && node scripts/run-map-perf-case.mjs PERF-MAP-32-PAN",
+    "perf:map32:zoom": "npm run build && node scripts/run-map-perf-case.mjs PERF-MAP-32-ZOOM",
+    "perf:map64:pan": "npm run build && node scripts/run-map-perf-case.mjs PERF-MAP-64-PAN",
+    "perf:map:all": "npm run build && node scripts/run-map-perf-case.mjs PERF-MAP-16-PAN && node scripts/run-map-perf-case.mjs PERF-MAP-20-ZOOM && node scripts/run-map-perf-case.mjs PERF-MAP-32-PAN && node scripts/run-map-perf-case.mjs PERF-MAP-32-ZOOM && node scripts/run-map-perf-case.mjs PERF-MAP-64-PAN",
+    "perf:map:fog": "npm run build && node scripts/run-map-perf-case.mjs PERF-MAP-16-FOG-PAN && node scripts/run-map-perf-case.mjs PERF-MAP-32-FOG-PAN && node scripts/run-map-perf-case.mjs PERF-MAP-64-FOG-PAN",
+    "smoke:playable": "npm run build && node scripts/run-playable-smoke.mjs",
+    "smoke:30turn": "npm run build && node scripts/run-30-turn-loop.mjs",
+    "test": "vitest run",
+    "typecheck": "tsc -b --pretty false",
+    "verify:phase2": "npm run typecheck && npm run test && npm run lint && npm run perf:map:all && npm run perf:map:fog && npm run smoke:playable && npm run smoke:30turn"
+  },
+  "dependencies": {
+    "pixi.js": "^8.18.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.13.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.3",
+    "eslint": "^9.13.0",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.14",
+    "globals": "^15.11.0",
+    "jsdom": "^24.1.1",
+    "playwright": "^1.44.1",
+    "typescript": "~5.6.2",
+    "typescript-eslint": "^8.11.0",
+    "vite": "^5.4.10",
+    "vitest": "^1.6.1"
+  }
+}
