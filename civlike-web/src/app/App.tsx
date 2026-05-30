@@ -9,7 +9,8 @@ import { getTerrainConfig, terrainConfigs } from '../game/config/terrain'
 import { getTechConfig } from '../game/config/tech'
 import { tryApplyRuleCommand } from '../game/simulation/applyRuleCommand'
 import { getCityYield } from '../game/simulation/cityProduction'
-import { createInitialGameState } from '../game/state/gameState'
+import { areHexNeighbors } from '../game/simulation/hexGrid'
+import { createInitialGameState, type GameState, type ScenarioId } from '../game/state/gameState'
 import { hashGameState } from '../game/state/hashGameState'
 import { loadGameFromSave, serializeSavedGame } from '../game/state/saveGame'
 import type { RuleCommand } from '../game/commands/ruleCommand'
@@ -23,14 +24,19 @@ export function App() {
   const stageRef = useRef<PixiStageHandle | null>(null)
   const latestExplorationRef = useRef<PixiExplorationSnapshot | null>(null)
   const [stats, setStats] = useState<PixiStageStats | null>(null)
-  const [gameState, setGameState] = useState(() => createInitialGameState(1001))
+  const [gameState, setGameState] = useState(() =>
+    createInitialGameState(1001, { scenarioId: getInitialScenarioId() }),
+  )
   const [selectedUnitId, setSelectedUnitId] = useState<string | null>(null)
   const [commandError, setCommandError] = useState<string | null>(null)
   const [savedGameJson, setSavedGameJson] = useState<string | null>(null)
   const [saveStatus, setSaveStatus] = useState('无')
   const [persistentSaveStatus, setPersistentSaveStatus] = useState('检查中')
+  const [discoveryStatus, setDiscoveryStatus] = useState('等待侦察兵移动')
+  const [eventLog, setEventLog] = useState<string[]>(['等待事件'])
 
   function runCommand(command: RuleCommand): boolean {
+    const exploredBefore = getExploredTileCount(gameState, command.playerId)
     const result = tryApplyRuleCommand(gameState, command)
 
     if (!result.ok) {
@@ -39,8 +45,46 @@ export function App() {
     }
 
     setCommandError(null)
+    const discoveryEvent = updateDiscoveryStatus(command, result.state, exploredBefore)
+    pushEvents([
+      ...getCommandEvents(gameState, result.state, command),
+      ...(discoveryEvent ? [discoveryEvent] : []),
+    ])
+    if (command.type === 'FOUND_CITY') {
+      setSelectedUnitId(null)
+    }
     setGameState(result.state)
     return true
+  }
+
+  function pushEvents(events: string[]): void {
+    if (events.length === 0) {
+      return
+    }
+
+    setEventLog((currentEvents) => [...events, ...currentEvents.filter((event) => event !== '等待事件')].slice(0, 5))
+  }
+
+  function updateDiscoveryStatus(
+    command: RuleCommand,
+    nextState: GameState,
+    exploredBefore: number,
+  ): string | null {
+    if (command.type !== 'MOVE_UNIT') {
+      return null
+    }
+
+    const exploredAfter = getExploredTileCount(nextState, command.playerId)
+    const newTiles = Math.max(0, exploredAfter - exploredBefore)
+    const target = Math.min(20, nextState.map.tiles.length)
+
+    if (newTiles > 0) {
+      setDiscoveryStatus(`本次新发现 ${newTiles} 个地块，累计 ${Math.min(exploredAfter, target)} / ${target}`)
+      return `新发现：${newTiles} 个地块，累计 ${Math.min(exploredAfter, target)} / ${target}`
+    }
+
+    setDiscoveryStatus(`本次没有新发现，累计 ${Math.min(exploredAfter, target)} / ${target}`)
+    return null
   }
 
   function endTurn(): void {
@@ -67,12 +111,73 @@ export function App() {
     })
   }
 
+  function setCapitalSettlerProduction(): void {
+    runCommand({
+      cityId: 'city:capital',
+      playerId: gameState.activePlayerId,
+      productionId: 'unit:settler',
+      type: 'SET_PRODUCTION',
+    })
+  }
+
+  function setCapitalWarriorProduction(): void {
+    runCommand({
+      cityId: 'city:capital',
+      playerId: gameState.activePlayerId,
+      productionId: 'unit:warrior',
+      type: 'SET_PRODUCTION',
+    })
+  }
+
+  function setSelectedCityProduction(productionId: 'unit:scout' | 'unit:settler' | 'unit:warrior'): void {
+    if (!selectedCityCanShowDetails || !selectedCity) {
+      setCommandError('SET_PRODUCTION：需要先选择自己的城市。')
+      return
+    }
+
+    runCommand({
+      cityId: selectedCity.id,
+      playerId: gameState.activePlayerId,
+      productionId,
+      type: 'SET_PRODUCTION',
+    })
+  }
+
+  function foundCity(): void {
+    if (!selectedUnit) {
+      setCommandError('FOUND_CITY：需要先选择开拓者。')
+      return
+    }
+
+    runCommand({
+      playerId: gameState.activePlayerId,
+      tileId: selectedUnit.tileId,
+      type: 'FOUND_CITY',
+      unitId: selectedUnit.id,
+    })
+  }
+
+  function attackSelectedTarget(): void {
+    if (!selectedUnit || !selectedAttackTarget) {
+      setCommandError('ATTACK：需要先选择战士和一个可见相邻敌方单位。')
+      return
+    }
+
+    runCommand({
+      attackerUnitId: selectedUnit.id,
+      playerId: gameState.activePlayerId,
+      targetUnitId: selectedAttackTarget.id,
+      type: 'ATTACK',
+    })
+  }
+
   function saveGame(): void {
     const serialized = serializeSavedGame(gameState)
 
     setSavedGameJson(serialized)
     setSaveStatus(`已保存回合 ${gameState.turn} / 命令 ${gameState.commandLog.length}`)
     setCommandError(null)
+    pushEvents([`保存：回合 ${gameState.turn} / 命令 ${gameState.commandLog.length}`])
   }
 
   function loadSavedGame(): void {
@@ -92,7 +197,9 @@ export function App() {
     setGameState(result.state)
     setSelectedUnitId(null)
     setCommandError(null)
+    setDiscoveryStatus(getExplorationSummary(result.state, result.state.activePlayerId))
     setSaveStatus(`已读取回合 ${result.state.turn} / 命令 ${result.state.commandLog.length}`)
+    pushEvents([`读取存档：回合 ${result.state.turn} / 命令 ${result.state.commandLog.length}`])
   }
 
   function savePersistentGame(): void {
@@ -106,6 +213,7 @@ export function App() {
 
     setCommandError(null)
     setPersistentSaveStatus(`已保存回合 ${gameState.turn} / 命令 ${gameState.commandLog.length} / ${result.bytes} 字节`)
+    pushEvents([`持久保存：回合 ${gameState.turn} / 命令 ${gameState.commandLog.length}`])
   }
 
   function loadPersistentGame(): void {
@@ -126,7 +234,9 @@ export function App() {
     setGameState(result.state)
     setSelectedUnitId(null)
     setCommandError(null)
+    setDiscoveryStatus(getExplorationSummary(result.state, result.state.activePlayerId))
     setPersistentSaveStatus(`已读取回合 ${result.state.turn} / 命令 ${result.state.commandLog.length}`)
+    pushEvents([`持久读取：回合 ${result.state.turn} / 命令 ${result.state.commandLog.length}`])
   }
 
   const activePlayer = gameState.players.find((player) => player.id === gameState.activePlayerId)
@@ -142,6 +252,7 @@ export function App() {
   const selectedUnit = selectedUnitId
     ? gameState.units.find((unit) => unit.id === selectedUnitId)
     : undefined
+  const canFoundCity = selectedUnit?.typeId === 'unit:settler'
   const currentTech = gameState.currentTechByPlayerId[gameState.activePlayerId]
   const currentTechConfig = currentTech ? getTechConfig(currentTech) : null
   const completedTechs = gameState.completedTechByPlayerId[gameState.activePlayerId] ?? []
@@ -151,6 +262,57 @@ export function App() {
   const activeExploration = gameState.explorationByPlayerId[gameState.activePlayerId]
   const exploredTileCount = activeExploration?.exploredTileIds.length ?? 0
   const visibleTileCount = activeExploration?.visibleTileIds.length ?? 0
+  const explorationTarget = Math.min(20, gameState.map.tiles.length)
+  const explorationTargetStatus =
+    exploredTileCount >= explorationTarget
+      ? `探索目标完成 ${explorationTarget} / ${explorationTarget}`
+      : `探索目标未完成 ${Math.min(exploredTileCount, explorationTarget)} / ${explorationTarget}`
+  const selectedTileIsVisible = selectedTile
+    ? activeExploration?.visibleTileIds.includes(selectedTile.id) ?? false
+    : false
+  const selectedTileIsExplored = selectedTile
+    ? activeExploration?.exploredTileIds.includes(selectedTile.id) ?? false
+    : false
+  const selectedTileCanShowMapMemory = selectedTileIsVisible || selectedTileIsExplored
+  const selectedTileHasOwnCity = selectedCity?.ownerId === gameState.activePlayerId
+  const selectedCityCanShowDetails =
+    selectedCity?.ownerId === gameState.activePlayerId &&
+    (selectedTileIsVisible || selectedTileHasOwnCity)
+  const selectedCityYield = selectedCityCanShowDetails && selectedCity
+    ? getCityYield(gameState, selectedCity)
+    : null
+  const selectedTileExplorationStatus = selectedTile
+    ? getExplorationStatusLabel(selectedTileIsVisible, selectedTileIsExplored)
+    : '无'
+  const visibleEnemyUnitsOnSelectedTile = selectedTileIsVisible
+    ? selectedUnits.filter((unit) => unit.ownerId !== gameState.activePlayerId)
+    : []
+  const selectedUnitTile = selectedUnit
+    ? gameState.map.tiles.find((tile) => tile.id === selectedUnit.tileId)
+    : undefined
+  const selectedAttackTarget =
+    selectedUnit?.typeId === 'unit:warrior' &&
+    selectedUnit.ownerId === gameState.activePlayerId &&
+    selectedTile &&
+    selectedUnitTile &&
+    visibleEnemyUnitsOnSelectedTile.length === 1 &&
+    areAdjacentTiles(selectedUnitTile, selectedTile)
+      ? visibleEnemyUnitsOnSelectedTile[0]
+      : undefined
+  const hasAmbiguousAttackTargets =
+    selectedUnit?.typeId === 'unit:warrior' &&
+    selectedTileIsVisible &&
+    visibleEnemyUnitsOnSelectedTile.length > 1
+  const attackStatus = getAttackStatus({
+    activePlayerId: gameState.activePlayerId,
+    hasAmbiguousAttackTargets,
+    selectedAttackTargetId: selectedAttackTarget?.id,
+    selectedTile,
+    selectedTileIsVisible,
+    selectedUnit,
+    selectedUnitTile,
+    visibleEnemyUnitCount: visibleEnemyUnitsOnSelectedTile.length,
+  })
   latestExplorationRef.current = activeExploration ?? null
   const objectives = [
     {
@@ -200,6 +362,15 @@ export function App() {
       return
     }
 
+    const enemyUnitsOnTile = gameState.units.filter(
+      (unit) => unit.tileId === tileId && unit.ownerId !== gameState.activePlayerId,
+    )
+
+    if (enemyUnitsOnTile.length > 0) {
+      setCommandError(null)
+      return
+    }
+
     const fromTile = gameState.map.tiles.find((tile) => tile.id === selectedUnit.tileId)
 
     if (!fromTile || !areAdjacentTiles(fromTile, clickedTile)) {
@@ -228,6 +399,7 @@ export function App() {
       return
     }
 
+    let cancelled = false
     let dispose: (() => void) | undefined
 
     mountPixiStage(host, {
@@ -236,6 +408,11 @@ export function App() {
         handleTileSelectRef.current(tileId)
       },
     }).then((stage) => {
+      if (cancelled) {
+        stage.destroy()
+        return
+      }
+
       dispose = stage.destroy
       stageRef.current = stage
       stage.setExploration(latestExplorationRef.current)
@@ -243,6 +420,7 @@ export function App() {
     })
 
     return () => {
+      cancelled = true
       stageRef.current = null
       dispose?.()
     }
@@ -274,6 +452,35 @@ export function App() {
           <button type="button" onClick={setCapitalProduction}>
             生产侦察兵
           </button>
+          <button type="button" onClick={setCapitalSettlerProduction}>
+            生产开拓者
+          </button>
+          <button type="button" onClick={setCapitalWarriorProduction}>
+            生产战士
+          </button>
+          {canFoundCity ? (
+            <button type="button" onClick={foundCity}>
+              建立城市
+            </button>
+          ) : null}
+          {selectedAttackTarget ? (
+            <button type="button" onClick={attackSelectedTarget}>
+              攻击
+            </button>
+          ) : null}
+          {selectedCityCanShowDetails ? (
+            <>
+              <button type="button" onClick={() => setSelectedCityProduction('unit:scout')}>
+                选中城市生产侦察兵
+              </button>
+              <button type="button" onClick={() => setSelectedCityProduction('unit:settler')}>
+                选中城市生产开拓者
+              </button>
+              <button type="button" onClick={() => setSelectedCityProduction('unit:warrior')}>
+                选中城市生产战士
+              </button>
+            </>
+          ) : null}
           <button type="button" onClick={saveGame}>
             保存游戏
           </button>
@@ -296,6 +503,18 @@ export function App() {
             <p className="objective-hint" aria-label="探索提示">
               {explorationHint}
             </p>
+            <p className="objective-hint" aria-label="探索进度">
+              探索进度 {Math.min(exploredTileCount, explorationTarget)} / {explorationTarget}
+            </p>
+            <p className="objective-hint" aria-label="探索目标状态">
+              {explorationTargetStatus}
+            </p>
+            <p className="objective-hint" aria-label="新发现提示">
+              {discoveryStatus}
+            </p>
+            <p className="objective-hint" aria-label="情报说明">
+              情报说明：可见=当前情报，已探索=历史地形，未知=隐藏详情
+            </p>
           </div>
           <ol>
             {objectives.map((objective) => (
@@ -303,6 +522,15 @@ export function App() {
                 <span>{objective.done ? '完成' : '下一步'}</span>
                 {objective.label}
               </li>
+            ))}
+          </ol>
+        </section>
+
+        <section className="event-panel" aria-label="最近事件">
+          <p className="eyebrow">最近事件</p>
+          <ol>
+            {eventLog.map((event, index) => (
+              <li key={`${event}-${index}`}>{event}</li>
             ))}
           </ol>
         </section>
@@ -319,6 +547,10 @@ export function App() {
           <div>
             <dt>当前玩家</dt>
             <dd>{activePlayer?.name ?? gameState.activePlayerId}</dd>
+          </div>
+          <div>
+            <dt>场景</dt>
+            <dd>{gameState.scenarioId}</dd>
           </div>
           <div>
             <dt>食物库存</dt>
@@ -389,6 +621,10 @@ export function App() {
             <dd>{commandError ?? '无'}</dd>
           </div>
           <div>
+            <dt>攻击状态</dt>
+            <dd>{attackStatus}</dd>
+          </div>
+          <div>
             <dt>已选单位</dt>
             <dd>{selectedUnit ? `${selectedUnit.id} @ ${selectedUnit.tileId}` : '无'}</dd>
           </div>
@@ -397,12 +633,26 @@ export function App() {
             <dd>{gameState.units.length}</dd>
           </div>
           <div>
+            <dt>城市数量</dt>
+            <dd>{gameState.cities.length}</dd>
+          </div>
+          <div>
             <dt>可见地块</dt>
             <dd>{visibleTileCount}</dd>
           </div>
           <div>
             <dt>已探索地块</dt>
             <dd>{exploredTileCount}</dd>
+          </div>
+          <div>
+            <dt>探索进度</dt>
+            <dd>
+              {Math.min(exploredTileCount, explorationTarget)} / {explorationTarget}
+            </dd>
+          </div>
+          <div>
+            <dt>新发现</dt>
+            <dd>{discoveryStatus}</dd>
           </div>
           <div>
             <dt>地图迷雾</dt>
@@ -447,26 +697,108 @@ export function App() {
           <div>
             <dt>地块详情</dt>
             <dd>
-              {selectedTile && selectedTerrain
+              {selectedTile && selectedTerrain && selectedTileCanShowMapMemory
                 ? `${selectedTile.x}, ${selectedTile.y} / ${selectedTerrain.label}`
-                : '无'}
+                : selectedTile ? '未知地块' : '无'}
             </dd>
+          </div>
+          <div>
+            <dt>地块探索状态</dt>
+            <dd>{selectedTileExplorationStatus}</dd>
           </div>
           <div>
             <dt>地块产出</dt>
             <dd>
-              {selectedTerrain
+              {selectedTerrain && selectedTileCanShowMapMemory
                 ? `食物 ${selectedTerrain.food}，生产 ${selectedTerrain.production}，科研 ${selectedTerrain.science}`
-                : '无'}
+                : selectedTile ? '未知' : '无'}
             </dd>
           </div>
           <div>
             <dt>地块单位</dt>
-            <dd>{selectedUnits.length > 0 ? selectedUnits.map((unit) => unit.id).join(', ') : '无'}</dd>
+            <dd>
+              {selectedTileIsVisible
+                ? selectedUnits.length > 0
+                  ? selectedUnits.map((unit) => unit.id).join(', ')
+                  : '无'
+                : selectedTile
+                  ? selectedTileCanShowMapMemory
+                    ? '不可见'
+                    : '未知'
+                  : '无'}
+            </dd>
+          </div>
+          <div>
+            <dt>地块单位生命</dt>
+            <dd>
+              {selectedTileIsVisible
+                ? selectedUnits.length > 0
+                  ? selectedUnits.map((unit) => `${unit.id} ${unit.hp}/${unit.maxHp}`).join(', ')
+                  : '无'
+                : selectedTile
+                  ? selectedTileCanShowMapMemory
+                    ? '不可见'
+                    : '未知'
+                  : '无'}
+            </dd>
           </div>
           <div>
             <dt>地块城市</dt>
-            <dd>{selectedCity ? selectedCity.id : '无'}</dd>
+            <dd>
+              {selectedTileIsVisible
+                ? selectedCity
+                  ? selectedCity.id
+                  : '无'
+                : selectedTileHasOwnCity
+                  ? selectedCity.id
+                : selectedTile
+                  ? selectedTileCanShowMapMemory
+                    ? '不可见'
+                    : '未知'
+                  : '无'}
+            </dd>
+          </div>
+          <div>
+            <dt>地块城市生产</dt>
+            <dd>
+              {selectedCityCanShowDetails && selectedCity
+                ? selectedCity.productionId ?? '无'
+                : selectedTile
+                  ? selectedTileCanShowMapMemory
+                    ? selectedCity
+                      ? '不可见'
+                      : '无'
+                    : '未知'
+                  : '无'}
+            </dd>
+          </div>
+          <div>
+            <dt>地块城市进度</dt>
+            <dd>
+              {selectedCityCanShowDetails && selectedCity
+                ? selectedCity.productionProgress
+                : selectedTile
+                  ? selectedTileCanShowMapMemory
+                    ? selectedCity
+                      ? '不可见'
+                      : '无'
+                    : '未知'
+                  : '无'}
+            </dd>
+          </div>
+          <div>
+            <dt>地块城市产出</dt>
+            <dd>
+              {selectedCityYield
+                ? `食物 ${selectedCityYield.food}，生产 ${selectedCityYield.production}，科研 ${selectedCityYield.science}`
+                : selectedTile
+                  ? selectedTileCanShowMapMemory
+                    ? selectedCity
+                      ? '不可见'
+                      : '无'
+                    : '未知'
+                  : '无'}
+            </dd>
           </div>
           <div>
             <dt>模块边界</dt>
@@ -479,8 +811,151 @@ export function App() {
 }
 
 function areAdjacentTiles(from: MapTile, to: MapTile): boolean {
-  const deltaX = Math.abs(from.x - to.x)
-  const deltaY = Math.abs(from.y - to.y)
+  return areHexNeighbors(from, to)
+}
 
-  return deltaX + deltaY === 1
+function getAttackStatus({
+  activePlayerId,
+  hasAmbiguousAttackTargets,
+  selectedAttackTargetId,
+  selectedTile,
+  selectedTileIsVisible,
+  selectedUnit,
+  selectedUnitTile,
+  visibleEnemyUnitCount,
+}: {
+  activePlayerId: string
+  hasAmbiguousAttackTargets: boolean
+  selectedAttackTargetId?: string
+  selectedTile?: MapTile
+  selectedTileIsVisible: boolean
+  selectedUnit?: GameState['units'][number]
+  selectedUnitTile?: MapTile
+  visibleEnemyUnitCount: number
+}): string {
+  if (selectedAttackTargetId) {
+    return `可以攻击 ${selectedAttackTargetId}`
+  }
+
+  if (!selectedUnit) {
+    return '需要选择己方战士'
+  }
+
+  if (selectedUnit.ownerId !== activePlayerId) {
+    return '需要选择己方战士'
+  }
+
+  if (selectedUnit.typeId !== 'unit:warrior') {
+    return '只有战士可以攻击'
+  }
+
+  if (!selectedTile || selectedTile.id === selectedUnit.tileId) {
+    return '请选择可见相邻敌方单位'
+  }
+
+  if (!selectedTileIsVisible) {
+    return '目标不可见'
+  }
+
+  if (visibleEnemyUnitCount === 0) {
+    return '请选择可见相邻敌方单位'
+  }
+
+  if (hasAmbiguousAttackTargets) {
+    return '目标不明确'
+  }
+
+  if (!selectedUnitTile || !areAdjacentTiles(selectedUnitTile, selectedTile)) {
+    return '目标不相邻'
+  }
+
+  return '请选择可见相邻敌方单位'
+}
+
+function getExplorationStatusLabel(isVisible: boolean, isExplored: boolean): string {
+  if (isVisible) {
+    return '可见'
+  }
+
+  if (isExplored) {
+    return '已探索'
+  }
+
+  return '未知'
+}
+
+function getExploredTileCount(state: GameState, playerId: string): number {
+  return state.explorationByPlayerId[playerId]?.exploredTileIds.length ?? 0
+}
+
+function getExplorationSummary(state: GameState, playerId: string): string {
+  const explored = getExploredTileCount(state, playerId)
+  const target = Math.min(20, state.map.tiles.length)
+
+  return `累计探索 ${Math.min(explored, target)} / ${target}`
+}
+
+function getInitialScenarioId(): ScenarioId {
+  if (typeof window === 'undefined') {
+    return 'default'
+  }
+
+  const scenario = new URLSearchParams(window.location.search).get('scenario')
+
+  return scenario === 'combat' || scenario === 'combat:adjacent-enemy'
+    ? 'combat:adjacent-enemy'
+    : 'default'
+}
+
+function getCommandEvents(previousState: GameState, nextState: GameState, command: RuleCommand): string[] {
+  const events: string[] = []
+  const previousExplored = getExploredTileCount(previousState, previousState.activePlayerId)
+  const nextExplored = getExploredTileCount(nextState, previousState.activePlayerId)
+  const target = Math.min(20, nextState.map.tiles.length)
+
+  if (previousExplored < target && nextExplored >= target) {
+    events.push(`探索目标完成：${target} / ${target}`)
+  }
+
+  const previousUnitIds = new Set(previousState.units.map((unit) => unit.id))
+  const newUnits = nextState.units.filter((unit) => !previousUnitIds.has(unit.id))
+
+  for (const unit of newUnits) {
+    events.push(`生产完成：${unit.id}`)
+  }
+
+  const previousCityIds = new Set(previousState.cities.map((city) => city.id))
+  const newCities = nextState.cities.filter((city) => !previousCityIds.has(city.id))
+
+  for (const city of newCities) {
+    events.push(`建立城市：${city.id}`)
+  }
+
+  if (command.type === 'ATTACK') {
+    const previousTarget = previousState.units.find((unit) => unit.id === command.targetUnitId)
+    const nextTarget = nextState.units.find((unit) => unit.id === command.targetUnitId)
+
+    if (previousTarget && nextTarget) {
+      events.push(
+        `攻击：${command.attackerUnitId} -> ${command.targetUnitId}，HP ${previousTarget.hp} -> ${nextTarget.hp}`,
+      )
+    } else if (previousTarget) {
+      events.push(`击败单位：${command.targetUnitId}`)
+    }
+  }
+
+  const playerIds = nextState.players.map((player) => player.id)
+
+  for (const playerId of playerIds) {
+    const previousTechs = new Set(previousState.completedTechByPlayerId[playerId] ?? [])
+    const completedTechs = nextState.completedTechByPlayerId[playerId] ?? []
+
+    for (const techId of completedTechs) {
+      if (!previousTechs.has(techId)) {
+        events.push(`科技完成：${techId}`)
+      }
+    }
+  }
+
+  return events
 }

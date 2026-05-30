@@ -1,4 +1,5 @@
 import { createCommandRecord, type RuleCommand } from '../commands/ruleCommand'
+import { getUnitConfig } from '../config/unit'
 import type { GameState } from '../state/gameState'
 import {
   validateRuleCommand,
@@ -47,6 +48,27 @@ export function tryApplyRuleCommand(
   })
 
   switch (command.type) {
+    case 'ATTACK': {
+      const attacker = state.units.find((unit) => unit.id === command.attackerUnitId)
+      const attack = attacker ? getUnitConfig(attacker.typeId)?.attack ?? 0 : 0
+
+      return {
+        ok: true,
+        state: {
+          ...state,
+          commandLog: [...state.commandLog, commandRecord],
+          units: state.units.flatMap((unit) => {
+            if (unit.id !== command.targetUnitId) {
+              return [unit]
+            }
+
+            const nextHp = unit.hp - attack
+
+            return nextHp > 0 ? [{ ...unit, hp: nextHp }] : []
+          }),
+        },
+      }
+    }
     case 'CHOOSE_TECH':
       return {
         ok: true,
@@ -76,6 +98,28 @@ export function tryApplyRuleCommand(
           ),
         ),
       }
+    case 'FOUND_CITY': {
+      const nextCityIndex = state.cities.filter((city) => city.ownerId === command.playerId).length + 1
+
+      return {
+        ok: true,
+        state: refreshExploration({
+          ...state,
+          cities: [
+            ...state.cities,
+            {
+              id: `city:${command.playerId}:${nextCityIndex}`,
+              ownerId: command.playerId,
+              productionId: null,
+              productionProgress: 0,
+              tileId: command.tileId,
+            },
+          ],
+          commandLog: [...state.commandLog, commandRecord],
+          units: state.units.filter((unit) => unit.id !== command.unitId),
+        }),
+      }
+    }
     case 'MOVE_UNIT':
       return {
         ok: true,

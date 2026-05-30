@@ -178,6 +178,7 @@ try {
 
       function createFogExploration(size) {
         const center = Math.floor(size / 2)
+        const centerTile = { x: center, y: center }
         const visibleRange = Math.max(2, Math.floor(size / 8))
         const exploredRange = Math.max(4, Math.floor(size / 3))
         const visibleTileIds = []
@@ -185,7 +186,7 @@ try {
 
         for (let y = 0; y < size; y += 1) {
           for (let x = 0; x < size; x += 1) {
-            const distance = Math.abs(x - center) + Math.abs(y - center)
+            const distance = getHexDistance({ x, y }, centerTile)
             const tileId = `tile:${x}:${y}`
 
             if (distance <= exploredRange) {
@@ -199,6 +200,25 @@ try {
         }
 
         return { exploredTileIds, visibleTileIds }
+      }
+
+      function getHexDistance(first, second) {
+        const firstCube = oddRowOffsetToCube(first)
+        const secondCube = oddRowOffsetToCube(second)
+
+        return Math.max(
+          Math.abs(firstCube.x - secondCube.x),
+          Math.abs(firstCube.y - secondCube.y),
+          Math.abs(firstCube.z - secondCube.z),
+        )
+      }
+
+      function oddRowOffsetToCube(point) {
+        const x = point.x - (point.y - (point.y & 1)) / 2
+        const z = point.y
+        const y = -x - z
+
+        return { x, y, z }
       }
     }, {
       caseId,

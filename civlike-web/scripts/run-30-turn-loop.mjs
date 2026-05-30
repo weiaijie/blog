@@ -24,17 +24,25 @@ try {
     await page.waitForFunction(() => document.documentElement.dataset.civPerf === 'ready')
 
     await expectObjective(page, '移动侦察兵')
+    await expectIntelHelp(page)
+    await expectValue(page, '探索进度', '7 / 20')
+    await expectExplorationTargetStatus(page, '探索目标未完成 7 / 20')
+    await expectValue(page, '地图迷雾', '可见 7，已探索 7')
 
-    await page.mouse.click(364, 404)
+    await page.mouse.click(415, 389)
     await page.waitForFunction(() => window.__civPerf?.getStats()?.selectedTileId === 'tile:8:9')
-    await page.mouse.click(364, 444)
+    await page.mouse.click(394, 425)
     await page.waitForFunction(() => window.__civPerf?.getStats()?.selectedTileId === 'tile:8:10')
     await expectObjective(page, '选择采矿')
+    await expectValue(page, '探索进度', '10 / 20')
+    await expectExplorationTargetStatus(page, '探索目标未完成 10 / 20')
+    await expectValue(page, '新发现', '本次新发现 3 个地块，累计 10 / 20')
+    await expectValue(page, '地图迷雾', '可见 7，已探索 10')
 
     await page.getByRole('button', { name: '选择采矿' }).click()
     await expectObjective(page, '生产侦察兵')
 
-    await page.getByRole('button', { name: '生产侦察兵' }).click()
+    await page.getByRole('button', { exact: true, name: '生产侦察兵' }).click()
     await expectObjective(page, '结束回合')
 
     await page.getByRole('button', { name: '保存游戏' }).click()
@@ -48,6 +56,11 @@ try {
     await expectValue(page, '单位数量', '8')
     await expectValue(page, '食物库存', '28')
     await expectValue(page, '已完成科技', 'tech:mining')
+    await expectValue(page, '探索进度', '20 / 20')
+    await expectExplorationTargetStatus(page, '探索目标完成 20 / 20')
+    await expectEvent(page, '探索目标完成：20 / 20')
+    await expectValue(page, '地图迷雾', '可见 21，已探索 21')
+    await expectIntelHelp(page)
 
     await page.getByRole('button', { name: '读取游戏' }).click()
     await expectValue(page, '回合', '1')
@@ -57,6 +70,10 @@ try {
     await expectValue(page, '当前科技', 'tech:mining')
     await expectValue(page, '首都生产', 'unit:scout')
     await expectValue(page, '存档状态', '已读取回合 1 / 命令 3')
+    await expectValue(page, '探索进度', '10 / 20')
+    await expectExplorationTargetStatus(page, '探索目标未完成 10 / 20')
+    await expectValue(page, '新发现', '累计探索 10 / 20')
+    await expectValue(page, '地图迷雾', '可见 7，已探索 10')
 
     for (let index = 0; index < 29; index += 1) {
       await page.getByRole('button', { name: '结束回合' }).click()
@@ -69,6 +86,10 @@ try {
     await expectValue(page, '首都进度', '2')
     await expectValue(page, '已完成科技', 'tech:mining')
     await expectValue(page, '命令日志', '32')
+    await expectValue(page, '探索进度', '20 / 20')
+    await expectExplorationTargetStatus(page, '探索目标完成 20 / 20')
+    await expectValue(page, '地图迷雾', '可见 21，已探索 21')
+    await expectIntelHelp(page)
     await expectObjective(page, '继续回合')
 
     console.log('30 turn UI loop passed')
@@ -98,6 +119,32 @@ async function expectObjective(page, expected) {
 
     return heading?.textContent === expected
   }, expected)
+}
+
+async function expectExplorationTargetStatus(page, expected) {
+  await page.waitForFunction((expected) => {
+    const hint = document.querySelector('[aria-label="探索目标状态"]')
+
+    return hint?.textContent === expected
+  }, expected)
+}
+
+async function expectEvent(page, expected) {
+  await page.waitForFunction((expected) => {
+    const events = Array.from(document.querySelectorAll('[aria-label="最近事件"] li')).map(
+      (item) => item.textContent,
+    )
+
+    return events.includes(expected)
+  }, expected)
+}
+
+async function expectIntelHelp(page) {
+  await page.waitForFunction(() => {
+    const hint = document.querySelector('[aria-label="情报说明"]')
+
+    return hint?.textContent === '情报说明：可见=当前情报，已探索=历史地形，未知=隐藏详情'
+  })
 }
 
 async function waitForHttp(targetUrl, timeoutMs) {

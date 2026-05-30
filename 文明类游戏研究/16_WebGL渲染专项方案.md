@@ -21,7 +21,7 @@
 | 操作顺滑 | 拖拽平移、滚轮缩放、Hover、选中、路径预览不卡顿。 | Debug Panel 显示 FPS、p95 frame time、命中耗时。 |
 | 可调试 | 能显示坐标、tileId、可见性、路径、AI 目标、渲染对象数量。 | Debug Render 页签和地图 Overlay 可开关。 |
 | 可恢复 | WebGL context lost 后不白屏失控，至少能提示刷新，第二版可尝试恢复。 | 手动触发或模拟 context lost，记录错误事件。 |
-| 可扩展 | 后续可以从方格切六边形，从半透明迷雾升级到 Shader，从 CPU 命中升级到 GPU picking。 | 坐标和渲染接口集中在 `RenderEngine` 与 `CoordinateSystem`。 |
+| 可扩展 | 当前第一版已经使用六边形 offset hex；后续可以调整 hex layout、从半透明迷雾升级到 Shader、从 CPU 命中升级到 GPU picking。 | 坐标和渲染接口集中在 `RenderEngine` 与 `CoordinateSystem`。 |
 
 ## 二、渲染层级表
 
@@ -111,42 +111,39 @@ type RenderEngine = {
 
 ## 五、坐标系统
 
-第一版默认方格地图，保留六边形扩展点。
+第一版默认六边形 offset hex 地图，渲染、点击命中、相邻移动、视野和迷雾都按 hex 处理。
 
 | 坐标 | 类型 | 归属 | 示例 |
 | --- | --- | --- | --- |
-| 规则坐标 | `GridCoord` | `GameState`、Simulation、寻路。 | `{ kind: "square", x: 3, y: 5 }` |
+| 规则坐标 | `GridCoord` | `GameState`、Simulation、寻路。 | `{ kind: "hex", layout: "odd-r", x: 3, y: 5 }` |
 | 世界坐标 | `WorldPoint` | PixiJS 地图世界。 | `{ x: 192, y: 320 }` |
 | 屏幕坐标 | `ScreenPoint` | 浏览器输入、Tooltip 锚点。 | `{ x: 640, y: 360 }` |
 | 相机状态 | `CameraState` | UIState/RenderEngine。 | `{ x: -120, y: -80, zoom: 1.25 }` |
 
-### 方格转换
+### 六边形转换
 
 第一版建议：
 
 | 参数 | 推荐值 | 说明 |
 | --- | --- | --- |
-| `tileSize` | 64 px | 16x16 地图在桌面下清晰，缩放后仍好读。 |
+| `hexRadius` | 24 px | 16x16 地图在桌面下清晰，缩放后仍好读。 |
 | `tileOrigin` | `{ x: 0, y: 0 }` | 地图左上角世界坐标。 |
 | `minZoom` | 0.6 | 能看全局。 |
 | `maxZoom` | 2.0 | 能查看单位和资源细节。 |
 | `defaultZoom` | 根据视口适配到 16x16 可见。 | 新局居中首都附近。 |
 
 ```ts
-function gridToWorld(coord: GridCoord, tileSize: number): WorldPoint {
+function gridToWorld(coord: GridCoord, hexRadius: number): WorldPoint {
+  const width = Math.sqrt(3) * hexRadius;
+  const verticalSpacing = hexRadius * 1.5;
   return {
-    x: coord.x * tileSize,
-    y: coord.y * tileSize,
+    x: coord.x * width + (coord.y % 2 === 1 ? width / 2 : 0) + width / 2,
+    y: coord.y * verticalSpacing + hexRadius,
   };
 }
 
-function worldToGrid(point: WorldPoint, tileSize: number): GridCoord {
-  return {
-    kind: "square",
-    x: Math.floor(point.x / tileSize),
-    y: Math.floor(point.y / tileSize),
-  };
-}
+// 第一版实现使用 hex 反算和多边形命中测试；不能用 floor(world / tileSize)。
+function worldToGrid(point: WorldPoint, hexRadius: number): GridCoord;
 ```
 
 屏幕坐标到地块：
@@ -157,7 +154,7 @@ PointerEvent.clientX/clientY
   -> 得到 ScreenPoint
   -> 应用 camera 逆变换
   -> 得到 WorldPoint
-  -> worldToGrid
+  -> worldToGrid + hex polygon hit test
   -> 校验地图边界与可见性
   -> TileHitResult
 ```
@@ -173,7 +170,7 @@ PointerEvent.clientX/clientY
 | 判断 | 结论 |
 | --- | --- |
 | 地图规模 | 12x12 到 20x20，CPU 计算足够快。 |
-| 地形形态 | 默认方格，命中公式简单。 |
+| 地形形态 | 默认六边形 offset hex，CPU 反算后再做 hex polygon 命中校正。 |
 | 开发效率 | CPU 命中更容易调试，能直接输出坐标、tileId、失败原因。 |
 | 可维护性 | 不需要额外离屏 framebuffer、颜色 ID、读像素同步开销。 |
 

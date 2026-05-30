@@ -1,22 +1,24 @@
 import { describe, expect, it } from 'vitest'
 import { calculateChunkStats } from '../../src/render/chunks/chunkManager'
 import { calculateActiveTileRect } from '../../src/render/chunks/viewportManager'
+import { getHexMapWorldSize } from '../../src/render/coordinates/hexCoordinates'
 
 describe('viewport manager', () => {
-  it('calculates active tiles and chunks', () => {
+  it('calculates active tiles for a hex map', () => {
+    const worldSize = getHexMapWorldSize(3, 3, { hexRadius: 20 })
     const activeRect = calculateActiveTileRect({
-      camera: { x: 24, y: 24, zoom: 1 },
-      viewportWidth: 320,
-      viewportHeight: 240,
-      mapWidth: 16,
-      mapHeight: 16,
-      tileSize: 40,
+      camera: { x: 0, y: 0, zoom: 1 },
+      viewportWidth: worldSize.width,
+      viewportHeight: worldSize.height,
+      mapWidth: 3,
+      mapHeight: 3,
+      hexRadius: 20,
     })
 
     expect(activeRect).toEqual({
-      count: 48,
-      maxX: 8,
-      maxY: 6,
+      count: 9,
+      maxX: 3,
+      maxY: 3,
       minX: 0,
       minY: 0,
     })

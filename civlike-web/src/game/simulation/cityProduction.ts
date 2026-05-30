@@ -1,6 +1,6 @@
 import { getTerrainConfig } from '../config/terrain'
 import { getUnitConfig } from '../config/unit'
-import type { CityState, GameState } from '../state/gameState'
+import { createUnitState, type CityState, type GameState } from '../state/gameState'
 import type { MapTile } from '../state/map'
 import { areHexNeighbors } from './hexGrid'
 
@@ -104,11 +104,12 @@ function advanceOneCityProduction(state: GameState, cityId: string): GameState {
     ),
     units: [
       ...state.units,
-      {
+      createUnitState({
         id: `${city.productionId}:${nextUnitIndex}`,
         ownerId: city.ownerId,
         tileId: spawnTileId,
-      },
+        typeId: unitConfig.id,
+      }),
     ],
   }
 }

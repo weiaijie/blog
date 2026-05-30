@@ -152,6 +152,28 @@ h1 {
   color: #3f6a39;
 }
 
+.event-panel {
+  display: grid;
+  gap: 8px;
+  padding-block: 16px;
+  border-bottom: 1px solid #d9ded2;
+}
+
+.event-panel ol {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.event-panel li {
+  color: #17201b;
+  font-size: 13px;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
 .debug-list {
   display: grid;
   gap: 14px;

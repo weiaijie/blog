@@ -1,12 +1,15 @@
 import { isCommandLog, type CommandLog } from '../commands/ruleCommand'
+import { isUnitId } from '../config/unit'
 import { replayCommandLog } from '../simulation/replayCommands'
-import type { GameState } from './gameState'
+import type { GameState, ScenarioId } from './gameState'
 
 export const SAVE_SCHEMA_VERSION = 1
+export const DEFAULT_SCENARIO_ID: ScenarioId = 'default'
 
 export type SavedGame = {
   schemaVersion: typeof SAVE_SCHEMA_VERSION
   seed: number
+  scenarioId?: ScenarioId
   commandLog: CommandLog
 }
 
@@ -14,6 +17,7 @@ export type SaveGameErrorCode =
   | 'INVALID_COMMAND_LOG'
   | 'INVALID_JSON'
   | 'INVALID_SCHEMA_VERSION'
+  | 'INVALID_SCENARIO_ID'
   | 'INVALID_SEED'
   | 'REPLAY_FAILED'
 
@@ -38,11 +42,17 @@ export type LoadGameResult =
   | SaveGameFailure
 
 export function createSavedGame(state: GameState): SavedGame {
-  return {
+  const savedGame: SavedGame = {
     commandLog: state.commandLog,
     schemaVersion: SAVE_SCHEMA_VERSION,
     seed: state.seed,
   }
+
+  if (state.scenarioId !== DEFAULT_SCENARIO_ID) {
+    savedGame.scenarioId = state.scenarioId
+  }
+
+  return savedGame
 }
 
 export function serializeSavedGame(state: GameState): string {
@@ -72,8 +82,18 @@ export function parseSavedGame(json: string): SaveGameResult {
     return reject('INVALID_SEED', 'Save seed must be an integer.')
   }
 
+  const scenarioId = parsed.scenarioId ?? DEFAULT_SCENARIO_ID
+
+  if (!isScenarioId(scenarioId)) {
+    return reject('INVALID_SCENARIO_ID', 'Save scenario id is not supported.')
+  }
+
   if (!isCommandLog(parsed.commandLog)) {
     return reject('INVALID_COMMAND_LOG', 'Save commandLog contains invalid command records.')
+  }
+
+  if (!hasValidCommandLogReferences(parsed.commandLog)) {
+    return reject('INVALID_COMMAND_LOG', 'Save commandLog contains invalid command references.')
   }
 
   return {
@@ -82,6 +102,7 @@ export function parseSavedGame(json: string): SaveGameResult {
       commandLog: parsed.commandLog,
       schemaVersion: SAVE_SCHEMA_VERSION,
       seed,
+      scenarioId: scenarioId === DEFAULT_SCENARIO_ID ? undefined : scenarioId,
     },
   }
 }
@@ -96,7 +117,9 @@ export function loadGameFromSave(json: string): LoadGameResult {
   try {
     return {
       ok: true,
-      state: replayCommandLog(parsed.savedGame.seed, parsed.savedGame.commandLog),
+      state: replayCommandLog(parsed.savedGame.seed, parsed.savedGame.commandLog, {
+        scenarioId: parsed.savedGame.scenarioId,
+      }),
     }
   } catch (error) {
     return reject(
@@ -108,6 +131,20 @@ export function loadGameFromSave(json: string): LoadGameResult {
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null
+}
+
+function hasValidCommandLogReferences(commandLog: CommandLog): boolean {
+  return commandLog.every((record) => {
+    if (record.command.type !== 'SET_PRODUCTION') {
+      return true
+    }
+
+    return record.command.productionId !== '' && isUnitId(record.command.productionId)
+  })
+}
+
+function isScenarioId(value: unknown): value is ScenarioId {
+  return value === 'default' || value === 'combat:adjacent-enemy'
 }
 
 function reject(code: SaveGameErrorCode, reason: string): SaveGameFailure {

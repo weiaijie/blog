@@ -1,6 +1,6 @@
 {
   "caseId": "PERF-MAP-32-ZOOM",
-  "createdAt": "2026-05-30T13:42:45.305Z",
+  "createdAt": "2026-05-30T21:51:48.682Z",
   "url": "http://127.0.0.1:5177/",
   "mode": "production-preview",
   "viewport": {
@@ -11,13 +11,13 @@
     "width": 928,
     "height": 688,
     "tileCount": 1024,
-    "activeTileCount": 266,
+    "activeTileCount": 288,
     "activeChunkCount": 9,
     "allocatedTileGraphics": 1024,
     "cameraX": -466,
     "cameraY": -347,
     "zoom": 1.3,
-    "p95FrameMs": 13.2,
+    "p95FrameMs": 13.9,
     "selectedTileId": null,
     "fogVisibleTileCount": 0,
     "fogExploredTileCount": 0
@@ -25,18 +25,18 @@
   "trace": {
     "label": "PERF-MAP-32-ZOOM",
     "frameCount": 119,
-    "averageFrameMs": 12.100000000300527,
-    "p50FrameMs": 11.900000035762787,
-    "p95FrameMs": 13.199999988079071,
-    "maxFrameMs": 17.30000001192093,
+    "averageFrameMs": 11.921848739395623,
+    "p50FrameMs": 11.699999988079071,
+    "p95FrameMs": 13.899999976158142,
+    "maxFrameMs": 16.80000001192093,
     "over20MsCount": 0,
     "over33MsCount": 0,
     "topFrameTimesMs": [
-      17.30000001192093,
-      14.300000011920929,
-      13.5,
-      13.199999988079071,
-      13.199999988079071
+      16.80000001192093,
+      16.100000023841858,
+      14.700000047683716,
+      14,
+      13.899999976158142
     ]
   },
   "threshold": {

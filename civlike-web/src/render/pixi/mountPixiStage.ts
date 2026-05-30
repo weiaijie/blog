@@ -12,11 +12,19 @@ import { CameraController } from '../camera/cameraController'
 import { calculateChunkStats } from '../chunks/chunkManager'
 import { TilePool } from '../chunks/tilePool'
 import { calculateActiveTileRect } from '../chunks/viewportManager'
-import { tileToWorld, worldToTile } from '../coordinates/squareCoordinates'
+import {
+  getHexMapWorldSize,
+  getHexPolygonPoints,
+  tileToWorld,
+  worldToTile,
+} from '../coordinates/hexCoordinates'
 
-const TILE_SIZE = 40
+const HEX_RADIUS = 24
+const TILE_SIZE = HEX_RADIUS * Math.sqrt(3)
 const FOG_TEXTURE_SCALE = 0.0625
 const FOG_DRAG_RESTORE_MS = 120
+const FOG_UNKNOWN_FILL = 'rgba(3, 8, 12, 0.88)'
+const FOG_EXPLORED_FILL = 'rgba(6, 16, 20, 0.48)'
 const CAMERA_PADDING = 24
 const CHUNK_SIZE = 8
 const DEFAULT_SEED = 1001
@@ -78,12 +86,15 @@ export async function mountPixiStage(
   let statsFrame = 0
   let fogRestoreTimer = 0
   let isFogPanSuppressed = false
+  const initialWorldSize = getHexMapWorldSize(gameMap.width, gameMap.height, { hexRadius: HEX_RADIUS })
   const camera = new CameraController({
     viewportWidth: app.renderer.width,
     viewportHeight: app.renderer.height,
     mapWidth: gameMap.width,
     mapHeight: gameMap.height,
     tileSize: TILE_SIZE,
+    worldHeight: initialWorldSize.height,
+    worldWidth: initialWorldSize.width,
     padding: CAMERA_PADDING,
   })
   const fogCanvas = document.createElement('canvas')
@@ -101,9 +112,10 @@ export async function mountPixiStage(
 
     for (const tile of map.tiles) {
       const terrain = getTerrainConfig(tile.terrainId)
-      const world = tileToWorld(tile, { tileSize: TILE_SIZE })
+      const world = tileToWorld(tile, { hexRadius: HEX_RADIUS })
+      const points = getHexPolygonPoints(world, HEX_RADIUS - 1)
 
-      grid.rect(world.x, world.y, TILE_SIZE - 1, TILE_SIZE - 1).fill(terrain.color)
+      grid.poly(points.flatMap((point) => [point.x, point.y])).fill(terrain.color)
     }
 
     tilePool.setAllocatedTileGraphics(map.tiles.length)
@@ -120,7 +132,7 @@ export async function mountPixiStage(
       viewportHeight: app.renderer.height,
       mapWidth: gameMap.width,
       mapHeight: gameMap.height,
-      tileSize: TILE_SIZE,
+      hexRadius: HEX_RADIUS,
     })
   }
 
@@ -129,8 +141,9 @@ export async function mountPixiStage(
       return
     }
 
-    const width = gameMap.width * TILE_SIZE
-    const height = gameMap.height * TILE_SIZE
+    const worldSize = getHexMapWorldSize(gameMap.width, gameMap.height, { hexRadius: HEX_RADIUS })
+    const width = worldSize.width
+    const height = worldSize.height
     const textureWidth = Math.ceil(width * FOG_TEXTURE_SCALE)
     const textureHeight = Math.ceil(height * FOG_TEXTURE_SCALE)
     fogTexture.source.scaleMode = gameMap.width >= 32 ? 'nearest' : 'linear'
@@ -139,9 +152,9 @@ export async function mountPixiStage(
       fogCanvas.width = textureWidth
       fogCanvas.height = textureHeight
       fogContext.imageSmoothingEnabled = false
-      fogTexture.source.resize(textureWidth, textureHeight)
       fogSprite.width = width
       fogSprite.height = height
+      fogTexture.source.resize(textureWidth, textureHeight)
     }
 
     fogContext.clearRect(0, 0, textureWidth, textureHeight)
@@ -153,11 +166,11 @@ export async function mountPixiStage(
     }
 
     updateFogVisibility()
-    fogContext.fillStyle = 'rgba(6, 16, 20, 0.72)'
+    fogContext.fillStyle = FOG_UNKNOWN_FILL
     fogContext.fillRect(0, 0, textureWidth, textureHeight)
 
     fogContext.globalCompositeOperation = 'copy'
-    fogContext.fillStyle = 'rgba(6, 16, 20, 0.32)'
+    fogContext.fillStyle = FOG_EXPLORED_FILL
 
     for (const tileId of currentExploration.exploredTileIds) {
       const tile = parseTileId(tileId)
@@ -225,11 +238,10 @@ export async function mountPixiStage(
       return
     }
 
-    const world = tileToWorld(tile, { tileSize: TILE_SIZE })
+    const world = tileToWorld(tile, { hexRadius: HEX_RADIUS })
+    const points = getHexPolygonPoints(world, HEX_RADIUS - 3)
 
-    selection
-      .rect(world.x + 2, world.y + 2, TILE_SIZE - 5, TILE_SIZE - 5)
-      .stroke({ color: 0xfff0a3, width: 3 })
+    selection.poly(points.flatMap((point) => [point.x, point.y])).stroke({ color: 0xfff0a3, width: 3 })
   }
 
   function applyCamera(): void {
@@ -290,6 +302,7 @@ export async function mountPixiStage(
     }
 
     const mapSize = mapSizeByScenario[scenarioId]
+    const worldSize = getHexMapWorldSize(mapSize, mapSize, { hexRadius: HEX_RADIUS })
 
     gameMap = createFixedMap(mapSize, mapSize, DEFAULT_SEED)
     currentExploration = null
@@ -301,6 +314,8 @@ export async function mountPixiStage(
       mapWidth: gameMap.width,
       mapHeight: gameMap.height,
       tileSize: TILE_SIZE,
+      worldHeight: worldSize.height,
+      worldWidth: worldSize.width,
       padding: CAMERA_PADDING,
     })
     selectedTileId = null
@@ -361,7 +376,7 @@ export async function mountPixiStage(
       x: event.clientX - rect.left,
       y: event.clientY - rect.top,
     })
-    const tile = worldToTile(world, { tileSize: TILE_SIZE })
+    const tile = worldToTile(world, { hexRadius: HEX_RADIUS })
 
     if (tile.x >= 0 && tile.x < gameMap.width && tile.y >= 0 && tile.y < gameMap.height) {
       selectedTileId = `tile:${tile.x}:${tile.y}`
@@ -442,25 +457,50 @@ export async function mountPixiStage(
         delete window.__civPerf
         delete document.documentElement.dataset.civPerf
       }
+      app.canvas.remove()
       app.destroy(true, { children: true })
     },
   }
 }
 
 function fillFogTile(context: CanvasRenderingContext2D, x: number, y: number): void {
-  const left = Math.floor(x * TILE_SIZE * FOG_TEXTURE_SCALE)
-  const top = Math.floor(y * TILE_SIZE * FOG_TEXTURE_SCALE)
-  const size = Math.max(1, Math.ceil((TILE_SIZE - 1) * FOG_TEXTURE_SCALE))
-
-  context.fillRect(left, top, size, size)
+  drawFogHex(context, x, y, 'fill')
 }
 
 function clearFogTile(context: CanvasRenderingContext2D, x: number, y: number): void {
-  const left = Math.floor(x * TILE_SIZE * FOG_TEXTURE_SCALE)
-  const top = Math.floor(y * TILE_SIZE * FOG_TEXTURE_SCALE)
-  const size = Math.max(1, Math.ceil((TILE_SIZE - 1) * FOG_TEXTURE_SCALE))
+  drawFogHex(context, x, y, 'clear')
+}
 
-  context.clearRect(left, top, size, size)
+function drawFogHex(context: CanvasRenderingContext2D, x: number, y: number, mode: 'clear' | 'fill'): void {
+  const center = tileToWorld({ x, y }, { hexRadius: HEX_RADIUS })
+  const points = getHexPolygonPoints(center, HEX_RADIUS)
+
+  context.beginPath()
+  points.forEach((point, index) => {
+    const scaledX = point.x * FOG_TEXTURE_SCALE
+    const scaledY = point.y * FOG_TEXTURE_SCALE
+
+    if (index === 0) {
+      context.moveTo(scaledX, scaledY)
+    } else {
+      context.lineTo(scaledX, scaledY)
+    }
+  })
+  context.closePath()
+
+  if (mode === 'clear') {
+    context.save()
+    context.clip()
+    context.clearRect(
+      (center.x - TILE_SIZE / 2) * FOG_TEXTURE_SCALE,
+      (center.y - HEX_RADIUS) * FOG_TEXTURE_SCALE,
+      TILE_SIZE * FOG_TEXTURE_SCALE,
+      HEX_RADIUS * 2 * FOG_TEXTURE_SCALE,
+    )
+    context.restore()
+  } else {
+    context.fill()
+  }
 }
 
 function parseTileId(tileId: string): { x: number; y: number } | null {

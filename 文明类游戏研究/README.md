@@ -8,7 +8,7 @@
 | --- | --- |
 | 平台 | 桌面浏览器 Web Demo 优先，移动端第二阶段预留。 |
 | 技术栈 | TypeScript + Vite + PixiJS/WebGL + React DOM UI。 |
-| 地图 | 第一版默认方格 16x16，支持 12x12 到 20x20；六边形仅作为第二版迁移目标。 |
+| 地图 | 第一版默认六边形 16x16 offset hex，支持 12x12 到 20x20；不再把六边形推迟到第二版。 |
 | 玩法范围 | 1 名玩家 + 1 个 AI，30 回合，最多每方 3 城、10 单位。 |
 | 胜利 | 征服胜利、科技胜利、30 回合分数胜利。 |
 | 状态架构 | `GameState + RuleCommand + Validator + Simulation` 为规则核心；UI 和渲染不直接改规则。 |
