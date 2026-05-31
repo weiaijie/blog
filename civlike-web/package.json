@@ -18,6 +18,7 @@
     "smoke:playable": "npm run build && node scripts/run-playable-smoke.mjs",
     "smoke:combat": "npm run build && node scripts/run-combat-smoke.mjs",
     "smoke:30turn": "npm run build && node scripts/run-30-turn-loop.mjs",
+    "assets:terrain:blender": "node scripts/blender/build-terrain-assets.mjs",
     "test": "vitest run",
     "typecheck": "tsc -b --pretty false",
     "verify:phase2": "npm run typecheck && npm run test && npm run lint && npm run perf:map:all && npm run perf:map:fog && npm run smoke:playable && npm run smoke:combat && npm run smoke:30turn"
@@ -25,12 +26,14 @@
   "dependencies": {
     "pixi.js": "^8.18.1",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "three": "^0.184.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
+    "@types/three": "^0.184.1",
     "@vitejs/plugin-react": "^4.3.3",
     "eslint": "^9.13.0",
     "eslint-plugin-react-hooks": "^5.0.0",

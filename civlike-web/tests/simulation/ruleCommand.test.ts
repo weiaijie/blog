@@ -189,7 +189,7 @@ describe('RuleCommand validation and replay', () => {
       },
       {
         code: 'FOUND_CITY_BLOCKED_TILE',
-        state: withSettlerAt('tile:8:6'),
+        state: withTerrain(withSettlerAt('tile:8:6'), 'tile:8:6', 'water'),
         tileId: 'tile:8:6',
       },
       {
@@ -741,6 +741,16 @@ function withSettlerAt(tileId: string) {
         typeId: 'unit:settler',
       }),
     ],
+  }
+}
+
+function withTerrain(state: ReturnType<typeof createInitialGameState>, tileId: string, terrainId: 'water') {
+  return {
+    ...state,
+    map: {
+      ...state.map,
+      tiles: state.map.tiles.map((tile) => (tile.id === tileId ? { ...tile, terrainId } : tile)),
+    },
   }
 }
 

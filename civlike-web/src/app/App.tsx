@@ -337,6 +337,7 @@ export function App() {
     },
   ]
   const nextObjective = objectives.find((objective) => !objective.done)?.label ?? '继续回合'
+  const nextObjectiveIndex = objectives.findIndex((objective) => !objective.done)
   const explorationHint = objectives[0].done
     ? `侦察兵已探索 ${exploredTileCount} 个地块`
     : '移动侦察兵以揭示附近地块'
@@ -517,13 +518,22 @@ export function App() {
             </p>
           </div>
           <ol>
-            {objectives.map((objective) => (
-              <li key={objective.label} data-complete={objective.done ? 'true' : 'false'}>
-                <span>{objective.done ? '完成' : '下一步'}</span>
+            {objectives.map((objective, index) => (
+              <li
+                key={objective.label}
+                className={`objective-step ${objective.done ? 'objective-step--done' : index === nextObjectiveIndex ? 'objective-step--next' : ''}`}
+                data-complete={objective.done ? 'true' : 'false'}
+              >
+                <span>
+                  {objective.done ? 'DONE' : index === nextObjectiveIndex ? 'NEXT' : `STEP ${index + 1}`}
+                </span>
                 {objective.label}
               </li>
             ))}
           </ol>
+          <p className="objective-hint">
+            Progress {Math.min(nextObjectiveIndex + 1, objectives.length)} / {objectives.length}
+          </p>
         </section>
 
         <section className="event-panel" aria-label="最近事件">

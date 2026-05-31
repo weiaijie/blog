@@ -18,13 +18,20 @@ import {
   tileToWorld,
   worldToTile,
 } from '../coordinates/hexCoordinates'
+import {
+  getCityVisualStyle,
+  getTerrainVisualStyle,
+  getUnitVisualKind,
+  getUnitVisualStyle,
+  mapVisualTheme,
+  type MapVisualOwner,
+  type TerrainVisualStyle,
+} from '../visuals/mapVisualTheme'
 
 const HEX_RADIUS = 24
 const TILE_SIZE = HEX_RADIUS * Math.sqrt(3)
 const FOG_TEXTURE_SCALE = 0.0625
 const FOG_DRAG_RESTORE_MS = 120
-const FOG_UNKNOWN_FILL = 'rgba(3, 8, 12, 0.88)'
-const FOG_EXPLORED_FILL = 'rgba(6, 16, 20, 0.48)'
 const CAMERA_PADDING = 24
 const CHUNK_SIZE = 8
 const DEFAULT_SEED = 1001
@@ -47,16 +54,49 @@ export type PixiStageStats = {
 
 export type PixiStageHandle = {
   stats: PixiStageStats
+  selectTile: (tileId: string) => void
   setExploration: (exploration: PixiExplorationSnapshot | null) => void
+  setVisualEntities: (entities: PixiVisualEntities) => void
   destroy: () => void
 }
 
 export type PixiExplorationSnapshot = PerfExplorationSnapshot
 
+export type PixiVisualUnit = {
+  id: string
+  owner: MapVisualOwner
+  tileId: string
+  typeId: string
+}
+
+export type PixiVisualCity = {
+  id: string
+  owner: MapVisualOwner
+  tileId: string
+}
+
+export type PixiVisualBuildHint = {
+  kind: 'citySite' | 'objective'
+  tileId: string
+}
+
+export type PixiVisualEntities = {
+  buildHints: PixiVisualBuildHint[]
+  cities: PixiVisualCity[]
+  units: PixiVisualUnit[]
+}
+
 export type MountPixiStageOptions = {
   initialExploration?: PixiExplorationSnapshot | null
+  initialVisualEntities?: PixiVisualEntities
   onTileSelect?: (tileId: string) => void
   onStats?: (stats: PixiStageStats) => void
+}
+
+const emptyVisualEntities: PixiVisualEntities = {
+  buildHints: [],
+  cities: [],
+  units: [],
 }
 
 export async function mountPixiStage(
@@ -67,7 +107,7 @@ export async function mountPixiStage(
 
   await app.init({
     resizeTo: host,
-    backgroundColor: 0x182027,
+    backgroundColor: mapVisualTheme.background,
     antialias: false,
   })
 
@@ -75,15 +115,19 @@ export async function mountPixiStage(
 
   const mapLayer = new Container()
   const grid = new Graphics()
+  const entityLayer = new Graphics()
+  const buildHintLayer = new Graphics()
   const selection = new Graphics()
   const tilePool = new TilePool()
   const sampler = new PerformanceSampler()
   let gameMap = createFixedMap(16, 16, DEFAULT_SEED)
   let currentExploration = options.initialExploration ?? null
+  let visualEntities = options.initialVisualEntities ?? emptyVisualEntities
   let selectedTileId: string | null = null
   let latestTrace = sampler.stop()
   let queuedStats: PixiStageStats | null = null
   let statsFrame = 0
+  let isPerfTraceActive = false
   let fogRestoreTimer = 0
   let isFogPanSuppressed = false
   const initialWorldSize = getHexMapWorldSize(gameMap.width, gameMap.height, { hexRadius: HEX_RADIUS })
@@ -103,24 +147,71 @@ export async function mountPixiStage(
   const fogSprite = new Sprite(fogTexture)
 
   mapLayer.addChild(grid)
+  mapLayer.addChild(entityLayer)
+  mapLayer.addChild(buildHintLayer)
   mapLayer.addChild(fogSprite)
   mapLayer.addChild(selection)
   app.stage.addChild(mapLayer)
 
   function renderMap(map: GameMap): void {
     grid.clear()
+    const shouldDrawDetails = map.tiles.length <= mapVisualTheme.tile.detailMapMaxTiles
+    const shouldDrawAccents =
+      shouldDrawDetails && map.tiles.length <= mapVisualTheme.tile.accentMapMaxTiles
+    const shouldDrawTileStroke = map.tiles.length <= mapVisualTheme.tile.strokeMapMaxTiles
+    const terrainByTileId = new Map(
+      map.tiles.map((tile) => {
+        const terrain = getTerrainConfig(tile.terrainId)
+
+        return [tile.id, getTerrainVisualStyle(tile.terrainId, terrain.color)] as const
+      }),
+    )
 
     for (const tile of map.tiles) {
       const terrain = getTerrainConfig(tile.terrainId)
+      const visual = terrainByTileId.get(tile.id) ?? getTerrainVisualStyle(tile.terrainId, terrain.color)
       const world = tileToWorld(tile, { hexRadius: HEX_RADIUS })
       const points = getHexPolygonPoints(world, HEX_RADIUS - 1)
+      const polygon = points.flatMap((point) => [point.x, point.y])
 
-      grid.poly(points.flatMap((point) => [point.x, point.y])).fill(terrain.color)
+      if (shouldDrawDetails) {
+        drawTerrainRelief(grid, points, visual)
+      }
+
+      const tileShape = grid.poly(polygon).fill(visual.fill)
+
+      if (shouldDrawTileStroke) {
+        tileShape.stroke({ alpha: visual.strokeAlpha, color: visual.stroke, width: 1 })
+      }
+
+      if (shouldDrawAccents) {
+        drawTerrainBevel(grid, points, visual)
+        drawTerrainTransitions(grid, world, points, map, terrainByTileId, visual)
+        drawTerrainAccent(grid, world, visual)
+      }
     }
 
     tilePool.setAllocatedTileGraphics(map.tiles.length)
+    renderVisualEntities()
     renderFog()
     renderSelection()
+  }
+
+  function renderVisualEntities(): void {
+    entityLayer.clear()
+    buildHintLayer.clear()
+
+    for (const city of visualEntities.cities) {
+      drawCityMarker(entityLayer, city)
+    }
+
+    for (const unit of visualEntities.units) {
+      drawUnitMarker(entityLayer, unit)
+    }
+
+    for (const hint of visualEntities.buildHints) {
+      drawBuildHint(buildHintLayer, hint)
+    }
   }
 
   function getActiveTileRect() {
@@ -152,10 +243,10 @@ export async function mountPixiStage(
       fogCanvas.width = textureWidth
       fogCanvas.height = textureHeight
       fogContext.imageSmoothingEnabled = false
-      fogSprite.width = width
-      fogSprite.height = height
       fogTexture.source.resize(textureWidth, textureHeight)
     }
+
+    fogSprite.setSize(width, height)
 
     fogContext.clearRect(0, 0, textureWidth, textureHeight)
 
@@ -166,21 +257,19 @@ export async function mountPixiStage(
     }
 
     updateFogVisibility()
-    fogContext.fillStyle = FOG_UNKNOWN_FILL
+    fogContext.fillStyle = mapVisualTheme.fog.unknownFill
     fogContext.fillRect(0, 0, textureWidth, textureHeight)
 
-    fogContext.globalCompositeOperation = 'copy'
-    fogContext.fillStyle = FOG_EXPLORED_FILL
+    fogContext.fillStyle = mapVisualTheme.fog.exploredFill
 
     for (const tileId of currentExploration.exploredTileIds) {
       const tile = parseTileId(tileId)
 
       if (tile && tile.x < gameMap.width && tile.y < gameMap.height) {
+        clearFogTile(fogContext, tile.x, tile.y)
         fillFogTile(fogContext, tile.x, tile.y)
       }
     }
-
-    fogContext.globalCompositeOperation = 'source-over'
 
     for (const tileId of currentExploration.visibleTileIds) {
       const tile = parseTileId(tileId)
@@ -241,7 +330,9 @@ export async function mountPixiStage(
     const world = tileToWorld(tile, { hexRadius: HEX_RADIUS })
     const points = getHexPolygonPoints(world, HEX_RADIUS - 3)
 
-    selection.poly(points.flatMap((point) => [point.x, point.y])).stroke({ color: 0xfff0a3, width: 3 })
+    selection
+      .poly(points.flatMap((point) => [point.x, point.y]))
+      .stroke({ color: mapVisualTheme.selection.stroke, width: mapVisualTheme.selection.width })
   }
 
   function applyCamera(): void {
@@ -277,6 +368,10 @@ export async function mountPixiStage(
   function publishStats(): PixiStageStats {
     const stats = calculateStats()
 
+    if (isPerfTraceActive) {
+      return stats
+    }
+
     queuedStats = stats
 
     if (statsFrame === 0) {
@@ -306,6 +401,7 @@ export async function mountPixiStage(
 
     gameMap = createFixedMap(mapSize, mapSize, DEFAULT_SEED)
     currentExploration = null
+    visualEntities = emptyVisualEntities
     restoreFogAfterCameraMove()
 
     camera.setBounds({
@@ -327,6 +423,22 @@ export async function mountPixiStage(
   function setExploration(exploration: PixiExplorationSnapshot | null): void {
     currentExploration = exploration
     renderFog()
+    publishStats()
+  }
+
+  function setVisualEntities(entities: PixiVisualEntities): void {
+    visualEntities = entities
+    renderVisualEntities()
+    publishStats()
+  }
+
+  function selectTile(tileId: string): void {
+    if (!gameMap.tiles.some((tile) => tile.id === tileId)) {
+      return
+    }
+
+    selectedTileId = tileId
+    renderSelection()
     publishStats()
   }
 
@@ -402,10 +514,12 @@ export async function mountPixiStage(
     loadScenario: resetMap,
     setExploration,
     startTrace: (label: string) => {
+      isPerfTraceActive = true
       sampler.start(label)
     },
     stopTrace: () => {
       latestTrace = sampler.stop()
+      isPerfTraceActive = false
       publishStats()
       return latestTrace
     },
@@ -440,7 +554,9 @@ export async function mountPixiStage(
 
   return {
     stats: initialStats,
+    selectTile,
     setExploration,
+    setVisualEntities,
     destroy: () => {
       app.canvas.removeEventListener('pointerdown', onPointerDown)
       app.canvas.removeEventListener('pointermove', onPointerMove)
@@ -461,6 +577,346 @@ export async function mountPixiStage(
       app.destroy(true, { children: true })
     },
   }
+}
+
+function drawCityMarker(graphics: Graphics, city: PixiVisualCity): void {
+  const tile = parseTileId(city.tileId)
+
+  if (!tile) {
+    return
+  }
+
+  const center = tileToWorld(tile, { hexRadius: HEX_RADIUS })
+  const style = getCityVisualStyle(city.owner)
+  const baseY = center.y + 4
+
+  graphics
+    .poly([
+      center.x - 9,
+      baseY,
+      center.x,
+      baseY - 9,
+      center.x + 9,
+      baseY,
+      center.x + 9,
+      baseY + 9,
+      center.x - 9,
+      baseY + 9,
+    ])
+    .fill(style.fill)
+    .stroke({ color: style.stroke, width: 1.5 })
+    .poly([
+      center.x - 11,
+      baseY,
+      center.x,
+      baseY - 11,
+      center.x + 11,
+      baseY,
+    ])
+    .fill(style.roof)
+    .stroke({ color: style.stroke, width: 1.5 })
+}
+
+function drawUnitMarker(graphics: Graphics, unit: PixiVisualUnit): void {
+  const tile = parseTileId(unit.tileId)
+
+  if (!tile) {
+    return
+  }
+
+  const center = tileToWorld(tile, { hexRadius: HEX_RADIUS })
+  const style = getUnitVisualStyle(unit.owner)
+  const kind = getUnitVisualKind(unit.typeId)
+  const x = center.x
+  const y = center.y - 5
+
+  graphics.circle(x, y, 9).fill(style.fill).stroke({ color: style.stroke, width: 2 })
+
+  if (kind === 'scout') {
+    graphics
+      .circle(x, y, 4)
+      .stroke({ color: style.detail, width: 1.5 })
+      .circle(x, y, 1.4)
+      .fill(style.detail)
+    return
+  }
+
+  if (kind === 'warrior') {
+    graphics
+      .poly([x - 5, y - 4, x + 5, y - 4, x + 4, y + 3, x, y + 7, x - 4, y + 3])
+      .fill(style.detail)
+    return
+  }
+
+  if (kind === 'settler') {
+    graphics
+      .moveTo(x - 3, y + 5)
+      .lineTo(x - 3, y - 6)
+      .stroke({ color: style.detail, width: 1.5 })
+      .poly([x - 2, y - 6, x + 6, y - 3, x - 2, y])
+      .fill(style.detail)
+    return
+  }
+
+  graphics
+    .moveTo(x - 4, y - 4)
+    .lineTo(x + 4, y + 4)
+    .moveTo(x + 4, y - 4)
+    .lineTo(x - 4, y + 4)
+    .stroke({ color: style.detail, width: 1.5 })
+}
+
+function drawBuildHint(graphics: Graphics, hint: PixiVisualBuildHint): void {
+  const tile = parseTileId(hint.tileId)
+
+  if (!tile) {
+    return
+  }
+
+  const center = tileToWorld(tile, { hexRadius: HEX_RADIUS })
+  const points = getHexPolygonPoints(center, HEX_RADIUS - 6)
+  const style = hint.kind === 'objective'
+    ? mapVisualTheme.objectiveHint
+    : mapVisualTheme.buildHint
+
+  graphics
+    .poly(points.flatMap((point) => [point.x, point.y]))
+    .fill({ alpha: style.fillAlpha, color: style.fill })
+    .stroke({
+      alpha: style.strokeAlpha,
+      color: style.stroke,
+      width: 2,
+    })
+
+  if (hint.kind === 'citySite') {
+    graphics
+      .moveTo(center.x - 4, center.y + 7)
+      .lineTo(center.x - 4, center.y - 7)
+      .stroke({ color: mapVisualTheme.buildHint.stroke, width: 1.5 })
+      .poly([center.x - 3, center.y - 7, center.x + 7, center.y - 3, center.x - 3, center.y + 1])
+      .fill(mapVisualTheme.buildHint.stroke)
+  }
+
+  if (hint.kind === 'objective') {
+    graphics
+      .circle(center.x, center.y, 6)
+      .stroke({ color: mapVisualTheme.objectiveHint.stroke, width: 2 })
+      .moveTo(center.x - 10, center.y)
+      .lineTo(center.x + 10, center.y)
+      .moveTo(center.x, center.y - 10)
+      .lineTo(center.x, center.y + 10)
+      .stroke({ color: mapVisualTheme.objectiveHint.stroke, width: 1.5 })
+  }
+}
+
+function drawTerrainRelief(
+  graphics: Graphics,
+  points: Array<{ x: number; y: number }>,
+  visual: TerrainVisualStyle,
+): void {
+  if (visual.elevation <= 0) {
+    return
+  }
+
+  const offset = visual.elevation * 1.2
+  const shadowPolygon = points.flatMap((point) => [point.x + offset, point.y + offset])
+
+  graphics
+    .poly(shadowPolygon)
+    .fill({
+      alpha: mapVisualTheme.tile.reliefShadowAlpha + visual.elevation * 0.03,
+      color: mapVisualTheme.tile.reliefShadow,
+    })
+}
+
+function drawTerrainBevel(
+  graphics: Graphics,
+  points: Array<{ x: number; y: number }>,
+  visual: TerrainVisualStyle,
+): void {
+  drawEdgeLine(graphics, points[4], points[5], visual.highlight, mapVisualTheme.tile.bevelAlpha, 1)
+  drawEdgeLine(graphics, points[5], points[0], visual.highlight, mapVisualTheme.tile.bevelAlpha, 1)
+  drawEdgeLine(graphics, points[1], points[2], visual.shadow, mapVisualTheme.tile.bevelAlpha + 0.08, 1)
+  drawEdgeLine(graphics, points[2], points[3], visual.shadow, mapVisualTheme.tile.bevelAlpha + 0.08, 1)
+}
+
+function drawTerrainTransitions(
+  graphics: Graphics,
+  center: { x: number; y: number },
+  points: Array<{ x: number; y: number }>,
+  map: GameMap,
+  terrainByTileId: Map<string, TerrainVisualStyle>,
+  visual: TerrainVisualStyle,
+): void {
+  for (let index = 0; index < points.length; index += 1) {
+    const start = points[index]
+    const end = points[(index + 1) % points.length]
+    const neighbor = getNeighborByEdge(center, start, end, map)
+
+    if (!neighbor) {
+      if (visual.accentKind === 'waves') {
+        drawEdgeLine(graphics, start, end, mapVisualTheme.tile.shoreline, 0.34, 1.5)
+      }
+      continue
+    }
+
+    const neighborVisual = terrainByTileId.get(neighbor.id)
+
+    if (!neighborVisual || neighborVisual.accentKind === visual.accentKind) {
+      continue
+    }
+
+    if (visual.accentKind === 'waves' || neighborVisual.accentKind === 'waves') {
+      drawEdgeLine(graphics, start, end, mapVisualTheme.tile.shoreline, 0.5, 2)
+      continue
+    }
+
+    if (visual.accentKind === 'trees' || neighborVisual.accentKind === 'trees') {
+      drawEdgeLine(graphics, start, end, 0x244c32, 0.42, 2)
+      continue
+    }
+
+    if (visual.elevation !== neighborVisual.elevation) {
+      const high = visual.elevation > neighborVisual.elevation ? visual : neighborVisual
+
+      drawEdgeLine(graphics, start, end, high.transition, mapVisualTheme.tile.transitionAlpha, 2)
+    }
+  }
+}
+
+function getNeighborByEdge(
+  center: { x: number; y: number },
+  start: { x: number; y: number },
+  end: { x: number; y: number },
+  map: GameMap,
+): GameMap['tiles'][number] | undefined {
+  const midpoint = {
+    x: (start.x + end.x) / 2,
+    y: (start.y + end.y) / 2,
+  }
+  const outward = normalizeVector({
+    x: midpoint.x - center.x,
+    y: midpoint.y - center.y,
+  })
+  const neighborCoordinate = worldToTile(
+    {
+      x: midpoint.x + outward.x * HEX_RADIUS * 0.55,
+      y: midpoint.y + outward.y * HEX_RADIUS * 0.55,
+    },
+    { hexRadius: HEX_RADIUS },
+  )
+
+  if (
+    neighborCoordinate.x < 0 ||
+    neighborCoordinate.y < 0 ||
+    neighborCoordinate.x >= map.width ||
+    neighborCoordinate.y >= map.height
+  ) {
+    return undefined
+  }
+
+  return map.tiles.find(
+    (tile) => tile.x === neighborCoordinate.x && tile.y === neighborCoordinate.y,
+  )
+}
+
+function normalizeVector(vector: { x: number; y: number }): { x: number; y: number } {
+  const length = Math.hypot(vector.x, vector.y)
+
+  if (length === 0) {
+    return { x: 0, y: 0 }
+  }
+
+  return {
+    x: vector.x / length,
+    y: vector.y / length,
+  }
+}
+
+function drawEdgeLine(
+  graphics: Graphics,
+  start: { x: number; y: number },
+  end: { x: number; y: number },
+  color: number,
+  alpha: number,
+  width: number,
+): void {
+  graphics
+    .moveTo(start.x, start.y)
+    .lineTo(end.x, end.y)
+    .stroke({ alpha, color, width })
+}
+
+function drawTerrainAccent(
+  graphics: Graphics,
+  center: { x: number; y: number },
+  visual: TerrainVisualStyle,
+): void {
+  if (visual.accentKind === 'none') {
+    return
+  }
+
+  if (visual.accentKind === 'grass') {
+    graphics
+      .moveTo(center.x - 5, center.y + 5)
+      .lineTo(center.x - 2, center.y + 2)
+      .moveTo(center.x + 3, center.y + 6)
+      .lineTo(center.x + 6, center.y + 2)
+      .stroke({ alpha: visual.accentAlpha, color: visual.accent, width: 1 })
+    return
+  }
+
+  if (visual.accentKind === 'trees') {
+    graphics
+      .circle(center.x - 5, center.y + 2, 2.6)
+      .circle(center.x + 1, center.y - 3, 2.4)
+      .circle(center.x + 6, center.y + 3, 2.2)
+      .fill({ alpha: visual.accentAlpha, color: visual.accent })
+      .circle(center.x - 1, center.y + 4, 5.5)
+      .stroke({ alpha: 0.18, color: visual.highlight, width: 1 })
+    return
+  }
+
+  if (visual.accentKind === 'ridges') {
+    graphics
+      .poly([
+        center.x - 12,
+        center.y + 8,
+        center.x - 3,
+        center.y - 8,
+        center.x + 5,
+        center.y + 8,
+      ])
+      .fill({ alpha: 0.18, color: visual.highlight })
+      .poly([
+        center.x - 3,
+        center.y + 8,
+        center.x + 8,
+        center.y - 5,
+        center.x + 14,
+        center.y + 8,
+      ])
+      .fill({ alpha: 0.12, color: visual.shadow })
+      .moveTo(center.x - 10, center.y + 4)
+      .lineTo(center.x - 3, center.y - 3)
+      .lineTo(center.x + 4, center.y + 4)
+      .moveTo(center.x - 1, center.y + 7)
+      .lineTo(center.x + 6, center.y)
+      .lineTo(center.x + 11, center.y + 5)
+      .stroke({ alpha: visual.accentAlpha, color: visual.accent, width: 1 })
+    return
+  }
+
+  graphics
+    .moveTo(center.x - 11, center.y - 2)
+    .lineTo(center.x - 5, center.y - 4)
+    .lineTo(center.x + 1, center.y - 2)
+    .lineTo(center.x + 7, center.y - 4)
+    .moveTo(center.x - 8, center.y + 5)
+    .lineTo(center.x - 2, center.y + 3)
+    .lineTo(center.x + 4, center.y + 5)
+    .lineTo(center.x + 10, center.y + 3)
+    .stroke({ alpha: visual.accentAlpha, color: visual.accent, width: 1 })
 }
 
 function fillFogTile(context: CanvasRenderingContext2D, x: number, y: number): void {

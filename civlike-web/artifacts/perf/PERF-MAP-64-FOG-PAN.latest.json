@@ -1,6 +1,6 @@
 {
   "caseId": "PERF-MAP-64-FOG-PAN",
-  "createdAt": "2026-05-30T21:52:20.315Z",
+  "createdAt": "2026-05-31T00:40:01.325Z",
   "url": "http://127.0.0.1:5181/",
   "mode": "production-preview",
   "viewport": {
@@ -25,18 +25,18 @@
   "trace": {
     "label": "PERF-MAP-64-FOG-PAN",
     "frameCount": 119,
-    "averageFrameMs": 12.61344537815126,
-    "p50FrameMs": 12.400000035762787,
+    "averageFrameMs": 13.164705882553292,
+    "p50FrameMs": 13.199999988079071,
     "p95FrameMs": 14.5,
-    "maxFrameMs": 17,
+    "maxFrameMs": 15.699999988079071,
     "over20MsCount": 0,
     "over33MsCount": 0,
     "topFrameTimesMs": [
-      17,
-      16.5,
-      15.5,
-      15.300000011920929,
-      15
+      15.699999988079071,
+      15.199999988079071,
+      14.900000035762787,
+      14.899999976158142,
+      14.800000011920929
     ]
   },
   "threshold": {

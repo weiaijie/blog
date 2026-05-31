@@ -2,8 +2,8 @@ import { spawn, spawnSync } from 'node:child_process'
 import { chromium } from 'playwright'
 
 const port = 5188
-const baseUrl = `http://127.0.0.1:${port}/`
-const combatUrl = `${baseUrl}?scenario=combat`
+const baseUrl = `http://127.0.0.1:${port}/?seed=1001`
+const combatUrl = `http://127.0.0.1:${port}/?scenario=combat&seed=1001`
 
 const server = spawn(
   process.platform === 'win32' ? 'npm.cmd' : 'npm',
@@ -34,6 +34,8 @@ try {
     await expectValue(page, '单位数量', '2')
     await expectValue(page, '命令日志', '0')
     await expectValue(page, '攻击状态', '需要选择己方战士')
+    await expectObjective(page, '选择战士')
+    await expectExplorationHint(page, '点击己方战士所在地块：tile:8:9')
     await expectNoButton(page, '攻击')
 
     await page.mouse.click(415, 389)
@@ -42,6 +44,8 @@ try {
     await expectValue(page, '地块单位', 'unit:warrior:scenario:1')
     await expectValue(page, '地块单位生命', 'unit:warrior:scenario:1 20/20')
     await expectValue(page, '攻击状态', '请选择可见相邻敌方单位')
+    await expectObjective(page, '选择敌方单位')
+    await expectExplorationHint(page, '点击相邻敌方单位所在地块：tile:8:10')
     await expectNoButton(page, '攻击')
 
     await page.mouse.click(394, 425)
@@ -50,6 +54,8 @@ try {
     await expectValue(page, '地块单位', 'unit:enemy:scout:1')
     await expectValue(page, '地块单位生命', 'unit:enemy:scout:1 10/10')
     await expectValue(page, '攻击状态', '可以攻击 unit:enemy:scout:1')
+    await expectObjective(page, '攻击敌方单位')
+    await expectExplorationHint(page, '点击“攻击”按钮，目标 unit:enemy:scout:1。')
     await expectButton(page, '攻击')
 
     await page.getByRole('button', { name: '攻击' }).click()
@@ -57,6 +63,8 @@ try {
     await expectValue(page, '命令日志', '1')
     await expectValue(page, '上条命令', 'cmd:1:0:ATTACK / ATTACK')
     await expectValue(page, '地块单位生命', 'unit:enemy:scout:1 4/10')
+    await expectObjective(page, '击败敌方单位')
+    await expectExplorationHint(page, '点击“攻击”按钮，目标 unit:enemy:scout:1。')
     await expectEvent(page, '攻击：unit:warrior:scenario:1 -> unit:enemy:scout:1，HP 10 -> 4')
 
     await page.getByRole('button', { name: '攻击' }).click()
@@ -66,12 +74,16 @@ try {
     await expectValue(page, '地块单位', '无')
     await expectValue(page, '地块单位生命', '无')
     await expectValue(page, '攻击状态', '请选择可见相邻敌方单位')
+    await expectObjective(page, '保存战斗结果')
+    await expectExplorationHint(page, '敌方单位已击败，保存战斗结果。')
     await expectEvent(page, '击败单位：unit:enemy:scout:1')
     await expectNoButton(page, '攻击')
 
     const attackHash = await readValue(page, '状态哈希')
     await page.getByRole('button', { name: '保存游戏' }).click()
     await expectValue(page, '存档状态', '已保存回合 1 / 命令 2')
+    await expectObjective(page, '继续回合')
+    await expectExplorationHint(page, '战斗已结束，存档已记录。')
 
     await page.getByRole('button', { name: '结束回合' }).click()
     await expectValue(page, '回合', '2')
@@ -118,6 +130,22 @@ async function expectValue(page, label, expected) {
     },
     { label, expected },
   )
+}
+
+async function expectObjective(page, expected) {
+  await page.waitForFunction((expected) => {
+    const heading = document.querySelector('[aria-label="当前目标"] h2')
+
+    return heading?.textContent === expected
+  }, expected)
+}
+
+async function expectExplorationHint(page, expected) {
+  await page.waitForFunction((expected) => {
+    const hint = document.querySelector('[aria-label="探索提示"]')
+
+    return hint?.textContent === expected
+  }, expected)
 }
 
 async function readValue(page, label) {

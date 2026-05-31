@@ -1,6 +1,6 @@
 {
   "caseId": "PERF-MAP-32-ZOOM",
-  "createdAt": "2026-05-30T21:51:48.682Z",
+  "createdAt": "2026-05-31T00:39:21.024Z",
   "url": "http://127.0.0.1:5177/",
   "mode": "production-preview",
   "viewport": {
@@ -17,7 +17,7 @@
     "cameraX": -466,
     "cameraY": -347,
     "zoom": 1.3,
-    "p95FrameMs": 13.9,
+    "p95FrameMs": 12.4,
     "selectedTileId": null,
     "fogVisibleTileCount": 0,
     "fogExploredTileCount": 0
@@ -25,18 +25,18 @@
   "trace": {
     "label": "PERF-MAP-32-ZOOM",
     "frameCount": 119,
-    "averageFrameMs": 11.921848739395623,
-    "p50FrameMs": 11.699999988079071,
-    "p95FrameMs": 13.899999976158142,
-    "maxFrameMs": 16.80000001192093,
+    "averageFrameMs": 10.909243697378816,
+    "p50FrameMs": 10.899999976158142,
+    "p95FrameMs": 12.399999976158142,
+    "maxFrameMs": 13.099999964237213,
     "over20MsCount": 0,
     "over33MsCount": 0,
     "topFrameTimesMs": [
-      16.80000001192093,
-      16.100000023841858,
-      14.700000047683716,
-      14,
-      13.899999976158142
+      13.099999964237213,
+      12.700000047683716,
+      12.700000047683716,
+      12.600000023841858,
+      12.5
     ]
   },
   "threshold": {

@@ -1,0 +1,24 @@
+{
+  "after": {
+    "cards": 4,
+    "canvases": 4,
+    "seeds": [
+      "seed 86348393",
+      "seed 997228992",
+      "seed 893890885",
+      "seed 347874694"
+    ]
+  },
+  "before": {
+    "title": "草原六边形区块变体",
+    "cards": 4,
+    "canvases": 4,
+    "seeds": [
+      "seed 820138999",
+      "seed 690920213",
+      "seed 42014653",
+      "seed 237189169"
+    ]
+  },
+  "consoleErrors": []
+}

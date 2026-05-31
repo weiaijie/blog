@@ -1,6 +1,6 @@
 {
   "caseId": "PERF-MAP-16-PAN",
-  "createdAt": "2026-05-30T21:51:32.956Z",
+  "createdAt": "2026-05-31T00:39:01.874Z",
   "url": "http://127.0.0.1:5174/",
   "mode": "production-preview",
   "viewport": {
@@ -17,7 +17,7 @@
     "cameraX": -257,
     "cameraY": -244,
     "zoom": 1.7,
-    "p95FrameMs": 13.3,
+    "p95FrameMs": 14,
     "selectedTileId": null,
     "fogVisibleTileCount": 0,
     "fogExploredTileCount": 0
@@ -25,18 +25,18 @@
   "trace": {
     "label": "PERF-MAP-16-PAN",
     "frameCount": 119,
-    "averageFrameMs": 11.56386554591796,
-    "p50FrameMs": 11.399999976158142,
-    "p95FrameMs": 13.300000011920929,
-    "maxFrameMs": 17.599999964237213,
+    "averageFrameMs": 12.24873949549779,
+    "p50FrameMs": 12.300000011920929,
+    "p95FrameMs": 14,
+    "maxFrameMs": 14.300000011920929,
     "over20MsCount": 0,
     "over33MsCount": 0,
     "topFrameTimesMs": [
-      17.599999964237213,
-      14,
-      13.599999964237213,
-      13.300000011920929,
-      13.300000011920929
+      14.300000011920929,
+      14.199999988079071,
+      14.199999988079071,
+      14.099999964237213,
+      14
     ]
   },
   "threshold": {

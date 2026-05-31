@@ -2,7 +2,7 @@ import { spawn, spawnSync } from 'node:child_process'
 import { chromium } from 'playwright'
 
 const port = 5187
-const url = `http://127.0.0.1:${port}/`
+const url = `http://127.0.0.1:${port}/?seed=1001`
 
 const server = spawn(
   process.platform === 'win32' ? 'npm.cmd' : 'npm',

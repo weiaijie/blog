@@ -119,6 +119,8 @@ const url = `http://127.0.0.1:${port}/`
 const artifactDir = resolve('artifacts/perf')
 const artifactPath = resolve(artifactDir, perfCase.artifactName)
 
+cleanupPreviewPort(port)
+
 const server = spawn(
   process.platform === 'win32' ? 'npm.cmd' : 'npm',
   ['run', 'preview', '--', '--host', '127.0.0.1', '--port', String(port)],
@@ -160,7 +162,9 @@ try {
 
       await setup()
 
-      for (let index = 0; index < 10; index += 1) {
+      await new Promise((resolveWarmup) => setTimeout(resolveWarmup, 250))
+
+      for (let index = 0; index < 30; index += 1) {
         await new Promise((resolveFrame) => requestAnimationFrame(resolveFrame))
       }
 
@@ -251,8 +255,15 @@ try {
     }
 
     await mkdir(artifactDir, { recursive: true })
-    await writeFile(artifactPath, `${JSON.stringify(payload, null, 2)}\n`, 'utf8')
+    await writeArtifactWithRetry(artifactPath, `${JSON.stringify(payload, null, 2)}\n`)
     console.log(`Wrote ${artifactPath}`)
+
+    if (payload.status !== 'PASS') {
+      console.error(
+        `${caseId} failed performance budget: ${payload.status} p95=${payload.trace.p95FrameMs}ms max=${payload.trace.maxFrameMs}ms`,
+      )
+      process.exitCode = 1
+    }
   } finally {
     await browser.close()
   }
@@ -297,4 +308,43 @@ function stopProcessTree(childProcess) {
   }
 
   childProcess.kill()
+}
+
+function cleanupPreviewPort(targetPort) {
+  if (process.platform !== 'win32') {
+    return
+  }
+
+  const command = [
+    '$ErrorActionPreference = "SilentlyContinue"',
+    `Get-NetTCPConnection -LocalPort ${targetPort}`,
+    '  | Select-Object -ExpandProperty OwningProcess -Unique',
+    '  | ForEach-Object { Stop-Process -Id $_ -Force }',
+  ].join('; ')
+
+  spawnSync('powershell.exe', ['-NoProfile', '-Command', command], {
+    stdio: 'ignore',
+  })
+}
+
+async function writeArtifactWithRetry(targetPath, contents) {
+  const retryableCodes = new Set(['EBUSY', 'EPERM', 'EACCES', 'UNKNOWN'])
+  let lastError
+
+  for (let attempt = 0; attempt < 6; attempt += 1) {
+    try {
+      await writeFile(targetPath, contents, 'utf8')
+      return
+    } catch (error) {
+      lastError = error
+
+      if (!retryableCodes.has(error?.code)) {
+        throw error
+      }
+
+      await delay(150 * (attempt + 1))
+    }
+  }
+
+  throw lastError
 }
