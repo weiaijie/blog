@@ -77,7 +77,17 @@ def expand_context(sample, messages, self_id):
     return sample
 
 
-def prepare(out):
+def scene_seeds(text):
+    """Retrieval cues only, never semantic labels or evaluation hints."""
+    if any(word in text for word in ('接口','代码','客户','需求','上线','数据库','后台','前端','测试')):
+        return []
+    groups = {'情绪线索':('难过','委屈','伤心','心情','担心','害怕','心烦','失眠','烦死','不开心'),
+              '闲聊线索':('哈哈','好玩','电影','游戏','笑死','搞笑','开玩笑'),
+              '生活线索':('吃饭','外卖','到家','快递','睡觉','做饭','买菜','停车','散步')}
+    return [name for name,words in groups.items() if any(word in text for word in words)]
+
+
+def prepare(out, scene_development=False):
     if out.exists() and any(out.iterdir()):
         raise ValueError("使用新输出目录，保留此前结果")
     old_days, old_sources, old_splits = used_history(lab.HERE/'private')
@@ -93,18 +103,33 @@ def prepare(out):
     account = Path(lab.read_json(lab.ROOT / 'wechat-decrypt/config.json')['db_dir']).parent.name
     if self_id not in (account, re.sub(r'_[0-9a-fA-F]{4,}$', '', account)):
         raise ValueError("本人身份与配置不一致")
-    cutoff = latest - 180 * 86400
+    cutoff = latest - (365 if scene_development else 180) * 86400
     for row in lab.rows(self_csv):
         if int(row['create_time']) >= cutoff and row['message_kind'] == 'text' and row['chat_username'] != self_id:
             activity[row['chat_username']] += 1
             metadata[row['chat_username']] = row
     selected = []
     partitions = {}
-    for group, n in (('False', 8), ('True', 4)):
-        chats = [c for c, _ in activity.most_common() if metadata[c]['is_group'] == group][:n]
-        for i, chat in enumerate(chats):
-            selected.append(chat)
-            partitions[chat] = old_splits.get(lab.digest(chat), 'dev' if i % 2 == 0 else 'eval')
+    if scene_development:
+        eligible = {chat for chat,n in activity.items() if n >= 3 and metadata[chat]['is_group']=='False'
+                    and old_splits.get(lab.digest(chat)) != 'eval'}
+        scores = collections.defaultdict(collections.Counter)
+        for row in lab.rows(lab.BASE/'analysis_output/all_messages_cleaned.csv'):
+            if (row['chat_username'] in eligible and int(row['create_time']) >= cutoff
+                    and row['message_kind']=='text' and row['sender_username'] and row['sender_username'] != self_id):
+                for seed in scene_seeds(row['clean_text']):
+                    scores[seed][row['chat_username']] += 1
+        for seed in ('情绪线索','闲聊线索','生活线索'):
+            for chat,_ in scores[seed].most_common(3):
+                if chat not in selected:
+                    selected.append(chat)
+                    partitions[chat] = 'dev'
+    else:
+        for group, n in (('False', 8), ('True', 4)):
+            chats = [c for c, _ in activity.most_common() if metadata[c]['is_group'] == group][:n]
+            for i, chat in enumerate(chats):
+                selected.append(chat)
+                partitions[chat] = old_splits.get(lab.digest(chat), 'dev' if i % 2 == 0 else 'eval')
     messages = {chat: [] for chat in selected}
     aliases = set()
     for row in lab.rows(lab.BASE / 'analysis_output/all_messages_cleaned.csv'):
@@ -113,7 +138,7 @@ def prepare(out):
             aliases.update(row[k] for k in ('chat_name', 'remark', 'nick_name', 'alias', 'sender_label', 'sender_username'))
     aliases.discard('me')
     aliases.discard('我')
-    used, output, checks = set(), [], collections.Counter()
+    used, output, checks, seed_counts = set(), [], collections.Counter(), collections.Counter()
     for chat in selected:
         entries = lab.make_candidates(messages[chat], self_id, context_turns=12, context_chars=3500, min_reply_chars=1)
         days = set()
@@ -124,6 +149,12 @@ def prepare(out):
                 checks['seen_day_excluded'] += 1
                 continue
             s=expand_context(s,messages[chat],self_id)
+            if scene_development:
+                seeds = scene_seeds(' '.join(m['text'] for m in s['context'][-8:]))
+                seeds = [seed for seed in seeds if seed_counts[seed] < 8]
+                if not seeds:
+                    continue
+                seed = min(seeds, key=lambda value:seed_counts[value])
             if any(source_key(row) in old_sources for row in s['source']):
                 checks['seen_context_excluded'] += 1
                 continue
@@ -144,6 +175,8 @@ def prepare(out):
                 continue
             s.update(identity_verified=True, split=partitions[chat])
             output.append(s)
+            if scene_development:
+                seed_counts[seed] += 1
             used.add(fingerprint)
             days.add(s['date'])
     # Partition before exposing examples to the AI. No answer/intent-derived labels in eval inputs.
@@ -163,6 +196,8 @@ def prepare(out):
                 'counts': dict(collections.Counter(s['split'] for s in output)),
                 'source_latest': dt.datetime.fromtimestamp(latest).isoformat(),
                 'context_messages_max': 24, 'context_window_seconds': 1800, 'context_chars_max': 3500,
+                'sampling': {'mode':'scene_development' if scene_development else 'active_chats',
+                             'days':365 if scene_development else 180, 'keyword_seed_counts':dict(seed_counts)},
                 'identity_verified': len(output), 'filters': dict(checks),
                 'history_exclusion': {'chat_days':len(old_days),'source_rows':len(old_sources),
                                       'preserved_chat_splits':len(old_splits)},
@@ -206,12 +241,30 @@ def validate_analysis(packets, analysis):
     return entries
 
 
+def check_generation_context(run, analysis):
+    if 'generation_context_sha256' in analysis:
+        context = lab.read_json(run/'generation-context.json')
+        if sha(context) != analysis['generation_context_sha256']:
+            raise ValueError('生成使用的提示或风格资料版本已改变')
+        examples = context.get('development_examples', [])
+        packets = lab.read_json(run/'analysis-inputs.json')
+        evaluation = [s for s in packets if s['split']=='eval']
+        if (len({s['id'] for s in examples}) != len(examples)
+                or any(s.get('split') != 'dev' or not s.get('reference')
+                       or s['id'] in {p['id'] for p in evaluation}
+                       or s['chat_id'] in {p['chat_id'] for p in evaluation} for s in examples)):
+            raise ValueError('风格资料中的示例不能与本轮评测交叉')
+        return context
+    return None
+
+
 def assemble(run):
     if any((run/name).exists() for name in ('generation-manifest.json','predictions.json','comparison.private.json')):
         raise ValueError('本轮生成已冻结；请用新目录开展下一轮，或 render 查看已有结果')
     packets = lab.read_json(run/'analysis-inputs.json')
     analysis = lab.read_json(run/'ai-analysis.json')
     entries = validate_analysis(packets, analysis)
+    check_generation_context(run, analysis)
     manifest = lab.read_json(run/'manifest.json')
     raw_source = lab.read_json(run/'source.private.json')
     if manifest['input_sha256'] != sha(packets) or manifest['source_sha256'] != sha(raw_source):
@@ -274,6 +327,7 @@ def frozen_run(run):
             or manifest['input_sha256'] != sha(packets)):
         raise ValueError('生成结果或输入已改变，与冻结清单不匹配')
     validate_analysis(packets, analysis)
+    check_generation_context(run, analysis)
     expected = {s['id'] for s in analysis['items'] if s['quality']=='usable'} & {
         p['id'] for p in packets if p['split']=='eval'}
     for values in (manifest['eval_ids'], [s['id'] for s in predictions], [s['id'] for s in comparisons]):
@@ -309,6 +363,11 @@ def make_report(manifest, comparisons, assessment):
                 or type(s.get('extra_commitment')) is not bool
                 or not s.get('verdict') or not s.get('reason')):
             raise ValueError('评价字段不完整')
+    action_review = any('action_alignment' in s or 'information_gap' in s for s in items)
+    if action_review and any(s.get('action_alignment') not in ('一致','不同','无法判断')
+                             or s.get('information_gap') not in ('无','当前任务进度','系统知识','个人事实','指代或媒体','隐含意图')
+                             for s in items):
+        raise ValueError('回应动作与信息缺口评价必须完整覆盖')
     by_id = {s['id']: s for s in items}
     grouped = {}
     for field in ('scene','reply_state'):
@@ -318,13 +377,17 @@ def make_report(manifest, comparisons, assessment):
             grouped[field][label] = {
                 'count': len(subset), 'style': dict(collections.Counter(s['style'] for s in subset)),
                 'meaning': dict(collections.Counter(s['meaning'] for s in subset))}
-    return {'reviewer': assessment['reviewer'], 'reviewer_kind': 'ai', 'human_ratings': 0,
+    report = {'reviewer': assessment['reviewer'], 'reviewer_kind': 'ai', 'human_ratings': 0,
               'evaluated': len(items), 'style': dict(collections.Counter(s['style'] for s in items)),
               'meaning': dict(collections.Counter(s['meaning'] for s in items)),
               'unsupported_facts': sum(s['unsupported_fact'] for s in items),
               'extra_commitments': sum(s['extra_commitment'] for s in items), 'groups': grouped,
               'evaluation_sha256': sha(assessment),
               'limits': '同一会话 AI 的历史对照自评；不代表本人评分、独立盲测或场景覆盖率。'}
+    if action_review:
+        report['action_alignment'] = dict(collections.Counter(s['action_alignment'] for s in items))
+        report['information_gaps'] = dict(collections.Counter(s['information_gap'] for s in items))
+    return report
 
 
 def evaluate(run):
@@ -359,6 +422,21 @@ def render(run):
     if report:
         chunks += ['<p>AI 风格评价：'+html.escape(' / '.join(k+' '+str(v) for k,v in report['style'].items()))+
                    '。历史意思对照：'+html.escape(' / '.join(k+' '+str(v) for k,v in report['meaning'].items()))+'。</p>']
+        if 'action_alignment' in report:
+            chunks += ['<p>回应动作：'+html.escape(' / '.join(k+' '+str(v) for k,v in report['action_alignment'].items()))+
+                       '。口吻贴近不等于选对回应动作；本轮与旧轮样本不同，不能直接比较准确率。</p>']
+    if 'generation_context_sha256' in raw_analysis:
+        context=lab.read_json(run/'generation-context.json')
+        profile=context.get('style_profile',{})
+        chunks += ['<details><summary>查看分场景说话方式与不同状态的区别</summary><p>以下规则由开发记录归纳；证据少的场景暂定，历史事实不能当成当前事实。</p>']
+        for name,facet in profile.get('facets',{}).items():
+            chunks += ['<h3>'+html.escape(name)+'</h3><small>'+html.escape(facet.get('support',''))+'</small><ul>']
+            chunks += ['<li>'+html.escape(rule)+'</li>' for rule in facet.get('rules',[])]
+            chunks += ['</ul>']
+        for name,state in profile.get('states',{}).items():
+            if isinstance(state,dict):
+                chunks += ['<p><strong>'+html.escape(name)+'：</strong>'+html.escape(state['rule'])+'</p>']
+        chunks += ['</details>']
     chunks += ['<details><summary>查看全部样本的分类依据与未生成原因</summary><table><thead><tr><th>场景 / 状态</th><th>用途</th><th>依据</th></tr></thead><tbody>']
     quality_names={'usable':'可用','insufficient':'上下文不足','excluded':'排除'}
     for p in packets:
@@ -373,6 +451,9 @@ def render(run):
         if s['id'] in assessments:
             e=assessments[s['id']]
             chunks += ['<p>AI 对照评价：'+html.escape(e['verdict']+'；'+e['reason'])+'</p>']
+            if 'action_alignment' in e:
+                chunks += ['<small>口吻 '+html.escape(e['style'])+' / 回应动作 '+html.escape(e['action_alignment'])+
+                           ' / 信息缺口 '+html.escape(e['information_gap'])+'</small>']
         chunks += ['</article>']
     (run/'results.html').write_text('\n'.join(chunks),encoding='utf-8')
 
@@ -381,7 +462,8 @@ def tokens(text):
     result = set(re.findall(r'[a-z][a-z0-9_]*', text.lower()))
     for phrase in re.findall(r'[\u4e00-\u9fff]+', text):
         result.update(phrase[i:i+2] for i in range(max(1,len(phrase)-1)))
-    return result
+    return result - {'这个','那个','了吗','了没','一下','什么','怎么','现在','可以','已经',
+                     '好的','没有','你们','我们','不是','到了','过了','完了','定了'}
 
 
 def build_request(run, message, out):
@@ -397,6 +479,7 @@ def build_request(run, message, out):
     packets = lab.read_json(run/'analysis-inputs.json')
     analysis = lab.read_json(run/'ai-analysis.json')
     validate_analysis(packets, analysis)
+    snapshot = check_generation_context(run, analysis)
     manifest = lab.read_json(run/'generation-manifest.json')
     if manifest['input_sha256'] != sha(packets) or manifest['analysis_sha256'] != sha(analysis):
         raise ValueError('学习来源已改变')
@@ -409,6 +492,15 @@ def build_request(run, message, out):
             raise ValueError('学习示例已改变')
         if labels[s['id']]['quality'] != 'usable' or any(s[k] != labels[s['id']][k] for k in ('scene','reply_state')):
             raise ValueError('学习示例标签已改变或不可用')
+    if snapshot and snapshot.get('development_examples'):
+        own_examples = {s['id']:s for s in dev}
+        dev = []
+        for s in snapshot['development_examples']:
+            hint = lab.suggest_context_labels(s)
+            example = {k:s[k] for k in ('id','context','reference','channel')}
+            example.update(scene=hint['scene'], reply_state=hint['reply_state'],
+                           label_source='补充示例的规则检索建议，当前话题仍须语义判断')
+            dev.append(own_examples.get(s['id'], example))
     hint = lab.suggest_context_labels({'context':[{'role':'对方','text':message}]})
     query = tokens(message)
     ranked = []
@@ -428,6 +520,7 @@ def build_request(run, message, out):
                'style_profile':lab.read_json(profile_path) if profile_path.exists() else None,
                'examples':examples, 'retrieval':'中文双字片段和英文词重合排序，场景建议仅加权；非语义向量检索',
                'provenance':{'generation_manifest_sha256':sha(manifest),
+                             'generation_context_sha256':analysis.get('generation_context_sha256'),
                              'example_ids':[s['id'] for s in examples]},
                'output_schema':{'scene':'场景或待判断','reply_state':'状态或待判断',
                                 'response_action':'承接/澄清/说明/推进/延后/无法确定',
@@ -438,11 +531,14 @@ def build_request(run, message, out):
 
 def main():
     parser=argparse.ArgumentParser()
-    parser.add_argument('command',choices=['prepare','assemble','evaluate','render','request'])
+    parser.add_argument('command',choices=['prepare','prepare-scenes','assemble','evaluate','render','request'])
     parser.add_argument('--run',type=Path,required=True)
     parser.add_argument('--message')
     parser.add_argument('--out',type=Path)
     args=parser.parse_args()
+    if args.command == 'prepare-scenes':
+        prepare(args.run, scene_development=True)
+        return
     if args.command == 'request':
         if args.message is None or args.out is None:
             parser.error('request 需要 --message 和 --out')

@@ -10,7 +10,7 @@
 <div id="samples"></div></main>
 <script>
 let samples=/*SAMPLES*/[];
-const labelOptions={scene:['工作','闲聊','生活事务','情绪交流','混合场景','待判断'],reply_state:['正常回应','暂时没空','不确定','催促推进','表达不满','轻松玩笑','待判断']};
+const labelOptions={scene:['工作','闲聊','生活事务','情绪交流','混合场景','待判断'],reply_state:['正常回应','暂时没空','排期紧张','不确定','催促推进','表达不满','轻松玩笑','待判断']};
 const sceneFilter=document.createElement('select');sceneFilter.setAttribute('aria-label','按聊天场景筛选');['全部场景',...labelOptions.scene].forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v;sceneFilter.append(o);});document.querySelector('.bar').append(sceneFilter);sceneFilter.onchange=render;
 const root=document.getElementById('samples');
 function update(){document.getElementById('count').textContent=`已选择 ${samples.filter(s=>s.approved).length} / ${samples.length} 段`;}

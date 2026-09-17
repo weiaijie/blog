@@ -30,6 +30,80 @@ def fixture(run):
 
 
 class AutoLabTests(unittest.TestCase):
+    def test_scene_development_excludes_existing_evaluation_contacts(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder);source=[];own=[]
+            for index,chat in enumerate(('dev-chat','eval-chat')):
+                incoming={**row('other','下班到家吃饭了吗',10+index*10),'chat_username':chat}
+                source.append(incoming)
+                for offset in (1,2,3):
+                    sent={**row('me','恩到了',10+index*10+offset),'chat_username':chat}
+                    own.append(sent);source.append(sent)
+            for s in source:
+                s.update({k:'' for k in ('chat_name','remark','nick_name','alias','sender_label')})
+            with patch.object(auto.lab,'HERE',root),patch.object(auto,'used_history',return_value=(set(),set(),{auto.lab.digest('eval-chat'):'eval'})), \
+                 patch.object(auto.lab,'rows',side_effect=lambda path:iter(own if path.name=='self_messages_cleaned.csv' else source)), \
+                 patch.object(auto.lab,'read_json',return_value={'db_dir':'C:/fake/me/db_storage'}), \
+                 patch.object(auto.lab,'verify_identity',return_value=True):
+                auto.prepare(root/'scene-run',scene_development=True)
+            packets=auto.lab.read_json(root/'scene-run/analysis-inputs.json')
+            self.assertTrue(packets)
+            self.assertEqual({s['chat_id'] for s in packets},{auto.lab.digest('dev-chat')})
+            self.assertTrue(all(s['split']=='dev' for s in packets))
+
+    def test_generation_context_freezes_prompt_and_disallows_eval_examples(self):
+        with tempfile.TemporaryDirectory() as folder:
+            run=Path(folder);packets,_,analysis=fixture(run)
+            context={'instructions':'版本一','development_examples':[packets[0]]}
+            analysis['generation_context_sha256']=auto.sha(context)
+            auto.lab.write_json(run/'generation-context.json',context)
+            auto.lab.write_json(run/'ai-analysis.json',analysis)
+            auto.assemble(run)
+            context['instructions']='事后修改';auto.lab.write_json(run/'generation-context.json',context)
+            with self.assertRaisesRegex(ValueError,'版本'):auto.render(run)
+        with tempfile.TemporaryDirectory() as folder:
+            run=Path(folder);packets,_,analysis=fixture(run)
+            context={'development_examples':[{**packets[0],'chat_id':packets[1]['chat_id']}]}
+            analysis['generation_context_sha256']=auto.sha(context)
+            auto.lab.write_json(run/'generation-context.json',context)
+            auto.lab.write_json(run/'ai-analysis.json',analysis)
+            with self.assertRaisesRegex(ValueError,'交叉'):auto.assemble(run)
+
+    def test_request_uses_frozen_extra_development_examples(self):
+        with tempfile.TemporaryDirectory() as folder:
+            run=Path(folder);packets,_,analysis=fixture(run)
+            extra={**packets[0],'id':'life-dev','chat_id':'new-chat',
+                   'context':[{'role':'对方','text':'停车位弄好了没'}], 'reference':['好了']}
+            context={'development_examples':[packets[0],extra]}
+            analysis['generation_context_sha256']=auto.sha(context)
+            auto.lab.write_json(run/'generation-context.json',context)
+            auto.lab.write_json(run/'ai-analysis.json',analysis)
+            auto.assemble(run);auto.build_request(run,'停车位搞定了吗',run/'request-life.json')
+            request=auto.lab.read_json(run/'request-life.json')
+            self.assertIn('life-dev',request['provenance']['example_ids'])
+            self.assertNotIn('dev',request['provenance']['example_ids'])
+            self.assertNotIn('隐藏答案',str(request))
+
+    def test_response_action_rating_is_independent_and_must_be_complete(self):
+        with tempfile.TemporaryDirectory() as folder:
+            run=Path(folder);fixture(run);auto.assemble(run)
+            manifest,_,_,comparison=auto.frozen_run(run)
+            assessment={'comparison_sha256':auto.sha(comparison),'reviewer_kind':'ai','reviewer':'测试',
+                        'items':[{'id':'eval','style':'贴近','meaning':'不同','action_alignment':'不同',
+                                  'information_gap':'个人事实','unsupported_fact':False,'extra_commitment':False,
+                                  'verdict':'短句不等于意思一样','reason':'检验维度分离'}]}
+            report=auto.make_report(manifest,comparison,assessment)
+            self.assertEqual(report['style'],{'贴近':1})
+            self.assertEqual(report['action_alignment'],{'不同':1})
+            del assessment['items'][0]['information_gap']
+            with self.assertRaisesRegex(ValueError,'完整覆盖'):auto.make_report(manifest,comparison,assessment)
+
+    def test_schedule_pressure_requires_own_words(self):
+        sample={'context':[{'role':'对方','text':'有点赶'}]}
+        self.assertEqual(auto.lab.suggest_context_labels(sample)['reply_state'],'待判断')
+        sample['context'].append({'role':'我','text':'这个有点赶'})
+        self.assertEqual(auto.lab.suggest_context_labels(sample)['reply_state'],'排期紧张')
+
     def test_interrupted_generation_cannot_overwrite_revealed_answers(self):
         with tempfile.TemporaryDirectory() as folder:
             run=Path(folder);fixture(run);write=auto.lab.write_json
