@@ -38,16 +38,24 @@ python -m unittest discover -s . -p 'test_*.py' -v
 ```powershell
 python reply_lab.py build --source private/run-20260917/reviewed-candidates.private.json --out private/run-20260917/eval-v1
 python reply_lab.py score --ratings private/run-20260917/eval-v1/ratings.json
+python reply_lab.py audit --source private/run-20260917/candidates.json
 ```
 
 `build` 只接受已批准、完成隐私复核、身份核验、类型与表达意图已填写的样本。同一会话整体归入同一组，开发组至少 10 段，实际人数与数量取决于分组，因此不保证恰好 10/20。仍需复核四类覆盖及重复场景。
 
 - `dev.json`：开发样本，可用于后续改进提示；当前基线不自动插入示例。
+- `manifest.json`：样本 ID、类别数量、输入与提示词校验值。评分必须对应完整评测清单，不能删除难例或重复计分。
 - `eval-inputs.json`、`requests.json`：无原答案的评测输入及消息请求结构，基线使用 `prompt.txt`。
 - `eval-references.private.json`：隐藏答案，仅评价时揭示。
 - `ratings.json`：填写实际模型名称、生成回复、本人评分、事实错误及额外承诺，再运行 `score`。未填写不计为通过。
 
 模型接入方式尚未确定；也可先在选定模型里手动运行请求。现有脚本不会发送真实聊天到任何服务。
+
+### 2026-09-17 继续核验
+
+增加 `audit` 检查真实准备度，以及重复样本/评价丢失/覆盖不足的检查。当前 11 项测试通过，含三项新增反例。`score` 在四类各至少 5 条、全部填写且可用率至少 80%、无事实错误和额外承诺时才报告数值门槛满足；这不代替本人最终判断。
+
+真实候选复核结果：69 条身份确认、0 条人工批准、0 条隐私人工复核、0 条表达意图填写。尚不能生成正式开发/评测集，也不能给出真实风格评分；下一步需要本人在筛选页确认并导出。此前“8 项测试”指首轮结果。
 
 ## 数据与 Git
 

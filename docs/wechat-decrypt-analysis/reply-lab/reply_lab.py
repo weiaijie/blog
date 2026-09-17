@@ -184,6 +184,8 @@ def prepare(out):
 
 def split_samples(samples):
     approved = [s for s in samples if s.get("approved")]
+    if len({s["id"] for s in approved}) != len(approved):
+        raise ValueError("样本 ID 重复，不能进入评测")
     for s in approved:
         if not s.get("privacy_reviewed") or not s.get("identity_verified"):
             raise ValueError("批准样本必须完成身份和隐私复核")
@@ -213,6 +215,16 @@ def build(source, out):
         raise ValueError("输出目录非空")
     out.mkdir(parents=True, exist_ok=True)
     instruction = (HERE / "prompt.txt").read_text(encoding="utf-8")
+    write_json(out / "manifest.json", {
+        "mode": "intent_provided_reply_draft",
+        "source_sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
+        "prompt_sha256": hashlib.sha256(instruction.encode()).hexdigest(),
+        "dev_ids": [s["id"] for s in dev], "eval_ids": [s["id"] for s in evaluation],
+        "dev_types": dict(collections.Counter(s["object_type"] for s in dev)),
+        "eval_types": dict(collections.Counter(s["object_type"] for s in evaluation)),
+        "shared_chats": sorted({s["chat_id"] for s in dev} & {s["chat_id"] for s in evaluation}),
+        "required_eval_per_type": 5,
+    })
     write_json(out / "dev.json", [{**public_input(s), "reply": s["reference"]} for s in dev])
     write_json(out / "eval-inputs.json", [public_input(s) for s in evaluation])
     write_json(out / "eval-references.private.json", [{"id": s["id"], "reference": s["reference"]} for s in evaluation])
@@ -234,15 +246,44 @@ def review(source, output):
 
 def score(path):
     data = read_json(path)
+    manifest = read_json(path.parent / "manifest.json")
+    actual_ids = [x["id"] for x in data]
+    if len(set(actual_ids)) != len(actual_ids) or set(actual_ids) != set(manifest["eval_ids"]):
+        raise ValueError("评价 ID 必须与本批评测清单完全一致，不能删除困难样本或重复计分")
     allowed = ("可直接用", "小改可用", "不像我")
-    complete = [x for x in data if x.get("rating") in allowed and x.get("reply") and x.get("model")
+    complete = [x for x in data if x.get("rating") in allowed
+                and isinstance(x.get("reply"), list) and x["reply"]
+                and all(isinstance(line, str) and line.strip() for line in x["reply"])
+                and isinstance(x.get("model"), str) and x["model"].strip()
                 and type(x.get("factual_error")) is bool and type(x.get("extra_promise")) is bool]
     usable = sum(x["rating"] != "不像我" for x in complete)
+    coverage = all(manifest["eval_types"].get(kind, 0) >= 5 for kind in ("同事", "领导", "家人", "群聊"))
+    fully_rated = bool(data) and len(complete) == len(data)
+    numeric_gate = (fully_rated and coverage and usable / len(data) >= .8
+                    and not any(x["factual_error"] or x["extra_promise"] for x in complete))
     print(json.dumps({"total": len(data), "rated": len(complete), "usable": usable,
                       "usable_rate": usable / len(complete) if complete else None,
                       "factual_errors": sum(x["factual_error"] for x in complete),
                       "extra_promises": sum(x["extra_promise"] for x in complete),
-                      "status": "待完成评价" if len(complete) < len(data) or not data else "评价已填写，需结合场景覆盖验收"}, ensure_ascii=False))
+                      "eval_types": manifest["eval_types"], "coverage_met": coverage,
+                      "numeric_gate_met": numeric_gate,
+                      "status": "待完成评价" if not fully_rated else "已统计本人评价；数值门槛不替代本人验收"}, ensure_ascii=False))
+
+
+def audit(source):
+    data = read_json(source)
+    report = {"candidates": len(data), "approved": sum(s.get("approved") is True for s in data),
+              "identity_verified": sum(s.get("identity_verified") is True for s in data),
+              "privacy_reviewed": sum(s.get("privacy_reviewed") is True for s in data),
+              "intent_filled": sum(bool(s.get("intent", "").strip()) for s in data),
+              "object_types": dict(collections.Counter(s["object_type"] for s in data))}
+    try:
+        dev, evaluation = split_samples(data)
+        report["split"] = {"dev": len(dev), "eval": len(evaluation),
+                           "eval_types": dict(collections.Counter(s["object_type"] for s in evaluation))}
+    except ValueError as error:
+        report["split_pending"] = str(error)
+    print(json.dumps(report, ensure_ascii=False))
 
 
 def main():
@@ -258,6 +299,8 @@ def main():
     r = sub.add_parser("review")
     r.add_argument("--source", type=Path, required=True)
     r.add_argument("--out", type=Path, required=True)
+    a = sub.add_parser("audit")
+    a.add_argument("--source", type=Path, required=True)
     args = parser.parse_args()
     if args.command == "prepare":
         prepare(args.out)
@@ -265,6 +308,8 @@ def main():
         build(args.source, args.out)
     elif args.command == "review":
         review(args.source, args.out)
+    elif args.command == "audit":
+        audit(args.source)
     else:
         score(args.ratings)
 

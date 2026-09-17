@@ -81,6 +81,30 @@ class LabTests(unittest.TestCase):
             lab.review(path/"source.json",path/"review.html")
             self.assertNotIn("</script><script>bad",(path/"review.html").read_text(encoding="utf-8"))
 
+    def test_duplicate_sample_rejected(self):
+        with self.assertRaisesRegex(ValueError,"ID 重复"):
+            lab.split_samples([sample(1,"a"),sample(1,"b")])
+
+    def test_score_rejects_missing_or_duplicate_rows(self):
+        with tempfile.TemporaryDirectory() as folder:
+            path=Path(folder)
+            lab.write_json(path/"manifest.json",{"eval_ids":["1","2"],"eval_types":{"同事":2}})
+            for ratings in ([{"id":"1"}], [{"id":"1"},{"id":"1"}]):
+                lab.write_json(path/"ratings.json",ratings)
+                with self.assertRaisesRegex(ValueError,"评价 ID"):
+                    lab.score(path/"ratings.json")
+
+    def test_high_score_without_coverage_does_not_pass(self):
+        with tempfile.TemporaryDirectory() as folder:
+            path=Path(folder)
+            lab.write_json(path/"manifest.json",{"eval_ids":["1"],"eval_types":{"同事":1}})
+            lab.write_json(path/"ratings.json",[{"id":"1","model":"synthetic-test","reply":["好"],"rating":"可直接用","factual_error":False,"extra_promise":False}])
+            output=io.StringIO()
+            with contextlib.redirect_stdout(output):lab.score(path/"ratings.json")
+            result=json.loads(output.getvalue())
+            self.assertEqual(result["usable_rate"],1)
+            self.assertFalse(result["numeric_gate_met"])
+
 
 if __name__ == "__main__":
     unittest.main()
