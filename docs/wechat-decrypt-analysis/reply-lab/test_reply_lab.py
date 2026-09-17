@@ -81,13 +81,35 @@ class LabTests(unittest.TestCase):
 
     def test_review_does_not_allow_embedded_script_breakout(self):
         with tempfile.TemporaryDirectory() as folder:
-            path=Path(folder);lab.write_json(path/"source.json",[{"context":"</script><script>bad</script>"}])
+            path=Path(folder);lab.write_json(path/"source.json",[{"context":[{"role":"对方","text":"</script><script>bad</script>"}]}])
             lab.review(path/"source.json",path/"review.html")
             self.assertNotIn("</script><script>bad",(path/"review.html").read_text(encoding="utf-8"))
 
     def test_duplicate_sample_rejected(self):
         with self.assertRaisesRegex(ValueError,"ID 重复"):
             lab.split_samples([sample(1,"a"),sample(1,"b")])
+
+    def test_scene_uses_current_topic_not_contact(self):
+        s=sample(1,"same-chat")
+        s['context']=[{'role':'对方','text':'接口字段改好了吗'}]
+        self.assertEqual(lab.labels(s)['scene'],'工作')
+        s['context']=[{'role':'对方','text':'哈哈这个电影好玩'}]
+        self.assertEqual(lab.labels(s)['scene'],'闲聊')
+
+    def test_state_does_not_copy_other_person_or_hidden_answer(self):
+        s=sample(1,"chat");s['context']=[{'role':'对方','text':'我在忙，赶紧上线'}]
+        s['reference']=['我也很着急']
+        self.assertEqual(lab.labels(s)['reply_state'],'待判断')
+        s['context'].append({'role':'我','text':'我在忙，晚点看'})
+        self.assertEqual(lab.labels(s)['reply_state'],'暂时没空')
+
+    def test_mixed_and_unknown_are_not_forced(self):
+        s=sample(1,"chat");s['context']=[{'role':'对方','text':'下班再看看接口'}]
+        self.assertEqual(lab.labels(s)['scene'],'混合场景')
+        s['context']=[{'role':'对方','text':'好'}]
+        self.assertEqual(lab.labels(s)['scene'],'待判断')
+        s.update(scene='闲聊',reply_state='轻松玩笑',label_source='用户调整')
+        self.assertEqual(lab.public_input(s)['scene'],'闲聊')
 
     def test_score_rejects_missing_or_duplicate_rows(self):
         with tempfile.TemporaryDirectory() as folder:

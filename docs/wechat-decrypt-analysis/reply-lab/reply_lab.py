@@ -14,6 +14,49 @@ HERE = Path(__file__).resolve().parent
 BASE = HERE.parent
 ROOT = BASE.parent.parent
 
+SCENES = ("工作", "闲聊", "生活事务", "情绪交流", "混合场景", "待判断")
+STATES = ("正常回应", "暂时没空", "不确定", "催促推进", "表达不满", "轻松玩笑", "待判断")
+
+
+def suggest_context_labels(sample):
+    """Conservative suggestions from pre-reply context only, never the hidden answer."""
+    context = sample["context"]
+    text = "\n".join(m["text"] for m in context)
+    rules = {
+        "工作": ("接口", "代码", "后台", "前端", "后端", "上线", "客户", "测试", "字段", "需求", "数据库", "发版"),
+        "闲聊": ("哈哈", "好玩", "电影", "游戏", "八卦", "开玩笑"),
+        "生活事务": ("吃饭", "到家", "下班", "停车", "自行车", "打气筒", "押金", "快递", "手机", "膝盖", "景点", "小区"),
+        "情绪交流": ("难过", "委屈", "伤心", "烦死", "担心", "心情", "安慰"),
+    }
+    evidence = {scene: [word for word in words if word in text] for scene, words in rules.items()}
+    found = [scene for scene, words in evidence.items() if words]
+    scene = found[0] if len(found) == 1 else "混合场景" if found else "待判断"
+    # Other people's moods/urgency must not become the user's current state.
+    own = "\n".join(m["text"] for m in context[-4:] if m["role"] == "我")
+    state_rules = {
+        "暂时没空": ("没空", "晚点看", "等我到家", "我在忙"),
+        "不确定": ("不确定", "好像", "估计", "应该"),
+        "催促推进": ("赶紧", "尽快", "还没好吗"),
+        "表达不满": ("烦死", "受不了", "怎么又"),
+        "轻松玩笑": ("哈哈", "开玩笑"),
+    }
+    state_evidence = {state: [word for word in words if word in own] for state, words in state_rules.items()}
+    states = [state for state, words in state_evidence.items() if words]
+    return {"scene": scene, "reply_state": states[0] if len(states) == 1 else "待判断",
+            "label_source": "上下文规则建议，待复核",
+            "label_evidence": {"scene": {k:v for k,v in evidence.items() if v},
+                               "reply_state": {k:v for k,v in state_evidence.items() if v}}}
+
+
+def labels(sample):
+    suggestions = suggest_context_labels(sample)
+    for key in ("scene", "reply_state", "label_source", "label_evidence"):
+        if key in sample:
+            suggestions[key] = sample[key]
+    if suggestions["scene"] not in SCENES or suggestions["reply_state"] not in STATES:
+        raise ValueError("场景或回应状态无效")
+    return suggestions
+
 
 def read_json(path):
     return json.loads(path.read_text(encoding="utf-8"))
@@ -213,7 +256,7 @@ def split_samples(samples):
 
 
 def public_input(sample):
-    return {k: sample[k] for k in ("id", "object_type", "context", "intent", "facts")}
+    return {**{k: sample[k] for k in ("id", "object_type", "context", "intent", "facts")}, **labels(sample)}
 
 
 def build(source, out):
@@ -229,6 +272,9 @@ def build(source, out):
         "dev_ids": [s["id"] for s in dev], "eval_ids": [s["id"] for s in evaluation],
         "dev_types": dict(collections.Counter(s["object_type"] for s in dev)),
         "eval_types": dict(collections.Counter(s["object_type"] for s in evaluation)),
+        "eval_scenes": dict(collections.Counter(labels(s)["scene"] for s in evaluation)),
+        "eval_states": dict(collections.Counter(labels(s)["reply_state"] for s in evaluation)),
+        "eval_labels": {s["id"]: {k: labels(s)[k] for k in ("scene", "reply_state")} for s in evaluation},
         "shared_chats": sorted({s["chat_id"] for s in dev} & {s["chat_id"] for s in evaluation}),
         "required_eval_per_type": 5,
     })
@@ -245,7 +291,7 @@ def build(source, out):
 def review(source, output):
     if output.exists():
         raise ValueError("筛选页已存在，请使用新文件名")
-    payload = json.dumps(read_json(source), ensure_ascii=False).replace("<", "\\u003c")
+    payload = json.dumps([{**s, **labels(s)} for s in read_json(source)], ensure_ascii=False).replace("<", "\\u003c")
     template = (HERE / "review.html").read_text(encoding="utf-8")
     output.write_text(template.replace("/*SAMPLES*/[]", payload), encoding="utf-8")
     print("已生成本地筛选页；不会自动保存，请使用导出按钮")
@@ -268,11 +314,22 @@ def score(path):
     fully_rated = bool(data) and len(complete) == len(data)
     numeric_gate = (fully_rated and coverage and usable / len(data) >= .8
                     and not any(x["factual_error"] or x["extra_promise"] for x in complete))
+    grouped = {}
+    for field in ("scene", "reply_state"):
+        grouped[field] = {}
+        for row in data:
+            label = manifest.get("eval_labels", {}).get(row["id"], {}).get(field, "待判断")
+            part = grouped[field].setdefault(label, {"total": 0, "rated": 0, "usable": 0})
+            part["total"] += 1
+            if row in complete:
+                part["rated"] += 1
+                part["usable"] += row["rating"] != "不像我"
     print(json.dumps({"total": len(data), "rated": len(complete), "usable": usable,
                       "usable_rate": usable / len(complete) if complete else None,
                       "factual_errors": sum(x["factual_error"] for x in complete),
                       "extra_promises": sum(x["extra_promise"] for x in complete),
                       "eval_types": manifest["eval_types"], "coverage_met": coverage,
+                      "by_scene_and_state": grouped,
                       "numeric_gate_met": numeric_gate,
                       "status": "待完成评价" if not fully_rated else "已统计本人评价；数值门槛不替代本人验收"}, ensure_ascii=False))
 
@@ -284,6 +341,8 @@ def audit(source):
               "privacy_reviewed": sum(s.get("privacy_reviewed") is True for s in data),
               "intent_filled": sum(bool(s.get("intent", "").strip()) for s in data),
               "object_types": dict(collections.Counter(s["object_type"] for s in data))}
+    report["scenes"] = dict(collections.Counter(labels(s)["scene"] for s in data))
+    report["reply_states"] = dict(collections.Counter(labels(s)["reply_state"] for s in data))
     try:
         dev, evaluation = split_samples(data)
         report["split"] = {"dev": len(dev), "eval": len(evaluation),
