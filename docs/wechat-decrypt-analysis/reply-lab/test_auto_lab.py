@@ -4,6 +4,7 @@ import io
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
 import auto_lab as auto
 from test_reply_lab import row
@@ -29,6 +30,91 @@ def fixture(run):
 
 
 class AutoLabTests(unittest.TestCase):
+    def test_interrupted_generation_cannot_overwrite_revealed_answers(self):
+        with tempfile.TemporaryDirectory() as folder:
+            run=Path(folder);fixture(run);write=auto.lab.write_json
+            def interrupted(path,value):
+                write(path,value)
+                if path.name=='comparison.private.json':
+                    raise OSError('模拟写出答案后中断')
+            with patch.object(auto.lab,'write_json',side_effect=interrupted):
+                with self.assertRaises(OSError):auto.assemble(run)
+            self.assertFalse((run/'generation-manifest.json').exists())
+            revealed=(run/'comparison.private.json').read_bytes()
+            with self.assertRaisesRegex(ValueError,'冻结'):auto.assemble(run)
+            self.assertEqual((run/'comparison.private.json').read_bytes(),revealed)
+
+    def test_learning_answers_and_identity_flags_must_match_source(self):
+        for field in ('reference','identity_verified'):
+            with self.subTest(field=field),tempfile.TemporaryDirectory() as folder:
+                run=Path(folder);packets,source,analysis=fixture(run)
+                if field=='reference':source[0][field]=['不同学习答案']
+                else:source[0][field]='False'
+                auto.lab.write_json(run/'source.private.json',source)
+                auto.lab.write_json(run/'manifest.json',{'input_sha256':auto.sha(packets),'source_sha256':auto.sha(source)})
+                with self.assertRaises(ValueError):auto.assemble(run)
+
+    def test_history_excludes_every_prior_batch_and_preserves_splits(self):
+        with tempfile.TemporaryDirectory() as folder:
+            history=Path(folder)
+            for directory,name,sample in (
+                ('manual','candidates.json',{'chat_id':'a','date':'2026-03-01','source':[row('me','',1)]}),
+                ('first','source.private.json',{'chat_id':'b','date':'2026-03-02','split':'eval','source':[row('me','',2)]}),
+                ('second','source.private.json',{'chat_id':'c','date':'2026-03-03','split':'dev','source':[row('me','',3)]})):
+                (history/directory).mkdir()
+                auto.lab.write_json(history/directory/name,[sample])
+            days,sources,splits=auto.used_history(history)
+            self.assertEqual(len(days),3)
+            self.assertEqual(sources,{auto.source_key(row('me','',i)) for i in (1,2,3)})
+            self.assertEqual(splits,{'b':'eval','c':'dev'})
+            auto.lab.write_json(history/'second/source.private.json',[
+                {'chat_id':'b','date':'2026-03-04','split':'dev'}])
+            with self.assertRaisesRegex(ValueError,'冲突'):
+                auto.used_history(history)
+
+    def test_unknown_text_is_not_attributed_to_any_speaker(self):
+        messages=[row('','身份未知的真实文字',1),row('other','问题',2),row('me','回复',3)]
+        sample=auto.lab.make_candidates(messages,'me',min_reply_chars=1)[0]
+        expanded=auto.expand_context(sample,messages,'me')
+        self.assertNotIn('身份未知的真实文字',str(expanded['context']))
+        self.assertEqual(expanded['context'][0]['role'],'未知')
+
+    def test_render_checks_frozen_files_even_before_any_evaluation(self):
+        for name in ('comparison.private.json','analysis-inputs.json','predictions.json'):
+            with self.subTest(name=name),tempfile.TemporaryDirectory() as folder:
+                run=Path(folder);fixture(run);auto.assemble(run)
+                data=auto.lab.read_json(run/name)
+                data[0]['unexpected_change']=True
+                auto.lab.write_json(run/name,data)
+                with self.assertRaisesRegex(ValueError,'冻结'):
+                    auto.render(run)
+
+    def test_render_recomputes_summary_and_verifies_evaluation_totals(self):
+        with tempfile.TemporaryDirectory() as folder:
+            run=Path(folder);fixture(run);auto.assemble(run)
+            summary=auto.lab.read_json(run/'summary.json');summary['candidates']=999
+            auto.lab.write_json(run/'summary.json',summary)
+            auto.render(run)
+            self.assertNotIn('999',(run/'results.html').read_text(encoding='utf-8'))
+            assessment={'comparison_sha256':auto.sha(auto.lab.read_json(run/'comparison.private.json')),
+                        'reviewer_kind':'ai','reviewer':'测试执行器','items':[
+                            {'id':'eval','style':'贴近','meaning':'不同','unsupported_fact':False,
+                             'extra_commitment':False,'verdict':'测试','reason':'测试'}]}
+            auto.lab.write_json(run/'ai-evaluation.json',assessment);auto.evaluate(run)
+            self.assertEqual(auto.lab.read_json(run/'summary.json')['candidates'],2)
+            report=auto.lab.read_json(run/'evaluation-report.json');report['style']['贴近']=999
+            auto.lab.write_json(run/'evaluation-report.json',report)
+            with self.assertRaisesRegex(ValueError,'汇总'):
+                auto.render(run)
+
+    def test_mixed_keyword_hint_does_not_discard_work_examples(self):
+        with tempfile.TemporaryDirectory() as folder:
+            run=Path(folder);fixture(run);auto.assemble(run)
+            auto.build_request(run,'下班看看接口字段',run/'mixed.json')
+            request=auto.lab.read_json(run/'mixed.json')
+            self.assertEqual(request['scene_hint']['scene'],'混合场景')
+            self.assertEqual(request['provenance']['example_ids'],['dev'])
+
     def test_expanded_context_preserves_media_speakers_and_excludes_target_future(self):
         messages=[row('other','前文接口',1),row('third','不可见图片',2,'image'),
                   row('','系统内容',3,'system'),row('other','可以么',4),

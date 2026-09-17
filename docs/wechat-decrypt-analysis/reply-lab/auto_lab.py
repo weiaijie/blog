@@ -27,6 +27,27 @@ def mask(text, aliases):
     return text
 
 
+def source_key(row):
+    return tuple(str(row[k]) for k in ('db_file','table_name','local_id'))
+
+
+def used_history(folder):
+    """All prepared batches count as seen, even if they were never evaluated."""
+    days, sources, splits = set(), set(), {}
+    paths = sorted(set(folder.glob('*/source.private.json')) | set(folder.glob('*/candidates.json')))
+    for path in paths:
+        for sample in lab.read_json(path):
+            days.add((sample['chat_id'], sample['date']))
+            sources.update(source_key(row) for row in sample.get('source', []))
+            split = sample.get('split')
+            if split in ('dev','eval'):
+                chat = sample['chat_id']
+                if chat in splits and splits[chat] != split:
+                    raise ValueError('历史会话的开发/评测划分冲突')
+                splits[chat] = split
+    return days, sources, splits
+
+
 def expand_context(sample, messages, self_id):
     target = sample['source'][-len(sample['reference'])]
     ordered = sorted(messages, key=lambda r: (int(r['create_time']), int(r['local_id'])))
@@ -37,6 +58,8 @@ def expand_context(sample, messages, self_id):
         if int(ordered[index]['create_time'])-int(r['create_time'])>1800:
             break
         text=r['clean_text'] if r['message_kind']=='text' else '[缺失'+r['message_kind']+'内容]'
+        if not r['sender_username'] and r['message_kind']=='text':
+            text='[未知发送者文本，未纳入上下文]'
         if size+len(text)>3500:
             break
         before.insert(0,(r,text))
@@ -47,7 +70,7 @@ def expand_context(sample, messages, self_id):
         sender=r['sender_username']
         if sender and sender != self_id:
             peers.setdefault(sender,'对方'+str(len(peers)+1))
-        sample['context'].append({'role':'我' if sender==self_id else '对方',
+        sample['context'].append({'role':'我' if sender==self_id else '对方' if sender else '未知',
                                   'speaker':'我' if sender==self_id else peers[sender] if sender else '未知发送者',
                                   'text':text})
     sample['source']=[{k:r[k] for k in ('db_file','table_name','local_id','sender_username')} for r,t in before if r['sender_username']] + sample['source'][-len(sample['reference']):]
@@ -57,6 +80,7 @@ def expand_context(sample, messages, self_id):
 def prepare(out):
     if out.exists() and any(out.iterdir()):
         raise ValueError("使用新输出目录，保留此前结果")
+    old_days, old_sources, old_splits = used_history(lab.HERE/'private')
     self_csv = lab.BASE / "analysis_output/self_messages_cleaned.csv"
     senders, activity, metadata = collections.Counter(), collections.Counter(), {}
     latest = 0
@@ -80,7 +104,7 @@ def prepare(out):
         chats = [c for c, _ in activity.most_common() if metadata[c]['is_group'] == group][:n]
         for i, chat in enumerate(chats):
             selected.append(chat)
-            partitions[chat] = 'dev' if i % 2 == 0 else 'eval'
+            partitions[chat] = old_splits.get(lab.digest(chat), 'dev' if i % 2 == 0 else 'eval')
     messages = {chat: [] for chat in selected}
     aliases = set()
     for row in lab.rows(lab.BASE / 'analysis_output/all_messages_cleaned.csv'):
@@ -89,8 +113,6 @@ def prepare(out):
             aliases.update(row[k] for k in ('chat_name', 'remark', 'nick_name', 'alias', 'sender_label', 'sender_username'))
     aliases.discard('me')
     aliases.discard('我')
-    previous = lab.HERE / 'private/run-20260917/candidates.json'
-    old_days = {(s['chat_id'], s['date']) for s in lab.read_json(previous)} if previous.exists() else set()
     used, output, checks = set(), [], collections.Counter()
     for chat in selected:
         entries = lab.make_candidates(messages[chat], self_id, context_turns=12, context_chars=3500, min_reply_chars=1)
@@ -99,8 +121,12 @@ def prepare(out):
             if len(days) >= 4:
                 break
             if s['date'] in days or (s['chat_id'], s['date']) in old_days:
+                checks['seen_day_excluded'] += 1
                 continue
             s=expand_context(s,messages[chat],self_id)
+            if any(source_key(row) in old_sources for row in s['source']):
+                checks['seen_context_excluded'] += 1
+                continue
             s['context'] = [{**m, 'text': mask(m['text'], aliases)} for m in s['context']]
             s['reference'] = [mask(t, aliases) for t in s['reference']]
             texts = [m['text'] for m in s['context']] + s['reference']
@@ -128,6 +154,8 @@ def prepare(out):
         if s['split'] == 'dev':
             p['reference'] = s['reference']
         packets.append(p)
+    if not output:
+        raise ValueError('没有未见过的可用候选；请扩大数据范围，不回退重复样本')
     out.mkdir(parents=True, exist_ok=True)
     lab.write_json(out / 'source.private.json', output)
     lab.write_json(out / 'analysis-inputs.json', packets)
@@ -136,6 +164,8 @@ def prepare(out):
                 'source_latest': dt.datetime.fromtimestamp(latest).isoformat(),
                 'context_messages_max': 24, 'context_window_seconds': 1800, 'context_chars_max': 3500,
                 'identity_verified': len(output), 'filters': dict(checks),
+                'history_exclusion': {'chat_days':len(old_days),'source_rows':len(old_sources),
+                                      'preserved_chat_splits':len(old_splits)},
                 'user_input_required': False, 'semantic_executor': 'current_conversation_ai',
                 'privacy': '自动遮罩，语义复核在当前会话完成；不保证完全匿名',
                 'evaluation_limit': '本会话此前看过其他历史样本，本轮目标答案未提供；不是独立模型盲测',
@@ -145,6 +175,8 @@ def prepare(out):
 
 
 def validate_analysis(packets, analysis):
+    if len({s['id'] for s in packets}) != len(packets):
+        raise ValueError('输入 ID 重复')
     if analysis.get('input_sha256') != sha(packets):
         raise ValueError('AI 结果与本批输入不匹配')
     if analysis.get('reviewer_kind') != 'ai' or not analysis.get('reviewer'):
@@ -175,7 +207,7 @@ def validate_analysis(packets, analysis):
 
 
 def assemble(run):
-    if (run/'generation-manifest.json').exists():
+    if any((run/name).exists() for name in ('generation-manifest.json','predictions.json','comparison.private.json')):
         raise ValueError('本轮生成已冻结；请用新目录开展下一轮，或 render 查看已有结果')
     packets = lab.read_json(run/'analysis-inputs.json')
     analysis = lab.read_json(run/'ai-analysis.json')
@@ -190,12 +222,14 @@ def assemble(run):
     chats = {'dev': set(), 'eval': set()}
     for p in packets:
         s = source[p['id']]
-        if p['split'] not in chats or not s.get('identity_verified'):
+        if p['split'] not in chats or s.get('identity_verified') is not True:
             raise ValueError('划分或身份核验缺失')
         if any(s[k] != p[k] for k in ('context','split','chat_id')):
             raise ValueError('来源与输入内容不一致')
         if p['split'] == 'eval' and 'reference' in p:
             raise ValueError('评测输入不得包含目标答案')
+        if p['split'] == 'dev' and p.get('reference') != s['reference']:
+            raise ValueError('学习答案与来源不一致')
         chats[p['split']].add(p['chat_id'])
     if chats['dev'] & chats['eval']:
         raise ValueError('同一会话不能跨开发和评测组')
@@ -221,25 +255,47 @@ def assemble(run):
         'analysis_sha256': sha(analysis), 'predictions_sha256': sha(predictions),
         'comparison_sha256': sha(comparison), 'input_sha256': sha(packets),
         'created_at': dt.datetime.now().isoformat(), 'eval_ids': [s['id'] for s in predictions]})
-    summary = {'candidates':len(packets),'quality':dict(collections.Counter(s['quality'] for s in entries)),
-               'scenes':dict(collections.Counter(s['scene'] for s in entries)),
-               'states':dict(collections.Counter(s['reply_state'] for s in entries)),
-               'dev':len(dev),'eval_generated':len(predictions),'human_ratings':0,
-               'analysis_source':analysis['reviewer'],'evaluation':'待 AI 对照评估；不是本人评分'}
+    summary = make_summary(packets, analysis)
     lab.write_json(run/'summary.json',summary)
     print(json.dumps(summary,ensure_ascii=False))
     render(run)
 
 
-def evaluate(run):
+def frozen_run(run):
+    """Validate every consumer, including rendering before any ratings exist."""
     manifest = lab.read_json(run/'generation-manifest.json')
+    packets = lab.read_json(run/'analysis-inputs.json')
+    analysis = lab.read_json(run/'ai-analysis.json')
     comparisons = lab.read_json(run/'comparison.private.json')
     predictions = lab.read_json(run/'predictions.json')
-    assessment = lab.read_json(run/'ai-evaluation.json')
     if (manifest['predictions_sha256'] != sha(predictions)
             or manifest['comparison_sha256'] != sha(comparisons)
-            or manifest['analysis_sha256'] != sha(lab.read_json(run/'ai-analysis.json'))
-            or assessment.get('comparison_sha256') != sha(comparisons)):
+            or manifest['analysis_sha256'] != sha(analysis)
+            or manifest['input_sha256'] != sha(packets)):
+        raise ValueError('生成结果或输入已改变，与冻结清单不匹配')
+    validate_analysis(packets, analysis)
+    expected = {s['id'] for s in analysis['items'] if s['quality']=='usable'} & {
+        p['id'] for p in packets if p['split']=='eval'}
+    for values in (manifest['eval_ids'], [s['id'] for s in predictions], [s['id'] for s in comparisons]):
+        if len(values) != len(expected) or set(values) != expected:
+            raise ValueError('冻结的评测清单不匹配')
+    return manifest, packets, analysis, comparisons
+
+
+def make_summary(packets, analysis, evaluated=False):
+    entries = analysis['items']
+    usable = {s['id'] for s in entries if s['quality']=='usable'}
+    return {'candidates':len(packets), 'quality':dict(collections.Counter(s['quality'] for s in entries)),
+            'scenes':dict(collections.Counter(s['scene'] for s in entries)),
+            'states':dict(collections.Counter(s['reply_state'] for s in entries)),
+            'dev':sum(s['split']=='dev' and s['id'] in usable for s in packets),
+            'eval_generated':sum(s['split']=='eval' and s['id'] in usable for s in packets),
+            'human_ratings':0, 'analysis_source':analysis['reviewer'],
+            'evaluation':'已完成本会话 AI 对照自评；不是本人评分' if evaluated else '待 AI 对照评估；不是本人评分'}
+
+
+def make_report(manifest, comparisons, assessment):
+    if assessment.get('comparison_sha256') != sha(comparisons):
         raise ValueError('评价与冻结的生成结果不匹配')
     if assessment.get('reviewer_kind') != 'ai' or not assessment.get('reviewer'):
         raise ValueError('评价必须声明 AI 来源')
@@ -262,38 +318,37 @@ def evaluate(run):
             grouped[field][label] = {
                 'count': len(subset), 'style': dict(collections.Counter(s['style'] for s in subset)),
                 'meaning': dict(collections.Counter(s['meaning'] for s in subset))}
-    report = {'reviewer': assessment['reviewer'], 'reviewer_kind': 'ai', 'human_ratings': 0,
+    return {'reviewer': assessment['reviewer'], 'reviewer_kind': 'ai', 'human_ratings': 0,
               'evaluated': len(items), 'style': dict(collections.Counter(s['style'] for s in items)),
               'meaning': dict(collections.Counter(s['meaning'] for s in items)),
               'unsupported_facts': sum(s['unsupported_fact'] for s in items),
               'extra_commitments': sum(s['extra_commitment'] for s in items), 'groups': grouped,
               'evaluation_sha256': sha(assessment),
               'limits': '同一会话 AI 的历史对照自评；不代表本人评分、独立盲测或场景覆盖率。'}
+
+
+def evaluate(run):
+    manifest, packets, analysis, comparisons = frozen_run(run)
+    report = make_report(manifest, comparisons, lab.read_json(run/'ai-evaluation.json'))
     lab.write_json(run/'evaluation-report.json', report)
-    summary = lab.read_json(run/'summary.json')
-    summary['evaluation'] = '已完成本会话 AI 对照自评；不是本人评分'
-    lab.write_json(run/'summary.json', summary)
+    lab.write_json(run/'summary.json', make_summary(packets, analysis, evaluated=True))
     print(json.dumps(report, ensure_ascii=False))
     render(run)
 
 
 def render(run):
-    summary=lab.read_json(run/'summary.json')
+    manifest, packets, raw_analysis, data = frozen_run(run)
+    summary=make_summary(packets, raw_analysis)
     source_latest=lab.read_json(run/'manifest.json').get('source_latest','未记录最新日期')
-    data=lab.read_json(run/'comparison.private.json')
-    analysis={s['id']:s for s in lab.read_json(run/'ai-analysis.json')['items']}
+    analysis={s['id']:s for s in raw_analysis['items']}
     assessments = {}
     report = None
     if (run/'evaluation-report.json').exists():
-        report = lab.read_json(run/'evaluation-report.json')
-        if report['evaluation_sha256'] != sha(lab.read_json(run/'ai-evaluation.json')):
-            raise ValueError('评价已改变，请重新 evaluate')
-        manifest = lab.read_json(run/'generation-manifest.json')
-        if (manifest['comparison_sha256'] != sha(data)
-                or manifest['analysis_sha256'] != sha(lab.read_json(run/'ai-analysis.json'))
-                or manifest['predictions_sha256'] != sha(lab.read_json(run/'predictions.json'))):
-            raise ValueError('生成结果已改变，请重新评价')
-        assessments={s['id']:s for s in lab.read_json(run/'ai-evaluation.json')['items']}
+        assessment=lab.read_json(run/'ai-evaluation.json')
+        report=make_report(manifest, data, assessment)
+        if report != lab.read_json(run/'evaluation-report.json'):
+            raise ValueError('评价或汇总已改变，请重新 evaluate')
+        assessments={s['id']:s for s in assessment['items']}
     chunks=['<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>自动分析结果</title>',
             '<style>body{font:16px/1.7 system-ui;background:#f5f3ed;color:#25362c;max-width:950px;margin:auto;padding:24px}article{background:white;margin:20px 0;padding:24px;border-radius:8px}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit}h1{font-size:28px}.pair{display:grid;grid-template-columns:1fr 1fr;gap:24px}td,th{text-align:left;vertical-align:top;padding:6px;border-bottom:1px solid #ddd}table{width:100%;border-collapse:collapse;overflow-wrap:anywhere}@media(max-width:600px){.pair{display:block}body{padding:14px}article{padding:16px}}small{color:#58655a}</style>',
             '<h1>历史回复 · 自动分析结果</h1><p>已由 AI 补上下文、分类、筛选和生成。无需填写样本表；此页用于查看与可选纠错。原回复只在生成结果保存后揭示。</p>',
@@ -304,7 +359,6 @@ def render(run):
     if report:
         chunks += ['<p>AI 风格评价：'+html.escape(' / '.join(k+' '+str(v) for k,v in report['style'].items()))+
                    '。历史意思对照：'+html.escape(' / '.join(k+' '+str(v) for k,v in report['meaning'].items()))+'。</p>']
-    packets=lab.read_json(run/'analysis-inputs.json')
     chunks += ['<details><summary>查看全部样本的分类依据与未生成原因</summary><table><thead><tr><th>场景 / 状态</th><th>用途</th><th>依据</th></tr></thead><tbody>']
     quality_names={'usable':'可用','insufficient':'上下文不足','excluded':'排除'}
     for p in packets:
@@ -359,10 +413,11 @@ def build_request(run, message, out):
     query = tokens(message)
     ranked = []
     for s in dev:
-        if hint['scene'] != '待判断' and s['scene'] not in (hint['scene'],'待判断'):
-            continue
         words = tokens(' '.join(m['text'] for m in s['context'][-4:]))
         overlap = len(query & words) / max(1,len(query | words))
+        # Keyword hints can be wrong or mixed; they must not eliminate useful examples.
+        if hint['scene'] == s['scene'] and hint['scene'] != '待判断':
+            overlap *= 1.25
         ranked.append((overlap, s['id'], s))
     ranked.sort(key=lambda v:(-v[0], v[1]))
     examples = [s for score,_,s in ranked[:3] if score > 0]
@@ -371,7 +426,7 @@ def build_request(run, message, out):
     request = {'executor':'current_conversation_ai', 'network_called':False,
                'instructions':prompt, 'message':message, 'scene_hint':hint,
                'style_profile':lab.read_json(profile_path) if profile_path.exists() else None,
-               'examples':examples, 'retrieval':'中文双字片段和英文词重合排序；非语义向量检索',
+               'examples':examples, 'retrieval':'中文双字片段和英文词重合排序，场景建议仅加权；非语义向量检索',
                'provenance':{'generation_manifest_sha256':sha(manifest),
                              'example_ids':[s['id'] for s in examples]},
                'output_schema':{'scene':'场景或待判断','reply_state':'状态或待判断',
