@@ -1,0 +1,56 @@
+# 本人回复样本试验
+
+在已有 `docs/wechat-decrypt-analysis/` 下继续工作。此目录已存在历史导出、清洗与分析资料；不要重复导出全库。
+
+第一阶段工具仅本地运行：抽取候选 → 本人筛选 → 导出生成输入与隐藏答案 → 收集模型输出和本人评价。没有模型 API 调用、微信自动发送或后台监听。
+
+## 本轮结果（2026-09-17）
+
+- 历史本人消息 CSV 有 62134 条，本人发送者唯一，并与本地配置的账号目录匹配。
+- 快照最新时间为 2026-03-14 14:28:17，非当前实时微信数据。
+- 从快照最新时间向前 180 天，选择活跃的 8 个私聊、4 个群聊，得到 69 段候选。
+- 69 段的上下文和回复发送者均通过原始 SQLite `Name2Id` 与消息行回查；数据库以 `mode=ro` 打开。
+- 45 段私聊关系待本人确认，24 段为群聊；身份匹配不等于内容已完全匿名。
+- 自动替换部分联系人标识、URL、邮箱、IP、长号码及显式敏感字段；人名、地址、业务细节等可能仍残留，因此数据只留本地且默认未批准。
+- 8 项单元测试通过。真实筛选页经 Chrome 无头验证：69 张卡片渲染、编辑后导出一致、390px 视口无横向溢出、页面脚本错误为 0。
+- 10/20 划分和隐藏答案流程使用虚构测试数据验证通过；真实样本尚未完成本人筛选，未划为正式评测集，模型调用为 0。
+
+## 使用
+
+Windows 可用 Python 3 标准库即可运行脚本，不需要读取密钥文件，不导入现有 MCP 模块。
+
+本机本轮使用的 Python：`C:\Users\saber\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe`。PowerShell 中将下列 `python` 换为 `& '上述绝对路径'` 即可。
+
+以下命令在本目录执行：
+
+```powershell
+python reply_lab.py prepare --out private/run-new
+python reply_lab.py review --source private/run-new/candidates.json --out private/run-new/review.html
+python -m unittest discover -s . -p 'test_*.py' -v
+```
+
+本轮已生成 `private/run-20260917/review.html`，直接打开即可。每段选择对象类型、填写想表达的意思，复核内容并勾选纳入样本。完成后点“导出已编辑样本”；可通过“恢复已导出文件”继续编辑。关闭前必须导出，页面不自动保存。
+
+会话仅显示匿名编号；必要时在本地查 `private/run-20260917/contact-map.private.json` 对照联系人，不要上传该文件。群聊输出只区分本人/他人，复杂多方讨论应剔除或人工补充上下文，不能把所有群成员视作一个人。
+
+先选 30 段并尽量覆盖四类对象。下载的 `reviewed-candidates.private.json` 移到对应的 `private/` 目录后：
+
+```powershell
+python reply_lab.py build --source private/run-20260917/reviewed-candidates.private.json --out private/run-20260917/eval-v1
+python reply_lab.py score --ratings private/run-20260917/eval-v1/ratings.json
+```
+
+`build` 只接受已批准、完成隐私复核、身份核验、类型与表达意图已填写的样本。同一会话整体归入同一组，开发组至少 10 段，实际人数与数量取决于分组，因此不保证恰好 10/20。仍需复核四类覆盖及重复场景。
+
+- `dev.json`：开发样本，可用于后续改进提示；当前基线不自动插入示例。
+- `eval-inputs.json`、`requests.json`：无原答案的评测输入及消息请求结构，基线使用 `prompt.txt`。
+- `eval-references.private.json`：隐藏答案，仅评价时揭示。
+- `ratings.json`：填写实际模型名称、生成回复、本人评分、事实错误及额外承诺，再运行 `score`。未填写不计为通过。
+
+模型接入方式尚未确定；也可先在选定模型里手动运行请求。现有脚本不会发送真实聊天到任何服务。
+
+## 数据与 Git
+
+`private/` 保存真实样本、对照、联系人映射、筛选页及评价，必须保持忽略。历史 `analysis_output/` 和 `exports/` 也不纳入提交。
+
+上级 `/docs` 被仓库忽略，本轮只对本目录内的脚本、无真实内容的页面模板、提示词、测试及 README 精确强制添加；不要对整个目录执行 `git add -f`。
