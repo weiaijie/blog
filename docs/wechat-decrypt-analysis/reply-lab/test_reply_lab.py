@@ -41,6 +41,10 @@ class LabTests(unittest.TestCase):
         for secret in ("张三", "https://", "13812345678", "a@b.com", "10.2.3.4", "abc"):
             self.assertNotIn(secret, text)
 
+    def test_whitespace_credentials_excluded_wholesale(self):
+        for text in ("地址 example.invalid 密码 fake-secret", "密码是fake-secret", "password fake-secret"):
+            self.assertEqual(lab.redact(text), "[含凭据信息，整条排除]")
+
     def test_identity_verifies_database_and_rejects_mismatch(self):
         with tempfile.TemporaryDirectory() as folder:
             path = Path(folder)

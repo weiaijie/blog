@@ -34,6 +34,9 @@ def digest(value):
 
 def redact(text, aliases=()):
     # Mechanical masking only; human review remains mandatory.
+    # Credential-bearing messages are excluded wholesale, including whitespace separators.
+    if "[敏感字段]" in text or re.search(r"(?i)(?:密码|口令|密钥|password|secret|access[_ -]?token)\s*(?:[:=：]|是|为|\s)\s*\S+", text):
+        return "[含凭据信息，整条排除]"
     for alias in sorted(set(aliases), key=len, reverse=True):
         if len(alias) >= 2:
             text = text.replace(alias, "[联系人]")
@@ -91,6 +94,8 @@ def make_candidates(messages, self_id, aliases=()):
         chat = turn[0]["chat_username"]
         context = [{"role": "我" if r["sender_username"] == self_id else "对方",
                     "text": redact(r["clean_text"], aliases)} for r in context_rows]
+        if any("[含凭据信息，整条排除]" in text for text in answer + [m["text"] for m in context]):
+            continue
         result.append({
             "id": digest(chat + ':' + turn[0]["db_file"] + ':' + turn[0]["local_id"]),
             "chat_id": digest(chat), "date": turn[0]["create_datetime"][:10],
@@ -187,6 +192,8 @@ def split_samples(samples):
     if len({s["id"] for s in approved}) != len(approved):
         raise ValueError("样本 ID 重复，不能进入评测")
     for s in approved:
+        if s.get("excluded_reason") or "[含凭据信息，整条排除]" in json.dumps([s["context"],s["reference"]],ensure_ascii=False):
+            raise ValueError("排除样本不能进入评测")
         if not s.get("privacy_reviewed") or not s.get("identity_verified"):
             raise ValueError("批准样本必须完成身份和隐私复核")
         if s["object_type"] not in ("同事", "领导", "家人", "群聊"):
