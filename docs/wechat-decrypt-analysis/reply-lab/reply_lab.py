@@ -76,7 +76,7 @@ def digest(value):
 
 
 def redact(text, aliases=()):
-    # Mechanical masking only; human review remains mandatory.
+    # Mechanical masking only; this does not guarantee full anonymization.
     # Credential-bearing messages are excluded wholesale, including whitespace separators.
     if "[敏感字段]" in text or re.search(r"(?i)(?:密码|口令|密钥|password|secret|access[_ -]?token)\s*(?:[:=：]|是|为|\s)\s*\S+", text):
         return "[含凭据信息，整条排除]"
@@ -95,7 +95,7 @@ def redact(text, aliases=()):
     return text
 
 
-def make_candidates(messages, self_id, aliases=()):
+def make_candidates(messages, self_id, aliases=(), context_turns=4, context_chars=1200, min_reply_chars=6):
     messages = sorted(messages, key=lambda r: (int(r["create_time"]), int(r["local_id"])))
     turns, current = [], []
     for row in messages:
@@ -124,15 +124,15 @@ def make_candidates(messages, self_id, aliases=()):
         if int(turn[0]["create_time"]) - int(previous[-1]["create_time"]) > 1800:
             continue
         answer = [redact(r["clean_text"], aliases) for r in turn]
-        if not 6 <= sum(map(len, answer)) <= 180 or len(answer) > 5 or len(previous) > 5:
+        if not min_reply_chars <= sum(map(len, answer)) <= 180 or len(answer) > 5 or len(previous) > 5:
             continue
         history = [previous]
-        for earlier in reversed(turns[max(0, i - 4):i - 1]):
+        for earlier in reversed(turns[max(0, i - context_turns):i - 1]):
             if not earlier or int(history[0][0]["create_time"]) - int(earlier[-1]["create_time"]) > 1800:
                 break
             history.insert(0, earlier)
         context_rows = [r for block in history for r in block]
-        if sum(len(r["clean_text"]) for r in context_rows) > 1200:
+        if sum(len(r["clean_text"]) for r in context_rows) > context_chars:
             continue
         chat = turn[0]["chat_username"]
         context = [{"role": "我" if r["sender_username"] == self_id else "对方",
