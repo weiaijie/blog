@@ -180,7 +180,11 @@ def build_asset(asset_id, detailed):
     elif asset_id == "terrain-hill":
         create_terrain_hill(detailed)
     elif asset_id == "buildable-city-center":
-        create_buildable_city_center(detailed)
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("city_block_v2", Path(__file__).with_name("city_block_v2.py"))
+        city_module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(city_module)
+        city_module.create_city_block(detailed)
     elif asset_id == "city-module-tower":
         create_city_module_tower(detailed)
     elif asset_id == "city-module-gate":

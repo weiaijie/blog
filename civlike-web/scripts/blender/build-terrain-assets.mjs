@@ -30,6 +30,8 @@ if (!blenderBin) {
 const blenderArgs = [
   '--background',
   '--factory-startup',
+  '--python-exit-code',
+  '1',
   '--python',
   blenderScript,
   '--',

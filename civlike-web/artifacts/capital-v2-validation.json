@@ -1,0 +1,56 @@
+{
+  "lod0": {
+    "bytes": 2906048,
+    "meshTriangles": 36870,
+    "nodes": 1547,
+    "embeddedImages": 1
+  },
+  "lod1": {
+    "bytes": 907020,
+    "meshTriangles": 6476,
+    "nodes": 1172,
+    "embeddedImages": 1
+  },
+  "capital-v2-banner": {
+    "bytes": 9244,
+    "meshTriangles": 116,
+    "nodes": 4,
+    "embeddedImages": 0
+  },
+  "capital-v2-gate": {
+    "bytes": 104964,
+    "meshTriangles": 1412,
+    "nodes": 43,
+    "embeddedImages": 1
+  },
+  "capital-v2-roof": {
+    "bytes": 77104,
+    "meshTriangles": 726,
+    "nodes": 61,
+    "embeddedImages": 0
+  },
+  "capital-v2-tower": {
+    "bytes": 298672,
+    "meshTriangles": 3646,
+    "nodes": 164,
+    "embeddedImages": 1
+  },
+  "capital-v2-wall": {
+    "bytes": 77636,
+    "meshTriangles": 1188,
+    "nodes": 27,
+    "embeddedImages": 1
+  },
+  "capital-v2-window": {
+    "bytes": 47304,
+    "meshTriangles": 544,
+    "nodes": 19,
+    "embeddedImages": 1
+  },
+  "boundsXYZ": [
+    1.732050895690918,
+    2.0,
+    0.6349999755620956
+  ],
+  "importedMeshes": 1547
+}
