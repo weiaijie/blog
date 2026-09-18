@@ -87,7 +87,7 @@ def scene_seeds(text):
     return [name for name,words in groups.items() if any(word in text for word in words)]
 
 
-def prepare(out, scene_development=False):
+def prepare(out, scene_development=False, scene_evaluation=False):
     if out.exists() and any(out.iterdir()):
         raise ValueError("使用新输出目录，保留此前结果")
     old_days, old_sources, old_splits = used_history(lab.HERE/'private')
@@ -103,16 +103,18 @@ def prepare(out, scene_development=False):
     account = Path(lab.read_json(lab.ROOT / 'wechat-decrypt/config.json')['db_dir']).parent.name
     if self_id not in (account, re.sub(r'_[0-9a-fA-F]{4,}$', '', account)):
         raise ValueError("本人身份与配置不一致")
-    cutoff = latest - (365 if scene_development else 180) * 86400
+    scene_sampling = scene_development or scene_evaluation
+    cutoff = latest - (365 if scene_sampling else 180) * 86400
     for row in lab.rows(self_csv):
         if int(row['create_time']) >= cutoff and row['message_kind'] == 'text' and row['chat_username'] != self_id:
             activity[row['chat_username']] += 1
             metadata[row['chat_username']] = row
     selected = []
     partitions = {}
-    if scene_development:
+    if scene_sampling:
+        excluded_split = 'dev' if scene_evaluation else 'eval'
         eligible = {chat for chat,n in activity.items() if n >= 3 and metadata[chat]['is_group']=='False'
-                    and old_splits.get(lab.digest(chat)) != 'eval'}
+                    and old_splits.get(lab.digest(chat)) != excluded_split}
         scores = collections.defaultdict(collections.Counter)
         for row in lab.rows(lab.BASE/'analysis_output/all_messages_cleaned.csv'):
             if (row['chat_username'] in eligible and int(row['create_time']) >= cutoff
@@ -123,7 +125,7 @@ def prepare(out, scene_development=False):
             for chat,_ in scores[seed].most_common(3):
                 if chat not in selected:
                     selected.append(chat)
-                    partitions[chat] = 'dev'
+                    partitions[chat] = 'eval' if scene_evaluation else 'dev'
     else:
         for group, n in (('False', 8), ('True', 4)):
             chats = [c for c, _ in activity.most_common() if metadata[c]['is_group'] == group][:n]
@@ -149,7 +151,7 @@ def prepare(out, scene_development=False):
                 checks['seen_day_excluded'] += 1
                 continue
             s=expand_context(s,messages[chat],self_id)
-            if scene_development:
+            if scene_sampling:
                 seeds = scene_seeds(' '.join(m['text'] for m in s['context'][-8:]))
                 seeds = [seed for seed in seeds if seed_counts[seed] < 8]
                 if not seeds:
@@ -175,7 +177,7 @@ def prepare(out, scene_development=False):
                 continue
             s.update(identity_verified=True, split=partitions[chat])
             output.append(s)
-            if scene_development:
+            if scene_sampling:
                 seed_counts[seed] += 1
             used.add(fingerprint)
             days.add(s['date'])
@@ -196,8 +198,8 @@ def prepare(out, scene_development=False):
                 'counts': dict(collections.Counter(s['split'] for s in output)),
                 'source_latest': dt.datetime.fromtimestamp(latest).isoformat(),
                 'context_messages_max': 24, 'context_window_seconds': 1800, 'context_chars_max': 3500,
-                'sampling': {'mode':'scene_development' if scene_development else 'active_chats',
-                             'days':365 if scene_development else 180, 'keyword_seed_counts':dict(seed_counts)},
+                'sampling': {'mode':'scene_evaluation' if scene_evaluation else 'scene_development' if scene_development else 'active_chats',
+                             'days':365 if scene_sampling else 180, 'keyword_seed_counts':dict(seed_counts)},
                 'identity_verified': len(output), 'filters': dict(checks),
                 'history_exclusion': {'chat_days':len(old_days),'source_rows':len(old_sources),
                                       'preserved_chat_splits':len(old_splits)},
@@ -466,11 +468,11 @@ def tokens(text):
                      '好的','没有','你们','我们','不是','到了','过了','完了','定了'}
 
 
-def build_request(run, message, out):
+def build_request(run, message, out=None):
     """Prepare a request for the AI executor, using development examples only."""
     if not message or not message.strip():
         raise ValueError('消息不能为空')
-    if out.exists():
+    if out is not None and out.exists():
         raise ValueError('请求输出已存在，请使用新文件')
     message = mask(message, ())
     if '[含凭据信息' in message:
@@ -525,19 +527,24 @@ def build_request(run, message, out):
                'output_schema':{'scene':'场景或待判断','reply_state':'状态或待判断',
                                 'response_action':'承接/澄清/说明/推进/延后/无法确定',
                                 'draft':['短消息'],'missing_facts':['缺少的当前事实']}}
-    lab.write_json(out,request)
-    print(json.dumps({'request':str(out),'examples':len(examples),'network_called':False},ensure_ascii=False))
+    if out is not None:
+        lab.write_json(out,request)
+        print(json.dumps({'request':str(out),'examples':len(examples),'network_called':False},ensure_ascii=False))
+    return request
 
 
 def main():
     parser=argparse.ArgumentParser()
-    parser.add_argument('command',choices=['prepare','prepare-scenes','assemble','evaluate','render','request'])
+    parser.add_argument('command',choices=['prepare','prepare-scenes','prepare-eval-scenes','assemble','evaluate','render','request'])
     parser.add_argument('--run',type=Path,required=True)
     parser.add_argument('--message')
     parser.add_argument('--out',type=Path)
     args=parser.parse_args()
     if args.command == 'prepare-scenes':
         prepare(args.run, scene_development=True)
+        return
+    if args.command == 'prepare-eval-scenes':
+        prepare(args.run, scene_evaluation=True)
         return
     if args.command == 'request':
         if args.message is None or args.out is None:

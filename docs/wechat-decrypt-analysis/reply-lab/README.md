@@ -1,10 +1,37 @@
 # 本人回复分析与试验
 
-默认流程已改为：自动抽样与身份回查 → 当前会话 AI 分析场景和状态 → 先保存生成回复 → 揭示历史答案 → AI 对照评价。用户无需逐条填写意图、对象关系或批准样本。页面用于查看结果和可选纠错。
+现已提供本机回复草稿台：输入对话 → 独立 Codex CLI 生成 → 查看依据与缺口 → 复制草稿。另有自动抽样、身份回查、先冻结生成再揭示答案的评测管线，无需本人整理样本表。
 
-继续使用 docs/wechat-decrypt-analysis 下的已有 CSV 和 SQLite，不重复导出全库。语义执行器是当前 Codex 会话中的 AI；Python 负责数据、校验、检索和页面，尚不包含独立模型 API。退出会话后不会自行持续分析或回复。
+继续使用 docs/wechat-decrypt-analysis 下的已有 CSV 和 SQLite。2026-09-18 起 app.py 与 replay_trial.py 可通过本机已登录的 Codex CLI 调用模型；原 auto_lab.py 的分析路径仍由当前会话 AI 执行。服务运行后可以独立生成草稿，不依赖本会话代写结果；不自动监听微信或发送消息。
 
-## 最新进展：新样本评测与场景档案
+## 当前入口：本地回复草稿台（2026-09-18）
+
+在本目录运行 `./启动回复草稿.ps1`，或 `python app.py --port 8765`，打开 http://127.0.0.1:8765/ 。需要已有 Codex CLI 登录；无需另填 API 密钥。默认 CLI 模型由安装版本选择，未固定精确模型版本；本工具独立进程不加载用户 config、项目指令、工具、插件或记忆。
+
+- 输入可以是对方消息，也可以是带“我：”“对方：”的多行对话；未标新角色的换行延续上一位说话人。
+- 生成时会把必要、经过机械遮罩的片段和风格参考发送给 Codex 模型服务，仍可能保留业务或个人信息，不是完全匿名或离线推理。
+- 有依据才写当前进度和本人状态，历史示例只参考说话方式。缺事实可能只返回缺口；不能要求模型猜测本人实际决定。
+- 默认输入和结果只在内存（最多保留 20 次生成，关闭服务清除）；点击“保存到本机”才把该次资料、草稿和修改写入 private/feedback，不自动用于训练。
+- 历史回放选择会自动填入 13 段新记录，按当时的时间生成，原答案不传给生成器。编辑回放文字会退出回放模式；此时编辑后的文字作为本次输入，页面有提示。
+- 49 项单元测试通过；7 个合成机制案例通过 AI 内容复核；真实页面生成、复制和 320/390/1200px 检查通过。
+
+[完整计划](../../../个人/模拟自己说话推进计划.md)、[本版验收与限制](本地草稿工具验收-20260918.md)、[新 13 条历史对照](private/replay-20260918/results.html)。技术闭环已完成，模仿质量仍为试验状态；本轮没有把自动评分当成本人认可。
+
+新增程序职责：reply_engine.py 组织来源时间及输出校验，codex_provider.py 做文本模型调用，app.py/app.html 提供本地入口，replay_trial.py 冻结并验证历史回放，check_live_behaviors.py 显式运行联网的合成检查。`python -m unittest -q` 不调用模型；联网检查需单独运行并使用新输出文件。
+
+历史回放命令：
+
+~~~powershell
+python auto_lab.py prepare --run private/new-active
+python auto_lab.py prepare-eval-scenes --run private/new-scenes
+python replay_trial.py prepare --out private/new-replay --batches private/new-active private/new-scenes
+python replay_trial.py run --out private/new-replay
+python replay_trial.py render --out private/new-replay
+~~~
+
+prepare-eval-scenes 从非开发联系人找场景线索，关键词不等于真实场景；生成与揭示步骤分别冻结校验，启动过的批次不重写。较早资料只取同一会话、目标回复之前最多 7 天且匹配当前话题的 6 条，并回查发送者；本轮只找到 3 条，不能声称已补齐当前事实。
+
+## 2026-09-17：新样本评测与场景档案
 
 已完成原先准备的 32 段：15 段学习、15 段生成对照、2 段信息不足；另外定向补取并分析了 9 段开发记录。合并旧开发样本后有 39 段风格参考，开发与本轮评测联系人交叉为 0。
 
