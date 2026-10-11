@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { createBoulderGeometry, createBroadleafGeometry, createFlowerGeometry, createGrassGeometry, createPineGeometry, createShrubGeometry } from '../../src/render/visuals/terrainWorldModels'
+import { createBoulderGeometry, createBroadleafGeometry, createFernGeometry, createFlowerGeometry, createGrassGeometry, createPineGeometry, createReedGeometry, createShrubGeometry } from '../../src/render/visuals/terrainWorldModels'
 
 describe('C-style sculpted terrain props', () => {
   it.each([createBoulderGeometry, createBroadleafGeometry, createPineGeometry, createShrubGeometry])('builds reproducible, distinct faceted variants for %s', (create) => {
@@ -19,8 +19,18 @@ describe('C-style sculpted terrain props', () => {
     for (const geometry of [createFlowerGeometry(), createGrassGeometry()]) {
       geometry.computeBoundingBox()
       expect(geometry.boundingBox!.min.y).toBeGreaterThanOrEqual(-0.001)
-      expect(geometry.boundingBox!.max.y).toBeLessThan(0.18)
+      expect(geometry.boundingBox!.max.y).toBeLessThan(0.3)
       geometry.dispose()
     }
+  })
+  it.each([createFernGeometry, createReedGeometry, createFlowerGeometry, createGrassGeometry])('builds rooted, colored detail with finite normals for %s', (create) => {
+    const geometry = create()
+    geometry.computeBoundingBox()
+    expect(geometry.boundingBox!.min.y).toBeGreaterThanOrEqual(-0.001)
+    expect(geometry.boundingBox!.max.y).toBeLessThan(0.6)
+    expect(geometry.getAttribute('position').count).toBeGreaterThan(30)
+    expect(geometry.getAttribute('color').count).toBe(geometry.getAttribute('position').count)
+    expect(Array.from(geometry.getAttribute('normal').array).every(Number.isFinite)).toBe(true)
+    geometry.dispose()
   })
 })

@@ -88,10 +88,14 @@ export function createBoulderGeometry(variant: number): THREE.BufferGeometry {
 
 export function createGrassGeometry(): THREE.BufferGeometry {
   const positions: number[] = []
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 7; i++) {
     const angle = i * 2.4, dx = Math.cos(angle), dz = Math.sin(angle)
-    const h = 0.09 + i % 3 * 0.026, w = 0.013
-    positions.push(-dz*w,0,dx*w, dz*w,0,-dx*w, dx*0.06,h,dz*0.06)
+    const h = 0.13 + i % 3 * 0.05, w = 0.018
+    const a = [-dz*w,0,dx*w], b = [dz*w,0,-dx*w]
+    const c = [dx*0.038-dz*w*0.6,h*0.62,dz*0.038+dx*w*0.6]
+    const d = [dx*0.038+dz*w*0.6,h*0.62,dz*0.038-dx*w*0.6]
+    const tip = [dx*0.1,h,dz*0.1]
+    positions.push(...a,...b,...c,...b,...d,...c,...c,...d,...tip)
   }
   const geometry = new THREE.BufferGeometry()
   geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3))
@@ -100,11 +104,49 @@ export function createGrassGeometry(): THREE.BufferGeometry {
 }
 
 export function createFlowerGeometry(): THREE.BufferGeometry {
-  const parts: THREE.BufferGeometry[] = []
-  for (let i = 0; i < 3; i++) {
-    const flower = new THREE.CircleGeometry(0.026, 5).rotateX(-Math.PI / 2)
-    parts.push(flower.toNonIndexed().translate(Math.cos(i * 2.4) * 0.055, 0.08 + i * 0.025, Math.sin(i * 2.4) * 0.055))
-    flower.dispose()
+  const positions: number[] = [], colors: number[] = []
+  const add = (points: number[], color: number[]) => { positions.push(...points); for (let i = 0; i < 3; i++) colors.push(...color) }
+  for (let i = 0; i < 4; i++) {
+    const x = Math.cos(i * 2.4) * 0.085, z = Math.sin(i * 2.4) * 0.085, y = 0.12 + i * 0.026
+    add([x-0.006,0,z,x+0.006,0,z,x,y,z], [0.3,0.5,0.16])
+    for (let petal = 0; petal < 5; petal++) {
+      const a = petal * Math.PI * 2 / 5, b = a + 0.75
+      add([x,y,z,x+Math.cos(a)*0.047,y+0.009,z+Math.sin(a)*0.047,x+Math.cos(b)*0.042,y+0.009,z+Math.sin(b)*0.042], [1,0.98,0.9])
+    }
+    add([x-0.016,y+0.012,z-0.012,x,y+0.012,z+0.019,x+0.016,y+0.012,z-0.012], [1,0.65,0.15])
   }
-  return paintFacets(join(parts), 45)
+  const geometry = new THREE.BufferGeometry()
+  geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions,3))
+  geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors,3))
+  geometry.computeVertexNormals()
+  return geometry
+}
+
+export function createReedGeometry(): THREE.BufferGeometry {
+  const positions: number[] = []
+  for (let i = 0; i < 6; i++) {
+    const a = i * 2.4, x = Math.cos(a)*0.08, z = Math.sin(a)*0.08, h = 0.3+i%3*0.12
+    positions.push(x-0.008,0,z,x+0.008,0,z,x+0.03,h,z+0.018,
+      x,0.1,z,x+0.022,0.2,z+0.02,x+Math.cos(a)*0.19,h*0.8,z+Math.sin(a)*0.19)
+  }
+  const geometry = new THREE.BufferGeometry()
+  geometry.setAttribute('position',new THREE.Float32BufferAttribute(positions,3))
+  geometry.computeVertexNormals()
+  return paintFacets(geometry,117)
+}
+
+export function createFernGeometry(): THREE.BufferGeometry {
+  const positions: number[] = []
+  for (let i = 0; i < 7; i++) {
+    const a = i*2.4, dx=Math.cos(a), dz=Math.sin(a)
+    for (let j=1;j<=4;j++) {
+      const t=j/5, x=dx*t*0.28, z=dz*t*0.28, y=Math.sin(t*2.5)*0.19
+      const w=(1-t)*0.082
+      positions.push(x-dz*w,y,z+dx*w,x+dz*w,y,z-dx*w,x+dx*0.09,y+0.02,z+dz*0.09)
+    }
+  }
+  const geometry = new THREE.BufferGeometry()
+  geometry.setAttribute('position',new THREE.Float32BufferAttribute(positions,3))
+  geometry.computeVertexNormals()
+  return paintFacets(geometry,118)
 }

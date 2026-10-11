@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Boxes, Grid2X2, Mountain, Pause, Play, RotateCcw, Shuffle, Trees, Waves, Wind, ZoomIn, ZoomOut } from 'lucide-react'
+import { Boxes, Focus, Grid2X2, Mountain, Move, Pause, Play, RotateCcw, Shuffle, Trees, Waves, Wind, ZoomIn, ZoomOut } from 'lucide-react'
 import { mountTerrainWorldScene, type TerrainWorldHandle, type TerrainWorldSelection, type TerrainWorldSettings, type TerrainWorldStats } from '../../render/visuals/mountTerrainWorldScene'
 import './terrainWorldLab.css'
 
@@ -12,7 +12,7 @@ export function TerrainWorldLab() {
   const [seed, setSeed] = useState(initialSeed)
   const [seedInput, setSeedInput] = useState(String(seed))
   const [settings, setSettings] = useState<TerrainWorldSettings>(() => ({
-    animated: !window.matchMedia('(prefers-reduced-motion: reduce)').matches, wind: 1.2, flow: 1, grid: true,
+    animated: !window.matchMedia('(prefers-reduced-motion: reduce)').matches, wind: 1.2, flow: 1, grid: true, pan: false,
   }))
   const [view, setView] = useState<'isometric' | 'top'>('isometric')
   const [stats, setStats] = useState<TerrainWorldStats | null>(null)
@@ -47,7 +47,7 @@ export function TerrainWorldLab() {
     window.history.replaceState(null, '', url)
   }
   function changeView(next: 'isometric' | 'top') { setView(next); handle.current?.view(next) }
-  const toggle = (key: 'animated' | 'grid') => setSettings((previous) => ({ ...previous, [key]: !previous[key] }))
+  const toggle = (key: 'animated' | 'grid' | 'pan') => setSettings((previous) => ({ ...previous, [key]: !previous[key] }))
 
   return (
     <main className="terrain-world-lab">
@@ -75,6 +75,8 @@ export function TerrainWorldLab() {
             <button className="terrain-world-icon" title="重置视角" aria-label="重置视角" onClick={() => changeView('isometric')}><RotateCcw size={18} /></button>
             <button className="terrain-world-icon" title="放大" aria-label="放大" onClick={() => handle.current?.zoom(1.2)}><ZoomIn size={18} /></button>
             <button className="terrain-world-icon" title="缩小" aria-label="缩小" onClick={() => handle.current?.zoom(1 / 1.2)}><ZoomOut size={18} /></button>
+            <button className="terrain-world-icon" title="地块近景" aria-label="地块近景" onClick={() => { setView('isometric'); handle.current?.focus() }}><Focus size={18} /></button>
+            <button className="terrain-world-icon" title="平移地图" aria-label="平移地图" aria-pressed={settings.pan} onClick={() => toggle('pan')}><Move size={18} /></button>
           </div>
           <div className="terrain-world-legend" aria-label="地形图例">
             {[['#91ac47', '草原'], ['#467745', '森林'], ['#a4ab73', '丘陵'], ['#929c9e', '山地'], ['#d4b75b', '干草原'], ['#45aebe', '水域']].map(([color, label]) => <span key={label}><i style={{ background: color }} />{label}</span>)}

@@ -1,13 +1,14 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import {
-  WATER_LEVEL, clipWaterTriangle, createTerrainField, createTerrainSurface, createWorldTiles, edgePoints,
+  WATER_LEVEL, WORLD_LAYOUT_SCALE, clipWaterTriangle, createTerrainField, createTerrainSurface, createWorldTiles, edgePoints,
   getWorldEdges, randomTilePoint, seededRandom, smoothstep,
   type GroundSample, type WorldTile,
 } from './terrainWorld'
-import { createBoulderGeometry, createBroadleafGeometry, createFlowerGeometry, createGrassGeometry, createPineGeometry, createShrubGeometry } from './terrainWorldModels'
+import { createBoulderGeometry, createBroadleafGeometry, createFernGeometry, createFlowerGeometry, createGrassGeometry, createPineGeometry, createReedGeometry, createShrubGeometry } from './terrainWorldModels'
+import { createTerrainWaterMaterial } from './terrainWorldWater'
 
-export type TerrainWorldSettings = { animated: boolean; wind: number; flow: number; grid: boolean }
+export type TerrainWorldSettings = { animated: boolean; wind: number; flow: number; grid: boolean; pan: boolean }
 export type TerrainWorldStats = { tiles: number; trees: number; grass: number; triangles: number }
 export type TerrainWorldSelection = { id: string; label: string; fertility: number; elevation: number }
 export type TerrainWorldHandle = {
@@ -15,12 +16,12 @@ export type TerrainWorldHandle = {
   update: (settings: TerrainWorldSettings) => void
   view: (mode: 'isometric' | 'top') => void
   zoom: (factor: number) => void
+  focus: () => void
 }
 
 const PALETTE = {
   grass: new THREE.Color('#83a532'), forest: new THREE.Color('#536f2c'), dry: new THREE.Color('#e6b940'),
   sand: new THREE.Color('#efda9c'), rock: new THREE.Color('#737c89'), peak: new THREE.Color('#c3c6c4'),
-  water: new THREE.Color('#087598'), shallow: new THREE.Color('#55c7c0'),
 }
 
 function groundColor(sample: GroundSample): THREE.Color {
@@ -84,19 +85,23 @@ export function mountTerrainWorldScene(
   renderer.domElement.style.touchAction = 'none'
   host.appendChild(renderer.domElement)
 
-  const camera = new THREE.OrthographicCamera(-8, 8, 6, -6, 0.1, 100)
+  const camera = new THREE.OrthographicCamera(-22, 22, 18, -18, 0.1, 200)
   const controls = new OrbitControls(camera, renderer.domElement)
   controls.enableDamping = true
   controls.dampingFactor = 0.09
-  controls.enablePan = false
-  controls.minZoom = 0.7
-  controls.maxZoom = 3
+  controls.enablePan = true
+  controls.screenSpacePanning = false
+  controls.mouseButtons.LEFT = settings.pan ? THREE.MOUSE.PAN : THREE.MOUSE.ROTATE
+  controls.touches.ONE = settings.pan ? THREE.TOUCH.PAN : THREE.TOUCH.ROTATE
+  controls.minZoom = 0.55
+  controls.maxZoom = 8
   controls.minPolarAngle = 0.03
   controls.maxPolarAngle = Math.PI * 0.46
   controls.target.set(0, 0.7, 0)
   function setView(mode: 'isometric' | 'top') {
-    camera.position.set(...(mode === 'top' ? [0, 22, 0.01] : [3.3, 12.8, 18]) as [number, number, number])
-    camera.zoom = mode === 'top' ? 0.78 : 1
+    controls.target.set(0, 0.7, 0)
+    camera.position.set(...(mode === 'top' ? [0, 60, 0.01] : [9, 31, 48]) as [number, number, number])
+    camera.zoom = mode === 'top' ? 0.85 : 1
     camera.lookAt(controls.target)
     camera.updateProjectionMatrix()
     controls.update()
@@ -105,10 +110,10 @@ export function mountTerrainWorldScene(
 
   scene.add(new THREE.HemisphereLight(0xe5f2ff, 0x827f4e, 1.05))
   const sun = new THREE.DirectionalLight(0xfff2d5, 3.0)
-  sun.position.set(-5, 10, 4)
+  sun.position.set(-18, 32, 15)
   sun.castShadow = true
   sun.shadow.mapSize.set(4096, 4096)
-  Object.assign(sun.shadow.camera, { left: -10, right: 10, top: 10, bottom: -10, near: 0.5, far: 35 })
+  Object.assign(sun.shadow.camera, { left: -24, right: 24, top: 24, bottom: -24, near: 0.5, far: 110 })
   sun.shadow.bias = -0.0002
   sun.shadow.normalBias = 0.016
   scene.add(sun)
@@ -116,40 +121,50 @@ export function mountTerrainWorldScene(
   fill.position.set(4, 6, -7)
   scene.add(fill)
 
-  const landPositions: number[] = [], landColors: number[] = []
-  const waterPositions: number[] = [], waterColors: number[] = [], depths: number[] = []
+  const landPositions: number[] = [], landColors: number[] = [], cover: number[] = []
+  const waterPositions: number[] = [], depths: number[] = [], flows: number[] = []
   for (const points of surface.triangles) {
     const center = field.sample(points.reduce((sum, p) => sum + p.x, 0) / 3, points.reduce((sum, p) => sum + p.z, 0) / 3)
     const color = groundColor(center)
     const facet = Math.sin(center.x * 112.1 + center.z * 173.7) * 0.018 + 1
     color.multiplyScalar(facet)
-    for (const p of points) { landPositions.push(p.x, p.height, p.z); landColors.push(color.r, color.g, color.b) }
+    for (const p of points) { landPositions.push(p.x, p.height, p.z); landColors.push(color.r, color.g, color.b); cover.push(p.rock, p.dry, p.shore) }
     const water = clipWaterTriangle(points)
     for (let index = 1; index < water.length - 1; index++) {
       for (const p of [water[0], water[index], water[index + 1]]) {
         const depth = WATER_LEVEL - p.height
-        const c = PALETTE.shallow.clone().lerp(PALETTE.water, smoothstep(0, 0.52, depth))
-        c.multiplyScalar(0.92 + Math.sin(center.x * 79.1 + center.z * 117.3) * 0.075)
+        const flowAt = field.waterCoordinates(p.x, p.z)
         waterPositions.push(p.x, WATER_LEVEL + 0.006, p.z)
-        waterColors.push(c.r, c.g, c.b)
+        flows.push(flowAt.across, flowAt.along, flowAt.river)
         depths.push(depth)
       }
     }
   }
   const groundMaterial = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 1, flatShading: true })
   groundMaterial.onBeforeCompile = (shader) => {
-    shader.vertexShader = 'varying vec3 terrainPosition; varying float terrainUp;\n' + shader.vertexShader.replace('#include <begin_vertex>', '#include <begin_vertex>\nterrainPosition = position; terrainUp = normal.y;')
-    shader.fragmentShader = `varying vec3 terrainPosition; varying float terrainUp;
+    shader.vertexShader = 'attribute vec3 terrainCover; varying vec3 vCover; varying vec3 terrainPosition; varying float terrainUp;\n' + shader.vertexShader.replace('#include <begin_vertex>', '#include <begin_vertex>\nterrainPosition = position; terrainUp = normal.y; vCover=terrainCover;')
+    shader.fragmentShader = `varying vec3 vCover; varying vec3 terrainPosition; varying float terrainUp;
       float terrainHash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+      float terrainNoise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.0-2.0*f);return mix(mix(terrainHash(i),terrainHash(i+vec2(1,0)),f.x),mix(terrainHash(i+vec2(0,1)),terrainHash(i+vec2(1,1)),f.x),f.y);}
     ` + shader.fragmentShader.replace('#include <color_fragment>', `#include <color_fragment>
       vec2 cell = terrainPosition.xz * 33.0;
       vec2 f = fract(cell); float h = terrainHash(floor(cell));
       float fleck = step(0.68,h)*step(f.y,f.x*0.48)*step(f.x,0.7);
-      float meadow = smoothstep(0.8,0.98,terrainUp) * (1.0-smoothstep(0.9,1.8,terrainPosition.y));
-      diffuseColor.rgb *= 1.0 + (fleck * 0.23 - 0.04) * meadow;
+      float meadow = smoothstep(0.65,0.98,terrainUp) * (1.0-vCover.x) * smoothstep(0.18,0.65,vCover.z);
+      float coverNoise=terrainNoise(terrainPosition.xz*2.1)*0.6+terrainNoise(terrainPosition.xz*5.8)*0.4;
+      float soil=smoothstep(0.61,0.79,coverNoise)*(0.12+vCover.y*0.28);
+      diffuseColor.rgb=mix(diffuseColor.rgb,vec3(0.30,0.22,0.075),soil*meadow);
+      diffuseColor.rgb *= 1.0 + ((coverNoise-0.5)*0.22+fleck*0.26-0.04)*meadow;
+      float grain=terrainNoise(terrainPosition.xz*37.0);
+      diffuseColor.rgb *= 1.0+(grain-0.5)*0.09*(1.0-vCover.x);
+      float strata=sin(terrainPosition.y*22.0+terrainPosition.x*1.5+terrainNoise(terrainPosition.xz*3.0)*3.0);
+      float fissure=smoothstep(0.7,0.95,strata)*vCover.x*(1.0-smoothstep(0.8,0.98,terrainUp));
+      diffuseColor.rgb *= 1.0-fissure*0.14+(grain-0.5)*0.07*vCover.x;
     `)
   }
-  const ground = new THREE.Mesh(bufferGeometry(landPositions, landColors), groundMaterial)
+  const groundGeometry = bufferGeometry(landPositions, landColors)
+  groundGeometry.setAttribute('terrainCover', new THREE.Float32BufferAttribute(cover, 3))
+  const ground = new THREE.Mesh(groundGeometry, groundMaterial)
   ground.receiveShadow = true
   ground.castShadow = true
   scene.add(ground)
@@ -185,51 +200,11 @@ export function mountTerrainWorldScene(
   grid.visible = settings.grid
   scene.add(grid)
 
-  const waterGeometry = bufferGeometry(waterPositions, waterColors)
+  const waterGeometry = bufferGeometry(waterPositions)
   waterGeometry.setAttribute('waterDepth', new THREE.Float32BufferAttribute(depths, 1))
-  const waterMaterial = new THREE.ShaderMaterial({
-    uniforms: { flowTime: flow }, vertexColors: true,
-    vertexShader: `attribute float waterDepth; varying float vDepth; varying vec3 vTint; varying vec2 vWorld;
-      void main(){vDepth=waterDepth;vTint=color;vWorld=position.xz;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`,
-    fragmentShader: `uniform float flowTime; varying float vDepth; varying vec3 vTint; varying vec2 vWorld;
-      void main(){
-        float ripple=sin(vWorld.y*9.0-flowTime*1.8+sin(vWorld.x*3.0));
-        float streak=smoothstep(0.985,1.0,ripple)*smoothstep(0.7,0.95,sin(vWorld.x*6.0+vWorld.y*1.4));
-        float foam=(1.0-smoothstep(0.012,0.044,vDepth));
-        float innerBank=exp(-pow((vDepth-0.09)/0.019,2.0))*0.15;
-        vec3 c=mix(vTint,vec3(0.81,0.96,0.85),streak*0.23+foam*0.72+innerBank);
-        c+=sin(vWorld.x*2.0+vWorld.y*2.0-flowTime*0.65)*0.01;
-        gl_FragColor=vec4(c,1.0);
-        #include <tonemapping_fragment>
-        #include <colorspace_fragment>
-      }`,
-  })
+  waterGeometry.setAttribute('waterFlow', new THREE.Float32BufferAttribute(flows, 3))
+  const waterMaterial = createTerrainWaterMaterial(flow)
   scene.add(new THREE.Mesh(waterGeometry, waterMaterial))
-
-  const ribbonPositions: number[] = []
-  for (const offset of [-0.32, 0.3]) {
-    for (let z = -5.1; z < 3.25; z += 0.075) {
-      const pathPoint = (v: number, side: number) => {
-        const x = field.riverX(v) + field.riverWidth(v) * offset + side * 0.012
-        return [x, WATER_LEVEL + 0.012, v]
-      }
-      const a = pathPoint(z, -1), b = pathPoint(z, 1), c = pathPoint(z + 0.075, -1), d = pathPoint(z + 0.075, 1)
-      if ([a, b, c, d].some(([x, , v]) => (surface.sample(x, v)?.height ?? 1) >= WATER_LEVEL)) continue
-      ribbonPositions.push(...a, ...c, ...b, ...b, ...c, ...d)
-    }
-  }
-  const ribbonMaterial = new THREE.ShaderMaterial({
-    uniforms: { flowTime: flow }, transparent: true, depthWrite: false,
-    vertexShader: `varying float riverZ; void main(){riverZ=position.z;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`,
-    fragmentShader: `uniform float flowTime; varying float riverZ;
-      void main(){float t=fract(riverZ*0.38-flowTime*0.095);
-        float alpha=smoothstep(0.05,0.25,t)*(1.0-smoothstep(0.55,0.92,t))*0.65;
-        gl_FragColor=vec4(0.65,0.88,0.82,alpha);
-        #include <tonemapping_fragment>
-        #include <colorspace_fragment>
-      }`,
-  })
-  scene.add(new THREE.Mesh(bufferGeometry(ribbonPositions), ribbonMaterial))
 
   function windMaterial(color: number) {
     const mat = new THREE.MeshStandardMaterial({ color, vertexColors: true, flatShading: true, roughness: 0.95, side: THREE.DoubleSide })
@@ -251,19 +226,27 @@ export function mountTerrainWorldScene(
   const rockMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, roughness: 1, flatShading: true })
   const trunkGeometry = new THREE.CylinderGeometry(0.052, 0.085, 1.15, 6).translate(0, 0.575, 0)
   type Instance = { sample: GroundSample; scale: number; rotation: number; color: THREE.Color; aspect?: number }
-  const trees: Instance[] = [], pines: Instance[] = [], shrubs: Instance[] = [], grass: Instance[] = [], stones: Instance[] = [], flowers: Instance[] = []
+  const trees: Instance[] = [], pines: Instance[] = [], shrubs: Instance[] = [], grass: Instance[] = [], stones: Instance[] = [], flowers: Instance[] = [], reeds: Instance[] = [], ferns: Instance[] = []
   const random = seededRandom(seed ^ 0x41c6ce57)
   const leafColors = ['#285443', '#396445', '#597e32', '#719334', '#8ca337'].map((c) => new THREE.Color(c))
-  const flowerColors = ['#fff2c4', '#f7cb42', '#e8a345', '#d3d9ac'].map((c) => new THREE.Color(c))
+  const flowerColors = ['#fff8e4', '#f6d155', '#dfb7e5', '#efac73'].map((c) => new THREE.Color(c))
   const occupied: Instance[] = []
   for (const tile of tiles) {
     for (let i = 0; i < 440; i++) {
       const point = randomTilePoint(tile, random), sample = surface.sample(point.x, point.z)
-      if (!sample || sample.height < WATER_LEVEL + 0.06 || sample.shore < 0.28 || sample.rock > 0.63) continue
+      if (sample && sample.rock > 0.3 && sample.shore > 0.6 && i < 10) {
+        stones.push({ sample, scale: 0.08 + random() * 0.24, rotation: random() * Math.PI * 2,
+          aspect: 0.5 + random() * 0.4, color: PALETTE.rock.clone().lerp(PALETTE.peak, random() * 0.3) })
+      }
+      if (!sample || sample.height < WATER_LEVEL + 0.01 || sample.shore < 0.14 || sample.rock > 0.7) continue
       const roll = random()
       const instance: Instance = { sample, scale: 0.65 + random() * 0.6, rotation: random() * Math.PI * 2, color: groundColor(sample), aspect: 0.85 + random() * 0.35 }
       const riverWood = (1 - smoothstep(0.45, 1.0, sample.shore)) * 0.07
       const grouping = smoothstep(-0.25, 0.5, sample.patch)
+      if (sample.shore < 0.48) {
+        if (i < 120 && roll < 0.55) reeds.push({ ...instance, color: new THREE.Color('#7e9744'), scale: 0.65 + random() * 0.65 })
+        continue
+      }
       if (i < 70 && sample.rock < 0.18 && roll < sample.forest * 0.92 + riverWood + grouping * 0.009) {
         instance.scale *= 0.28 + sample.forest * 0.43 + riverWood * 0.7
         if (occupied.some((tree) => Math.hypot(tree.sample.x - sample.x, tree.sample.z - sample.z) < (tree.scale + instance.scale) * 0.43)) continue
@@ -277,13 +260,17 @@ export function mountTerrainWorldScene(
         instance.scale *= 0.4 + random() * 0.48
         instance.color = leafColors[Math.floor(random() * leafColors.length)].clone()
         shrubs.push(instance)
-      } else if (i > 125 && sample.rock < 0.25 && roll < grouping * 0.38) {
+      } else if (i > 125 && sample.rock < 0.25 && roll < grouping * 0.5) {
         instance.scale *= 0.45 + random() * 0.55
         instance.color.lerp(new THREE.Color('#b7b947'), random() * 0.4)
         grass.push(instance)
-        if (sample.dry < 0.6 && grouping > 0.6 && i % 2 === 0) {
-          flowers.push({ ...instance, scale: 0.65 + random() * 0.4, color: flowerColors[Math.floor(random() * flowerColors.length)] })
+        if (sample.forest > 0.3 && i % 5 === 0) ferns.push({ ...instance, color: new THREE.Color('#638844'), scale: 0.65 + random() * 0.55 })
+        if (sample.dry < 0.6 && grouping > 0.7 && i % 3 === 0) {
+          flowers.push({ ...instance, scale: 0.7 + random() * 0.5, color: flowerColors[Math.floor(random() * flowerColors.length)] })
         }
+      }
+      if (i < 12 && sample.patch > 0.12 && (sample.rock > 0.12 || sample.shore < 1.1 || roll < 0.12)) {
+        stones.push({ ...instance, scale: 0.07 + random() * 0.25, color: PALETTE.rock.clone().lerp(PALETTE.sand, random() * 0.32) })
       }
     }
   }
@@ -291,7 +278,8 @@ export function mountTerrainWorldScene(
   const rockGroups = [[-3.6, 1.1, 0.8], [-4.8, 1.5, 0.65], [-2.8, 2.4, 1.0], [-1.0, 2.5, 0.65],
     [0.2, 0.8, 0.6], [0.9, -1, 0.6], [-1.4, -0.5, 0.65], [-3, -2, 0.7], [2.6, -0.6, 0.85],
     [4.1, -0.1, 1.0], [4.9, -2.5, 0.8], [4.8, 1.8, 0.75], [3.5, 3.1, 0.55], [-4.4, -3.1, 0.8]]
-  for (const [x, z, size] of rockGroups) {
+  for (const [baseX, baseZ, size] of rockGroups) {
+    const x = baseX * WORLD_LAYOUT_SCALE, z = baseZ * WORLD_LAYOUT_SCALE
     for (let i = 0; i < 13; i++) {
       const angle = random() * Math.PI * 2, radius = i === 0 ? 0 : 0.18 + random() * 0.65
       const sample = surface.sample(x + Math.cos(angle) * radius, z + Math.sin(angle) * radius)
@@ -302,7 +290,7 @@ export function mountTerrainWorldScene(
     }
   }
   for (const [x, z, scale] of [[-4.3, 2.1, 0.95], [-3.6, 3.3, 1.05], [-2.7, 3.55, 0.75]]) {
-    const sample = surface.sample(x, z)
+    const sample = surface.sample(x * WORLD_LAYOUT_SCALE, z * WORLD_LAYOUT_SCALE)
     if (sample && sample.height < WATER_LEVEL) stones.push({ sample, scale, rotation: random() * 6.28, aspect: 1.55, color: PALETTE.rock.clone() })
   }
   const transform = new THREE.Object3D()
@@ -335,6 +323,8 @@ export function mountTerrainWorldScene(
   instances(trunkGeometry, stemMaterial, [...trees, ...pines])
   instances(createGrassGeometry(), grassMaterial, grass, true)
   instances(createFlowerGeometry(), grassMaterial, flowers, true)
+  instances(createReedGeometry(), grassMaterial, reeds, true)
+  instances(createFernGeometry(), grassMaterial, ferns, true)
 
   const floor = new THREE.Mesh(new THREE.PlaneGeometry(200, 200), new THREE.ShadowMaterial({ color: 0x42535c, opacity: 0.22 }))
   floor.rotation.x = -Math.PI / 2
@@ -346,8 +336,10 @@ export function mountTerrainWorldScene(
   selection.renderOrder = 2
   scene.add(selection)
   const raycaster = new THREE.Raycaster()
+  let selectedTile: WorldTile | null = null
   let pointerDown = { x: 0, y: 0 }
   function selectTile(tile: WorldTile, sample: GroundSample) {
+    selectedTile = tile
     const points: THREE.Vector3[] = []
     tile.corners.forEach((a, i) => edgePoints(a, tile.corners[(i + 1) % 6]).slice(0, -1).forEach((p) => {
       points.push(new THREE.Vector3(p.x, Math.max(field.sample(p.x, p.z).height, WATER_LEVEL) + 0.025, p.z))
@@ -359,6 +351,7 @@ export function mountTerrainWorldScene(
   }
   const down = (event: PointerEvent) => { pointerDown = { x: event.clientX, y: event.clientY } }
   const up = (event: PointerEvent) => {
+    if (event.button !== 0) return
     if (Math.hypot(event.clientX - pointerDown.x, event.clientY - pointerDown.y) > 5) return
     const rect = renderer.domElement.getBoundingClientRect()
     raycaster.setFromCamera(new THREE.Vector2((event.clientX - rect.left) / rect.width * 2 - 1, -(event.clientY - rect.top) / rect.height * 2 + 1), camera)
@@ -372,7 +365,7 @@ export function mountTerrainWorldScene(
   function resize() {
     const width = Math.max(1, host.clientWidth), height = Math.max(1, host.clientHeight)
     renderer.setSize(width, height, false)
-    const vertical = Math.max(11.1, 16.2 / (width / height))
+    const vertical = Math.max(27.5, 39.5 / (width / height))
     camera.left = -vertical * width / height / 2
     camera.right = -camera.left
     camera.top = vertical / 2
@@ -394,6 +387,7 @@ export function mountTerrainWorldScene(
     renderer.render(scene, camera)
     if (now - lastReport > 250) {
       host.dataset.simulationTime = uniforms.meadowTime.value.toFixed(3)
+      host.dataset.flowTime = flow.value.toFixed(3)
       host.dataset.drawCalls = String(renderer.info.render.calls)
       host.dataset.triangles = String(renderer.info.render.triangles)
       lastReport = now
@@ -403,9 +397,22 @@ export function mountTerrainWorldScene(
   frame = requestAnimationFrame(animate)
   onStats({ tiles: tiles.length, trees: trees.length + pines.length, grass: grass.length, triangles: landPositions.length / 9 })
   return {
-    update: (next) => { settings = { ...next }; grid.visible = next.grid; uniforms.meadowWind.value = next.wind },
+    update: (next) => {
+      settings = { ...next }; grid.visible = next.grid; uniforms.meadowWind.value = next.wind
+      controls.mouseButtons.LEFT = next.pan ? THREE.MOUSE.PAN : THREE.MOUSE.ROTATE
+      controls.touches.ONE = next.pan ? THREE.TOUCH.PAN : THREE.TOUCH.ROTATE
+    },
     view: setView,
-    zoom: (factor) => { camera.zoom = Math.min(3, Math.max(0.7, camera.zoom * factor)); camera.updateProjectionMatrix() },
+    zoom: (factor) => { camera.zoom = Math.min(8, Math.max(0.55, camera.zoom * factor)); camera.updateProjectionMatrix() },
+    focus: () => {
+      const center = selectedTile?.center ?? { x: field.riverX(2) - 1.8, z: 2 }
+      const y = Math.max(WATER_LEVEL, surface.sample(center.x, center.z)?.height ?? 0.3)
+      controls.target.set(center.x, y, center.z)
+      camera.position.set(center.x + 9, y + 31, center.z + 48)
+      camera.zoom = 3.8
+      camera.updateProjectionMatrix()
+      controls.update()
+    },
     destroy: () => {
       cancelAnimationFrame(frame)
       observer.disconnect()

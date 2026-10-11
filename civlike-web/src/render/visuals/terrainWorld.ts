@@ -2,6 +2,8 @@ import { SimplexNoise } from 'three/examples/jsm/math/SimplexNoise.js'
 import { getHexMetrics, getHexPolygonPoints } from '../coordinates/hexCoordinates'
 
 export const WORLD_HEX_RADIUS = 1.18
+export const WORLD_TILE_RADIUS = 8
+export const WORLD_LAYOUT_SCALE = WORLD_TILE_RADIUS / 3
 export const WATER_LEVEL = 0.08
 export const WORLD_SUBDIVISIONS = 5
 
@@ -39,7 +41,7 @@ function snap(point: GroundPoint): GroundPoint {
   return { x: Math.round(point.x * 1e6) / 1e6, z: Math.round(point.z * 1e6) / 1e6 }
 }
 
-export function createWorldTiles(radius = 3): WorldTile[] {
+export function createWorldTiles(radius = WORLD_TILE_RADIUS): WorldTile[] {
   const tiles: WorldTile[] = []
   const metrics = getHexMetrics(WORLD_HEX_RADIUS)
   for (let q = -radius; q <= radius; q++) {
@@ -123,12 +125,24 @@ function sculptedPeak(cx: number, cz: number, width: number, length: number, hei
   }
 }
 
-export function createTerrainField(seed: number) {
+export function createTerrainField(seed: number, scale = WORLD_LAYOUT_SCALE) {
   const random = seededRandom(seed)
   const noise = new SimplexNoise({ random })
   const phase = (random() - 0.5) * 0.65
-  const riverX = (z: number) => 0.2 - z * 0.56 + Math.sin(z * 1.03 + 0.65 + phase) * 0.65
-  const riverWidth = (z: number) => 0.21 + smoothstep(-5, 4, z) * 0.24 + Math.sin(z * 1.5) * 0.025
+  const riverX = (z: number) => (0.2 - z / scale * 0.56 + Math.sin(z / scale * 1.03 + 0.65 + phase) * 0.65) * scale
+  const riverWidth = (z: number) => (0.21 + smoothstep(-5, 4, z / scale) * 0.24 + Math.sin(z / scale * 1.5) * 0.025) * scale
+  const coastAt = (x: number, z: number) => (4.25 + x / scale * 0.8 + Math.sin(x / scale * 1.35 + phase) * 0.3 - z / scale) * scale
+  const arcStep = 0.1, arcStart = -7 * scale, arcLengths = [0]
+  for (let i = 1; i <= Math.ceil(14 * scale / arcStep); i++) {
+    const z = arcStart + i * arcStep
+    arcLengths.push(arcLengths[i - 1] + Math.hypot(arcStep, riverX(z) - riverX(z - arcStep)))
+  }
+  const waterCoordinates = (x: number, z: number) => {
+    const index = Math.max(0, Math.min(arcLengths.length - 1.000001, (z - arcStart) / arcStep))
+    const whole = Math.floor(index), t = index - whole
+    return { across: (x - riverX(z)) / riverWidth(z), along: arcLengths[whole] * (1 - t) + arcLengths[whole + 1] * t,
+      river: (1 - smoothstep(1.15, 2.4, Math.abs(x - riverX(z)) / riverWidth(z))) * smoothstep(-0.8, 1.4, coastAt(x, z)) }
+  }
   const crags = [sculptedPeak(3.55, -2.65, 1.7, 2.3, 2.95, -0.22),
     sculptedPeak(4.8, -1.3, 1.5, 1.7, 2.03, 0.4), sculptedPeak(2.6, -4.05, 1.4, 1.65, 2.35, -0.3)]
   // Broad asymmetric planes give connected ridges, rather than noisy conical peaks.
@@ -139,11 +153,12 @@ export function createTerrainField(seed: number) {
     const radius = Math.max(Math.abs(u) * 0.94 + Math.abs(v) * 0.34, Math.abs(v) + u * 0.14, -u * 0.8 - v * 0.42)
     return Math.max(0, 1 - radius) * height
   }
-  const sample = (x: number, z: number): GroundSample => {
+  const sample = (worldX: number, worldZ: number): GroundSample => {
     // Shared world coordinates control both sides of every tile edge.
+    const x = worldX / scale, z = worldZ / scale
     const n = noise.noise(x * 0.48, z * 0.48)
-    const river = Math.abs(x - riverX(z)) - riverWidth(z)
-    const coast = 4.25 + x * 0.8 + Math.sin(x * 1.35 + phase) * 0.3 - z
+    const river = Math.abs(worldX - riverX(worldZ)) - riverWidth(worldZ)
+    const coast = coastAt(worldX, worldZ)
     const shore = Math.min(river, coast)
     const forest = smoothstep(1.1, 3.6, -x + n * 0.65) * smoothstep(-0.6, 2.5, -z + n * 0.3)
     const dry = smoothstep(1.0, 3.6, x + n * 0.65) * (0.85 + n * 0.15)
@@ -154,15 +169,15 @@ export function createTerrainField(seed: number) {
       ridge(x, z, -2.5, -1.7, 1.6, 1.8, 0.42, 0.5),
     )
     const peak = Math.max(...crags.map((crag) => crag(x, z)))
-    const upland = Math.max(hill * smoothstep(0.35, 1.85, river), peak * smoothstep(0.18, 1.05, river))
+    const upland = Math.max(hill * smoothstep(0.35, 1.85 * scale, river), peak * smoothstep(0.18, 1.05 * scale, river)) * Math.sqrt(scale)
     const elevation = 0.29 + (n * 0.11 + noise.noise(x * 1.6, z * 1.6) * 0.025) * (1 - smoothstep(0.3, 1.0, upland)) + upland
     const beachWidth = 0.45 + noise.noise(x * 0.7 + 13, z * 0.7) * 0.12
     const bed = -0.18 - smoothstep(0, 0.65, -shore) * 0.28
     const height = bed + (elevation - bed) * smoothstep(-0.12, beachWidth, shore)
     const rock = smoothstep(0.2, 1.15, peak + n * 0.24) * smoothstep(0.5, 1.15, elevation)
-    return { x, z, height, shore, forest, dry, rock, patch: noise.noise(x * 2.6, z * 2.6) }
+    return { x: worldX, z: worldZ, height, shore, forest, dry, rock, patch: noise.noise(worldX * 1.7, worldZ * 1.7) }
   }
-  return { seed, sample, riverX, riverWidth }
+  return { seed, scale, sample, riverX, riverWidth, waterCoordinates }
 }
 
 // Props sample the rendered triangles, not the analytic field above/below them.

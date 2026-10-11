@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-11",
+  "iteration": 3,
+  "url": "http://localhost:5173/?view=terrain-world&assetSeed=263745286",
+  "scope": "Independent C-style Three.js terrain prototype. No gameplay changes or Blender/GLB rebuild.",
+  "runtime": { "node": "22.22.0", "npm": "10.9.4", "manager": "nvm" },
+  "geometry": {
+    "tileRadius": 8,
+    "tiles": 217,
+    "sharedEdges": 600,
+    "outerEdges": 102,
+    "landTriangles": 32550,
+    "renderedTriangles": 389331,
+    "drawCalls": 26,
+    "trees": 388,
+    "grassClumps": 9314
+  },
+  "automated": { "tests": 85, "testFiles": 15, "typecheck": "passed via build", "build": "passed", "scopedEslint": "passed" },
+  "browser": {
+    "engine": "Codex in-app browser, Playwright and screenshot API",
+    "desktop": [1440, 960],
+    "mobile": [390, 844],
+    "narrow": [320, 740],
+    "horizontalOverflow": false,
+    "newConsoleErrorsAfterShaderFix": 0,
+    "checked": ["isometric", "top", "focus", "tile selection", "pan drag", "animation pause", "zero flow", "seed change"],
+    "alternateSeed": { "seed": 20261012, "tiles": 217, "trees": 342, "grassClumps": 9524 },
+    "restoredSeed": 263745286
+  },
+  "pixelChecks": {
+    "method": "System.Drawing RGB sum difference >20, step3, x30..1179 y130..899; 98688 canvas samples.",
+    "waterOnly": { "wind": 0, "flow": 1, "frames": ["terrain-world-c-v3-water-a.jpg", "terrain-world-c-v3-water-b.jpg"], "changedSamples": 8560, "changedPercent": 8.674 },
+    "zeroFlow": { "wind": 0, "flow": 0, "frames": ["terrain-world-c-v3-still-a.jpg", "terrain-world-c-v3-still-b.jpg"], "changedSamples": 0, "flowTimeBothFrames": 83.573 },
+    "paused": { "wind": 1.2, "flow": 1, "frames": ["terrain-world-c-v3-close.jpg", "terrain-world-c-v3-paused-b.jpg"], "changedSamples": 0, "simulationTimeBothFrames": 7.158 },
+    "desktopNonblank": { "coloredSamples": 95648, "coloredBounds": [78,208,1126,790] },
+    "mobileNonblank": { "coloredSamples": 10109, "coloredBounds": [24,240,364,424] }
+  },
+  "captures": ["terrain-world-c-v3-desktop.jpg", "terrain-world-c-v3-close.jpg", "terrain-world-c-v3-top.jpg", "terrain-world-c-v3-mobile.jpg", "terrain-world-c-v3-mobile-close.jpg", "terrain-world-c-v3-pan.jpg", "terrain-world-c-v3-seed-20261012.jpg"],
+  "limitations": [
+    "Art direction still requires user acceptance; actual screenshots are not the original AI concept render.",
+    "Physical mobile GPU performance is not measured; the responsive tests use desktop browser viewport overrides.",
+    "Build retains the existing >500kB Three.js/OrbitControls chunk warning.",
+    "Flow animation is stylized shading, not fluid simulation."
+  ]
+}
