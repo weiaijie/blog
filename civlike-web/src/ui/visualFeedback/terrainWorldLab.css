@@ -1,0 +1,71 @@
+.terrain-world-lab { height: 100dvh; min-height: 600px; display: flex; flex-direction: column; background: #e8eef1; color: #273c3d; font-family: "Segoe UI", "Microsoft YaHei", sans-serif; letter-spacing: 0; }
+.terrain-world-lab * { box-sizing: border-box; }
+.terrain-world-lab button { display: inline-flex; justify-content: center; align-items: center; gap: 7px; cursor: pointer; font-size: 13px; border: 1px solid #cfd9dc; border-radius: 4px; background: #fff; color: #354b4d; min-height: 34px; padding: 0 12px; }
+.terrain-world-lab button:hover { background: #e7efed; border-color: #9db3ad; }
+.terrain-world-lab button:focus-visible, .terrain-world-lab input:focus-visible { outline: 2px solid #2c8b74; outline-offset: 3px; }
+.terrain-world-header { height: 62px; flex: 0 0 62px; display: flex; justify-content: space-between; align-items: center; padding: 0 22px; gap: 12px; border-bottom: 1px solid #d3dfe2; background: #fbfcfc; }
+.terrain-world-title, .terrain-world-header-actions { display: flex; align-items: center; gap: 12px; }
+.terrain-world-title > svg { color: #47795c; }
+.terrain-world-title h1 { font-size: 20px; font-weight: 650; white-space: nowrap; }
+.terrain-world-title > span { font-size: 12px; color: #738484; border-left: 1px solid #d7e0df; padding-left: 12px; }
+.terrain-world-lab button.terrain-world-generate { background: #34705b; color: #fff; border-color: #34705b; }
+.terrain-world-lab button.terrain-world-generate:hover { background: #285b48; }
+.terrain-world-lab button.terrain-world-icon { width: 34px; height: 34px; flex: 0 0 34px; padding: 0; }
+.terrain-world-body { flex: 1; min-height: 0; display: grid; grid-template-columns: minmax(0,1fr) 234px; }
+.terrain-world-stage { position: relative; min-width: 0; min-height: 0; overflow: hidden; }
+.terrain-world-canvas { position: absolute; inset: 0; }
+.terrain-world-canvas canvas { display: block; width: 100%; height: 100%; }
+.terrain-world-viewbar { position: absolute; top: 16px; left: 18px; display: flex; gap: 6px; flex-wrap: wrap; max-width: calc(100% - 36px); }
+.terrain-world-segments { display: flex; }
+.terrain-world-segments button { border-radius: 0; min-width: 49px; }
+.terrain-world-segments button:first-child { border-radius: 4px 0 0 4px; }
+.terrain-world-segments button:last-child { border-radius: 0 4px 4px 0; border-left: 0; }
+.terrain-world-lab button[aria-pressed="true"] { background: #dceae3; color: #28624d; border-color: #a8c2b4; }
+.terrain-world-legend { position: absolute; bottom: 15px; left: 20px; right: 20px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; pointer-events: none; }
+.terrain-world-legend span { font-size: 12px; display: inline-flex; gap: 6px; align-items: center; color: #4e6365; }
+.terrain-world-legend i { width: 9px; height: 9px; display: block; border-radius: 2px; }
+.terrain-world-panel { background: #fbfcfc; border-left: 1px solid #d3dfe2; padding: 0 20px; overflow-y: auto; }
+.terrain-world-panel section { padding: 23px 0; border-bottom: 1px solid #e2e8e8; }
+.terrain-world-panel section:last-child { border-bottom: 0; }
+.terrain-world-panel h2 { margin: 0 0 17px; font-size: 13px; display: flex; align-items: center; gap: 8px; font-weight: 650; }
+.terrain-world-panel h2 svg { color: #708987; }
+.terrain-world-seed label { font-size: 12px; color: #738484; display: block; margin-bottom: 6px; }
+.terrain-world-seed > div { display: flex; gap: 6px; }
+.terrain-world-seed input { width: 100%; min-width: 0; height: 34px; border: 1px solid #d0dada; border-radius: 4px; padding: 0 8px; background: #f6f9f8; color: #3a5250; font-size: 13px; }
+.terrain-world-panel dl { margin: 16px 0 0; font-size: 12px; }
+.terrain-world-panel dl div { display: flex; justify-content: space-between; margin-top: 10px; }
+.terrain-world-panel dt { color: #788886; }
+.terrain-world-panel dd { margin: 0; font-variant-numeric: tabular-nums; }
+.terrain-world-panel .terrain-world-metrics { display: flex; justify-content: space-between; }
+.terrain-world-metrics div { flex-direction: column; gap: 6px; }
+.terrain-world-metrics dd { font-size: 18px; font-weight: 550; }
+.terrain-world-range { display: block; margin-bottom: 16px; font-size: 12px; }
+.terrain-world-range > span { display: flex; gap: 6px; align-items: center; margin-bottom: 8px; }
+.terrain-world-range output { margin-left: auto; color: #657e75; font-variant-numeric: tabular-nums; }
+.terrain-world-range input { width: 100%; accent-color: #4b8467; height: 5px; display: block; cursor: pointer; }
+.terrain-world-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; }
+.terrain-world-toggle input { accent-color: #43876a; width: 15px; height: 15px; margin: 0; }
+.terrain-world-footer { height: 30px; flex: 0 0 30px; display: flex; justify-content: space-between; align-items: center; padding: 0 22px; background: #fbfcfc; border-top: 1px solid #d3dfe2; color: #7b8c8a; font-size: 11px; }
+.terrain-world-footer span { display: flex; align-items: center; gap: 7px; }
+.terrain-world-footer i { width: 6px; height: 6px; border-radius: 50%; background: #abb8b7; }
+.terrain-world-footer i.is-live { background: #4e9975; }
+.terrain-world-error { position: absolute; inset: 25%; background: #fff; color: #9c3c30; padding: 24px; font-size: 14px; }
+.terrain-world-mobile-selection { display: none; }
+@media (max-width: 700px) {
+  .terrain-world-lab { min-height: 720px; }
+  .terrain-world-header { height: 56px; flex-basis: 56px; padding: 0 12px; }
+  .terrain-world-title { gap: 7px; }
+  .terrain-world-title h1 { font-size: 17px; }
+  .terrain-world-title > span { display: none; }
+  .terrain-world-header-actions { gap: 6px; }
+  .terrain-world-body { grid-template-columns: 1fr; grid-template-rows: minmax(340px,1fr) 206px; }
+  .terrain-world-panel { border-left: 0; border-top: 1px solid #d3dfe2; display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); padding: 0 14px; gap: 22px; }
+  .terrain-world-panel section { padding: 17px 0 10px; border-bottom: 0; }
+  .terrain-world-panel h2 { margin-bottom: 13px; }
+  .terrain-world-selection { display: none; }
+  .terrain-world-mobile-selection { display: block; position: absolute; top: 57px; left: 12px; padding: 6px 9px; background: #fbfcfc; color: #3b6654; font-size: 11px; border-radius: 4px; }
+  .terrain-world-viewbar { top: 12px; left: 12px; max-width: calc(100% - 24px); }
+  .terrain-world-legend { gap: 8px 12px; bottom: 10px; left: 12px; right: 12px; }
+  .terrain-world-legend span { font-size: 10px; }
+  .terrain-world-footer { padding: 0 12px; }
+}

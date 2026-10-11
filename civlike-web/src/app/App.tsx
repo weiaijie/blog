@@ -24,8 +24,16 @@ const GrasslandBlockLab = lazy(() =>
   })),
 )
 
+const TerrainWorldLab = lazy(() =>
+  import('../ui/visualFeedback/TerrainWorldLab').then((module) => ({ default: module.TerrainWorldLab })),
+)
+
 export function App() {
   const view = new URLSearchParams(window.location.search).get('view')
+
+  if (view === 'terrain-world') {
+    return <Suspense fallback={<main>加载地形样区...</main>}><TerrainWorldLab /></Suspense>
+  }
 
   if (view === 'grassland-block') {
     return (

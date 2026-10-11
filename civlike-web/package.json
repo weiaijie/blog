@@ -24,6 +24,7 @@
     "verify:phase2": "npm run typecheck && npm run test && npm run lint && npm run perf:map:all && npm run perf:map:fog && npm run smoke:playable && npm run smoke:combat && npm run smoke:30turn"
   },
   "dependencies": {
+    "lucide-react": "^1.55.0",
     "pixi.js": "^8.18.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

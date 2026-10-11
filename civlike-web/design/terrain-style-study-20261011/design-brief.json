@@ -1,7 +1,9 @@
 {
   "title": "多地形区块风格与连续过渡选型",
   "date": "2026-10-11",
-  "status": "待用户选择；仅概念图，不是已完成的模型或运行时效果",
+  "status": "用户已选择 C；概念图仍是风格参考，动态三维样区已单独实现并验证",
+  "selectedStyle": "C",
+  "prototypeUrl": "http://localhost:5173/?view=terrain-world&assetSeed=20261011",
   "generationTool": "Built-in image_gen",
   "scope": "停止照片写实路线。先用多地形连接地图选风格，再重做区块与连接部件。本轮未替换运行时模型。",
   "currentSourceFacts": {
