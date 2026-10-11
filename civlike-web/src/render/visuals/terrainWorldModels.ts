@@ -150,3 +150,46 @@ export function createFernGeometry(): THREE.BufferGeometry {
   geometry.computeVertexNormals()
   return paintFacets(geometry,118)
 }
+
+export function createBareTreeGeometry(): THREE.BufferGeometry {
+  const branch = (a: THREE.Vector3, b: THREE.Vector3, width: number) => {
+    const delta = b.clone().sub(a)
+    return new THREE.CylinderGeometry(width * 0.38, width, delta.length(), 5).toNonIndexed()
+      .applyQuaternion(new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0,1,0), delta.clone().normalize()))
+      .translate(...a.clone().add(b).multiplyScalar(0.5).toArray())
+  }
+  const parts = [branch(new THREE.Vector3(), new THREE.Vector3(0.04,1.8,0),0.08)]
+  for (let i=0;i<8;i++) {
+    const a=i*2.4, y=0.55+i*0.12
+    const tip=new THREE.Vector3(Math.cos(a)*0.48,y+0.48,Math.sin(a)*0.48)
+    parts.push(branch(new THREE.Vector3(0,y,0),tip,0.035))
+    parts.push(branch(tip.clone().multiplyScalar(0.8),tip.clone().add(new THREE.Vector3(0.1,0.2,-0.1)),0.013))
+  }
+  return paintFacets(join(parts),128)
+}
+
+export function createCactusGeometry(): THREE.BufferGeometry {
+  const parts = [new THREE.CylinderGeometry(0.075,0.11,0.95,7).toNonIndexed().translate(0,0.475,0)]
+  for (const side of [-1,1]) {
+    const y=side===1?0.37:0.55
+    parts.push(new THREE.CylinderGeometry(0.065,0.075,0.25,6).toNonIndexed().rotateZ(Math.PI/2).translate(side*0.15,y,0))
+    parts.push(new THREE.CylinderGeometry(0.045,0.065,0.28,6).toNonIndexed().translate(side*0.27,y+0.13,0))
+  }
+  return paintFacets(join(parts),131)
+}
+
+export function createLilyGeometry(): THREE.BufferGeometry {
+  return paintFacets(new THREE.CircleGeometry(0.14,7,0.15,Math.PI*1.85).toNonIndexed().rotateX(-Math.PI/2),142)
+}
+
+export function createLeafLitterGeometry(): THREE.BufferGeometry {
+  const positions:number[]=[]
+  for(let i=0;i<6;i++) {
+    const x=Math.cos(i*2.4)*0.14,z=Math.sin(i*2.4)*0.14
+    positions.push(x-0.03,0.009,z,x,0.014,z+0.05,x+0.035,0.009,z,x-0.03,0.009,z,x+0.035,0.009,z,x,0.012,z-0.05)
+  }
+  const geometry=new THREE.BufferGeometry()
+  geometry.setAttribute('position',new THREE.Float32BufferAttribute(positions,3))
+  geometry.computeVertexNormals()
+  return paintFacets(geometry,144)
+}

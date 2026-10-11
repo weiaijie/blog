@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-11",
+  "iteration": 4,
+  "seed": 337863546,
+  "scope": "Independent Three.js visual prototype; no gameplay enums, saves or Blender assets changed.",
+  "tiles": 217,
+  "biomes": { "meadow": 10, "grassland": 44, "broadleaf": 15, "conifer": 9, "wetland": 3, "steppe": 11, "dunes": 17, "badlands": 8, "tundra": 16, "hills": 10, "alpine": 19, "shore": 6, "shallows": 8, "water": 41 },
+  "seasons": ["thaw", "bloom", "green", "dry", "harvest", "rust", "frost", "snow"],
+  "automated": {
+    "tests": 97,
+    "testFiles": 16,
+    "buildAndTypecheck": "passed",
+    "scopedEslint": "passed",
+    "all14BiomesSeeds": [569575877,337863546,20261011,1,999999999],
+    "coverage": ["8 season presets", "14 populated biome classifications", "shared-edge color continuity", "unchanged terrain heights across seasons", "climate-dependent snow", "finite prop geometry", "seasonal water uniform"]
+  },
+  "runtime": { "drawCalls": 30, "triangles": 434530, "trees": 387, "grassClumps": 7020, "newConsoleErrorsAfter133345UTC": 0 },
+  "browser": {
+    "engine": "Codex in-app browser Playwright API",
+    "desktop": [1440,960],
+    "mobile": [390,844],
+    "narrow": [320,740],
+    "overflow": false,
+    "seasonPreservedAfterReload": "rust",
+    "focusChecked": ["wetland", "dunes", "broadleaf"],
+    "seasonSwitchesPreservePausedClock": 39.672,
+    "cameraAndGeometryRestored": true
+  },
+  "pixelChecks": {
+    "method": "System.Drawing RGB difference sum >20; x30..1179, y130..889, step3, 97536 canvas samples compared with paused bloom.",
+    "changedFromBloom": { "thaw": 21287, "green": 10898, "dry": 16941, "harvest": 18641, "rust": 21615, "frost": 35622, "snow": 44842, "bloomRestored": 0 },
+    "animation": { "season": "rust", "frames": ["terrain-world-c-v4-motion-a.jpg", "terrain-world-c-v4-motion-b.jpg"], "changedSamples": 15247, "clock": [59.864,139.199] },
+    "mobileNonblank": { "method": "Saturation spread >28, step2, x0..width, y160..469 for snow and y160..369 for rust", "snowColoredSamples": 3205, "rustColoredSamples": 14429 }
+  },
+  "captures": ["terrain-world-c-v4-bloom.jpg", "terrain-world-c-v4-thaw.jpg", "terrain-world-c-v4-green.jpg", "terrain-world-c-v4-dry.jpg", "terrain-world-c-v4-harvest.jpg", "terrain-world-c-v4-rust.jpg", "terrain-world-c-v4-frost.jpg", "terrain-world-c-v4-snow.jpg", "terrain-world-c-v4-bloom-restored.jpg", "terrain-world-c-v4-wetland.jpg", "terrain-world-c-v4-dunes.jpg", "terrain-world-c-v4-mobile-snow.jpg", "terrain-world-c-v4-mobile-rust.jpg"],
+  "limits": [
+    "These are eight manually selectable phases of four seasons, not eight separate climates or a calendar simulation.",
+    "Snow and ice are visual shading; no dynamic snow accumulation or physical freeze simulation.",
+    "Responsive browser checks do not establish physical mobile GPU performance.",
+    "Existing Three.js bundle-size warning remains. Art acceptance belongs to the user."
+  ]
+}

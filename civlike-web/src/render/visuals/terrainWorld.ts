@@ -15,6 +15,12 @@ export type GroundSample = GroundPoint & {
   dry: number
   rock: number
   patch: number
+  cold: number
+  pine: number
+  desert: number
+  badlands: number
+  wetland: number
+  meadow: number
 }
 export type WorldTile = { id: string; q: number; r: number; center: GroundPoint; corners: GroundPoint[] }
 export type WorldEdge = { a: GroundPoint; b: GroundPoint; tiles: string[] }
@@ -162,6 +168,13 @@ export function createTerrainField(seed: number, scale = WORLD_LAYOUT_SCALE) {
     const shore = Math.min(river, coast)
     const forest = smoothstep(1.1, 3.6, -x + n * 0.65) * smoothstep(-0.6, 2.5, -z + n * 0.3)
     const dry = smoothstep(1.0, 3.6, x + n * 0.65) * (0.85 + n * 0.15)
+    const cold = smoothstep(2.6, 5.1, -z + n * 0.35)
+    const pine = smoothstep(0.16, 0.62, cold) * (1 - smoothstep(0.72, 0.96, cold)) * (1 - dry * 0.65)
+    const desert = smoothstep(1.7, 3.7, x + n * 0.4) * smoothstep(0.3, 2.3, z)
+    const region = (cx: number, cz: number, rx: number, rz: number) => 1 - smoothstep(0.45, 1.2, Math.hypot((x-cx)/rx, (z-cz)/rz) + n * 0.13)
+    const badlands = region(3.9, 0.25, 1.6, 1.4) * (1 - desert * 0.6)
+    const wetland = region(-3.5, 0.75, 1.4, 1.3) * smoothstep(0.05, 0.8, shore)
+    const meadow = region(-0.8, 1.2, 2.1, 1.7) * (1 - forest) * smoothstep(0.3, 1.2, shore)
     const hill = Math.max(
       ridge(x, z, -1.6, -3.75, 2.7, 2.1, 1.65, -0.55),
       ridge(x, z, 0.1, -4.9, 1.7, 2.2, 1.5, 0.4),
@@ -170,12 +183,14 @@ export function createTerrainField(seed: number, scale = WORLD_LAYOUT_SCALE) {
     )
     const peak = Math.max(...crags.map((crag) => crag(x, z)))
     const upland = Math.max(hill * smoothstep(0.35, 1.85 * scale, river), peak * smoothstep(0.18, 1.05 * scale, river)) * Math.sqrt(scale)
-    const elevation = 0.29 + (n * 0.11 + noise.noise(x * 1.6, z * 1.6) * 0.025) * (1 - smoothstep(0.3, 1.0, upland)) + upland
+    const dunes = desert * (0.12 + Math.pow(0.5 + 0.5 * Math.sin(worldX * 1.2 + worldZ * 0.7 + n * 2), 2) * 0.38)
+    const mesa = badlands * smoothstep(0.3, 0.72, noise.noise(x * 2.5, z * 2.5) * 0.5 + 0.5) * 0.8
+    const elevation = (0.29 + (n * 0.11 + noise.noise(x * 1.6, z * 1.6) * 0.025) * (1 - smoothstep(0.3, 1.0, upland)) + upland + dunes + mesa) * (1 - wetland * 0.7)
     const beachWidth = 0.45 + noise.noise(x * 0.7 + 13, z * 0.7) * 0.12
     const bed = -0.18 - smoothstep(0, 0.65, -shore) * 0.28
-    const height = bed + (elevation - bed) * smoothstep(-0.12, beachWidth, shore)
+    const height = bed + (elevation - bed) * smoothstep(-0.12, beachWidth, shore) - wetland * (0.04 + noise.noise(worldX * 0.8, worldZ * 0.8) * 0.07)
     const rock = smoothstep(0.2, 1.15, peak + n * 0.24) * smoothstep(0.5, 1.15, elevation)
-    return { x: worldX, z: worldZ, height, shore, forest, dry, rock, patch: noise.noise(worldX * 1.7, worldZ * 1.7) }
+    return { x: worldX, z: worldZ, height, shore, forest, dry, rock, cold, pine, desert, badlands, wetland, meadow, patch: noise.noise(worldX * 1.7, worldZ * 1.7) }
   }
   return { seed, scale, sample, riverX, riverWidth, waterCoordinates }
 }

@@ -5,11 +5,12 @@ import {
   getWorldEdges, randomTilePoint, seededRandom, smoothstep,
   type GroundSample, type WorldTile,
 } from './terrainWorld'
-import { createBoulderGeometry, createBroadleafGeometry, createFernGeometry, createFlowerGeometry, createGrassGeometry, createPineGeometry, createReedGeometry, createShrubGeometry } from './terrainWorldModels'
+import { createBareTreeGeometry, createBoulderGeometry, createBroadleafGeometry, createCactusGeometry, createFernGeometry, createFlowerGeometry, createGrassGeometry, createLeafLitterGeometry, createLilyGeometry, createPineGeometry, createReedGeometry, createShrubGeometry } from './terrainWorldModels'
 import { createTerrainWaterMaterial } from './terrainWorldWater'
+import { getTerrainSeason, snowCover, terrainBiome, terrainGroundColor, TERRAIN_BIOMES, type TerrainBiome, type TerrainSeason } from './terrainWorldClimate'
 
-export type TerrainWorldSettings = { animated: boolean; wind: number; flow: number; grid: boolean; pan: boolean }
-export type TerrainWorldStats = { tiles: number; trees: number; grass: number; triangles: number }
+export type TerrainWorldSettings = { animated: boolean; wind: number; flow: number; grid: boolean; pan: boolean; season: string }
+export type TerrainWorldStats = { tiles: number; trees: number; grass: number; triangles: number; biomes: { id: TerrainBiome; count: number }[] }
 export type TerrainWorldSelection = { id: string; label: string; fertility: number; elevation: number }
 export type TerrainWorldHandle = {
   destroy: () => void
@@ -17,19 +18,11 @@ export type TerrainWorldHandle = {
   view: (mode: 'isometric' | 'top') => void
   zoom: (factor: number) => void
   focus: () => void
+  focusBiome: (biome: TerrainBiome) => void
 }
 
 const PALETTE = {
-  grass: new THREE.Color('#83a532'), forest: new THREE.Color('#536f2c'), dry: new THREE.Color('#e6b940'),
   sand: new THREE.Color('#efda9c'), rock: new THREE.Color('#737c89'), peak: new THREE.Color('#c3c6c4'),
-}
-
-function groundColor(sample: GroundSample): THREE.Color {
-  const color = PALETTE.grass.clone().lerp(PALETTE.forest, sample.forest * 0.6).lerp(PALETTE.dry, sample.dry)
-  color.multiplyScalar(1 + sample.patch * 0.08)
-  color.lerp(PALETTE.sand, 1 - smoothstep(0.12, 0.5, sample.shore))
-  color.lerp(PALETTE.rock, sample.rock)
-  return color.lerp(PALETTE.peak, smoothstep(1.5, 3.6, sample.height) * sample.rock * 0.75)
 }
 
 function bufferGeometry(positions: number[], colors?: number[]): THREE.BufferGeometry {
@@ -69,6 +62,8 @@ export function mountTerrainWorldScene(
   const surface = createTerrainSurface(field, tiles)
   const edges = getWorldEdges(tiles)
   let settings = { ...initialSettings }
+  let season = getTerrainSeason(settings.season)
+  const groundColor = (sample: GroundSample) => terrainGroundColor(sample, season)
   const uniforms = { meadowTime: { value: 0 }, meadowWind: { value: settings.wind } }
   const flow = { value: 0 }
   const scene = new THREE.Scene()
@@ -122,12 +117,16 @@ export function mountTerrainWorldScene(
   scene.add(fill)
 
   const landPositions: number[] = [], landColors: number[] = [], cover: number[] = []
-  const waterPositions: number[] = [], depths: number[] = [], flows: number[] = []
+  const waterPositions: number[] = [], depths: number[] = [], flows: number[] = [], waterClimates: number[] = [], stillWater: number[] = []
+  const landFaces: { sample: GroundSample; facet: number }[] = []
+  const snowAmounts: number[] = []
   for (const points of surface.triangles) {
     const center = field.sample(points.reduce((sum, p) => sum + p.x, 0) / 3, points.reduce((sum, p) => sum + p.z, 0) / 3)
     const color = groundColor(center)
     const facet = Math.sin(center.x * 112.1 + center.z * 173.7) * 0.018 + 1
     color.multiplyScalar(facet)
+    landFaces.push({ sample: center, facet })
+    snowAmounts.push(...points.map((p) => snowCover(p, season)))
     for (const p of points) { landPositions.push(p.x, p.height, p.z); landColors.push(color.r, color.g, color.b); cover.push(p.rock, p.dry, p.shore) }
     const water = clipWaterTriangle(points)
     for (let index = 1; index < water.length - 1; index++) {
@@ -137,20 +136,23 @@ export function mountTerrainWorldScene(
         waterPositions.push(p.x, WATER_LEVEL + 0.006, p.z)
         flows.push(flowAt.across, flowAt.along, flowAt.river)
         depths.push(depth)
+        const climate = field.sample(p.x, p.z)
+        waterClimates.push(Math.max(0,0.65+climate.cold*0.35-climate.desert*0.6-climate.badlands*0.25))
+        stillWater.push(climate.wetland)
       }
     }
   }
   const groundMaterial = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 1, flatShading: true })
   groundMaterial.onBeforeCompile = (shader) => {
-    shader.vertexShader = 'attribute vec3 terrainCover; varying vec3 vCover; varying vec3 terrainPosition; varying float terrainUp;\n' + shader.vertexShader.replace('#include <begin_vertex>', '#include <begin_vertex>\nterrainPosition = position; terrainUp = normal.y; vCover=terrainCover;')
-    shader.fragmentShader = `varying vec3 vCover; varying vec3 terrainPosition; varying float terrainUp;
+    shader.vertexShader = 'attribute float snowCover; varying float vSnow; attribute vec3 terrainCover; varying vec3 vCover; varying vec3 terrainPosition; varying float terrainUp;\n' + shader.vertexShader.replace('#include <begin_vertex>', '#include <begin_vertex>\nterrainPosition = position; terrainUp = normal.y; vCover=terrainCover; vSnow=snowCover;')
+    shader.fragmentShader = `varying float vSnow; varying vec3 vCover; varying vec3 terrainPosition; varying float terrainUp;
       float terrainHash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
       float terrainNoise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.0-2.0*f);return mix(mix(terrainHash(i),terrainHash(i+vec2(1,0)),f.x),mix(terrainHash(i+vec2(0,1)),terrainHash(i+vec2(1,1)),f.x),f.y);}
     ` + shader.fragmentShader.replace('#include <color_fragment>', `#include <color_fragment>
       vec2 cell = terrainPosition.xz * 33.0;
       vec2 f = fract(cell); float h = terrainHash(floor(cell));
       float fleck = step(0.68,h)*step(f.y,f.x*0.48)*step(f.x,0.7);
-      float meadow = smoothstep(0.65,0.98,terrainUp) * (1.0-vCover.x) * smoothstep(0.18,0.65,vCover.z);
+      float meadow = smoothstep(0.65,0.98,terrainUp) * (1.0-vCover.x) * smoothstep(0.18,0.65,vCover.z)*(1.0-vSnow);
       float coverNoise=terrainNoise(terrainPosition.xz*2.1)*0.6+terrainNoise(terrainPosition.xz*5.8)*0.4;
       float soil=smoothstep(0.61,0.79,coverNoise)*(0.12+vCover.y*0.28);
       diffuseColor.rgb=mix(diffuseColor.rgb,vec3(0.30,0.22,0.075),soil*meadow);
@@ -159,11 +161,12 @@ export function mountTerrainWorldScene(
       diffuseColor.rgb *= 1.0+(grain-0.5)*0.09*(1.0-vCover.x);
       float strata=sin(terrainPosition.y*22.0+terrainPosition.x*1.5+terrainNoise(terrainPosition.xz*3.0)*3.0);
       float fissure=smoothstep(0.7,0.95,strata)*vCover.x*(1.0-smoothstep(0.8,0.98,terrainUp));
-      diffuseColor.rgb *= 1.0-fissure*0.14+(grain-0.5)*0.07*vCover.x;
+      diffuseColor.rgb *= 1.0-fissure*0.14*(1.0-vSnow)+(grain-0.5)*0.07*vCover.x;
     `)
   }
   const groundGeometry = bufferGeometry(landPositions, landColors)
   groundGeometry.setAttribute('terrainCover', new THREE.Float32BufferAttribute(cover, 3))
+  groundGeometry.setAttribute('snowCover', new THREE.Float32BufferAttribute(snowAmounts, 1))
   const ground = new THREE.Mesh(groundGeometry, groundMaterial)
   ground.receiveShadow = true
   ground.castShadow = true
@@ -203,6 +206,8 @@ export function mountTerrainWorldScene(
   const waterGeometry = bufferGeometry(waterPositions)
   waterGeometry.setAttribute('waterDepth', new THREE.Float32BufferAttribute(depths, 1))
   waterGeometry.setAttribute('waterFlow', new THREE.Float32BufferAttribute(flows, 3))
+  waterGeometry.setAttribute('waterClimate', new THREE.Float32BufferAttribute(waterClimates, 1))
+  waterGeometry.setAttribute('waterStill', new THREE.Float32BufferAttribute(stillWater, 1))
   const waterMaterial = createTerrainWaterMaterial(flow)
   scene.add(new THREE.Mesh(waterGeometry, waterMaterial))
 
@@ -210,9 +215,10 @@ export function mountTerrainWorldScene(
     const mat = new THREE.MeshStandardMaterial({ color, vertexColors: true, flatShading: true, roughness: 0.95, side: THREE.DoubleSide })
     mat.onBeforeCompile = (shader) => {
       Object.assign(shader.uniforms, uniforms)
-      shader.vertexShader = windFunction + shader.vertexShader.replace('#include <begin_vertex>', 'vec3 transformed = bendInWind(position);')
+      shader.vertexShader = 'attribute float instanceSnow; varying float plantSnow; varying float plantUp;\n' + windFunction + shader.vertexShader.replace('#include <begin_vertex>', 'vec3 transformed = bendInWind(position); plantSnow=instanceSnow; plantUp=normal.y;')
+      shader.fragmentShader = 'varying float plantSnow; varying float plantUp;\n' + shader.fragmentShader.replace('#include <color_fragment>', '#include <color_fragment>\ndiffuseColor.rgb=mix(diffuseColor.rgb,vec3(0.82,0.9,0.91),plantSnow*smoothstep(0.0,0.65,plantUp));')
     }
-    mat.customProgramCacheKey = () => 'terrain-world-wind-v1'
+    mat.customProgramCacheKey = () => 'terrain-world-wind-snow-v2'
     return mat
   }
   const windDepth = new THREE.MeshDepthMaterial({ depthPacking: THREE.RGBADepthPacking, side: THREE.DoubleSide })
@@ -226,7 +232,7 @@ export function mountTerrainWorldScene(
   const rockMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, roughness: 1, flatShading: true })
   const trunkGeometry = new THREE.CylinderGeometry(0.052, 0.085, 1.15, 6).translate(0, 0.575, 0)
   type Instance = { sample: GroundSample; scale: number; rotation: number; color: THREE.Color; aspect?: number }
-  const trees: Instance[] = [], pines: Instance[] = [], shrubs: Instance[] = [], grass: Instance[] = [], stones: Instance[] = [], flowers: Instance[] = [], reeds: Instance[] = [], ferns: Instance[] = []
+  const trees: Instance[] = [], pines: Instance[] = [], shrubs: Instance[] = [], grass: Instance[] = [], stones: Instance[] = [], flowers: Instance[] = [], reeds: Instance[] = [], ferns: Instance[] = [], cacti: Instance[] = [], lilies: Instance[] = [], litter: Instance[] = []
   const random = seededRandom(seed ^ 0x41c6ce57)
   const leafColors = ['#285443', '#396445', '#597e32', '#719334', '#8ca337'].map((c) => new THREE.Color(c))
   const flowerColors = ['#fff8e4', '#f6d155', '#dfb7e5', '#efac73'].map((c) => new THREE.Color(c))
@@ -234,6 +240,9 @@ export function mountTerrainWorldScene(
   for (const tile of tiles) {
     for (let i = 0; i < 440; i++) {
       const point = randomTilePoint(tile, random), sample = surface.sample(point.x, point.z)
+      if (sample && sample.wetland > 0.4 && sample.height < WATER_LEVEL && i < 28) {
+        lilies.push({ sample: { ...sample, height: WATER_LEVEL+0.028 }, scale: 0.4+random()*0.5, rotation: random()*6.28, color: new THREE.Color('#547d46') })
+      }
       if (sample && sample.rock > 0.3 && sample.shore > 0.6 && i < 10) {
         stones.push({ sample, scale: 0.08 + random() * 0.24, rotation: random() * Math.PI * 2,
           aspect: 0.5 + random() * 0.4, color: PALETTE.rock.clone().lerp(PALETTE.peak, random() * 0.3) })
@@ -243,14 +252,21 @@ export function mountTerrainWorldScene(
       const instance: Instance = { sample, scale: 0.65 + random() * 0.6, rotation: random() * Math.PI * 2, color: groundColor(sample), aspect: 0.85 + random() * 0.35 }
       const riverWood = (1 - smoothstep(0.45, 1.0, sample.shore)) * 0.07
       const grouping = smoothstep(-0.25, 0.5, sample.patch)
-      if (sample.shore < 0.48) {
+      if (sample.desert > 0.55 || sample.badlands > 0.58) {
+        if (i < 7 && sample.desert > 0.7 && roll < 0.3) cacti.push({ ...instance, scale: 0.6+random()*0.8, color: new THREE.Color('#5c876d') })
+        if (i < 16 && roll < 0.4) stones.push({ ...instance, scale: sample.badlands * (0.3+random()*0.7)+0.1, color: new THREE.Color('#b27855') })
+        if (i > 250 && roll < 0.04) grass.push({ ...instance, scale: instance.scale*0.6, color: new THREE.Color('#b8a96a') })
+        continue
+      }
+      if (sample.shore < 0.48 || sample.wetland > 0.45) {
         if (i < 120 && roll < 0.55) reeds.push({ ...instance, color: new THREE.Color('#7e9744'), scale: 0.65 + random() * 0.65 })
         continue
       }
-      if (i < 70 && sample.rock < 0.18 && roll < sample.forest * 0.92 + riverWood + grouping * 0.009) {
-        instance.scale *= 0.28 + sample.forest * 0.43 + riverWood * 0.7
+      const woodland = Math.max(sample.forest, sample.pine * 0.95) * (1-smoothstep(0.68,0.86,sample.cold))
+      if (i < 70 && sample.rock < 0.18 && roll < woodland * 0.92 + riverWood + grouping * 0.009) {
+        instance.scale *= 0.28 + woodland * 0.43 + riverWood * 0.7
         if (occupied.some((tree) => Math.hypot(tree.sample.x - sample.x, tree.sample.z - sample.z) < (tree.scale + instance.scale) * 0.43)) continue
-        const pine = random() < 0.23 + sample.forest * 0.45
+        const pine = random() < 0.12 + sample.pine * 0.85
         if (pine) instance.scale *= 0.82
         instance.color = leafColors[Math.floor(random() * leafColors.length)].clone()
         if (pine) instance.color.multiplyScalar(0.8)
@@ -260,14 +276,15 @@ export function mountTerrainWorldScene(
         instance.scale *= 0.4 + random() * 0.48
         instance.color = leafColors[Math.floor(random() * leafColors.length)].clone()
         shrubs.push(instance)
-      } else if (i > 125 && sample.rock < 0.25 && roll < grouping * 0.5) {
+      } else if (i > 125 && sample.rock < 0.25 && roll < grouping * (0.5-sample.cold*0.3)) {
         instance.scale *= 0.45 + random() * 0.55
         instance.color.lerp(new THREE.Color('#b7b947'), random() * 0.4)
         grass.push(instance)
         if (sample.forest > 0.3 && i % 5 === 0) ferns.push({ ...instance, color: new THREE.Color('#638844'), scale: 0.65 + random() * 0.55 })
-        if (sample.dry < 0.6 && grouping > 0.7 && i % 3 === 0) {
+        if (sample.dry < 0.6 && sample.cold < 0.55 && grouping > 0.7 && (i % 3 === 0 || sample.meadow > 0.6)) {
           flowers.push({ ...instance, scale: 0.7 + random() * 0.5, color: flowerColors[Math.floor(random() * flowerColors.length)] })
         }
+        if (sample.forest > 0.25 && i % 3 === 0) litter.push({ ...instance, color: new THREE.Color('#c18c43') })
       }
       if (i < 12 && sample.patch > 0.12 && (sample.rock > 0.12 || sample.shore < 1.1 || roll < 0.12)) {
         stones.push({ ...instance, scale: 0.07 + random() * 0.25, color: PALETTE.rock.clone().lerp(PALETTE.sand, random() * 0.32) })
@@ -294,17 +311,45 @@ export function mountTerrainWorldScene(
     if (sample && sample.height < WATER_LEVEL) stones.push({ sample, scale, rotation: random() * 6.28, aspect: 1.55, color: PALETTE.rock.clone() })
   }
   const transform = new THREE.Object3D()
-  function instances(geometry: THREE.BufferGeometry, material: THREE.Material, list: Instance[], wind = false) {
+  type PropKind = 'broadleaf' | 'pine' | 'branch' | 'shrub' | 'grass' | 'flower' | 'reed' | 'fern' | 'rock' | 'cactus' | 'lily' | 'litter'
+  const seasonalUpdates: ((value: TerrainSeason) => void)[] = []
+  function instances(geometry: THREE.BufferGeometry, material: THREE.Material, list: Instance[], wind = false, kind: PropKind = 'rock') {
     const mesh = new THREE.InstancedMesh(geometry, material, list.length)
-    list.forEach((item, index) => {
-      transform.position.set(item.sample.x, item.sample.height - 0.012, item.sample.z)
-      transform.rotation.set(0, item.rotation, 0)
-      transform.scale.setScalar(item.scale)
-      transform.scale.y *= item.aspect ?? 1
-      transform.updateMatrix()
-      mesh.setMatrixAt(index, transform.matrix)
-      if (material !== stemMaterial) mesh.setColorAt(index, item.color)
-    })
+    const snowAttribute = new THREE.InstancedBufferAttribute(new Float32Array(list.length), 1)
+    geometry.setAttribute('instanceSnow', snowAttribute)
+    const updateSeason = (value: TerrainSeason) => {
+      list.forEach((item, index) => {
+        const s=item.sample, snow=snowCover(s,value), choice=(Math.sin(index*127.1+13.7)*43758.5453)%1
+        let size=1, color=item.color.clone()
+        if (kind==='broadleaf' || kind==='shrub') {
+          color=new THREE.Color(value.leaves[index%value.leaves.length])
+          size=kind==='broadleaf'?Math.cbrt(value.foliage):0.35+value.foliage*0.65
+        }
+        if (kind==='grass' || kind==='fern' || kind==='reed') {
+          color=terrainGroundColor(s,value).lerp(new THREE.Color('#b9ac72'),value.dry*0.4)
+          size=1-snow*(kind==='reed'?0.15:0.75)
+        }
+        if (kind==='flower') size=Math.abs(choice)<value.bloom?1:0
+        if (kind==='lily') size=1-value.ice
+        if (kind==='litter') size=value.litter*(1-snow)
+        if (kind==='rock') color.lerp(new THREE.Color('#edf3f1'),snow*0.75)
+        transform.position.set(s.x, s.height - 0.012, s.z)
+        transform.rotation.set(0, item.rotation, 0)
+        transform.scale.setScalar(item.scale*Math.max(0.00001,size))
+        transform.scale.y *= item.aspect ?? 1
+        transform.updateMatrix()
+        mesh.setMatrixAt(index, transform.matrix)
+        if (material !== stemMaterial) mesh.setColorAt(index, color)
+        snowAttribute.setX(index,snow)
+      })
+      mesh.instanceMatrix.needsUpdate=true
+      if(mesh.instanceColor) mesh.instanceColor.needsUpdate=true
+      snowAttribute.needsUpdate=true
+      mesh.computeBoundingSphere()
+      if(mesh.boundingSphere) mesh.boundingSphere.radius+=0.5
+    }
+    seasonalUpdates.push(updateSeason)
+    updateSeason(season)
     mesh.castShadow = material !== grassMaterial
     mesh.receiveShadow = true
     if (wind) mesh.customDepthMaterial = windDepth
@@ -315,16 +360,38 @@ export function mountTerrainWorldScene(
   }
   for (let variant = 0; variant < 4; variant++) {
     const select = (list: Instance[]) => list.filter((_, i) => i % 4 === variant)
-    instances(createBroadleafGeometry(variant), leafMaterial, select(trees), true)
-    instances(createPineGeometry(variant), leafMaterial, select(pines), true)
-    instances(createShrubGeometry(variant), leafMaterial, select(shrubs), true)
+    instances(createBroadleafGeometry(variant), leafMaterial, select(trees), true, 'broadleaf')
+    instances(createPineGeometry(variant), leafMaterial, select(pines), true, 'pine')
+    instances(createShrubGeometry(variant), leafMaterial, select(shrubs), true, 'shrub')
     instances(createBoulderGeometry(variant), rockMaterial, select(stones))
   }
-  instances(trunkGeometry, stemMaterial, [...trees, ...pines])
-  instances(createGrassGeometry(), grassMaterial, grass, true)
-  instances(createFlowerGeometry(), grassMaterial, flowers, true)
-  instances(createReedGeometry(), grassMaterial, reeds, true)
-  instances(createFernGeometry(), grassMaterial, ferns, true)
+  instances(trunkGeometry, stemMaterial, pines, false, 'branch')
+  instances(createBareTreeGeometry(), stemMaterial, trees, false, 'branch')
+  instances(createGrassGeometry(), grassMaterial, grass, true, 'grass')
+  instances(createFlowerGeometry(), grassMaterial, flowers, true, 'flower')
+  instances(createReedGeometry(), grassMaterial, reeds, true, 'reed')
+  instances(createFernGeometry(), grassMaterial, ferns, true, 'fern')
+  instances(createCactusGeometry(), rockMaterial, cacti, false, 'cactus')
+  instances(createLilyGeometry(), grassMaterial, lilies, true, 'lily')
+  instances(createLeafLitterGeometry(), grassMaterial, litter, false, 'litter')
+
+  function applySeason(next: TerrainSeason) {
+    season=next
+    const colorAttribute=groundGeometry.getAttribute('color'), snowAttribute=groundGeometry.getAttribute('snowCover')
+    landFaces.forEach(({sample,facet},index)=> {
+      const color=groundColor(sample).multiplyScalar(facet)
+      for(let j=0;j<3;j++) {
+        colorAttribute.setXYZ(index*3+j,color.r,color.g,color.b)
+        snowAttribute.setX(index*3+j,snowCover(surface.triangles[index][j],season))
+      }
+    })
+    colorAttribute.needsUpdate=true; snowAttribute.needsUpdate=true
+    seasonalUpdates.forEach((update)=>update(season))
+    waterMaterial.uniforms.iceAmount.value=season.ice
+    renderer.toneMappingExposure=1.05-season.snow*0.13
+    host.dataset.season=season.id
+  }
+  applySeason(season)
 
   const floor = new THREE.Mesh(new THREE.PlaneGeometry(200, 200), new THREE.ShadowMaterial({ color: 0x42535c, opacity: 0.22 }))
   floor.rotation.x = -Math.PI / 2
@@ -346,7 +413,7 @@ export function mountTerrainWorldScene(
     }))
     selection.geometry.dispose()
     selection.geometry = new THREE.BufferGeometry().setFromPoints(points)
-    const label = sample.height < WATER_LEVEL ? '水域' : sample.shore < 0.4 ? '河岸' : sample.rock > 0.4 ? '山地' : sample.height > 0.65 ? '丘陵' : sample.forest > 0.5 ? '森林' : sample.dry > 0.55 ? '干草平原' : '草原'
+    const label = TERRAIN_BIOMES.find((biome)=>biome.id===terrainBiome(sample))!.label
     onSelect({ id: tile.id, label, elevation: Number(sample.height.toFixed(2)), fertility: Math.round(90 - sample.dry * 55 - sample.rock * 40) })
   }
   const down = (event: PointerEvent) => { pointerDown = { x: event.clientX, y: event.clientY } }
@@ -395,23 +462,38 @@ export function mountTerrainWorldScene(
     frame = requestAnimationFrame(animate)
   }
   frame = requestAnimationFrame(animate)
-  onStats({ tiles: tiles.length, trees: trees.length + pines.length, grass: grass.length, triangles: landPositions.length / 9 })
+  const biomeTiles = new Map<TerrainBiome, WorldTile[]>()
+  for(const tile of tiles) {
+    const biome=terrainBiome(field.sample(tile.center.x,tile.center.z))
+    const list=biomeTiles.get(biome)??[]; list.push(tile); biomeTiles.set(biome,list)
+  }
+  onStats({ tiles: tiles.length, trees: trees.length + pines.length, grass: grass.length, triangles: landPositions.length / 9,
+    biomes:TERRAIN_BIOMES.map(({id})=>({id,count:biomeTiles.get(id)?.length??0})) })
+  function focusTile() {
+    const center = selectedTile?.center ?? { x: field.riverX(2) - 1.8, z: 2 }
+    const y = Math.max(WATER_LEVEL, surface.sample(center.x, center.z)?.height ?? 0.3)
+    controls.target.set(center.x, y, center.z)
+    camera.position.set(center.x + 9, y + 31, center.z + 48)
+    camera.zoom = 3.8
+    camera.updateProjectionMatrix()
+    controls.update()
+  }
   return {
     update: (next) => {
+      if (next.season!==season.id) applySeason(getTerrainSeason(next.season))
       settings = { ...next }; grid.visible = next.grid; uniforms.meadowWind.value = next.wind
       controls.mouseButtons.LEFT = next.pan ? THREE.MOUSE.PAN : THREE.MOUSE.ROTATE
       controls.touches.ONE = next.pan ? THREE.TOUCH.PAN : THREE.TOUCH.ROTATE
     },
     view: setView,
     zoom: (factor) => { camera.zoom = Math.min(8, Math.max(0.55, camera.zoom * factor)); camera.updateProjectionMatrix() },
-    focus: () => {
-      const center = selectedTile?.center ?? { x: field.riverX(2) - 1.8, z: 2 }
-      const y = Math.max(WATER_LEVEL, surface.sample(center.x, center.z)?.height ?? 0.3)
-      controls.target.set(center.x, y, center.z)
-      camera.position.set(center.x + 9, y + 31, center.z + 48)
-      camera.zoom = 3.8
-      camera.updateProjectionMatrix()
-      controls.update()
+    focus: focusTile,
+    focusBiome: (biome) => {
+      const list=biomeTiles.get(biome)
+      if(!list?.length) return
+      const tile=list[Math.floor(list.length/2)]
+      selectTile(tile,field.sample(tile.center.x,tile.center.z))
+      focusTile()
     },
     destroy: () => {
       cancelAnimationFrame(frame)

@@ -1,23 +1,25 @@
 {
   "title": "多地形区块风格与连续过渡选型",
   "date": "2026-10-11",
-  "status": "用户已选择 C；第三轮已扩至217块并重做地表细节与流水，技术验证通过，美术效果待用户验收",
+  "status": "用户已选择 C；第四轮已实现217块连续地图、14类地貌与8个季节阶段，技术验证通过，美术效果待用户验收",
   "selectedStyle": "C",
-  "prototypeUrl": "http://localhost:5173/?view=terrain-world&assetSeed=263745286",
+  "prototypeUrl": "http://localhost:5173/?view=terrain-world&assetSeed=337863546&season=rust",
   "generationTool": "Built-in image_gen",
   "scope": "独立 terrain-world 页面采用 C 低多边形路线；本轮重做运行时地形、植被、岩石和水岸，不修改游戏规则，不覆盖旧草地区块资产，不代表已导出新的 Blender/GLB。",
   "modelIteration": {
-    "version": 3,
+    "version": 4,
     "reference": "C-low-poly.png",
-    "fixedSeed": 263745286,
-    "actualDesktopCapture": "../../artifacts/terrain-world-c-v3-desktop.jpg",
-    "actualCloseCapture": "../../artifacts/terrain-world-c-v3-close.jpg",
-    "verification": "../../artifacts/terrain-world-c-v3-verification.json",
+    "fixedSeed": 337863546,
+    "actualDesktopCapture": "../../artifacts/terrain-world-c-v4-bloom.jpg",
+    "actualCloseCapture": "../../artifacts/terrain-world-c-v4-wetland.jpg",
+    "verification": "../../artifacts/terrain-world-c-v4-verification.json",
+    "biomes": ["花甸", "草原", "阔叶林", "针叶林", "湿地", "旱草原", "沙丘", "红岩荒地", "苔原", "丘陵", "高山", "沙岸", "浅水", "深水"],
+    "seasons": ["初春", "暮春", "初夏", "盛夏", "初秋", "深秋", "初冬", "深冬"],
     "changes": [
-      "地图半径由3格扩为8格，共217块、600条共享内部边，仍共用世界坐标地表与水位。",
-      "细化弯曲草叶、花瓣与花茎、湿岸芦苇、林下蕨类；增加地表斑驳、山坡碎石与岩面层次。",
-      "移除双白线河流，使用连续河道弧长驱动细波纹、深浅色、水面高光、岸边碎浪，并在入海口混合海面波纹。",
-      "增加地块近景、鼠标与触摸平移模式；全图、俯视与不同种子仍可检查，植被采用实例化绘制。"
+      "14类地貌采用连续世界坐标权重，不逐块跳色；增加沙丘起伏、红岩台地、湿地浅池与寒冷区域。",
+      "新增枯枝树、仙人掌、浮叶和落叶几何；按地貌分配花甸、针叶林、稀疏苔原与湿地植被。",
+      "8个季节阶段联动花量、树冠、地表枯黄、落叶、覆雪和岸边结冰；沙丘和红岩积雪更少。",
+      "切换季节复用场景，不重建地图、不移动镜头；URL保留季节，地貌定位可直接查看代表区块。"
     ],
     "acceptanceBoundary": "网页实际截图是本轮交付证据；AI 概念图不等于实际模型，测试通过不等于已完成原图美术还原，构图比例和细节密度仍需用户确认。"
   },
