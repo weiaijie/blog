@@ -1,0 +1,23 @@
+{
+  "asset": "terrain-grassland",
+  "generationSeed": 20261011,
+  "blenderVersion": "4.5.10 LTS",
+  "generationCommand": "npm run assets:terrain:blender -- terrain-grassland --seed 20261011",
+  "previewUrl": "http://localhost:5173/?view=grassland-block&assetSeed=20261011",
+  "assets": [
+    {
+      "path": "src/render/assets/terrain/terrain-grassland-lod0.glb",
+      "bytes": 1866596,
+      "meshes": 608,
+      "embeddedImages": 1,
+      "sha256": "012ca3a98626f28dc02d7917cceabcb512fe85a7527e7518539825921f0a0a3f"
+    },
+    {
+      "path": "src/render/assets/terrain/terrain-grassland-lod1.glb",
+      "bytes": 585740,
+      "meshes": 211,
+      "embeddedImages": 1,
+      "sha256": "2ac8e2a698941b51c74d6c77872bbbaf2b30fcb4c54c24b9e70df2f08631ab3f"
+    }
+  ]
+}

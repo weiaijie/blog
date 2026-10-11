@@ -14,10 +14,15 @@ export function GrasslandBlockLab() {
   const initialSeed = useMemo(() => getInitialAssetSeed(), [])
   const [baseSeed, setBaseSeed] = useState(initialSeed)
   const [variantCount, setVariantCount] = useState(DEFAULT_VARIANT_COUNT)
-  const variants = useMemo(() => createGrasslandVariants(baseSeed, variantCount), [baseSeed, variantCount])
+  const [rerollSeeds, setRerollSeeds] = useState<Record<number, number>>({})
+  const variants = useMemo(
+    () => createGrasslandVariants(baseSeed, variantCount, rerollSeeds),
+    [baseSeed, variantCount, rerollSeeds],
+  )
 
   function regenerateAll(): void {
     setBaseSeed(createRandomAssetSeed())
+    setRerollSeeds({})
   }
 
   function addVariant(): void {
@@ -30,7 +35,7 @@ export function GrasslandBlockLab() {
 
   function rerollVariant(index: number): void {
     const nextSeed = createRandomAssetSeed()
-    setBaseSeed((currentSeed) => mixSeed(currentSeed, nextSeed + index * 97))
+    setRerollSeeds((currentSeeds) => ({ ...currentSeeds, [index]: nextSeed }))
   }
 
   return (
@@ -84,9 +89,13 @@ export function GrasslandBlockLab() {
   )
 }
 
-function createGrasslandVariants(baseSeed: number, count: number): GrasslandVariant[] {
+function createGrasslandVariants(
+  baseSeed: number,
+  count: number,
+  rerollSeeds: Record<number, number>,
+): GrasslandVariant[] {
   return Array.from({ length: count }, (_, index) => {
-    const seed = mixSeed(baseSeed, index * 10_007 + 47)
+    const seed = rerollSeeds[index] ?? mixSeed(baseSeed, index * 10_007 + 47)
     const fertility = Math.round(18 + seededUnit(seed, 'fertility') * 82)
 
     return {

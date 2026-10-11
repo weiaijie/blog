@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import {
   mountPixiStage,
   type PixiExplorationSnapshot,
@@ -18,7 +18,27 @@ import type { MapTile } from '../game/state/map'
 import { getManualSaveStatus, loadManualGame, saveManualGame } from '../storage/browserSaveSlot'
 import { initialUiState } from './stores/uiState'
 
+const GrasslandBlockLab = lazy(() =>
+  import('../ui/visualFeedback/GrasslandBlockLab').then((module) => ({
+    default: module.GrasslandBlockLab,
+  })),
+)
+
 export function App() {
+  const view = new URLSearchParams(window.location.search).get('view')
+
+  if (view === 'grassland-block') {
+    return (
+      <Suspense fallback={<main className="grassland-lab">加载草原区块...</main>}>
+        <GrasslandBlockLab />
+      </Suspense>
+    )
+  }
+
+  return <GameApp />
+}
+
+function GameApp() {
   const hostRef = useRef<HTMLDivElement | null>(null)
   const handleTileSelectRef = useRef<(tileId: string) => void>(() => undefined)
   const stageRef = useRef<PixiStageHandle | null>(null)

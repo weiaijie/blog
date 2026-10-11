@@ -106,7 +106,7 @@ export function mountThreeModuleScene(
     }
 
     if (terrainId === 'grassland') {
-      void addRuntimeAssetModel(root, 'terrain-grassland', 1.7, () => destroyed, spec.variantSeed)
+      void addRuntimeAssetModel(root, 'terrain-grassland', 2.8, () => destroyed, spec.variantSeed)
     }
 
     if (terrainId === 'water') {
@@ -127,6 +127,9 @@ export function mountThreeModuleScene(
 
     renderer.setSize(width, height, false)
     camera.aspect = width / height
+    if (spec.kind === 'terrain' && (spec.terrainId ?? 'grassland') === 'grassland') {
+      camera.zoom = Math.min(1, camera.aspect / 1.25)
+    }
     camera.updateProjectionMatrix()
   }
 
@@ -224,7 +227,7 @@ function applyRuntimeVariant(model: Object3D, assetId: RuntimeModelAssetId, vari
     }
 
     const name = child.name.toLowerCase()
-    const localSeed = `${name}:${child.id}`
+    const localSeed = name
     const isGrassMaterial =
       name.includes('grass') ||
       name.includes('turf') ||
@@ -287,7 +290,9 @@ function cloneVariantMaterial(
   const cloned = source.clone()
 
   if (cloned instanceof MeshStandardMaterial) {
-    if (isGrassMaterial) {
+    if (isGrassMaterial && cloned.map) {
+      cloned.color.setRGB(1.08 - fertility * 0.24, 0.88 + fertility * 0.20, 0.72 + fertility * 0.12)
+    } else if (isGrassMaterial) {
       cloned.color.setHSL(
         0.19 + fertility * 0.06 + hueShift * 0.5,
         0.30 + fertility * 0.16 + saturationShift * 0.45,
