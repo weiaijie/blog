@@ -80,11 +80,22 @@ describe('C-style continuous terrain', () => {
   })
   it.each([1, WORLD_LAYOUT_SCALE])('keeps distinct biome regions at layout scale %f', (scale) => {
     const field = createTerrainField(20261011, scale)
-    expect(field.sample(-4 * scale, -2 * scale).forest).toBeGreaterThan(0.6)
-    expect(field.sample(-1.5 * scale, 0.9 * scale).forest).toBeLessThan(0.15)
-    expect(field.sample(-1.6 * scale, -3.75 * scale).height).toBeGreaterThan(1.5)
-    expect(field.sample(3.4 * scale, -2.55 * scale).rock).toBeGreaterThan(0.7)
-    expect(field.sample(4 * scale, 2 * scale).dry).toBeGreaterThan(0.65)
+    const samples=tiles.map(({center})=>field.sample(center.x/WORLD_LAYOUT_SCALE*scale,center.z/WORLD_LAYOUT_SCALE*scale)).filter((p)=>p.height>WATER_LEVEL)
+    expect(Math.max(...samples.map((p)=>p.forest))).toBeGreaterThan(0.8)
+    expect(Math.min(...samples.map((p)=>p.forest))).toBeLessThan(0.1)
+    expect(Math.max(...samples.map((p)=>p.height))).toBeGreaterThan(1.5)
+    expect(Math.max(...samples.map((p)=>p.rock))).toBeGreaterThan(0.7)
+    expect(Math.max(...samples.map((p)=>p.dry))).toBeGreaterThan(0.8)
+  })
+  it('changes continental silhouettes, mountain ranges and forest regions across seeds',()=> {
+    const fields=[221648817,569575877,337863546,20261011,1,999999999].map((s)=>createTerrainField(s))
+    expect(new Set(fields.map((f)=>f.layout)).size).toBe(3)
+    for(let i=1;i<fields.length;i++) {
+      const a=tiles.map((t)=>fields[0].sample(t.center.x,t.center.z)),b=tiles.map((t)=>fields[i].sample(t.center.x,t.center.z))
+      expect(a.filter((p,j)=>(p.height<WATER_LEVEL)!==(b[j].height<WATER_LEVEL)).length).toBeGreaterThan(30)
+      expect(a.filter((p,j)=>Math.abs(p.forest-b[j].forest)>0.3).length).toBeGreaterThan(30)
+      expect(a.filter((p,j)=>Math.abs(p.height-b[j].height)>0.5).length).toBeGreaterThan(20)
+    }
   })
   it('advects river coordinates monotonically downstream across tile boundaries', () => {
     const field = createTerrainField(263745286)
@@ -92,10 +103,10 @@ describe('C-style continuous terrain', () => {
     for (let z = -15; z <= 15; z += 0.07) {
       const flow = field.waterCoordinates(field.riverX(z), z)
       expect(flow.across).toBeCloseTo(0)
-      expect(flow.along).toBeGreaterThan(previous)
+      expect(flow.along*field.flowDirection).toBeGreaterThan(previous)
       expect(flow.river).toBeGreaterThanOrEqual(0)
       expect(flow.river).toBeLessThanOrEqual(1)
-      previous = flow.along
+      previous = flow.along*field.flowDirection
     }
     for (const edge of edges) for (const p of edgePoints(edge.a,edge.b)) {
       expect(Object.values(field.waterCoordinates(p.x,p.z)).every(Number.isFinite)).toBe(true)

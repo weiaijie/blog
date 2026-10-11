@@ -1,12 +1,21 @@
 import { describe, expect, it } from 'vitest'
-import { createTerrainField, createWorldTiles, edgePoints, getWorldEdges, WORLD_LAYOUT_SCALE } from '../../src/render/visuals/terrainWorld'
+import { createTerrainField, createWorldTiles, edgePoints, getWorldEdges } from '../../src/render/visuals/terrainWorld'
 import { getTerrainSeason, snowCover, terrainBiome, terrainGroundColor, TERRAIN_BIOMES, TERRAIN_SEASONS } from '../../src/render/visuals/terrainWorldClimate'
 
 describe('visual biome and seasonal layers', () => {
   const tiles=createWorldTiles()
-  it.each([569575877,337863546,20261011,1,999999999])('represents all 14 terrain families in 217 cells for seed %i', (seed)=> {
+  it.each([569575877,337863546,20261011,1,999999999])('represents diverse seed-dependent biomes in 217 cells for seed %i', (seed)=> {
     const field=createTerrainField(seed)
     const present=new Set(tiles.map(({center})=>terrainBiome(field.sample(center.x,center.z))))
+    expect(present.size).toBeGreaterThanOrEqual(11)
+    expect(present.has('water')).toBe(true)
+    expect(present.has('alpine')).toBe(true)
+  })
+  it('covers the full biome catalog across the world presets',()=> {
+    const present=new Set([569575877,337863546,20261011,1,999999999].flatMap((seed)=> {
+      const field=createTerrainField(seed)
+      return tiles.map(({center})=>terrainBiome(field.sample(center.x,center.z)))
+    }))
     expect([...present].sort()).toEqual(TERRAIN_BIOMES.map(({id})=>id).sort())
   })
   it('offers eight distinct seasonal stages and safely resolves URL input', ()=> {
@@ -27,8 +36,9 @@ describe('visual biome and seasonal layers', () => {
     expect(autumn.litter).toBeGreaterThan(spring.litter)
     expect(winter.foliage).toBe(0)
     expect(winter.ice).toBe(1)
-    const field=createTerrainField(569575877),scale=WORLD_LAYOUT_SCALE
-    const temperate=field.sample(-2*scale,0),desert=field.sample(4*scale,3*scale)
+    const field=createTerrainField(569575877),samples=tiles.map(({center})=>field.sample(center.x,center.z))
+    const temperate=samples.find((s)=>s.height>0.2 && s.desert<0.05 && s.badlands<0.05)!
+    const desert=samples.find((s)=>s.height>0.2 && s.desert>0.95)!
     expect(snowCover(temperate,winter)).toBeGreaterThan(0.9)
     expect(snowCover(desert,winter)).toBeLessThan(0.15)
     expect(terrainGroundColor(temperate,winter).getHex()).not.toBe(terrainGroundColor(temperate,spring).getHex())

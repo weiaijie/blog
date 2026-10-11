@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-11",
+  "scope": "Independent Three.js terrain-world visual prototype, not main gameplay",
+  "url": "http://localhost:5173/?view=terrain-world&assetSeed=221648817",
+  "checks": {
+    "tests": {"files": 18, "passed": 113, "failed": 0},
+    "productionBuild": "passed; existing OrbitControls/Three chunk remains above 500 kB",
+    "scopedEslint": "passed",
+    "browserErrors": 0,
+    "testedLayoutSeeds": [221648817, 337863546, 569575877, 20261011, 1, 999999999],
+    "browserLayoutSeeds": [221648817, 569575877, 20261011],
+    "world": {"tiles": 217, "biomeCatalog": 14, "seasonStages": 8, "layoutFamilies": 3},
+    "seed221648817": {"places": 8, "buildingGroups": 63, "fields": 12, "bridges": 1, "travelersAndCarriers": 21, "wildlifeIncludingBirds": 36},
+    "seed569575877": {"places": 8, "buildingGroups": 67, "fields": 12, "initialDay": 272, "initialSeason": "frost"},
+    "seed20261011": {"places": 8, "buildingGroups": 71, "fields": 3, "initialDay": 104, "initialSeason": "green"},
+    "contracts": [
+      "All 600 shared edges retain matching coordinates and heights",
+      "Building footprints and farm rectangles fit their assigned hex",
+      "Roads remain dry with bounded endpoint slope except explicit bridges",
+      "Travelers follow connected settlement routes and wait at destinations",
+      "Wildlife paths remain on appropriate land; birds use closed loops",
+      "Seasonal values and leaf colors interpolate continuously across all eight boundaries"
+    ],
+    "seasonCycleProbe": {"fromDay": 45.774, "toDay": 382.478, "speed": 20, "observedNextYear": true},
+    "manualSeasonResetAfterAutoAdvance": {"fromDay": 419.728, "toDay": 45, "season": "bloom", "passed": true},
+    "wildlifeMotionProbe": {"before": [-12.710, 7.313], "after": [-12.730, 7.288], "note": "Herd movement includes stationary grazing intervals"},
+    "fixedViewMotionPair": {
+      "beforeTime": 77.640, "afterTime": 137.016,
+      "residentBefore": [-5.101, 8.823], "residentAfter": [-11.560, 0],
+      "sampledCanvasPixels": 56287, "changedPixels": 17066,
+      "files": ["terrain-world-c-v6-life-a.jpg", "terrain-world-c-v6-life-b.jpg"]
+    },
+    "pausedPair": {
+      "simulationTime": 53.233, "worldDay": 45,
+      "allReportedMetricsEqual": true,
+      "sampledCanvasPixels": 65317, "changedPixels": 0,
+      "files": ["terrain-world-c-v6-paused-a.jpg", "terrain-world-c-v6-paused-b.jpg"]
+    },
+    "viewports": [
+      {"width": 1440, "height": 960, "canvasWidth": 1206, "canvasHeight": 868, "documentWidth": 1440, "distinctCanvasSampleColors": 14521},
+      {"width": 390, "height": 844, "canvasWidth": 390, "canvasHeight": 402, "documentWidth": 390, "distinctCanvasSampleColors": 1897},
+      {"width": 320, "height": 740, "canvasWidth": 320, "canvasHeight": 298, "documentWidth": 320, "distinctCanvasSampleColors": 1277}
+    ]
+  },
+  "captures": [
+    "terrain-world-c-v6-overview.jpg", "terrain-world-c-v6-town.jpg",
+    "terrain-world-c-v6-wildlife.jpg", "terrain-world-c-v6-mobile.jpg",
+    "terrain-world-c-v6-mobile-320.jpg", "terrain-world-c-v6-seed-569575877.jpg",
+    "terrain-world-c-v6-seed-20261011.jpg"
+  ],
+  "limitations": [
+    "No economic transactions, quests, persistent population or main-game simulation integration",
+    "No new Blender files or exported GLB assets",
+    "Responsive browser checks are not physical mobile GPU performance acceptance",
+    "Visual likeness and art quality still require user review"
+  ]
+}

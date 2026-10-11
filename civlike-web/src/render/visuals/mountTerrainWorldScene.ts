@@ -1,18 +1,20 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import {
-  WATER_LEVEL, WORLD_LAYOUT_SCALE, clipWaterTriangle, createTerrainField, createTerrainSurface, createWorldTiles, edgePoints,
+  WATER_LEVEL, clipWaterTriangle, createTerrainField, createTerrainSurface, createWorldTiles, edgePoints,
   getWorldEdges, randomTilePoint, seededRandom, smoothstep,
   type GroundSample, type WorldTile,
 } from './terrainWorld'
 import { createBareTreeGeometry, createBoulderGeometry, createBroadleafGeometry, createCactusGeometry, createFernGeometry, createFlowerGeometry, createGrassGeometry, createLeafLitterGeometry, createLilyGeometry, createPineGeometry, createReedGeometry, createShrubGeometry } from './terrainWorldModels'
 import { createTerrainWaterMaterial } from './terrainWorldWater'
-import { getTerrainSeason, snowCover, terrainBiome, terrainGroundColor, TERRAIN_BIOMES, type TerrainBiome, type TerrainSeason } from './terrainWorldClimate'
+import { snowCover, terrainBiome, terrainGroundColor, TERRAIN_BIOMES, type TerrainBiome, type TerrainSeason } from './terrainWorldClimate'
 import { civilizationOccupies, createCivilizationPlan } from './terrainWorldCivilization'
 import { createWorldScenery } from './terrainWorldScenery'
+import { advanceWorldDay, seasonalBlend, worldCalendar, type WorldCalendar } from './terrainWorldTime'
+import { createWorldLife, type LifeKind } from './terrainWorldLife'
 
-export type TerrainWorldSettings = { animated: boolean; wind: number; flow: number; grid: boolean; pan: boolean; season: string }
-export type TerrainWorldStats = { tiles: number; trees: number; grass: number; triangles: number; biomes: { id: TerrainBiome; count: number }[]; places: { id: string; label: string }[]; buildings: number; farms: number; bridges: number }
+export type TerrainWorldSettings = { animated: boolean; wind: number; flow: number; grid: boolean; pan: boolean; day: number; dayRevision: number; autoSeason: boolean; timeSpeed: number }
+export type TerrainWorldStats = { tiles: number; trees: number; grass: number; triangles: number; biomes: { id: TerrainBiome; count: number }[]; places: { id: string; label: string }[]; buildings: number; farms: number; bridges: number; people: number; animals: number; layout: string }
 export type TerrainWorldSelection = { id: string; label: string; fertility: number; elevation: number }
 export type TerrainWorldHandle = {
   destroy: () => void
@@ -22,6 +24,7 @@ export type TerrainWorldHandle = {
   focus: () => void
   focusBiome: (biome: TerrainBiome) => void
   focusPlace: (id: string) => void
+  focusLife: (kind: LifeKind) => void
 }
 
 const PALETTE = {
@@ -59,6 +62,7 @@ export function mountTerrainWorldScene(
   initialSettings: TerrainWorldSettings,
   onStats: (stats: TerrainWorldStats) => void,
   onSelect: (selection: TerrainWorldSelection) => void,
+  onCalendar: (calendar: WorldCalendar) => void,
 ): TerrainWorldHandle {
   const field = createTerrainField(seed)
   const tiles = createWorldTiles()
@@ -66,7 +70,8 @@ export function mountTerrainWorldScene(
   const civilization = createCivilizationPlan(field, surface.sample)
   const edges = getWorldEdges(tiles)
   let settings = { ...initialSettings }
-  let season = getTerrainSeason(settings.season)
+  let day=settings.day, lastSeasonDay=day
+  let season = seasonalBlend(day)
   const groundColor = (sample: GroundSample) => terrainGroundColor(sample, season)
   const uniforms = { meadowTime: { value: 0 }, meadowWind: { value: settings.wind } }
   const flow = { value: 0 }
@@ -93,7 +98,7 @@ export function mountTerrainWorldScene(
   controls.mouseButtons.LEFT = settings.pan ? THREE.MOUSE.PAN : THREE.MOUSE.ROTATE
   controls.touches.ONE = settings.pan ? THREE.TOUCH.PAN : THREE.TOUCH.ROTATE
   controls.minZoom = 0.55
-  controls.maxZoom = 8
+  controls.maxZoom = 16
   controls.minPolarAngle = 0.03
   controls.maxPolarAngle = Math.PI * 0.46
   controls.target.set(0, 0.7, 0)
@@ -216,6 +221,8 @@ export function mountTerrainWorldScene(
   scene.add(new THREE.Mesh(waterGeometry, waterMaterial))
   const scenery = createWorldScenery(civilization, surface.sample)
   scene.add(scenery.group)
+  const life=createWorldLife(seed,civilization,surface.sample)
+  scene.add(life.group)
 
   function windMaterial(color: number) {
     const mat = new THREE.MeshStandardMaterial({ color, vertexColors: true, flatShading: true, roughness: 0.95, side: THREE.DoubleSide })
@@ -271,8 +278,8 @@ export function mountTerrainWorldScene(
       }
       const woodland = Math.max(sample.forest, sample.pine * 0.95) * (1-smoothstep(0.68,0.86,sample.cold))
       if (i < 70 && sample.rock < 0.18 && roll < woodland * 0.92 + riverWood + grouping * 0.009) {
-        instance.scale *= 0.28 + woodland * 0.43 + riverWood * 0.7
-        if (occupied.some((tree) => Math.hypot(tree.sample.x - sample.x, tree.sample.z - sample.z) < (tree.scale + instance.scale) * 0.43)) continue
+        instance.scale *= 0.18 + woodland * (0.13+grouping*0.18) + riverWood * 0.4
+        if (occupied.some((tree) => Math.hypot(tree.sample.x - sample.x, tree.sample.z - sample.z) < (tree.scale + instance.scale) * 0.62)) continue
         const pine = random() < 0.12 + sample.pine * 0.85
         if (pine) instance.scale *= 0.82
         instance.color = leafColors[Math.floor(random() * leafColors.length)].clone()
@@ -284,12 +291,12 @@ export function mountTerrainWorldScene(
         instance.color = leafColors[Math.floor(random() * leafColors.length)].clone()
         shrubs.push(instance)
       } else if (i > 125 && sample.rock < 0.25 && roll < grouping * (0.5-sample.cold*0.3)) {
-        instance.scale *= 0.45 + random() * 0.55
+        instance.scale *= 0.25 + random() * 0.3
         instance.color.lerp(new THREE.Color('#b7b947'), random() * 0.4)
         grass.push(instance)
         if (sample.forest > 0.3 && i % 5 === 0) ferns.push({ ...instance, color: new THREE.Color('#638844'), scale: 0.65 + random() * 0.55 })
         if (sample.dry < 0.6 && sample.cold < 0.55 && grouping > 0.7 && (i % 3 === 0 || sample.meadow > 0.6)) {
-          flowers.push({ ...instance, scale: 0.7 + random() * 0.5, color: flowerColors[Math.floor(random() * flowerColors.length)] })
+          flowers.push({ ...instance, scale: 0.3 + random() * 0.25, color: flowerColors[Math.floor(random() * flowerColors.length)] })
         }
         if (sample.forest > 0.25 && i % 3 === 0) litter.push({ ...instance, color: new THREE.Color('#c18c43') })
       }
@@ -298,12 +305,13 @@ export function mountTerrainWorldScene(
       }
     }
   }
-  // Art-directed rock groups reinforce bank bends and the foot of each ridge.
-  const rockGroups = [[-3.6, 1.1, 0.8], [-4.8, 1.5, 0.65], [-2.8, 2.4, 1.0], [-1.0, 2.5, 0.65],
-    [0.2, 0.8, 0.6], [0.9, -1, 0.6], [-1.4, -0.5, 0.65], [-3, -2, 0.7], [2.6, -0.6, 0.85],
-    [4.1, -0.1, 1.0], [4.9, -2.5, 0.8], [4.8, 1.8, 0.75], [3.5, 3.1, 0.55], [-4.4, -3.1, 0.8]]
-  for (const [baseX, baseZ, size] of rockGroups) {
-    const x = baseX * WORLD_LAYOUT_SCALE, z = baseZ * WORLD_LAYOUT_SCALE
+  // Cluster rocks at this seed's banks and ridges, not fixed world coordinates.
+  const rockGroups=tiles.filter((tile)=> {
+    const s=field.sample(tile.center.x,tile.center.z)
+    return (s.shore<1.5 || s.rock>0.15) && random()<0.32
+  }).slice(0,22)
+  for (const tile of rockGroups) {
+    const {x,z}=tile.center,size=0.4+random()*0.55
     for (let i = 0; i < 13; i++) {
       const angle = random() * Math.PI * 2, radius = i === 0 ? 0 : 0.18 + random() * 0.65
       const sample = surface.sample(x + Math.cos(angle) * radius, z + Math.sin(angle) * radius)
@@ -313,10 +321,6 @@ export function mountTerrainWorldScene(
         aspect: 0.7 + random() * 0.8, rotation: random() * Math.PI * 2,
         color: PALETTE.rock.clone().lerp(PALETTE.peak, random() * 0.65) })
     }
-  }
-  for (const [x, z, scale] of [[-4.3, 2.1, 0.95], [-3.6, 3.3, 1.05], [-2.7, 3.55, 0.75]]) {
-    const sample = surface.sample(x * WORLD_LAYOUT_SCALE, z * WORLD_LAYOUT_SCALE)
-    if (sample && sample.height < WATER_LEVEL) stones.push({ sample, scale, rotation: random() * 6.28, aspect: 1.55, color: PALETTE.rock.clone() })
   }
   const transform = new THREE.Object3D()
   type PropKind = 'broadleaf' | 'pine' | 'branch' | 'shrub' | 'grass' | 'flower' | 'reed' | 'fern' | 'rock' | 'cactus' | 'lily' | 'litter'
@@ -374,7 +378,7 @@ export function mountTerrainWorldScene(
     instances(createBoulderGeometry(variant), rockMaterial, select(stones))
   }
   instances(trunkGeometry, stemMaterial, pines, false, 'branch')
-  instances(createBareTreeGeometry(), stemMaterial, trees, false, 'branch')
+  instances(createBareTreeGeometry().scale(0.78,0.65,0.78), stemMaterial, trees, false, 'branch')
   instances(createGrassGeometry(), grassMaterial, grass, true, 'grass')
   instances(createFlowerGeometry(), grassMaterial, flowers, true, 'flower')
   instances(createReedGeometry(), grassMaterial, reeds, true, 'reed')
@@ -451,7 +455,7 @@ export function mountTerrainWorldScene(
   const observer = new ResizeObserver(resize)
   observer.observe(host)
   resize()
-  let frame = 0, previousTime = performance.now(), lastReport = 0, sceneryTime = 0
+  let frame = 0, previousTime = performance.now(), lastReport = 0, sceneryTime = 0, lastSeasonUpdate=0
   const animate = (now: number) => {
     const delta = Math.min((now - previousTime) / 1000, 0.05)
     previousTime = now
@@ -459,9 +463,14 @@ export function mountTerrainWorldScene(
       uniforms.meadowTime.value += delta
       flow.value += delta * settings.flow
       sceneryTime += delta * settings.wind
+      day=advanceWorldDay(day,delta,settings.timeSpeed,settings.autoSeason)
+      if(Math.abs(day-lastSeasonDay)>1.5 && now-lastSeasonUpdate>800) {
+        applySeason(seasonalBlend(day));lastSeasonDay=day;lastSeasonUpdate=now
+      }
     }
     controls.update()
     scenery.animate(sceneryTime,flow.value)
+    life.animate(uniforms.meadowTime.value)
     renderer.render(scene, camera)
     if (now - lastReport > 250) {
       host.dataset.simulationTime = uniforms.meadowTime.value.toFixed(3)
@@ -470,6 +479,12 @@ export function mountTerrainWorldScene(
       host.dataset.triangles = String(renderer.info.render.triangles)
       host.dataset.buildings = String(civilization.buildings.length)
       host.dataset.windmills = String(scenery.rotors)
+      host.dataset.worldDay=day.toFixed(3)
+      const resident=life.position('traveler',uniforms.meadowTime.value)
+      const animal=life.position('deer',uniforms.meadowTime.value)
+      host.dataset.residentPosition=resident?`${resident.x.toFixed(3)},${resident.z.toFixed(3)}`:''
+      host.dataset.animalPosition=animal?`${animal.x.toFixed(3)},${animal.z.toFixed(3)}`:''
+      onCalendar(worldCalendar(day))
       lastReport = now
     }
     frame = requestAnimationFrame(animate)
@@ -482,7 +497,8 @@ export function mountTerrainWorldScene(
   }
   onStats({ tiles: tiles.length, trees: trees.length + pines.length, grass: grass.length, triangles: landPositions.length / 9,
     biomes:TERRAIN_BIOMES.map(({id})=>({id,count:biomeTiles.get(id)?.length??0})),
-    places:civilization.places.map(({id,label})=>({id,label})),buildings:civilization.buildings.length,farms:civilization.farms.length,bridges:civilization.roads.filter((r)=>r.bridge).length })
+    places:civilization.places.map(({id,label,tileId})=>({id,label:`${label} · ${tileId}`})),buildings:civilization.buildings.length,farms:civilization.farms.length,bridges:civilization.roads.filter((r)=>r.bridge).length,
+    people:life.actors.filter((a)=>a.kind==='traveler'||a.kind==='cart').length,animals:life.actors.filter((a)=>a.kind!=='traveler'&&a.kind!=='cart').length,layout:field.layout })
   function focusTile() {
     const center = selectedTile?.center ?? { x: field.riverX(2) - 1.8, z: 2 }
     const y = Math.max(WATER_LEVEL, surface.sample(center.x, center.z)?.height ?? 0.3)
@@ -494,13 +510,13 @@ export function mountTerrainWorldScene(
   }
   return {
     update: (next) => {
-      if (next.season!==season.id) applySeason(getTerrainSeason(next.season))
+      if (next.day!==settings.day || next.dayRevision!==settings.dayRevision) { day=next.day;lastSeasonDay=day;applySeason(seasonalBlend(day));onCalendar(worldCalendar(day)) }
       settings = { ...next }; grid.visible = next.grid; uniforms.meadowWind.value = next.wind
       controls.mouseButtons.LEFT = next.pan ? THREE.MOUSE.PAN : THREE.MOUSE.ROTATE
       controls.touches.ONE = next.pan ? THREE.TOUCH.PAN : THREE.TOUCH.ROTATE
     },
     view: setView,
-    zoom: (factor) => { camera.zoom = Math.min(8, Math.max(0.55, camera.zoom * factor)); camera.updateProjectionMatrix() },
+    zoom: (factor) => { camera.zoom = Math.min(16, Math.max(0.55, camera.zoom * factor)); camera.updateProjectionMatrix() },
     focus: focusTile,
     focusBiome: (biome) => {
       const list=biomeTiles.get(biome)
@@ -515,8 +531,15 @@ export function mountTerrainWorldScene(
       const {x,z,height}=place.center
       controls.target.set(x,height,z)
       camera.position.set(x+9,height+31,z+48)
-      camera.zoom=4.3
+      selectTile(tiles.find((tile)=>tile.id===place.tileId)!,place.center)
+      camera.zoom=10
       camera.updateProjectionMatrix();controls.update()
+    },
+    focusLife: (kind) => {
+      const p=life.position(kind,uniforms.meadowTime.value)
+      if(!p) return
+      controls.target.set(p.x,p.height,p.z);camera.position.set(p.x+9,p.height+31,p.z+48)
+      camera.zoom=12;camera.updateProjectionMatrix();controls.update()
     },
     destroy: () => {
       cancelAnimationFrame(frame)

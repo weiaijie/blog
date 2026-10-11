@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js'
 import { snowCover, type TerrainSeason } from './terrainWorldClimate'
 import { type GroundSample } from './terrainWorld'
-import { type CivilizationPlan, type SurfaceSampler } from './terrainWorldCivilization'
+import { roadDistance, type CivilizationPlan, type SurfaceSampler } from './terrainWorldCivilization'
 
 type Finish = 'wall' | 'roof' | 'wood' | 'stone' | 'road' | 'crop' | 'soil' | 'orchard' | 'fruit'
 type Piece = { geometry: THREE.BufferGeometry; color: THREE.Color; sample: GroundSample; finish: Finish }
@@ -42,10 +42,10 @@ export function createWorldScenery(plan: CivilizationPlan, sample: SurfaceSample
     for(let i=0;i<=count;i++) {
       const px=x+(alongX?length*i/count:0),pz=z+(alongX?0:length*i/count)
       const y=sample(px,pz)?.height??0.3
-      box(px,y+0.15,pz,0.038,0.3,0.038,wood)
+      box(px,y+0.05,pz,0.018,0.1,0.018,wood)
       if(i<count) {
         const nx=x+(alongX?length*(i+1)/count:0),nz=z+(alongX?0:length*(i+1)/count)
-        for(const h of [0.11,0.23]) box((px+nx)/2,y+h,(pz+nz)/2,alongX?length/count:0.024,0.026,alongX?0.024:length/count,wood)
+        for(const h of [0.035,0.075]) box((px+nx)/2,y+h,(pz+nz)/2,alongX?length/count:0.012,0.012,alongX?0.012:length/count,wood)
       }
     }
   }
@@ -66,16 +66,16 @@ export function createWorldScenery(plan: CivilizationPlan, sample: SurfaceSample
       const bridgeY=(t:number)=>a.height*(1-t)+b.height*t+0.035+Math.sin(t*Math.PI)*0.22
       for(let i=0;i<=count;i++) {
         const t=i/count,x=a.x+(b.x-a.x)*t,z=a.z+(b.z-a.z)*t,y=bridgeY(t)
-        box(x,y-0.035,z,length/count*0.95,0.07,0.51,i%3===0?'#ab8b61':'#967650')
+        box(x,y-0.035,z,length/count*0.95,0.07,0.29,i%3===0?'#ab8b61':'#967650')
         if(i%4===0 && i>0 && i<count) for(const side of [-1,1]) {
-          box(x,y+0.16,z+side*0.27,0.045,0.39,0.045,wood)
+          box(x,y+0.065,z+side*0.16,0.022,0.16,0.022,wood)
           const ground=sample(x,z)?.height??-0.46
           if(i%8===0) cylinder(x,(ground+y)/2,z+side*0.2,0.065,0.09,y-ground,stone)
         }
         if(i<count) for(const side of [-1,1]) {
           const nextY=bridgeY((i+1)/count)
           const rail=new THREE.BoxGeometry(Math.hypot(length/count,nextY-y),0.035,0.035)
-          rail.rotateZ(Math.atan2(nextY-y,(b.x-a.x)/count)).translate(x+(b.x-a.x)/count/2,(y+nextY)/2+0.29,z+side*0.27)
+          rail.rotateZ(Math.atan2(nextY-y,(b.x-a.x)/count)).translate(x+(b.x-a.x)/count/2,(y+nextY)/2+0.13,z+side*0.16)
           add(rail,wood,'wood')
         }
       }
@@ -84,7 +84,7 @@ export function createWorldScenery(plan: CivilizationPlan, sample: SurfaceSample
     for(let i=1;i<road.points.length;i++) {
       const a=road.points[i-1],b=road.points[i],length=Math.hypot(b.x-a.x,b.z-a.z)
       const dx=(b.x-a.x)/length,dz=(b.z-a.z)/length,positions:number[]=[]
-      const steps=Math.ceil(length/0.1),width=0.26
+      const steps=Math.ceil(length/0.1),width=0.21
       for(let j=0;j<steps;j++) {
         const point=(t:number,side:number)=> {
           const x=a.x+dx*t-dz*side,z=a.z+dz*t+dx*side
@@ -113,15 +113,40 @@ export function createWorldScenery(plan: CivilizationPlan, sample: SurfaceSample
     }
     if(place.kind==='ruins' || place.kind==='lookout') continue
     const {x,z}=place.center
-    patch(x,z,place.radius*1.12,place.radius*1.12,'#b5ae90','road')
+    patch(x,z,0.43,0.43,'#b5ae90','road')
+    // A small well and courtyard read as a complete village at tile scale.
+    const well=[[-0.2,0.12],[0.2,0.12],[0,-0.22]].map(([dx,dz])=>({x:x+dx,z:z+dz})).find((p)=>roadDistance(p,plan.roads)>0.19)
+    if(well) {
+      const y=sample(well.x,well.z)!.height
+      cylinder(well.x,y+0.055,well.z,0.066,0.073,0.11,stone)
+      cylinder(well.x,y+0.112,well.z,0.043,0.043,0.006,'#426b70')
+    }
+    if(['town','village','farmstead'].includes(place.kind)) for(let edge=0;edge<6;edge++) {
+      const a=(edge/3+1/6)*Math.PI,b=a+Math.PI/3
+      const start={x:x+Math.cos(a)*1.035,z:z+Math.sin(a)*1.035},end={x:x+Math.cos(b)*1.035,z:z+Math.sin(b)*1.035}
+      for(let j=0;j<6;j++) {
+        const px=start.x+(end.x-start.x)*(j+0.5)/6,pz=start.z+(end.z-start.z)*(j+0.5)/6
+        if(roadDistance({x:px,z:pz},plan.roads)<0.24) continue
+        const y=sample(px,pz)?.height
+        if(y===undefined) continue
+        setFrame(px,y,pz,-Math.atan2(end.z-start.z,end.x-start.x))
+        if(place.kind==='town') box(0,0.055,0,0.178,0.11,0.045,stone,'stone')
+        else for(const h of [0.035,0.075]) box(0,h,0,0.174,0.012,0.015,wood)
+        box(-0.086,0.07,0,0.025,0.14,0.025,place.kind==='town'?stone:wood,place.kind==='town'?'stone':'wood')
+        frame.identity()
+      }
+    }
     if(place.kind==='town') {
+      for(const dx of [-0.675,-0.405,-0.135,0.135,0.405,0.675]) patch(x+dx,z,0.035,1.3,'#c5b99a','road')
+      for(const dz of [-0.405,0.405,0.675]) patch(x,z+dz,1.3,0.035,'#c5b99a','road')
       // The market stands flank a central street, rather than blocking it.
       for(const side of [-1,1]) {
-        const px=x+side*0.48,pz=z-0.2,y=sample(px,pz)!.height
-        box(px,y+0.17,pz,0.33,0.2,0.24,wood)
-        box(px,y+0.5,pz,0.41,0.04,0.32,side<0?'#a45244':'#488781','roof')
-        for(const dx of [-0.17,0.17]) box(px+dx,y+0.28,pz,0.024,0.5,0.024,wood)
-        for(let j=0;j<3;j++) box(px-0.1+j*0.1,y+0.29,pz,0.07,0.05,0.16,'#d0ad59','crop')
+        const px=x+side*0.23,pz=z-0.05,y=sample(px,pz)!.height
+        if(roadDistance({x:px,z:pz},plan.roads)<0.19 || (well && Math.hypot(px-well.x,pz-well.z)<0.17)) continue
+        box(px,y+0.045,pz,0.12,0.065,0.09,wood)
+        box(px,y+0.16,pz,0.145,0.015,0.12,side<0?'#a45244':'#488781','roof')
+        for(const dx of [-0.06,0.06]) box(px+dx,y+0.09,pz,0.009,0.16,0.009,wood)
+        for(let j=0;j<3;j++) box(px-0.04+j*0.04,y+0.084,pz,0.026,0.02,0.06,'#d0ad59','crop')
       }
     }
   }
@@ -158,6 +183,11 @@ export function createWorldScenery(plan: CivilizationPlan, sample: SurfaceSample
     box(0,0.23,d/2+0.02,0.15,0.31,0.03,wood)
     box(0,h*0.42,d/2+0.014,w,0.035,0.025,wood)
     box(0.19,h+0.23,-0.14,0.13,0.35,0.13,stone,'stone')
+    for(const side of [-1,1]) {
+      box(side*(w/2+0.012),h*0.62,0,0.025,0.16,0.14,'#334e52')
+      box(side*(w/2+0.03),h*0.62,0,0.012,0.16,0.015,wall,'wall')
+      box(0,h*0.62,-d/2-0.012,0.14,0.16,0.025,'#334e52')
+    }
     if(b.kind==='hall') {
       cylinder(0,h+0.7,0,0.012,0.018,0.58,wood,'wood',5)
       box(0.12,h+0.89,0,0.24,0.16,0.025,'#d2a548','roof')
@@ -181,9 +211,9 @@ export function createWorldScenery(plan: CivilizationPlan, sample: SurfaceSample
     const deck=bank.height+0.09
     setFrame(bank.x,deck,bank.z,angle)
     for(let i=0;i<=12;i++) {
-      box(0,0,i*length/12,0.56,0.065,length/12*0.94,'#a98c62')
+      box(0,0,i*length/12,0.3,0.045,length/12*0.94,'#a98c62')
       if(i%4===0) for(const side of [-1,1]) {
-        cylinder(side*0.29,-0.22,i*length/12,0.04,0.055,0.64,wood,'wood',6)
+        cylinder(side*0.17,-0.22,i*length/12,0.025,0.035,0.64,wood,'wood',6)
       }
     }
     const boat=new THREE.Group()
@@ -195,7 +225,7 @@ export function createWorldScenery(plan: CivilizationPlan, sample: SurfaceSample
     // The boat is moored alongside the pier in open water, not on its approach.
     const bx=end.x+Math.cos(angle)*0.62,bz=end.z-Math.sin(angle)*0.62
     if((sample(bx,bz)?.height??1)<0.04) {
-      boat.position.set(bx,0.12,bz);boat.rotation.y=angle;group.add(boat);boats.push(boat)
+      boat.position.set(bx,0.12,bz);boat.rotation.y=angle;boat.scale.setScalar(0.55);group.add(boat);boats.push(boat)
     } else { hull.geometry.dispose();hull.material.dispose();mast.geometry.dispose();mast.material.dispose();sailGeo.dispose();(boat.children[2] as THREE.Mesh<THREE.BufferGeometry,THREE.Material>).material.dispose() }
     frame.identity()
   }
@@ -204,22 +234,22 @@ export function createWorldScenery(plan: CivilizationPlan, sample: SurfaceSample
     patch(x,z,farm.width,farm.depth,'#8f7451','soil',0.029)
     if(farm.crop===2) {
       for(let row=0;row<2;row++) for(let j=0;j<3;j++) {
-        const px=x-0.35+row*0.7,pz=z-0.5+j*0.5,y=sample(px,pz)!.height
-        cylinder(px,y+0.23,pz,0.018,0.032,0.45,wood,'wood',5)
-        add(new THREE.IcosahedronGeometry(0.26,0).scale(1,1.15,1).translate(px,y+0.47,pz),'#729849','orchard')
-        for(const side of [-1,1]) add(new THREE.IcosahedronGeometry(0.04,0).translate(px+side*0.19,y+0.44,pz+0.1),'#bd6748','fruit')
+        const px=x-farm.width*0.27+row*farm.width*0.54,pz=z-farm.depth*0.32+j*farm.depth*0.32,y=sample(px,pz)!.height
+        cylinder(px,y+0.12,pz,0.012,0.023,0.24,wood,'wood',5)
+        add(new THREE.IcosahedronGeometry(0.15,0).scale(1,1.15,1).translate(px,y+0.26,pz),'#729849','orchard')
+        for(const side of [-1,1]) add(new THREE.IcosahedronGeometry(0.02,0).translate(px+side*0.11,y+0.25,pz+0.06),'#bd6748','fruit')
       }
     } else {
     for(let row=0;row<6;row++) {
-      const px=x-farm.width/2+0.14+row*0.22
-      patch(px,z,0.075,farm.depth-0.15,['#bfc16c','#759555','#caaa54'][farm.crop],'crop',0.07)
+      const px=x-farm.width/2+farm.width*(row+0.5)/6
+      patch(px,z,0.075,farm.depth-0.15,['#bfc16c','#759555','#caaa54'][farm.crop],'crop',0.035)
       for(let j=0;j<10;j++) {
-        const pz=z-farm.depth/2+0.16+j*0.14,y=sample(px,pz)!.height
+        const pz=z-farm.depth/2+farm.depth*(j+0.5)/10,y=sample(px,pz)!.height
         if(farm.crop===0) {
-          box(px,y+0.14,pz,0.025,0.17,0.025,'#b9b16a','crop')
-          add(new THREE.ConeGeometry(0.038,0.11,4).translate(px,y+0.24,pz),'#d6be68','crop')
+          box(px,y+0.065,pz,0.012,0.07,0.012,'#b9b16a','crop')
+          add(new THREE.ConeGeometry(0.023,0.055,4).translate(px,y+0.115,pz),'#d6be68','crop')
         } else if(j%2===0) {
-          add(new THREE.IcosahedronGeometry(0.095,0).scale(1,0.65,1).translate(px,y+0.09,pz),'#7d9e62','crop')
+          add(new THREE.IcosahedronGeometry(0.065,0).scale(1,0.65,1).translate(px,y+0.065,pz),'#7d9e62','crop')
         }
       }
     }

@@ -38,11 +38,17 @@ function crown(seed: number, width: number, height: number): THREE.BufferGeometr
 }
 
 export function createBroadleafGeometry(variant: number): THREE.BufferGeometry {
-  const parts = [
-    crown(57 + variant * 13, 0.45, 1.12).rotateZ(-0.23).translate(-0.22, 0.62, 0.03),
-    crown(89 + variant * 9, 0.4, 1.27).rotateZ(0.16).translate(0.19, 0.9, 0.02),
-    crown(26 + variant * 19, 0.33, 0.93).rotateX(-0.24).translate(0.04, 0.73, 0.29),
-  ]
+  const random=seededRandom(variant+718),parts:THREE.BufferGeometry[]=[]
+  // Oak, upright birch, spreading canopy and drooping willow silhouettes.
+  const count=[7,5,6,8][variant%4]
+  for(let i=0;i<count;i++) {
+    const angle=i*2.399,radius=i===0?0:0.26+random()*0.12
+    const width=variant===1?0.26:0.34+random()*0.12
+    const height=variant===1?0.78:variant===2?0.38:0.5+random()*0.15
+    const y=variant===1?0.65+i*0.2:variant===2?1.02+random()*0.12:0.72+random()*0.35
+    parts.push(crown(100+i+variant*20,width,height).translate(Math.cos(angle)*radius,y,Math.sin(angle)*radius))
+    if(variant===3 && i>0) parts.push(crown(300+i,0.16,0.62).translate(Math.cos(angle)*0.48,0.42,Math.sin(angle)*0.48))
+  }
   return paintFacets(join(parts), variant + 10)
 }
 

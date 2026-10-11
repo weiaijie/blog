@@ -1,18 +1,24 @@
 import createGraph from 'ngraph.graph'
 import { aStar } from 'ngraph.path'
 import { CatmullRomCurve3, Vector3 } from 'three'
-import { WATER_LEVEL, seededRandom, type GroundPoint, type GroundSample, type TerrainField } from './terrainWorld'
+import { WATER_LEVEL, WORLD_HEX_RADIUS, createWorldTiles, seededRandom, type GroundPoint, type GroundSample, type TerrainField, type WorldTile } from './terrainWorld'
 
 export type SurfaceSampler = (x: number, z: number) => GroundSample | null
 export type PlaceKind = 'town' | 'village' | 'farmstead' | 'lumber' | 'quarry' | 'ruins' | 'harbor' | 'lookout'
-export type WorldPlace = { id: string; label: string; kind: PlaceKind; center: GroundSample; radius: number }
+export type WorldPlace = { id: string; label: string; kind: PlaceKind; center: GroundSample; radius: number; tileId: string }
 export type WorldRoad = { points: GroundSample[]; bridge: boolean; from: string; to: string }
 export type WorldBuilding = { placeId: string; center: GroundSample; rotation: number; size: number; kind: 'house' | 'barn' | 'hall' | 'mill' | 'tower' | 'ruin' | 'logs'; variant: number }
-export type WorldFarm = { center: GroundSample; width: number; depth: number; crop: number }
+export type WorldFarm = { center: GroundSample; width: number; depth: number; crop: number; tileId: string }
 export type CivilizationPlan = { places: WorldPlace[]; roads: WorldRoad[]; buildings: WorldBuilding[]; farms: WorldFarm[]; docks: { bank: GroundSample; end: GroundSample }[] }
 
 const distance = (a: GroundPoint, b: GroundPoint) => Math.hypot(a.x - b.x, a.z - b.z)
 const key = (p: GroundPoint) => `${p.x},${p.z}`
+
+export function insideTile(point: GroundPoint, tile: WorldTile, margin = 0) {
+  const x=Math.abs(point.x-tile.center.x),z=Math.abs(point.z-tile.center.z)
+  const apothem=WORLD_HEX_RADIUS*Math.sqrt(3)/2-margin
+  return x<=apothem && x*0.5+z*Math.sqrt(3)/2<=apothem
+}
 
 export function segmentDistance(p: GroundPoint, a: GroundPoint, b: GroundPoint) {
   const dx = b.x - a.x, dz = b.z - a.z
@@ -63,36 +69,65 @@ export function createCivilizationPlan(field: TerrainField, sample: SurfaceSampl
     }
     if(safe) graph.addLink(key(a),key(b),{cost:distance(a,b)*(1+(a.forest+b.forest)*0.35)+Math.abs(a.height-b.height)*7,bridge:false})
   }
-  const bridgeZ=1.5
-  const bank=(side:number)=>nodes.filter((p)=>p.z===bridgeZ && (p.x-field.riverX(bridgeZ))*side>0 && p.shore>0.65)
-    .sort((a,b)=>Math.abs(a.x-field.riverX(bridgeZ))-Math.abs(b.x-field.riverX(bridgeZ)))[0]
-  const left=bank(-1),right=bank(1)
-  if(left && right) graph.addLink(key(left),key(right),{cost:distance(left,right)*1.2,bridge:true})
+  for(const bridgeZ of [-10,-7.5,-5,-2.5,0,2.5,5,7.5,10]) {
+    const bank=(side:number)=>nodes.filter((p)=>p.z===bridgeZ && (p.x-field.riverX(bridgeZ))*side>0 && p.shore>0.65)
+      .sort((a,b)=>Math.abs(a.x-field.riverX(bridgeZ))-Math.abs(b.x-field.riverX(bridgeZ)))[0]
+    const left=bank(-1),right=bank(1)
+    if(left && right && distance(left,right)<4.8 && Math.abs(left.height-right.height)<0.3
+      && (sample((left.x+right.x)/2,bridgeZ)?.height??1)<WATER_LEVEL) {
+      graph.addLink(key(left),key(right),{cost:distance(left,right)*1.2,bridge:true})
+    }
+  }
   const finder=aStar(graph,{distance:(_a,_b,link)=>link.data.cost,heuristic:(a,b)=>distance(a.data,b.data)})
   const plan: CivilizationPlan={places:[],roads:[],buildings:[],farms:[],docks:[]}
-  const anchors: {kind:PlaceKind;label:string;x:number;z:number;radius:number}[]=[
-    {kind:'town',label:'河谷集镇',x:5,z:0,radius:1.95},
-    {kind:'village',label:'花甸村庄',x:-4,z:2,radius:1.35},
-    {kind:'farmstead',label:'南岸农庄',x:3,z:7,radius:1.25},
-    {kind:'lumber',label:'林间伐木场',x:-11,z:-4,radius:1.2},
-    {kind:'quarry',label:'山麓采石场',x:10,z:2,radius:1.1},
-    {kind:'ruins',label:'山道遗迹',x:-5,z:-8,radius:1},
-    {kind:'harbor',label:'海湾渔村',x:2,z:11,radius:1.1},
-    {kind:'lookout',label:'高地哨塔',x:-1,z:-11,radius:0.65},
+  const tiles=createWorldTiles()
+  const candidates=tiles.flatMap((tile)=> {
+    const center=sample(tile.center.x,tile.center.z)
+    if(!center || !footprint(sample,center,1.65,1.65,0.38) || center.rock>0.3) return []
+    const near=nodes.filter((p)=>distance(p,center)<0.8 && Math.abs(p.height-center.height)/(distance(p,center)||1)<0.42).filter((p)=>[0,0.25,0.5,0.75,1].every((t)=> {
+      const s=sample(center.x+(p.x-center.x)*t,center.z+(p.z-center.z)*t)
+      return s && s.height>WATER_LEVEL+0.06 && s.shore>0.32
+    }))
+    if(!near.length) return []
+    graph.addNode(key(center),center)
+    near.forEach((p)=>graph.addLink(key(p),key(center),{cost:distance(p,center),bridge:false}))
+    return [{tile,center,rank:random()}]
+  })
+  const anchors: {kind:PlaceKind;label:string}[]=[
+    {kind:'town',label:'河谷集镇'}, {kind:'village',label:'花甸村庄'},
+    {kind:'farmstead',label:'田园农庄'}, {kind:'lumber',label:'林间伐木场'},
+    {kind:'quarry',label:'山麓采石场'}, {kind:'ruins',label:'山道遗迹'},
+    {kind:'harbor',label:'水岸渔村'}, {kind:'lookout',label:'高地哨塔'},
   ]
+  // Start in the largest connected region, not an attractive but isolated island.
+  const components=new Map<string,number>(),sizes:number[]=[]
+  graph.forEachNode((node)=> {
+    const start=String(node.id)
+    if(components.has(start)) return
+    const id=sizes.length,queue=[start];components.set(start,id)
+    for(let i=0;i<queue.length;i++) graph.forEachLinkedNode(queue[i],(next)=> {
+      const nextKey=String(next.id)
+      if(!components.has(nextKey)) {components.set(nextKey,id);queue.push(nextKey)}
+    })
+    sizes.push(candidates.filter((c)=>components.get(key(c.center))===id).length)
+  })
+  const mainland=sizes.indexOf(Math.max(...sizes))
   for(const anchor of anchors) {
-    const target={x:anchor.x+(random()-0.5)*1.2,z:anchor.z+(random()-0.5)*1.2}
-    const upland=['quarry','ruins','lookout'].includes(anchor.kind)
-    const candidate=nodes.filter((p)=>distance(p,target)<3.5 && footprint(sample,p,anchor.radius*2,anchor.radius*2,upland?0.85:0.24))
-      .filter((p)=>plan.places.every((place)=>distance(p,place.center)>place.radius+anchor.radius+1))
-      .sort((a,b)=>distance(a,target)-distance(b,target)).find((p)=>!plan.places.length || finder.find(key(p),key(plan.places[0].center)).length>0)
-    if(!candidate) continue
-    const place: WorldPlace={...anchor,id:anchor.kind,center:candidate}
+    const score=(c:typeof candidates[number])=> {
+      const p=c.center
+      const habitat=anchor.kind==='lumber'?-p.forest*5:anchor.kind==='harbor'?p.shore*1.5:anchor.kind==='quarry'||anchor.kind==='lookout'?-p.height*2: p.dry+p.forest*0.3
+      return habitat+c.rank*3
+    }
+    const chosen=candidates.filter((c)=>components.get(key(c.center))===mainland && plan.places.every((place)=>distance(c.center,place.center)>2.9))
+      .sort((a,b)=>score(a)-score(b)).find((c)=>!plan.places.length || finder.find(key(c.center),key(plan.places[0].center)).length>0)
+    if(!chosen) continue
+    const candidate=chosen.center
+    const place: WorldPlace={...anchor,id:anchor.kind,center:candidate,radius:0.94,tileId:chosen.tile.id}
     if(plan.places.length) {
       // Attach each site to its nearest reachable settlement, preserving one connected network.
       const parents=[...plan.places].sort((a,b)=>distance(a.center,candidate)-distance(b.center,candidate))
       const parent=parents.find((p)=>finder.find(key(candidate),key(p.center)).length>0)!
-      const path=finder.find(key(candidate),key(parent.center)).reverse().map((node)=>node.data)
+      const path=finder.find(key(parent.center),key(candidate)).reverse().map((node)=>node.data)
       let points=[path[0]]
       for(let i=1;i<path.length;i++) {
         if(graph.getLink(key(path[i-1]),key(path[i]))?.data.bridge || graph.getLink(key(path[i]),key(path[i-1]))?.data.bridge) {
@@ -107,7 +142,7 @@ export function createCivilizationPlan(field: TerrainField, sample: SurfaceSampl
   }
   const harbor=plan.places.find((p)=>p.kind==='harbor')
   if(harbor) {
-    const bank=nodes.filter((p)=>p.shore>0.36 && p.shore<0.85 && p.z>8 && distance(p,harbor.center)<5)
+    const bank=nodes.filter((p)=>p.shore>0.36 && p.shore<0.85 && distance(p,harbor.center)<5)
       .sort((a,b)=>distance(a,harbor.center)-distance(b,harbor.center)).find((p)=>finder.find(key(p),key(harbor.center)).length>0)
     if(bank) {
       const end=Array.from({length:24},(_,i)=>sample(bank.x+Math.cos(i*Math.PI/12)*1.3,bank.z+Math.sin(i*Math.PI/12)*1.3))
@@ -120,38 +155,40 @@ export function createCivilizationPlan(field: TerrainField, sample: SurfaceSampl
   }
   for(const place of plan.places) {
     const town=place.kind==='town', rural=place.kind==='village'||place.kind==='farmstead'
-    const count=town?14:rural?6:5
+    const tile=tiles.find((t)=>t.id===place.tileId)!
+    const slots=Array.from({length:49},(_,i)=>({x:(i%7-3)*0.27,z:(Math.floor(i/7)-3)*0.27}))
+      .filter((p)=>Math.hypot(p.x,p.z)>0.34)
     let placed=0
-    for(let i=0;i<count;i++) {
-      const angle=i/count*Math.PI*2+(random()-0.5)*0.15
-      const radius=place.radius*(town && i%2===0?0.52:0.8)
-      const p={x:place.center.x+Math.sin(angle)*radius,z:place.center.z+Math.cos(angle)*radius}
-      const size=town?0.72:rural?0.68:0.7
-      if(roadDistance(p,plan.roads)<size*0.42+0.19) continue
+    for(let i=0;i<slots.length;i++) {
+      const slot=slots[i]
+      const p={x:place.center.x+slot.x,z:place.center.z+slot.z}
+      if(place.kind==='quarry' && slot.z<0.5) continue
+      const size=town||rural?0.235:0.27
+      if(!insideTile(p,tile,size*0.65+0.06) || roadDistance(p,plan.roads)<size*0.53+0.145) continue
+      if(plan.buildings.some((b)=>distance(p,b.center)<(b.size+size)*0.57)) continue
       const ground=footprint(sample,p,size*0.8)
       if(!ground) continue
       const center={...sample(p.x,p.z)!,height:Math.max(...ground.map((s)=>s.height))}
       let kind:WorldBuilding['kind']='house'
       if(place.kind==='lookout') kind='tower'
       else if(place.kind==='ruins') kind='ruin'
-      else if(place.kind==='lumber' && i>1) kind='logs'
-      else if(place.kind==='quarry') kind=i===0?'tower':'ruin'
+      else if(place.kind==='lumber' && placed>2) kind='logs'
+      else if(place.kind==='quarry') kind=placed===0?'tower':'ruin'
       else if(town && placed===0) kind='hall'
       else if(rural && placed===0) kind='mill'
-      else if(rural && i===3) kind='barn'
-      plan.buildings.push({placeId:place.id,center,rotation:angle+Math.PI,size,kind,variant:Math.floor(random()*4)})
+      else if(rural && placed===3) kind='barn'
+      plan.buildings.push({placeId:place.id,center,rotation:slot.z>0?Math.PI:0,size,kind,variant:Math.floor(random()*4)})
       placed++
-      if(place.kind==='lookout') break
+      if(placed>=(town?24:rural?15:place.kind==='lookout'?1:8)) break
     }
-    if(!town && !rural) continue
-    for(const [dx,dz] of [[-1,0],[1,0],[-0.6,1],[0.6,1],[0,-1]]) {
-      const center=sample(place.center.x+dx*(place.radius+1.05),place.center.z+dz*(place.radius+1.4))
-      if(!center || !footprint(sample,center,1.4,1.6) || center.desert>0.3 || center.badlands>0.3) continue
-      const corners=[[-0.7,-0.8],[-0.7,0.8],[0.7,-0.8],[0.7,0.8]].map(([x,z])=>({x:center.x+x,z:center.z+z}))
-      if([center,...corners].some((p)=>roadDistance(p,plan.roads)<0.42 || plan.places.some((s)=>distance(p,s.center)<s.radius+0.1))) continue
-      if(plan.farms.some((f)=>distance(f.center,center)<1.8)) continue
-      plan.farms.push({center,width:1.4,depth:1.6,crop:plan.farms.length%3})
-    }
+  }
+  for(const {tile,center} of [...candidates].sort((a,b)=>a.rank-b.rank)) {
+    if(plan.farms.length>=12) break
+    if(center.desert>0.3 || center.badlands>0.3 || plan.places.some((p)=>p.tileId===tile.id)
+      || !plan.places.some((p)=>distance(p.center,center)<5)) continue
+    const corners=[[-0.65,-0.55],[-0.65,0.55],[0.65,-0.55],[0.65,0.55]].map(([x,z])=>({x:center.x+x,z:center.z+z}))
+    if([center,...corners].some((p)=>roadDistance(p,plan.roads)<0.45)) continue
+    plan.farms.push({center,width:1.3,depth:1.1,crop:plan.farms.length%3,tileId:tile.id})
   }
   for(const road of plan.roads) {
     if(road.bridge || road.points.length<3) continue
@@ -163,7 +200,7 @@ export function createCivilizationPlan(field: TerrainField, sample: SurfaceSampl
       if(i===0) return true
       const a=points[i-1],length=distance(a,p)
       return Math.abs(a.height-p.height)/length<=0.42
-        && plan.buildings.every((b)=>segmentDistance(b.center,a,p)>b.size*0.42+0.19)
+        && plan.buildings.every((b)=>segmentDistance(b.center,a,p)>b.size*0.53+0.145)
         && plan.farms.every((farm)=>Math.abs(p.x-farm.center.x)>farm.width/2+0.18 || Math.abs(p.z-farm.center.z)>farm.depth/2+0.18)
     })
     if(clear) road.points=points

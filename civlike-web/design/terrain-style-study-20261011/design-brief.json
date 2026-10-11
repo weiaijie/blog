@@ -1,30 +1,35 @@
 {
   "title": "多地形区块风格与连续过渡选型",
   "date": "2026-10-11",
-  "status": "用户已选择 C；第五轮在217块连续地图、14类地貌与8个季节阶段上增加聚落、路网和生产景观，技术验证通过，美术效果待用户验收",
+  "status": "用户已选择 C；第六轮重做整图随机布局、单格聚落、植被与居民动物活动，加入随机初始季节和时间流转，美术效果待用户验收",
   "selectedStyle": "C",
-  "prototypeUrl": "http://localhost:5173/?view=terrain-world&assetSeed=337863546&season=bloom",
+  "prototypeUrl": "http://localhost:5173/?view=terrain-world&assetSeed=221648817",
   "generationTool": "Built-in image_gen",
-  "scope": "独立 terrain-world 页面采用 C 低多边形路线；本轮增加运行时聚落、道路、桥梁、农田、港口与地标，不修改游戏规则，不覆盖旧资产，不代表已接入城镇经济、道路寻路或导出新的 Blender/GLB。",
+  "scope": "独立 terrain-world 页面采用 C 非写实低多边形路线；运行时地形、聚落、道路寻路与活动均为视觉原型。不修改主游戏规则、经济和存档，不覆盖旧资产，也未导出新的 Blender/GLB。用户已澄清城镇互动指人物行走、运输、进出村庄，不做任务系统。",
   "modelIteration": {
-    "version": 5,
+    "version": 6,
     "reference": "C-low-poly.png",
-    "fixedSeed": 337863546,
-    "actualDesktopCapture": "../../artifacts/terrain-world-c-v5-overview.jpg",
-    "actualCloseCapture": "../../artifacts/terrain-world-c-v5-farmstead.jpg",
-    "verification": "../../artifacts/terrain-world-c-v5-verification.json",
+    "fixedSeed": 221648817,
+    "actualDesktopCapture": "../../artifacts/terrain-world-c-v6-overview.jpg",
+    "actualCloseCapture": "../../artifacts/terrain-world-c-v6-town.jpg",
+    "verification": "../../artifacts/terrain-world-c-v6-verification.json",
     "biomes": ["花甸", "草原", "阔叶林", "针叶林", "湿地", "旱草原", "沙丘", "红岩荒地", "苔原", "丘陵", "高山", "沙岸", "浅水", "深水"],
     "seasons": ["初春", "暮春", "初夏", "盛夏", "初秋", "深秋", "初冬", "深冬"],
-    "places": ["河谷集镇", "花甸村庄", "南岸农庄", "林间伐木场", "山麓采石场", "山道遗迹", "海湾渔村", "高地哨塔"],
+    "places": ["河谷集镇", "花甸村庄", "田园农庄", "林间伐木场", "山麓采石场", "山道遗迹", "水岸渔村", "高地哨塔"],
     "changes": [
-      "基于实际渲染地面选址，使用 ngraph.path 的 A* 连接聚落，道路避水和陡坡，仅显式桥梁跨河；安全路段做曲线平滑。",
-      "集镇具有多色屋顶、木框房屋、会堂和摊位；村庄配风车与谷仓，渔村连接栈桥与小帆船，山林布置遗迹、哨塔、伐木与采石设施。",
-      "麦田、菜地、果园采用不同几何，与围栏、田垄组合；完整路网先于建筑生成，并为道路与建筑预留植被禁入范围。",
-      "季节联动屋顶覆雪、道路与农田颜色、果树落叶和结果；风车随风速转动，小船随水流轻晃，统一支持暂停。",
-      "右侧增加聚落定位和设施统计；手机320及390宽度可直接看到聚落入口。保留217块、14类地貌和8个季节阶段。"
+      "保留217块连续地面。种子控制河流弯曲、宽度、海岸方向、河口/湖区/半岛布局，以及山系、丘陵和气候区域。14类地貌是可生成目录，不要求每个种子都出现全部类型。",
+      "聚落基于实际渲染面和最大可达区域选址，建筑与农田记录所属六边形。集镇密集街巷、围墙留口、会堂、摊位和住宅集中在单格；村庄有围栏、风车、谷仓与水井。农田是独立生产地块。",
+      "ngraph.path A* 连接聚落并避水避陡坡；显式桥面供人物、运输车通过，到站停留后返程。鹿与羊在适宜陆地范围徘徊，飞鸟沿闭合轨迹飞行，使用实例化批量绘制。",
+      "阔叶树重做为宽冠、直立、平展和下垂四种轮廓，调整树冠/枝干、草花、农作物、围栏、船与房屋比例；岩石簇随实际岸线和山脚分布。",
+      "种子决定初始日期，360日一年、8个阶段，植被色彩、叶量、积雪与结冰随时间插值；支持1/5/20倍季节速度、手选季节与统一暂停，隐藏页面不补算离线时间。",
+      "右侧增加季节进度、活动定位与人物动物数量，保留聚落和地貌定位。1440桌面、390与320手机宽度检查通过，无横向溢出，窄屏面板可纵向滚动。"
     ],
     "acceptanceBoundary": "网页实际截图是本轮交付证据；AI 概念图不等于实际模型，测试通过不等于已完成原图美术还原，构图比例和细节密度仍需用户确认。"
   },
+  "researchReferences": [
+    {"title":"Civilization VI: Meet the Developers / Brian Busatti","url":"https://store.steampowered.com/news/posts/?appids=289070&enddate=1468504862","applied":"参考官方访谈中强调的远景轮廓辨识、功能色彩和整体一致性；不把文明VI城市分区误解为一个房子占一格。"},
+    {"title":"Toukana DevlogROMANTIK #2","url":"https://toukana.itch.io/dorfromantik-prototype/devlog/198346/devlogromantik-2-biomes-boats-and-more-big-news-soon","applied":"开发者介绍不同地域气氛与船、火车、河流带来的生动感。本项目据此采用成片植被、地域配色和道路运输，具体造型与路径实现是本项目方案，不是复制其技术实现。"}
+  ],
   "currentSourceFacts": {
     "terrainTypes": [
       "grassland",

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import * as THREE from 'three'
 import { createTerrainField, createTerrainSurface, createWorldTiles, WATER_LEVEL } from '../../src/render/visuals/terrainWorld'
-import { civilizationOccupies, createCivilizationPlan, roadDistance } from '../../src/render/visuals/terrainWorldCivilization'
+import { civilizationOccupies, createCivilizationPlan, insideTile, roadDistance } from '../../src/render/visuals/terrainWorldCivilization'
 import { createWorldScenery } from '../../src/render/visuals/terrainWorldScenery'
 import { TERRAIN_SEASONS } from '../../src/render/visuals/terrainWorldClimate'
 
@@ -11,7 +11,7 @@ function build(seed:number) {
 }
 
 describe('connected scenery, independent of gameplay',()=> {
-  it.each([337863546,569575877,20261011,1,999999999])('places varied settlements and safe roads for seed %i',(seed)=> {
+  it.each([221648817,337863546,569575877,20261011,1,999999999])('places varied settlements and safe roads for seed %i',(seed)=> {
     const {plan,surface}=build(seed)
     expect(plan.places.length).toBeGreaterThanOrEqual(7)
     expect(plan.buildings.length).toBeGreaterThanOrEqual(25)
@@ -44,8 +44,16 @@ describe('connected scenery, independent of gameplay',()=> {
       }
     }
     for(const b of plan.buildings) {
-      expect(roadDistance(b.center,plan.roads)).toBeGreaterThan(b.size*0.42+0.18)
+      expect(roadDistance(b.center,plan.roads)).toBeGreaterThan(b.size*0.53+0.14)
       expect(b.center.height).toBeGreaterThan(WATER_LEVEL)
+      const place=plan.places.find((p)=>p.id===b.placeId)!,tile=createWorldTiles().find((t)=>t.id===place.tileId)!
+      expect(insideTile(b.center,tile,b.size*0.65)).toBe(true)
+    }
+    expect(plan.buildings.filter((b)=>b.placeId==='town').length).toBeGreaterThanOrEqual(12)
+    expect(new Set(plan.places.map((p)=>p.tileId)).size).toBe(plan.places.length)
+    for(const farm of plan.farms) {
+      const tile=createWorldTiles().find((t)=>t.id===farm.tileId)!
+      for(const x of [-1,1]) for(const z of [-1,1]) expect(insideTile({x:farm.center.x+x*farm.width/2,z:farm.center.z+z*farm.depth/2},tile,0.04)).toBe(true)
     }
   },20000)
   it('is deterministic while different seeds change layout',()=> {

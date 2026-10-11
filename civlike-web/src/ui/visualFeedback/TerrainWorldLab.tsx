@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { Boxes, Focus, Grid2X2, Mountain, Move, Pause, Play, RotateCcw, Shuffle, Trees, Waves, Wind, ZoomIn, ZoomOut } from 'lucide-react'
 import { mountTerrainWorldScene, type TerrainWorldHandle, type TerrainWorldSelection, type TerrainWorldSettings, type TerrainWorldStats } from '../../render/visuals/mountTerrainWorldScene'
-import { getTerrainSeason, TERRAIN_BIOMES, TERRAIN_SEASONS, type TerrainBiome } from '../../render/visuals/terrainWorldClimate'
+import { TERRAIN_BIOMES, TERRAIN_SEASONS, type TerrainBiome } from '../../render/visuals/terrainWorldClimate'
+import { initialWorldDay, worldCalendar } from '../../render/visuals/terrainWorldTime'
+import type { LifeKind } from '../../render/visuals/terrainWorldLife'
 import './terrainWorldLab.css'
 
 function initialSeed() {
@@ -14,13 +16,15 @@ export function TerrainWorldLab() {
   const [seedInput, setSeedInput] = useState(String(seed))
   const [settings, setSettings] = useState<TerrainWorldSettings>(() => ({
     animated: !window.matchMedia('(prefers-reduced-motion: reduce)').matches, wind: 1.2, flow: 1, grid: true, pan: false,
-    season: getTerrainSeason(new URLSearchParams(window.location.search).get('season')).id,
+    day:initialWorldDay(seed,new URLSearchParams(window.location.search).get('season')),dayRevision:0,autoSeason:true,timeSpeed:5,
   }))
+  const [calendar,setCalendar]=useState(()=>worldCalendar(settings.day))
   const [view, setView] = useState<'isometric' | 'top'>('isometric')
   const [stats, setStats] = useState<TerrainWorldStats | null>(null)
   const [selection, setSelection] = useState<TerrainWorldSelection | null>(null)
   const [biomeFocus, setBiomeFocus] = useState<TerrainBiome | ''>('')
   const [placeFocus, setPlaceFocus] = useState('')
+  const [lifeFocus,setLifeFocus]=useState('')
   const [error, setError] = useState('')
   const host = useRef<HTMLDivElement>(null)
   const handle = useRef<TerrainWorldHandle | null>(null)
@@ -35,13 +39,14 @@ export function TerrainWorldLab() {
     setSelection(null)
     setBiomeFocus('')
     setPlaceFocus('')
+    setLifeFocus('')
     setView('isometric')
     try {
       handle.current = mountTerrainWorldScene(host.current, seed, latestSettings.current, setStats, (next)=> {
         setSelection(next)
         setPlaceFocus('')
         setBiomeFocus(TERRAIN_BIOMES.find(({label})=>label===next.label)?.id??'')
-      })
+      },setCalendar)
     } catch (reason) {
       setError(reason instanceof Error ? reason.message : '三维场景无法加载')
     }
@@ -49,17 +54,23 @@ export function TerrainWorldLab() {
   }, [seed])
 
   function changeSeed(next: number) {
+    const day=initialWorldDay(next)
+    setSettings((previous)=>({...previous,day,dayRevision:previous.dayRevision+1}))
+    setCalendar(worldCalendar(day))
     setSeed(next)
     setSeedInput(String(next))
     const url = new URL(window.location.href)
     url.searchParams.set('view', 'terrain-world')
     url.searchParams.set('assetSeed', String(next))
+    url.searchParams.delete('season')
     window.history.replaceState(null, '', url)
   }
-  function changeView(next: 'isometric' | 'top') { setView(next); setBiomeFocus(''); setPlaceFocus(''); handle.current?.view(next) }
+  function changeView(next: 'isometric' | 'top') { setView(next); setBiomeFocus(''); setPlaceFocus(''); setLifeFocus(''); handle.current?.view(next) }
   const toggle = (key: 'animated' | 'grid' | 'pan') => setSettings((previous) => ({ ...previous, [key]: !previous[key] }))
   function changeSeason(season: string) {
-    setSettings((previous)=>({...previous,season}))
+    const day=initialWorldDay(seed,season)
+    setSettings((previous)=>({...previous,day,dayRevision:previous.dayRevision+1,autoSeason:false}))
+    setCalendar(worldCalendar(day))
     const url=new URL(window.location.href)
     url.searchParams.set('season',season)
     window.history.replaceState(null,'',url)
@@ -111,14 +122,17 @@ export function TerrainWorldLab() {
               <div><input id="terrain-seed" type="number" min="1" max="1000000000" step="1" required value={seedInput} onChange={(event) => setSeedInput(event.target.value)} /><button type="submit" className="terrain-world-icon" title="应用种子" aria-label="应用种子"><RotateCcw size={16} /></button></div>
             </form>
             <dl className="terrain-world-metrics"><div><dt>区块</dt><dd>{stats?.tiles ?? '—'}</dd></div><div><dt>树木</dt><dd>{stats?.trees ?? '—'}</dd></div><div><dt>草丛</dt><dd>{stats?.grass ?? '—'}</dd></div></dl>
-            <label className="terrain-world-select">季节<select aria-label="季节" value={settings.season} onChange={(event)=>changeSeason(event.target.value)}>{TERRAIN_SEASONS.map(({id,label})=><option value={id} key={id}>{label}</option>)}</select></label>
+            <label className="terrain-world-select">季节<select aria-label="季节" value={calendar.season.id} onChange={(event)=>changeSeason(event.target.value)}>{TERRAIN_SEASONS.map(({id,label})=><option value={id} key={id}>{label}</option>)}</select></label>
             <label className="terrain-world-select">聚落定位<select aria-label="聚落定位" value={placeFocus} onChange={(event)=> {
-              setPlaceFocus(event.target.value);setSelection(null);setBiomeFocus('');setView('isometric');handle.current?.focusPlace(event.target.value)
+              handle.current?.focusPlace(event.target.value);setPlaceFocus(event.target.value);setBiomeFocus('');setView('isometric')
             }}><option value="">{stats?.places.length??0} 处聚落与遗迹</option>{stats?.places.map(({id,label})=><option value={id} key={id}>{label}</option>)}</select></label>
             <div className="terrain-world-scenery-count">建筑 {stats?.buildings??0} · 农田 {stats?.farms??0} · 桥梁 {stats?.bridges??0}</div>
           </section>
           <section>
             <h2><Wind size={16} />环境动态</h2>
+            <div className="terrain-world-calendar"><span>第 {calendar.year} 年 · {calendar.day} 日</span><progress aria-label="季节进度" max="1" value={calendar.progress} /></div>
+            <div className="terrain-world-clock"><label className="terrain-world-toggle"><input type="checkbox" checked={settings.autoSeason} onChange={(event)=>setSettings((previous)=>({...previous,autoSeason:event.target.checked}))} />季节流转</label><select aria-label="时间速度" value={settings.timeSpeed} onChange={(event)=>setSettings((previous)=>({...previous,timeSpeed:Number(event.target.value)}))}>{[1,5,20].map((speed)=><option key={speed} value={speed}>{speed}×</option>)}</select></div>
+            <label className="terrain-world-select">活动定位<select aria-label="活动定位" value={lifeFocus} onChange={(event)=>{handle.current?.focusLife(event.target.value as LifeKind);setLifeFocus(event.target.value);setPlaceFocus('');setBiomeFocus('');setSelection(null)}}><option value="">人{stats?.people??0} · 动物{stats?.animals??0}</option><option value="traveler">行人与村道</option><option value="cart">运输车队</option><option value="deer">林缘鹿群</option><option value="sheep">草地羊群</option><option value="bird">盘旋飞鸟</option></select></label>
             <label className="terrain-world-range"><span>风力<output>{settings.wind.toFixed(1)}</output></span><input aria-label="风力" type="range" min="0" max="2.5" step="0.1" value={settings.wind} onChange={(event) => setSettings((previous) => ({ ...previous, wind: Number(event.target.value) }))} /></label>
             <label className="terrain-world-range"><span><Waves size={15} />水流<output>{settings.flow.toFixed(1)}</output></span><input aria-label="水流" type="range" min="0" max="2" step="0.1" value={settings.flow} onChange={(event) => setSettings((previous) => ({ ...previous, flow: Number(event.target.value) }))} /></label>
             <label className="terrain-world-toggle"><input type="checkbox" checked={settings.animated} onChange={() => toggle('animated')} />环境动画</label>
