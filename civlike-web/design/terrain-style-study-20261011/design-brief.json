@@ -1,22 +1,25 @@
 {
   "title": "多地形区块风格与连续过渡选型",
   "date": "2026-10-11",
-  "status": "用户已选择 C；第六轮重做整图随机布局、单格聚落、植被与居民动物活动，加入随机初始季节和时间流转，美术效果待用户验收",
+  "status": "用户已选择 C；第七轮加入几何波浪、分层水面、随浪船只和水下鱼群，保留整图随机与季节流转，美术效果待用户验收",
   "selectedStyle": "C",
   "prototypeUrl": "http://localhost:5173/?view=terrain-world&assetSeed=221648817",
   "generationTool": "Built-in image_gen",
   "scope": "独立 terrain-world 页面采用 C 非写实低多边形路线；运行时地形、聚落、道路寻路与活动均为视觉原型。不修改主游戏规则、经济和存档，不覆盖旧资产，也未导出新的 Blender/GLB。用户已澄清城镇互动指人物行走、运输、进出村庄，不做任务系统。",
   "modelIteration": {
-    "version": 6,
+    "version": 7,
     "reference": "C-low-poly.png",
     "fixedSeed": 221648817,
-    "actualDesktopCapture": "../../artifacts/terrain-world-c-v6-overview.jpg",
-    "actualCloseCapture": "../../artifacts/terrain-world-c-v6-town.jpg",
-    "verification": "../../artifacts/terrain-world-c-v6-verification.json",
+    "actualDesktopCapture": "../../artifacts/terrain-world-c-v7-overview.jpg",
+    "actualCloseCapture": "../../artifacts/terrain-world-c-v7-fish.jpg",
+    "verification": "../../artifacts/terrain-world-c-v7-verification.json",
     "biomes": ["花甸", "草原", "阔叶林", "针叶林", "湿地", "旱草原", "沙丘", "红岩荒地", "苔原", "丘陵", "高山", "沙岸", "浅水", "深水"],
     "seasons": ["初春", "暮春", "初夏", "盛夏", "初秋", "深秋", "初冬", "深冬"],
     "places": ["河谷集镇", "花甸村庄", "田园农庄", "林间伐木场", "山麓采石场", "山道遗迹", "水岸渔村", "高地哨塔"],
     "changes": [
+      "水面裁剪网格细分，GPU叠加低频涌浪与沿河道的小波形；河岸、地图外边缘、静水和结冰区域衰减波幅。水面法线来自真实起伏，并结合断续浪峰、流纹、岸边泡沫、浅水光纹与深浅透明度。不是完整流体或折射模拟。",
+      "CPU与GPU共享波谱，船读取水位和坡度；网格随水波起伏。新增0至2浪高控制，水流为0时停水不停止鱼类，统一暂停则全部停止。",
+      "实例化鱼群按种子选取足够深的水域，验证完整活动范围，低多边形鱼身、眼睛和摆尾沿闭合路径游动；浪谷时下潜，不穿水面或河床。冰期活动减慢，透明/结冰材质自然遮挡鱼。活动定位可直达鱼群。",
       "保留217块连续地面。种子控制河流弯曲、宽度、海岸方向、河口/湖区/半岛布局，以及山系、丘陵和气候区域。14类地貌是可生成目录，不要求每个种子都出现全部类型。",
       "聚落基于实际渲染面和最大可达区域选址，建筑与农田记录所属六边形。集镇密集街巷、围墙留口、会堂、摊位和住宅集中在单格；村庄有围栏、风车、谷仓与水井。农田是独立生产地块。",
       "ngraph.path A* 连接聚落并避水避陡坡；显式桥面供人物、运输车通过，到站停留后返程。鹿与羊在适宜陆地范围徘徊，飞鸟沿闭合轨迹飞行，使用实例化批量绘制。",
@@ -27,6 +30,7 @@
     "acceptanceBoundary": "网页实际截图是本轮交付证据；AI 概念图不等于实际模型，测试通过不等于已完成原图美术还原，构图比例和细节密度仍需用户确认。"
   },
   "researchReferences": [
+    {"title":"NVIDIA GPU Gems: Effective Water Simulation from Physical Models","url":"https://developer.nvidia.com/gpugems/gpugems/part-i-natural-effects/chapter-1-effective-water-simulation-physical-models","applied":"参考几何波浪与细节波纹分层的思路；本项目使用共享正弦波谱、实际位移法线和岸深衰减，保持C非写实风格，并未引入完整流体求解器。"},
     {"title":"Civilization VI: Meet the Developers / Brian Busatti","url":"https://store.steampowered.com/news/posts/?appids=289070&enddate=1468504862","applied":"参考官方访谈中强调的远景轮廓辨识、功能色彩和整体一致性；不把文明VI城市分区误解为一个房子占一格。"},
     {"title":"Toukana DevlogROMANTIK #2","url":"https://toukana.itch.io/dorfromantik-prototype/devlog/198346/devlogromantik-2-biomes-boats-and-more-big-news-soon","applied":"开发者介绍不同地域气氛与船、火车、河流带来的生动感。本项目据此采用成片植被、地域配色和道路运输，具体造型与路径实现是本项目方案，不是复制其技术实现。"}
   ],

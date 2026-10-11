@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import type { WaterSurface } from './terrainWorldWater'
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js'
 import { snowCover, type TerrainSeason } from './terrainWorldClimate'
 import { type GroundSample } from './terrainWorld'
@@ -217,6 +218,7 @@ export function createWorldScenery(plan: CivilizationPlan, sample: SurfaceSample
       }
     }
     const boat=new THREE.Group()
+    boat.name='moored-boat'
     const hull=new THREE.Mesh(new THREE.CylinderGeometry(0.23,0.14,0.15,6),new THREE.MeshStandardMaterial({color:wood,roughness:1,flatShading:true}))
     hull.scale.set(0.8,1,2.4);boat.add(hull)
     const mast=new THREE.Mesh(new THREE.CylinderGeometry(0.012,0.02,0.66,5).translate(0,0.34,0),new THREE.MeshStandardMaterial({color:wood,roughness:1}));boat.add(mast)
@@ -291,8 +293,15 @@ export function createWorldScenery(plan: CivilizationPlan, sample: SurfaceSample
     })
   }
   let freeze=0
-  return {group,updateSeason:(season:TerrainSeason)=>{freeze=season.ice;seasonal.forEach((update)=>update(season))},animate:(time:number,waterTime=time)=> {
+  return {group,updateSeason:(season:TerrainSeason)=>{freeze=season.ice;seasonal.forEach((update)=>update(season))},animate:(time:number,waterTime=time,waterAt?:(x:number,z:number)=>WaterSurface)=> {
     rotors.forEach((rotor,i)=>{rotor.rotation.z=time*0.65+i})
-    boats.forEach((boat)=>{boat.position.y=0.12+Math.sin(waterTime*1.6)*0.018*(1-freeze);boat.rotation.z=Math.sin(waterTime)*0.025*(1-freeze)})
+    boats.forEach((boat)=>{
+      if(waterAt) {
+        const water=waterAt(boat.position.x,boat.position.z),a=boat.rotation.y
+        boat.position.y=water.height+0.034
+        boat.rotation.x=Math.atan(-water.dx*Math.sin(a)-water.dz*Math.cos(a))
+        boat.rotation.z=Math.atan(water.dx*Math.cos(a)-water.dz*Math.sin(a))
+      } else {boat.position.y=0.12+Math.sin(waterTime*1.6)*0.018*(1-freeze);boat.rotation.z=Math.sin(waterTime)*0.025*(1-freeze)}
+    })
   },rotors:rotors.length}
 }

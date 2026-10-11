@@ -15,7 +15,7 @@ export function TerrainWorldLab() {
   const [seed, setSeed] = useState(initialSeed)
   const [seedInput, setSeedInput] = useState(String(seed))
   const [settings, setSettings] = useState<TerrainWorldSettings>(() => ({
-    animated: !window.matchMedia('(prefers-reduced-motion: reduce)').matches, wind: 1.2, flow: 1, grid: true, pan: false,
+    animated: !window.matchMedia('(prefers-reduced-motion: reduce)').matches, wind: 1.2, flow: 1, waves: 1, grid: true, pan: false,
     day:initialWorldDay(seed,new URLSearchParams(window.location.search).get('season')),dayRevision:0,autoSeason:true,timeSpeed:5,
   }))
   const [calendar,setCalendar]=useState(()=>worldCalendar(settings.day))
@@ -132,9 +132,10 @@ export function TerrainWorldLab() {
             <h2><Wind size={16} />环境动态</h2>
             <div className="terrain-world-calendar"><span>第 {calendar.year} 年 · {calendar.day} 日</span><progress aria-label="季节进度" max="1" value={calendar.progress} /></div>
             <div className="terrain-world-clock"><label className="terrain-world-toggle"><input type="checkbox" checked={settings.autoSeason} onChange={(event)=>setSettings((previous)=>({...previous,autoSeason:event.target.checked}))} />季节流转</label><select aria-label="时间速度" value={settings.timeSpeed} onChange={(event)=>setSettings((previous)=>({...previous,timeSpeed:Number(event.target.value)}))}>{[1,5,20].map((speed)=><option key={speed} value={speed}>{speed}×</option>)}</select></div>
-            <label className="terrain-world-select">活动定位<select aria-label="活动定位" value={lifeFocus} onChange={(event)=>{handle.current?.focusLife(event.target.value as LifeKind);setLifeFocus(event.target.value);setPlaceFocus('');setBiomeFocus('');setSelection(null)}}><option value="">人{stats?.people??0} · 动物{stats?.animals??0}</option><option value="traveler">行人与村道</option><option value="cart">运输车队</option><option value="deer">林缘鹿群</option><option value="sheep">草地羊群</option><option value="bird">盘旋飞鸟</option></select></label>
+            <label className="terrain-world-select">活动定位<select aria-label="活动定位" value={lifeFocus} onChange={(event)=>{handle.current?.focusLife(event.target.value as LifeKind|'fish');setLifeFocus(event.target.value);setPlaceFocus('');setBiomeFocus('');setSelection(null);setView('isometric')}}><option value="">人{stats?.people??0} · 动物{stats?.animals??0}</option><option value="traveler">行人与村道</option><option value="cart">运输车队</option><option value="deer">林缘鹿群</option><option value="sheep">草地羊群</option><option value="bird">盘旋飞鸟</option><option value="fish" disabled={!stats?.fish}>水下鱼群 · {stats?.fish??0}</option></select></label>
             <label className="terrain-world-range"><span>风力<output>{settings.wind.toFixed(1)}</output></span><input aria-label="风力" type="range" min="0" max="2.5" step="0.1" value={settings.wind} onChange={(event) => setSettings((previous) => ({ ...previous, wind: Number(event.target.value) }))} /></label>
             <label className="terrain-world-range"><span><Waves size={15} />水流<output>{settings.flow.toFixed(1)}</output></span><input aria-label="水流" type="range" min="0" max="2" step="0.1" value={settings.flow} onChange={(event) => setSettings((previous) => ({ ...previous, flow: Number(event.target.value) }))} /></label>
+            <label className="terrain-world-range"><span>浪高<output>{settings.waves.toFixed(1)}</output></span><input aria-label="浪高" type="range" min="0" max="2" step="0.1" value={settings.waves} onChange={(event)=>setSettings((previous)=>({...previous,waves:Number(event.target.value)}))} /></label>
             <label className="terrain-world-toggle"><input type="checkbox" checked={settings.animated} onChange={() => toggle('animated')} />环境动画</label>
             <label className="terrain-world-select">地貌定位<select aria-label="地貌定位" value={biomeFocus} onChange={(event)=> {
               if(!event.target.value) return

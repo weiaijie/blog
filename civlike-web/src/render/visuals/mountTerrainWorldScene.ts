@@ -6,15 +6,16 @@ import {
   type GroundSample, type WorldTile,
 } from './terrainWorld'
 import { createBareTreeGeometry, createBoulderGeometry, createBroadleafGeometry, createCactusGeometry, createFernGeometry, createFlowerGeometry, createGrassGeometry, createLeafLitterGeometry, createLilyGeometry, createPineGeometry, createReedGeometry, createShrubGeometry } from './terrainWorldModels'
-import { createTerrainWaterMaterial } from './terrainWorldWater'
+import { createTerrainWaterMaterial, sampleWaterHeight, waterEnvironment, type WaterEnvironment } from './terrainWorldWater'
 import { snowCover, terrainBiome, terrainGroundColor, TERRAIN_BIOMES, type TerrainBiome, type TerrainSeason } from './terrainWorldClimate'
 import { civilizationOccupies, createCivilizationPlan } from './terrainWorldCivilization'
 import { createWorldScenery } from './terrainWorldScenery'
 import { advanceWorldDay, seasonalBlend, worldCalendar, type WorldCalendar } from './terrainWorldTime'
 import { createWorldLife, type LifeKind } from './terrainWorldLife'
+import { createWorldAquatic } from './terrainWorldAquatic'
 
-export type TerrainWorldSettings = { animated: boolean; wind: number; flow: number; grid: boolean; pan: boolean; day: number; dayRevision: number; autoSeason: boolean; timeSpeed: number }
-export type TerrainWorldStats = { tiles: number; trees: number; grass: number; triangles: number; biomes: { id: TerrainBiome; count: number }[]; places: { id: string; label: string }[]; buildings: number; farms: number; bridges: number; people: number; animals: number; layout: string }
+export type TerrainWorldSettings = { animated: boolean; wind: number; flow: number; waves: number; grid: boolean; pan: boolean; day: number; dayRevision: number; autoSeason: boolean; timeSpeed: number }
+export type TerrainWorldStats = { tiles: number; trees: number; grass: number; triangles: number; biomes: { id: TerrainBiome; count: number }[]; places: { id: string; label: string }[]; buildings: number; farms: number; bridges: number; people: number; animals: number; fish: number; layout: string }
 export type TerrainWorldSelection = { id: string; label: string; fertility: number; elevation: number }
 export type TerrainWorldHandle = {
   destroy: () => void
@@ -24,7 +25,7 @@ export type TerrainWorldHandle = {
   focus: () => void
   focusBiome: (biome: TerrainBiome) => void
   focusPlace: (id: string) => void
-  focusLife: (kind: LifeKind) => void
+  focusLife: (kind: LifeKind | 'fish') => void
 }
 
 const PALETTE = {
@@ -69,12 +70,26 @@ export function mountTerrainWorldScene(
   const surface = createTerrainSurface(field, tiles)
   const civilization = createCivilizationPlan(field, surface.sample)
   const edges = getWorldEdges(tiles)
+  const boundary=edges.filter((edge)=>edge.tiles.length===1)
+  const waterEdgeFade=(x:number,z:number)=> {
+    let distance=Infinity
+    for(const {a,b} of boundary) {
+      const dx=b.x-a.x,dz=b.z-a.z,t=Math.max(0,Math.min(1,((x-a.x)*dx+(z-a.z)*dz)/(dx*dx+dz*dz)))
+      distance=Math.min(distance,Math.hypot(x-a.x-dx*t,z-a.z-dz*t))
+    }
+    return smoothstep(0,0.4,distance)
+  }
   let settings = { ...initialSettings }
   let day=settings.day, lastSeasonDay=day
   let season = seasonalBlend(day)
   const groundColor = (sample: GroundSample) => terrainGroundColor(sample, season)
   const uniforms = { meadowTime: { value: 0 }, meadowWind: { value: settings.wind } }
   const flow = { value: 0 }
+  const waterHeight=(x:number,z:number)=> {
+    const sample=surface.sample(x,z)
+    return sample?sampleWaterHeight(x,z,flow.value,waterEnvironment(field,sample,waterEdgeFade(x,z)),settings.waves,season.ice):WATER_LEVEL+0.006
+  }
+  const waterAt=(x:number,z:number)=>({height:waterHeight(x,z),dx:(waterHeight(x+0.04,z)-waterHeight(x-0.04,z))/0.08,dz:(waterHeight(x,z+0.04)-waterHeight(x,z-0.04))/0.08})
   const scene = new THREE.Scene()
   scene.background = new THREE.Color('#dfe5e7')
   const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' })
@@ -126,7 +141,7 @@ export function mountTerrainWorldScene(
   scene.add(fill)
 
   const landPositions: number[] = [], landColors: number[] = [], cover: number[] = []
-  const waterPositions: number[] = [], depths: number[] = [], flows: number[] = [], waterClimates: number[] = [], stillWater: number[] = []
+  const waterPositions: number[] = [], depths: number[] = [], flows: number[] = [], waterClimates: number[] = [], stillWater: number[] = [], waterEdges: number[] = []
   const landFaces: { sample: GroundSample; facet: number }[] = []
   const snowAmounts: number[] = []
   for (const points of surface.triangles) {
@@ -139,7 +154,11 @@ export function mountTerrainWorldScene(
     for (const p of points) { landPositions.push(p.x, p.height, p.z); landColors.push(color.r, color.g, color.b); cover.push(p.rock, p.dry, p.shore) }
     const water = clipWaterTriangle(points)
     for (let index = 1; index < water.length - 1; index++) {
-      for (const p of [water[0], water[index], water[index + 1]]) {
+      const [a,b,c]=[water[0],water[index],water[index+1]]
+      const midpoint=(p:typeof a,q:typeof a)=>({x:(p.x+q.x)/2,z:(p.z+q.z)/2,height:(p.height+q.height)/2})
+      const ab=midpoint(a,b),bc=midpoint(b,c),ca=midpoint(c,a)
+      // Subdivide only water; preserve the clipped shoreline and interpolated bed depth.
+      for (const p of [a,ab,ca, ab,b,bc, ca,bc,c, ab,bc,ca]) {
         const depth = WATER_LEVEL - p.height
         const flowAt = field.waterCoordinates(p.x, p.z)
         waterPositions.push(p.x, WATER_LEVEL + 0.006, p.z)
@@ -148,6 +167,7 @@ export function mountTerrainWorldScene(
         const climate = field.sample(p.x, p.z)
         waterClimates.push(Math.max(0,0.65+climate.cold*0.35-climate.desert*0.6-climate.badlands*0.25))
         stillWater.push(climate.wetland)
+        waterEdges.push(waterEdgeFade(p.x,p.z))
       }
     }
   }
@@ -182,10 +202,14 @@ export function mountTerrainWorldScene(
   scene.add(ground)
 
   const sidePositions: number[] = [], sideColors: number[] = [], gridPositions: number[] = []
+  const waterGridPoints: {index:number;x:number;z:number;env:WaterEnvironment}[]=[]
   for (const edge of edges) {
     const points = edgePoints(edge.a, edge.b)
     for (let i = 0; i < points.length - 1; i++) {
       const a = field.sample(points[i].x, points[i].z), b = field.sample(points[i + 1].x, points[i + 1].z)
+      for(const [offset,p] of [a,b].entries()) if(p.height<WATER_LEVEL) {
+        waterGridPoints.push({index:gridPositions.length/3+offset,x:p.x,z:p.z,env:waterEnvironment(field,p,waterEdgeFade(p.x,p.z))})
+      }
       gridPositions.push(a.x, Math.max(a.height, WATER_LEVEL) + 0.017, a.z, b.x, Math.max(b.height, WATER_LEVEL) + 0.017, b.z)
       if (edge.tiles.length !== 1) continue
       const topA = Math.max(a.height, WATER_LEVEL), topB = Math.max(b.height, WATER_LEVEL)
@@ -217,12 +241,18 @@ export function mountTerrainWorldScene(
   waterGeometry.setAttribute('waterFlow', new THREE.Float32BufferAttribute(flows, 3))
   waterGeometry.setAttribute('waterClimate', new THREE.Float32BufferAttribute(waterClimates, 1))
   waterGeometry.setAttribute('waterStill', new THREE.Float32BufferAttribute(stillWater, 1))
+  waterGeometry.setAttribute('waterEdge', new THREE.Float32BufferAttribute(waterEdges, 1))
+  waterGeometry.computeBoundingSphere()
+  if(waterGeometry.boundingSphere) waterGeometry.boundingSphere.radius+=0.18
   const waterMaterial = createTerrainWaterMaterial(flow)
+  waterMaterial.uniforms.waveStrength.value=settings.waves
   scene.add(new THREE.Mesh(waterGeometry, waterMaterial))
   const scenery = createWorldScenery(civilization, surface.sample)
   scene.add(scenery.group)
   const life=createWorldLife(seed,civilization,surface.sample)
   scene.add(life.group)
+  const aquatic=createWorldAquatic(seed,tiles,surface.sample,waterHeight)
+  scene.add(aquatic.group)
 
   function windMaterial(color: number) {
     const mat = new THREE.MeshStandardMaterial({ color, vertexColors: true, flatShading: true, roughness: 0.95, side: THREE.DoubleSide })
@@ -455,7 +485,7 @@ export function mountTerrainWorldScene(
   const observer = new ResizeObserver(resize)
   observer.observe(host)
   resize()
-  let frame = 0, previousTime = performance.now(), lastReport = 0, sceneryTime = 0, lastSeasonUpdate=0
+  let frame = 0, previousTime = performance.now(), lastReport = 0, sceneryTime = 0, aquaticTime=0, lastSeasonUpdate=0
   const animate = (now: number) => {
     const delta = Math.min((now - previousTime) / 1000, 0.05)
     previousTime = now
@@ -463,14 +493,21 @@ export function mountTerrainWorldScene(
       uniforms.meadowTime.value += delta
       flow.value += delta * settings.flow
       sceneryTime += delta * settings.wind
+      aquaticTime += delta*(1-season.ice*0.7)
       day=advanceWorldDay(day,delta,settings.timeSpeed,settings.autoSeason)
       if(Math.abs(day-lastSeasonDay)>1.5 && now-lastSeasonUpdate>800) {
         applySeason(seasonalBlend(day));lastSeasonDay=day;lastSeasonUpdate=now
       }
     }
     controls.update()
-    scenery.animate(sceneryTime,flow.value)
+    if(grid.visible) {
+      const positions=grid.geometry.getAttribute('position')
+      for(const p of waterGridPoints) positions.setY(p.index,sampleWaterHeight(p.x,p.z,flow.value,p.env,settings.waves,season.ice)+0.012)
+      positions.needsUpdate=true
+    }
+    scenery.animate(sceneryTime,flow.value,waterAt)
     life.animate(uniforms.meadowTime.value)
+    aquatic.animate(aquaticTime)
     renderer.render(scene, camera)
     if (now - lastReport > 250) {
       host.dataset.simulationTime = uniforms.meadowTime.value.toFixed(3)
@@ -480,6 +517,12 @@ export function mountTerrainWorldScene(
       host.dataset.buildings = String(civilization.buildings.length)
       host.dataset.windmills = String(scenery.rotors)
       host.dataset.worldDay=day.toFixed(3)
+      const fish=aquatic.position(aquaticTime)
+      host.dataset.fishCount=String(aquatic.fish.length)
+      host.dataset.fishPosition=fish?`${fish.x.toFixed(3)},${fish.height.toFixed(3)},${fish.z.toFixed(3)}`:''
+      const waterProbe=aquatic.fish[0]?.school.center??{x:field.riverX(0),z:0}
+      host.dataset.waterHeight=waterHeight(waterProbe.x,waterProbe.z).toFixed(4)
+      host.dataset.waveStrength=String(settings.waves)
       const resident=life.position('traveler',uniforms.meadowTime.value)
       const animal=life.position('deer',uniforms.meadowTime.value)
       host.dataset.residentPosition=resident?`${resident.x.toFixed(3)},${resident.z.toFixed(3)}`:''
@@ -498,7 +541,7 @@ export function mountTerrainWorldScene(
   onStats({ tiles: tiles.length, trees: trees.length + pines.length, grass: grass.length, triangles: landPositions.length / 9,
     biomes:TERRAIN_BIOMES.map(({id})=>({id,count:biomeTiles.get(id)?.length??0})),
     places:civilization.places.map(({id,label,tileId})=>({id,label:`${label} · ${tileId}`})),buildings:civilization.buildings.length,farms:civilization.farms.length,bridges:civilization.roads.filter((r)=>r.bridge).length,
-    people:life.actors.filter((a)=>a.kind==='traveler'||a.kind==='cart').length,animals:life.actors.filter((a)=>a.kind!=='traveler'&&a.kind!=='cart').length,layout:field.layout })
+    people:life.actors.filter((a)=>a.kind==='traveler'||a.kind==='cart').length,animals:life.actors.filter((a)=>a.kind!=='traveler'&&a.kind!=='cart').length,fish:aquatic.fish.length,layout:field.layout })
   function focusTile() {
     const center = selectedTile?.center ?? { x: field.riverX(2) - 1.8, z: 2 }
     const y = Math.max(WATER_LEVEL, surface.sample(center.x, center.z)?.height ?? 0.3)
@@ -512,6 +555,7 @@ export function mountTerrainWorldScene(
     update: (next) => {
       if (next.day!==settings.day || next.dayRevision!==settings.dayRevision) { day=next.day;lastSeasonDay=day;applySeason(seasonalBlend(day));onCalendar(worldCalendar(day)) }
       settings = { ...next }; grid.visible = next.grid; uniforms.meadowWind.value = next.wind
+      waterMaterial.uniforms.waveStrength.value=next.waves
       controls.mouseButtons.LEFT = next.pan ? THREE.MOUSE.PAN : THREE.MOUSE.ROTATE
       controls.touches.ONE = next.pan ? THREE.TOUCH.PAN : THREE.TOUCH.ROTATE
     },
@@ -536,10 +580,11 @@ export function mountTerrainWorldScene(
       camera.updateProjectionMatrix();controls.update()
     },
     focusLife: (kind) => {
-      const p=life.position(kind,uniforms.meadowTime.value)
+      const center=aquatic.fish[0]?.school.center
+      const p=kind==='fish'?(center?{...center,height:WATER_LEVEL}:null):life.position(kind,uniforms.meadowTime.value)
       if(!p) return
       controls.target.set(p.x,p.height,p.z);camera.position.set(p.x+9,p.height+31,p.z+48)
-      camera.zoom=12;camera.updateProjectionMatrix();controls.update()
+      camera.zoom=kind==='fish'?10:12;camera.updateProjectionMatrix();controls.update()
     },
     destroy: () => {
       cancelAnimationFrame(frame)

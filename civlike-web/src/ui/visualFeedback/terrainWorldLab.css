@@ -74,6 +74,8 @@
   .terrain-world-seed input { padding: 0 5px; font-size: 12px; }
   .terrain-world-panel { overflow-y: auto; }
   .terrain-world-panel h2 { margin-bottom: 13px; }
+  .terrain-world-clock select { width: 44px; flex: 0 0 44px; }
+  .terrain-world-clock .terrain-world-toggle { font-size: 11px; gap: 5px; white-space: nowrap; }
   .terrain-world-panel .terrain-world-select { margin-top: 13px; }
   .terrain-world-selection { display: none; }
   .terrain-world-mobile-selection { display: block; position: absolute; bottom: 12px; left: 12px; padding: 6px 9px; background: #fbfcfc; color: #3b6654; font-size: 11px; border-radius: 4px; }

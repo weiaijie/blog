@@ -11,6 +11,18 @@ function build(seed:number) {
 }
 
 describe('connected scenery, independent of gameplay',()=> {
+  it('moves moored boats with the shared water height and slope',()=> {
+    const {plan,surface}=build(221648817),scenery=createWorldScenery(plan,surface.sample)
+    const boat=scenery.group.getObjectByName('moored-boat')
+    expect(boat).toBeDefined()
+    scenery.animate(0,0,()=>({height:0.19,dx:0.12,dz:-0.08}))
+    expect(boat!.position.y).toBeCloseTo(0.224,8)
+    expect(Math.abs(boat!.rotation.x)+Math.abs(boat!.rotation.z)).toBeGreaterThan(0.05)
+    scenery.animate(0,0,()=>({height:0.086,dx:0,dz:0}))
+    expect(boat!.position.y).toBeCloseTo(0.12,8)
+    expect(boat!.rotation.x).toBeCloseTo(0,8);expect(boat!.rotation.z).toBeCloseTo(0,8)
+    scenery.group.traverse((item)=>{if(item instanceof THREE.Mesh) {item.geometry.dispose();for(const m of Array.isArray(item.material)?item.material:[item.material]) m.dispose()}})
+  })
   it.each([221648817,337863546,569575877,20261011,1,999999999])('places varied settlements and safe roads for seed %i',(seed)=> {
     const {plan,surface}=build(seed)
     expect(plan.places.length).toBeGreaterThanOrEqual(7)
