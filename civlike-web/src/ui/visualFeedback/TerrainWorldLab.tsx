@@ -20,6 +20,7 @@ export function TerrainWorldLab() {
   const [stats, setStats] = useState<TerrainWorldStats | null>(null)
   const [selection, setSelection] = useState<TerrainWorldSelection | null>(null)
   const [biomeFocus, setBiomeFocus] = useState<TerrainBiome | ''>('')
+  const [placeFocus, setPlaceFocus] = useState('')
   const [error, setError] = useState('')
   const host = useRef<HTMLDivElement>(null)
   const handle = useRef<TerrainWorldHandle | null>(null)
@@ -33,10 +34,12 @@ export function TerrainWorldLab() {
     setError('')
     setSelection(null)
     setBiomeFocus('')
+    setPlaceFocus('')
     setView('isometric')
     try {
       handle.current = mountTerrainWorldScene(host.current, seed, latestSettings.current, setStats, (next)=> {
         setSelection(next)
+        setPlaceFocus('')
         setBiomeFocus(TERRAIN_BIOMES.find(({label})=>label===next.label)?.id??'')
       })
     } catch (reason) {
@@ -53,7 +56,7 @@ export function TerrainWorldLab() {
     url.searchParams.set('assetSeed', String(next))
     window.history.replaceState(null, '', url)
   }
-  function changeView(next: 'isometric' | 'top') { setView(next); setBiomeFocus(''); handle.current?.view(next) }
+  function changeView(next: 'isometric' | 'top') { setView(next); setBiomeFocus(''); setPlaceFocus(''); handle.current?.view(next) }
   const toggle = (key: 'animated' | 'grid' | 'pan') => setSettings((previous) => ({ ...previous, [key]: !previous[key] }))
   function changeSeason(season: string) {
     setSettings((previous)=>({...previous,season}))
@@ -109,6 +112,10 @@ export function TerrainWorldLab() {
             </form>
             <dl className="terrain-world-metrics"><div><dt>区块</dt><dd>{stats?.tiles ?? '—'}</dd></div><div><dt>树木</dt><dd>{stats?.trees ?? '—'}</dd></div><div><dt>草丛</dt><dd>{stats?.grass ?? '—'}</dd></div></dl>
             <label className="terrain-world-select">季节<select aria-label="季节" value={settings.season} onChange={(event)=>changeSeason(event.target.value)}>{TERRAIN_SEASONS.map(({id,label})=><option value={id} key={id}>{label}</option>)}</select></label>
+            <label className="terrain-world-select">聚落定位<select aria-label="聚落定位" value={placeFocus} onChange={(event)=> {
+              setPlaceFocus(event.target.value);setSelection(null);setBiomeFocus('');setView('isometric');handle.current?.focusPlace(event.target.value)
+            }}><option value="">{stats?.places.length??0} 处聚落与遗迹</option>{stats?.places.map(({id,label})=><option value={id} key={id}>{label}</option>)}</select></label>
+            <div className="terrain-world-scenery-count">建筑 {stats?.buildings??0} · 农田 {stats?.farms??0} · 桥梁 {stats?.bridges??0}</div>
           </section>
           <section>
             <h2><Wind size={16} />环境动态</h2>
@@ -117,7 +124,7 @@ export function TerrainWorldLab() {
             <label className="terrain-world-toggle"><input type="checkbox" checked={settings.animated} onChange={() => toggle('animated')} />环境动画</label>
             <label className="terrain-world-select">地貌定位<select aria-label="地貌定位" value={biomeFocus} onChange={(event)=> {
               if(!event.target.value) return
-              setView('isometric'); handle.current?.focusBiome(event.target.value as TerrainBiome)
+              setView('isometric'); setPlaceFocus(''); handle.current?.focusBiome(event.target.value as TerrainBiome)
             }}><option value="">{stats?.biomes.filter(({count})=>count>0).length??0} 种地貌</option>{TERRAIN_BIOMES.map(({id,label})=> {
               const count=stats?.biomes.find((biome)=>biome.id===id)?.count??0
               return <option value={id} key={id} disabled={!count}>{label} · {count}</option>

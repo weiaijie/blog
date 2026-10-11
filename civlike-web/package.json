@@ -25,6 +25,8 @@
   },
   "dependencies": {
     "lucide-react": "^1.55.0",
+    "ngraph.graph": "^20.1.2",
+    "ngraph.path": "^1.6.1",
     "pixi.js": "^8.18.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

@@ -8,9 +8,11 @@ import {
 import { createBareTreeGeometry, createBoulderGeometry, createBroadleafGeometry, createCactusGeometry, createFernGeometry, createFlowerGeometry, createGrassGeometry, createLeafLitterGeometry, createLilyGeometry, createPineGeometry, createReedGeometry, createShrubGeometry } from './terrainWorldModels'
 import { createTerrainWaterMaterial } from './terrainWorldWater'
 import { getTerrainSeason, snowCover, terrainBiome, terrainGroundColor, TERRAIN_BIOMES, type TerrainBiome, type TerrainSeason } from './terrainWorldClimate'
+import { civilizationOccupies, createCivilizationPlan } from './terrainWorldCivilization'
+import { createWorldScenery } from './terrainWorldScenery'
 
 export type TerrainWorldSettings = { animated: boolean; wind: number; flow: number; grid: boolean; pan: boolean; season: string }
-export type TerrainWorldStats = { tiles: number; trees: number; grass: number; triangles: number; biomes: { id: TerrainBiome; count: number }[] }
+export type TerrainWorldStats = { tiles: number; trees: number; grass: number; triangles: number; biomes: { id: TerrainBiome; count: number }[]; places: { id: string; label: string }[]; buildings: number; farms: number; bridges: number }
 export type TerrainWorldSelection = { id: string; label: string; fertility: number; elevation: number }
 export type TerrainWorldHandle = {
   destroy: () => void
@@ -19,6 +21,7 @@ export type TerrainWorldHandle = {
   zoom: (factor: number) => void
   focus: () => void
   focusBiome: (biome: TerrainBiome) => void
+  focusPlace: (id: string) => void
 }
 
 const PALETTE = {
@@ -60,6 +63,7 @@ export function mountTerrainWorldScene(
   const field = createTerrainField(seed)
   const tiles = createWorldTiles()
   const surface = createTerrainSurface(field, tiles)
+  const civilization = createCivilizationPlan(field, surface.sample)
   const edges = getWorldEdges(tiles)
   let settings = { ...initialSettings }
   let season = getTerrainSeason(settings.season)
@@ -210,6 +214,8 @@ export function mountTerrainWorldScene(
   waterGeometry.setAttribute('waterStill', new THREE.Float32BufferAttribute(stillWater, 1))
   const waterMaterial = createTerrainWaterMaterial(flow)
   scene.add(new THREE.Mesh(waterGeometry, waterMaterial))
+  const scenery = createWorldScenery(civilization, surface.sample)
+  scene.add(scenery.group)
 
   function windMaterial(color: number) {
     const mat = new THREE.MeshStandardMaterial({ color, vertexColors: true, flatShading: true, roughness: 0.95, side: THREE.DoubleSide })
@@ -240,6 +246,7 @@ export function mountTerrainWorldScene(
   for (const tile of tiles) {
     for (let i = 0; i < 440; i++) {
       const point = randomTilePoint(tile, random), sample = surface.sample(point.x, point.z)
+      if (civilizationOccupies(civilization, point)) continue
       if (sample && sample.wetland > 0.4 && sample.height < WATER_LEVEL && i < 28) {
         lilies.push({ sample: { ...sample, height: WATER_LEVEL+0.028 }, scale: 0.4+random()*0.5, rotation: random()*6.28, color: new THREE.Color('#547d46') })
       }
@@ -300,6 +307,7 @@ export function mountTerrainWorldScene(
     for (let i = 0; i < 13; i++) {
       const angle = random() * Math.PI * 2, radius = i === 0 ? 0 : 0.18 + random() * 0.65
       const sample = surface.sample(x + Math.cos(angle) * radius, z + Math.sin(angle) * radius)
+      if (sample && civilizationOccupies(civilization, sample)) continue
       if (!sample || sample.height < -0.08 || sample.height > 1.8) continue
       stones.push({ sample, scale: size * (i < 2 ? 0.6 + random() * 0.38 : 0.12 + random() * 0.25),
         aspect: 0.7 + random() * 0.8, rotation: random() * Math.PI * 2,
@@ -387,6 +395,7 @@ export function mountTerrainWorldScene(
     })
     colorAttribute.needsUpdate=true; snowAttribute.needsUpdate=true
     seasonalUpdates.forEach((update)=>update(season))
+    scenery.updateSeason(season)
     waterMaterial.uniforms.iceAmount.value=season.ice
     renderer.toneMappingExposure=1.05-season.snow*0.13
     host.dataset.season=season.id
@@ -442,21 +451,25 @@ export function mountTerrainWorldScene(
   const observer = new ResizeObserver(resize)
   observer.observe(host)
   resize()
-  let frame = 0, previousTime = performance.now(), lastReport = 0
+  let frame = 0, previousTime = performance.now(), lastReport = 0, sceneryTime = 0
   const animate = (now: number) => {
     const delta = Math.min((now - previousTime) / 1000, 0.05)
     previousTime = now
     if (settings.animated && !document.hidden) {
       uniforms.meadowTime.value += delta
       flow.value += delta * settings.flow
+      sceneryTime += delta * settings.wind
     }
     controls.update()
+    scenery.animate(sceneryTime,flow.value)
     renderer.render(scene, camera)
     if (now - lastReport > 250) {
       host.dataset.simulationTime = uniforms.meadowTime.value.toFixed(3)
       host.dataset.flowTime = flow.value.toFixed(3)
       host.dataset.drawCalls = String(renderer.info.render.calls)
       host.dataset.triangles = String(renderer.info.render.triangles)
+      host.dataset.buildings = String(civilization.buildings.length)
+      host.dataset.windmills = String(scenery.rotors)
       lastReport = now
     }
     frame = requestAnimationFrame(animate)
@@ -468,7 +481,8 @@ export function mountTerrainWorldScene(
     const list=biomeTiles.get(biome)??[]; list.push(tile); biomeTiles.set(biome,list)
   }
   onStats({ tiles: tiles.length, trees: trees.length + pines.length, grass: grass.length, triangles: landPositions.length / 9,
-    biomes:TERRAIN_BIOMES.map(({id})=>({id,count:biomeTiles.get(id)?.length??0})) })
+    biomes:TERRAIN_BIOMES.map(({id})=>({id,count:biomeTiles.get(id)?.length??0})),
+    places:civilization.places.map(({id,label})=>({id,label})),buildings:civilization.buildings.length,farms:civilization.farms.length,bridges:civilization.roads.filter((r)=>r.bridge).length })
   function focusTile() {
     const center = selectedTile?.center ?? { x: field.riverX(2) - 1.8, z: 2 }
     const y = Math.max(WATER_LEVEL, surface.sample(center.x, center.z)?.height ?? 0.3)
@@ -494,6 +508,15 @@ export function mountTerrainWorldScene(
       const tile=list[Math.floor(list.length/2)]
       selectTile(tile,field.sample(tile.center.x,tile.center.z))
       focusTile()
+    },
+    focusPlace: (id) => {
+      const place=civilization.places.find((p)=>p.id===id)
+      if(!place) return
+      const {x,z,height}=place.center
+      controls.target.set(x,height,z)
+      camera.position.set(x+9,height+31,z+48)
+      camera.zoom=4.3
+      camera.updateProjectionMatrix();controls.update()
     },
     destroy: () => {
       cancelAnimationFrame(frame)
