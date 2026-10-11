@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-11",
+  "timezone": "Asia/Shanghai",
+  "revision": "C-style model iteration 2",
+  "url": "http://localhost:5173/?view=terrain-world&assetSeed=20261011",
+  "runtime": { "manager": "nvm", "node": "22.22.0", "npm": "10.9.4" },
+  "scope": "Isolated Three.js terrain prototype. No gameplay, save-state, old grassland GLB or Blender source changes in this iteration.",
+  "checks": {
+    "tests": { "files": 14, "passed": 78, "failed": 0 },
+    "typecheck": "passed",
+    "scopedEslint": "passed",
+    "productionBuild": "passed; existing shared Three.js chunk exceeds Vite 500 kB advisory",
+    "browserErrors": [],
+    "viewports": [
+      { "width": 1440, "height": 960, "canvasCount": 1, "horizontalOverflow": false, "capture": "terrain-world-c-v2-desktop.jpg" },
+      { "width": 390, "height": 844, "documentWidth": 390, "canvasCount": 1, "canvasBounds": [0, 56, 390, 552], "coloredTerrainPixelSamples": 11150, "coloredTerrainBounds": [24, 220, 366, 446], "capture": "terrain-world-c-v2-mobile.jpg" }
+    ],
+    "animation": { "sampledPixels": 93119, "rgbDifferenceThreshold": 20, "playingChangedPixels": 9514, "playingChangedPercent": 10.22, "pausedChangedPixels": 0, "pausedSimulationTime": 88.497 },
+    "interactions": ["orbit drag", "top view", "isometric reset", "grid off/on", "pause/resume", "apply seed", "restore seed"],
+    "seedSamples": [
+      { "seed": 20261011, "tiles": 37, "trees": 68, "grass": 1146, "terrainTriangles": 5550 },
+      { "seed": 20261012, "tiles": 37, "trees": 74, "grass": 1173, "terrainTriangles": 5550 }
+    ],
+    "desktopRenderSnapshot": { "drawCalls": 25, "triangles": 34975 }
+  },
+  "limitations": [
+    "Art-direction review remains pending. This is not a claim of exact C concept-image reproduction.",
+    "Mobile check uses a desktop browser viewport, not physical-phone performance acceptance.",
+    "No FPS benchmark or production deployment performed.",
+    "No new blend or GLB export in this iteration. Geometry is built directly in the existing Three.js preview."
+  ]
+}

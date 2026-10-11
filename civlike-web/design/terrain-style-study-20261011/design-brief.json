@@ -1,11 +1,25 @@
 {
   "title": "多地形区块风格与连续过渡选型",
   "date": "2026-10-11",
-  "status": "用户已选择 C；概念图仍是风格参考，动态三维样区已单独实现并验证",
+  "status": "用户已选择 C；第二轮造型与构图重做已实现，技术验证通过，美术效果待用户验收",
   "selectedStyle": "C",
   "prototypeUrl": "http://localhost:5173/?view=terrain-world&assetSeed=20261011",
   "generationTool": "Built-in image_gen",
-  "scope": "停止照片写实路线。先用多地形连接地图选风格，再重做区块与连接部件。本轮未替换运行时模型。",
+  "scope": "独立 terrain-world 页面采用 C 低多边形路线；本轮重做运行时地形、植被、岩石和水岸，不修改游戏规则，不覆盖旧草地区块资产，不代表已导出新的 Blender/GLB。",
+  "modelIteration": {
+    "version": 2,
+    "reference": "C-low-poly.png",
+    "fixedSeed": 20261011,
+    "actualDesktopCapture": "../../artifacts/terrain-world-c-v2-desktop.jpg",
+    "verification": "../../artifacts/terrain-world-c-v2-verification.json",
+    "changes": [
+      "扩大干净的地形切面，连接丘陵、坡脚与多峰山脊；保留跨格共享边界。",
+      "树冠、针叶树、灌木、岩石各提供四种不对称几何变体；保留草原留白和簇状花草。",
+      "草地到河谷采用更宽缓坡，加入宽窄沙岸、成组岸石、出水岩石、深色河槽及沿河水流线。",
+      "植被和石块贴合实际三角面高度；海床不再穿出外缘断面。"
+    ],
+    "acceptanceBoundary": "网页实际截图是本轮交付证据；AI 概念图不等于实际模型，测试通过不等于已完成原图美术还原，构图比例和细节密度仍需用户确认。"
+  },
   "currentSourceFacts": {
     "terrainTypes": [
       "grassland",
@@ -101,7 +115,7 @@
     "随机样式优先改变块内细节，公共边用共享种子保持一致；肥力、湿度和植被密度联动，地表不能每格随机跳色。"
   ],
   "nextAcceptance": [
-    "用户先选一种风格或明确混合方向，再做模型。",
+    "以选定的 C 图和固定种子网页截图对照验收造型、构图和色彩，再扩展随机生成范围。",
     "第一套交付应同时包含草原、森林、丘陵、水域和林缘、坡脚、水岸，不能只做草坪。",
     "先验收连接地图，再验收单块；检查两格、三格交点、旋转组合和不同种子。",
     "检查俯视/斜视、网格开/关、近看细节和缩小后的辨识度；概念图不替代实际渲染验证。"

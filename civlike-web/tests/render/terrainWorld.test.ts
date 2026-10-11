@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { WATER_LEVEL, WORLD_SUBDIVISIONS, clipWaterTriangle, createTerrainField, createWorldTiles, edgePoints, getWorldEdges, pointKey, seededRandom, tileTriangles } from '../../src/render/visuals/terrainWorld'
+import { WATER_LEVEL, WORLD_SUBDIVISIONS, clipWaterTriangle, createTerrainField, createTerrainSurface, createWorldTiles, edgePoints, getWorldEdges, pointKey, seededRandom, tileTriangles } from '../../src/render/visuals/terrainWorld'
 
 describe('C-style continuous terrain', () => {
   const tiles = createWorldTiles()
@@ -59,5 +59,31 @@ describe('C-style continuous terrain', () => {
     expect(wet).toBeGreaterThan(100)
     expect(dry).toBeGreaterThan(100)
     expect(shore).toBeGreaterThan(100)
+  })
+  it.each([20261011, 20261012, 999999999])('keeps the rendered river open and the seabed within the cutaway for seed %i', (seed) => {
+    const field = createTerrainField(seed), surface = createTerrainSurface(field, tiles)
+    for (let z = -5; z <= 5; z += 0.05) {
+      const sample = surface.sample(field.riverX(z), z)
+      if (sample) expect(sample.height).toBeLessThan(WATER_LEVEL)
+    }
+    for (const triangle of surface.triangles) for (const p of triangle) expect(p.height).toBeGreaterThan(-0.53)
+  })
+  it('anchors props on the exact rendered triangle, including mountain and bank slopes', () => {
+    const surface = createTerrainSurface(createTerrainField(20261011), tiles)
+    for (const triangle of surface.triangles) {
+      const x = triangle.reduce((sum, p) => sum + p.x, 0) / 3
+      const z = triangle.reduce((sum, p) => sum + p.z, 0) / 3
+      const height = triangle.reduce((sum, p) => sum + p.height, 0) / 3
+      expect(surface.sample(x, z)?.height).toBeCloseTo(height, 6)
+    }
+    expect(surface.sample(100, 100)).toBeNull()
+  })
+  it('keeps distinct forest, meadow, foothill, mountain and dry plain regions', () => {
+    const field = createTerrainField(20261011)
+    expect(field.sample(-4, -2).forest).toBeGreaterThan(0.6)
+    expect(field.sample(-1.5, 0.9).forest).toBeLessThan(0.15)
+    expect(field.sample(-1.6, -3.75).height).toBeGreaterThan(1.5)
+    expect(field.sample(3.4, -2.55).rock).toBeGreaterThan(0.7)
+    expect(field.sample(4, 2).dry).toBeGreaterThan(0.65)
   })
 })
