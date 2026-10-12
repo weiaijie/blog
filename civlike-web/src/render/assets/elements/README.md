@@ -8,9 +8,29 @@
 
 独立页面提供自由旋转、正面、侧面、俯视、线框、动画暂停和 GLB 下载，同时展示对应三视图。此批次没有替换现有 `terrain-world` 地图元素。
 
+### 树木扩展样板
+
+新增 `oak-tree`、`birch-tree`、`willow-tree`、`palm-tree`。模型采用独立枝干与折面叶片，不使用实心球体替代整个树冠；源文件由 `scripts/blender/map_element_trees.py` 生成。
+
+当前累计 38 类独立模型、45 个版本，规划 108 类；剩余 70 类未建模。
+
+- 橡树使用粗主干、根部外扩、侧枝、裂片叶与带杯状果帽的橡子。
+- 白桦使用细长白色树皮、深色横向皮孔、细枝、小型尖叶与柔荑花序/种序。
+- 垂柳使用展开的主枝、下垂细枝与交替狭长叶；本样板选择雌花序到种子的展示，不把同一株描述为雌雄同株。
+- 棕榈使用弯曲主干、环状叶痕、羽状叶轴及成对小叶，花后椰果从绿转褐；末期保留绿色树冠，不能套用落叶休眠。
+- 木质分枝的局部生长轴沿各自分枝方向；叶组、花与果实保留父子附着层级和独立阶段。风动、自动进度、暂停和手动回退沿用物候驱动。
+- 当前把幼树建立和成年物候压缩在同一展示条；不代表树龄、真实逐年生长、授粉条件、种子传播或生态更新。落叶树末期以叶组渐退表现疏冠，尚无逐片落叶轨迹；棕榈尚无老叶脱落更新。
+- GLB 保留阶段元数据，不包含任意查看器可直接播放的生长剪辑；仍未接入地图季节、邻格遮挡、LOD 或实例化。
+
+结构资料：[NC State 橡树](https://plants.ces.ncsu.edu/plants/quercus-alba/)、[NC State 白桦](https://plants.ces.ncsu.edu/plants/betula-pendula/common-name/european-weeping-birch/)、[OSU 垂柳](https://landscapeplants.oregonstate.edu/plants/salix-babylonica/)、[NParks 椰子树](https://www.nparks.gov.sg/florafaunaweb/flora/5/6/5618)。只作形态参考，未下载第三方网格；并非精确植物学复刻。
+
+```powershell
+blender --background --factory-startup --python-exit-code 1 --python scripts/blender/map_element_kit.py -- --assets oak-tree birch-tree willow-tree palm-tree
+```
+
 ### 作物扩展样板
 
-当前 34 类模型、41 个版本，规划 108 个独立资产。新增 `corn-field`、`rice-paddy`、`vineyard`、`cotton-field`，例如 `/?view=map-elements&element=cotton-field`。
+作物批次完成时为 34 类模型、41 个版本，规划 108 个独立资产。新增 `corn-field`、`rice-paddy`、`vineyard`、`cotton-field`，例如 `/?view=map-elements&element=cotton-field`。
 
 - 玉米有节间/叶鞘、交错披垂叶片、顶部雄穗、侧生果穗、苞叶和花丝。花药消退后保留干穗轴，籽粒随灌浆出现；成熟苞叶轻微松开。
 - 水稻有九丛分蘖、窄叶、分枝穗轴和独立籽粒。穗轴与附着籽粒一起随成熟下垂，花期也有完整支撑。田埂内是静态风格化浅水，不含灌排模拟或水面波动。

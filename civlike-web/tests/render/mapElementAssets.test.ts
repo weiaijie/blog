@@ -5,9 +5,9 @@ import { mapElementRoadmap } from '../../src/render/assets/mapElementRoadmap'
 
 describe('C-style Blender element kit', () => {
   it('counts modeled families separately from roadmap entries and revisions', () => {
-    expect(manifest.assets).toHaveLength(41)
-    expect(new Set(manifest.assets.map((a) => a.id)).size).toBe(41)
-    expect(new Set(manifest.assets.map((a) => a.id.replace(/-v\d+$/, ''))).size).toBe(34)
+    expect(manifest.assets).toHaveLength(45)
+    expect(new Set(manifest.assets.map((a) => a.id)).size).toBe(45)
+    expect(new Set(manifest.assets.map((a) => a.id.replace(/-v\d+$/, ''))).size).toBe(38)
     expect(mapElementRoadmap).toHaveLength(108)
     expect(new Set(mapElementRoadmap.map((a) => a.id)).size).toBe(108)
     for (const asset of manifest.assets) expect(mapElementRoadmap.some((a) => a.id === asset.id.replace(/-v\d+$/, ''))).toBe(true)
@@ -43,7 +43,7 @@ describe('C-style Blender element kit', () => {
       expect(bytes.length).toBeLessThan(living || botanical || building ? 2_500_000 : 1_500_000)
       if (botanical) {
         const roles = new Set(json.nodes.map((node: { extras?: { lifeRole?: string } }) => node.extras?.lifeRole))
-        for (const role of ['shoot','structure','foliage','blossom',['sunflower-field','rice-paddy'].includes(asset.id) ? 'seed' : 'fruit']) expect(roles.has(role)).toBe(true)
+        for (const role of ['shoot','structure','foliage','blossom',['sunflower-field','rice-paddy','birch-tree','willow-tree'].includes(asset.id) ? 'seed' : 'fruit']) expect(roles.has(role)).toBe(true)
         for (const node of json.nodes.filter((node: { extras?: { lifeRole?: string } }) => node.extras?.lifeRole)) {
           expect(node.extras.lifeStart).toBeLessThan(node.extras.lifeFull)
           expect(node.extras.lifeEnd).toBeLessThan(node.extras.lifeGone)

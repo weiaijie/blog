@@ -844,6 +844,86 @@
         ]
       ],
       "glbBytes": 2353012
+    },
+    {
+      "id": "oak-tree",
+      "reference": "",
+      "triangles": 23626,
+      "meshObjects": 152,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.75,
+          -1.8075,
+          0.0
+        ],
+        [
+          1.8918,
+          1.75,
+          3.6237
+        ]
+      ],
+      "glbBytes": 2400180
+    },
+    {
+      "id": "birch-tree",
+      "reference": "",
+      "triangles": 22662,
+      "meshObjects": 145,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.75,
+          -1.75,
+          0.0
+        ],
+        [
+          1.75,
+          1.75,
+          3.8934
+        ]
+      ],
+      "glbBytes": 2313552
+    },
+    {
+      "id": "willow-tree",
+      "reference": "",
+      "triangles": 24038,
+      "meshObjects": 123,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.75,
+          -1.75,
+          0.0
+        ],
+        [
+          1.75,
+          1.75,
+          2.845
+        ]
+      ],
+      "glbBytes": 2377560
+    },
+    {
+      "id": "palm-tree",
+      "reference": "",
+      "triangles": 15986,
+      "meshObjects": 66,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.75,
+          -1.75,
+          0.0
+        ],
+        [
+          1.75,
+          1.75,
+          3.2671
+        ]
+      ],
+      "glbBytes": 1554568
     }
   ]
 }

@@ -48,4 +48,4 @@ const groups: { category: string; items: [string, string][] }[] = [
 
 export const mapElementRoadmap = groups.flatMap(({ category, items }) => items.map(([id, label]) => ({ id, label, category })))
 export const mapElementCategories = groups.map((group) => group.category)
-export const botanicalFamilies = new Set(['berry-shrub', 'apple-tree', 'pumpkin-patch', 'sunflower-field', 'corn-field', 'rice-paddy', 'vineyard', 'cotton-field'])
+export const botanicalFamilies = new Set(['berry-shrub', 'apple-tree', 'pumpkin-patch', 'sunflower-field', 'corn-field', 'rice-paddy', 'vineyard', 'cotton-field', 'oak-tree', 'birch-tree', 'willow-tree', 'palm-tree'])

@@ -40,7 +40,7 @@ describe('living field growth', () => {
     expect(root.position.y).toBe(.13)
   })
   it('resolves old links and defaults only unspecified revisions to latest', () => {
-    expect(mapElementLibrary).toHaveLength(34)
+    expect(mapElementLibrary).toHaveLength(38)
     expect(initialMapElement('?element=wheat-field').id).toBe('wheat-field-v3')
     expect(initialMapElement('?element=wheat-field&revision=2').id).toBe('wheat-field-v2')
     expect(initialMapElement('?element=vegetable-field&revision=1').id).toBe('vegetable-field')

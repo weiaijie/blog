@@ -20,9 +20,10 @@ export function botanicalStage(progress: number, family: string) {
   if (progress < .55) return family==='corn-field' ? '抽雄吐丝' : family==='rice-paddy' ? '抽穗开花' : '开花'
   if (family==='cotton-field' && progress>=.76) return progress<.89 ? '棉铃开裂' : '吐絮留种'
   if ((family==='rice-paddy' || family==='corn-field') && progress<.76) return '灌浆'
-  if (progress < .76) return family === 'sunflower-field' ? '结籽' : '结果'
+  if (progress < .76) return ['sunflower-field','birch-tree','willow-tree'].includes(family) ? '结籽' : '结果'
   if (progress < .89) return '成熟'
-  return family === 'apple-tree' || family === 'berry-shrub' || family === 'vineyard' ? '落叶休眠' : '衰老留种'
+  if (family === 'palm-tree') return '常绿结实'
+  return ['apple-tree','berry-shrub','vineyard','oak-tree','birch-tree','willow-tree'].includes(family) ? '落叶休眠' : '衰老留种'
 }
 
 export function createBotanicalMotion(model: Group) {

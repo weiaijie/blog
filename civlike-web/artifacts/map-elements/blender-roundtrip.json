@@ -204,7 +204,27 @@
       "id": "cotton-field",
       "sourceObjects": 792,
       "roundTripTriangles": 22214
+    },
+    {
+      "id": "oak-tree",
+      "sourceObjects": 1325,
+      "roundTripTriangles": 23626
+    },
+    {
+      "id": "birch-tree",
+      "sourceObjects": 1272,
+      "roundTripTriangles": 22662
+    },
+    {
+      "id": "willow-tree",
+      "sourceObjects": 1492,
+      "roundTripTriangles": 24038
+    },
+    {
+      "id": "palm-tree",
+      "sourceObjects": 877,
+      "roundTripTriangles": 15986
     }
   ],
-  "passed": 41
+  "passed": 45
 }
