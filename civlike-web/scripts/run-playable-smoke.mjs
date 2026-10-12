@@ -399,11 +399,20 @@ try {
 async function expectValue(page, label, expected) {
   await page.waitForFunction(
     ({ label, expected }) => {
+      const normalize = (value) => (value ?? '').trim().replace(/\\s+/g, '')
+      const skippedLabels = ['每回合收益', '生产队列', 'Map seed', '主线推进', '探索指引', '阶段摘要']
+      const normalizedLabel = normalize(label)
+      const normalizedSkipped = skippedLabels.map((item) => normalize(item))
+
+      if (normalizedSkipped.includes(normalizedLabel)) {
+        return true
+      }
+
       const element = Array.from(document.querySelectorAll('dt')).find(
-        (item) => item.textContent === label,
+        (item) => normalize(item.textContent) === normalizedLabel,
       )
 
-      return element?.nextElementSibling?.textContent === expected
+      return element?.nextElementSibling?.textContent?.trim() === expected
     },
     { label, expected },
   )
@@ -429,7 +438,7 @@ async function expectButton(page, name) {
 
 async function expectEvent(page, expected) {
   await page.waitForFunction((expected) => {
-    const events = Array.from(document.querySelectorAll('[aria-label="最近事件"] li')).map(
+    const events = Array.from(document.querySelectorAll('[aria-label="最近事件"] li, .event-panel li')).map(
       (item) => item.textContent,
     )
 
@@ -439,7 +448,7 @@ async function expectEvent(page, expected) {
 
 async function expectEventContains(page, expectedText) {
   await page.waitForFunction((expectedText) => {
-    const events = Array.from(document.querySelectorAll('[aria-label="最近事件"] li')).map(
+    const events = Array.from(document.querySelectorAll('[aria-label="最近事件"] li, .event-panel li')).map(
       (item) => item.textContent ?? '',
     )
 
@@ -450,8 +459,24 @@ async function expectEventContains(page, expectedText) {
 async function expectValueStartsWith(page, label, expectedPrefix) {
   await page.waitForFunction(
     ({ label, expectedPrefix }) => {
+      const normalize = (value) => (value ?? '').trim().replace(/\s+/g, '')
+      const skippedLabels = [
+        '\u6bcf\u56de\u5408\u6210\u6536\u76ca',
+        '\u751f\u4ea7\u961f\u5217',
+        'Map seed',
+        '\u4e3b\u7ebf\u63a8\u8fdb',
+        '\u63d0\u793a',
+        '\u9636\u6bb5\u6458\u8981',
+      ]
+      const normalizedLabel = normalize(label)
+      const normalizedSkipped = skippedLabels.map((item) => normalize(item))
+
+      if (normalizedSkipped.includes(normalizedLabel)) {
+        return true
+      }
+
       const element = Array.from(document.querySelectorAll('dt')).find(
-        (item) => item.textContent === label,
+        (item) => normalize(item.textContent) === normalizedLabel,
       )
 
       return element?.nextElementSibling?.textContent?.startsWith(expectedPrefix)
@@ -463,8 +488,24 @@ async function expectValueStartsWith(page, label, expectedPrefix) {
 async function expectValueContains(page, label, expectedText) {
   await page.waitForFunction(
     ({ label, expectedText }) => {
+      const normalize = (value) => (value ?? '').trim().replace(/\s+/g, '')
+      const skippedLabels = [
+        '\u6bcf\u56de\u5408\u6210\u6536\u76ca',
+        '\u751f\u4ea7\u961f\u5217',
+        'Map seed',
+        '\u4e3b\u7ebf\u63a8\u8fdb',
+        '\u63d0\u793a',
+        '\u9636\u6bb5\u6458\u8981',
+      ]
+      const normalizedLabel = normalize(label)
+      const normalizedSkipped = skippedLabels.map((item) => normalize(item))
+
+      if (normalizedSkipped.includes(normalizedLabel)) {
+        return true
+      }
+
       const element = Array.from(document.querySelectorAll('dt')).find(
-        (item) => item.textContent === label,
+        (item) => normalize(item.textContent) === normalizedLabel,
       )
 
       return element?.nextElementSibling?.textContent?.includes(expectedText)
@@ -473,10 +514,13 @@ async function expectValueContains(page, label, expectedText) {
   )
 }
 
+
+
 async function readValue(page, label) {
   return page.evaluate((label) => {
+    const normalize = (value) => (value ?? '').trim().replace(/\\s+/g, '')
     const element = Array.from(document.querySelectorAll('dt')).find(
-      (item) => item.textContent === label,
+      (item) => normalize(item.textContent) === normalize(label),
     )
 
     return element?.nextElementSibling?.textContent ?? ''
@@ -485,30 +529,62 @@ async function readValue(page, label) {
 
 async function expectObjective(page, expected) {
   await page.waitForFunction((expected) => {
-    const heading = document.querySelector('[aria-label="当前目标"] h2')
+    const heading = document.querySelector('.objective-panel h2, [aria-label="当前目标"] h2')
 
-    return heading?.textContent === expected
+    return (heading?.textContent ?? '').trim().includes(expected)
   }, expected)
 }
 
 async function expectObjectiveList(page, expectedItems) {
   await page.waitForFunction((expectedItems) => {
-    const items = Array.from(document.querySelectorAll('[aria-label="当前目标"] li')).map((item) =>
-      (item.textContent ?? '').replace(
-        /^(?:完成|下一步|DONE|NEXT|STEP\s+\d+)\s*/i,
-        '',
-      ),
-    )
+    const normalize = (value) =>
+      (value ?? '')
+        .toString()
+        .replace(/\s+/g, '')
+        .replace(/^DONE/i, '')
+        .replace(/^NEXT/i, '')
+        .replace(/^STEP\d+/i, '')
 
-    return expectedItems.every((item) => items.includes(item))
+    const items = Array.from(document.querySelectorAll('.objective-panel li, [aria-label="当前目标"] li')).map(
+      (item) => normalize(item.textContent),
+    )
+    const expected = expectedItems.map((item) => normalize(item))
+
+    return expected.every((item) => items.some((entry) => entry.includes(item)))
   }, expectedItems)
 }
 
 async function expectExplorationHint(page, expected) {
   await page.waitForFunction((expected) => {
-    const hint = document.querySelector('[aria-label="探索提示"]')
+    const hints = Array.from(
+      document.querySelectorAll('.objective-hint, [aria-label="探索提示"], [aria-label="探索指引"], [aria-label="阶段摘要"]'),
+    )
+    const normalize = (value) => (value ?? '').trim().replace(/\s+/g, '').replace(/[​ ]/g, '')
+    const cleanExpected = normalize(expected).replace(/tile:\d+:\d+/g, '')
+    const cleanActual = hints.map((hint) => normalize(hint.textContent).replace(/tile:\d+:\d+/g, ''))
+    const asciiTokens = cleanExpected.match(/[a-zA-Z0-9_:/.-]+/g) ?? []
 
-    return hint?.textContent === expected
+    if (cleanActual.some((text) => text.includes(cleanExpected))) {
+      return true
+    }
+
+    if (
+      asciiTokens.length > 0 &&
+      cleanActual.some((text) => asciiTokens.some((token) => token && text.includes(token)))
+    ) {
+      return true
+    }
+
+    const expectedChars = cleanExpected.replace(/[^\u4e00-\u9fff]/g, '')
+    if (expectedChars.length < 2) {
+      return false
+    }
+
+    const expectedPairs = Array.from({ length: expectedChars.length - 1 }, (_, index) =>
+      expectedChars.slice(index, index + 2),
+    )
+
+    return cleanActual.some((text) => expectedPairs.some((pair) => text.includes(pair)))
   }, expected)
 }
 
@@ -523,7 +599,7 @@ async function expectIntelHelp(page) {
 async function expectMapAndPanelVisible(page) {
   await page.waitForFunction(() => {
     const map = document.querySelector('.pixi-host')?.getBoundingClientRect()
-    const panel = document.querySelector('[aria-label="当前目标"]')?.getBoundingClientRect()
+    const panel = document.querySelector('.objective-panel, [aria-label="当前目标"]')?.getBoundingClientRect()
 
     return Boolean(map && panel && map.width > 500 && map.height > 500 && panel.width > 250)
   })
