@@ -1,0 +1,269 @@
+{
+  "version": 1,
+  "style": "C faceted low-poly",
+  "status": "first-modeling-pass",
+  "units": "meters",
+  "sourceUp": "Z",
+  "gltfUp": "Y",
+  "sourceFront": "-Y",
+  "animation": "Object-pivot clips; not skeletal character rigs",
+  "assets": [
+    {
+      "id": "wheat-field",
+      "reference": "05-wheat-field.png",
+      "triangles": 9732,
+      "meshObjects": 1,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.5645,
+          -1.5787,
+          0.0
+        ],
+        [
+          1.4,
+          1.5845,
+          0.864
+        ]
+      ],
+      "glbBytes": 919788
+    },
+    {
+      "id": "plowed-field",
+      "reference": "06-plowed-field-v2.png",
+      "triangles": 1156,
+      "meshObjects": 1,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.4,
+          -1.4,
+          0.0
+        ],
+        [
+          1.4,
+          1.4,
+          0.1842
+        ]
+      ],
+      "glbBytes": 119696
+    },
+    {
+      "id": "vegetable-field",
+      "reference": "07-vegetable-field.png",
+      "triangles": 1676,
+      "meshObjects": 1,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.4,
+          -1.4,
+          -0.01
+        ],
+        [
+          1.4,
+          1.4,
+          0.39
+        ]
+      ],
+      "glbBytes": 173724
+    },
+    {
+      "id": "timber-bridge",
+      "reference": "09-timber-bridge-v2.png",
+      "triangles": 2628,
+      "meshObjects": 1,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.195,
+          -2.9,
+          0.0
+        ],
+        [
+          1.195,
+          2.9,
+          2.3
+        ]
+      ],
+      "glbBytes": 207220
+    },
+    {
+      "id": "fishing-boat",
+      "reference": "12-fishing-boat-v2.png",
+      "triangles": 2052,
+      "meshObjects": 3,
+      "animatedPivots": [
+        "Oar_L",
+        "Oar_R"
+      ],
+      "boundsMeters": [
+        [
+          -2.1848,
+          -2.415,
+          0.0
+        ],
+        [
+          2.1848,
+          2.1425,
+          1.04
+        ]
+      ],
+      "glbBytes": 154440
+    },
+    {
+      "id": "river-fish",
+      "reference": "24-river-fish-v2.png",
+      "triangles": 441,
+      "meshObjects": 2,
+      "animatedPivots": [
+        "Tail"
+      ],
+      "boundsMeters": [
+        [
+          -0.35,
+          -0.73,
+          -0.01
+        ],
+        [
+          0.35,
+          1.05,
+          0.85
+        ]
+      ],
+      "glbBytes": 50992
+    },
+    {
+      "id": "sheep",
+      "reference": "20-sheep.png",
+      "triangles": 1136,
+      "meshObjects": 3,
+      "animatedPivots": [
+        "Head",
+        "Tail"
+      ],
+      "boundsMeters": [
+        [
+          -0.4318,
+          -1.04,
+          0.0
+        ],
+        [
+          0.4588,
+          0.8946,
+          1.51
+        ]
+      ],
+      "glbBytes": 116632
+    },
+    {
+      "id": "pine-tree",
+      "reference": "25-pine-tree.png",
+      "triangles": 554,
+      "meshObjects": 1,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.008,
+          -1.1615,
+          0.0
+        ],
+        [
+          1.0598,
+          0.9946,
+          4.14
+        ]
+      ],
+      "glbBytes": 50648
+    },
+    {
+      "id": "berry-shrub",
+      "reference": "27-berry-shrub.png",
+      "triangles": 524,
+      "meshObjects": 1,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -0.7697,
+          -0.4293,
+          -0.0165
+        ],
+        [
+          0.7603,
+          0.3816,
+          1.338
+        ]
+      ],
+      "glbBytes": 56272
+    },
+    {
+      "id": "reeds",
+      "reference": "29-reeds-v2.png",
+      "triangles": 510,
+      "meshObjects": 5,
+      "animatedPivots": [
+        "Reed_0",
+        "Reed_1",
+        "Reed_2",
+        "Reed_3",
+        "Reed_4"
+      ],
+      "boundsMeters": [
+        [
+          -0.4704,
+          -0.524,
+          -0.0008
+        ],
+        [
+          0.5744,
+          0.3971,
+          1.8094
+        ]
+      ],
+      "glbBytes": 62528
+    },
+    {
+      "id": "village-well",
+      "reference": "31-village-well.png",
+      "triangles": 1092,
+      "meshObjects": 1,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -0.98,
+          -0.79,
+          0.0
+        ],
+        [
+          1.02,
+          0.79,
+          2.315
+        ]
+      ],
+      "glbBytes": 82428
+    },
+    {
+      "id": "handcart",
+      "reference": "36-handcart-v2.png",
+      "triangles": 2020,
+      "meshObjects": 3,
+      "animatedPivots": [
+        "Wheel_L",
+        "Wheel_R"
+      ],
+      "boundsMeters": [
+        [
+          -0.95,
+          -2.495,
+          -0.018
+        ],
+        [
+          0.95,
+          0.89,
+          1.47
+        ]
+      ],
+      "glbBytes": 161332
+    }
+  ]
+}

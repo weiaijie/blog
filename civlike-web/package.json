@@ -19,6 +19,7 @@
     "smoke:combat": "npm run build && node scripts/run-combat-smoke.mjs",
     "smoke:30turn": "npm run build && node scripts/run-30-turn-loop.mjs",
     "assets:terrain:blender": "node scripts/blender/build-terrain-assets.mjs",
+    "assets:elements:blender": "blender --background --factory-startup --python-exit-code 1 --python scripts/blender/map_element_kit.py",
     "test": "vitest run",
     "typecheck": "tsc -b --pretty false",
     "verify:phase2": "npm run typecheck && npm run test && npm run lint && npm run perf:map:all && npm run perf:map:fog && npm run smoke:playable && npm run smoke:combat && npm run smoke:30turn"

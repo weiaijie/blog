@@ -1,0 +1,65 @@
+{
+  "assets": [
+    {
+      "id": "wheat-field",
+      "sourceObjects": 1297,
+      "roundTripTriangles": 9732
+    },
+    {
+      "id": "plowed-field",
+      "sourceObjects": 39,
+      "roundTripTriangles": 1156
+    },
+    {
+      "id": "vegetable-field",
+      "sourceObjects": 113,
+      "roundTripTriangles": 1676
+    },
+    {
+      "id": "timber-bridge",
+      "sourceObjects": 67,
+      "roundTripTriangles": 2628
+    },
+    {
+      "id": "fishing-boat",
+      "sourceObjects": 123,
+      "roundTripTriangles": 2052
+    },
+    {
+      "id": "river-fish",
+      "sourceObjects": 10,
+      "roundTripTriangles": 441
+    },
+    {
+      "id": "sheep",
+      "sourceObjects": 24,
+      "roundTripTriangles": 1136
+    },
+    {
+      "id": "pine-tree",
+      "sourceObjects": 9,
+      "roundTripTriangles": 554
+    },
+    {
+      "id": "berry-shrub",
+      "sourceObjects": 15,
+      "roundTripTriangles": 524
+    },
+    {
+      "id": "reeds",
+      "sourceObjects": 25,
+      "roundTripTriangles": 510
+    },
+    {
+      "id": "village-well",
+      "sourceObjects": 80,
+      "roundTripTriangles": 1092
+    },
+    {
+      "id": "handcart",
+      "sourceObjects": 57,
+      "roundTripTriangles": 2020
+    }
+  ],
+  "passed": 12
+}

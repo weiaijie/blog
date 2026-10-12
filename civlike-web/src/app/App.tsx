@@ -28,8 +28,16 @@ const TerrainWorldLab = lazy(() =>
   import('../ui/visualFeedback/TerrainWorldLab').then((module) => ({ default: module.TerrainWorldLab })),
 )
 
+const MapElementLab = lazy(() =>
+  import('../ui/visualFeedback/MapElementLab').then((module) => ({ default: module.MapElementLab })),
+)
+
 export function App() {
   const view = new URLSearchParams(window.location.search).get('view')
+
+  if (view === 'map-elements') {
+    return <Suspense fallback={<main>加载模型库...</main>}><MapElementLab /></Suspense>
+  }
 
   if (view === 'terrain-world') {
     return <Suspense fallback={<main>加载地形样区...</main>}><TerrainWorldLab /></Suspense>

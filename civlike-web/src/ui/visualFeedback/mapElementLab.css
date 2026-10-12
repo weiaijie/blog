@@ -1,0 +1,52 @@
+.element-lab { height: 100dvh; min-height: 620px; display: grid; grid-template: 64px 1fr / 216px minmax(0, 1fr); background: #fff; color: #263337; font-family: "Microsoft YaHei", system-ui, sans-serif; letter-spacing: 0; }
+.element-lab * { box-sizing: border-box; }
+.element-header { grid-column: 1 / -1; display: flex; align-items: center; gap: 22px; padding: 0 24px; border-bottom: 1px solid #dce1e3; }
+.element-header h1 { font-size: 19px; margin: 0; }
+.element-header span { color: #6d7478; font-size: 12px; }
+.element-header a { margin-left: auto; font-size: 13px; color: #326b56; }
+.element-library { border-right: 1px solid #dce1e3; overflow: auto; padding: 16px 10px; }
+.element-library select { display: none; }
+.element-library p { font-size: 12px; color: #727e81; padding: 12px; }
+.element-list { display: grid; gap: 3px; }
+.element-lab button, .element-tools a { border: 0; border-radius: 4px; background: transparent; color: inherit; font: inherit; cursor: pointer; box-shadow: none; }
+.element-list button { display: flex; justify-content: space-between; gap: 8px; align-items: center; width: 100%; min-height: 43px; padding: 10px 12px; text-align: left; font-size: 13px; }
+.element-list small { font-size: 11px; color: #78847f; }
+.element-lab button:hover { background: #edf1ef; }
+.element-lab button[aria-pressed="true"] { background: #e0eee5; color: #285d42; }
+.element-lab button:focus-visible, .element-lab a:focus-visible { outline: 2px solid #438565; outline-offset: 2px; }
+.element-workspace { position: relative; min-width: 0; min-height: 0; display: grid; grid-template: 56px minmax(280px, 1fr) 196px / minmax(0, 1fr); }
+.element-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 20px; border-bottom: 1px solid #dce1e3; }
+.element-views { display: flex; gap: 2px; }
+.element-views button { font-size: 12px; padding: 9px 12px; white-space: nowrap; }
+.element-tools { display: flex; gap: 4px; }
+.element-tools button, .element-tools a { display: grid; place-items: center; width: 34px; height: 34px; padding: 0; }
+.element-tools button:disabled { opacity: .3; cursor: default; }
+.element-stage { width: 100%; height: 100%; min-height: 0; overflow: hidden; background: #edf1f2; }
+.element-stage canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+.element-load-status { position: absolute; top: 80px; left: 24px; font-size: 13px; background: #fff; padding: 8px; max-width: calc(100% - 48px); overflow-wrap: anywhere; }
+.element-inspector { border-top: 1px solid #dce1e3; display: grid; grid-template-columns: minmax(200px, 1fr) minmax(0, 420px); gap: 20px; padding: 16px 24px; overflow: hidden; }
+.element-inspector h2 { font-size: 17px; margin: 0 0 16px; }
+.element-inspector dl { display: flex; gap: 24px; flex-wrap: wrap; margin: 0; }
+.element-inspector dl div { display: grid; gap: 6px; }
+.element-inspector dt { font-size: 11px; color: #7b8284; }
+.element-inspector dd { font-size: 13px; margin: 0; }
+.element-inspector figure { margin: 0; min-width: 0; }
+.element-inspector img { display: block; width: 100%; height: 138px; object-fit: contain; }
+.element-inspector figcaption { text-align: center; color: #7b8284; font-size: 11px; margin-top: 5px; }
+@media (max-width: 800px) {
+  .element-lab { min-height: 780px; height: auto; grid-template: 60px 58px 1fr / minmax(0, 1fr); }
+  .element-header { padding: 0 14px; gap: 12px; }
+  .element-header h1 { font-size: 16px; }
+  .element-header span { display: none; }
+  .element-library { border-right: 0; padding: 10px 14px; }
+  .element-library select { display: block; width: 100%; height: 36px; font: inherit; font-size: 14px; border: 1px solid #b9c4c0; background: #fff; color: #263337; }
+  .element-list, .element-library p { display: none; }
+  .element-workspace { grid-template-rows: auto 420px auto; }
+  .element-toolbar { padding: 8px; gap: 4px; flex-wrap: wrap; }
+  .element-views button { padding: 8px; }
+  .element-tools { gap: 1px; }
+  .element-tools button, .element-tools a { width: 30px; }
+  .element-inspector { grid-template-columns: 1fr; gap: 14px; padding: 16px; }
+  .element-inspector dl { gap: 22px; }
+  .element-inspector img { height: 150px; }
+}

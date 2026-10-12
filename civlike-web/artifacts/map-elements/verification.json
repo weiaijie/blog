@@ -1,0 +1,196 @@
+{
+  "results": [
+    {
+      "id": "wheat-field",
+      "hash": 3894751970,
+      "coverage": 0.12851163857355807,
+      "bounds": [
+        308,
+        150,
+        932,
+        496
+      ],
+      "width": 1224,
+      "height": 684,
+      "animated": false
+    },
+    {
+      "id": "plowed-field",
+      "hash": 1476557585,
+      "coverage": 0.1306233994572488,
+      "bounds": [
+        260,
+        185,
+        964,
+        482
+      ],
+      "width": 1224,
+      "height": 684,
+      "animated": false
+    },
+    {
+      "id": "vegetable-field",
+      "hash": 750263712,
+      "coverage": 0.13598880097848107,
+      "bounds": [
+        260,
+        169,
+        964,
+        476
+      ],
+      "width": 1224,
+      "height": 684,
+      "animated": false
+    },
+    {
+      "id": "timber-bridge",
+      "hash": 545615803,
+      "coverage": 0.08746607804915338,
+      "bounds": [
+        380,
+        171,
+        844,
+        530
+      ],
+      "width": 1224,
+      "height": 684,
+      "animated": false
+    },
+    {
+      "id": "fishing-boat",
+      "hash": 2046784875,
+      "coverage": 0.061838283071513206,
+      "bounds": [
+        396,
+        251,
+        816,
+        474
+      ],
+      "width": 1224,
+      "height": 684,
+      "animated": true
+    },
+    {
+      "id": "river-fish",
+      "hash": 2521011211,
+      "coverage": 0.046683293200321066,
+      "bounds": [
+        444,
+        204,
+        724,
+        497
+      ],
+      "width": 1224,
+      "height": 684,
+      "animated": true
+    },
+    {
+      "id": "sheep",
+      "hash": 1217338300,
+      "coverage": 0.09818254787295035,
+      "bounds": [
+        412,
+        113,
+        776,
+        505
+      ],
+      "width": 1224,
+      "height": 684,
+      "animated": true
+    },
+    {
+      "id": "pine-tree",
+      "hash": 1157802115,
+      "coverage": 0.06276994228490616,
+      "bounds": [
+        484,
+        108,
+        744,
+        575
+      ],
+      "width": 1224,
+      "height": 684,
+      "animated": false
+    },
+    {
+      "id": "berry-shrub",
+      "hash": 3084319680,
+      "coverage": 0.09030883308489088,
+      "bounds": [
+        464,
+        195,
+        796,
+        530
+      ],
+      "width": 1224,
+      "height": 684,
+      "animated": false
+    },
+    {
+      "id": "reeds",
+      "hash": 3430515915,
+      "coverage": 0.03281351526965562,
+      "bounds": [
+        536,
+        95,
+        768,
+        577
+      ],
+      "width": 1224,
+      "height": 684,
+      "animated": true
+    },
+    {
+      "id": "village-well",
+      "hash": 3761862051,
+      "coverage": 0.19089458395443948,
+      "bounds": [
+        348,
+        45,
+        868,
+        626
+      ],
+      "width": 1224,
+      "height": 684,
+      "animated": false
+    },
+    {
+      "id": "handcart",
+      "hash": 2062224939,
+      "coverage": 0.0675715705385468,
+      "bounds": [
+        380,
+        211,
+        844,
+        513
+      ],
+      "width": 1224,
+      "height": 684,
+      "animated": true
+    }
+  ],
+  "mobile": {
+    "hash": 2396448868,
+    "coverage": 0.16334554334554335,
+    "bounds": [
+      82,
+      79,
+      288,
+      302
+    ],
+    "width": 390,
+    "height": 420
+  },
+  "errors": [],
+  "checks": [
+    "12 models",
+    "reference loading",
+    "canvas pixels",
+    "framing",
+    "animations",
+    "pause",
+    "three views",
+    "wireframe",
+    "mobile switching"
+  ]
+}
