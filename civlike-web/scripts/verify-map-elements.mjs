@@ -168,24 +168,35 @@ try {
   await screenshot('living-field-mobile', true)
   const phenology = []
   await page.setViewportSize({ width: 1440, height: 1000 })
-  for (const id of ['berry-shrub-v4','apple-tree','pumpkin-patch','sunflower-field']) {
+  for (const id of ['berry-shrub-v4','apple-tree','pumpkin-patch','sunflower-field','corn-field','rice-paddy','vineyard','cotton-field']) {
     await page.goto(`${base}/?view=map-elements&element=${id}`)
     await page.waitForSelector('.element-stage[data-loaded="true"][data-organs]')
     await page.getByRole('button', { name:'暂停动画', exact:true }).click()
     const states = []
     for (const value of [5,49,82,100]) {
       await page.getByLabel('生长阶段', { exact:true }).fill(String(value))
-      await page.waitForTimeout(1700)
+      await page.waitForFunction((target) => Math.abs(Number(document.querySelector('.element-stage').dataset.growth)-target)<.0002,value/100,{ timeout:15000 })
+      await page.waitForTimeout(150)
       const organs = JSON.parse(await page.locator('.element-stage').getAttribute('data-organs'))
       const pixel = await pixels()
       states.push({ value, organs, hash:pixel.hash })
       await screenshot(`${id}-stage-${value}`)
       if (value === 5) assert(organs.shoot > 0 && !organs.fruit && !organs.blossom, `${id}: not a seedling`)
       if (value === 49) assert(organs.blossom > 0 && !organs.fruit, `${id}: flowers missing`)
-      if (value === 82) assert(organs[id === 'sunflower-field' ? 'seed' : 'fruit'] > 0, `${id}: fruit/seeds missing`)
+      if (value === 82) assert(organs[['sunflower-field','rice-paddy','cotton-field'].includes(id) ? 'seed' : 'fruit'] > 0, `${id}: fruit/seeds missing`)
       if (value === 100) assert(!organs.blossom, `${id}: petals persisted into senescence`)
     }
     assert.equal(new Set(states.map((state) => state.hash)).size,4, `${id}: visually identical life stages`)
+    await page.getByLabel('风力',{ exact:true }).fill('0')
+    await page.getByRole('button',{ name:'播放动画',exact:true }).click()
+    await page.waitForTimeout(300)
+    const calm=await pixels()
+    await page.waitForTimeout(350)
+    assert.equal((await pixels()).hash,calm.hash,`${id}: zero wind drifted`)
+    await page.getByLabel('风力',{ exact:true }).fill('60')
+    await page.waitForTimeout(300)
+    assert.notEqual((await pixels()).hash,calm.hash,`${id}: wind did not move organs`)
+    await page.getByRole('button',{ name:'暂停动画',exact:true }).click()
     await page.getByLabel('生长阶段', { exact:true }).fill('82')
     await page.waitForTimeout(1700)
     for (const view of ['正面','侧面','俯视']) {
@@ -196,7 +207,7 @@ try {
     }
     await page.getByRole('button', { name:'自由视角', exact:true }).click()
     await page.setViewportSize({ width:390,height:844 })
-    await page.getByLabel('生长阶段', { exact:true }).fill('82')
+    await page.getByLabel('生长阶段', { exact:true }).fill(id==='cotton-field' ? '100' : '82')
     await page.waitForTimeout(1700)
     const pixel = await pixels()
     assert(pixel.coverage>.007 && pixel.bounds[0]>0 && pixel.bounds[2]<pixel.width-1, `${id}: mobile blank/clipped`)
@@ -207,7 +218,7 @@ try {
   }
   await page.getByRole('button', { name:'资产进度', exact:true }).click()
   assert.equal(await page.locator('.element-roadmap li').count(),108)
-  assert.equal(await page.locator('.element-roadmap li button:enabled').count(),30)
+  assert.equal(await page.locator('.element-roadmap li button:enabled').count(),34)
   await screenshot('roadmap')
   await page.setViewportSize({ width:390,height:844 })
   assert(await page.evaluate(() => document.querySelector('.element-roadmap').scrollWidth <= innerWidth), 'Mobile roadmap overflow')

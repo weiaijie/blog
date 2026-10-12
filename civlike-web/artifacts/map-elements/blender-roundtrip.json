@@ -184,7 +184,27 @@
       "id": "castle-wall",
       "sourceObjects": 330,
       "roundTripTriangles": 13572
+    },
+    {
+      "id": "corn-field",
+      "sourceObjects": 1122,
+      "roundTripTriangles": 23198
+    },
+    {
+      "id": "rice-paddy",
+      "sourceObjects": 1389,
+      "roundTripTriangles": 24394
+    },
+    {
+      "id": "vineyard",
+      "sourceObjects": 772,
+      "roundTripTriangles": 22422
+    },
+    {
+      "id": "cotton-field",
+      "sourceObjects": 792,
+      "roundTripTriangles": 22214
     }
   ],
-  "passed": 37
+  "passed": 41
 }

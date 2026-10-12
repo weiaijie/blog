@@ -764,6 +764,86 @@
         ]
       ],
       "glbBytes": 997488
+    },
+    {
+      "id": "corn-field",
+      "reference": "",
+      "triangles": 23198,
+      "meshObjects": 123,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.75,
+          -1.75,
+          0.0
+        ],
+        [
+          1.75,
+          1.75,
+          2.2178
+        ]
+      ],
+      "glbBytes": 2441192
+    },
+    {
+      "id": "rice-paddy",
+      "reference": "",
+      "triangles": 24394,
+      "meshObjects": 219,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.75,
+          -1.75,
+          -0.003
+        ],
+        [
+          1.75,
+          1.75,
+          0.9662
+        ]
+      ],
+      "glbBytes": 2205964
+    },
+    {
+      "id": "vineyard",
+      "reference": "",
+      "triangles": 22422,
+      "meshObjects": 93,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.75,
+          -1.75,
+          0.0
+        ],
+        [
+          1.75,
+          1.75,
+          1.53
+        ]
+      ],
+      "glbBytes": 2334780
+    },
+    {
+      "id": "cotton-field",
+      "reference": "",
+      "triangles": 22214,
+      "meshObjects": 195,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.75,
+          -1.75,
+          0.0
+        ],
+        [
+          1.75,
+          1.75,
+          1.0088
+        ]
+      ],
+      "glbBytes": 2353012
     }
   ]
 }

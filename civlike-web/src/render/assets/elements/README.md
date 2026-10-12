@@ -8,9 +8,24 @@
 
 独立页面提供自由旋转、正面、侧面、俯视、线框、动画暂停和 GLB 下载，同时展示对应三视图。此批次没有替换现有 `terrain-world` 地图元素。
 
+### 作物扩展样板
+
+当前 34 类模型、41 个版本，规划 108 个独立资产。新增 `corn-field`、`rice-paddy`、`vineyard`、`cotton-field`，例如 `/?view=map-elements&element=cotton-field`。
+
+- 玉米有节间/叶鞘、交错披垂叶片、顶部雄穗、侧生果穗、苞叶和花丝。花药消退后保留干穗轴，籽粒随灌浆出现；成熟苞叶轻微松开。
+- 水稻有九丛分蘖、窄叶、分枝穗轴和独立籽粒。穗轴与附着籽粒一起随成熟下垂，花期也有完整支撑。田埂内是静态风格化浅水，不含灌排模拟或水面波动。
+- 葡萄有支架、拉线、木质主干、结果枝、卷须及逐级果柄；花退后果串从绿转紫。多年生建立与一年物候被压缩到同一展示条，不代表真实葡萄逐年修剪系统。
+- 棉花有掌状叶外观、花、闭合棉铃、四瓣铃壳和独立棉絮。铃壳以附着点为轴渐开，棉絮在后期出现，不只是绿球变白球。
+- 新节点继续使用物候层级，增加 `lifeOpenAngle` / `lifeOpenAxis` / 开裂区间及可选 `lifeDroopAngle` / `lifeDroopStart`。GLB 不含独立播放的生长剪辑，运行时为 `mapElementLifecycle.ts`。
+- 源文件、GLB 和阶段回退测试均保留；不接入真实播种、收获、肥力产量或地图级季节时间，也不将阶段计作新资产。
+
+```powershell
+blender --background --factory-startup --python-exit-code 1 --python scripts/blender/map_element_kit.py -- --assets corn-field rice-paddy vineyard cotton-field
+```
+
 ### 建筑施工样板
 
-当前 30 类模型、37 个版本，规划 108 个独立资产。乡村建筑有村舍、谷仓、风车磨坊、水车磨坊；防御建筑新增瞭望塔、城堡主楼、城门、城墙。可用 `/?view=map-elements&element=castle-gate` 预览。
+防御建筑批次完成时为 30 类模型、37 个版本。乡村建筑有村舍、谷仓、风车磨坊、水车磨坊；防御建筑有瞭望塔、城堡主楼、城门、城墙。可用 `/?view=map-elements&element=castle-gate` 预览。
 
 - 地基、墙层、木构架/椽架、分层屋瓦、窗框、门扇和附件独立建模。按施工顺序安装，根节点不统一缩放；临时脚手架在竣工时隐藏。
 - 支持施工滑条、约 30 秒自动施工、暂停、回退、功能运行与速度。风车帆叶、主轴、水轮、门扇和几何水流分别有转轴或流向，未竣工时不运转。

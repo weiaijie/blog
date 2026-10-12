@@ -7,7 +7,7 @@
         "organs": {
           "shoot": 1
         },
-        "hash": 1485614381
+        "hash": 2017353381
       },
       {
         "value": 49,
@@ -16,7 +16,7 @@
           "blossom": 8,
           "foliage": 8
         },
-        "hash": 1317829521
+        "hash": 4006679662
       },
       {
         "value": 82,
@@ -25,7 +25,7 @@
           "foliage": 8,
           "fruit": 8
         },
-        "hash": 3749344062
+        "hash": 999748205
       },
       {
         "value": 100,
@@ -35,7 +35,7 @@
           "fruit": 8,
           "litter": 8
         },
-        "hash": 745522687
+        "hash": 1178767678
       }
     ]
   },
@@ -47,7 +47,7 @@
         "organs": {
           "shoot": 1
         },
-        "hash": 876961403
+        "hash": 2982186622
       },
       {
         "value": 49,
@@ -56,7 +56,7 @@
           "blossom": 8,
           "foliage": 8
         },
-        "hash": 83988817
+        "hash": 659101465
       },
       {
         "value": 82,
@@ -65,7 +65,7 @@
           "foliage": 8,
           "fruit": 8
         },
-        "hash": 969754543
+        "hash": 566177154
       },
       {
         "value": 100,
@@ -75,7 +75,7 @@
           "fruit": 8,
           "litter": 8
         },
-        "hash": 293554925
+        "hash": 1698392647
       }
     ]
   },
@@ -87,7 +87,7 @@
         "organs": {
           "shoot": 3
         },
-        "hash": 917011868
+        "hash": 1853389367
       },
       {
         "value": 49,
@@ -96,7 +96,7 @@
           "foliage": 15,
           "blossom": 9
         },
-        "hash": 2443991984
+        "hash": 877453729
       },
       {
         "value": 82,
@@ -105,7 +105,7 @@
           "foliage": 15,
           "fruit": 9
         },
-        "hash": 2927644242
+        "hash": 1161155552
       },
       {
         "value": 100,
@@ -114,7 +114,7 @@
           "foliage": 15,
           "fruit": 9
         },
-        "hash": 3582316604
+        "hash": 678173365
       }
     ]
   },
@@ -126,7 +126,7 @@
         "organs": {
           "shoot": 9
         },
-        "hash": 3673086392
+        "hash": 2736209059
       },
       {
         "value": 49,
@@ -136,7 +136,7 @@
           "bud": 9,
           "blossom": 9
         },
-        "hash": 4261974548
+        "hash": 1858218307
       },
       {
         "value": 82,
@@ -146,7 +146,7 @@
           "blossom": 9,
           "seed": 9
         },
-        "hash": 2674973913
+        "hash": 3146963337
       },
       {
         "value": 100,
@@ -155,7 +155,169 @@
           "foliage": 36,
           "seed": 9
         },
-        "hash": 1062113630
+        "hash": 1052272602
+      }
+    ]
+  },
+  {
+    "id": "corn-field",
+    "states": [
+      {
+        "value": 5,
+        "organs": {
+          "shoot": 6
+        },
+        "hash": 1450944676
+      },
+      {
+        "value": 49,
+        "organs": {
+          "structure": 18,
+          "husk": 24,
+          "foliage": 36,
+          "blossom": 12
+        },
+        "hash": 556517040
+      },
+      {
+        "value": 82,
+        "organs": {
+          "structure": 18,
+          "fruit": 6,
+          "husk": 24,
+          "foliage": 36
+        },
+        "hash": 1541527337
+      },
+      {
+        "value": 100,
+        "organs": {
+          "structure": 18,
+          "fruit": 6,
+          "husk": 24,
+          "foliage": 36
+        },
+        "hash": 1364150939
+      }
+    ]
+  },
+  {
+    "id": "rice-paddy",
+    "states": [
+      {
+        "value": 5,
+        "organs": {
+          "shoot": 9
+        },
+        "hash": 2455689916
+      },
+      {
+        "value": 49,
+        "organs": {
+          "structure": 54,
+          "foliage": 81,
+          "blossom": 27
+        },
+        "hash": 3173737799
+      },
+      {
+        "value": 82,
+        "organs": {
+          "structure": 54,
+          "foliage": 81,
+          "seed": 27
+        },
+        "hash": 555127892
+      },
+      {
+        "value": 100,
+        "organs": {
+          "structure": 54,
+          "foliage": 81,
+          "seed": 27
+        },
+        "hash": 2487430626
+      }
+    ]
+  },
+  {
+    "id": "vineyard",
+    "states": [
+      {
+        "value": 5,
+        "organs": {
+          "shoot": 4
+        },
+        "hash": 1856238471
+      },
+      {
+        "value": 49,
+        "organs": {
+          "structure": 28,
+          "blossom": 8,
+          "foliage": 24
+        },
+        "hash": 2139934726
+      },
+      {
+        "value": 82,
+        "organs": {
+          "structure": 28,
+          "fruit": 8,
+          "foliage": 24
+        },
+        "hash": 3839240548
+      },
+      {
+        "value": 100,
+        "organs": {
+          "structure": 28,
+          "fruit": 8,
+          "foliage": 24
+        },
+        "hash": 1473893409
+      }
+    ]
+  },
+  {
+    "id": "cotton-field",
+    "states": [
+      {
+        "value": 5,
+        "organs": {
+          "shoot": 6
+        },
+        "hash": 1605880632
+      },
+      {
+        "value": 49,
+        "organs": {
+          "structure": 24,
+          "blossom": 18,
+          "foliage": 18
+        },
+        "hash": 1998184866
+      },
+      {
+        "value": 82,
+        "organs": {
+          "structure": 24,
+          "husk": 72,
+          "fruit": 18,
+          "seed": 18,
+          "foliage": 18
+        },
+        "hash": 1123726270
+      },
+      {
+        "value": 100,
+        "organs": {
+          "structure": 24,
+          "husk": 72,
+          "seed": 18,
+          "foliage": 18
+        },
+        "hash": 4294753614
       }
     ]
   }

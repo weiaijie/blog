@@ -4,6 +4,8 @@ import { defaultFieldSettings, type FieldSettings } from './mapElementGrowth'
 type Organ = {
   object: Object3D; scale: Vector3; rotation: Quaternion; role: string
   start: number; full: number; end: number; gone: number; bend: number; phase: number; position: Vector3; fallHeight: number
+  openAngle: number; openAxis: Vector3; openStart: number; openFull: number
+  droopAngle: number; droopStart: number
 }
 
 function smooth(value: number) { const t = Math.max(0, Math.min(1, value)); return t*t*(3-2*t) }
@@ -15,10 +17,12 @@ export function organEnvelope(progress: number, start: number, full: number, end
 export function botanicalStage(progress: number, family: string) {
   if (progress < .12) return '萌芽'
   if (progress < .36) return '展叶'
-  if (progress < .55) return '开花'
+  if (progress < .55) return family==='corn-field' ? '抽雄吐丝' : family==='rice-paddy' ? '抽穗开花' : '开花'
+  if (family==='cotton-field' && progress>=.76) return progress<.89 ? '棉铃开裂' : '吐絮留种'
+  if ((family==='rice-paddy' || family==='corn-field') && progress<.76) return '灌浆'
   if (progress < .76) return family === 'sunflower-field' ? '结籽' : '结果'
   if (progress < .89) return '成熟'
-  return family === 'apple-tree' || family === 'berry-shrub' ? '落叶休眠' : '衰老留种'
+  return family === 'apple-tree' || family === 'berry-shrub' || family === 'vineyard' ? '落叶休眠' : '衰老留种'
 }
 
 export function createBotanicalMotion(model: Group) {
@@ -30,7 +34,11 @@ export function createBotanicalMotion(model: Group) {
     if (typeof data.lifeRole === 'string') {
       organs.push({ object, scale: object.scale.clone(), rotation: object.quaternion.clone(), role: data.lifeRole,
         start: Number(data.lifeStart), full: Number(data.lifeFull), end: Number(data.lifeEnd), gone: Number(data.lifeGone),
-        bend: Number(data.lifeBend), phase: Number(data.lifePhase), position: object.position.clone(), fallHeight: Number(data.lifeFallHeight ?? 0) })
+        bend: Number(data.lifeBend), phase: Number(data.lifePhase), position: object.position.clone(), fallHeight: Number(data.lifeFallHeight ?? 0),
+        openAngle:Number(data.lifeOpenAngle ?? 0),openAxis:new Vector3().fromArray(data.lifeOpenAxis ?? [1,0,0]).normalize(),
+        openStart:Number(data.lifeOpenStart ?? .7),openFull:Number(data.lifeOpenFull ?? .92),
+        droopAngle:Number(data.lifeDroopAngle ?? (data.lifeRole==='seed' ? .30 : data.lifeRole==='foliage' ? .25 : 0)),
+        droopStart:Number(data.lifeDroopStart ?? (data.lifeRole==='seed' ? .8 : .86)) })
     }
     if (object instanceof Mesh) {
       for (const material of Array.isArray(object.material) ? object.material : [object.material]) {
@@ -43,7 +51,7 @@ export function createBotanicalMotion(model: Group) {
   let settings = { ...defaultFieldSettings }
   let progress = settings.growth
   let elapsed = 0
-  const angle = new Euler(), motion = new Quaternion(), scale = new Vector3()
+  const angle = new Euler(), motion = new Quaternion(), opening = new Quaternion(), scale = new Vector3()
   const unripe = new Color('#629644'), autumn = new Color('#b79049')
   const visible: Record<string, number> = {}
   return {
@@ -74,10 +82,11 @@ export function createBotanicalMotion(model: Group) {
           : scale.setScalar(Math.max(.001,amount)))
         const wind = (Math.sin(elapsed*1.6+organ.phase)+.23*Math.sin(elapsed*3.8+organ.phase*2))*settings.wind*organ.bend
         const unfold = role==='foliage' ? (1-smooth((p-organ.start)/.18))*.95 : 0
-        const droop = role==='seed' ? smooth((p-.8)/.2)*.30 : role==='foliage' ? smooth((p-.86)/.14)*.25 : 0
+        const droop = smooth((p-organ.droopStart)/Math.max(.001,1-organ.droopStart))*organ.droopAngle
         angle.set(wind+unfold+droop, 0, wind*.4)
         motion.setFromEuler(angle)
-        object.quaternion.copy(organ.rotation).multiply(motion)
+        const open = smooth((p-organ.openStart)/Math.max(.001,organ.openFull-organ.openStart))*organ.openAngle
+        object.quaternion.copy(organ.rotation).multiply(opening.setFromAxisAngle(organ.openAxis,open)).multiply(motion)
         if (role === 'litter') {
           const fall = smooth((p-.88)/.12)
           object.position.copy(organ.position)

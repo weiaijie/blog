@@ -19,6 +19,7 @@ import map_element_botany
 import map_element_fauna
 import map_element_buildings
 import map_element_fortifications
+import map_element_crops
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / 'src/render/assets/elements'
@@ -743,6 +744,10 @@ BUILDERS = {
     'castle-keep': (lambda: map_element_fortifications.build(sys.modules[__name__], 'castle-keep'), ''),
     'castle-gate': (lambda: map_element_fortifications.build(sys.modules[__name__], 'castle-gate'), ''),
     'castle-wall': (lambda: map_element_fortifications.build(sys.modules[__name__], 'castle-wall'), ''),
+    'corn-field': (lambda: map_element_crops.build(sys.modules[__name__], 'corn-field'), ''),
+    'rice-paddy': (lambda: map_element_crops.build(sys.modules[__name__], 'rice-paddy'), ''),
+    'vineyard': (lambda: map_element_crops.build(sys.modules[__name__], 'vineyard'), ''),
+    'cotton-field': (lambda: map_element_crops.build(sys.modules[__name__], 'cotton-field'), ''),
 }
 
 
