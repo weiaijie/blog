@@ -349,7 +349,27 @@
       "id": "rail-track",
       "sourceObjects": 986,
       "roundTripTriangles": 19456
+    },
+    {
+      "id": "rickshaw",
+      "sourceObjects": 83,
+      "roundTripTriangles": 2892
+    },
+    {
+      "id": "bicycle",
+      "sourceObjects": 194,
+      "roundTripTriangles": 3820
+    },
+    {
+      "id": "early-car",
+      "sourceObjects": 151,
+      "roundTripTriangles": 5604
+    },
+    {
+      "id": "freight-wagon",
+      "sourceObjects": 148,
+      "roundTripTriangles": 6812
     }
   ],
-  "passed": 70
+  "passed": 74
 }

@@ -11,6 +11,7 @@ import { createBuildingMotion, defaultBuildingSettings, type BuildingSettings, t
 import { createTerrainMotion, defaultTerrainSettings, type TerrainSettings, type TerrainState } from './mapElementTerrain'
 import { createHumanMotion, defaultHumanSettings, type HumanSettings, type HumanState } from './mapElementPeople'
 import { createRouteMotion, defaultRouteSettings, type RouteSettings, type RouteState } from './mapElementRoutes'
+import { createTransportMotion, defaultTransportSettings, type TransportSettings, type TransportState } from './mapElementTransport'
 
 export type ElementView = 'perspective' | 'front' | 'side' | 'top'
 export type ElementScene = {
@@ -24,6 +25,7 @@ export type ElementScene = {
   setTerrainSettings: (value: TerrainSettings) => void
   setHumanSettings: (value: HumanSettings) => void
   setRouteSettings: (value: RouteSettings) => void
+  setTransportSettings: (value: TransportSettings) => void
   destroy: () => void
 }
 
@@ -48,6 +50,7 @@ export function mountMapElement(
   onTerrain?: (value: TerrainState) => void,
   onHuman?: (value: HumanState) => void,
   onRoute?: (value: RouteState) => void,
+  onTransport?: (value: TransportState) => void,
 ): ElementScene {
   const renderer = new WebGLRenderer({ antialias: true, preserveDrawingBuffer: true })
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
@@ -79,6 +82,8 @@ export function mountMapElement(
   let human: ReturnType<typeof createHumanMotion>
   let humanSettings={...defaultHumanSettings}
   let route:ReturnType<typeof createRouteMotion>
+  let transport:ReturnType<typeof createTransportMotion>
+  let transportSettings={...defaultTransportSettings}
   let routeSettings={...defaultRouteSettings}
   const routeNeighbors:{model:Group;motion:NonNullable<ReturnType<typeof createRouteMotion>>;edge:number}[]=[]
   let terrainSettings=defaultTerrainSettings('grassland')
@@ -185,6 +190,9 @@ export function mountMapElement(
     human?.setSettings(humanSettings)
     human?.update(0,false)
     route=createRouteMotion(model)
+    transport=createTransportMotion(model)
+    transport?.setSettings(transportSettings)
+    transport?.update(0,false)
     if(route){
       const ports:{edge:number;offset:Vector3}[]=[]
       model.traverse((o)=>{if(typeof o.userData.routePort==='number')ports.push({edge:o.userData.routePort,offset:new Vector3().fromArray(o.userData.neighborOffsetGltf)})})
@@ -206,7 +214,7 @@ export function mountMapElement(
     setView(view)
     host.dataset.loaded = 'true'
     host.dataset.animations = String(gltf.animations.length)
-    onLoad(gltf.animations.length + (field.count || botanical.count || animal || building || terrain || route ? 1 : 0))
+    onLoad(gltf.animations.length + (field.count || botanical.count || animal || building || terrain || route || transport ? 1 : 0))
   }).catch((error: unknown) => {
     if (!destroyed) onError(error instanceof Error ? error.message : '模型加载失败')
   })
@@ -218,6 +226,11 @@ export function mountMapElement(
     const delta = previousTime ? Math.min((time - previousTime) / 1000, .05) : 0
     previousTime = time
     if (playing) mixer?.update(delta)
+    if(transport){
+      const state=transport.update(delta,playing)
+      host.dataset.transport=JSON.stringify(state)
+      if(time-lastGrowthReport>120){onTransport?.({...state});lastGrowthReport=time}
+    }
     if(route){
       const state=route.update(delta,playing)
       const ports=routeSettings.shape==='straight' ? [0,3] : routeSettings.shape==='bend' ? [0,2] : route.kind==='rail-track' ? [0,2,3] : [0,2,4]
@@ -267,6 +280,7 @@ export function mountMapElement(
     setBuildingSettings(value) { buildingSettings=value; building?.setSettings(value) },
     setTerrainSettings(value) { terrainSettings=value;terrain?.setSettings(value) },
     setHumanSettings(value) { humanSettings=value;human?.setSettings(value) },
+    setTransportSettings(value){transportSettings=value;transport?.setSettings(value)},
     setRouteSettings(value) {
       const changed=routeSettings.connected!==value.connected
       routeSettings=value;route?.setSettings(value)
@@ -302,6 +316,7 @@ export function mountMapElement(
       delete host.dataset.terrain
       delete host.dataset.human
       delete host.dataset.route
+      delete host.dataset.transport
     },
   }
 }

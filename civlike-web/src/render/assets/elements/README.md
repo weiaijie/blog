@@ -8,9 +8,32 @@
 
 独立页面提供自由旋转、正面、侧面、俯视、线框、动画暂停和 GLB 下载；已有三视参考的条目同时展示对应图片。此批次没有替换现有 `terrain-world` 地图元素。
 
+### 运输车辆与机构
+
+当前累计 65 类独立模型、74 个版本，108 类规划中剩余 43 类。新增人力车 `rickshaw`、自行车 `bicycle`、早期汽车 `early-car`、铁路货车厢 `freight-wagon`，均有可编辑 `.blend` 与分件 `.glb`。
+
+- 人力车有辐条轮、车辕、踏板、座垫/扶手和五根同轴篷架。布面顶点沿铰链扇形折叠，并保留小褶皱；不是整个车篷统一缩放。折叠时更新法线、包围球与包围盒。
+- 自行车有前后三角车架、前叉、座管、车把、曲柄/脚踏、前链盘、后链轮及 56 个运动链节。轮转角为滚动距离/轮半径；曲柄按 2.5:1 比例联动，脚踏反向补偿保持水平，链节按弧长沿闭环运动。
+- 早期汽车有散热器格栅、头灯、弧形挡泥板、透明风挡、双排座位和薄弧形布顶。前轮内外转角按轴距/轮距分别计算，方向盘随之转动；车门绕独立铰链打开，后部行李可移除。
+- 货车厢有两根车轴、带内侧轮缘的车轮、轴箱/板簧、木板地板、三层侧板、缓冲器/牵引接点和六件独立货箱。侧板打开和货箱逐件装卸由独立节点控制。
+- `TransportRoot` 保存 `routeProfile`、`wheelbase`、`track`、`cargoSlots`。货车轮面中心距 0.72 m，与已有轨道一致；轮面接触平面为 Y=0，轮缘下伸 0.017 m，放入直线轨道需整体抬至轨顶 0.28 m。实际轮面和钢轨通过射线接触测试，不只比较元数据。
+- 车辆使用游戏缩尺，不是上述历史实车复刻；路面总宽校验不等于双向车道或驾驶员尺寸适配。自行车头管采用简化竖直转向轴，没有后倾/拖曳距模型。钢轮、链节与转向均为机构展示，不是动力学求解。
+- 网页轮速表示等效滚动线速度，车体保持原地；支持倒转和暂停。开合只在轮速为零时允许；再次加速会先闭合机构，闭合前轮轴保持停止。装载为有限件数显隐，不包含搬运/货物库存系统。
+- 动态由 `mapElementTransport.ts` 读取节点元数据运行，GLB 没有烘焙剪辑，通用查看器不会自行播放。尚无驾乘者、马匹牵引、地图路径跟随、车轮碰撞、悬挂压缩、制动、车厢连挂或车辆 LOD。
+- 四款分别为 2,892 / 3,820 / 5,604 / 6,812 三角面，约 0.19 / 0.29 / 0.36 / 0.45 MB；最终专项绘制调用为 22 / 69 / 30 / 30。
+
+结构参考：[Science Museum 安全自行车](https://collection.sciencemuseumgroup.org.uk/objects/co25833/rover-safety-bicycle-1885)、[The Henry Ford 1913 旅行汽车](https://www.thehenryford.org/collections/explore/artifact/231335)、[Science Museum 敞式货车](https://collection.sciencemuseumgroup.org.uk/objects/co205953/12-ton-3-plank-open-wagon)。所有几何由本地脚本制作，没有下载第三方网格，也没有把网页图片冒充三视设计图。
+
+```powershell
+blender --background --factory-startup --python-exit-code 1 --python scripts/blender/map_element_kit.py -- --assets rickshaw bicycle early-car freight-wagon
+node scripts/verify-map-transport.mjs
+```
+
+预览：`/?view=map-elements&element=early-car`，另三款可从模型列表切换。
+
 ### 道路、轨道与邻接预览
 
-当前累计 61 类独立模型、70 个版本，108 类规划中剩余 47 类。新增土路 `dirt-road`、石板路 `stone-road`、柏油路 `asphalt-road`、铁路 `rail-track`；每款包含直线、弯道及岔口，形态不重复计数。
+此批完成时为 61 类独立模型、70 个版本。新增土路 `dirt-road`、石板路 `stone-road`、柏油路 `asphalt-road`、铁路 `rail-track`；每款包含直线、弯道及岔口，形态不重复计数。
 
 - 土路有实际车辙起伏、贴合地表的磨损带与散石；石路有错缝铺石、缝隙和收边石；柏油路区分路基、面层、标线与反光柱。三岔路面做网格布尔合并，不叠放共面路面。
 - 铁路有道砟、枕木、扣件、轨底/轨腰/轨头，岔口包含可移动尖轨和方向标。结构参考 [Network Rail 铁路构成](https://www.networkrail.co.uk/our-work/living-by-the-railway/)，所有网格由本地脚本制作，没有下载第三方模型。

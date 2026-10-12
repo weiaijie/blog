@@ -1432,6 +1432,86 @@
         ]
       ],
       "glbBytes": 1206936
+    },
+    {
+      "id": "rickshaw",
+      "reference": "",
+      "triangles": 2892,
+      "meshObjects": 9,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -0.58,
+          -1.6349,
+          0.0
+        ],
+        [
+          0.58,
+          0.6618,
+          1.7312
+        ]
+      ],
+      "glbBytes": 185172
+    },
+    {
+      "id": "bicycle",
+      "reference": "",
+      "triangles": 3820,
+      "meshObjects": 63,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -0.27,
+          -0.85,
+          0.0
+        ],
+        [
+          0.27,
+          0.9,
+          1.042
+        ]
+      ],
+      "glbBytes": 290932
+    },
+    {
+      "id": "early-car",
+      "reference": "",
+      "triangles": 5604,
+      "meshObjects": 9,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -0.6,
+          -0.94,
+          0.0
+        ],
+        [
+          0.6,
+          1.066,
+          1.3009
+        ]
+      ],
+      "glbBytes": 361012
+    },
+    {
+      "id": "freight-wagon",
+      "reference": "",
+      "triangles": 6812,
+      "meshObjects": 13,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -0.495,
+          -1.09,
+          -0.017
+        ],
+        [
+          0.522,
+          1.09,
+          0.925
+        ]
+      ],
+      "glbBytes": 447304
     }
   ]
 }
