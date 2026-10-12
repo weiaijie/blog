@@ -29,6 +29,8 @@ import map_element_people
 import map_element_routes
 import map_element_transport
 import map_element_mounted
+import map_element_steam
+import map_element_vessels
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / 'src/render/assets/elements'
@@ -792,6 +794,9 @@ BUILDERS = {
     'freight-wagon': (lambda: map_element_transport.build(sys.modules[__name__], 'freight-wagon'), ''),
     'rider': (lambda: map_element_mounted.build(sys.modules[__name__], 'rider'), ''),
     'horse-cart': (lambda: map_element_mounted.build(sys.modules[__name__], 'horse-cart'), ''),
+    'steam-locomotive': (lambda: map_element_steam.build(sys.modules[__name__]), ''),
+    'sailboat': (lambda: map_element_vessels.build(sys.modules[__name__], 'sailboat'), ''),
+    'river-barge': (lambda: map_element_vessels.build(sys.modules[__name__], 'river-barge'), ''),
 }
 
 

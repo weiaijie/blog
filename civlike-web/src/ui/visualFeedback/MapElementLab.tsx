@@ -12,6 +12,7 @@ import { defaultHumanSettings, humanModes, type HumanSettings, type HumanState }
 import { defaultRouteSettings, routeStage, type RouteSettings, type RouteShape, type RouteState } from '../../render/visuals/mapElementRoutes'
 import { defaultTransportSettings, transportAccessLabels, type TransportSettings, type TransportState } from '../../render/visuals/mapElementTransport'
 import { defaultMountedSettings, type MountedSettings, type MountedState } from '../../render/visuals/mapElementMounted'
+import { defaultVesselSettings, type VesselSettings, type VesselState } from '../../render/visuals/mapElementVessels'
 import './mapElementLab.css'
 
 const views: [ElementView, string][] = [['perspective', '自由视角'], ['front', '正面'], ['side', '侧面'], ['top', '俯视']]
@@ -57,7 +58,8 @@ function ElementPreview({ asset, select, view, setView }: {
   view: ElementView; setView: (view: ElementView) => void
 }) {
   const versions = mapElements.filter((candidate) => candidate.family === asset.family)
-  const living = !asset.mounted && !asset.transport && !asset.route && !asset.animal && !asset.human && !asset.building && !asset.terrain && (asset.revision >= 3 || asset.lifecycle)
+  const mechanical=asset.vessel || asset.mounted || asset.transport || asset.route || asset.human
+  const living = !mechanical && !asset.animal && !asset.building && !asset.terrain && (asset.revision >= 3 || asset.lifecycle)
   const growing = living && asset.family !== 'plowed-field'
   const host = useRef<HTMLDivElement>(null)
   const scene = useRef<ElementScene>()
@@ -83,6 +85,9 @@ function ElementPreview({ asset, select, view, setView }: {
   const [transportState,setTransportState]=useState<TransportState>({distance:0,speed:.7,steering:0,access:0,cargo:0})
   const [mountedSettings,setMountedSettings]=useState<MountedSettings>({...defaultMountedSettings})
   const [mountedState,setMountedState]=useState<MountedState>({distance:0,speed:.7,cargo:0,stride:0})
+  const [vesselSettings,setVesselSettings]=useState<VesselSettings>({...defaultVesselSettings})
+  const [vesselState,setVesselState]=useState<VesselState>({distance:0,speed:.7,rudder:0,cargo:0,heave:0})
+  function updateVessel(patch:Partial<VesselSettings>){setVesselSettings((previous)=>({...previous,...patch}));setPlaying(true);scene.current?.setPlaying(true)}
   function updateMounted(patch:Partial<MountedSettings>){setMountedSettings((previous)=>({...previous,...patch}));setPlaying(true);scene.current?.setPlaying(true)}
   function updateTransport(patch:Partial<TransportSettings>){setTransportSettings((previous)=>({...previous,...patch}));setPlaying(true);scene.current?.setPlaying(true)}
   function updateRoute(patch:Partial<RouteSettings>){setRouteSettings((previous)=>({...previous,progress:previous.automatic ? routeState.progress : previous.progress,...patch}))}
@@ -107,7 +112,7 @@ function ElementPreview({ asset, select, view, setView }: {
     if (!host.current) return
     const handle = mountMapElement(host.current, asset.url, (count) => {
       setStatus('已加载'); setHasAnimation(count > 0)
-    }, (message) => setStatus(`加载失败：${message}`), setProgress, setAnimalState, setBuildingState, setTerrainState, setHumanState, setRouteState, setTransportState, setMountedState)
+    }, (message) => setStatus(`加载失败：${message}`), setProgress, setAnimalState, setBuildingState, setTerrainState, setHumanState, setRouteState, setTransportState, setMountedState, setVesselState)
     scene.current = handle
     return () => { scene.current = undefined; handle.destroy() }
   }, [asset.url])
@@ -120,7 +125,8 @@ function ElementPreview({ asset, select, view, setView }: {
   useEffect(() => { scene.current?.setRouteSettings(routeSettings) }, [routeSettings])
   useEffect(() => { scene.current?.setTransportSettings(transportSettings) }, [transportSettings])
   useEffect(() => { scene.current?.setMountedSettings(mountedSettings) }, [mountedSettings])
-  return <section className={`element-workspace${living || asset.mounted || asset.transport || asset.route || asset.animal || asset.human || asset.building || asset.terrain ? ' element-workspace-living' : ''}`} aria-label={asset.label}>
+  useEffect(() => { scene.current?.setVesselSettings(vesselSettings) }, [vesselSettings])
+  return <section className={`element-workspace${living || mechanical || asset.animal || asset.building || asset.terrain ? ' element-workspace-living' : ''}`} aria-label={asset.label}>
     <div className="element-toolbar">
       <div className="element-views" role="group" aria-label="相机视角">{views.map(([id, label]) => <button key={id} aria-pressed={view === id} onClick={() => { setView(id); scene.current?.setView(id) }}>{label}</button>)}</div>
       <div className="element-tools">
@@ -134,7 +140,18 @@ function ElementPreview({ asset, select, view, setView }: {
     <div className="element-stage" ref={host} data-asset={asset.id} />
     {status !== '已加载' && <div className="element-load-status" role="status">{status}</div>}
     <aside className="element-inspector">
-      <div><div className="element-revision-heading"><h2>{asset.label}</h2>{versions.length > 1 && <div className="element-revisions" role="group" aria-label="模型版本">{versions.map((candidate) => <button key={candidate.id} aria-pressed={candidate.id === asset.id} onClick={() => select(candidate)}>{elementVersionLabel(candidate.revision)}</button>)}</div>}</div><dl><div><dt>三角面</dt><dd>{asset.triangles.toLocaleString()}</dd></div><div><dt>GLB</dt><dd>{(asset.glbBytes / 1024).toFixed(0)} KB</dd></div><div><dt>动画</dt><dd>{asset.mounted ? '步态 / 骑乘' : asset.transport ? '轮轴 / 机构' : asset.route ? '铺设 / 风动' : asset.terrain ? asset.terrainMotion : asset.building ? '施工 / 运行' : asset.animal ? '成长 / 行为' : asset.lifecycle ? '物候 / 风动' : living ? '网页风动' : asset.animatedPivots.length ? 'GLB 动画' : '无'}</dd></div><div><dt>版本</dt><dd>{`V${asset.revision}`}</dd></div></dl>
+      <div><div className="element-revision-heading"><h2>{asset.label}</h2>{versions.length > 1 && <div className="element-revisions" role="group" aria-label="模型版本">{versions.map((candidate) => <button key={candidate.id} aria-pressed={candidate.id === asset.id} onClick={() => select(candidate)}>{elementVersionLabel(candidate.revision)}</button>)}</div>}</div><dl><div><dt>三角面</dt><dd>{asset.triangles.toLocaleString()}</dd></div><div><dt>GLB</dt><dd>{(asset.glbBytes / 1024).toFixed(0)} KB</dd></div><div><dt>动画</dt><dd>{asset.vessel ? (asset.family === 'sailboat' ? '帆舵 / 起伏' : '推进 / 起伏') : asset.mounted ? '步态 / 骑乘' : asset.transport ? '轮轴 / 机构' : asset.route ? '铺设 / 风动' : asset.terrain ? asset.terrainMotion : asset.building ? '施工 / 运行' : asset.animal ? '成长 / 行为' : asset.lifecycle ? '物候 / 风动' : living ? '网页风动' : asset.animatedPivots.length ? 'GLB 动画' : '无'}</dd></div><div><dt>版本</dt><dd>{`V${asset.revision}`}</dd></div></dl>
+        {asset.vessel && <div className="element-field-controls">
+          <label className="element-slider"><span>波浪 <output>{Math.round(vesselSettings.waves*100)}%</output></span><input aria-label="波浪" type="range" min="0" max="100" value={Math.round(vesselSettings.waves*100)} onChange={(event)=>updateVessel({waves:Number(event.target.value)/100})} /></label>
+          <label className="element-slider"><span>舵角 <output>{Math.round(vesselState.rudder*180/Math.PI)}°</output></span><input aria-label="舵角" type="range" min="-25" max="25" value={Math.round(vesselSettings.rudder*180/Math.PI)} onChange={(event)=>updateVessel({rudder:Number(event.target.value)*Math.PI/180})} /></label>
+          {asset.family==='sailboat' ? <>
+            <label className="element-slider"><span>风力 <output>{Math.round(vesselSettings.wind*100)}%</output></span><input aria-label="风力" type="range" min="0" max="100" value={Math.round(vesselSettings.wind*100)} onChange={(event)=>updateVessel({wind:Number(event.target.value)/100})} /></label>
+            <label className="element-slider"><span>帆角 <output>{Math.round(vesselSettings.trim*180/Math.PI)}°</output></span><input aria-label="帆角" type="range" min="-48" max="48" value={Math.round(vesselSettings.trim*180/Math.PI)} onChange={(event)=>updateVessel({trim:Number(event.target.value)*Math.PI/180})} /></label>
+          </> : <>
+            <label className="element-slider"><span>推进速度 <output>{vesselState.speed.toFixed(1)} m/s</output></span><input aria-label="推进速度" type="range" min="-100" max="200" value={Math.round(vesselSettings.speed*100)} onChange={(event)=>updateVessel({speed:Number(event.target.value)/100})} /></label>
+            <label className="element-slider"><span>装载 <output>{vesselState.cargo} 件</output></span><input aria-label="装载" type="range" min="0" max="6" value={Math.round(vesselSettings.load*6)} onChange={(event)=>updateVessel({load:Number(event.target.value)/6})} /></label>
+          </>}
+        </div>}
         {asset.mounted && <div className="element-field-controls">
           <label className="element-slider"><span>步行速度 <output>{mountedState.speed.toFixed(1)} m/s</output></span><input aria-label="步行速度" type="range" min="0" max="140" value={Math.round(mountedSettings.speed*100)} onChange={(event)=>updateMounted({speed:Number(event.target.value)/100})} /></label>
           {asset.family==='horse-cart'&&<label className="element-slider"><span>装载 <output>{mountedState.cargo} 件</output></span><input aria-label="装载" type="range" min="0" max="4" value={Math.round(mountedSettings.load*4)} onChange={(event)=>updateMounted({load:Number(event.target.value)/4})} /></label>}
@@ -180,7 +197,7 @@ function ElementPreview({ asset, select, view, setView }: {
           {growing && <div className="element-growth-actions"><label><input type="checkbox" checked={settings.automatic} onChange={(event) => { updateField({ automatic: event.target.checked, growth: progress >= .99 ? .02 : progress }); if (event.target.checked) { setPlaying(true); scene.current?.setPlaying(true) } }} />自动生长</label><button title="重新播种" aria-label="重新播种" onClick={() => updateField({ growth: 0, automatic: false })}><Sprout size={17} /></button><button title="随机长势" aria-label="随机长势" onClick={() => updateField({ seed: settings.seed + 1 })}><Shuffle size={17} /></button></div>}
         </div>}
       </div>
-      {asset.referenceUrl ? <figure><a href={asset.referenceUrl} target="_blank" rel="noreferrer"><img src={asset.referenceUrl} alt={`${asset.label}三视参考图`} /></a><figcaption>设计参考</figcaption></figure> : asset.mounted || asset.transport || asset.human || asset.route ? null : asset.terrain ? !aridTerrains.has(asset.family) && <div className="element-phenology" aria-label="地貌季相">{terrainSeasons.map((label,index)=><button key={label} aria-pressed={Math.abs(terrainState.phase-index/4)<.10} onClick={()=>updateTerrain({phase:index/4,snow:terrainSnow(asset.family,index/4),automatic:false})}>{label}</button>)}</div> : asset.building ? <div className="element-phenology" aria-label="施工阶段">{[.08,.30,.52,.78,1].map((value) => <button key={value} aria-pressed={Math.abs(buildingState.progress-value)<.08} onClick={() => updateBuilding({ progress:value,automatic:false })}>{buildingStage(value)}</button>)}</div> : asset.animal ? <div className="element-phenology" aria-label="年龄阶段">{([['幼体',.04],['亚成体',.5],['成年',1]] as const).map(([label,age]) => <button key={label} aria-pressed={Math.abs(animalState.age-age)<.1} onClick={() => updateAnimal({ age,automatic:false })}>{label}</button>)}</div> : <div className="element-phenology" aria-label="物候阶段">{[.05,.25,.47,.65,.81,.97].map((value) => <button key={value} aria-pressed={Math.abs(progress-value)<.08} onClick={() => updateField({ growth: value, automatic: false })}>{botanicalStage(value, asset.family)}</button>)}</div>}
+      {asset.referenceUrl ? <figure><a href={asset.referenceUrl} target="_blank" rel="noreferrer"><img src={asset.referenceUrl} alt={`${asset.label}三视参考图`} /></a><figcaption>设计参考</figcaption></figure> : mechanical ? null : asset.terrain ? !aridTerrains.has(asset.family) && <div className="element-phenology" aria-label="地貌季相">{terrainSeasons.map((label,index)=><button key={label} aria-pressed={Math.abs(terrainState.phase-index/4)<.10} onClick={()=>updateTerrain({phase:index/4,snow:terrainSnow(asset.family,index/4),automatic:false})}>{label}</button>)}</div> : asset.building ? <div className="element-phenology" aria-label="施工阶段">{[.08,.30,.52,.78,1].map((value) => <button key={value} aria-pressed={Math.abs(buildingState.progress-value)<.08} onClick={() => updateBuilding({ progress:value,automatic:false })}>{buildingStage(value)}</button>)}</div> : asset.animal ? <div className="element-phenology" aria-label="年龄阶段">{([['幼体',.04],['亚成体',.5],['成年',1]] as const).map(([label,age]) => <button key={label} aria-pressed={Math.abs(animalState.age-age)<.1} onClick={() => updateAnimal({ age,automatic:false })}>{label}</button>)}</div> : <div className="element-phenology" aria-label="物候阶段">{[.05,.25,.47,.65,.81,.97].map((value) => <button key={value} aria-pressed={Math.abs(progress-value)<.08} onClick={() => updateField({ growth: value, automatic: false })}>{botanicalStage(value, asset.family)}</button>)}</div>}
     </aside>
   </section>
 }

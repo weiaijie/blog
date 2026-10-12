@@ -379,7 +379,22 @@
       "id": "horse-cart",
       "sourceObjects": 397,
       "roundTripTriangles": 14938
+    },
+    {
+      "id": "steam-locomotive",
+      "sourceObjects": 306,
+      "roundTripTriangles": 13032
+    },
+    {
+      "id": "sailboat",
+      "sourceObjects": 89,
+      "roundTripTriangles": 2888
+    },
+    {
+      "id": "river-barge",
+      "sourceObjects": 165,
+      "roundTripTriangles": 5417
     }
   ],
-  "passed": 76
+  "passed": 79
 }

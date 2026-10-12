@@ -1552,6 +1552,66 @@
         ]
       ],
       "glbBytes": 1156956
+    },
+    {
+      "id": "steam-locomotive",
+      "reference": "",
+      "triangles": 13032,
+      "meshObjects": 27,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -0.565,
+          -1.42,
+          -0.017
+        ],
+        [
+          0.565,
+          1.42,
+          2.27
+        ]
+      ],
+      "glbBytes": 802484
+    },
+    {
+      "id": "sailboat",
+      "reference": "",
+      "triangles": 2888,
+      "meshObjects": 5,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -0.582,
+          -1.6645,
+          -0.69
+        ],
+        [
+          0.582,
+          1.56,
+          2.87
+        ]
+      ],
+      "glbBytes": 191428
+    },
+    {
+      "id": "river-barge",
+      "reference": "",
+      "triangles": 5417,
+      "meshObjects": 10,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -0.7509,
+          -1.9536,
+          -0.443
+        ],
+        [
+          0.7509,
+          2.07,
+          1.4125
+        ]
+      ],
+      "glbBytes": 410228
     }
   ]
 }

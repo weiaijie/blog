@@ -13,6 +13,7 @@ import { createHumanMotion, defaultHumanSettings, type HumanSettings, type Human
 import { createRouteMotion, defaultRouteSettings, type RouteSettings, type RouteState } from './mapElementRoutes'
 import { createTransportMotion, defaultTransportSettings, type TransportSettings, type TransportState } from './mapElementTransport'
 import { createMountedMotion, defaultMountedSettings, type MountedSettings, type MountedState } from './mapElementMounted'
+import { createVesselMotion, defaultVesselSettings, type VesselSettings, type VesselState } from './mapElementVessels'
 
 export type ElementView = 'perspective' | 'front' | 'side' | 'top'
 export type ElementScene = {
@@ -28,6 +29,7 @@ export type ElementScene = {
   setRouteSettings: (value: RouteSettings) => void
   setTransportSettings: (value: TransportSettings) => void
   setMountedSettings: (value: MountedSettings) => void
+  setVesselSettings: (value: VesselSettings) => void
   destroy: () => void
 }
 
@@ -54,6 +56,7 @@ export function mountMapElement(
   onRoute?: (value: RouteState) => void,
   onTransport?: (value: TransportState) => void,
   onMounted?: (value: MountedState) => void,
+  onVessel?: (value: VesselState) => void,
 ): ElementScene {
   const renderer = new WebGLRenderer({ antialias: true, preserveDrawingBuffer: true })
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
@@ -89,6 +92,8 @@ export function mountMapElement(
   let transportSettings={...defaultTransportSettings}
   let mounted:ReturnType<typeof createMountedMotion>
   let mountedSettings={...defaultMountedSettings}
+  let vessel:ReturnType<typeof createVesselMotion>
+  let vesselSettings={...defaultVesselSettings}
   let routeSettings={...defaultRouteSettings}
   const routeNeighbors:{model:Group;motion:NonNullable<ReturnType<typeof createRouteMotion>>;edge:number}[]=[]
   let terrainSettings=defaultTerrainSettings('grassland')
@@ -201,6 +206,9 @@ export function mountMapElement(
     mounted=createMountedMotion(model)
     mounted?.setSettings(mountedSettings)
     mounted?.update(0,false)
+    vessel=createVesselMotion(model)
+    vessel?.setSettings(vesselSettings)
+    vessel?.update(0,false)
     if(route){
       const ports:{edge:number;offset:Vector3}[]=[]
       model.traverse((o)=>{if(typeof o.userData.routePort==='number')ports.push({edge:o.userData.routePort,offset:new Vector3().fromArray(o.userData.neighborOffsetGltf)})})
@@ -222,7 +230,7 @@ export function mountMapElement(
     setView(view)
     host.dataset.loaded = 'true'
     host.dataset.animations = String(gltf.animations.length)
-    onLoad(gltf.animations.length + (field.count || botanical.count || animal || building || terrain || route || transport || mounted ? 1 : 0))
+    onLoad(gltf.animations.length + (field.count || botanical.count || animal || building || terrain || route || transport || mounted || vessel ? 1 : 0))
   }).catch((error: unknown) => {
     if (!destroyed) onError(error instanceof Error ? error.message : '模型加载失败')
   })
@@ -234,6 +242,11 @@ export function mountMapElement(
     const delta = previousTime ? Math.min((time - previousTime) / 1000, .05) : 0
     previousTime = time
     if (playing) mixer?.update(delta)
+    if(vessel){
+      const state=vessel.update(delta,playing)
+      host.dataset.vessel=JSON.stringify(state)
+      if(time-lastGrowthReport>120){onVessel?.({...state});lastGrowthReport=time}
+    }
     if(mounted){
       const state=mounted.update(delta,playing)
       host.dataset.mounted=JSON.stringify(state)
@@ -295,6 +308,7 @@ export function mountMapElement(
     setHumanSettings(value) { humanSettings=value;human?.setSettings(value) },
     setTransportSettings(value){transportSettings=value;transport?.setSettings(value)},
     setMountedSettings(value){mountedSettings=value;mounted?.setSettings(value)},
+    setVesselSettings(value){vesselSettings=value;vessel?.setSettings(value)},
     setRouteSettings(value) {
       const changed=routeSettings.connected!==value.connected
       routeSettings=value;route?.setSettings(value)
@@ -332,6 +346,7 @@ export function mountMapElement(
       delete host.dataset.route
       delete host.dataset.transport
       delete host.dataset.mounted
+      delete host.dataset.vessel
     },
   }
 }

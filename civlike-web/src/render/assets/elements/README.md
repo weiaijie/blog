@@ -8,9 +8,30 @@
 
 独立页面提供自由旋转、正面、侧面、俯视、线框、动画暂停和 GLB 下载；已有三视参考的条目同时展示对应图片。此批次没有替换现有 `terrain-world` 地图元素。
 
+### 蒸汽机车与船舶
+
+当前累计 70 类独立模型、79 个版本，108 类规划剩余 38 类。新增 `steam-locomotive`、`sailboat`、`river-barge`，均保留分件 Blender 源文件。不同装载和帆角状态不重复计数。
+
+- 蒸汽机车为三轴动轮的游戏缩尺罐式机车，区分锅炉、烟箱、水箱、驾驶室、煤斗、汽缸、十字头、活塞杆和联动杆。两侧曲柄相差四分之一转，连杆端点根据实际曲柄销求解，不是互不关联的摆动。蒸汽粒子随运行上升、扩散和淡出。
+- 轮面中心距 0.72 m，牵引接点高 0.42 m，与既有铁路货车厢一致。轮面 Y=0，装入直线铁路需整体抬至轨顶 0.28 m；六只轮子的真实轮面和钢轨做射线接触检查。完整一转逐帧检查杆长与实际几何端点。
+- 帆船包含有厚度的船壳、开放驾驶舱、舱口、座板、甲板接缝、桅杆/支索、主帆/前帆、帆桁、鳍式龙骨和尾舵。帆网格以三角重心权重鼓起，三条边保持固定；主帆随帆桁转动，桅侧边仍位于桅杆轴。
+- 河运货船为宽底货舱轮廓，包含六件独立货箱、侧通道、护舷绳、透明驾驶室、舵轮/控制台、舱门、排气管、三叶螺旋桨、尾舵上支架与底部支架。底支架位于螺旋桨扫掠范围下方，舵轮与尾舵联动。
+- 船舶 `waterline=0`、`routeProfile=water-channel-v1`，四个系泊接点保留法向。网页分别控制风力、帆角、波浪、舵角、推进速度和装载，船体有小幅升沉/纵摇/横摇，不缩放船体。负推进速度倒转螺旋桨；零动力且零波浪时静止。
+- 三款分别 13,032 / 2,888 / 5,417 三角面，802,484 / 191,428 / 410,228 字节，未提高基础预算。机构由网页驱动，没有烘焙蒸汽/船舶剪辑。
+- 当前没有水面流体、浮力求解、推进力学、帆船自动航向、地图航线、列车移动/连挂、交通调度或 LOD。系泊/轨道接口只是后续装配基础，不代表 200 格地图已通过性能验收。
+
+结构参考：[Science Museum 罐式机车藏品](https://collection.sciencemuseumgroup.org.uk/objects/co205737/london-brighton-and-south-coast-railway-locomotive-boxhill)、[Science Museum 蒸汽机构组件](https://collection.sciencemuseumgroup.org.uk/objects/co51790)、[Royal Museums Greenwich 平头货驳模型](https://www.rmg.co.uk/collections/objects/rmgc-object-67520)。这些仅供一般轮廓和构件关系参考，本批并非历史实船/实车复刻；没有下载第三方网格或伪造三视参考。
+
+```powershell
+blender --background --factory-startup --python-exit-code 1 --python scripts/blender/map_element_kit.py -- --assets steam-locomotive sailboat river-barge
+node scripts/verify-map-marine-steam.mjs
+```
+
+预览：`/?view=map-elements&element=steam-locomotive`、`/?view=map-elements&element=sailboat`、`/?view=map-elements&element=river-barge`。
+
 ### 骑手与双轮马车
 
-当前累计 67 类独立模型、76 个版本，108 类规划剩余 41 类。新增 `rider` 和 `horse-cart`；骑姿、车架及马具为新建几何，共用已有马匹躯干/头部/腿部模型，不另计重复的马或货物。
+此批完成时累计 67 类独立模型、76 个版本，108 类规划剩余 41 类。新增 `rider` 和 `horse-cart`；骑姿、车架及马具为新建几何，共用已有马匹躯干/头部/腿部模型，不另计重复的马或货物。
 
 - 骑手有马鞍、贴合实际躯干表面的鞍垫、肚带、独立马镫踏面、骑靴和握缰姿态；骨盆与鞍位同步，靴底与踏面做实际射线核对。人物采用分件坐姿与上身平衡，不是复用站姿强行穿过马背。
 - 马车为双轮木制货车，有车轴/板簧、前座/脚踏、车辕、胸带、后鞧、辕环、导缰环、牵引横木和四件货箱。轮圈是连续网格，车轮独立滚动。

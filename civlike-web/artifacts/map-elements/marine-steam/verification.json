@@ -1,0 +1,54 @@
+{
+  "results": [
+    {
+      "id": "steam-locomotive",
+      "drawCalls": 55,
+      "first": {
+        "hash": 1658322200,
+        "coverage": 0.07385076252723312,
+        "bounds": [
+          444,
+          96,
+          772,
+          396
+        ],
+        "w": 1224,
+        "h": 600
+      }
+    },
+    {
+      "id": "sailboat",
+      "drawCalls": 15,
+      "first": {
+        "hash": 1375178913,
+        "coverage": 0.0366557734204793,
+        "bounds": [
+          516,
+          146,
+          708,
+          437
+        ],
+        "w": 1224,
+        "h": 600
+      }
+    },
+    {
+      "id": "river-barge",
+      "drawCalls": 32,
+      "first": {
+        "hash": 2345526268,
+        "coverage": 0.053355119825708064,
+        "bounds": [
+          456,
+          182,
+          760,
+          428
+        ],
+        "w": 1224,
+        "h": 600
+      }
+    }
+  ],
+  "retries": [],
+  "errors": []
+}

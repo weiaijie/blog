@@ -1,4 +1,5 @@
 import { Group, Mesh, Object3D, Quaternion, Vector3 } from 'three'
+import { createSteamMotion } from './mapElementSteam'
 
 export type TransportSettings={speed:number;steering:number;access:boolean;load:number}
 export type TransportState={distance:number;speed:number;steering:number;access:number;cargo:number}
@@ -14,6 +15,7 @@ export function createTransportMotion(model:Group){
   let root:Object3D|undefined
   model.traverse((o)=>{if(o.userData.vehicleKind)root=o})
   if(!root)return undefined
+  const steam=createSteamMotion(model)
   const data=root.userData,kind=String(data.vehicleKind),rotating:{object:Object3D;base:Quaternion}[]=[],cargo:Object3D[]=[]
   const cloth:{mesh:Mesh;rest:Float32Array}[]=[],links:Object3D[]=[]
   model.traverse((o)=>{
@@ -70,6 +72,7 @@ export function createTransportMotion(model:Group){
         link.position.copy(a).lerp(b,t);tangent.copy(b).sub(a).normalize();link.quaternion.setFromUnitVectors(up,tangent)
       }
       const visible=Math.round(settings.load*cargo.length)
+      steam?.update(playing?delta:0,speed)
       for(const object of cargo)object.visible=object.userData.vehicleCargo<visible
       Object.assign(state,{distance,speed,steering,access,cargo:visible})
       return state
