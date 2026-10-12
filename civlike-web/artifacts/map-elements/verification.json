@@ -12,7 +12,8 @@
       ],
       "width": 1224,
       "height": 684,
-      "animated": false
+      "animated": false,
+      "drawCalls": 3
     },
     {
       "id": "plowed-field",
@@ -26,7 +27,8 @@
       ],
       "width": 1224,
       "height": 684,
-      "animated": false
+      "animated": false,
+      "drawCalls": 2
     },
     {
       "id": "vegetable-field",
@@ -40,7 +42,8 @@
       ],
       "width": 1224,
       "height": 684,
-      "animated": false
+      "animated": false,
+      "drawCalls": 3
     },
     {
       "id": "timber-bridge",
@@ -54,12 +57,13 @@
       ],
       "width": 1224,
       "height": 684,
-      "animated": false
+      "animated": false,
+      "drawCalls": 4
     },
     {
       "id": "fishing-boat",
-      "hash": 649536848,
-      "coverage": 0.06178095019684287,
+      "hash": 4125630717,
+      "coverage": 0.06180006115506632,
       "bounds": [
         400,
         251,
@@ -68,26 +72,28 @@
       ],
       "width": 1224,
       "height": 684,
-      "animated": true
+      "animated": true,
+      "drawCalls": 6
     },
     {
       "id": "river-fish",
-      "hash": 820306746,
-      "coverage": 0.046688070939876924,
+      "hash": 1395441799,
+      "coverage": 0.04670240415854451,
       "bounds": [
         444,
         204,
         724,
-        498
+        496
       ],
       "width": 1224,
       "height": 684,
-      "animated": true
+      "animated": true,
+      "drawCalls": 6
     },
     {
       "id": "sheep",
-      "hash": 2842062831,
-      "coverage": 0.09817299239383863,
+      "hash": 4042899556,
+      "coverage": 0.09818254787295035,
       "bounds": [
         412,
         113,
@@ -96,7 +102,8 @@
       ],
       "width": 1224,
       "height": 684,
-      "animated": true
+      "animated": true,
+      "drawCalls": 9
     },
     {
       "id": "pine-tree",
@@ -110,7 +117,8 @@
       ],
       "width": 1224,
       "height": 684,
-      "animated": false
+      "animated": false,
+      "drawCalls": 4
     },
     {
       "id": "berry-shrub",
@@ -124,21 +132,23 @@
       ],
       "width": 1224,
       "height": 684,
-      "animated": false
+      "animated": false,
+      "drawCalls": 5
     },
     {
       "id": "reeds",
-      "hash": 3271518902,
-      "coverage": 0.03286129266521423,
+      "hash": 270482411,
+      "coverage": 0.03284695944654665,
       "bounds": [
         536,
         95,
         780,
-        575
+        576
       ],
       "width": 1224,
       "height": 684,
-      "animated": true
+      "animated": true,
+      "drawCalls": 10
     },
     {
       "id": "village-well",
@@ -152,12 +162,13 @@
       ],
       "width": 1224,
       "height": 684,
-      "animated": false
+      "animated": false,
+      "drawCalls": 7
     },
     {
       "id": "handcart",
-      "hash": 1535200173,
-      "coverage": 0.06757634827810266,
+      "hash": 3815323688,
+      "coverage": 0.06760501471543784,
       "bounds": [
         380,
         211,
@@ -166,7 +177,8 @@
       ],
       "width": 1224,
       "height": 684,
-      "animated": true
+      "animated": true,
+      "drawCalls": 11
     },
     {
       "id": "plowed-field-v2",
@@ -180,7 +192,8 @@
       ],
       "width": 1224,
       "height": 684,
-      "animated": false
+      "animated": false,
+      "drawCalls": 4
     },
     {
       "id": "wheat-field-v2",
@@ -194,24 +207,70 @@
       ],
       "width": 1224,
       "height": 684,
-      "animated": false
+      "animated": false,
+      "drawCalls": 8
+    },
+    {
+      "id": "plowed-field-v3",
+      "hash": 3598639676,
+      "coverage": 0.11211328976034858,
+      "bounds": [
+        304,
+        160,
+        920,
+        414
+      ],
+      "width": 1224,
+      "height": 600,
+      "animated": true,
+      "drawCalls": 23
+    },
+    {
+      "id": "wheat-field-v3",
+      "hash": 224708490,
+      "coverage": 0.1292483660130719,
+      "bounds": [
+        304,
+        109,
+        920,
+        448
+      ],
+      "width": 1224,
+      "height": 600,
+      "animated": true,
+      "drawCalls": 362
+    },
+    {
+      "id": "vegetable-field-v3",
+      "hash": 161777011,
+      "coverage": 0.11213507625272331,
+      "bounds": [
+        304,
+        147,
+        920,
+        401
+      ],
+      "width": 1224,
+      "height": 600,
+      "animated": true,
+      "drawCalls": 77
     }
   ],
   "mobile": {
-    "hash": 749631734,
-    "coverage": 0.16332112332112333,
+    "hash": 2238152146,
+    "coverage": 0.13086691086691088,
     "bounds": [
-      82,
-      79,
-      288,
-      302
+      94,
+      93,
+      278,
+      293
     ],
     "width": 390,
     "height": 420
   },
   "errors": [],
   "checks": [
-    "14 models",
+    "17 models",
     "reference loading",
     "canvas pixels",
     "framing",
@@ -223,6 +282,11 @@
     "original/refined switching",
     "revision URL reload",
     "revision download",
-    "orbit interaction"
+    "orbit interaction",
+    "growth geometry",
+    "automatic growth",
+    "calm/wind",
+    "living mobile",
+    "draw call budget"
   ]
 }

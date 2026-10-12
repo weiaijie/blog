@@ -19,10 +19,10 @@ const labels: Record<string, [string, string]> = {
 
 export const mapElements = manifest.assets.map((asset) => ({
   ...asset,
-  family: asset.id.replace(/-v2$/, ''),
-  revision: asset.id.endsWith('-v2') ? 2 : 1,
-  label: labels[asset.id.replace(/-v2$/, '')]?.[0] ?? asset.id,
-  category: labels[asset.id.replace(/-v2$/, '')]?.[1] ?? '其他',
+  family: asset.id.replace(/-v\d+$/, ''),
+  revision: Number(asset.id.match(/-v(\d+)$/)?.[1] ?? 1),
+  label: labels[asset.id.replace(/-v\d+$/, '')]?.[0] ?? asset.id,
+  category: labels[asset.id.replace(/-v\d+$/, '')]?.[1] ?? '其他',
   url: models[`./elements/${asset.id}.glb`],
   referenceUrl: references[`../../../design/asset-orthographics-20261012-expanded/${asset.reference}`],
 }))
@@ -35,7 +35,12 @@ export const mapElementLibrary = [...new Set(mapElements.map((asset) => asset.fa
 export function initialMapElement(search: string): MapElement {
   const params = new URLSearchParams(search)
   const id = params.get('element') ?? 'wheat-field'
-  const exact = mapElements.find((asset) => asset.id === id)
-  if (exact && (params.get('revision') === '1' || exact.revision === 2)) return exact
-  return mapElementLibrary.find((asset) => asset.family === id) ?? mapElementLibrary[0]
+  const family = id.replace(/-v\d+$/, '')
+  const revision = Number(params.get('revision') ?? id.match(/-v(\d+)$/)?.[1])
+  return mapElements.find((asset) => asset.family === family && asset.revision === revision)
+    ?? mapElementLibrary.find((asset) => asset.family === family) ?? mapElementLibrary[0]
+}
+
+export function elementVersionLabel(revision: number) {
+  return revision === 1 ? '原版' : revision === 2 ? '改进版' : '自然动态'
 }

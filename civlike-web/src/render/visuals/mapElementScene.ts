@@ -4,12 +4,14 @@ import {
 } from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import { createFieldMotion, defaultFieldSettings, type FieldSettings } from './mapElementGrowth'
 
 export type ElementView = 'perspective' | 'front' | 'side' | 'top'
 export type ElementScene = {
   setView: (view: ElementView) => void
   setPlaying: (value: boolean) => void
   setWireframe: (value: boolean) => void
+  setFieldSettings: (value: FieldSettings) => void
   destroy: () => void
 }
 
@@ -28,6 +30,7 @@ export function mountMapElement(
   url: string,
   onLoad: (animations: number) => void,
   onError: (message: string) => void,
+  onGrowth?: (value: number) => void,
 ): ElementScene {
   const renderer = new WebGLRenderer({ antialias: true, preserveDrawingBuffer: true })
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
@@ -51,6 +54,9 @@ export function mountMapElement(
   controls.maxZoom = 5
   let model: Group | undefined
   let mixer: AnimationMixer | undefined
+  let field: ReturnType<typeof createFieldMotion> | undefined
+  let fieldSettings = { ...defaultFieldSettings }
+  let lastGrowthReport = 0
   let destroyed = false
   let playing = !window.matchMedia('(prefers-reduced-motion: reduce)').matches
   let wireframe = false
@@ -65,7 +71,8 @@ export function mountMapElement(
     const height = Math.max(1, host.clientHeight)
     renderer.setSize(width, height, false)
     const aspect = width / height
-    const halfHeight = size * .68 / Math.min(aspect, 1)
+    // Square ground tiles need room for their diagonal in narrow viewports.
+    const halfHeight = size * (aspect < 1.2 ? .76 : .68) / Math.min(aspect, 1)
     camera.left = -halfHeight * aspect
     camera.right = halfHeight * aspect
     camera.top = halfHeight
@@ -110,6 +117,10 @@ export function mountMapElement(
     bounds.getCenter(center)
     const extent = bounds.getSize(new Vector3())
     size = Math.max(extent.x, extent.y, extent.z, .1)
+    field = createFieldMotion(model)
+    field.setSettings(fieldSettings)
+    host.dataset.plants = String(field.cropCount)
+    field.update(0, false)
     if (gltf.animations.length) {
       mixer = new AnimationMixer(model)
       for (const clip of gltf.animations) mixer.clipAction(clip).play()
@@ -118,7 +129,7 @@ export function mountMapElement(
     setView(view)
     host.dataset.loaded = 'true'
     host.dataset.animations = String(gltf.animations.length)
-    onLoad(gltf.animations.length)
+    onLoad(gltf.animations.length + (field.count ? 1 : 0))
   }).catch((error: unknown) => {
     if (!destroyed) onError(error instanceof Error ? error.message : '模型加载失败')
   })
@@ -130,13 +141,20 @@ export function mountMapElement(
     const delta = previousTime ? Math.min((time - previousTime) / 1000, .05) : 0
     previousTime = time
     if (playing) mixer?.update(delta)
+    if (field?.count) {
+      const progress = field.update(delta, playing)
+      host.dataset.growth = progress.toFixed(4)
+      if (time - lastGrowthReport > 120) { onGrowth?.(progress); lastGrowthReport = time }
+    }
     controls.update()
     renderer.render(scene, camera)
+    host.dataset.drawCalls = String(renderer.info.render.calls)
     frame = requestAnimationFrame(animate)
   }
   frame = requestAnimationFrame(animate)
   return {
     setView, setPlaying(value) { playing = value }, setWireframe,
+    setFieldSettings(value) { fieldSettings = value; field?.setSettings(value) },
     destroy() {
       destroyed = true
       cancelAnimationFrame(frame)
@@ -149,6 +167,9 @@ export function mountMapElement(
       renderer.domElement.remove()
       delete host.dataset.loaded
       delete host.dataset.animations
+      delete host.dataset.plants
+      delete host.dataset.growth
+      delete host.dataset.drawCalls
     },
   }
 }

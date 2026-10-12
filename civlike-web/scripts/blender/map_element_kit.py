@@ -36,6 +36,9 @@ def palette():
         'loam_dark': '594332', 'loam': '725438', 'loam_light': '806044',
         'loam_dry': '8E6D4B', 'straw': 'B69543', 'straw_light': 'D3B45A',
         'straw_green': '8B8D42', 'ripe_grain': 'D9B867',
+        'field_blend': 'FFFFFF', 'cabbage_outer': '638B50',
+        'cabbage_middle': '82A963', 'cabbage_inner': 'A0BB77',
+        'edge_grass': '7B9250',
     }
     M.clear()
     for name, code in colors.items():
@@ -222,14 +225,23 @@ def plowed_refined():
     field_surface()
 
 
-def wheat_refined():
-    field_surface(36,24,28)
+def wheat_refined(natural=False):
+    if natural:
+        living_soil()
+    else:
+        field_surface(36,24,28)
     for row in range(6):
         for j in range(21):
+            if natural and RNG.random() < .085:
+                continue
+            before=set(bpy.context.scene.objects)
             x=-1.15+row*.46+RNG.uniform(-.085,.085)
             y=-1.25+j*.125+RNG.uniform(-.026,.026)
-            ground=field_height(x,y)
-            h=RNG.uniform(.64,.9)
+            if natural:
+                x += .055*math.sin(y*2.6+row*.4)
+                y += RNG.uniform(-.033,.033)
+            ground=living_height(x,y) if natural else field_height(x,y)
+            h=RNG.uniform(.52,.81) if natural else RNG.uniform(.64,.9)
             angle=RNG.uniform(0,math.tau)
             lean=Vector((math.cos(angle),math.sin(angle),0))*RNG.uniform(.07,.15)
             root=Vector((x,y,ground))
@@ -247,7 +259,8 @@ def wheat_refined():
             faces.extend([(2,1,0),(9,10,11)])
             stem_material='straw_green' if RNG.random()<.16 else 'straw'
             mesh('curved_wheat_stem',verts,faces,stem_material)
-            for level,turn in [(.28,0),(.52,2.65)]:
+            leaf_levels=[(.2,0),(.38,2.65),(.59,4.8)] if natural else [(.28,0),(.52,2.65)]
+            for level,turn in leaf_levels:
                 a=angle+turn
                 direction=Vector((math.cos(a),math.sin(a),0))
                 across=Vector((-direction.y,direction.x,0))
@@ -262,10 +275,11 @@ def wheat_refined():
                     faces.extend([(a,a+3,a+4,a+1),(a+1,a+4,a+5,a+2)])
                 mesh('arched_wheat_leaf',verts,faces,stem_material)
             head=centers[-1]
+            head_before=set(bpy.context.scene.objects)
             axis=Vector((lean.x*1.8,lean.y*1.8,1)).normalized()
             width=Vector((-math.sin(angle),math.cos(angle),0))
             depth=axis.cross(width).normalized()
-            for tier in range(4):
+            for tier in range(5 if natural else 4):
                 for side in [-1,1]:
                     p=head+axis*(tier*.037)+width*(side*.017)
                     # Tapered six-face kernels overlap around the rachis, not floating beads.
@@ -277,6 +291,142 @@ def wheat_refined():
             for side in [-1,0,1]:
                 p=head+axis*.135+width*side*.012
                 mesh('short_awn',[tuple(p-width*.002),tuple(p+width*.002),tuple(p+axis*.09+width*side*.014)],[(0,1,2)],'straw_light')
+            if natural:
+                head_node=pivot('WheatHead',head,list(set(bpy.context.scene.objects)-head_before))
+                head_node['cropPart']='head'
+                parts=list(set(bpy.context.scene.objects)-before)
+                root_parts=[obj for obj in parts if obj.parent is None]
+                plant=pivot('WheatPlant',root,root_parts)
+                plant['crop']='wheat'
+                plant['vigor']=RNG.uniform(.82,1.12)
+
+
+def soil_weight(x,y):
+    radius=((abs(x)/1.38)**6+(abs(y)/1.38)**6)**(1/6)
+    irregular=.045*math.sin(x*9+y*3)+.035*math.sin(y*11-x*2)
+    t=max(0,min(1,(1.12-radius+irregular)/.26))
+    return t*t*(3-2*t)
+
+
+def living_height(x,y):
+    # Shared flat outside border; cultivation dies away before the grassy perimeter.
+    edge=max(0,min(1,(1.75-max(abs(x),abs(y)))/.18))
+    phase=(x+.055*math.sin(y*2.6)+1.15)/.46
+    crown=(.5+.5*math.cos(phase*math.tau))**1.2
+    return .055+edge*(soil_weight(x,y)*(.082*crown+.008*math.sin(x*29+y*5)*math.cos(y*27))
+                       +.008*math.sin(x*8+y*5)*math.cos(y*6))
+
+
+def living_soil():
+    columns,rows=48,40
+    verts=[]
+    for j in range(rows+1):
+        for i in range(columns+1):
+            x,y=-1.75+i*3.5/columns,-1.75+j*3.5/rows
+            if 0<i<columns and 0<j<rows:
+                x+=RNG.uniform(-.02,.02);y+=RNG.uniform(-.02,.02)
+            verts.append((x,y,living_height(x,y)))
+    faces=[]
+    for j in range(rows):
+        for i in range(columns):
+            a=j*(columns+1)+i;b=a+1;c=a+columns+1;d=c+1
+            faces.extend([(a,b,d),(a,d,c)] if RNG.random()<.5 else [(a,b,c),(b,d,c)])
+    top_faces=len(faces)
+    boundary=(list(range(columns+1))+[j*(columns+1)+columns for j in range(1,rows+1)]
+              +[rows*(columns+1)+i for i in range(columns-1,-1,-1)]
+              +[j*(columns+1) for j in range(rows-1,0,-1)])
+    bottom=len(verts)
+    verts.extend([(verts[i][0],verts[i][1],0) for i in boundary])
+    for i,a in enumerate(boundary):
+        n=(i+1)%len(boundary)
+        faces.append((a,bottom+i,bottom+n,boundary[n]))
+    faces.append(tuple(reversed(range(bottom,len(verts)))))
+    obj=mesh('soil_grass_transition',verts,faces,'field_blend')
+    obj['fieldSurface']=True
+    colors=obj.data.color_attributes.new(name='SoilBlend',type='FLOAT_COLOR',domain='CORNER')
+    material=M['field_blend']
+    color_node=material.node_tree.nodes.new('ShaderNodeVertexColor')
+    color_node.layer_name='SoilBlend'
+    material.node_tree.links.new(color_node.outputs['Color'],material.node_tree.nodes['Principled BSDF'].inputs['Base Color'])
+    for face in obj.data.polygons:
+        for loop in face.loop_indices:
+            x,y,z=obj.data.vertices[obj.data.loops[loop].vertex_index].co
+            w=soil_weight(x,y)
+            crest=max(0,min(1,(z-.055)/.1))
+            earth=(.32+.15*crest,.235+.115*crest,.145+.075*crest)
+            grass=(.33,.42,.205)
+            shade=.96+.045*math.sin(x*15+y*13)
+            rgb=[((grass[c]*(1-w)+earth[c]*w)*shade) if face.index<top_faces else (.29,.24,.16)[c] for c in range(3)]
+            linear=[v/12.92 if v<=.04045 else ((v+.055)/1.055)**2.4 for v in rgb]
+            colors.data[loop].color=(*linear,1)
+    for _ in range(95):
+        x,y=RNG.uniform(-1.6,1.6),RNG.uniform(-1.6,1.6)
+        radius=RNG.uniform(.012,.035)
+        ico('embedded_crumb',(x,y,living_height(x,y)-radius*.16),
+            (radius*1.4,radius,radius*.6),'loam' if soil_weight(x,y)>.5 else 'earth',1)
+    for i in range(32):
+        angle=RNG.uniform(0,math.tau)
+        radius=RNG.uniform(1.4,1.63)
+        x,y=radius*math.cos(angle),radius*math.sin(angle)
+        if soil_weight(x,y)>.8:
+            continue
+        ground=living_height(x,y)
+        parts=[]
+        for j in range(5):
+            leaf=blade('margin_grass',x,y,RNG.uniform(.07,.16),angle+j*2.3,'edge_grass',.035)
+            for vertex in leaf.data.vertices:
+                vertex.co.x=x+(vertex.co.x-x)*.45
+                vertex.co.y=y+(vertex.co.y-y)*.45
+            leaf.location.z=ground
+            parts.append(leaf)
+        root=pivot('MarginGrass',(x,y,ground),parts)
+        root['crop']='edge-grass'
+
+
+def cabbage_leaf(center,angle,radius,height,width,mat):
+    direction=Vector((math.cos(angle),math.sin(angle),0))
+    across=Vector((-direction.y,direction.x,0))
+    verts=[]
+    for i in range(5):
+        t=i/4
+        distance=radius*math.sin(t*math.pi*.82)
+        lift=height*math.sin(t*math.pi*.58)
+        for j in [-1,0,1]:
+            span=width*math.sin(t*math.pi)*j
+            edge=.025*(j*j)*math.sin(t*math.pi)
+            p=Vector(center)+direction*distance+across*span+Vector((0,0,lift+edge))
+            verts.append(tuple(p))
+    faces=[]
+    for i in range(4):
+        a=i*3
+        faces.extend([(a,a+3,a+4,a+1),(a+1,a+4,a+5,a+2)])
+    return mesh('curled_cabbage_leaf',verts,faces,mat)
+
+
+def vegetables_living():
+    living_soil()
+    for row in range(5):
+        for col in range(4):
+            if (row,col) in [(0,2),(3,0)]:
+                continue
+            x=-.97+col*.63+RNG.uniform(-.075,.075)+.06*math.sin(row*1.7)
+            y=-1.03+row*.5+RNG.uniform(-.075,.075)
+            z=living_height(x,y)
+            angle=RNG.uniform(0,math.tau)
+            size=RNG.uniform(.78,1.12)
+            leaves=[];inner=[]
+            for layer,(count,r,h,w,material) in enumerate([
+                (8,.32,.085,.105,'cabbage_outer'),(7,.23,.19,.105,'cabbage_middle'),
+                (6,.145,.29,.095,'cabbage_inner')]):
+                for i in range(count):
+                    leaf=cabbage_leaf((x,y,z+.012+layer*.01),angle+i*2.399+layer*.6,
+                                      r*size*RNG.uniform(.92,1.1),h*size,w*size,material)
+                    (inner if layer==2 else leaves).append(leaf)
+            head=pivot('CabbageHeart',(x,y,z+.03),inner)
+            head['cropPart']='head'
+            root=pivot('CabbagePlant',(x,y,z),leaves+[head])
+            root['crop']='cabbage'
+            root['vigor']=RNG.uniform(.8,1.13)
 
 
 def wheat():
@@ -564,6 +714,9 @@ BUILDERS = {
     'handcart': (cart, '36-handcart-v2.png'),
     'plowed-field-v2': (plowed_refined, '06-plowed-field-v2.png'),
     'wheat-field-v2': (wheat_refined, '05-wheat-field.png'),
+    'plowed-field-v3': (living_soil, '06-plowed-field-v2.png'),
+    'wheat-field-v3': (lambda: wheat_refined(natural=True), '05-wheat-field.png'),
+    'vegetable-field-v3': (vegetables_living, '07-vegetable-field.png'),
 }
 
 

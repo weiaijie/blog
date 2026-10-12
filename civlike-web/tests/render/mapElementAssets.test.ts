@@ -3,10 +3,10 @@ import { describe, expect, it } from 'vitest'
 import manifest from '../../src/render/assets/elements/manifest.json'
 
 describe('C-style Blender element kit', () => {
-  it('has twelve asset families and two refined comparison models', () => {
-    expect(manifest.assets).toHaveLength(14)
-    expect(new Set(manifest.assets.map((a) => a.id)).size).toBe(14)
-    expect(new Set(manifest.assets.map((a) => a.id.replace(/-v2$/, ''))).size).toBe(12)
+  it('has twelve asset families and five refined comparison models', () => {
+    expect(manifest.assets).toHaveLength(17)
+    expect(new Set(manifest.assets.map((a) => a.id)).size).toBe(17)
+    expect(new Set(manifest.assets.map((a) => a.id.replace(/-v\d+$/, ''))).size).toBe(12)
     for (const id of ['plowed-field', 'wheat-field']) {
       const before = readFileSync(new URL(`../../src/render/assets/elements/${id}.glb`, import.meta.url))
       const after = readFileSync(new URL(`../../src/render/assets/elements/${id}-v2.glb`, import.meta.url))
@@ -23,8 +23,14 @@ describe('C-style Blender element kit', () => {
       const json = JSON.parse(bytes.toString('utf8', 20, 20 + bytes.readUInt32LE(12)))
       expect(json.meshes.length).toBeGreaterThan(0)
       expect(asset.triangles).toBeGreaterThan(100)
-      expect(asset.triangles).toBeLessThan(15000)
-      expect(bytes.length).toBeLessThan(1_500_000)
+      const living = asset.id.endsWith('-v3')
+      expect(asset.triangles).toBeLessThan(living ? 25000 : 15000)
+      expect(bytes.length).toBeLessThan(living ? 2_500_000 : 1_500_000)
+      if (living) {
+        expect(json.nodes.some((node: { extras?: { crop?: string } }) => node.extras?.crop === 'edge-grass')).toBe(true)
+        expect(json.meshes.some((mesh: { primitives: { attributes: { COLOR_0?: number } }[] }) => mesh.primitives.some((primitive) => primitive.attributes.COLOR_0 !== undefined))).toBe(true)
+        if (!asset.id.startsWith('plowed')) expect(json.nodes.some((node: { extras?: { cropPart?: string } }) => node.extras?.cropPart === 'head')).toBe(true)
+      }
       for (const mesh of json.meshes) {
         for (const primitive of mesh.primitives) {
           const position = json.accessors[primitive.attributes.POSITION]

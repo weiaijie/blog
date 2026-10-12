@@ -304,6 +304,66 @@
         ]
       ],
       "glbBytes": 1238512
+    },
+    {
+      "id": "plowed-field-v3",
+      "reference": "06-plowed-field-v2.png",
+      "triangles": 6566,
+      "meshObjects": 21,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.75,
+          -1.75,
+          0.0
+        ],
+        [
+          1.75,
+          1.75,
+          0.2692
+        ]
+      ],
+      "glbBytes": 852244
+    },
+    {
+      "id": "wheat-field-v3",
+      "reference": "05-wheat-field.png",
+      "triangles": 20013,
+      "meshObjects": 247,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.75,
+          -1.75,
+          0.0
+        ],
+        [
+          1.75,
+          1.75,
+          1.1588
+        ]
+      ],
+      "glbBytes": 1922352
+    },
+    {
+      "id": "vegetable-field-v3",
+      "reference": "07-vegetable-field.png",
+      "triangles": 12614,
+      "meshObjects": 57,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.75,
+          -1.75,
+          0.0
+        ],
+        [
+          1.75,
+          1.75,
+          0.4897
+        ]
+      ],
+      "glbBytes": 1223388
     }
   ]
 }

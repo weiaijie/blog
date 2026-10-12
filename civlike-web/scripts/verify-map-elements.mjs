@@ -9,8 +9,23 @@ await mkdir(output, { recursive: true })
 const browser = await chromium.launch()
 const page = await browser.newPage({ viewport: { width: 1440, height: 1000 }, reducedMotion: 'no-preference' })
 const errors = []
+const screenshotWriteRetries = []
 page.on('pageerror', (error) => errors.push(error.message))
 page.on('console', (message) => { if (message.type() === 'error') errors.push(message.text()) })
+
+async function screenshot(name, fullPage = false) {
+  const bytes = await page.screenshot({ fullPage })
+  for (let attempt = 0; ; attempt++) {
+    try {
+      await writeFile(`${output}/${name}.png`, bytes)
+      return
+    } catch (error) {
+      if (attempt >= 3 || !['UNKNOWN', 'EBUSY', 'EPERM'].includes(error.code)) throw error
+      screenshotWriteRetries.push({ name, code: error.code, attempt: attempt + 1 })
+      await new Promise((resolve) => setTimeout(resolve, 400 * (attempt + 1)))
+    }
+  }
+}
 
 async function pixels() {
   return page.locator('.element-stage canvas').evaluate((canvas) => {
@@ -36,7 +51,7 @@ async function pixels() {
 const results = []
 try {
   for (const asset of manifest.assets) {
-    await page.goto(`${base}/?view=map-elements&element=${asset.id}&revision=${asset.id.endsWith('-v2') ? 2 : 1}`)
+    await page.goto(`${base}/?view=map-elements&element=${asset.id}&revision=${asset.id.match(/-v(\d+)$/)?.[1] ?? 1}`)
     await page.waitForSelector(`.element-stage[data-loaded="true"][data-asset="${asset.id}"]`, { timeout: 60000 })
     await page.waitForTimeout(450)
     assert(await page.locator('.element-inspector img').evaluate((img) => img.complete && img.naturalWidth > 0), 'Reference did not load')
@@ -44,7 +59,7 @@ try {
     assert(initial.coverage > .007, `${asset.id}: blank canvas`)
     assert(initial.bounds[0] > 0 && initial.bounds[1] > 0 && initial.bounds[2] < initial.width - 1 && initial.bounds[3] < initial.height - 1, `${asset.id}: clipped model`)
     let animated = false
-    if (asset.animatedPivots.length) {
+    if (asset.animatedPivots.length || asset.id.endsWith('-v3')) {
       await page.waitForTimeout(440)
       animated = (await pixels()).hash !== initial.hash
       assert(animated, `${asset.id}: static animation`)
@@ -54,8 +69,10 @@ try {
       await page.waitForTimeout(250)
       assert.equal((await pixels()).hash, paused.hash, `${asset.id}: pause failed`)
     }
-    await page.screenshot({ path: `${output}/${asset.id}.png` })
-    results.push({ id: asset.id, ...initial, animated })
+    await screenshot(asset.id)
+    const drawCalls = Number(await page.locator('.element-stage').getAttribute('data-draw-calls'))
+    assert(drawCalls < 450, `${asset.id}: preview draw-call budget exceeded`)
+    results.push({ id: asset.id, ...initial, animated, drawCalls })
   }
   await page.goto(`${base}/?view=map-elements&element=fishing-boat`)
   await page.waitForSelector('.element-stage[data-loaded="true"]')
@@ -66,7 +83,7 @@ try {
   }
   await page.getByRole('button', { name: '线框', exact: true }).click()
   assert.equal(await page.getByRole('button', { name: '线框', exact: true }).getAttribute('aria-pressed'), 'true')
-  await page.screenshot({ path: `${output}/wireframe.png` })
+  await screenshot('wireframe')
   await page.setViewportSize({ width: 390, height: 844 })
   await page.goto(`${base}/?view=map-elements&element=sheep`)
   await page.waitForSelector('.element-stage[data-loaded="true"]')
@@ -74,15 +91,15 @@ try {
   assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'Mobile horizontal overflow')
   const mobile = await pixels()
   assert(mobile.coverage > .007 && mobile.bounds[0] > 0 && mobile.bounds[2] < mobile.width - 1, 'Mobile blank/clipped')
-  await page.screenshot({ path: `${output}/mobile.png`, fullPage: true })
+  await screenshot('mobile', true)
   await page.getByLabel('选择模型', { exact: true }).selectOption('pine-tree')
   await page.waitForSelector('.element-stage[data-asset="pine-tree"][data-loaded="true"]')
   assert((await pixels()).coverage > .007, 'Mobile model switching failed')
-  await page.goto(`${base}/?view=map-elements&element=wheat-field`)
+  await page.goto(`${base}/?view=map-elements&element=wheat-field&revision=2`)
   await page.waitForSelector('.element-stage[data-asset="wheat-field-v2"][data-loaded="true"]')
   await page.waitForTimeout(300)
   assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'V2 mobile overflow')
-  await page.screenshot({ path: `${output}/wheat-v2-mobile.png`, fullPage: true })
+  await screenshot('wheat-v2-mobile', true)
   await page.getByRole('button', { name: '俯视', exact: true }).click()
   await page.getByRole('button', { name: '原版', exact: true }).click()
   await page.waitForSelector('.element-stage[data-asset="wheat-field"][data-loaded="true"]')
@@ -104,9 +121,54 @@ try {
   await page.mouse.up()
   await page.waitForTimeout(500)
   assert.notEqual((await pixels()).hash, stationary.hash, 'Orbit interaction failed')
+  await page.goto(`${base}/?view=map-elements&element=vegetable-field&revision=3`)
+  await page.waitForSelector('.element-stage[data-asset="vegetable-field-v3"][data-loaded="true"]')
+  await page.getByRole('button', { name: '暂停动画', exact: true }).click()
+  await page.getByLabel('生长阶段', { exact: true }).focus()
+  await page.keyboard.press('Home')
+  await page.keyboard.press('ArrowRight')
+  await page.keyboard.press('ArrowRight')
+  await page.waitForTimeout(1700)
+  const seedling = await pixels()
+  await screenshot('vegetables-seedling')
+  await page.getByLabel('生长阶段', { exact: true }).press('End')
+  await page.waitForTimeout(1700)
+  assert.notEqual((await pixels()).hash, seedling.hash, 'Growth did not alter geometry')
+  assert(Number(await page.locator('.element-stage').getAttribute('data-growth')) > .99, 'Did not reach maturity')
+  assert(Number(await page.locator('.element-stage').getAttribute('data-draw-calls')) < 450, 'Preview draw-call budget exceeded')
+  await screenshot('vegetables-mature')
+  await page.getByRole('button', { name: '重新播种', exact: true }).click()
+  await page.waitForTimeout(1700)
+  await page.getByLabel('自动生长', { exact: true }).check()
+  await page.waitForTimeout(1600)
+  assert(Number(await page.locator('.element-stage').getAttribute('data-growth')) > .02, 'Automatic growth stopped')
+  await page.getByLabel('自动生长', { exact: true }).uncheck()
+  await page.getByLabel('生长阶段', { exact: true }).press('End')
+  await page.waitForTimeout(1700)
+  await page.getByLabel('风力', { exact: true }).press('Home')
+  await page.waitForTimeout(200)
+  const calm = await pixels()
+  await page.waitForTimeout(300)
+  assert.equal((await pixels()).hash, calm.hash, 'Zero wind is not still')
+  await page.getByLabel('风力', { exact: true }).press('End')
+  await page.waitForTimeout(300)
+  assert.notEqual((await pixels()).hash, calm.hash, 'Wind is not moving')
+  await page.getByRole('button', { name: '随机长势', exact: true }).click()
+  await page.setViewportSize({ width: 900, height: 900 })
+  await page.waitForTimeout(300)
+  assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'Tablet overflow')
+  const controlBounds = await page.getByRole('button', { name: '随机长势', exact: true }).boundingBox()
+  const inspectorBounds = await page.locator('.element-inspector').boundingBox()
+  assert(controlBounds.y + controlBounds.height <= inspectorBounds.y + inspectorBounds.height, 'Tablet controls clipped')
+  await page.setViewportSize({ width: 390, height: 844 })
+  await page.waitForTimeout(300)
+  assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'Living field mobile overflow')
+  const livingMobile = await pixels()
+  assert(livingMobile.bounds[0] > 0 && livingMobile.bounds[2] < livingMobile.width - 1, 'Living field clipped on mobile')
+  await screenshot('living-field-mobile', true)
   assert.deepEqual(errors, [], 'Browser errors')
-  await writeFile(`${output}/verification.json`, JSON.stringify({ results, mobile, errors, checks: [`${results.length} models`, 'reference loading', 'canvas pixels', 'framing', 'animations', 'pause', 'three views', 'wireframe', 'mobile switching', 'original/refined switching', 'revision URL reload', 'revision download', 'orbit interaction'] }, null, 2) + '\n')
-  console.log(JSON.stringify({ models: results.length, animated: results.filter((r) => r.animated).length, errors }))
+  await writeFile(`${output}/verification.json`, JSON.stringify({ results, mobile, errors, checks: [`${results.length} models`, 'reference loading', 'canvas pixels', 'framing', 'animations', 'pause', 'three views', 'wireframe', 'mobile switching', 'original/refined switching', 'revision URL reload', 'revision download', 'orbit interaction', 'growth geometry', 'automatic growth', 'calm/wind', 'living mobile', 'draw call budget'] }, null, 2) + '\n')
+  console.log(JSON.stringify({ models: results.length, animated: results.filter((r) => r.animated).length, screenshotWriteRetries, errors }))
 } finally {
   await browser.close()
 }

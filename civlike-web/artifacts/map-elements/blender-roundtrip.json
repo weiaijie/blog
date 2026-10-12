@@ -69,7 +69,22 @@
       "id": "wheat-field-v2",
       "sourceObjects": 1793,
       "roundTripTriangles": 14616
+    },
+    {
+      "id": "plowed-field-v3",
+      "sourceObjects": 216,
+      "roundTripTriangles": 6566
+    },
+    {
+      "id": "wheat-field-v3",
+      "sourceObjects": 2363,
+      "roundTripTriangles": 20013
+    },
+    {
+      "id": "vegetable-field-v3",
+      "sourceObjects": 630,
+      "roundTripTriangles": 12614
     }
   ],
-  "passed": 14
+  "passed": 17
 }
