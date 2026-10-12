@@ -8,9 +8,24 @@
 
 独立页面提供自由旋转、正面、侧面、俯视、线框、动画暂停和 GLB 下载；已有三视参考的条目同时展示对应图片。此批次没有替换现有 `terrain-world` 地图元素。
 
+### 人物骨架与职业动作
+
+当前累计 57 类独立模型、66 个版本，108 类规划中剩余 51 类。新增农夫 `farmer`、渔夫 `fisher`、伐木工 `woodcutter`、商人 `merchant`，保留可编辑骨架、IK 控制与独立零件的 `.blend`，导出蒙皮 `.glb`。
+
+- 每款包含 3 秒循环的 `Idle` / `Walk` / `Work`，模型库可切换、暂停和调整 0–2 倍速度；切换使用 0.3 秒混合。原地行走不是地图寻路。
+- 农夫持锄、渔夫持竿、伐木工持斧、商人持账本和钱币。工具绑定握持骨骼，不依赖网页额外挂载；衣服、帽子、腰带、靴子和随身包具区分职业。
+- 四款分别为 1,792 / 1,812 / 1,692 / 1,760 三角面，GLB 约 0.32 MB。分段蒙皮是风格化样板，尚无手指骨骼、面部表情、人物成长、骑乘和搬运配对动作。
+- Blender IK 约束经导出采样为骨骼剪辑，可在支持蒙皮动画的查看器中播放。工作土块/树桩的显隐由网页根据动作控制，通用查看器不会自动隐藏这些道具。导出方式参见 [Blender 4.4 glTF Actions 说明](https://developer.blender.org/docs/release_notes/4.4/pipeline_assets_io/)。
+- 尚未接入地图人流、城镇运输、工作产出、库存、地形贴合、路径跟随或多人 LOD；不把模型库工作动作当作已经完成生产模拟。
+
+```powershell
+blender --background --factory-startup --python-exit-code 1 --python scripts/blender/map_element_kit.py -- --assets farmer fisher woodcutter merchant
+node scripts/verify-map-people.mjs
+```
+
 ### 火山、熔岩地与荒漠
 
-当前累计 53 类独立模型、62 个版本，108 类规划中剩余 55 类未建模。新增 `volcano`、`lava-field`、`sand-dunes`、`desert-oasis`，均保存可编辑 `.blend` / `.glb`。
+此批完成时为 53 类独立模型、62 个版本。新增 `volcano`、`lava-field`、`sand-dunes`、`desert-oasis`，均保存可编辑 `.blend` / `.glb`。
 
 - 火山为凹陷火口、低于火口边缘的熔池、三条下坡熔岩带和 14 个火山灰粒子；熔岩地为低矮起伏基岩、五条主裂隙与八条支裂隙。熔流沿网格显示移动明暗及自发光变化，不是把整个山体放大或变色。
 - 沙丘使用偏向一侧的三条沙脊、细沙纹与 24 个沿表面轨迹移动的沙粒。使用 Blender BVH 从实际三角网格取高，每条轨迹 321 个样本；不依赖原高度公式猜测网格高度，运行时不需要逐帧射线查询。

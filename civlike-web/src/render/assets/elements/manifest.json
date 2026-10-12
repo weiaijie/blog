@@ -6,7 +6,7 @@
   "sourceUp": "Z",
   "gltfUp": "Y",
   "sourceFront": "-Y",
-  "animation": "Object-pivot clips; not skeletal character rigs",
+  "animation": "Object-pivot clips, metadata-driven lifecycles and skinned human action clips",
   "assets": [
     {
       "id": "wheat-field",
@@ -1264,6 +1264,94 @@
         ]
       ],
       "glbBytes": 549640
+    },
+    {
+      "id": "farmer",
+      "reference": "",
+      "triangles": 1792,
+      "meshObjects": 2,
+      "animatedPivots": [
+        "WorkerRig"
+      ],
+      "boundsMeters": [
+        [
+          -0.4418,
+          -0.91,
+          0.0
+        ],
+        [
+          0.525,
+          0.245,
+          1.9
+        ]
+      ],
+      "glbBytes": 327952
+    },
+    {
+      "id": "fisher",
+      "reference": "",
+      "triangles": 1812,
+      "meshObjects": 1,
+      "animatedPivots": [
+        "WorkerRig"
+      ],
+      "boundsMeters": [
+        [
+          -0.4418,
+          -0.6987,
+          0.0
+        ],
+        [
+          0.4418,
+          0.185,
+          2.0911
+        ]
+      ],
+      "glbBytes": 323148
+    },
+    {
+      "id": "woodcutter",
+      "reference": "",
+      "triangles": 1692,
+      "meshObjects": 2,
+      "animatedPivots": [
+        "WorkerRig"
+      ],
+      "boundsMeters": [
+        [
+          -0.4418,
+          -1.1,
+          0.0
+        ],
+        [
+          0.46,
+          0.131,
+          1.823
+        ]
+      ],
+      "glbBytes": 319960
+    },
+    {
+      "id": "merchant",
+      "reference": "",
+      "triangles": 1760,
+      "meshObjects": 1,
+      "animatedPivots": [
+        "WorkerRig"
+      ],
+      "boundsMeters": [
+        [
+          -0.485,
+          -0.26,
+          0.0
+        ],
+        [
+          0.4418,
+          0.265,
+          1.85
+        ]
+      ],
+      "glbBytes": 320624
     }
   ]
 }

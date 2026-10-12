@@ -9,6 +9,7 @@ import { createBotanicalMotion } from './mapElementLifecycle'
 import { createAnimalMotion, defaultAnimalSettings, type AnimalSettings, type AnimalState } from './mapElementAnimals'
 import { createBuildingMotion, defaultBuildingSettings, type BuildingSettings, type BuildingState } from './mapElementBuildings'
 import { createTerrainMotion, defaultTerrainSettings, type TerrainSettings, type TerrainState } from './mapElementTerrain'
+import { createHumanMotion, defaultHumanSettings, type HumanSettings, type HumanState } from './mapElementPeople'
 
 export type ElementView = 'perspective' | 'front' | 'side' | 'top'
 export type ElementScene = {
@@ -20,6 +21,7 @@ export type ElementScene = {
   setAnimalSettings: (value: AnimalSettings) => void
   setBuildingSettings: (value: BuildingSettings) => void
   setTerrainSettings: (value: TerrainSettings) => void
+  setHumanSettings: (value: HumanSettings) => void
   destroy: () => void
 }
 
@@ -42,6 +44,7 @@ export function mountMapElement(
   onAnimal?: (value: AnimalState) => void,
   onBuilding?: (value: BuildingState) => void,
   onTerrain?: (value: TerrainState) => void,
+  onHuman?: (value: HumanState) => void,
 ): ElementScene {
   const renderer = new WebGLRenderer({ antialias: true, preserveDrawingBuffer: true })
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
@@ -70,6 +73,8 @@ export function mountMapElement(
   let animal: ReturnType<typeof createAnimalMotion>
   let building: ReturnType<typeof createBuildingMotion>
   let terrain: ReturnType<typeof createTerrainMotion>
+  let human: ReturnType<typeof createHumanMotion>
+  let humanSettings={...defaultHumanSettings}
   let terrainSettings=defaultTerrainSettings('grassland')
   let buildingSettings = { ...defaultBuildingSettings }
   let animalSettings = { ...defaultAnimalSettings }
@@ -170,7 +175,10 @@ export function mountMapElement(
     field.update(0, false)
     botanical.update(0, false)
     animal?.update(0,false)
-    if (gltf.animations.length) {
+    human=createHumanMotion(model,gltf.animations)
+    human?.setSettings(humanSettings)
+    human?.update(0,false)
+    if (gltf.animations.length && !human) {
       mixer = new AnimationMixer(model)
       for (const clip of gltf.animations) mixer.clipAction(clip).play()
     }
@@ -191,6 +199,11 @@ export function mountMapElement(
     const delta = previousTime ? Math.min((time - previousTime) / 1000, .05) : 0
     previousTime = time
     if (playing) mixer?.update(delta)
+    if(human){
+      const state=human.update(delta,playing)
+      host.dataset.human=JSON.stringify(state)
+      if(time-lastGrowthReport>120){onHuman?.(state);lastGrowthReport=time}
+    }
     if(terrain) {
       const state=terrain.update(delta,playing)
       host.dataset.terrain=JSON.stringify(state)
@@ -224,6 +237,7 @@ export function mountMapElement(
     setFieldSettings(value) { fieldSettings = value; field?.setSettings(value); botanical?.setSettings(value) },
     setBuildingSettings(value) { buildingSettings=value; building?.setSettings(value) },
     setTerrainSettings(value) { terrainSettings=value;terrain?.setSettings(value) },
+    setHumanSettings(value) { humanSettings=value;human?.setSettings(value) },
     setAnimalSettings(value) {
       const changed = animalSettings.family!==value.family
       animalSettings=value
@@ -236,6 +250,7 @@ export function mountMapElement(
       observer.disconnect()
       controls.dispose()
       mixer?.stopAllAction()
+      human?.destroy()
       if (model) { mixer?.uncacheRoot(model); disposeModel(model) }
       renderer.dispose()
       renderer.forceContextLoss()
@@ -250,6 +265,7 @@ export function mountMapElement(
       delete host.dataset.building
       delete host.dataset.cutaway
       delete host.dataset.terrain
+      delete host.dataset.human
     },
   }
 }

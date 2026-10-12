@@ -309,7 +309,27 @@
       "id": "desert-oasis",
       "sourceObjects": 397,
       "roundTripTriangles": 7148
+    },
+    {
+      "id": "farmer",
+      "sourceObjects": 48,
+      "roundTripTriangles": 1792
+    },
+    {
+      "id": "fisher",
+      "sourceObjects": 56,
+      "roundTripTriangles": 1812
+    },
+    {
+      "id": "woodcutter",
+      "sourceObjects": 45,
+      "roundTripTriangles": 1692
+    },
+    {
+      "id": "merchant",
+      "sourceObjects": 48,
+      "roundTripTriangles": 1760
     }
   ],
-  "passed": 62
+  "passed": 66
 }

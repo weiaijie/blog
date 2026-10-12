@@ -13,11 +13,15 @@ for asset in manifest['assets']:
     with bpy.data.libraries.load(str(assets / 'source/elements' / (asset['id'] + '.blend'))) as (source, _):
         source_objects = len(source.objects)
         assert source_objects > 1, asset['id'] + ': missing editable components'
-    bpy.ops.object.select_all(action='SELECT')
-    bpy.ops.object.delete(use_global=False)
+    # Hidden importer helper collections are not selected by select_all.
+    for obj in list(bpy.context.scene.objects):
+        bpy.data.objects.remove(obj, do_unlink=True)
     bpy.ops.import_scene.gltf(filepath=str(assets / 'elements' / (asset['id'] + '.glb')))
     bpy.context.scene.frame_set(0)
-    meshes = [o for o in bpy.context.scene.objects if o.type == 'MESH']
+    # glTF import creates a custom bone display mesh that is not part of the asset.
+    bone_shapes = {p.custom_shape for o in bpy.context.scene.objects if o.type == 'ARMATURE'
+                   for p in o.pose.bones if p.custom_shape}
+    meshes = [o for o in bpy.context.scene.objects if o.type == 'MESH' and o not in bone_shapes]
     assert meshes, asset['id'] + ': empty mesh'
     triangles = 0
     for obj in meshes:

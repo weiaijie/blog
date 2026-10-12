@@ -25,6 +25,7 @@ import map_element_understory
 import map_element_meadow
 import map_element_conifer_reed
 import map_element_landforms
+import map_element_people
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / 'src/render/assets/elements'
@@ -774,6 +775,10 @@ BUILDERS = {
     'lava-field': (lambda: map_element_landforms.build(sys.modules[__name__], 'lava-field'), ''),
     'sand-dunes': (lambda: map_element_landforms.build(sys.modules[__name__], 'sand-dunes'), ''),
     'desert-oasis': (lambda: map_element_landforms.build(sys.modules[__name__], 'desert-oasis'), ''),
+    'farmer': (lambda: map_element_people.build(sys.modules[__name__], 'farmer'), ''),
+    'fisher': (lambda: map_element_people.build(sys.modules[__name__], 'fisher'), ''),
+    'woodcutter': (lambda: map_element_people.build(sys.modules[__name__], 'woodcutter'), ''),
+    'merchant': (lambda: map_element_people.build(sys.modules[__name__], 'merchant'), ''),
 }
 
 
@@ -799,6 +804,9 @@ def consolidate():
 def build(asset_id):
     bpy.ops.object.select_all(action='SELECT')
     bpy.ops.object.delete(use_global=False)
+    # Previous workers' stashed actions must not leak into the next asset export.
+    for action in bpy.data.actions:
+        if action.use_fake_user and action.users==1:action.use_fake_user=False
     for datablocks in [bpy.data.meshes,bpy.data.materials,bpy.data.actions]:
         for item in list(datablocks):
             if item.users == 0:
@@ -809,12 +817,12 @@ def build(asset_id):
     scene.unit_settings.system='METRIC'
     scene.render.fps=24;scene.frame_start=1;scene.frame_end=73
     BUILDERS[asset_id][0]()
-    scene.frame_set(1)
+    scene.frame_set(0 if asset_id in map_element_people.KINDS else 1)
     bpy.ops.wm.save_as_mainfile(filepath=str(SOURCE/(asset_id+'.blend')),compress=True)
     consolidate()
     bpy.ops.object.select_all(action='SELECT')
     bpy.ops.export_scene.gltf(filepath=str(OUT/(asset_id+'.glb')),export_format='GLB',use_selection=True,
-                              export_apply=asset_id!='mushrooms',export_animations=True,export_animation_mode='SCENE',
+                              export_apply=asset_id!='mushrooms',export_animations=True,export_animation_mode='ACTIONS' if asset_id in map_element_people.KINDS else 'SCENE',
                               export_extras=True)
     objects=[o for o in scene.objects if o.type=='MESH']
     triangles=0
@@ -840,7 +848,7 @@ def main():
     merged={a['id']:a for a in previous};merged.update({a['id']:a for a in results})
     manifest.write_text(json.dumps({'version':1,'style':'C faceted low-poly','status':'first-modeling-pass',
                                    'units':'meters','sourceUp':'Z','gltfUp':'Y','sourceFront':'-Y',
-                                   'animation':'Object-pivot clips; not skeletal character rigs',
+                                   'animation':'Object-pivot clips, metadata-driven lifecycles and skinned human action clips',
                                    'assets':list(merged.values())},indent=2)+'\n',encoding='utf-8')
     print('ELEMENT_KIT_COMPLETE',json.dumps(results))
 
