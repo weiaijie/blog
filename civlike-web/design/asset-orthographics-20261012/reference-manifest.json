@@ -1,0 +1,118 @@
+{
+  "title": "C-style map element orthographic reference set",
+  "date": "2026-10-12",
+  "generator": "Built-in image_gen",
+  "status": "concept-reference-only",
+  "styleReference": "../terrain-style-study-20261011/C-low-poly.png",
+  "viewOrder": [
+    "front",
+    "right-side",
+    "top"
+  ],
+  "background": "white",
+  "geometryAccuracy": "Generated concept images, not CAD projections. Scale and feature correspondence require manual calibration in Blender.",
+  "integration": "No runtime model, Blender file, GLB, or game code was replaced.",
+  "modelingGuidance": [
+    "Each sheet depicts one intended asset from three views, not three separate assets.",
+    "Calibrate image scale to the proposed dimensions before modeling; these dimensions are design targets, not measurements derived from the image.",
+    "For image-to-3D, use separate views in a supported multi-view workflow. Do not interpret the entire three-column sheet as one physical object.",
+    "Use Blender Z-up, origin at the ground-level center, and a flat base. Verify scale, normals, UVs, material count and silhouettes before exporting GLB.",
+    "Create a simplified runtime mesh and LODs rather than treating AI image output as a production mesh.",
+    "Keep foliage and trunk separable for wind animation. Keep windmill rotor as a separate object with origin on its axle.",
+    "For the windmill, the blade plane is vertical; the intended local rotation axis is Y when Z is up and Y is front-to-back.",
+    "Final cottage reference intentionally has no chimney; the first generated cottage image was rejected for chimney inconsistency."
+  ],
+  "assets": [
+    {
+      "id": "01-broadleaf-tree",
+      "file": "01-broadleaf-tree.png",
+      "label": "Broadleaf tree",
+      "proposedDimensionsMeters": {
+        "width": 4,
+        "depth": 3.5,
+        "height": 5
+      },
+      "parts": [
+        "trunk",
+        "branches",
+        "foliage-clusters"
+      ],
+      "animation": "Trunk anchored, crown and branches may sway; preserve root position."
+    },
+    {
+      "id": "02-mossy-rock",
+      "file": "02-mossy-rock.png",
+      "label": "Mossy rock outcrop",
+      "proposedDimensionsMeters": {
+        "width": 2.4,
+        "depth": 1.8,
+        "height": 1.6
+      },
+      "parts": [
+        "main-outcrop",
+        "secondary-rocks"
+      ],
+      "animation": "Static terrain dressing."
+    },
+    {
+      "id": "03-village-cottage",
+      "file": "03-village-cottage.png",
+      "label": "Village cottage",
+      "proposedDimensionsMeters": {
+        "width": 4,
+        "depth": 5,
+        "height": 4
+      },
+      "parts": [
+        "walls",
+        "roof",
+        "door",
+        "shutters"
+      ],
+      "animation": "Optional door and shutter pivots; no chimney in final reference."
+    },
+    {
+      "id": "04-windmill",
+      "file": "04-windmill.png",
+      "label": "Village windmill",
+      "proposedDimensionsMeters": {
+        "baseDiameter": 3,
+        "towerAndRoofHeight": 5.8,
+        "rotorDiameter": 6,
+        "axleHeight": 4
+      },
+      "parts": [
+        "tower",
+        "roof",
+        "axle",
+        "rotor"
+      ],
+      "animation": "Rotate rotor as one rigid object about horizontal axle, not around world Z."
+    }
+  ],
+  "prompts": [
+    {
+      "id": "01-broadleaf-tree",
+      "prompt": "Use case: stylized-concept. Deliver a production-oriented orthographic 3D game asset reference sheet for a civilization-like hex-world game. Visual style: sophisticated non-photorealistic low-poly diorama, deliberate flat-shaded polygonal facets, readable silhouette, restrained geometric detail, matte materials, bright clear colors. Not photorealistic, not smooth clay, not voxel, not a cartoon drawing. This is a SINGLE asset repeated as THREE strictly consistent orthographic projections, not three different designs.\nCanvas: high-resolution wide landscape, pure white background, exactly three widely spaced columns: LEFT = straight-on FRONT elevation, MIDDLE = exact RIGHT SIDE elevation rotated 90 degrees, RIGHT = true TOP plan looking straight down at 90 degrees. NO perspective, no isometric or 3/4 views, no tilted overhead camera. Front/side ground baselines align. Same world-units-per-pixel in all three views; true height, width, depth and distinctive structural features must agree across views. Fully visible objects with generous white margins, no crop, no text, no labels, no numbers, no dimension lines, no grid, no frames, no swatches, no extra objects, no floor cast shadows, no background scene, no hex tile or pedestal. Soft neutral studio illumination that shows facets without baked dramatic shadows. All details belong to the same coherent geometry; top view must hide geometry occluded by the roof or canopy. Useful as a concept reference for manual Blender modeling and image-to-3D, clean isolated silhouettes.\nAsset 01: ONE mature broadleaf meadow tree. Height 5.0 m, crown width 4.0 m, crown depth 3.5 m. A short sturdy muted brown trunk with a fork into three thick branches, subtly flared roots ending at a flat ground datum. The crown consists of 7 to 9 interlocking angular low-poly leaf volumes with an organic, asymmetrical but balanced silhouette, not a single sphere and not a pile of separate floating balls. Distinct main high crown, a lower wide branch to the FRONT-LEFT, smaller lower crown to BACK-RIGHT. Fresh leaf green, forest-green shaded faces, a few light yellow-green top planes. Large readable polygonal faces; no individual leaves, no noisy microtexture, no grass or ground under tree. Canopy attached to branches; trunk visible below foliage. The TOP plan shows the exact same irregular crown footprint. Avoid round blob crowns and conical trunk geometry."
+    },
+    {
+      "id": "02-mossy-rock",
+      "prompt": "Use case: stylized-concept. Deliver a production-oriented orthographic 3D game asset reference sheet for a civilization-like hex-world game. Visual style: sophisticated non-photorealistic low-poly diorama, deliberate flat-shaded polygonal facets, readable silhouette, restrained geometric detail, matte materials, bright clear colors. Not photorealistic, not smooth clay, not voxel, not a cartoon drawing. This is a SINGLE asset repeated as THREE strictly consistent orthographic projections, not three different designs.\nCanvas: high-resolution wide landscape, pure white background, exactly three widely spaced columns: LEFT = straight-on FRONT elevation, MIDDLE = exact RIGHT SIDE elevation rotated 90 degrees, RIGHT = true TOP plan looking straight down at 90 degrees. NO perspective, no isometric or 3/4 views, no tilted overhead camera. Front/side ground baselines align. Same world-units-per-pixel in all three views; true height, width, depth and distinctive structural features must agree across views. Fully visible objects with generous white margins, no crop, no text, no labels, no numbers, no dimension lines, no grid, no frames, no swatches, no extra objects, no floor cast shadows, no background scene, no hex tile or pedestal. Soft neutral studio illumination that shows facets without baked dramatic shadows. All details belong to the same coherent geometry; top view must hide geometry occluded by the roof or canopy. Useful as a concept reference for manual Blender modeling and image-to-3D, clean isolated silhouettes.\nAsset 02: ONE modular mossy granite rock outcrop, a single coherent grouping on the same flat bottom, not a scatter of unrelated stones. Dimensions width 2.4 m, depth 1.8 m, height 1.6 m. Main asymmetrical angular boulder stands at back-left, a sloped shoulder descends toward front-right into a smaller attached boulder, and one short low wedge at front-left. Strong broad chamfered facets and a few shallow cracks. Cool neutral medium-gray stone, subtly lighter gray top planes, muted olive-green moss on only 15 percent of upward-facing surfaces. Facets stay crisp and sculptural; no photogrammetric textures, no pores, no extreme fractured spikes. Front and right views are unmistakably elevation views; TOP is an actual plan, no side faces incorrectly exposed. All three views must keep the same main peak, shoulder direction, wedge placement, moss coverage and scale. No dirt mound, no circular/oval base, no grass, no plinth or grid."
+    },
+    {
+      "id": "03-village-cottage",
+      "prompt": "Use case: stylized-concept. Deliver a production-oriented orthographic 3D game asset reference sheet for a civilization-like hex-world game. Visual style: sophisticated non-photorealistic low-poly diorama, deliberate flat-shaded polygonal facets, readable silhouette, restrained geometric detail, matte materials, bright clear colors. Not photorealistic, not smooth clay, not voxel, not a cartoon drawing. This is a SINGLE asset repeated as THREE strictly consistent orthographic projections, not three different designs.\nCanvas: high-resolution wide landscape, pure white background, exactly three widely spaced columns: LEFT = straight-on FRONT elevation, MIDDLE = exact RIGHT SIDE elevation rotated 90 degrees, RIGHT = true TOP plan looking straight down at 90 degrees. NO perspective, no isometric or 3/4 views, no tilted overhead camera. Front/side ground baselines align. Same world-units-per-pixel in all three views; true height, width, depth and distinctive structural features must agree across views. Fully visible objects with generous white margins, no crop, no text, no labels, no numbers, no dimension lines, no grid, no frames, no swatches, no extra objects, no floor cast shadows, no background scene, no hex tile or pedestal. Soft neutral studio illumination that shows facets without baked dramatic shadows. All details belong to the same coherent geometry; top view must hide geometry occluded by the roof or canopy. Useful as a concept reference for manual Blender modeling and image-to-3D, clean isolated silhouettes.\nAsset 03: ONE small rural timber-and-plaster cottage for a stylized strategy-game village, modular and easy to rebuild as a low-poly mesh. Footprint 4 m wide x 5 m deep, overall ridge height 4 m, wall height 2.5 m. Simple rectangular body, a symmetrical pitched gable roof with ridge running from front to back. Matte muted terracotta red roof with broad simplified tile strips (only 5 rows on each slope), warm off-white plaster, dark desaturated wooden beams, cool-gray low stone footing. FRONT elevation faces the triangular gable: one central rectangular oak door, one square shuttered window on either side, one small square attic vent centered in the gable. RIGHT SIDE elevation is the long eave wall: two evenly spaced square shuttered windows, no door. One small rectangular gray masonry chimney sits on the RIGHT roof slope near the BACK quarter, in exactly the same location in all three views. TOP plan: roof is a true rectangle, ridge runs vertically on the sheet from front at bottom to back at top, chimney visible on upper-right roof slope; no wall facade or door visible through roof. Subtle timber end joints and simplified blocks give useful modeling detail without realistic grunge. Straight orthographic elevations, NOT 3/4. No garden, fence, barrels, plants, ground platform or decorative props. Do not add asymmetrical extensions, dormers, porch, curved roofs or smoke."
+    },
+    {
+      "id": "04-windmill",
+      "prompt": "Use case: stylized-concept. Deliver a production-oriented orthographic 3D game asset reference sheet for a civilization-like hex-world game. Visual style: sophisticated non-photorealistic low-poly diorama, deliberate flat-shaded polygonal facets, readable silhouette, restrained geometric detail, matte materials, bright clear colors. Not photorealistic, not smooth clay, not voxel, not a cartoon drawing. This is a SINGLE asset repeated as THREE strictly consistent orthographic projections, not three different designs.\nCanvas: high-resolution wide landscape, pure white background, exactly three widely spaced columns: LEFT = straight-on FRONT elevation, MIDDLE = exact RIGHT SIDE elevation rotated 90 degrees, RIGHT = true TOP plan looking straight down at 90 degrees. NO perspective, no isometric or 3/4 views, no tilted overhead camera. Front/side ground baselines align. Same world-units-per-pixel in all three views; true height, width, depth and distinctive structural features must agree across views. Fully visible objects with generous white margins, no crop, no text, no labels, no numbers, no dimension lines, no grid, no frames, no swatches, no extra objects, no floor cast shadows, no background scene, no hex tile or pedestal. Soft neutral studio illumination that shows facets without baked dramatic shadows. All details belong to the same coherent geometry; top view must hide geometry occluded by the roof or canopy. Useful as a concept reference for manual Blender modeling and image-to-3D, clean isolated silhouettes.\nAsset 04: ONE small rural windmill, coherent simple buildable geometry, with visibly separable rotating rotor and static tower. Octagonal subtly tapered tower: 3 m base diameter, 2.3 m upper diameter, wall height 4.5 m, blue-gray eight-sided conical cap ending at 5.8 m. Warm light plaster tower, low cool-gray stone base, dark wooden trim, one simple front plank door below axle and two small simple square windows on the right wall. Four identical wood-framed cream-cloth sails on a hub, total swept diameter 6.0 m, horizontal front-to-back axle at height 4 m, hub 0.7 m in front of the front tower wall. Rotor is stopped in diagonal X pose, each blade same length and tapered rectangular outline, robust wooden frame, only 3 transverse braces per blade. Blade rotation plane is VERTICAL and parallel to the FRONT camera image plane. FRONT elevation shows the full X-shaped rotor centered on hub. In the RIGHT SIDE elevation the rotor is strictly EDGE-ON, appearing as a narrow vertical arrangement in front of the tower; DO NOT show a second front-facing X. In the TOP plan the rotor is also EDGE-ON, a narrow horizontal line located in front of the octagonal roof footprint, with axle connecting back to tower. DO NOT show flat four-spoke sails spread out on the top view. Exact same rotor pose across views. TOP front direction is down the page. Maintain consistent scale and whole bounding boxes. Matte flat-shaded low-poly planes, elegant strategy-game model, clean craftsmanship, no photoreal grain. No landscape, hex base, ground pad, extra buildings, flags, arrows, smoke, vehicles or decorative props."
+    }
+  ],
+  "revisions": [
+    {
+      "asset": "03-village-cottage",
+      "operation": "Remove inconsistent chimney",
+      "prompt": "Use case: precise-object-edit. Edit this existing cottage orthographic reference sheet, preserving the exact canvas, three-column FRONT / RIGHT SIDE / TOP arrangement, existing cottage geometry, doors, windows, materials, lighting and white background. Make one consistency correction ONLY: remove the chimney completely from the middle RIGHT SIDE view and the right TOP view, seamlessly replace it with the same uninterrupted terracotta roof tiles. The FRONT view already has no chimney and must remain unchanged. All three views now depict one chimney-free cottage. No other objects, text, embellishments or camera changes. This is a non-photorealistic low-poly game asset concept sheet, not a new design."
+    }
+  ]
+}
