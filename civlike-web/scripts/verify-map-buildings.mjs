@@ -7,6 +7,7 @@ await mkdir(output,{ recursive:true })
 const browser=await chromium.launch()
 const page=await browser.newPage({ viewport:{ width:1440,height:1000 },reducedMotion:'no-preference' })
 const errors=[],results=[],writeRetries=[]
+const requested=process.argv.slice(2)
 page.on('pageerror',(error) => errors.push(error.message))
 page.on('console',(message) => { if(message.type()==='error') errors.push(message.text()) })
 async function shot(name,fullPage=false) {
@@ -40,7 +41,7 @@ async function pixels() {
   })
 }
 try {
-  for(const id of ['cottage','barn','windmill','watermill','watchtower','castle-keep','castle-gate','castle-wall']) {
+  for(const id of requested.length ? requested : ['cottage','barn','windmill','watermill','watchtower','castle-keep','castle-gate','castle-wall','stable','blacksmith','market-hall']) {
     await page.setViewportSize({ width:1440,height:1000 })
     await page.goto(`http://127.0.0.1:5173/?view=map-elements&element=${id}`)
     await page.waitForSelector('.element-stage[data-loaded="true"][data-building]')
@@ -63,6 +64,16 @@ try {
     const upgraded=await pixels()
     assert(upgraded.framed && upgraded.hash!==base.hash,`${id}: upgrade missing/clipped`)
     await shot(`${id}-upgraded`)
+    if(['stable','blacksmith','market-hall'].includes(id)){
+      await page.getByRole('button',{name:'屋顶剖面',exact:true}).click()
+      await page.waitForTimeout(300)
+      const interior=await pixels();assert(interior.framed&&interior.hash!==upgraded.hash,`${id}: roof inspection has no effect`)
+      await shot(`${id}-interior`)
+      await page.getByRole('button',{name:'播放动画',exact:true}).click();await page.waitForTimeout(300)
+      assert.equal(await page.locator('.element-stage').getAttribute('data-cutaway'),'true')
+      await page.getByRole('button',{name:'暂停动画',exact:true}).click()
+      await page.getByRole('button',{name:'屋顶剖面',exact:true}).click()
+    }
     for(const view of ['正面','侧面','俯视']) {
       await page.getByRole('button',{ name:view,exact:true }).click()
       await page.waitForTimeout(250)
@@ -115,6 +126,14 @@ try {
     assert(mobile.coverage>.007 && mobile.framed,`${id}: mobile clipped/blank`)
     assert(await page.evaluate(() => document.documentElement.scrollWidth<=innerWidth),`${id}: mobile horizontal overflow`)
     await shot(`${id}-mobile`,true)
+    await page.setViewportSize({ width:320,height:720 })
+    await page.waitForTimeout(300)
+    const narrow=await pixels()
+    assert(narrow.coverage>.007 && narrow.framed,`${id}: narrow mobile clipped/blank`)
+    assert(await page.evaluate(() => document.documentElement.scrollWidth<=innerWidth),`${id}: narrow mobile overflow`)
+    assert((await page.getByLabel('下载 GLB',{exact:true}).getAttribute('download')).includes(id))
+    await shot(`${id}-mobile-320`,true)
+    await page.setViewportSize({ width:390,height:844 })
     if (id==='castle-gate') {
       await page.getByLabel('开启通道',{ exact:true }).check()
       await page.waitForFunction(() => JSON.parse(document.querySelector('.element-stage').dataset.building).access===1,{},{ timeout:15000 })
@@ -135,6 +154,6 @@ try {
     console.log(`BUILDING_VERIFIED ${id}`)
   }
   assert.deepEqual(errors,[])
-  await writeFile(`${output}/verification.json`,JSON.stringify({ results,errors,writeRetries },null,2)+'\n')
+  await writeFile(`${output}/${requested.length?'verification-selected':'verification'}.json`,JSON.stringify({ results,errors,writeRetries },null,2)+'\n')
   console.log(JSON.stringify({ models:results.length,errors,writeRetries }))
 } finally { await browser.close() }

@@ -1612,6 +1612,66 @@
         ]
       ],
       "glbBytes": 410228
+    },
+    {
+      "id": "stable",
+      "reference": "",
+      "triangles": 8309,
+      "meshObjects": 34,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -4.95,
+          -3.87,
+          0.0
+        ],
+        [
+          5.353,
+          3.87,
+          6.84
+        ]
+      ],
+      "glbBytes": 617348
+    },
+    {
+      "id": "blacksmith",
+      "reference": "",
+      "triangles": 8964,
+      "meshObjects": 32,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -2.4,
+          -2.595,
+          0.0
+        ],
+        [
+          2.25,
+          2.05,
+          3.595
+        ]
+      ],
+      "glbBytes": 644808
+    },
+    {
+      "id": "market-hall",
+      "reference": "",
+      "triangles": 9620,
+      "meshObjects": 28,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -2.85,
+          -3.085,
+          0.0
+        ],
+        [
+          2.7,
+          2.275,
+          3.42
+        ]
+      ],
+      "glbBytes": 770528
     }
   ]
 }

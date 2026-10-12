@@ -22,7 +22,7 @@ export const mapElements = manifest.assets.map((asset) => {
     transport: ['rickshaw','bicycle','early-car','freight-wagon','steam-locomotive'].includes(asset.id),
     mounted: ['rider','horse-cart'].includes(asset.id),
     vessel: ['sailboat','river-barge'].includes(asset.id),
-    building: ['cottage','barn','windmill','watermill','watchtower','castle-keep','castle-gate','castle-wall'].includes(asset.id),
+    building: ['cottage','barn','windmill','watermill','watchtower','castle-keep','castle-gate','castle-wall','stable','blacksmith','market-hall'].includes(asset.id),
     gate: asset.id==='castle-gate',
     terrain: ['grassland','rolling-hills','rocky-mountain','snow-peak','volcano','lava-field','sand-dunes','desert-oasis'].includes(family),
     terrainMotion: family==='volcano' ? '熔流 / 火山灰' : family==='lava-field' ? '熔流' : family==='sand-dunes' ? '风沙' : family==='desert-oasis' ? '水波 / 风动' : '季相 / 风动',

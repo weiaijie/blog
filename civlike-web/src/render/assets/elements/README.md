@@ -8,9 +8,30 @@
 
 独立页面提供自由旋转、正面、侧面、俯视、线框、动画暂停和 GLB 下载；已有三视参考的条目同时展示对应图片。此批次没有替换现有 `terrain-world` 地图元素。
 
+### 马厩、铁匠铺与集市
+
+当前累计 73 类独立模型、82 个版本，108 类规划剩余 35 类。新增 `stable`、`blacksmith`、`market-hall`，不是同一房屋的换色，也不将施工阶段或升级附件计为新资产。
+
+- 马厩：前部通道、三间木隔栏、低门/铰链、草料槽、斜草架、散草与垫草、屋架、风向标；升级为后部储草阁及侧面登阁梯。通过三处 `animal` 接点可放置既有成年马，使用实际顶点包围盒检查栏门、草架、分隔与阁底静态净空。另逐顶点检查草捆/绑绳不穿瓦面。建筑尺寸已在 Blender 烘焙，运行时根节点仍为单位缩放。尚未验证马匹转身、走入或采食动作。
+- 铁匠铺：石砌后墙/侧墙、开放工作区、炉床/炉罩/烟道、煤火、带尖角的铁砧、工具台/锤钳、风箱及升级遮棚。固定下叶板、绕喷嘴铰接的上叶板、折叠皮囊为不同网格；皮囊上下边界分别贴合叶板，不整体缩放模型。炉火随运行变化，未加入火焰物理或生产库存。
+- 集市：开放柱廊、前后通道、四处交易位、独立柜台/货箱、水果蔬菜、面包、陶罐与升级散货。中央通道在升级后仍通过实际网格射线贯通检查。条纹遮棚固定在前后两根横梁，只有中段起伏。
+- 三款均支持逐件施工、回退、自动施工、功能运行、运行速度、暂停及升级附件。新增屋顶剖面按钮可隐藏瓦面并保留屋架与内部构件，不影响施工状态；默认展示完整屋顶。
+- 基于原有建筑驱动新增 `sway`、`bellows`、`bellows-skin`、`ember`、`awning` 类型；风箱变形先换算至铰链局部坐标，兼容 GLB 按材质分拆后的子节点变换。旧建筑和城门动作路径不改变。
+- 三款 8,309 / 8,964 / 9,620 三角面，617,348 / 644,808 / 770,528 字节，升级状态近景绘制调用 64 / 51 / 51。没有提高预算；不是地图缩尺、实例化、LOD 或 200 格性能已合格。
+- `.blend` 和 `.glb` 均保留分件及接口。功能运动由网页读取元数据运行，没有通用 GLB 烘焙动作；没有工作人员、马匹自动入住、交易/锻造产出、火灾或经济系统。
+
+结构参考：[National Trust 马厩隔栏、草架与通道记录](https://heritagerecords.nationaltrust.org.uk/HBSMR/MonRecord.aspx?uid=MNA125153)、[Weald & Downland 铁匠铺维护记录](https://www.wealddown.co.uk/wp-content/uploads/2020/12/2019-WDLM-Magazine-%E2%80%93-SpringSummer.pdf)、[博物馆公共建筑与集市介绍](https://www.wealddown.co.uk/discover/buildings/public-buildings/)。只参考用途和构件关系，游戏样板并非这些建筑的复刻，没有下载第三方网格。
+
+```powershell
+blender --background --factory-startup --python-exit-code 1 --python scripts/blender/map_element_kit.py -- --assets stable blacksmith market-hall
+node scripts/verify-map-buildings.mjs stable blacksmith market-hall
+```
+
+预览：`/?view=map-elements&element=stable`、`/?view=map-elements&element=blacksmith`、`/?view=map-elements&element=market-hall`。指定模型的专项结果保存为 `artifacts/map-elements/buildings/verification-selected.json`，不覆盖此前完整建筑专项结果。
+
 ### 蒸汽机车与船舶
 
-当前累计 70 类独立模型、79 个版本，108 类规划剩余 38 类。新增 `steam-locomotive`、`sailboat`、`river-barge`，均保留分件 Blender 源文件。不同装载和帆角状态不重复计数。
+此批完成时累计 70 类独立模型、79 个版本，108 类规划剩余 38 类。新增 `steam-locomotive`、`sailboat`、`river-barge`，均保留分件 Blender 源文件。不同装载和帆角状态不重复计数。
 
 - 蒸汽机车为三轴动轮的游戏缩尺罐式机车，区分锅炉、烟箱、水箱、驾驶室、煤斗、汽缸、十字头、活塞杆和联动杆。两侧曲柄相差四分之一转，连杆端点根据实际曲柄销求解，不是互不关联的摆动。蒸汽粒子随运行上升、扩散和淡出。
 - 轮面中心距 0.72 m，牵引接点高 0.42 m，与既有铁路货车厢一致。轮面 Y=0，装入直线铁路需整体抬至轨顶 0.28 m；六只轮子的真实轮面和钢轨做射线接触检查。完整一转逐帧检查杆长与实际几何端点。

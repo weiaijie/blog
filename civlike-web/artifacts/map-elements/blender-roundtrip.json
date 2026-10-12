@@ -394,7 +394,22 @@
       "id": "river-barge",
       "sourceObjects": 165,
       "roundTripTriangles": 5417
+    },
+    {
+      "id": "stable",
+      "sourceObjects": 369,
+      "roundTripTriangles": 8309
+    },
+    {
+      "id": "blacksmith",
+      "sourceObjects": 326,
+      "roundTripTriangles": 8964
+    },
+    {
+      "id": "market-hall",
+      "sourceObjects": 335,
+      "roundTripTriangles": 9620
     }
   ],
-  "passed": 79
+  "passed": 82
 }

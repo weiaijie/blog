@@ -1,0 +1,159 @@
+{
+  "results": [
+    {
+      "id": "stable",
+      "stages": [
+        {
+          "progress": 0,
+          "hash": 2552647704,
+          "coverage": 0.050217864923747274,
+          "framed": true,
+          "visible": 1
+        },
+        {
+          "progress": 30,
+          "hash": 3504807473,
+          "coverage": 0.07866557734204793,
+          "framed": true,
+          "visible": 10
+        },
+        {
+          "progress": 52,
+          "hash": 2408963475,
+          "coverage": 0.0961764705882353,
+          "framed": true,
+          "visible": 15
+        },
+        {
+          "progress": 78,
+          "hash": 2822032135,
+          "coverage": 0.11534313725490196,
+          "framed": true,
+          "visible": 27
+        },
+        {
+          "progress": 100,
+          "hash": 834077612,
+          "coverage": 0.11383986928104575,
+          "framed": true,
+          "visible": 31
+        }
+      ],
+      "upgraded": {
+        "hash": 2146595854,
+        "coverage": 0.11447712418300654,
+        "framed": true
+      },
+      "mobile": {
+        "hash": 4233502456,
+        "coverage": 0.21787545787545787,
+        "framed": true
+      },
+      "drawCalls": 64
+    },
+    {
+      "id": "blacksmith",
+      "stages": [
+        {
+          "progress": 0,
+          "hash": 358026948,
+          "coverage": 0.04833877995642701,
+          "framed": true,
+          "visible": 1
+        },
+        {
+          "progress": 30,
+          "hash": 2514786889,
+          "coverage": 0.0839760348583878,
+          "framed": true,
+          "visible": 11
+        },
+        {
+          "progress": 52,
+          "hash": 2284134868,
+          "coverage": 0.10062636165577342,
+          "framed": true,
+          "visible": 16
+        },
+        {
+          "progress": 78,
+          "hash": 292079623,
+          "coverage": 0.11543028322440087,
+          "framed": true,
+          "visible": 29
+        },
+        {
+          "progress": 100,
+          "hash": 3876063026,
+          "coverage": 0.11369825708061002,
+          "framed": true,
+          "visible": 29
+        }
+      ],
+      "upgraded": {
+        "hash": 3052883504,
+        "coverage": 0.11378540305010894,
+        "framed": true
+      },
+      "mobile": {
+        "hash": 979045182,
+        "coverage": 0.21523809523809523,
+        "framed": true
+      },
+      "drawCalls": 51
+    },
+    {
+      "id": "market-hall",
+      "stages": [
+        {
+          "progress": 0,
+          "hash": 914417871,
+          "coverage": 0.052096949891067536,
+          "framed": true,
+          "visible": 1
+        },
+        {
+          "progress": 30,
+          "hash": 2779499558,
+          "coverage": 0.06109477124183006,
+          "framed": true,
+          "visible": 8
+        },
+        {
+          "progress": 52,
+          "hash": 1219441604,
+          "coverage": 0.08196078431372548,
+          "framed": true,
+          "visible": 12
+        },
+        {
+          "progress": 78,
+          "hash": 1665583822,
+          "coverage": 0.11119281045751633,
+          "framed": true,
+          "visible": 22
+        },
+        {
+          "progress": 100,
+          "hash": 724753354,
+          "coverage": 0.11149782135076253,
+          "framed": true,
+          "visible": 26
+        }
+      ],
+      "upgraded": {
+        "hash": 2025402612,
+        "coverage": 0.11280501089324618,
+        "framed": true
+      },
+      "mobile": {
+        "hash": 3251080080,
+        "coverage": 0.21557997557997557,
+        "framed": true
+      },
+      "drawCalls": 51
+    }
+  ],
+  "errors": [],
+  "writeRetries": []
+}
