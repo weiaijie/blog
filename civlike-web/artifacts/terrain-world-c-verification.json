@@ -1,0 +1,54 @@
+{
+  "date": "2026-10-11",
+  "scope": "C-style continuous animated 3D terrain prototype; isolated from gameplay",
+  "url": "http://localhost:5173/?view=terrain-world&assetSeed=20261011",
+  "implementation": "Live Three.js geometry, instanced vegetation and shader animation. Not a generated image or imported GLB.",
+  "seed": 20261011,
+  "terrain": {
+    "tiles": 37,
+    "trees": 79,
+    "grassClumps": 712,
+    "groundTriangles": 17982,
+    "observedRenderedTriangles": 39858,
+    "observedDrawCalls": 11,
+    "sharedEdges": 90,
+    "externalEdges": 42
+  },
+  "validation": {
+    "unitTestFiles": 13,
+    "unitTests": 68,
+    "terrainTests": 7,
+    "testedContinuitySeeds": [20261011, 1, 999999999],
+    "typecheck": "passed",
+    "scopedLint": "passed",
+    "productionBuild": "passed; shared Three.js chunk exceeds Vite advisory size threshold",
+    "browserErrors": [],
+    "desktopViewport": [1440, 960],
+    "mobileViewport": [390, 844],
+    "mobileDocumentWidth": 390,
+    "mobilePixelCheck": {"samples": 42075, "coloredTerrainSamples": 11605, "coloredBounds": [38, 212, 350, 446]},
+    "mobileCanvasBounds": {"x": 0, "y": 56, "width": 390, "height": 552},
+    "interactions": ["orbit drag", "top view", "reset view", "grid toggle", "tile selection", "pause and resume", "wind slider", "water slider", "apply seed", "random regeneration"],
+    "alternateSeed": {"seed": 20261012, "trees": 76, "grassClumps": 736},
+    "randomSeedObserved": 73761284,
+    "animationPixels": {
+      "samplingRegion": {"x": 40, "y": 120, "right": 1170, "bottom": 880, "step": 3},
+      "samples": 95758,
+      "thresholdRgbAbsoluteDifference": 20,
+      "playingChanged": 21718,
+      "playingChangedPercent": 22.68,
+      "pausedChanged": 0,
+      "pausedSimulationTime": 61.129,
+      "nonBackgroundSamples": 57346
+    }
+  },
+  "screenshots": ["terrain-world-c-desktop.jpg", "terrain-world-c-mobile.jpg", "terrain-world-c-top.jpg"],
+  "boundaries": [
+    "Main Pixi gameplay, saves and rules were not changed.",
+    "Previous rejected realistic grassland edits remain separate and are not part of this implementation.",
+    "This is a bounded art and animation prototype, not a completed full-world asset library.",
+    "No Blender source or GLB export is claimed for this procedural scene.",
+    "Existing package versions were preserved; only lucide-react and its optional-peer metadata were added.",
+    "No large-game-map FPS or physical mobile-device benchmark is claimed."
+  ]
+}

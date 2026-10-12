@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-11",
+  "scope": "Independent terrain-world visual prototype; no gameplay, economy, save-format or Blender export changes.",
+  "url": "http://localhost:5173/?view=terrain-world&assetSeed=337863546&season=bloom",
+  "fixedSeed": 337863546,
+  "world": { "tiles": 217, "biomes": 14, "seasonPhases": 8, "places": 8, "buildingAndPropGroups": 26, "farmPlots": 4, "cropForms": 3, "bridges": 1, "windmills": 2 },
+  "roadPlanner": { "algorithm": "ngraph.path A*", "gridSpacing": 0.5, "maximumRoadGrade": 0.42, "waterCrossings": "Explicit bridge edges only", "curvePolicy": "Accept smoothing only if terrain, building and field clearance remain valid" },
+  "testSeeds": [337863546, 569575877, 20261011, 1, 999999999],
+  "checks": {
+    "vitest": "104 tests across 17 files passed",
+    "typecheckAndProductionBuild": "passed via npm run build",
+    "scopedEslint": "passed",
+    "browserErrors": [],
+    "desktopViewport": [1440, 960],
+    "desktopOverviewRender": { "drawCalls": 57, "triangles": 377541 },
+    "mobileViewports": [[390,844], [320,740]],
+    "horizontalOverflow": false,
+    "mobile320Canvas": [320,298],
+    "mobile320PanelClientAndScrollHeight": [355,355],
+    "mobile320PlaceSelectorY": [636,670],
+    "coloredCanvasSamples": { "overview": 40423, "mobile390": 4251, "mobile320": 6285, "sampleStep": 3, "minimumRgbRange": 28 },
+    "windmillAnimation": { "clockSeconds": [9.328,41.404], "roi": [510,440,140,145], "changedSamples": 628, "sampleStep": 2, "minimumRgbSumDifference": 25 },
+    "pausedFrames": { "simulationTimeSeconds": 41.704, "identicalSha256": "8E1563400527EA61B93A88DFB877AB5405CE3D565034B22933F0901BF63676F7" },
+    "browserSecondSeed": { "seed": 569575877, "places": 8, "buildingAndPropGroups": 26, "farmPlots": 7, "bridges": 1 }
+  },
+  "captures": ["terrain-world-c-v5-overview.jpg", "terrain-world-c-v5-farmstead.jpg", "terrain-world-c-v5-harbor.jpg", "terrain-world-c-v5-winter.jpg", "terrain-world-c-v5-mobile.jpg", "terrain-world-c-v5-mobile-320.jpg", "terrain-world-c-v5-seed-569575877.jpg", "terrain-world-c-v5-motion-a.jpg", "terrain-world-c-v5-motion-b.jpg", "terrain-world-c-v5-paused-a.jpg", "terrain-world-c-v5-paused-b.jpg"],
+  "limitations": ["Art direction still requires user acceptance", "Browser viewport emulation is not physical mobile GPU acceptance", "Existing Three/OrbitControls production chunk remains above the Vite 500 kB warning threshold", "Layout uses an art-directed regional composition with seeded local variation, not unrestricted world generation"],
+  "libraryReferences": ["https://github.com/anvaka/ngraph.path", "https://github.com/anvaka/ngraph.graph"]
+}

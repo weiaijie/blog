@@ -1,0 +1,137 @@
+{
+  "title": "多地形区块风格与连续过渡选型",
+  "date": "2026-10-11",
+  "status": "用户已选择 C；第七轮加入几何波浪、分层水面、随浪船只和水下鱼群，保留整图随机与季节流转，美术效果待用户验收",
+  "selectedStyle": "C",
+  "prototypeUrl": "http://localhost:5173/?view=terrain-world&assetSeed=221648817",
+  "generationTool": "Built-in image_gen",
+  "scope": "独立 terrain-world 页面采用 C 非写实低多边形路线；运行时地形、聚落、道路寻路与活动均为视觉原型。不修改主游戏规则、经济和存档，不覆盖旧资产，也未导出新的 Blender/GLB。用户已澄清城镇互动指人物行走、运输、进出村庄，不做任务系统。",
+  "modelIteration": {
+    "version": 7,
+    "reference": "C-low-poly.png",
+    "fixedSeed": 221648817,
+    "actualDesktopCapture": "../../artifacts/terrain-world-c-v7-overview.jpg",
+    "actualCloseCapture": "../../artifacts/terrain-world-c-v7-fish.jpg",
+    "verification": "../../artifacts/terrain-world-c-v7-verification.json",
+    "biomes": ["花甸", "草原", "阔叶林", "针叶林", "湿地", "旱草原", "沙丘", "红岩荒地", "苔原", "丘陵", "高山", "沙岸", "浅水", "深水"],
+    "seasons": ["初春", "暮春", "初夏", "盛夏", "初秋", "深秋", "初冬", "深冬"],
+    "places": ["河谷集镇", "花甸村庄", "田园农庄", "林间伐木场", "山麓采石场", "山道遗迹", "水岸渔村", "高地哨塔"],
+    "changes": [
+      "水面裁剪网格细分，GPU叠加低频涌浪与沿河道的小波形；河岸、地图外边缘、静水和结冰区域衰减波幅。水面法线来自真实起伏，并结合断续浪峰、流纹、岸边泡沫、浅水光纹与深浅透明度。不是完整流体或折射模拟。",
+      "CPU与GPU共享波谱，船读取水位和坡度；网格随水波起伏。新增0至2浪高控制，水流为0时停水不停止鱼类，统一暂停则全部停止。",
+      "实例化鱼群按种子选取足够深的水域，验证完整活动范围，低多边形鱼身、眼睛和摆尾沿闭合路径游动；浪谷时下潜，不穿水面或河床。冰期活动减慢，透明/结冰材质自然遮挡鱼。活动定位可直达鱼群。",
+      "保留217块连续地面。种子控制河流弯曲、宽度、海岸方向、河口/湖区/半岛布局，以及山系、丘陵和气候区域。14类地貌是可生成目录，不要求每个种子都出现全部类型。",
+      "聚落基于实际渲染面和最大可达区域选址，建筑与农田记录所属六边形。集镇密集街巷、围墙留口、会堂、摊位和住宅集中在单格；村庄有围栏、风车、谷仓与水井。农田是独立生产地块。",
+      "ngraph.path A* 连接聚落并避水避陡坡；显式桥面供人物、运输车通过，到站停留后返程。鹿与羊在适宜陆地范围徘徊，飞鸟沿闭合轨迹飞行，使用实例化批量绘制。",
+      "阔叶树重做为宽冠、直立、平展和下垂四种轮廓，调整树冠/枝干、草花、农作物、围栏、船与房屋比例；岩石簇随实际岸线和山脚分布。",
+      "种子决定初始日期，360日一年、8个阶段，植被色彩、叶量、积雪与结冰随时间插值；支持1/5/20倍季节速度、手选季节与统一暂停，隐藏页面不补算离线时间。",
+      "右侧增加季节进度、活动定位与人物动物数量，保留聚落和地貌定位。1440桌面、390与320手机宽度检查通过，无横向溢出，窄屏面板可纵向滚动。"
+    ],
+    "acceptanceBoundary": "网页实际截图是本轮交付证据；AI 概念图不等于实际模型，测试通过不等于已完成原图美术还原，构图比例和细节密度仍需用户确认。"
+  },
+  "researchReferences": [
+    {"title":"NVIDIA GPU Gems: Effective Water Simulation from Physical Models","url":"https://developer.nvidia.com/gpugems/gpugems/part-i-natural-effects/chapter-1-effective-water-simulation-physical-models","applied":"参考几何波浪与细节波纹分层的思路；本项目使用共享正弦波谱、实际位移法线和岸深衰减，保持C非写实风格，并未引入完整流体求解器。"},
+    {"title":"Civilization VI: Meet the Developers / Brian Busatti","url":"https://store.steampowered.com/news/posts/?appids=289070&enddate=1468504862","applied":"参考官方访谈中强调的远景轮廓辨识、功能色彩和整体一致性；不把文明VI城市分区误解为一个房子占一格。"},
+    {"title":"Toukana DevlogROMANTIK #2","url":"https://toukana.itch.io/dorfromantik-prototype/devlog/198346/devlogromantik-2-biomes-boats-and-more-big-news-soon","applied":"开发者介绍不同地域气氛与船、火车、河流带来的生动感。本项目据此采用成片植被、地域配色和道路运输，具体造型与路径实现是本项目方案，不是复制其技术实现。"}
+  ],
+  "currentSourceFacts": {
+    "terrainTypes": [
+      "grassland",
+      "forest",
+      "hill",
+      "water"
+    ],
+    "source": "src/game/config/terrain.ts",
+    "note": "其他类型是设计建议，不表示已接入玩法或存档。"
+  },
+  "styles": [
+    {
+      "id": "A",
+      "name": "精细手绘微缩",
+      "file": "A-painted-diorama.png",
+      "note": "细节最丰富，仍带一定自然主义质感；不等于选定写实路线。",
+      "prompt": "Create a landscape 1536x1024 art-direction concept image for a hex-grid civilization strategy game. This is a NON-PHOTOREALISTIC game terrain art study, not a screenshot or finished 3D asset. Show one connected compact 19-hex landscape from a fixed isometric camera, about 45 degrees down. Same test geography for all styles: lush central meadow with irregular sparse flowers and a few angular rocks; woodland in upper left grading from solitary trees through bushes into dense canopy; rounded foothills at upper middle connecting naturally into a modest angular rocky mountain at upper right; dry golden grassland on the right; a continuous curved river descending from the right foothills through meadow to the bottom-left coast; wet riparian vegetation, a small irregular sandbank, turquoise shallows deepening into blue water at lower left. At least 7 visibly different terrain treatments. All terrain belongs to ONE joined landform. A very subtle thin hex-grid overlay indicates cells but has NO gaps, bevels, vertical walls or seams between neighboring hexes. Only the OUTSIDE perimeter of the entire map has a shallow decorative soil cutaway. Heights and slopes continue across neighboring cells. One continuous water level. River enters and exits neighboring cells at the exact same shared crossing, no dead-end blue blobs. Coastline meanders independently of the hex boundaries. Broad softly interlocking biome boundaries, bushes and scattered small trees feather forest edges, soil and grass intermingle at hill feet. Strong game readability and deliberately authored shape language rather than noisy realistic detail.\nComposition: the connected map occupies upper 75 percent, entirely visible with comfortable breathing room on a neutral pale gray background. Bottom 25 percent shows three large isolated borderless close-up vignettes of connected terrain transitions: grass-to-forest, grass-to-hills, land-to-shallow-water. These demonstrate continuous surfaces, NOT separated raised tiles. No people, buildings, HUD, decorative frames, logos or text. No photographic scanned textures, no PBR grunge, no realistic individual grass hairs, no plastic shine, no repetitive oval patches.\nSTYLE A: REFINED HAND-PAINTED MINIATURE. Sophisticated stylized 3D game art with painted albedo textures, softly chiseled natural forms, leaf clusters grouped into elegant readable masses, short brush-stroke grass patterns with occasional sculpted grass tufts. Tiny deliberately placed flowers, warm muted gold and olive grass, fresh moss greens, slate-gray mountain planes, clear turquoise water. Rich but controlled medium-scale detail, subtly painted highlights and occlusion, matte materials, warm soft directional light. Clearly an artist-painted collectible miniature world, NOT realism and NOT an ultra-simple toy."
+    },
+    {
+      "id": "B",
+      "name": "柔和卡通",
+      "file": "B-soft-cartoon.png",
+      "note": "树冠、山体和岩石更圆润，色块清楚，明显非照片写实。",
+      "prompt": "Create a landscape 1536x1024 art-direction concept image for a hex-grid civilization strategy game. This is a NON-PHOTOREALISTIC game terrain art study, not a screenshot or finished 3D asset. Show one connected compact 19-hex landscape from a fixed isometric camera, about 45 degrees down. Same test geography for all styles: lush central meadow with irregular sparse flowers and a few angular rocks; woodland in upper left grading from solitary trees through bushes into dense canopy; rounded foothills at upper middle connecting naturally into a modest angular rocky mountain at upper right; dry golden grassland on the right; a continuous curved river descending from the right foothills through meadow to the bottom-left coast; wet riparian vegetation, a small irregular sandbank, turquoise shallows deepening into blue water at lower left. At least 7 visibly different terrain treatments. All terrain belongs to ONE joined landform. A very subtle thin hex-grid overlay indicates cells but has NO gaps, bevels, vertical walls or seams between neighboring hexes. Only the OUTSIDE perimeter of the entire map has a shallow decorative soil cutaway. Heights and slopes continue across neighboring cells. One continuous water level. River enters and exits neighboring cells at the exact same shared crossing, no dead-end blue blobs. Coastline meanders independently of the hex boundaries. Broad softly interlocking biome boundaries, bushes and scattered small trees feather forest edges, soil and grass intermingle at hill feet. Strong game readability and deliberately authored shape language rather than noisy realistic detail.\nComposition: the connected map occupies upper 75 percent, entirely visible with comfortable breathing room on a neutral pale gray background. Bottom 25 percent shows three large isolated borderless close-up vignettes of connected terrain transitions: grass-to-forest, grass-to-hills, land-to-shallow-water. These demonstrate continuous surfaces, NOT separated raised tiles. No people, buildings, HUD, decorative frames, logos or text. No photographic scanned textures, no PBR grunge, no realistic individual grass hairs, no plastic shine, no repetitive oval patches.\nSTYLE B: SOFT CARTOON SCULPTURE, distinctly NON-realistic. Art-directed matte animated-family-film miniature world, rounded chunky tree crowns built from 3 to 5 broad stylized leaf masses, simplified carved trunks, softly sculpted hills with broad flowing color regions, gently rounded angular rocks, grass indicated by a few broad hand-painted strokes and sparse tiny tufts. Exaggerated elegant readable shapes. Cheerful balanced spring greens, golden dry grass, lavender-gray mountain rocks and turquoise water; painted cream ripples as a few graphic flowing lines. Absolutely NO tiny leaf noise, no photorealism, no detailed hair-like grass, no shiny plastic. Soft warm studio shadows. Think handcrafted colorful toy landscape for a strategy game, but all tile surfaces merge into a continuous world, not disconnected toy pieces. Let sculptural silhouettes and controlled broad painted shading do the work, rather than texture."
+    },
+    {
+      "id": "C",
+      "name": "清爽低多边形",
+      "file": "C-low-poly.png",
+      "note": "以几何切面和轮廓为主，纹理较少。",
+      "prompt": "Create a landscape 1536x1024 art-direction concept image for a hex-grid civilization strategy game. This is a NON-PHOTOREALISTIC game terrain art study, not a screenshot or finished 3D asset. Show one connected compact 19-hex landscape from a fixed isometric camera, about 45 degrees down. Same test geography for all styles: lush central meadow with irregular sparse flowers and a few angular rocks; woodland in upper left grading from solitary trees through bushes into dense canopy; rounded foothills at upper middle connecting naturally into a modest angular rocky mountain at upper right; dry golden grassland on the right; a continuous curved river descending from the right foothills through meadow to the bottom-left coast; wet riparian vegetation, a small irregular sandbank, turquoise shallows deepening into blue water at lower left. At least 7 visibly different terrain treatments. All terrain belongs to ONE joined landform. A very subtle thin hex-grid overlay indicates cells but has NO gaps, bevels, vertical walls or seams between neighboring hexes. Only the OUTSIDE perimeter of the entire map has a shallow decorative soil cutaway. Heights and slopes continue across neighboring cells. One continuous water level. River enters and exits neighboring cells at the exact same shared crossing, no dead-end blue blobs. Coastline meanders independently of the hex boundaries. Broad softly interlocking biome boundaries, bushes and scattered small trees feather forest edges, soil and grass intermingle at hill feet. Strong game readability and deliberately authored shape language rather than noisy realistic detail.\nComposition: the connected map occupies upper 75 percent, entirely visible with comfortable breathing room on a neutral pale gray background. Bottom 25 percent shows three large isolated borderless close-up vignettes of connected terrain transitions: grass-to-forest, grass-to-hills, land-to-shallow-water. These demonstrate continuous surfaces, NOT separated raised tiles. No people, buildings, HUD, decorative frames, logos or text. No photographic scanned textures, no PBR grunge, no realistic individual grass hairs, no plastic shine, no repetitive oval patches.\nSTYLE C: CRISP LOW-POLY STRATEGY GAME, intentionally geometric and polished. All hills and mountains made of large clean triangulated planes, trees of 2 or 3 angular faceted green canopy volumes with simple trunks, flowers as very sparse small color accents. Very few texture marks; beauty comes from designed silhouettes, carefully placed facets, broad material color fields and pleasing directional shadows. Vibrant but balanced jade and apple greens, golden fields, charcoal/light-gray rock and cyan/deep teal water, restrained warm flowers. The continuous river has clean flowing edges and one or two elegant pale flow lines. Top terrain is a CONTINUOUS triangulated mesh, not a stack of separate hexagonal pedestals. Never place a circular or oval green platform under trees or grass. No grass-hair detail, no realistic scan, no rough photographic noise. High quality premium low-poly game art, airy composition, matte shading, strong readable different biome silhouettes at small scale."
+    },
+    {
+      "id": "D",
+      "name": "绘本式 2.5D",
+      "file": "D-illustrated-25d.png",
+      "note": "可见绘画笔触、轮廓和扁平光影，更像插画地图。",
+      "prompt": "Create a landscape 1536x1024 art-direction concept image for a hex-grid civilization strategy game. This is a NON-PHOTOREALISTIC game terrain art study, not a screenshot or finished 3D asset. Show one connected compact 19-hex landscape from a fixed isometric camera, about 45 degrees down. Same test geography for all styles: lush central meadow with irregular sparse flowers and a few angular rocks; woodland in upper left grading from solitary trees through bushes into dense canopy; rounded foothills at upper middle connecting naturally into a modest angular rocky mountain at upper right; dry golden grassland on the right; a continuous curved river descending from the right foothills through meadow to the bottom-left coast; wet riparian vegetation, a small irregular sandbank, turquoise shallows deepening into blue water at lower left. At least 7 visibly different terrain treatments. All terrain belongs to ONE joined landform. A very subtle thin hex-grid overlay indicates cells but has NO gaps, bevels, vertical walls or seams between neighboring hexes. Only the OUTSIDE perimeter of the entire map has a shallow decorative soil cutaway. Heights and slopes continue across neighboring cells. One continuous water level. River enters and exits neighboring cells at the exact same shared crossing, no dead-end blue blobs. Coastline meanders independently of the hex boundaries. Broad softly interlocking biome boundaries, bushes and scattered small trees feather forest edges, soil and grass intermingle at hill feet. Strong game readability and deliberately authored shape language rather than noisy realistic detail.\nComposition: the connected map occupies upper 75 percent, entirely visible with comfortable breathing room on a neutral pale gray background. Bottom 25 percent shows three large isolated borderless close-up vignettes of connected terrain transitions: grass-to-forest, grass-to-hills, land-to-shallow-water. These demonstrate continuous surfaces, NOT separated raised tiles. No people, buildings, HUD, decorative frames, logos or text. No photographic scanned textures, no PBR grunge, no realistic individual grass hairs, no plastic shine, no repetitive oval patches.\nSTYLE D: ILLUSTRATED STORYBOOK 2.5D, visibly HAND-DRAWN instead of rendered. Isometric gouache game-map illustration, confident soft-edged opaque brushstrokes, subtle pencil/ink contour accents, flattened painted shadows, intentionally simplified silhouettes. Tree crowns are expressive rounded leaf clusters with brush strokes and outlined trunks, mountains overlapping graphic gray-lilac silhouettes with drawn ridge lines, meadow small restrained comma-shaped grass brush marks and flowers. Balanced fresh sage green, brighter yellow-green, straw yellow, turquoise blue, gray-lilac. Light neutral gray paper background, not sepia or parchment. The image should feel like a beautifully painted board-game map with modest relief, NOT a realistic rendering, NOT clay and NOT polygonal 3D. Especially emphasize connected winding coastlines and gentle painted blending across hexes. Tiny soil-edge drawing only around overall outside perimeter, no hard tile separation. Bottom three close-ups use the same illustrated technique."
+    }
+  ],
+  "proposedCatalog": {
+    "ground": [
+      "肥沃草原",
+      "干草平原",
+      "荒地",
+      "沙地",
+      "湿地",
+      "冻土/雪地",
+      "浅水",
+      "深水"
+    ],
+    "elevation": [
+      "平地",
+      "丘陵",
+      "山脉",
+      "明确的悬崖"
+    ],
+    "overlays": [
+      "疏林",
+      "密林",
+      "灌木",
+      "花草",
+      "资源",
+      "农田",
+      "道路",
+      "村落/城市"
+    ],
+    "connections": [
+      "林缘",
+      "坡脚",
+      "连续山脊",
+      "沙岸",
+      "岩岸",
+      "河道",
+      "河湾",
+      "汇流",
+      "入海口",
+      "道路连接",
+      "桥梁"
+    ],
+    "note": "用于美术资产拆分；不擅自改现有地形枚举或游戏规则。当前四张概念图展示其中的代表类型，并未展示全套资产。"
+  },
+  "transitionContract": [
+    "内部公共边不显示土墙、倒角、缝隙或独立底座；仅单块检视和整张展示地图外轮廓显示断面。",
+    "相邻网格必须共用边界高度和角点；随机起伏不能分别改变同一条边。",
+    "地表在世界坐标下连续，跨格共享色彩和纹理变化；六边形线是可关闭的覆盖层，不是材质分界线。",
+    "林缘从草地到灌木、疏树、密林逐步变化，不能沿六边形边整齐切树。",
+    "坡脚通过连续缓坡、草土交错和零散岩石接地；山脊跨格延续，不是一格一座孤立圆锥。",
+    "河道使用共享的进出口位置、宽度和水位，支持弯道、汇流和入海口；不能每格独立画蓝色弧线。",
+    "海岸使用不规则岸形、湿沙/卵石和浅水过渡，再连接深水；相邻水格水位一致。",
+    "三格交点也要处理材质、地形和水流连接，不能只接好两格的一条边。",
+    "明确的峭壁和岩岸允许陡峭边界，不能把所有边界都做模糊渐变。",
+    "随机样式优先改变块内细节，公共边用共享种子保持一致；肥力、湿度和植被密度联动，地表不能每格随机跳色。"
+  ],
+  "nextAcceptance": [
+    "以选定的 C 图和固定种子网页截图对照验收造型、构图和色彩，再扩展随机生成范围。",
+    "第一套交付应同时包含草原、森林、丘陵、水域和林缘、坡脚、水岸，不能只做草坪。",
+    "先验收连接地图，再验收单块；检查两格、三格交点、旋转组合和不同种子。",
+    "检查俯视/斜视、网格开/关、近看细节和缩小后的辨识度；概念图不替代实际渲染验证。"
+  ]
+}

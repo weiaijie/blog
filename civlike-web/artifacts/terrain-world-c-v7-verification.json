@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-12",
+  "iteration": 7,
+  "url": "http://localhost:5173/?view=terrain-world&assetSeed=221648817&season=bloom",
+  "scope": "Stylized water geometry, shading, boat buoyancy, underwater fish and preview controls only; no main game rules or save changes.",
+  "checks": {
+    "typecheck": "passed as part of npm run build",
+    "tests": {"files": 19, "passed": 123},
+    "eslint": "passed for changed TypeScript files",
+    "build": "passed; existing OrbitControls/Three chunk warning remains (618.71 kB)",
+    "browserErrors": [],
+    "fishSafety": "Three seeded habitats sampled through a complete swimming cycle; maximum wave strength tested for body clearance above bed and below surface.",
+    "boatBuoyancy": "Unit test checks shared height, pitch and roll; actual harbor capture inspected.",
+    "scopeOfSimulation": "Layered procedural waves, not a fluid solver, screen-space refraction or ecosystem AI."
+  },
+  "desktop": {
+    "viewport": [1440, 960],
+    "canvas": [1206, 868],
+    "horizontalOverflow": false,
+    "pixelDifferenceThresholdRgbSum": 18,
+    "paused": {"sampledPixels": 56935, "changedPixels": 0, "uniqueColors": 17113, "flowTime": 14.654, "fishPosition": "4.372,-0.130,-7.128", "waterHeight": 0.1606},
+    "motion": {"sampledPixels": 56935, "changedPixels": 24525, "waterPixels": 32473, "changedWaterPixels": 20557, "flowTimes": [30.122,57.396], "waterHeights": [0.0330,0.0837], "fishPositions": ["4.996,-0.135,-6.981","4.742,-0.124,-7.220"]},
+    "waveStrength": {"values": [0,1,2], "fixedTimeHeights": [0.0860,0.1606,0.2351], "flatVsHighChangedPixels": 30702},
+    "winter": {"season": "snow", "sameTimeWaveHeight": 0.1121, "openWaterSameTimeHeight": 0.1606, "iceAndSnowCapture": "terrain-world-c-v7-winter.jpg"},
+    "flowZero": {"flowTimes": [57.628,57.628], "waterHeights": [0.0620,0.0620], "fishPositions": ["4.758,-0.116,-6.800","5.004,-0.130,-6.923"]}
+  },
+  "mobile": [
+    {"viewport": [390,844], "canvas": [390,402], "scrollWidth": 390, "sampledPixels": 32470, "changedPixels": 18798, "uniqueColors": 14145},
+    {"viewport": [320,740], "canvas": [320,298], "scrollWidth": 320, "check": "Nonblank scene; toolbar wraps; seasonal toggle fits; panel scrolls vertically."}
+  ],
+  "seedChecks": [
+    {"seed": 221648817, "tiles": 217, "fish": 55},
+    {"seed": 569575877, "tiles": 217, "fish": 57},
+    {"seed": 20261011, "tiles": 217, "fish": 53}
+  ],
+  "evidence": [
+    "terrain-world-c-v7-overview.jpg", "terrain-world-c-v7-fish.jpg", "terrain-world-c-v7-harbor.jpg",
+    "terrain-world-c-v7-water-a.jpg", "terrain-world-c-v7-water-b.jpg", "terrain-world-c-v7-paused-a.jpg", "terrain-world-c-v7-paused-b.jpg",
+    "terrain-world-c-v7-flat.jpg", "terrain-world-c-v7-high.jpg", "terrain-world-c-v7-winter.jpg",
+    "terrain-world-c-v7-mobile.jpg", "terrain-world-c-v7-mobile-motion.jpg", "terrain-world-c-v7-mobile-320.jpg",
+    "terrain-world-c-v7-seed-569575877.jpg", "terrain-world-c-v7-seed-20261011.jpg"
+  ],
+  "acceptanceBoundary": "Actual browser captures, not concept renders. Automated checks do not replace user art-direction acceptance or real-device performance testing."
+}
