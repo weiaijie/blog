@@ -1,0 +1,210 @@
+{
+  "results": [
+    {
+      "id": "cottage",
+      "stages": [
+        {
+          "progress": 0,
+          "hash": 3986798272,
+          "coverage": 0.05655773420479303,
+          "framed": true,
+          "visible": 1
+        },
+        {
+          "progress": 30,
+          "hash": 1724965068,
+          "coverage": 0.09755446623093682,
+          "framed": true,
+          "visible": 7
+        },
+        {
+          "progress": 52,
+          "hash": 3722996004,
+          "coverage": 0.15809368191721132,
+          "framed": true,
+          "visible": 11
+        },
+        {
+          "progress": 78,
+          "hash": 1092109176,
+          "coverage": 0.16800108932461874,
+          "framed": true,
+          "visible": 20
+        },
+        {
+          "progress": 100,
+          "hash": 3048513531,
+          "coverage": 0.16592592592592592,
+          "framed": true,
+          "visible": 21
+        }
+      ],
+      "upgraded": {
+        "hash": 2003319013,
+        "coverage": 0.19240196078431374,
+        "framed": true
+      },
+      "mobile": {
+        "hash": 4273446211,
+        "coverage": 0.293015873015873,
+        "framed": true
+      },
+      "drawCalls": 38
+    },
+    {
+      "id": "barn",
+      "stages": [
+        {
+          "progress": 0,
+          "hash": 122174167,
+          "coverage": 0.06979847494553378,
+          "framed": true,
+          "visible": 1
+        },
+        {
+          "progress": 30,
+          "hash": 1649477094,
+          "coverage": 0.12449891067538127,
+          "framed": true,
+          "visible": 7
+        },
+        {
+          "progress": 52,
+          "hash": 3031863848,
+          "coverage": 0.1850871459694989,
+          "framed": true,
+          "visible": 11
+        },
+        {
+          "progress": 78,
+          "hash": 3601151977,
+          "coverage": 0.1898202614379085,
+          "framed": true,
+          "visible": 21
+        },
+        {
+          "progress": 100,
+          "hash": 1827253878,
+          "coverage": 0.18991830065359477,
+          "framed": true,
+          "visible": 21
+        }
+      ],
+      "upgraded": {
+        "hash": 3618187864,
+        "coverage": 0.20362745098039214,
+        "framed": true
+      },
+      "mobile": {
+        "hash": 2438772003,
+        "coverage": 0.3091330891330891,
+        "framed": true
+      },
+      "drawCalls": 36
+    },
+    {
+      "id": "windmill",
+      "stages": [
+        {
+          "progress": 0,
+          "hash": 2534881490,
+          "coverage": 0.03376906318082789,
+          "framed": true,
+          "visible": 1
+        },
+        {
+          "progress": 30,
+          "hash": 893426572,
+          "coverage": 0.07481481481481482,
+          "framed": true,
+          "visible": 8
+        },
+        {
+          "progress": 52,
+          "hash": 424695490,
+          "coverage": 0.09494553376906319,
+          "framed": true,
+          "visible": 12
+        },
+        {
+          "progress": 78,
+          "hash": 2927351873,
+          "coverage": 0.09863834422657952,
+          "framed": true,
+          "visible": 17
+        },
+        {
+          "progress": 100,
+          "hash": 3705519941,
+          "coverage": 0.10438997821350762,
+          "framed": true,
+          "visible": 17
+        }
+      ],
+      "upgraded": {
+        "hash": 2376782296,
+        "coverage": 0.1103050108932462,
+        "framed": true
+      },
+      "mobile": {
+        "hash": 3281766067,
+        "coverage": 0.171990231990232,
+        "framed": true
+      },
+      "drawCalls": 42
+    },
+    {
+      "id": "watermill",
+      "stages": [
+        {
+          "progress": 0,
+          "hash": 2245582740,
+          "coverage": 0.03442265795206972,
+          "framed": true,
+          "visible": 1
+        },
+        {
+          "progress": 30,
+          "hash": 3936433499,
+          "coverage": 0.07279956427015251,
+          "framed": true,
+          "visible": 8
+        },
+        {
+          "progress": 52,
+          "hash": 4003506612,
+          "coverage": 0.10980936819172113,
+          "framed": true,
+          "visible": 12
+        },
+        {
+          "progress": 78,
+          "hash": 2475651664,
+          "coverage": 0.11658496732026144,
+          "framed": true,
+          "visible": 22
+        },
+        {
+          "progress": 100,
+          "hash": 1492058544,
+          "coverage": 0.11624183006535947,
+          "framed": true,
+          "visible": 28
+        }
+      ],
+      "upgraded": {
+        "hash": 1649209822,
+        "coverage": 0.12265795206971677,
+        "framed": true
+      },
+      "mobile": {
+        "hash": 1182734164,
+        "coverage": 0.18703296703296704,
+        "framed": true
+      },
+      "drawCalls": 46
+    }
+  ],
+  "errors": [],
+  "writeRetries": []
+}

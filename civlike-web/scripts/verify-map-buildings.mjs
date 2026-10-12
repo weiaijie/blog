@@ -1,0 +1,120 @@
+import { chromium } from 'playwright'
+import { mkdir, writeFile } from 'node:fs/promises'
+import assert from 'node:assert/strict'
+
+const output='artifacts/map-elements/buildings'
+await mkdir(output,{ recursive:true })
+const browser=await chromium.launch()
+const page=await browser.newPage({ viewport:{ width:1440,height:1000 },reducedMotion:'no-preference' })
+const errors=[],results=[],writeRetries=[]
+page.on('pageerror',(error) => errors.push(error.message))
+page.on('console',(message) => { if(message.type()==='error') errors.push(message.text()) })
+async function shot(name,fullPage=false) {
+  const bytes=await page.screenshot({ fullPage })
+  for(let attempt=0;;attempt++) {
+    try { await writeFile(`${output}/${name}.png`,bytes); return }
+    catch(error) {
+      if(attempt>=3 || !['UNKNOWN','EBUSY','EPERM'].includes(error.code)) throw error
+      writeRetries.push({ name,code:error.code }); await page.waitForTimeout(400*(attempt+1))
+    }
+  }
+}
+async function state() { return JSON.parse(await page.locator('.element-stage').getAttribute('data-building')) }
+async function pixels() {
+  return page.locator('.element-stage canvas').evaluate((canvas) => {
+    const gl=canvas.getContext('webgl2'),w=gl.drawingBufferWidth,h=gl.drawingBufferHeight,data=new Uint8Array(w*h*4)
+    gl.readPixels(0,0,w,h,gl.RGBA,gl.UNSIGNED_BYTE,data)
+    let hash=2166136261,painted=0,minX=w,minY=h,maxX=0,maxY=0
+    for(let i=0;i<data.length;i+=16) {
+      hash=Math.imul(hash^data[i],16777619)>>>0
+      if(Math.abs(data[i]-data[0])+Math.abs(data[i+1]-data[1])+Math.abs(data[i+2]-data[2])>35) {
+        painted++;const x=(i/4)%w,y=Math.floor(i/4/w)
+        minX=Math.min(minX,x);minY=Math.min(minY,y);maxX=Math.max(maxX,x);maxY=Math.max(maxY,y)
+      }
+    }
+    return { hash,coverage:painted/(w*h/4),framed:minX>0&&minY>0&&maxX<w-1&&maxY<h-1 }
+  })
+}
+try {
+  for(const id of ['cottage','barn','windmill','watermill']) {
+    await page.setViewportSize({ width:1440,height:1000 })
+    await page.goto(`http://127.0.0.1:5173/?view=map-elements&element=${id}`)
+    await page.waitForSelector('.element-stage[data-loaded="true"][data-building]')
+    await page.getByRole('button',{ name:'暂停动画',exact:true }).click()
+    const stages=[]
+    for(const progress of [0,30,52,78,100]) {
+      await page.getByLabel('施工进度',{ exact:true }).fill(String(progress))
+      await page.waitForTimeout(1600)
+      const p=await pixels(),s=await state()
+      assert(p.coverage>.007 && p.framed,`${id}: stage ${progress} blank/clipped`)
+      assert(Math.abs(s.progress-progress/100)<.005,`${id}: slider not applied`)
+      stages.push({ progress,...p,visible:s.visible })
+      await shot(`${id}-stage-${progress}`)
+    }
+    assert.equal(new Set(stages.map((s) => s.hash)).size,stages.length,`${id}: identical construction stages`)
+    assert(stages.at(-1).visible>stages[0].visible,`${id}: no assembled parts`)
+    const base=await pixels()
+    await page.getByLabel('升级附件',{ exact:true }).check()
+    await page.waitForTimeout(300)
+    const upgraded=await pixels()
+    assert(upgraded.framed && upgraded.hash!==base.hash,`${id}: upgrade missing/clipped`)
+    await shot(`${id}-upgraded`)
+    for(const view of ['正面','侧面','俯视']) {
+      await page.getByRole('button',{ name:view,exact:true }).click()
+      await page.waitForTimeout(250)
+      assert((await pixels()).framed,`${id}: ${view} clipped`)
+      await shot(`${id}-${view}`)
+    }
+    await page.getByRole('button',{ name:'自由视角',exact:true }).click()
+    await page.getByRole('button',{ name:'播放动画',exact:true }).click()
+    const moving=await pixels()
+    await page.waitForTimeout(750)
+    assert.notEqual((await pixels()).hash,moving.hash,`${id}: operating mechanism static`)
+    await page.getByLabel('功能运行',{ exact:true }).uncheck()
+    await page.waitForTimeout(300)
+    const stopped=await pixels()
+    await page.waitForTimeout(350)
+    assert.equal((await pixels()).hash,stopped.hash,`${id}: working toggle ignored`)
+    await page.getByLabel('功能运行',{ exact:true }).check()
+    await page.getByLabel('运行速度',{ exact:true }).fill('0')
+    await page.waitForTimeout(300)
+    const zero=await pixels()
+    await page.waitForTimeout(350)
+    assert.equal((await pixels()).hash,zero.hash,`${id}: zero speed ignored`)
+    await page.getByLabel('运行速度',{ exact:true }).fill('60')
+    await page.getByLabel('自动施工',{ exact:true }).check()
+    await page.waitForTimeout(2000)
+    await page.getByRole('button',{ name:'暂停动画',exact:true }).click()
+    await page.waitForTimeout(250)
+    const paused=await state(),still=await pixels()
+    assert(paused.progress<.20 && paused.progress>0,`${id}: auto construction not reset/advancing`)
+    await page.waitForTimeout(300)
+    assert.deepEqual(await state(),paused,`${id}: auto construction did not pause`)
+    assert.equal((await pixels()).hash,still.hash,`${id}: construction changed while paused`)
+    if (id==='watermill') {
+      await page.getByRole('button',{ name:'播放动画',exact:true }).click()
+      await page.waitForFunction(() => JSON.parse(document.querySelector('.element-stage').dataset.building).progress===1,{},{ timeout:90000 })
+      await page.getByRole('button',{ name:'暂停动画',exact:true }).click()
+      await page.waitForTimeout(250)
+      await page.getByLabel('自动施工',{ exact:true }).uncheck()
+      await page.waitForTimeout(500)
+      assert.equal((await state()).progress,1,'Disabling completed auto construction reset the building')
+      await shot('watermill-auto-completed')
+    }
+    await page.getByLabel('施工进度',{ exact:true }).fill('100')
+    await page.waitForTimeout(1600)
+    const drawCalls=Number(await page.locator('.element-stage').getAttribute('data-draw-calls'))
+    assert(drawCalls<450,`${id}: draw-call budget`)
+    await page.setViewportSize({ width:390,height:844 })
+    await page.waitForTimeout(300)
+    const mobile=await pixels()
+    assert(mobile.coverage>.007 && mobile.framed,`${id}: mobile clipped/blank`)
+    assert(await page.evaluate(() => document.documentElement.scrollWidth<=innerWidth),`${id}: mobile horizontal overflow`)
+    await shot(`${id}-mobile`,true)
+    results.push({ id,stages,upgraded,mobile,drawCalls })
+    console.log(`BUILDING_VERIFIED ${id}`)
+  }
+  assert.deepEqual(errors,[])
+  await writeFile(`${output}/verification.json`,JSON.stringify({ results,errors,writeRetries },null,2)+'\n')
+  console.log(JSON.stringify({ models:results.length,errors,writeRetries }))
+} finally { await browser.close() }

@@ -604,6 +604,86 @@
         ]
       ],
       "glbBytes": 345368
+    },
+    {
+      "id": "cottage",
+      "reference": "",
+      "triangles": 7560,
+      "meshObjects": 23,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.9168,
+          -2.19,
+          0.0
+        ],
+        [
+          3.2942,
+          1.83,
+          4.201
+        ]
+      ],
+      "glbBytes": 567152
+    },
+    {
+      "id": "barn",
+      "reference": "",
+      "triangles": 7124,
+      "meshObjects": 23,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -2.5184,
+          -2.99,
+          0.0
+        ],
+        [
+          3.8942,
+          2.63,
+          4.48
+        ]
+      ],
+      "glbBytes": 534496
+    },
+    {
+      "id": "windmill",
+      "reference": "",
+      "triangles": 4948,
+      "meshObjects": 20,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -2.1367,
+          -2.1,
+          0.0
+        ],
+        [
+          2.1367,
+          1.57,
+          6.2667
+        ]
+      ],
+      "glbBytes": 369688
+    },
+    {
+      "id": "watermill",
+      "reference": "",
+      "triangles": 9096,
+      "meshObjects": 30,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -2.1186,
+          -2.8,
+          0.0
+        ],
+        [
+          3.1,
+          4.925,
+          4.23
+        ]
+      ],
+      "glbBytes": 683016
     }
   ]
 }

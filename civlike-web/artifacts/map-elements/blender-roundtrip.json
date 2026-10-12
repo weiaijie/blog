@@ -144,7 +144,27 @@
       "id": "deer",
       "sourceObjects": 81,
       "roundTripTriangles": 3616
+    },
+    {
+      "id": "cottage",
+      "sourceObjects": 284,
+      "roundTripTriangles": 7560
+    },
+    {
+      "id": "barn",
+      "sourceObjects": 274,
+      "roundTripTriangles": 7124
+    },
+    {
+      "id": "windmill",
+      "sourceObjects": 250,
+      "roundTripTriangles": 4948
+    },
+    {
+      "id": "watermill",
+      "sourceObjects": 357,
+      "roundTripTriangles": 9096
     }
   ],
-  "passed": 29
+  "passed": 33
 }
