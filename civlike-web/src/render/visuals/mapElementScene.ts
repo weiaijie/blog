@@ -8,6 +8,7 @@ import { createFieldMotion, defaultFieldSettings, type FieldSettings } from './m
 import { createBotanicalMotion } from './mapElementLifecycle'
 import { createAnimalMotion, defaultAnimalSettings, type AnimalSettings, type AnimalState } from './mapElementAnimals'
 import { createBuildingMotion, defaultBuildingSettings, type BuildingSettings, type BuildingState } from './mapElementBuildings'
+import { createTerrainMotion, defaultTerrainSettings, type TerrainSettings, type TerrainState } from './mapElementTerrain'
 
 export type ElementView = 'perspective' | 'front' | 'side' | 'top'
 export type ElementScene = {
@@ -18,6 +19,7 @@ export type ElementScene = {
   setFieldSettings: (value: FieldSettings) => void
   setAnimalSettings: (value: AnimalSettings) => void
   setBuildingSettings: (value: BuildingSettings) => void
+  setTerrainSettings: (value: TerrainSettings) => void
   destroy: () => void
 }
 
@@ -39,6 +41,7 @@ export function mountMapElement(
   onGrowth?: (value: number) => void,
   onAnimal?: (value: AnimalState) => void,
   onBuilding?: (value: BuildingState) => void,
+  onTerrain?: (value: TerrainState) => void,
 ): ElementScene {
   const renderer = new WebGLRenderer({ antialias: true, preserveDrawingBuffer: true })
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
@@ -66,6 +69,8 @@ export function mountMapElement(
   let botanical: ReturnType<typeof createBotanicalMotion> | undefined
   let animal: ReturnType<typeof createAnimalMotion>
   let building: ReturnType<typeof createBuildingMotion>
+  let terrain: ReturnType<typeof createTerrainMotion>
+  let terrainSettings=defaultTerrainSettings('grassland')
   let buildingSettings = { ...defaultBuildingSettings }
   let animalSettings = { ...defaultAnimalSettings }
   let fieldSettings = { ...defaultFieldSettings }
@@ -150,6 +155,9 @@ export function mountMapElement(
     building = createBuildingMotion(model)
     building?.setSettings(buildingSettings)
     building?.update(0,false)
+    terrain=createTerrainMotion(model)
+    terrain?.setSettings(terrainSettings)
+    terrain?.update(0,false)
     animal = createAnimalMotion(model)
     animal?.setSpread(singleSize*.8)
     animal?.setSettings(animalSettings)
@@ -171,7 +179,7 @@ export function mountMapElement(
     setView(view)
     host.dataset.loaded = 'true'
     host.dataset.animations = String(gltf.animations.length)
-    onLoad(gltf.animations.length + (field.count || botanical.count || animal || building ? 1 : 0))
+    onLoad(gltf.animations.length + (field.count || botanical.count || animal || building || terrain ? 1 : 0))
   }).catch((error: unknown) => {
     if (!destroyed) onError(error instanceof Error ? error.message : '模型加载失败')
   })
@@ -183,6 +191,11 @@ export function mountMapElement(
     const delta = previousTime ? Math.min((time - previousTime) / 1000, .05) : 0
     previousTime = time
     if (playing) mixer?.update(delta)
+    if(terrain) {
+      const state=terrain.update(delta,playing)
+      host.dataset.terrain=JSON.stringify(state)
+      if(time-lastGrowthReport>120){onTerrain?.(state);lastGrowthReport=time}
+    }
     if (building) {
       const state=building.update(delta,playing)
       host.dataset.building=JSON.stringify(state)
@@ -210,6 +223,7 @@ export function mountMapElement(
     setView, setPlaying(value) { playing = value }, setWireframe, setCutaway,
     setFieldSettings(value) { fieldSettings = value; field?.setSettings(value); botanical?.setSettings(value) },
     setBuildingSettings(value) { buildingSettings=value; building?.setSettings(value) },
+    setTerrainSettings(value) { terrainSettings=value;terrain?.setSettings(value) },
     setAnimalSettings(value) {
       const changed = animalSettings.family!==value.family
       animalSettings=value
@@ -235,6 +249,7 @@ export function mountMapElement(
       delete host.dataset.animals
       delete host.dataset.building
       delete host.dataset.cutaway
+      delete host.dataset.terrain
     },
   }
 }

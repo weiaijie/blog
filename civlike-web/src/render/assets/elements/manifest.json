@@ -1104,6 +1104,86 @@
         ]
       ],
       "glbBytes": 1938968
+    },
+    {
+      "id": "grassland",
+      "reference": "",
+      "triangles": 8682,
+      "meshObjects": 134,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.75,
+          -1.5155,
+          -0.16
+        ],
+        [
+          1.75,
+          1.5155,
+          0.3533
+        ]
+      ],
+      "glbBytes": 738312
+    },
+    {
+      "id": "rolling-hills",
+      "reference": "",
+      "triangles": 7686,
+      "meshObjects": 114,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.75,
+          -1.5155,
+          -0.16
+        ],
+        [
+          1.75,
+          1.5155,
+          0.9055
+        ]
+      ],
+      "glbBytes": 654104
+    },
+    {
+      "id": "rocky-mountain",
+      "reference": "",
+      "triangles": 5522,
+      "meshObjects": 53,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.75,
+          -1.5155,
+          -0.16
+        ],
+        [
+          1.75,
+          1.5155,
+          1.6696
+        ]
+      ],
+      "glbBytes": 488348
+    },
+    {
+      "id": "snow-peak",
+      "reference": "",
+      "triangles": 4760,
+      "meshObjects": 38,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.75,
+          -1.5155,
+          -0.16
+        ],
+        [
+          1.75,
+          1.5155,
+          2.2196
+        ]
+      ],
+      "glbBytes": 427756
     }
   ]
 }

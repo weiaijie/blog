@@ -8,9 +8,24 @@
 
 独立页面提供自由旋转、正面、侧面、俯视、线框、动画暂停和 GLB 下载，同时展示对应三视图。此批次没有替换现有 `terrain-world` 地图元素。
 
+### 六边形地貌与季相
+
+当前累计 49 类独立模型、58 个版本，108 类规划中剩余 59 类未建模。新增草原 `grassland`、缓丘 `rolling-hills`、岩山 `rocky-mountain`、雪峰 `snow-peak`，均有 `.blend` / `.glb`。
+
+- 草原为微起伏地表、不规则裸土、疏密草簇和散石；缓丘为双丘与低谷；岩山为多峰山脊、分区岩面和坡脚碎石；雪峰有更高主脊及夏季保留雪冠。不是同一个轮廓换色。
+- 平顶六边形半径 1.75 m、边缘标高 0.08 m、底面 -0.16 m；每边 15 段，内部网格扰动，边界顶点固定。六个 `HexEdge` 空节点保存 `connectionKind=terrain`、`profile=hex-flat-3.5-v1`、`normalGltf`、`neighborOffsetGltf`，后两者是 GLB Y-up 坐标。只证明该协议下未旋转地貌彼此对齐，不代表已接入现有地图尺度/道路/河流。
+- 网页有春夏秋冬、积雪、风力与四季循环。颜色平滑过渡，覆雪按相对高度、坡面及分区渐显，地形顶点和整体比例不变化；草簇独立风动，重覆雪时隐藏。不是雪深、侵蚀、降水、水文或作物产量模拟。
+- 自动循环约 90 秒一轮，暂停冻结季相时钟和风动；关闭循环保留当前状态。`LandformRoot.terrainType`、`snowThreshold`、`terrainTuft` 等元数据由 `mapElementTerrain.ts` 驱动，GLB 中没有烘焙四季动画，通用查看器会同时显示全部雪层。
+- 单款最终为 4,760–8,682 三角面、0.43–0.74 MB。源文件保留独立草叶和坡面，可继续编辑；地图批量应用仍需 LOD、合批、边界色彩融合和环境统一。
+
+```powershell
+blender --background --factory-startup --python-exit-code 1 --python scripts/blender/map_element_kit.py -- --assets grassland rolling-hills rocky-mountain snow-peak
+node scripts/verify-map-landforms.mjs
+```
+
 ### 针叶树与芦苇重做
 
-当前累计 45 类独立模型、54 个版本，规划 108 类，剩余 63 类未建模。`pine-tree-v4`、`reeds-v4` 替换对应 family 的默认预览，原版仍可切换，不把重做版本计作新增资产。
+此批完成时为 45 类独立模型、54 个版本。`pine-tree-v4`、`reeds-v4` 替换对应 family 的默认预览，原版仍可切换，不把重做版本计作新增资产。
 
 - 针叶树：20 个主枝、60 个侧梢、成束针叶、抽梢芽、花粉球花、4 个种子球果及 72 个可转开的木质鳞片。幼苗建立、枝条伸展、球果长大、绿转褐、鳞片张开和有翅种子展示分别控制；针叶保持常绿，不套用花瓣和水果阶段。
 - 芦苇：9 根高低错落的分节秆、45 片弯叶和叶鞘、真正分枝的圆锥花序。不再使用旧版香蒲棒状穗头；花期紫灰小穗退去后留下浅色种穗，穗枝带着小穗一起运动，晚期叶片枯黄下垂。岸边浅水仍是静态底板。

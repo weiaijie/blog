@@ -269,7 +269,27 @@
       "id": "reeds-v4",
       "sourceObjects": 2350,
       "roundTripTriangles": 21437
+    },
+    {
+      "id": "grassland",
+      "sourceObjects": 1046,
+      "roundTripTriangles": 8682
+    },
+    {
+      "id": "rolling-hills",
+      "sourceObjects": 865,
+      "roundTripTriangles": 7686
+    },
+    {
+      "id": "rocky-mountain",
+      "sourceObjects": 405,
+      "roundTripTriangles": 5522
+    },
+    {
+      "id": "snow-peak",
+      "sourceObjects": 263,
+      "roundTripTriangles": 4760
     }
   ],
-  "passed": 54
+  "passed": 58
 }
