@@ -1,8 +1,10 @@
 import { Color, Group, Mesh, MeshStandardMaterial, Object3D, Quaternion, Vector3 } from 'three'
+import { createGeodynamics } from './mapElementGeodynamics'
 
-export type TerrainSettings = { phase:number; snow:number; wind:number; automatic:boolean }
+export type TerrainSettings = { phase:number; snow:number; wind:number; automatic:boolean; activity:number }
 export type TerrainState = { phase:number; snow:number }
 export const terrainSeasons = ['春','夏','秋','冬']
+export const aridTerrains = new Set(['volcano','lava-field','sand-dunes','desert-oasis'])
 
 function smooth(value:number) {const t=Math.max(0,Math.min(1,value));return t*t*(3-2*t)}
 function wrap(value:number) {return ((value%1)+1)%1}
@@ -11,16 +13,18 @@ function blend(values:number[],phase:number) {
   return values[i]+(values[(i+1)%4]-values[i])*smooth(p-i)
 }
 export function terrainSnow(kind:string,phase:number) {
+  if(aridTerrains.has(kind))return 0
   return blend(kind==='snow-peak' ? [.62,.42,.54,.96] : [.12,0,.04,.94],phase)
 }
 export function defaultTerrainSettings(kind:string):TerrainSettings {
-  return {phase:.25,snow:terrainSnow(kind,.25),wind:.45,automatic:false}
+  return {phase:.25,snow:terrainSnow(kind,.25),wind:.45,automatic:false,activity:1}
 }
 
 export function createTerrainMotion(model:Group) {
   let kind:string|undefined
   model.traverse((o)=>{if(typeof o.userData.terrainType==='string')kind=o.userData.terrainType})
   if(!kind)return undefined
+  const geodynamics=createGeodynamics(model)
   const tufts:{object:Object3D;rotation:Quaternion;phase:number;altitude:number}[]=[]
   const snow:{object:Object3D;threshold:number;materials:MeshStandardMaterial[]}[]=[]
   const greens=new Map<MeshStandardMaterial,Color[]>()
@@ -44,8 +48,9 @@ export function createTerrainMotion(model:Group) {
   const rotation=new Quaternion(),axis=new Vector3(1,0,.35).normalize()
   return {
     kind,
-    setSettings(value:TerrainSettings) {settings={...value,phase:wrap(value.phase),snow:Math.max(0,Math.min(1,value.snow)),wind:Math.max(0,Math.min(1,value.wind))}},
+    setSettings(value:TerrainSettings) {settings={...value,phase:wrap(value.phase),snow:Math.max(0,Math.min(1,value.snow)),wind:Math.max(0,Math.min(1,value.wind)),activity:Math.max(0,Math.min(1,value.activity))}},
     update(delta:number,playing:boolean):TerrainState {
+      geodynamics.update(delta,playing,settings.wind,settings.activity)
       if(playing) {
         elapsed+=delta
         if(settings.automatic){phase=wrap(phase+delta/90);settings.phase=phase;settings.snow=terrainSnow(kind!,phase)}

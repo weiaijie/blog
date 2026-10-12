@@ -770,6 +770,10 @@ BUILDERS = {
     'rolling-hills': (lambda: map_element_landforms.build(sys.modules[__name__], 'rolling-hills'), ''),
     'rocky-mountain': (lambda: map_element_landforms.build(sys.modules[__name__], 'rocky-mountain'), ''),
     'snow-peak': (lambda: map_element_landforms.build(sys.modules[__name__], 'snow-peak'), ''),
+    'volcano': (lambda: map_element_landforms.build(sys.modules[__name__], 'volcano'), ''),
+    'lava-field': (lambda: map_element_landforms.build(sys.modules[__name__], 'lava-field'), ''),
+    'sand-dunes': (lambda: map_element_landforms.build(sys.modules[__name__], 'sand-dunes'), ''),
+    'desert-oasis': (lambda: map_element_landforms.build(sys.modules[__name__], 'desert-oasis'), ''),
 }
 
 

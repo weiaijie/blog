@@ -5,6 +5,7 @@ import { describe, expect, it } from 'vitest'
 import { createTerrainMotion, defaultTerrainSettings, terrainSnow } from '../../src/render/visuals/mapElementTerrain'
 
 const ids=['grassland','rolling-hills','rocky-mountain','snow-peak']
+const allIds=[...ids,'volcano','lava-field','sand-dunes','desert-oasis']
 async function load(id:string) {
   const b=readFileSync(new URL(`../../src/render/assets/elements/${id}.glb`,import.meta.url))
   return (await new GLTFLoader().parseAsync(b.buffer.slice(b.byteOffset,b.byteOffset+b.byteLength),'')).scene
@@ -47,7 +48,7 @@ describe('hex landforms and seasonal surfaces',()=>{
     for(let i=1;i<heights.length;i++)expect(heights[i]-heights[i-1]).toBeGreaterThan(.4)
   })
   it('matches actual border vertices and anchors across all six edges of every terrain pair',async()=>{
-    const models=await Promise.all(ids.map(load)),borders=models.map(border)
+    const models=await Promise.all(allIds.map(load)),borders=models.map(border)
     for(const points of borders)expect(points).toHaveLength(90)
     for(let a=0;a<models.length;a++)for(let b=0;b<models.length;b++) {
       const edges=nodes(models[a],'edgeIndex'),other=nodes(models[b],'edgeIndex')
@@ -64,7 +65,7 @@ describe('hex landforms and seasonal surfaces',()=>{
     }
   })
   it('has continuous top triangles on every edge and a closed underside',async()=>{
-    for(const id of ids) {
+    for(const id of allIds) {
       const model=await load(id),faces=triangles(model)
       for(const edge of nodes(model,'edgeIndex')) {
         const normal=new Vector3().fromArray(edge.userData.normalGltf),segments:number[]=[]

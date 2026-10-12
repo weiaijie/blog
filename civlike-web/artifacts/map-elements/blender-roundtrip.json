@@ -289,7 +289,27 @@
       "id": "snow-peak",
       "sourceObjects": 263,
       "roundTripTriangles": 4760
+    },
+    {
+      "id": "volcano",
+      "sourceObjects": 71,
+      "roundTripTriangles": 2830
+    },
+    {
+      "id": "lava-field",
+      "sourceObjects": 79,
+      "roundTripTriangles": 3362
+    },
+    {
+      "id": "sand-dunes",
+      "sourceObjects": 82,
+      "roundTripTriangles": 3434
+    },
+    {
+      "id": "desert-oasis",
+      "sourceObjects": 397,
+      "roundTripTriangles": 7148
     }
   ],
-  "passed": 58
+  "passed": 62
 }

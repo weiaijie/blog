@@ -1184,6 +1184,86 @@
         ]
       ],
       "glbBytes": 427756
+    },
+    {
+      "id": "volcano",
+      "reference": "",
+      "triangles": 2830,
+      "meshObjects": 19,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.75,
+          -1.5155,
+          -0.16
+        ],
+        [
+          1.75,
+          1.5155,
+          1.6489
+        ]
+      ],
+      "glbBytes": 244236
+    },
+    {
+      "id": "lava-field",
+      "reference": "",
+      "triangles": 3362,
+      "meshObjects": 14,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.75,
+          -1.5155,
+          -0.16
+        ],
+        [
+          1.75,
+          1.5155,
+          0.3495
+        ]
+      ],
+      "glbBytes": 294676
+    },
+    {
+      "id": "sand-dunes",
+      "reference": "",
+      "triangles": 3434,
+      "meshObjects": 25,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.75,
+          -1.5155,
+          -0.16
+        ],
+        [
+          1.75,
+          1.5155,
+          0.8521
+        ]
+      ],
+      "glbBytes": 657336
+    },
+    {
+      "id": "desert-oasis",
+      "reference": "",
+      "triangles": 7148,
+      "meshObjects": 53,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.75,
+          -1.5155,
+          -0.16
+        ],
+        [
+          1.75,
+          1.5155,
+          2.0007
+        ]
+      ],
+      "glbBytes": 549640
     }
   ]
 }
