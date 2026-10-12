@@ -59,7 +59,7 @@ try {
     assert(initial.coverage > .007, `${asset.id}: blank canvas`)
     assert(initial.bounds[0] > 0 && initial.bounds[1] > 0 && initial.bounds[2] < initial.width - 1 && initial.bounds[3] < initial.height - 1, `${asset.id}: clipped model`)
     let animated = false
-    if (asset.animatedPivots.length || asset.id.endsWith('-v3') || await page.locator('.element-stage').getAttribute('data-organs') || await page.locator('.element-stage').getAttribute('data-animals') || await page.locator('.element-stage').getAttribute('data-building') || await page.locator('.element-stage').getAttribute('data-terrain')) {
+    if (asset.animatedPivots.length || asset.id.endsWith('-v3') || await page.locator('.element-stage').getAttribute('data-organs') || await page.locator('.element-stage').getAttribute('data-animals') || await page.locator('.element-stage').getAttribute('data-building') || await page.locator('.element-stage').getAttribute('data-terrain') || await page.locator('.element-stage').getAttribute('data-route')) {
       await page.waitForTimeout(440)
       animated = (await pixels()).hash !== initial.hash
       assert(animated, `${asset.id}: static animation`)
@@ -234,7 +234,7 @@ try {
   }
   await page.getByRole('button', { name:'资产进度', exact:true }).click()
   assert.equal(await page.locator('.element-roadmap li').count(),108)
-  assert.equal(await page.locator('.element-roadmap li button:enabled').count(),57)
+  assert.equal(await page.locator('.element-roadmap li button:enabled').count(),61)
   await screenshot('roadmap')
   await page.setViewportSize({ width:390,height:844 })
   assert(await page.evaluate(() => document.querySelector('.element-roadmap').scrollWidth <= innerWidth), 'Mobile roadmap overflow')

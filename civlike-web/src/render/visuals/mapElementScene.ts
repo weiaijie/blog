@@ -10,6 +10,7 @@ import { createAnimalMotion, defaultAnimalSettings, type AnimalSettings, type An
 import { createBuildingMotion, defaultBuildingSettings, type BuildingSettings, type BuildingState } from './mapElementBuildings'
 import { createTerrainMotion, defaultTerrainSettings, type TerrainSettings, type TerrainState } from './mapElementTerrain'
 import { createHumanMotion, defaultHumanSettings, type HumanSettings, type HumanState } from './mapElementPeople'
+import { createRouteMotion, defaultRouteSettings, type RouteSettings, type RouteState } from './mapElementRoutes'
 
 export type ElementView = 'perspective' | 'front' | 'side' | 'top'
 export type ElementScene = {
@@ -22,6 +23,7 @@ export type ElementScene = {
   setBuildingSettings: (value: BuildingSettings) => void
   setTerrainSettings: (value: TerrainSettings) => void
   setHumanSettings: (value: HumanSettings) => void
+  setRouteSettings: (value: RouteSettings) => void
   destroy: () => void
 }
 
@@ -45,6 +47,7 @@ export function mountMapElement(
   onBuilding?: (value: BuildingState) => void,
   onTerrain?: (value: TerrainState) => void,
   onHuman?: (value: HumanState) => void,
+  onRoute?: (value: RouteState) => void,
 ): ElementScene {
   const renderer = new WebGLRenderer({ antialias: true, preserveDrawingBuffer: true })
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
@@ -75,6 +78,9 @@ export function mountMapElement(
   let terrain: ReturnType<typeof createTerrainMotion>
   let human: ReturnType<typeof createHumanMotion>
   let humanSettings={...defaultHumanSettings}
+  let route:ReturnType<typeof createRouteMotion>
+  let routeSettings={...defaultRouteSettings}
+  const routeNeighbors:{model:Group;motion:NonNullable<ReturnType<typeof createRouteMotion>>;edge:number}[]=[]
   let terrainSettings=defaultTerrainSettings('grassland')
   let buildingSettings = { ...defaultBuildingSettings }
   let animalSettings = { ...defaultAnimalSettings }
@@ -178,6 +184,19 @@ export function mountMapElement(
     human=createHumanMotion(model,gltf.animations)
     human?.setSettings(humanSettings)
     human?.update(0,false)
+    route=createRouteMotion(model)
+    if(route){
+      const ports:{edge:number;offset:Vector3}[]=[]
+      model.traverse((o)=>{if(typeof o.userData.routePort==='number')ports.push({edge:o.userData.routePort,offset:new Vector3().fromArray(o.userData.neighborOffsetGltf)})})
+      for(const {edge,offset}of ports){
+        const neighbor=model.clone(true),motion=createRouteMotion(neighbor)!
+        neighbor.position.copy(offset);neighbor.rotation.y=(edge+3)*Math.PI/3;neighbor.visible=false
+        scene.add(neighbor);routeNeighbors.push({model:neighbor,motion,edge})
+      }
+    }
+    route?.setSettings(routeSettings)
+    route?.update(0,false)
+    if(route && routeSettings.connected)size=singleSize*2.6
     if (gltf.animations.length && !human) {
       mixer = new AnimationMixer(model)
       for (const clip of gltf.animations) mixer.clipAction(clip).play()
@@ -187,7 +206,7 @@ export function mountMapElement(
     setView(view)
     host.dataset.loaded = 'true'
     host.dataset.animations = String(gltf.animations.length)
-    onLoad(gltf.animations.length + (field.count || botanical.count || animal || building || terrain ? 1 : 0))
+    onLoad(gltf.animations.length + (field.count || botanical.count || animal || building || terrain || route ? 1 : 0))
   }).catch((error: unknown) => {
     if (!destroyed) onError(error instanceof Error ? error.message : '模型加载失败')
   })
@@ -199,6 +218,16 @@ export function mountMapElement(
     const delta = previousTime ? Math.min((time - previousTime) / 1000, .05) : 0
     previousTime = time
     if (playing) mixer?.update(delta)
+    if(route){
+      const state=route.update(delta,playing)
+      const ports=routeSettings.shape==='straight' ? [0,3] : routeSettings.shape==='bend' ? [0,2] : route.kind==='rail-track' ? [0,2,3] : [0,2,4]
+      for(const neighbor of routeNeighbors){
+        neighbor.model.visible=routeSettings.connected&&ports.includes(neighbor.edge)
+        if(neighbor.model.visible){neighbor.motion.setSettings({...routeSettings,shape:'straight',progress:state.progress,automatic:false,connected:false});neighbor.motion.update(delta,playing)}
+      }
+      host.dataset.route=JSON.stringify(state)
+      if(time-lastGrowthReport>120){onRoute?.({...state});lastGrowthReport=time}
+    }
     if(human){
       const state=human.update(delta,playing)
       host.dataset.human=JSON.stringify(state)
@@ -238,6 +267,11 @@ export function mountMapElement(
     setBuildingSettings(value) { buildingSettings=value; building?.setSettings(value) },
     setTerrainSettings(value) { terrainSettings=value;terrain?.setSettings(value) },
     setHumanSettings(value) { humanSettings=value;human?.setSettings(value) },
+    setRouteSettings(value) {
+      const changed=routeSettings.connected!==value.connected
+      routeSettings=value;route?.setSettings(value)
+      if(changed){size=singleSize*(value.connected?2.6:1);setView(view)}
+    },
     setAnimalSettings(value) {
       const changed = animalSettings.family!==value.family
       animalSettings=value
@@ -251,6 +285,7 @@ export function mountMapElement(
       controls.dispose()
       mixer?.stopAllAction()
       human?.destroy()
+      for(const neighbor of routeNeighbors)scene.remove(neighbor.model)
       if (model) { mixer?.uncacheRoot(model); disposeModel(model) }
       renderer.dispose()
       renderer.forceContextLoss()
@@ -266,6 +301,7 @@ export function mountMapElement(
       delete host.dataset.cutaway
       delete host.dataset.terrain
       delete host.dataset.human
+      delete host.dataset.route
     },
   }
 }

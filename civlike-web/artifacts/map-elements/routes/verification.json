@@ -1,0 +1,613 @@
+{
+  "results": [
+    {
+      "id": "dirt-road",
+      "shapes": [
+        {
+          "label": "直线",
+          "shape": "straight",
+          "progress": 1,
+          "ports": [
+            0,
+            3
+          ],
+          "switchPosition": 0,
+          "visible": 55,
+          "hash": 716070938,
+          "coverage": 0.07404684095860567,
+          "bounds": [
+            420,
+            198,
+            800,
+            385
+          ],
+          "w": 1224,
+          "h": 600,
+          "drawCalls": 76
+        },
+        {
+          "label": "转弯",
+          "shape": "bend",
+          "progress": 1,
+          "ports": [
+            0,
+            2
+          ],
+          "switchPosition": 0,
+          "visible": 50,
+          "hash": 3647641152,
+          "coverage": 0.07529956427015251,
+          "bounds": [
+            420,
+            198,
+            800,
+            390
+          ],
+          "w": 1224,
+          "h": 600,
+          "drawCalls": 71
+        },
+        {
+          "label": "三岔",
+          "shape": "junction",
+          "progress": 1,
+          "ports": [
+            0,
+            2,
+            4
+          ],
+          "switchPosition": 0,
+          "visible": 71,
+          "hash": 197529327,
+          "coverage": 0.07528322440087146,
+          "bounds": [
+            420,
+            198,
+            800,
+            390
+          ],
+          "w": 1224,
+          "h": 600,
+          "drawCalls": 80
+        }
+      ],
+      "stages": [
+        {
+          "progress": 0,
+          "hash": 1519740768,
+          "coverage": 0.07377995642701525,
+          "bounds": [
+            420,
+            198,
+            800,
+            385
+          ],
+          "w": 1224,
+          "h": 600
+        },
+        {
+          "progress": 0.2,
+          "hash": 1255454558,
+          "coverage": 0.07389433551198257,
+          "bounds": [
+            420,
+            198,
+            800,
+            385
+          ],
+          "w": 1224,
+          "h": 600
+        },
+        {
+          "progress": 0.5,
+          "hash": 1588620135,
+          "coverage": 0.07404684095860567,
+          "bounds": [
+            420,
+            198,
+            800,
+            385
+          ],
+          "w": 1224,
+          "h": 600
+        },
+        {
+          "progress": 0.8,
+          "hash": 1107326444,
+          "coverage": 0.07404684095860567,
+          "bounds": [
+            420,
+            198,
+            800,
+            385
+          ],
+          "w": 1224,
+          "h": 600
+        },
+        {
+          "progress": 1,
+          "hash": 716070938,
+          "coverage": 0.07404684095860567,
+          "bounds": [
+            420,
+            198,
+            800,
+            385
+          ],
+          "w": 1224,
+          "h": 600
+        }
+      ],
+      "connected": {
+        "hash": 3809745326,
+        "coverage": 0.042140522875816995,
+        "bounds": [
+          452,
+          218,
+          820,
+          385
+        ],
+        "w": 1224,
+        "h": 600,
+        "drawCalls": 308
+      }
+    },
+    {
+      "id": "stone-road",
+      "shapes": [
+        {
+          "label": "直线",
+          "shape": "straight",
+          "progress": 1,
+          "ports": [
+            0,
+            3
+          ],
+          "switchPosition": 0,
+          "visible": 129,
+          "hash": 3274366078,
+          "coverage": 0.07399782135076252,
+          "bounds": [
+            420,
+            198,
+            800,
+            385
+          ],
+          "w": 1224,
+          "h": 600,
+          "drawCalls": 150
+        },
+        {
+          "label": "转弯",
+          "shape": "bend",
+          "progress": 1,
+          "ports": [
+            0,
+            2
+          ],
+          "switchPosition": 0,
+          "visible": 114,
+          "hash": 1571459670,
+          "coverage": 0.07538671023965142,
+          "bounds": [
+            420,
+            198,
+            800,
+            392
+          ],
+          "w": 1224,
+          "h": 600,
+          "drawCalls": 135
+        },
+        {
+          "label": "三岔",
+          "shape": "junction",
+          "progress": 1,
+          "ports": [
+            0,
+            2,
+            4
+          ],
+          "switchPosition": 0,
+          "visible": 172,
+          "hash": 624953895,
+          "coverage": 0.07540305010893246,
+          "bounds": [
+            420,
+            198,
+            800,
+            392
+          ],
+          "w": 1224,
+          "h": 600,
+          "drawCalls": 181
+        }
+      ],
+      "stages": [
+        {
+          "progress": 0,
+          "hash": 3031619409,
+          "coverage": 0.07373093681917212,
+          "bounds": [
+            420,
+            198,
+            800,
+            385
+          ],
+          "w": 1224,
+          "h": 600
+        },
+        {
+          "progress": 0.2,
+          "hash": 2459621291,
+          "coverage": 0.07384531590413944,
+          "bounds": [
+            420,
+            198,
+            800,
+            385
+          ],
+          "w": 1224,
+          "h": 600
+        },
+        {
+          "progress": 0.5,
+          "hash": 31715980,
+          "coverage": 0.07399782135076252,
+          "bounds": [
+            420,
+            198,
+            800,
+            385
+          ],
+          "w": 1224,
+          "h": 600
+        },
+        {
+          "progress": 0.8,
+          "hash": 3973726476,
+          "coverage": 0.07399782135076252,
+          "bounds": [
+            420,
+            198,
+            800,
+            385
+          ],
+          "w": 1224,
+          "h": 600
+        },
+        {
+          "progress": 1,
+          "hash": 3274366078,
+          "coverage": 0.07399782135076252,
+          "bounds": [
+            420,
+            198,
+            800,
+            385
+          ],
+          "w": 1224,
+          "h": 600
+        }
+      ],
+      "connected": {
+        "hash": 1718230726,
+        "coverage": 0.042140522875816995,
+        "bounds": [
+          452,
+          218,
+          820,
+          385
+        ],
+        "w": 1224,
+        "h": 600,
+        "drawCalls": 631
+      }
+    },
+    {
+      "id": "asphalt-road",
+      "shapes": [
+        {
+          "label": "直线",
+          "shape": "straight",
+          "progress": 1,
+          "ports": [
+            0,
+            3
+          ],
+          "switchPosition": 0,
+          "visible": 27,
+          "hash": 3379805282,
+          "coverage": 0.07293028322440087,
+          "bounds": [
+            420,
+            188,
+            800,
+            382
+          ],
+          "w": 1224,
+          "h": 600,
+          "drawCalls": 48
+        },
+        {
+          "label": "转弯",
+          "shape": "bend",
+          "progress": 1,
+          "ports": [
+            0,
+            2
+          ],
+          "switchPosition": 0,
+          "visible": 25,
+          "hash": 961845692,
+          "coverage": 0.07422657952069717,
+          "bounds": [
+            420,
+            188,
+            800,
+            379
+          ],
+          "w": 1224,
+          "h": 600,
+          "drawCalls": 46
+        },
+        {
+          "label": "三岔",
+          "shape": "junction",
+          "progress": 1,
+          "ports": [
+            0,
+            2,
+            4
+          ],
+          "switchPosition": 0,
+          "visible": 23,
+          "hash": 1478168906,
+          "coverage": 0.07410130718954248,
+          "bounds": [
+            420,
+            188,
+            800,
+            379
+          ],
+          "w": 1224,
+          "h": 600,
+          "drawCalls": 30
+        }
+      ],
+      "stages": [
+        {
+          "progress": 0,
+          "hash": 3011697459,
+          "coverage": 0.07312636165577342,
+          "bounds": [
+            420,
+            188,
+            800,
+            376
+          ],
+          "w": 1224,
+          "h": 600
+        },
+        {
+          "progress": 0.2,
+          "hash": 285172034,
+          "coverage": 0.0732516339869281,
+          "bounds": [
+            420,
+            188,
+            800,
+            376
+          ],
+          "w": 1224,
+          "h": 600
+        },
+        {
+          "progress": 0.5,
+          "hash": 2530868423,
+          "coverage": 0.07338779956427015,
+          "bounds": [
+            420,
+            188,
+            800,
+            376
+          ],
+          "w": 1224,
+          "h": 600
+        },
+        {
+          "progress": 0.8,
+          "hash": 3329838714,
+          "coverage": 0.07338779956427015,
+          "bounds": [
+            420,
+            188,
+            800,
+            376
+          ],
+          "w": 1224,
+          "h": 600
+        },
+        {
+          "progress": 1,
+          "hash": 3379805282,
+          "coverage": 0.07293028322440087,
+          "bounds": [
+            420,
+            188,
+            800,
+            382
+          ],
+          "w": 1224,
+          "h": 600
+        }
+      ],
+      "connected": {
+        "hash": 3506232972,
+        "coverage": 0.04167211328976035,
+        "bounds": [
+          452,
+          215,
+          816,
+          381
+        ],
+        "w": 1224,
+        "h": 600,
+        "drawCalls": 174
+      }
+    },
+    {
+      "id": "rail-track",
+      "shapes": [
+        {
+          "label": "直线",
+          "shape": "straight",
+          "progress": 1,
+          "ports": [
+            0,
+            3
+          ],
+          "switchPosition": 0,
+          "visible": 89,
+          "hash": 1782370911,
+          "coverage": 0.07271786492374728,
+          "bounds": [
+            424,
+            180,
+            800,
+            367
+          ],
+          "w": 1224,
+          "h": 600,
+          "drawCalls": 110
+        },
+        {
+          "label": "转弯",
+          "shape": "bend",
+          "progress": 1,
+          "ports": [
+            0,
+            2
+          ],
+          "switchPosition": 0,
+          "visible": 89,
+          "hash": 4009689687,
+          "coverage": 0.07433006535947713,
+          "bounds": [
+            424,
+            180,
+            800,
+            379
+          ],
+          "w": 1224,
+          "h": 600,
+          "drawCalls": 110
+        },
+        {
+          "label": "道岔",
+          "shape": "junction",
+          "progress": 1,
+          "ports": [
+            0,
+            3
+          ],
+          "switchPosition": 0,
+          "visible": 163,
+          "hash": 4172308020,
+          "coverage": 0.07482570806100218,
+          "bounds": [
+            424,
+            180,
+            800,
+            379
+          ],
+          "w": 1224,
+          "h": 600,
+          "drawCalls": 180
+        }
+      ],
+      "stages": [
+        {
+          "progress": 0,
+          "hash": 170849987,
+          "coverage": 0.07240196078431373,
+          "bounds": [
+            424,
+            180,
+            800,
+            367
+          ],
+          "w": 1224,
+          "h": 600
+        },
+        {
+          "progress": 0.2,
+          "hash": 1309368802,
+          "coverage": 0.0725,
+          "bounds": [
+            424,
+            180,
+            800,
+            367
+          ],
+          "w": 1224,
+          "h": 600
+        },
+        {
+          "progress": 0.5,
+          "hash": 1160404211,
+          "coverage": 0.0725,
+          "bounds": [
+            424,
+            180,
+            800,
+            367
+          ],
+          "w": 1224,
+          "h": 600
+        },
+        {
+          "progress": 0.8,
+          "hash": 98649068,
+          "coverage": 0.07271786492374728,
+          "bounds": [
+            424,
+            180,
+            800,
+            367
+          ],
+          "w": 1224,
+          "h": 600
+        },
+        {
+          "progress": 1,
+          "hash": 1782370911,
+          "coverage": 0.07271786492374728,
+          "bounds": [
+            424,
+            180,
+            800,
+            367
+          ],
+          "w": 1224,
+          "h": 600
+        }
+      ],
+      "connected": {
+        "hash": 3313923262,
+        "coverage": 0.04122004357298475,
+        "bounds": [
+          408,
+          245,
+          816,
+          380
+        ],
+        "w": 1224,
+        "h": 600,
+        "drawCalls": 510
+      }
+    }
+  ],
+  "retries": [],
+  "errors": []
+}

@@ -58,6 +58,8 @@
 .element-growth-actions input { accent-color: #438565; }
 .element-growth-actions button { display: grid; place-items: center; width: 30px; height: 30px; }
 .element-animal-controls { display: grid; gap: 14px; max-width: 520px; margin-top: 18px; }
+.element-route-controls .element-behaviors, .element-route-neighbors { grid-column: 1 / -1; }
+.element-route-neighbors { display: flex; align-items: center; gap: 6px; font-size: 12px; }
 .element-behaviors { display: flex; gap: 3px; }
 .element-behaviors button { padding: 7px 16px; font-size: 12px; border-bottom: 2px solid #dce1e3; border-radius: 0; }
 .element-breeding-state { display: flex; align-items: center; gap: 14px; font-size: 12px; }

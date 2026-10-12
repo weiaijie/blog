@@ -329,7 +329,27 @@
       "id": "merchant",
       "sourceObjects": 48,
       "roundTripTriangles": 1760
+    },
+    {
+      "id": "dirt-road",
+      "sourceObjects": 616,
+      "roundTripTriangles": 16102
+    },
+    {
+      "id": "stone-road",
+      "sourceObjects": 1094,
+      "roundTripTriangles": 24134
+    },
+    {
+      "id": "asphalt-road",
+      "sourceObjects": 672,
+      "roundTripTriangles": 13864
+    },
+    {
+      "id": "rail-track",
+      "sourceObjects": 986,
+      "roundTripTriangles": 19456
     }
   ],
-  "passed": 66
+  "passed": 70
 }

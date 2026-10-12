@@ -1352,6 +1352,86 @@
         ]
       ],
       "glbBytes": 320624
+    },
+    {
+      "id": "dirt-road",
+      "reference": "",
+      "triangles": 16102,
+      "meshObjects": 219,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.75,
+          -1.5155,
+          -0.16
+        ],
+        [
+          1.75,
+          1.5155,
+          0.2291
+        ]
+      ],
+      "glbBytes": 932068
+    },
+    {
+      "id": "stone-road",
+      "reference": "",
+      "triangles": 24134,
+      "meshObjects": 458,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.75,
+          -1.5155,
+          -0.16
+        ],
+        [
+          1.75,
+          1.5155,
+          0.229
+        ]
+      ],
+      "glbBytes": 1675768
+    },
+    {
+      "id": "asphalt-road",
+      "reference": "",
+      "triangles": 13864,
+      "meshObjects": 116,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.75,
+          -1.5155,
+          -0.16
+        ],
+        [
+          1.75,
+          1.5155,
+          0.42
+        ]
+      ],
+      "glbBytes": 572744
+    },
+    {
+      "id": "rail-track",
+      "reference": "",
+      "triangles": 19456,
+      "meshObjects": 392,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.75,
+          -1.5155,
+          -0.16
+        ],
+        [
+          1.75,
+          1.5155,
+          0.58
+        ]
+      ],
+      "glbBytes": 1206936
     }
   ]
 }

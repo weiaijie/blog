@@ -26,6 +26,7 @@ import map_element_meadow
 import map_element_conifer_reed
 import map_element_landforms
 import map_element_people
+import map_element_routes
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / 'src/render/assets/elements'
@@ -779,6 +780,10 @@ BUILDERS = {
     'fisher': (lambda: map_element_people.build(sys.modules[__name__], 'fisher'), ''),
     'woodcutter': (lambda: map_element_people.build(sys.modules[__name__], 'woodcutter'), ''),
     'merchant': (lambda: map_element_people.build(sys.modules[__name__], 'merchant'), ''),
+    'dirt-road': (lambda: map_element_routes.build(sys.modules[__name__], 'dirt-road'), ''),
+    'stone-road': (lambda: map_element_routes.build(sys.modules[__name__], 'stone-road'), ''),
+    'asphalt-road': (lambda: map_element_routes.build(sys.modules[__name__], 'asphalt-road'), ''),
+    'rail-track': (lambda: map_element_routes.build(sys.modules[__name__], 'rail-track'), ''),
 }
 
 

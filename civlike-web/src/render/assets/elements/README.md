@@ -8,9 +8,28 @@
 
 独立页面提供自由旋转、正面、侧面、俯视、线框、动画暂停和 GLB 下载；已有三视参考的条目同时展示对应图片。此批次没有替换现有 `terrain-world` 地图元素。
 
+### 道路、轨道与邻接预览
+
+当前累计 61 类独立模型、70 个版本，108 类规划中剩余 47 类。新增土路 `dirt-road`、石板路 `stone-road`、柏油路 `asphalt-road`、铁路 `rail-track`；每款包含直线、弯道及岔口，形态不重复计数。
+
+- 土路有实际车辙起伏、贴合地表的磨损带与散石；石路有错缝铺石、缝隙和收边石；柏油路区分路基、面层、标线与反光柱。三岔路面做网格布尔合并，不叠放共面路面。
+- 铁路有道砟、枕木、扣件、轨底/轨腰/轨头，岔口包含可移动尖轨和方向标。结构参考 [Network Rail 铁路构成](https://www.networkrail.co.uk/our-work/living-by-the-railway/)，所有网格由本地脚本制作，没有下载第三方模型。
+- 共用半径 1.75 m 六边形底块，地表标高 0.08 m。道路宽 1.45 m、端部面高 0.145 m；轨道中心距 0.72 m、轨头内侧净距 0.668 m、轨顶高 0.28 m。这是游戏缩尺接口，不是标准轨距或真实公路车道尺寸。
+- `RoutePort` 的 `normalGltf` / `neighborOffsetGltf` 使用 Y-up 坐标，`road-145-v1` 与 `narrow-rail-0668-v1` 不互通。`RouteShape.ports` 记录实际开口；网页提供同类邻接预览，接点和路面端部顶点分别测试。
+- 施工按路基、铺装、收边或轨件逐件出现并小幅落位，支持进度回退、自动铺设与暂停。草簇独立风动；道岔移动期间没有开放的出口。驱动为 `mapElementRoutes.ts`，不是整体缩放或烘焙动画剪辑。
+- `.blend` 保留独立零件，`.glb` 保留三套形态及动作元数据。通用查看器会同时显示三种形态，必须按 `routeShape` 选择一套；网页的 GLB 下载不是单独形态导出。
+- 邻接预览共享原模型几何和材质，仍增加绘制次数；尚无地图路网、交通寻路、车辆尺度适配、桥坡衔接、跨材质融合及 LOD。道岔为压缩造型，尚未完成真实辙叉、轮缘槽和联锁，不作为工程轨道模型。
+
+```powershell
+blender --background --factory-startup --python-exit-code 1 --python scripts/blender/map_element_kit.py -- --assets dirt-road stone-road asphalt-road rail-track
+node scripts/verify-map-routes.mjs
+```
+
+预览：`/?view=map-elements&element=rail-track`，可切换道路形态、邻接预览、施工进度及道岔方向。
+
 ### 人物骨架与职业动作
 
-当前累计 57 类独立模型、66 个版本，108 类规划中剩余 51 类。新增农夫 `farmer`、渔夫 `fisher`、伐木工 `woodcutter`、商人 `merchant`，保留可编辑骨架、IK 控制与独立零件的 `.blend`，导出蒙皮 `.glb`。
+此批完成时为 57 类独立模型、66 个版本。新增农夫 `farmer`、渔夫 `fisher`、伐木工 `woodcutter`、商人 `merchant`，保留可编辑骨架、IK 控制与独立零件的 `.blend`，导出蒙皮 `.glb`。
 
 - 每款包含 3 秒循环的 `Idle` / `Walk` / `Work`，模型库可切换、暂停和调整 0–2 倍速度；切换使用 0.3 秒混合。原地行走不是地图寻路。
 - 农夫持锄、渔夫持竿、伐木工持斧、商人持账本和钱币。工具绑定握持骨骼，不依赖网页额外挂载；衣服、帽子、腰带、靴子和随身包具区分职业。
