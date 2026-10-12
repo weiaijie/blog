@@ -1,0 +1,678 @@
+{
+  "title": "C-style map asset orthographics - expanded set",
+  "date": "2026-10-12",
+  "generator": "Built-in image_gen",
+  "style": "C non-realistic faceted low-poly",
+  "status": "complete-concept-reference-set",
+  "previousSet": "../asset-orthographics-20261012/reference-manifest.json",
+  "count": 32,
+  "totalWithPrevious": 36,
+  "notes": [
+    "Concept references, not CAD or completed 3D meshes.",
+    "Target dimensions in prompts are design intent; projections require manual scale and correspondence calibration.",
+    "One subject per sheet. Humanoid and land-animal views are front/right/back; others front/right/top.",
+    "No runtime models or gameplay files are modified.",
+    "Keep animated parts separate: wheels, oars, sails, limbs, tails, foliage and water vegetation.",
+    "Do not feed the whole sheet as a single object; use supported separate-view inputs or calibrate reference planes in Blender.",
+    "All selected images were visually inspected; 12 assets received targeted revisions. This does not establish CAD-level cross-view correspondence.",
+    "The selected file is in each asset.file; draftFile is retained for comparison, not an extra asset.",
+    "Remaining modeling caveats are recorded per asset where identified; all proportions and occlusions need Blender calibration."
+  ],
+  "assets": [
+    {
+      "id": "05-wheat-field",
+      "label": "成熟麦田",
+      "category": "farmland",
+      "file": "05-wheat-field.png",
+      "views": [
+        "front",
+        "right-side",
+        "top"
+      ],
+      "status": "generated",
+      "prompt": "Use case: stylized-concept. Produce ONE high-quality orthographic modeling reference sheet for ONE asset in a cohesive non-photorealistic low-poly civilization strategy-game art kit. Style matches a faceted green tree, gray mossy rock, off-white timber cottage with terracotta roof, and cream octagonal windmill with blue-gray roof. Large intentional polygon facets, simplified but rich silhouette and structural details, matte flat-shaded materials, restrained surface texture. NOT photorealistic, NOT smooth clay, NOT voxel, NOT anime, NOT crude primitive placeholders. Clean pure white background, neutral soft studio illumination, no cast ground shadows. Exactly THREE views of the SAME asset and SAME geometry, fully visible, evenly spaced across three columns on a wide landscape sheet. No isometric or three-quarter perspective. Keep details, object count, asymmetry, proportions, color placement, orientation and scale consistent across views. Generous outer margins; nothing clipped. No text, labels, logos, dimensions, frames, grid, scene, UI, swatches or extra unrelated objects. Do not include a hex tile, decorative pedestal or floating island.\nView order LEFT: FRONT straight-on elevation; CENTER: exact RIGHT SIDE elevation; RIGHT: true TOP PLAN looking vertically down 90 degrees, NOT an angled overhead view. Front and side share ground/water datum and height; top uses front toward bottom of page. Same world-units-per-pixel, not arbitrary resizing to fill each panel. Top correctly hides surfaces occluded by roofs/canopies.\nSUBJECT: One modular rectangular wheat field, footprint 4 x 5 m, six straight crop rows with clear narrow soil furrows. Ochre-gold low-poly ears on modest green-gold stalks, 0.8 m crop height, small unevenness within each row but exactly six rows in all views. Exposed neutral umber soil less than 0.12 m thick, edges level and flush for joining adjacent terrain. No raised slab, fences or border. Top plan displays the six crop bands; elevations show stalk structure. Crops may later sway as separate clumps.",
+      "sourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-490c5e55-8048-40ae-a7c1-8e013b1ead42.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1379863,
+      "sha256": "382C9E0E1C5E054054424F77332A91EE49F42213BB30C78D88B6B6817EEC7E60",
+      "reviewStatus": "concept-reference-manual-modeling-calibration-required"
+    },
+    {
+      "id": "06-plowed-field",
+      "label": "翻耕田地",
+      "category": "farmland",
+      "file": "06-plowed-field-v2.png",
+      "views": [
+        "front",
+        "right-side",
+        "top"
+      ],
+      "status": "generated",
+      "prompt": "Use case: stylized-concept. Produce ONE high-quality orthographic modeling reference sheet for ONE asset in a cohesive non-photorealistic low-poly civilization strategy-game art kit. Style matches a faceted green tree, gray mossy rock, off-white timber cottage with terracotta roof, and cream octagonal windmill with blue-gray roof. Large intentional polygon facets, simplified but rich silhouette and structural details, matte flat-shaded materials, restrained surface texture. NOT photorealistic, NOT smooth clay, NOT voxel, NOT anime, NOT crude primitive placeholders. Clean pure white background, neutral soft studio illumination, no cast ground shadows. Exactly THREE views of the SAME asset and SAME geometry, fully visible, evenly spaced across three columns on a wide landscape sheet. No isometric or three-quarter perspective. Keep details, object count, asymmetry, proportions, color placement, orientation and scale consistent across views. Generous outer margins; nothing clipped. No text, labels, logos, dimensions, frames, grid, scene, UI, swatches or extra unrelated objects. Do not include a hex tile, decorative pedestal or floating island.\nView order LEFT: FRONT straight-on elevation; CENTER: exact RIGHT SIDE elevation; RIGHT: true TOP PLAN looking vertically down 90 degrees, NOT an angled overhead view. Front and side share ground/water datum and height; top uses front toward bottom of page. Same world-units-per-pixel, not arbitrary resizing to fill each panel. Top correctly hides surfaces occluded by roofs/canopies.\nSUBJECT: One freshly plowed modular rectangular field 4 x 5 m, six long gently ridged soil furrows aligned front-to-back, modest irregular clods and shallow troughs. Neutral muted earth, slightly darker moist furrow bottoms, crisp simplified polygon surfaces. Ground thickness at most 0.12 m; flat perimeter datum permits tiling, no thick platform, no visible underground cutaway, no plants, fences or tools. True top plan shows parallel complete furrows. Include useful surface relief despite shallow height.",
+      "sourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-ca6378bc-158d-44a9-b033-c2941864d433.png",
+      "draftFile": "06-plowed-field.png",
+      "draftSourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-c11f15b2-c933-4191-bb99-962eb757df3a.png",
+      "revisionPrompt": "Fix ONLY the projection consistency of this exact low-poly plowed-soil reference sheet. Three panels left/front, center/right side, right/top. Preserve material, six straight parallel ridges, clean white background and empty margins. Replace LEFT panel with a strict horizontal-camera orthographic front elevation: a very low thin soil strip with SIX visible sawtooth ridge cross sections across its width, absolutely NO visible depth or receding top plane. Replace CENTER panel with the strict right elevation along the length of a single ridge: ONE very low long continuous rough-edged soil strip, NOT six humps. Keep RIGHT panel a true vertical top plan with six long parallel ridges running vertically. All panels use the same world-units-per-pixel; elevations are intentionally extremely shallow, DO NOT tilt them to reveal detail. No perspective, no added text.",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1554204,
+      "sha256": "18BA218AAD3FB1C4966BC79AFB3DB82C10F289138527F5B99908EBD933785538",
+      "reviewStatus": "concept-reference-manual-modeling-calibration-required"
+    },
+    {
+      "id": "07-vegetable-field",
+      "label": "蔬菜田",
+      "category": "farmland",
+      "file": "07-vegetable-field.png",
+      "views": [
+        "front",
+        "right-side",
+        "top"
+      ],
+      "status": "generated",
+      "prompt": "Use case: stylized-concept. Produce ONE high-quality orthographic modeling reference sheet for ONE asset in a cohesive non-photorealistic low-poly civilization strategy-game art kit. Style matches a faceted green tree, gray mossy rock, off-white timber cottage with terracotta roof, and cream octagonal windmill with blue-gray roof. Large intentional polygon facets, simplified but rich silhouette and structural details, matte flat-shaded materials, restrained surface texture. NOT photorealistic, NOT smooth clay, NOT voxel, NOT anime, NOT crude primitive placeholders. Clean pure white background, neutral soft studio illumination, no cast ground shadows. Exactly THREE views of the SAME asset and SAME geometry, fully visible, evenly spaced across three columns on a wide landscape sheet. No isometric or three-quarter perspective. Keep details, object count, asymmetry, proportions, color placement, orientation and scale consistent across views. Generous outer margins; nothing clipped. No text, labels, logos, dimensions, frames, grid, scene, UI, swatches or extra unrelated objects. Do not include a hex tile, decorative pedestal or floating island.\nView order LEFT: FRONT straight-on elevation; CENTER: exact RIGHT SIDE elevation; RIGHT: true TOP PLAN looking vertically down 90 degrees, NOT an angled overhead view. Front and side share ground/water datum and height; top uses front toward bottom of page. Same world-units-per-pixel, not arbitrary resizing to fill each panel. Top correctly hides surfaces occluded by roofs/canopies.\nSUBJECT: One 4 x 4 m vegetable patch with four rows of four compact angular cabbage rosettes each: exactly sixteen plants arranged 4 by 4, lettuce-green outer leaves, lighter centers, angular broad folded leaves not spheres. Bare narrow soil paths between rows. Nearly flush ground mat, 0.1 m soil thickness and crop height 0.35 m, no border wall or pedestal, no fence, no other crop species. Front elevation shows four columns, right elevation four rows, top shows all sixteen clearly.",
+      "sourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-b8d99311-8492-43c0-8679-02fbedd36e8c.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1145012,
+      "sha256": "B11E7F1ED07721368836F35BCD861A0EC054B3ABE89BF576485DB3F4AECF9C57",
+      "reviewStatus": "concept-reference-manual-modeling-calibration-required"
+    },
+    {
+      "id": "08-orchard",
+      "label": "果园单元",
+      "category": "farmland",
+      "file": "08-orchard-v2.png",
+      "views": [
+        "front",
+        "right-side",
+        "top"
+      ],
+      "status": "generated",
+      "prompt": "Use case: stylized-concept. Produce ONE high-quality orthographic modeling reference sheet for ONE asset in a cohesive non-photorealistic low-poly civilization strategy-game art kit. Style matches a faceted green tree, gray mossy rock, off-white timber cottage with terracotta roof, and cream octagonal windmill with blue-gray roof. Large intentional polygon facets, simplified but rich silhouette and structural details, matte flat-shaded materials, restrained surface texture. NOT photorealistic, NOT smooth clay, NOT voxel, NOT anime, NOT crude primitive placeholders. Clean pure white background, neutral soft studio illumination, no cast ground shadows. Exactly THREE views of the SAME asset and SAME geometry, fully visible, evenly spaced across three columns on a wide landscape sheet. No isometric or three-quarter perspective. Keep details, object count, asymmetry, proportions, color placement, orientation and scale consistent across views. Generous outer margins; nothing clipped. No text, labels, logos, dimensions, frames, grid, scene, UI, swatches or extra unrelated objects. Do not include a hex tile, decorative pedestal or floating island.\nView order LEFT: FRONT straight-on elevation; CENTER: exact RIGHT SIDE elevation; RIGHT: true TOP PLAN looking vertically down 90 degrees, NOT an angled overhead view. Front and side share ground/water datum and height; top uses front toward bottom of page. Same world-units-per-pixel, not arbitrary resizing to fill each panel. Top correctly hides surfaces occluded by roofs/canopies.\nSUBJECT: One small orchard planting module with exactly FOUR short low-poly apple trees arranged on a square 2 by 2 grid, sparse grass around their roots and a nearly flush thin square soil mat. Each tree 2 m high with trunk exposed for first 0.7 m, compact faceted green canopy and a few terracotta-red apples. The SAME four trees appear in every view: front and side hide rear trees naturally, true top shows four separate crowns in a square, never add a fifth tree. No fence, building, planter, large platform or decorative base. Modular 5 x 5 m plot.",
+      "sourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-055de660-e557-4d94-b826-f94e1393df8c.png",
+      "draftFile": "08-orchard.png",
+      "draftSourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-1f6f7e69-151a-4e61-99df-0a673dcbb939.png",
+      "revisionPrompt": "Correct ONLY camera projection on this exact four-tree orchard modeling reference sheet, preserving faceted style, four apple trees in a 2x2 arrangement, white background and the right top-plan panel. LEFT and CENTER must be strict eye-level orthographic elevations, with cameras horizontal: the thin ground mat is seen exactly edge-on as a horizontal narrow line, NEVER a trapezoid. Two front trees occlude the two aligned back trees; do not spread trees for visibility. No visible top surface of ground in either elevation. Top remains a vertical overhead square patch with exactly four crowns. Same scale in all panels; no text.",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1605951,
+      "sha256": "C47106D0F4E3689B1FDADD76343EDFFEC4EA48BF8AB8DBDF5710E45DCCCE05AE",
+      "reviewStatus": "concept-reference-manual-modeling-calibration-required"
+    },
+    {
+      "id": "09-timber-bridge",
+      "label": "木制车行桥",
+      "category": "infrastructure",
+      "file": "09-timber-bridge-v2.png",
+      "views": [
+        "front",
+        "right-side",
+        "top"
+      ],
+      "status": "generated",
+      "prompt": "Use case: stylized-concept. Produce ONE high-quality orthographic modeling reference sheet for ONE asset in a cohesive non-photorealistic low-poly civilization strategy-game art kit. Style matches a faceted green tree, gray mossy rock, off-white timber cottage with terracotta roof, and cream octagonal windmill with blue-gray roof. Large intentional polygon facets, simplified but rich silhouette and structural details, matte flat-shaded materials, restrained surface texture. NOT photorealistic, NOT smooth clay, NOT voxel, NOT anime, NOT crude primitive placeholders. Clean pure white background, neutral soft studio illumination, no cast ground shadows. Exactly THREE views of the SAME asset and SAME geometry, fully visible, evenly spaced across three columns on a wide landscape sheet. No isometric or three-quarter perspective. Keep details, object count, asymmetry, proportions, color placement, orientation and scale consistent across views. Generous outer margins; nothing clipped. No text, labels, logos, dimensions, frames, grid, scene, UI, swatches or extra unrelated objects. Do not include a hex tile, decorative pedestal or floating island.\nView order LEFT: FRONT straight-on elevation; CENTER: exact RIGHT SIDE elevation; RIGHT: true TOP PLAN looking vertically down 90 degrees, NOT an angled overhead view. Front and side share ground/water datum and height; top uses front toward bottom of page. Same world-units-per-pixel, not arbitrary resizing to fill each panel. Top correctly hides surfaces occluded by roofs/canopies.\nSUBJECT: One straight timber road bridge 7 m long, deck width 2.4 m, for small carts. A level plank deck, simple low timber rails on both sides, exactly four rail posts per side and two cross-braced trestle supports under deck. Front view looks directly into bridge entrance down its length; right side shows its whole longitudinal span; top shows complete plank deck between rails. Medium desaturated wood, dark end grain only subtle, gray iron strap joints. Both approaches terminate at identical deck level. No river, banks, ground, people, rope or curved arch.",
+      "sourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-e142718b-8015-4f9a-8dcb-b5a03987c16c.png",
+      "draftFile": "09-timber-bridge.png",
+      "draftSourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-09ec4182-1994-41b4-b238-39bf8bf8ec3a.png",
+      "revisionPrompt": "Correct ONLY camera projection on this exact wooden bridge reference. Keep all design, four railing posts per side, wood, metal, white background and three panel order front/right/top. LEFT front must be STRICT horizontal camera at deck level, orthographic elevation, not angled: nearest two railing posts obscure all farther same-height posts, two horizontal rails become edge-on short end pieces; bridge deck is a THIN horizontal rectangular edge, absolutely no receding deck planks visible. The entrance support is two legs with X bracing. CENTER side remains full span orthographic, four posts along near side and two lower trestles; no visible deck top. RIGHT true top keeps eight posts (four on each side). No perspective, no added objects or text.",
+      "width": 1774,
+      "height": 887,
+      "bytes": 1187799,
+      "sha256": "DAAD4FCD18C1DA9BBA7A4BDA130FF170430FA8C60519839352896156E2913E13",
+      "reviewStatus": "concept-reference-manual-modeling-calibration-required"
+    },
+    {
+      "id": "10-stone-bridge",
+      "label": "单拱石桥",
+      "category": "infrastructure",
+      "file": "10-stone-bridge-v2.png",
+      "views": [
+        "front",
+        "right-side",
+        "top"
+      ],
+      "status": "generated",
+      "prompt": "Use case: stylized-concept. Produce ONE high-quality orthographic modeling reference sheet for ONE asset in a cohesive non-photorealistic low-poly civilization strategy-game art kit. Style matches a faceted green tree, gray mossy rock, off-white timber cottage with terracotta roof, and cream octagonal windmill with blue-gray roof. Large intentional polygon facets, simplified but rich silhouette and structural details, matte flat-shaded materials, restrained surface texture. NOT photorealistic, NOT smooth clay, NOT voxel, NOT anime, NOT crude primitive placeholders. Clean pure white background, neutral soft studio illumination, no cast ground shadows. Exactly THREE views of the SAME asset and SAME geometry, fully visible, evenly spaced across three columns on a wide landscape sheet. No isometric or three-quarter perspective. Keep details, object count, asymmetry, proportions, color placement, orientation and scale consistent across views. Generous outer margins; nothing clipped. No text, labels, logos, dimensions, frames, grid, scene, UI, swatches or extra unrelated objects. Do not include a hex tile, decorative pedestal or floating island.\nView order LEFT: FRONT straight-on elevation; CENTER: exact RIGHT SIDE elevation; RIGHT: true TOP PLAN looking vertically down 90 degrees, NOT an angled overhead view. Front and side share ground/water datum and height; top uses front toward bottom of page. Same world-units-per-pixel, not arbitrary resizing to fill each panel. Top correctly hides surfaces occluded by roofs/canopies.\nSUBJECT: One short single-arch stone bridge, length 7 m, width 2.5 m, low solid stone parapets. Exactly ONE smooth semicircular arch beneath gently crowned cobbled deck; two short end abutments. Cool-gray large polygon-cut blocks, simplified wedge voussoirs around arch. Front view looks into road entrance, side view exposes one complete arch and both abutments, top shows cobbled route and parapets. Sturdy clean stylized medieval civil-engineering asset, not a ruined bridge. No water, riverbank, plants, pedestals or vehicles.",
+      "sourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-47750525-6732-4dc4-8a4a-55b4ba7e5974.png",
+      "draftFile": "10-stone-bridge.png",
+      "draftSourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-83d3b889-7721-4b1e-8bcc-0c87901569cd.png",
+      "revisionPrompt": "Correct ONLY camera projection of the exact stone bridge sheet. Preserve low-poly gray blocks and one single arch. LEFT panel is STRICT horizontal-camera orthographic entrance elevation: two short solid parapet ends and the crowned road appears as a shallow front silhouette, not a long receding cobbled surface. Absolutely no converging edges or birdseye view in left panel. CENTER remains exact side elevation showing the ONE arch, with no visible deck top. RIGHT remains true overhead plan of full road running vertically with four corner end blocks. Keep all dimensions, white background, spacing, no labels.",
+      "width": 1942,
+      "height": 809,
+      "bytes": 1580989,
+      "sha256": "5A5FB8D017BFF1D626971D4CC25395C737F5FD55D11368B6CD58E7145E9C82DF",
+      "reviewStatus": "concept-reference-manual-modeling-calibration-required",
+      "modelingNote": "Use the side elevation for the arch and longitudinal crown; the front illustration is a simplified entrance reference."
+    },
+    {
+      "id": "11-footbridge",
+      "label": "乡村木步桥",
+      "category": "infrastructure",
+      "file": "11-footbridge-v2.png",
+      "views": [
+        "front",
+        "right-side",
+        "top"
+      ],
+      "status": "generated",
+      "prompt": "Use case: stylized-concept. Produce ONE high-quality orthographic modeling reference sheet for ONE asset in a cohesive non-photorealistic low-poly civilization strategy-game art kit. Style matches a faceted green tree, gray mossy rock, off-white timber cottage with terracotta roof, and cream octagonal windmill with blue-gray roof. Large intentional polygon facets, simplified but rich silhouette and structural details, matte flat-shaded materials, restrained surface texture. NOT photorealistic, NOT smooth clay, NOT voxel, NOT anime, NOT crude primitive placeholders. Clean pure white background, neutral soft studio illumination, no cast ground shadows. Exactly THREE views of the SAME asset and SAME geometry, fully visible, evenly spaced across three columns on a wide landscape sheet. No isometric or three-quarter perspective. Keep details, object count, asymmetry, proportions, color placement, orientation and scale consistent across views. Generous outer margins; nothing clipped. No text, labels, logos, dimensions, frames, grid, scene, UI, swatches or extra unrelated objects. Do not include a hex tile, decorative pedestal or floating island.\nView order LEFT: FRONT straight-on elevation; CENTER: exact RIGHT SIDE elevation; RIGHT: true TOP PLAN looking vertically down 90 degrees, NOT an angled overhead view. Front and side share ground/water datum and height; top uses front toward bottom of page. Same world-units-per-pixel, not arbitrary resizing to fill each panel. Top correctly hides surfaces occluded by roofs/canopies.\nSUBJECT: One narrow rustic footbridge 4 m long and 1.2 m wide, slightly arched small plank deck on two parallel curved timber beams, simple rope handrails with three upright wooden posts per side. Pale weathered desaturated wood, matte hemp ropes. Front looks through narrow entrance, right side shows mild longitudinal rise and complete three-post rail, top reveals single continuous strip of 12 planks. Clearly different from cart bridge: lightweight and slender, no trestles or heavy metal. No stream, stones, terrain or people.",
+      "sourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-ab3d6b85-17b6-41a5-905c-8004c399d04c.png",
+      "draftFile": "11-footbridge.png",
+      "draftSourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-1692cc3b-2865-4f5a-af94-9d9f5ffa273b.png",
+      "revisionPrompt": "Correct projection and post consistency of this wooden footbridge sheet without changing low-poly materials or design. LEFT front is STRICT horizontal-camera orthographic elevation, showing near pair of posts and bridge deck only edge-on; no receding planks. CENTER is strict side with three posts and two ropes following the shallow arch. RIGHT is a true top plan, rotate its long axis VERTICAL, entrance at bottom, with exactly SIX posts arranged three on EACH side: front pair, middle pair, back pair. Show transverse planks across the width, and ropes along length. Three drawings must depict same bridge. White background, no labels.",
+      "width": 1983,
+      "height": 793,
+      "bytes": 1300446,
+      "sha256": "8C11F402456F170141E648E7B49E2C0C3E7D79FBE08CAD0832E9ABD977576F12",
+      "reviewStatus": "concept-reference-manual-modeling-calibration-required"
+    },
+    {
+      "id": "12-fishing-boat",
+      "label": "近岸渔船",
+      "category": "boats",
+      "file": "12-fishing-boat-v2.png",
+      "views": [
+        "front",
+        "right-side",
+        "top"
+      ],
+      "status": "generated",
+      "prompt": "Use case: stylized-concept. Produce ONE high-quality orthographic modeling reference sheet for ONE asset in a cohesive non-photorealistic low-poly civilization strategy-game art kit. Style matches a faceted green tree, gray mossy rock, off-white timber cottage with terracotta roof, and cream octagonal windmill with blue-gray roof. Large intentional polygon facets, simplified but rich silhouette and structural details, matte flat-shaded materials, restrained surface texture. NOT photorealistic, NOT smooth clay, NOT voxel, NOT anime, NOT crude primitive placeholders. Clean pure white background, neutral soft studio illumination, no cast ground shadows. Exactly THREE views of the SAME asset and SAME geometry, fully visible, evenly spaced across three columns on a wide landscape sheet. No isometric or three-quarter perspective. Keep details, object count, asymmetry, proportions, color placement, orientation and scale consistent across views. Generous outer margins; nothing clipped. No text, labels, logos, dimensions, frames, grid, scene, UI, swatches or extra unrelated objects. Do not include a hex tile, decorative pedestal or floating island.\nView order LEFT: FRONT straight-on elevation; CENTER: exact RIGHT SIDE elevation; RIGHT: true TOP PLAN looking vertically down 90 degrees, NOT an angled overhead view. Front and side share ground/water datum and height; top uses front toward bottom of page. Same world-units-per-pixel, not arbitrary resizing to fill each panel. Top correctly hides surfaces occluded by roofs/canopies.\nSUBJECT: One small open wooden fishing rowboat, length 4 m, beam 1.4 m, pointed bow, flat transom stern, low angular clinker-style hull, three transverse bench seats. One compact coiled rope inside stern, two oars stored lengthwise INSIDE hull, not projecting as extra silhouettes. Muted desaturated wood, thin teal-painted gunwale. Front view is bow-on, right is full starboard side, top is exact deck plan with bow at bottom and transom at top. Hull is fully visible to keel, no water plane or stand. No mast, sail, crew, fishing net obscuring form or ground.",
+      "sourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-b492fb6a-8a32-4884-b1d9-ae015f6d9680.png",
+      "draftFile": "12-fishing-boat.png",
+      "draftSourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-8d64207e-ab7d-4077-951b-b9eccd8dd4b1.png",
+      "revisionPrompt": "Correct only the projection of the existing faceted fishing boat reference sheet. Keep hull, turquoise gunwale, three benches and two oars, white background. LEFT is strict orthographic BOW elevation at horizontal camera: the near pointed bow and hull silhouette obscure interior, no top-down look into boat, no far stern visible. CENTER exact right side has horizontal camera and should show exterior hull outline only, not an angled view into all three benches. RIGHT true overhead view retains all three benches, two oars and stern rope; bow at bottom. No perspective or labels.",
+      "width": 1942,
+      "height": 809,
+      "bytes": 1100972,
+      "sha256": "F2BCE2AA4305A5450E94700F42E0133659722A5E5E39A75C930250F711E48296",
+      "reviewStatus": "concept-reference-manual-modeling-calibration-required"
+    },
+    {
+      "id": "13-cargo-sailboat",
+      "label": "小型货帆船",
+      "category": "boats",
+      "file": "13-cargo-sailboat-v2.png",
+      "views": [
+        "front",
+        "right-side",
+        "top"
+      ],
+      "status": "generated",
+      "prompt": "Use case: stylized-concept. Produce ONE high-quality orthographic modeling reference sheet for ONE asset in a cohesive non-photorealistic low-poly civilization strategy-game art kit. Style matches a faceted green tree, gray mossy rock, off-white timber cottage with terracotta roof, and cream octagonal windmill with blue-gray roof. Large intentional polygon facets, simplified but rich silhouette and structural details, matte flat-shaded materials, restrained surface texture. NOT photorealistic, NOT smooth clay, NOT voxel, NOT anime, NOT crude primitive placeholders. Clean pure white background, neutral soft studio illumination, no cast ground shadows. Exactly THREE views of the SAME asset and SAME geometry, fully visible, evenly spaced across three columns on a wide landscape sheet. No isometric or three-quarter perspective. Keep details, object count, asymmetry, proportions, color placement, orientation and scale consistent across views. Generous outer margins; nothing clipped. No text, labels, logos, dimensions, frames, grid, scene, UI, swatches or extra unrelated objects. Do not include a hex tile, decorative pedestal or floating island.\nView order LEFT: FRONT straight-on elevation; CENTER: exact RIGHT SIDE elevation; RIGHT: true TOP PLAN looking vertically down 90 degrees, NOT an angled overhead view. Front and side share ground/water datum and height; top uses front toward bottom of page. Same world-units-per-pixel, not arbitrary resizing to fill each panel. Top correctly hides surfaces occluded by roofs/canopies.\nSUBJECT: One stylized coastal cargo sailboat, hull length 7 m, beam 2.6 m, one central mast 6 m above keel, one simple furled cream sail tightly bound along a horizontal yard across ship, short bowsprit, compact covered cargo hatch amidships and raised stern helm. Desaturated wooden hull with muted navy gunwale, simplified rigging limited to two stays, geometric clean hull panels. Sail is FURLED consistently in every view so geometry remains unambiguous. Front is bow-on, right is starboard broadside, top is vertical deck plan bow toward bottom. Entire hull to keel and mast top visible. No water, crew, stand or dock.",
+      "sourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-d6ad7141-c094-448c-ac0e-1eff0fe8c731.png",
+      "draftFile": "13-cargo-sailboat.png",
+      "draftSourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-912c3b46-2f7a-4073-8815-fb826ffe5cf0.png",
+      "revisionPrompt": "Repair the geometric inconsistency in this low-poly sailboat three-view sheet while preserving all colors, hull, hatch, mast, white background, first and third panel composition. It is a square-rigged boat with a transverse yard pointing port-starboard. In the CENTER strict right-side elevation, the transverse horizontal yard and furled cream sail must be seen exactly END-ON: a small compact cross section at mast height, NOT a wide horizontal bar across the side view. Remove the wide sail and triangular halyard from CENTER only; retain a narrow mast and appropriate narrow rigging. LEFT bow view still shows full-width yard and furled sail; RIGHT top view still shows full-width yard across hull. Do not invent a second sail or second mast. Side camera horizontal, no deck interior tilt. Exactly three panels, no text.",
+      "width": 1774,
+      "height": 887,
+      "bytes": 1577359,
+      "sha256": "7355C740822F88F8E1A0DCB0E3EFE62F7D0A9B505113200071BB5D5D600589D8",
+      "reviewStatus": "concept-reference-manual-modeling-calibration-required"
+    },
+    {
+      "id": "14-river-ferry",
+      "label": "平底渡船",
+      "category": "boats",
+      "file": "14-river-ferry-v2.png",
+      "views": [
+        "front",
+        "right-side",
+        "top"
+      ],
+      "status": "generated",
+      "prompt": "Use case: stylized-concept. Produce ONE high-quality orthographic modeling reference sheet for ONE asset in a cohesive non-photorealistic low-poly civilization strategy-game art kit. Style matches a faceted green tree, gray mossy rock, off-white timber cottage with terracotta roof, and cream octagonal windmill with blue-gray roof. Large intentional polygon facets, simplified but rich silhouette and structural details, matte flat-shaded materials, restrained surface texture. NOT photorealistic, NOT smooth clay, NOT voxel, NOT anime, NOT crude primitive placeholders. Clean pure white background, neutral soft studio illumination, no cast ground shadows. Exactly THREE views of the SAME asset and SAME geometry, fully visible, evenly spaced across three columns on a wide landscape sheet. No isometric or three-quarter perspective. Keep details, object count, asymmetry, proportions, color placement, orientation and scale consistent across views. Generous outer margins; nothing clipped. No text, labels, logos, dimensions, frames, grid, scene, UI, swatches or extra unrelated objects. Do not include a hex tile, decorative pedestal or floating island.\nView order LEFT: FRONT straight-on elevation; CENTER: exact RIGHT SIDE elevation; RIGHT: true TOP PLAN looking vertically down 90 degrees, NOT an angled overhead view. Front and side share ground/water datum and height; top uses front toward bottom of page. Same world-units-per-pixel, not arbitrary resizing to fill each panel. Top correctly hides surfaces occluded by roofs/canopies.\nSUBJECT: One shallow-draft flat-bottom river ferry barge, 5 m long by 2.5 m wide. Broad rectangular open plank deck, chamfered bow corners, short low gunwale on long edges, two open end ramps folded flat and flush with deck, one long steering sweep fixed at stern on a simple pivot. Muted wood and gray iron brackets, tiny coil of rope fixed rear-left. Front looks at bow landing edge, side shows very shallow hull and steering sweep, top shows broad unobstructed transport deck. No sail, mast, people, cargo, water, pier or ground. Same sweep orientation across views.",
+      "sourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-eab646e9-9572-44d2-b607-6948c6a249f3.png",
+      "draftFile": "14-river-ferry.png",
+      "draftSourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-f686cd1d-7727-4793-8416-5faa414e97bd.png",
+      "revisionPrompt": "Correct only the projection of the flat-bottomed river ferry reference. White background, same low-poly wooden barge, same single steering sweep at rear corner and front lowered ramp. LEFT must be a STRICT horizontal-camera orthographic bow elevation: deck seen only as a thin horizontal edge, NOT a long trapezoid platform. CENTER is strict right-side elevation with no visible large deck top; RIGHT remains vertical overhead plan, bow/ramp at bottom, oar at top right. Ensure sweep pivot stays same rear corner across views. Keep proportions, three panels, no labels.",
+      "width": 1774,
+      "height": 887,
+      "bytes": 1115035,
+      "sha256": "032155D42B5B5E073512FEFC0970F825A94A6864B92327D839AD5D1269CA34CC",
+      "reviewStatus": "concept-reference-manual-modeling-calibration-required"
+    },
+    {
+      "id": "15-farmer",
+      "label": "农夫",
+      "category": "people",
+      "file": "15-farmer.png",
+      "views": [
+        "front",
+        "right-side",
+        "back"
+      ],
+      "status": "generated",
+      "prompt": "Use case: stylized-concept. Produce ONE high-quality orthographic modeling reference sheet for ONE asset in a cohesive non-photorealistic low-poly civilization strategy-game art kit. Style matches a faceted green tree, gray mossy rock, off-white timber cottage with terracotta roof, and cream octagonal windmill with blue-gray roof. Large intentional polygon facets, simplified but rich silhouette and structural details, matte flat-shaded materials, restrained surface texture. NOT photorealistic, NOT smooth clay, NOT voxel, NOT anime, NOT crude primitive placeholders. Clean pure white background, neutral soft studio illumination, no cast ground shadows. Exactly THREE views of the SAME asset and SAME geometry, fully visible, evenly spaced across three columns on a wide landscape sheet. No isometric or three-quarter perspective. Keep details, object count, asymmetry, proportions, color placement, orientation and scale consistent across views. Generous outer margins; nothing clipped. No text, labels, logos, dimensions, frames, grid, scene, UI, swatches or extra unrelated objects. Do not include a hex tile, decorative pedestal or floating island.\nView order LEFT: FRONT; CENTER: exact RIGHT PROFILE facing left; RIGHT: BACK, all strict orthographic with same height, proportion and ground baseline. Same pose across views, no turn of head, no action pose, no 3/4 angles. Front and back align anatomically; the profile must be genuinely side-on.\nSUBJECT: One adult male farmer character, low-poly strategy-game proportions about six heads tall, sturdy ordinary physique, calm neutral face. Straw hat with simple faceted brim, ivory rolled-sleeve shirt, muted moss-green waistcoat, dark brown trousers, sturdy brown boots, small belt pouch. Full-body relaxed A-pose, arms 30 degrees away from torso, empty hands, palms toward thighs, feet shoulder-width apart. Clean anatomical silhouette with separately readable arms and legs, simple eyes and nose, not chibi. No held tool, ground, animals or extra props. Model height 1.75 m.",
+      "sourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-84d164da-26a9-47b5-b990-52458cee803a.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1380940,
+      "sha256": "B3028153D3804E249AF1CF8C064E451D4D9FBD5FA83416C45A9936AF6FBF8B23",
+      "reviewStatus": "concept-reference-manual-modeling-calibration-required"
+    },
+    {
+      "id": "16-trader",
+      "label": "商旅",
+      "category": "people",
+      "file": "16-trader.png",
+      "views": [
+        "front",
+        "right-side",
+        "back"
+      ],
+      "status": "generated",
+      "prompt": "Use case: stylized-concept. Produce ONE high-quality orthographic modeling reference sheet for ONE asset in a cohesive non-photorealistic low-poly civilization strategy-game art kit. Style matches a faceted green tree, gray mossy rock, off-white timber cottage with terracotta roof, and cream octagonal windmill with blue-gray roof. Large intentional polygon facets, simplified but rich silhouette and structural details, matte flat-shaded materials, restrained surface texture. NOT photorealistic, NOT smooth clay, NOT voxel, NOT anime, NOT crude primitive placeholders. Clean pure white background, neutral soft studio illumination, no cast ground shadows. Exactly THREE views of the SAME asset and SAME geometry, fully visible, evenly spaced across three columns on a wide landscape sheet. No isometric or three-quarter perspective. Keep details, object count, asymmetry, proportions, color placement, orientation and scale consistent across views. Generous outer margins; nothing clipped. No text, labels, logos, dimensions, frames, grid, scene, UI, swatches or extra unrelated objects. Do not include a hex tile, decorative pedestal or floating island.\nView order LEFT: FRONT; CENTER: exact RIGHT PROFILE facing left; RIGHT: BACK, all strict orthographic with same height, proportion and ground baseline. Same pose across views, no turn of head, no action pose, no 3/4 angles. Front and back align anatomically; the profile must be genuinely side-on.\nSUBJECT: One adult female traveling merchant, low-poly strategy-game proportions six heads tall, ordinary build. Muted plum tunic over ivory sleeves, dark teal cropped sleeveless coat, brown trousers and boots, narrow leather belt, compact satchel fixed at left hip with diagonal shoulder strap, dark hair in a simple low bun. Full-body relaxed A-pose with arms 30 degrees from torso and empty hands, feet shoulder-width apart. Neutral calm stylized face, no realistic skin texture, no oversized anime eyes. Clothing and satchel stay on the SAME anatomical sides across all projections. Height 1.68 m.",
+      "sourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-627f0384-de6a-445a-86f4-b7fe63f9b658.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1327674,
+      "sha256": "1478D0D2550C882BBB86677129A4D48C499B89FDC457C7EDBDE485393235BCEF",
+      "reviewStatus": "concept-reference-manual-modeling-calibration-required"
+    },
+    {
+      "id": "17-lumberjack",
+      "label": "伐木工",
+      "category": "people",
+      "file": "17-lumberjack.png",
+      "views": [
+        "front",
+        "right-side",
+        "back"
+      ],
+      "status": "generated",
+      "prompt": "Use case: stylized-concept. Produce ONE high-quality orthographic modeling reference sheet for ONE asset in a cohesive non-photorealistic low-poly civilization strategy-game art kit. Style matches a faceted green tree, gray mossy rock, off-white timber cottage with terracotta roof, and cream octagonal windmill with blue-gray roof. Large intentional polygon facets, simplified but rich silhouette and structural details, matte flat-shaded materials, restrained surface texture. NOT photorealistic, NOT smooth clay, NOT voxel, NOT anime, NOT crude primitive placeholders. Clean pure white background, neutral soft studio illumination, no cast ground shadows. Exactly THREE views of the SAME asset and SAME geometry, fully visible, evenly spaced across three columns on a wide landscape sheet. No isometric or three-quarter perspective. Keep details, object count, asymmetry, proportions, color placement, orientation and scale consistent across views. Generous outer margins; nothing clipped. No text, labels, logos, dimensions, frames, grid, scene, UI, swatches or extra unrelated objects. Do not include a hex tile, decorative pedestal or floating island.\nView order LEFT: FRONT; CENTER: exact RIGHT PROFILE facing left; RIGHT: BACK, all strict orthographic with same height, proportion and ground baseline. Same pose across views, no turn of head, no action pose, no 3/4 angles. Front and back align anatomically; the profile must be genuinely side-on.\nSUBJECT: One adult male lumber worker, sturdy low-poly non-chibi strategy-game character, six heads tall. Russet rolled-sleeve shirt, desaturated forest-green trousers with simple knee patches, dark boots, plain belt, short dark hair, short block-shaped beard. Full-body relaxed A-pose, hands empty, arms 30 degrees from torso, feet shoulder-width apart. Broad shoulder silhouette but natural ordinary human proportions, consistent face and beard in front/profile/back, no muscles exaggerated. No axe in hands, backpack, scenery or base. Height 1.8 m; intended arm swing and walking rig.",
+      "sourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-ff563c73-8ea7-49db-a21f-5de952ec0d4a.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1233651,
+      "sha256": "05F68D2C22E844DCE192B090CD26388D3F7D45C2D4C2FEE2F8CA8E46B5493AB8",
+      "reviewStatus": "concept-reference-manual-modeling-calibration-required"
+    },
+    {
+      "id": "18-fisher",
+      "label": "渔民",
+      "category": "people",
+      "file": "18-fisher.png",
+      "views": [
+        "front",
+        "right-side",
+        "back"
+      ],
+      "status": "generated",
+      "prompt": "Use case: stylized-concept. Produce ONE high-quality orthographic modeling reference sheet for ONE asset in a cohesive non-photorealistic low-poly civilization strategy-game art kit. Style matches a faceted green tree, gray mossy rock, off-white timber cottage with terracotta roof, and cream octagonal windmill with blue-gray roof. Large intentional polygon facets, simplified but rich silhouette and structural details, matte flat-shaded materials, restrained surface texture. NOT photorealistic, NOT smooth clay, NOT voxel, NOT anime, NOT crude primitive placeholders. Clean pure white background, neutral soft studio illumination, no cast ground shadows. Exactly THREE views of the SAME asset and SAME geometry, fully visible, evenly spaced across three columns on a wide landscape sheet. No isometric or three-quarter perspective. Keep details, object count, asymmetry, proportions, color placement, orientation and scale consistent across views. Generous outer margins; nothing clipped. No text, labels, logos, dimensions, frames, grid, scene, UI, swatches or extra unrelated objects. Do not include a hex tile, decorative pedestal or floating island.\nView order LEFT: FRONT; CENTER: exact RIGHT PROFILE facing left; RIGHT: BACK, all strict orthographic with same height, proportion and ground baseline. Same pose across views, no turn of head, no action pose, no 3/4 angles. Front and back align anatomically; the profile must be genuinely side-on.\nSUBJECT: One adult female fisher character for low-poly strategy game, six-head proportions. Simple teal cap, cream shirt, short slate-blue vest, rolled dark trousers, ochre waist sash, plain dark boots; hair braided and tucked behind head. Full-body relaxed A-pose with empty hands and arms 30 degrees away from body, feet shoulder-width apart. Neutral pleasant face, clear simplified faceted geometry, no photoreal skin, no oversized head. Same clothing and silhouette in all views. No fishing rod or basket, no water or background. Height 1.65 m.",
+      "sourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-45c49527-de26-4d40-bdf0-b5c23e14bcdd.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1326796,
+      "sha256": "65D45A27B56A8AFC7D2E4B1629C201019920E39519E2B20DF97AA1FF476F90DD",
+      "reviewStatus": "concept-reference-manual-modeling-calibration-required"
+    },
+    {
+      "id": "19-deer",
+      "label": "鹿",
+      "category": "animals",
+      "file": "19-deer.png",
+      "views": [
+        "front",
+        "right-side",
+        "back"
+      ],
+      "status": "generated",
+      "prompt": "Use case: stylized-concept. Produce ONE high-quality orthographic modeling reference sheet for ONE asset in a cohesive non-photorealistic low-poly civilization strategy-game art kit. Style matches a faceted green tree, gray mossy rock, off-white timber cottage with terracotta roof, and cream octagonal windmill with blue-gray roof. Large intentional polygon facets, simplified but rich silhouette and structural details, matte flat-shaded materials, restrained surface texture. NOT photorealistic, NOT smooth clay, NOT voxel, NOT anime, NOT crude primitive placeholders. Clean pure white background, neutral soft studio illumination, no cast ground shadows. Exactly THREE views of the SAME asset and SAME geometry, fully visible, evenly spaced across three columns on a wide landscape sheet. No isometric or three-quarter perspective. Keep details, object count, asymmetry, proportions, color placement, orientation and scale consistent across views. Generous outer margins; nothing clipped. No text, labels, logos, dimensions, frames, grid, scene, UI, swatches or extra unrelated objects. Do not include a hex tile, decorative pedestal or floating island.\nView order LEFT: FRONT; CENTER: exact RIGHT PROFILE facing left; RIGHT: BACK, all strict orthographic with same height, proportion and ground baseline. Same pose across views, no turn of head, no action pose, no 3/4 angles. Front and back align anatomically; the profile must be genuinely side-on.\nSUBJECT: One adult male deer, elegant simplified low-poly faceted animal in neutral quadruped standing pose. Warm muted tawny coat, pale throat and rump patch, darker slim lower legs and hooves, short tail, two modest branched antlers with exactly three tines on each side. Four anatomically plausible straight legs, alert ears, head level, mouth closed. Front, right side and rear views must show same antlers, coat patches, leg lengths, tail and stance. No motion pose, landscape, grass, base or shadows. Shoulder height 1.2 m, body length 1.7 m.",
+      "sourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-9386b415-2b7b-4a70-b11f-c967e02d8c45.png",
+      "width": 1774,
+      "height": 887,
+      "bytes": 1271553,
+      "sha256": "5D5D5DD89BACD620D1101AED320ADC644A390E2C515D9BA6B401881C0678DC73",
+      "reviewStatus": "concept-reference-manual-modeling-calibration-required"
+    },
+    {
+      "id": "20-sheep",
+      "label": "绵羊",
+      "category": "animals",
+      "file": "20-sheep.png",
+      "views": [
+        "front",
+        "right-side",
+        "back"
+      ],
+      "status": "generated",
+      "prompt": "Use case: stylized-concept. Produce ONE high-quality orthographic modeling reference sheet for ONE asset in a cohesive non-photorealistic low-poly civilization strategy-game art kit. Style matches a faceted green tree, gray mossy rock, off-white timber cottage with terracotta roof, and cream octagonal windmill with blue-gray roof. Large intentional polygon facets, simplified but rich silhouette and structural details, matte flat-shaded materials, restrained surface texture. NOT photorealistic, NOT smooth clay, NOT voxel, NOT anime, NOT crude primitive placeholders. Clean pure white background, neutral soft studio illumination, no cast ground shadows. Exactly THREE views of the SAME asset and SAME geometry, fully visible, evenly spaced across three columns on a wide landscape sheet. No isometric or three-quarter perspective. Keep details, object count, asymmetry, proportions, color placement, orientation and scale consistent across views. Generous outer margins; nothing clipped. No text, labels, logos, dimensions, frames, grid, scene, UI, swatches or extra unrelated objects. Do not include a hex tile, decorative pedestal or floating island.\nView order LEFT: FRONT; CENTER: exact RIGHT PROFILE facing left; RIGHT: BACK, all strict orthographic with same height, proportion and ground baseline. Same pose across views, no turn of head, no action pose, no 3/4 angles. Front and back align anatomically; the profile must be genuinely side-on.\nSUBJECT: One adult sheep, low-poly cream wool represented by a compact cluster of broad angular facets, not tiny curls or spheres. Dark desaturated gray face and lower legs, short drooping ears, no horns, short tail, stout body. Neutral standing on four separate legs, head level, mouth closed. Front/right side/back at same size and baseline with matching leg positions and fleece volume. Recognizable sheep anatomy, not toy/chibi, no grass, accessories, landscape or base. Shoulder height 0.75 m, body length 1.2 m.",
+      "sourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-1cedb4d7-ed24-4389-ab9f-c071d87f275e.png",
+      "width": 1774,
+      "height": 887,
+      "bytes": 1290361,
+      "sha256": "56601947639BA40A248B8DD1A40D0639641B05EB943AE4CEE68EFB44A2D02470",
+      "reviewStatus": "concept-reference-manual-modeling-calibration-required"
+    },
+    {
+      "id": "21-cow",
+      "label": "奶牛",
+      "category": "animals",
+      "file": "21-cow.png",
+      "views": [
+        "front",
+        "right-side",
+        "back"
+      ],
+      "status": "generated",
+      "prompt": "Use case: stylized-concept. Produce ONE high-quality orthographic modeling reference sheet for ONE asset in a cohesive non-photorealistic low-poly civilization strategy-game art kit. Style matches a faceted green tree, gray mossy rock, off-white timber cottage with terracotta roof, and cream octagonal windmill with blue-gray roof. Large intentional polygon facets, simplified but rich silhouette and structural details, matte flat-shaded materials, restrained surface texture. NOT photorealistic, NOT smooth clay, NOT voxel, NOT anime, NOT crude primitive placeholders. Clean pure white background, neutral soft studio illumination, no cast ground shadows. Exactly THREE views of the SAME asset and SAME geometry, fully visible, evenly spaced across three columns on a wide landscape sheet. No isometric or three-quarter perspective. Keep details, object count, asymmetry, proportions, color placement, orientation and scale consistent across views. Generous outer margins; nothing clipped. No text, labels, logos, dimensions, frames, grid, scene, UI, swatches or extra unrelated objects. Do not include a hex tile, decorative pedestal or floating island.\nView order LEFT: FRONT; CENTER: exact RIGHT PROFILE facing left; RIGHT: BACK, all strict orthographic with same height, proportion and ground baseline. Same pose across views, no turn of head, no action pose, no 3/4 angles. Front and back align anatomically; the profile must be genuinely side-on.\nSUBJECT: One adult dairy cow, matte flat-shaded low-poly body, white coat with three large clean dark charcoal patches in fixed positions, light muted pink muzzle, short pale horns, readable ears, udder, four sturdy legs with split hooves, thin tail with dark tip hanging naturally. Neutral standing square, head forward, calm expression. Front/right side/back strictly consistent anatomy and patch placement; no unrealistic extra legs. Not photoreal, not round toy. No halter, bell, grass, base, calves or scene. Shoulder height 1.4 m, body length 2.2 m.",
+      "sourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-14d71e09-62ef-42c1-811e-1a5be7658eb0.png",
+      "width": 1774,
+      "height": 887,
+      "bytes": 1316792,
+      "sha256": "74D20E46E5E8ACFFE3B54080B05229A49E5ADB02E0D74288F6D909482037F936",
+      "reviewStatus": "concept-reference-manual-modeling-calibration-required"
+    },
+    {
+      "id": "22-horse",
+      "label": "运输马",
+      "category": "animals",
+      "file": "22-horse.png",
+      "views": [
+        "front",
+        "right-side",
+        "back"
+      ],
+      "status": "generated",
+      "prompt": "Use case: stylized-concept. Produce ONE high-quality orthographic modeling reference sheet for ONE asset in a cohesive non-photorealistic low-poly civilization strategy-game art kit. Style matches a faceted green tree, gray mossy rock, off-white timber cottage with terracotta roof, and cream octagonal windmill with blue-gray roof. Large intentional polygon facets, simplified but rich silhouette and structural details, matte flat-shaded materials, restrained surface texture. NOT photorealistic, NOT smooth clay, NOT voxel, NOT anime, NOT crude primitive placeholders. Clean pure white background, neutral soft studio illumination, no cast ground shadows. Exactly THREE views of the SAME asset and SAME geometry, fully visible, evenly spaced across three columns on a wide landscape sheet. No isometric or three-quarter perspective. Keep details, object count, asymmetry, proportions, color placement, orientation and scale consistent across views. Generous outer margins; nothing clipped. No text, labels, logos, dimensions, frames, grid, scene, UI, swatches or extra unrelated objects. Do not include a hex tile, decorative pedestal or floating island.\nView order LEFT: FRONT; CENTER: exact RIGHT PROFILE facing left; RIGHT: BACK, all strict orthographic with same height, proportion and ground baseline. Same pose across views, no turn of head, no action pose, no 3/4 angles. Front and back align anatomically; the profile must be genuinely side-on.\nSUBJECT: One adult bay pack horse WITHOUT any saddle, tack or cargo, ready for future modular equipment. Angular low-poly chestnut body, charcoal mane and tail, dark lower legs, small cream forehead blaze. Balanced ordinary horse anatomy, neutral standing pose on four legs, head level, ears forward, long tail hanging down. Front/right profile/back orthographic, equal scale, consistent blaze and hooves. Clean large polygons, not toy, not photoreal, no ground or extras. Withers height 1.55 m, body length 2.3 m.",
+      "sourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-293d9cca-0449-40ea-81c7-bc7e4df20543.png",
+      "width": 1774,
+      "height": 887,
+      "bytes": 1266929,
+      "sha256": "E934A5CB17147A746B7888BE05EF1C52B3DCE4EA5651E1B9C9ABB9CB3CA67C0B",
+      "reviewStatus": "concept-reference-manual-modeling-calibration-required"
+    },
+    {
+      "id": "23-boar",
+      "label": "野猪",
+      "category": "animals",
+      "file": "23-boar.png",
+      "views": [
+        "front",
+        "right-side",
+        "back"
+      ],
+      "status": "generated",
+      "prompt": "Use case: stylized-concept. Produce ONE high-quality orthographic modeling reference sheet for ONE asset in a cohesive non-photorealistic low-poly civilization strategy-game art kit. Style matches a faceted green tree, gray mossy rock, off-white timber cottage with terracotta roof, and cream octagonal windmill with blue-gray roof. Large intentional polygon facets, simplified but rich silhouette and structural details, matte flat-shaded materials, restrained surface texture. NOT photorealistic, NOT smooth clay, NOT voxel, NOT anime, NOT crude primitive placeholders. Clean pure white background, neutral soft studio illumination, no cast ground shadows. Exactly THREE views of the SAME asset and SAME geometry, fully visible, evenly spaced across three columns on a wide landscape sheet. No isometric or three-quarter perspective. Keep details, object count, asymmetry, proportions, color placement, orientation and scale consistent across views. Generous outer margins; nothing clipped. No text, labels, logos, dimensions, frames, grid, scene, UI, swatches or extra unrelated objects. Do not include a hex tile, decorative pedestal or floating island.\nView order LEFT: FRONT; CENTER: exact RIGHT PROFILE facing left; RIGHT: BACK, all strict orthographic with same height, proportion and ground baseline. Same pose across views, no turn of head, no action pose, no 3/4 angles. Front and back align anatomically; the profile must be genuinely side-on.\nSUBJECT: One stocky adult wild boar, muted gray-brown flat-shaded polygonal fur masses, darker short bristle ridge along upper back, wedge-shaped head, small ears, flat snout, modest paired ivory tusks, four short strong legs with split hooves, short thin tail. Neutral standing, head aligned straight with body, no action or snarling. Front/right profile/back consistent anatomy, color and proportions. Stylized but recognizable, not a domestic pink pig, no realistic hairs. No grass, ground base or other animals. Shoulder height 0.75 m, body length 1.3 m.",
+      "sourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-980bdf74-2a24-4fa0-a056-3cbc326f2c61.png",
+      "width": 1942,
+      "height": 809,
+      "bytes": 1231577,
+      "sha256": "2595689363FBA6030DC8A7595E1B17080EB798829D076EB1C1FE5F1F72D12F9C",
+      "reviewStatus": "concept-reference-manual-modeling-calibration-required"
+    },
+    {
+      "id": "24-river-fish",
+      "label": "河鱼",
+      "category": "animals",
+      "file": "24-river-fish-v2.png",
+      "views": [
+        "front",
+        "right-side",
+        "top"
+      ],
+      "status": "generated",
+      "prompt": "Use case: stylized-concept. Produce ONE high-quality orthographic modeling reference sheet for ONE asset in a cohesive non-photorealistic low-poly civilization strategy-game art kit. Style matches a faceted green tree, gray mossy rock, off-white timber cottage with terracotta roof, and cream octagonal windmill with blue-gray roof. Large intentional polygon facets, simplified but rich silhouette and structural details, matte flat-shaded materials, restrained surface texture. NOT photorealistic, NOT smooth clay, NOT voxel, NOT anime, NOT crude primitive placeholders. Clean pure white background, neutral soft studio illumination, no cast ground shadows. Exactly THREE views of the SAME asset and SAME geometry, fully visible, evenly spaced across three columns on a wide landscape sheet. No isometric or three-quarter perspective. Keep details, object count, asymmetry, proportions, color placement, orientation and scale consistent across views. Generous outer margins; nothing clipped. No text, labels, logos, dimensions, frames, grid, scene, UI, swatches or extra unrelated objects. Do not include a hex tile, decorative pedestal or floating island.\nView order LEFT: FRONT straight-on elevation; CENTER: exact RIGHT SIDE elevation; RIGHT: true TOP PLAN looking vertically down 90 degrees, NOT an angled overhead view. Front and side share ground/water datum and height; top uses front toward bottom of page. Same world-units-per-pixel, not arbitrary resizing to fill each panel. Top correctly hides surfaces occluded by roofs/canopies.\nSUBJECT: One common river fish, streamlined silver-gray low-poly body with muted teal dorsal surface, pale belly, subtle warm ochre fins, forked tail, one dorsal fin, paired pectoral and pelvic fins placed anatomically. Straight neutral swimming/rest pose with tail centered, all three projections show same fish not three species. LEFT front looks directly at fish face, CENTER exact right side with nose toward left, RIGHT strict top with nose at bottom. No water, bubbles, plants, cast shadow or base. Faceted game-ready silhouette, clear tail hinge location, length 0.45 m, not a shark or ornamental koi.",
+      "sourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-ceb77c52-0270-452b-a09c-1abe5b8ba3b0.png",
+      "draftFile": "24-river-fish.png",
+      "draftSourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-e56fe64c-33f0-4866-b2ca-5afb5e217810.png",
+      "revisionPrompt": "Make ONE narrowly targeted anatomical projection correction to the supplied low-poly river fish three-view sheet. Preserve left front, center side, palette, white background and layout. In the RIGHT top-down panel ONLY, the caudal tail fin must be edge-on, a narrow thin elongated tip along the vertical body axis, NOT a wide V-shaped tail. A fish tail is a V-shaped vertical plane seen full-size in the side view; from directly ABOVE its two lobes overlap into a thin blade. Dorsal fin likewise edge-on narrow ridge. Pectoral fins can remain laterally visible. Do not change side-view fin shape or add fins. No labels.",
+      "width": 1774,
+      "height": 887,
+      "bytes": 1546672,
+      "sha256": "147D208447A7E5B63A9B61D4E0D5D9AC6139A346BEA28F3A956A8E49E0DD2602",
+      "reviewStatus": "concept-reference-manual-modeling-calibration-required"
+    },
+    {
+      "id": "25-pine-tree",
+      "label": "针叶树",
+      "category": "vegetation",
+      "file": "25-pine-tree.png",
+      "views": [
+        "front",
+        "right-side",
+        "top"
+      ],
+      "status": "generated",
+      "prompt": "Use case: stylized-concept. Produce ONE high-quality orthographic modeling reference sheet for ONE asset in a cohesive non-photorealistic low-poly civilization strategy-game art kit. Style matches a faceted green tree, gray mossy rock, off-white timber cottage with terracotta roof, and cream octagonal windmill with blue-gray roof. Large intentional polygon facets, simplified but rich silhouette and structural details, matte flat-shaded materials, restrained surface texture. NOT photorealistic, NOT smooth clay, NOT voxel, NOT anime, NOT crude primitive placeholders. Clean pure white background, neutral soft studio illumination, no cast ground shadows. Exactly THREE views of the SAME asset and SAME geometry, fully visible, evenly spaced across three columns on a wide landscape sheet. No isometric or three-quarter perspective. Keep details, object count, asymmetry, proportions, color placement, orientation and scale consistent across views. Generous outer margins; nothing clipped. No text, labels, logos, dimensions, frames, grid, scene, UI, swatches or extra unrelated objects. Do not include a hex tile, decorative pedestal or floating island.\nView order LEFT: FRONT straight-on elevation; CENTER: exact RIGHT SIDE elevation; RIGHT: true TOP PLAN looking vertically down 90 degrees, NOT an angled overhead view. Front and side share ground/water datum and height; top uses front toward bottom of page. Same world-units-per-pixel, not arbitrary resizing to fill each panel. Top correctly hides surfaces occluded by roofs/canopies.\nSUBJECT: One conifer pine tree 6 m tall, brown-gray exposed trunk lower 1.2 m, four irregular tiered angular green branch masses tapering to a sharp crown, asymmetric edge not perfect stacked cones. Deep forest-green lower facets, fresh green upper planes, a few readable branch ends, no individual needles. Same distinctive branch mass shapes across front/right/top; top appears a star-like irregular footprint, not a side-view cone. No roots spreading beyond a small flat contact, grass, soil, snow or base.",
+      "sourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-02dc6a0e-b987-49cf-a8d9-d50c29445db4.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1229705,
+      "sha256": "56CA4289973D8FBBF412266F0FCE590E6B9B9EFC19B0AE84BAC9F3E28ACB75B9",
+      "reviewStatus": "concept-reference-manual-modeling-calibration-required"
+    },
+    {
+      "id": "26-birch-tree",
+      "label": "白桦树",
+      "category": "vegetation",
+      "file": "26-birch-tree.png",
+      "views": [
+        "front",
+        "right-side",
+        "top"
+      ],
+      "status": "generated",
+      "prompt": "Use case: stylized-concept. Produce ONE high-quality orthographic modeling reference sheet for ONE asset in a cohesive non-photorealistic low-poly civilization strategy-game art kit. Style matches a faceted green tree, gray mossy rock, off-white timber cottage with terracotta roof, and cream octagonal windmill with blue-gray roof. Large intentional polygon facets, simplified but rich silhouette and structural details, matte flat-shaded materials, restrained surface texture. NOT photorealistic, NOT smooth clay, NOT voxel, NOT anime, NOT crude primitive placeholders. Clean pure white background, neutral soft studio illumination, no cast ground shadows. Exactly THREE views of the SAME asset and SAME geometry, fully visible, evenly spaced across three columns on a wide landscape sheet. No isometric or three-quarter perspective. Keep details, object count, asymmetry, proportions, color placement, orientation and scale consistent across views. Generous outer margins; nothing clipped. No text, labels, logos, dimensions, frames, grid, scene, UI, swatches or extra unrelated objects. Do not include a hex tile, decorative pedestal or floating island.\nView order LEFT: FRONT straight-on elevation; CENTER: exact RIGHT SIDE elevation; RIGHT: true TOP PLAN looking vertically down 90 degrees, NOT an angled overhead view. Front and side share ground/water datum and height; top uses front toward bottom of page. Same world-units-per-pixel, not arbitrary resizing to fill each panel. Top correctly hides surfaces occluded by roofs/canopies.\nSUBJECT: One slender birch 5 m high, pale off-white trunk with sparse dark charcoal bark dashes, three upward branches, airy canopy formed from five broad faceted yellow-green foliage masses leaving deliberate gaps. Fine readable trunk silhouette, no individual leaves. Low-poly matte style consistent with existing broadleaf tree but thinner and lighter; not spherical blobs. Front/right elevations and true top footprint of same crown. No fallen leaves, roots slab, grass, soil or background.",
+      "sourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-e7a311fa-9f24-4c08-b9ac-5728ff0c6447.png",
+      "width": 1774,
+      "height": 887,
+      "bytes": 1219706,
+      "sha256": "D7CF0FF90DE9DA1088B2797EB9D4D5E9FB9BDC180F291CCBEA03CEF749F57263",
+      "reviewStatus": "concept-reference-manual-modeling-calibration-required"
+    },
+    {
+      "id": "27-berry-shrub",
+      "label": "浆果灌木",
+      "category": "vegetation",
+      "file": "27-berry-shrub.png",
+      "views": [
+        "front",
+        "right-side",
+        "top"
+      ],
+      "status": "generated",
+      "prompt": "Use case: stylized-concept. Produce ONE high-quality orthographic modeling reference sheet for ONE asset in a cohesive non-photorealistic low-poly civilization strategy-game art kit. Style matches a faceted green tree, gray mossy rock, off-white timber cottage with terracotta roof, and cream octagonal windmill with blue-gray roof. Large intentional polygon facets, simplified but rich silhouette and structural details, matte flat-shaded materials, restrained surface texture. NOT photorealistic, NOT smooth clay, NOT voxel, NOT anime, NOT crude primitive placeholders. Clean pure white background, neutral soft studio illumination, no cast ground shadows. Exactly THREE views of the SAME asset and SAME geometry, fully visible, evenly spaced across three columns on a wide landscape sheet. No isometric or three-quarter perspective. Keep details, object count, asymmetry, proportions, color placement, orientation and scale consistent across views. Generous outer margins; nothing clipped. No text, labels, logos, dimensions, frames, grid, scene, UI, swatches or extra unrelated objects. Do not include a hex tile, decorative pedestal or floating island.\nView order LEFT: FRONT straight-on elevation; CENTER: exact RIGHT SIDE elevation; RIGHT: true TOP PLAN looking vertically down 90 degrees, NOT an angled overhead view. Front and side share ground/water datum and height; top uses front toward bottom of page. Same world-units-per-pixel, not arbitrary resizing to fill each panel. Top correctly hides surfaces occluded by roofs/canopies.\nSUBJECT: One compact berry shrub, width 1.2 m, depth 0.9 m, height 0.85 m. Three interlocking irregular low-poly leaf masses, angular serrated outer silhouette, short woody stems visible near bottom, forest-green and fresh-green faces with seven small matte burgundy berries. No separate detached spherical canopy balls, no photographic leaves. True orthographic front/right/top of exact same shrub; all berries remain attached and correctly occluded. No planter, soil disc, ground or props.",
+      "sourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-e8ee9b4b-ff39-42f5-843a-5f2e62f8d4b2.png",
+      "width": 1774,
+      "height": 887,
+      "bytes": 1229283,
+      "sha256": "00E6DC65DC65884E1EFE095D7E0CD96FB5E837AD325CE06B8CF07BD34670E4AE",
+      "reviewStatus": "concept-reference-manual-modeling-calibration-required"
+    },
+    {
+      "id": "28-meadow-grass",
+      "label": "花草簇",
+      "category": "vegetation",
+      "file": "28-meadow-grass.png",
+      "views": [
+        "front",
+        "right-side",
+        "top"
+      ],
+      "status": "generated",
+      "prompt": "Use case: stylized-concept. Produce ONE high-quality orthographic modeling reference sheet for ONE asset in a cohesive non-photorealistic low-poly civilization strategy-game art kit. Style matches a faceted green tree, gray mossy rock, off-white timber cottage with terracotta roof, and cream octagonal windmill with blue-gray roof. Large intentional polygon facets, simplified but rich silhouette and structural details, matte flat-shaded materials, restrained surface texture. NOT photorealistic, NOT smooth clay, NOT voxel, NOT anime, NOT crude primitive placeholders. Clean pure white background, neutral soft studio illumination, no cast ground shadows. Exactly THREE views of the SAME asset and SAME geometry, fully visible, evenly spaced across three columns on a wide landscape sheet. No isometric or three-quarter perspective. Keep details, object count, asymmetry, proportions, color placement, orientation and scale consistent across views. Generous outer margins; nothing clipped. No text, labels, logos, dimensions, frames, grid, scene, UI, swatches or extra unrelated objects. Do not include a hex tile, decorative pedestal or floating island.\nView order LEFT: FRONT straight-on elevation; CENTER: exact RIGHT SIDE elevation; RIGHT: true TOP PLAN looking vertically down 90 degrees, NOT an angled overhead view. Front and side share ground/water datum and height; top uses front toward bottom of page. Same world-units-per-pixel, not arbitrary resizing to fill each panel. Top correctly hides surfaces occluded by roofs/canopies.\nSUBJECT: One small meadow ground-cover clump 0.55 m wide, 0.35 m deep, 0.4 m tall: 12 broad tapered angular green grass blades rooted together, varied blade heights, three tiny white five-petal daisies with yellow centers on simple stems, two short straw-colored blades. Elegant faceted low-poly stylization, not photoreal hair grass. Front/right/top show same roots, flower number and geometry. NO oval green patch, no soil base, no pot or pedestal. Roots end at same flat datum. Suitable for instanced grass wind animation.",
+      "sourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-2a32200e-828d-42cb-8d00-01ecf008e2b0.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1241664,
+      "sha256": "06200D74CEF5992860A7BE6BB4294D68A7FCF5AB33240E2432C99D22968AB5FC",
+      "reviewStatus": "concept-reference-manual-modeling-calibration-required"
+    },
+    {
+      "id": "29-reeds",
+      "label": "水岸芦苇",
+      "category": "vegetation",
+      "file": "29-reeds-v2.png",
+      "views": [
+        "front",
+        "right-side",
+        "top"
+      ],
+      "status": "generated",
+      "prompt": "Use case: stylized-concept. Produce ONE high-quality orthographic modeling reference sheet for ONE asset in a cohesive non-photorealistic low-poly civilization strategy-game art kit. Style matches a faceted green tree, gray mossy rock, off-white timber cottage with terracotta roof, and cream octagonal windmill with blue-gray roof. Large intentional polygon facets, simplified but rich silhouette and structural details, matte flat-shaded materials, restrained surface texture. NOT photorealistic, NOT smooth clay, NOT voxel, NOT anime, NOT crude primitive placeholders. Clean pure white background, neutral soft studio illumination, no cast ground shadows. Exactly THREE views of the SAME asset and SAME geometry, fully visible, evenly spaced across three columns on a wide landscape sheet. No isometric or three-quarter perspective. Keep details, object count, asymmetry, proportions, color placement, orientation and scale consistent across views. Generous outer margins; nothing clipped. No text, labels, logos, dimensions, frames, grid, scene, UI, swatches or extra unrelated objects. Do not include a hex tile, decorative pedestal or floating island.\nView order LEFT: FRONT straight-on elevation; CENTER: exact RIGHT SIDE elevation; RIGHT: true TOP PLAN looking vertically down 90 degrees, NOT an angled overhead view. Front and side share ground/water datum and height; top uses front toward bottom of page. Same world-units-per-pixel, not arbitrary resizing to fill each panel. Top correctly hides surfaces occluded by roofs/canopies.\nSUBJECT: One waterside reed clump 1.5 m high, footprint 0.65 x 0.5 m, exactly five slender upright green stalks with simple brown cattail seed heads, a handful of long angular olive-green blade leaves arching outwards from common root origin. Same stalk positions and head heights across front/right/top. Clearly segmented low-poly forms; no hundreds of tiny fibers. No water, muddy circular patch, pot, soil platform or reflections. Roots on flat datum, plants separable for subtle wind sway.",
+      "sourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-ae295d88-bc3e-485a-9e6e-f56ee72d5861.png",
+      "draftFile": "29-reeds.png",
+      "draftSourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-19c36b31-0cec-4ef5-b001-03b237f85705.png",
+      "revisionPrompt": "Correct only missing stalk consistency of the supplied low-poly cattail/reed three-view sheet. The asset contains exactly FIVE cattail heads attached to FIVE separate stalks. Keep left front view unchanged. Center side view should include the fifth head partly behind an existing head if occluded. RIGHT vertical top view must show FIVE brown polygonal seedhead tips in distinct positions, including one central tip plus four offset tips, connected through green stalks/leaves. Preserve same style, palette, heights and white background, no scene or labels.",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1431522,
+      "sha256": "BD348814227E87D4E966A2A3453DA85B870471A3E6E62D90E6F10EA20B0E9B0F",
+      "reviewStatus": "concept-reference-manual-modeling-calibration-required",
+      "modelingNote": "Use five stalks from the front view. The generated top view resolves only four seedheads; separate/position the fifth stalk manually in Blender."
+    },
+    {
+      "id": "30-barn",
+      "label": "谷仓",
+      "category": "settlement",
+      "file": "30-barn.png",
+      "views": [
+        "front",
+        "right-side",
+        "top"
+      ],
+      "status": "generated",
+      "prompt": "Use case: stylized-concept. Produce ONE high-quality orthographic modeling reference sheet for ONE asset in a cohesive non-photorealistic low-poly civilization strategy-game art kit. Style matches a faceted green tree, gray mossy rock, off-white timber cottage with terracotta roof, and cream octagonal windmill with blue-gray roof. Large intentional polygon facets, simplified but rich silhouette and structural details, matte flat-shaded materials, restrained surface texture. NOT photorealistic, NOT smooth clay, NOT voxel, NOT anime, NOT crude primitive placeholders. Clean pure white background, neutral soft studio illumination, no cast ground shadows. Exactly THREE views of the SAME asset and SAME geometry, fully visible, evenly spaced across three columns on a wide landscape sheet. No isometric or three-quarter perspective. Keep details, object count, asymmetry, proportions, color placement, orientation and scale consistent across views. Generous outer margins; nothing clipped. No text, labels, logos, dimensions, frames, grid, scene, UI, swatches or extra unrelated objects. Do not include a hex tile, decorative pedestal or floating island.\nView order LEFT: FRONT straight-on elevation; CENTER: exact RIGHT SIDE elevation; RIGHT: true TOP PLAN looking vertically down 90 degrees, NOT an angled overhead view. Front and side share ground/water datum and height; top uses front toward bottom of page. Same world-units-per-pixel, not arbitrary resizing to fill each panel. Top correctly hides surfaces occluded by roofs/canopies.\nSUBJECT: One compact farm barn 6 m wide x 7 m deep x 5 m ridge height. Rectangular vertical-timber walls painted muted oxblood red, dark wood exposed frame, blue-gray simple gabled roof with ridge front-to-back, pale gray stone footing. FRONT gable has centered large double sliding doors and one small square loft vent. RIGHT eave wall has exactly three small high windows, no door. TOP shows clean rectangular roof and central ridge, NO chimney or dormers. Simplified plank panels, broad flat-shaded surfaces, no clutter, hay, animals, ramp, grounds or base.",
+      "sourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-83d02c7d-5bda-4c9b-8d8c-939700381b04.png",
+      "width": 1942,
+      "height": 809,
+      "bytes": 1253793,
+      "sha256": "40BF3AB8134F91E1C83892A32506BB798A501B0DA37A099C0A82D87AAA125ED6",
+      "reviewStatus": "concept-reference-manual-modeling-calibration-required"
+    },
+    {
+      "id": "31-village-well",
+      "label": "水井",
+      "category": "settlement",
+      "file": "31-village-well.png",
+      "views": [
+        "front",
+        "right-side",
+        "top"
+      ],
+      "status": "generated",
+      "prompt": "Use case: stylized-concept. Produce ONE high-quality orthographic modeling reference sheet for ONE asset in a cohesive non-photorealistic low-poly civilization strategy-game art kit. Style matches a faceted green tree, gray mossy rock, off-white timber cottage with terracotta roof, and cream octagonal windmill with blue-gray roof. Large intentional polygon facets, simplified but rich silhouette and structural details, matte flat-shaded materials, restrained surface texture. NOT photorealistic, NOT smooth clay, NOT voxel, NOT anime, NOT crude primitive placeholders. Clean pure white background, neutral soft studio illumination, no cast ground shadows. Exactly THREE views of the SAME asset and SAME geometry, fully visible, evenly spaced across three columns on a wide landscape sheet. No isometric or three-quarter perspective. Keep details, object count, asymmetry, proportions, color placement, orientation and scale consistent across views. Generous outer margins; nothing clipped. No text, labels, logos, dimensions, frames, grid, scene, UI, swatches or extra unrelated objects. Do not include a hex tile, decorative pedestal or floating island.\nView order LEFT: FRONT straight-on elevation; CENTER: exact RIGHT SIDE elevation; RIGHT: true TOP PLAN looking vertically down 90 degrees, NOT an angled overhead view. Front and side share ground/water datum and height; top uses front toward bottom of page. Same world-units-per-pixel, not arbitrary resizing to fill each panel. Top correctly hides surfaces occluded by roofs/canopies.\nSUBJECT: One village water well: circular low gray-stone ring diameter 1.5 m and height 0.8 m, two simple timber posts supporting a small pitched terracotta roof 2.2 m high, horizontal wooden winding spindle with crank and one rope down into dark well opening. Small wooden bucket attached to rope, all inside ring. Front shows crank assembly and well opening beneath roof; right shows roof slope and ring profile; TOP hides most opening under roof correctly. Low-poly octagonal approximation to round ring, readable simple blocks, no water pool, ground, foliage or detached bucket.",
+      "sourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-50952c99-6aea-423b-b94c-485f5172a176.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1237882,
+      "sha256": "A9D3F2528D368F13640589907E16EDCF459E17297ABFA133F8D62ACD7374ADBD",
+      "reviewStatus": "concept-reference-manual-modeling-calibration-required",
+      "modelingNote": "Reconcile roof-ridge orientation with front and side views before blocking out the well; do not blindly trace the top panel."
+    },
+    {
+      "id": "32-watchtower",
+      "label": "木制瞭望塔",
+      "category": "settlement",
+      "file": "32-watchtower.png",
+      "views": [
+        "front",
+        "right-side",
+        "top"
+      ],
+      "status": "generated",
+      "prompt": "Use case: stylized-concept. Produce ONE high-quality orthographic modeling reference sheet for ONE asset in a cohesive non-photorealistic low-poly civilization strategy-game art kit. Style matches a faceted green tree, gray mossy rock, off-white timber cottage with terracotta roof, and cream octagonal windmill with blue-gray roof. Large intentional polygon facets, simplified but rich silhouette and structural details, matte flat-shaded materials, restrained surface texture. NOT photorealistic, NOT smooth clay, NOT voxel, NOT anime, NOT crude primitive placeholders. Clean pure white background, neutral soft studio illumination, no cast ground shadows. Exactly THREE views of the SAME asset and SAME geometry, fully visible, evenly spaced across three columns on a wide landscape sheet. No isometric or three-quarter perspective. Keep details, object count, asymmetry, proportions, color placement, orientation and scale consistent across views. Generous outer margins; nothing clipped. No text, labels, logos, dimensions, frames, grid, scene, UI, swatches or extra unrelated objects. Do not include a hex tile, decorative pedestal or floating island.\nView order LEFT: FRONT straight-on elevation; CENTER: exact RIGHT SIDE elevation; RIGHT: true TOP PLAN looking vertically down 90 degrees, NOT an angled overhead view. Front and side share ground/water datum and height; top uses front toward bottom of page. Same world-units-per-pixel, not arbitrary resizing to fill each panel. Top correctly hides surfaces occluded by roofs/canopies.\nSUBJECT: One freestanding timber watchtower with four square vertical posts, height 6 m, platform 2.8 x 2.8 m at height 4 m, sturdy diagonal cross braces, simple platform railing with centered front opening, small slate-blue pyramidal roof on upper posts. One straight ladder attached vertically to front, stopping at front platform opening, consistently visible/occluded in each view. Warm desaturated timber, gray iron bands. Front and right strict elevations; true top sees pyramidal square roof and small ladder tip, not platform through opaque roof. No flag, soldier, terrain or fortification wall.",
+      "sourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-27dda436-1342-4f0f-bf24-d8ad3d170097.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1354590,
+      "sha256": "79099718DAB49F32D26ECEEABB11D2EDF5CA5E08F93F294E072DFBF1A2BD2A61",
+      "reviewStatus": "concept-reference-manual-modeling-calibration-required"
+    },
+    {
+      "id": "33-market-stall",
+      "label": "集市摊位",
+      "category": "settlement",
+      "file": "33-market-stall.png",
+      "views": [
+        "front",
+        "right-side",
+        "top"
+      ],
+      "status": "generated",
+      "prompt": "Use case: stylized-concept. Produce ONE high-quality orthographic modeling reference sheet for ONE asset in a cohesive non-photorealistic low-poly civilization strategy-game art kit. Style matches a faceted green tree, gray mossy rock, off-white timber cottage with terracotta roof, and cream octagonal windmill with blue-gray roof. Large intentional polygon facets, simplified but rich silhouette and structural details, matte flat-shaded materials, restrained surface texture. NOT photorealistic, NOT smooth clay, NOT voxel, NOT anime, NOT crude primitive placeholders. Clean pure white background, neutral soft studio illumination, no cast ground shadows. Exactly THREE views of the SAME asset and SAME geometry, fully visible, evenly spaced across three columns on a wide landscape sheet. No isometric or three-quarter perspective. Keep details, object count, asymmetry, proportions, color placement, orientation and scale consistent across views. Generous outer margins; nothing clipped. No text, labels, logos, dimensions, frames, grid, scene, UI, swatches or extra unrelated objects. Do not include a hex tile, decorative pedestal or floating island.\nView order LEFT: FRONT straight-on elevation; CENTER: exact RIGHT SIDE elevation; RIGHT: true TOP PLAN looking vertically down 90 degrees, NOT an angled overhead view. Front and side share ground/water datum and height; top uses front toward bottom of page. Same world-units-per-pixel, not arbitrary resizing to fill each panel. Top correctly hides surfaces occluded by roofs/canopies.\nSUBJECT: One small market stall 2.4 m wide x 1.8 m deep x 2.4 m high: four timber uprights, flat-front counter with three closed rectangular bins, pitched cloth canopy with alternating muted teal and ivory broad stripes, no printed words. Two small angular baskets fixed on counter, no piles of tiny goods. Front sees open counter; right shows shallow depth; top shows exact rectangular striped canopy hiding the counter below. Sturdy low-poly matte craft, no people, hanging signs, ground, adjacent stalls or decorative base.",
+      "sourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-6c7481e9-8480-49e0-8d0d-12de0980e559.png",
+      "width": 1774,
+      "height": 887,
+      "bytes": 1233934,
+      "sha256": "7F9207D214F3CB4BF1CA38C2889D4E29B342D9D5C86BDBE612ED4FACAEFF1C50",
+      "reviewStatus": "concept-reference-manual-modeling-calibration-required"
+    },
+    {
+      "id": "34-wooden-pier",
+      "label": "木码头",
+      "category": "infrastructure",
+      "file": "34-wooden-pier-v2.png",
+      "views": [
+        "front",
+        "right-side",
+        "top"
+      ],
+      "status": "generated",
+      "prompt": "Use case: stylized-concept. Produce ONE high-quality orthographic modeling reference sheet for ONE asset in a cohesive non-photorealistic low-poly civilization strategy-game art kit. Style matches a faceted green tree, gray mossy rock, off-white timber cottage with terracotta roof, and cream octagonal windmill with blue-gray roof. Large intentional polygon facets, simplified but rich silhouette and structural details, matte flat-shaded materials, restrained surface texture. NOT photorealistic, NOT smooth clay, NOT voxel, NOT anime, NOT crude primitive placeholders. Clean pure white background, neutral soft studio illumination, no cast ground shadows. Exactly THREE views of the SAME asset and SAME geometry, fully visible, evenly spaced across three columns on a wide landscape sheet. No isometric or three-quarter perspective. Keep details, object count, asymmetry, proportions, color placement, orientation and scale consistent across views. Generous outer margins; nothing clipped. No text, labels, logos, dimensions, frames, grid, scene, UI, swatches or extra unrelated objects. Do not include a hex tile, decorative pedestal or floating island.\nView order LEFT: FRONT straight-on elevation; CENTER: exact RIGHT SIDE elevation; RIGHT: true TOP PLAN looking vertically down 90 degrees, NOT an angled overhead view. Front and side share ground/water datum and height; top uses front toward bottom of page. Same world-units-per-pixel, not arbitrary resizing to fill each panel. Top correctly hides surfaces occluded by roofs/canopies.\nSUBJECT: One straight modular wooden pier 6 m long x 2 m wide, level plank deck on six timber pilings arranged three per side, four simple short mooring posts at corners, one gray mooring ring attached to front-right post. Desaturated timber, broad end grain, subtle darker lower pile sections. Front looks down pier from shore end, side shows length and three piles, top shows uninterrupted planks and four posts. Uniform joinable shore edge at deck height; full piles visible, no water, shoreline, boats, people, ropes or ground platform.",
+      "sourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-ce0abaca-e2b9-4ac6-8770-bb17a6753176.png",
+      "draftFile": "34-wooden-pier.png",
+      "draftSourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-82016f01-f9d3-4733-ab4a-d6e26b452a98.png",
+      "revisionPrompt": "Correct camera and structural consistency of this exact wooden pier three-view sheet. Preserve palette, faceted wood, iron ring, no water, white background. Geometry is six vertical round piles in TWO rows of THREE (front, middle, back), all six tops protrude the same short distance above deck. LEFT is a strict horizontal-camera front elevation: two near piles obscure farther piles and deck is seen edge-on, not a long top surface. CENTER strict side shows three piles evenly spaced with same above-deck height, not a shorter middle pile. RIGHT true top plan must show SIX round post tops: three on each long side, including the missing two center posts. Entrance/front at bottom. Keep iron ring on front right pile. No text.",
+      "width": 1774,
+      "height": 887,
+      "bytes": 1365931,
+      "sha256": "F5E719C88702F05E3B83530DA4C83053CE2D4E6A5D9819F8F55CB97107193EB3",
+      "reviewStatus": "concept-reference-manual-modeling-calibration-required"
+    },
+    {
+      "id": "35-fence-gate",
+      "label": "围栏与门",
+      "category": "settlement",
+      "file": "35-fence-gate.png",
+      "views": [
+        "front",
+        "right-side",
+        "top"
+      ],
+      "status": "generated",
+      "prompt": "Use case: stylized-concept. Produce ONE high-quality orthographic modeling reference sheet for ONE asset in a cohesive non-photorealistic low-poly civilization strategy-game art kit. Style matches a faceted green tree, gray mossy rock, off-white timber cottage with terracotta roof, and cream octagonal windmill with blue-gray roof. Large intentional polygon facets, simplified but rich silhouette and structural details, matte flat-shaded materials, restrained surface texture. NOT photorealistic, NOT smooth clay, NOT voxel, NOT anime, NOT crude primitive placeholders. Clean pure white background, neutral soft studio illumination, no cast ground shadows. Exactly THREE views of the SAME asset and SAME geometry, fully visible, evenly spaced across three columns on a wide landscape sheet. No isometric or three-quarter perspective. Keep details, object count, asymmetry, proportions, color placement, orientation and scale consistent across views. Generous outer margins; nothing clipped. No text, labels, logos, dimensions, frames, grid, scene, UI, swatches or extra unrelated objects. Do not include a hex tile, decorative pedestal or floating island.\nView order LEFT: FRONT straight-on elevation; CENTER: exact RIGHT SIDE elevation; RIGHT: true TOP PLAN looking vertically down 90 degrees, NOT an angled overhead view. Front and side share ground/water datum and height; top uses front toward bottom of page. Same world-units-per-pixel, not arbitrary resizing to fill each panel. Top correctly hides surfaces occluded by roofs/canopies.\nSUBJECT: One modular farm fence-and-gate unit, total width 4 m, height 1.1 m: two short side fence panels with two horizontal rails each, a centered 1.2 m-wide wooden gate with diagonal Z brace and two iron hinges on its anatomical LEFT post. Four main posts total, gate closed flush with panels, flat shared ground datum. Weathered muted wood. Front shows whole fence width, right side strictly edge-on reveals post depth and hinge, top is thin horizontal strip with consistent post positions and gate. No vegetation, dirt base, stone, people or extra panels.",
+      "sourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-0888650c-b6ab-4122-8038-1b6557b4cf4b.png",
+      "width": 1983,
+      "height": 793,
+      "bytes": 1060942,
+      "sha256": "EEF9DA6D0F0DDFCA6D1A4AB636644C130A747C360EAEE7D7F1F790A42581D392",
+      "reviewStatus": "concept-reference-manual-modeling-calibration-required"
+    },
+    {
+      "id": "36-handcart",
+      "label": "双轮手推车",
+      "category": "transport",
+      "file": "36-handcart-v2.png",
+      "views": [
+        "front",
+        "right-side",
+        "top"
+      ],
+      "status": "generated",
+      "prompt": "Use case: stylized-concept. Produce ONE high-quality orthographic modeling reference sheet for ONE asset in a cohesive non-photorealistic low-poly civilization strategy-game art kit. Style matches a faceted green tree, gray mossy rock, off-white timber cottage with terracotta roof, and cream octagonal windmill with blue-gray roof. Large intentional polygon facets, simplified but rich silhouette and structural details, matte flat-shaded materials, restrained surface texture. NOT photorealistic, NOT smooth clay, NOT voxel, NOT anime, NOT crude primitive placeholders. Clean pure white background, neutral soft studio illumination, no cast ground shadows. Exactly THREE views of the SAME asset and SAME geometry, fully visible, evenly spaced across three columns on a wide landscape sheet. No isometric or three-quarter perspective. Keep details, object count, asymmetry, proportions, color placement, orientation and scale consistent across views. Generous outer margins; nothing clipped. No text, labels, logos, dimensions, frames, grid, scene, UI, swatches or extra unrelated objects. Do not include a hex tile, decorative pedestal or floating island.\nView order LEFT: FRONT straight-on elevation; CENTER: exact RIGHT SIDE elevation; RIGHT: true TOP PLAN looking vertically down 90 degrees, NOT an angled overhead view. Front and side share ground/water datum and height; top uses front toward bottom of page. Same world-units-per-pixel, not arbitrary resizing to fill each panel. Top correctly hides surfaces occluded by roofs/canopies.\nSUBJECT: One two-wheeled wooden handcart with rectangular open cargo box 1.4 m long x 0.9 m wide, two six-spoke wheels on one axle, wheel diameter 0.8 m, two parallel forward handles length 1 m, exactly two simple burlap grain sacks fixed inside cargo box. Front looks from handle ends towards cart, right profile shows wheel, box and both aligned handles, top shows open box, two sacks, both wheels and parallel handles projecting toward bottom. Muted matte wood, gray iron wheel rims, beige sacks. Wheel hubs share one horizontal axle, wheels separate for animation. No horse, people, ground, scene or extra cart.",
+      "sourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-c8b4458a-8a6b-4909-929d-78e0739c0d08.png",
+      "draftFile": "36-handcart.png",
+      "draftSourcePath": "C:\\Users\\saber\\.codex\\generated_images\\019e7b4c-0114-7742-bdec-ed8927bbdd3e\\exec-6c549987-d430-40f5-83e8-507e23fb605b.png",
+      "revisionPrompt": "Correct projection and cargo placement on this exact low-poly two-wheel handcart three-view sheet. Preserve style, white background, two wheels on ONE axle and TWO sacks, handles. RIGHT top panel is source of truth: two sacks placed front-to-back on the longitudinal centerline, handles point down. LEFT strict horizontal front elevation should show the nearer sack occluding most of the farther sack, NOT two sacks side-by-side; wheels thin edge-on to left and right, handles mostly foreshortened. CENTER strict right-side elevation shows two sacks along length and ONE circular near wheel; cart bed and both handles perfectly horizontal, not tilted; handles project LEFT to match front orientation. No third wheel, no perspective, no text.",
+      "width": 1774,
+      "height": 887,
+      "bytes": 1353989,
+      "sha256": "080C75F23ECF7B778B0D9E967B3B10CB0824A1168CD7E57BCC7E5AF1BF9520A1",
+      "reviewStatus": "concept-reference-manual-modeling-calibration-required"
+    }
+  ],
+  "completedCount": 32,
+  "revisedAssets": 12,
+  "validation": {
+    "pngReadable": 32,
+    "sourceHashMatches": 32,
+    "selectedImagesBytes": 41953516,
+    "runtimeCodeChanged": false
+  }
+}
