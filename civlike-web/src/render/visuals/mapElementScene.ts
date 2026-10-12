@@ -14,6 +14,7 @@ export type ElementScene = {
   setView: (view: ElementView) => void
   setPlaying: (value: boolean) => void
   setWireframe: (value: boolean) => void
+  setCutaway: (value: boolean) => void
   setFieldSettings: (value: FieldSettings) => void
   setAnimalSettings: (value: AnimalSettings) => void
   setBuildingSettings: (value: BuildingSettings) => void
@@ -72,6 +73,7 @@ export function mountMapElement(
   let destroyed = false
   let playing = !window.matchMedia('(prefers-reduced-motion: reduce)').matches
   let wireframe = false
+  let cutaway = false
   let view: ElementView = 'perspective'
   let size = 4
   let singleSize = 4
@@ -123,6 +125,12 @@ export function mountMapElement(
     })
   }
 
+  function setCutaway(value: boolean) {
+    cutaway=value
+    model?.traverse((object) => { if (object.userData.inspectionCover) object.visible=!value })
+    host.dataset.cutaway=String(value)
+  }
+
   void new GLTFLoader().loadAsync(url).then((gltf) => {
     if (destroyed) { disposeModel(gltf.scene); return }
     model = gltf.scene
@@ -159,6 +167,7 @@ export function mountMapElement(
       for (const clip of gltf.animations) mixer.clipAction(clip).play()
     }
     setWireframe(wireframe)
+    setCutaway(cutaway)
     setView(view)
     host.dataset.loaded = 'true'
     host.dataset.animations = String(gltf.animations.length)
@@ -198,7 +207,7 @@ export function mountMapElement(
   }
   frame = requestAnimationFrame(animate)
   return {
-    setView, setPlaying(value) { playing = value }, setWireframe,
+    setView, setPlaying(value) { playing = value }, setWireframe, setCutaway,
     setFieldSettings(value) { fieldSettings = value; field?.setSettings(value); botanical?.setSettings(value) },
     setBuildingSettings(value) { buildingSettings=value; building?.setSettings(value) },
     setAnimalSettings(value) {
@@ -225,6 +234,7 @@ export function mountMapElement(
       delete host.dataset.organs
       delete host.dataset.animals
       delete host.dataset.building
+      delete host.dataset.cutaway
     },
   }
 }

@@ -65,6 +65,12 @@ try {
       assert(animated, `${asset.id}: static animation`)
       await page.getByRole('button', { name: '暂停动画', exact: true }).click()
       await page.waitForTimeout(200)
+      if (await page.getByLabel('生长阶段',{exact:true}).count()) {
+        await page.waitForFunction(() => {
+          const value=Number(document.querySelector('input[aria-label="生长阶段"]').value)/100
+          return Math.abs(Number(document.querySelector('.element-stage').dataset.growth)-value)<.0001
+        })
+      }
       const paused = await pixels()
       await page.waitForTimeout(250)
       assert.equal((await pixels()).hash, paused.hash, `${asset.id}: pause failed`)
@@ -168,7 +174,7 @@ try {
   await screenshot('living-field-mobile', true)
   const phenology = []
   await page.setViewportSize({ width: 1440, height: 1000 })
-  for (const id of ['berry-shrub-v4','apple-tree','pumpkin-patch','sunflower-field','corn-field','rice-paddy','vineyard','cotton-field','oak-tree','birch-tree','willow-tree','palm-tree','cactus','fern','mushrooms','lily-pad']) {
+  for (const id of ['berry-shrub-v4','apple-tree','pumpkin-patch','sunflower-field','corn-field','rice-paddy','vineyard','cotton-field','oak-tree','birch-tree','willow-tree','palm-tree','cactus','fern','mushrooms','lily-pad','bamboo','wildflowers','potato-field']) {
     await page.goto(`${base}/?view=map-elements&element=${id}`)
     await page.waitForSelector('.element-stage[data-loaded="true"][data-organs]')
     await page.getByRole('button', { name:'暂停动画', exact:true }).click()
@@ -183,9 +189,9 @@ try {
       await screenshot(`${id}-stage-${value}`)
       if (value === 5) assert(organs.shoot > 0 && !organs.fruit && !organs.blossom, `${id}: not a seedling`)
       if (value === 25) assert(organs.foliage > 0 && !organs.spore, `${id}: unfurling stage missing`)
-      if (value === 49) assert(organs[id==='fern' ? 'foliage' : id==='mushrooms' ? 'cap' : 'blossom'] > 0 && !organs.fruit, `${id}: developed organs missing`)
-      if (value === 82) assert(organs[['fern','mushrooms'].includes(id) ? 'spore' : ['sunflower-field','rice-paddy','cotton-field','birch-tree','willow-tree'].includes(id) ? 'seed' : 'fruit'] > 0, `${id}: reproductive organs missing`)
-      if (['fern','mushrooms'].includes(id)) assert(!organs.blossom && !organs.fruit && !organs.seed, `${id}: nonflowering lifecycle mislabeled`)
+      if (value === 49) assert(organs[['fern','bamboo'].includes(id) ? 'foliage' : id==='mushrooms' ? 'cap' : 'blossom'] > 0 && !organs.fruit, `${id}: developed organs missing`)
+      if (value === 82) assert(organs[id==='bamboo' ? 'foliage' : id==='potato-field' ? 'tuber' : ['fern','mushrooms'].includes(id) ? 'spore' : ['sunflower-field','rice-paddy','cotton-field','birch-tree','willow-tree','wildflowers'].includes(id) ? 'seed' : 'fruit'] > 0, `${id}: mature organs missing`)
+      if (['fern','mushrooms','bamboo'].includes(id)) assert(!organs.blossom && !organs.fruit && !organs.seed, `${id}: nonflowering lifecycle mislabeled`)
       if (value === 100) assert(!organs.blossom, `${id}: petals persisted into senescence`)
     }
     if (id==='fern') {
@@ -224,7 +230,7 @@ try {
   }
   await page.getByRole('button', { name:'资产进度', exact:true }).click()
   assert.equal(await page.locator('.element-roadmap li').count(),108)
-  assert.equal(await page.locator('.element-roadmap li button:enabled').count(),42)
+  assert.equal(await page.locator('.element-roadmap li button:enabled').count(),45)
   await screenshot('roadmap')
   await page.setViewportSize({ width:390,height:844 })
   assert(await page.evaluate(() => document.querySelector('.element-roadmap').scrollWidth <= innerWidth), 'Mobile roadmap overflow')

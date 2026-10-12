@@ -8,9 +8,27 @@
 
 独立页面提供自由旋转、正面、侧面、俯视、线框、动画暂停和 GLB 下载，同时展示对应三视图。此批次没有替换现有 `terrain-world` 地图元素。
 
+### 竹丛、野花与土豆
+
+当前累计 45 类独立模型、52 个版本，规划 108 类，剩余 63 类未建模。新增 `bamboo`、`wildflowers`、`potato-field`，由 `scripts/blender/map_element_meadow.py` 生成。
+
+- 竹丛：五根错落竹秆、40 个分节节点、节环、逐步退去的笋箨、侧枝及狭长叶、收细竹梢。竹节沿长度伸长并保持直径，末段维持常绿叶片并出现少量落叶。本样板仅演示出笋到成竹的营养生长，没有把罕见开花强行当作年度阶段。
+- 野花丛：12 株菊形草花，基生叶、茎生叶、总苞、花苞、192 个独立舌状花瓣、中心花盘及瘦果种头，默认花期。白色与淡粉作为游戏美术混合，不代表精确单一物种；不复用浆果结构。
+- 土豆田：四穴植株，分枝茎、48 组复叶、五裂花冠/黄色花药、地下匍匐茎及 20 个带芽眼的块茎。块茎属于地下茎结构，不套用绿色果实到黄果的颜色动画；地上茎叶后期衰退而地下块茎保留。
+- 土豆工具栏的分层图标切换土层剖面，仅隐藏前半土体及土块，不隐藏植物或移动块茎；关闭恢复完整覆土。源文件/GLB 默认包含完整土层，`inspectionCover` 是查看器元数据，不是烘焙剖面动画。
+- `lifeRadialGrowth=1` 保持竹节直径，旧模型默认 `.45` 不变。物候、展开及风动仍需网页驱动，不是可直接在任意 GLB 查看器播放的生长剪辑。
+- 尚未模拟竹鞭扩张、竹种开花周期、野花播种/授粉、土豆采收与土壤水肥/产量，也未接入地图季节或 LOD。
+
+结构资料：[UMD 竹丛与竹鞭](https://extension.umd.edu/resource/containing-and-removing-bamboo)、[PROSEA 竹秆生长](https://prosea.prota4u.org/view.aspx?id=2070)、[NC State 菊形花序](https://plants.ces.ncsu.edu/plants/leucanthemum-vulgare/)、[UMN 土豆匍匐茎与覆土](https://extension.umn.edu/garden-and-home/yard-and-garden/gardening-in-minnesota/growing-potatoes)。仅核对结构，未下载第三方网格。
+
+```powershell
+blender --background --factory-startup --python-exit-code 1 --python scripts/blender/map_element_kit.py -- --assets bamboo wildflowers potato-field
+node scripts/verify-map-meadow.mjs
+```
+
 ### 林下与水生样板
 
-当前累计 42 类独立模型、49 个版本，规划 108 类，剩余 66 类未建模。新增 `cactus`、`fern`、`mushrooms`、`lily-pad`，由 `scripts/blender/map_element_understory.py` 生成。
+林下水生批次完成时为 42 类独立模型、49 个版本。新增 `cactus`、`fern`、`mushrooms`、`lily-pad`，由 `scripts/blender/map_element_understory.py` 生成。
 
 - 仙人掌：纵肋肉质茎、侧臂、刺座及辐射刺、花瓣和成熟红果，保持茎体绿色，不套用秋季落叶材质。
 - 蕨丛：分节叶轴由卷曲姿态逐段舒展，羽叶和背面孢子囊群随叶轴运动；不显示花朵、果实或种子。

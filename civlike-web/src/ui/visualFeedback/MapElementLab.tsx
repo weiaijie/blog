@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Box, Download, ListChecks, Pause, Play, RotateCcw, Shuffle, Sprout, X } from 'lucide-react'
+import { Box, Download, Layers2, ListChecks, Pause, Play, RotateCcw, Shuffle, Sprout, X } from 'lucide-react'
 import { elementVersionLabel, initialMapElement, mapElementLibrary, mapElements, type MapElement } from '../../render/assets/mapElementCatalog'
 import { mountMapElement, type ElementScene, type ElementView } from '../../render/visuals/mapElementScene'
 import { defaultFieldSettings, type FieldSettings } from '../../render/visuals/mapElementGrowth'
@@ -58,9 +58,10 @@ function ElementPreview({ asset, select, view, setView }: {
   const scene = useRef<ElementScene>()
   const [playing, setPlaying] = useState(!window.matchMedia('(prefers-reduced-motion: reduce)').matches)
   const [wireframe, setWireframe] = useState(false)
+  const [cutaway, setCutaway] = useState(false)
   const [status, setStatus] = useState('加载中')
   const [hasAnimation, setHasAnimation] = useState(false)
-  const initialGrowth = asset.family==='cotton-field' ? .96 : asset.family==='lily-pad' ? .49 : defaultFieldSettings.growth
+  const initialGrowth = asset.family==='cotton-field' ? .96 : ['lily-pad','wildflowers'].includes(asset.family) ? .49 : defaultFieldSettings.growth
   const [settings, setSettings] = useState<FieldSettings>({ ...defaultFieldSettings,growth:initialGrowth })
   const [progress, setProgress] = useState(initialGrowth)
   const [animalSettings, setAnimalSettings] = useState<AnimalSettings>({ ...defaultAnimalSettings })
@@ -99,6 +100,7 @@ function ElementPreview({ asset, select, view, setView }: {
       <div className="element-tools">
         <button title={playing ? '暂停动画' : '播放动画'} aria-label={playing ? '暂停动画' : '播放动画'} disabled={!hasAnimation} onClick={() => { setPlaying(!playing); scene.current?.setPlaying(!playing) }}>{playing ? <Pause size={18} /> : <Play size={18} />}</button>
         <button title="线框" aria-label="线框" aria-pressed={wireframe} onClick={() => { setWireframe(!wireframe); scene.current?.setWireframe(!wireframe) }}><Box size={18} /></button>
+        {asset.family==='potato-field' && <button title="土层剖面" aria-label="土层剖面" aria-pressed={cutaway} onClick={() => { setCutaway(!cutaway); scene.current?.setCutaway(!cutaway) }}><Layers2 size={18} /></button>}
         <button title="重置视角" aria-label="重置视角" onClick={() => scene.current?.setView(view)}><RotateCcw size={18} /></button>
         <a href={asset.url} download={`${asset.id}.glb`} title="下载 GLB" aria-label="下载 GLB"><Download size={18} /></a>
       </div>

@@ -5,7 +5,7 @@ type Organ = {
   object: Object3D; scale: Vector3; rotation: Quaternion; role: string
   start: number; full: number; end: number; gone: number; bend: number; phase: number; position: Vector3; fallHeight: number
   openAngle: number; openAxis: Vector3; openStart: number; openFull: number
-  droopAngle: number; droopStart: number; unfurlAngle: number; unfoldAngle: number; bob: number
+  droopAngle: number; droopStart: number; unfurlAngle: number; unfoldAngle: number; bob: number; radialGrowth: number
 }
 
 function smooth(value: number) { const t = Math.max(0, Math.min(1, value)); return t*t*(3-2*t) }
@@ -15,6 +15,10 @@ export function organEnvelope(progress: number, start: number, full: number, end
 }
 
 export function botanicalStage(progress: number, family: string) {
+  if (family==='bamboo' || family==='potato-field') {
+    const stages=family==='bamboo' ? ['出笋','拔节','展枝','展叶','成竹','换叶'] : ['出苗','茎叶生长','开花结薯','块茎膨大','薯块成熟','茎叶枯退']
+    return stages[progress<.12 ? 0 : progress<.36 ? 1 : progress<.55 ? 2 : progress<.76 ? 3 : progress<.89 ? 4 : 5]
+  }
   if (family==='fern' || family==='mushrooms') {
     const stages=family==='fern' ? ['卷芽','舒卷','羽叶展开','孢子囊形成','孢子成熟','老叶衰退'] : ['原基','菌柄伸长','菌盖展开','菌褶成熟','产孢','衰败']
     return stages[progress<.12 ? 0 : progress<.36 ? 1 : progress<.55 ? 2 : progress<.76 ? 3 : progress<.89 ? 4 : 5]
@@ -25,7 +29,7 @@ export function botanicalStage(progress: number, family: string) {
   if (progress < .55) return family==='corn-field' ? '抽雄吐丝' : family==='rice-paddy' ? '抽穗开花' : '开花'
   if (family==='cotton-field' && progress>=.76) return progress<.89 ? '棉铃开裂' : '吐絮留种'
   if ((family==='rice-paddy' || family==='corn-field') && progress<.76) return '灌浆'
-  if (progress < .76) return ['sunflower-field','birch-tree','willow-tree'].includes(family) ? '结籽' : '结果'
+  if (progress < .76) return ['sunflower-field','birch-tree','willow-tree','wildflowers'].includes(family) ? '结籽' : '结果'
   if (progress < .89) return '成熟'
   if (family === 'palm-tree') return '常绿结实'
   if (family === 'cactus') return '留果休眠'
@@ -46,6 +50,7 @@ export function createBotanicalMotion(model: Group) {
         openAngle:Number(data.lifeOpenAngle ?? 0),openAxis:new Vector3().fromArray(data.lifeOpenAxis ?? [1,0,0]).normalize(),
         openStart:Number(data.lifeOpenStart ?? .7),openFull:Number(data.lifeOpenFull ?? .92),
         unfurlAngle:Number(data.lifeUnfurlAngle ?? 0),unfoldAngle:Number(data.lifeUnfoldAngle ?? .95),bob:Number(data.lifeBob ?? 0),
+        radialGrowth:Number(data.lifeRadialGrowth ?? .45),
         droopAngle:Number(data.lifeDroopAngle ?? (data.lifeRole==='seed' ? .30 : data.lifeRole==='foliage' ? .25 : 0)),
         droopStart:Number(data.lifeDroopStart ?? (data.lifeRole==='seed' ? .8 : .86)) })
     }
@@ -89,7 +94,7 @@ export function createBotanicalMotion(model: Group) {
         if (object.visible) visible[role] = (visible[role]??0)+1
         // Organs emerge at their attachment points. The entire plant is never scaled.
         object.scale.copy(organ.scale).multiply(role==='structure'
-          ? scale.set(.45+.55*amount, Math.max(.001,amount), .45+.55*amount)
+          ? scale.set(organ.radialGrowth+(1-organ.radialGrowth)*amount, Math.max(.001,amount), organ.radialGrowth+(1-organ.radialGrowth)*amount)
           : scale.setScalar(Math.max(.001,amount)))
         const wind = (Math.sin(elapsed*1.6+organ.phase)+.23*Math.sin(elapsed*3.8+organ.phase*2))*settings.wind*organ.bend
         const unfold = role==='foliage' ? (1-smooth((p-organ.start)/.18))*organ.unfoldAngle : 0

@@ -22,6 +22,7 @@ import map_element_fortifications
 import map_element_crops
 import map_element_trees
 import map_element_understory
+import map_element_meadow
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / 'src/render/assets/elements'
@@ -758,6 +759,9 @@ BUILDERS = {
     'fern': (lambda: map_element_understory.build(sys.modules[__name__], 'fern'), ''),
     'mushrooms': (lambda: map_element_understory.build(sys.modules[__name__], 'mushrooms'), ''),
     'lily-pad': (lambda: map_element_understory.build(sys.modules[__name__], 'lily-pad'), ''),
+    'bamboo': (lambda: map_element_meadow.build(sys.modules[__name__], 'bamboo'), ''),
+    'wildflowers': (lambda: map_element_meadow.build(sys.modules[__name__], 'wildflowers'), ''),
+    'potato-field': (lambda: map_element_meadow.build(sys.modules[__name__], 'potato-field'), ''),
 }
 
 

@@ -244,7 +244,22 @@
       "id": "lily-pad",
       "sourceObjects": 170,
       "roundTripTriangles": 1920
+    },
+    {
+      "id": "bamboo",
+      "sourceObjects": 976,
+      "roundTripTriangles": 17526
+    },
+    {
+      "id": "wildflowers",
+      "sourceObjects": 1368,
+      "roundTripTriangles": 22538
+    },
+    {
+      "id": "potato-field",
+      "sourceObjects": 848,
+      "roundTripTriangles": 17604
     }
   ],
-  "passed": 49
+  "passed": 52
 }

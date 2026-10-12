@@ -1004,6 +1004,66 @@
         ]
       ],
       "glbBytes": 214216
+    },
+    {
+      "id": "bamboo",
+      "reference": "",
+      "triangles": 17526,
+      "meshObjects": 242,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.75,
+          -1.75,
+          0.0
+        ],
+        [
+          1.75,
+          1.75,
+          2.9761
+        ]
+      ],
+      "glbBytes": 1762816
+    },
+    {
+      "id": "wildflowers",
+      "reference": "",
+      "triangles": 22538,
+      "meshObjects": 321,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.75,
+          -1.75,
+          0.0
+        ],
+        [
+          1.75,
+          1.75,
+          1.0829
+        ]
+      ],
+      "glbBytes": 2277800
+    },
+    {
+      "id": "potato-field",
+      "reference": "",
+      "triangles": 17604,
+      "meshObjects": 135,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.75,
+          -1.75,
+          -0.55
+        ],
+        [
+          1.75,
+          1.75,
+          1.0187
+        ]
+      ],
+      "glbBytes": 1650276
     }
   ]
 }
