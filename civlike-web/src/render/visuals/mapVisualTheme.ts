@@ -91,14 +91,6 @@ export const mapVisualTheme = {
   },
   tile: {
     defaultStroke: 0x2a332f,
-    accentMapMaxTiles: 0,
-    bevelAlpha: 0.22,
-    detailMapMaxTiles: 0,
-    reliefShadow: 0x071014,
-    reliefShadowAlpha: 0.2,
-    strokeMapMaxTiles: 256,
-    transitionAlpha: 0.44,
-    shoreline: 0xb9dfd7,
   },
   buildHint: {
     fill: 0xf2d06b,

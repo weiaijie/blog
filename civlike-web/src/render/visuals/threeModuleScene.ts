@@ -1,4 +1,5 @@
 import {
+  ACESFilmicToneMapping,
   AmbientLight,
   Box3,
   BoxGeometry,
@@ -13,15 +14,18 @@ import {
   MeshStandardMaterial,
   Object3D,
   PerspectiveCamera,
+  PCFSoftShadowMap,
   PlaneGeometry,
   RingGeometry,
   Scene,
   SphereGeometry,
   SRGBColorSpace,
+  Texture,
   Vector3,
   WebGLRenderer,
 } from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { runtimeModelAssetUrls, type RuntimeModelAssetId } from '../assets/modelAssetUrls'
 import type {
   BuildableModuleId,
@@ -58,23 +62,48 @@ export function mountThreeModuleScene(
   host: HTMLElement,
   spec: ModuleSceneSpec,
 ): ModuleSceneHandle {
+  const isGrassland = spec.kind === 'terrain' && (spec.terrainId ?? 'grassland') === 'grassland'
   const scene = new Scene()
   scene.background = new Color(0x172129)
 
   const renderer = new WebGLRenderer({ antialias: true, alpha: false })
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
   renderer.outputColorSpace = SRGBColorSpace
+  if (isGrassland) {
+    renderer.toneMapping = ACESFilmicToneMapping
+    renderer.toneMappingExposure = 1.15
+    renderer.shadowMap.enabled = true
+    renderer.shadowMap.type = PCFSoftShadowMap
+  }
   host.appendChild(renderer.domElement)
 
   const camera = new PerspectiveCamera(spec.kind === 'terrain-set' ? 31 : 34, 1, 0.1, 100)
   camera.position.set(spec.kind === 'terrain-set' ? 5.2 : 2.6, spec.kind === 'terrain-set' ? 4.3 : 2.3, spec.kind === 'terrain-set' ? 5.6 : 3.25)
   camera.lookAt(0, 0, 0)
+  const controls = isGrassland ? new OrbitControls(camera, renderer.domElement) : undefined
+  if (controls) {
+    controls.enableDamping = true
+    controls.enablePan = false
+    controls.minDistance = 3
+    controls.maxDistance = 8
+    controls.maxPolarAngle = Math.PI * 0.49
+  }
 
-  scene.add(new AmbientLight(0xc9d8c8, 1.8))
-  const keyLight = new DirectionalLight(0xffffff, 2.8)
+  scene.add(new AmbientLight(0xffffff, isGrassland ? 0.95 : 1.8))
+  const keyLight = new DirectionalLight(0xfff5df, isGrassland ? 3 : 2.8)
   keyLight.position.set(3, 5, 4)
+  if (isGrassland) {
+    keyLight.castShadow = true
+    keyLight.shadow.mapSize.set(2048, 2048)
+    keyLight.shadow.camera.left = keyLight.shadow.camera.bottom = -2.5
+    keyLight.shadow.camera.right = keyLight.shadow.camera.top = 2.5
+    keyLight.shadow.camera.near = 0.1
+    keyLight.shadow.camera.far = 15
+    keyLight.shadow.bias = -0.0001
+    keyLight.shadow.normalBias = 0.005
+  }
   scene.add(keyLight)
-  const fillLight = new DirectionalLight(0x9fc8ff, 0.9)
+  const fillLight = new DirectionalLight(0x9fc8ff, isGrassland ? 0.5 : 0.9)
   fillLight.position.set(-4, 2, -3)
   scene.add(fillLight)
 
@@ -134,7 +163,10 @@ export function mountThreeModuleScene(
   }
 
   function animate(time: number): void {
-    root.rotation.y = spec.kind === 'terrain-set' ? -0.18 + Math.sin(time * 0.00018) * 0.04 : time * 0.00022
+    if (!isGrassland) {
+      root.rotation.y = spec.kind === 'terrain-set' ? -0.18 + Math.sin(time * 0.00018) * 0.04 : time * 0.00022
+    }
+    controls?.update()
 
     root.traverse((child) => {
       if (child.userData.animate === 'bob') {
@@ -159,18 +191,10 @@ export function mountThreeModuleScene(
       destroyed = true
       window.removeEventListener('resize', resize)
       cancelAnimationFrame(animationFrame)
+      controls?.dispose()
       renderer.forceContextLoss()
       renderer.dispose()
-      scene.traverse((object) => {
-        if (object instanceof Mesh) {
-          object.geometry.dispose()
-          const materials = Array.isArray(object.material) ? object.material : [object.material]
-
-          for (const material of materials) {
-            material.dispose()
-          }
-        }
-      })
+      disposeObjectTree(scene)
       renderer.domElement.remove()
     },
   }
@@ -290,7 +314,8 @@ function cloneVariantMaterial(
   const cloned = source.clone()
 
   if (cloned instanceof MeshStandardMaterial) {
-    if (isGrassMaterial && cloned.map) {
+    const isMeadow = source.name === 'meadow_surface' || source.name === 'meadow_leaf'
+    if (isMeadow || (isGrassMaterial && cloned.map)) {
       cloned.color.setRGB(1.08 - fertility * 0.24, 0.88 + fertility * 0.20, 0.72 + fertility * 0.12)
     } else if (isGrassMaterial) {
       cloned.color.setHSL(
@@ -338,20 +363,29 @@ function fitModelToPreview(model: Object3D, targetSize: number): void {
 function setRuntimePreviewMetadata(model: Object3D): void {
   model.traverse((child) => {
     child.userData.runtimeAsset = true
+    if (child instanceof Mesh) {
+      child.castShadow = true
+      child.receiveShadow = true
+    }
   })
 }
 
 function disposeObjectTree(object: Object3D): void {
+  const textures = new Set<Texture>()
   object.traverse((child) => {
     if (child instanceof Mesh) {
       child.geometry.dispose()
       const materials = Array.isArray(child.material) ? child.material : [child.material]
 
       for (const childMaterial of materials) {
+        for (const value of Object.values(childMaterial)) {
+          if (value instanceof Texture) textures.add(value)
+        }
         childMaterial.dispose()
       }
     }
   })
+  for (const texture of textures) texture.dispose()
 }
 
 function createTerrainSetModel(): Group {

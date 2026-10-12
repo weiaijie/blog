@@ -30,6 +30,9 @@ import {
 
 const HEX_RADIUS = 24
 const TILE_SIZE = HEX_RADIUS * Math.sqrt(3)
+const TERRAIN_TEXTURE_SCALE = 1
+const TERRAIN_BLEND_RADIUS = HEX_RADIUS * 1.72
+const GRID_LINE_WIDTH = 0.75
 const FOG_TEXTURE_SCALE = 0.0625
 const FOG_DRAG_RESTORE_MS = 120
 const CAMERA_PADDING = 24
@@ -114,7 +117,10 @@ export async function mountPixiStage(
   host.appendChild(app.canvas)
 
   const mapLayer = new Container()
-  const grid = new Graphics()
+  const terrainBaseCanvas = document.createElement('canvas')
+  const terrainBaseContext = terrainBaseCanvas.getContext('2d')
+  const terrainBaseTexture = Texture.from(terrainBaseCanvas)
+  const terrainBaseSprite = new Sprite(terrainBaseTexture)
   const entityLayer = new Graphics()
   const buildHintLayer = new Graphics()
   const selection = new Graphics()
@@ -146,7 +152,7 @@ export async function mountPixiStage(
   const fogTexture = Texture.from(fogCanvas)
   const fogSprite = new Sprite(fogTexture)
 
-  mapLayer.addChild(grid)
+  mapLayer.addChild(terrainBaseSprite)
   mapLayer.addChild(entityLayer)
   mapLayer.addChild(buildHintLayer)
   mapLayer.addChild(fogSprite)
@@ -154,11 +160,6 @@ export async function mountPixiStage(
   app.stage.addChild(mapLayer)
 
   function renderMap(map: GameMap): void {
-    grid.clear()
-    const shouldDrawDetails = map.tiles.length <= mapVisualTheme.tile.detailMapMaxTiles
-    const shouldDrawAccents =
-      shouldDrawDetails && map.tiles.length <= mapVisualTheme.tile.accentMapMaxTiles
-    const shouldDrawTileStroke = map.tiles.length <= mapVisualTheme.tile.strokeMapMaxTiles
     const terrainByTileId = new Map(
       map.tiles.map((tile) => {
         const terrain = getTerrainConfig(tile.terrainId)
@@ -167,34 +168,96 @@ export async function mountPixiStage(
       }),
     )
 
-    for (const tile of map.tiles) {
-      const terrain = getTerrainConfig(tile.terrainId)
-      const visual = terrainByTileId.get(tile.id) ?? getTerrainVisualStyle(tile.terrainId, terrain.color)
-      const world = tileToWorld(tile, { hexRadius: HEX_RADIUS })
-      const points = getHexPolygonPoints(world, HEX_RADIUS - 1)
-      const polygon = points.flatMap((point) => [point.x, point.y])
-
-      if (shouldDrawDetails) {
-        drawTerrainRelief(grid, points, visual)
-      }
-
-      const tileShape = grid.poly(polygon).fill(visual.fill)
-
-      if (shouldDrawTileStroke) {
-        tileShape.stroke({ alpha: visual.strokeAlpha, color: visual.stroke, width: 1 })
-      }
-
-      if (shouldDrawAccents) {
-        drawTerrainBevel(grid, points, visual)
-        drawTerrainTransitions(grid, world, points, map, terrainByTileId, visual)
-        drawTerrainAccent(grid, world, visual)
-      }
-    }
-
+    renderContinuousTerrainBase(map, terrainByTileId)
     tilePool.setAllocatedTileGraphics(map.tiles.length)
     renderVisualEntities()
     renderFog()
     renderSelection()
+  }
+
+  function renderContinuousTerrainBase(
+    map: GameMap,
+    terrainByTileId: Map<string, TerrainVisualStyle>,
+  ): void {
+    if (!terrainBaseContext) {
+      return
+    }
+
+    const worldSize = getHexMapWorldSize(map.width, map.height, { hexRadius: HEX_RADIUS })
+
+    prepareMapTexture(
+      terrainBaseCanvas,
+      terrainBaseContext,
+      terrainBaseTexture,
+      terrainBaseSprite,
+      worldSize,
+    )
+
+    terrainBaseContext.fillStyle = getAverageTerrainColor(map, terrainByTileId)
+    terrainBaseContext.fillRect(0, 0, worldSize.width, worldSize.height)
+
+    for (const tile of map.tiles) {
+      const terrain = getTerrainConfig(tile.terrainId)
+      const visual = terrainByTileId.get(tile.id) ?? getTerrainVisualStyle(tile.terrainId, terrain.color)
+      const center = tileToWorld(tile, { hexRadius: HEX_RADIUS })
+
+      drawTerrainBlend(terrainBaseContext, center, visual)
+    }
+
+    renderTerrainGridOverlay(terrainBaseContext, map, terrainByTileId)
+    terrainBaseTexture.source.update()
+  }
+
+  function renderTerrainGridOverlay(
+    context: CanvasRenderingContext2D,
+    map: GameMap,
+    terrainByTileId: Map<string, TerrainVisualStyle>,
+  ): void {
+    context.lineJoin = 'round'
+    context.lineCap = 'round'
+    context.lineWidth = GRID_LINE_WIDTH
+
+    for (const tile of map.tiles) {
+      const terrain = getTerrainConfig(tile.terrainId)
+      const visual = terrainByTileId.get(tile.id) ?? getTerrainVisualStyle(tile.terrainId, terrain.color)
+      const center = tileToWorld(tile, { hexRadius: HEX_RADIUS })
+      const points = getHexPolygonPoints(center, HEX_RADIUS - 0.7)
+
+      context.strokeStyle = colorToRgba(visual.stroke, Math.min(0.16, visual.strokeAlpha * 0.24))
+      context.beginPath()
+      points.forEach((point, index) => {
+        if (index === 0) {
+          context.moveTo(point.x, point.y)
+        } else {
+          context.lineTo(point.x, point.y)
+        }
+      })
+      context.closePath()
+      context.stroke()
+    }
+  }
+
+  function prepareMapTexture(
+    canvas: HTMLCanvasElement,
+    context: CanvasRenderingContext2D,
+    texture: Texture,
+    sprite: Sprite,
+    worldSize: { width: number; height: number },
+  ): void {
+    const textureWidth = Math.ceil(worldSize.width * TERRAIN_TEXTURE_SCALE)
+    const textureHeight = Math.ceil(worldSize.height * TERRAIN_TEXTURE_SCALE)
+
+    texture.source.scaleMode = 'linear'
+
+    if (canvas.width !== textureWidth || canvas.height !== textureHeight) {
+      canvas.width = textureWidth
+      canvas.height = textureHeight
+      texture.source.resize(textureWidth, textureHeight)
+    }
+
+    context.setTransform(TERRAIN_TEXTURE_SCALE, 0, 0, TERRAIN_TEXTURE_SCALE, 0, 0)
+    context.imageSmoothingEnabled = true
+    sprite.setSize(worldSize.width, worldSize.height)
   }
 
   function renderVisualEntities(): void {
@@ -709,214 +772,82 @@ function drawBuildHint(graphics: Graphics, hint: PixiVisualBuildHint): void {
   }
 }
 
-function drawTerrainRelief(
-  graphics: Graphics,
-  points: Array<{ x: number; y: number }>,
-  visual: TerrainVisualStyle,
-): void {
-  if (visual.elevation <= 0) {
-    return
-  }
-
-  const offset = visual.elevation * 1.2
-  const shadowPolygon = points.flatMap((point) => [point.x + offset, point.y + offset])
-
-  graphics
-    .poly(shadowPolygon)
-    .fill({
-      alpha: mapVisualTheme.tile.reliefShadowAlpha + visual.elevation * 0.03,
-      color: mapVisualTheme.tile.reliefShadow,
-    })
-}
-
-function drawTerrainBevel(
-  graphics: Graphics,
-  points: Array<{ x: number; y: number }>,
-  visual: TerrainVisualStyle,
-): void {
-  drawEdgeLine(graphics, points[4], points[5], visual.highlight, mapVisualTheme.tile.bevelAlpha, 1)
-  drawEdgeLine(graphics, points[5], points[0], visual.highlight, mapVisualTheme.tile.bevelAlpha, 1)
-  drawEdgeLine(graphics, points[1], points[2], visual.shadow, mapVisualTheme.tile.bevelAlpha + 0.08, 1)
-  drawEdgeLine(graphics, points[2], points[3], visual.shadow, mapVisualTheme.tile.bevelAlpha + 0.08, 1)
-}
-
-function drawTerrainTransitions(
-  graphics: Graphics,
-  center: { x: number; y: number },
-  points: Array<{ x: number; y: number }>,
+function getAverageTerrainColor(
   map: GameMap,
   terrainByTileId: Map<string, TerrainVisualStyle>,
-  visual: TerrainVisualStyle,
-): void {
-  for (let index = 0; index < points.length; index += 1) {
-    const start = points[index]
-    const end = points[(index + 1) % points.length]
-    const neighbor = getNeighborByEdge(center, start, end, map)
+): string {
+  if (map.tiles.length === 0) {
+    return colorToHex(mapVisualTheme.background)
+  }
 
-    if (!neighbor) {
-      if (visual.accentKind === 'waves') {
-        drawEdgeLine(graphics, start, end, mapVisualTheme.tile.shoreline, 0.34, 1.5)
+  const total = map.tiles.reduce(
+    (sum, tile) => {
+      const terrain = getTerrainConfig(tile.terrainId)
+      const visual = terrainByTileId.get(tile.id) ?? getTerrainVisualStyle(tile.terrainId, terrain.color)
+      const color = splitColor(visual.fill)
+
+      return {
+        b: sum.b + color.b,
+        g: sum.g + color.g,
+        r: sum.r + color.r,
       }
-      continue
-    }
-
-    const neighborVisual = terrainByTileId.get(neighbor.id)
-
-    if (!neighborVisual || neighborVisual.accentKind === visual.accentKind) {
-      continue
-    }
-
-    if (visual.accentKind === 'waves' || neighborVisual.accentKind === 'waves') {
-      drawEdgeLine(graphics, start, end, mapVisualTheme.tile.shoreline, 0.5, 2)
-      continue
-    }
-
-    if (visual.accentKind === 'trees' || neighborVisual.accentKind === 'trees') {
-      drawEdgeLine(graphics, start, end, 0x244c32, 0.42, 2)
-      continue
-    }
-
-    if (visual.elevation !== neighborVisual.elevation) {
-      const high = visual.elevation > neighborVisual.elevation ? visual : neighborVisual
-
-      drawEdgeLine(graphics, start, end, high.transition, mapVisualTheme.tile.transitionAlpha, 2)
-    }
-  }
-}
-
-function getNeighborByEdge(
-  center: { x: number; y: number },
-  start: { x: number; y: number },
-  end: { x: number; y: number },
-  map: GameMap,
-): GameMap['tiles'][number] | undefined {
-  const midpoint = {
-    x: (start.x + end.x) / 2,
-    y: (start.y + end.y) / 2,
-  }
-  const outward = normalizeVector({
-    x: midpoint.x - center.x,
-    y: midpoint.y - center.y,
-  })
-  const neighborCoordinate = worldToTile(
-    {
-      x: midpoint.x + outward.x * HEX_RADIUS * 0.55,
-      y: midpoint.y + outward.y * HEX_RADIUS * 0.55,
     },
-    { hexRadius: HEX_RADIUS },
+    { b: 0, g: 0, r: 0 },
   )
 
-  if (
-    neighborCoordinate.x < 0 ||
-    neighborCoordinate.y < 0 ||
-    neighborCoordinate.x >= map.width ||
-    neighborCoordinate.y >= map.height
-  ) {
-    return undefined
-  }
-
-  return map.tiles.find(
-    (tile) => tile.x === neighborCoordinate.x && tile.y === neighborCoordinate.y,
-  )
+  return colorToHex(joinColor({
+    b: Math.round(total.b / map.tiles.length),
+    g: Math.round(total.g / map.tiles.length),
+    r: Math.round(total.r / map.tiles.length),
+  }))
 }
 
-function normalizeVector(vector: { x: number; y: number }): { x: number; y: number } {
-  const length = Math.hypot(vector.x, vector.y)
-
-  if (length === 0) {
-    return { x: 0, y: 0 }
-  }
-
-  return {
-    x: vector.x / length,
-    y: vector.y / length,
-  }
-}
-
-function drawEdgeLine(
-  graphics: Graphics,
-  start: { x: number; y: number },
-  end: { x: number; y: number },
-  color: number,
-  alpha: number,
-  width: number,
-): void {
-  graphics
-    .moveTo(start.x, start.y)
-    .lineTo(end.x, end.y)
-    .stroke({ alpha, color, width })
-}
-
-function drawTerrainAccent(
-  graphics: Graphics,
+function drawTerrainBlend(
+  context: CanvasRenderingContext2D,
   center: { x: number; y: number },
   visual: TerrainVisualStyle,
 ): void {
-  if (visual.accentKind === 'none') {
-    return
-  }
+  const radius = TERRAIN_BLEND_RADIUS + visual.elevation * 2
+  const gradient = context.createRadialGradient(
+    center.x,
+    center.y,
+    HEX_RADIUS * 0.08,
+    center.x,
+    center.y,
+    radius,
+  )
 
-  if (visual.accentKind === 'grass') {
-    graphics
-      .moveTo(center.x - 5, center.y + 5)
-      .lineTo(center.x - 2, center.y + 2)
-      .moveTo(center.x + 3, center.y + 6)
-      .lineTo(center.x + 6, center.y + 2)
-      .stroke({ alpha: visual.accentAlpha, color: visual.accent, width: 1 })
-    return
-  }
+  gradient.addColorStop(0, colorToRgba(visual.fill, 0.82))
+  gradient.addColorStop(0.48, colorToRgba(visual.fill, 0.56))
+  gradient.addColorStop(0.86, colorToRgba(visual.transition, 0.16))
+  gradient.addColorStop(1, colorToRgba(visual.transition, 0))
 
-  if (visual.accentKind === 'trees') {
-    graphics
-      .circle(center.x - 5, center.y + 2, 2.6)
-      .circle(center.x + 1, center.y - 3, 2.4)
-      .circle(center.x + 6, center.y + 3, 2.2)
-      .fill({ alpha: visual.accentAlpha, color: visual.accent })
-      .circle(center.x - 1, center.y + 4, 5.5)
-      .stroke({ alpha: 0.18, color: visual.highlight, width: 1 })
-    return
-  }
+  context.fillStyle = gradient
+  context.beginPath()
+  context.arc(center.x, center.y, radius, 0, Math.PI * 2)
+  context.fill()
+}
 
-  if (visual.accentKind === 'ridges') {
-    graphics
-      .poly([
-        center.x - 12,
-        center.y + 8,
-        center.x - 3,
-        center.y - 8,
-        center.x + 5,
-        center.y + 8,
-      ])
-      .fill({ alpha: 0.18, color: visual.highlight })
-      .poly([
-        center.x - 3,
-        center.y + 8,
-        center.x + 8,
-        center.y - 5,
-        center.x + 14,
-        center.y + 8,
-      ])
-      .fill({ alpha: 0.12, color: visual.shadow })
-      .moveTo(center.x - 10, center.y + 4)
-      .lineTo(center.x - 3, center.y - 3)
-      .lineTo(center.x + 4, center.y + 4)
-      .moveTo(center.x - 1, center.y + 7)
-      .lineTo(center.x + 6, center.y)
-      .lineTo(center.x + 11, center.y + 5)
-      .stroke({ alpha: visual.accentAlpha, color: visual.accent, width: 1 })
-    return
-  }
+function colorToHex(color: number): string {
+  return `#${color.toString(16).padStart(6, '0')}`
+}
 
-  graphics
-    .moveTo(center.x - 11, center.y - 2)
-    .lineTo(center.x - 5, center.y - 4)
-    .lineTo(center.x + 1, center.y - 2)
-    .lineTo(center.x + 7, center.y - 4)
-    .moveTo(center.x - 8, center.y + 5)
-    .lineTo(center.x - 2, center.y + 3)
-    .lineTo(center.x + 4, center.y + 5)
-    .lineTo(center.x + 10, center.y + 3)
-    .stroke({ alpha: visual.accentAlpha, color: visual.accent, width: 1 })
+function colorToRgba(color: number, alpha: number): string {
+  const channels = splitColor(color)
+
+  return `rgba(${channels.r}, ${channels.g}, ${channels.b}, ${alpha})`
+}
+
+function splitColor(color: number): { b: number; g: number; r: number } {
+  return {
+    b: color & 0xff,
+    g: (color >> 8) & 0xff,
+    r: (color >> 16) & 0xff,
+  }
+}
+
+function joinColor(color: { b: number; g: number; r: number }): number {
+  return (color.r << 16) | (color.g << 8) | color.b
 }
 
 function fillFogTile(context: CanvasRenderingContext2D, x: number, y: number): void {

@@ -172,7 +172,11 @@ def build_asset(asset_id, detailed):
     reset_scene()
 
     if asset_id == "terrain-grassland":
-        create_terrain_grassland(detailed)
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("grassland_block", Path(__file__).with_name("grassland_block.py"))
+        grassland_module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(grassland_module)
+        grassland_module.create_grassland_block(detailed, GENERATION_SEED, OUTPUT_TEXTURE_ROOT)
     elif asset_id == "terrain-water":
         create_terrain_water(detailed)
     elif asset_id == "transition-shoreline":
