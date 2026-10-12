@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs'
-import { Box3, Group, Object3D, Vector3 } from 'three'
+import { Box3, Group, Mesh, Object3D, Vector3 } from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { describe, expect, it } from 'vitest'
 import { createAnimalMotion, defaultAnimalSettings, solveAnimalLeg } from '../../src/render/visuals/mapElementAnimals'
@@ -25,7 +25,8 @@ describe('animal growth, articulation and bounded offspring', () => {
       expect(Math.hypot(solution.kneeY,solution.kneeZ)).toBeCloseTo(.5,6)
     }
   })
-  for (const id of ['sheep-v5','cow','horse','chicken']) {
+  for (const id of ['sheep-v5','cow','horse','chicken','goat','pig','duck','deer']) {
+    const bird = id==='chicken' || id==='duck'
     it(`${id} preserves grounded feet, changes proportions and hides adult details when young`, async () => {
       const model = await load(id), motion = createAnimalMotion(model)!
       const root = model.children.find((node) => node.userData.faunaSpecies)!
@@ -61,21 +62,21 @@ describe('animal growth, articulation and bounded offspring', () => {
       motion.setSettings({ ...defaultAnimalSettings,family:true })
       const started = { ...motion.update(2,true) }
       expect(started.offspring).toBe(0)
-      if (id==='chicken') {
+      if (bird) {
         model.updateMatrixWorld(true)
         for (const root of model.children.filter((node) => node.visible)) {
           for (const egg of tagged(root,'egg').filter((node) => node.visible)) expect(new Box3().setFromObject(egg,true).min.y).toBeGreaterThan(-.0001)
         }
       }
       expect(motion.update(3,false).breedingProgress).toBe(started.breedingProgress)
-      expect(motion.update(8,true).offspring).toBe(id==='chicken' ? 3 : 1)
+      expect(motion.update(8,true).offspring).toBe(bird ? 3 : 1)
       const newbornAge=motion.state.offspringAge
       expect(motion.update(4,true).offspringAge).toBeGreaterThan(newbornAge)
       const pausedAge=motion.state.offspringAge
       expect(motion.update(4,false).offspringAge).toBe(pausedAge)
-      expect(motion.update(800,true).offspring).toBe(id==='chicken' ? 3 : 1)
+      expect(motion.update(800,true).offspring).toBe(bird ? 3 : 1)
       expect(motion.state.offspringAge).toBe(1)
-      expect(model.children.filter((node) => node.userData.faunaSpecies)).toHaveLength(id==='chicken' ? 5 : 3)
+      expect(model.children.filter((node) => node.userData.faunaSpecies)).toHaveLength(bird ? 5 : 3)
       motion.setSettings({ ...defaultAnimalSettings,family:false })
       expect(motion.update(0,false).offspring).toBe(0)
       expect(model.children.filter((node) => node.userData.faunaSpecies && node.visible)).toHaveLength(1)
@@ -88,5 +89,32 @@ describe('animal growth, articulation and bounded offspring', () => {
     expect(initialMapElement('?element=sheep').id).toBe('sheep-v5')
     expect(initialMapElement('?element=sheep&revision=1').animal).toBe(false)
     expect(createAnimalMotion(new Group())).toBeUndefined()
+  })
+  it('fades fawn markings independently and keeps the adult partner without antlers', async () => {
+    const model=await load('deer'), motion=createAnimalMotion(model)!
+    const roots=model.children.filter((node) => node.userData.faunaSpecies)
+    const spots=tagged(roots[0],'juvenile-detail')[0]
+    const materials: import('three').Material[]=[]
+    spots.traverse((node) => { if (node instanceof Mesh) materials.push(...(Array.isArray(node.material) ? node.material : [node.material])) })
+    const setAge=(age: number) => {
+      motion.setSettings({ ...defaultAnimalSettings,age })
+      for (let i=0;i<150;i++) motion.update(1/60,false)
+    }
+    setAge(0)
+    expect(spots.visible).toBe(true)
+    expect(materials.every((material) => material.opacity===1)).toBe(true)
+    setAge(.5)
+    expect(materials.every((material) => material.opacity>.4 && material.opacity<.6)).toBe(true)
+    setAge(1)
+    expect(spots.visible).toBe(false)
+    motion.setSettings({ ...defaultAnimalSettings,family:true })
+    motion.update(0,false)
+    expect(tagged(roots[0],'adult-detail').some((part) => part.visible && part.userData.sexTrait==='male')).toBe(true)
+    expect(tagged(roots[1],'adult-detail').some((part) => part.visible && part.userData.sexTrait==='male')).toBe(false)
+    roots[0].traverse((node) => {
+      if (node instanceof Mesh) for (const material of Array.isArray(node.material) ? node.material : [node.material]) {
+        if (material.name.startsWith('wool_light')) expect(material.opacity).toBe(1)
+      }
+    })
   })
 })

@@ -729,6 +729,10 @@ BUILDERS = {
     'cow': (lambda: map_element_fauna.build(sys.modules[__name__], 'cow'), ''),
     'horse': (lambda: map_element_fauna.build(sys.modules[__name__], 'horse'), ''),
     'chicken': (lambda: map_element_fauna.build(sys.modules[__name__], 'chicken'), ''),
+    'goat': (lambda: map_element_fauna.build(sys.modules[__name__], 'goat'), ''),
+    'pig': (lambda: map_element_fauna.build(sys.modules[__name__], 'pig'), ''),
+    'duck': (lambda: map_element_fauna.build(sys.modules[__name__], 'duck'), ''),
+    'deer': (lambda: map_element_fauna.build(sys.modules[__name__], 'deer'), ''),
 }
 
 

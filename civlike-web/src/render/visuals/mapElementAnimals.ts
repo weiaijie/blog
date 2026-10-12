@@ -51,7 +51,7 @@ export function createAnimalMotion(model: Group) {
   model.traverse((object) => { if (object.userData.faunaSpecies) original=object })
   if (!original) return undefined
   const species = String(original.userData.faunaSpecies)
-  const bird = species==='chicken'
+  const bird = species==='chicken' || species==='duck'
   const animals = [rig(original)]
   const template = original.clone(true)
   // A bounded family shares geometry, but each animal owns its changing coat materials.
@@ -97,14 +97,25 @@ export function createAnimalMotion(model: Group) {
       const maturity = part.maturity ? smooth((progress-part.maturity)/.40) : 1
       object.visible = incubating ? role==='egg' : role!=='egg' && maturity>.01
       if (index===1 && object.userData.sexTrait==='female') object.visible=false
+      if (index===1 && object.userData.sexTrait==='male') object.visible=false
       if (part.maturity) object.scale.multiplyScalar(Math.max(.001,maturity))
+      if (role==='juvenile-detail') {
+        object.visible=!incubating && progress<.7
+        object.traverse((node) => {
+          if (node instanceof Mesh) for (const material of Array.isArray(node.material) ? node.material : [node.material]) {
+            material.transparent=true
+            material.depthWrite=false
+            material.opacity=1-smooth((progress-.30)/.40)
+          }
+        })
+      }
       if (index===1 && role==='body') object.scale.x*=1.06
       if (bird && index!==1 && object.name.startsWith('Comb')) object.scale.multiplyScalar(.55)
       let x = part.followHead || role==='head' ? headAngle : 0, y = 0, z = 0
       if (role==='ear') z = Math.sin(elapsed*2.1+index)*.06*Number(object.userData.side??1)
       if (role==='tail') y = Math.sin(elapsed*2.5+index)*.14
       if (role==='wing') z = Math.sin(elapsed*1.6+index)*.045*Number(object.userData.side??1)
-      if (role==='body') x = Math.sin(elapsed*1.4+index)*.006
+      if (role==='body' || role==='juvenile-detail') x = Math.sin(elapsed*1.4+index)*.006
       if (role==='egg') z = Math.sin(elapsed*8+index)*.045*state.breedingProgress
       angles.set(x,y,z); motion.setFromEuler(angles)
       object.quaternion.multiply(motion)

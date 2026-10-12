@@ -10,16 +10,18 @@
 
 ### 动物成长样板
 
-当前 18 类模型、25 个版本。新增牛、马、鸡，绵羊默认打开 V5；`element=sheep&revision=1` 仍可打开原版。
+当前 22 类模型、29 个版本。动物成长样板包括羊、牛、马、鸡、山羊、猪、鸭和鹿。绵羊默认打开 V5；`element=sheep&revision=1` 仍可打开原版。
 
 - 幼体有独立的头身比例和腿长，不是根节点统一缩放；羊毛、角、鬃毛、鸡冠及尾羽分阶段出现，雏鸡与成年鸡羽色不同。
 - 模型库提供成长阶段、自动成长、休息/行走/采食（鸡为啄食）和繁育预览。腿部按双段 IK 定位，支撑期脚掌不穿地；行为切换平滑过渡。
 - 繁育预览仅对成年阶段开放。约 8 秒等待后显示 1 只子代（鸡 3 只，等待期间有蛋）；子代继续约 45 秒成长，不会无限新增。暂停同时冻结成长和繁育时钟。
 - GLB 为节点关节和年龄元数据，网页运行时驱动动作，不包含骨骼蒙皮或可独立播放的成长动画。尚未接入地图寻路、生态繁殖条件或遗传系统。
 - 新增动物无独立设计图时只展示年龄选择，不借用其他模型的设计稿。三视相机仍可使用。
+- 山羊的后掠角与胡须、猪的鼻盘与卷尾、鸭的扁嘴与蹼足、鹿的分叉角分别建模。幼鹿斑点随成长渐隐；鸭有黄色幼羽与孵化、子代成长，最多 3 只子代。猪等哺乳动物仍限 1 只，仅为有界展示而非真实窝仔数。
 
 ```powershell
 blender --background --factory-startup --python-exit-code 1 --python scripts/blender/map_element_kit.py -- --assets sheep-v5 cow horse chicken
+blender --background --factory-startup --python-exit-code 1 --python scripts/blender/map_element_kit.py -- --assets goat pig duck deer
 node scripts/verify-map-fauna.mjs
 ```
 

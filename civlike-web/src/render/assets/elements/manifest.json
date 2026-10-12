@@ -524,6 +524,86 @@
         ]
       ],
       "glbBytes": 186416
+    },
+    {
+      "id": "goat",
+      "reference": "",
+      "triangles": 3464,
+      "meshObjects": 22,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -0.4032,
+          -1.032,
+          0.0
+        ],
+        [
+          0.4032,
+          0.6844,
+          1.7809
+        ]
+      ],
+      "glbBytes": 334744
+    },
+    {
+      "id": "pig",
+      "reference": "",
+      "triangles": 3326,
+      "meshObjects": 19,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -0.4104,
+          -1.172,
+          0.0
+        ],
+        [
+          0.4104,
+          0.8772,
+          0.92
+        ]
+      ],
+      "glbBytes": 309284
+    },
+    {
+      "id": "duck",
+      "reference": "",
+      "triangles": 1760,
+      "meshObjects": 14,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -0.264,
+          -0.7,
+          0.0
+        ],
+        [
+          0.264,
+          0.57,
+          0.76
+        ]
+      ],
+      "glbBytes": 157120
+    },
+    {
+      "id": "deer",
+      "reference": "",
+      "triangles": 3616,
+      "meshObjects": 22,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -0.4308,
+          -1.202,
+          0.0
+        ],
+        [
+          0.4308,
+          0.8527,
+          2.6106
+        ]
+      ],
+      "glbBytes": 345368
     }
   ]
 }

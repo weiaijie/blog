@@ -124,7 +124,27 @@
       "id": "chicken",
       "sourceObjects": 65,
       "roundTripTriangles": 2040
+    },
+    {
+      "id": "goat",
+      "sourceObjects": 75,
+      "roundTripTriangles": 3464
+    },
+    {
+      "id": "pig",
+      "sourceObjects": 84,
+      "roundTripTriangles": 3326
+    },
+    {
+      "id": "duck",
+      "sourceObjects": 63,
+      "roundTripTriangles": 1760
+    },
+    {
+      "id": "deer",
+      "sourceObjects": 81,
+      "roundTripTriangles": 3616
     }
   ],
-  "passed": 25
+  "passed": 29
 }

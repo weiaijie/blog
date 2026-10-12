@@ -38,7 +38,7 @@ async function pixels() {
   })
 }
 try {
-  for(const id of ['sheep-v5','cow','horse','chicken']) {
+  for(const id of ['sheep-v5','cow','horse','chicken','goat','pig','duck','deer']) {
     await page.setViewportSize({ width:1440,height:1000 })
     await page.goto(`http://127.0.0.1:5173/?view=map-elements&element=${id}`)
     await page.waitForSelector('.element-stage[data-loaded="true"][data-animals]')
@@ -82,14 +82,14 @@ try {
     assert.equal((await pixels()).hash,still.hash,`${id}: pose did not pause`)
     await page.getByRole('button',{ name:'播放动画',exact:true }).click()
     await page.waitForFunction(() => JSON.parse(document.querySelector('.element-stage').dataset.animals).offspring>0,{},{ timeout:30000 })
-    assert.equal((await state()).offspring,id==='chicken' ? 3 : 1)
+    assert.equal((await state()).offspring,['chicken','duck'].includes(id) ? 3 : 1)
     await page.getByRole('button',{ name:'暂停动画',exact:true }).click()
     const family=await pixels()
     assert(family.coverage>.007 && family.framed,`${id}: family blank/clipped`)
     const drawCalls=Number(await page.locator('.element-stage').getAttribute('data-draw-calls'))
     assert(drawCalls<450,`${id}: family draw-call budget`)
     await snapshot(`${id}-family`)
-    if (id==='chicken') {
+    if (id==='chicken' || id==='duck') {
       await page.getByRole('button',{ name:'播放动画',exact:true }).click()
       await page.waitForFunction(() => JSON.parse(document.querySelector('.element-stage').dataset.animals).offspringAge>=.99,{},{ timeout:80000 })
       await page.getByRole('button',{ name:'暂停动画',exact:true }).click()

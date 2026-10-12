@@ -3,23 +3,23 @@
     {
       "id": "sheep-v5",
       "young": {
-        "hash": 211471009,
-        "coverage": 0.030032679738562093,
+        "hash": 3490015497,
+        "coverage": 0.030038126361655773,
         "framed": true
       },
       "adult": {
-        "hash": 3565513843,
-        "coverage": 0.07222222222222222,
+        "hash": 3678063366,
+        "coverage": 0.07226579520697168,
         "framed": true
       },
       "family": {
-        "hash": 1791439975,
+        "hash": 119940296,
         "coverage": 0.03362135814777888,
         "framed": true
       },
       "mobile": {
-        "hash": 2277450168,
-        "coverage": 0.05221001221001221,
+        "hash": 59128536,
+        "coverage": 0.052234432234432235,
         "framed": true
       },
       "drawCalls": 106
@@ -27,23 +27,23 @@
     {
       "id": "cow",
       "young": {
-        "hash": 1440618349,
-        "coverage": 0.021345315904139434,
+        "hash": 2954804309,
+        "coverage": 0.021356209150326797,
         "framed": true
       },
       "adult": {
-        "hash": 1074321885,
+        "hash": 168926086,
         "coverage": 0.050762527233115466,
         "framed": true
       },
       "family": {
-        "hash": 1873087322,
-        "coverage": 0.02466230936819172,
+        "hash": 3856222455,
+        "coverage": 0.024645969498910677,
         "framed": true
       },
       "mobile": {
-        "hash": 2589226322,
-        "coverage": 0.0380952380952381,
+        "hash": 3747957641,
+        "coverage": 0.037997557997557996,
         "framed": true
       },
       "drawCalls": 107
@@ -51,7 +51,7 @@
     {
       "id": "horse",
       "young": {
-        "hash": 1446122135,
+        "hash": 1491536204,
         "coverage": 0.02571350762527233,
         "framed": true
       },
@@ -61,13 +61,13 @@
         "framed": true
       },
       "family": {
-        "hash": 3030076222,
-        "coverage": 0.029624183006535947,
+        "hash": 1228958820,
+        "coverage": 0.029607843137254904,
         "framed": true
       },
       "mobile": {
-        "hash": 1589906961,
-        "coverage": 0.046056166056166054,
+        "hash": 207804449,
+        "coverage": 0.046031746031746035,
         "framed": true
       },
       "drawCalls": 101
@@ -75,26 +75,122 @@
     {
       "id": "chicken",
       "young": {
-        "hash": 3194210914,
-        "coverage": 0.02746732026143791,
+        "hash": 1221437554,
+        "coverage": 0.027450980392156862,
         "framed": true
       },
       "adult": {
-        "hash": 255112493,
-        "coverage": 0.0926525054466231,
+        "hash": 654170795,
+        "coverage": 0.09261437908496732,
         "framed": true
       },
       "family": {
-        "hash": 2726505993,
-        "coverage": 0.053622004357298476,
+        "hash": 2370836013,
+        "coverage": 0.053556644880174295,
         "framed": true
       },
       "mobile": {
-        "hash": 1639594744,
-        "coverage": 0.12776556776556777,
+        "hash": 3413422260,
+        "coverage": 0.12774114774114775,
         "framed": true
       },
       "drawCalls": 101
+    },
+    {
+      "id": "goat",
+      "young": {
+        "hash": 918543515,
+        "coverage": 0.027739651416122005,
+        "framed": true
+      },
+      "adult": {
+        "hash": 3037288020,
+        "coverage": 0.0666557734204793,
+        "framed": true
+      },
+      "family": {
+        "hash": 466342034,
+        "coverage": 0.032205882352941174,
+        "framed": true
+      },
+      "mobile": {
+        "hash": 2464168214,
+        "coverage": 0.050061050061050064,
+        "framed": true
+      },
+      "drawCalls": 105
+    },
+    {
+      "id": "pig",
+      "young": {
+        "hash": 548939083,
+        "coverage": 0.02570806100217865,
+        "framed": true
+      },
+      "adult": {
+        "hash": 1270388893,
+        "coverage": 0.061356209150326795,
+        "framed": true
+      },
+      "family": {
+        "hash": 1844631203,
+        "coverage": 0.029787581699346404,
+        "framed": true
+      },
+      "mobile": {
+        "hash": 1416848302,
+        "coverage": 0.04573870573870574,
+        "framed": true
+      },
+      "drawCalls": 99
+    },
+    {
+      "id": "duck",
+      "young": {
+        "hash": 7938995,
+        "coverage": 0.01758714596949891,
+        "framed": true
+      },
+      "adult": {
+        "hash": 906561656,
+        "coverage": 0.04548474945533769,
+        "framed": true
+      },
+      "family": {
+        "hash": 1875311126,
+        "coverage": 0.028556644880174294,
+        "framed": true
+      },
+      "mobile": {
+        "hash": 1499658398,
+        "coverage": 0.06649572649572649,
+        "framed": true
+      },
+      "drawCalls": 104
+    },
+    {
+      "id": "deer",
+      "young": {
+        "hash": 2883528246,
+        "coverage": 0.017957516339869282,
+        "framed": true
+      },
+      "adult": {
+        "hash": 377168870,
+        "coverage": 0.043262527233115466,
+        "framed": true
+      },
+      "family": {
+        "hash": 1863222107,
+        "coverage": 0.021094771241830065,
+        "framed": true
+      },
+      "mobile": {
+        "hash": 561177291,
+        "coverage": 0.033382173382173384,
+        "framed": true
+      },
+      "drawCalls": 103
     }
   ],
   "errors": [],
