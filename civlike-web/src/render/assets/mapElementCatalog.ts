@@ -12,6 +12,7 @@ export const mapElements = manifest.assets.map((asset) => ({
   label: labels.get(asset.id.replace(/-v\d+$/, ''))?.label ?? asset.id,
   category: labels.get(asset.id.replace(/-v\d+$/, ''))?.category ?? '其他',
   lifecycle: botanicalFamilies.has(asset.id.replace(/-v\d+$/, '')) && (asset.id === 'berry-shrub-v4' || !asset.id.startsWith('berry-shrub')),
+  animal: ['sheep-v5','cow','horse','chicken'].includes(asset.id),
   url: models[`./elements/${asset.id}.glb`],
   referenceUrl: references[`../../../design/asset-orthographics-20261012-expanded/${asset.reference}`],
 }))
@@ -31,5 +32,5 @@ export function initialMapElement(search: string): MapElement {
 }
 
 export function elementVersionLabel(revision: number) {
-  return revision === 1 ? '原版' : revision === 2 ? '改进版' : revision === 3 ? '自然动态' : '物候动态'
+  return revision === 1 ? '原版' : revision === 2 ? '改进版' : revision === 3 ? '自然动态' : revision === 4 ? '物候动态' : '成长动态'
 }

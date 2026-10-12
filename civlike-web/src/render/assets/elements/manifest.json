@@ -444,6 +444,86 @@
         ]
       ],
       "glbBytes": 2048236
+    },
+    {
+      "id": "sheep-v5",
+      "reference": "20-sheep.png",
+      "triangles": 4000,
+      "meshObjects": 20,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -0.4032,
+          -1.195,
+          0.0
+        ],
+        [
+          0.4032,
+          0.7639,
+          1.32
+        ]
+      ],
+      "glbBytes": 379012
+    },
+    {
+      "id": "cow",
+      "reference": "",
+      "triangles": 3612,
+      "meshObjects": 22,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -0.4784,
+          -1.525,
+          0.0
+        ],
+        [
+          0.4784,
+          1.1496,
+          1.7903
+        ]
+      ],
+      "glbBytes": 348696
+    },
+    {
+      "id": "horse",
+      "reference": "",
+      "triangles": 3198,
+      "meshObjects": 20,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -0.3848,
+          -1.455,
+          0.0
+        ],
+        [
+          0.3848,
+          1.1382,
+          2.2575
+        ]
+      ],
+      "glbBytes": 315248
+    },
+    {
+      "id": "chicken",
+      "reference": "",
+      "triangles": 2040,
+      "meshObjects": 15,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -0.264,
+          -0.56,
+          0.0
+        ],
+        [
+          0.264,
+          0.41,
+          1.0
+        ]
+      ],
+      "glbBytes": 186416
     }
   ]
 }

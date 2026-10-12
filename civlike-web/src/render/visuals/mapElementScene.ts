@@ -6,6 +6,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { createFieldMotion, defaultFieldSettings, type FieldSettings } from './mapElementGrowth'
 import { createBotanicalMotion } from './mapElementLifecycle'
+import { createAnimalMotion, defaultAnimalSettings, type AnimalSettings, type AnimalState } from './mapElementAnimals'
 
 export type ElementView = 'perspective' | 'front' | 'side' | 'top'
 export type ElementScene = {
@@ -13,6 +14,7 @@ export type ElementScene = {
   setPlaying: (value: boolean) => void
   setWireframe: (value: boolean) => void
   setFieldSettings: (value: FieldSettings) => void
+  setAnimalSettings: (value: AnimalSettings) => void
   destroy: () => void
 }
 
@@ -32,6 +34,7 @@ export function mountMapElement(
   onLoad: (animations: number) => void,
   onError: (message: string) => void,
   onGrowth?: (value: number) => void,
+  onAnimal?: (value: AnimalState) => void,
 ): ElementScene {
   const renderer = new WebGLRenderer({ antialias: true, preserveDrawingBuffer: true })
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
@@ -57,6 +60,8 @@ export function mountMapElement(
   let mixer: AnimationMixer | undefined
   let field: ReturnType<typeof createFieldMotion> | undefined
   let botanical: ReturnType<typeof createBotanicalMotion> | undefined
+  let animal: ReturnType<typeof createAnimalMotion>
+  let animalSettings = { ...defaultAnimalSettings }
   let fieldSettings = { ...defaultFieldSettings }
   let lastGrowthReport = 0
   let destroyed = false
@@ -64,6 +69,7 @@ export function mountMapElement(
   let wireframe = false
   let view: ElementView = 'perspective'
   let size = 4
+  let singleSize = 4
   let frame = 0
   let previousTime = 0
   const center = new Vector3()
@@ -119,6 +125,11 @@ export function mountMapElement(
     bounds.getCenter(center)
     const extent = bounds.getSize(new Vector3())
     size = Math.max(extent.x, extent.y, extent.z, .1)
+    singleSize = size
+    animal = createAnimalMotion(model)
+    animal?.setSpread(singleSize*.8)
+    animal?.setSettings(animalSettings)
+    if (animalSettings.family) size=singleSize*2.25
     field = createFieldMotion(model)
     field.setSettings(fieldSettings)
     botanical = createBotanicalMotion(model)
@@ -126,6 +137,7 @@ export function mountMapElement(
     host.dataset.plants = String(field.cropCount)
     field.update(0, false)
     botanical.update(0, false)
+    animal?.update(0,false)
     if (gltf.animations.length) {
       mixer = new AnimationMixer(model)
       for (const clip of gltf.animations) mixer.clipAction(clip).play()
@@ -134,7 +146,7 @@ export function mountMapElement(
     setView(view)
     host.dataset.loaded = 'true'
     host.dataset.animations = String(gltf.animations.length)
-    onLoad(gltf.animations.length + (field.count || botanical.count ? 1 : 0))
+    onLoad(gltf.animations.length + (field.count || botanical.count || animal ? 1 : 0))
   }).catch((error: unknown) => {
     if (!destroyed) onError(error instanceof Error ? error.message : '模型加载失败')
   })
@@ -146,6 +158,11 @@ export function mountMapElement(
     const delta = previousTime ? Math.min((time - previousTime) / 1000, .05) : 0
     previousTime = time
     if (playing) mixer?.update(delta)
+    if (animal) {
+      const state = animal.update(delta,playing)
+      host.dataset.animals=JSON.stringify(state)
+      if (time-lastGrowthReport>120) { onAnimal?.({ ...state }); lastGrowthReport=time }
+    }
     if (field?.count || botanical?.count) {
       const fieldProgress = field?.update(delta, playing) ?? fieldSettings.growth
       const progress = botanical?.count ? botanical.update(delta, playing) : fieldProgress
@@ -162,6 +179,12 @@ export function mountMapElement(
   return {
     setView, setPlaying(value) { playing = value }, setWireframe,
     setFieldSettings(value) { fieldSettings = value; field?.setSettings(value); botanical?.setSettings(value) },
+    setAnimalSettings(value) {
+      const changed = animalSettings.family!==value.family
+      animalSettings=value
+      animal?.setSettings(value)
+      if (changed) { size=singleSize*(value.family ? 2.25 : 1); setView(view) }
+    },
     destroy() {
       destroyed = true
       cancelAnimationFrame(frame)
@@ -178,6 +201,7 @@ export function mountMapElement(
       delete host.dataset.growth
       delete host.dataset.drawCalls
       delete host.dataset.organs
+      delete host.dataset.animals
     },
   }
 }

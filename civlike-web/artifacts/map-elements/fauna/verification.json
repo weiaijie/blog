@@ -1,0 +1,102 @@
+{
+  "results": [
+    {
+      "id": "sheep-v5",
+      "young": {
+        "hash": 211471009,
+        "coverage": 0.030032679738562093,
+        "framed": true
+      },
+      "adult": {
+        "hash": 3565513843,
+        "coverage": 0.07222222222222222,
+        "framed": true
+      },
+      "family": {
+        "hash": 1791439975,
+        "coverage": 0.03362135814777888,
+        "framed": true
+      },
+      "mobile": {
+        "hash": 2277450168,
+        "coverage": 0.05221001221001221,
+        "framed": true
+      },
+      "drawCalls": 106
+    },
+    {
+      "id": "cow",
+      "young": {
+        "hash": 1440618349,
+        "coverage": 0.021345315904139434,
+        "framed": true
+      },
+      "adult": {
+        "hash": 1074321885,
+        "coverage": 0.050762527233115466,
+        "framed": true
+      },
+      "family": {
+        "hash": 1873087322,
+        "coverage": 0.02466230936819172,
+        "framed": true
+      },
+      "mobile": {
+        "hash": 2589226322,
+        "coverage": 0.0380952380952381,
+        "framed": true
+      },
+      "drawCalls": 107
+    },
+    {
+      "id": "horse",
+      "young": {
+        "hash": 1446122135,
+        "coverage": 0.02571350762527233,
+        "framed": true
+      },
+      "adult": {
+        "hash": 3031324421,
+        "coverage": 0.06047930283224401,
+        "framed": true
+      },
+      "family": {
+        "hash": 3030076222,
+        "coverage": 0.029624183006535947,
+        "framed": true
+      },
+      "mobile": {
+        "hash": 1589906961,
+        "coverage": 0.046056166056166054,
+        "framed": true
+      },
+      "drawCalls": 101
+    },
+    {
+      "id": "chicken",
+      "young": {
+        "hash": 3194210914,
+        "coverage": 0.02746732026143791,
+        "framed": true
+      },
+      "adult": {
+        "hash": 255112493,
+        "coverage": 0.0926525054466231,
+        "framed": true
+      },
+      "family": {
+        "hash": 2726505993,
+        "coverage": 0.053622004357298476,
+        "framed": true
+      },
+      "mobile": {
+        "hash": 1639594744,
+        "coverage": 0.12776556776556777,
+        "framed": true
+      },
+      "drawCalls": 101
+    }
+  ],
+  "errors": [],
+  "writeRetries": []
+}

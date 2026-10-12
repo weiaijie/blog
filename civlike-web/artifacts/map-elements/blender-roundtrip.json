@@ -104,7 +104,27 @@
       "id": "sunflower-field",
       "sourceObjects": 945,
       "roundTripTriangles": 18518
+    },
+    {
+      "id": "sheep-v5",
+      "sourceObjects": 68,
+      "roundTripTriangles": 4000
+    },
+    {
+      "id": "cow",
+      "sourceObjects": 79,
+      "roundTripTriangles": 3612
+    },
+    {
+      "id": "horse",
+      "sourceObjects": 73,
+      "roundTripTriangles": 3198
+    },
+    {
+      "id": "chicken",
+      "sourceObjects": 65,
+      "roundTripTriangles": 2040
     }
   ],
-  "passed": 21
+  "passed": 25
 }

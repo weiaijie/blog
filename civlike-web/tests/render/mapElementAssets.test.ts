@@ -5,9 +5,9 @@ import { mapElementRoadmap } from '../../src/render/assets/mapElementRoadmap'
 
 describe('C-style Blender element kit', () => {
   it('counts modeled families separately from roadmap entries and revisions', () => {
-    expect(manifest.assets).toHaveLength(21)
-    expect(new Set(manifest.assets.map((a) => a.id)).size).toBe(21)
-    expect(new Set(manifest.assets.map((a) => a.id.replace(/-v\d+$/, ''))).size).toBe(15)
+    expect(manifest.assets).toHaveLength(25)
+    expect(new Set(manifest.assets.map((a) => a.id)).size).toBe(25)
+    expect(new Set(manifest.assets.map((a) => a.id.replace(/-v\d+$/, ''))).size).toBe(18)
     expect(mapElementRoadmap).toHaveLength(108)
     expect(new Set(mapElementRoadmap.map((a) => a.id)).size).toBe(108)
     for (const asset of manifest.assets) expect(mapElementRoadmap.some((a) => a.id === asset.id.replace(/-v\d+$/, ''))).toBe(true)
@@ -29,6 +29,15 @@ describe('C-style Blender element kit', () => {
       expect(asset.triangles).toBeGreaterThan(100)
       const living = asset.id.endsWith('-v3')
       const botanical = json.nodes.some((node: { extras?: { lifeRole?: string } }) => node.extras?.lifeRole)
+      const animal = json.nodes.some((node: { extras?: { faunaSpecies?: string } }) => node.extras?.faunaSpecies)
+      if (animal) {
+        const roles = new Set(json.nodes.map((node: { extras?: { animalRole?: string } }) => node.extras?.animalRole))
+        for (const role of ['body','head','upper-leg','lower-leg','foot']) expect(roles.has(role)).toBe(true)
+        for (const node of json.nodes.filter((node: { extras?: { animalRole?: string } }) => node.extras?.animalRole)) {
+          expect(node.extras.youngPosition).toHaveLength(3)
+          expect(node.extras.youngScale.every((value: number) => value>0 && value<=1)).toBe(true)
+        }
+      }
       expect(asset.triangles).toBeLessThan(living || botanical ? 25000 : 15000)
       expect(bytes.length).toBeLessThan(living || botanical ? 2_500_000 : 1_500_000)
       if (botanical) {

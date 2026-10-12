@@ -16,6 +16,7 @@ from mathutils import Vector
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import map_element_botany
+import map_element_fauna
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / 'src/render/assets/elements'
@@ -724,6 +725,10 @@ BUILDERS = {
     'apple-tree': (lambda: map_element_botany.build(sys.modules[__name__], 'apple-tree'), ''),
     'pumpkin-patch': (lambda: map_element_botany.build(sys.modules[__name__], 'pumpkin-patch'), ''),
     'sunflower-field': (lambda: map_element_botany.build(sys.modules[__name__], 'sunflower-field'), ''),
+    'sheep-v5': (lambda: map_element_fauna.build(sys.modules[__name__], 'sheep'), '20-sheep.png'),
+    'cow': (lambda: map_element_fauna.build(sys.modules[__name__], 'cow'), ''),
+    'horse': (lambda: map_element_fauna.build(sys.modules[__name__], 'horse'), ''),
+    'chicken': (lambda: map_element_fauna.build(sys.modules[__name__], 'chicken'), ''),
 }
 
 
