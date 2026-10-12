@@ -45,6 +45,12 @@ describe('living field growth', () => {
     expect(initialMapElement('?element=wheat-field&revision=2').id).toBe('wheat-field-v2')
     expect(initialMapElement('?element=vegetable-field&revision=1').id).toBe('vegetable-field')
     expect(initialMapElement('?element=wheat-field-v3').revision).toBe(3)
+    for(const family of ['pine-tree','reeds']) {
+      expect(initialMapElement(`?element=${family}`).id).toBe(`${family}-v4`)
+      expect(initialMapElement(`?element=${family}`).lifecycle).toBe(true)
+      expect(initialMapElement(`?element=${family}&revision=1`).id).toBe(family)
+      expect(initialMapElement(`?element=${family}&revision=1`).lifecycle).toBe(false)
+    }
   })
   it('pauses automatic growth and stops at maturity without looping backwards', () => {
     const model = new Group(), plant = new Group()

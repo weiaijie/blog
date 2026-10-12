@@ -8,9 +8,25 @@
 
 独立页面提供自由旋转、正面、侧面、俯视、线框、动画暂停和 GLB 下载，同时展示对应三视图。此批次没有替换现有 `terrain-world` 地图元素。
 
+### 针叶树与芦苇重做
+
+当前累计 45 类独立模型、54 个版本，规划 108 类，剩余 63 类未建模。`pine-tree-v4`、`reeds-v4` 替换对应 family 的默认预览，原版仍可切换，不把重做版本计作新增资产。
+
+- 针叶树：20 个主枝、60 个侧梢、成束针叶、抽梢芽、花粉球花、4 个种子球果及 72 个可转开的木质鳞片。幼苗建立、枝条伸展、球果长大、绿转褐、鳞片张开和有翅种子展示分别控制；针叶保持常绿，不套用花瓣和水果阶段。
+- 芦苇：9 根高低错落的分节秆、45 片弯叶和叶鞘、真正分枝的圆锥花序。不再使用旧版香蒲棒状穗头；花期紫灰小穗退去后留下浅色种穗，穗枝带着小穗一起运动，晚期叶片枯黄下垂。岸边浅水仍是静态底板。
+- `lifeRole` 为针叶树新增 `pollen` / `cone` / `scale` 语义，使用现有器官驱动。网页执行生长和风动，通用 GLB 查看器不会自动运行这些元数据。
+- 这是风格化缩时展示，松树为泛化的三针束造型，不冒充精确树种；多年幼树建立和成年球果周期压缩在同一时间条中。尚无授粉、种子飞散萌发、松针换叶周期、芦苇地下根茎扩张、地图季节接入或 LOD。
+
+结构参考：[UF/IFAS 松树针束与球果](https://ask.ifas.ufl.edu/publication/FR003)、[King County 芦苇羽状圆锥花序](https://kingcounty.gov/en/dept/dnrp/nature-recreation/environment-ecology-conservation/noxious-weeds/identification-control/phragmites)。只核对结构，未下载第三方网格。
+
+```powershell
+blender --background --factory-startup --python-exit-code 1 --python scripts/blender/map_element_kit.py -- --assets pine-tree-v4 reeds-v4
+node scripts/verify-map-conifer-reed.mjs
+```
+
 ### 竹丛、野花与土豆
 
-当前累计 45 类独立模型、52 个版本，规划 108 类，剩余 63 类未建模。新增 `bamboo`、`wildflowers`、`potato-field`，由 `scripts/blender/map_element_meadow.py` 生成。
+此批完成时为 45 类独立模型、52 个版本。新增 `bamboo`、`wildflowers`、`potato-field`，由 `scripts/blender/map_element_meadow.py` 生成。
 
 - 竹丛：五根错落竹秆、40 个分节节点、节环、逐步退去的笋箨、侧枝及狭长叶、收细竹梢。竹节沿长度伸长并保持直径，末段维持常绿叶片并出现少量落叶。本样板仅演示出笋到成竹的营养生长，没有把罕见开花强行当作年度阶段。
 - 野花丛：12 株菊形草花，基生叶、茎生叶、总苞、花苞、192 个独立舌状花瓣、中心花盘及瘦果种头，默认花期。白色与淡粉作为游戏美术混合，不代表精确单一物种；不复用浆果结构。
@@ -201,7 +217,7 @@ node node_modules/vitest/vitest.mjs run --exclude '**/.sites-preview/**'
 npm run build
 ```
 
-浏览器检查覆盖清单中全部版本加载、画面非空和完整取景、动画与暂停、三视图、线框、移动端切换及横向溢出，另验证版本切换、版本链接刷新、下载链接、鼠标旋转、生长几何、自动生长、零风静止、风动、平板控件和单样板绘制调用预算。物候样板额外验证萌芽、开花、成熟、衰败四阶段的器官可见性与画面差异。截图和 JSON 结果位于 `artifacts/map-elements/`。这些检查不等于艺术质量验收，也不等于 200 格场景的性能验收。
+浏览器检查覆盖清单中全部版本加载、画面非空和完整取景、动画与暂停、三视图、线框、移动端切换及横向溢出，另验证版本切换、版本链接刷新、下载链接、鼠标旋转、生长几何、自动生长、零风静止、风动、平板控件和单样板绘制调用预算。物候样板按类型验证出芽、展叶/开花/花粉球花、成孢/结籽/果实成熟以及后期阶段的器官可见性与画面差异，不统一假定所有植物都开花结果。截图和 JSON 结果位于 `artifacts/map-elements/`。这些检查不等于艺术质量验收，也不等于 200 格场景的性能验收。
 
 ## 后续工作
 

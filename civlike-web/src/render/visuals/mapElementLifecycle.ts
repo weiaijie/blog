@@ -15,6 +15,10 @@ export function organEnvelope(progress: number, start: number, full: number, end
 }
 
 export function botanicalStage(progress: number, family: string) {
+  if (family==='pine-tree' || family==='reeds') {
+    const stages=family==='pine-tree' ? ['幼苗','抽梢','花粉球花','球果发育','球果成熟','鳞片张开'] : ['出芽','展叶拔高','抽穗开花','结籽','绒穗成熟','枯黄留穗']
+    return stages[progress<.12 ? 0 : progress<.36 ? 1 : progress<.55 ? 2 : progress<.76 ? 3 : progress<.89 ? 4 : 5]
+  }
   if (family==='bamboo' || family==='potato-field') {
     const stages=family==='bamboo' ? ['出笋','拔节','展枝','展叶','成竹','换叶'] : ['出苗','茎叶生长','开花结薯','块茎膨大','薯块成熟','茎叶枯退']
     return stages[progress<.12 ? 0 : progress<.36 ? 1 : progress<.55 ? 2 : progress<.76 ? 3 : progress<.89 ? 4 : 5]

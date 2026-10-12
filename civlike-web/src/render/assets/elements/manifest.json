@@ -1064,6 +1064,46 @@
         ]
       ],
       "glbBytes": 1650276
+    },
+    {
+      "id": "pine-tree-v4",
+      "reference": "",
+      "triangles": 22886,
+      "meshObjects": 325,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.75,
+          -1.75,
+          0.0
+        ],
+        [
+          1.75,
+          1.75,
+          3.7589
+        ]
+      ],
+      "glbBytes": 2342264
+    },
+    {
+      "id": "reeds-v4",
+      "reference": "",
+      "triangles": 21437,
+      "meshObjects": 108,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.75,
+          -1.75,
+          0.0
+        ],
+        [
+          1.75,
+          1.75,
+          2.4613
+        ]
+      ],
+      "glbBytes": 1938968
     }
   ]
 }

@@ -5,8 +5,8 @@ import { mapElementRoadmap } from '../../src/render/assets/mapElementRoadmap'
 
 describe('C-style Blender element kit', () => {
   it('counts modeled families separately from roadmap entries and revisions', () => {
-    expect(manifest.assets).toHaveLength(52)
-    expect(new Set(manifest.assets.map((a) => a.id)).size).toBe(52)
+    expect(manifest.assets).toHaveLength(54)
+    expect(new Set(manifest.assets.map((a) => a.id)).size).toBe(54)
     expect(new Set(manifest.assets.map((a) => a.id.replace(/-v\d+$/, ''))).size).toBe(45)
     expect(mapElementRoadmap).toHaveLength(108)
     expect(new Set(mapElementRoadmap.map((a) => a.id)).size).toBe(108)
@@ -43,7 +43,7 @@ describe('C-style Blender element kit', () => {
       expect(bytes.length).toBeLessThan(living || botanical || building ? 2_500_000 : 1_500_000)
       if (botanical) {
         const roles = new Set(json.nodes.map((node: { extras?: { lifeRole?: string } }) => node.extras?.lifeRole))
-        const expected=asset.id==='bamboo' ? ['shoot','structure','foliage','husk','litter'] : asset.id==='potato-field' ? ['shoot','structure','foliage','blossom','stolon','tuber'] : asset.id==='fern' ? ['shoot','structure','foliage','spore'] : asset.id==='mushrooms' ? ['shoot','structure','cap','spore'] : asset.id==='cactus' ? ['shoot','structure','armor','blossom','fruit'] : ['shoot','structure','foliage','blossom',['sunflower-field','rice-paddy','birch-tree','willow-tree','wildflowers'].includes(asset.id) ? 'seed' : 'fruit']
+        const expected=asset.id==='pine-tree-v4' ? ['shoot','structure','foliage','pollen','cone','scale','seed'] : asset.id==='bamboo' ? ['shoot','structure','foliage','husk','litter'] : asset.id==='potato-field' ? ['shoot','structure','foliage','blossom','stolon','tuber'] : asset.id==='fern' ? ['shoot','structure','foliage','spore'] : asset.id==='mushrooms' ? ['shoot','structure','cap','spore'] : asset.id==='cactus' ? ['shoot','structure','armor','blossom','fruit'] : ['shoot','structure','foliage','blossom',['sunflower-field','rice-paddy','birch-tree','willow-tree','wildflowers','reeds-v4'].includes(asset.id) ? 'seed' : 'fruit']
         for (const role of expected) expect(roles.has(role)).toBe(true)
         if (['fern','mushrooms','bamboo'].includes(asset.id)) expect(roles.has('blossom') || roles.has('fruit') || roles.has('seed')).toBe(false)
         for (const node of json.nodes.filter((node: { extras?: { lifeRole?: string } }) => node.extras?.lifeRole)) {

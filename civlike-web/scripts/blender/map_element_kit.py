@@ -23,6 +23,7 @@ import map_element_crops
 import map_element_trees
 import map_element_understory
 import map_element_meadow
+import map_element_conifer_reed
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / 'src/render/assets/elements'
@@ -762,6 +763,8 @@ BUILDERS = {
     'bamboo': (lambda: map_element_meadow.build(sys.modules[__name__], 'bamboo'), ''),
     'wildflowers': (lambda: map_element_meadow.build(sys.modules[__name__], 'wildflowers'), ''),
     'potato-field': (lambda: map_element_meadow.build(sys.modules[__name__], 'potato-field'), ''),
+    'pine-tree-v4': (lambda: map_element_conifer_reed.build(sys.modules[__name__], 'pine-tree'), ''),
+    'reeds-v4': (lambda: map_element_conifer_reed.build(sys.modules[__name__], 'reeds'), ''),
 }
 
 

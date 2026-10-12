@@ -99,7 +99,7 @@ try {
   assert(mobile.coverage > .007 && mobile.bounds[0] > 0 && mobile.bounds[2] < mobile.width - 1, 'Mobile blank/clipped')
   await screenshot('mobile', true)
   await page.getByLabel('选择模型', { exact: true }).selectOption('pine-tree')
-  await page.waitForSelector('.element-stage[data-asset="pine-tree"][data-loaded="true"]')
+  await page.waitForSelector('.element-stage[data-asset="pine-tree-v4"][data-loaded="true"]')
   assert((await pixels()).coverage > .007, 'Mobile model switching failed')
   await page.goto(`${base}/?view=map-elements&element=wheat-field&revision=2`)
   await page.waitForSelector('.element-stage[data-asset="wheat-field-v2"][data-loaded="true"]')
@@ -174,12 +174,12 @@ try {
   await screenshot('living-field-mobile', true)
   const phenology = []
   await page.setViewportSize({ width: 1440, height: 1000 })
-  for (const id of ['berry-shrub-v4','apple-tree','pumpkin-patch','sunflower-field','corn-field','rice-paddy','vineyard','cotton-field','oak-tree','birch-tree','willow-tree','palm-tree','cactus','fern','mushrooms','lily-pad','bamboo','wildflowers','potato-field']) {
+  for (const id of ['berry-shrub-v4','apple-tree','pumpkin-patch','sunflower-field','corn-field','rice-paddy','vineyard','cotton-field','oak-tree','birch-tree','willow-tree','palm-tree','cactus','fern','mushrooms','lily-pad','bamboo','wildflowers','potato-field','pine-tree-v4','reeds-v4']) {
     await page.goto(`${base}/?view=map-elements&element=${id}`)
     await page.waitForSelector('.element-stage[data-loaded="true"][data-organs]')
     await page.getByRole('button', { name:'暂停动画', exact:true }).click()
     const states = []
-    for (const value of id==='fern' ? [5,25,49,82,100] : [5,49,82,100]) {
+    for (const value of ['fern','pine-tree-v4'].includes(id) ? [5,25,49,82,100] : [5,49,82,100]) {
       await page.getByLabel('生长阶段', { exact:true }).fill(String(value))
       await page.waitForFunction((target) => Math.abs(Number(document.querySelector('.element-stage').dataset.growth)-target)<.0002,value/100,{ timeout:15000 })
       await page.waitForTimeout(150)
@@ -189,8 +189,12 @@ try {
       await screenshot(`${id}-stage-${value}`)
       if (value === 5) assert(organs.shoot > 0 && !organs.fruit && !organs.blossom, `${id}: not a seedling`)
       if (value === 25) assert(organs.foliage > 0 && !organs.spore, `${id}: unfurling stage missing`)
-      if (value === 49) assert(organs[['fern','bamboo'].includes(id) ? 'foliage' : id==='mushrooms' ? 'cap' : 'blossom'] > 0 && !organs.fruit, `${id}: developed organs missing`)
-      if (value === 82) assert(organs[id==='bamboo' ? 'foliage' : id==='potato-field' ? 'tuber' : ['fern','mushrooms'].includes(id) ? 'spore' : ['sunflower-field','rice-paddy','cotton-field','birch-tree','willow-tree','wildflowers'].includes(id) ? 'seed' : 'fruit'] > 0, `${id}: mature organs missing`)
+      if (value === 49) assert(organs[['fern','bamboo'].includes(id) ? 'foliage' : id==='pine-tree-v4' ? 'pollen' : id==='mushrooms' ? 'cap' : 'blossom'] > 0 && !organs.fruit, `${id}: developed organs missing`)
+      if (value === 82) assert(organs[id==='bamboo' ? 'foliage' : id==='pine-tree-v4' ? 'cone' : id==='potato-field' ? 'tuber' : ['fern','mushrooms'].includes(id) ? 'spore' : ['sunflower-field','rice-paddy','cotton-field','birch-tree','willow-tree','wildflowers','reeds-v4'].includes(id) ? 'seed' : 'fruit'] > 0, `${id}: mature organs missing`)
+      if (id==='pine-tree-v4') {
+        assert(!organs.blossom && !organs.fruit, 'Pine incorrectly has flowers or fruit')
+        if (value===100) assert(organs.scale>0 && organs.seed>0 && !organs.pollen, 'Pine did not open seed cones')
+      }
       if (['fern','mushrooms','bamboo'].includes(id)) assert(!organs.blossom && !organs.fruit && !organs.seed, `${id}: nonflowering lifecycle mislabeled`)
       if (value === 100) assert(!organs.blossom, `${id}: petals persisted into senescence`)
     }
@@ -198,7 +202,7 @@ try {
       assert(new Set(states.map((state) => state.hash)).size>=4, `${id}: visually identical life stages`)
       assert.notEqual(states.find((s) => s.value===25).hash,states.find((s) => s.value===49).hash, 'Fern failed to unfurl')
       assert(!states.find((s) => s.value===49).organs.spore && states.find((s) => s.value===82).organs.spore>0, 'Fern failed to develop sori')
-    } else assert.equal(new Set(states.map((state) => state.hash)).size,4, `${id}: visually identical life stages`)
+    } else assert.equal(new Set(states.map((state) => state.hash)).size,states.length, `${id}: visually identical life stages`)
     await page.getByLabel('风力',{ exact:true }).fill('0')
     await page.getByRole('button',{ name:'播放动画',exact:true }).click()
     await page.waitForTimeout(300)

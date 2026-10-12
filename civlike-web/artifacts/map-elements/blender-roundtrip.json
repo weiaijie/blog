@@ -259,7 +259,17 @@
       "id": "potato-field",
       "sourceObjects": 848,
       "roundTripTriangles": 17604
+    },
+    {
+      "id": "pine-tree-v4",
+      "sourceObjects": 924,
+      "roundTripTriangles": 22886
+    },
+    {
+      "id": "reeds-v4",
+      "sourceObjects": 2350,
+      "roundTripTriangles": 21437
     }
   ],
-  "passed": 52
+  "passed": 54
 }

@@ -1,0 +1,198 @@
+{
+  "results": [
+    {
+      "id": "pine-tree-v4",
+      "states": [
+        {
+          "value": 5,
+          "hash": 352128851,
+          "coverage": 0.054673202614379086,
+          "bounds": [
+            396,
+            63,
+            824,
+            239
+          ],
+          "w": 1224,
+          "h": 600,
+          "organs": {
+            "shoot": 1
+          }
+        },
+        {
+          "value": 25,
+          "hash": 4224237787,
+          "coverage": 0.05800108932461873,
+          "bounds": [
+            396,
+            63,
+            824,
+            318
+          ],
+          "w": 1224,
+          "h": 600,
+          "organs": {
+            "shoot": 1,
+            "structure": 82,
+            "foliage": 61,
+            "bud": 60
+          }
+        },
+        {
+          "value": 49,
+          "hash": 2271943982,
+          "coverage": 0.08801742919389978,
+          "bounds": [
+            396,
+            63,
+            824,
+            449
+          ],
+          "w": 1224,
+          "h": 600,
+          "organs": {
+            "structure": 86,
+            "foliage": 61,
+            "bud": 60,
+            "pollen": 4
+          }
+        },
+        {
+          "value": 76,
+          "hash": 499606200,
+          "coverage": 0.0883115468409586,
+          "bounds": [
+            396,
+            63,
+            824,
+            449
+          ],
+          "w": 1224,
+          "h": 600,
+          "organs": {
+            "structure": 86,
+            "foliage": 61,
+            "cone": 4,
+            "scale": 72
+          }
+        },
+        {
+          "value": 100,
+          "hash": 356745098,
+          "coverage": 0.08863289760348583,
+          "bounds": [
+            396,
+            63,
+            824,
+            449
+          ],
+          "w": 1224,
+          "h": 600,
+          "organs": {
+            "structure": 86,
+            "foliage": 61,
+            "cone": 4,
+            "scale": 72,
+            "seed": 4
+          }
+        }
+      ],
+      "drawCalls": 38
+    },
+    {
+      "id": "reeds-v4",
+      "states": [
+        {
+          "value": 5,
+          "hash": 1098993987,
+          "coverage": 0.07422657952069717,
+          "bounds": [
+            372,
+            91,
+            852,
+            300
+          ],
+          "w": 1224,
+          "h": 600,
+          "organs": {
+            "shoot": 9
+          }
+        },
+        {
+          "value": 25,
+          "hash": 3754800072,
+          "coverage": 0.0743681917211329,
+          "bounds": [
+            372,
+            91,
+            852,
+            300
+          ],
+          "w": 1224,
+          "h": 600,
+          "organs": {
+            "shoot": 9,
+            "structure": 9,
+            "foliage": 40
+          }
+        },
+        {
+          "value": 49,
+          "hash": 3852956316,
+          "coverage": 0.0857516339869281,
+          "bounds": [
+            372,
+            91,
+            852,
+            403
+          ],
+          "w": 1224,
+          "h": 600,
+          "organs": {
+            "structure": 18,
+            "foliage": 45,
+            "blossom": 9
+          }
+        },
+        {
+          "value": 76,
+          "hash": 3607778657,
+          "coverage": 0.08503267973856209,
+          "bounds": [
+            372,
+            91,
+            852,
+            397
+          ],
+          "w": 1224,
+          "h": 600,
+          "organs": {
+            "structure": 18,
+            "foliage": 45,
+            "seed": 9
+          }
+        },
+        {
+          "value": 100,
+          "hash": 4182498928,
+          "coverage": 0.08586601307189543,
+          "bounds": [
+            372,
+            91,
+            852,
+            407
+          ],
+          "w": 1224,
+          "h": 600,
+          "organs": {
+            "structure": 18,
+            "foliage": 45,
+            "seed": 9
+          }
+        }
+      ],
+      "drawCalls": 53
+    }
+  ],
+  "errors": []
+}
