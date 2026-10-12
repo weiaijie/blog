@@ -369,7 +369,17 @@
       "id": "freight-wagon",
       "sourceObjects": 148,
       "roundTripTriangles": 6812
+    },
+    {
+      "id": "rider",
+      "sourceObjects": 214,
+      "roundTripTriangles": 8054
+    },
+    {
+      "id": "horse-cart",
+      "sourceObjects": 397,
+      "roundTripTriangles": 14938
     }
   ],
-  "passed": 74
+  "passed": 76
 }

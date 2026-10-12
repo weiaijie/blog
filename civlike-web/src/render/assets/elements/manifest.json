@@ -1512,6 +1512,46 @@
         ]
       ],
       "glbBytes": 447304
+    },
+    {
+      "id": "rider",
+      "reference": "",
+      "triangles": 8054,
+      "meshObjects": 26,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -0.529,
+          -1.455,
+          0.0
+        ],
+        [
+          0.529,
+          1.1382,
+          2.76
+        ]
+      ],
+      "glbBytes": 703448
+    },
+    {
+      "id": "horse-cart",
+      "reference": "",
+      "triangles": 14938,
+      "meshObjects": 35,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -0.67,
+          -3.055,
+          0.0
+        ],
+        [
+          0.67,
+          1.801,
+          2.2575
+        ]
+      ],
+      "glbBytes": 1156956
     }
   ]
 }

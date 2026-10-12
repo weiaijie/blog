@@ -8,9 +8,30 @@
 
 独立页面提供自由旋转、正面、侧面、俯视、线框、动画暂停和 GLB 下载；已有三视参考的条目同时展示对应图片。此批次没有替换现有 `terrain-world` 地图元素。
 
+### 骑手与双轮马车
+
+当前累计 67 类独立模型、76 个版本，108 类规划剩余 41 类。新增 `rider` 和 `horse-cart`；骑姿、车架及马具为新建几何，共用已有马匹躯干/头部/腿部模型，不另计重复的马或货物。
+
+- 骑手有马鞍、贴合实际躯干表面的鞍垫、肚带、独立马镫踏面、骑靴和握缰姿态；骨盆与鞍位同步，靴底与踏面做实际射线核对。人物采用分件坐姿与上身平衡，不是复用站姿强行穿过马背。
+- 马车为双轮木制货车，有车轴/板簧、前座/脚踏、车辕、胸带、后鞧、辕环、导缰环、牵引横木和四件货箱。轮圈是连续网格，车轮独立滚动。
+- `MountedAssembly` 保存 `mountKind`、`routeProfile=road-145-v1`、`strideMeters`、`cargoSlots`。`mountedHorse` 仅有一匹成年马，复用 `mapElementAnimals.ts` 的腿部 IK，不开启家庭或成长模式。原独立马的成长繁育不受影响。
+- `mapElementMounted.ts` 将前后左右蹄分成四拍相位；支撑相后移速度与 `distance / wheelRadius` 滚轮对应。速度范围 0–1.4 m/s，为原地预览等效速度。骑手/马鞍、车座/车夫保持连接，轻微平衡动作不改变骨盆坐点。
+- `mountAnchor` 标记口衔、手、导环和牵引点；`mountCable` 管状几何每次随这些端点重新计算。导出可能因硬边重排/拆分顶点，驱动按初始位置绑定各圈，不能假定 GLB 顶点顺序等于 Blender 顺序。暂停及零速不重复重建缰绳。
+- 8,054 / 14,938 三角面，约 0.70 / 1.16 MB，专项绘制调用 51 / 75。总宽符合既有公路宽度限制，不代表转弯扫掠、坡道、多人 LOD 或 200 格性能合格。
+- 不含上下马、人物成长、疾驰、马车转向/碰撞/力学、货物库存、城镇运输或地图寻路。不是工程马具或骑术教学模型；通用 GLB 查看器需接入网页驱动才能运动，没有烘焙骑乘剪辑。
+
+结构参考：[Science Museum 双轮马车藏品](https://collection.sciencemuseumgroup.org.uk/objects/co25949)、[British Horse Society 骑手姿态与马镫/缰绳基础](https://www.bhs.org.uk/media/5rijjjt5/introduction-about-the-rider-checklist-guidance.pdf)。只是结构参考，非实物复刻；没有下载第三方网格。
+
+```powershell
+blender --background --factory-startup --python-exit-code 1 --python scripts/blender/map_element_kit.py -- --assets rider horse-cart
+node scripts/verify-map-mounted.mjs
+```
+
+预览：`/?view=map-elements&element=rider` 或 `/?view=map-elements&element=horse-cart`。
+
 ### 运输车辆与机构
 
-当前累计 65 类独立模型、74 个版本，108 类规划中剩余 43 类。新增人力车 `rickshaw`、自行车 `bicycle`、早期汽车 `early-car`、铁路货车厢 `freight-wagon`，均有可编辑 `.blend` 与分件 `.glb`。
+此批完成时为 65 类独立模型、74 个版本。新增人力车 `rickshaw`、自行车 `bicycle`、早期汽车 `early-car`、铁路货车厢 `freight-wagon`，均有可编辑 `.blend` 与分件 `.glb`。
 
 - 人力车有辐条轮、车辕、踏板、座垫/扶手和五根同轴篷架。布面顶点沿铰链扇形折叠，并保留小褶皱；不是整个车篷统一缩放。折叠时更新法线、包围球与包围盒。
 - 自行车有前后三角车架、前叉、座管、车把、曲柄/脚踏、前链盘、后链轮及 56 个运动链节。轮转角为滚动距离/轮半径；曲柄按 2.5:1 比例联动，脚踏反向补偿保持水平，链节按弧长沿闭环运动。

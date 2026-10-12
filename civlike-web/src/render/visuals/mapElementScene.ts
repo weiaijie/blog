@@ -12,6 +12,7 @@ import { createTerrainMotion, defaultTerrainSettings, type TerrainSettings, type
 import { createHumanMotion, defaultHumanSettings, type HumanSettings, type HumanState } from './mapElementPeople'
 import { createRouteMotion, defaultRouteSettings, type RouteSettings, type RouteState } from './mapElementRoutes'
 import { createTransportMotion, defaultTransportSettings, type TransportSettings, type TransportState } from './mapElementTransport'
+import { createMountedMotion, defaultMountedSettings, type MountedSettings, type MountedState } from './mapElementMounted'
 
 export type ElementView = 'perspective' | 'front' | 'side' | 'top'
 export type ElementScene = {
@@ -26,6 +27,7 @@ export type ElementScene = {
   setHumanSettings: (value: HumanSettings) => void
   setRouteSettings: (value: RouteSettings) => void
   setTransportSettings: (value: TransportSettings) => void
+  setMountedSettings: (value: MountedSettings) => void
   destroy: () => void
 }
 
@@ -51,6 +53,7 @@ export function mountMapElement(
   onHuman?: (value: HumanState) => void,
   onRoute?: (value: RouteState) => void,
   onTransport?: (value: TransportState) => void,
+  onMounted?: (value: MountedState) => void,
 ): ElementScene {
   const renderer = new WebGLRenderer({ antialias: true, preserveDrawingBuffer: true })
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
@@ -84,6 +87,8 @@ export function mountMapElement(
   let route:ReturnType<typeof createRouteMotion>
   let transport:ReturnType<typeof createTransportMotion>
   let transportSettings={...defaultTransportSettings}
+  let mounted:ReturnType<typeof createMountedMotion>
+  let mountedSettings={...defaultMountedSettings}
   let routeSettings={...defaultRouteSettings}
   const routeNeighbors:{model:Group;motion:NonNullable<ReturnType<typeof createRouteMotion>>;edge:number}[]=[]
   let terrainSettings=defaultTerrainSettings('grassland')
@@ -193,6 +198,9 @@ export function mountMapElement(
     transport=createTransportMotion(model)
     transport?.setSettings(transportSettings)
     transport?.update(0,false)
+    mounted=createMountedMotion(model)
+    mounted?.setSettings(mountedSettings)
+    mounted?.update(0,false)
     if(route){
       const ports:{edge:number;offset:Vector3}[]=[]
       model.traverse((o)=>{if(typeof o.userData.routePort==='number')ports.push({edge:o.userData.routePort,offset:new Vector3().fromArray(o.userData.neighborOffsetGltf)})})
@@ -214,7 +222,7 @@ export function mountMapElement(
     setView(view)
     host.dataset.loaded = 'true'
     host.dataset.animations = String(gltf.animations.length)
-    onLoad(gltf.animations.length + (field.count || botanical.count || animal || building || terrain || route || transport ? 1 : 0))
+    onLoad(gltf.animations.length + (field.count || botanical.count || animal || building || terrain || route || transport || mounted ? 1 : 0))
   }).catch((error: unknown) => {
     if (!destroyed) onError(error instanceof Error ? error.message : '模型加载失败')
   })
@@ -226,6 +234,11 @@ export function mountMapElement(
     const delta = previousTime ? Math.min((time - previousTime) / 1000, .05) : 0
     previousTime = time
     if (playing) mixer?.update(delta)
+    if(mounted){
+      const state=mounted.update(delta,playing)
+      host.dataset.mounted=JSON.stringify(state)
+      if(time-lastGrowthReport>120){onMounted?.({...state});lastGrowthReport=time}
+    }
     if(transport){
       const state=transport.update(delta,playing)
       host.dataset.transport=JSON.stringify(state)
@@ -281,6 +294,7 @@ export function mountMapElement(
     setTerrainSettings(value) { terrainSettings=value;terrain?.setSettings(value) },
     setHumanSettings(value) { humanSettings=value;human?.setSettings(value) },
     setTransportSettings(value){transportSettings=value;transport?.setSettings(value)},
+    setMountedSettings(value){mountedSettings=value;mounted?.setSettings(value)},
     setRouteSettings(value) {
       const changed=routeSettings.connected!==value.connected
       routeSettings=value;route?.setSettings(value)
@@ -317,6 +331,7 @@ export function mountMapElement(
       delete host.dataset.human
       delete host.dataset.route
       delete host.dataset.transport
+      delete host.dataset.mounted
     },
   }
 }

@@ -46,16 +46,16 @@ function rig(root: Object3D) {
   return { root,parts,legs,coats }
 }
 
-export function createAnimalMotion(model: Group) {
+export function createAnimalMotion(model: Group, mounted = false) {
   let original: Object3D | undefined
-  model.traverse((object) => { if (object.userData.faunaSpecies) original=object })
+  model.traverse((object) => { if (mounted ? object.userData.mountedHorse : object.userData.faunaSpecies) original=object })
   if (!original) return undefined
-  const species = String(original.userData.faunaSpecies)
+  const species = mounted ? 'horse' : String(original.userData.faunaSpecies)
   const bird = species==='chicken' || species==='duck'
   const animals = [rig(original)]
   const template = original.clone(true)
   // A bounded family shares geometry, but each animal owns its changing coat materials.
-  for (let i=0;i<(bird ? 4 : 2);i++) {
+  for (let i=0;i<(mounted ? 0 : bird ? 4 : 2);i++) {
     const clone = template.clone(true)
     const copies = new Map<Material,Material>()
     clone.traverse((object) => {
@@ -72,7 +72,7 @@ export function createAnimalMotion(model: Group) {
   }
   let settings = { ...defaultAnimalSettings }
   let age = 1, elapsed = 0, breeding = 0, nursery = 0
-  const blend = { walk:0,graze:0 }
+  const blend = { walk:mounted ? 1 : 0,graze:0 }
   const state: AnimalState = { age,offspring:0,offspringAge:0,breedingProgress:0,breedingState:'single' }
   const motion = new Quaternion(), angles = new Euler(), scale = new Vector3()
   const unitScale = new Vector3(1,1,1)
@@ -124,7 +124,7 @@ export function createAnimalMotion(model: Group) {
       const { upper,lower,foot } = leg
       const factor = upper.youngScale.y+(1-upper.youngScale.y)*growth
       const a = leg.upperLength*factor, b = leg.lowerLength*factor, height = leg.footHeight*factor
-      const phase = (elapsed*(bird ? 1.9 : 1.15)+leg.index*.5+Math.floor(leg.index/2)*.5+index*.13)%1
+      const phase = (elapsed*(bird ? 1.9 : 1.15)+(mounted ? [0,.5,.25,.75][leg.index] : leg.index*.5+Math.floor(leg.index/2)*.5)+index*.13)%1
       const stride = (bird ? .075 : .19)*factor
       const forward = blend.walk*(phase<.62 ? stride*(1-2*phase/.62) : stride*(-1+2*(phase-.62)/.38))
       const lift = phase<.62 ? 0 : blend.walk*Math.sin((phase-.62)/.38*Math.PI)*(bird ? .048 : .09)*factor
@@ -147,7 +147,7 @@ export function createAnimalMotion(model: Group) {
     setSpread(value: number) { spread=value },
     setSettings(next: AnimalSettings) {
       const wasFamily = settings.family
-      settings = { ...next,age:Math.max(0,Math.min(1,next.age)) }
+      settings = mounted ? {age:1,automatic:false,behavior:'walk',family:false} : { ...next,age:Math.max(0,Math.min(1,next.age)) }
       if (!settings.family || !wasFamily) { breeding=0; nursery=0 }
     },
     update(delta: number, playing: boolean) {

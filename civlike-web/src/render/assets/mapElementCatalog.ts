@@ -20,6 +20,7 @@ export const mapElements = manifest.assets.map((asset) => {
     human: ['farmer','fisher','woodcutter','merchant'].includes(asset.id),
     route: ['dirt-road','stone-road','asphalt-road','rail-track'].includes(asset.id),
     transport: ['rickshaw','bicycle','early-car','freight-wagon'].includes(asset.id),
+    mounted: ['rider','horse-cart'].includes(asset.id),
     building: ['cottage','barn','windmill','watermill','watchtower','castle-keep','castle-gate','castle-wall'].includes(asset.id),
     gate: asset.id==='castle-gate',
     terrain: ['grassland','rolling-hills','rocky-mountain','snow-peak','volcano','lava-field','sand-dunes','desert-oasis'].includes(family),
