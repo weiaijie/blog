@@ -4,6 +4,24 @@ import math
 from mathutils import Vector
 
 
+def build_group(k, root, name, objects, start, end, anchor=(0, 0, 0), tier=1, temporary=False, motion='', axis=(0, 1, 0), rate=1):
+    node = k.pivot(name, anchor, objects)
+    node.parent = root
+    node['buildStart'], node['buildFull'] = start, end
+    node['buildingTier'], node['buildingTemporary'] = tier, temporary
+    node['buildingMotion'] = motion
+    node['motionAxis'] = [axis[0], axis[2], -axis[1]]
+    node['motionRate'] = rate
+    return node
+
+
+def connection(k, root, name, pos, kind):
+    node = k.pivot(name, pos, [])
+    node.parent = root
+    node['connectionKind'] = kind
+    return node
+
+
 def build(k, kind):
     root = k.pivot('BuildingRoot', (0, 0, 0), [])
     root['buildingType'] = kind
@@ -17,20 +35,10 @@ def build(k, kind):
         k.M[name] = mat
 
     def group(name, objects, start, end, anchor=(0, 0, 0), tier=1, temporary=False, motion='', axis=(0, 1, 0), rate=1):
-        node = k.pivot(name, anchor, objects)
-        node.parent = root
-        node['buildStart'], node['buildFull'] = start, end
-        node['buildingTier'], node['buildingTemporary'] = tier, temporary
-        node['buildingMotion'] = motion
-        # Runtime extras are in the exported glTF Y-up basis.
-        node['motionAxis'] = [axis[0], axis[2], -axis[1]]
-        node['motionRate'] = rate
-        return node
+        return build_group(k, root, name, objects, start, end, anchor, tier, temporary, motion, axis, rate)
 
     def socket(name, pos, kind):
-        node = k.pivot(name, pos, [])
-        node.parent = root
-        node['connectionKind'] = kind
+        return connection(k, root, name, pos, kind)
 
     def foundation(w, d):
         parts = [k.box('foundation_slab', (0, 0, .11), (w, d, .22), 'stone', .03)]

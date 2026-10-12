@@ -10,16 +10,21 @@
 
 ### 建筑施工样板
 
-当前 26 类模型、33 个版本，规划 108 个独立资产。新增村舍、谷仓、风车磨坊、水车磨坊，可用 `/?view=map-elements&element=watermill` 预览。
+当前 30 类模型、37 个版本，规划 108 个独立资产。乡村建筑有村舍、谷仓、风车磨坊、水车磨坊；防御建筑新增瞭望塔、城堡主楼、城门、城墙。可用 `/?view=map-elements&element=castle-gate` 预览。
 
 - 地基、墙层、木构架/椽架、分层屋瓦、窗框、门扇和附件独立建模。按施工顺序安装，根节点不统一缩放；临时脚手架在竣工时隐藏。
 - 支持施工滑条、约 30 秒自动施工、暂停、回退、功能运行与速度。风车帆叶、主轴、水轮、门扇和几何水流分别有转轴或流向，未竣工时不运转。
 - 升级附件可切换储物棚、平台，并受施工进度控制；暂不含跨时代升级链、独立升级计时、资源成本或居民调度。
 - 入口与进/出水锚点可供后续地图装配使用，尚未接入实际道路水体。门洞射线与水流方向有回归测试。
 - GLB 包含施工/临时/升级零件及节点元数据，没有内嵌施工剪辑；通用查看器可能显示所有部件。网页 `mapElementBuildings.ts` 控制当前阶段可见性与运动。
+- 防御建筑有分层石砌、拱券、城垛、巡逻道、木楼/木棚与独立旗帜。旗杆边缘固定，布面使用分段顶点波动，不是刚体整片旋转，也不是物理布料模拟。
+- 城门可控制通道开闭：先下降吊桥，再提升闸门；关闭时反向执行，拉索上端保持固定。暂停、功能开关、运行速度与施工状态共同控制机构。
+- 城墙与城门墙端保存相反法向、同一断面 `curtain-3.2`、3.2 米巡逻道和 1.2 米墙厚。射线检查开放门洞与墙段端部，但尚未完成地图实际组合、塔楼内部楼梯或寻路验收。
+- 新防御建筑为 10,910–20,322 三角面，使用既定近景样板 25,000 三角面 / 2.5 MB 上限；不能据此批量铺满地图，仍需 LOD 与实例化。
 
 ```powershell
 blender --background --factory-startup --python-exit-code 1 --python scripts/blender/map_element_kit.py -- --assets cottage barn windmill watermill
+blender --background --factory-startup --python-exit-code 1 --python scripts/blender/map_element_kit.py -- --assets watchtower castle-keep castle-gate castle-wall
 node scripts/verify-map-buildings.mjs
 ```
 

@@ -20,6 +20,10 @@ async function shot(name,fullPage=false) {
   }
 }
 async function state() { return JSON.parse(await page.locator('.element-stage').getAttribute('data-building')) }
+async function settle(progress) {
+  await page.waitForFunction((target) => Math.abs(JSON.parse(document.querySelector('.element-stage').dataset.building).progress-target)<.00001,progress,{ timeout:15000 })
+  await page.waitForTimeout(150)
+}
 async function pixels() {
   return page.locator('.element-stage canvas').evaluate((canvas) => {
     const gl=canvas.getContext('webgl2'),w=gl.drawingBufferWidth,h=gl.drawingBufferHeight,data=new Uint8Array(w*h*4)
@@ -36,7 +40,7 @@ async function pixels() {
   })
 }
 try {
-  for(const id of ['cottage','barn','windmill','watermill']) {
+  for(const id of ['cottage','barn','windmill','watermill','watchtower','castle-keep','castle-gate','castle-wall']) {
     await page.setViewportSize({ width:1440,height:1000 })
     await page.goto(`http://127.0.0.1:5173/?view=map-elements&element=${id}`)
     await page.waitForSelector('.element-stage[data-loaded="true"][data-building]')
@@ -44,7 +48,7 @@ try {
     const stages=[]
     for(const progress of [0,30,52,78,100]) {
       await page.getByLabel('施工进度',{ exact:true }).fill(String(progress))
-      await page.waitForTimeout(1600)
+      await settle(progress/100)
       const p=await pixels(),s=await state()
       assert(p.coverage>.007 && p.framed,`${id}: stage ${progress} blank/clipped`)
       assert(Math.abs(s.progress-progress/100)<.005,`${id}: slider not applied`)
@@ -102,7 +106,7 @@ try {
       await shot('watermill-auto-completed')
     }
     await page.getByLabel('施工进度',{ exact:true }).fill('100')
-    await page.waitForTimeout(1600)
+    await settle(1)
     const drawCalls=Number(await page.locator('.element-stage').getAttribute('data-draw-calls'))
     assert(drawCalls<450,`${id}: draw-call budget`)
     await page.setViewportSize({ width:390,height:844 })
@@ -111,6 +115,22 @@ try {
     assert(mobile.coverage>.007 && mobile.framed,`${id}: mobile clipped/blank`)
     assert(await page.evaluate(() => document.documentElement.scrollWidth<=innerWidth),`${id}: mobile horizontal overflow`)
     await shot(`${id}-mobile`,true)
+    if (id==='castle-gate') {
+      await page.getByLabel('开启通道',{ exact:true }).check()
+      await page.waitForFunction(() => JSON.parse(document.querySelector('.element-stage').dataset.building).access===1,{},{ timeout:15000 })
+      await page.getByRole('button',{ name:'暂停动画',exact:true }).click()
+      await page.waitForTimeout(200)
+      const open=await pixels()
+      assert(open.framed && open.hash!==mobile.hash,'Gate did not open or bridge clipped on mobile')
+      await shot('castle-gate-open-mobile',true)
+      await page.setViewportSize({ width:1440,height:1000 })
+      await page.waitForTimeout(200)
+      assert((await pixels()).framed,'Open bridge clipped on desktop')
+      await shot('castle-gate-open')
+      await page.getByLabel('开启通道',{ exact:true }).uncheck()
+      await page.waitForFunction(() => JSON.parse(document.querySelector('.element-stage').dataset.building).access===0,{},{ timeout:15000 })
+      assert(await page.getByText('已关闭',{ exact:true }).isVisible())
+    }
     results.push({ id,stages,upgraded,mobile,drawCalls })
     console.log(`BUILDING_VERIFIED ${id}`)
   }

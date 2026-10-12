@@ -75,6 +75,7 @@ export function mountMapElement(
   let view: ElementView = 'perspective'
   let size = 4
   let singleSize = 4
+  let frameRatio = .68
   let frame = 0
   let previousTime = 0
   const center = new Vector3()
@@ -84,8 +85,8 @@ export function mountMapElement(
     const height = Math.max(1, host.clientHeight)
     renderer.setSize(width, height, false)
     const aspect = width / height
-    // Square ground tiles need room for their diagonal in narrow viewports.
-    const halfHeight = size * (aspect < 1.2 ? .76 : .68) / Math.min(aspect, 1)
+    // Cover the full bounding sphere so rotating wide, tall assets cannot clip their corners.
+    const halfHeight = size * Math.max(frameRatio, aspect < 1.2 ? .76 : .68) / Math.min(aspect, 1)
     camera.left = -halfHeight * aspect
     camera.right = halfHeight * aspect
     camera.top = halfHeight
@@ -127,9 +128,16 @@ export function mountMapElement(
     model = gltf.scene
     scene.add(model)
     const bounds = new Box3().setFromObject(model)
+    model.traverse((node) => {
+      if (Array.isArray(node.userData.animationBoundsMin) && Array.isArray(node.userData.animationBoundsMax)) {
+        bounds.expandByPoint(new Vector3().fromArray(node.userData.animationBoundsMin).applyMatrix4(node.matrixWorld))
+        bounds.expandByPoint(new Vector3().fromArray(node.userData.animationBoundsMax).applyMatrix4(node.matrixWorld))
+      }
+    })
     bounds.getCenter(center)
     const extent = bounds.getSize(new Vector3())
     size = Math.max(extent.x, extent.y, extent.z, .1)
+    frameRatio = Math.max(.68, extent.length() * .55 / size)
     singleSize = size
     building = createBuildingMotion(model)
     building?.setSettings(buildingSettings)

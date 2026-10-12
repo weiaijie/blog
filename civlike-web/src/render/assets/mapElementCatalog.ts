@@ -13,7 +13,8 @@ export const mapElements = manifest.assets.map((asset) => ({
   category: labels.get(asset.id.replace(/-v\d+$/, ''))?.category ?? '其他',
   lifecycle: botanicalFamilies.has(asset.id.replace(/-v\d+$/, '')) && (asset.id === 'berry-shrub-v4' || !asset.id.startsWith('berry-shrub')),
   animal: ['sheep-v5','cow','horse','chicken','goat','pig','duck','deer'].includes(asset.id),
-  building: ['cottage','barn','windmill','watermill'].includes(asset.id),
+  building: ['cottage','barn','windmill','watermill','watchtower','castle-keep','castle-gate','castle-wall'].includes(asset.id),
+  gate: asset.id==='castle-gate',
   url: models[`./elements/${asset.id}.glb`],
   referenceUrl: references[`../../../design/asset-orthographics-20261012-expanded/${asset.reference}`],
 }))

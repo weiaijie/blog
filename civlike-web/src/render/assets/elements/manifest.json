@@ -684,6 +684,86 @@
         ]
       ],
       "glbBytes": 683016
+    },
+    {
+      "id": "watchtower",
+      "reference": "",
+      "triangles": 10910,
+      "meshObjects": 17,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.55,
+          -2.8477,
+          0.0
+        ],
+        [
+          1.55,
+          1.55,
+          6.45
+        ]
+      ],
+      "glbBytes": 807896
+    },
+    {
+      "id": "castle-keep",
+      "reference": "",
+      "triangles": 20322,
+      "meshObjects": 54,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -2.95,
+          -2.6237,
+          0.0
+        ],
+        [
+          2.95,
+          2.6237,
+          6.67
+        ]
+      ],
+      "glbBytes": 1451912
+    },
+    {
+      "id": "castle-gate",
+      "reference": "",
+      "triangles": 15230,
+      "meshObjects": 42,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -2.8,
+          -1.3375,
+          0.0
+        ],
+        [
+          2.8,
+          1.3,
+          6.78
+        ]
+      ],
+      "glbBytes": 1122776
+    },
+    {
+      "id": "castle-wall",
+      "reference": "",
+      "triangles": 13572,
+      "meshObjects": 16,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -2.0,
+          -1.17,
+          0.0
+        ],
+        [
+          2.0,
+          0.725,
+          5.07
+        ]
+      ],
+      "glbBytes": 997488
     }
   ]
 }

@@ -18,6 +18,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import map_element_botany
 import map_element_fauna
 import map_element_buildings
+import map_element_fortifications
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / 'src/render/assets/elements'
@@ -738,6 +739,10 @@ BUILDERS = {
     'barn': (lambda: map_element_buildings.build(sys.modules[__name__], 'barn'), ''),
     'windmill': (lambda: map_element_buildings.build(sys.modules[__name__], 'windmill'), ''),
     'watermill': (lambda: map_element_buildings.build(sys.modules[__name__], 'watermill'), ''),
+    'watchtower': (lambda: map_element_fortifications.build(sys.modules[__name__], 'watchtower'), ''),
+    'castle-keep': (lambda: map_element_fortifications.build(sys.modules[__name__], 'castle-keep'), ''),
+    'castle-gate': (lambda: map_element_fortifications.build(sys.modules[__name__], 'castle-gate'), ''),
+    'castle-wall': (lambda: map_element_fortifications.build(sys.modules[__name__], 'castle-wall'), ''),
 }
 
 

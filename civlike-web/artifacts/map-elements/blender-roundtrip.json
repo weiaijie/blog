@@ -164,7 +164,27 @@
       "id": "watermill",
       "sourceObjects": 357,
       "roundTripTriangles": 9096
+    },
+    {
+      "id": "watchtower",
+      "sourceObjects": 274,
+      "roundTripTriangles": 10910
+    },
+    {
+      "id": "castle-keep",
+      "sourceObjects": 762,
+      "roundTripTriangles": 20322
+    },
+    {
+      "id": "castle-gate",
+      "sourceObjects": 536,
+      "roundTripTriangles": 15230
+    },
+    {
+      "id": "castle-wall",
+      "sourceObjects": 330,
+      "roundTripTriangles": 13572
     }
   ],
-  "passed": 33
+  "passed": 37
 }
