@@ -364,6 +364,86 @@
         ]
       ],
       "glbBytes": 1223388
+    },
+    {
+      "id": "berry-shrub-v4",
+      "reference": "27-berry-shrub.png",
+      "triangles": 20642,
+      "meshObjects": 75,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.75,
+          -1.75,
+          0.0
+        ],
+        [
+          1.75,
+          1.75,
+          1.2289
+        ]
+      ],
+      "glbBytes": 2048860
+    },
+    {
+      "id": "apple-tree",
+      "reference": "",
+      "triangles": 20130,
+      "meshObjects": 75,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.75,
+          -1.75,
+          0.0
+        ],
+        [
+          1.75,
+          1.75,
+          2.7859
+        ]
+      ],
+      "glbBytes": 1926836
+    },
+    {
+      "id": "pumpkin-patch",
+      "reference": "",
+      "triangles": 15710,
+      "meshObjects": 60,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.75,
+          -1.75,
+          0.0
+        ],
+        [
+          1.75,
+          1.75,
+          0.6164
+        ]
+      ],
+      "glbBytes": 1515524
+    },
+    {
+      "id": "sunflower-field",
+      "reference": "",
+      "triangles": 18518,
+      "meshObjects": 102,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.75,
+          -1.75,
+          0.0
+        ],
+        [
+          1.75,
+          1.75,
+          1.6597
+        ]
+      ],
+      "glbBytes": 2048236
     }
   ]
 }

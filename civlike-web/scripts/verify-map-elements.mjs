@@ -54,12 +54,12 @@ try {
     await page.goto(`${base}/?view=map-elements&element=${asset.id}&revision=${asset.id.match(/-v(\d+)$/)?.[1] ?? 1}`)
     await page.waitForSelector(`.element-stage[data-loaded="true"][data-asset="${asset.id}"]`, { timeout: 60000 })
     await page.waitForTimeout(450)
-    assert(await page.locator('.element-inspector img').evaluate((img) => img.complete && img.naturalWidth > 0), 'Reference did not load')
+    if (asset.reference) assert(await page.locator('.element-inspector img').evaluate((img) => img.complete && img.naturalWidth > 0), 'Reference did not load')
     const initial = await pixels()
     assert(initial.coverage > .007, `${asset.id}: blank canvas`)
     assert(initial.bounds[0] > 0 && initial.bounds[1] > 0 && initial.bounds[2] < initial.width - 1 && initial.bounds[3] < initial.height - 1, `${asset.id}: clipped model`)
     let animated = false
-    if (asset.animatedPivots.length || asset.id.endsWith('-v3')) {
+    if (asset.animatedPivots.length || asset.id.endsWith('-v3') || await page.locator('.element-stage').getAttribute('data-organs')) {
       await page.waitForTimeout(440)
       animated = (await pixels()).hash !== initial.hash
       assert(animated, `${asset.id}: static animation`)
@@ -166,9 +166,57 @@ try {
   const livingMobile = await pixels()
   assert(livingMobile.bounds[0] > 0 && livingMobile.bounds[2] < livingMobile.width - 1, 'Living field clipped on mobile')
   await screenshot('living-field-mobile', true)
+  const phenology = []
+  await page.setViewportSize({ width: 1440, height: 1000 })
+  for (const id of ['berry-shrub-v4','apple-tree','pumpkin-patch','sunflower-field']) {
+    await page.goto(`${base}/?view=map-elements&element=${id}`)
+    await page.waitForSelector('.element-stage[data-loaded="true"][data-organs]')
+    await page.getByRole('button', { name:'暂停动画', exact:true }).click()
+    const states = []
+    for (const value of [5,49,82,100]) {
+      await page.getByLabel('生长阶段', { exact:true }).fill(String(value))
+      await page.waitForTimeout(1700)
+      const organs = JSON.parse(await page.locator('.element-stage').getAttribute('data-organs'))
+      const pixel = await pixels()
+      states.push({ value, organs, hash:pixel.hash })
+      await screenshot(`${id}-stage-${value}`)
+      if (value === 5) assert(organs.shoot > 0 && !organs.fruit && !organs.blossom, `${id}: not a seedling`)
+      if (value === 49) assert(organs.blossom > 0 && !organs.fruit, `${id}: flowers missing`)
+      if (value === 82) assert(organs[id === 'sunflower-field' ? 'seed' : 'fruit'] > 0, `${id}: fruit/seeds missing`)
+      if (value === 100) assert(!organs.blossom, `${id}: petals persisted into senescence`)
+    }
+    assert.equal(new Set(states.map((state) => state.hash)).size,4, `${id}: visually identical life stages`)
+    await page.getByLabel('生长阶段', { exact:true }).fill('82')
+    await page.waitForTimeout(1700)
+    for (const view of ['正面','侧面','俯视']) {
+      await page.getByRole('button', { name:view, exact:true }).click()
+      await page.waitForTimeout(250)
+      const pixel = await pixels()
+      assert(pixel.coverage>.007 && pixel.bounds[0]>0 && pixel.bounds[2]<pixel.width-1, `${id}: ${view} blank/clipped`)
+    }
+    await page.getByRole('button', { name:'自由视角', exact:true }).click()
+    await page.setViewportSize({ width:390,height:844 })
+    await page.getByLabel('生长阶段', { exact:true }).fill('82')
+    await page.waitForTimeout(1700)
+    const pixel = await pixels()
+    assert(pixel.coverage>.007 && pixel.bounds[0]>0 && pixel.bounds[2]<pixel.width-1, `${id}: mobile blank/clipped`)
+    assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `${id}: mobile overflow`)
+    await screenshot(`${id}-mobile`,true)
+    await page.setViewportSize({ width:1440,height:1000 })
+    phenology.push({ id,states })
+  }
+  await page.getByRole('button', { name:'资产进度', exact:true }).click()
+  assert.equal(await page.locator('.element-roadmap li').count(),108)
+  assert.equal(await page.locator('.element-roadmap li button:enabled').count(),15)
+  await screenshot('roadmap')
+  await page.setViewportSize({ width:390,height:844 })
+  assert(await page.evaluate(() => document.querySelector('.element-roadmap').scrollWidth <= innerWidth), 'Mobile roadmap overflow')
+  await screenshot('roadmap-mobile',true)
+  await page.getByRole('button', { name:'关闭资产进度', exact:true }).click()
   assert.deepEqual(errors, [], 'Browser errors')
   await writeFile(`${output}/verification.json`, JSON.stringify({ results, mobile, errors, checks: [`${results.length} models`, 'reference loading', 'canvas pixels', 'framing', 'animations', 'pause', 'three views', 'wireframe', 'mobile switching', 'original/refined switching', 'revision URL reload', 'revision download', 'orbit interaction', 'growth geometry', 'automatic growth', 'calm/wind', 'living mobile', 'draw call budget'] }, null, 2) + '\n')
-  console.log(JSON.stringify({ models: results.length, animated: results.filter((r) => r.animated).length, screenshotWriteRetries, errors }))
+  await writeFile(`${output}/phenology.json`, JSON.stringify(phenology,null,2)+'\n')
+  console.log(JSON.stringify({ models: results.length, animated: results.filter((r) => r.animated).length, botanical:phenology.length, screenshotWriteRetries, errors }))
 } finally {
   await browser.close()
 }

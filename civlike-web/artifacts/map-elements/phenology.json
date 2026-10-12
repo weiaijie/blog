@@ -1,0 +1,162 @@
+[
+  {
+    "id": "berry-shrub-v4",
+    "states": [
+      {
+        "value": 5,
+        "organs": {
+          "shoot": 1
+        },
+        "hash": 1186972996
+      },
+      {
+        "value": 49,
+        "organs": {
+          "structure": 9,
+          "blossom": 8,
+          "foliage": 8
+        },
+        "hash": 1544833989
+      },
+      {
+        "value": 82,
+        "organs": {
+          "structure": 9,
+          "foliage": 8,
+          "fruit": 8
+        },
+        "hash": 4293539811
+      },
+      {
+        "value": 100,
+        "organs": {
+          "structure": 9,
+          "foliage": 8,
+          "fruit": 8,
+          "litter": 8
+        },
+        "hash": 2021832956
+      }
+    ]
+  },
+  {
+    "id": "apple-tree",
+    "states": [
+      {
+        "value": 5,
+        "organs": {
+          "shoot": 1
+        },
+        "hash": 3734083946
+      },
+      {
+        "value": 49,
+        "organs": {
+          "structure": 9,
+          "blossom": 8,
+          "foliage": 8
+        },
+        "hash": 2863543908
+      },
+      {
+        "value": 82,
+        "organs": {
+          "structure": 9,
+          "foliage": 8,
+          "fruit": 8
+        },
+        "hash": 2401514826
+      },
+      {
+        "value": 100,
+        "organs": {
+          "structure": 9,
+          "foliage": 8,
+          "fruit": 8,
+          "litter": 8
+        },
+        "hash": 1960406742
+      }
+    ]
+  },
+  {
+    "id": "pumpkin-patch",
+    "states": [
+      {
+        "value": 5,
+        "organs": {
+          "shoot": 3
+        },
+        "hash": 1418814680
+      },
+      {
+        "value": 49,
+        "organs": {
+          "structure": 3,
+          "foliage": 15,
+          "blossom": 9
+        },
+        "hash": 4041584598
+      },
+      {
+        "value": 82,
+        "organs": {
+          "structure": 3,
+          "foliage": 15,
+          "fruit": 9
+        },
+        "hash": 2333578897
+      },
+      {
+        "value": 100,
+        "organs": {
+          "structure": 3,
+          "foliage": 15,
+          "fruit": 9
+        },
+        "hash": 849770825
+      }
+    ]
+  },
+  {
+    "id": "sunflower-field",
+    "states": [
+      {
+        "value": 5,
+        "organs": {
+          "shoot": 9
+        },
+        "hash": 133941619
+      },
+      {
+        "value": 49,
+        "organs": {
+          "structure": 9,
+          "foliage": 36,
+          "bud": 9,
+          "blossom": 9
+        },
+        "hash": 837884328
+      },
+      {
+        "value": 82,
+        "organs": {
+          "structure": 9,
+          "foliage": 36,
+          "blossom": 9,
+          "seed": 9
+        },
+        "hash": 2235912959
+      },
+      {
+        "value": 100,
+        "organs": {
+          "structure": 9,
+          "foliage": 36,
+          "seed": 9
+        },
+        "hash": 633220260
+      }
+    ]
+  }
+]

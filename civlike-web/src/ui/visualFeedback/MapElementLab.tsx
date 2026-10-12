@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
-import { Box, Download, Pause, Play, RotateCcw, Shuffle, Sprout } from 'lucide-react'
+import { Box, Download, ListChecks, Pause, Play, RotateCcw, Shuffle, Sprout, X } from 'lucide-react'
 import { elementVersionLabel, initialMapElement, mapElementLibrary, mapElements, type MapElement } from '../../render/assets/mapElementCatalog'
 import { mountMapElement, type ElementScene, type ElementView } from '../../render/visuals/mapElementScene'
 import { defaultFieldSettings, type FieldSettings } from '../../render/visuals/mapElementGrowth'
+import { botanicalStage } from '../../render/visuals/mapElementLifecycle'
+import { mapElementCategories, mapElementRoadmap } from '../../render/assets/mapElementRoadmap'
 import './mapElementLab.css'
 
 const views: [ElementView, string][] = [['perspective', '自由视角'], ['front', '正面'], ['side', '侧面'], ['top', '俯视']]
@@ -10,6 +12,7 @@ const views: [ElementView, string][] = [['perspective', '自由视角'], ['front
 export function MapElementLab() {
   const [selected, setSelected] = useState(() => initialMapElement(location.search))
   const [view, setView] = useState<ElementView>('perspective')
+  const roadmap = useRef<HTMLDialogElement>(null)
   useEffect(() => {
     const onPopState = () => setSelected(initialMapElement(location.search))
     window.addEventListener('popstate', onPopState)
@@ -23,15 +26,22 @@ export function MapElementLab() {
     history.replaceState(null, '', url)
   }
   return <main className="element-lab">
-    <header className="element-header"><h1>地图模型库</h1><span>C 风格 / 第一批</span><a href="?view=terrain-world">返回地图</a></header>
+    <header className="element-header"><h1>地图模型库</h1><span>{mapElementLibrary.length} / {mapElementRoadmap.length} 项已建模</span><button className="element-roadmap-toggle" title="资产进度" aria-label="资产进度" onClick={() => roadmap.current?.showModal()}><ListChecks size={18} /></button><a href="?view=terrain-world">返回地图</a></header>
     <nav className="element-library" aria-label="模型列表">
       <select aria-label="选择模型" value={selected.family} onChange={(event) => select(mapElementLibrary.find((a) => a.family === event.target.value)!)}>
         {mapElementLibrary.map((asset) => <option key={asset.family} value={asset.family}>{asset.label}{asset.revision > 1 ? ` · ${elementVersionLabel(asset.revision)}` : ''}</option>)}
       </select>
-      <div className="element-list">{mapElementLibrary.map((asset) => <button key={asset.family} aria-pressed={selected.family === asset.family} onClick={() => select(asset)}><span>{asset.label}</span><small>{asset.revision > 1 ? '已更新' : asset.category}</small></button>)}</div>
+      <div className="element-list">{mapElementLibrary.map((asset) => <button key={asset.family} aria-pressed={selected.family === asset.family} onClick={() => select(asset)}><span>{asset.label}</span><small>{asset.lifecycle ? '物候' : asset.revision > 1 ? '已更新' : asset.category}</small></button>)}</div>
       <p>{mapElementLibrary.length} 类模型 · {mapElements.length} 个版本</p>
     </nav>
     <ElementPreview key={selected.id} asset={selected} select={select} view={view} setView={setView} />
+    <dialog ref={roadmap} className="element-roadmap" aria-labelledby="roadmap-title">
+      <header><h2 id="roadmap-title">资产进度</h2><span>{mapElementLibrary.length} / {mapElementRoadmap.length} 已建模</span><button title="关闭" aria-label="关闭资产进度" onClick={() => roadmap.current?.close()}><X size={20} /></button></header>
+      <div className="element-roadmap-body">{mapElementCategories.map((category) => <section key={category}><h3>{category}</h3><ul>{mapElementRoadmap.filter((item) => item.category === category).map((item) => {
+        const asset = mapElementLibrary.find((candidate) => candidate.family === item.id)
+        return <li key={item.id}><button disabled={!asset} onClick={() => { if (asset) select(asset); roadmap.current?.close() }}>{item.label}</button><small>{!asset ? '待制作' : asset.lifecycle ? '物候样板' : asset.revision >= 3 ? '自然动态' : '基础模型 · 待细化'}</small></li>
+      })}</ul></section>)}</div>
+    </dialog>
   </main>
 }
 
@@ -40,7 +50,7 @@ function ElementPreview({ asset, select, view, setView }: {
   view: ElementView; setView: (view: ElementView) => void
 }) {
   const versions = mapElements.filter((candidate) => candidate.family === asset.family)
-  const living = asset.revision >= 3
+  const living = asset.revision >= 3 || asset.lifecycle
   const growing = living && asset.family !== 'plowed-field'
   const host = useRef<HTMLDivElement>(null)
   const scene = useRef<ElementScene>()
@@ -50,7 +60,7 @@ function ElementPreview({ asset, select, view, setView }: {
   const [hasAnimation, setHasAnimation] = useState(false)
   const [settings, setSettings] = useState<FieldSettings>({ ...defaultFieldSettings })
   const [progress, setProgress] = useState(defaultFieldSettings.growth)
-  const stage = progress < .08 ? '播种' : progress < .32 ? '幼苗' : progress < .62 ? '生长' : progress < .92 ? (asset.family === 'wheat-field' ? '抽穗' : '结球') : '成熟'
+  const stage = asset.lifecycle ? botanicalStage(progress, asset.family) : progress < .08 ? '播种' : progress < .32 ? '幼苗' : progress < .62 ? '生长' : progress < .92 ? (asset.family === 'wheat-field' ? '抽穗' : '结球') : '成熟'
   function updateField(patch: Partial<FieldSettings>) {
     setSettings((previous) => ({ ...previous, growth: previous.automatic ? progress : previous.growth, ...patch }))
   }
@@ -84,7 +94,7 @@ function ElementPreview({ asset, select, view, setView }: {
           {growing && <div className="element-growth-actions"><label><input type="checkbox" checked={settings.automatic} onChange={(event) => { updateField({ automatic: event.target.checked, growth: progress >= .99 ? .02 : progress }); if (event.target.checked) { setPlaying(true); scene.current?.setPlaying(true) } }} />自动生长</label><button title="重新播种" aria-label="重新播种" onClick={() => updateField({ growth: 0, automatic: false })}><Sprout size={17} /></button><button title="随机长势" aria-label="随机长势" onClick={() => updateField({ seed: settings.seed + 1 })}><Shuffle size={17} /></button></div>}
         </div>}
       </div>
-      <figure><a href={asset.referenceUrl} target="_blank" rel="noreferrer"><img src={asset.referenceUrl} alt={`${asset.label}三视参考图`} /></a><figcaption>设计参考</figcaption></figure>
+      {asset.referenceUrl ? <figure><a href={asset.referenceUrl} target="_blank" rel="noreferrer"><img src={asset.referenceUrl} alt={`${asset.label}三视参考图`} /></a><figcaption>设计参考</figcaption></figure> : <div className="element-phenology" aria-label="物候阶段">{[.05,.25,.47,.65,.81,.97].map((value) => <button key={value} aria-pressed={Math.abs(progress-value)<.08} onClick={() => updateField({ growth: value, automatic: false })}>{botanicalStage(value, asset.family)}</button>)}</div>}
     </aside>
   </section>
 }

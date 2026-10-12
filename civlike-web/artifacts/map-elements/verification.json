@@ -62,8 +62,8 @@
     },
     {
       "id": "fishing-boat",
-      "hash": 4125630717,
-      "coverage": 0.06180006115506632,
+      "hash": 1235344566,
+      "coverage": 0.06179050567595459,
       "bounds": [
         400,
         251,
@@ -77,13 +77,13 @@
     },
     {
       "id": "river-fish",
-      "hash": 1395441799,
-      "coverage": 0.04670240415854451,
+      "hash": 820306746,
+      "coverage": 0.046688070939876924,
       "bounds": [
         444,
         204,
         724,
-        496
+        498
       ],
       "width": 1224,
       "height": 684,
@@ -92,8 +92,8 @@
     },
     {
       "id": "sheep",
-      "hash": 4042899556,
-      "coverage": 0.09818254787295035,
+      "hash": 1195673921,
+      "coverage": 0.09817299239383863,
       "bounds": [
         412,
         113,
@@ -137,13 +137,13 @@
     },
     {
       "id": "reeds",
-      "hash": 270482411,
-      "coverage": 0.03284695944654665,
+      "hash": 2750982760,
+      "coverage": 0.0329520697167756,
       "bounds": [
         536,
         95,
         780,
-        576
+        575
       ],
       "width": 1224,
       "height": 684,
@@ -167,8 +167,8 @@
     },
     {
       "id": "handcart",
-      "hash": 3815323688,
-      "coverage": 0.06760501471543784,
+      "hash": 3408392210,
+      "coverage": 0.06759545923632611,
       "bounds": [
         380,
         211,
@@ -212,8 +212,8 @@
     },
     {
       "id": "plowed-field-v3",
-      "hash": 3598639676,
-      "coverage": 0.11211328976034858,
+      "hash": 2072510579,
+      "coverage": 0.1121078431372549,
       "bounds": [
         304,
         160,
@@ -227,8 +227,8 @@
     },
     {
       "id": "wheat-field-v3",
-      "hash": 224708490,
-      "coverage": 0.1292483660130719,
+      "hash": 1451637863,
+      "coverage": 0.1292538126361656,
       "bounds": [
         304,
         109,
@@ -242,8 +242,8 @@
     },
     {
       "id": "vegetable-field-v3",
-      "hash": 161777011,
-      "coverage": 0.11213507625272331,
+      "hash": 862229852,
+      "coverage": 0.112140522875817,
       "bounds": [
         304,
         147,
@@ -254,11 +254,71 @@
       "height": 600,
       "animated": true,
       "drawCalls": 77
+    },
+    {
+      "id": "berry-shrub-v4",
+      "hash": 3338757627,
+      "coverage": 0.11678649237472767,
+      "bounds": [
+        304,
+        92,
+        920,
+        372
+      ],
+      "width": 1224,
+      "height": 600,
+      "animated": true,
+      "drawCalls": 76
+    },
+    {
+      "id": "apple-tree",
+      "hash": 1042621355,
+      "coverage": 0.1564161220043573,
+      "bounds": [
+        304,
+        9,
+        920,
+        471
+      ],
+      "width": 1224,
+      "height": 600,
+      "animated": true,
+      "drawCalls": 92
+    },
+    {
+      "id": "pumpkin-patch",
+      "hash": 1924362448,
+      "coverage": 0.11211873638344226,
+      "bounds": [
+        304,
+        148,
+        920,
+        402
+      ],
+      "width": 1224,
+      "height": 600,
+      "animated": true,
+      "drawCalls": 68
+    },
+    {
+      "id": "sunflower-field",
+      "hash": 3927213799,
+      "coverage": 0.12769063180827886,
+      "bounds": [
+        304,
+        79,
+        920,
+        434
+      ],
+      "width": 1224,
+      "height": 600,
+      "animated": true,
+      "drawCalls": 95
     }
   ],
   "mobile": {
-    "hash": 2238152146,
-    "coverage": 0.13086691086691088,
+    "hash": 2358837751,
+    "coverage": 0.1308913308913309,
     "bounds": [
       94,
       93,
@@ -270,7 +330,7 @@
   },
   "errors": [],
   "checks": [
-    "17 models",
+    "21 models",
     "reference loading",
     "canvas pixels",
     "framing",

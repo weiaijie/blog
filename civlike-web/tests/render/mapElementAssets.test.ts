@@ -1,12 +1,16 @@
 import { readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 import manifest from '../../src/render/assets/elements/manifest.json'
+import { mapElementRoadmap } from '../../src/render/assets/mapElementRoadmap'
 
 describe('C-style Blender element kit', () => {
-  it('has twelve asset families and five refined comparison models', () => {
-    expect(manifest.assets).toHaveLength(17)
-    expect(new Set(manifest.assets.map((a) => a.id)).size).toBe(17)
-    expect(new Set(manifest.assets.map((a) => a.id.replace(/-v\d+$/, ''))).size).toBe(12)
+  it('counts modeled families separately from roadmap entries and revisions', () => {
+    expect(manifest.assets).toHaveLength(21)
+    expect(new Set(manifest.assets.map((a) => a.id)).size).toBe(21)
+    expect(new Set(manifest.assets.map((a) => a.id.replace(/-v\d+$/, ''))).size).toBe(15)
+    expect(mapElementRoadmap).toHaveLength(108)
+    expect(new Set(mapElementRoadmap.map((a) => a.id)).size).toBe(108)
+    for (const asset of manifest.assets) expect(mapElementRoadmap.some((a) => a.id === asset.id.replace(/-v\d+$/, ''))).toBe(true)
     for (const id of ['plowed-field', 'wheat-field']) {
       const before = readFileSync(new URL(`../../src/render/assets/elements/${id}.glb`, import.meta.url))
       const after = readFileSync(new URL(`../../src/render/assets/elements/${id}-v2.glb`, import.meta.url))
@@ -24,8 +28,17 @@ describe('C-style Blender element kit', () => {
       expect(json.meshes.length).toBeGreaterThan(0)
       expect(asset.triangles).toBeGreaterThan(100)
       const living = asset.id.endsWith('-v3')
-      expect(asset.triangles).toBeLessThan(living ? 25000 : 15000)
-      expect(bytes.length).toBeLessThan(living ? 2_500_000 : 1_500_000)
+      const botanical = json.nodes.some((node: { extras?: { lifeRole?: string } }) => node.extras?.lifeRole)
+      expect(asset.triangles).toBeLessThan(living || botanical ? 25000 : 15000)
+      expect(bytes.length).toBeLessThan(living || botanical ? 2_500_000 : 1_500_000)
+      if (botanical) {
+        const roles = new Set(json.nodes.map((node: { extras?: { lifeRole?: string } }) => node.extras?.lifeRole))
+        for (const role of ['shoot','structure','foliage','blossom',asset.id === 'sunflower-field' ? 'seed' : 'fruit']) expect(roles.has(role)).toBe(true)
+        for (const node of json.nodes.filter((node: { extras?: { lifeRole?: string } }) => node.extras?.lifeRole)) {
+          expect(node.extras.lifeStart).toBeLessThan(node.extras.lifeFull)
+          expect(node.extras.lifeEnd).toBeLessThan(node.extras.lifeGone)
+        }
+      }
       if (living) {
         expect(json.nodes.some((node: { extras?: { crop?: string } }) => node.extras?.crop === 'edge-grass')).toBe(true)
         expect(json.meshes.some((mesh: { primitives: { attributes: { COLOR_0?: number } }[] }) => mesh.primitives.some((primitive) => primitive.attributes.COLOR_0 !== undefined))).toBe(true)

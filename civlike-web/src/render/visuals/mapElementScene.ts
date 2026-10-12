@@ -5,6 +5,7 @@ import {
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { createFieldMotion, defaultFieldSettings, type FieldSettings } from './mapElementGrowth'
+import { createBotanicalMotion } from './mapElementLifecycle'
 
 export type ElementView = 'perspective' | 'front' | 'side' | 'top'
 export type ElementScene = {
@@ -55,6 +56,7 @@ export function mountMapElement(
   let model: Group | undefined
   let mixer: AnimationMixer | undefined
   let field: ReturnType<typeof createFieldMotion> | undefined
+  let botanical: ReturnType<typeof createBotanicalMotion> | undefined
   let fieldSettings = { ...defaultFieldSettings }
   let lastGrowthReport = 0
   let destroyed = false
@@ -119,8 +121,11 @@ export function mountMapElement(
     size = Math.max(extent.x, extent.y, extent.z, .1)
     field = createFieldMotion(model)
     field.setSettings(fieldSettings)
+    botanical = createBotanicalMotion(model)
+    botanical.setSettings(fieldSettings)
     host.dataset.plants = String(field.cropCount)
     field.update(0, false)
+    botanical.update(0, false)
     if (gltf.animations.length) {
       mixer = new AnimationMixer(model)
       for (const clip of gltf.animations) mixer.clipAction(clip).play()
@@ -129,7 +134,7 @@ export function mountMapElement(
     setView(view)
     host.dataset.loaded = 'true'
     host.dataset.animations = String(gltf.animations.length)
-    onLoad(gltf.animations.length + (field.count ? 1 : 0))
+    onLoad(gltf.animations.length + (field.count || botanical.count ? 1 : 0))
   }).catch((error: unknown) => {
     if (!destroyed) onError(error instanceof Error ? error.message : '模型加载失败')
   })
@@ -141,9 +146,11 @@ export function mountMapElement(
     const delta = previousTime ? Math.min((time - previousTime) / 1000, .05) : 0
     previousTime = time
     if (playing) mixer?.update(delta)
-    if (field?.count) {
-      const progress = field.update(delta, playing)
+    if (field?.count || botanical?.count) {
+      const fieldProgress = field?.update(delta, playing) ?? fieldSettings.growth
+      const progress = botanical?.count ? botanical.update(delta, playing) : fieldProgress
       host.dataset.growth = progress.toFixed(4)
+      if (botanical?.count) host.dataset.organs = JSON.stringify(botanical.visible)
       if (time - lastGrowthReport > 120) { onGrowth?.(progress); lastGrowthReport = time }
     }
     controls.update()
@@ -154,7 +161,7 @@ export function mountMapElement(
   frame = requestAnimationFrame(animate)
   return {
     setView, setPlaying(value) { playing = value }, setWireframe,
-    setFieldSettings(value) { fieldSettings = value; field?.setSettings(value) },
+    setFieldSettings(value) { fieldSettings = value; field?.setSettings(value); botanical?.setSettings(value) },
     destroy() {
       destroyed = true
       cancelAnimationFrame(frame)
@@ -170,6 +177,7 @@ export function mountMapElement(
       delete host.dataset.plants
       delete host.dataset.growth
       delete host.dataset.drawCalls
+      delete host.dataset.organs
     },
   }
 }

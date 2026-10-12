@@ -84,7 +84,27 @@
       "id": "vegetable-field-v3",
       "sourceObjects": 630,
       "roundTripTriangles": 12614
+    },
+    {
+      "id": "berry-shrub-v4",
+      "sourceObjects": 993,
+      "roundTripTriangles": 20642
+    },
+    {
+      "id": "apple-tree",
+      "sourceObjects": 969,
+      "roundTripTriangles": 20130
+    },
+    {
+      "id": "pumpkin-patch",
+      "sourceObjects": 384,
+      "roundTripTriangles": 15710
+    },
+    {
+      "id": "sunflower-field",
+      "sourceObjects": 945,
+      "roundTripTriangles": 18518
     }
   ],
-  "passed": 17
+  "passed": 21
 }

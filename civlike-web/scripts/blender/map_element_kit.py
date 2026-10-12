@@ -14,6 +14,9 @@ import bmesh
 import bpy
 from mathutils import Vector
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import map_element_botany
+
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / 'src/render/assets/elements'
 SOURCE = ROOT / 'src/render/assets/source/elements'
@@ -317,7 +320,7 @@ def living_height(x,y):
                        +.008*math.sin(x*8+y*5)*math.cos(y*6))
 
 
-def living_soil():
+def living_soil(height=living_height, weight=soil_weight):
     columns,rows=48,40
     verts=[]
     for j in range(rows+1):
@@ -325,7 +328,7 @@ def living_soil():
             x,y=-1.75+i*3.5/columns,-1.75+j*3.5/rows
             if 0<i<columns and 0<j<rows:
                 x+=RNG.uniform(-.02,.02);y+=RNG.uniform(-.02,.02)
-            verts.append((x,y,living_height(x,y)))
+            verts.append((x,y,height(x,y)))
     faces=[]
     for j in range(rows):
         for i in range(columns):
@@ -351,7 +354,7 @@ def living_soil():
     for face in obj.data.polygons:
         for loop in face.loop_indices:
             x,y,z=obj.data.vertices[obj.data.loops[loop].vertex_index].co
-            w=soil_weight(x,y)
+            w=weight(x,y)
             crest=max(0,min(1,(z-.055)/.1))
             earth=(.32+.15*crest,.235+.115*crest,.145+.075*crest)
             grass=(.33,.42,.205)
@@ -362,15 +365,15 @@ def living_soil():
     for _ in range(95):
         x,y=RNG.uniform(-1.6,1.6),RNG.uniform(-1.6,1.6)
         radius=RNG.uniform(.012,.035)
-        ico('embedded_crumb',(x,y,living_height(x,y)-radius*.16),
-            (radius*1.4,radius,radius*.6),'loam' if soil_weight(x,y)>.5 else 'earth',1)
+        ico('embedded_crumb',(x,y,height(x,y)-radius*.16),
+            (radius*1.4,radius,radius*.6),'loam' if weight(x,y)>.5 else 'earth',1)
     for i in range(32):
         angle=RNG.uniform(0,math.tau)
         radius=RNG.uniform(1.4,1.63)
         x,y=radius*math.cos(angle),radius*math.sin(angle)
-        if soil_weight(x,y)>.8:
+        if weight(x,y)>.8:
             continue
-        ground=living_height(x,y)
+        ground=height(x,y)
         parts=[]
         for j in range(5):
             leaf=blade('margin_grass',x,y,RNG.uniform(.07,.16),angle+j*2.3,'edge_grass',.035)
@@ -717,6 +720,10 @@ BUILDERS = {
     'plowed-field-v3': (living_soil, '06-plowed-field-v2.png'),
     'wheat-field-v3': (lambda: wheat_refined(natural=True), '05-wheat-field.png'),
     'vegetable-field-v3': (vegetables_living, '07-vegetable-field.png'),
+    'berry-shrub-v4': (lambda: map_element_botany.build(sys.modules[__name__], 'berry-shrub'), '27-berry-shrub.png'),
+    'apple-tree': (lambda: map_element_botany.build(sys.modules[__name__], 'apple-tree'), ''),
+    'pumpkin-patch': (lambda: map_element_botany.build(sys.modules[__name__], 'pumpkin-patch'), ''),
+    'sunflower-field': (lambda: map_element_botany.build(sys.modules[__name__], 'sunflower-field'), ''),
 }
 
 
