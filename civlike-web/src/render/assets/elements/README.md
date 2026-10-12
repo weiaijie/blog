@@ -8,6 +8,21 @@
 
 独立页面提供自由旋转、正面、侧面、俯视、线框、动画暂停和 GLB 下载，同时展示对应三视图。此批次没有替换现有 `terrain-world` 地图元素。
 
+### 农田改进样板 V2
+
+当前有 12 类模型、14 个版本。麦田和翻耕地默认显示 V2，底部“原版 / 改进版”可切换，原版源文件和 GLB 未覆盖。版本切换保留所选正面/侧面/俯视模式，下载链接对应当前版本。
+
+- 麦田：`/?view=map-elements&element=wheat-field&revision=2`。弯曲茎秆、分层折叠叶片、重叠麦粒、成熟色差，底部使用连续田垄表面。
+- 翻耕地：`/?view=map-elements&element=plowed-field&revision=2`。连续封闭土面、圆钝田垄、沟底和垄顶色差、嵌入式碎土，外围降低到统一高度。
+- 两款分别输出 `wheat-field-v2`、`plowed-field-v2` 的 `.blend` 和 `.glb`；`revision=1` 可直接打开原版。
+- 这是本地重建的比较样板，没有下载或使用 Synty、Quaternius 的第三方网格；不是商用成品质量或大地图接缝的验收结论。
+
+单独重新生成两款：
+
+```powershell
+blender --background --factory-startup --python-exit-code 1 --python scripts/blender/map_element_kit.py -- --assets plowed-field-v2 wheat-field-v2
+```
+
 ## 资产
 
 本目录保存 GLB；可编辑 Blender 源文件位于 `../source/elements/<id>.blend`。源文件保留独立零件，导出时按静态父节点合并网格，动画节点保持独立。
@@ -49,7 +64,7 @@ node node_modules/vitest/vitest.mjs run --exclude '**/.sites-preview/**'
 npm run build
 ```
 
-浏览器检查覆盖 12 款加载、画面非空和完整取景、5 款动画与暂停、三视图、线框、移动端切换及横向溢出。截图和 JSON 结果位于 `artifacts/map-elements/`。这些检查不等于艺术质量验收，也不等于 200 格场景的性能验收。
+浏览器检查覆盖 14 个版本加载、画面非空和完整取景、5 款动画与暂停、三视图、线框、移动端切换及横向溢出，另验证原版/改进版切换、版本链接刷新、对应版本下载链接和鼠标旋转。截图和 JSON 结果位于 `artifacts/map-elements/`。这些检查不等于艺术质量验收，也不等于 200 格场景的性能验收。
 
 ## 后续工作
 

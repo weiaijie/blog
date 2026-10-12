@@ -19,9 +19,23 @@ const labels: Record<string, [string, string]> = {
 
 export const mapElements = manifest.assets.map((asset) => ({
   ...asset,
-  label: labels[asset.id]?.[0] ?? asset.id,
-  category: labels[asset.id]?.[1] ?? '其他',
+  family: asset.id.replace(/-v2$/, ''),
+  revision: asset.id.endsWith('-v2') ? 2 : 1,
+  label: labels[asset.id.replace(/-v2$/, '')]?.[0] ?? asset.id,
+  category: labels[asset.id.replace(/-v2$/, '')]?.[1] ?? '其他',
   url: models[`./elements/${asset.id}.glb`],
   referenceUrl: references[`../../../design/asset-orthographics-20261012-expanded/${asset.reference}`],
 }))
 export type MapElement = typeof mapElements[number]
+
+export const mapElementLibrary = [...new Set(mapElements.map((asset) => asset.family))].map((family) =>
+  mapElements.filter((asset) => asset.family === family).sort((a, b) => b.revision - a.revision)[0],
+)
+
+export function initialMapElement(search: string): MapElement {
+  const params = new URLSearchParams(search)
+  const id = params.get('element') ?? 'wheat-field'
+  const exact = mapElements.find((asset) => asset.id === id)
+  if (exact && (params.get('revision') === '1' || exact.revision === 2)) return exact
+  return mapElementLibrary.find((asset) => asset.family === id) ?? mapElementLibrary[0]
+}

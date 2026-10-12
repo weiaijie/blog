@@ -3,9 +3,15 @@ import { describe, expect, it } from 'vitest'
 import manifest from '../../src/render/assets/elements/manifest.json'
 
 describe('C-style Blender element kit', () => {
-  it('has twelve distinct assets', () => {
-    expect(manifest.assets).toHaveLength(12)
-    expect(new Set(manifest.assets.map((a) => a.id)).size).toBe(12)
+  it('has twelve asset families and two refined comparison models', () => {
+    expect(manifest.assets).toHaveLength(14)
+    expect(new Set(manifest.assets.map((a) => a.id)).size).toBe(14)
+    expect(new Set(manifest.assets.map((a) => a.id.replace(/-v2$/, ''))).size).toBe(12)
+    for (const id of ['plowed-field', 'wheat-field']) {
+      const before = readFileSync(new URL(`../../src/render/assets/elements/${id}.glb`, import.meta.url))
+      const after = readFileSync(new URL(`../../src/render/assets/elements/${id}-v2.glb`, import.meta.url))
+      expect(after.equals(before)).toBe(false)
+    }
   })
   for (const asset of manifest.assets) {
     it(`${asset.id} exports geometry, source and promised animation`, () => {

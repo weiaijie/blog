@@ -26,6 +26,10 @@
 .element-load-status { position: absolute; top: 80px; left: 24px; font-size: 13px; background: #fff; padding: 8px; max-width: calc(100% - 48px); overflow-wrap: anywhere; }
 .element-inspector { border-top: 1px solid #dce1e3; display: grid; grid-template-columns: minmax(200px, 1fr) minmax(0, 420px); gap: 20px; padding: 16px 24px; overflow: hidden; }
 .element-inspector h2 { font-size: 17px; margin: 0 0 16px; }
+.element-revision-heading { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 20px; margin-bottom: 16px; }
+.element-revision-heading h2 { margin: 0; }
+.element-revisions { display: flex; padding: 2px; background: #f0f3f1; border: 1px solid #dce1e3; border-radius: 4px; }
+.element-revisions button { min-width: 60px; padding: 7px 10px; font-size: 12px; }
 .element-inspector dl { display: flex; gap: 24px; flex-wrap: wrap; margin: 0; }
 .element-inspector dl div { display: grid; gap: 6px; }
 .element-inspector dt { font-size: 11px; color: #7b8284; }

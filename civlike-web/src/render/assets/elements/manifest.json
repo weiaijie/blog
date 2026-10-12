@@ -264,6 +264,46 @@
         ]
       ],
       "glbBytes": 161332
+    },
+    {
+      "id": "plowed-field-v2",
+      "reference": "06-plowed-field-v2.png",
+      "triangles": 6566,
+      "meshObjects": 1,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.4,
+          -1.4,
+          0.0
+        ],
+        [
+          1.4,
+          1.4,
+          0.1735
+        ]
+      ],
+      "glbBytes": 634860
+    },
+    {
+      "id": "wheat-field-v2",
+      "reference": "05-wheat-field.png",
+      "triangles": 14616,
+      "meshObjects": 1,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.607,
+          -1.6585,
+          0.0
+        ],
+        [
+          1.5162,
+          1.6518,
+          1.2558
+        ]
+      ],
+      "glbBytes": 1238512
     }
   ]
 }

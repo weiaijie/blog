@@ -1,39 +1,46 @@
 import { useEffect, useRef, useState } from 'react'
 import { Box, Download, Pause, Play, RotateCcw } from 'lucide-react'
-import { mapElements, type MapElement } from '../../render/assets/mapElementCatalog'
+import { initialMapElement, mapElementLibrary, mapElements, type MapElement } from '../../render/assets/mapElementCatalog'
 import { mountMapElement, type ElementScene, type ElementView } from '../../render/visuals/mapElementScene'
 import './mapElementLab.css'
 
 const views: [ElementView, string][] = [['perspective', '自由视角'], ['front', '正面'], ['side', '侧面'], ['top', '俯视']]
 
 export function MapElementLab() {
-  const [selected, setSelected] = useState(() => {
-    const id = new URLSearchParams(location.search).get('element')
-    return mapElements.find((asset) => asset.id === id) ?? mapElements.find((asset) => asset.id === 'fishing-boat') ?? mapElements[0]
-  })
+  const [selected, setSelected] = useState(() => initialMapElement(location.search))
+  const [view, setView] = useState<ElementView>('perspective')
+  useEffect(() => {
+    const onPopState = () => setSelected(initialMapElement(location.search))
+    window.addEventListener('popstate', onPopState)
+    return () => window.removeEventListener('popstate', onPopState)
+  }, [])
   function select(asset: MapElement) {
     setSelected(asset)
     const url = new URL(location.href)
-    url.searchParams.set('element', asset.id)
+    url.searchParams.set('element', asset.family)
+    url.searchParams.set('revision', String(asset.revision))
     history.replaceState(null, '', url)
   }
   return <main className="element-lab">
     <header className="element-header"><h1>地图模型库</h1><span>C 风格 / 第一批</span><a href="?view=terrain-world">返回地图</a></header>
     <nav className="element-library" aria-label="模型列表">
-      <select aria-label="选择模型" value={selected.id} onChange={(event) => select(mapElements.find((a) => a.id === event.target.value)!)}>
-        {mapElements.map((asset) => <option key={asset.id} value={asset.id}>{asset.label}</option>)}
+      <select aria-label="选择模型" value={selected.family} onChange={(event) => select(mapElementLibrary.find((a) => a.family === event.target.value)!)}>
+        {mapElementLibrary.map((asset) => <option key={asset.family} value={asset.family}>{asset.label}{asset.revision === 2 ? ' · 改进版' : ''}</option>)}
       </select>
-      <div className="element-list">{mapElements.map((asset) => <button key={asset.id} aria-pressed={selected.id === asset.id} onClick={() => select(asset)}><span>{asset.label}</span><small>{asset.category}</small></button>)}</div>
-      <p>{mapElements.length} 个模型</p>
+      <div className="element-list">{mapElementLibrary.map((asset) => <button key={asset.family} aria-pressed={selected.family === asset.family} onClick={() => select(asset)}><span>{asset.label}</span><small>{asset.revision === 2 ? '已更新' : asset.category}</small></button>)}</div>
+      <p>{mapElementLibrary.length} 类模型 · {mapElements.length} 个版本</p>
     </nav>
-    <ElementPreview key={selected.id} asset={selected} />
+    <ElementPreview key={selected.id} asset={selected} select={select} view={view} setView={setView} />
   </main>
 }
 
-function ElementPreview({ asset }: { asset: MapElement }) {
+function ElementPreview({ asset, select, view, setView }: {
+  asset: MapElement; select: (asset: MapElement) => void
+  view: ElementView; setView: (view: ElementView) => void
+}) {
+  const versions = mapElements.filter((candidate) => candidate.family === asset.family)
   const host = useRef<HTMLDivElement>(null)
   const scene = useRef<ElementScene>()
-  const [view, setView] = useState<ElementView>('perspective')
   const [playing, setPlaying] = useState(!window.matchMedia('(prefers-reduced-motion: reduce)').matches)
   const [wireframe, setWireframe] = useState(false)
   const [status, setStatus] = useState('加载中')
@@ -46,6 +53,7 @@ function ElementPreview({ asset }: { asset: MapElement }) {
     scene.current = handle
     return () => { scene.current = undefined; handle.destroy() }
   }, [asset.url])
+  useEffect(() => { scene.current?.setView(view) }, [view])
   return <section className="element-workspace" aria-label={asset.label}>
     <div className="element-toolbar">
       <div className="element-views" role="group" aria-label="相机视角">{views.map(([id, label]) => <button key={id} aria-pressed={view === id} onClick={() => { setView(id); scene.current?.setView(id) }}>{label}</button>)}</div>
@@ -59,7 +67,7 @@ function ElementPreview({ asset }: { asset: MapElement }) {
     <div className="element-stage" ref={host} data-asset={asset.id} />
     {status !== '已加载' && <div className="element-load-status" role="status">{status}</div>}
     <aside className="element-inspector">
-      <div><h2>{asset.label}</h2><dl><div><dt>三角面</dt><dd>{asset.triangles.toLocaleString()}</dd></div><div><dt>GLB</dt><dd>{(asset.glbBytes / 1024).toFixed(0)} KB</dd></div><div><dt>动画部件</dt><dd>{asset.animatedPivots.length}</dd></div><div><dt>版本</dt><dd>建模初版</dd></div></dl></div>
+      <div><div className="element-revision-heading"><h2>{asset.label}</h2>{versions.length > 1 && <div className="element-revisions" role="group" aria-label="模型版本">{versions.map((candidate) => <button key={candidate.id} aria-pressed={candidate.id === asset.id} onClick={() => select(candidate)}>{candidate.revision === 1 ? '原版' : '改进版'}</button>)}</div>}</div><dl><div><dt>三角面</dt><dd>{asset.triangles.toLocaleString()}</dd></div><div><dt>GLB</dt><dd>{(asset.glbBytes / 1024).toFixed(0)} KB</dd></div><div><dt>动画部件</dt><dd>{asset.animatedPivots.length}</dd></div><div><dt>版本</dt><dd>{asset.revision === 2 ? '改进样板 V2' : '建模初版'}</dd></div></dl></div>
       <figure><a href={asset.referenceUrl} target="_blank" rel="noreferrer"><img src={asset.referenceUrl} alt={`${asset.label}三视参考图`} /></a><figcaption>设计参考</figcaption></figure>
     </aside>
   </section>

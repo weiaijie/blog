@@ -33,6 +33,9 @@ def palette():
         'hoof': '444943', 'eye': '191F20', 'fish': '7FABA3',
         'fish_dark': '4F7A76', 'belly': 'D5D9C8', 'fin': 'BFAC6F',
         'pine': '356542', 'pine_light': '598448', 'pine_dark': '264D36',
+        'loam_dark': '594332', 'loam': '725438', 'loam_light': '806044',
+        'loam_dry': '8E6D4B', 'straw': 'B69543', 'straw_light': 'D3B45A',
+        'straw_green': '8B8D42', 'ripe_grain': 'D9B867',
     }
     M.clear()
     for name, code in colors.items():
@@ -161,6 +164,119 @@ def plowed():
             face.material_index = RNG.randrange(2)
     for _ in range(32):
         ico('clod', (RNG.uniform(-1.3, 1.3), RNG.uniform(-1.3, 1.3), .08), (.04, .06, .04), 'earth')
+
+
+def field_height(x, y):
+    # Broad rounded crowns and shared low borders, not disconnected triangular strips.
+    phase = (x + 1.15 + .015 * math.sin(y * 4)) / .46
+    crown = (.5 + .5 * math.cos(phase * math.tau)) ** 1.3
+    margin = max(0, min(1, (1.4-abs(x))/.12, (1.4-abs(y))/.22))
+    margin = margin * margin * (3-2*margin)
+    return .045 + margin * (.105*crown + .009*math.sin(x*29+y*7)*math.sin(y*21))
+
+
+def field_surface(columns=48, rows=40, clods=110):
+    vertices = []
+    for j in range(rows+1):
+        for i in range(columns+1):
+            x, y = -1.4+i*2.8/columns, -1.4+j*2.8/rows
+            if 0<i<columns and 0<j<rows:
+                x += RNG.uniform(-.014,.014)
+                y += RNG.uniform(-.018,.018)
+            vertices.append((x,y,field_height(x,y)))
+    faces = []
+    for j in range(rows):
+        for i in range(columns):
+            a=j*(columns+1)+i; b=a+1; c=a+columns+1; d=c+1
+            faces.extend([(a,b,c),(b,d,c)] if (i+j)%2 else [(a,b,d),(a,d,c)])
+    surface_count = len(faces)
+    boundary = (list(range(columns+1)) +
+                [j*(columns+1)+columns for j in range(1,rows+1)] +
+                [rows*(columns+1)+i for i in range(columns-1,-1,-1)] +
+                [j*(columns+1) for j in range(rows-1,0,-1)])
+    bottom = len(vertices)
+    vertices.extend([(vertices[i][0],vertices[i][1],0) for i in boundary])
+    for i,a in enumerate(boundary):
+        n=(i+1)%len(boundary)
+        faces.append((a,bottom+i,bottom+n,boundary[n]))
+    faces.append(tuple(reversed(range(bottom,len(vertices)))))
+    earth = mesh('continuous_tilled_soil',vertices,faces,'loam_dark')
+    for name in ['loam','loam_light','loam_dry']:
+        earth.data.materials.append(M[name])
+    for face in earth.data.polygons:
+        if face.index >= surface_count:
+            continue
+        z=sum(earth.data.vertices[v].co.z for v in face.vertices)/len(face.vertices)
+        face.material_index = 0 if z<.065 else 1 if z<.105 else 2 if z<.137 else 3
+    for _ in range(clods):
+        x,y=RNG.uniform(-1.34,1.34),RNG.uniform(-1.34,1.34)
+        radius=RNG.uniform(.018,.041)
+        obj=ico('embedded_soil_clod',(x,y,field_height(x,y)-radius*.15),
+                (radius*1.3,radius,radius*.65),'loam_light' if RNG.random()<.6 else 'loam',1)
+        obj.rotation_euler.z=RNG.uniform(0,math.tau)
+        for v in obj.data.vertices:
+            v.co *= RNG.uniform(.8,1.12)
+
+
+def plowed_refined():
+    field_surface()
+
+
+def wheat_refined():
+    field_surface(36,24,28)
+    for row in range(6):
+        for j in range(21):
+            x=-1.15+row*.46+RNG.uniform(-.085,.085)
+            y=-1.25+j*.125+RNG.uniform(-.026,.026)
+            ground=field_height(x,y)
+            h=RNG.uniform(.64,.9)
+            angle=RNG.uniform(0,math.tau)
+            lean=Vector((math.cos(angle),math.sin(angle),0))*RNG.uniform(.07,.15)
+            root=Vector((x,y,ground))
+            centers=[root+lean*t*t+Vector((0,0,h*t)) for t in [0,.4,.75,1]]
+            verts=[]
+            for n,p in enumerate(centers):
+                for k in range(3):
+                    a=k*math.tau/3
+                    verts.append(tuple(p+Vector((math.cos(a),math.sin(a),0))*(.008-n*.001)))
+            faces=[]
+            for n in range(3):
+                for k in range(3):
+                    a=n*3+k; b=n*3+(k+1)%3
+                    faces.append((a,b,b+3,a+3))
+            faces.extend([(2,1,0),(9,10,11)])
+            stem_material='straw_green' if RNG.random()<.16 else 'straw'
+            mesh('curved_wheat_stem',verts,faces,stem_material)
+            for level,turn in [(.28,0),(.52,2.65)]:
+                a=angle+turn
+                direction=Vector((math.cos(a),math.sin(a),0))
+                across=Vector((-direction.y,direction.x,0))
+                start=root+lean*level*level+Vector((0,0,h*level))
+                verts=[]
+                for n,(distance,lift,width) in enumerate([(0,0,.006),(.08,.17,.036),(.24,.2,.027),(.4,.11,0)]):
+                    center=start+direction*distance+Vector((0,0,lift))
+                    verts.extend([tuple(center-across*width),tuple(center+Vector((0,0,.012 if n in [1,2] else 0))),tuple(center+across*width)])
+                faces=[]
+                for n in range(3):
+                    a=n*3
+                    faces.extend([(a,a+3,a+4,a+1),(a+1,a+4,a+5,a+2)])
+                mesh('arched_wheat_leaf',verts,faces,stem_material)
+            head=centers[-1]
+            axis=Vector((lean.x*1.8,lean.y*1.8,1)).normalized()
+            width=Vector((-math.sin(angle),math.cos(angle),0))
+            depth=axis.cross(width).normalized()
+            for tier in range(4):
+                for side in [-1,1]:
+                    p=head+axis*(tier*.037)+width*(side*.017)
+                    # Tapered six-face kernels overlap around the rachis, not floating beads.
+                    verts=[tuple(p-width*.018-depth*.014),tuple(p+width*.018-depth*.014),
+                           tuple(p+width*.018+depth*.014),tuple(p-width*.018+depth*.014),
+                           tuple(p+axis*.051+width*side*.018)]
+                    mesh('overlapping_wheat_kernel',verts,[(0,3,2,1),(0,1,4),(1,2,4),(2,3,4),(3,0,4)],
+                         'ripe_grain' if tier%2 else 'straw_light')
+            for side in [-1,0,1]:
+                p=head+axis*.135+width*side*.012
+                mesh('short_awn',[tuple(p-width*.002),tuple(p+width*.002),tuple(p+axis*.09+width*side*.014)],[(0,1,2)],'straw_light')
 
 
 def wheat():
@@ -446,6 +562,8 @@ BUILDERS = {
     'reeds': (reeds, '29-reeds-v2.png'),
     'village-well': (well, '31-village-well.png'),
     'handcart': (cart, '36-handcart-v2.png'),
+    'plowed-field-v2': (plowed_refined, '06-plowed-field-v2.png'),
+    'wheat-field-v2': (wheat_refined, '05-wheat-field.png'),
 }
 
 

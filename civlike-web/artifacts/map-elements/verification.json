@@ -58,10 +58,10 @@
     },
     {
       "id": "fishing-boat",
-      "hash": 2046784875,
-      "coverage": 0.061838283071513206,
+      "hash": 649536848,
+      "coverage": 0.06178095019684287,
       "bounds": [
-        396,
+        400,
         251,
         816,
         474
@@ -72,13 +72,13 @@
     },
     {
       "id": "river-fish",
-      "hash": 2521011211,
-      "coverage": 0.046683293200321066,
+      "hash": 820306746,
+      "coverage": 0.046688070939876924,
       "bounds": [
         444,
         204,
         724,
-        497
+        498
       ],
       "width": 1224,
       "height": 684,
@@ -86,8 +86,8 @@
     },
     {
       "id": "sheep",
-      "hash": 1217338300,
-      "coverage": 0.09818254787295035,
+      "hash": 2842062831,
+      "coverage": 0.09817299239383863,
       "bounds": [
         412,
         113,
@@ -128,13 +128,13 @@
     },
     {
       "id": "reeds",
-      "hash": 3430515915,
-      "coverage": 0.03281351526965562,
+      "hash": 3271518902,
+      "coverage": 0.03286129266521423,
       "bounds": [
         536,
         95,
-        768,
-        577
+        780,
+        575
       ],
       "width": 1224,
       "height": 684,
@@ -156,8 +156,8 @@
     },
     {
       "id": "handcart",
-      "hash": 2062224939,
-      "coverage": 0.0675715705385468,
+      "hash": 1535200173,
+      "coverage": 0.06757634827810266,
       "bounds": [
         380,
         211,
@@ -167,11 +167,39 @@
       "width": 1224,
       "height": 684,
       "animated": true
+    },
+    {
+      "id": "plowed-field-v2",
+      "hash": 720991537,
+      "coverage": 0.12780931085884648,
+      "bounds": [
+        260,
+        186,
+        964,
+        476
+      ],
+      "width": 1224,
+      "height": 684,
+      "animated": false
+    },
+    {
+      "id": "wheat-field-v2",
+      "hash": 395675901,
+      "coverage": 0.14058498643121967,
+      "bounds": [
+        312,
+        133,
+        920,
+        534
+      ],
+      "width": 1224,
+      "height": 684,
+      "animated": false
     }
   ],
   "mobile": {
-    "hash": 2396448868,
-    "coverage": 0.16334554334554335,
+    "hash": 749631734,
+    "coverage": 0.16332112332112333,
     "bounds": [
       82,
       79,
@@ -183,7 +211,7 @@
   },
   "errors": [],
   "checks": [
-    "12 models",
+    "14 models",
     "reference loading",
     "canvas pixels",
     "framing",
@@ -191,6 +219,10 @@
     "pause",
     "three views",
     "wireframe",
-    "mobile switching"
+    "mobile switching",
+    "original/refined switching",
+    "revision URL reload",
+    "revision download",
+    "orbit interaction"
   ]
 }

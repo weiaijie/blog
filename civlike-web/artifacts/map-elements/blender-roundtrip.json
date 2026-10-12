@@ -59,7 +59,17 @@
       "id": "handcart",
       "sourceObjects": 57,
       "roundTripTriangles": 2020
+    },
+    {
+      "id": "plowed-field-v2",
+      "sourceObjects": 111,
+      "roundTripTriangles": 6566
+    },
+    {
+      "id": "wheat-field-v2",
+      "sourceObjects": 1793,
+      "roundTripTriangles": 14616
     }
   ],
-  "passed": 12
+  "passed": 14
 }
