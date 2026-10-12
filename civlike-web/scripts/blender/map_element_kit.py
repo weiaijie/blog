@@ -21,6 +21,7 @@ import map_element_buildings
 import map_element_fortifications
 import map_element_crops
 import map_element_trees
+import map_element_understory
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / 'src/render/assets/elements'
@@ -753,6 +754,10 @@ BUILDERS = {
     'birch-tree': (lambda: map_element_trees.build(sys.modules[__name__], 'birch-tree'), ''),
     'willow-tree': (lambda: map_element_trees.build(sys.modules[__name__], 'willow-tree'), ''),
     'palm-tree': (lambda: map_element_trees.build(sys.modules[__name__], 'palm-tree'), ''),
+    'cactus': (lambda: map_element_understory.build(sys.modules[__name__], 'cactus'), ''),
+    'fern': (lambda: map_element_understory.build(sys.modules[__name__], 'fern'), ''),
+    'mushrooms': (lambda: map_element_understory.build(sys.modules[__name__], 'mushrooms'), ''),
+    'lily-pad': (lambda: map_element_understory.build(sys.modules[__name__], 'lily-pad'), ''),
 }
 
 
@@ -793,7 +798,7 @@ def build(asset_id):
     consolidate()
     bpy.ops.object.select_all(action='SELECT')
     bpy.ops.export_scene.gltf(filepath=str(OUT/(asset_id+'.glb')),export_format='GLB',use_selection=True,
-                              export_apply=True,export_animations=True,export_animation_mode='SCENE',
+                              export_apply=asset_id!='mushrooms',export_animations=True,export_animation_mode='SCENE',
                               export_extras=True)
     objects=[o for o in scene.objects if o.type=='MESH']
     triangles=0

@@ -8,11 +8,28 @@
 
 独立页面提供自由旋转、正面、侧面、俯视、线框、动画暂停和 GLB 下载，同时展示对应三视图。此批次没有替换现有 `terrain-world` 地图元素。
 
+### 林下与水生样板
+
+当前累计 42 类独立模型、49 个版本，规划 108 类，剩余 66 类未建模。新增 `cactus`、`fern`、`mushrooms`、`lily-pad`，由 `scripts/blender/map_element_understory.py` 生成。
+
+- 仙人掌：纵肋肉质茎、侧臂、刺座及辐射刺、花瓣和成熟红果，保持茎体绿色，不套用秋季落叶材质。
+- 蕨丛：分节叶轴由卷曲姿态逐段舒展，羽叶和背面孢子囊群随叶轴运动；不显示花朵、果实或种子。
+- 菌菇：不同高度的菌柄、弧面菌盖和放射菌褶，使用 Blender `ClosedCap` 形态键/GLB morph target 实现闭合到张开，不是整株等比放大；孢子结构独立于菌盖生长，标签不伪装成开花结果。
+- 睡莲：有缺口的浮叶、贴合叶面的放射叶脉、分层花瓣及花后种荚；默认展示花期。浮叶有小幅上下漂动，叶片保留水面间隙。浅水面为静态展示底板，不是新水波系统，也不是荷花模型。
+- 新增 `lifeUnfurlAngle`、可覆盖的 `lifeUnfoldAngle` 和 `lifeBob` 元数据，旧资产默认行为不变。菌菇导出不应用修改器，以保留形态键；其他资产导出设置不变。
+- 这是局部缩时展示：未模拟菌丝扩张、孢子释放/萌发、授粉、仙人掌储水、睡莲果实沉水或地图水位/生态条件；菌菇造型不是食用鉴定依据。所有器官生命周期仍需网页驱动，不是独立烘焙动画剪辑。
+
+结构参考：[NPS 仙人掌](https://www.nps.gov/sagu/learn/nature/cacti-and-desert-succulents.htm)、[USFS 蕨类](https://www.srs.fs.usda.gov/pubs/gtr/uncaptured/gtr_se015.pdf)、[Penn State 菌盖发育](https://extension.psu.edu/seeding-substrate-and-management-of-growing-agaricus-bisporus)、[NParks 睡莲](https://www.nparks.gov.sg/florafaunaweb/flora/2/2/2271)。未下载第三方网格。
+
+```powershell
+blender --background --factory-startup --python-exit-code 1 --python scripts/blender/map_element_kit.py -- --assets cactus fern mushrooms lily-pad
+```
+
 ### 树木扩展样板
 
 新增 `oak-tree`、`birch-tree`、`willow-tree`、`palm-tree`。模型采用独立枝干与折面叶片，不使用实心球体替代整个树冠；源文件由 `scripts/blender/map_element_trees.py` 生成。
 
-当前累计 38 类独立模型、45 个版本，规划 108 类；剩余 70 类未建模。
+树木批次完成时为 38 类独立模型、45 个版本。
 
 - 橡树使用粗主干、根部外扩、侧枝、裂片叶与带杯状果帽的橡子。
 - 白桦使用细长白色树皮、深色横向皮孔、细枝、小型尖叶与柔荑花序/种序。

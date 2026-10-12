@@ -224,7 +224,27 @@
       "id": "palm-tree",
       "sourceObjects": 877,
       "roundTripTriangles": 15986
+    },
+    {
+      "id": "cactus",
+      "sourceObjects": 476,
+      "roundTripTriangles": 16814
+    },
+    {
+      "id": "fern",
+      "sourceObjects": 1377,
+      "roundTripTriangles": 19286
+    },
+    {
+      "id": "mushrooms",
+      "sourceObjects": 384,
+      "roundTripTriangles": 10774
+    },
+    {
+      "id": "lily-pad",
+      "sourceObjects": 170,
+      "roundTripTriangles": 1920
     }
   ],
-  "passed": 45
+  "passed": 49
 }

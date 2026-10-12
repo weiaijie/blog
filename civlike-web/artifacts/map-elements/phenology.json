@@ -7,7 +7,7 @@
         "organs": {
           "shoot": 1
         },
-        "hash": 182154296
+        "hash": 1724373607
       },
       {
         "value": 49,
@@ -16,7 +16,7 @@
           "blossom": 8,
           "foliage": 8
         },
-        "hash": 1615209893
+        "hash": 379871107
       },
       {
         "value": 82,
@@ -25,7 +25,7 @@
           "foliage": 8,
           "fruit": 8
         },
-        "hash": 1411644456
+        "hash": 1876602306
       },
       {
         "value": 100,
@@ -35,7 +35,7 @@
           "fruit": 8,
           "litter": 8
         },
-        "hash": 2512263407
+        "hash": 2765642727
       }
     ]
   },
@@ -47,7 +47,7 @@
         "organs": {
           "shoot": 1
         },
-        "hash": 3208755814
+        "hash": 2226543702
       },
       {
         "value": 49,
@@ -56,7 +56,7 @@
           "blossom": 8,
           "foliage": 8
         },
-        "hash": 1898729784
+        "hash": 1164537564
       },
       {
         "value": 82,
@@ -65,7 +65,7 @@
           "foliage": 8,
           "fruit": 8
         },
-        "hash": 3836466338
+        "hash": 2676903134
       },
       {
         "value": 100,
@@ -75,7 +75,7 @@
           "fruit": 8,
           "litter": 8
         },
-        "hash": 2902439172
+        "hash": 891175454
       }
     ]
   },
@@ -87,7 +87,7 @@
         "organs": {
           "shoot": 3
         },
-        "hash": 4253785712
+        "hash": 950555736
       },
       {
         "value": 49,
@@ -96,7 +96,7 @@
           "foliage": 15,
           "blossom": 9
         },
-        "hash": 442693001
+        "hash": 3926266002
       },
       {
         "value": 82,
@@ -105,7 +105,7 @@
           "foliage": 15,
           "fruit": 9
         },
-        "hash": 1109938384
+        "hash": 4127890999
       },
       {
         "value": 100,
@@ -114,7 +114,7 @@
           "foliage": 15,
           "fruit": 9
         },
-        "hash": 2489188550
+        "hash": 3435910005
       }
     ]
   },
@@ -126,7 +126,7 @@
         "organs": {
           "shoot": 9
         },
-        "hash": 2736209059
+        "hash": 3337350729
       },
       {
         "value": 49,
@@ -136,7 +136,7 @@
           "bud": 9,
           "blossom": 9
         },
-        "hash": 1858218307
+        "hash": 1097055582
       },
       {
         "value": 82,
@@ -146,7 +146,7 @@
           "blossom": 9,
           "seed": 9
         },
-        "hash": 3146963337
+        "hash": 2473735091
       },
       {
         "value": 100,
@@ -155,7 +155,7 @@
           "foliage": 36,
           "seed": 9
         },
-        "hash": 1052272602
+        "hash": 4149323754
       }
     ]
   },
@@ -167,7 +167,7 @@
         "organs": {
           "shoot": 6
         },
-        "hash": 1478456365
+        "hash": 2726797447
       },
       {
         "value": 49,
@@ -177,7 +177,7 @@
           "foliage": 36,
           "blossom": 12
         },
-        "hash": 2017698795
+        "hash": 1794843513
       },
       {
         "value": 82,
@@ -187,7 +187,7 @@
           "husk": 24,
           "foliage": 36
         },
-        "hash": 3669065478
+        "hash": 2921901603
       },
       {
         "value": 100,
@@ -197,7 +197,7 @@
           "husk": 24,
           "foliage": 36
         },
-        "hash": 2847395785
+        "hash": 2848350443
       }
     ]
   },
@@ -209,7 +209,7 @@
         "organs": {
           "shoot": 9
         },
-        "hash": 4252897122
+        "hash": 2197511206
       },
       {
         "value": 49,
@@ -218,7 +218,7 @@
           "foliage": 81,
           "blossom": 27
         },
-        "hash": 2742097490
+        "hash": 2292729219
       },
       {
         "value": 82,
@@ -227,7 +227,7 @@
           "foliage": 81,
           "seed": 27
         },
-        "hash": 493199917
+        "hash": 393704665
       },
       {
         "value": 100,
@@ -236,7 +236,7 @@
           "foliage": 81,
           "seed": 27
         },
-        "hash": 1875631503
+        "hash": 2708037557
       }
     ]
   },
@@ -248,7 +248,7 @@
         "organs": {
           "shoot": 4
         },
-        "hash": 2802791036
+        "hash": 3281786881
       },
       {
         "value": 49,
@@ -257,7 +257,7 @@
           "blossom": 8,
           "foliage": 24
         },
-        "hash": 726402124
+        "hash": 845041796
       },
       {
         "value": 82,
@@ -266,7 +266,7 @@
           "fruit": 8,
           "foliage": 24
         },
-        "hash": 236489429
+        "hash": 1051784281
       },
       {
         "value": 100,
@@ -275,7 +275,7 @@
           "fruit": 8,
           "foliage": 24
         },
-        "hash": 1150736117
+        "hash": 3229175801
       }
     ]
   },
@@ -287,7 +287,7 @@
         "organs": {
           "shoot": 6
         },
-        "hash": 851981363
+        "hash": 2463639656
       },
       {
         "value": 49,
@@ -296,7 +296,7 @@
           "blossom": 18,
           "foliage": 18
         },
-        "hash": 3317378889
+        "hash": 3578798577
       },
       {
         "value": 82,
@@ -307,7 +307,7 @@
           "seed": 18,
           "foliage": 18
         },
-        "hash": 2808372095
+        "hash": 1617920044
       },
       {
         "value": 100,
@@ -317,7 +317,7 @@
           "seed": 18,
           "foliage": 18
         },
-        "hash": 2811559997
+        "hash": 966777098
       }
     ]
   },
@@ -329,7 +329,7 @@
         "organs": {
           "shoot": 1
         },
-        "hash": 3609009918
+        "hash": 3310412846
       },
       {
         "value": 49,
@@ -338,7 +338,7 @@
           "foliage": 36,
           "blossom": 18
         },
-        "hash": 3500780738
+        "hash": 2535360947
       },
       {
         "value": 82,
@@ -347,7 +347,7 @@
           "fruit": 18,
           "foliage": 36
         },
-        "hash": 1962105090
+        "hash": 3784208761
       },
       {
         "value": 100,
@@ -356,7 +356,7 @@
           "fruit": 18,
           "foliage": 36
         },
-        "hash": 4288404052
+        "hash": 3165915666
       }
     ]
   },
@@ -395,7 +395,7 @@
           "foliage": 30,
           "seed": 20
         },
-        "hash": 3368204244
+        "hash": 586334392
       }
     ]
   },
@@ -407,7 +407,7 @@
         "organs": {
           "shoot": 1
         },
-        "hash": 2905234889
+        "hash": 3242716722
       },
       {
         "value": 49,
@@ -416,7 +416,7 @@
           "blossom": 16,
           "foliage": 24
         },
-        "hash": 1095390048
+        "hash": 3404315514
       },
       {
         "value": 82,
@@ -425,7 +425,7 @@
           "foliage": 24,
           "seed": 16
         },
-        "hash": 933638857
+        "hash": 3748632900
       },
       {
         "value": 100,
@@ -434,7 +434,7 @@
           "foliage": 24,
           "seed": 16
         },
-        "hash": 1336419849
+        "hash": 2638109797
       }
     ]
   },
@@ -446,7 +446,7 @@
         "organs": {
           "shoot": 1
         },
-        "hash": 749752279
+        "hash": 3271755583
       },
       {
         "value": 49,
@@ -455,7 +455,7 @@
           "foliage": 11,
           "blossom": 3
         },
-        "hash": 984742532
+        "hash": 1420034585
       },
       {
         "value": 82,
@@ -464,7 +464,7 @@
           "foliage": 11,
           "fruit": 3
         },
-        "hash": 3436289036
+        "hash": 316525893
       },
       {
         "value": 100,
@@ -473,7 +473,170 @@
           "foliage": 11,
           "fruit": 3
         },
-        "hash": 1240440125
+        "hash": 4121163717
+      }
+    ]
+  },
+  {
+    "id": "cactus",
+    "states": [
+      {
+        "value": 5,
+        "organs": {
+          "shoot": 3
+        },
+        "hash": 3105027939
+      },
+      {
+        "value": 49,
+        "organs": {
+          "structure": 7,
+          "armor": 5,
+          "blossom": 50
+        },
+        "hash": 1394796725
+      },
+      {
+        "value": 82,
+        "organs": {
+          "structure": 7,
+          "armor": 5,
+          "fruit": 5
+        },
+        "hash": 2594452644
+      },
+      {
+        "value": 100,
+        "organs": {
+          "structure": 7,
+          "armor": 5,
+          "fruit": 5
+        },
+        "hash": 1934799706
+      }
+    ]
+  },
+  {
+    "id": "fern",
+    "states": [
+      {
+        "value": 5,
+        "organs": {
+          "shoot": 3
+        },
+        "hash": 455478586
+      },
+      {
+        "value": 25,
+        "organs": {
+          "shoot": 3,
+          "structure": 90,
+          "foliage": 81
+        },
+        "hash": 98054807
+      },
+      {
+        "value": 49,
+        "organs": {
+          "structure": 90,
+          "foliage": 90
+        },
+        "hash": 573466662
+      },
+      {
+        "value": 82,
+        "organs": {
+          "structure": 90,
+          "foliage": 90,
+          "spore": 90
+        },
+        "hash": 573466662
+      },
+      {
+        "value": 100,
+        "organs": {
+          "structure": 90,
+          "foliage": 90,
+          "spore": 90
+        },
+        "hash": 1254264087
+      }
+    ]
+  },
+  {
+    "id": "mushrooms",
+    "states": [
+      {
+        "value": 5,
+        "organs": {
+          "shoot": 7
+        },
+        "hash": 3742220642
+      },
+      {
+        "value": 49,
+        "organs": {
+          "structure": 7,
+          "cap": 7
+        },
+        "hash": 3841229112
+      },
+      {
+        "value": 82,
+        "organs": {
+          "structure": 7,
+          "cap": 7,
+          "spore": 7
+        },
+        "hash": 180995811
+      },
+      {
+        "value": 100,
+        "organs": {
+          "structure": 7,
+          "cap": 7,
+          "spore": 7
+        },
+        "hash": 1273030044
+      }
+    ]
+  },
+  {
+    "id": "lily-pad",
+    "states": [
+      {
+        "value": 5,
+        "organs": {
+          "shoot": 6
+        },
+        "hash": 2779002764
+      },
+      {
+        "value": 49,
+        "organs": {
+          "foliage": 6,
+          "structure": 2,
+          "blossom": 44
+        },
+        "hash": 3556953753
+      },
+      {
+        "value": 82,
+        "organs": {
+          "foliage": 6,
+          "structure": 2,
+          "fruit": 2
+        },
+        "hash": 464245060
+      },
+      {
+        "value": 100,
+        "organs": {
+          "foliage": 6,
+          "structure": 2,
+          "fruit": 2
+        },
+        "hash": 9462866
       }
     ]
   }

@@ -60,7 +60,7 @@ function ElementPreview({ asset, select, view, setView }: {
   const [wireframe, setWireframe] = useState(false)
   const [status, setStatus] = useState('加载中')
   const [hasAnimation, setHasAnimation] = useState(false)
-  const initialGrowth = asset.family==='cotton-field' ? .96 : defaultFieldSettings.growth
+  const initialGrowth = asset.family==='cotton-field' ? .96 : asset.family==='lily-pad' ? .49 : defaultFieldSettings.growth
   const [settings, setSettings] = useState<FieldSettings>({ ...defaultFieldSettings,growth:initialGrowth })
   const [progress, setProgress] = useState(initialGrowth)
   const [animalSettings, setAnimalSettings] = useState<AnimalSettings>({ ...defaultAnimalSettings })
