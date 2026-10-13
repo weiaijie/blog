@@ -82,6 +82,7 @@ try {
   assert.equal(await page.getByLabel('四季循环',{exact:true}).count(),0)
   assert.equal(await page.locator('.element-stage').getAttribute('data-terrain'),null)
   assert.deepEqual(errors,[])
-  await writeFile(`${output}/verification.json`,JSON.stringify({results,retries,errors},null,2)+'\n')
+  const report=requested.some((id)=>['waterfall','lake-shore'].includes(id))?'verification-hydroscapes.json':'verification.json'
+  await writeFile(`${output}/${report}`,JSON.stringify({results,retries,errors},null,2)+'\n')
   console.log(JSON.stringify({models:results.length,retries,errors}))
 }finally {await browser.close()}

@@ -504,7 +504,17 @@
       "id": "dock",
       "sourceObjects": 275,
       "roundTripTriangles": 7308
+    },
+    {
+      "id": "waterfall",
+      "sourceObjects": 488,
+      "roundTripTriangles": 9999
+    },
+    {
+      "id": "lake-shore",
+      "sourceObjects": 436,
+      "roundTripTriangles": 9566
     }
   ],
-  "passed": 101
+  "passed": 103
 }

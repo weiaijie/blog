@@ -474,6 +474,17 @@ npm run build
 - 结构用途参考：[Science Museum 吊臂起重机模型](https://collection.sciencemuseumgroup.org.uk/objects/co2015/demainbrays-wharf-jib-crane-model)、[NPS Long Wharf](https://www.nps.gov/places/long-wharf-boston.htm)。原创风格化游戏资产，未使用第三方网格或贴图，也不宣称通过现实港工结构验算。
 - 页面：`/?view=map-elements&element=harbor`、`/?view=map-elements&element=dock`，继续在现有模型库标签内切换。
 
+## 第二十九批瀑布与湖岸
+
+- `waterfall`：上游窄河槽、1.10 m 高差、两侧岩壁与风化石、下游加深冲刷潭、岸边草簇与石滩。水面按真实河床三角面裁切，只有河槽落水，不把整个岩壁盖成水墙。
+- `lake-shore`：陆地、非直线岸线、浅滩、深水、疏密草簇、漂木与岸石。水面与地面共享裁切岸线，不用椭圆贴片掩盖交界；主体不随水波整体升降。
+- 水面顶点沿自身法向微幅波动，瀑布明暗/泡沫向下移动，底部冲击纹向外传播；18 个有限飞溅按抛物线回落并淡入淡出。湖水为慢波。岸线与所有外边界固定，暂停和零水流可冻结；五个冰区渐进出现并抑制流水/飞溅，夏季恢复，岸草保留风动和季节颜色。
+- 瀑布上下游沿用 `hex-river-080-v1`，宽 0.80 m；下游水面/床面为 0.04 / -0.08 m，上游为 1.14 / 1.02 m。与既有河湾接上游时必须抬高邻块 1.10 m。保留旧河床实际折点，六种旋转的邻块真实网格射线已核对。四条侧边标为 `hex-drop-110-side-v1`，需要对应高差地形，不能接普通平地。
+- 湖岸两条陆地边沿用 `hex-flat-3.5-v1`；两条深水边为 `hex-lake-deep-v1`，水面 0.04 m、床面 -0.16 m；另外两条横跨岸线的边为 `hex-lake-shore-v1`。深水、混合岸线与陆地接口不可混接；当前并未制作所有转角、河湖汇入口或地图级自动岸线拼装。
+- `.blend` 保留独立可编辑地形、水面、草簇、冰雪区和飞溅构件；GLB 含相应元数据，动态由网页驱动，没有通用烘焙水面剪辑。不是真实流体、质量守恒、侵蚀或结冰温度模型。
+- 结构参考：[NPS Norden Chute 的落差与冲刷潭](https://www.nps.gov/places/norden-chute.htm)、[USGS 湖滨浅水与深水分区](https://water.usgs.gov/nwsum/WSP2425/definitions.html)。只参考地貌关系，采用 C 风格非写实原创网格，没有第三方模型或贴图。
+- 页面：`/?view=map-elements&element=waterfall`、`/?view=map-elements&element=lake-shore`，继续复用现有标签切换。
+
 ## 后续工作
 
 - 与设计稿继续比对轮廓和细节，尤其是植被叶簇、屋瓦、水井附件和动物面部。
