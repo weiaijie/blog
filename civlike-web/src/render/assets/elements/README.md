@@ -455,6 +455,15 @@ npm run build
 - 结构参考：[AMI Pula 圆形剧场](https://www.ami-pula.hr/en/locations/amphitheater/)、[NPS 议事厅](https://www.nps.gov/inde/learn/historyculture/places-independencehall-assemblyroom.htm)、[NPS 钟楼](https://www.nps.gov/inde/learn/historyculture/tower-faqs.htm)。只参考场地、布篷、议事桌席与钟面构件关系，不复制历史尺度、布局或第三方网格/贴图。这里是虚构游戏建筑。
 - 页面：`/?view=map-elements&element=town-hall`、`/?view=map-elements&element=amphitheater`。继续复用现有模型库标签。
 
+## 第二十七批兔子
+
+- `rabbit` 为棉尾兔结构参考的 C 风格资产：连续胸腹与圆臀、较短前肢、折叠后腿和加长后脚、耳廓内层、眼眶与高光、鼻垫、口鼻须、下颌、白尾。源文件和直接加载的 GLB 都保存脚掌落地的休息姿态。
+- 独立原地跳跃循环包含蓄力、离地、腾空、前脚先落地、后脚收拢；两段 IK 保持腿长，前后膝方向不同。耳朵从耳根轻摆，鼻头独立抽动，采食时下颌轻动，不以整只模型上下平移替代动作。
+- 头身、四肢、耳长和尾部按不同幼体比例成长；灰褐幼毛转成年被毛，白尾/口鼻保持原色。预览幼体采用已长毛、睁眼、可活动的艺术化幼兔，不是刚出生的无毛闭眼幼崽阶段。
+- 繁育仍为有界展示：两只亲代和一只子代，子代继续长大，不代表实际窝仔数量或真实妊娠周期。没有地图跳跃位移、觅食寻路、捕猎、种群模拟或完整蒙皮；动作由网页元数据驱动，GLB 中不含烘焙动作剪辑。
+- 原创网格，不下载第三方模型/贴图。外形结构参考：[NPS 棉尾兔](https://www.nps.gov/whsa/learn/nature/desert-cottontail.htm)、[NPS 兔类](https://www.nps.gov/gosp/learn/nature/rabbits-hares.htm)。米制为游戏美术尺度，未宣称物种精准复原。
+- 页面：`/?view=map-elements&element=rabbit`，在原有标签内切换。验证包括实际脚掌/腿段网格、不同年龄逐帧落地与腾空、耳根固定、成长、暂停及 320/390 手机取景。
+
 ## 后续工作
 
 - 与设计稿继续比对轮廓和细节，尤其是植被叶簇、屋瓦、水井附件和动物面部。

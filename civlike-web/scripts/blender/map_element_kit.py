@@ -18,6 +18,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import map_element_botany
 import map_element_fauna
 import map_element_canids
+import map_element_rabbit
 import map_element_modern
 import map_element_public
 import map_element_buildings
@@ -758,6 +759,7 @@ BUILDERS = {
     'deer': (lambda: map_element_fauna.build(sys.modules[__name__], 'deer'), ''),
     'fox': (lambda: map_element_canids.build(sys.modules[__name__], 'fox'), ''),
     'wolf': (lambda: map_element_canids.build(sys.modules[__name__], 'wolf'), ''),
+    'rabbit': (lambda: map_element_rabbit.build(sys.modules[__name__]), ''),
     'cottage': (lambda: map_element_buildings.build(sys.modules[__name__], 'cottage'), ''),
     'barn': (lambda: map_element_buildings.build(sys.modules[__name__], 'barn'), ''),
     'windmill': (lambda: map_element_buildings.build(sys.modules[__name__], 'windmill'), ''),

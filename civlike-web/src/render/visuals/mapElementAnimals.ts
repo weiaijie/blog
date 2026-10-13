@@ -8,12 +8,26 @@ export const defaultAnimalSettings: AnimalSettings = { age: 1, automatic: false,
 function smooth(value: number) { const t = Math.max(0,Math.min(1,value)); return t*t*(3-2*t) }
 
 // Two-link sagittal IK keeps the foot on the authored ground during stance.
-export function solveAnimalLeg(upper: number, lower: number, forward: number, drop: number) {
+export function solveAnimalLeg(upper: number, lower: number, forward: number, drop: number, bend = -1) {
   const distance = Math.max(.001,Math.min(upper+lower-.00001,Math.hypot(forward,drop)))
   const cosine = Math.max(-1,Math.min(1,(upper*upper+distance*distance-lower*lower)/(2*upper*distance)))
-  const angle = Math.atan2(forward,drop)-Math.acos(cosine)
+  const angle = Math.atan2(forward,drop)+bend*Math.acos(cosine)
   const kneeY = -upper*Math.cos(angle), kneeZ = upper*Math.sin(angle)
   return { kneeY, kneeZ, upperAngle: -angle, lowerAngle: -Math.atan2(forward-kneeZ,drop+kneeY) }
+}
+
+// Authored in-place hop: crouch, launch, flight, forefoot landing, hind-foot recovery.
+const rabbitHopKeys = [
+  [0,0,0,0,0,0], [.16,-.035,0,0,-.010,-.015], [.28,.005,.055,.018,.010,-.028],
+  [.44,.115,.150,.160,.052,.045], [.60,.070,.105,.115,.065,.070],
+  [.70,-.008,0,.060,.035,.060], [.80,-.035,0,0,.018,.035], [1,0,0,0,0,0],
+]
+export function sampleRabbitHop(phase: number) {
+  const t=((phase%1)+1)%1
+  const end=rabbitHopKeys.findIndex((key)=>key[0]>t),a=rabbitHopKeys[end-1],b=rabbitHopKeys[end]
+  const mix=smooth((t-a[0])/(b[0]-a[0]))
+  const values=a.map((value,index)=>value+(b[index]-value)*mix)
+  return { body:values[1],frontLift:values[2],hindLift:values[3],frontForward:values[4],hindForward:values[5] }
 }
 
 type Part = {
@@ -25,11 +39,15 @@ type Leg = { upper: Part; lower: Part; foot: Part; upperLength: number; lowerLen
 function rig(root: Object3D) {
   const parts: Part[] = []
   const coats = new Map<MeshStandardMaterial,Color>()
-  const ears: { object: Object3D; rotation: Quaternion; side: number }[] = []
+  const ears: { object: Object3D; rotation: Quaternion; scale: Vector3; side: number; rabbit: boolean }[] = []
+  const muzzle: { object: Object3D; position: Vector3; rotation: Quaternion; jaw: boolean }[]=[]
   root.traverse((object) => {
-    if (object.userData.canidEarSide) ears.push({object,rotation:object.quaternion.clone(),side:Number(object.userData.canidEarSide)})
+    if (object.userData.canidEarSide || object.userData.rabbitEarSide) ears.push({object,rotation:object.quaternion.clone(),scale:object.scale.clone(),side:Number(object.userData.canidEarSide??object.userData.rabbitEarSide),rabbit:Boolean(object.userData.rabbitEarSide)})
+    if (object.userData.rabbitNose || object.userData.rabbitJaw) muzzle.push({object,position:object.position.clone(),rotation:object.quaternion.clone(),jaw:Boolean(object.userData.rabbitJaw)})
     if (typeof object.userData.animalRole === 'string') {
-      parts.push({ object,role:object.userData.animalRole,position:object.position.clone(),scale:object.scale.clone(),rotation:object.quaternion.clone(),
+      const rotation=object.quaternion.clone()
+      if (object.userData.restLegAngle) rotation.multiply(new Quaternion().setFromEuler(new Euler(-Number(object.userData.restLegAngle),0,0)))
+      parts.push({ object,role:object.userData.animalRole,position:object.position.clone(),scale:object.scale.clone(),rotation,
         youngPosition:new Vector3().fromArray(object.userData.youngPosition),youngScale:new Vector3().fromArray(object.userData.youngScale),
         maturity:Number(object.userData.maturity??0),followHead:Boolean(object.userData.followHead) })
     }
@@ -45,7 +63,7 @@ function rig(root: Object3D) {
     const foot = parts.find((p) => p.role==='foot' && p.object.userData.legIndex===index)!
     return { upper,lower,foot,index,upperLength:Number(upper.object.userData.segmentLength),lowerLength:Number(lower.object.userData.segmentLength),footHeight:Number(upper.object.userData.footHeight) }
   })
-  return { root,parts,legs,coats,ears }
+  return { root,parts,legs,coats,ears,muzzle }
 }
 
 export function createAnimalMotion(model: Group, mounted = false) {
@@ -54,6 +72,7 @@ export function createAnimalMotion(model: Group, mounted = false) {
   if (!original) return undefined
   const species = mounted ? 'horse' : String(original.userData.faunaSpecies)
   const bird = species==='chicken' || species==='duck'
+  const rabbit = species==='rabbit'
   const gaitStride = Number(original.userData.gaitStride ?? (bird ? .075 : .19))
   const gaitFrequency = Number(original.userData.gaitFrequency ?? (bird ? 1.9 : 1.15))
   const gaitLift = Number(original.userData.gaitLift ?? (bird ? .048 : .09))
@@ -92,8 +111,10 @@ export function createAnimalMotion(model: Group, mounted = false) {
     const firstLeg = animal.legs[0]
     const legFactor = firstLeg.upper.youngScale.y+(1-firstLeg.upper.youngScale.y)*growth
     const legReach = (firstLeg.upperLength+firstLeg.lowerLength)*legFactor
+    const hop = rabbit ? sampleRabbitHop(elapsed*gaitFrequency+index*.13) : undefined
+    const hopHeight = hop ? hop.body*legFactor*blend.walk : 0
     const maxStride = gaitStride*legFactor*blend.walk
-    const crouch = legReach-Math.sqrt(Math.max(.001,legReach*legReach-maxStride*maxStride))+.001*blend.walk
+    const crouch = rabbit ? -hopHeight : legReach-Math.sqrt(Math.max(.001,legReach*legReach-maxStride*maxStride))+.001*blend.walk
     for (const part of animal.parts) {
       const { object,role } = part
       object.position.copy(part.youngPosition).lerp(part.position,growth)
@@ -133,11 +154,12 @@ export function createAnimalMotion(model: Group, mounted = false) {
       const a = leg.upperLength*factor, b = leg.lowerLength*factor, height = leg.footHeight*factor
       const phase = (elapsed*gaitFrequency+(mounted ? [0,.5,.25,.75][leg.index] : leg.index*.5+Math.floor(leg.index/2)*.5)+index*.13)%1
       const stride = gaitStride*factor
-      const forward = blend.walk*(phase<.62 ? stride*(1-2*phase/.62) : stride*(-1+2*(phase-.62)/.38))
-      const lift = phase<.62 ? 0 : blend.walk*Math.sin((phase-.62)/.38*Math.PI)*gaitLift*factor
-      const solution = solveAnimalLeg(a,b,forward,a+b-crouch-lift)
+      const forward = hop ? blend.walk*factor*(leg.index<2 ? hop.frontForward : hop.hindForward) : blend.walk*(phase<.62 ? stride*(1-2*phase/.62) : stride*(-1+2*(phase-.62)/.38))
+      const lift = hop ? blend.walk*factor*(leg.index<2 ? hop.frontLift : hop.hindLift) : phase<.62 ? 0 : blend.walk*Math.sin((phase-.62)/.38*Math.PI)*gaitLift*factor
+      const restDrop = rabbit ? Number(upper.object.userData.restDrop)*factor : a+b
+      const solution = solveAnimalLeg(a,b,forward,restDrop-crouch-lift,rabbit ? Number(upper.object.userData.kneeBend) : -1)
       const hip = upper.object.position
-      hip.y=a+b+height-crouch
+      hip.y=restDrop+height-crouch
       angles.set(solution.upperAngle,0,0); motion.setFromEuler(angles)
       upper.object.quaternion.copy(upper.rotation).multiply(motion)
       lower.object.position.set(hip.x,hip.y+solution.kneeY,hip.z+solution.kneeZ)
@@ -148,8 +170,18 @@ export function createAnimalMotion(model: Group, mounted = false) {
     if (bird) for (const [material,adult] of animal.coats) material.color.copy(chick).lerp(adult,smooth((progress-.2)/.55))
     if (juvenileCoat) for (const [material,adult] of animal.coats) material.color.copy(adult).lerp(juvenileCoat,.58*(1-smooth((progress-.18)/.60)))
     for (const ear of animal.ears) {
-      angles.set(0,0,Math.sin(elapsed*2.1+index+ear.side*.8)*.08*ear.side)
+      angles.set(ear.rabbit ? -.20*blend.walk+.055*Math.sin(elapsed*1.7+ear.side) : 0,0,Math.sin(elapsed*2.1+index+ear.side*.8)*.08*ear.side)
       ear.object.quaternion.copy(ear.rotation).multiply(motion.setFromEuler(angles))
+      ear.object.scale.copy(ear.scale)
+      if (ear.rabbit) ear.object.scale.y*=.60+.40*growth
+    }
+    for (const part of animal.muzzle) {
+      part.object.position.copy(part.position)
+      part.object.quaternion.copy(part.rotation)
+      if(part.jaw) {
+        angles.set(blend.graze*(.025+.025*Math.sin(elapsed*14)),0,0)
+        part.object.quaternion.multiply(motion.setFromEuler(angles))
+      } else part.object.position.y+=.002*(1+blend.graze)*Math.sin(elapsed*11)
     }
   }
 

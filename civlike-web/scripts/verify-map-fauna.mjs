@@ -3,10 +3,10 @@ import { mkdir, writeFile } from 'node:fs/promises'
 import assert from 'node:assert/strict'
 
 const requested=process.argv.slice(2)
-const species=['sheep-v5','cow','horse','chicken','goat','pig','duck','deer','fox','wolf']
+const species=['sheep-v5','cow','horse','chicken','goat','pig','duck','deer','fox','wolf','rabbit']
 assert(requested.every((id)=>species.includes(id)),'Unknown animal')
 const selected=requested.length ? requested : species
-const output=requested.length ? 'artifacts/map-elements/canids' : 'artifacts/map-elements/fauna'
+const output=requested.length===1 && requested[0]==='rabbit' ? 'artifacts/map-elements/rabbit' : requested.length ? 'artifacts/map-elements/canids' : 'artifacts/map-elements/fauna'
 await mkdir(output,{ recursive:true })
 const browser=await chromium.launch()
 const page=await browser.newPage({ viewport:{ width:1440,height:1000 },reducedMotion:'no-preference' })
@@ -66,12 +66,28 @@ try {
       await snapshot(`${id}-${view}`)
     }
     await page.getByRole('button',{ name:'自由视角',exact:true }).click()
-    await page.getByRole('button',{ name:'行走',exact:true }).click()
+    await page.getByRole('button',{ name:id==='rabbit' ? '跳跃' : '行走',exact:true }).click()
     await page.getByRole('button',{ name:'播放动画',exact:true }).click()
     const walking=await pixels()
     await page.waitForTimeout(380)
     assert.notEqual((await pixels()).hash,walking.hash,`${id}: walk static`)
     await snapshot(`${id}-walk`)
+    if(id==='rabbit') {
+      const hopping=[]
+      for(let sample=0;sample<8;sample++) {
+        await page.waitForTimeout(95)
+        const pose=await pixels()
+        assert(pose.framed && pose.coverage>.007,'Rabbit hop blank/clipped')
+        hopping.push(pose.hash)
+        await snapshot(`${id}-hop-${sample}`)
+      }
+      assert(new Set(hopping).size>=6,'Rabbit hop poses do not change')
+      await page.getByRole('button',{name:'暂停动画',exact:true}).click()
+      const frozen=await pixels()
+      await page.waitForTimeout(400)
+      assert.equal((await pixels()).hash,frozen.hash,'Rabbit hop did not pause')
+      await page.getByRole('button',{name:'播放动画',exact:true}).click()
+    }
     await page.getByRole('button',{ name:['fox','wolf'].includes(id) ? '嗅闻' : id==='chicken' ? '啄食' : '采食',exact:true }).click()
     await page.waitForTimeout(1400)
     await snapshot(`${id}-feed`)
@@ -93,7 +109,7 @@ try {
     const drawCalls=Number(await page.locator('.element-stage').getAttribute('data-draw-calls'))
     assert(drawCalls<450,`${id}: family draw-call budget`)
     await snapshot(`${id}-family`)
-    if (['chicken','duck','fox','wolf'].includes(id)) {
+    if (['chicken','duck','fox','wolf','rabbit'].includes(id)) {
       await page.getByRole('button',{ name:'播放动画',exact:true }).click()
       await page.waitForFunction(() => JSON.parse(document.querySelector('.element-stage').dataset.animals).offspringAge>=.99,{},{ timeout:80000 })
       await page.getByRole('button',{ name:'暂停动画',exact:true }).click()

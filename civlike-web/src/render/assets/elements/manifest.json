@@ -1992,6 +1992,26 @@
         ]
       ],
       "glbBytes": 933864
+    },
+    {
+      "id": "rabbit",
+      "reference": "",
+      "triangles": 3100,
+      "meshObjects": 22,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -0.1729,
+          -0.363,
+          0.0
+        ],
+        [
+          0.1729,
+          0.334,
+          0.575
+        ]
+      ],
+      "glbBytes": 284324
     }
   ]
 }

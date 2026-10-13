@@ -489,7 +489,12 @@
       "id": "amphitheater",
       "sourceObjects": 783,
       "roundTripTriangles": 16840
+    },
+    {
+      "id": "rabbit",
+      "sourceObjects": 80,
+      "roundTripTriangles": 3100
     }
   ],
-  "passed": 98
+  "passed": 99
 }

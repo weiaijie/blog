@@ -1,0 +1,30 @@
+{
+  "results": [
+    {
+      "id": "rabbit",
+      "young": {
+        "hash": 623039500,
+        "coverage": 0.016443355119825708,
+        "framed": true
+      },
+      "adult": {
+        "hash": 2382274340,
+        "coverage": 0.041230936819172115,
+        "framed": true
+      },
+      "family": {
+        "hash": 3093822693,
+        "coverage": 0.020059912854030502,
+        "framed": true
+      },
+      "mobile": {
+        "hash": 503822002,
+        "coverage": 0.04786324786324787,
+        "framed": true
+      },
+      "drawCalls": 102
+    }
+  ],
+  "errors": [],
+  "writeRetries": []
+}
