@@ -41,7 +41,7 @@ async function pixels() {
   })
 }
 try {
-  for(const id of requested.length ? requested : ['cottage','barn','windmill','watermill','watchtower','castle-keep','castle-gate','castle-wall','stable','blacksmith','market-hall']) {
+  for(const id of requested.length ? requested : ['cottage','barn','windmill','watermill','watchtower','castle-keep','castle-gate','castle-wall','stable','blacksmith','market-hall','train-station','factory']) {
     await page.setViewportSize({ width:1440,height:1000 })
     await page.goto(`http://127.0.0.1:5173/?view=map-elements&element=${id}`)
     await page.waitForSelector('.element-stage[data-loaded="true"][data-building]')
@@ -64,7 +64,7 @@ try {
     const upgraded=await pixels()
     assert(upgraded.framed && upgraded.hash!==base.hash,`${id}: upgrade missing/clipped`)
     await shot(`${id}-upgraded`)
-    if(['stable','blacksmith','market-hall'].includes(id)){
+    if(['stable','blacksmith','market-hall','train-station','factory'].includes(id)){
       await page.getByRole('button',{name:'屋顶剖面',exact:true}).click()
       await page.waitForTimeout(300)
       const interior=await pixels();assert(interior.framed&&interior.hash!==upgraded.hash,`${id}: roof inspection has no effect`)
@@ -134,6 +134,16 @@ try {
     assert((await page.getByLabel('下载 GLB',{exact:true}).getAttribute('download')).includes(id))
     await shot(`${id}-mobile-320`,true)
     await page.setViewportSize({ width:390,height:844 })
+    if(id==='train-station'){
+      await page.getByLabel('发车信号',{exact:true}).check()
+      await page.waitForFunction(()=>JSON.parse(document.querySelector('.element-stage').dataset.building).access===1,{},{timeout:15000})
+      assert(await page.getByText('允许通行',{exact:true}).isVisible())
+      await page.getByRole('button',{name:'暂停动画',exact:true}).click()
+      await page.waitForTimeout(150);assert((await pixels()).framed,'Station signal clipped');await shot('train-station-signal-open',true)
+      await page.getByLabel('发车信号',{exact:true}).uncheck()
+      await page.waitForFunction(()=>JSON.parse(document.querySelector('.element-stage').dataset.building).access===0,{},{timeout:15000})
+      assert(await page.getByText('停车信号',{exact:true}).isVisible())
+    }
     if (id==='castle-gate') {
       await page.getByLabel('开启通道',{ exact:true }).check()
       await page.waitForFunction(() => JSON.parse(document.querySelector('.element-stage').dataset.building).access===1,{},{ timeout:15000 })

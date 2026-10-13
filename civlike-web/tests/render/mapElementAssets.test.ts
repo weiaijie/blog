@@ -5,9 +5,9 @@ import { mapElementRoadmap } from '../../src/render/assets/mapElementRoadmap'
 
 describe('C-style Blender element kit', () => {
   it('counts modeled families separately from roadmap entries and revisions', () => {
-    expect(manifest.assets).toHaveLength(82)
-    expect(new Set(manifest.assets.map((a) => a.id)).size).toBe(82)
-    expect(new Set(manifest.assets.map((a) => a.id.replace(/-v\d+$/, ''))).size).toBe(73)
+    expect(manifest.assets).toHaveLength(84)
+    expect(new Set(manifest.assets.map((a) => a.id)).size).toBe(84)
+    expect(new Set(manifest.assets.map((a) => a.id.replace(/-v\d+$/, ''))).size).toBe(75)
     expect(mapElementRoadmap).toHaveLength(108)
     expect(new Set(mapElementRoadmap.map((a) => a.id)).size).toBe(108)
     for (const asset of manifest.assets) expect(mapElementRoadmap.some((a) => a.id === asset.id.replace(/-v\d+$/, ''))).toBe(true)

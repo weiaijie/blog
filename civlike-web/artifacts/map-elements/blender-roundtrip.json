@@ -409,7 +409,17 @@
       "id": "market-hall",
       "sourceObjects": 335,
       "roundTripTriangles": 9620
+    },
+    {
+      "id": "train-station",
+      "sourceObjects": 435,
+      "roundTripTriangles": 14604
+    },
+    {
+      "id": "factory",
+      "sourceObjects": 451,
+      "roundTripTriangles": 15273
     }
   ],
-  "passed": 82
+  "passed": 84
 }

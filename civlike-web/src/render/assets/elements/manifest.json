@@ -1672,6 +1672,46 @@
         ]
       ],
       "glbBytes": 770528
+    },
+    {
+      "id": "train-station",
+      "reference": "",
+      "triangles": 14604,
+      "meshObjects": 53,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -3.31,
+          -3.8,
+          0.0
+        ],
+        [
+          3.17,
+          3.8,
+          2.9798
+        ]
+      ],
+      "glbBytes": 1095008
+    },
+    {
+      "id": "factory",
+      "reference": "",
+      "triangles": 15273,
+      "meshObjects": 58,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -4.36,
+          -2.3,
+          0.0
+        ],
+        [
+          3.58,
+          2.3,
+          3.28
+        ]
+      ],
+      "glbBytes": 1098072
     }
   ]
 }

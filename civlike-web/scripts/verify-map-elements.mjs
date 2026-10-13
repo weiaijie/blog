@@ -234,7 +234,7 @@ try {
   }
   await page.getByRole('button', { name:'资产进度', exact:true }).click()
   assert.equal(await page.locator('.element-roadmap li').count(),108)
-  assert.equal(await page.locator('.element-roadmap li button:enabled').count(),73)
+  assert.equal(await page.locator('.element-roadmap li button:enabled').count(),75)
   await screenshot('roadmap')
   await page.setViewportSize({ width:390,height:844 })
   assert(await page.evaluate(() => document.querySelector('.element-roadmap').scrollWidth <= innerWidth), 'Mobile roadmap overflow')

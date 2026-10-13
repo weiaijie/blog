@@ -46,7 +46,7 @@ export function createBuildingMotion(model: Group) {
     })
   }
   let settings={ ...defaultBuildingSettings }, progress=1, elapsed=0, access=0
-  const hasGate=parts.some((part) => part.motion==='lift')
+  const hasGate=parts.some((part) => part.motion==='lift' || part.motion==='semaphore')
   const rotation=new Quaternion()
   const state: BuildingState={ progress,visible:0,operating:false,tier:1,access:0 }
   return {
@@ -83,6 +83,18 @@ export function createBuildingMotion(model: Group) {
         if (part.motion==='door') object.quaternion.multiply(rotation.setFromAxisAngle(part.axis,(.05+(1-Math.cos(elapsed*.65))*.32)*part.rate))
         if (part.motion==='sway') object.quaternion.multiply(rotation.setFromAxisAngle(part.axis,Math.sin(elapsed*.8)*.22))
         if (part.motion==='bellows') object.quaternion.multiply(rotation.setFromAxisAngle(part.axis,bellowsAngle))
+        if (part.motion==='semaphore') object.quaternion.multiply(rotation.setFromAxisAngle(part.axis,smooth(access)*Math.PI/4))
+        if (part.motion==='belt-loop') {
+          const data=object.userData,[left,right]=data.beltCenters as number[],r=Number(data.beltRadius),span=right-left,arc=Math.PI*r,length=2*span+2*arc
+          let distance=((Number(data.beltPhase)*length-elapsed*Number(data.beltSpeed))%length+length)%length
+          let x:number,y:number,angle:number
+          if(distance<arc){angle=-Math.PI/2+distance/r;x=right+r*Math.cos(angle);y=r*Math.sin(angle);angle+=Math.PI/2}
+          else if((distance-=arc)<span){x=right-distance;y=r;angle=Math.PI}
+          else if((distance-=span)<arc){angle=Math.PI/2+distance/r;x=left+r*Math.cos(angle);y=r*Math.sin(angle);angle+=Math.PI/2}
+          else {distance-=arc;x=left+distance;y=-r;angle=0}
+          object.position.set(x,Number(data.beltHeight)+y+(1-assembled)*.18,Number(data.beltDepth))
+          object.quaternion.setFromAxisAngle(new Vector3(0,0,1),angle)
+        }
         if (part.motion==='flow') object.position.addScaledVector(part.axis,((elapsed*.18+Number(object.userData.flowPhase))%1-.5)*5.0)
         if (part.motion==='lift') object.position.y+=gateLift*Number(object.userData.gateTravel)
         if (part.motion==='bridge') object.quaternion.multiply(rotation.setFromAxisAngle(part.axis,bridgeAngle))
