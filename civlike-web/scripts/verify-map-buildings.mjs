@@ -41,7 +41,7 @@ async function pixels() {
   })
 }
 try {
-  for(const id of requested.length ? requested : ['cottage','barn','windmill','watermill','watchtower','castle-keep','castle-gate','castle-wall','stable','blacksmith','market-hall','train-station','factory','stone-bridge','steel-bridge','aqueduct','irrigation-channel','inn','chapel','apartment','hospital']) {
+  for(const id of requested.length ? requested : ['cottage','barn','windmill','watermill','watchtower','castle-keep','castle-gate','castle-wall','stable','blacksmith','market-hall','train-station','factory','stone-bridge','steel-bridge','aqueduct','irrigation-channel','inn','chapel','apartment','hospital','town-hall','amphitheater']) {
     await page.setViewportSize({ width:1440,height:1000 })
     await page.goto(`http://127.0.0.1:5173/?view=map-elements&element=${id}`)
     await page.waitForSelector('.element-stage[data-loaded="true"][data-building]')
@@ -64,7 +64,7 @@ try {
     const upgraded=await pixels()
     assert(upgraded.framed && upgraded.hash!==base.hash,`${id}: upgrade missing/clipped`)
     await shot(`${id}-upgraded`)
-    if(['stable','blacksmith','market-hall','train-station','factory','inn','chapel','apartment','hospital'].includes(id)){
+    if(['stable','blacksmith','market-hall','train-station','factory','inn','chapel','apartment','hospital','town-hall'].includes(id)){
       await page.getByRole('button',{name:'屋顶剖面',exact:true}).click()
       await page.waitForTimeout(300)
       const interior=await pixels();assert(interior.framed&&interior.hash!==upgraded.hash,`${id}: roof inspection has no effect`)
@@ -72,7 +72,7 @@ try {
       await page.getByRole('button',{name:'播放动画',exact:true}).click();await page.waitForTimeout(300)
       assert.equal(await page.locator('.element-stage').getAttribute('data-cutaway'),'true')
       await page.getByRole('button',{name:'暂停动画',exact:true}).click()
-      if(['inn','chapel','apartment','hospital'].includes(id)){
+      if(['inn','chapel','apartment','hospital','town-hall'].includes(id)){
         await page.getByRole('button',{name:'俯视',exact:true}).click();await page.waitForTimeout(250)
         const top=await pixels();assert(top.coverage>.007&&top.framed&&top.hash!==interior.hash,`${id}: interior top view missing`)
         await shot(`${id}-interior-top`)

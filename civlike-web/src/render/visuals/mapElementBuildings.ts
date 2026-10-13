@@ -5,6 +5,7 @@ export type BuildingSettings = { progress: number; automatic: boolean; working: 
 export type BuildingState = { progress: number; visible: number; operating: boolean; tier: 1 | 2; access: number }
 export const defaultBuildingSettings: BuildingSettings = { progress: 1, automatic: false, working: true, speed: .6, tier: 1, gateOpen:false }
 export function buildingStage(progress: number, kind?: string) {
+  if(kind==='amphitheater')return progress<.15 ? '基础' : progress<.42 ? '看台' : progress<.62 ? '阶梯与拱廊' : progress<.90 ? '座席与布篷' : progress<.99 ? '收尾' : '竣工'
   if(kind==='irrigation-channel')return progress<.15 ? '基础' : progress<.42 ? '渠床' : progress<.62 ? '渠壁' : progress<.90 ? '水闸与附件' : progress<.99 ? '注水' : '竣工'
   if(kind==='aqueduct')return progress<.15 ? '基础' : progress<.42 ? '桥墩' : progress<.62 ? '承重结构' : progress<.90 ? '渠槽与附件' : progress<.99 ? '注水' : '竣工'
   if(kind==='stone-bridge'||kind==='steel-bridge')return progress<.15 ? '基础' : progress<.42 ? '桥墩' : progress<.62 ? '拱圈与承重' : progress<.90 ? '桥面与护栏' : progress<.99 ? '收尾' : '竣工'
@@ -22,7 +23,7 @@ export function createBuildingMotion(model: Group) {
   })
   if (!parts.length) return undefined
   const surfaces: { mesh: Mesh; base: Float32Array; motion: string; min: number; span: number }[]=[]
-  for (const part of parts.filter((part) => part.motion==='banner' || part.motion==='chain' || part.motion==='awning')) {
+  for (const part of parts.filter((part) => part.motion==='banner' || part.motion==='chain' || part.motion==='awning' || part.motion==='velarium')) {
     part.object.traverse((node) => {
       if (!(node instanceof Mesh)) return
       node.geometry=node.geometry.clone()
@@ -125,6 +126,10 @@ export function createBuildingMotion(model: Group) {
           if (motion==='banner') {
             const t=(x-min)/span
             attribute.setXYZ(i,x,y,z+.09*t*Math.sin(elapsed*3.5-t*7+y*1.2))
+          } else if(motion==='velarium') {
+            const uv=mesh.geometry.attributes.uv,u=uv.getX(i),v=uv.getY(i)
+            const pinned=Math.sin(Math.PI*u)*Math.sin(Math.PI*v)
+            attribute.setXYZ(i,x,y+.045*pinned*Math.sin(elapsed*3-u*5-v*4),z)
           } else if(motion==='awning') {
             const t=(z-min)/span
             attribute.setXYZ(i,x,y+.055*4*t*(1-t)*Math.sin(elapsed*3-x*2-t*5),z)

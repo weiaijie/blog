@@ -1952,6 +1952,46 @@
         ]
       ],
       "glbBytes": 958484
+    },
+    {
+      "id": "town-hall",
+      "reference": "",
+      "triangles": 12426,
+      "meshObjects": 41,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -4.7,
+          -5.36,
+          0.0
+        ],
+        [
+          4.46,
+          3.3,
+          7.16
+        ]
+      ],
+      "glbBytes": 860640
+    },
+    {
+      "id": "amphitheater",
+      "reference": "",
+      "triangles": 16840,
+      "meshObjects": 31,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -9.176,
+          -7.4,
+          0.0
+        ],
+        [
+          9.176,
+          7.4,
+          4.58
+        ]
+      ],
+      "glbBytes": 933864
     }
   ]
 }

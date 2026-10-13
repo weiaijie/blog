@@ -479,7 +479,17 @@
       "id": "hospital",
       "sourceObjects": 581,
       "roundTripTriangles": 11696
+    },
+    {
+      "id": "town-hall",
+      "sourceObjects": 987,
+      "roundTripTriangles": 12426
+    },
+    {
+      "id": "amphitheater",
+      "sourceObjects": 783,
+      "roundTripTriangles": 16840
     }
   ],
-  "passed": 96
+  "passed": 98
 }

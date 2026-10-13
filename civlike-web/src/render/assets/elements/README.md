@@ -446,6 +446,15 @@ npm run build
 - `.blend` 保留可编辑构件，GLB 保存分组、运动参数和入口接点；运行时动作由网页驱动，不是通用查看器内置动画。这是虚构游戏建筑，不宣称符合现实建筑或医疗规范；暂未实现电梯、住户/患者行为、完整室内导航或建筑服务模拟。
 - 几何测试检查实际门洞、每级踏面、上层平台、走廊、阳台开门空间和运动边界。页面：`/?view=map-elements&element=apartment`、`/?view=map-elements&element=hospital`，复用现有预览标签。
 
+## 第二十六批公共建筑
+
+- `town-hall`：砖砌单层议事厅、分格窗、双扇入口、柱廊和三角门楣、独立钟楼及双指针、六张议事桌、座椅、账册与讲台。中央通道不被桌席或钟楼支承占用；屋顶可隐藏检查内部。升级入口花池。
+- `amphitheater`：椭圆场地、五排分区石座、四条独立看台阶梯、上层步道、24 个真实拱孔和四个贯通地面入口。入口与看台楼梯分开，不让高看台或实体假拱堵住入口；升级八片分区遮篷和独立支架。
+- 旗帜沿杆边固定，钟面分针与时针按 12:1 缩时旋转，入口门叶独立开合。布篷 `velarium` 通过 UV 固定四边，只有内部起伏，无累计位置漂移；暂停、零速和功能停止均冻结。沿用分件施工、回退、自动施工及升级，不将建筑统一放大。
+- 米制 `.blend` 保留可编辑构件，GLB 带入口方向/净宽、施工和运动元数据。动画由网页驱动，未烘焙成通用 GLB 剪辑。尚无议事/娱乐经济、观众入席、群众避让、完整建筑规范验算或地图 LOD。
+- 结构参考：[AMI Pula 圆形剧场](https://www.ami-pula.hr/en/locations/amphitheater/)、[NPS 议事厅](https://www.nps.gov/inde/learn/historyculture/places-independencehall-assemblyroom.htm)、[NPS 钟楼](https://www.nps.gov/inde/learn/historyculture/tower-faqs.htm)。只参考场地、布篷、议事桌席与钟面构件关系，不复制历史尺度、布局或第三方网格/贴图。这里是虚构游戏建筑。
+- 页面：`/?view=map-elements&element=town-hall`、`/?view=map-elements&element=amphitheater`。继续复用现有模型库标签。
+
 ## 后续工作
 
 - 与设计稿继续比对轮廓和细节，尤其是植被叶簇、屋瓦、水井附件和动物面部。
