@@ -4,11 +4,11 @@ import { WATER_LEVEL, WORLD_LAYOUT_SCALE, WORLD_SUBDIVISIONS, clipWaterTriangle,
 describe('C-style continuous terrain', () => {
   const tiles = createWorldTiles()
   const edges = getWorldEdges(tiles)
-  it('builds 217 tiles with shared internal edges and only an external cutaway', () => {
-    expect(tiles).toHaveLength(217)
-    expect(new Set(tiles.map((tile) => tile.id)).size).toBe(217)
-    expect(edges.filter((edge) => edge.tiles.length === 1)).toHaveLength(102)
-    expect(edges.filter((edge) => edge.tiles.length === 2)).toHaveLength(600)
+  it('builds 469 tiles with shared internal edges and only an external cutaway', () => {
+    expect(tiles).toHaveLength(469)
+    expect(new Set(tiles.map((tile) => tile.id)).size).toBe(469)
+    expect(edges.filter((edge) => edge.tiles.length === 1)).toHaveLength(150)
+    expect(edges.filter((edge) => edge.tiles.length === 2)).toHaveLength(1332)
     expect(edges.every((edge) => edge.tiles.length <= 2)).toBe(true)
   })
   it.each([20261011, 1, 999999999])('keeps all sampled shared edges identical with seed %i', (seed) => {

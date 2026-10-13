@@ -4,7 +4,7 @@ import { getTerrainSeason, snowCover, terrainBiome, terrainGroundColor, TERRAIN_
 
 describe('visual biome and seasonal layers', () => {
   const tiles=createWorldTiles()
-  it.each([569575877,337863546,20261011,1,999999999])('represents diverse seed-dependent biomes in 217 cells for seed %i', (seed)=> {
+  it.each([569575877,337863546,20261011,1,999999999])('represents diverse seed-dependent biomes in 469 cells for seed %i', (seed)=> {
     const field=createTerrainField(seed)
     const present=new Set(tiles.map(({center})=>terrainBiome(field.sample(center.x,center.z))))
     expect(present.size).toBeGreaterThanOrEqual(11)

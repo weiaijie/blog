@@ -52,8 +52,12 @@ export function createCivilizationPlan(field: TerrainField, sample: SurfaceSampl
   const random=seededRandom(field.seed^0x774acc)
   const graph=createGraph<GroundSample,{cost:number;bridge:boolean}>()
   const nodes: GroundSample[]=[]
+  const tiles=createWorldTiles()
+  const corners=tiles.flatMap((tile)=>tile.corners)
+  const extentX=Math.ceil(Math.max(...corners.map((p)=>Math.abs(p.x)))*2)/2
+  const extentZ=Math.ceil(Math.max(...corners.map((p)=>Math.abs(p.z)))*2)/2
   // A fine graph follows the rendered ground. Only the explicit bridge may cross water.
-  for(let x=-16;x<=16;x+=0.5) for(let z=-14;z<=14;z+=0.5) {
+  for(let x=-extentX;x<=extentX;x+=0.5) for(let z=-extentZ;z<=extentZ;z+=0.5) {
     const s=sample(x,z)
     if(s && s.height>WATER_LEVEL+0.06 && s.rock<0.55 && s.shore>0.36 && s.wetland<0.6) {
       nodes.push(s); graph.addNode(key(s),s)
@@ -69,18 +73,18 @@ export function createCivilizationPlan(field: TerrainField, sample: SurfaceSampl
     }
     if(safe) graph.addLink(key(a),key(b),{cost:distance(a,b)*(1+(a.forest+b.forest)*0.35)+Math.abs(a.height-b.height)*7,bridge:false})
   }
-  for(const bridgeZ of [-10,-7.5,-5,-2.5,0,2.5,5,7.5,10]) {
+  const bridgeReach=Math.floor(extentZ/2.5)*2.5
+  for(let bridgeZ=-bridgeReach;bridgeZ<=bridgeReach;bridgeZ+=2.5) {
     const bank=(side:number)=>nodes.filter((p)=>p.z===bridgeZ && (p.x-field.riverX(bridgeZ))*side>0 && p.shore>0.65)
       .sort((a,b)=>Math.abs(a.x-field.riverX(bridgeZ))-Math.abs(b.x-field.riverX(bridgeZ)))[0]
     const left=bank(-1),right=bank(1)
-    if(left && right && distance(left,right)<4.8 && Math.abs(left.height-right.height)<0.3
+    if(left && right && distance(left,right)<field.riverWidth(bridgeZ)*2+2 && Math.abs(left.height-right.height)<0.3
       && (sample((left.x+right.x)/2,bridgeZ)?.height??1)<WATER_LEVEL) {
       graph.addLink(key(left),key(right),{cost:distance(left,right)*1.2,bridge:true})
     }
   }
   const finder=aStar(graph,{distance:(_a,_b,link)=>link.data.cost,heuristic:(a,b)=>distance(a.data,b.data)})
   const plan: CivilizationPlan={places:[],roads:[],buildings:[],farms:[],docks:[]}
-  const tiles=createWorldTiles()
   const candidates=tiles.flatMap((tile)=> {
     const center=sample(tile.center.x,tile.center.z)
     if(!center || !footprint(sample,center,1.65,1.65,0.38) || center.rock>0.3) return []
@@ -118,7 +122,9 @@ export function createCivilizationPlan(field: TerrainField, sample: SurfaceSampl
       const habitat=anchor.kind==='lumber'?-p.forest*5:anchor.kind==='harbor'?p.shore*1.5:anchor.kind==='quarry'||anchor.kind==='lookout'?-p.height*2: p.dry+p.forest*0.3
       return habitat+c.rank*3
     }
-    const chosen=candidates.filter((c)=>components.get(key(c.center))===mainland && plan.places.every((place)=>distance(c.center,place.center)>2.9))
+    const chosen=candidates.filter((c)=>components.get(key(c.center))===mainland
+      && (anchor.kind!=='town' || footprint(sample,c.center,1.65,1.65,0.16))
+      && plan.places.every((place)=>distance(c.center,place.center)>2.9))
       .sort((a,b)=>score(a)-score(b)).find((c)=>!plan.places.length || finder.find(key(c.center),key(plan.places[0].center)).length>0)
     if(!chosen) continue
     const candidate=chosen.center
@@ -183,7 +189,7 @@ export function createCivilizationPlan(field: TerrainField, sample: SurfaceSampl
     }
   }
   for(const {tile,center} of [...candidates].sort((a,b)=>a.rank-b.rank)) {
-    if(plan.farms.length>=12) break
+    if(plan.farms.length>=24) break
     if(center.desert>0.3 || center.badlands>0.3 || plan.places.some((p)=>p.tileId===tile.id)
       || !plan.places.some((p)=>distance(p.center,center)<5)) continue
     const corners=[[-0.65,-0.55],[-0.65,0.55],[0.65,-0.55],[0.65,0.55]].map(([x,z])=>({x:center.x+x,z:center.z+z}))

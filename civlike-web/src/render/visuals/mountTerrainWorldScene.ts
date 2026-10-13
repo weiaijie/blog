@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import {
-  WATER_LEVEL, clipWaterTriangle, createTerrainField, createTerrainSurface, createWorldTiles, edgePoints,
+  WATER_LEVEL, WORLD_TILE_RADIUS, clipWaterTriangle, createTerrainField, createTerrainSurface, createWorldTiles, edgePoints,
   getWorldEdges, randomTilePoint, seededRandom, smoothstep,
   type GroundSample, type WorldTile,
 } from './terrainWorld'
@@ -67,6 +67,7 @@ export function mountTerrainWorldScene(
 ): TerrainWorldHandle {
   const field = createTerrainField(seed)
   const tiles = createWorldTiles()
+  const viewScale = WORLD_TILE_RADIUS / 8
   const surface = createTerrainSurface(field, tiles)
   const civilization = createCivilizationPlan(field, surface.sample)
   const edges = getWorldEdges(tiles)
@@ -131,8 +132,10 @@ export function mountTerrainWorldScene(
   const sun = new THREE.DirectionalLight(0xfff2d5, 3.0)
   sun.position.set(-18, 32, 15)
   sun.castShadow = true
-  sun.shadow.mapSize.set(4096, 4096)
-  Object.assign(sun.shadow.camera, { left: -24, right: 24, top: 24, bottom: -24, near: 0.5, far: 110 })
+  const shadowSize = host.clientWidth < 600 ? 1024 : 2048
+  sun.shadow.mapSize.set(shadowSize, shadowSize)
+  const shadowExtent = 24 * viewScale
+  Object.assign(sun.shadow.camera, { left: -shadowExtent, right: shadowExtent, top: shadowExtent, bottom: -shadowExtent, near: 0.5, far: 110 })
   sun.shadow.bias = -0.0002
   sun.shadow.normalBias = 0.016
   scene.add(sun)
@@ -281,7 +284,7 @@ export function mountTerrainWorldScene(
   const flowerColors = ['#fff8e4', '#f6d155', '#dfb7e5', '#efac73'].map((c) => new THREE.Color(c))
   const occupied: Instance[] = []
   for (const tile of tiles) {
-    for (let i = 0; i < 440; i++) {
+    for (let i = 0; i < 520; i++) {
       const point = randomTilePoint(tile, random), sample = surface.sample(point.x, point.z)
       if (civilizationOccupies(civilization, point)) continue
       if (sample && sample.wetland > 0.4 && sample.height < WATER_LEVEL && i < 28) {
@@ -355,6 +358,7 @@ export function mountTerrainWorldScene(
   const transform = new THREE.Object3D()
   type PropKind = 'broadleaf' | 'pine' | 'branch' | 'shrub' | 'grass' | 'flower' | 'reed' | 'fern' | 'rock' | 'cactus' | 'lily' | 'litter'
   const seasonalUpdates: ((value: TerrainSeason) => void)[] = []
+  const detailLayers: { near: THREE.InstancedMesh; far: THREE.InstancedMesh }[] = []
   function instances(geometry: THREE.BufferGeometry, material: THREE.Material, list: Instance[], wind = false, kind: PropKind = 'rock') {
     const mesh = new THREE.InstancedMesh(geometry, material, list.length)
     const snowAttribute = new THREE.InstancedBufferAttribute(new Float32Array(list.length), 1)
@@ -400,6 +404,14 @@ export function mountTerrainWorldScene(
     scene.add(mesh)
     return mesh
   }
+  function groundDetails(geometry: THREE.BufferGeometry, list: Instance[], kind: PropKind, wind = true) {
+    const near = instances(geometry, grassMaterial, list, wind, kind)
+    // Distant subpixel blades and petals use a stable sparse subset. Zooming in
+    // restores all detail without adding per-frame geometry or random changes.
+    const far = instances(geometry.clone(), grassMaterial, list.filter((_, index) => index % 3 === 0), wind, kind)
+    near.visible = false
+    detailLayers.push({ near, far })
+  }
   for (let variant = 0; variant < 4; variant++) {
     const select = (list: Instance[]) => list.filter((_, i) => i % 4 === variant)
     instances(createBroadleafGeometry(variant), leafMaterial, select(trees), true, 'broadleaf')
@@ -409,13 +421,13 @@ export function mountTerrainWorldScene(
   }
   instances(trunkGeometry, stemMaterial, pines, false, 'branch')
   instances(createBareTreeGeometry().scale(0.78,0.65,0.78), stemMaterial, trees, false, 'branch')
-  instances(createGrassGeometry(), grassMaterial, grass, true, 'grass')
-  instances(createFlowerGeometry(), grassMaterial, flowers, true, 'flower')
+  groundDetails(createGrassGeometry(), grass, 'grass')
+  groundDetails(createFlowerGeometry(), flowers, 'flower')
   instances(createReedGeometry(), grassMaterial, reeds, true, 'reed')
-  instances(createFernGeometry(), grassMaterial, ferns, true, 'fern')
+  groundDetails(createFernGeometry(), ferns, 'fern')
   instances(createCactusGeometry(), rockMaterial, cacti, false, 'cactus')
   instances(createLilyGeometry(), grassMaterial, lilies, true, 'lily')
-  instances(createLeafLitterGeometry(), grassMaterial, litter, false, 'litter')
+  groundDetails(createLeafLitterGeometry(), litter, 'litter', false)
 
   function applySeason(next: TerrainSeason) {
     season=next
@@ -475,7 +487,7 @@ export function mountTerrainWorldScene(
   function resize() {
     const width = Math.max(1, host.clientWidth), height = Math.max(1, host.clientHeight)
     renderer.setSize(width, height, false)
-    const vertical = Math.max(27.5, 39.5 / (width / height))
+    const vertical = Math.max(27.5, 39.5 / (width / height)) * viewScale
     camera.left = -vertical * width / height / 2
     camera.right = -camera.left
     camera.top = vertical / 2
@@ -487,7 +499,7 @@ export function mountTerrainWorldScene(
   resize()
   let frame = 0, previousTime = performance.now(), lastReport = 0, sceneryTime = 0, aquaticTime=0, lastSeasonUpdate=0
   const animate = (now: number) => {
-    const delta = Math.min((now - previousTime) / 1000, 0.05)
+    const delta = Math.max(0, Math.min((now - previousTime) / 1000, 0.05))
     previousTime = now
     if (settings.animated && !document.hidden) {
       uniforms.meadowTime.value += delta
@@ -500,6 +512,8 @@ export function mountTerrainWorldScene(
       }
     }
     controls.update()
+    const closeDetail = camera.zoom / viewScale >= 2
+    for (const layer of detailLayers) { layer.near.visible = closeDetail; layer.far.visible = !closeDetail }
     if(grid.visible) {
       const positions=grid.geometry.getAttribute('position')
       for(const p of waterGridPoints) positions.setY(p.index,sampleWaterHeight(p.x,p.z,flow.value,p.env,settings.waves,season.ice)+0.012)
@@ -513,6 +527,12 @@ export function mountTerrainWorldScene(
       host.dataset.simulationTime = uniforms.meadowTime.value.toFixed(3)
       host.dataset.flowTime = flow.value.toFixed(3)
       host.dataset.drawCalls = String(renderer.info.render.calls)
+      host.dataset.tiles = String(tiles.length)
+      host.dataset.trees = String(trees.length + pines.length)
+      host.dataset.grass = String(grass.length)
+      host.dataset.farms = String(civilization.farms.length)
+      host.dataset.shadowSize = String(shadowSize)
+      host.dataset.detailMode = closeDetail ? 'near' : 'far'
       host.dataset.triangles = String(renderer.info.render.triangles)
       host.dataset.buildings = String(civilization.buildings.length)
       host.dataset.windmills = String(scenery.rotors)
@@ -547,7 +567,7 @@ export function mountTerrainWorldScene(
     const y = Math.max(WATER_LEVEL, surface.sample(center.x, center.z)?.height ?? 0.3)
     controls.target.set(center.x, y, center.z)
     camera.position.set(center.x + 9, y + 31, center.z + 48)
-    camera.zoom = 3.8
+    camera.zoom = 3.8 * viewScale
     camera.updateProjectionMatrix()
     controls.update()
   }
@@ -576,7 +596,7 @@ export function mountTerrainWorldScene(
       controls.target.set(x,height,z)
       camera.position.set(x+9,height+31,z+48)
       selectTile(tiles.find((tile)=>tile.id===place.tileId)!,place.center)
-      camera.zoom=10
+      camera.zoom=10 * viewScale
       camera.updateProjectionMatrix();controls.update()
     },
     focusLife: (kind) => {
@@ -584,7 +604,7 @@ export function mountTerrainWorldScene(
       const p=kind==='fish'?(center?{...center,height:WATER_LEVEL}:null):life.position(kind,uniforms.meadowTime.value)
       if(!p) return
       controls.target.set(p.x,p.height,p.z);camera.position.set(p.x+9,p.height+31,p.z+48)
-      camera.zoom=kind==='fish'?10:12;camera.updateProjectionMatrix();controls.update()
+      camera.zoom=Math.min(16,(kind==='fish'?10:12)*viewScale);camera.updateProjectionMatrix();controls.update()
     },
     destroy: () => {
       cancelAnimationFrame(frame)

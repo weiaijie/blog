@@ -4,6 +4,7 @@ import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js
 import { snowCover, type TerrainSeason } from './terrainWorldClimate'
 import { type GroundSample } from './terrainWorld'
 import { roadDistance, type CivilizationPlan, type SurfaceSampler } from './terrainWorldCivilization'
+import { createBroadleafGeometry } from './terrainWorldModels'
 
 type Finish = 'wall' | 'roof' | 'wood' | 'stone' | 'road' | 'crop' | 'soil' | 'orchard' | 'fruit'
 type Piece = { geometry: THREE.BufferGeometry; color: THREE.Color; sample: GroundSample; finish: Finish }
@@ -34,6 +35,13 @@ export function createWorldScenery(plan: CivilizationPlan, sample: SurfaceSample
     const shape=new THREE.Shape().moveTo(-w/2,0).lineTo(w/2,0).lineTo(0,h).closePath()
     const geo=new THREE.ExtrudeGeometry(shape,{depth:d,bevelEnabled:false,steps:1})
     add(geo.translate(x,y,z-d/2),color,'roof')
+    // Raised courses and a ridge cap keep small rooftops legible in close views.
+    const trim=new THREE.Color(color).multiplyScalar(0.78).getStyle()
+    box(x,y+h+0.008,z,0.035,0.025,d+0.025,trim,'roof')
+    for(const side of [-1,1]) for(let course=1;course<=3;course++) {
+      const px=x+side*w*course/8,py=y+h*(1-course/4)+0.009
+      box(px,py,z,0.023,0.018,d+0.015,trim,'roof')
+    }
   }
   function setFrame(x:number,y:number,z:number,angle=0,size=1) {
     transform.position.set(x,y,z);transform.rotation.set(0,angle,0);transform.scale.setScalar(size);transform.updateMatrix();frame=transform.matrix.clone()
@@ -180,10 +188,17 @@ export function createWorldScenery(plan: CivilizationPlan, sample: SurfaceSample
       box(side*w/2,h/2+0.08,d/2+0.012,0.035,h,0.035,wood)
       box(side*0.2,h*0.62,d/2+0.015,0.12,0.15,0.025,'#334e52')
       box(side*0.2,h*0.62,d/2+0.03,0.012,0.15,0.025,wall,'wall')
+      box(side*0.2,h*0.62-0.085,d/2+0.036,0.17,0.025,0.06,wood)
+      for(const shutter of [-1,1]) box(side*0.2+shutter*0.08,h*0.62,d/2+0.033,0.028,0.17,0.02,roofColor,'wood')
     }
     box(0,0.23,d/2+0.02,0.15,0.31,0.03,wood)
+    box(0,0.035,d/2+0.065,0.21,0.04,0.10,stone,'stone')
+    box(0,0.405,d/2+0.035,0.20,0.028,0.035,wood)
+    box(0.045,0.23,d/2+0.041,0.014,0.025,0.014,'#c5ae72','wood')
     box(0,h*0.42,d/2+0.014,w,0.035,0.025,wood)
     box(0.19,h+0.23,-0.14,0.13,0.35,0.13,stone,'stone')
+    box(0.19,h+0.405,-0.14,0.16,0.035,0.16,'#b7ad97','stone')
+    box(0.19,h+0.425,-0.14,0.08,0.006,0.08,'#454444','stone')
     for(const side of [-1,1]) {
       box(side*(w/2+0.012),h*0.62,0,0.025,0.16,0.14,'#334e52')
       box(side*(w/2+0.03),h*0.62,0,0.012,0.16,0.015,wall,'wall')
@@ -238,7 +253,9 @@ export function createWorldScenery(plan: CivilizationPlan, sample: SurfaceSample
       for(let row=0;row<2;row++) for(let j=0;j<3;j++) {
         const px=x-farm.width*0.27+row*farm.width*0.54,pz=z-farm.depth*0.32+j*farm.depth*0.32,y=sample(px,pz)!.height
         cylinder(px,y+0.12,pz,0.012,0.023,0.24,wood,'wood',5)
-        add(new THREE.IcosahedronGeometry(0.15,0).scale(1,1.15,1).translate(px,y+0.26,pz),'#729849','orchard')
+        const canopy=createBroadleafGeometry((row+j)%4).scale(0.19,0.19,0.19).translate(px,y+0.12,pz)
+        canopy.deleteAttribute('color')
+        add(canopy,'#729849','orchard')
         for(const side of [-1,1]) add(new THREE.IcosahedronGeometry(0.02,0).translate(px+side*0.11,y+0.25,pz+0.06),'#bd6748','fruit')
       }
     } else {
@@ -246,6 +263,7 @@ export function createWorldScenery(plan: CivilizationPlan, sample: SurfaceSample
       const px=x-farm.width/2+farm.width*(row+0.5)/6
       patch(px,z,0.075,farm.depth-0.15,['#bfc16c','#759555','#caaa54'][farm.crop],'crop',0.035)
       for(let j=0;j<10;j++) {
+        if(farm.crop===0 && row>=4 && j>=8) continue
         const pz=z-farm.depth/2+farm.depth*(j+0.5)/10,y=sample(px,pz)!.height
         if(farm.crop===0) {
           box(px,y+0.065,pz,0.012,0.07,0.012,'#b9b16a','crop')
@@ -256,8 +274,18 @@ export function createWorldScenery(plan: CivilizationPlan, sample: SurfaceSample
       }
     }
     }
+    if(farm.crop===0) for(let bundle=0;bundle<3;bundle++) {
+      const px=x+0.33+bundle*0.11,pz=z+farm.depth*0.35,y=sample(px,pz)!.height
+      cylinder(px,y+0.075,pz,0.026,0.054,0.15,'#c7ad64','crop',6)
+      cylinder(px,y+0.07,pz,0.034,0.034,0.016,wood,'wood',6)
+    }
     fence(x-farm.width/2-0.04,z-farm.depth/2-0.04,farm.width+0.08,true)
     fence(x-farm.width/2-0.04,z-farm.depth/2-0.04,farm.depth+0.08,false)
+    // Leave a farm gate in the opposite edge; complete the enclosure around it.
+    fence(x+farm.width/2+0.04,z-farm.depth/2-0.04,farm.depth+0.08,false)
+    const span=(farm.width-0.22)/2
+    fence(x-farm.width/2-0.04,z+farm.depth/2+0.04,span,true)
+    fence(x+0.15,z+farm.depth/2+0.04,span,true)
   }
   const seasonal: ((season:TerrainSeason)=>void)[]=[]
   for(const finish of ['wall','roof','wood','stone','road','crop','soil','orchard','fruit'] as Finish[]) {

@@ -2,7 +2,7 @@ import { SimplexNoise } from 'three/examples/jsm/math/SimplexNoise.js'
 import { getHexMetrics, getHexPolygonPoints } from '../coordinates/hexCoordinates'
 
 export const WORLD_HEX_RADIUS = 1.18
-export const WORLD_TILE_RADIUS = 8
+export const WORLD_TILE_RADIUS = 12
 export const WORLD_LAYOUT_SCALE = WORLD_TILE_RADIUS / 3
 export const WATER_LEVEL = 0.08
 export const WORLD_SUBDIVISIONS = 5
