@@ -1,0 +1,210 @@
+{
+  "results": [
+    {
+      "id": "inn",
+      "stages": [
+        {
+          "progress": 0,
+          "hash": 1242217757,
+          "coverage": 0.03522331154684096,
+          "framed": true,
+          "visible": 1
+        },
+        {
+          "progress": 30,
+          "hash": 4174108692,
+          "coverage": 0.10874727668845316,
+          "framed": true,
+          "visible": 15
+        },
+        {
+          "progress": 52,
+          "hash": 2771790321,
+          "coverage": 0.1385566448801743,
+          "framed": true,
+          "visible": 27
+        },
+        {
+          "progress": 78,
+          "hash": 4158727357,
+          "coverage": 0.14229847494553377,
+          "framed": true,
+          "visible": 45
+        },
+        {
+          "progress": 100,
+          "hash": 1441195806,
+          "coverage": 0.14429193899782136,
+          "framed": true,
+          "visible": 47
+        }
+      ],
+      "upgraded": {
+        "hash": 4268619169,
+        "coverage": 0.1443355119825708,
+        "framed": true
+      },
+      "mobile": {
+        "hash": 300255440,
+        "coverage": 0.274993894993895,
+        "framed": true
+      },
+      "drawCalls": 75
+    },
+    {
+      "id": "chapel",
+      "stages": [
+        {
+          "progress": 0,
+          "hash": 2565032441,
+          "coverage": 0.035697167755991285,
+          "framed": true,
+          "visible": 1
+        },
+        {
+          "progress": 30,
+          "hash": 1089087590,
+          "coverage": 0.07299019607843137,
+          "framed": true,
+          "visible": 11
+        },
+        {
+          "progress": 52,
+          "hash": 1192160588,
+          "coverage": 0.09194444444444444,
+          "framed": true,
+          "visible": 18
+        },
+        {
+          "progress": 78,
+          "hash": 3439407858,
+          "coverage": 0.09845860566448801,
+          "framed": true,
+          "visible": 31
+        },
+        {
+          "progress": 100,
+          "hash": 1582482140,
+          "coverage": 0.10077342047930284,
+          "framed": true,
+          "visible": 36
+        }
+      ],
+      "upgraded": {
+        "hash": 4156888109,
+        "coverage": 0.10690087145969498,
+        "framed": true
+      },
+      "mobile": {
+        "hash": 2283926581,
+        "coverage": 0.2037118437118437,
+        "framed": true
+      },
+      "drawCalls": 59
+    },
+    {
+      "id": "market-hall",
+      "stages": [
+        {
+          "progress": 0,
+          "hash": 914417871,
+          "coverage": 0.052096949891067536,
+          "framed": true,
+          "visible": 1
+        },
+        {
+          "progress": 30,
+          "hash": 2779499558,
+          "coverage": 0.06109477124183006,
+          "framed": true,
+          "visible": 8
+        },
+        {
+          "progress": 52,
+          "hash": 1219441604,
+          "coverage": 0.08196078431372548,
+          "framed": true,
+          "visible": 12
+        },
+        {
+          "progress": 78,
+          "hash": 1665583822,
+          "coverage": 0.11119281045751633,
+          "framed": true,
+          "visible": 22
+        },
+        {
+          "progress": 100,
+          "hash": 2183116234,
+          "coverage": 0.11149782135076253,
+          "framed": true,
+          "visible": 26
+        }
+      ],
+      "upgraded": {
+        "hash": 1975936308,
+        "coverage": 0.11280501089324618,
+        "framed": true
+      },
+      "mobile": {
+        "hash": 4090780479,
+        "coverage": 0.21555555555555556,
+        "framed": true
+      },
+      "drawCalls": 51
+    },
+    {
+      "id": "irrigation-channel",
+      "stages": [
+        {
+          "progress": 0,
+          "hash": 352019275,
+          "coverage": 0.05927015250544662,
+          "framed": true,
+          "visible": 1
+        },
+        {
+          "progress": 30,
+          "hash": 4294349600,
+          "coverage": 0.059449891067538126,
+          "framed": true,
+          "visible": 10
+        },
+        {
+          "progress": 52,
+          "hash": 3930752813,
+          "coverage": 0.05522331154684096,
+          "framed": true,
+          "visible": 17
+        },
+        {
+          "progress": 78,
+          "hash": 3567253111,
+          "coverage": 0.05584967320261438,
+          "framed": true,
+          "visible": 27
+        },
+        {
+          "progress": 100,
+          "hash": 2768511228,
+          "coverage": 0.05606209150326798,
+          "framed": true,
+          "visible": 30
+        }
+      ],
+      "upgraded": {
+        "hash": 1946474831,
+        "coverage": 0.05613834422657952,
+        "framed": true
+      },
+      "mobile": {
+        "hash": 1477548433,
+        "coverage": 0.08654456654456655,
+        "framed": true
+      },
+      "drawCalls": 62
+    }
+  ],
+  "errors": [],
+  "writeRetries": []
+}

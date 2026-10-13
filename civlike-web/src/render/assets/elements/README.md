@@ -410,6 +410,15 @@ npm run build
 - 参考：[NPS Washington Aqueduct](https://www.nps.gov/places/washington-aqueduct.htm)、[FAO Irrigation System](https://www.fao.org/4/r4082e/r4082e06.htm)。仅参考结构用途与水量控制关系，没有第三方模型或贴图，也不复刻可行船的大型运河渡槽。
 - 页面：`/?view=map-elements&element=aqueduct`、`/?view=map-elements&element=irrigation-channel`。
 
+## 第二十二批聚落建筑
+
+- `inn`：二层廊式旅店，分层墙体、真实门窗洞口、外楼梯及平台、三个独立客房、床铺与餐桌、悬挂杯形招牌；升级为外廊花箱。客房门向内打开，避免占用外廊栏杆空间；招牌单独摆动。
+- `chapel`：长厅、侧扶壁、分格彩窗、中间过道、长椅、祭台、独立钟架与空心铜钟；升级庭院花坛。钟体绕轴摆动，钟舌在钟内单独转动。摆钟为预览运动，不模拟敲击碰撞或音频。
+- 两款均支持分件施工、屋顶剖面、升级附件、运行/停止、暂停与零速，根模型不整体缩放。保留可编辑 Blender 源文件；功能动作由网页元数据驱动，未烘焙为通用 GLB 动画剪辑。
+- 门洞按现有人物尺度制作，为 1.20 m 宽、2.20 m 高；旅店二层楼面 2.55 m、外廊深 1.30 m、踏步宽 1.24 m、床垫长 1.90 m。测试四种人物各 24 帧行走姿态的网格包围范围与门洞、开门状态及外廊净空，不缩小人物；这不是完整导航或上下楼动画。
+- 结构参考：[National Trust 廊式旅店](https://www.nationaltrust.org.uk/visit/london/george-inn)、[National Bell Festival 钟体构件](https://www.bells.org/activity/learn-about-different-parts-bell)。仅参考空间用途与构件关系，没有第三方网格、贴图或地标复刻。
+- 页面：`/?view=map-elements&element=inn`、`/?view=map-elements&element=chapel`。尚未接入地图居民住宿、宗教、访问调度或完整跨时代建筑升级。
+
 ## 后续工作
 
 - 与设计稿继续比对轮廓和细节，尤其是植被叶簇、屋瓦、水井附件和动物面部。

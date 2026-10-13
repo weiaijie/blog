@@ -1792,6 +1792,46 @@
         ]
       ],
       "glbBytes": 539196
+    },
+    {
+      "id": "inn",
+      "reference": "",
+      "triangles": 22820,
+      "meshObjects": 49,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -2.78,
+          -3.29,
+          -0.0
+        ],
+        [
+          3.879,
+          2.062,
+          6.115
+        ]
+      ],
+      "glbBytes": 1678096
+    },
+    {
+      "id": "chapel",
+      "reference": "",
+      "triangles": 16904,
+      "meshObjects": 38,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -3.0,
+          -3.35,
+          0.0
+        ],
+        [
+          3.0,
+          2.862,
+          6.14
+        ]
+      ],
+      "glbBytes": 1267216
     }
   ]
 }

@@ -439,7 +439,17 @@
       "id": "irrigation-channel",
       "sourceObjects": 386,
       "roundTripTriangles": 7572
+    },
+    {
+      "id": "inn",
+      "sourceObjects": 1021,
+      "roundTripTriangles": 22820
+    },
+    {
+      "id": "chapel",
+      "sourceObjects": 665,
+      "roundTripTriangles": 16904
     }
   ],
-  "passed": 88
+  "passed": 90
 }

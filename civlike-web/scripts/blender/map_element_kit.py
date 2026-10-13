@@ -35,6 +35,7 @@ import map_element_workshops
 import map_element_industry
 import map_element_bridges
 import map_element_hydraulics
+import map_element_civic
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / 'src/render/assets/elements'
@@ -810,6 +811,8 @@ BUILDERS = {
     'steel-bridge': (lambda: map_element_bridges.build(sys.modules[__name__], 'steel-bridge'), ''),
     'aqueduct': (lambda: map_element_hydraulics.build(sys.modules[__name__], 'aqueduct'), ''),
     'irrigation-channel': (lambda: map_element_hydraulics.build(sys.modules[__name__], 'irrigation-channel'), ''),
+    'inn': (lambda: map_element_civic.build(sys.modules[__name__], 'inn'), ''),
+    'chapel': (lambda: map_element_civic.build(sys.modules[__name__], 'chapel'), ''),
 }
 
 
