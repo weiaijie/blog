@@ -4,9 +4,9 @@ import assert from 'node:assert/strict'
 
 const requested=process.argv.slice(2)
 const species=['sheep-v5','cow','horse','chicken','goat','pig','duck','deer','fox','wolf','rabbit']
-assert(requested.every((id)=>species.includes(id)),'Unknown animal')
+assert(requested.every((id)=>species.includes(id) || species.includes(id.replace(/-v2$/, '')) || id==='sheep-v6'),'Unknown animal')
 const selected=requested.length ? requested : species
-const output=requested.length===1 && requested[0]==='rabbit' ? 'artifacts/map-elements/rabbit' : requested.length ? 'artifacts/map-elements/canids' : 'artifacts/map-elements/fauna'
+const output=requested.some((id)=>id.endsWith('-v2') || id==='sheep-v6') ? 'artifacts/map-elements/anatomy/animals' : requested.length===1 && requested[0]==='rabbit' ? 'artifacts/map-elements/rabbit' : requested.length ? 'artifacts/map-elements/canids' : 'artifacts/map-elements/fauna'
 await mkdir(output,{ recursive:true })
 const browser=await chromium.launch()
 const page=await browser.newPage({ viewport:{ width:1440,height:1000 },reducedMotion:'no-preference' })
@@ -44,7 +44,7 @@ async function pixels() {
 try {
   for(const id of selected) {
     await page.setViewportSize({ width:1440,height:1000 })
-    await page.goto(`http://127.0.0.1:5173/?view=map-elements&element=${id}`)
+    await page.goto(`${process.env.ELEMENT_PREVIEW_URL||'http://127.0.0.1:5173'}/?view=map-elements&element=${id}`)
     await page.waitForSelector('.element-stage[data-loaded="true"][data-animals]')
     await page.getByRole('button',{ name:'暂停动画',exact:true }).click()
     await page.getByLabel('成长阶段',{ exact:true }).fill('0')

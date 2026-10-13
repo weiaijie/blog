@@ -5,8 +5,8 @@ import { mapElementRoadmap } from '../../src/render/assets/mapElementRoadmap'
 
 describe('C-style Blender element kit', () => {
   it('counts modeled families separately from roadmap entries and revisions', () => {
-    expect(manifest.assets).toHaveLength(108)
-    expect(new Set(manifest.assets.map((a) => a.id)).size).toBe(108)
+    expect(manifest.assets).toHaveLength(112)
+    expect(new Set(manifest.assets.map((a) => a.id)).size).toBe(112)
     expect(new Set(manifest.assets.map((a) => a.id.replace(/-v\d+$/, ''))).size).toBe(99)
     expect(mapElementRoadmap).toHaveLength(108)
     expect(new Set(mapElementRoadmap.map((a) => a.id)).size).toBe(108)
@@ -27,7 +27,8 @@ describe('C-style Blender element kit', () => {
       const json = JSON.parse(bytes.toString('utf8', 20, 20 + bytes.readUInt32LE(12)))
       expect(json.meshes.length).toBeGreaterThan(0)
       expect(asset.triangles).toBeGreaterThan(100)
-      const living = asset.id.endsWith('-v3')
+      const licensed = json.nodes.some((node: { extras?: { licensedAsset?: string } }) => node.extras?.licensedAsset)
+      const living = asset.id.endsWith('-v3') && !licensed
       const botanical = json.nodes.some((node: { extras?: { lifeRole?: string } }) => node.extras?.lifeRole)
       const animal = json.nodes.some((node: { extras?: { faunaSpecies?: string } }) => node.extras?.faunaSpecies)
       const building = json.nodes.some((node: { extras?: { buildingType?: string } }) => node.extras?.buildingType)
@@ -40,8 +41,8 @@ describe('C-style Blender element kit', () => {
           expect(node.extras.youngScale.every((value: number) => value>0 && value<=1)).toBe(true)
         }
       }
-      expect(asset.triangles).toBeLessThan(living || botanical || building || route ? 25000 : 15000)
-      expect(bytes.length).toBeLessThan(living || botanical || building || route ? 2_500_000 : 1_500_000)
+      expect(asset.triangles).toBeLessThan(living || botanical || building || route || licensed ? 25000 : 15000)
+      expect(bytes.length).toBeLessThan(living || botanical || building || route || licensed ? 2_500_000 : 1_500_000)
       if (botanical) {
         const roles = new Set(json.nodes.map((node: { extras?: { lifeRole?: string } }) => node.extras?.lifeRole))
         const expected=asset.id==='pine-tree-v4' ? ['shoot','structure','foliage','pollen','cone','scale','seed'] : asset.id==='bamboo' ? ['shoot','structure','foliage','husk','litter'] : asset.id==='potato-field' ? ['shoot','structure','foliage','blossom','stolon','tuber'] : asset.id==='fern' ? ['shoot','structure','foliage','spore'] : asset.id==='mushrooms' ? ['shoot','structure','cap','spore'] : asset.id==='cactus' ? ['shoot','structure','armor','blossom','fruit'] : ['shoot','structure','foliage','blossom',['sunflower-field','rice-paddy','birch-tree','willow-tree','wildflowers','reeds-v4'].includes(asset.id) ? 'seed' : 'fruit']

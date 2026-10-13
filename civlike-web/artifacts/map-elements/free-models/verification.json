@@ -1,0 +1,65 @@
+{
+  "results": [
+    {
+      "family": "farmer",
+      "count": 24,
+      "motions": [
+        {
+          "clip": "Idle",
+          "hash": 1027594217,
+          "coverage": 0.040754573434312,
+          "framed": true
+        },
+        {
+          "clip": "Walk",
+          "hash": 4069725329,
+          "coverage": 0.03574022201473182,
+          "framed": true
+        },
+        {
+          "clip": "Run",
+          "hash": 881989698,
+          "coverage": 0.029988126938018004,
+          "framed": true
+        },
+        {
+          "clip": "Wave",
+          "hash": 531621993,
+          "coverage": 0.036443383937937314,
+          "framed": true
+        }
+      ]
+    },
+    {
+      "family": "horse",
+      "count": 13,
+      "motions": [
+        {
+          "clip": "Idle",
+          "hash": 1228215886,
+          "coverage": 0.04249518737536167,
+          "framed": true
+        },
+        {
+          "clip": "Walk",
+          "hash": 2101995532,
+          "coverage": 0.04360180286106212,
+          "framed": true
+        },
+        {
+          "clip": "Gallop",
+          "hash": 27031598,
+          "coverage": 0.028616384825535152,
+          "framed": true
+        },
+        {
+          "clip": "Eating",
+          "hash": 1775997171,
+          "coverage": 0.043665202706597045,
+          "framed": true
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

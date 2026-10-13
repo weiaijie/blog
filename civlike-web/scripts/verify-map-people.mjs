@@ -2,8 +2,8 @@ import { chromium } from 'playwright'
 import { mkdir, writeFile } from 'node:fs/promises'
 import assert from 'node:assert/strict'
 
-const output='artifacts/map-elements/people'
 const selected=process.argv.slice(2)
+const output=selected.some((id)=>id.endsWith('-v2')) ? 'artifacts/map-elements/anatomy/people' : 'artifacts/map-elements/people'
 await mkdir(output,{recursive:true})
 const browser=await chromium.launch(),page=await browser.newPage({viewport:{width:1440,height:1000}})
 const errors=[],results=[],retries=[]

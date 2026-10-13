@@ -2198,6 +2198,92 @@
         ]
       ],
       "glbBytes": 244392
+    },
+    {
+      "id": "farmer-v2",
+      "reference": "15-farmer.png",
+      "triangles": 3199,
+      "meshObjects": 2,
+      "animatedPivots": [
+        "WorkerRig"
+      ],
+      "boundsMeters": [
+        [
+          -0.4399,
+          -0.91,
+          0.0
+        ],
+        [
+          0.525,
+          0.245,
+          1.9
+        ]
+      ],
+      "glbBytes": 485740
+    },
+    {
+      "id": "horse-v2",
+      "reference": "",
+      "triangles": 2672,
+      "meshObjects": 20,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -0.3626,
+          -1.405,
+          0.0
+        ],
+        [
+          0.3626,
+          1.0812,
+          2.2575
+        ]
+      ],
+      "glbBytes": 205104
+    },
+    {
+      "id": "farmer-v3",
+      "reference": "",
+      "triangles": 5476,
+      "meshObjects": 4,
+      "animatedPivots": [
+        "CharacterArmature"
+      ],
+      "boundsMeters": [
+        [
+          -0.8241,
+          -1.1637,
+          -0.0722
+        ],
+        [
+          0.8267,
+          1.6427,
+          1.9171
+        ]
+      ],
+      "glbBytes": 1729716
+    },
+    {
+      "id": "horse-v3",
+      "reference": "",
+      "triangles": 2182,
+      "meshObjects": 1,
+      "animatedPivots": [
+        "AnimalArmature"
+      ],
+      "boundsMeters": [
+        [
+          -1.2633,
+          -4.3309,
+          -0.1427
+        ],
+        [
+          4.1219,
+          4.0636,
+          6.0731
+        ]
+      ],
+      "glbBytes": 896028
     }
   ]
 }

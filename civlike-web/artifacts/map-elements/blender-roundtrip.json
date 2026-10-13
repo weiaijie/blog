@@ -539,7 +539,27 @@
       "id": "street-lamp",
       "sourceObjects": 112,
       "roundTripTriangles": 3008
+    },
+    {
+      "id": "farmer-v2",
+      "sourceObjects": 53,
+      "roundTripTriangles": 3199
+    },
+    {
+      "id": "horse-v2",
+      "sourceObjects": 60,
+      "roundTripTriangles": 2672
+    },
+    {
+      "id": "farmer-v3",
+      "sourceObjects": 7,
+      "roundTripTriangles": 5476
+    },
+    {
+      "id": "horse-v3",
+      "sourceObjects": 4,
+      "roundTripTriangles": 2182
     }
   ],
-  "passed": 108
+  "passed": 112
 }

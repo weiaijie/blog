@@ -839,6 +839,8 @@ BUILDERS = {
     'waterfall': (lambda: map_element_hydroscapes.build(sys.modules[__name__], 'waterfall'), ''),
     'lake-shore': (lambda: map_element_hydroscapes.build(sys.modules[__name__], 'lake-shore'), ''),
     'fence': (lambda: map_element_fence.build(sys.modules[__name__]), ''),
+    'farmer-v2': (lambda: map_element_people.build(sys.modules[__name__], 'farmer', refined=True), '15-farmer.png'),
+    'horse-v2': (lambda: map_element_fauna.build(sys.modules[__name__], 'horse', refined=True), ''),
     'street-lamp': (lambda: map_element_lamp.build(sys.modules[__name__]), ''),
 }
 
@@ -863,6 +865,7 @@ def consolidate():
 
 
 def build(asset_id):
+    human=asset_id.removesuffix('-v2') in map_element_people.KINDS
     bpy.ops.object.select_all(action='SELECT')
     bpy.ops.object.delete(use_global=False)
     # Previous workers' stashed actions must not leak into the next asset export.
@@ -878,12 +881,12 @@ def build(asset_id):
     scene.unit_settings.system='METRIC'
     scene.render.fps=24;scene.frame_start=1;scene.frame_end=73
     BUILDERS[asset_id][0]()
-    scene.frame_set(0 if asset_id in map_element_people.KINDS else 1)
+    scene.frame_set(0 if human else 1)
     bpy.ops.wm.save_as_mainfile(filepath=str(SOURCE/(asset_id+'.blend')),compress=True)
     consolidate()
     bpy.ops.object.select_all(action='SELECT')
     bpy.ops.export_scene.gltf(filepath=str(OUT/(asset_id+'.glb')),export_format='GLB',use_selection=True,
-                              export_apply=asset_id!='mushrooms',export_animations=True,export_animation_mode='ACTIONS' if asset_id in map_element_people.KINDS else 'SCENE',
+                              export_apply=asset_id!='mushrooms',export_animations=True,export_animation_mode='ACTIONS' if human else 'SCENE',
                               export_extras=True)
     objects=[o for o in scene.objects if o.type=='MESH']
     triangles=0

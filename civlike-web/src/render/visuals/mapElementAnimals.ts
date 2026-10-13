@@ -1,4 +1,4 @@
-import { Color, Euler, Group, Material, Mesh, MeshStandardMaterial, Object3D, Quaternion, Vector3 } from 'three'
+import { Color, Euler, Group, Material, Matrix4, Mesh, MeshStandardMaterial, Object3D, Quaternion, Vector3 } from 'three'
 
 export type AnimalBehavior = 'idle' | 'walk' | 'graze'
 export type AnimalSettings = { age: number; automatic: boolean; behavior: AnimalBehavior; family: boolean }
@@ -63,7 +63,22 @@ function rig(root: Object3D) {
     const foot = parts.find((p) => p.role==='foot' && p.object.userData.legIndex===index)!
     return { upper,lower,foot,index,upperLength:Number(upper.object.userData.segmentLength),lowerLength:Number(lower.object.userData.segmentLength),footHeight:Number(upper.object.userData.footHeight) }
   })
-  return { root,parts,legs,coats,ears,muzzle }
+  const surfaces: {mesh:Mesh;body:Object3D;head:Object3D;bodyPoints:Vector3[];headPoints:Vector3[];weights:number[]}[]=[]
+  const head=parts.find((part)=>part.role==='head')?.object
+  if(head && typeof root.userData.neckBlendStart==='number') {
+    root.updateMatrixWorld(true)
+    const rootInverse=root.matrixWorld.clone().invert(),headInverse=head.matrixWorld.clone().invert()
+    for(const part of parts.filter((part)=>part.object.userData.deformWithHead))part.object.traverse((node)=>{
+      if(!(node instanceof Mesh))return
+      node.geometry=node.geometry.clone()
+      const p=node.geometry.getAttribute('position'),bodyInverse=part.object.matrixWorld.clone().invert()
+      const rest=Array.from({length:p.count},(_,i)=>new Vector3().fromBufferAttribute(p,i).applyMatrix4(node.matrixWorld))
+      surfaces.push({mesh:node,body:part.object,head,bodyPoints:rest.map((v)=>v.clone().applyMatrix4(bodyInverse)),
+        headPoints:rest.map((v)=>v.clone().applyMatrix4(headInverse)),
+        weights:rest.map((v)=>smooth((v.clone().applyMatrix4(rootInverse).z-Number(root.userData.neckBlendStart))/(Number(root.userData.neckBlendEnd)-Number(root.userData.neckBlendStart))))})
+    })
+  }
+  return { root,parts,legs,coats,ears,muzzle,surfaces }
 }
 
 export function createAnimalMotion(model: Group, mounted = false) {
@@ -156,8 +171,8 @@ export function createAnimalMotion(model: Group, mounted = false) {
       const stride = gaitStride*factor
       const forward = hop ? blend.walk*factor*(leg.index<2 ? hop.frontForward : hop.hindForward) : blend.walk*(phase<.62 ? stride*(1-2*phase/.62) : stride*(-1+2*(phase-.62)/.38))
       const lift = hop ? blend.walk*factor*(leg.index<2 ? hop.frontLift : hop.hindLift) : phase<.62 ? 0 : blend.walk*Math.sin((phase-.62)/.38*Math.PI)*gaitLift*factor
-      const restDrop = rabbit ? Number(upper.object.userData.restDrop)*factor : a+b
-      const solution = solveAnimalLeg(a,b,forward,restDrop-crouch-lift,rabbit ? Number(upper.object.userData.kneeBend) : -1)
+      const restDrop = Number(upper.object.userData.restDrop ?? (leg.upperLength+leg.lowerLength))*factor
+      const solution = solveAnimalLeg(a,b,forward,restDrop-crouch-lift,Number(upper.object.userData.kneeBend ?? -1))
       const hip = upper.object.position
       hip.y=restDrop+height-crouch
       angles.set(solution.upperAngle,0,0); motion.setFromEuler(angles)
@@ -182,6 +197,22 @@ export function createAnimalMotion(model: Group, mounted = false) {
         angles.set(blend.graze*(.025+.025*Math.sin(elapsed*14)),0,0)
         part.object.quaternion.multiply(motion.setFromEuler(angles))
       } else part.object.position.y+=.002*(1+blend.graze)*Math.sin(elapsed*11)
+    }
+    if(animal.surfaces.length) {
+      animal.root.updateMatrixWorld(true)
+      const toMesh=new Matrix4(),bodyPoint=new Vector3(),headPoint=new Vector3()
+      for(const surface of animal.surfaces) {
+        const p=surface.mesh.geometry.getAttribute('position')
+        toMesh.copy(surface.mesh.matrixWorld).invert()
+        for(let i=0;i<p.count;i++) {
+          bodyPoint.copy(surface.bodyPoints[i]).applyMatrix4(surface.body.matrixWorld)
+          headPoint.copy(surface.headPoints[i]).applyMatrix4(surface.head.matrixWorld)
+          bodyPoint.lerp(headPoint,surface.weights[i]).applyMatrix4(toMesh)
+          p.setXYZ(i,bodyPoint.x,bodyPoint.y,bodyPoint.z)
+        }
+        p.needsUpdate=true
+        surface.mesh.geometry.computeVertexNormals();surface.mesh.geometry.computeBoundingBox();surface.mesh.geometry.computeBoundingSphere()
+      }
     }
   }
 

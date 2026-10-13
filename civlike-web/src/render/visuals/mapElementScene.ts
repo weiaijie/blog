@@ -14,8 +14,9 @@ import { createRouteMotion, defaultRouteSettings, type RouteSettings, type Route
 import { createTransportMotion, defaultTransportSettings, type TransportSettings, type TransportState } from './mapElementTransport'
 import { createMountedMotion, defaultMountedSettings, type MountedSettings, type MountedState } from './mapElementMounted'
 import { createVesselMotion, defaultVesselSettings, type VesselSettings, type VesselState } from './mapElementVessels'
+import { createSkeletalMotion, defaultSkeletalSettings, type SkeletalSettings, type SkeletalState } from './mapElementSkeletal'
 
-export type ElementView = 'perspective' | 'front' | 'side' | 'top'
+export type ElementView = 'perspective' | 'front' | 'side' | 'back' | 'top'
 export type ElementScene = {
   setView: (view: ElementView) => void
   setPlaying: (value: boolean) => void
@@ -30,6 +31,7 @@ export type ElementScene = {
   setTransportSettings: (value: TransportSettings) => void
   setMountedSettings: (value: MountedSettings) => void
   setVesselSettings: (value: VesselSettings) => void
+  setSkeletalSettings: (value: SkeletalSettings) => void
   destroy: () => void
 }
 
@@ -57,6 +59,7 @@ export function mountMapElement(
   onTransport?: (value: TransportState) => void,
   onMounted?: (value: MountedState) => void,
   onVessel?: (value: VesselState) => void,
+  onSkeletal?: (value: SkeletalState) => void,
 ): ElementScene {
   const renderer = new WebGLRenderer({ antialias: true, preserveDrawingBuffer: true })
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
@@ -89,6 +92,8 @@ export function mountMapElement(
   let terrain: ReturnType<typeof createTerrainMotion>
   let human: ReturnType<typeof createHumanMotion>
   let humanSettings={...defaultHumanSettings}
+  let skeletal: ReturnType<typeof createSkeletalMotion>
+  let skeletalSettings={...defaultSkeletalSettings}
   let route:ReturnType<typeof createRouteMotion>
   let transport:ReturnType<typeof createTransportMotion>
   let transportSettings={...defaultTransportSettings}
@@ -114,6 +119,17 @@ export function mountMapElement(
   let frame = 0
   let previousTime = 0
   const center = new Vector3()
+  const skeletalBounds=new Map<string,Box3>()
+  function fitSkeletal(clip: string) {
+    const bounds=skeletalBounds.get(clip)
+    if(!bounds)return
+    bounds.getCenter(center)
+    const extent=bounds.getSize(new Vector3())
+    size=Math.max(extent.x,extent.y,extent.z,.1)
+    singleSize=size
+    frameRatio=Math.max(.68,extent.length()*.55/size)
+    setView(view)
+  }
 
   function resize() {
     const width = Math.max(1, host.clientWidth)
@@ -134,7 +150,7 @@ export function mountMapElement(
     controls.reset()
     camera.zoom = 1
     camera.up.set(0, 1, 0)
-    const direction = next === 'front' ? new Vector3(0, 0, 1)
+    const direction = next === 'front' ? new Vector3(0, 0, 1) : next==='back' ? new Vector3(0,0,-1)
       : next === 'side' ? new Vector3(1, 0, 0)
         : next === 'top' ? new Vector3(0, 1, 0) : new Vector3(1.3, .9, 1.6).normalize()
     if (next === 'top') camera.up.set(0, 0, -1)
@@ -170,11 +186,17 @@ export function mountMapElement(
     scene.add(model)
     const bounds = new Box3().setFromObject(model)
     model.traverse((node) => {
+      if(node.userData.licensedAsset && typeof node.userData.clipBounds==='string') {
+        const clips=JSON.parse(node.userData.clipBounds) as Record<string,{min:number[];max:number[]}>
+        for(const [name,box]of Object.entries(clips))skeletalBounds.set(name,new Box3(new Vector3().fromArray(box.min).applyMatrix4(node.matrixWorld),new Vector3().fromArray(box.max).applyMatrix4(node.matrixWorld)))
+        return
+      }
       if (Array.isArray(node.userData.animationBoundsMin) && Array.isArray(node.userData.animationBoundsMax)) {
         bounds.expandByPoint(new Vector3().fromArray(node.userData.animationBoundsMin).applyMatrix4(node.matrixWorld))
         bounds.expandByPoint(new Vector3().fromArray(node.userData.animationBoundsMax).applyMatrix4(node.matrixWorld))
       }
     })
+    if(skeletalBounds.has('Idle'))bounds.copy(skeletalBounds.get('Idle')!)
     bounds.getCenter(center)
     const extent = bounds.getSize(new Vector3())
     size = Math.max(extent.x, extent.y, extent.z, .1)
@@ -201,6 +223,9 @@ export function mountMapElement(
     human=createHumanMotion(model,gltf.animations)
     human?.setSettings(humanSettings)
     human?.update(0,false)
+    skeletal=createSkeletalMotion(model,gltf.animations)
+    skeletal?.setSettings(skeletalSettings)
+    skeletal?.update(0,false)
     route=createRouteMotion(model)
     transport=createTransportMotion(model)
     transport?.setSettings(transportSettings)
@@ -223,13 +248,14 @@ export function mountMapElement(
     route?.setSettings(routeSettings)
     route?.update(0,false)
     if(route && routeSettings.connected)size=singleSize*2.6
-    if (gltf.animations.length && !human) {
+    if (gltf.animations.length && !human && !skeletal) {
       mixer = new AnimationMixer(model)
       for (const clip of gltf.animations) mixer.clipAction(clip).play()
     }
     setWireframe(wireframe)
     setCutaway(cutaway)
     setView(view)
+    if(skeletal)fitSkeletal(skeletal.update(0,false).clip)
     host.dataset.loaded = 'true'
     host.dataset.animations = String(gltf.animations.length)
     onLoad(gltf.animations.length + (field.count || botanical.count || animal || building || terrain || route || transport || mounted || vessel ? 1 : 0))
@@ -274,6 +300,11 @@ export function mountMapElement(
       host.dataset.human=JSON.stringify(state)
       if(time-lastGrowthReport>120){onHuman?.(state);lastGrowthReport=time}
     }
+    if(skeletal){
+      const state=skeletal.update(delta,playing)
+      host.dataset.skeletal=JSON.stringify(state)
+      if(time-lastGrowthReport>120){onSkeletal?.(state);lastGrowthReport=time}
+    }
     if(terrain) {
       const state=terrain.update(delta,playing)
       host.dataset.terrain=JSON.stringify(state)
@@ -313,6 +344,7 @@ export function mountMapElement(
     setBuildingSettings(value) { buildingSettings=value; building?.setSettings(value) },
     setTerrainSettings(value) { terrainSettings=value;terrain?.setSettings(value) },
     setHumanSettings(value) { humanSettings=value;human?.setSettings(value) },
+    setSkeletalSettings(value) { const changed=value.clip!==skeletalSettings.clip;skeletalSettings=value;skeletal?.setSettings(value);if(changed&&skeletal)fitSkeletal(skeletal.update(0,false).clip) },
     setTransportSettings(value){transportSettings=value;transport?.setSettings(value)},
     setMountedSettings(value){mountedSettings=value;mounted?.setSettings(value)},
     setVesselSettings(value){vesselSettings=value;vessel?.setSettings(value)},
@@ -334,6 +366,7 @@ export function mountMapElement(
       controls.dispose()
       mixer?.stopAllAction()
       human?.destroy()
+      skeletal?.destroy()
       for(const neighbor of routeNeighbors)scene.remove(neighbor.model)
       if (model) { mixer?.uncacheRoot(model); disposeModel(model) }
       renderer.dispose()
@@ -350,6 +383,7 @@ export function mountMapElement(
       delete host.dataset.cutaway
       delete host.dataset.terrain
       delete host.dataset.human
+      delete host.dataset.skeletal
       delete host.dataset.route
       delete host.dataset.transport
       delete host.dataset.mounted

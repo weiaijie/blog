@@ -13,9 +13,11 @@ import { defaultRouteSettings, routeStage, type RouteSettings, type RouteShape, 
 import { defaultTransportSettings, transportAccessLabels, type TransportSettings, type TransportState } from '../../render/visuals/mapElementTransport'
 import { defaultMountedSettings, type MountedSettings, type MountedState } from '../../render/visuals/mapElementMounted'
 import { defaultVesselSettings, type VesselSettings, type VesselState } from '../../render/visuals/mapElementVessels'
+import { defaultSkeletalSettings, skeletalClipLabel, type SkeletalSettings, type SkeletalState } from '../../render/visuals/mapElementSkeletal'
 import './mapElementLab.css'
 
-const views: [ElementView, string][] = [['perspective', '自由视角'], ['front', '正面'], ['side', '侧面'], ['top', '俯视']]
+const views: [ElementView, string][] = [['perspective', '自由视角'], ['front', '正面'], ['side', '侧面'], ['back','背面'], ['top', '俯视']]
+const versionLabel=(asset:MapElement)=>asset.licensed?.label ?? elementVersionLabel(asset.revision)
 
 export function MapElementLab() {
   const [selected, setSelected] = useState(() => initialMapElement(location.search))
@@ -37,7 +39,7 @@ export function MapElementLab() {
     <header className="element-header"><h1>地图模型库</h1><span>{mapElementLibrary.length} / {mapElementRoadmap.length} 项已建模</span><button className="element-roadmap-toggle" title="资产进度" aria-label="资产进度" onClick={() => roadmap.current?.showModal()}><ListChecks size={18} /></button><a href="?view=terrain-world">返回地图</a></header>
     <nav className="element-library" aria-label="模型列表">
       <select aria-label="选择模型" value={selected.family} onChange={(event) => select(mapElementLibrary.find((a) => a.family === event.target.value)!)}>
-        {mapElementLibrary.map((asset) => <option key={asset.family} value={asset.family}>{asset.label}{asset.revision > 1 ? ` · ${elementVersionLabel(asset.revision)}` : ''}</option>)}
+        {mapElementLibrary.map((asset) => <option key={asset.family} value={asset.family}>{asset.label}{asset.revision > 1 ? ` · ${versionLabel(asset)}` : ''}</option>)}
       </select>
       <div className="element-list">{mapElementLibrary.map((asset) => <button key={asset.family} aria-pressed={selected.family === asset.family} onClick={() => select(asset)}><span>{asset.label}</span><small>{asset.terrain ? aridTerrains.has(asset.family) ? '动态' : '季相' : asset.building ? '施工' : asset.animal ? '成长' : asset.lifecycle ? '物候' : asset.revision > 1 ? '已更新' : asset.category}</small></button>)}</div>
       <p>{mapElementLibrary.length} 类模型 · {mapElements.length} 个版本</p>
@@ -58,7 +60,7 @@ function ElementPreview({ asset, select, view, setView }: {
   view: ElementView; setView: (view: ElementView) => void
 }) {
   const versions = mapElements.filter((candidate) => candidate.family === asset.family)
-  const mechanical=asset.vessel || asset.mounted || asset.transport || asset.route || asset.human
+  const mechanical=asset.vessel || asset.mounted || asset.transport || asset.route || asset.human || asset.skeletal
   const living = !mechanical && !asset.animal && !asset.building && !asset.terrain && (asset.revision >= 3 || asset.lifecycle)
   const growing = living && asset.family !== 'plowed-field'
   const host = useRef<HTMLDivElement>(null)
@@ -79,6 +81,8 @@ function ElementPreview({ asset, select, view, setView }: {
   const [terrainState,setTerrainState]=useState<TerrainState>(()=>defaultTerrainSettings(asset.family))
   const [humanSettings,setHumanSettings]=useState<HumanSettings>({...defaultHumanSettings})
   const [humanState,setHumanState]=useState<HumanState>({mode:'Work',time:0,duration:3})
+  const [skeletalSettings,setSkeletalSettings]=useState<SkeletalSettings>({...defaultSkeletalSettings})
+  const [skeletalState,setSkeletalState]=useState<SkeletalState>({clip:'',clips:[],time:0,duration:1})
   const [routeSettings,setRouteSettings]=useState<RouteSettings>({...defaultRouteSettings})
   const [routeState,setRouteState]=useState<RouteState>({shape:'straight',progress:1,ports:[0,3],switchPosition:0,visible:0})
   const [transportSettings,setTransportSettings]=useState<TransportSettings>({...defaultTransportSettings})
@@ -112,7 +116,7 @@ function ElementPreview({ asset, select, view, setView }: {
     if (!host.current) return
     const handle = mountMapElement(host.current, asset.url, (count) => {
       setStatus('已加载'); setHasAnimation(count > 0)
-    }, (message) => setStatus(`加载失败：${message}`), setProgress, setAnimalState, setBuildingState, setTerrainState, setHumanState, setRouteState, setTransportState, setMountedState, setVesselState)
+    }, (message) => setStatus(`加载失败：${message}`), setProgress, setAnimalState, setBuildingState, setTerrainState, setHumanState, setRouteState, setTransportState, setMountedState, setVesselState, setSkeletalState)
     scene.current = handle
     return () => { scene.current = undefined; handle.destroy() }
   }, [asset.url])
@@ -122,6 +126,7 @@ function ElementPreview({ asset, select, view, setView }: {
   useEffect(() => { scene.current?.setBuildingSettings(buildingSettings) }, [buildingSettings])
   useEffect(() => { scene.current?.setTerrainSettings(terrainSettings) }, [terrainSettings])
   useEffect(() => { scene.current?.setHumanSettings(humanSettings) }, [humanSettings])
+  useEffect(() => { scene.current?.setSkeletalSettings(skeletalSettings) }, [skeletalSettings])
   useEffect(() => { scene.current?.setRouteSettings(routeSettings) }, [routeSettings])
   useEffect(() => { scene.current?.setTransportSettings(transportSettings) }, [transportSettings])
   useEffect(() => { scene.current?.setMountedSettings(mountedSettings) }, [mountedSettings])
@@ -141,7 +146,13 @@ function ElementPreview({ asset, select, view, setView }: {
     <div className="element-stage" ref={host} data-asset={asset.id} />
     {status !== '已加载' && <div className="element-load-status" role="status">{status}</div>}
     <aside className="element-inspector">
-      <div><div className="element-revision-heading"><h2>{asset.label}</h2>{versions.length > 1 && <div className="element-revisions" role="group" aria-label="模型版本">{versions.map((candidate) => <button key={candidate.id} aria-pressed={candidate.id === asset.id} onClick={() => select(candidate)}>{elementVersionLabel(candidate.revision)}</button>)}</div>}</div><dl><div><dt>三角面</dt><dd>{asset.triangles.toLocaleString()}</dd></div><div><dt>GLB</dt><dd>{(asset.glbBytes / 1024).toFixed(0)} KB</dd></div><div><dt>动画</dt><dd>{asset.vessel ? (asset.family === 'sailboat' ? '帆舵 / 起伏' : '推进 / 起伏') : asset.mounted ? '步态 / 骑乘' : asset.transport ? '轮轴 / 机构' : asset.route ? '铺设 / 风动' : asset.terrain ? asset.terrainMotion : asset.building ? '施工 / 运行' : asset.animal ? '成长 / 行为' : asset.lifecycle ? '物候 / 风动' : living ? '网页风动' : asset.animatedPivots.length ? 'GLB 动画' : '无'}</dd></div><div><dt>版本</dt><dd>{`V${asset.revision}`}</dd></div></dl>
+      <div><div className="element-revision-heading"><h2>{asset.label}</h2>{versions.length > 1 && <div className="element-revisions" role="group" aria-label="模型版本">{versions.map((candidate) => <button key={candidate.id} aria-pressed={candidate.id === asset.id} onClick={() => select(candidate)}>{versionLabel(candidate)}</button>)}</div>}</div><dl><div><dt>三角面</dt><dd>{asset.triangles.toLocaleString()}</dd></div><div><dt>GLB</dt><dd>{(asset.glbBytes / 1024).toFixed(0)} KB</dd></div><div><dt>动画</dt><dd>{asset.skeletal ? `${skeletalState.clips.length} 个动作` : asset.vessel ? (asset.family === 'sailboat' ? '帆舵 / 起伏' : '推进 / 起伏') : asset.mounted ? '步态 / 骑乘' : asset.transport ? '轮轴 / 机构' : asset.route ? '铺设 / 风动' : asset.terrain ? asset.terrainMotion : asset.building ? '施工 / 运行' : asset.animal ? '成长 / 行为' : asset.lifecycle ? '物候 / 风动' : living ? '网页风动' : asset.animatedPivots.length ? 'GLB 动画' : '无'}</dd></div><div><dt>版本</dt><dd>{asset.licensed ? 'CC0' : `V${asset.revision}`}</dd></div></dl>
+        {asset.skeletal && <div className="element-animal-controls">
+          <label className="element-slider"><span>动作</span><select aria-label="骨骼动作" value={skeletalSettings.clip || skeletalState.clip} onChange={(event)=>{setSkeletalSettings({...skeletalSettings,clip:event.target.value});setPlaying(true);scene.current?.setPlaying(true)}}>{skeletalState.clips.map((clip)=><option key={clip} value={clip}>{skeletalClipLabel(clip)}</option>)}</select></label>
+          <label className="element-slider"><span>动作速度 <output>{skeletalSettings.speed.toFixed(1)}×</output></span><input aria-label="动作速度" type="range" min="0" max="200" value={Math.round(skeletalSettings.speed*100)} onChange={(event)=>setSkeletalSettings({...skeletalSettings,speed:Number(event.target.value)/100})}/></label>
+          <progress aria-label="动作进度" value={skeletalState.time} max={skeletalState.duration}/>
+          <a className="element-credit" href={asset.licensed.source} rel="noreferrer">{asset.licensed.author} · {asset.licensed.license}</a>
+        </div>}
         {asset.vessel && <div className="element-field-controls">
           <label className="element-slider"><span>波浪 <output>{Math.round(vesselSettings.waves*100)}%</output></span><input aria-label="波浪" type="range" min="0" max="100" value={Math.round(vesselSettings.waves*100)} onChange={(event)=>updateVessel({waves:Number(event.target.value)/100})} /></label>
           <label className="element-slider"><span>舵角 <output>{Math.round(vesselState.rudder*180/Math.PI)}°</output></span><input aria-label="舵角" type="range" min="-25" max="25" value={Math.round(vesselSettings.rudder*180/Math.PI)} onChange={(event)=>updateVessel({rudder:Number(event.target.value)*Math.PI/180})} /></label>

@@ -4,7 +4,7 @@ import math
 from mathutils import Vector
 
 
-def build(k, species):
+def build(k, species, refined=False):
     bird = species in ['chicken', 'duck']
     duck = species == 'duck'
     pig = species == 'pig'
@@ -21,6 +21,13 @@ def build(k, species):
         'deer': (.28, .73, 1.04, .30),
     }
     width, length, hip, depth = dimensions[species]
+    if refined:
+        width, length, hip, depth = {
+            'sheep': (.33, .62, .67, .27), 'cow': (.40, .95, .99, .34),
+            'horse': (.32, .88, 1.12, .30), 'chicken': (.205, .29, .28, .235),
+            'goat': (.235, .57, .73, .235), 'pig': (.37, .66, .40, .29),
+            'duck': (.23, .40, .17, .19), 'deer': (.26, .74, 1.04, .25),
+        }[species]
     colors = {
         'coat': 'DCD2B4' if species == 'sheep' else 'D5D4C8' if species == 'cow' else '906344' if species == 'horse' else 'D5A368',
         'coat_light': 'EEE3C4' if species == 'sheep' else 'EBE7D8' if species == 'cow' else 'AE7D53' if species == 'horse' else 'E9C899',
@@ -47,6 +54,7 @@ def build(k, species):
     root = k.pivot('AnimalRoot',(0,0,0),[])
     root['faunaSpecies'] = species
     root['faunaBird'] = bird
+    if refined:root['anatomyVersion'] = 2
     leg_factor = .48 if bird else .68
 
     def part(name, anchor, objects, role, scale=(.57,.55,.62), maturity=0, index=-1):
@@ -60,7 +68,7 @@ def build(k, species):
         return obj
 
     def loft(name, rings, material, segments=12):
-        if name == 'anatomical_torso':
+        if name == 'anatomical_torso' and not refined:
             rings = [tuple(a[i]+(b[i]-a[i])*t for i in range(4))
                      for a,b in zip(rings,rings[1:]) for t in [0,.33,.66]]+[rings[-1]]
         vertices = []
@@ -100,6 +108,15 @@ def build(k, species):
         profile = [(-1,.04,.33,.5),(-.72,.09,.86,.91),(-.32,0,1,1),(0,-.03,1.05,.96),(.48,.04,.83,.73),(.85,.15,.49,.44),(1,.2,.14,.2)]
     elif deer or goat:
         profile = [(-1,.14,.05,.1),(-.72,.08,.88,1),(-.3,0,.99,.94),(0,.08,.84,.76),(.48,.08,.91,.83),(.8,.06,.64,.71),(1,.04,.15,.3)]
+    if refined:
+        profile = [(-1.08,.08,.015,.025),(-.83,.08,.66,.82),(-.58,.05,.98,1),(-.20,-.02,1,.95),
+                   (.19,-.03,.89,.83),(.54,.03,.96,.94),(.82,.10,.66,.73),(1.05,.08,.015,.025)]
+        if bird:
+            profile = [(-1.08,.04,.015,.025),(-.75,.10,.66,.91),(-.30,.05,1,1),(.15,0,.95,.87),
+                       (.58,.09,.73,.63),(.91,.17,.26,.23),(1.04,.20,.015,.02)]
+        elif pig:
+            profile = [(-1.08,.05,.015,.02),(-.83,.04,.74,.9),(-.42,0,1,1),(.1,.02,1.02,.96),
+                       (.58,.04,.90,.93),(.85,.09,.61,.74),(1.05,.1,.015,.025)]
     torso = loft('anatomical_torso',[(y*length,body_center+z*depth,width*w,depth*h) for y,z,w,h in profile],'coat',16)
     torso.data.materials.append(k.M['coat_light'])
     torso.data.materials.append(k.M['marking'])
@@ -112,7 +129,7 @@ def build(k, species):
             face.material_index = 2 if patch>.52 else 0
         else:
             face.material_index = 1 if face.index%16 in [0,1,14,15] else 0
-    part('Body',(0,0,body_center),[torso],'body')
+    body_node=part('Body',(0,0,body_center),[torso],'body')
     if deer:
         vertices, faces = [], []
         for face in torso.data.polygons:
@@ -136,12 +153,18 @@ def build(k, species):
                 head_parts.append(k.ico('bill_nostril',(side*.044,-.557,.586),(.012,.018,.006),'nose',1))
     else:
         horse = species == 'horse'
-        head_anchor = (0,-length*.68,hip+depth*.6)
+        head_anchor = (0,-length*(.43 if refined else .68),hip+depth*.6)
         head_z = hip+(.67 if horse or deer else .19 if pig else .40 if species == 'cow' else .34)
         head_y = -length-(.06 if horse else .12)
         head_parts = [loft('neck',[(-length*.38,hip+.18,width*.71,.26),
                                    (-length*.71,head_z-.16,width*.48,.25),
                                    (head_y+.08,head_z,width*.38,.18)],'coat',12)]
+        if refined:
+            for obj in head_parts:k.bpy.data.objects.remove(obj,do_unlink=True)
+            head_parts = [loft('flowing_neck',[(-length*.23,body_center,width*.79,depth*.88),
+                                               (-length*.48,head_z-.33,width*.67,depth*.90),
+                                               (-length*.77,head_z-.15,width*.46,.23),
+                                               (head_y+.08,head_z,width*.37,.17)],'coat',16)]
         head_rings = [(head_y+.10,head_z+.05,.16,.24),
                                               (head_y-.08,head_z,.17,.21),
                                               (head_y-.30,head_z-.15,.12,.12),
@@ -177,6 +200,18 @@ def build(k, species):
                     udder.append(k.beam('teat',(x,y,hip-.13),(x,y,hip-.23),.023,'nose',6,.016))
             udder_node = part('Udder',(0,length*.42,hip),udder,'adult-detail',(.5,.5,.5),.6)
             udder_node['sexTrait'] = 'female'
+    if refined and not bird:
+        # Weld the overlapping closed volumes; the viewer blends this surface between torso and head anchors.
+        neck=head_parts.pop(0)
+        k.bpy.context.view_layer.objects.active=torso
+        modifier=torso.modifiers.new('ContinuousNeck','BOOLEAN')
+        modifier.operation='UNION';modifier.solver='EXACT';modifier.object=neck
+        k.bpy.ops.object.modifier_apply(modifier=modifier.name)
+        k.bpy.data.objects.remove(neck,do_unlink=True)
+        body_node['deformWithHead']=True
+        root['neckBlendStart']=length*.25
+        root['neckBlendEnd']=length*.77
+        for face in torso.data.polygons:face.use_smooth=True
     part('Head',head_anchor,head_parts,'head',(.74,.73,.76) if not bird else (.65,.65,.72))
 
     def head_detail(name, objects, role='face', maturity=0):
@@ -260,12 +295,24 @@ def build(k, species):
             for f in coat.data.polygons:
                 f.material_index = int(k.RNG.random()<.15)
             fleece = [coat]
-            part('Fleece',(0,0,body_center),fleece,'adult-detail',(.55,.53,.60),.15)
+            wool_node=part('Fleece',(0,0,body_center),fleece,'adult-detail',(.55,.53,.60),.15)
+            if refined:wool_node['deformWithHead']=True
 
     foot_height = .038 if bird else .065
     upper_len = (hip-foot_height)*.53
     lower_len = hip-foot_height-upper_len
     slim = .70 if deer else .77 if goat else 1
+    def tapered_limb(name,x,y,top,bottom,profile,material):
+        vertices=[]
+        for t,w,d in profile:
+            for i in range(12):
+                a=i*math.tau/12
+                vertices.append((x+w*math.sin(a),y+d*math.cos(a),top+(bottom-top)*t))
+        faces=[tuple(reversed(range(12))),tuple(range((len(profile)-1)*12,len(profile)*12))]
+        for j in range(len(profile)-1):
+            for i in range(12):
+                p=j*12+i;q=j*12+(i+1)%12;faces.append((p,q,q+12,p+12))
+        return k.mesh(name,vertices,faces,material)
     for index in range(2 if bird else 4):
         side = -1 if index%2==0 else 1
         x = side*width*(.54 if bird else .68)
@@ -273,17 +320,31 @@ def build(k, species):
         knee = hip-upper_len
         young = (leg_factor,leg_factor,leg_factor)
         upper_parts = [k.beam('upper_leg',(x,y,hip),(x,y,knee),.019 if bird else .095*slim,'beak' if bird else 'coat',9,.013 if bird else .055*slim)]
-        if not bird:
+        if refined and not bird:
+            for obj in upper_parts:k.bpy.data.objects.remove(obj,do_unlink=True)
+            muscle=(.109 if index<2 else .145)*slim
+            upper_parts=[tapered_limb('shaped_forelimb' if index<2 else 'shaped_hindlimb',x,y,hip+.075,knee-.025,
+                          [(0,.075*slim,.09*slim),(.15,muscle,.115*slim),(.36,muscle*.83,.102*slim),
+                           (.66,.069*slim,.077*slim),(1,.058*slim,.060*slim)],'coat')]
+        elif not bird:
             upper_parts.append(k.ico('shoulder' if index<2 else 'haunch',(x,y,hip-.025 if deer or goat else hip-.07),((.095 if index<2 else .14)*slim,.13*slim,.21),'coat',2))
             upper_parts.append(k.ico('knee',(x,y,knee+.015),(.061*slim,.071*slim,.067),'coat_light',2))
         upper = part('UpperLeg',(x,y,hip),upper_parts,'upper-leg',young,index=index)
         lower_parts = [k.beam('lower_leg',(x,y,knee),(x,y,foot_height),.012 if bird else .053*slim,'beak' if bird else 'coat_light',8,.009 if bird else .037*slim)]
-        if not bird:
+        if refined and not bird:
+            for obj in lower_parts:k.bpy.data.objects.remove(obj,do_unlink=True)
+            lower_parts=[tapered_limb('tapered_shank',x,y,knee+.025,foot_height-.014,
+                           [(0,.059*slim,.059*slim),(.23,.060*slim,.066*slim),(.64,.037*slim,.043*slim),
+                            (.86,.038*slim,.048*slim),(1,.048*slim,.055*slim)],'coat_light')]
+        elif not bird:
             lower_parts.append(k.ico('fetlock',(x,y,foot_height+.026),(.055*slim,.061*slim,.075),'coat_light',2))
         lower = part('LowerLeg',(x,y,knee),lower_parts,'lower-leg',young,index=index)
         upper['segmentLength'] = upper_len
         lower['segmentLength'] = lower_len
         upper['footHeight'] = foot_height
+        if refined and not bird:
+            upper['restDrop'] = (upper_len+lower_len)*(.997 if index<2 else .98)
+            upper['kneeBend'] = -1 if index<2 else 1
         feet = []
         if bird:
             for toe in [-1,0,1]:

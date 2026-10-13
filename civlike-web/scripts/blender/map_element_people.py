@@ -1,11 +1,12 @@
 """Stylized workers with deform bones, Blender IK and portable action clips."""
 import math
 from mathutils import Matrix, Vector
+import map_element_character_anatomy
 
 KINDS=('farmer','fisher','woodcutter','merchant','builder','town-resident','engineer')
 
 
-def build(k,kind):
+def build(k,kind,refined=False):
     b=k.bpy
     b.context.scene.frame_start=0;b.context.scene.frame_end=72
     colors={'human_skin':'BE8B67','human_skin_light':'D5A480','human_hair':'544536',
@@ -13,6 +14,8 @@ def build(k,kind):
                            'builder':'638780','town-resident':'967BA1','engineer':'497F91'}[kind],
             'human_linen':'D9D0B3','human_trousers':'56636A','human_boot':'665342','human_leather':'866A47',
             'builder_mallet':'BA996E','engineer_spanner':'A4B5B8','engineer_bolt':'D5BB76'}
+    if refined:
+        colors['human_trousers']={'farmer':'75614A','fisher':'49636A','woodcutter':'6F5946','merchant':'555267','builder':'596861','town-resident':'675B69','engineer':'485D65'}[kind]
     for name,code in colors.items():
         mat=k.M['stone'].copy();mat.name=name
         rgb=[int(code[i:i+2],16)/255 for i in (0,2,4)]
@@ -22,6 +25,7 @@ def build(k,kind):
     data=b.data.armatures.new('WorkerSkeleton');rig=b.data.objects.new('WorkerRig',data)
     b.context.collection.objects.link(rig);b.context.view_layer.objects.active=rig;rig.select_set(True)
     rig['humanProfession']=kind;rig['humanClips']=['Idle','Walk','Work']
+    if refined:rig['anatomyVersion']=2
     b.ops.object.mode_set(mode='EDIT')
     bones={}
     def bone(name,head,tail,parent=None,deform=True):
@@ -66,44 +70,16 @@ def build(k,kind):
             for i in range(segments):
                 a=j*segments+i;c=j*segments+(i+1)%segments;f.append((a,c,c+segments,a+segments))
         return skin(k.mesh(name,v,f,material),parent)
-    loft('tailored_tunic',[(.84,.18,.12),(.98,.175,.105),(1.17,.19,.13),(1.34,.24,.13),(1.40,.16,.10)],'human_shirt')
-    loft('leather_belt',[(.985,.182,.111),(1.025,.18,.111)],'human_leather')
-    skin(k.box('belt_buckle',(0,-.119,1.008),(.075,.022,.05),'iron',.005),'Spine')
-    skin(k.beam('neck',(0,0,1.37),(0,0,1.51),.065,'human_skin',10),'Head')
-    skin(k.ico('faceted_head',(0,-.005,1.625),(.132,.114,.175),'human_skin',2),'Head')
-    skin(k.ico('hair_cap',(0,.026,1.73),(.136,.105,.093),'human_hair',2),'Head')
-    for s in [-1,1]:
-        skin(k.ico('ear',(s*.127,0,1.62),(.026,.032,.044),'human_skin',1),'Head')
-        skin(k.ico('eye',(s*.047,-.105,1.65),(.011,.009,.010),'eye',1),'Head')
-        skin(k.beam('eyebrow',(s*.02,-.104,1.676),(s*.073,-.099,1.677),.006,'human_hair',4),'Head')
-    skin(k.mesh('nose',[(-.018,-.103,1.655),(.018,-.103,1.655),(0,-.158,1.603),(-.024,-.116,1.596),(.024,-.116,1.596)],[(0,1,2),(0,2,3),(1,4,2),(2,4,3)],'human_skin_light'),'Head')
-    skin(k.beam('mouth',(-.027,-.109,1.565),(.027,-.109,1.565),.005,'human_hair',4),'Head')
-    for s,side in [(1,'R'),(-1,'L')]:
-        hip=(s*.13,0,.90);knee=(s*.13,-.045,.53);ankle=(s*.13,0,.16)
-        skin(k.beam('trouser_thigh',hip,knee,.093,'human_trousers',9,.072),'Thigh'+side)
-        skin(k.ico('knee',knee,(.075,.071,.074),'human_trousers',1),'Shin'+side)
-        skin(k.beam('trouser_calf',knee,ankle,.068,'human_trousers',9,.049),'Shin'+side)
-        skin(k.box('boot',(s*.13,-.061,.082),(.17,.29,.15),'human_boot',.025),'Foot'+side)
-        skin(k.box('boot_sole',(s*.13,-.063,.013),(.176,.296,.026),'wood_dark',.006),'Foot'+side)
-        shoulder=(s*.23,0,1.36);elbow=(s*.34,-.03,1.10);wrist=(s*.40,-.10,.89)
-        skin(k.ico('sleeve_shoulder',shoulder,(.087,.086,.091),'human_shirt',2),'Arm'+side)
-        skin(k.beam('sleeve',shoulder,elbow,.082,'human_shirt',10,.062),'Arm'+side)
-        skin(k.ico('elbow',elbow,(.060,.058,.063),'human_skin',1),'Forearm'+side)
-        skin(k.beam('forearm',elbow,wrist,.057,'human_skin',9,.038),'Forearm'+side)
-        open_hand=kind=='town-resident' and side=='R'
-        skin(k.ico('open_palm' if open_hand else 'mitten_hand',(s*.40,-.108,.845),
-                   (.038,.021,.041) if open_hand else (.044,.033,.059),'human_skin_light',2),'Hand'+side)
-        if open_hand:
-            for j in range(4):
-                x=.374+j*.017;length=.038+(.008 if j in [1,2] else 0)
-                skin(k.beam('greeting_finger',(x,-.108,.819),(x+(j-1.5)*.004,-.108,.819-length),.008,'human_skin_light',7),'HandR')
-                skin(k.ico('fingertip',(x+(j-1.5)*.004,-.108,.819-length),(.008,.008,.009),'human_skin_light',1),'HandR')
-        skin(k.ico('thumb',(s*.37,-.13,.858),(.023,.022,.035),'human_skin',1),'Hand'+side)
+    if refined:
+        map_element_character_anatomy.build(k,kind,rig,skin)
+    else:
+        base_anatomy(k,kind,skin,loft)
     # Tools are skinned to the grasp bone, so they also work in external GLB viewers.
     gx,gy,gz=.40,-.10,.89
     if kind=='farmer':
         loft('straw_hat_crown',[(1.76,.142,.13),(1.87,.12,.11),(1.90,.04,.04)],'straw_light','Head',16)
         loft('wide_straw_brim',[(1.762,.27,.245),(1.783,.255,.23)],'straw','Head',20)
+        if refined:loft('hat_ribbon',[(1.78,.142,.131),(1.81,.138,.127)],'human_leather','Head',16)
         skin(k.beam('hoe_handle',(gx,gy,gz-.84),(gx,gy,gz+.39),.019,'wood_light',8),'HandR')
         skin(k.box('hoe_blade',(gx,gy-.10,gz-.85),(.25,.20,.027),'iron',.008),'HandR')
         skin(k.box('seed_pouch',(-.19,-.025,.93),(.15,.10,.17),'human_leather',.025),'Spine')
@@ -220,12 +196,17 @@ def build(k,kind):
         for frame in range(73):
             t=frame/72*math.tau
             for p in rig.pose.bones:p.matrix_basis=Matrix.Identity(4)
-            spine=rig.pose.bones['Spine'];spine.location.y=-.022
+            spine=rig.pose.bones['Spine'];spine.location.y=0 if refined and mode=='Idle' else -.022
             spine.rotation_euler.x=.009*math.sin(t)
             rig.pose.bones['Head'].rotation_euler.y=.035*math.sin(t)
             for s,side in [(1,'R'),(-1,'L')]:
                 phase=t+(0 if s==1 else math.pi);stride=math.sin(phase)
                 control('FootTarget'+side,(s*.13,-.19*stride if mode=='Walk' else 0,.16+(.075*max(0,math.cos(phase)) if mode=='Walk' else 0)))
+                if refined and mode=='Walk':
+                    p=(frame/72+(0 if s==1 else .5))%1
+                    swing=max(0,(p-.62)/.38)
+                    forward=.18*(1-2*p/.62) if p<.62 else .18*(-1+2*swing*swing*(3-2*swing))
+                    control('FootTarget'+side,(s*.13,forward,.16+.075*math.sin(swing*math.pi)))
                 control('HandTarget'+side,(s*.39,-.10+(.15*stride if mode=='Walk' else .008*math.sin(t+s)),.91))
             if kind=='town-resident':
                 control('HandTargetL',(-.40,-.12+.025*math.sin(t),.92))
@@ -280,3 +261,38 @@ def build(k,kind):
     rig['animationBoundsMin']=[minimum.x-.04,minimum.z-.04,-maximum.y-.04]
     rig['animationBoundsMax']=[maximum.x+.04,maximum.z+.04,-minimum.y+.04]
     rig.animation_data.action=actions[0];b.context.scene.frame_set(0)
+
+
+def base_anatomy(k,kind,skin,loft):
+    loft('tailored_tunic',[(.84,.18,.12),(.98,.175,.105),(1.17,.19,.13),(1.34,.24,.13),(1.40,.16,.10)],'human_shirt')
+    loft('leather_belt',[(.985,.182,.111),(1.025,.18,.111)],'human_leather')
+    skin(k.box('belt_buckle',(0,-.119,1.008),(.075,.022,.05),'iron',.005),'Spine')
+    skin(k.beam('neck',(0,0,1.37),(0,0,1.51),.065,'human_skin',10),'Head')
+    skin(k.ico('faceted_head',(0,-.005,1.625),(.132,.114,.175),'human_skin',2),'Head')
+    skin(k.ico('hair_cap',(0,.026,1.73),(.136,.105,.093),'human_hair',2),'Head')
+    for s in [-1,1]:
+        skin(k.ico('ear',(s*.127,0,1.62),(.026,.032,.044),'human_skin',1),'Head')
+        skin(k.ico('eye',(s*.047,-.105,1.65),(.011,.009,.010),'eye',1),'Head')
+        skin(k.beam('eyebrow',(s*.02,-.104,1.676),(s*.073,-.099,1.677),.006,'human_hair',4),'Head')
+    skin(k.mesh('nose',[(-.018,-.103,1.655),(.018,-.103,1.655),(0,-.158,1.603),(-.024,-.116,1.596),(.024,-.116,1.596)],[(0,1,2),(0,2,3),(1,4,2),(2,4,3)],'human_skin_light'),'Head')
+    skin(k.beam('mouth',(-.027,-.109,1.565),(.027,-.109,1.565),.005,'human_hair',4),'Head')
+    for s,side in [(1,'R'),(-1,'L')]:
+        hip=(s*.13,0,.90);knee=(s*.13,-.045,.53);ankle=(s*.13,0,.16)
+        skin(k.beam('trouser_thigh',hip,knee,.093,'human_trousers',9,.072),'Thigh'+side)
+        skin(k.ico('knee',knee,(.075,.071,.074),'human_trousers',1),'Shin'+side)
+        skin(k.beam('trouser_calf',knee,ankle,.068,'human_trousers',9,.049),'Shin'+side)
+        skin(k.box('boot',(s*.13,-.061,.082),(.17,.29,.15),'human_boot',.025),'Foot'+side)
+        skin(k.box('boot_sole',(s*.13,-.063,.013),(.176,.296,.026),'wood_dark',.006),'Foot'+side)
+        shoulder=(s*.23,0,1.36);elbow=(s*.34,-.03,1.10);wrist=(s*.40,-.10,.89)
+        skin(k.ico('sleeve_shoulder',shoulder,(.087,.086,.091),'human_shirt',2),'Arm'+side)
+        skin(k.beam('sleeve',shoulder,elbow,.082,'human_shirt',10,.062),'Arm'+side)
+        skin(k.ico('elbow',elbow,(.060,.058,.063),'human_skin',1),'Forearm'+side)
+        skin(k.beam('forearm',elbow,wrist,.057,'human_skin',9,.038),'Forearm'+side)
+        open_hand=kind=='town-resident' and side=='R'
+        skin(k.ico('open_palm' if open_hand else 'mitten_hand',(s*.40,-.108,.845),(.038,.021,.041) if open_hand else (.044,.033,.059),'human_skin_light',2),'Hand'+side)
+        if open_hand:
+            for j in range(4):
+                x=.374+j*.017;length=.038+(.008 if j in [1,2] else 0)
+                skin(k.beam('greeting_finger',(x,-.108,.819),(x+(j-1.5)*.004,-.108,.819-length),.008,'human_skin_light',7),'HandR')
+                skin(k.ico('fingertip',(x+(j-1.5)*.004,-.108,.819-length),(.008,.008,.009),'human_skin_light',1),'HandR')
+        skin(k.ico('thumb',(s*.37,-.13,.858),(.023,.022,.035),'human_skin',1),'Hand'+side)

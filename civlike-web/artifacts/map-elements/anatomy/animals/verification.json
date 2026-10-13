@@ -1,0 +1,30 @@
+{
+  "results": [
+    {
+      "id": "horse-v2",
+      "young": {
+        "hash": 3517156329,
+        "coverage": 0.0219880174291939,
+        "framed": true
+      },
+      "adult": {
+        "hash": 2006466988,
+        "coverage": 0.04863834422657952,
+        "framed": true
+      },
+      "family": {
+        "hash": 2396284087,
+        "coverage": 0.024266090617037776,
+        "framed": true
+      },
+      "mobile": {
+        "hash": 817314836,
+        "coverage": 0.046178266178266175,
+        "framed": true
+      },
+      "drawCalls": 86
+    }
+  ],
+  "errors": [],
+  "writeRetries": []
+}

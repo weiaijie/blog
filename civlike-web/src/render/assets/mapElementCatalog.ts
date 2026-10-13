@@ -1,23 +1,27 @@
 import manifest from './elements/manifest.json'
 import { botanicalFamilies, mapElementRoadmap } from './mapElementRoadmap'
+import { licensedModelAssets } from './licensedModelAssets'
 
 const models = import.meta.glob('./elements/*.glb', { eager: true, query: '?url', import: 'default' }) as Record<string, string>
-const references = import.meta.glob('../../../design/asset-orthographics-20261012-expanded/{05-wheat-field,06-plowed-field-v2,07-vegetable-field,09-timber-bridge-v2,12-fishing-boat-v2,24-river-fish-v2,20-sheep,25-pine-tree,27-berry-shrub,29-reeds-v2,31-village-well,36-handcart-v2}.png', { eager: true, query: '?url', import: 'default' }) as Record<string, string>
+const references = import.meta.glob('../../../design/asset-orthographics-20261012-expanded/{05-wheat-field,06-plowed-field-v2,07-vegetable-field,09-timber-bridge-v2,12-fishing-boat-v2,15-farmer,24-river-fish-v2,20-sheep,25-pine-tree,27-berry-shrub,29-reeds-v2,31-village-well,36-handcart-v2}.png', { eager: true, query: '?url', import: 'default' }) as Record<string, string>
 const labels = new Map(mapElementRoadmap.map((item) => [item.id, item]))
 const minimumBotanicalRevision: Record<string,number> = { 'berry-shrub':4,'pine-tree':4,reeds:4 }
 
 export const mapElements = manifest.assets.map((asset) => {
   const family=asset.id.replace(/-v\d+$/, '')
   const revision=Number(asset.id.match(/-v(\d+)$/)?.[1] ?? 1)
+  const licensed = licensedModelAssets[asset.id]
   return {
     ...asset,
     family,
     revision,
+    licensed,
+    skeletal: Boolean(licensed),
     label: labels.get(family)?.label ?? asset.id,
     category: labels.get(family)?.category ?? '其他',
     lifecycle: botanicalFamilies.has(family) && revision>=(minimumBotanicalRevision[family]??1),
-    animal: ['sheep-v5','cow','horse','chicken','goat','pig','duck','deer','fox','wolf','rabbit'].includes(asset.id),
-    human: ['farmer','fisher','woodcutter','merchant','builder','town-resident','engineer'].includes(asset.id),
+    animal: !licensed && (family==='sheep' ? revision>=5 : ['cow','horse','chicken','goat','pig','duck','deer','fox','wolf','rabbit'].includes(family)),
+    human: !licensed && ['farmer','fisher','woodcutter','merchant','builder','town-resident','engineer'].includes(family),
     route: ['dirt-road','stone-road','asphalt-road','rail-track'].includes(asset.id),
     transport: ['rickshaw','bicycle','early-car','freight-wagon','steam-locomotive'].includes(asset.id),
     mounted: ['rider','horse-cart'].includes(asset.id),
