@@ -5,6 +5,7 @@ export type BuildingSettings = { progress: number; automatic: boolean; working: 
 export type BuildingState = { progress: number; visible: number; operating: boolean; tier: 1 | 2; access: number }
 export const defaultBuildingSettings: BuildingSettings = { progress: 1, automatic: false, working: true, speed: .6, tier: 1, gateOpen:false }
 export function buildingStage(progress: number, kind?: string) {
+  if(kind==='fence')return progress<.15 ? '基脚' : progress<.42 ? '立柱' : progress<.62 ? '横栏与斜撑' : progress<.90 ? '门扇与五金' : progress<.99 ? '收尾' : '竣工'
   if(kind==='dock')return progress<.15 ? '桩基' : progress<.42 ? '梁架' : progress<.62 ? '桥面' : progress<.90 ? '泊位与设备' : progress<.99 ? '收尾' : '竣工'
   if(kind==='harbor')return progress<.15 ? '基础' : progress<.42 ? '岸壁' : progress<.62 ? '库房' : progress<.90 ? '吊机与设备' : progress<.99 ? '收尾' : '竣工'
   if(kind==='amphitheater')return progress<.15 ? '基础' : progress<.42 ? '看台' : progress<.62 ? '阶梯与拱廊' : progress<.90 ? '座席与布篷' : progress<.99 ? '收尾' : '竣工'
@@ -54,7 +55,7 @@ export function createBuildingMotion(model: Group) {
   }
   let settings={ ...defaultBuildingSettings }, progress=1, elapsed=0, access=0
   const water=createChannelWater(model)
-  const hasGate=parts.some((part) => part.motion==='lift' || part.motion==='semaphore' || part.motion==='bascule' || part.motion==='hydro-gate')
+  const hasGate=parts.some((part) => part.motion==='lift' || part.motion==='semaphore' || part.motion==='bascule' || part.motion==='hydro-gate' || part.motion==='swing-gate')
   const rotation=new Quaternion()
   const state: BuildingState={ progress,visible:0,operating:false,tier:1,access:0 }
   return {
@@ -89,6 +90,8 @@ export function createBuildingMotion(model: Group) {
         if (!part.temporary && part.start>0) object.position.y+=(1-assembled)*.18
         if (part.motion==='spin') object.quaternion.multiply(rotation.setFromAxisAngle(part.axis,elapsed*part.rate))
         if (part.motion==='door') object.quaternion.multiply(rotation.setFromAxisAngle(part.axis,(.05+(1-Math.cos(elapsed*.65))*.32)*part.rate))
+        if (part.motion==='gate-latch') object.quaternion.multiply(rotation.setFromAxisAngle(part.axis,-smooth(access/.20)*Math.PI*.39))
+        if (part.motion==='swing-gate') object.quaternion.multiply(rotation.setFromAxisAngle(part.axis,smooth((access-.20)/.80)*Number(object.userData.gateAngle)))
         if (part.motion==='sway') object.quaternion.multiply(rotation.setFromAxisAngle(part.axis,Math.sin(elapsed*.8)*.22))
         if (part.motion==='sign-swing') object.quaternion.multiply(rotation.setFromAxisAngle(part.axis,Math.sin(elapsed*1.4)*.13))
         if (part.motion==='bell-swing') object.quaternion.multiply(rotation.setFromAxisAngle(part.axis,Math.sin(elapsed*2.4)*.32))

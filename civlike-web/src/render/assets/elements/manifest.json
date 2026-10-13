@@ -2158,6 +2158,26 @@
         ]
       ],
       "glbBytes": 399216
+    },
+    {
+      "id": "fence",
+      "reference": "",
+      "triangles": 3736,
+      "meshObjects": 33,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -3.36,
+          -0.284,
+          0.0
+        ],
+        [
+          3.36,
+          0.3338,
+          1.53
+        ]
+      ],
+      "glbBytes": 318412
     }
   ]
 }

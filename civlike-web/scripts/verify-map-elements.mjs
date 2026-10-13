@@ -59,6 +59,7 @@ try {
     assert(initial.coverage > .007, `${asset.id}: blank canvas`)
     assert(initial.bounds[0] > 0 && initial.bounds[1] > 0 && initial.bounds[2] < initial.width - 1 && initial.bounds[3] < initial.height - 1, `${asset.id}: clipped model`)
     let animated = false
+    if (asset.id === 'fence') await page.getByLabel('开启通道', { exact: true }).check()
     if (asset.animatedPivots.length || asset.id.endsWith('-v3') || await page.locator('.element-stage').getAttribute('data-organs') || await page.locator('.element-stage').getAttribute('data-animals') || await page.locator('.element-stage').getAttribute('data-building') || await page.locator('.element-stage').getAttribute('data-terrain') || await page.locator('.element-stage').getAttribute('data-route') || await page.locator('.element-stage').getAttribute('data-transport') || await page.locator('.element-stage').getAttribute('data-mounted') || await page.locator('.element-stage').getAttribute('data-vessel')) {
       await page.waitForTimeout(440)
       animated = (await pixels()).hash !== initial.hash

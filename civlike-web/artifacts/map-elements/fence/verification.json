@@ -1,0 +1,90 @@
+{
+  "stages": [
+    {
+      "progress": 0,
+      "hash": 1644540677,
+      "coverage": 0.0018845315904139433,
+      "framed": true,
+      "visible": 1,
+      "operating": false,
+      "tier": 1,
+      "access": 0
+    },
+    {
+      "progress": 0.3,
+      "hash": 333582297,
+      "coverage": 0.011122004357298475,
+      "framed": true,
+      "visible": 6,
+      "operating": false,
+      "tier": 1,
+      "access": 0
+    },
+    {
+      "progress": 0.52,
+      "hash": 1523961228,
+      "coverage": 0.01610566448801743,
+      "framed": true,
+      "visible": 10,
+      "operating": false,
+      "tier": 1,
+      "access": 0
+    },
+    {
+      "progress": 0.78,
+      "hash": 4086298288,
+      "coverage": 0.022489106753812636,
+      "framed": true,
+      "visible": 14,
+      "operating": false,
+      "tier": 1,
+      "access": 0
+    },
+    {
+      "progress": 1,
+      "hash": 1541601167,
+      "coverage": 0.022347494553376906,
+      "framed": true,
+      "visible": 16,
+      "operating": false,
+      "tier": 1,
+      "access": 0
+    }
+  ],
+  "views": [
+    {
+      "view": "正面",
+      "hash": 595612796,
+      "coverage": 0.024673202614379084,
+      "framed": true
+    },
+    {
+      "view": "侧面",
+      "hash": 2565012356,
+      "coverage": 0.009782135076252724,
+      "framed": true
+    },
+    {
+      "view": "俯视",
+      "hash": 3524750303,
+      "coverage": 0.008927015250544663,
+      "framed": true
+    }
+  ],
+  "mobile": [
+    {
+      "width": 390,
+      "hash": 2986290544,
+      "coverage": 0.04188034188034188,
+      "framed": true
+    },
+    {
+      "width": 320,
+      "hash": 867135749,
+      "coverage": 0.035386904761904765,
+      "framed": true
+    }
+  ],
+  "drawCalls": 60,
+  "errors": []
+}

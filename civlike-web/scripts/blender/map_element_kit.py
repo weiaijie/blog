@@ -43,6 +43,7 @@ import map_element_hydraulics
 import map_element_civic
 import map_element_riparian
 import map_element_hydroscapes
+import map_element_fence
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / 'src/render/assets/elements'
@@ -836,6 +837,7 @@ BUILDERS = {
     'river-bend': (lambda: map_element_riparian.build(sys.modules[__name__], 'river-bend'), ''),
     'waterfall': (lambda: map_element_hydroscapes.build(sys.modules[__name__], 'waterfall'), ''),
     'lake-shore': (lambda: map_element_hydroscapes.build(sys.modules[__name__], 'lake-shore'), ''),
+    'fence': (lambda: map_element_fence.build(sys.modules[__name__]), ''),
 }
 
 

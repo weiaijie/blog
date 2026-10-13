@@ -1,106 +1,55 @@
 {
   "results": [
     {
-      "id": "harbor",
+      "id": "castle-gate",
       "stages": [
         {
           "progress": 0,
-          "hash": 439953828,
-          "coverage": 0.07514161220043573,
+          "hash": 981502875,
+          "coverage": 0.02607843137254902,
           "framed": true,
           "visible": 1
         },
         {
           "progress": 30,
-          "hash": 2966741074,
-          "coverage": 0.08663398692810458,
-          "framed": true,
-          "visible": 9
-        },
-        {
-          "progress": 52,
-          "hash": 1093733094,
-          "coverage": 0.08910675381263616,
-          "framed": true,
-          "visible": 12
-        },
-        {
-          "progress": 78,
-          "hash": 1995278548,
-          "coverage": 0.09226579520697167,
-          "framed": true,
-          "visible": 20
-        },
-        {
-          "progress": 100,
-          "hash": 2496344009,
-          "coverage": 0.09288671023965142,
-          "framed": true,
-          "visible": 21
-        }
-      ],
-      "upgraded": {
-        "hash": 3821096555,
-        "coverage": 0.09288671023965142,
-        "framed": true
-      },
-      "mobile": {
-        "hash": 3700139256,
-        "coverage": 0.17792429792429793,
-        "framed": true
-      },
-      "drawCalls": 46
-    },
-    {
-      "id": "dock",
-      "stages": [
-        {
-          "progress": 0,
-          "hash": 2283162803,
-          "coverage": 0.01706971677559913,
-          "framed": true,
-          "visible": 1
-        },
-        {
-          "progress": 30,
-          "hash": 1409739207,
-          "coverage": 0.029302832244008713,
-          "framed": true,
-          "visible": 4
-        },
-        {
-          "progress": 52,
-          "hash": 1484349973,
-          "coverage": 0.03643246187363834,
-          "framed": true,
-          "visible": 9
-        },
-        {
-          "progress": 78,
-          "hash": 1669554931,
-          "coverage": 0.043333333333333335,
+          "hash": 626695820,
+          "coverage": 0.06784858387799564,
           "framed": true,
           "visible": 15
         },
         {
-          "progress": 100,
-          "hash": 4272203341,
-          "coverage": 0.04471132897603486,
+          "progress": 52,
+          "hash": 2048968873,
+          "coverage": 0.10783224400871459,
           "framed": true,
-          "visible": 16
+          "visible": 29
+        },
+        {
+          "progress": 78,
+          "hash": 3609758438,
+          "coverage": 0.1162037037037037,
+          "framed": true,
+          "visible": 35
+        },
+        {
+          "progress": 100,
+          "hash": 2218909265,
+          "coverage": 0.11572984749455338,
+          "framed": true,
+          "visible": 40
         }
       ],
       "upgraded": {
-        "hash": 2984418189,
-        "coverage": 0.0456318082788671,
+        "hash": 1543459398,
+        "coverage": 0.11615468409586056,
         "framed": true
       },
       "mobile": {
-        "hash": 1969534311,
-        "coverage": 0.07675213675213675,
+        "hash": 3543479937,
+        "coverage": 0.2205860805860806,
         "framed": true
       },
-      "drawCalls": 35
+      "drawCalls": 78
     }
   ],
   "errors": [],

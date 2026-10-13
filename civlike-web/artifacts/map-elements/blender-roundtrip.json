@@ -529,7 +529,12 @@
       "id": "engineer",
       "sourceObjects": 70,
       "roundTripTriangles": 2392
+    },
+    {
+      "id": "fence",
+      "sourceObjects": 161,
+      "roundTripTriangles": 3736
     }
   ],
-  "passed": 106
+  "passed": 107
 }
