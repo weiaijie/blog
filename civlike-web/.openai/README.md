@@ -54,3 +54,12 @@ Windows 注意：使用 Git for Windows 的 Bash，不使用 WSL。若包装器�
 - 入口：https://civlike-terrain-lab.prettyhawk1.chatgpt.site/?view=map-elements&element=street-lamp 。线上专项覆盖五阶段、四种时刻、供电、三视图、320/390 手机、循环/暂停/零速、自动施工与下载，29 次绘制调用、页面错误 0。
 - 验证使用独立暂存树快照：50 文件 / 518 项测试、生产构建及 108 个 Blender 回读通过，旧栅栏浏览器回归通过。144 个静态文件与发布输出字节相同；唯一剩余 `index.html` 差异为 CR/LF 换行产生的空白，标签、脚本和样式引用一致。归档总共 146 项，包含 145 个构建文件与托管清单。
 - 工作区同期出现的 `farmer-v2`、`horse-v2` 及相关人物/动物代码仍由原任务保留，没有纳入本次提交或公开包。发布没有复制 Blender 源文件、其他项目或个人资料；没有新开用户浏览器标签。临时 5184 验证服务已停止，原 5173 服务未动。
+
+## 2026-10-13 第 5 版发布
+
+- 按用户要求汇总上一版未发布的地图正式改动，GitHub 提交 `7ca3245aba5873efe489a20ba7f6ace2c1a17569` 已推送并核对。远端没有新增提交或冲突，首次 fetch 的 TLS 失败重试后恢复。
+- 新增农夫/马 V2 与 V3 四个版本及骨骼动作选择、混合过渡、速度、暂停、逐动作取景、背面视角和来源标注。当前 99 类独立资产、112 个版本；第三方动作模型没有冒充自制成长/繁育模型。
+- Sites 源码 `be2071b630333962536bfcc1af08fdeabcb81281`；版本 `appgprj_6acc56a15ad08191a8f8358942d686ef~appgver_e6a49420b5a481918c67ef70b9044645`；部署 `appgdep_6ace2df7962c8191b884d69b64028b53` 于 2026-10-13 13:11:41 UTC 返回 `succeeded`，权限保持公开。
+- 51 文件 / 529 项测试、变动文件 ESLint、生产构建及 112 模型 Blender 回读通过。V2 农夫、V2 马与旧路灯的本地生产专项通过；V3 两款在本地与公开 URL 均通过动作、暂停/零速、视角、手机、下载、版本切换检查，页面错误 0。
+- 发布构建包含 150 个静态文件，149 个与本地验证输出逐字节一致，入口 HTML 仅换行空白差异。归档另含托管清单，共 151 项；不含 Blender 源文件、微信工具或个人资料。临时 5184 服务已停止，未新开用户浏览器标签。
+- 农夫入口：https://civlike-terrain-lab.prettyhawk1.chatgpt.site/?view=map-elements&element=farmer&revision=3 ；马入口：https://civlike-terrain-lab.prettyhawk1.chatgpt.site/?view=map-elements&element=horse&revision=3 。线上证据位于被忽略的 `.sites-artifacts/artifacts/map-elements/free-models/`。
