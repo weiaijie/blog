@@ -3,6 +3,7 @@ import { mkdir, writeFile } from 'node:fs/promises'
 import assert from 'node:assert/strict'
 
 const output='artifacts/map-elements/people'
+const selected=process.argv.slice(2)
 await mkdir(output,{recursive:true})
 const browser=await chromium.launch(),page=await browser.newPage({viewport:{width:1440,height:1000}})
 const errors=[],results=[],retries=[]
@@ -18,7 +19,7 @@ function framed(p){assert(p.coverage>.005 && p.bounds[0]>0 && p.bounds[1]>0 && p
 async function shot(name){const b=await page.screenshot({fullPage:true});for(let i=0;;i++)try{await writeFile(`${output}/${name}.png`,b);return}catch(e){if(i>=3||!['UNKNOWN','EBUSY','EPERM'].includes(e.code))throw e;retries.push({name,attempt:i+1});await page.waitForTimeout(400*(i+1))}}
 async function state(){return JSON.parse(await page.locator('.element-stage').getAttribute('data-human'))}
 try{
-  for(const id of ['farmer','fisher','woodcutter','merchant']){
+  for(const id of selected.length ? selected : ['farmer','fisher','woodcutter','merchant','builder','town-resident','engineer']){
     await page.setViewportSize({width:1440,height:1000})
     await page.goto(`${process.env.ELEMENT_PREVIEW_URL||'http://127.0.0.1:5173'}/?view=map-elements&element=${id}`)
     await page.waitForSelector(`.element-stage[data-asset="${id}"][data-loaded="true"][data-human]`)
@@ -53,6 +54,6 @@ try{
   await page.getByLabel('选择模型',{exact:true}).selectOption('wheat-field');await page.waitForSelector('.element-stage[data-asset="wheat-field-v3"][data-loaded="true"]')
   assert.equal(await page.getByLabel('人物动作',{exact:true}).count(),0);assert.equal(await page.locator('.element-stage').getAttribute('data-human'),null)
   assert.deepEqual(errors,[])
-  await writeFile(`${output}/verification.json`,JSON.stringify({results,retries,errors},null,2)+'\n')
+  await writeFile(`${output}/verification${selected.length ? '-selected' : ''}.json`,JSON.stringify({results,retries,errors},null,2)+'\n')
   console.log(JSON.stringify({models:results.length,retries,errors}))
 }finally{await browser.close()}

@@ -113,7 +113,7 @@ describe('gallery inn and chapel',()=>{
     }
     const passages=[{model:inn,x:0,y:.2,z:1.85,approach:1.40},{model:chapel,x:0,y:.2,z:2.65,approach:.85},...[-1.5,0,1.5].map((x)=>({model:inn,x,y:2.55,z:1.85,approach:.24}))]
     const solids=new Map([inn,chapel].map((model)=>[model,meshes(model).filter(visible)]))
-    for(const id of ['farmer','merchant','fisher','woodcutter']){
+    for(const id of ['farmer','merchant','fisher','woodcutter','builder','town-resident','engineer']){
       const b=readFileSync(new URL(`../../src/render/assets/elements/${id}.glb`,import.meta.url)),{scene,animations}=await new GLTFLoader().parseAsync(b.buffer.slice(b.byteOffset,b.byteOffset+b.byteLength),'')
       const human=createHumanMotion(scene,animations)!;human.setSettings({mode:'Walk',speed:1});human.update(1,true)
       for(let frame=0;frame<24;frame++){

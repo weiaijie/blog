@@ -17,7 +17,7 @@ export const mapElements = manifest.assets.map((asset) => {
     category: labels.get(family)?.category ?? '其他',
     lifecycle: botanicalFamilies.has(family) && revision>=(minimumBotanicalRevision[family]??1),
     animal: ['sheep-v5','cow','horse','chicken','goat','pig','duck','deer','fox','wolf','rabbit'].includes(asset.id),
-    human: ['farmer','fisher','woodcutter','merchant'].includes(asset.id),
+    human: ['farmer','fisher','woodcutter','merchant','builder','town-resident','engineer'].includes(asset.id),
     route: ['dirt-road','stone-road','asphalt-road','rail-track'].includes(asset.id),
     transport: ['rickshaw','bicycle','early-car','freight-wagon','steam-locomotive'].includes(asset.id),
     mounted: ['rider','horse-cart'].includes(asset.id),

@@ -2,15 +2,17 @@
 import math
 from mathutils import Matrix, Vector
 
-KINDS=('farmer','fisher','woodcutter','merchant')
+KINDS=('farmer','fisher','woodcutter','merchant','builder','town-resident','engineer')
 
 
 def build(k,kind):
     b=k.bpy
     b.context.scene.frame_start=0;b.context.scene.frame_end=72
     colors={'human_skin':'BE8B67','human_skin_light':'D5A480','human_hair':'544536',
-            'human_shirt':{'farmer':'72895B','fisher':'548B95','woodcutter':'A55948','merchant':'646F9B'}[kind],
-            'human_linen':'D9D0B3','human_trousers':'56636A','human_boot':'665342','human_leather':'866A47'}
+            'human_shirt':{'farmer':'72895B','fisher':'548B95','woodcutter':'A55948','merchant':'646F9B',
+                           'builder':'638780','town-resident':'967BA1','engineer':'497F91'}[kind],
+            'human_linen':'D9D0B3','human_trousers':'56636A','human_boot':'665342','human_leather':'866A47',
+            'builder_mallet':'BA996E','engineer_spanner':'A4B5B8','engineer_bolt':'D5BB76'}
     for name,code in colors.items():
         mat=k.M['stone'].copy();mat.name=name
         rgb=[int(code[i:i+2],16)/255 for i in (0,2,4)]
@@ -38,6 +40,11 @@ def build(k,kind):
         bone('Forearm'+side,(s*.34,-.03,1.10),(s*.40,-.10,.89),'Arm'+side)
         bone('Hand'+side,(s*.40,-.10,.89),(s*.40,-.10,.79),'Forearm'+side)
         bone('HandTarget'+side,(s*.40,-.10,.89),(s*.40,-.10,.79),'Root',False)
+    if kind in ['builder','engineer']:
+        # The contact bone shares the tool's grasp transform, including exported IK baking.
+        y=-.155 if kind=='builder' else -.10
+        bone('ToolContact',(.40,y,1.17),(.40,y,1.20),'HandR',False)
+    if kind=='engineer':bone('ValveNut',(.16,-.32,1.34),(.16,-.32,1.44),'Root')
     b.ops.object.mode_set(mode='OBJECT')
     for side in ['R','L']:
         for chain,target in [('Shin','Foot'),('Forearm','Hand')]:
@@ -83,7 +90,14 @@ def build(k,kind):
         skin(k.beam('sleeve',shoulder,elbow,.082,'human_shirt',10,.062),'Arm'+side)
         skin(k.ico('elbow',elbow,(.060,.058,.063),'human_skin',1),'Forearm'+side)
         skin(k.beam('forearm',elbow,wrist,.057,'human_skin',9,.038),'Forearm'+side)
-        skin(k.ico('mitten_hand',(s*.40,-.108,.845),(.044,.033,.059),'human_skin_light',2),'Hand'+side)
+        open_hand=kind=='town-resident' and side=='R'
+        skin(k.ico('open_palm' if open_hand else 'mitten_hand',(s*.40,-.108,.845),
+                   (.038,.021,.041) if open_hand else (.044,.033,.059),'human_skin_light',2),'Hand'+side)
+        if open_hand:
+            for j in range(4):
+                x=.374+j*.017;length=.038+(.008 if j in [1,2] else 0)
+                skin(k.beam('greeting_finger',(x,-.108,.819),(x+(j-1.5)*.004,-.108,.819-length),.008,'human_skin_light',7),'HandR')
+                skin(k.ico('fingertip',(x+(j-1.5)*.004,-.108,.819-length),(.008,.008,.009),'human_skin_light',1),'HandR')
         skin(k.ico('thumb',(s*.37,-.13,.858),(.023,.022,.035),'human_skin',1),'Hand'+side)
     # Tools are skinned to the grasp bone, so they also work in external GLB viewers.
     gx,gy,gz=.40,-.10,.89
@@ -108,7 +122,7 @@ def build(k,kind):
         for s in [-1,1]:skin(k.box('vest_panel',(s*.135,-.128,1.25),(.13,.025,.28),'human_leather',.008),'Spine')
         skin(k.beam('axe_handle',(gx,gy,gz-.16),(gx,gy,gz+.51),.023,'wood_light',8),'HandR')
         skin(k.mesh('wedge_axe',[(gx-.06,gy-.05,gz+.38),(gx-.06,gy+.035,gz+.56),(gx+.06,gy+.035,gz+.56),(gx+.06,gy-.05,gz+.38),(gx,gy-.24,gz+.37),(gx,gy-.20,gz+.59)],[(0,1,2,3),(0,4,5,1),(3,2,5,4),(1,5,2),(0,3,4)],'iron'),'HandR')
-    else:
+    elif kind=='merchant':
         loft('merchant_cap',[(1.755,.147,.13),(1.83,.13,.117),(1.85,.06,.07)],'human_shirt','Head')
         skin(k.box('travel_pack',(0,.17,1.19),(.34,.19,.40),'human_leather',.03),'Spine')
         for s in [-1,1]:skin(k.beam('pack_strap',(s*.11,-.13,1.03),(s*.16,-.13,1.36),.016,'wood_dark',5),'Spine')
@@ -116,6 +130,58 @@ def build(k,kind):
         skin(k.box('ledger_pages',(-.40,-.14,.863),(.148,.219,.015),'human_linen',.004),'HandL')
         for j in range(4):skin(k.box('ledger_line',(-.40,-.21+j*.04,.873),(.105,.004,.002),'wood',0),'HandL')
         skin(k.ico('coin',(gx,gy-.015,gz-.05),(.025,.025,.008),'gold',2),'HandR')
+    elif kind=='builder':
+        loft('work_cap',[(1.75,.146,.134),(1.84,.137,.126),(1.89,.075,.075)],'human_linen','Head',16)
+        skin(k.box('cap_peak',(0,-.145,1.759),(.25,.12,.025),'human_leather',.01),'Head')
+        skin(k.box('apron_bib',(0,-.139,1.25),(.27,.025,.24),'human_leather',.012),'Spine')
+        loft('short_work_apron',[(.78,.194,.146),(.98,.187,.122)],'human_leather')
+        for s in [-1,1]:
+            skin(k.beam('apron_strap',(s*.10,-.143,1.36),(s*.15,.08,1.37),.013,'human_linen',6),'Spine')
+            skin(k.box('apron_pocket',(s*.10,-.146,.90),(.13,.025,.12),'wood_light',.01),'Spine')
+        skin(k.beam('mallet_handle',(gx,gy,gz-.12),(gx,gy,gz+.30),.022,'wood_dark',10),'HandR')
+        skin(k.box('mallet_head',(gx,gy,gz+.28),(.17,.11,.11),'builder_mallet',.012),'HandR')
+        for x in [-.065,.065]:skin(k.box('mallet_iron_band',(gx+x,gy,gz+.28),(.019,.115,.115),'iron',.005),'HandR')
+        skin(k.beam('belt_chisel',(-.22,.0,.79),(-.22,.0,1.07),.016,'iron',6),'Spine')
+    elif kind=='town-resident':
+        skin(k.ico('hair_bun',(0,.116,1.71),(.085,.067,.088),'human_hair',2),'Head')
+        for s in [-1,1]:
+            skin(k.beam('coat_lapel',(s*.09,-.116,1.395),(s*.045,-.151,1.19),.024,'human_linen',5),'Spine')
+            skin(k.box('coat_pocket',(s*.115,-.127,.93),(.09,.018,.075),'human_shirt',.006),'Spine')
+        for j in range(4):skin(k.ico('coat_button',(0,-.133,1.13-j*.063),(.012,.008,.012),'gold',1),'Spine')
+        skin(k.beam('scarf_collar',(-.075,-.025,1.42),(.07,-.025,1.42),.065,'tile',10),'Spine')
+        skin(k.box('scarf_tail',(.073,-.155,1.27),(.066,.023,.22),'tile',.005),'Spine')
+        # An open basket has a separate rim, woven walls and actual contents, not a solid box.
+        bx,by,bz=-.40,-.108,.64
+        skin(k.box('basket_base',(bx,by,bz-.10),(.20,.19,.025),'wood',.01),'HandL')
+        for j in range(5):
+            z=bz-.08+j*.035
+            for s in [-1,1]:
+                skin(k.beam('basket_weft',(bx-.10,by+s*.095,z),(bx+.10,by+s*.095,z),.012,'wood_light',6),'HandL')
+                skin(k.beam('basket_weft',(bx+s*.10,by-.095,z),(bx+s*.10,by+.095,z),.012,'wood_light',6),'HandL')
+        for j in range(7):
+            for s in [-1,1]:skin(k.beam('basket_upright',(bx-.09+j*.03,by+s*.095,bz-.10),(bx-.09+j*.03,by+s*.095,bz+.065),.008,'wood_dark',5),'HandL')
+        for j in range(12):
+            a=j*math.pi/12;c=(j+1)*math.pi/12
+            skin(k.beam('basket_handle',(bx+.10*math.cos(a),by,bz+.06+.15*math.sin(a)),
+                        (bx+.10*math.cos(c),by,bz+.06+.15*math.sin(c)),.011,'wood_dark',6),'HandL')
+        for x,y,z,mat in [(-.045,-.04,.036,'berry'),(.039,-.025,.048,'leaf_light'),(0,.044,.062,'grain')]:
+            skin(k.ico('market_produce',(bx+x,by+y,bz+z),(.053,.048,.057),mat,2),'HandL')
+    elif kind=='engineer':
+        loft('engineer_cap',[(1.75,.146,.134),(1.84,.14,.128),(1.86,.095,.095)],'human_shirt','Head',16)
+        skin(k.box('engineer_visor',(0,-.141,1.76),(.25,.15,.026),'wood_dark',.012),'Head')
+        for s in [-1,1]:
+            skin(k.box('overall_bib_strap',(s*.118,-.127,1.24),(.043,.028,.31),'human_leather',.005),'Spine')
+            skin(k.ico('strap_rivet',(s*.118,-.147,1.12),(.013,.01,.013),'gold',1),'Spine')
+        skin(k.box('bib_pocket',(0,-.146,1.21),(.16,.018,.11),'human_linen',.005),'Spine')
+        for x in [-.035,.012]:skin(k.beam('pocket_pencil',(x,-.16,1.21),(x,-.16,1.33),.008,'tile',6),'Spine')
+        skin(k.box('clipboard',(-.40,-.14,.84),(.20,.26,.027),'wood_dark',.006),'HandL')
+        skin(k.box('blueprint',(-.40,-.14,.86),(.18,.24,.012),'teal',.003),'HandL')
+        for j in range(5):skin(k.box('drawing_grid',(-.40,-.22+j*.04,.867),(.15,.002,.001),'human_linen',0),'HandL')
+        for j in range(4):skin(k.box('drawing_grid',(-.46+j*.04,-.14,.868),(.002,.21,.001),'human_linen',0),'HandL')
+        skin(k.box('board_clip',(-.40,-.24,.88),(.065,.033,.014),'iron',.003),'HandL')
+        skin(k.beam('spanner_shaft',(gx,gy,gz-.13),(gx,gy,gz+.24),.018,'engineer_spanner',8),'HandR')
+        skin(k.box('spanner_heel',(gx,gy,gz+.239),(.106,.04,.023),'engineer_spanner',.005),'HandR')
+        for s in [-1,1]:skin(k.box('spanner_jaw',(gx+s*.041,gy,gz+.281),(.027,.04,.068),'engineer_spanner',.004),'HandR')
     # An authored work prop is independent of the skeleton and can be hidden during travel.
     props=[]
     if kind=='woodcutter':
@@ -124,13 +190,29 @@ def build(k,kind):
     elif kind=='farmer':
         props.append(k.box('worked_soil',(0,-.60,.027),(.72,.62,.05),'earth',.02))
         for j in range(4):props.append(k.beam('small_furrow',(-.3,-.85+j*.15,.05),(.3,-.85+j*.15,.05),.024,'earth_light',5))
+    elif kind=='builder':
+        for x in [-.24,.24]:
+            for y in [-.69,-.39]:props.append(k.beam('trestle_leg',(x*1.1,y,0),(x,y,.81),.038,'wood',6))
+        props.append(k.box('masonry_bench',(0,-.54,.845),(.69,.48,.07),'wood_light',.015))
+        props.append(k.box('mortar_bed',(0,-.53,.895),(.47,.27,.035),'stone_light',.008))
+        props.append(k.box('setting_brick',(0,-.52,.946),(.38,.22,.078),'tile',.008))
+        for j in range(3):props.append(k.box('spare_brick',(.46,-.52,.046+j*.093),(.26,.17,.085),'tile',.01))
+    elif kind=='engineer':
+        props.append(k.box('service_base',(.16,-.46,.045),(.47,.48,.09),'iron',.015))
+        props.append(k.beam('service_column',(.16,-.46,.09),(.16,-.46,1.21),.063,'iron',8))
+        props.append(k.box('valve_housing',(.16,-.42,1.34),(.32,.16,.27),'teal',.035))
+        props.append(k.beam('valve_nut',(.16,-.348,1.34),(.16,-.301,1.34),.032,'engineer_bolt',6))
+        props.append(k.beam('pipe_inlet',(-.11,-.42,1.34),(.43,-.42,1.34),.048,'iron',10))
+        for x in [-.11,.43]:props.append(k.beam('pipe_flange',(x-.012,-.42,1.34),(x+.012,-.42,1.34),.08,'iron',10))
+        # One skin per fixture part keeps the rotating nut in the same portable Work clip.
+        for obj in props:skin(obj,'ValveNut' if obj.name=='valve_nut' else 'Root')
     if props:
         prop=k.pivot('WorkProp',(0,0,0),props);prop['humanWorkProp']=True
     actions=[]
     rest={p.name:data.bones[p.name].matrix_local.copy() for p in rig.pose.bones}
-    def control(name,pos,tilt=0):
+    def control(name,pos,tilt=0,axis='X'):
         p=rig.pose.bones[name]
-        orientation=Matrix.Rotation(tilt,4,'X') @ rest[name].to_3x3().to_4x4()
+        orientation=Matrix.Rotation(tilt,4,axis) @ rest[name].to_3x3().to_4x4()
         orientation.translation=pos;p.matrix=orientation
     for mode in ['Idle','Walk','Work']:
         rig.animation_data_create();rig.animation_data.action=None
@@ -145,6 +227,8 @@ def build(k,kind):
                 phase=t+(0 if s==1 else math.pi);stride=math.sin(phase)
                 control('FootTarget'+side,(s*.13,-.19*stride if mode=='Walk' else 0,.16+(.075*max(0,math.cos(phase)) if mode=='Walk' else 0)))
                 control('HandTarget'+side,(s*.39,-.10+(.15*stride if mode=='Walk' else .008*math.sin(t+s)),.91))
+            if kind=='town-resident':
+                control('HandTargetL',(-.40,-.12+.025*math.sin(t),.92))
             if mode=='Work':
                 u=.5+.5*math.cos(t)
                 if kind=='farmer':
@@ -158,12 +242,24 @@ def build(k,kind):
                 elif kind=='fisher':
                     control('HandTargetR',(.13,-.36,1.06+.018*math.sin(t)),.33)
                     control('HandTargetL',(.10+.025*math.cos(t*2),-.38+.025*math.sin(t*2),.99),.15)
-                else:
+                elif kind=='merchant':
                     control('HandTargetL',(-.14,-.35,1.10),-.9)
                     control('HandTargetR',(.03+.11*math.cos(t),-.36+.05*math.sin(t),1.15+.045*math.sin(t)),.8)
+                elif kind=='builder':
+                    control('HandTargetR',(0,-.24,1.04+.16*u),math.pi/2*(1-u))
+                    control('HandTargetL',(-.21,-.31,1.09),.45)
+                    spine.rotation_euler.x=.045*(1-u)
+                elif kind=='town-resident':
+                    control('HandTargetR',(.36+.055*math.sin(t*2),-.19,1.60),math.pi+.2*math.sin(t*2))
+                    rig.pose.bones['Head'].rotation_euler.y=.075*math.sin(t)
+                elif kind=='engineer':
+                    angle=.4*math.sin(t);bolt=Vector((.16,-.32,1.34))
+                    control('HandTargetR',bolt-Matrix.Rotation(angle,3,'Y')@Vector((0,0,.28)),angle,'Y')
+                    control('HandTargetL',(-.15,-.32,1.13),-.8)
+                    rig.pose.bones['ValveNut'].rotation_euler.z=-angle
             b.context.view_layer.update()
             for p in rig.pose.bones:
-                if p.name.startswith(('FootTarget','HandTarget')) or p.name in ['Spine','Head']:
+                if p.name.startswith(('FootTarget','HandTarget')) or p.name in ['Spine','Head','ValveNut']:
                     p.keyframe_insert(data_path='location',frame=frame)
                     p.keyframe_insert(data_path='rotation_euler',frame=frame)
         actions.append(action)

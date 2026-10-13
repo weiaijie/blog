@@ -1,12 +1,26 @@
 import { readFileSync } from 'node:fs'
-import { AnimationMixer, Bone, Group, Quaternion, SkinnedMesh, Vector3 } from 'three'
+import { AnimationMixer, Bone, Box3, Group, Mesh, Quaternion, SkinnedMesh, Vector3 } from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { describe, expect, it } from 'vitest'
 import { createHumanMotion, defaultHumanSettings, humanModes } from '../../src/render/visuals/mapElementPeople'
 
-const ids=['farmer','fisher','woodcutter','merchant']
+const ids=['farmer','fisher','woodcutter','merchant','builder','town-resident','engineer']
 async function load(id:string){const b=readFileSync(new URL(`../../src/render/assets/elements/${id}.glb`,import.meta.url));return new GLTFLoader().parseAsync(b.buffer.slice(b.byteOffset,b.byteOffset+b.byteLength),'')}
 function pose(model:Group){const result:number[]=[];model.updateMatrixWorld(true);model.traverse((o)=>{if(o instanceof Bone)result.push(...o.matrixWorld.elements)});return result}
+function vertices(model:Group,material:string,bone?:string){
+  const points:Vector3[]=[]
+  model.updateMatrixWorld(true)
+  model.traverse((o)=>{
+    if(!(o instanceof Mesh) || Array.isArray(o.material) || o.material.name!==material)return
+    if(o instanceof SkinnedMesh)o.skeleton.update()
+    for(let i=0;i<o.geometry.getAttribute('position').count;i++){
+      if(bone && (!(o instanceof SkinnedMesh) || o.skeleton.bones[o.geometry.getAttribute('skinIndex').getX(i)].name!==bone))continue
+      points.push(o.getVertexPosition(i,new Vector3()).applyMatrix4(o.matrixWorld))
+    }
+  })
+  expect(points.length).toBeGreaterThan(0)
+  return points
+}
 describe('portable worker rigs',()=>{
   for(const id of ids){
     it(`${id} exports only its own three skeletal actions and remains on the ground through every action`,async()=>{
@@ -63,6 +77,57 @@ describe('portable worker rigs',()=>{
       expect(scene.scale.toArray()).toEqual([1,1,1]);motion.destroy()
     })
   }
+  it('builder strikes the brick top with the actual mallet mesh without passing through it',async()=>{
+    const {scene,animations}=await load('builder'),mixer=new AnimationMixer(scene)
+    mixer.clipAction(animations.find((c)=>c.name==='Work')!).play()
+    const top=new Box3().setFromPoints(vertices(scene,'tile')).max.y
+    const contact=scene.getObjectByName('ToolContact')!
+    for(let frame=0;frame<72;frame++){
+      mixer.setTime(frame/24);scene.updateMatrixWorld(true)
+      expect(new Box3().setFromPoints(vertices(scene,'builder_mallet')).min.y).toBeGreaterThanOrEqual(top-.003)
+    }
+    mixer.setTime(1.5);scene.updateMatrixWorld(true)
+    expect(contact.getWorldPosition(new Vector3()).distanceTo(new Vector3(0,top,.52))).toBeLessThan(.002)
+    expect(new Box3().setFromPoints(vertices(scene,'builder_mallet')).min.y).toBeCloseTo(top,3)
+    mixer.stopAllAction();mixer.uncacheRoot(scene)
+  })
+  it('engineer keeps the open spanner on the fixed nut and rotates the exported nut mesh with it',async()=>{
+    const {scene,animations}=await load('engineer'),mixer=new AnimationMixer(scene)
+    mixer.clipAction(animations.find((c)=>c.name==='Work')!).play();mixer.setTime(0);scene.updateMatrixWorld(true)
+    const nut=scene.getObjectByName('ValveNut')!,contact=scene.getObjectByName('ToolContact')!
+    const center=nut.getWorldPosition(new Vector3()),initial=vertices(scene,'engineer_bolt')
+    const hand=scene.getObjectByName('HandR')!,restHand=hand.getWorldQuaternion(new Quaternion())
+    for(let frame=0;frame<72;frame++){
+      mixer.setTime(frame/24);scene.updateMatrixWorld(true)
+      expect(contact.getWorldPosition(new Vector3()).distanceTo(center)).toBeLessThan(.002)
+      expect(nut.getWorldPosition(new Vector3()).distanceTo(center)).toBeLessThan(1e-5)
+      const rotation=nut.getWorldQuaternion(new Quaternion()),actual=vertices(scene,'engineer_bolt')
+      actual.forEach((v,i)=>expect(v.distanceTo(initial[i].clone().sub(center).applyQuaternion(rotation).add(center))).toBeLessThan(1e-5))
+      const handTurn=hand.getWorldQuaternion(new Quaternion()).multiply(restHand.clone().invert())
+      expect(handTurn.angleTo(rotation)).toBeLessThan(.002)
+    }
+    mixer.setTime(.75);scene.updateMatrixWorld(true)
+    expect(vertices(scene,'engineer_bolt').some((v,i)=>v.distanceTo(initial[i])>.01)).toBe(true)
+    expect(vertices(scene,'engineer_spanner').length).toBeGreaterThan(50)
+    mixer.stopAllAction();mixer.uncacheRoot(scene)
+  })
+  it('resident holds the basket clear of the legs and raises a separate open hand to greet',async()=>{
+    const {scene,animations}=await load('town-resident'),mixer=new AnimationMixer(scene)
+    for(const clip of animations){
+      mixer.stopAllAction();mixer.clipAction(clip).play()
+      for(let frame=0;frame<72;frame+=3){
+        mixer.setTime(frame/24);scene.updateMatrixWorld(true)
+        const basket=new Box3().setFromPoints(vertices(scene,'wood_light','HandL'))
+        expect(basket.max.x).toBeLessThan(-.28);expect(basket.min.y).toBeGreaterThan(.4)
+        if(clip.name==='Work'){
+          expect(scene.getObjectByName('HandR')!.getWorldPosition(new Vector3()).y).toBeGreaterThan(1.58)
+          const openHand=new Box3().setFromPoints(vertices(scene,'human_skin_light','HandR'))
+          expect(openHand.max.y).toBeGreaterThan(1.69)
+        }
+      }
+    }
+    mixer.stopAllAction();mixer.uncacheRoot(scene)
+  })
   it('does not add worker controls to unrelated assets',()=>expect(createHumanMotion(new Group(),[])).toBeUndefined())
   it('fails visibly when an authored worker clip is missing',async()=>{
     const {scene,animations}=await load('farmer');expect(()=>createHumanMotion(scene,animations.filter((a)=>a.name!=='Walk'))).toThrow('missing Walk')

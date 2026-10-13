@@ -514,7 +514,22 @@
       "id": "lake-shore",
       "sourceObjects": 436,
       "roundTripTriangles": 9566
+    },
+    {
+      "id": "builder",
+      "sourceObjects": 61,
+      "roundTripTriangles": 2284
+    },
+    {
+      "id": "town-resident",
+      "sourceObjects": 106,
+      "roundTripTriangles": 3084
+    },
+    {
+      "id": "engineer",
+      "sourceObjects": 70,
+      "roundTripTriangles": 2392
     }
   ],
-  "passed": 103
+  "passed": 106
 }
