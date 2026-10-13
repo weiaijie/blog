@@ -1,0 +1,136 @@
+{
+  "stages": [
+    {
+      "progress": 0,
+      "hash": 1795686336,
+      "coverage": 0.014626509453586014,
+      "framed": true
+    },
+    {
+      "progress": 30,
+      "hash": 254636759,
+      "coverage": 0.018989281921590523,
+      "framed": true
+    },
+    {
+      "progress": 52,
+      "hash": 3887699932,
+      "coverage": 0.022821077062874284,
+      "framed": true
+    },
+    {
+      "progress": 78,
+      "hash": 2964959100,
+      "coverage": 0.031141546512519023,
+      "framed": true
+    },
+    {
+      "progress": 100,
+      "hash": 1799016116,
+      "coverage": 0.03429456651448966,
+      "framed": true
+    }
+  ],
+  "times": [
+    {
+      "hour": 12,
+      "progress": 1,
+      "visible": 12,
+      "operating": false,
+      "tier": 2,
+      "access": 0,
+      "lighting": {
+        "hour": 12,
+        "night": 0,
+        "power": 0
+      },
+      "hash": 3125069581,
+      "coverage": 0.03479817387591552,
+      "framed": true
+    },
+    {
+      "hour": 18,
+      "progress": 1,
+      "visible": 12,
+      "operating": false,
+      "tier": 2,
+      "access": 0,
+      "lighting": {
+        "hour": 18,
+        "night": 0.5,
+        "power": 0.5
+      },
+      "hash": 2505441380,
+      "coverage": 0.032143287242311774,
+      "framed": true
+    },
+    {
+      "hour": 22,
+      "progress": 1,
+      "visible": 12,
+      "operating": false,
+      "tier": 2,
+      "access": 0,
+      "lighting": {
+        "hour": 22,
+        "night": 1,
+        "power": 1
+      },
+      "hash": 3858605683,
+      "coverage": 0.03239509092302471,
+      "framed": true
+    },
+    {
+      "hour": 6,
+      "progress": 1,
+      "visible": 12,
+      "operating": false,
+      "tier": 2,
+      "access": 0,
+      "lighting": {
+        "hour": 6,
+        "night": 0.5,
+        "power": 0.5
+      },
+      "hash": 2505441380,
+      "coverage": 0.032143287242311774,
+      "framed": true
+    }
+  ],
+  "views": [
+    {
+      "view": "正面",
+      "hash": 2328835747,
+      "coverage": 0.021397838867540316,
+      "framed": true
+    },
+    {
+      "view": "侧面",
+      "hash": 559090144,
+      "coverage": 0.019246559595362433,
+      "framed": true
+    },
+    {
+      "view": "俯视",
+      "hash": 4286717086,
+      "coverage": 0.027983052517489407,
+      "framed": true
+    }
+  ],
+  "mobile": [
+    {
+      "width": 390,
+      "hash": 3318751967,
+      "coverage": 0.04915750915750916,
+      "framed": true
+    },
+    {
+      "width": 320,
+      "hash": 1490586439,
+      "coverage": 0.040535714285714286,
+      "framed": true
+    }
+  ],
+  "drawCalls": 29,
+  "errors": []
+}

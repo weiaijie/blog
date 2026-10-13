@@ -2178,6 +2178,26 @@
         ]
       ],
       "glbBytes": 318412
+    },
+    {
+      "id": "street-lamp",
+      "reference": "",
+      "triangles": 3008,
+      "meshObjects": 12,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -0.684,
+          -0.684,
+          0.0
+        ],
+        [
+          0.684,
+          0.684,
+          4.033
+        ]
+      ],
+      "glbBytes": 244392
     }
   ]
 }

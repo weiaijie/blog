@@ -1,10 +1,12 @@
 import { Group, Matrix4, Mesh, MeshStandardMaterial, Object3D, Quaternion, Vector3 } from 'three'
 import { createChannelWater } from './mapElementHydraulics'
+import { createLampLighting, type LampState } from './mapElementLamp'
 
-export type BuildingSettings = { progress: number; automatic: boolean; working: boolean; speed: number; tier: 1 | 2; gateOpen: boolean }
-export type BuildingState = { progress: number; visible: number; operating: boolean; tier: 1 | 2; access: number }
-export const defaultBuildingSettings: BuildingSettings = { progress: 1, automatic: false, working: true, speed: .6, tier: 1, gateOpen:false }
+export type BuildingSettings = { progress: number; automatic: boolean; working: boolean; speed: number; tier: 1 | 2; gateOpen: boolean; hour:number; dayCycle:boolean }
+export type BuildingState = { progress: number; visible: number; operating: boolean; tier: 1 | 2; access: number; lighting?:LampState }
+export const defaultBuildingSettings: BuildingSettings = { progress: 1, automatic: false, working: true, speed: .6, tier: 1, gateOpen:false, hour:18, dayCycle:false }
 export function buildingStage(progress: number, kind?: string) {
+  if(kind==='street-lamp')return progress<.15 ? '基座' : progress<.42 ? '灯杆' : progress<.62 ? '支承结构' : progress<.90 ? '灯室与电气' : progress<.99 ? '收尾' : '竣工'
   if(kind==='fence')return progress<.15 ? '基脚' : progress<.42 ? '立柱' : progress<.62 ? '横栏与斜撑' : progress<.90 ? '门扇与五金' : progress<.99 ? '收尾' : '竣工'
   if(kind==='dock')return progress<.15 ? '桩基' : progress<.42 ? '梁架' : progress<.62 ? '桥面' : progress<.90 ? '泊位与设备' : progress<.99 ? '收尾' : '竣工'
   if(kind==='harbor')return progress<.15 ? '基础' : progress<.42 ? '岸壁' : progress<.62 ? '库房' : progress<.90 ? '吊机与设备' : progress<.99 ? '收尾' : '竣工'
@@ -55,6 +57,7 @@ export function createBuildingMotion(model: Group) {
   }
   let settings={ ...defaultBuildingSettings }, progress=1, elapsed=0, access=0
   const water=createChannelWater(model)
+  const lamp=createLampLighting(model)
   const hasGate=parts.some((part) => part.motion==='lift' || part.motion==='semaphore' || part.motion==='bascule' || part.motion==='hydro-gate' || part.motion==='swing-gate')
   const rotation=new Quaternion()
   const state: BuildingState={ progress,visible:0,operating:false,tier:1,access:0 }
@@ -164,6 +167,7 @@ export function createBuildingMotion(model: Group) {
       }
       for(const material of embers)material.emissiveIntensity=1.25+.35*Math.sin(elapsed*2.4-.4)+.10*Math.sin(elapsed*7)
       water.update(delta*settings.speed,playing&&operating,access,progress>=.93)
+      if(lamp)state.lighting={...lamp.update(delta*settings.speed,playing,{hour:settings.hour,automatic:settings.dayCycle,on:progress>=.99&&settings.working})}
       return state
     },
   }

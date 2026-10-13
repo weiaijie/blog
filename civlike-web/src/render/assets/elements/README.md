@@ -2,7 +2,14 @@
 
 状态：可编辑建模初版，采用 C 风格的非写实、切面低多边形造型。有三视参考的条目依据参考重新构造几何，无参考条目为程序化建模样板；并非图片贴片或自动重建，也不表示已经逐项还原设计稿。
 
-当前为 98 类独立资产、107 个版本，108 类规划剩余 10 类。各批次下的数量均为该批完成时的历史快照；实时进度以模型库清单与 `design/map-element-production-goal.md` 为准。
+当前发布批次为 99 类独立资产、108 个版本，108 类规划剩余 9 类。各批次下的数量均为该批完成时的历史快照；其他会话中的未发布版本不计入本批，实时进度以模型库清单与 `design/map-element-production-goal.md` 为准。
+
+## 道路电照明
+
+- `street-lamp` 为电路灯，不是煤气灯。包括铺装、螺栓基座、分段铸金属灯杆、可见检修盖板、灯框玻璃、陶瓷灯座、螺口灯泡、通风顶帽和可选卷曲支架；没有用整件缩放代替施工。
+- 在模型库中可调施工、升级、供电、昼夜时刻和循环速度。满速约 60 秒一天，5–7 时渐灭、17–19 时渐亮，暂停与零速冻结时间；未竣工或断电时灯芯不发光。
+- 灯芯中心距地 3.31 米，运行时在 GLB 的 `lampEmitter` 节点创建局部点光源，并同步环境昼夜。GLB 外部查看器不会自动执行这些网页逻辑；未实现真实电网、地图级照明性能或物理光度验收。
+- 预览：`/?view=map-elements&element=street-lamp`。生成：`blender --background --factory-startup --python-exit-code 1 --python scripts/blender/map_element_kit.py -- --assets street-lamp`；网页检查：`node scripts/verify-map-lamp.mjs`。
 
 ### 农场栅栏
 

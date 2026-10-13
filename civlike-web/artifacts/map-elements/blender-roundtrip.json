@@ -534,7 +534,12 @@
       "id": "fence",
       "sourceObjects": 161,
       "roundTripTriangles": 3736
+    },
+    {
+      "id": "street-lamp",
+      "sourceObjects": 112,
+      "roundTripTriangles": 3008
     }
   ],
-  "passed": 107
+  "passed": 108
 }

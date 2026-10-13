@@ -65,7 +65,9 @@ export function mountMapElement(
   host.appendChild(renderer.domElement)
   const scene = new Scene()
   scene.background = new Color('#edf1f2')
-  scene.add(new HemisphereLight(0xffffff, 0x939aa0, 2.2))
+  const ambient=new HemisphereLight(0xffffff, 0x939aa0, 2.2)
+  scene.add(ambient)
+  const dayBackground=new Color('#edf1f2'),nightBackground=new Color('#262d31')
   const key = new DirectionalLight(0xffffff, 2.5)
   key.position.set(-3, 6, 5)
   scene.add(key)
@@ -279,6 +281,11 @@ export function mountMapElement(
     }
     if (building) {
       const state=building.update(delta,playing)
+      if(state.lighting){
+        const night=state.lighting.night
+        ;(scene.background as Color).copy(dayBackground).lerp(nightBackground,night)
+        ambient.intensity=2.2-1.92*night;key.intensity=2.5-2.25*night;fill.intensity=1.1-.92*night
+      }
       host.dataset.building=JSON.stringify(state)
       if (time-lastGrowthReport>120) { onBuilding?.({ ...state }); lastGrowthReport=time }
     }
