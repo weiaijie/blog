@@ -133,7 +133,7 @@ function ElementPreview({ asset, select, view, setView }: {
         <button title={playing ? '暂停动画' : '播放动画'} aria-label={playing ? '暂停动画' : '播放动画'} disabled={!hasAnimation} onClick={() => { setPlaying(!playing); scene.current?.setPlaying(!playing) }}>{playing ? <Pause size={18} /> : <Play size={18} />}</button>
         <button title="线框" aria-label="线框" aria-pressed={wireframe} onClick={() => { setWireframe(!wireframe); scene.current?.setWireframe(!wireframe) }}><Box size={18} /></button>
         {asset.family==='potato-field' && <button title="土层剖面" aria-label="土层剖面" aria-pressed={cutaway} onClick={() => { setCutaway(!cutaway); scene.current?.setCutaway(!cutaway) }}><Layers2 size={18} /></button>}
-        {['stable','blacksmith','market-hall','train-station','factory','inn','chapel','apartment','hospital','town-hall'].includes(asset.family) && <button title={cutaway ? '显示屋顶' : '隐藏屋顶'} aria-label="屋顶剖面" aria-pressed={cutaway} onClick={() => { setCutaway(!cutaway); scene.current?.setCutaway(!cutaway) }}><Layers2 size={18} /></button>}
+        {['stable','blacksmith','market-hall','train-station','factory','inn','chapel','apartment','hospital','town-hall','harbor'].includes(asset.family) && <button title={cutaway ? '显示屋顶' : '隐藏屋顶'} aria-label="屋顶剖面" aria-pressed={cutaway} onClick={() => { setCutaway(!cutaway); scene.current?.setCutaway(!cutaway) }}><Layers2 size={18} /></button>}
         <button title="重置视角" aria-label="重置视角" onClick={() => scene.current?.setView(view)}><RotateCcw size={18} /></button>
         <a href={asset.url} download={`${asset.id}.glb`} title="下载 GLB" aria-label="下载 GLB"><Download size={18} /></a>
       </div>

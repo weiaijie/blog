@@ -19,6 +19,7 @@ import map_element_botany
 import map_element_fauna
 import map_element_canids
 import map_element_rabbit
+import map_element_ports
 import map_element_modern
 import map_element_public
 import map_element_buildings
@@ -760,6 +761,8 @@ BUILDERS = {
     'fox': (lambda: map_element_canids.build(sys.modules[__name__], 'fox'), ''),
     'wolf': (lambda: map_element_canids.build(sys.modules[__name__], 'wolf'), ''),
     'rabbit': (lambda: map_element_rabbit.build(sys.modules[__name__]), ''),
+    'harbor': (lambda: map_element_ports.build(sys.modules[__name__], 'harbor'), ''),
+    'dock': (lambda: map_element_ports.build(sys.modules[__name__], 'dock'), ''),
     'cottage': (lambda: map_element_buildings.build(sys.modules[__name__], 'cottage'), ''),
     'barn': (lambda: map_element_buildings.build(sys.modules[__name__], 'barn'), ''),
     'windmill': (lambda: map_element_buildings.build(sys.modules[__name__], 'windmill'), ''),

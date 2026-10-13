@@ -494,7 +494,17 @@
       "id": "rabbit",
       "sourceObjects": 80,
       "roundTripTriangles": 3100
+    },
+    {
+      "id": "harbor",
+      "sourceObjects": 593,
+      "roundTripTriangles": 18788
+    },
+    {
+      "id": "dock",
+      "sourceObjects": 275,
+      "roundTripTriangles": 7308
     }
   ],
-  "passed": 99
+  "passed": 101
 }

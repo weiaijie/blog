@@ -2012,6 +2012,46 @@
         ]
       ],
       "glbBytes": 284324
+    },
+    {
+      "id": "harbor",
+      "reference": "",
+      "triangles": 18788,
+      "meshObjects": 23,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -5.07,
+          -5.5,
+          -1.16
+        ],
+        [
+          5.07,
+          4.6854,
+          3.7129
+        ]
+      ],
+      "glbBytes": 1378004
+    },
+    {
+      "id": "dock",
+      "reference": "",
+      "triangles": 7308,
+      "meshObjects": 18,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -2.7,
+          -4.6,
+          -0.9
+        ],
+        [
+          2.7,
+          3.536,
+          2.36
+        ]
+      ],
+      "glbBytes": 516008
     }
   ]
 }

@@ -1,106 +1,106 @@
 {
   "results": [
     {
-      "id": "town-hall",
+      "id": "harbor",
       "stages": [
         {
           "progress": 0,
-          "hash": 28571875,
-          "coverage": 0.053502178649237474,
+          "hash": 439953828,
+          "coverage": 0.07514161220043573,
           "framed": true,
           "visible": 1
         },
         {
           "progress": 30,
-          "hash": 1141560436,
-          "coverage": 0.08679193899782135,
+          "hash": 2966741074,
+          "coverage": 0.08663398692810458,
           "framed": true,
-          "visible": 11
+          "visible": 9
         },
         {
           "progress": 52,
-          "hash": 2791012068,
-          "coverage": 0.1057843137254902,
-          "framed": true,
-          "visible": 19
-        },
-        {
-          "progress": 78,
-          "hash": 2719019512,
-          "coverage": 0.10901416122004358,
-          "framed": true,
-          "visible": 33
-        },
-        {
-          "progress": 100,
-          "hash": 613573540,
-          "coverage": 0.11052287581699347,
-          "framed": true,
-          "visible": 39
-        }
-      ],
-      "upgraded": {
-        "hash": 1223626825,
-        "coverage": 0.11075708061002179,
-        "framed": true
-      },
-      "mobile": {
-        "hash": 745084582,
-        "coverage": 0.21130647130647132,
-        "framed": true
-      },
-      "drawCalls": 59
-    },
-    {
-      "id": "amphitheater",
-      "stages": [
-        {
-          "progress": 0,
-          "hash": 4062015382,
-          "coverage": 0.059302832244008716,
-          "framed": true,
-          "visible": 1
-        },
-        {
-          "progress": 30,
-          "hash": 2760681168,
-          "coverage": 0.06746732026143791,
-          "framed": true,
-          "visible": 7
-        },
-        {
-          "progress": 52,
-          "hash": 3585755491,
-          "coverage": 0.07958605664488018,
+          "hash": 1093733094,
+          "coverage": 0.08910675381263616,
           "framed": true,
           "visible": 12
         },
         {
           "progress": 78,
-          "hash": 2738295491,
-          "coverage": 0.07674291938997821,
+          "hash": 1995278548,
+          "coverage": 0.09226579520697167,
           "framed": true,
           "visible": 20
         },
         {
           "progress": 100,
-          "hash": 3329175206,
-          "coverage": 0.07573529411764705,
+          "hash": 2496344009,
+          "coverage": 0.09288671023965142,
           "framed": true,
           "visible": 21
         }
       ],
       "upgraded": {
-        "hash": 3370753744,
-        "coverage": 0.08487472766884531,
+        "hash": 3821096555,
+        "coverage": 0.09288671023965142,
         "framed": true
       },
       "mobile": {
-        "hash": 4020235140,
-        "coverage": 0.1485225885225885,
+        "hash": 3700139256,
+        "coverage": 0.17792429792429793,
         "framed": true
       },
-      "drawCalls": 43
+      "drawCalls": 46
+    },
+    {
+      "id": "dock",
+      "stages": [
+        {
+          "progress": 0,
+          "hash": 2283162803,
+          "coverage": 0.01706971677559913,
+          "framed": true,
+          "visible": 1
+        },
+        {
+          "progress": 30,
+          "hash": 1409739207,
+          "coverage": 0.029302832244008713,
+          "framed": true,
+          "visible": 4
+        },
+        {
+          "progress": 52,
+          "hash": 1484349973,
+          "coverage": 0.03643246187363834,
+          "framed": true,
+          "visible": 9
+        },
+        {
+          "progress": 78,
+          "hash": 1669554931,
+          "coverage": 0.043333333333333335,
+          "framed": true,
+          "visible": 15
+        },
+        {
+          "progress": 100,
+          "hash": 4272203341,
+          "coverage": 0.04471132897603486,
+          "framed": true,
+          "visible": 16
+        }
+      ],
+      "upgraded": {
+        "hash": 2984418189,
+        "coverage": 0.0456318082788671,
+        "framed": true
+      },
+      "mobile": {
+        "hash": 1969534311,
+        "coverage": 0.07675213675213675,
+        "framed": true
+      },
+      "drawCalls": 35
     }
   ],
   "errors": [],

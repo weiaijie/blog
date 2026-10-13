@@ -5,6 +5,8 @@ export type BuildingSettings = { progress: number; automatic: boolean; working: 
 export type BuildingState = { progress: number; visible: number; operating: boolean; tier: 1 | 2; access: number }
 export const defaultBuildingSettings: BuildingSettings = { progress: 1, automatic: false, working: true, speed: .6, tier: 1, gateOpen:false }
 export function buildingStage(progress: number, kind?: string) {
+  if(kind==='dock')return progress<.15 ? '桩基' : progress<.42 ? '梁架' : progress<.62 ? '桥面' : progress<.90 ? '泊位与设备' : progress<.99 ? '收尾' : '竣工'
+  if(kind==='harbor')return progress<.15 ? '基础' : progress<.42 ? '岸壁' : progress<.62 ? '库房' : progress<.90 ? '吊机与设备' : progress<.99 ? '收尾' : '竣工'
   if(kind==='amphitheater')return progress<.15 ? '基础' : progress<.42 ? '看台' : progress<.62 ? '阶梯与拱廊' : progress<.90 ? '座席与布篷' : progress<.99 ? '收尾' : '竣工'
   if(kind==='irrigation-channel')return progress<.15 ? '基础' : progress<.42 ? '渠床' : progress<.62 ? '渠壁' : progress<.90 ? '水闸与附件' : progress<.99 ? '注水' : '竣工'
   if(kind==='aqueduct')return progress<.15 ? '基础' : progress<.42 ? '桥墩' : progress<.62 ? '承重结构' : progress<.90 ? '渠槽与附件' : progress<.99 ? '注水' : '竣工'
@@ -96,6 +98,12 @@ export function createBuildingMotion(model: Group) {
           const phase=elapsed%12
           const open=phase<2 ? 0 : phase<4 ? smooth((phase-2)/2) : phase<7 ? 1 : phase<9 ? 1-smooth((phase-7)/2) : 0
           object.position.addScaledVector(part.axis,open*Number(object.userData.slideTravel))
+        }
+        if (part.motion.startsWith('hoist-')) {
+          const lift=(.5-.5*Math.cos(elapsed*.65))*Number(object.userData.hoistTravel)
+          if(part.motion==='hoist-load') object.position.y+=lift
+          if(part.motion==='hoist-cable') object.scale.y=1-lift/Number(object.userData.hoistLength)
+          if(part.motion==='hoist-wheel') object.quaternion.multiply(rotation.setFromAxisAngle(part.axis,lift/Number(object.userData.hoistRadius)))
         }
         if (part.motion==='bellows') object.quaternion.multiply(rotation.setFromAxisAngle(part.axis,bellowsAngle))
         if (part.motion==='semaphore') object.quaternion.multiply(rotation.setFromAxisAngle(part.axis,smooth(access)*Math.PI/4))

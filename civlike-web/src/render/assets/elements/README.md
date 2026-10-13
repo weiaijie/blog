@@ -464,6 +464,16 @@ npm run build
 - 原创网格，不下载第三方模型/贴图。外形结构参考：[NPS 棉尾兔](https://www.nps.gov/whsa/learn/nature/desert-cottontail.htm)、[NPS 兔类](https://www.nps.gov/gosp/learn/nature/rabbits-hares.htm)。米制为游戏美术尺度，未宣称物种精准复原。
 - 页面：`/?view=map-elements&element=rabbit`，在原有标签内切换。验证包括实际脚掌/腿段网格、不同年龄逐帧落地与腾空、耳根固定、成长、暂停及 320/390 手机取景。
 
+## 第二十八批港口与码头
+
+- `harbor`：石砌岸壁、铺面、岸上坡道、仓库真实装卸洞口和双扇滑门、内部货箱与分拣桌、靠泊护木、系船柱及岸吊。升级货场增加货箱和称重台，屋顶可剖开检查内部。
+- `dock`：固定木桩、纵梁/横梁/斜撑、T 形分板桥面、岸上坡道、系船柱、爬梯和手摇小吊架。升级长凳、救生圈和支架；不是随浪浮动码头。
+- 固定吊臂采用单绳吊挂，吊索上端固定、下端随货物运动，卷筒和滑轮转角与提升长度对应。支持分件施工、回退、升级、自动施工及运行/暂停/零速；不将整个建筑统一缩放。只演示垂直提升，不模拟横向转运、真实载荷或船舶装卸调度。
+- 地面入口从 0.08 m 坡道连续连接 0.48 m 桥面。两款各有两个 `water-channel-v1` 泊位，水线 0 m、净宽 1.90 m、长 4.50 m、水深 0.90 m，已核对现有河运货船尺寸并射线检查下部船体范围。不是完整船舶扫掠避障、停靠导航或波浪条件下的碰撞验收。
+- 水下桩基与岸壁保留负高程，资产不内嵌水面，由地图放置时匹配水线与岸高；陆地接点也不表示现有任意道路可直接拼接。可编辑 `.blend` 与 GLB 均保存；功能动画由网页元数据驱动，未烘焙成通用 GLB 剪辑。
+- 结构用途参考：[Science Museum 吊臂起重机模型](https://collection.sciencemuseumgroup.org.uk/objects/co2015/demainbrays-wharf-jib-crane-model)、[NPS Long Wharf](https://www.nps.gov/places/long-wharf-boston.htm)。原创风格化游戏资产，未使用第三方网格或贴图，也不宣称通过现实港工结构验算。
+- 页面：`/?view=map-elements&element=harbor`、`/?view=map-elements&element=dock`，继续在现有模型库标签内切换。
+
 ## 后续工作
 
 - 与设计稿继续比对轮廓和细节，尤其是植被叶簇、屋瓦、水井附件和动物面部。
