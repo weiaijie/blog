@@ -91,6 +91,11 @@ export function createBuildingMotion(model: Group) {
         if (part.motion==='bell-swing') object.quaternion.multiply(rotation.setFromAxisAngle(part.axis,Math.sin(elapsed*2.4)*.32))
         if (part.motion==='bell-clapper') object.quaternion.multiply(rotation.setFromAxisAngle(part.axis,Math.sin(elapsed*2.4-.6)*-.24))
         if (part.motion==='entry-door') object.quaternion.multiply(rotation.setFromAxisAngle(part.axis,(.5-.5*Math.cos(elapsed*.5))*Number(object.userData.doorAngle)))
+        if (part.motion==='sliding-door') {
+          const phase=elapsed%12
+          const open=phase<2 ? 0 : phase<4 ? smooth((phase-2)/2) : phase<7 ? 1 : phase<9 ? 1-smooth((phase-7)/2) : 0
+          object.position.addScaledVector(part.axis,open*Number(object.userData.slideTravel))
+        }
         if (part.motion==='bellows') object.quaternion.multiply(rotation.setFromAxisAngle(part.axis,bellowsAngle))
         if (part.motion==='semaphore') object.quaternion.multiply(rotation.setFromAxisAngle(part.axis,smooth(access)*Math.PI/4))
         if (part.motion==='bascule') object.quaternion.multiply(rotation.setFromAxisAngle(part.axis,smooth((access-.2)/.8)*Number(object.userData.basculeAngle)))

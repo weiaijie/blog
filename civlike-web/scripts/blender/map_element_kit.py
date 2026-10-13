@@ -18,6 +18,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import map_element_botany
 import map_element_fauna
 import map_element_canids
+import map_element_modern
 import map_element_buildings
 import map_element_fortifications
 import map_element_crops
@@ -817,6 +818,8 @@ BUILDERS = {
     'irrigation-channel': (lambda: map_element_hydraulics.build(sys.modules[__name__], 'irrigation-channel'), ''),
     'inn': (lambda: map_element_civic.build(sys.modules[__name__], 'inn'), ''),
     'chapel': (lambda: map_element_civic.build(sys.modules[__name__], 'chapel'), ''),
+    'apartment': (lambda: map_element_modern.build(sys.modules[__name__], 'apartment'), ''),
+    'hospital': (lambda: map_element_modern.build(sys.modules[__name__], 'hospital'), ''),
     'wetland': (lambda: map_element_riparian.build(sys.modules[__name__], 'wetland'), ''),
     'river-bend': (lambda: map_element_riparian.build(sys.modules[__name__], 'river-bend'), ''),
 }

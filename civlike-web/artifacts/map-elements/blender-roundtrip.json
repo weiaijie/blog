@@ -469,7 +469,17 @@
       "id": "wolf",
       "sourceObjects": 97,
       "roundTripTriangles": 4286
+    },
+    {
+      "id": "apartment",
+      "sourceObjects": 609,
+      "roundTripTriangles": 9978
+    },
+    {
+      "id": "hospital",
+      "sourceObjects": 581,
+      "roundTripTriangles": 11696
     }
   ],
-  "passed": 94
+  "passed": 96
 }

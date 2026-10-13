@@ -1912,6 +1912,46 @@
         ]
       ],
       "glbBytes": 412668
+    },
+    {
+      "id": "apartment",
+      "reference": "",
+      "triangles": 9978,
+      "meshObjects": 52,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -5.13,
+          -5.7,
+          0.0
+        ],
+        [
+          5.13,
+          3.5,
+          9.074
+        ]
+      ],
+      "glbBytes": 754756
+    },
+    {
+      "id": "hospital",
+      "reference": "",
+      "triangles": 11696,
+      "meshObjects": 49,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -6.03,
+          -5.8,
+          0.0
+        ],
+        [
+          6.03,
+          7.46,
+          6.674
+        ]
+      ],
+      "glbBytes": 958484
     }
   ]
 }
