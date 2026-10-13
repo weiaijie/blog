@@ -37,3 +37,12 @@ Windows 注意：使用 Git for Windows 的 Bash，不使用 WSL。若包装器�
 - Sites 源码提交：`24c4b43ea6766dd10fc2e157c1e550eb801242cf`；部署：`appgdep_6acdfc762a108191a2fe74552742eb46`，平台返回 `succeeded`。
 - 上线 97 类独立资产、106 个模型版本。504 项测试及生产构建通过；公开 URL 上建筑工、居民和工程师完成动作、暂停、三视图、320/390 手机检查，页面错误和截图重试均为 0。
 - 发布包仅含静态产物和托管清单，没有 Blender 源文件、其他项目或个人文档。原有 Three/OrbitControls 大分块警告仍在，不代表已经通过 200 格资产混合性能验收。
+
+## 2026-10-13 第 3 版发布
+
+- 在第 2 版上线后继续原资产目标，新增可拼接农场栅栏与顺序开合机构；当前公开模型库为 98 类、107 个版本。入口：https://civlike-terrain-lab.prettyhawk1.chatgpt.site/?view=map-elements&element=fence 。
+- GitHub 功能提交 `25290f0d7c5de3e6021e3447039261eb47bb7641` 已推送并用 `ls-remote` 核对；Sites 源码提交 `cb4a648a307206e5bc5636997063a764eefcc1b3`。
+- 保存版本 `appgprj_6acc56a15ad08191a8f8358942d686ef~appgver_f9c4654349008191b05ddfc68db9ea2c`；部署 `appgdep_6ace01f53cac81918d82de08e6ca6749`，平台于 2026-10-13 10:03:55 UTC 返回 `succeeded`。上传第一次未得到已保存版本，核对版本列表仍只有 1/2 后复用原包重试，没有重复创建站点或发布未确认的版本。
+- 正式测试 49 文件 / 510 项通过；107 个 GLB 的 Blender 回读通过。隔离发布目录 144 个构建文件与本地生产输出逐文件 SHA-256 相同，归档另外包含托管清单。
+- 发布后的公开 URL 栅栏专项通过五阶段施工、升级、真实开合、暂停、零速、停止运行、三视图、320/390 手机、自动作业暂停及下载；60 次绘制调用、页面错误 0。与本地截图证据分开放于被忽略的 `.sites-artifacts/artifacts/map-elements/fence/`，不覆盖本地验收记录。
+- 未改 Cloudflare 旧博客、其他项目或私有文件，也未配置 GitHub 自动部署。GitHub 推送同时提示默认分支已有 Dependabot 依赖告警；该告警不是本地图分支的专项安全审计结果，本轮未扩大范围修复。
