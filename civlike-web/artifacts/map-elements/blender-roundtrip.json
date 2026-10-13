@@ -449,7 +449,17 @@
       "id": "chapel",
       "sourceObjects": 665,
       "roundTripTriangles": 16904
+    },
+    {
+      "id": "wetland",
+      "sourceObjects": 613,
+      "roundTripTriangles": 8680
+    },
+    {
+      "id": "river-bend",
+      "sourceObjects": 462,
+      "roundTripTriangles": 7202
     }
   ],
-  "passed": 90
+  "passed": 92
 }

@@ -1,10 +1,12 @@
 import { Color, Group, Mesh, MeshStandardMaterial, Object3D, Quaternion, Vector3 } from 'three'
 import { createGeodynamics } from './mapElementGeodynamics'
+import { createRiparianWater } from './mapElementRiparian'
 
 export type TerrainSettings = { phase:number; snow:number; wind:number; automatic:boolean; activity:number }
 export type TerrainState = { phase:number; snow:number }
 export const terrainSeasons = ['春','夏','秋','冬']
 export const aridTerrains = new Set(['volcano','lava-field','sand-dunes','desert-oasis'])
+export const riparianTerrains = new Set(['wetland','river-bend'])
 
 function smooth(value:number) {const t=Math.max(0,Math.min(1,value));return t*t*(3-2*t)}
 function wrap(value:number) {return ((value%1)+1)%1}
@@ -25,6 +27,7 @@ export function createTerrainMotion(model:Group) {
   model.traverse((o)=>{if(typeof o.userData.terrainType==='string')kind=o.userData.terrainType})
   if(!kind)return undefined
   const geodynamics=createGeodynamics(model)
+  const riparian=createRiparianWater(model)
   const tufts:{object:Object3D;rotation:Quaternion;phase:number;altitude:number}[]=[]
   const snow:{object:Object3D;threshold:number;materials:MeshStandardMaterial[]}[]=[]
   const greens=new Map<MeshStandardMaterial,Color[]>()
@@ -67,6 +70,7 @@ export function createTerrainMotion(model:Group) {
         const p=wrap(phase)*4,i=Math.floor(p)
         material.color.copy(seasons[i]).lerp(seasons[(i+1)%4],smooth(p-i))
       }
+      riparian.update(delta,playing,settings.wind,settings.activity,coverage)
       for(const zone of snow) {
         const opacity=smooth((coverage-zone.threshold)/.13)
         zone.object.visible=opacity>.005

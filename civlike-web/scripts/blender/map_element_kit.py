@@ -36,6 +36,7 @@ import map_element_industry
 import map_element_bridges
 import map_element_hydraulics
 import map_element_civic
+import map_element_riparian
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / 'src/render/assets/elements'
@@ -813,6 +814,8 @@ BUILDERS = {
     'irrigation-channel': (lambda: map_element_hydraulics.build(sys.modules[__name__], 'irrigation-channel'), ''),
     'inn': (lambda: map_element_civic.build(sys.modules[__name__], 'inn'), ''),
     'chapel': (lambda: map_element_civic.build(sys.modules[__name__], 'chapel'), ''),
+    'wetland': (lambda: map_element_riparian.build(sys.modules[__name__], 'wetland'), ''),
+    'river-bend': (lambda: map_element_riparian.build(sys.modules[__name__], 'river-bend'), ''),
 }
 
 

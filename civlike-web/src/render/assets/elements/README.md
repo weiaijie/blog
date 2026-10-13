@@ -419,6 +419,16 @@ npm run build
 - 结构参考：[National Trust 廊式旅店](https://www.nationaltrust.org.uk/visit/london/george-inn)、[National Bell Festival 钟体构件](https://www.bells.org/activity/learn-about-different-parts-bell)。仅参考空间用途与构件关系，没有第三方网格、贴图或地标复刻。
 - 页面：`/?view=map-elements&element=inn`、`/?view=map-elements&element=chapel`。尚未接入地图居民住宿、宗教、访问调度或完整跨时代建筑升级。
 
+## 第二十三批水岸区块
+
+- `wetland` 为浅水盆地、出露小丘、挺水草莎与蒲棒、碎石倒木；`river-bend` 为弯曲主槽、外岸陡坡与内岸缓滩。C 风格非写实，不使用现成模型或贴图。
+- 实际河床三角面裁切水面边界，`FlowDepth` UV 保存沿程位置与水深；网页水面驱动处理导出 V 翻转，按水深衰减波幅。岸线和河口固定，浅水明暗与波峰向下游行进；湿地速度更低。
+- 两款支持风力、水流强度、积雪、四季循环与暂停。五个独立冰区随冬季显露，水波在结冰前衰减；不能据此声称真实热力、水量或冻融模拟。
+- 两端 `hex-river-080-v1` 的水宽 0.80 m、水面 0.04 m、主槽底 -0.08 m，其他四边 `hex-flat-3.5-v1` 高 0.08 m。地图装配需匹配河口类型，不能将河口直接拼普通平地；分叉、落差、汇流与地图河网尚未接入。
+- 验证包括实际导出网格、六种旋转、河口两两配对、边缘三角面连续覆盖、相邻草原平边、波浪暂停、冻结与融化，不用顶点标记替代面覆盖检查。
+- 可编辑 `.blend` 与 GLB 均保存。水流、风动和冰雪效果由网页元数据驱动，不是通用查看器可播放的烘焙动画。
+- 参考：[USGS 河湾](https://www.usgs.gov/educational-resources/find-feature-meander)、[EPA 湿地分类](https://www.epa.gov/wetlands/classification-and-types-wetlands)。页面：`/?view=map-elements&element=wetland`、`/?view=map-elements&element=river-bend`。
+
 ## 后续工作
 
 - 与设计稿继续比对轮廓和细节，尤其是植被叶簇、屋瓦、水井附件和动物面部。

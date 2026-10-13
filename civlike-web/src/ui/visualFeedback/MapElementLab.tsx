@@ -7,7 +7,7 @@ import { botanicalStage } from '../../render/visuals/mapElementLifecycle'
 import { mapElementCategories, mapElementRoadmap } from '../../render/assets/mapElementRoadmap'
 import { defaultAnimalSettings, type AnimalSettings, type AnimalState } from '../../render/visuals/mapElementAnimals'
 import { buildingStage, defaultBuildingSettings, type BuildingSettings, type BuildingState } from '../../render/visuals/mapElementBuildings'
-import { aridTerrains, defaultTerrainSettings, terrainSeasons, terrainSnow, type TerrainSettings, type TerrainState } from '../../render/visuals/mapElementTerrain'
+import { aridTerrains, riparianTerrains, defaultTerrainSettings, terrainSeasons, terrainSnow, type TerrainSettings, type TerrainState } from '../../render/visuals/mapElementTerrain'
 import { defaultHumanSettings, humanModes, type HumanSettings, type HumanState } from '../../render/visuals/mapElementPeople'
 import { defaultRouteSettings, routeStage, type RouteSettings, type RouteShape, type RouteState } from '../../render/visuals/mapElementRoutes'
 import { defaultTransportSettings, transportAccessLabels, type TransportSettings, type TransportState } from '../../render/visuals/mapElementTransport'
@@ -176,6 +176,7 @@ function ElementPreview({ asset, select, view, setView }: {
           <progress aria-label="动作进度" value={humanState.time} max={humanState.duration} />
         </div>}
         {asset.terrain && <div className="element-field-controls">
+          {riparianTerrains.has(asset.family) && <label className="element-slider"><span>水流强度 <output>{Math.round(terrainSettings.activity*100)}%</output></span><input aria-label="水流强度" type="range" min="0" max="100" value={Math.round(terrainSettings.activity*100)} onChange={(event)=>updateTerrain({activity:Number(event.target.value)/100})} /></label>}
           {aridTerrains.has(asset.family) ? asset.family!=='sand-dunes' && <label className="element-slider"><span>活动强度 <output>{Math.round(terrainSettings.activity*100)}%</output></span><input aria-label="活动强度" type="range" min="0" max="100" value={Math.round(terrainSettings.activity*100)} onChange={(event)=>updateTerrain({activity:Number(event.target.value)/100})} /></label> : <label className="element-slider"><span>积雪 <output>{Math.round(terrainState.snow*100)}%</output></span><input aria-label="积雪" type="range" min="0" max="100" value={Math.round((terrainSettings.automatic ? terrainState.snow : terrainSettings.snow)*100)} onChange={(event)=>updateTerrain({snow:Number(event.target.value)/100,automatic:false})} /></label>}
           {!['volcano','lava-field'].includes(asset.family) && <label className="element-slider"><span>风力 <output>{Math.round(terrainSettings.wind*100)}%</output></span><input aria-label="风力" type="range" min="0" max="100" value={Math.round(terrainSettings.wind*100)} onChange={(event)=>updateTerrain({wind:Number(event.target.value)/100})} /></label>}
           {!aridTerrains.has(asset.family) && <div className="element-growth-actions"><label><input type="checkbox" checked={terrainSettings.automatic} onChange={(event)=>{updateTerrain({automatic:event.target.checked});if(event.target.checked){setPlaying(true);scene.current?.setPlaying(true)}}} />四季循环</label></div>}

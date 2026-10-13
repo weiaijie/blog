@@ -1832,6 +1832,46 @@
         ]
       ],
       "glbBytes": 1267216
+    },
+    {
+      "id": "wetland",
+      "reference": "",
+      "triangles": 8680,
+      "meshObjects": 93,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.75,
+          -1.5155,
+          -0.16
+        ],
+        [
+          1.75,
+          1.5155,
+          0.5475
+        ]
+      ],
+      "glbBytes": 757136
+    },
+    {
+      "id": "river-bend",
+      "reference": "",
+      "triangles": 7202,
+      "meshObjects": 75,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.75,
+          -1.5155,
+          -0.16
+        ],
+        [
+          1.75,
+          1.5155,
+          0.5578
+        ]
+      ],
+      "glbBytes": 619112
     }
   ]
 }

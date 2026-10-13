@@ -2,7 +2,8 @@ import { chromium } from 'playwright'
 import { mkdir, writeFile } from 'node:fs/promises'
 import assert from 'node:assert/strict'
 
-const output='artifacts/map-elements/landforms'
+const requested=process.argv.slice(2)
+const output=requested.length?'artifacts/map-elements/riparian':'artifacts/map-elements/landforms'
 await mkdir(output,{recursive:true})
 const browser=await chromium.launch(),page=await browser.newPage({viewport:{width:1440,height:1000},reducedMotion:'no-preference'})
 const errors=[],results=[],retries=[]
@@ -30,7 +31,7 @@ async function settled(phase,snow) {
 }
 async function state() {return JSON.parse(await page.locator('.element-stage').getAttribute('data-terrain'))}
 try {
-  for(const id of ['grassland','rolling-hills','rocky-mountain','snow-peak']) {
+  for(const id of requested.length?requested:['grassland','rolling-hills','rocky-mountain','snow-peak']) {
     await page.setViewportSize({width:1440,height:1000})
     await page.goto(`${process.env.ELEMENT_PREVIEW_URL||'http://127.0.0.1:5173'}/?view=map-elements&element=${id}`)
     await page.waitForSelector(`.element-stage[data-asset="${id}"][data-loaded="true"][data-terrain]`)
@@ -49,9 +50,15 @@ try {
     assert.notEqual((await pixels()).hash,bare.hash,'Snow did not cover the surface');await shot(`${id}-snow`)
     await page.getByRole('button',{name:'夏',exact:true}).click();await settled(.25,id==='snow-peak'?.42:0)
     await page.getByRole('button',{name:'播放动画',exact:true}).click()
+    if(await page.getByLabel('水流强度',{exact:true}).count()) {
+      const flowing=await pixels();await page.waitForTimeout(650)
+      assert.notEqual((await pixels()).hash,flowing.hash,`${id}: no water motion without wind`)
+      await page.getByLabel('水流强度',{exact:true}).fill('0');await page.waitForTimeout(200)
+    }
     const calm=await pixels();await page.waitForTimeout(550);assert.equal((await pixels()).hash,calm.hash,'Zero wind drift')
     await page.getByLabel('风力',{exact:true}).fill('80');await page.waitForTimeout(750)
     assert.notEqual((await pixels()).hash,calm.hash,'No wind motion')
+    if(await page.getByLabel('水流强度',{exact:true}).count())await page.getByLabel('水流强度',{exact:true}).fill('100')
     await page.getByRole('button',{name:'暂停动画',exact:true}).click();await page.waitForTimeout(200)
     const paused=await pixels();await page.waitForTimeout(450);assert.equal((await pixels()).hash,paused.hash,'Pause failed')
     const drawCalls=Number(await page.locator('.element-stage').getAttribute('data-draw-calls'));assert(drawCalls<450)

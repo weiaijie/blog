@@ -27,8 +27,8 @@ export const mapElements = manifest.assets.map((asset) => {
     bascule: asset.id==='steel-bridge',
     gate: asset.id==='castle-gate',
     signal: asset.id==='train-station',
-    terrain: ['grassland','rolling-hills','rocky-mountain','snow-peak','volcano','lava-field','sand-dunes','desert-oasis'].includes(family),
-    terrainMotion: family==='volcano' ? '熔流 / 火山灰' : family==='lava-field' ? '熔流' : family==='sand-dunes' ? '风沙' : family==='desert-oasis' ? '水波 / 风动' : '季相 / 风动',
+    terrain: ['grassland','rolling-hills','rocky-mountain','snow-peak','volcano','lava-field','sand-dunes','desert-oasis','wetland','river-bend'].includes(family),
+    terrainMotion: family==='volcano' ? '熔流 / 火山灰' : family==='lava-field' ? '熔流' : family==='sand-dunes' ? '风沙' : family==='desert-oasis' ? '水波 / 风动' : ['wetland','river-bend'].includes(family) ? '水流 / 结冰 / 风动' : '季相 / 风动',
     url: models[`./elements/${asset.id}.glb`],
     referenceUrl: references[`../../../design/asset-orthographics-20261012-expanded/${asset.reference}`],
   }
