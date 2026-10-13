@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs'
-import { Box3, Group, Mesh, Object3D, Vector3 } from 'three'
+import { Box3, Group, Mesh, MeshStandardMaterial, Object3D, Vector3 } from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { describe, expect, it } from 'vitest'
 import { createAnimalMotion, defaultAnimalSettings, solveAnimalLeg } from '../../src/render/visuals/mapElementAnimals'
@@ -25,7 +25,7 @@ describe('animal growth, articulation and bounded offspring', () => {
       expect(Math.hypot(solution.kneeY,solution.kneeZ)).toBeCloseTo(.5,6)
     }
   })
-  for (const id of ['sheep-v5','cow','horse','chicken','goat','pig','duck','deer']) {
+  for (const id of ['sheep-v5','cow','horse','chicken','goat','pig','duck','deer','fox','wolf']) {
     const bird = id==='chicken' || id==='duck'
     it(`${id} preserves grounded feet, changes proportions and hides adult details when young`, async () => {
       const model = await load(id), motion = createAnimalMotion(model)!
@@ -89,6 +89,70 @@ describe('animal growth, articulation and bounded offspring', () => {
     expect(initialMapElement('?element=sheep').id).toBe('sheep-v5')
     expect(initialMapElement('?element=sheep&revision=1').animal).toBe(false)
     expect(createAnimalMotion(new Group())).toBeUndefined()
+  })
+  for (const id of ['fox','wolf']) {
+    it(`${id} grows its coat separately, keeps ear hinges attached and authors paw digits`, async () => {
+      const model=await load(id),motion=createAnimalMotion(model)!
+      const root=model.children.find((node)=>node.userData.faunaSpecies)!
+      const ears: Object3D[]=[],coats: MeshStandardMaterial[]=[],cream: MeshStandardMaterial[]=[]
+      root.traverse((node)=>{
+        if(node.userData.canidEarSide)ears.push(node)
+        if(node instanceof Mesh)for(const material of Array.isArray(node.material)?node.material:[node.material]) {
+          if(material instanceof MeshStandardMaterial && material.name==='coat')coats.push(material)
+          if(material instanceof MeshStandardMaterial && material.name==='fur_cream')cream.push(material)
+        }
+      })
+      expect(ears).toHaveLength(2)
+      expect(tagged(root,'foot').map((node)=>node.userData.pawDigits)).toEqual([4,4,4,4])
+      const adultColor=coats[0].color.clone(),creamColor=cream[0].color.clone()
+      const origins=ears.map((node)=>node.position.clone())
+      const setAge=(age:number)=>{
+        motion.setSettings({...defaultAnimalSettings,age,behavior:'graze'})
+        for(let frame=0;frame<180;frame++)motion.update(1/60,true)
+      }
+      setAge(0)
+      expect(coats[0].color.equals(adultColor)).toBe(false)
+      const youngColor=coats[0].color.clone()
+      expect(tagged(root,'head')[0].scale.x/tagged(root,'body')[0].scale.x).toBeGreaterThan(1.3)
+      setAge(.5)
+      expect(coats[0].color.equals(youngColor)).toBe(false)
+      expect(coats[0].color.equals(adultColor)).toBe(false)
+      setAge(1)
+      expect(coats[0].color.equals(adultColor)).toBe(true)
+      expect(cream.every((material)=>material.color.equals(creamColor))).toBe(true)
+      expect(ears.every((node,i)=>node.position.equals(origins[i]))).toBe(true)
+      for(const ear of ears) {
+        expect(ear.parent!.userData.followHead).toBe(true)
+        expect(ear.parent!.quaternion.angleTo(tagged(root,'head')[0].quaternion)).toBeLessThan(.0001)
+        expect(new Box3().setFromObject(ear,true).min.y).toBeGreaterThan(0)
+      }
+      expect(new Box3().setFromObject(tagged(root,'head')[0],true).min.y).toBeGreaterThan(0)
+      const rotation=ears[0].quaternion.clone()
+      motion.update(.2,true)
+      expect(ears[0].quaternion.equals(rotation)).toBe(false)
+      const paused=ears[0].quaternion.clone()
+      motion.update(1,false)
+      expect(ears[0].quaternion.equals(paused)).toBe(true)
+      motion.setSettings({...defaultAnimalSettings,age:0,automatic:true})
+      motion.update(0,false)
+      for(let frame=0;frame<60*36;frame++)motion.update(1/60,true)
+      expect(motion.state.age).toBeGreaterThan(.99)
+    })
+  }
+  it('distinguishes fox and wolf silhouettes, tail markings and gait metadata', async () => {
+    const fox=await load('fox'),wolf=await load('wolf')
+    const f=fox.children.find((node)=>node.userData.faunaSpecies)!,w=wolf.children.find((node)=>node.userData.faunaSpecies)!
+    const bodySize=(node:Object3D)=>new Box3().setFromObject(tagged(node,'body')[0],true).getSize(new Vector3())
+    expect(bodySize(w).x/bodySize(f).x).toBeGreaterThan(1.4)
+    expect(w.userData.gaitStride).toBeGreaterThan(f.userData.gaitStride)
+    expect(w.userData.gaitFrequency).toBeLessThan(f.userData.gaitFrequency)
+    for(const [root,marking] of [[f,'fur_cream'],[w,'coat_back']] as const) {
+      const tail=tagged(root,'tail')[0]
+      const names=new Set<string>()
+      tail.traverse((node)=>{if(node instanceof Mesh)for(const material of Array.isArray(node.material)?node.material:[node.material])names.add(material.name)})
+      expect(names.has(marking)).toBe(true)
+      expect(new Box3().setFromObject(tail,true).min.y).toBeGreaterThan(0)
+    }
   })
   it('fades fawn markings independently and keeps the adult partner without antlers', async () => {
     const model=await load('deer'), motion=createAnimalMotion(model)!

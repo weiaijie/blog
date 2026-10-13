@@ -7,7 +7,7 @@ export const defaultAnimalSettings: AnimalSettings = { age: 1, automatic: false,
 
 function smooth(value: number) { const t = Math.max(0,Math.min(1,value)); return t*t*(3-2*t) }
 
-// Two-link sagittal IK keeps the hoof on the authored ground during stance.
+// Two-link sagittal IK keeps the foot on the authored ground during stance.
 export function solveAnimalLeg(upper: number, lower: number, forward: number, drop: number) {
   const distance = Math.max(.001,Math.min(upper+lower-.00001,Math.hypot(forward,drop)))
   const cosine = Math.max(-1,Math.min(1,(upper*upper+distance*distance-lower*lower)/(2*upper*distance)))
@@ -25,7 +25,9 @@ type Leg = { upper: Part; lower: Part; foot: Part; upperLength: number; lowerLen
 function rig(root: Object3D) {
   const parts: Part[] = []
   const coats = new Map<MeshStandardMaterial,Color>()
+  const ears: { object: Object3D; rotation: Quaternion; side: number }[] = []
   root.traverse((object) => {
+    if (object.userData.canidEarSide) ears.push({object,rotation:object.quaternion.clone(),side:Number(object.userData.canidEarSide)})
     if (typeof object.userData.animalRole === 'string') {
       parts.push({ object,role:object.userData.animalRole,position:object.position.clone(),scale:object.scale.clone(),rotation:object.quaternion.clone(),
         youngPosition:new Vector3().fromArray(object.userData.youngPosition),youngScale:new Vector3().fromArray(object.userData.youngScale),
@@ -43,7 +45,7 @@ function rig(root: Object3D) {
     const foot = parts.find((p) => p.role==='foot' && p.object.userData.legIndex===index)!
     return { upper,lower,foot,index,upperLength:Number(upper.object.userData.segmentLength),lowerLength:Number(lower.object.userData.segmentLength),footHeight:Number(upper.object.userData.footHeight) }
   })
-  return { root,parts,legs,coats }
+  return { root,parts,legs,coats,ears }
 }
 
 export function createAnimalMotion(model: Group, mounted = false) {
@@ -52,6 +54,11 @@ export function createAnimalMotion(model: Group, mounted = false) {
   if (!original) return undefined
   const species = mounted ? 'horse' : String(original.userData.faunaSpecies)
   const bird = species==='chicken' || species==='duck'
+  const gaitStride = Number(original.userData.gaitStride ?? (bird ? .075 : .19))
+  const gaitFrequency = Number(original.userData.gaitFrequency ?? (bird ? 1.9 : 1.15))
+  const gaitLift = Number(original.userData.gaitLift ?? (bird ? .048 : .09))
+  const sniffAngle = Number(original.userData.sniffAngle ?? (bird ? .72 : .68))
+  const juvenileCoat = typeof original.userData.juvenileCoat==='string' ? new Color(original.userData.juvenileCoat) : undefined
   const animals = [rig(original)]
   const template = original.clone(true)
   // A bounded family shares geometry, but each animal owns its changing coat materials.
@@ -81,11 +88,11 @@ export function createAnimalMotion(model: Group, mounted = false) {
 
   function pose(animal: ReturnType<typeof rig>, progress: number, index: number, incubating: boolean) {
     const growth = smooth(progress)
-    const headAngle = blend.graze*((bird ? .72 : .68)+Math.sin(elapsed*2.6+index)*.07)+(1-blend.graze)*Math.sin(elapsed*1.2+index)*.025
+    const headAngle = blend.graze*(sniffAngle+Math.sin(elapsed*2.6+index)*.07)+(1-blend.graze)*Math.sin(elapsed*1.2+index)*.025
     const firstLeg = animal.legs[0]
     const legFactor = firstLeg.upper.youngScale.y+(1-firstLeg.upper.youngScale.y)*growth
     const legReach = (firstLeg.upperLength+firstLeg.lowerLength)*legFactor
-    const maxStride = (bird ? .075 : .19)*legFactor*blend.walk
+    const maxStride = gaitStride*legFactor*blend.walk
     const crouch = legReach-Math.sqrt(Math.max(.001,legReach*legReach-maxStride*maxStride))+.001*blend.walk
     for (const part of animal.parts) {
       const { object,role } = part
@@ -124,10 +131,10 @@ export function createAnimalMotion(model: Group, mounted = false) {
       const { upper,lower,foot } = leg
       const factor = upper.youngScale.y+(1-upper.youngScale.y)*growth
       const a = leg.upperLength*factor, b = leg.lowerLength*factor, height = leg.footHeight*factor
-      const phase = (elapsed*(bird ? 1.9 : 1.15)+(mounted ? [0,.5,.25,.75][leg.index] : leg.index*.5+Math.floor(leg.index/2)*.5)+index*.13)%1
-      const stride = (bird ? .075 : .19)*factor
+      const phase = (elapsed*gaitFrequency+(mounted ? [0,.5,.25,.75][leg.index] : leg.index*.5+Math.floor(leg.index/2)*.5)+index*.13)%1
+      const stride = gaitStride*factor
       const forward = blend.walk*(phase<.62 ? stride*(1-2*phase/.62) : stride*(-1+2*(phase-.62)/.38))
-      const lift = phase<.62 ? 0 : blend.walk*Math.sin((phase-.62)/.38*Math.PI)*(bird ? .048 : .09)*factor
+      const lift = phase<.62 ? 0 : blend.walk*Math.sin((phase-.62)/.38*Math.PI)*gaitLift*factor
       const solution = solveAnimalLeg(a,b,forward,a+b-crouch-lift)
       const hip = upper.object.position
       hip.y=a+b+height-crouch
@@ -139,6 +146,11 @@ export function createAnimalMotion(model: Group, mounted = false) {
       foot.object.position.set(hip.x,height+lift,hip.z+forward)
     }
     if (bird) for (const [material,adult] of animal.coats) material.color.copy(chick).lerp(adult,smooth((progress-.2)/.55))
+    if (juvenileCoat) for (const [material,adult] of animal.coats) material.color.copy(adult).lerp(juvenileCoat,.58*(1-smooth((progress-.18)/.60)))
+    for (const ear of animal.ears) {
+      angles.set(0,0,Math.sin(elapsed*2.1+index+ear.side*.8)*.08*ear.side)
+      ear.object.quaternion.copy(ear.rotation).multiply(motion.setFromEuler(angles))
+    }
   }
 
   return {

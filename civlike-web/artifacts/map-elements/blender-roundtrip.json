@@ -459,7 +459,17 @@
       "id": "river-bend",
       "sourceObjects": 462,
       "roundTripTriangles": 7202
+    },
+    {
+      "id": "fox",
+      "sourceObjects": 97,
+      "roundTripTriangles": 4286
+    },
+    {
+      "id": "wolf",
+      "sourceObjects": 97,
+      "roundTripTriangles": 4286
     }
   ],
-  "passed": 92
+  "passed": 94
 }

@@ -17,6 +17,7 @@ from mathutils import Vector
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import map_element_botany
 import map_element_fauna
+import map_element_canids
 import map_element_buildings
 import map_element_fortifications
 import map_element_crops
@@ -753,6 +754,8 @@ BUILDERS = {
     'pig': (lambda: map_element_fauna.build(sys.modules[__name__], 'pig'), ''),
     'duck': (lambda: map_element_fauna.build(sys.modules[__name__], 'duck'), ''),
     'deer': (lambda: map_element_fauna.build(sys.modules[__name__], 'deer'), ''),
+    'fox': (lambda: map_element_canids.build(sys.modules[__name__], 'fox'), ''),
+    'wolf': (lambda: map_element_canids.build(sys.modules[__name__], 'wolf'), ''),
     'cottage': (lambda: map_element_buildings.build(sys.modules[__name__], 'cottage'), ''),
     'barn': (lambda: map_element_buildings.build(sys.modules[__name__], 'barn'), ''),
     'windmill': (lambda: map_element_buildings.build(sys.modules[__name__], 'windmill'), ''),

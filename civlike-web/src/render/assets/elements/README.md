@@ -429,6 +429,15 @@ npm run build
 - 可编辑 `.blend` 与 GLB 均保存。水流、风动和冰雪效果由网页元数据驱动，不是通用查看器可播放的烘焙动画。
 - 参考：[USGS 河湾](https://www.usgs.gov/educational-resources/find-feature-meander)、[EPA 湿地分类](https://www.epa.gov/wetlands/classification-and-types-wetlands)。页面：`/?view=map-elements&element=wetland`、`/?view=map-elements&element=river-bend`。
 
+## 第二十四批野生动物
+
+- `fox`：窄长尖脸、黑色小腿、尖耳、乳白胸腹与尾尖、蓬松连续尾部；`wolf`：更宽的口鼻和胸颈、相对较小的耳朵、灰色背毛与自然下垂的窄尾。两款有四趾爪掌和爪尖，不复用家畜蹄子。
+- 幼体按头、躯干、四肢、尾巴分别改变比例，灰褐幼毛逐渐转为成年被毛，白色标记不一起染色；根节点不统一缩放。步幅、步频和抬脚高度按物种保存，沿用两段腿部 IK，耳朵在真实耳根小幅转动。
+- 页面支持休息、行走、嗅闻、手动或自动成长、有限繁育预览。繁育最多显示两只亲代和一只子代，子代继续长大，不代表真实窝仔数量、地图种群、捕猎或寻路行为。
+- `.blend` 保存独立网格与关节，GLB 保存 `faunaSpecies`、成长和步态元数据。动作由网页驱动，不是可在任意 GLB 查看器播放的骨骼动画；当前动物仍是分件关节模型，不是完整蒙皮骨骼。
+- 识别特征参考：[NPS 赤狐](https://www.nps.gov/cwdw/learn/nature/red-fox.htm)、[NPS 狼体态](https://www.nps.gov/noca/learn/nature/wolf-description-and-biology.htm)。只参考比例与外观特征，没有下载第三方模型或贴图；尺寸为游戏美术尺度。
+- 页面：`/?view=map-elements&element=fox`、`/?view=map-elements&element=wolf`。沿用现有模型库标签切换，不重复新建预览标签。
+
 ## 后续工作
 
 - 与设计稿继续比对轮廓和细节，尤其是植被叶簇、屋瓦、水井附件和动物面部。

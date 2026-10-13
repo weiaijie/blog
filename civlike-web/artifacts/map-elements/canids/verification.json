@@ -1,0 +1,54 @@
+{
+  "results": [
+    {
+      "id": "fox",
+      "young": {
+        "hash": 3763612587,
+        "coverage": 0.012020697167755992,
+        "framed": true
+      },
+      "adult": {
+        "hash": 2621002155,
+        "coverage": 0.03122004357298475,
+        "framed": true
+      },
+      "family": {
+        "hash": 661943782,
+        "coverage": 0.015566448801742919,
+        "framed": true
+      },
+      "mobile": {
+        "hash": 373767574,
+        "coverage": 0.030915750915750915,
+        "framed": true
+      },
+      "drawCalls": 111
+    },
+    {
+      "id": "wolf",
+      "young": {
+        "hash": 728027313,
+        "coverage": 0.015,
+        "framed": true
+      },
+      "adult": {
+        "hash": 2496837951,
+        "coverage": 0.03684640522875817,
+        "framed": true
+      },
+      "family": {
+        "hash": 3683527652,
+        "coverage": 0.01843681917211329,
+        "framed": true
+      },
+      "mobile": {
+        "hash": 3246246193,
+        "coverage": 0.03572649572649573,
+        "framed": true
+      },
+      "drawCalls": 111
+    }
+  ],
+  "errors": [],
+  "writeRetries": []
+}

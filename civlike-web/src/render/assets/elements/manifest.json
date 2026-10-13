@@ -1872,6 +1872,46 @@
         ]
       ],
       "glbBytes": 619112
+    },
+    {
+      "id": "fox",
+      "reference": "",
+      "triangles": 4286,
+      "meshObjects": 19,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -0.1561,
+          -0.736,
+          0.0
+        ],
+        [
+          0.1561,
+          1.032,
+          0.8211
+        ]
+      ],
+      "glbBytes": 412860
+    },
+    {
+      "id": "wolf",
+      "reference": "",
+      "triangles": 4286,
+      "meshObjects": 19,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -0.2434,
+          -1.0133,
+          0.0
+        ],
+        [
+          0.2434,
+          1.2768,
+          1.2195
+        ]
+      ],
+      "glbBytes": 412668
     }
   ]
 }

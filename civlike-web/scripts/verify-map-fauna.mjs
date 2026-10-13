@@ -2,7 +2,11 @@ import { chromium } from 'playwright'
 import { mkdir, writeFile } from 'node:fs/promises'
 import assert from 'node:assert/strict'
 
-const output='artifacts/map-elements/fauna'
+const requested=process.argv.slice(2)
+const species=['sheep-v5','cow','horse','chicken','goat','pig','duck','deer','fox','wolf']
+assert(requested.every((id)=>species.includes(id)),'Unknown animal')
+const selected=requested.length ? requested : species
+const output=requested.length ? 'artifacts/map-elements/canids' : 'artifacts/map-elements/fauna'
 await mkdir(output,{ recursive:true })
 const browser=await chromium.launch()
 const page=await browser.newPage({ viewport:{ width:1440,height:1000 },reducedMotion:'no-preference' })
@@ -38,7 +42,7 @@ async function pixels() {
   })
 }
 try {
-  for(const id of ['sheep-v5','cow','horse','chicken','goat','pig','duck','deer']) {
+  for(const id of selected) {
     await page.setViewportSize({ width:1440,height:1000 })
     await page.goto(`http://127.0.0.1:5173/?view=map-elements&element=${id}`)
     await page.waitForSelector('.element-stage[data-loaded="true"][data-animals]')
@@ -68,8 +72,8 @@ try {
     await page.waitForTimeout(380)
     assert.notEqual((await pixels()).hash,walking.hash,`${id}: walk static`)
     await snapshot(`${id}-walk`)
-    await page.getByRole('button',{ name:id==='chicken' ? '啄食' : '采食',exact:true }).click()
-    await page.waitForTimeout(300)
+    await page.getByRole('button',{ name:['fox','wolf'].includes(id) ? '嗅闻' : id==='chicken' ? '啄食' : '采食',exact:true }).click()
+    await page.waitForTimeout(1400)
     await snapshot(`${id}-feed`)
     await page.getByRole('button',{ name:'休息',exact:true }).click()
     await page.getByLabel('繁育预览',{ exact:true }).check()
@@ -89,11 +93,11 @@ try {
     const drawCalls=Number(await page.locator('.element-stage').getAttribute('data-draw-calls'))
     assert(drawCalls<450,`${id}: family draw-call budget`)
     await snapshot(`${id}-family`)
-    if (id==='chicken' || id==='duck') {
+    if (['chicken','duck','fox','wolf'].includes(id)) {
       await page.getByRole('button',{ name:'播放动画',exact:true }).click()
       await page.waitForFunction(() => JSON.parse(document.querySelector('.element-stage').dataset.animals).offspringAge>=.99,{},{ timeout:80000 })
       await page.getByRole('button',{ name:'暂停动画',exact:true }).click()
-      assert.equal((await state()).offspring,3,'Growing offspring multiplied')
+      assert.equal((await state()).offspring,['chicken','duck'].includes(id) ? 3 : 1,'Growing offspring multiplied')
       assert((await pixels()).framed,'Adult offspring family clipped')
       await snapshot(`${id}-grown-family`)
     }
@@ -103,6 +107,11 @@ try {
     assert(mobile.coverage>.007 && mobile.framed,`${id}: mobile family clipped`)
     assert(await page.evaluate(() => document.documentElement.scrollWidth<=innerWidth),`${id}: mobile overflow`)
     await snapshot(`${id}-mobile`,true)
+    await page.setViewportSize({width:320,height:740})
+    await page.waitForTimeout(300)
+    assert((await pixels()).framed,`${id}: narrow mobile family clipped`)
+    assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`${id}: narrow mobile overflow`)
+    await snapshot(`${id}-mobile-320`,true)
     await page.getByLabel('繁育预览',{ exact:true }).uncheck()
     await page.waitForTimeout(300)
     assert.equal((await state()).offspring,0)
