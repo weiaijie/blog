@@ -400,6 +400,16 @@ npm run build
 - 结构参考：[Tower Bridge 开启桥机构](https://www.towerbridge.org.uk/stories/how-does-tower-bridge-work)、[配重室](https://www.towerbridge.org.uk/stories/the-bascule-chambers)、[NPS 桥梁结构说明](https://www.nps.gov/blri/learn/historyculture/bridges.htm)。仅参考承重和运动关系，未使用第三方模型或贴图，不是地标复刻。
 - 页面：`/?view=map-elements&element=stone-bridge`、`/?view=map-elements&element=steel-bridge`。
 
+## 第二十一批水利设施
+
+- `aqueduct`：三拱承重、逐层桥墩、连续渠槽、同断面进出水口，可升级检修步道和护栏。
+- `irrigation-channel`：渠床、分段渠壁、草土岸边、U 形导轨、升降闸板、丝杆与固定高度手轮。闸板升程 0.36 m，对应手轮三圈和 0.12 m 螺距；支持施工、开闸、中途暂停、升级养护附件。
+- 新水面由连续细分网格组成，波峰沿渠道移动、靠边界衰减，底面保持在渠床。下游随开度延迟蓄水和退水；关闭仍可保留少量静水，不以循环移动的白色长条代替整个水面。
+- 使用 `open-channel-064-v1`，净宽 0.64 m、正常水深 0.18 m。端口位置取渠床，高架渠为 2.08 m、灌渠为 0.12 m；仅断面相同，**不同地面高程不能直接平放相接**。地图仍需台地放置或另做跌水连接。
+- 这是风格化预览动画，不是流体求解器、真实供水网络或农田产量模拟。水面几何与控制状态由网页驱动，GLB 自身不包含通用查看器可播放的水利逻辑。
+- 参考：[NPS Washington Aqueduct](https://www.nps.gov/places/washington-aqueduct.htm)、[FAO Irrigation System](https://www.fao.org/4/r4082e/r4082e06.htm)。仅参考结构用途与水量控制关系，没有第三方模型或贴图，也不复刻可行船的大型运河渡槽。
+- 页面：`/?view=map-elements&element=aqueduct`、`/?view=map-elements&element=irrigation-channel`。
+
 ## 后续工作
 
 - 与设计稿继续比对轮廓和细节，尤其是植被叶簇、屋瓦、水井附件和动物面部。

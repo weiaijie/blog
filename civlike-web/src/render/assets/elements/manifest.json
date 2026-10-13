@@ -1752,6 +1752,46 @@
         ]
       ],
       "glbBytes": 704276
+    },
+    {
+      "id": "aqueduct",
+      "reference": "",
+      "triangles": 10354,
+      "meshObjects": 45,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -0.69,
+          -4.3,
+          0.0
+        ],
+        [
+          1.0234,
+          4.3,
+          2.698
+        ]
+      ],
+      "glbBytes": 673868
+    },
+    {
+      "id": "irrigation-channel",
+      "reference": "",
+      "triangles": 7572,
+      "meshObjects": 31,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.35,
+          -2.4,
+          0.0
+        ],
+        [
+          1.35,
+          2.4,
+          1.51
+        ]
+      ],
+      "glbBytes": 539196
     }
   ]
 }

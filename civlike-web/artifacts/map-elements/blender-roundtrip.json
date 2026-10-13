@@ -429,7 +429,17 @@
       "id": "steel-bridge",
       "sourceObjects": 343,
       "roundTripTriangles": 10000
+    },
+    {
+      "id": "aqueduct",
+      "sourceObjects": 340,
+      "roundTripTriangles": 10354
+    },
+    {
+      "id": "irrigation-channel",
+      "sourceObjects": 386,
+      "roundTripTriangles": 7572
     }
   ],
-  "passed": 86
+  "passed": 88
 }

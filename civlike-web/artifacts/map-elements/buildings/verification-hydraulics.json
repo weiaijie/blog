@@ -1,0 +1,261 @@
+{
+  "results": [
+    {
+      "id": "aqueduct",
+      "stages": [
+        {
+          "progress": 0,
+          "hash": 4209086005,
+          "coverage": 0.010588235294117647,
+          "framed": true,
+          "visible": 1
+        },
+        {
+          "progress": 30,
+          "hash": 261037323,
+          "coverage": 0.03137799564270152,
+          "framed": true,
+          "visible": 13
+        },
+        {
+          "progress": 52,
+          "hash": 2041584549,
+          "coverage": 0.04644335511982571,
+          "framed": true,
+          "visible": 27
+        },
+        {
+          "progress": 78,
+          "hash": 3601783385,
+          "coverage": 0.05144880174291939,
+          "framed": true,
+          "visible": 42
+        },
+        {
+          "progress": 100,
+          "hash": 3863950523,
+          "coverage": 0.05135076252723311,
+          "framed": true,
+          "visible": 44
+        }
+      ],
+      "upgraded": {
+        "hash": 1233178236,
+        "coverage": 0.051753812636165575,
+        "framed": true
+      },
+      "mobile": {
+        "hash": 3076694543,
+        "coverage": 0.07978021978021978,
+        "framed": true
+      },
+      "drawCalls": 74
+    },
+    {
+      "id": "irrigation-channel",
+      "stages": [
+        {
+          "progress": 0,
+          "hash": 352019275,
+          "coverage": 0.05927015250544662,
+          "framed": true,
+          "visible": 1
+        },
+        {
+          "progress": 30,
+          "hash": 4294349600,
+          "coverage": 0.059449891067538126,
+          "framed": true,
+          "visible": 10
+        },
+        {
+          "progress": 52,
+          "hash": 3930752813,
+          "coverage": 0.05522331154684096,
+          "framed": true,
+          "visible": 17
+        },
+        {
+          "progress": 78,
+          "hash": 3567253111,
+          "coverage": 0.05584967320261438,
+          "framed": true,
+          "visible": 27
+        },
+        {
+          "progress": 100,
+          "hash": 2768511228,
+          "coverage": 0.05606209150326798,
+          "framed": true,
+          "visible": 30
+        }
+      ],
+      "upgraded": {
+        "hash": 1946474831,
+        "coverage": 0.05613834422657952,
+        "framed": true
+      },
+      "mobile": {
+        "hash": 1477548433,
+        "coverage": 0.08654456654456655,
+        "framed": true
+      },
+      "drawCalls": 62
+    },
+    {
+      "id": "watermill",
+      "stages": [
+        {
+          "progress": 0,
+          "hash": 3824908783,
+          "coverage": 0.029934640522875818,
+          "framed": true,
+          "visible": 1
+        },
+        {
+          "progress": 30,
+          "hash": 1593532712,
+          "coverage": 0.06342047930283225,
+          "framed": true,
+          "visible": 8
+        },
+        {
+          "progress": 52,
+          "hash": 2535506298,
+          "coverage": 0.09504901960784314,
+          "framed": true,
+          "visible": 12
+        },
+        {
+          "progress": 78,
+          "hash": 2436162492,
+          "coverage": 0.10098583877995643,
+          "framed": true,
+          "visible": 22
+        },
+        {
+          "progress": 100,
+          "hash": 2375246050,
+          "coverage": 0.10068627450980393,
+          "framed": true,
+          "visible": 28
+        }
+      ],
+      "upgraded": {
+        "hash": 2893323768,
+        "coverage": 0.1060239651416122,
+        "framed": true
+      },
+      "mobile": {
+        "hash": 4088761587,
+        "coverage": 0.18695970695970696,
+        "framed": true
+      },
+      "drawCalls": 46
+    },
+    {
+      "id": "train-station",
+      "stages": [
+        {
+          "progress": 0,
+          "hash": 2314193801,
+          "coverage": 0.04266339869281046,
+          "framed": true,
+          "visible": 1
+        },
+        {
+          "progress": 30,
+          "hash": 374965251,
+          "coverage": 0.07300653594771242,
+          "framed": true,
+          "visible": 18
+        },
+        {
+          "progress": 52,
+          "hash": 922120723,
+          "coverage": 0.08528322440087147,
+          "framed": true,
+          "visible": 29
+        },
+        {
+          "progress": 78,
+          "hash": 1038562519,
+          "coverage": 0.092380174291939,
+          "framed": true,
+          "visible": 48
+        },
+        {
+          "progress": 100,
+          "hash": 454278219,
+          "coverage": 0.09090958605664488,
+          "framed": true,
+          "visible": 51
+        }
+      ],
+      "upgraded": {
+        "hash": 3711854617,
+        "coverage": 0.09094771241830066,
+        "framed": true
+      },
+      "mobile": {
+        "hash": 2129080174,
+        "coverage": 0.1730891330891331,
+        "framed": true
+      },
+      "drawCalls": 88
+    },
+    {
+      "id": "steel-bridge",
+      "stages": [
+        {
+          "progress": 0,
+          "hash": 2972166918,
+          "coverage": 0.011933551198257081,
+          "framed": true,
+          "visible": 1
+        },
+        {
+          "progress": 30,
+          "hash": 1069166890,
+          "coverage": 0.04358932461873638,
+          "framed": true,
+          "visible": 7
+        },
+        {
+          "progress": 52,
+          "hash": 568347555,
+          "coverage": 0.05116013071895425,
+          "framed": true,
+          "visible": 12
+        },
+        {
+          "progress": 78,
+          "hash": 1135852877,
+          "coverage": 0.061781045751633984,
+          "framed": true,
+          "visible": 16
+        },
+        {
+          "progress": 100,
+          "hash": 792768946,
+          "coverage": 0.061633986928104574,
+          "framed": true,
+          "visible": 19
+        }
+      ],
+      "upgraded": {
+        "hash": 3393498877,
+        "coverage": 0.062031590413943356,
+        "framed": true
+      },
+      "mobile": {
+        "hash": 3184065188,
+        "coverage": 0.09438339438339438,
+        "framed": true
+      },
+      "drawCalls": 42
+    }
+  ],
+  "errors": [],
+  "writeRetries": []
+}

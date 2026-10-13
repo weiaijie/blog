@@ -1,9 +1,12 @@
 import { Group, Matrix4, Mesh, MeshStandardMaterial, Object3D, Quaternion, Vector3 } from 'three'
+import { createChannelWater } from './mapElementHydraulics'
 
 export type BuildingSettings = { progress: number; automatic: boolean; working: boolean; speed: number; tier: 1 | 2; gateOpen: boolean }
 export type BuildingState = { progress: number; visible: number; operating: boolean; tier: 1 | 2; access: number }
 export const defaultBuildingSettings: BuildingSettings = { progress: 1, automatic: false, working: true, speed: .6, tier: 1, gateOpen:false }
 export function buildingStage(progress: number, kind?: string) {
+  if(kind==='irrigation-channel')return progress<.15 ? '基础' : progress<.42 ? '渠床' : progress<.62 ? '渠壁' : progress<.90 ? '水闸与附件' : progress<.99 ? '注水' : '竣工'
+  if(kind==='aqueduct')return progress<.15 ? '基础' : progress<.42 ? '桥墩' : progress<.62 ? '承重结构' : progress<.90 ? '渠槽与附件' : progress<.99 ? '注水' : '竣工'
   if(kind==='stone-bridge'||kind==='steel-bridge')return progress<.15 ? '基础' : progress<.42 ? '桥墩' : progress<.62 ? '拱圈与承重' : progress<.90 ? '桥面与护栏' : progress<.99 ? '收尾' : '竣工'
   return progress<.15 ? '地基' : progress<.42 ? '墙体' : progress<.62 ? '结构' : progress<.90 ? '屋顶与部件' : progress<.99 ? '收尾' : '竣工'
 }
@@ -47,7 +50,8 @@ export function createBuildingMotion(model: Group) {
     })
   }
   let settings={ ...defaultBuildingSettings }, progress=1, elapsed=0, access=0
-  const hasGate=parts.some((part) => part.motion==='lift' || part.motion==='semaphore' || part.motion==='bascule')
+  const water=createChannelWater(model)
+  const hasGate=parts.some((part) => part.motion==='lift' || part.motion==='semaphore' || part.motion==='bascule' || part.motion==='hydro-gate')
   const rotation=new Quaternion()
   const state: BuildingState={ progress,visible:0,operating:false,tier:1,access:0 }
   return {
@@ -87,6 +91,8 @@ export function createBuildingMotion(model: Group) {
         if (part.motion==='semaphore') object.quaternion.multiply(rotation.setFromAxisAngle(part.axis,smooth(access)*Math.PI/4))
         if (part.motion==='bascule') object.quaternion.multiply(rotation.setFromAxisAngle(part.axis,smooth((access-.2)/.8)*Number(object.userData.basculeAngle)))
         if (part.motion==='road-barrier') object.quaternion.multiply(rotation.setFromAxisAngle(part.axis,(1-smooth(access/.2))*Math.PI/2))
+        if (part.motion==='hydro-gate') object.position.y+=smooth(access)*Number(object.userData.gateTravel)
+        if (part.motion==='hydro-wheel') object.quaternion.multiply(rotation.setFromAxisAngle(part.axis,smooth(access)*Math.PI*2*Number(object.userData.screwTurns)))
         if (part.motion==='belt-loop') {
           const data=object.userData,[left,right]=data.beltCenters as number[],r=Number(data.beltRadius),span=right-left,arc=Math.PI*r,length=2*span+2*arc
           let distance=((Number(data.beltPhase)*length-elapsed*Number(data.beltSpeed))%length+length)%length
@@ -132,6 +138,7 @@ export function createBuildingMotion(model: Group) {
         p.needsUpdate=true;mesh.geometry.computeVertexNormals();mesh.geometry.computeBoundingBox();mesh.geometry.computeBoundingSphere()
       }
       for(const material of embers)material.emissiveIntensity=1.25+.35*Math.sin(elapsed*2.4-.4)+.10*Math.sin(elapsed*7)
+      water.update(delta*settings.speed,playing&&operating,access,progress>=.93)
       return state
     },
   }
