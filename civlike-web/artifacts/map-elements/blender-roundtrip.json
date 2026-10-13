@@ -419,7 +419,17 @@
       "id": "factory",
       "sourceObjects": 451,
       "roundTripTriangles": 15273
+    },
+    {
+      "id": "stone-bridge",
+      "sourceObjects": 782,
+      "roundTripTriangles": 11172
+    },
+    {
+      "id": "steel-bridge",
+      "sourceObjects": 343,
+      "roundTripTriangles": 10000
     }
   ],
-  "passed": 84
+  "passed": 86
 }

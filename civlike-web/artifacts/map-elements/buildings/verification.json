@@ -26,26 +26,26 @@
         },
         {
           "progress": 78,
-          "hash": 1326362211,
+          "hash": 3960587116,
           "coverage": 0.11416122004357299,
           "framed": true,
           "visible": 20
         },
         {
           "progress": 100,
-          "hash": 1411270850,
+          "hash": 3373813812,
           "coverage": 0.11285947712418301,
           "framed": true,
           "visible": 21
         }
       ],
       "upgraded": {
-        "hash": 1872226955,
+        "hash": 1522614893,
         "coverage": 0.13086601307189544,
         "framed": true
       },
       "mobile": {
-        "hash": 2163374241,
+        "hash": 2649928779,
         "coverage": 0.25013431013431014,
         "framed": true
       },
@@ -77,21 +77,21 @@
         },
         {
           "progress": 78,
-          "hash": 2456127357,
+          "hash": 3483170947,
           "coverage": 0.12874727668845315,
           "framed": true,
           "visible": 21
         },
         {
           "progress": 100,
-          "hash": 1939856936,
+          "hash": 3523057000,
           "coverage": 0.12876361655773422,
           "framed": true,
           "visible": 21
         }
       ],
       "upgraded": {
-        "hash": 2417872456,
+        "hash": 110453888,
         "coverage": 0.13782135076252724,
         "framed": true
       },
@@ -128,27 +128,27 @@
         },
         {
           "progress": 78,
-          "hash": 3557958035,
+          "hash": 1446583785,
           "coverage": 0.08349673202614379,
           "framed": true,
           "visible": 17
         },
         {
           "progress": 100,
-          "hash": 3866093846,
-          "coverage": 0.08836601307189543,
+          "hash": 4146923418,
+          "coverage": 0.0883442265795207,
           "framed": true,
           "visible": 17
         }
       ],
       "upgraded": {
-        "hash": 941610606,
-        "coverage": 0.09335511982570806,
+        "hash": 1464786988,
+        "coverage": 0.09342592592592593,
         "framed": true
       },
       "mobile": {
-        "hash": 513439138,
-        "coverage": 0.17218559218559218,
+        "hash": 3139226270,
+        "coverage": 0.17196581196581195,
         "framed": true
       },
       "drawCalls": 42
@@ -179,27 +179,27 @@
         },
         {
           "progress": 78,
-          "hash": 2436162492,
-          "coverage": 0.10098583877995643,
+          "hash": 1158379715,
+          "coverage": 0.10100217864923747,
           "framed": true,
           "visible": 22
         },
         {
           "progress": 100,
-          "hash": 2375246050,
-          "coverage": 0.10068627450980393,
+          "hash": 3598057458,
+          "coverage": 0.10069172113289761,
           "framed": true,
           "visible": 28
         }
       ],
       "upgraded": {
-        "hash": 2893323768,
-        "coverage": 0.1060239651416122,
+        "hash": 2623644433,
+        "coverage": 0.10603485838779957,
         "framed": true
       },
       "mobile": {
-        "hash": 2931907194,
-        "coverage": 0.18695970695970696,
+        "hash": 384124341,
+        "coverage": 0.18698412698412697,
         "framed": true
       },
       "drawCalls": 46
@@ -237,20 +237,20 @@
         },
         {
           "progress": 100,
-          "hash": 3317922499,
+          "hash": 2057303129,
           "coverage": 0.072619825708061,
           "framed": true,
           "visible": 16
         }
       ],
       "upgraded": {
-        "hash": 3183326634,
+        "hash": 2065149216,
         "coverage": 0.07264161220043573,
         "framed": true
       },
       "mobile": {
-        "hash": 793768186,
-        "coverage": 0.13914529914529913,
+        "hash": 316757089,
+        "coverage": 0.1391941391941392,
         "framed": true
       },
       "drawCalls": 32
@@ -288,20 +288,20 @@
         },
         {
           "progress": 100,
-          "hash": 2752772833,
+          "hash": 1210160386,
           "coverage": 0.1711437908496732,
           "framed": true,
           "visible": 53
         }
       ],
       "upgraded": {
-        "hash": 3300647556,
+        "hash": 2788734803,
         "coverage": 0.17116557734204793,
         "framed": true
       },
       "mobile": {
-        "hash": 1931469021,
-        "coverage": 0.32593406593406593,
+        "hash": 1887041082,
+        "coverage": 0.325958485958486,
         "framed": true
       },
       "drawCalls": 105
@@ -339,20 +339,20 @@
         },
         {
           "progress": 100,
-          "hash": 739820020,
-          "coverage": 0.11574074074074074,
+          "hash": 2854490792,
+          "coverage": 0.11573529411764706,
           "framed": true,
           "visible": 40
         }
       ],
       "upgraded": {
-        "hash": 2243770884,
-        "coverage": 0.11617102396514162,
+        "hash": 499798884,
+        "coverage": 0.11616557734204792,
         "framed": true
       },
       "mobile": {
-        "hash": 1183730309,
-        "coverage": 0.2206105006105006,
+        "hash": 2004075696,
+        "coverage": 0.2205860805860806,
         "framed": true
       },
       "drawCalls": 78
@@ -390,20 +390,20 @@
         },
         {
           "progress": 100,
-          "hash": 4191960925,
-          "coverage": 0.137020697167756,
+          "hash": 634756756,
+          "coverage": 0.13699891067538125,
           "framed": true,
           "visible": 15
         }
       ],
       "upgraded": {
-        "hash": 2947613955,
-        "coverage": 0.14275054466230938,
+        "hash": 3809607110,
+        "coverage": 0.14272875816993463,
         "framed": true
       },
       "mobile": {
-        "hash": 3932923693,
-        "coverage": 0.2578266178266178,
+        "hash": 326885339,
+        "coverage": 0.2578754578754579,
         "framed": true
       },
       "drawCalls": 31
@@ -453,7 +453,7 @@
         "framed": true
       },
       "mobile": {
-        "hash": 1299852404,
+        "hash": 1603442312,
         "coverage": 0.21787545787545787,
         "framed": true
       },
@@ -485,26 +485,26 @@
         },
         {
           "progress": 78,
-          "hash": 4031440408,
+          "hash": 69806355,
           "coverage": 0.11543028322440087,
           "framed": true,
           "visible": 29
         },
         {
           "progress": 100,
-          "hash": 1497717952,
+          "hash": 2782539410,
           "coverage": 0.11369825708061002,
           "framed": true,
           "visible": 29
         }
       ],
       "upgraded": {
-        "hash": 2388287027,
+        "hash": 1911766334,
         "coverage": 0.11378540305010894,
         "framed": true
       },
       "mobile": {
-        "hash": 60022076,
+        "hash": 2980871744,
         "coverage": 0.21523809523809523,
         "framed": true
       },
@@ -543,19 +543,19 @@
         },
         {
           "progress": 100,
-          "hash": 429896042,
+          "hash": 786984777,
           "coverage": 0.11149782135076253,
           "framed": true,
           "visible": 26
         }
       ],
       "upgraded": {
-        "hash": 2293176960,
+        "hash": 1789063611,
         "coverage": 0.11280501089324618,
         "framed": true
       },
       "mobile": {
-        "hash": 186166271,
+        "hash": 928325714,
         "coverage": 0.21555555555555556,
         "framed": true
       },
@@ -594,19 +594,19 @@
         },
         {
           "progress": 100,
-          "hash": 3307742122,
+          "hash": 2370322318,
           "coverage": 0.09090958605664488,
           "framed": true,
           "visible": 51
         }
       ],
       "upgraded": {
-        "hash": 2148822012,
+        "hash": 4238826944,
         "coverage": 0.09094771241830066,
         "framed": true
       },
       "mobile": {
-        "hash": 4108846200,
+        "hash": 3812855107,
         "coverage": 0.1730891330891331,
         "framed": true
       },
@@ -638,53 +638,134 @@
         },
         {
           "progress": 78,
-          "hash": 3653157043,
-          "coverage": 0.11115468409586057,
+          "hash": 2054012012,
+          "coverage": 0.11116557734204793,
           "framed": true,
           "visible": 50
         },
         {
           "progress": 100,
-          "hash": 3057377016,
+          "hash": 3906608647,
           "coverage": 0.11101307189542484,
           "framed": true,
           "visible": 54
         }
       ],
       "upgraded": {
-        "hash": 1561526983,
+        "hash": 3002937306,
         "coverage": 0.1136437908496732,
         "framed": true
       },
       "mobile": {
-        "hash": 2298828684,
+        "hash": 4241057218,
         "coverage": 0.17912087912087912,
         "framed": true
       },
       "drawCalls": 82
+    },
+    {
+      "id": "stone-bridge",
+      "stages": [
+        {
+          "progress": 0,
+          "hash": 2991737428,
+          "coverage": 0.01787037037037037,
+          "framed": true,
+          "visible": 1
+        },
+        {
+          "progress": 30,
+          "hash": 3427590853,
+          "coverage": 0.049226579520697165,
+          "framed": true,
+          "visible": 13
+        },
+        {
+          "progress": 52,
+          "hash": 3020308465,
+          "coverage": 0.05905228758169934,
+          "framed": true,
+          "visible": 78
+        },
+        {
+          "progress": 78,
+          "hash": 1870168941,
+          "coverage": 0.0654193899782135,
+          "framed": true,
+          "visible": 145
+        },
+        {
+          "progress": 100,
+          "hash": 2499871084,
+          "coverage": 0.07035403050108932,
+          "framed": true,
+          "visible": 163
+        }
+      ],
+      "upgraded": {
+        "hash": 2208102948,
+        "coverage": 0.07190631808278868,
+        "framed": true
+      },
+      "mobile": {
+        "hash": 1854980085,
+        "coverage": 0.10974358974358975,
+        "framed": true
+      },
+      "drawCalls": 265
+    },
+    {
+      "id": "steel-bridge",
+      "stages": [
+        {
+          "progress": 0,
+          "hash": 2972166918,
+          "coverage": 0.011933551198257081,
+          "framed": true,
+          "visible": 1
+        },
+        {
+          "progress": 30,
+          "hash": 1069166890,
+          "coverage": 0.04358932461873638,
+          "framed": true,
+          "visible": 7
+        },
+        {
+          "progress": 52,
+          "hash": 568347555,
+          "coverage": 0.05116013071895425,
+          "framed": true,
+          "visible": 12
+        },
+        {
+          "progress": 78,
+          "hash": 1135852877,
+          "coverage": 0.061781045751633984,
+          "framed": true,
+          "visible": 16
+        },
+        {
+          "progress": 100,
+          "hash": 188901721,
+          "coverage": 0.061633986928104574,
+          "framed": true,
+          "visible": 19
+        }
+      ],
+      "upgraded": {
+        "hash": 1458508740,
+        "coverage": 0.062031590413943356,
+        "framed": true
+      },
+      "mobile": {
+        "hash": 4175413644,
+        "coverage": 0.09438339438339438,
+        "framed": true
+      },
+      "drawCalls": 42
     }
   ],
   "errors": [],
-  "writeRetries": [
-    {
-      "name": "castle-keep-侧面",
-      "code": "UNKNOWN"
-    },
-    {
-      "name": "blacksmith-stage-78",
-      "code": "UNKNOWN"
-    },
-    {
-      "name": "blacksmith-interior",
-      "code": "UNKNOWN"
-    },
-    {
-      "name": "blacksmith-interior",
-      "code": "UNKNOWN"
-    },
-    {
-      "name": "market-hall-俯视",
-      "code": "UNKNOWN"
-    }
-  ]
+  "writeRetries": []
 }

@@ -1712,6 +1712,46 @@
         ]
       ],
       "glbBytes": 1098072
+    },
+    {
+      "id": "stone-bridge",
+      "reference": "",
+      "triangles": 11172,
+      "meshObjects": 165,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.39,
+          -4.6,
+          -1.8
+        ],
+        [
+          1.39,
+          4.6,
+          1.7904
+        ]
+      ],
+      "glbBytes": 855060
+    },
+    {
+      "id": "steel-bridge",
+      "reference": "",
+      "triangles": 10000,
+      "meshObjects": 21,
+      "animatedPivots": [],
+      "boundsMeters": [
+        [
+          -1.305,
+          -4.602,
+          -1.8
+        ],
+        [
+          1.72,
+          4.602,
+          1.48
+        ]
+      ],
+      "glbBytes": 704276
     }
   ]
 }

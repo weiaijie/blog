@@ -391,6 +391,15 @@ npm run build
 
 浏览器检查覆盖清单中全部版本加载、画面非空和完整取景、动画与暂停、三视图、线框、移动端切换及横向溢出，另验证版本切换、版本链接刷新、下载链接、鼠标旋转、生长几何、自动生长、零风静止、风动、平板控件和单样板绘制调用预算。物候样板按类型验证出芽、展叶/开花/花粉球花、成孢/结籽/果实成熟以及后期阶段的器官可见性与画面差异，不统一假定所有植物都开花结果。截图和 JSON 结果位于 `artifacts/map-elements/`。这些检查不等于艺术质量验收，也不等于 200 格场景的性能验收。
 
+## 第二十批桥梁
+
+- `stone-bridge`：双拱、48 块拱石、水平砌石层、分块坡面铺装、分水墩、护墙和升级灯具。旗帜可风动，桥体不会做无意义摇晃。
+- `steel-bridge`：双叶 70 度开启桥、侧桁架、铆钉、横梁、转轴和下沉配重；路障先落下才抬桥，闭合后再放行道路。施工和开桥均可暂停、回退。
+- 两端道路宽 1.45 m、端面高 0.145 m，`road-145-v1` 对应已有三种道路；河床基准 -1.8 m。桥墩按跨河结构建模，没有把实体底座填满桥洞。水面需要地图另行装配，不把风动旗帜计为水流模拟。
+- Blender 保留独立零件及施工/连接元数据；网页执行功能动画，通用 GLB 查看器不自动执行路障时序。当前是游戏尺度的风格化结构，不是工程设计。
+- 结构参考：[Tower Bridge 开启桥机构](https://www.towerbridge.org.uk/stories/how-does-tower-bridge-work)、[配重室](https://www.towerbridge.org.uk/stories/the-bascule-chambers)、[NPS 桥梁结构说明](https://www.nps.gov/blri/learn/historyculture/bridges.htm)。仅参考承重和运动关系，未使用第三方模型或贴图，不是地标复刻。
+- 页面：`/?view=map-elements&element=stone-bridge`、`/?view=map-elements&element=steel-bridge`。
+
 ## 后续工作
 
 - 与设计稿继续比对轮廓和细节，尤其是植被叶簇、屋瓦、水井附件和动物面部。

@@ -41,7 +41,7 @@ async function pixels() {
   })
 }
 try {
-  for(const id of requested.length ? requested : ['cottage','barn','windmill','watermill','watchtower','castle-keep','castle-gate','castle-wall','stable','blacksmith','market-hall','train-station','factory']) {
+  for(const id of requested.length ? requested : ['cottage','barn','windmill','watermill','watchtower','castle-keep','castle-gate','castle-wall','stable','blacksmith','market-hall','train-station','factory','stone-bridge','steel-bridge']) {
     await page.setViewportSize({ width:1440,height:1000 })
     await page.goto(`http://127.0.0.1:5173/?view=map-elements&element=${id}`)
     await page.waitForSelector('.element-stage[data-loaded="true"][data-building]')
@@ -134,6 +134,28 @@ try {
     assert((await page.getByLabel('下载 GLB',{exact:true}).getAttribute('download')).includes(id))
     await shot(`${id}-mobile-320`,true)
     await page.setViewportSize({ width:390,height:844 })
+    if(id==='steel-bridge'){
+      await page.getByLabel('开启桥面',{exact:true}).check()
+      await page.waitForTimeout(180)
+      assert((await state()).access>0 && (await state()).access<1,'Bascule snapped open')
+      await page.getByRole('button',{name:'暂停动画',exact:true}).click()
+      await page.waitForTimeout(150)
+      const halfway=await state(),still=await pixels()
+      await page.waitForTimeout(300)
+      assert.deepEqual(await state(),halfway);assert.equal((await pixels()).hash,still.hash,'Paused bascule moved')
+      await page.getByRole('button',{name:'播放动画',exact:true}).click()
+      await page.waitForFunction(()=>JSON.parse(document.querySelector('.element-stage').dataset.building).access===1,{},{timeout:15000})
+      await page.getByText('桥面升起 · 道路封闭',{exact:true}).waitFor({state:'visible'})
+      await page.getByRole('button',{name:'暂停动画',exact:true}).click()
+      for(const size of [{width:320,height:720},{width:1440,height:1000}]){
+        await page.setViewportSize(size);await page.waitForTimeout(200)
+        const opened=await pixels();assert(opened.framed&&opened.coverage>.007,'Open bascule clipped/blank')
+        await shot(`steel-bridge-open-${size.width}`,true)
+      }
+      await page.getByLabel('开启桥面',{exact:true}).uncheck()
+      await page.waitForFunction(()=>JSON.parse(document.querySelector('.element-stage').dataset.building).access===0,{},{timeout:15000})
+      await page.getByText('桥面闭合 · 道路通行',{exact:true}).waitFor({state:'visible'})
+    }
     if(id==='train-station'){
       await page.getByLabel('发车信号',{exact:true}).check()
       await page.waitForFunction(()=>JSON.parse(document.querySelector('.element-stage').dataset.building).access===1,{},{timeout:15000})
