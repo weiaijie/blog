@@ -1,0 +1,26 @@
+[
+  {
+    "name": "sse_2025",
+    "url": "https://www.sse.com.cn/disclosure/announcement/general/c/c_20241223_10767108.shtml",
+    "requested_at_utc": "2026-11-02T03:27:14.519915+00:00",
+    "status": 200,
+    "content_type": "text/html",
+    "final_url": "https://www.sse.com.cn/disclosure/announcement/general/c/c_20241223_10767108.shtml",
+    "bytes": 27766,
+    "sha256": "d403c40f29bbf1fe7f39b02b7fb93c9a0bfbd71f8f04c6350c3b5050921bf889",
+    "elapsed_seconds": 1.68,
+    "preview": "<!doctype html>\r\n<html>\r\n\r\n<head>\r\n    <!--获取栏目id页-->\r\n    <!-- 站点属性 -->\r\n    \r\n<meta name=\"others\" content=\"页面生成时间 2024-12-23 16:58:27\">\r\n<meta name=\"template,templategroup,version\" content=\"877,default,2.6\">\r\n<title>关于"
+  },
+  {
+    "name": "sse_2026",
+    "url": "https://www.sse.com.cn/disclosure/announcement/general/c/c_20251222_10802507.shtml",
+    "requested_at_utc": "2026-11-02T03:27:14.520890+00:00",
+    "status": 200,
+    "content_type": "text/html",
+    "final_url": "https://www.sse.com.cn/disclosure/announcement/general/c/c_20251222_10802507.shtml",
+    "bytes": 28038,
+    "sha256": "ff188c710b8904758c185eb955e9eaa2c9bd7c2061af984d4f1d743f899c12a4",
+    "elapsed_seconds": 2.04,
+    "preview": "<!doctype html>\r\n<html>\r\n\r\n<head>\r\n    <!--获取栏目id页-->\r\n    <!-- 站点属性 -->\r\n    \r\n<meta name=\"others\" content=\"页面生成时间 2025-12-22 17:00:13\">\r\n<meta name=\"template,templategroup,version\" content=\"877,default,2.6\">\r\n<title>关于"
+  }
+]

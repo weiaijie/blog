@@ -1,0 +1,23 @@
+个人量化投资研究系统：2026-11-02 续接诊断
+
+目标：仅研究中国股票ETF、债券ETF；以1～2年评估长期年化净收益4%～5%的可行性，不保证收益；不接实盘、不使用真实资金。最终目标是GitHub私有仓库。
+
+项目状态：当前 /workspace 中未发现 quant-research、PROJECT_PLAN.md、Python研究代码或notebook、data、site。扫描排除了.git、node_modules、.venv。没有读取无关项目内容。不能推断旧环境文件已丢失，不能声称恢复。未删除、重建环境，未创建替代quant-research项目，未推送GitHub、未部署站点。用户描述的10项测试通过仅为历史上下文，本次无法复验。旧项目备份未能制作，因为当前没有找到旧项目。
+
+本目录仅本次独立诊断：probe.py / extra.py / calendar_probe.py为真实HTTP请求；requests.json / extra_requests.json / calendar_requests.json记录UTC时间、URL、状态、错误、响应摘要与SHA256；*.body是原始响应；validate.py与validation.json保存逐项比较。执行python validate.py可离线复验，网络探测脚本重新执行会覆盖同名快照，重新探测请复制目录。
+
+实测：新浪日线两标的各1023条，2022-08-09至2026-10-30。腾讯未复权与新浪各640共同交易日，OHLC逐字段完全一致。腾讯返回2026-11-02当日数据，未确认收盘，已排除。新浪压缩历史响应可读，但未解码，不能宣称全历史质量已验证。腾讯返回的样本始于2024-03-11，虽请求始于2024-01-01，受条数上限影响。
+新浪试探性分红页面FundInfo_JJJZ.php两标的均404，响应File not found.；此错误仅针对所测URL，不代表整个新浪分红服务不可用。
+东方财富日线fqt=0、1、2两标的均503，响应upstream connect error or disconnect/reset before headers. reset reason: connection termination。不能把网关/上游错误认定为不存在行情。
+最初SSE交易日历试探路径404；SZSE路径503，reset reason: remote connection failure。随后SSE正式年度休市公告两份均200。
+
+分红：东方财富fhsp表，510300共14次、511010共7次；每10份金额除以10，与新浪hfq.js的u字段相邻差分逐事件日期、金额全部一致。此为两家供应商展示交叉核验，不能证明底层来源彼此独立，尚未逐条核对基金管理人公告。新浪字段语义为经验推断，未有供应商正式字段规范。
+复权：共同样本内腾讯前复权收盘价等于未复权价格减后续现金分红，510300精确一致；511010有615日存在小数舍入残差，最大0.0005元，无超半个0.001报价单位误差。此验证只覆盖收盘价、该下载快照和样本期，不代表全历史公式或可实时回测的无前视信号。腾讯后复权响应已保存但尚未系统核验。东方财富表含510300在2012-05-11折算1:0.3709、511010在2013-03-05折算1:0.0100；历史折算需官方确认，不能忽略或将供应商后复权序列随意拼接。
+
+独立日历：人工录入两份SSE年度休市公告区间，按周一至周五减休市日生成，未从行情反推；2025-01-01至2026-10-30共441日，两标的新浪日线均无缺日、多日。未审计临时停市/个券停牌公告；2024及以前尚未验证。
+2025来源：https://www.sse.com.cn/disclosure/announcement/general/c/c_20241223_10767108.shtml
+2026来源：https://www.sse.com.cn/disclosure/announcement/general/c/c_20251222_10802507.shtml
+
+后续研究准入：找回用户旧项目并先备份；官方逐事件分红/除息/到账/折算确认；补齐全研究期独立日历；定义原始价格+分红应收与到账现金会计，到账前不能再投资，复权收益不能再重复加分红；验证费用、滑点、信号延迟及样本外切分后再研究收益。不在本次运行回测，不生成收益率结论。
+
+下载限制：指定用户交付目录 /codex/browser/projectless/0001-etf-etf-1-2-4-5-github-workspace-quant-research-/output 无法创建，系统返回 mkdir: cannot create directory ‘/codex’: Permission denied。本目录目前是云工作区诊断记录，不声称已提供可下载备份。
