@@ -1,0 +1,74 @@
+[
+  {
+    "name": "510300_20260112",
+    "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-01-12/510300_20260112_VTCZ.pdf",
+    "requested_at_utc": "2026-11-03T07:23:50.248284+00:00",
+    "status": 200,
+    "bytes": 139671,
+    "sha256": "c8ff747d02fa90db72320458c38249f73720b932d61b7e088f033583aab63992",
+    "extract_exit": 0
+  },
+  {
+    "name": "510300_20250611",
+    "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2025-06-11/510300_20250611_ZAU4.pdf",
+    "requested_at_utc": "2026-11-03T07:23:50.250495+00:00",
+    "status": 200,
+    "bytes": 139491,
+    "sha256": "9a2f554b8ba5e340c79905171388f65225e9239027a36794522aa6bb4a82be67",
+    "extract_exit": 0
+  },
+  {
+    "name": "511010_20260320",
+    "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-03-20/511010_20260320_Y87H.pdf",
+    "requested_at_utc": "2026-11-03T07:23:50.252826+00:00",
+    "status": 200,
+    "bytes": 122727,
+    "sha256": "a45a301dd556b3b1f36bad19abf952e7490110fda539a1d716cadb903bd22656",
+    "extract_exit": 0
+  },
+  {
+    "name": "511010_20260622",
+    "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-06-22/511010_20260622_0EYP.pdf",
+    "requested_at_utc": "2026-11-03T07:23:50.260744+00:00",
+    "status": 200,
+    "bytes": 124047,
+    "sha256": "82418fe2913770fd1ab6211869dbc8a83683e73490fcdb277c9c3be226a992a9",
+    "extract_exit": 0
+  },
+  {
+    "name": "511010_20251223",
+    "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2025-12-23/511010_20251223_0M89.pdf",
+    "requested_at_utc": "2026-11-03T07:23:54.572103+00:00",
+    "status": 200,
+    "bytes": 122951,
+    "sha256": "733995693eef19c61a55a30d2be7dcc0dcc471980b81b85363977478195c50a8",
+    "extract_exit": 0
+  },
+  {
+    "name": "511010_20250918",
+    "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2025-09-18/511010_20250918_FU3S.pdf",
+    "requested_at_utc": "2026-11-03T07:23:55.251237+00:00",
+    "status": 200,
+    "bytes": 123142,
+    "sha256": "ddfaac7c7097b0a15666d6e6787553be48613468e221564bccabfceceb5d0d02",
+    "extract_exit": 0
+  },
+  {
+    "name": "511010_2013_report",
+    "url": "https://static.cninfo.com.cn/finalpage/2014-03-31/63762335.PDF",
+    "requested_at_utc": "2026-11-03T07:23:55.259088+00:00",
+    "status": 200,
+    "bytes": 330569,
+    "sha256": "662306af7c5b58185244dd060aba3c69832e8602c08b1eb9e33da00348d98167",
+    "extract_exit": 0
+  },
+  {
+    "name": "510300_2015_prospectus",
+    "url": "https://pdf.dfcfw.com/pdf/H2_AN201512160012117564_1.pdf",
+    "requested_at_utc": "2026-11-03T07:23:55.819688+00:00",
+    "status": 200,
+    "bytes": 1128974,
+    "sha256": "9af0df217ff104f5847c2bc8c75e8636a38cb3cfaf4afc210f7dca8cb0d11e38",
+    "extract_exit": 0
+  }
+]
