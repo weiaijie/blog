@@ -1,0 +1,120 @@
+{
+  "510300": {
+    "calendar_expected": 1023,
+    "calendar_missing": [],
+    "calendar_extra": [],
+    "duplicate_dates": 0,
+    "ohlc_bounds_valid": true,
+    "comparison_rows": 640,
+    "adjustment_fields": [
+      "open",
+      "close",
+      "high",
+      "low"
+    ],
+    "adjustment_max_absolute_residual": {
+      "qfq": "0",
+      "hfq": "0.000548422860"
+    },
+    "beyond_half_tick_count": {
+      "qfq": 0,
+      "hfq": 114
+    },
+    "failure_examples": {
+      "qfq": [],
+      "hfq": [
+        {
+          "date": "2024-03-14",
+          "field": "low",
+          "residual": "0.000529016680"
+        },
+        {
+          "date": "2024-03-21",
+          "field": "close",
+          "residual": "0.000545790130"
+        },
+        {
+          "date": "2024-04-03",
+          "field": "open",
+          "residual": "0.000545790130"
+        },
+        {
+          "date": "2024-04-16",
+          "field": "high",
+          "residual": "0.000529016680"
+        },
+        {
+          "date": "2024-04-30",
+          "field": "high",
+          "residual": "0.000514526310"
+        }
+      ]
+    },
+    "empirical_hfq_scale": "0.37094933",
+    "volume_sina_equals_tencent_times_100": false,
+    "volume_mismatch_count": 603,
+    "volume_mismatch_dates": [
+      "2024-03-11",
+      "2024-03-12",
+      "2024-03-13",
+      "2024-03-14",
+      "2024-03-15",
+      "2024-03-18",
+      "2024-03-19",
+      "2024-03-20",
+      "2024-03-21",
+      "2024-03-22"
+    ],
+    "volume_scaled_residual_min": "-50.000",
+    "volume_scaled_residual_max": "49.000",
+    "consistent_with_nearest_integer_hundred_units": true,
+    "provider_unit_documentation_status": "not_verified",
+    "historical_point_in_time_adjustment_status": "not_verified"
+  },
+  "511010": {
+    "calendar_expected": 1023,
+    "calendar_missing": [],
+    "calendar_extra": [],
+    "duplicate_dates": 0,
+    "ohlc_bounds_valid": true,
+    "comparison_rows": 640,
+    "adjustment_fields": [
+      "open",
+      "close",
+      "high",
+      "low"
+    ],
+    "adjustment_max_absolute_residual": {
+      "qfq": "0.0005",
+      "hfq": "0.0005"
+    },
+    "beyond_half_tick_count": {
+      "qfq": 0,
+      "hfq": 0
+    },
+    "failure_examples": {
+      "qfq": [],
+      "hfq": []
+    },
+    "empirical_hfq_scale": "1",
+    "volume_sina_equals_tencent_times_100": false,
+    "volume_mismatch_count": 108,
+    "volume_mismatch_dates": [
+      "2024-04-03",
+      "2024-04-08",
+      "2024-04-10",
+      "2024-05-08",
+      "2024-05-09",
+      "2024-05-10",
+      "2024-05-13",
+      "2024-05-15",
+      "2024-05-20",
+      "2024-05-30"
+    ],
+    "volume_scaled_residual_min": "-50.000",
+    "volume_scaled_residual_max": "47.000",
+    "consistent_with_nearest_integer_hundred_units": true,
+    "provider_unit_documentation_status": "not_verified",
+    "historical_point_in_time_adjustment_status": "not_verified"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "url": "https://query.sse.com.cn/commonQuery.do?sqlId=COMMON_PL_JJXX_JJGG_NEW_L&isPagination=true&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.endPage=1&pageHelp.cacheSize=1&type=inParams&SECURITY_CODE=510300&TITLE=&START_DATE=2012-01-01&END_DATE=2021-12-31&DATE_DESC=1",
+  "requested_at_utc": "2026-11-03T09:40:26.129257+00:00",
+  "status": 200,
+  "bytes": 109351,
+  "sha256": "18355a7e71faf46734e689d3a0e81f3942c1008154595f59def7d3859ef7a339"
+}

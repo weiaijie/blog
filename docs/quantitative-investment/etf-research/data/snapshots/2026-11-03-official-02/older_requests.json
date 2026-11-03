@@ -1,0 +1,83 @@
+[
+  {
+    "name": "510300_20210111",
+    "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/2021-01-11/510300_20210111_1.pdf",
+    "requested_at_utc": "2026-11-03T09:40:36.630855+00:00",
+    "status": 200,
+    "bytes": 248205,
+    "sha256": "1992271ca55dc3c7f88cf528f8f0f757fc48143b2a805159d2b3efdfb9143fc2",
+    "extract_exit": 0
+  },
+  {
+    "name": "510300_20191205",
+    "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/2019-12-05/510300_20191205_1.pdf",
+    "requested_at_utc": "2026-11-03T09:40:36.632318+00:00",
+    "status": 200,
+    "bytes": 251269,
+    "sha256": "c010184f267a231457103e8a3798c2fa91445033be875bdf6711162f419b26db",
+    "extract_exit": 0
+  },
+  {
+    "name": "510300_20190110",
+    "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/2019-01-10/510300_20190110_1.pdf",
+    "requested_at_utc": "2026-11-03T09:40:36.633007+00:00",
+    "status": 200,
+    "bytes": 253105,
+    "sha256": "39a65a900bc8f30e0d572cecad642d06fd7ddfd7317b3265f99a3146f483d7ea",
+    "extract_exit": 0
+  },
+  {
+    "name": "510300_20180117",
+    "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/2018-01-17/510300_20180117_1.pdf",
+    "requested_at_utc": "2026-11-03T09:40:36.633695+00:00",
+    "status": 200,
+    "bytes": 238088,
+    "sha256": "6aecb0d984b8777857dc71df0f118a5d14b88bdc6d8a73257149d63d35946fca",
+    "extract_exit": 0
+  },
+  {
+    "name": "510300_20170117",
+    "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/2017-01-16/510300_20170117_1.pdf",
+    "requested_at_utc": "2026-11-03T09:40:37.533207+00:00",
+    "status": 200,
+    "bytes": 186132,
+    "sha256": "19d67c3c8f568b81f6ca489ccbc6b9f2d392bf0ecc0cfe217df1ccda5059d7ae",
+    "extract_exit": 0
+  },
+  {
+    "name": "510300_20160114",
+    "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/2016-01-14/510300_20160114_1.pdf",
+    "requested_at_utc": "2026-11-03T09:40:37.924444+00:00",
+    "status": 200,
+    "bytes": 185530,
+    "sha256": "d8db54b96a9e4fffd77ce98d0d4702e4b4601887e48ed738785d7f661b530759",
+    "extract_exit": 0
+  },
+  {
+    "name": "510300_20150114",
+    "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/2015-01-13/510300_20150114_1.pdf",
+    "requested_at_utc": "2026-11-03T09:40:38.136956+00:00",
+    "status": 200,
+    "bytes": 185375,
+    "sha256": "1edb820f5efe41a0f28f7bd05dfdaf454e0dde97894a4101f6b9570c1b2bf3db",
+    "extract_exit": 0
+  },
+  {
+    "name": "510300_20140115",
+    "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/2014-01-14/510300_20140115_1.pdf",
+    "requested_at_utc": "2026-11-03T09:40:38.194438+00:00",
+    "status": 200,
+    "bytes": 185288,
+    "sha256": "3c74e29e7ddac830b7181748b0eb00ddafcf8a72bd9d07ab2c88550ffb91cb44",
+    "extract_exit": 0
+  },
+  {
+    "name": "510300_20121212",
+    "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/2012-12-12/510300_20121212_1.pdf",
+    "requested_at_utc": "2026-11-03T09:40:38.495283+00:00",
+    "status": 200,
+    "bytes": 95936,
+    "sha256": "dbb0b83f1b47b148338ffa69cb8959372626207893b7daea4739ad79463676be",
+    "extract_exit": 0
+  }
+]

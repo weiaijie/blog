@@ -1,0 +1,641 @@
+{
+  "official_verified": 21,
+  "supplier_events": 21,
+  "official_pending": 0,
+  "all_verified_fields_match": true,
+  "full_history_gate": "BLOCKED_PENDING_PRICE_ADJUSTMENT_CALENDAR_AND_ACCOUNTING",
+  "dividends": [
+    {
+      "symbol": "510300",
+      "record_date": "2026-01-16",
+      "ex_date": "2026-01-19",
+      "pay_date": "2026-01-27",
+      "per_share": "0.1230",
+      "sina_increment": "0.1230000000000000",
+      "matches": true,
+      "official_status": "verified",
+      "official_evidence": {
+        "record_date": "2026-01-16",
+        "ex_date": "2026-01-19",
+        "pay_date": "2026-01-27",
+        "per_share": "0.1230",
+        "per_10_shares": "1.2300",
+        "source_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-01-12/510300_20260112_VTCZ.pdf",
+        "pdf_sha256": "c8ff747d02fa90db72320458c38249f73720b932d61b7e088f033583aab63992",
+        "source_file": "510300_20260112.pdf",
+        "field_checks": {
+          "record_date": true,
+          "ex_date": true,
+          "pay_date": true,
+          "per_share": true
+        },
+        "snapshot": "2026-11-03-official-01"
+      }
+    },
+    {
+      "symbol": "510300",
+      "record_date": "2025-06-17",
+      "ex_date": "2025-06-18",
+      "pay_date": "2025-06-27",
+      "per_share": "0.0880",
+      "sina_increment": "0.0880000000000000",
+      "matches": true,
+      "official_status": "verified",
+      "official_evidence": {
+        "record_date": "2025-06-17",
+        "ex_date": "2025-06-18",
+        "pay_date": "2025-06-27",
+        "per_share": "0.088",
+        "per_10_shares": "0.880",
+        "source_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2025-06-11/510300_20250611_ZAU4.pdf",
+        "pdf_sha256": "9a2f554b8ba5e340c79905171388f65225e9239027a36794522aa6bb4a82be67",
+        "source_file": "510300_20250611.pdf",
+        "field_checks": {
+          "record_date": true,
+          "ex_date": true,
+          "pay_date": true,
+          "per_share": true
+        },
+        "snapshot": "2026-11-03-official-01"
+      }
+    },
+    {
+      "symbol": "510300",
+      "record_date": "2024-01-17",
+      "ex_date": "2024-01-18",
+      "pay_date": "2024-01-23",
+      "per_share": "0.0690",
+      "sina_increment": "0.0690000000000000",
+      "matches": true,
+      "official_status": "verified",
+      "official_evidence": {
+        "record_date": "2024-01-17",
+        "ex_date": "2024-01-18",
+        "pay_date": "2024-01-23",
+        "per_share": "0.0690",
+        "per_10_shares": "0.6900",
+        "source_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2024-01-11/510300_20240111_QQFV.pdf",
+        "pdf_sha256": "165ddaec9b36480ff4cbc738227043db7b7acc4f80ac31bedaa0e4f5c4001f4b",
+        "source_file": "510300_20240111.pdf",
+        "snapshot": "2026-11-03-official-02",
+        "amount_parse_method": "table_row",
+        "field_checks": {
+          "record_date": true,
+          "ex_date": true,
+          "pay_date": true,
+          "per_share": true
+        }
+      }
+    },
+    {
+      "symbol": "510300",
+      "record_date": "2023-01-13",
+      "ex_date": "2023-01-16",
+      "pay_date": "2023-01-19",
+      "per_share": "0.0640",
+      "sina_increment": "0.0640000000000000",
+      "matches": true,
+      "official_status": "verified",
+      "official_evidence": {
+        "record_date": "2023-01-13",
+        "ex_date": "2023-01-16",
+        "pay_date": "2023-01-19",
+        "per_share": "0.0640",
+        "per_10_shares": "0.6400",
+        "source_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2023-01-09/510300_20230109_0ED5.pdf",
+        "pdf_sha256": "68f2227ae25acec3b831d50d042b87f12696dc0df1514ef9dacb36e018d571d7",
+        "source_file": "510300_20230109.pdf",
+        "snapshot": "2026-11-03-official-02",
+        "amount_parse_method": "table_row",
+        "field_checks": {
+          "record_date": true,
+          "ex_date": true,
+          "pay_date": true,
+          "per_share": true
+        }
+      }
+    },
+    {
+      "symbol": "510300",
+      "record_date": "2022-01-18",
+      "ex_date": "2022-01-19",
+      "pay_date": "2022-01-24",
+      "per_share": "0.0750",
+      "sina_increment": "0.0750000000000000",
+      "matches": true,
+      "official_status": "verified",
+      "official_evidence": {
+        "record_date": "2022-01-18",
+        "ex_date": "2022-01-19",
+        "pay_date": "2022-01-24",
+        "per_share": "0.0750",
+        "per_10_shares": "0.7500",
+        "source_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2022-01-12/510300_20220112_1_pWPNE0aG.pdf",
+        "pdf_sha256": "1f5411e65cb9043bec5ae100df3925e6bb0aa122ea18186c7ba9a7e0747a9b50",
+        "source_file": "510300_20220112.pdf",
+        "snapshot": "2026-11-03-official-02",
+        "amount_parse_method": "table_row",
+        "field_checks": {
+          "record_date": true,
+          "ex_date": true,
+          "pay_date": true,
+          "per_share": true
+        }
+      }
+    },
+    {
+      "symbol": "510300",
+      "record_date": "2021-01-15",
+      "ex_date": "2021-01-18",
+      "pay_date": "2021-01-21",
+      "per_share": "0.0720",
+      "sina_increment": "0.0720000000000000",
+      "matches": true,
+      "official_status": "verified",
+      "official_evidence": {
+        "record_date": "2021-01-15",
+        "ex_date": "2021-01-18",
+        "pay_date": "2021-01-21",
+        "per_share": "0.072",
+        "per_10_shares": "0.72",
+        "source_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/2021-01-11/510300_20210111_1.pdf",
+        "pdf_sha256": "1992271ca55dc3c7f88cf528f8f0f757fc48143b2a805159d2b3efdfb9143fc2",
+        "source_file": "510300_20210111.pdf",
+        "snapshot": "2026-11-03-official-02",
+        "amount_parse_method": "table_row",
+        "field_checks": {
+          "record_date": true,
+          "ex_date": true,
+          "pay_date": true,
+          "per_share": true
+        }
+      }
+    },
+    {
+      "symbol": "510300",
+      "record_date": "2019-12-10",
+      "ex_date": "2019-12-11",
+      "pay_date": "2019-12-16",
+      "per_share": "0.0620",
+      "sina_increment": "0.0620000000000000",
+      "matches": true,
+      "official_status": "verified",
+      "official_evidence": {
+        "record_date": "2019-12-10",
+        "ex_date": "2019-12-11",
+        "pay_date": "2019-12-16",
+        "per_share": "0.062",
+        "per_10_shares": "0.62",
+        "source_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/2019-12-05/510300_20191205_1.pdf",
+        "pdf_sha256": "c010184f267a231457103e8a3798c2fa91445033be875bdf6711162f419b26db",
+        "source_file": "510300_20191205.pdf",
+        "snapshot": "2026-11-03-official-02",
+        "amount_parse_method": "table_row",
+        "field_checks": {
+          "record_date": true,
+          "ex_date": true,
+          "pay_date": true,
+          "per_share": true
+        }
+      }
+    },
+    {
+      "symbol": "510300",
+      "record_date": "2019-01-15",
+      "ex_date": "2019-01-16",
+      "pay_date": "2019-01-21",
+      "per_share": "0.0590",
+      "sina_increment": "0.0590000000000000",
+      "matches": true,
+      "official_status": "verified",
+      "official_evidence": {
+        "record_date": "2019-01-15",
+        "ex_date": "2019-01-16",
+        "pay_date": "2019-01-21",
+        "per_share": "0.059",
+        "per_10_shares": "0.59",
+        "source_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/2019-01-10/510300_20190110_1.pdf",
+        "pdf_sha256": "39a65a900bc8f30e0d572cecad642d06fd7ddfd7317b3265f99a3146f483d7ea",
+        "source_file": "510300_20190110.pdf",
+        "snapshot": "2026-11-03-official-02",
+        "amount_parse_method": "table_row",
+        "field_checks": {
+          "record_date": true,
+          "ex_date": true,
+          "pay_date": true,
+          "per_share": true
+        }
+      }
+    },
+    {
+      "symbol": "510300",
+      "record_date": "2018-01-22",
+      "ex_date": "2018-01-23",
+      "pay_date": "2018-01-26",
+      "per_share": "0.0460",
+      "sina_increment": "0.0460000000000000",
+      "matches": true,
+      "official_status": "verified",
+      "official_evidence": {
+        "record_date": "2018-01-22",
+        "ex_date": "2018-01-23",
+        "pay_date": "2018-01-26",
+        "per_share": "0.046",
+        "per_10_shares": "0.46",
+        "source_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/2018-01-17/510300_20180117_1.pdf",
+        "pdf_sha256": "6aecb0d984b8777857dc71df0f118a5d14b88bdc6d8a73257149d63d35946fca",
+        "source_file": "510300_20180117.pdf",
+        "snapshot": "2026-11-03-official-02",
+        "amount_parse_method": "table_row",
+        "field_checks": {
+          "record_date": true,
+          "ex_date": true,
+          "pay_date": true,
+          "per_share": true
+        }
+      }
+    },
+    {
+      "symbol": "510300",
+      "record_date": "2017-01-20",
+      "ex_date": "2017-01-23",
+      "pay_date": "2017-01-26",
+      "per_share": "0.0550",
+      "sina_increment": "0.0550000000000000",
+      "matches": true,
+      "official_status": "verified",
+      "official_evidence": {
+        "record_date": "2017-01-20",
+        "ex_date": "2017-01-23",
+        "pay_date": "2017-01-26",
+        "per_share": "0.055",
+        "per_10_shares": "0.55",
+        "source_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/2017-01-16/510300_20170117_1.pdf",
+        "pdf_sha256": "19d67c3c8f568b81f6ca489ccbc6b9f2d392bf0ecc0cfe217df1ccda5059d7ae",
+        "source_file": "510300_20170117.pdf",
+        "snapshot": "2026-11-03-official-02",
+        "amount_parse_method": "table_row",
+        "field_checks": {
+          "record_date": true,
+          "ex_date": true,
+          "pay_date": true,
+          "per_share": true
+        }
+      }
+    },
+    {
+      "symbol": "510300",
+      "record_date": "2016-01-19",
+      "ex_date": "2016-01-20",
+      "pay_date": "2016-01-25",
+      "per_share": "0.0510",
+      "sina_increment": "0.0510000000000000",
+      "matches": true,
+      "official_status": "verified",
+      "official_evidence": {
+        "record_date": "2016-01-19",
+        "ex_date": "2016-01-20",
+        "pay_date": "2016-01-25",
+        "per_share": "0.051",
+        "per_10_shares": "0.51",
+        "source_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/2016-01-14/510300_20160114_1.pdf",
+        "pdf_sha256": "d8db54b96a9e4fffd77ce98d0d4702e4b4601887e48ed738785d7f661b530759",
+        "source_file": "510300_20160114.pdf",
+        "snapshot": "2026-11-03-official-02",
+        "amount_parse_method": "table_row",
+        "field_checks": {
+          "record_date": true,
+          "ex_date": true,
+          "pay_date": true,
+          "per_share": true
+        }
+      }
+    },
+    {
+      "symbol": "510300",
+      "record_date": "2015-01-19",
+      "ex_date": "2015-01-20",
+      "pay_date": "2015-01-23",
+      "per_share": "0.0350",
+      "sina_increment": "0.0350000000000000",
+      "matches": true,
+      "official_status": "verified",
+      "official_evidence": {
+        "record_date": "2015-01-19",
+        "ex_date": "2015-01-20",
+        "pay_date": "2015-01-23",
+        "per_share": "0.035",
+        "per_10_shares": "0.35",
+        "source_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/2015-01-13/510300_20150114_1.pdf",
+        "pdf_sha256": "1edb820f5efe41a0f28f7bd05dfdaf454e0dde97894a4101f6b9570c1b2bf3db",
+        "source_file": "510300_20150114.pdf",
+        "snapshot": "2026-11-03-official-02",
+        "amount_parse_method": "table_row",
+        "field_checks": {
+          "record_date": true,
+          "ex_date": true,
+          "pay_date": true,
+          "per_share": true
+        }
+      }
+    },
+    {
+      "symbol": "510300",
+      "record_date": "2014-01-20",
+      "ex_date": "2014-01-21",
+      "pay_date": "2014-01-27",
+      "per_share": "0.0480",
+      "sina_increment": "0.0480000000000000",
+      "matches": true,
+      "official_status": "verified",
+      "official_evidence": {
+        "record_date": "2014-01-20",
+        "ex_date": "2014-01-21",
+        "pay_date": "2014-01-27",
+        "per_share": "0.048",
+        "per_10_shares": "0.48",
+        "source_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/2014-01-14/510300_20140115_1.pdf",
+        "pdf_sha256": "3c74e29e7ddac830b7181748b0eb00ddafcf8a72bd9d07ab2c88550ffb91cb44",
+        "source_file": "510300_20140115.pdf",
+        "snapshot": "2026-11-03-official-02",
+        "amount_parse_method": "table_row",
+        "field_checks": {
+          "record_date": true,
+          "ex_date": true,
+          "pay_date": true,
+          "per_share": true
+        }
+      }
+    },
+    {
+      "symbol": "510300",
+      "record_date": "2012-12-17",
+      "ex_date": "2012-12-18",
+      "pay_date": "2012-12-24",
+      "per_share": "0.0330",
+      "sina_increment": "0.0330000000000000",
+      "matches": true,
+      "official_status": "verified",
+      "official_evidence": {
+        "record_date": "2012-12-17",
+        "ex_date": "2012-12-18",
+        "pay_date": "2012-12-24",
+        "per_share": "0.033",
+        "per_10_shares": "0.33",
+        "source_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/2012-12-12/510300_20121212_1.pdf",
+        "pdf_sha256": "dbb0b83f1b47b148338ffa69cb8959372626207893b7daea4739ad79463676be",
+        "source_file": "510300_20121212.pdf",
+        "snapshot": "2026-11-03-official-02",
+        "amount_parse_method": "table_row",
+        "field_checks": {
+          "record_date": true,
+          "ex_date": true,
+          "pay_date": true,
+          "per_share": true
+        }
+      }
+    },
+    {
+      "symbol": "511010",
+      "record_date": "2026-09-17",
+      "ex_date": "2026-09-18",
+      "pay_date": "2026-09-23",
+      "per_share": "0.6204",
+      "sina_increment": "0.6204000000000000",
+      "matches": true,
+      "official_status": "verified",
+      "official_evidence": {
+        "record_date": "2026-09-17",
+        "ex_date": "2026-09-18",
+        "pay_date": "2026-09-23",
+        "per_share": "0.6204",
+        "per_10_shares": "6.204",
+        "source_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-09-15/511010_20260915_H5ST.pdf",
+        "pdf_sha256": "3c67fc24bc804d1e25b3fceecbda509b42f1348e2fb1d8e32069e5a03f930a93",
+        "source_file": "511010_20260915.pdf",
+        "snapshot": "2026-11-03-official-02",
+        "amount_parse_method": "table_row",
+        "field_checks": {
+          "record_date": true,
+          "ex_date": true,
+          "pay_date": true,
+          "per_share": true
+        }
+      }
+    },
+    {
+      "symbol": "511010",
+      "record_date": "2026-06-24",
+      "ex_date": "2026-06-25",
+      "pay_date": "2026-06-30",
+      "per_share": "0.8144",
+      "sina_increment": "0.8144000000000000",
+      "matches": true,
+      "official_status": "verified",
+      "official_evidence": {
+        "record_date": "2026-06-24",
+        "ex_date": "2026-06-25",
+        "pay_date": "2026-06-30",
+        "per_share": "0.8144",
+        "per_10_shares": "8.144",
+        "source_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-06-22/511010_20260622_0EYP.pdf",
+        "pdf_sha256": "82418fe2913770fd1ab6211869dbc8a83683e73490fcdb277c9c3be226a992a9",
+        "source_file": "511010_20260622.pdf",
+        "field_checks": {
+          "record_date": true,
+          "ex_date": true,
+          "pay_date": true,
+          "per_share": true
+        },
+        "snapshot": "2026-11-03-official-01"
+      }
+    },
+    {
+      "symbol": "511010",
+      "record_date": "2026-03-24",
+      "ex_date": "2026-03-25",
+      "pay_date": "2026-03-30",
+      "per_share": "0.5715",
+      "sina_increment": "0.5715000000000000",
+      "matches": true,
+      "official_status": "verified",
+      "official_evidence": {
+        "record_date": "2026-03-24",
+        "ex_date": "2026-03-25",
+        "pay_date": "2026-03-30",
+        "per_share": "0.5715",
+        "per_10_shares": "5.715",
+        "source_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-03-20/511010_20260320_Y87H.pdf",
+        "pdf_sha256": "a45a301dd556b3b1f36bad19abf952e7490110fda539a1d716cadb903bd22656",
+        "source_file": "511010_20260320.pdf",
+        "field_checks": {
+          "record_date": true,
+          "ex_date": true,
+          "pay_date": true,
+          "per_share": true
+        },
+        "snapshot": "2026-11-03-official-01"
+      }
+    },
+    {
+      "symbol": "511010",
+      "record_date": "2025-12-25",
+      "ex_date": "2025-12-26",
+      "pay_date": "2025-12-31",
+      "per_share": "0.6542",
+      "sina_increment": "0.6542000000000000",
+      "matches": true,
+      "official_status": "verified",
+      "official_evidence": {
+        "record_date": "2025-12-25",
+        "ex_date": "2025-12-26",
+        "pay_date": "2025-12-31",
+        "per_share": "0.6542",
+        "per_10_shares": "6.542",
+        "source_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2025-12-23/511010_20251223_0M89.pdf",
+        "pdf_sha256": "733995693eef19c61a55a30d2be7dcc0dcc471980b81b85363977478195c50a8",
+        "source_file": "511010_20251223.pdf",
+        "field_checks": {
+          "record_date": true,
+          "ex_date": true,
+          "pay_date": true,
+          "per_share": true
+        },
+        "snapshot": "2026-11-03-official-01"
+      }
+    },
+    {
+      "symbol": "511010",
+      "record_date": "2025-09-22",
+      "ex_date": "2025-09-23",
+      "pay_date": "2025-09-26",
+      "per_share": "1.4500",
+      "sina_increment": "1.4500000000000000",
+      "matches": true,
+      "official_status": "verified",
+      "official_evidence": {
+        "record_date": "2025-09-22",
+        "ex_date": "2025-09-23",
+        "pay_date": "2025-09-26",
+        "per_share": "1.45",
+        "per_10_shares": "14.50",
+        "source_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2025-09-18/511010_20250918_FU3S.pdf",
+        "pdf_sha256": "ddfaac7c7097b0a15666d6e6787553be48613468e221564bccabfceceb5d0d02",
+        "source_file": "511010_20250918.pdf",
+        "field_checks": {
+          "record_date": true,
+          "ex_date": true,
+          "pay_date": true,
+          "per_share": true
+        },
+        "snapshot": "2026-11-03-official-01"
+      }
+    },
+    {
+      "symbol": "511010",
+      "record_date": "2015-10-08",
+      "ex_date": "2015-10-09",
+      "pay_date": "2015-10-14",
+      "per_share": "1.0000",
+      "sina_increment": "1.0000000000000000",
+      "matches": true,
+      "official_status": "verified",
+      "official_evidence": {
+        "record_date": "2015-10-08",
+        "ex_date": "2015-10-09",
+        "pay_date": "2015-10-14",
+        "per_share": "1.00",
+        "per_10_shares": "10.00",
+        "source_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/2015-09-25/511010_20150925_1.pdf",
+        "pdf_sha256": "b240969943772e6ad027017e43752d87b21f23b0c35667ba8db6fe0516b3013f",
+        "source_file": "511010_20150925.pdf",
+        "snapshot": "2026-11-03-official-02",
+        "amount_parse_method": "table_row",
+        "field_checks": {
+          "record_date": true,
+          "ex_date": true,
+          "pay_date": true,
+          "per_share": true
+        }
+      }
+    },
+    {
+      "symbol": "511010",
+      "record_date": "2013-05-31",
+      "ex_date": "2013-06-03",
+      "pay_date": "2013-06-07",
+      "per_share": "0.2800",
+      "sina_increment": "0.2800000000000000",
+      "matches": true,
+      "official_status": "verified",
+      "official_evidence": {
+        "record_date": "2013-05-31",
+        "ex_date": "2013-06-03",
+        "pay_date": "2013-06-07",
+        "per_share": "0.28",
+        "per_10_shares": "2.8",
+        "source_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/2013-05-28/511010_20130528_1.pdf",
+        "pdf_sha256": "8e86f4e54e6a3e5185458d4ada5d1fdfbf2ee08fc70423bc902df09abe763806",
+        "source_file": "511010_20130528.pdf",
+        "snapshot": "2026-11-03-official-02",
+        "amount_parse_method": "wrapped_table_row",
+        "field_checks": {
+          "record_date": true,
+          "ex_date": true,
+          "pay_date": true,
+          "per_share": true
+        }
+      }
+    }
+  ],
+  "initial_unit_conversions": [
+    {
+      "symbol": "510300",
+      "conversion_date": "2012-05-11",
+      "new_units_per_old_unit": "0.37094933",
+      "source_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2025-08-30/510300_20250830_9SZQ.pdf",
+      "pdf_sha256": "ec9569b56cc9342685bd7279c2a9e479dadb7c177a4679c9f929f344116ddfc1",
+      "source_file": "510300_2025_report.pdf",
+      "status": "verified_in_fund_report",
+      "scope": "initial subscription unit conversion; do not reapply to later listed market prices"
+    },
+    {
+      "symbol": "511010",
+      "conversion_date": "2013-03-05",
+      "new_units_per_old_unit": "0.01",
+      "source_url": "https://static.cninfo.com.cn/finalpage/2014-03-31/63762335.PDF",
+      "pdf_sha256": "662306af7c5b58185244dd060aba3c69832e8602c08b1eb9e33da00348d98167",
+      "source_file": "511010_2013_report.pdf",
+      "status": "verified_in_fund_report",
+      "scope": "initial subscription unit conversion; do not reapply to later listed market prices"
+    }
+  ],
+  "dividend_gate": "PASS_FOR_21_CATALOGUED_EVENTS",
+  "catalogue_coverage": {
+    "510300": {
+      "all_notices_returned": 259,
+      "api_total": 259,
+      "page_count": 1,
+      "dividend_notices": 14,
+      "matched_evidence_urls": true,
+      "query_window": [
+        "2012-01-01",
+        "2026-11-03"
+      ],
+      "limitation": "Current SSE catalogue plus title matching, not proof against upstream omission or unusually named notices."
+    },
+    "511010": {
+      "all_notices_returned": 230,
+      "api_total": 230,
+      "page_count": 1,
+      "dividend_notices": 7,
+      "matched_evidence_urls": true,
+      "query_window": [
+        "2012-01-01",
+        "2026-11-03"
+      ],
+      "limitation": "Current SSE catalogue plus title matching, not proof against upstream omission or unusually named notices."
+    }
+  },
+  "newly_verified": 15
+}
