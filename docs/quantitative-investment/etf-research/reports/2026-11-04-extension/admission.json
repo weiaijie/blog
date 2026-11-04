@@ -1,0 +1,19 @@
+{
+  "admitted": true,
+  "start": "2022-01-04",
+  "end": "2026-10-30",
+  "sessions": 1167,
+  "additional_sessions": 527,
+  "official_dividends": 10,
+  "exact_cross_source_ohlc_fields": 9336,
+  "sources": [
+    "Sina",
+    "Sohu"
+  ],
+  "underlying_vendor_independence_proven": false,
+  "actual_execution_verified": false,
+  "historical_extension_only": true,
+  "forward_sessions": 0,
+  "long_term_goal_established": false,
+  "snapshot_audit_was_pre_admission": true
+}

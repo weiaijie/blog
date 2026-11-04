@@ -1,0 +1,197 @@
+{
+  "calendar_checks": {
+    "510300": {
+      "sina_rows": 1970,
+      "independent_expected_sessions": 1970,
+      "missing_exchange_sessions": [],
+      "unexpected_dates": [],
+      "duplicate_dates": 0
+    },
+    "511010": {
+      "sina_rows": 1970,
+      "independent_expected_sessions": 1970,
+      "missing_exchange_sessions": [],
+      "unexpected_dates": [],
+      "duplicate_dates": 0
+    }
+  },
+  "sohu_510300": {
+    "rows": 1946,
+    "start": "2018-09-14",
+    "end": "2026-10-30",
+    "common_sina_days": 1946,
+    "compared_ohlc_fields": 7784,
+    "different_fields": 1305,
+    "difference_examples": [
+      {
+        "date": "2020-05-13",
+        "field": "open",
+        "sina": "3.933",
+        "sohu": "3.930"
+      },
+      {
+        "date": "2020-05-13",
+        "field": "close",
+        "sina": "3.954",
+        "sohu": "3.950"
+      },
+      {
+        "date": "2020-05-12",
+        "field": "open",
+        "sina": "3.947",
+        "sohu": "3.950"
+      },
+      {
+        "date": "2020-05-12",
+        "field": "close",
+        "sina": "3.945",
+        "sohu": "3.940"
+      },
+      {
+        "date": "2020-05-12",
+        "field": "low",
+        "sina": "3.917",
+        "sohu": "3.920"
+      },
+      {
+        "date": "2020-05-11",
+        "field": "open",
+        "sina": "3.959",
+        "sohu": "3.960"
+      },
+      {
+        "date": "2020-05-11",
+        "field": "close",
+        "sina": "3.946",
+        "sohu": "3.950"
+      },
+      {
+        "date": "2020-05-11",
+        "field": "low",
+        "sina": "3.935",
+        "sohu": "3.940"
+      },
+      {
+        "date": "2020-05-11",
+        "field": "high",
+        "sina": "3.992",
+        "sohu": "3.990"
+      },
+      {
+        "date": "2020-05-08",
+        "field": "open",
+        "sina": "3.929",
+        "sohu": "3.930"
+      },
+      {
+        "date": "2020-05-08",
+        "field": "close",
+        "sina": "3.953",
+        "sohu": "3.950"
+      },
+      {
+        "date": "2020-05-08",
+        "field": "low",
+        "sina": "3.927",
+        "sohu": "3.930"
+      },
+      {
+        "date": "2020-05-08",
+        "field": "high",
+        "sina": "3.972",
+        "sohu": "3.970"
+      },
+      {
+        "date": "2020-05-07",
+        "field": "open",
+        "sina": "3.918",
+        "sohu": "3.920"
+      },
+      {
+        "date": "2020-05-07",
+        "field": "close",
+        "sina": "3.911",
+        "sohu": "3.910"
+      },
+      {
+        "date": "2020-05-07",
+        "field": "low",
+        "sina": "3.899",
+        "sohu": "3.900"
+      },
+      {
+        "date": "2020-05-07",
+        "field": "high",
+        "sina": "3.925",
+        "sohu": "3.920"
+      },
+      {
+        "date": "2020-05-06",
+        "field": "open",
+        "sina": "3.865",
+        "sohu": "3.860"
+      },
+      {
+        "date": "2020-05-06",
+        "field": "close",
+        "sina": "3.918",
+        "sohu": "3.920"
+      },
+      {
+        "date": "2020-05-06",
+        "field": "high",
+        "sina": "3.926",
+        "sohu": "3.930"
+      }
+    ],
+    "missing_exchange_sessions": [
+      "2018-12-14",
+      "2018-12-25",
+      "2019-01-03",
+      "2019-01-04",
+      "2019-01-07",
+      "2019-01-08",
+      "2019-01-09",
+      "2019-01-10",
+      "2019-01-11",
+      "2019-01-14",
+      "2019-06-17",
+      "2019-06-18",
+      "2019-06-19",
+      "2019-06-20",
+      "2019-06-21",
+      "2019-06-24",
+      "2019-06-25",
+      "2019-06-26",
+      "2019-06-27",
+      "2019-06-28",
+      "2019-07-01"
+    ],
+    "unexpected_dates": []
+  },
+  "additional_portfolio_sessions_admitted": 0,
+  "decision": "Whole 2018 history rejected; 2022 onward candidate must additionally pass official-event loader before portfolio admission.",
+  "candidate_expansion": {
+    "start": "2022-01-04",
+    "end": "2026-10-30",
+    "symbols": {
+      "510300": {
+        "rows": 1167,
+        "expected_sessions": 1167,
+        "missing_dates": [],
+        "extra_dates": [],
+        "different_ohlc_fields": 0,
+        "examples": []
+      },
+      "511010": {
+        "rows": 1167,
+        "expected_sessions": 1167,
+        "missing_dates": [],
+        "extra_dates": [],
+        "different_ohlc_fields": 0,
+        "examples": []
+      }
+    },
+    "prices_and_calendar_passed": true
+  }
+}

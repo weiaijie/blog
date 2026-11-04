@@ -1,0 +1,24 @@
+[
+  {
+    "name": "sse_rules_2026",
+    "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/trade/universal/c/c_20260424_10816492.shtml",
+    "requested_at_utc": "2026-11-04T09:20:27.027631+00:00",
+    "status": 200,
+    "content_type": "text/html",
+    "final_url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/trade/universal/c/c_20260424_10816492.shtml",
+    "bytes": 33580,
+    "sha256": "1607a6841cb962ccea0936afc3bb5afbe51766960a4bfad691567a123fa74a54",
+    "elapsed_seconds": 2.64
+  },
+  {
+    "name": "sse_investor_questions",
+    "url": "https://www.sse.com.cn/services/investors/questions/",
+    "requested_at_utc": "2026-11-04T09:20:27.028946+00:00",
+    "status": 200,
+    "content_type": "text/html",
+    "final_url": "https://www.sse.com.cn/services/investors/questions/",
+    "bytes": 33607,
+    "sha256": "ff1b45e6bdf602a8e0d89fabee8a2e001c636f76d5acc1679446f49b90182101",
+    "elapsed_seconds": 1.7
+  }
+]

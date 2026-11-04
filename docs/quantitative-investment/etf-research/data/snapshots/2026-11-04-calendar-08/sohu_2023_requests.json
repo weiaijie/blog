@@ -1,0 +1,13 @@
+[
+  {
+    "name": "sohu_511010_2023",
+    "url": "https://q.stock.sohu.com/hisHq?code=cn_511010&start=20230101&end=20231231&stat=1&order=D&period=d&rt=json",
+    "requested_at_utc": "2026-11-04T09:22:03.649124+00:00",
+    "status": 200,
+    "content_type": "application/x-javascript",
+    "final_url": "https://q.stock.sohu.com/hisHq?code=cn_511010&start=20230101&end=20231231&stat=1&order=D&period=d&rt=json",
+    "bytes": 24458,
+    "sha256": "eb7209e43f165e01cff810d20d75bd6af454313f18b49e03e02e6b160c5e394c",
+    "elapsed_seconds": 0.99
+  }
+]

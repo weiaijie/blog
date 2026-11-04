@@ -54,16 +54,21 @@ def guard_reason(raw_open, previous_close, fill, *, ex_day):
   return 'conservative_9pct_buffer'
  return None
 
-def run(data, strategy, scenario, initial=D('100000'), *, execution_delay=1):
+def run(data, strategy, scenario, initial=D('100000'), *, execution_delay=1, account_start=None):
  if type(execution_delay) is not int or execution_delay not in (1,2,3):
   raise ValueError('Execution delay must be 1, 2 or 3 sessions')
  if not isinstance(initial,D) or not initial.is_finite() or initial<=0:
   raise ValueError('Initial cash must be a positive finite Decimal')
  weights,monthly=STRATEGIES[strategy];costs=SCENARIOS[scenario]
- ledger=Ledger(data.sessions,data.dividends,cash=initial,holdings={},costs=costs,lot_size=100,instruments=RULES)
+ if account_start is not None and account_start not in data.sessions:raise ValueError('Account start must be an admitted session')
+ start_index=data.sessions.index(account_start) if account_start is not None else 0
+ if account_start is not None and strategy=='trend_120' and start_index<120:raise ValueError('Forward trend requires 120 prior admitted sessions')
+ ledger_events=tuple(e for e in data.dividends if e.record_date>=account_start) if account_start is not None else data.dividends
+ ledger=Ledger(data.sessions[start_index:],ledger_events,cash=initial,holdings={},costs=costs,lot_size=100,instruments=RULES)
  rows=[];decisions=[];previous_equity=initial;previous_marks=None;pending={}
  for i,day in enumerate(data.sessions):
-  first=120 if strategy=='trend_120' else 1
+  if i<start_index:continue
+  first=start_index+1 if account_start is not None else (120 if strategy=='trend_120' else 1)
   due=i==first or (i>first and monthly and day.month!=data.sessions[i-1].month)
   if due and strategy=='trend_120':weights=trend_weights(data,day)
   if due:
@@ -99,7 +104,7 @@ def run(data, strategy, scenario, initial=D('100000'), *, execution_delay=1):
  peak=initial;drawdown=D(0)
  for row in rows:
   peak=max(peak,row['equity']);drawdown=min(drawdown,row['equity']/peak-1)
- elapsed=(data.sessions[-1]-data.sessions[0]).days
+ elapsed=(data.sessions[-1]-data.sessions[start_index]).days
  terminal=rows[-1]['equity'];total=terminal/initial-1
  summary={'strategy':strategy,'scenario':scenario,'initial_cash':str(initial),'ending_equity':str(terminal),'ending_cash':str(ledger.cash),'total_return':float(total),'annualized_scenario_return':float((terminal/initial)**(D('365.25')/elapsed)-1) if elapsed else None,'max_close_drawdown':float(drawdown),'trades':len(trades),'commissions':str(sum((r['commission'] for r in trades),D(0))),'sell_tax':str(sum((r['tax'] for r in trades),D(0))),'slippage_cost':str(sum((abs(r['fill_price']-r['raw_price'])*r['units'] for r in trades),D(0))),'excluded_orders':sum(d['reason'] in ('known_ex_dividend_day','conservative_9pct_buffer') for d in decisions),'cash_limited_orders':sum(d['reason']=='cash_limited_partial_or_zero' for d in decisions),'ending_holdings':dict(ledger.holdings),'terminal_liquidation_included':False}
  summary.update(execution_delay_sessions=execution_delay,pending_target_batches_at_end=len(pending))

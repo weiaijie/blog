@@ -48,25 +48,39 @@ class Dataset:
         return tuple(e for e in self.dividends if e.announcement_date<session)
 
 
-def load_dataset(snapshots):
+def load_dataset(snapshots, *, extended=False):
     root=Path(snapshots)
-    manifests={name:verify_manifest(root/name) for name in SNAPSHOTS}
-    calendar=json.loads((root/'2026-11-03-market-03/calendar.json').read_text())['dates']
+    names=SNAPSHOTS+('2026-11-04-expansion-07','2026-11-04-calendar-08') if extended else SNAPSHOTS
+    manifests={name:verify_manifest(root/name) for name in names}
+    calendar_snapshot='2026-11-04-calendar-08' if extended else '2026-11-03-market-03'
+    calendar=json.loads((root/calendar_snapshot/'calendar.json').read_text())['dates']
     if calendar!=sorted(set(calendar)):raise ValueError('Duplicate/nonmonotonic calendar')
     allbars={};tencent={}
-    provenance={'manifests_sha256':{name:hashlib.sha256((root/name/'manifest.json').read_bytes()).hexdigest() for name in SNAPSHOTS},'price_mode':'unadjusted','volume_loaded':False,'event_sources':[]}
+    provenance={'manifests_sha256':{name:hashlib.sha256((root/name/'manifest.json').read_bytes()).hexdigest() for name in names},'price_mode':'unadjusted','volume_loaded':False,'event_sources':[]}
     for symbol in SYMBOLS:
-        s=(root/'2026-11-02'/f'sina_daily_{symbol}.body').read_text()
+        s=(root/('2026-11-04-expansion-07' if extended else '2026-11-02')/f'sina_daily_{symbol}.body').read_text()
         rows=json.loads(s[s.index('([')+1:s.rindex(')')])
         days=[r['day'] for r in rows]
-        if days!=sorted(set(days)) or days!=calendar:raise ValueError('Price/calendar mismatch')
+        expected=[d for d in calendar if days[0]<=d<=days[-1]] if extended else calendar
+        if days!=sorted(set(days)) or days!=expected:raise ValueError('Price/calendar mismatch')
         bars={}
         for r in rows:
             day=date.fromisoformat(r['day']);v={k:money(r[k],positive=True) for k in ['open','high','low','close']}
             if not v['low']<=min(v['open'],v['close'])<=max(v['open'],v['close'])<=v['high']:raise ValueError('Invalid OHLC')
             bars[day]=RawBar(day,**v)
         allbars[symbol]=bars
-        rows=json.loads((root/'2026-11-02'/f'tencent_raw_{symbol}.body').read_text())['data']['sh'+symbol]['day']
+        if extended:
+            files=['sohu_510300'] if symbol=='510300' else ['sohu_511010_2022','sohu_511010_2023','sohu_511010_recent']
+            rows=[]
+            for name in files:
+                payload=json.loads((root/'2026-11-04-calendar-08'/(name+'.body')).read_text(encoding='gb18030'))
+                if len(payload)!=1 or payload[0]['status']!=0:raise ValueError('Failed cross-source response')
+                source=payload[0]['hq'];dates=[r[0] for r in source]
+                if dates!=sorted(set(dates),reverse=True):raise ValueError('Malformed cross-source order')
+                rows.extend([r[0],r[1],r[2],r[6],r[5]] for r in source if '2022-01-04'<=r[0]<='2026-10-30')
+            rows.sort(key=lambda r:r[0])
+        else:
+            rows=json.loads((root/'2026-11-02'/f'tencent_raw_{symbol}.body').read_text())['data']['sh'+symbol]['day']
         days=[r[0] for r in rows]
         if days!=sorted(set(days)):raise ValueError('Duplicate/nonmonotonic cross-source dates')
         tencent[symbol]={date.fromisoformat(r[0]):r for r in rows if r[0]<=calendar[-1]}
@@ -100,4 +114,5 @@ def load_dataset(snapshots):
         provenance['event_sources'].append({'symbol':row['symbol'],'ex_date':row['ex_date'],'announcement_date':str(announce),'pdf':str(pdf.relative_to(root)),'sha256':ev['pdf_sha256'],'url':ev['source_url']})
     if len({e.key for e in dividends})!=len(dividends):raise ValueError('Duplicate dividend')
     provenance.update(start=str(sessions[0]),end=str(sessions[-1]),session_count=len(sessions),event_count=len(dividends),excluded_current_or_unmatched_dates=True)
+    if extended:provenance.update(cross_source='Sohu raw daily OHLC; exact fields only',historical_extension=True,not_forward_observations=True)
     return Dataset(sessions,{s:{d:allbars[s][d] for d in sessions} for s in SYMBOLS},tuple(sorted(dividends,key=lambda e:(e.ex_date,e.symbol))),provenance)

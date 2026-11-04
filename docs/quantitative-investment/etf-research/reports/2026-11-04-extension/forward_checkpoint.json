@@ -1,0 +1,13 @@
+{
+  "format": 1,
+  "protocol_commit": "0c797f5ed5321d8653d64ccf0f795e1529f6f9b2",
+  "engine_sha256": "86805dd5d4cb93901c59be86f2f332641286442f65140dbddd9f196c0eb7e274",
+  "as_of": "2026-10-30",
+  "forward_start": "2026-11-05",
+  "admitted_prefix_sha256": "7aebc5951dc5d48d3164b8e7f5173e9c8e006b453cffcf23c607b6771556865f",
+  "status": "pending_future_observations",
+  "forward_sessions": 0,
+  "portfolios": {},
+  "real_money": false,
+  "checkpoint_sha256": "b172fbf7183e375457656a12b1cddf7c469cb50a0373fdc51ec0e412e676cfb8"
+}

@@ -1,0 +1,89 @@
+[
+  {
+    "name": "sse2018",
+    "url": "https://www.sse.com.cn/disclosure/announcement/general/c/c_20171222_4438363.shtml",
+    "requested_at_utc": "2026-11-04T09:18:28.258446+00:00",
+    "status": 200,
+    "content_type": "text/html",
+    "final_url": "https://www.sse.com.cn/disclosure/announcement/general/c/c_20171222_4438363.shtml",
+    "bytes": 27757,
+    "sha256": "12a69212c5103d56fd7b655905691c2e86b648660b7773ec058487a235fd8fb6",
+    "elapsed_seconds": 3.78
+  },
+  {
+    "name": "sse2019",
+    "url": "https://www.sse.com.cn/disclosure/announcement/general/c/c_20181220_4696473.shtml",
+    "requested_at_utc": "2026-11-04T09:18:28.259777+00:00",
+    "status": 200,
+    "content_type": "text/html",
+    "final_url": "https://www.sse.com.cn/disclosure/announcement/general/c/c_20181220_4696473.shtml",
+    "bytes": 27727,
+    "sha256": "b7c5c78f05bec02638d14f343bc3084895fc075aedb332f8f18672d6ba5b5538",
+    "elapsed_seconds": 2.39
+  },
+  {
+    "name": "sse2020",
+    "url": "https://www.sse.com.cn/disclosure/announcement/general/c/c_20191220_4969627.shtml",
+    "requested_at_utc": "2026-11-04T09:18:28.260548+00:00",
+    "status": 200,
+    "content_type": "text/html",
+    "final_url": "https://www.sse.com.cn/disclosure/announcement/general/c/c_20191220_4969627.shtml",
+    "bytes": 27642,
+    "sha256": "297c616224c31ea52fb58b8c3bed308f45cae2178ed7293707c58c3b91e5682b",
+    "elapsed_seconds": 2.43
+  },
+  {
+    "name": "sse2021",
+    "url": "https://www.sse.com.cn/disclosure/announcement/general/c/c_20201224_5286949.shtml",
+    "requested_at_utc": "2026-11-04T09:18:28.262607+00:00",
+    "status": 200,
+    "content_type": "text/html",
+    "final_url": "https://www.sse.com.cn/disclosure/announcement/general/c/c_20201224_5286949.shtml",
+    "bytes": 27794,
+    "sha256": "fb89d523d7f969a946bd153ed3bdcfd053982a49f02e6e7a8a449b30fe81be64",
+    "elapsed_seconds": 3.11
+  },
+  {
+    "name": "sse2019_adjust",
+    "url": "https://www.sse.com.cn/disclosure/announcement/general/c/c_20190418_4771364.shtml",
+    "requested_at_utc": "2026-11-04T09:18:28.261816+00:00",
+    "status": 200,
+    "content_type": "text/html",
+    "final_url": "https://www.sse.com.cn/disclosure/announcement/general/c/c_20190418_4771364.shtml",
+    "bytes": 26685,
+    "sha256": "5773869f2b5ec4568a3803c4394c93289098d21179a78a39567ab29579c8ac65",
+    "elapsed_seconds": 2.11
+  },
+  {
+    "name": "sse2020_adjust",
+    "url": "https://www.sse.com.cn/disclosure/announcement/general/c/c_20200127_4991582.shtml",
+    "requested_at_utc": "2026-11-04T09:18:28.263602+00:00",
+    "status": 200,
+    "content_type": "text/html",
+    "final_url": "https://www.sse.com.cn/disclosure/announcement/general/c/c_20200127_4991582.shtml",
+    "bytes": 27731,
+    "sha256": "8baf26a6732bdad76bbf8a2456d587ea87d26080d031ba2b9ce341d8d7d66009",
+    "elapsed_seconds": 3.3
+  },
+  {
+    "name": "sohu_510300",
+    "url": "https://q.stock.sohu.com/hisHq?code=cn_510300&start=20180914&end=20261030&stat=1&order=D&period=d&rt=json",
+    "requested_at_utc": "2026-11-04T09:18:30.370508+00:00",
+    "status": 200,
+    "content_type": "application/x-javascript",
+    "final_url": "https://q.stock.sohu.com/hisHq?code=cn_510300&start=20180914&end=20261030&stat=1&order=D&period=d&rt=json",
+    "bytes": 186170,
+    "sha256": "e4b3fcab6fb306bdefa5ed81383d3e382674a5a84c2acf53ab68f63e8e8d3151",
+    "elapsed_seconds": 1.86
+  },
+  {
+    "name": "sohu_511010",
+    "url": "https://q.stock.sohu.com/hisHq?code=cn_511010&start=20180914&end=20261030&stat=1&order=D&period=d&rt=json",
+    "requested_at_utc": "2026-11-04T09:18:30.656549+00:00",
+    "status": 503,
+    "error": "HTTP Error 503: Service Unavailable",
+    "bytes": 206,
+    "sha256": "1e2ea44c8bb71ad3a3195b4625c66b931827a2eb5e4099533860bf4270f67bcb",
+    "elapsed_seconds": 0.9
+  }
+]

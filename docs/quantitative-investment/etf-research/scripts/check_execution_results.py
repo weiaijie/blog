@@ -3,7 +3,7 @@ from pathlib import Path
 from decimal import Decimal as D
 import json,argparse
 from etf_research.data import load_dataset
-p=argparse.ArgumentParser();p.add_argument('--results',type=Path,required=True);a=p.parse_args();root=Path(__file__).resolve().parents[1];data=load_dataset(root/'data/snapshots')
+p=argparse.ArgumentParser();p.add_argument('--results',type=Path,required=True);p.add_argument('--extended',action='store_true');a=p.parse_args();root=Path(__file__).resolve().parents[1];data=load_dataset(root/'data/snapshots',extended=a.extended)
 summaries=json.loads((a.results/'sensitivity.json').read_text())['results'];audits=json.loads((a.results/'audit.json').read_text());end=str(data.sessions[-1]);output=[]
 for r in summaries:
  trades=[t for t in audits[r['run']]['journal'] if t['kind']=='trade'];cash=D(r['initial_cash']);units={s:0 for s in data.bars};outside=[]

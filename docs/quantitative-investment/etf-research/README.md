@@ -30,3 +30,9 @@ python -m http.server 8765 --bind 127.0.0.1
 存储位置：weiaijie/blog → redesign-pc → docs/quantitative-investment/etf-research。新环境从固定提交取回本目录，先读 CONTINUATION.md，再做哈希验证。可下载整个仓库ZIP；项目单独备份与原始输入均可从已提交文件重建。
 
 旧 /workspace/quant-research、旧策略和旧看板未恢复；当前是新建且逐步保存的研究，不冒称找回旧“10项测试”。历史会计/回放/基准报告位于reports目录；旧报告绑定当时提交的代码，不能要求旧代码哈希在最新实现上不变。当前版本以closure报告和清单为准。原有blog投资文章中的业绩描述不构成本研究证据。
+
+## 最新扩样与续接（2026-11-04，优先于上述历史版本）
+
+[1167日扩样报告](reports/2026-11-04-extension/PROGRESS.md)：新浪/搜狐9336个OHLC字段精确一致、10条官方分红，新增527日；58项测试通过。50/50基准费用场景年化由原640日4.90%变为扩样0.51%、回撤15.09%，当前不足支持长期目标。原报告全部保留。
+
+site/index.html现展示1167日扩样结果。前瞻账户续接组件已实现并测试，实际检查点仍无前瞻行情或收益；未来数据准入接口仍待建设。scripts/reproduce.py核对新结果和页面，同时确认旧核心结果未变。scripts/verify_project.py验证最新extension清单。

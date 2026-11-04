@@ -1,0 +1,9 @@
+{
+  "protocol_commit": "0c797f5ed5321d8653d64ccf0f795e1529f6f9b2",
+  "forward_earliest_date": "2026-11-05",
+  "admitted_data_end": "2026-10-30",
+  "admitted_forward_sessions": 0,
+  "forward_returns_computed": false,
+  "status": "pending_future_observations",
+  "note": "No future prices fabricated. This run is retrospective; protocol does not create a background scheduler."
+}
