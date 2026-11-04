@@ -1,0 +1,14 @@
+{
+  "historical_scenario_research": true,
+  "admitted_sessions": 640,
+  "newly_admitted_sessions": 0,
+  "raw_price_and_official_dividends_only": true,
+  "actual_execution_verified": false,
+  "long_term_goal_established": false,
+  "forward_returns_computed": false,
+  "parameter_optimization_performed": false,
+  "retrospective_time_isolation_tested": true,
+  "public_site_deployed": false,
+  "live_trading_allowed": false,
+  "protocol_commit": "0c797f5ed5321d8653d64ccf0f795e1529f6f9b2"
+}

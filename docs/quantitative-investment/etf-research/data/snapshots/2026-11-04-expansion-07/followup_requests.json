@@ -1,0 +1,85 @@
+[
+  {
+    "name": "tencent_prior_url_510300",
+    "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh510300,day,2024-01-01,2026-11-02,640,",
+    "requested_at_utc": "2026-11-04T07:33:55.119946+00:00",
+    "status": 501,
+    "error": "HTTP Error 501: Not Implemented",
+    "bytes": 324,
+    "sha256": "2d29a32fb3cdd17ed850cd63af207a93477ed7244c5c967376c650527e9dc4c9",
+    "elapsed_seconds": 1.51
+  },
+  {
+    "name": "tencent_default_510300",
+    "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh510300,day,,,640,",
+    "requested_at_utc": "2026-11-04T07:33:55.122573+00:00",
+    "status": 501,
+    "error": "HTTP Error 501: Not Implemented",
+    "bytes": 323,
+    "sha256": "e57c3c6e3e38b956fcdfc8392fd4829ec1c3895b98129df3bfe297004dce60bd",
+    "elapsed_seconds": 0.91
+  },
+  {
+    "name": "tencent_legacy2022_510300",
+    "url": "https://data.gtimg.cn/flashdata/hushen/daily/22/sh510300.js",
+    "requested_at_utc": "2026-11-04T07:33:55.123787+00:00",
+    "status": 200,
+    "content_type": "application/javascript; charset=utf-8",
+    "final_url": "https://data.gtimg.cn/flashdata/hushen/daily/22/sh510300.js",
+    "bytes": 7363,
+    "sha256": "8131a873d7f280e45d460d9b6e74aca1456dedc459c5a67a0909a28f57c3e7b2",
+    "elapsed_seconds": 1.27
+  },
+  {
+    "name": "tencent_prior_url_511010",
+    "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh511010,day,2024-01-01,2026-11-02,640,",
+    "requested_at_utc": "2026-11-04T07:33:55.124417+00:00",
+    "status": 501,
+    "error": "HTTP Error 501: Not Implemented",
+    "bytes": 326,
+    "sha256": "9d36e4011dc1eb450894828db5e9a002157a058dbedccfdbffafa09d0609f920",
+    "elapsed_seconds": 0.76
+  },
+  {
+    "name": "tencent_default_511010",
+    "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh511010,day,,,640,",
+    "requested_at_utc": "2026-11-04T07:33:55.884356+00:00",
+    "status": 501,
+    "error": "HTTP Error 501: Not Implemented",
+    "bytes": 326,
+    "sha256": "142ef3f67a33825c68581741fa418433d54503c7d1bccf74211dd7dd824807a0",
+    "elapsed_seconds": 0.67
+  },
+  {
+    "name": "tencent_legacy2022_511010",
+    "url": "https://data.gtimg.cn/flashdata/hushen/daily/22/sh511010.js",
+    "requested_at_utc": "2026-11-04T07:33:56.037059+00:00",
+    "status": 200,
+    "content_type": "application/javascript; charset=utf-8",
+    "final_url": "https://data.gtimg.cn/flashdata/hushen/daily/22/sh511010.js",
+    "bytes": 8418,
+    "sha256": "75136ea957365f041ece49901dce7dadab7927bbae886d331561b6f91694a224",
+    "elapsed_seconds": 1.82
+  },
+  {
+    "name": "sse_reference_spec_alt",
+    "url": "https://www.sse.com.cn/services/tradingtech/data/c/10762484/files/152e4250c3e2406faa232b75b1da8143.pdf",
+    "requested_at_utc": "2026-11-04T07:33:56.392383+00:00",
+    "status": 404,
+    "error": "HTTP Error 404: Not Found",
+    "bytes": 150,
+    "sha256": "d03c9c9c5fef19b7e84125dd79b77167d00e1df5f56da4818992e23e67360bbb",
+    "elapsed_seconds": 1.67
+  },
+  {
+    "name": "sse_etf_faq",
+    "url": "https://www.sse.com.cn/assortment/fund/etf/question/",
+    "requested_at_utc": "2026-11-04T07:33:56.554656+00:00",
+    "status": 200,
+    "content_type": "text/html",
+    "final_url": "https://www.sse.com.cn/assortment/fund/etf/question/",
+    "bytes": 35424,
+    "sha256": "a72b0d15f30216fafd50053acd66b2daf9e7d6d870090ae03d0ebb00e6c5d2e5",
+    "elapsed_seconds": 1.98
+  }
+]

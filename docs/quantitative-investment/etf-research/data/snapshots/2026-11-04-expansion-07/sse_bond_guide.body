@@ -1,0 +1,658 @@
+<!doctype html>
+<html>
+
+	<head>
+
+<meta name="others" content="页面生成时间 2024-09-02 17:11:22">
+<meta name="template,templategroup,version" content="672,default,2.1">
+<title>上海证券交易所债券ETF业务指南  | 上海证券交易所 | 基金网站</title>
+		<!--获取栏目id页-->
+		<!-- 站点属性 -->
+    <meta charset="utf-8">
+
+<meta name="description" content="">
+<meta name="author" content="上海证券交易所">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-title" content="上海证券交易所">
+<link rel="shortcut icon" href="/xhtml/imgs/favicon.ico">
+
+<meta name="others" content="页面生成时间 2024-09-02 17:11:22">
+<meta name="template,templategroup,version" content="672,default,2.1">
+<title>业务指南  | 上海证券交易所 | 基金网站</title>
+<script>
+
+    var channelId = "12684";
+    var channelCode = "guide";
+    var displayName = "业务指南";
+    var channelName = "业务指南";
+var websiteid = "46";
+
+    var col_id = channelId;
+    var col_old_id = channelId;
+    var pageTitle = displayName;
+
+
+
+</script>
+ <!--css-->
+    <link rel="stylesheet" href="/xhtml/css/lib/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="/xhtml/css/lib/swiper.min.css" type="text/css">
+<link rel="stylesheet" href="/xhtml/css/lib/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="/xhtml/css/common.css" type="text/css">
+<link rel="stylesheet" href="/xhtml/css/lrt.css" type="text/css">
+<link rel="stylesheet" href="/xhtml/css/style.css?v=V3.1.1" type="text/css">
+
+<link rel="stylesheet" href="/xhtml/css/edu.css" type="text/css">
+<link rel="stylesheet" href="/xhtml/css/css-reconstruction.css" type="text/css">
+
+	</head>
+
+	<body>
+		<!--头部-->
+		<!--PC端-->
+<div class="container-fluid head-menu-pc hidden-mob">
+    <div class="row link-pc-row">
+        <div class="col-md-4 offset-md-8 text-right">
+            <a href="http://www.sse.com.cn/" target="_blank" class="sse-link">上交所官网</a> |
+            <a id="business-handling" class="son-link" sub="business">
+                业务办理<i class="fa fa-sort-desc son-tit2" aria-hidden="true"></i>
+            </a>
+            <div class="business son-sub">
+                <ul class="list-unstyled list-business">
+                    <li class="">
+                        <a href="http://biz.sse.com.cn/fund/" target="_blank" rel="noopenner noreferrer">基金专区</a>
+                    </li>
+                    <li class="">
+                        <a href="https://bmsp.uap.sse.com.cn" target="_blank" rel="noopenner noreferrer">做市商专区</a>
+                    </li>
+                    <li class="">
+                        <a href="http://www.sse.com.cn/services/tradingtech/home/"
+                           target="_blank" rel="noopenner noreferrer">交易技术支持专区</a>
+                    </li>
+                    <li class="">
+                        <a href="http://www.sse.com.cn/home/biz/cnsca/" target="_blank" rel="noopenner noreferrer">CA服务专区</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row menu-pc-row">
+        <div class="col-md-3 menu-pc-left">
+        </div>
+        <div class="col-md-9 text-center menu-pc-right">
+            <ul class="list-inline menu-pc-ul">
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="pc_sear_div hidden-mob">
+    <div class="pc_sea_t">
+        搜索
+    </div>
+    <div class="pc_sea_in_div">
+        <div class="pc_sea_input">
+            <input type="text" class="pc_search_con" placeholder="搜公告，规则等"/>
+        </div>
+        <div id="site-search" class="text-center pc_sea_lo">
+            <i class="fa fa-search pc-search-go" aria-hidden="true"></i>
+        </div>
+    </div>
+</div>
+
+<!--移动端-->
+<div class="container-fluid head-menu-mob hidden-pc">
+    <div class="row head-menu-mob-row">
+        <div class="col-8 head-mob-left">
+
+        </div>
+        <div class="col-4 text-center head-mob-right">
+            <div class="mob_menu_btn">
+                <i class="fa fa-bars mob_menu_" aria-hidden="true"></i>
+            </div>
+        </div>
+    </div>
+    <!--菜单-->
+    <div class="row mob_menu_div hidden-pc">
+        <div class="text-center">
+            <div class="mob_menu_close text-right">
+                <img class="mob_menu_close_btn" src="/xhtml/imgs/menu-tel-close.png"/>
+            </div>
+            <div class="mob_menu_ul_div">
+                <ul class="menu-mob-ul">
+
+                </ul>
+            </div>
+            <!--搜索框-->
+            <div class="mo_sear_div">
+                <div class="mo_sear_t text-left">
+                    搜索
+                </div>
+                <div class="mo_sear_input">
+                    <div class="sear-inp">
+                        <input type="text" class="sear-in_" placeholder="搜公告，规则等"/>
+                    </div>
+                    <div class="sear-b">
+                        <i class="fa fa-search sear-go" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+		<div class="page page_content">
+
+			<div class="detail-top"></div>
+			<div class="detail-wrap">
+				<div class="detail-title">
+							上海证券交易所债券ETF业务指南
+				</div>
+				<div class="detail-time">2013年02月08日</div>
+
+				<div>
+							<p class="MsoNormal" align="left" style="margin: 0cm 0cm 0pt; text-align: left; mso-pagination: widow-orphan"><b style="mso-bidi-font-weight: normal"><span style="font-size: 16pt; font-family: 仿宋_GB2312">一、产品概要<span lang="EN-US">
+    <o:p></o:p></span></span></b></p>
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt; text-indent: 28pt; mso-char-indent-count: 2.0"><span style="font-size: 14pt; font-family: 仿宋_GB2312">本指南只针对采用现券申赎的单市场债券<span lang="EN-US">ETF</span>。<span lang="EN-US">
+   <o:p></o:p></span></span></p>
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt; text-indent: 28pt; mso-char-indent-count: 2.0"><span style="font-size: 14pt; font-family: 仿宋_GB2312">现券申赎是指申购赎回篮子中全部为本所上市交易债券，其运作模式与单市场股票<span lang="EN-US">ETF</span>类似。<span lang="EN-US">
+   <o:p></o:p></span></span></p>
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt; text-indent: 28pt; mso-char-indent-count: 2.0"><span style="font-size: 14pt; font-family: 仿宋_GB2312">单市场债券<span lang="EN-US">ETF</span>是指跟踪沪市债券指数的<span lang="EN-US">ETF</span>，或虽然跟踪跨市场指数但基金公司通过抽样复制技术选取的申赎组合证券仅包含本所上市交易债券的<span lang="EN-US">ETF</span>。<span lang="EN-US">
+   <o:p></o:p></span></span></p>
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt; text-indent: 28pt; mso-char-indent-count: 2.0"><span style="font-size: 14pt; font-family: 仿宋_GB2312">投资者可申报债券<span lang="EN-US">ETF</span>基金份额进入债券质押回购库，进行质押式回购交易，其折算率由登记公司具体规定。<span lang="EN-US">
+   <o:p></o:p></span></span></p>
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt; text-indent: 28pt; mso-char-indent-count: 2.0"><span style="font-size: 14pt; font-family: 仿宋_GB2312">债券<span lang="EN-US">ETF</span>与股票<span lang="EN-US">ETF</span>、债券在交易和申购赎回等方面的差异如下表所示：</span><span lang="EN-US" style="font-size: 15pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">
+  <o:p></o:p></span></p>
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span lang="EN-US">
+  <o:p>
+   <font face="Calibri">&nbsp;</font>
+  </o:p></span></p>
+<table class="MsoNormalTable" cellspacing="0" cellpadding="0" width="584" border="1" style="border-right: medium none; border-top: medium none; border-left: medium none; width: 437.75pt; border-bottom: medium none; border-collapse: collapse; mso-border-alt: solid windowtext .5pt; mso-yfti-tbllook: 160; mso-padding-alt: 0cm 5.4pt 0cm 5.4pt; mso-border-insideh: .5pt solid windowtext; mso-border-insidev: .5pt solid windowtext"> 
+ <tbody> 
+  <tr style="mso-yfti-irow: 0; mso-yfti-firstrow: yes"> 
+   <td valign="top" width="149" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: windowtext 1pt solid; padding-left: 5.4pt; padding-bottom: 0cm; border-left: windowtext 1pt solid; width: 111.75pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt"> <p class="MsoNormal" align="center" style="margin: 0cm 0cm 0pt; text-align: center"><span lang="EN-US" style="font-size: 14pt; font-family: 黑体; mso-hansi-font-family: 黑体">
+      <o:p>
+       &nbsp;
+      </o:p></span></p> </td> 
+   <td valign="top" width="142" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: windowtext 1pt solid; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 106.3pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt"> <p class="MsoNormal" align="center" style="margin: 0cm 0cm 0pt; text-align: center"><b style="mso-bidi-font-weight: normal"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 黑体">债券<span lang="EN-US">ETF
+        <o:p></o:p></span></span></b></p> </td> 
+   <td valign="top" width="161" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: windowtext 1pt solid; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 120.5pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt"> <p class="MsoNormal" align="center" style="margin: 0cm 0cm 0pt; text-align: center"><b style="mso-bidi-font-weight: normal"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 黑体">股票<span lang="EN-US">ETF
+        <o:p></o:p></span></span></b></p> </td> 
+   <td valign="top" width="132" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: windowtext 1pt solid; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 99.2pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt"> <p class="MsoNormal" align="center" style="margin: 0cm 0cm 0pt; text-align: center"><b style="mso-bidi-font-weight: normal"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 黑体">债券<span lang="EN-US">
+        <o:p></o:p></span></span></b></p> </td> 
+  </tr> 
+  <tr style="mso-yfti-irow: 1"> 
+   <td valign="top" width="149" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: windowtext 1pt solid; width: 111.75pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">当日买入，当日卖出<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+   <td valign="top" width="142" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 106.3pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">可以<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+   <td valign="top" width="161" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 120.5pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">不可以<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+   <td valign="top" width="132" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 99.2pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">可以<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+  </tr> 
+  <tr style="mso-yfti-irow: 2"> 
+   <td valign="top" width="149" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: windowtext 1pt solid; width: 111.75pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">涨跌幅<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+   <td valign="top" width="142" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 106.3pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span lang="EN-US" style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">10%
+      <o:p></o:p></span></p> </td> 
+   <td valign="top" width="161" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 120.5pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span lang="EN-US" style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">10%
+      <o:p></o:p></span></p> </td> 
+   <td valign="top" width="132" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 99.2pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt -40.55pt; text-indent: 37.8pt; mso-char-indent-count: 2.7; mso-para-margin-left: -3.86gd"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">价格区间<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+  </tr> 
+  <tr style="mso-yfti-irow: 3"> 
+   <td valign="top" width="149" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: windowtext 1pt solid; width: 111.75pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">申报单位<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+   <td valign="top" width="142" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 106.3pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">份<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+   <td valign="top" width="161" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 120.5pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">份<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+   <td valign="top" width="132" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 99.2pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt -40.55pt; text-indent: 37.8pt; mso-char-indent-count: 2.7; mso-para-margin-left: -3.86gd"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">手<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+  </tr> 
+  <tr style="mso-yfti-irow: 4"> 
+   <td valign="top" width="149" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: windowtext 1pt solid; width: 111.75pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">最小申报单位<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+   <td valign="top" width="142" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 106.3pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span lang="EN-US" style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">100</span><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">份<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+   <td valign="top" width="161" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 120.5pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span lang="EN-US" style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">100</span><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">份<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+   <td valign="top" width="132" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 99.2pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span lang="EN-US" style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">1</span><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">手（<span lang="EN-US">10</span>张）<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+  </tr> 
+  <tr style="mso-yfti-irow: 5"> 
+   <td valign="top" width="149" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: windowtext 1pt solid; width: 111.75pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">报价单位<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+   <td valign="top" width="142" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 106.3pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">每份价格<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+   <td valign="top" width="161" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 120.5pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">每份价格<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+   <td valign="top" width="132" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 99.2pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">每张价格<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+  </tr> 
+  <tr style="mso-yfti-irow: 6"> 
+   <td valign="top" width="149" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: windowtext 1pt solid; width: 111.75pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">成交金额<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+   <td valign="top" width="142" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 106.3pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">份数<span lang="EN-US">*</span>每份价格<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+   <td valign="top" width="161" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 120.5pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">份数<span lang="EN-US">*</span>每份价格<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+   <td valign="top" width="132" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 99.2pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">手数<span lang="EN-US">*</span>每张价格<span lang="EN-US">*10
+       <o:p></o:p></span></span></p> </td> 
+  </tr> 
+  <tr style="mso-yfti-irow: 7"> 
+   <td valign="top" width="149" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: windowtext 1pt solid; width: 111.75pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; color: black; font-family: 仿宋_GB2312">申报价格最小变动单位</span><span lang="EN-US" style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">
+      <o:p></o:p></span></p> </td> 
+   <td valign="top" width="142" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 106.3pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span lang="EN-US" style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">0.001</span><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">元<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+   <td valign="top" width="161" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 120.5pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span lang="EN-US" style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">0.001</span><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">元<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+   <td valign="top" width="132" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 99.2pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span lang="EN-US" style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">0.01</span><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">元<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+  </tr> 
+  <tr style="mso-yfti-irow: 8"> 
+   <td valign="top" width="149" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: windowtext 1pt solid; width: 111.75pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">最大申报单位<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+   <td valign="top" width="142" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 106.3pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">不超过<span lang="EN-US">100</span>万份<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+   <td valign="top" width="161" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 120.5pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">不超过<span lang="EN-US">100</span>万份<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+   <td valign="top" width="132" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 99.2pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">不超过<span lang="EN-US">1</span>万手<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+  </tr> 
+  <tr style="mso-yfti-irow: 9"> 
+   <td valign="top" width="149" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: windowtext 1pt solid; width: 111.75pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">纳入回购质押库<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+   <td valign="top" width="142" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 106.3pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">可以<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+   <td valign="top" width="161" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 120.5pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">不可以<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+   <td valign="top" width="132" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 99.2pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">可以<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+  </tr> 
+  <tr style="mso-yfti-irow: 10"> 
+   <td valign="top" width="149" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: windowtext 1pt solid; width: 111.75pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">当日申购，当日赎回<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+   <td valign="top" width="142" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 106.3pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">可以<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+   <td valign="top" width="161" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 120.5pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">不可以<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+   <td valign="top" width="132" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 99.2pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">不适用<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+  </tr> 
+  <tr style="mso-yfti-irow: 11"> 
+   <td valign="top" width="149" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: windowtext 1pt solid; width: 111.75pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">当日赎回的证券用于申购<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+   <td valign="top" width="142" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 106.3pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">可以<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+   <td valign="top" width="161" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 120.5pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">不可以<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+   <td valign="top" width="132" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 99.2pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">不适用<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+  </tr> 
+  <tr style="mso-yfti-irow: 12"> 
+   <td valign="top" width="149" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: windowtext 1pt solid; width: 111.75pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">当日赎回的证券可申报进入质押库<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+   <td valign="top" width="142" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 106.3pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">可以<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+   <td valign="top" width="161" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 120.5pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">不可以<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+   <td valign="top" width="132" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 99.2pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">不适用<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+  </tr> 
+  <tr style="mso-yfti-irow: 13"> 
+   <td valign="top" width="149" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: windowtext 1pt solid; width: 111.75pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">当日申报出库的证券用于申购<span lang="EN-US">ETF
+       <o:p></o:p></span></span></p> </td> 
+   <td valign="top" width="142" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 106.3pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">可以<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+   <td valign="top" width="161" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 120.5pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">不可以<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+   <td valign="top" width="132" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 99.2pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">可以<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+  </tr> 
+  <tr style="mso-yfti-irow: 14; mso-yfti-lastrow: yes"> 
+   <td valign="top" width="149" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: windowtext 1pt solid; width: 111.75pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">当日购买，当日可以申报入库<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+   <td valign="top" width="142" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 106.3pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">可以<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+   <td valign="top" width="161" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 120.5pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">不可以<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+   <td valign="top" width="132" style="border-right: windowtext 1pt solid; padding-right: 5.4pt; border-top: #f4f4f4; padding-left: 5.4pt; padding-bottom: 0cm; border-left: #f4f4f4; width: 99.2pt; padding-top: 0cm; border-bottom: windowtext 1pt solid; background-color: transparent; mso-border-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-top-alt: solid windowtext .5pt"> <p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 14pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">可以<span lang="EN-US">
+       <o:p></o:p></span></span></p> </td> 
+  </tr> 
+ </tbody>
+</table>
+<p class="MsoNormal" align="left" style="margin: 0cm 0cm 0pt; text-align: left"><a name="_Toc115227599" title=""></a><a name="_Toc347163304" title=""></a><a name="_Toc338410899" title=""></a><a name="_Toc291855379" title=""><span style="mso-bookmark: _Toc338410899"><span style="mso-bookmark: _Toc347163304"><span style="mso-bookmark: _Toc115227599"><b style="mso-bidi-font-weight: normal"><span lang="EN-US" style="font-size: 16pt; font-family: 仿宋_GB2312">
+       <o:p>
+        &nbsp;
+       </o:p></span></b></span></span></span></a></p>
+<p class="MsoNormal" align="left" style="margin: 0cm 0cm 0pt; text-align: left"><span style="mso-bookmark: _Toc291855379"><span style="mso-bookmark: _Toc338410899"><span style="mso-bookmark: _Toc347163304"><span style="mso-bookmark: _Toc115227599"><b style="mso-bidi-font-weight: normal"><span style="font-size: 16pt; font-family: 仿宋_GB2312">二、证券账户</span></b></span></span></span></span><b style="mso-bidi-font-weight: normal"><span lang="EN-US" style="font-size: 16pt; font-family: 仿宋_GB2312">
+   <o:p></o:p></span></b></p>
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt; text-indent: 28pt; mso-char-indent-count: 2.0"><span style="font-size: 14pt; font-family: 仿宋_GB2312">投资者所用证券账户、结算参与人所用证券和资金交收账户同现有股票<span lang="EN-US">ETF</span>，无须另行开设。<span lang="EN-US">
+   <o:p></o:p></span></span></p>
+<p class="MsoNormal" align="left" style="margin: 0cm 0cm 0pt; text-align: left"><a name="_Toc347163305" title=""></a><a name="_Toc338410900" title=""></a><span style="mso-bookmark: _Toc338410900"><span style="mso-bookmark: _Toc347163305"><b style="mso-bidi-font-weight: normal"><span style="font-size: 16pt; font-family: 仿宋_GB2312">三、市场参与者</span></b></span></span><b style="mso-bidi-font-weight: normal"><span lang="EN-US" style="font-size: 16pt; font-family: 仿宋_GB2312">
+   <o:p></o:p></span></b></p>
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt; text-indent: 28pt; mso-char-indent-count: 2.0"><span style="font-size: 14pt; font-family: 仿宋_GB2312">持有的上海证券账户或基金账户的投资者，可以参与场内以竞价交易进行基金份额的买卖，也可通过具备资格的券商进行基金份额的申购及赎回。<span lang="EN-US">
+   <o:p></o:p></span></span></p>
+<p class="MsoNormal" align="left" style="margin: 0cm 0cm 0pt; text-align: left"><a name="_Toc347163306" title=""></a><a name="_Toc338410901" title=""></a><span style="mso-bookmark: _Toc338410901"><span style="mso-bookmark: _Toc347163306"><b style="mso-bidi-font-weight: normal"><span style="font-size: 16pt; font-family: 仿宋_GB2312">四、发售</span></b></span></span><b style="mso-bidi-font-weight: normal"><span lang="EN-US" style="font-size: 16pt; font-family: 仿宋_GB2312">
+   <o:p></o:p></span></b></p>
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt; text-indent: 28pt; mso-char-indent-count: 2.0"><span style="font-size: 14pt; font-family: 仿宋_GB2312">同现有<span lang="EN-US">ETF</span>发行模式，网上现金认购采用三日模式。<span lang="EN-US">
+   <o:p></o:p></span></span></p>
+<p class="MsoNormal" align="left" style="margin: 0cm 0cm 0pt; text-align: left"><a name="_Toc347163307" title=""></a><a name="_Toc338410902" title=""></a><span style="mso-bookmark: _Toc338410902"><span style="mso-bookmark: _Toc347163307"><b style="mso-bidi-font-weight: normal"><span style="font-size: 16pt; font-family: 仿宋_GB2312">五、 二级市场交易</span></b></span></span><b style="mso-bidi-font-weight: normal"><span lang="EN-US" style="font-size: 16pt; font-family: 仿宋_GB2312">
+   <o:p></o:p></span></b></p>
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt; text-indent: 28pt; mso-char-indent-count: 2.0"><span style="font-size: 14pt; font-family: 仿宋_GB2312">债券<span lang="EN-US">ETF</span>比照债券，当日买入的债券<span lang="EN-US">ETF</span>份额，当日可卖出。其它交易方式遵照上海证券交易所有关规定，同现有股票<span lang="EN-US">ETF</span>。<span lang="EN-US">
+   <o:p></o:p></span></span></p>
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt; text-indent: 28pt; mso-char-indent-count: 2.0"><span style="font-size: 14pt; font-family: 仿宋_GB2312">本所为债券<span lang="EN-US">ETF</span>开设的代码段为<span lang="EN-US">511***</span>，发行、申赎、交易相关的具体代码规则与单市场股票<span lang="EN-US">ETF</span>相同。<span lang="EN-US">
+   <o:p></o:p></span></span></p>
+<p class="MsoNormal" align="left" style="margin: 0cm 0cm 0pt; text-align: left"><a name="_Toc347163308" title=""></a><a name="_Toc338410903" title=""></a><span style="mso-bookmark: _Toc338410903"><span style="mso-bookmark: _Toc347163308"><b style="mso-bidi-font-weight: normal"><span style="font-size: 16pt; font-family: 仿宋_GB2312">六、申购与赎回</span></b></span></span><b style="mso-bidi-font-weight: normal"><span lang="EN-US" style="font-size: 16pt; font-family: 仿宋_GB2312">
+   <o:p></o:p></span></b></p>
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt; text-indent: 30.1pt; mso-char-indent-count: 2.0"><b><span style="font-size: 15pt; color: black; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">（一）申赎模式<span lang="EN-US">
+    <o:p></o:p></span></span></b></p>
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt; text-indent: 28pt; mso-char-indent-count: 2.0"><span style="font-size: 14pt; font-family: 仿宋_GB2312">现券申赎的基本流程与单市场股票<span lang="EN-US">ETF</span>相同。<span lang="EN-US">
+   <o:p></o:p></span></span></p>
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt; text-indent: 28pt; mso-char-indent-count: 2.0"><span style="font-size: 14pt; font-family: 仿宋_GB2312">投资者使用交易所上市的债券现券（及一定比例的现金替代）进行申赎。对托管在银行间市场的双边挂牌债券，需办转托管到交易所市场后方能用以申购<span lang="EN-US">ETF</span>份额。<span lang="EN-US">
+   <o:p></o:p></span></span></p>
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt; text-indent: 26.9pt; mso-char-indent-count: 1.92"><span style="font-size: 14pt; font-family: 仿宋_GB2312">申购赎回的基本规则：<span lang="EN-US">
+   <o:p></o:p></span></span></p>
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt 75pt; text-indent: -21pt; mso-list: l0 level2 lfo1; tab-stops: list 75.0pt"><span lang="EN-US" style="font-size: 14pt; font-family: 仿宋_GB2312; mso-bidi-font-family: 仿宋_GB2312"><span style="mso-list: Ignore">1.<span new="" times="" style="font-weight: normal; font-size: 7pt; line-height: normal; font-style: normal; font-variant: normal">&nbsp;&nbsp;&nbsp; </span></span></span><span lang="EN-US" style="font-size: 14pt; font-family: 仿宋_GB2312">T</span><span style="font-size: 14pt; font-family: 仿宋_GB2312">日投资者申购的份额，<span lang="EN-US">T</span>日可卖出或赎回；证券公司可根据技术系统准备情况自行确定实施此项业务的开始时间。<span lang="EN-US">
+   <o:p></o:p></span></span></p>
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt 75pt; text-indent: -21pt; mso-list: l0 level2 lfo1; tab-stops: list 75.0pt"><span lang="EN-US" style="font-size: 14pt; font-family: 仿宋_GB2312; mso-bidi-font-family: 仿宋_GB2312"><span style="mso-list: Ignore">2.<span new="" times="" style="font-weight: normal; font-size: 7pt; line-height: normal; font-style: normal; font-variant: normal">&nbsp;&nbsp;&nbsp; </span></span></span><span lang="EN-US" style="font-size: 14pt; font-family: 仿宋_GB2312">T</span><span style="font-size: 14pt; font-family: 仿宋_GB2312">日投资者赎回<span lang="EN-US">ETF</span>，份额实时记减，赎回获得的成份债券<span lang="EN-US">T</span>日可卖出，也可用于当日的<span lang="EN-US">ETF</span>申购；<span lang="EN-US">
+   <o:p></o:p></span></span></p>
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt 75pt; text-indent: -21pt; mso-list: l0 level2 lfo1; tab-stops: list 75.0pt"><span lang="EN-US" style="font-size: 14pt; font-family: 仿宋_GB2312; mso-bidi-font-family: 仿宋_GB2312"><span style="mso-list: Ignore">3.<span new="" times="" style="font-weight: normal; font-size: 7pt; line-height: normal; font-style: normal; font-variant: normal">&nbsp;&nbsp;&nbsp; </span></span></span><span style="font-size: 14pt; font-family: 仿宋_GB2312">投资者<span lang="EN-US">T</span>日买入的<span lang="EN-US">ETF</span>份额，<span lang="EN-US">T</span>日可以卖出或赎回。<span lang="EN-US">
+   <o:p></o:p></span></span></p>
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt; text-indent: 30.1pt; mso-char-indent-count: 2.0"><b><span style="font-size: 15pt; color: black; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">（三）</span></b><span style="mso-bookmark: _Toc332274163"><b style="mso-bidi-font-weight: normal"><span style="font-size: 14pt; font-family: 仿宋_GB2312">日内申购赎回上限的前端控制</span></b></span><span style="mso-bookmark: _Toc332274163"><b><span lang="EN-US" style="font-size: 15pt; color: black; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">
+    <o:p></o:p></span></b></span></p>
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt; text-indent: 26.9pt; mso-char-indent-count: 1.92"><span style="mso-bookmark: _Toc332274163"><span style="font-size: 14pt; font-family: 仿宋_GB2312">基金公司可通过申购赎回清单设置“日内总申购额度”和“日内总赎回额度”<span lang="EN-US">,</span>本所交易系统据此进行前端控制。<span lang="EN-US">
+    <o:p></o:p></span></span></span></p>
+<p class="MsoNormal" align="left" style="margin: 0cm 0cm 0pt; text-align: left"><span style="mso-bookmark: _Toc332274163"><b style="mso-bidi-font-weight: normal"><span style="font-size: 16pt; font-family: 仿宋_GB2312">七、国债<span lang="EN-US">ETF</span>质押式回购交易<span lang="EN-US">
+     <o:p></o:p></span></span></b></span></p>
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt; text-indent: 26.9pt; mso-char-indent-count: 1.92"><span style="mso-bookmark: _Toc332274163"><span style="font-size: 14pt; font-family: 仿宋_GB2312">（一）国债<span lang="EN-US">ETF</span>回购交易实行质押库制度，融资方应在回购申报前，通过本所交易系统申报提交相应的国债<span lang="EN-US">ETF</span>转入债券回购质押库。用于质押的国债<span lang="EN-US">ETF</span>，按照证券登记结算机构的相关规定，转移至专用的质押账户。<span lang="EN-US">
+    <o:p></o:p></span></span></span></p>
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt; text-indent: 26.9pt; mso-char-indent-count: 1.92"><span style="mso-bookmark: _Toc332274163"><span style="font-size: 14pt; font-family: 仿宋_GB2312">（二）投资者当日申购或买入的<span lang="EN-US">ETF</span>，当日可以申报进入质押回购库。当日申报出库的国债<span lang="EN-US">ETF</span>，当日可以卖出。<span lang="EN-US">
+    <o:p></o:p></span></span></span></p>
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt; text-indent: 26.9pt; mso-char-indent-count: 1.92"><span style="mso-bookmark: _Toc332274163"><span style="font-size: 14pt; font-family: 仿宋_GB2312">（三）投资者当日申报转出回购质押库的国债可用于申购国债<span lang="EN-US">ETF</span>，当日赎回<span lang="EN-US">ETF</span>获得的国债可以申报转入回购质押库。<span lang="EN-US">
+    <o:p></o:p></span></span></span></p>
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt; text-indent: 26.9pt; mso-char-indent-count: 1.92"><span style="mso-bookmark: _Toc332274163"><span style="font-size: 14pt; font-family: 仿宋_GB2312">（四）国债<span lang="EN-US">ETF</span>申报进入回购质押库时，其申报应当符合下列要求<span lang="EN-US">: 
+    <o:p></o:p></span></span></span></p>
+<p class="ListParagraph" style="margin: 0cm 0cm 0pt 0.05pt; text-indent: 28pt"><span style="mso-bookmark: _Toc332274163"><span lang="EN-US" style="font-size: 14pt; font-family: 仿宋_GB2312">1</span></span><span style="mso-bookmark: _Toc332274163"><span style="font-size: 14pt; font-family: 仿宋_GB2312">、申报单位为份；<span lang="EN-US">
+    <o:p></o:p></span></span></span></p>
+<p class="ListParagraph" style="margin: 0cm 0cm 0pt 0.05pt; text-indent: 28pt"><span style="mso-bookmark: _Toc332274163"><span lang="EN-US" style="font-size: 14pt; font-family: 仿宋_GB2312">2</span></span><span style="mso-bookmark: _Toc332274163"><span style="font-size: 14pt; font-family: 仿宋_GB2312">、申报数量为<span lang="EN-US">100</span>份或其整数倍，单笔申报最大数量不超过<span lang="EN-US">10</span>万份。<span lang="EN-US">
+    <o:p></o:p></span></span></span></p>
+<p class="ListParagraph" style="margin: 0cm 0cm 0pt 0.05pt; text-indent: 28pt"><span style="mso-bookmark: _Toc332274163"><span style="font-size: 14pt; font-family: 仿宋_GB2312">（五）国债<span lang="EN-US">ETF</span>转入债券质押库的标准券折算率计算公式参照中国登记结算公司及本所公布的相关通知。<span lang="EN-US">
+    <o:p></o:p></span></span></span></p>
+<p class="ListParagraph" style="margin: 0cm 0cm 0pt 0.05pt; text-indent: 28pt"><span style="mso-bookmark: _Toc332274163"><span style="font-size: 14pt; font-family: 仿宋_GB2312">（六）国债<span lang="EN-US">ETF</span>转入国债回购质押库后开展回购交易的相关事项应遵照本所《上海证券交易所债券交易实施细则》和《上海证券交易所债券市场投资者适当性管理工作指引》。会员接受投资者的回购交易委托时，应对其证券账户内可用于回购的标准券余额进行检查。标准券余额不足的，回购申报无效。</span></span><span style="mso-bookmark: _Toc332274163"><span lang="EN-US" style="font-size: 15pt; color: black; font-family: 仿宋_GB2312">
+   <o:p></o:p></span></span></p>
+<p class="MsoNormal" align="left" style="margin: 0cm 0cm 0pt; text-align: left"><span style="mso-bookmark: _Toc332274163"><a name="_Toc332274174" title=""></a><a name="_Toc347163309" title=""></a><a name="_Toc338410904" title=""></a><span style="mso-bookmark: _Toc338410904"><span style="mso-bookmark: _Toc347163309"><span style="mso-bookmark: _Toc332274174"><b style="mso-bidi-font-weight: normal"><span style="font-size: 16pt; font-family: 仿宋_GB2312">八、登记结算</span></b></span></span></span></span><span style="mso-bookmark: _Toc332274163"><span style="mso-bookmark: _Toc332274174"><b style="mso-bidi-font-weight: normal"><span lang="EN-US" style="font-size: 16pt; font-family: 仿宋_GB2312">
+     <o:p></o:p></span></b></span></span></p>
+<p class="ListParagraph" style="margin: 0cm 0cm 0pt 0.05pt; text-indent: 28pt"><span style="mso-bookmark: _Toc332274163"><span style="mso-bookmark: _Toc332274174"><span style="font-size: 14pt; font-family: 仿宋_GB2312">现券申赎模式下，申购赎回现金替代及二级市场交易纳入净额结算和担保交收。<span lang="EN-US">
+     <o:p></o:p></span></span></span></span></p>
+<p class="MsoNormal" align="left" style="margin: 0cm 0cm 0pt; text-align: left"><span style="mso-bookmark: _Toc332274163"><span style="mso-bookmark: _Toc332274174"><a name="_Toc347163310" title=""></a><span style="mso-bookmark: _Toc347163310"><b style="mso-bidi-font-weight: normal"><span style="font-size: 16pt; font-family: 仿宋_GB2312">九、收益分配与权益</span></b></span></span></span><span style="mso-bookmark: _Toc332274163"><span style="mso-bookmark: _Toc347163310"><b style="mso-bidi-font-weight: normal"><span style="font-size: 16pt; font-family: 仿宋_GB2312">登记</span></b></span></span><span style="mso-bookmark: _Toc332274163"><b style="mso-bidi-font-weight: normal"><span lang="EN-US" style="font-size: 16pt; font-family: 仿宋_GB2312">
+    <o:p></o:p></span></b></span></p>
+<p class="ListParagraph" style="margin: 0cm 0cm 0pt 0.05pt; text-indent: 28pt"><span style="mso-bookmark: _Toc332274163"><span style="font-size: 14pt; font-family: 仿宋_GB2312">债券<span lang="EN-US">ETF</span>分红方式同股票<span lang="EN-US">ETF</span>的分红模式，原则上一年不超过<span lang="EN-US">4</span>次。权益登记与股票<span lang="EN-US">ETF</span>相同<span lang="EN-US">
+    <o:p></o:p></span></span></span></p>
+<p class="MsoNormal" align="left" style="margin: 0cm 0cm 0pt; text-align: left"><span style="mso-bookmark: _Toc332274163"><a name="_Toc347163311" title=""></a><a name="_Toc338410906" title=""></a><span style="mso-bookmark: _Toc338410906"><span style="mso-bookmark: _Toc347163311"><b style="mso-bidi-font-weight: normal"><span style="font-size: 16pt; font-family: 仿宋_GB2312">十、停复牌</span></b></span></span></span><span style="mso-bookmark: _Toc332274163"><b style="mso-bidi-font-weight: normal"><span lang="EN-US" style="font-size: 16pt; font-family: 仿宋_GB2312">
+    <o:p></o:p></span></b></span></p>
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt; text-indent: 28pt; mso-char-indent-count: 2.0"><span style="mso-bookmark: _Toc332274163"><span style="font-size: 14pt; font-family: 仿宋_GB2312">基金交易、申购、赎回可以分别停复牌。本所根据基金公司的申请或本所规定的其他情形，进行相应的停复牌。<span lang="EN-US">
+    <o:p></o:p></span></span></span></p>
+<p class="MsoNormal" align="left" style="margin: 0cm 0cm 0pt; text-align: left"><span style="mso-bookmark: _Toc332274163"><a name="_Toc347163312" title=""></a><a name="_Toc338410907" title=""></a><span style="mso-bookmark: _Toc338410907"><span style="mso-bookmark: _Toc347163312"><b style="mso-bidi-font-weight: normal"><span style="font-size: 16pt; font-family: 仿宋_GB2312">十一、信息披露</span></b></span></span></span><span style="mso-bookmark: _Toc332274163"><b style="mso-bidi-font-weight: normal"><span lang="EN-US" style="font-size: 16pt; font-family: 仿宋_GB2312">
+    <o:p></o:p></span></b></span></p>
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt; text-indent: 30.1pt; mso-char-indent-count: 2.0"><span style="mso-bookmark: _Toc332274163"><b style="mso-bidi-font-weight: normal"><span style="font-size: 15pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">（一）交易行情显示</span></b></span><span style="mso-bookmark: _Toc332274163"><span lang="EN-US" style="font-size: 15pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">
+   <o:p></o:p></span></span></p>
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt; text-indent: 28pt; mso-char-indent-count: 2.0"><span style="font-size: 14pt; font-family: 仿宋_GB2312">债券<span lang="EN-US">ETF</span>交易行情要素与现有的股票<span lang="EN-US">ETF</span>基本一致。<span lang="EN-US">
+   <o:p></o:p></span></span></p>
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt; text-indent: 28.1pt"><b style="mso-bidi-font-weight: normal"><span style="font-size: 15pt; font-family: 仿宋_GB2312; mso-hansi-font-family: 宋体">（二）<span lang="EN-US">IOPV
+    <o:p></o:p></span></span></b></p>
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt; text-indent: 28pt; mso-char-indent-count: 2.0"><span style="font-size: 14pt; font-family: 仿宋_GB2312">债券<span lang="EN-US">ETF</span>的<span lang="EN-US">IOPV</span>可为固定值或根据其成分债券交易价格动态计算，基金公司可选择是否发布<span lang="EN-US">IOPV</span>。<span lang="EN-US">
+   <o:p></o:p></span></span></p>
+<p class="MsoNormal" align="left" style="margin: 0cm 0cm 0pt; text-align: left"><a name="_Toc347163313" title=""></a><span style="mso-bookmark: _Toc347163313"><b style="mso-bidi-font-weight: normal"><span style="font-size: 16pt; font-family: 仿宋_GB2312">十二、收费标准</span></b></span><b style="mso-bidi-font-weight: normal"><span lang="EN-US" style="font-size: 16pt; font-family: 仿宋_GB2312">
+   <o:p></o:p></span></b></p>
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt; text-indent: 28pt; mso-char-indent-count: 2.0"><span style="font-size: 14pt; font-family: 仿宋_GB2312">债券<span lang="EN-US">ETF</span>暂不征收交易经手费和交易单元流量费。<span lang="EN-US">
+   <o:p></o:p></span></span></p>
+<p class="MsoNormal" align="left" style="margin: 0cm 0cm 0pt; text-align: left"><b style="mso-bidi-font-weight: normal"><span style="font-size: 16pt; font-family: 仿宋_GB2312">十四、其他事项<span lang="EN-US">
+    <o:p></o:p></span></span></b></p>
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt; text-indent: 28pt; mso-char-indent-count: 2.0"><span style="font-size: 14pt; font-family: 仿宋_GB2312">债券<span lang="EN-US">ETF</span>申购、赎回的其他事项，适用本所《交易型开放式指数基金业务实施细则》的规定。<span lang="EN-US">
+   <o:p></o:p></span></span></p>
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt; text-indent: 28pt; mso-char-indent-count: 2.0"><span style="font-size: 14pt; font-family: 仿宋_GB2312">债券<span lang="EN-US">ETF</span>的交易事项，适用本所《交易规则》中关于基金品种的有关规定。<span lang="EN-US">
+   <o:p></o:p></span></span></p>
+<p class="MsoNormal" align="left" style="margin: 0cm 0cm 0pt; text-align: left"><b style="mso-bidi-font-weight: normal"><span style="font-size: 16pt; font-family: 仿宋_GB2312">十五、 本指南由本所负责解释。<span lang="EN-US">
+    <o:p></o:p></span></span></b></p>
+				</div>
+			</div>
+
+		</div>
+
+		<!--底部-->
+		<!--PC端-->
+<div class="footer-pc hidden-mob">
+    <div class="container-area">
+        <div class="container-fluid">
+            <div class="row footer-pc-row1">
+                <div class="col-md-4 foot_left_log_div">
+                    <div class="foot-tit">
+                    </div>
+                </div>
+                <div class="col-md-2 footer-link">
+                    <div>
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="/home/" target="_self">
+                                    首页
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/fundlist/" target="_self">
+                                    基金列表
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/disclosure/" target="_self">
+                                    信息披露
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/marketdata/" target="_self">
+                                    市场数据
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-2 footer-link">
+                    <div>
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="/ruleguide/" target="_self">
+                                    规则指南
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/jjt/" target="_self">
+                                   基金通
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/fundtrends/" target="_self">
+                                    基金动态
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/fund/learning/" target="_self">
+                                    基金学苑
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-2 footer-link">
+                    <div>
+                      <li>
+                                <a>
+                                    <embed class="telephone" src="/xhtml/imgs/svg/telephone.svg" type="image/svg+xml"><span>  上海证券交易所服务热线<br>      400  8888  400</span>
+                                </a>
+                            </li>
+                       
+                    </div>
+                </div>
+                <div class="col-md-2 text-right footer-link">
+                    <img src="/xhtml/imgs/sjsapp.jpg" height="80px" width="80px"/><br/>
+                    <a class="sjsapp_tit">
+                        上交所APP
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row footer-pc-row2">
+            <div class="col-md-12 text-center foot_bottom_">
+                本网站现已支持 <img src="/xhtml/imgs/IPV6.png" style="margin-bottom:2px;" />     ©上海证券交易所版权所有 2020 <a target="_blank" href="https://beian.miit.gov.cn/" style="color: #fff;">沪ICP备05004045号-2</a> <a
+                    target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31011502016333"
+                    style="display:inline-block;color:#fff;"><img src="//www.sse.com.cn/images/beian.png"> 沪公网安备
+                31011502016333号</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--移动端-->
+<div class="footer-mob hidden-pc">
+    <div class="row text-center">
+        <div class="mob_foot_tit">
+
+        </div>
+    </div>
+    <div class="row text-center footer-mob-m">
+        <div class="col-6 footer-mob_left" style="text-align: left;position: relative;left: 20%;">
+            <ul class="list-inline">
+                <li class="list-inline">
+                    <a href="/home/" target="_self">
+                        首页
+                    </a>
+                </li>
+                <li class="list-inline">
+                    <a href="/fundlist/" target="_self">
+                        基金列表
+                    </a>
+                </li>
+              <li class="list-inline">
+                                <a href="/disclosure/" target="_self">
+                                    信息披露
+                                </a>
+                            </li>
+                            <li class="list-inline">
+                                <a href="/marketdata/" target="_self">
+                                    市场数据
+                                </a>
+                            </li>
+
+            </ul>
+        </div>
+        <div class="col-4 footer-mob_right" style="text-align:left;position:relative;left:15%;">
+            <ul class="list-inline">
+                <li class="list-inline">
+                    <a href="/ruleguide/" target="_self">
+                        规则指南
+                    </a>
+                </li>
+                <li class="list-inline">
+                    <a href="/jjt/" target="_self">
+                       基金通
+                    </a>
+                </li>
+                <li class="list-inline">
+                    <a href="/fundtrends/" target="_self">
+                        基金动态
+                    </a>
+                </li>
+                <li class="list-inline">
+                    <a href="/fund/learning/" target="_self">
+                        基金学苑
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row text-center info_base_row">
+        <div class="col-12 text-center mob_tel">
+            <embed class="telephone" style="padding-right: 3px;position: relative;top:3px;"
+                   src="/xhtml/imgs/svg/telephone.svg" type="image/svg+xml"/>
+             <a href="tel:400-8888-400">400-8888-400</a>
+        </div>
+        <!--<div class="col-12 text-center mob_address">
+            上海市浦东南路
+            528号证券大厦
+        </div>-->
+        <div class="col-12 text-center mob_app_img">
+            <img src='/xhtml/imgs/sjsapp.jpg' width="100px" height="100px"/> <br/>
+            <span>
+                上交所APP
+            </span>
+        </div>
+        <div class="col-12 text-center mob_foot_bottom_">
+            <div class="mob_foo_font">
+                <span>本网站现已支持 <img src="/xhtml/imgs/IPV6.png" style="margin-bottom:2px;" />     ©上海证券交易所版权所有 2020 <a target="_blank" href="https://beian.miit.gov.cn/" style="color: #fff;">沪ICP备05004045号-2</a> <a target="_blank"
+                        href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31011502016333"
+                        style="display:inline-block;text-decoration:none;">
+                        <img src="//www.sse.com.cn/images/beian.png">
+                        <span style="margin: 0px 0px 0px 5px; color: #fff;">沪公网安备 31011502016333号</span>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+      
+		<!--标准时间 js-->
+<script type="text/javascript">
+    var _date_ = new Date();
+    var _y_ = _date_.getFullYear();
+    var _m_ = (_date_.getMonth() + 1);
+    var _d_ = _date_.getDate();
+    var _h_ = _date_.getHours();
+    var _v_ = _y_ + '' + _m_ + '' + _d_ + '' + _h_;
+    document.write('<script src="//www.sse.com.cn/js/common/systemDate_global.js?v=' + _v_ + '"><\/script>');
+</script>
+<script src="/fundlist/data.js"></script>
+<!--API-->
+<script type="text/javascript" src="/xhtml/js/api.js?v=V202103-01" charset="utf-8"></script>
+<!-- jQuery -->
+<script type="text/javascript" src="/xhtml/js/lib/jquery.min.js" charset="utf-8"></script>
+<!-- bootstrap -->
+<script type="text/javascript" src="/xhtml/js/lib/bootstrap.min.js" charset="utf-8"></script>
+<!--swiper-->
+<script type="text/javascript" src="/xhtml/js/lib/swiper.min.js" charset="utf-8"></script>
+<!--菜单对象 js-->
+<script type="text/javascript" src="/xhtml/js/etf_full.js?v=V202610-16" charset="utf-8"></script>
+<!--菜单 js-->
+<script type="text/javascript" src="/xhtml/js/menu.js" charset="utf-8"></script>
+<!--工具类 js-->
+<script type="text/javascript" src="/xhtml/js/util.js?v=V202103-01" charset="utf-8"></script>
+<!--静态 js-->
+<script type="text/javascript" src="/xhtml/js/search_common.js?v=V202103-02" charset="utf-8"></script>
+<!--业务 js-->
+<script type="text/javascript" src="/xhtml/js/lrt.js?v=V202103-01" charset="utf-8"></script>
+<script type="text/javascript" src="/xhtml/js/business.js?v=V202103-01" charset="utf-8"></script>
+<script type="text/javascript" src="/xhtml/js/js.js?v=V202201-10" charset="utf-8"></script>
+
+<script src="//www.sse.com.cn/js/lib/gdp-full.js?v=3.0.9"></script>
+<script type='text/javascript'>
+    gdp('init', 'ba17301551dcbaf9', 'b3e5162b545195c2', {
+        host: 'prod-ua.sseinfo.com',
+        version: '1.0.0',
+        scheme: 'https',
+        debug: false
+    });
+    gdp('send');
+</script>
+      
+
+
+	</body>
+
+</html>

@@ -1,0 +1,187 @@
+{
+  "requests": 24,
+  "http_status_counts": {
+    "200": 6,
+    "404": 2,
+    "501": 14,
+    "503": 2
+  },
+  "symbols": {
+    "510300": {
+      "sina_rows": 1970,
+      "sina_start": "2018-09-14",
+      "sina_end": "2026-11-04",
+      "sina_current_day_excluded_from_research": true,
+      "prior_overlap_days": 1023,
+      "prior_snapshot_ohlc_differences": [],
+      "legacy_rows": 193,
+      "legacy_start": "2022-01-04",
+      "legacy_end": "2022-10-24",
+      "legacy_fields_compared": 772,
+      "legacy_different_fields": 660,
+      "legacy_max_abs_difference": "0.005",
+      "legacy_difference_examples": [
+        {
+          "date": "2022-01-04",
+          "field": "open",
+          "legacy": "5.03",
+          "sina": "5.025",
+          "abs_diff": "0.005"
+        },
+        {
+          "date": "2022-01-04",
+          "field": "high",
+          "legacy": "5.03",
+          "sina": "5.027",
+          "abs_diff": "0.003"
+        },
+        {
+          "date": "2022-01-04",
+          "field": "low",
+          "legacy": "4.94",
+          "sina": "4.942",
+          "abs_diff": "0.002"
+        },
+        {
+          "date": "2022-01-05",
+          "field": "open",
+          "legacy": "4.98",
+          "sina": "4.979",
+          "abs_diff": "0.001"
+        },
+        {
+          "date": "2022-01-05",
+          "field": "close",
+          "legacy": "4.94",
+          "sina": "4.943",
+          "abs_diff": "0.003"
+        },
+        {
+          "date": "2022-01-05",
+          "field": "high",
+          "legacy": "4.99",
+          "sina": "4.992",
+          "abs_diff": "0.002"
+        },
+        {
+          "date": "2022-01-05",
+          "field": "low",
+          "legacy": "4.93",
+          "sina": "4.925",
+          "abs_diff": "0.005"
+        },
+        {
+          "date": "2022-01-06",
+          "field": "open",
+          "legacy": "4.92",
+          "sina": "4.923",
+          "abs_diff": "0.003"
+        },
+        {
+          "date": "2022-01-06",
+          "field": "close",
+          "legacy": "4.89",
+          "sina": "4.887",
+          "abs_diff": "0.003"
+        },
+        {
+          "date": "2022-01-06",
+          "field": "high",
+          "legacy": "4.93",
+          "sina": "4.933",
+          "abs_diff": "0.003"
+        }
+      ],
+      "additional_admitted_sessions": 0
+    },
+    "511010": {
+      "sina_rows": 1970,
+      "sina_start": "2018-09-14",
+      "sina_end": "2026-11-04",
+      "sina_current_day_excluded_from_research": true,
+      "prior_overlap_days": 1023,
+      "prior_snapshot_ohlc_differences": [],
+      "legacy_rows": 193,
+      "legacy_start": "2022-01-04",
+      "legacy_end": "2022-10-24",
+      "legacy_fields_compared": 772,
+      "legacy_different_fields": 615,
+      "legacy_max_abs_difference": "0.005",
+      "legacy_difference_examples": [
+        {
+          "date": "2022-01-04",
+          "field": "open",
+          "legacy": "126.43",
+          "sina": "126.429",
+          "abs_diff": "0.001"
+        },
+        {
+          "date": "2022-01-04",
+          "field": "close",
+          "legacy": "126.42",
+          "sina": "126.418",
+          "abs_diff": "0.002"
+        },
+        {
+          "date": "2022-01-04",
+          "field": "high",
+          "legacy": "126.44",
+          "sina": "126.435",
+          "abs_diff": "0.005"
+        },
+        {
+          "date": "2022-01-04",
+          "field": "low",
+          "legacy": "126.28",
+          "sina": "126.283",
+          "abs_diff": "0.003"
+        },
+        {
+          "date": "2022-01-05",
+          "field": "open",
+          "legacy": "126.42",
+          "sina": "126.418",
+          "abs_diff": "0.002"
+        },
+        {
+          "date": "2022-01-05",
+          "field": "close",
+          "legacy": "126.28",
+          "sina": "126.283",
+          "abs_diff": "0.003"
+        },
+        {
+          "date": "2022-01-05",
+          "field": "high",
+          "legacy": "126.42",
+          "sina": "126.418",
+          "abs_diff": "0.002"
+        },
+        {
+          "date": "2022-01-05",
+          "field": "low",
+          "legacy": "126.26",
+          "sina": "126.259",
+          "abs_diff": "0.001"
+        },
+        {
+          "date": "2022-01-06",
+          "field": "open",
+          "legacy": "126.28",
+          "sina": "126.283",
+          "abs_diff": "0.003"
+        },
+        {
+          "date": "2022-01-06",
+          "field": "close",
+          "legacy": "126.21",
+          "sina": "126.214",
+          "abs_diff": "0.004"
+        }
+      ],
+      "additional_admitted_sessions": 0
+    }
+  },
+  "decision": "Retain frozen 640-session sample. New Sina history lacks complete independent-calendar and exact cross-source validation; legacy Tencent has coarse/different OHLC and ends in 2022. No tolerance widened. Failed official PDF URLs do not verify historical reference prices.",
+  "research_data_end": "2026-10-30"
+}

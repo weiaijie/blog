@@ -1,0 +1,165 @@
+[
+  {
+    "name": "sina_daily_510300",
+    "url": "https://quotes.sina.cn/cn/api/jsonp_v2.php/var%20_data=/CN_MarketDataService.getKLineData?symbol=sh510300&scale=240&ma=no&datalen=1970",
+    "requested_at_utc": "2026-11-04T07:32:28.492463+00:00",
+    "status": 200,
+    "content_type": "application/javascript; charset=gbk",
+    "final_url": "https://quotes.sina.cn/cn/api/jsonp_v2.php/var%20_data=/CN_MarketDataService.getKLineData?symbol=sh510300&scale=240&ma=no&datalen=1970",
+    "bytes": 201388,
+    "sha256": "dd102a4fa8657c522990b8d454793bd53a612d9a24b4e31536c6ae5b239a4992",
+    "elapsed_seconds": 2.58
+  },
+  {
+    "name": "tencent_raw_510300_2022",
+    "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh510300,day,2022-01-01,2022-12-31,640,",
+    "requested_at_utc": "2026-11-04T07:32:28.493365+00:00",
+    "status": 501,
+    "error": "HTTP Error 501: Not Implemented",
+    "bytes": 322,
+    "sha256": "ed71ce0c835033cb145ff88a271cd00ee02b9a76d856a8ecee40b4713f0858b1",
+    "elapsed_seconds": 1.61
+  },
+  {
+    "name": "tencent_raw_510300_2023",
+    "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh510300,day,2023-01-01,2023-12-31,640,",
+    "requested_at_utc": "2026-11-04T07:32:28.495992+00:00",
+    "status": 501,
+    "error": "HTTP Error 501: Not Implemented",
+    "bytes": 324,
+    "sha256": "3b99f939d777bf6cbd4b737a7da39e79740dd09e34ce54150842bb3458bd3036",
+    "elapsed_seconds": 1.14
+  },
+  {
+    "name": "tencent_raw_510300_2024",
+    "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh510300,day,2024-01-01,2024-12-31,640,",
+    "requested_at_utc": "2026-11-04T07:32:28.497106+00:00",
+    "status": 501,
+    "error": "HTTP Error 501: Not Implemented",
+    "bytes": 323,
+    "sha256": "77cd9c7f6580730742abefc1b1f0ae7407ebcacfcb731b3c7615f9294cff6d64",
+    "elapsed_seconds": 1.77
+  },
+  {
+    "name": "tencent_raw_510300_2025",
+    "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh510300,day,2025-01-01,2025-12-31,640,",
+    "requested_at_utc": "2026-11-04T07:32:28.499574+00:00",
+    "status": 501,
+    "error": "HTTP Error 501: Not Implemented",
+    "bytes": 323,
+    "sha256": "6782e43d95b74982b6156ec0f0c0d3e77087882acafd622c3a9b134de5d670c3",
+    "elapsed_seconds": 1.63
+  },
+  {
+    "name": "tencent_raw_510300_2026",
+    "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh510300,day,2026-01-01,2026-11-03,640,",
+    "requested_at_utc": "2026-11-04T07:32:28.503782+00:00",
+    "status": 501,
+    "error": "HTTP Error 501: Not Implemented",
+    "bytes": 326,
+    "sha256": "bdd27d88cde7ff7ac5ac50b47d414cd7e3f81516a1040af2de792b114b1769cf",
+    "elapsed_seconds": 1.13
+  },
+  {
+    "name": "eastmoney_raw_510300",
+    "url": "https://push2his.eastmoney.com/api/qt/stock/kline/get?secid=1.510300&klt=101&fqt=0&beg=20220101&end=20261103&fields1=f1,f2,f3,f4,f5,f6&fields2=f51,f52,f53,f54,f55,f56,f57,f58,f59,f60,f61",
+    "requested_at_utc": "2026-11-04T07:32:29.638353+00:00",
+    "status": 503,
+    "error": "HTTP Error 503: Service Unavailable",
+    "bytes": 95,
+    "sha256": "9deff96f9b5925fa5081257849ace321304b382d64cfb67d90a21a3c7cbf2925",
+    "elapsed_seconds": 1.42
+  },
+  {
+    "name": "sina_daily_511010",
+    "url": "https://quotes.sina.cn/cn/api/jsonp_v2.php/var%20_data=/CN_MarketDataService.getKLineData?symbol=sh511010&scale=240&ma=no&datalen=1970",
+    "requested_at_utc": "2026-11-04T07:32:29.636135+00:00",
+    "status": 200,
+    "content_type": "application/javascript; charset=gbk",
+    "final_url": "https://quotes.sina.cn/cn/api/jsonp_v2.php/var%20_data=/CN_MarketDataService.getKLineData?symbol=sh511010&scale=240&ma=no&datalen=1970",
+    "bytes": 212220,
+    "sha256": "ddd80e39dab1b3c1039d256655ca5f8c2adfa86e84def3897a1dd093841ee457",
+    "elapsed_seconds": 2.32
+  },
+  {
+    "name": "tencent_raw_511010_2022",
+    "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh511010,day,2022-01-01,2022-12-31,640,",
+    "requested_at_utc": "2026-11-04T07:32:30.103528+00:00",
+    "status": 501,
+    "error": "HTTP Error 501: Not Implemented",
+    "bytes": 323,
+    "sha256": "43a0933ea4a76dd05f7a90b1bcacdb801f27b4797645667a4a494f96f74a4b4f",
+    "elapsed_seconds": 0.32
+  },
+  {
+    "name": "tencent_raw_511010_2023",
+    "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh511010,day,2023-01-01,2023-12-31,640,",
+    "requested_at_utc": "2026-11-04T07:32:30.134081+00:00",
+    "status": 501,
+    "error": "HTTP Error 501: Not Implemented",
+    "bytes": 322,
+    "sha256": "7063cf2584ad83ec6775c06dcd9c8a880fcb8c23d713174fb2a4eb1785397a9d",
+    "elapsed_seconds": 0.72
+  },
+  {
+    "name": "tencent_raw_511010_2024",
+    "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh511010,day,2024-01-01,2024-12-31,640,",
+    "requested_at_utc": "2026-11-04T07:32:30.265083+00:00",
+    "status": 501,
+    "error": "HTTP Error 501: Not Implemented",
+    "bytes": 323,
+    "sha256": "a5cf19796958370bbd58a1cf0c344a6cfcffe63159aaa04d117f07c9844b5642",
+    "elapsed_seconds": 1.13
+  },
+  {
+    "name": "tencent_raw_511010_2025",
+    "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh511010,day,2025-01-01,2025-12-31,640,",
+    "requested_at_utc": "2026-11-04T07:32:30.423054+00:00",
+    "status": 501,
+    "error": "HTTP Error 501: Not Implemented",
+    "bytes": 323,
+    "sha256": "1c31e715aa847c77ccd3cbf0fe32591bf2474107547e5edcdde5f42e8ee600d8",
+    "elapsed_seconds": 0.48
+  },
+  {
+    "name": "tencent_raw_511010_2026",
+    "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh511010,day,2026-01-01,2026-11-03,640,",
+    "requested_at_utc": "2026-11-04T07:32:30.859698+00:00",
+    "status": 501,
+    "error": "HTTP Error 501: Not Implemented",
+    "bytes": 322,
+    "sha256": "1ba823d79ffc159675dce0d25918931f36343011bbfa4d98290aea4d78e3bafd",
+    "elapsed_seconds": 0.87
+  },
+  {
+    "name": "eastmoney_raw_511010",
+    "url": "https://push2his.eastmoney.com/api/qt/stock/kline/get?secid=1.511010&klt=101&fqt=0&beg=20220101&end=20261103&fields1=f1,f2,f3,f4,f5,f6&fields2=f51,f52,f53,f54,f55,f56,f57,f58,f59,f60,f61",
+    "requested_at_utc": "2026-11-04T07:32:30.911274+00:00",
+    "status": 503,
+    "error": "HTTP Error 503: Service Unavailable",
+    "bytes": 95,
+    "sha256": "9deff96f9b5925fa5081257849ace321304b382d64cfb67d90a21a3c7cbf2925",
+    "elapsed_seconds": 1.5
+  },
+  {
+    "name": "sse_reference_spec",
+    "url": "https://www.sse.com.cn/services/tradingtech/development/c/10767151/files/781b2418861147de8725b5915f1c571d.pdf",
+    "requested_at_utc": "2026-11-04T07:32:31.057001+00:00",
+    "status": 404,
+    "error": "HTTP Error 404: Not Found",
+    "bytes": 150,
+    "sha256": "d03c9c9c5fef19b7e84125dd79b77167d00e1df5f56da4818992e23e67360bbb",
+    "elapsed_seconds": 1.36
+  },
+  {
+    "name": "sse_bond_guide",
+    "url": "https://etf.sse.com.cn/ruleguide/guide/c/5287915.shtml",
+    "requested_at_utc": "2026-11-04T07:32:31.076823+00:00",
+    "status": 200,
+    "content_type": "text/html",
+    "final_url": "https://etf.sse.com.cn/ruleguide/guide/c/5287915.shtml",
+    "bytes": 79016,
+    "sha256": "d54d85cde8a3ebb7ab619fd4fb846591a8bd220359eac9a416abd4de4675c0e2",
+    "elapsed_seconds": 1.74
+  }
+]
