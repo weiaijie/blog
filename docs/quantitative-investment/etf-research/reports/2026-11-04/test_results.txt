@@ -1,0 +1,18 @@
+test_commission_minimum_and_adverse_slippage (test_accounting.AccountingTests.test_commission_minimum_and_adverse_slippage) ... ok
+test_end_before_pay_keeps_receivable (test_accounting.AccountingTests.test_end_before_pay_keeps_receivable) ... ok
+test_equity_no_dividend_double_count (test_accounting.AccountingTests.test_equity_no_dividend_double_count) ... ok
+test_ex_date_buy_does_not_receive_dividend (test_accounting.AccountingTests.test_ex_date_buy_does_not_receive_dividend) ... ok
+test_no_skipped_or_duplicate_sessions (test_accounting.AccountingTests.test_no_skipped_or_duplicate_sessions) ... ok
+test_receivable_then_payment_then_available (test_accounting.AccountingTests.test_receivable_then_payment_then_available) ... ok
+test_record_day_purchase_qualifies (test_accounting.AccountingTests.test_record_day_purchase_qualifies) ... ok
+test_reject_incomplete_start_and_duplicate_event (test_accounting.AccountingTests.test_reject_incomplete_start_and_duplicate_event) ... ok
+test_reject_nonfinite_float_and_short_sale (test_accounting.AccountingTests.test_reject_nonfinite_float_and_short_sale) ... ok
+test_sale_fee_slippage_and_tax (test_accounting.AccountingTests.test_sale_fee_slippage_and_tax) ... ok
+test_same_day_future_and_unknown_signals_rejected (test_accounting.AccountingTests.test_same_day_future_and_unknown_signals_rejected) ... ok
+test_same_session_buy_cannot_be_resold (test_accounting.AccountingTests.test_same_session_buy_cannot_be_resold) ... ok
+test_selling_on_ex_date_keeps_recorded_entitlement (test_accounting.AccountingTests.test_selling_on_ex_date_keeps_recorded_entitlement) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.001s
+
+OK

@@ -1,0 +1,42 @@
+{
+  "scope": "Frozen 2026-11-02 data, 640 common completed sessions; no backtest",
+  "sources": {
+    "2026-11-02/sina_daily_510300.body": "714f91eee9ebcb95e553df072eccd8132f2b8044a1eef8b7676b4d8138e8faec",
+    "2026-11-02/tencent_hfq_510300.body": "5d4976736517332c8b5656c9314a26bcb4e310deb4bf9f0832d16cb7b3b1cd38",
+    "2026-11-02/tencent_raw_510300.body": "32530a792940bdb73e6a7573024da319af6c51f1349682e6a64959e13505e541",
+    "2026-11-03-official-02/reconciliation.json": "d3c826a50b21991b4cbc4b36ec6d6518b7d46e0591aa95dd7f1eb8869d4f53c3",
+    "2026-11-02/sina_daily_511010.body": "0586012605ea7f641469bd7469d259b58c8bd6b966135452363eebf7e847fb0e",
+    "2026-11-02/tencent_hfq_511010.body": "8f6e3f525e1e6e5d19fb161575793c395e26e4e13374dcb6b05d844099480da3",
+    "2026-11-02/tencent_raw_511010.body": "56f4fbe6595ca5488a7f8d0ab95369e0c9347c93031ebb233f1dece519554684"
+  },
+  "symbols": {
+    "510300": {
+      "price_fields": 2560,
+      "factor_lower_bound": "0.3709602418042315740525459196",
+      "factor_upper_bound": "0.3709586466165413533834586466",
+      "single_factor_feasible": false,
+      "official_initial_ratio_used_for_comparison": "0.37094933",
+      "affine_offset_lower": "0.000048422860",
+      "affine_offset_upper": "0.000049564400",
+      "affine_offset_feasible": true,
+      "offset_status": "In-sample diagnostic interval only; not supplier-confirmed and prohibited for strategy inputs",
+      "volume_rows": 640,
+      "rounded_sina_over_100_matches_tencent": 640,
+      "unit_status": "Empirical rounding match only; no primary endpoint unit specification obtained"
+    },
+    "511010": {
+      "price_fields": 2560,
+      "factor_lower_bound": "1",
+      "factor_upper_bound": "1.000002078653475993631005750",
+      "single_factor_feasible": true,
+      "official_initial_ratio_used_for_comparison": "1",
+      "affine_offset_lower": "0.0000",
+      "affine_offset_upper": "0.0003",
+      "affine_offset_feasible": true,
+      "offset_status": "In-sample diagnostic interval only; not supplier-confirmed and prohibited for strategy inputs",
+      "volume_rows": 640,
+      "rounded_sina_over_100_matches_tencent": 640,
+      "unit_status": "Empirical rounding match only; no primary endpoint unit specification obtained"
+    }
+  }
+}

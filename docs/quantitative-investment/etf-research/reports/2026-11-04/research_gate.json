@@ -1,0 +1,23 @@
+{
+  "as_of": "2026-11-04",
+  "mode": "research_only",
+  "historical_strategy_backtest_enabled": false,
+  "vendor_adjusted_price_inputs_enabled": false,
+  "volume_signals_or_capacity_enabled": false,
+  "real_funds_or_order_routing_enabled": false,
+  "accounting_component": "implemented_13_tests_passed",
+  "pending": [
+    "traceable_raw_price_and_official_event_loader",
+    "instrument_trading_rules_and_fee_rounding",
+    "daily_real_data_accounting_replay",
+    "strategy_level_point_in_time_checks"
+  ],
+  "unresolved": [
+    "vendor_hfq_algorithm_not_confirmed",
+    "historical_volume_endpoint_unit_spec_not_obtained"
+  ],
+  "price_cross_validation_window": [
+    "2024-03-11",
+    "2026-10-30"
+  ]
+}

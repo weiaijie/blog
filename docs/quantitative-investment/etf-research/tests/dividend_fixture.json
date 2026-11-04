@@ -1,0 +1,27 @@
+{
+  "symbol": "510300",
+  "record_date": "2026-01-16",
+  "ex_date": "2026-01-19",
+  "pay_date": "2026-01-27",
+  "per_share": "0.1230",
+  "sina_increment": "0.1230000000000000",
+  "matches": true,
+  "official_status": "verified",
+  "official_evidence": {
+    "record_date": "2026-01-16",
+    "ex_date": "2026-01-19",
+    "pay_date": "2026-01-27",
+    "per_share": "0.1230",
+    "per_10_shares": "1.2300",
+    "source_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-01-12/510300_20260112_VTCZ.pdf",
+    "pdf_sha256": "c8ff747d02fa90db72320458c38249f73720b932d61b7e088f033583aab63992",
+    "source_file": "510300_20260112.pdf",
+    "field_checks": {
+      "record_date": true,
+      "ex_date": true,
+      "pay_date": true,
+      "per_share": true
+    },
+    "snapshot": "2026-11-03-official-01"
+  }
+}

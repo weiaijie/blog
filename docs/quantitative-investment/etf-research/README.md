@@ -18,3 +18,7 @@
 GitHub 下载备份：登录仓库后选择 Code → Download ZIP。新云环境从仓库克隆后先读 PROJECT_PLAN.md，再校验文件。
 
 保存位置：`weiaijie/blog` → `redesign-pc` → `docs/quantitative-investment/etf-research/`。历史快照 STATUS.txt 保留当时的私有存储约束，本文件记录的新授权优先。旧投资文档中的业绩描述不构成本ETF研究的验证结果。
+
+## 会计组件（2026-11-04）
+
+新增分红现金账本及13项合成会计测试：[说明与限制](reports/2026-11-04/PROGRESS.md)。在本项目目录运行 `PYTHONPATH=src python -m unittest discover -s tests -v`。尚未开展策略回测。

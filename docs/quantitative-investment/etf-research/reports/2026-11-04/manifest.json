@@ -1,0 +1,11 @@
+{
+  "reports/2026-11-04/PROGRESS.md": "8fae015db88c9e6b9e65d13ede87a8ffb6c240f7fa9393bac9cb171d699f834b",
+  "reports/2026-11-04/adjustment_diagnostics.json": "c775167ecbc33d0241109870a1ad60efd56f6914ae8eb6180096feecd0063621",
+  "reports/2026-11-04/research_gate.json": "4570a21bbbd537f12a641ab97c55274a4e14339e4a45d054a49de6553df991fa",
+  "reports/2026-11-04/test_results.txt": "98fae2565cd6e564381313f753e3def426ed8fcf1c8706a06061c22e53608f4a",
+  "scripts/audit_adjustments.py": "853d4bff81e3244b9cdd155ded37d77fb79b94a3a412f8d8cfea7ca9a508b0b5",
+  "src/etf_research/__init__.py": "0e5b3291772ca5ff38d19a19ea965f144e38bc6bfe653b69657ee3668b4d0f26",
+  "src/etf_research/accounting.py": "28b9ca39e8ee8ac9e76bacbd20652f0ba3bc6004357f93d0ea5cb27a7f5c2279",
+  "tests/dividend_fixture.json": "345f7feea5533f54009e92d117488d051c35baad2affe5fea71927fa7e9fa9a4",
+  "tests/test_accounting.py": "65f7e7c50955368754d4993bfa796d89c236544bfb1696e8964757e336a820e1"
+}
