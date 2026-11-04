@@ -1,0 +1,92 @@
+{
+  "purpose": "Accounting validation only; endowed starting shares, no trade strategy, not a net-return backtest",
+  "initial_state": {
+    "cash": "0",
+    "holdings": {
+      "510300": 100,
+      "511010": 100
+    },
+    "holdings_assumption": "Already owned and settled; acquisition cost intentionally undefined"
+  },
+  "sessions": 640,
+  "official_dividends": 7,
+  "trade_count": 0,
+  "independent_daily_checks": 3200,
+  "all_checks_passed": true,
+  "ending_dividend_cash": "432.1500",
+  "ending_receivables": "0",
+  "acquisition_cost_fees_or_strategy_returns_computed": false,
+  "provenance": {
+    "manifests_sha256": {
+      "2026-11-02": "3fbdd61736bb0b206f8efb2875bb0ddc8f23f523df3cc6059de845336518150f",
+      "2026-11-03-official-01": "8e9a629c570486158b1dc5194d7691889775b02e771b8ec5d77f841708a5ed34",
+      "2026-11-03-official-02": "368c8bb592152e72acaf10ef0451cc9f1ef1d3e7c4ab5ca99babb683aa3b813f",
+      "2026-11-03-market-03": "2dff9626a6aa73d60d92ff00381466b94f356433184436dcd434c771819ef598"
+    },
+    "price_mode": "unadjusted",
+    "volume_loaded": false,
+    "event_sources": [
+      {
+        "symbol": "510300",
+        "ex_date": "2026-01-19",
+        "announcement_date": "2026-01-12",
+        "pdf": "2026-11-03-official-01/510300_20260112.pdf",
+        "sha256": "c8ff747d02fa90db72320458c38249f73720b932d61b7e088f033583aab63992",
+        "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-01-12/510300_20260112_VTCZ.pdf"
+      },
+      {
+        "symbol": "510300",
+        "ex_date": "2025-06-18",
+        "announcement_date": "2025-06-11",
+        "pdf": "2026-11-03-official-01/510300_20250611.pdf",
+        "sha256": "9a2f554b8ba5e340c79905171388f65225e9239027a36794522aa6bb4a82be67",
+        "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2025-06-11/510300_20250611_ZAU4.pdf"
+      },
+      {
+        "symbol": "511010",
+        "ex_date": "2026-09-18",
+        "announcement_date": "2026-09-15",
+        "pdf": "2026-11-03-official-02/511010_20260915.pdf",
+        "sha256": "3c67fc24bc804d1e25b3fceecbda509b42f1348e2fb1d8e32069e5a03f930a93",
+        "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-09-15/511010_20260915_H5ST.pdf"
+      },
+      {
+        "symbol": "511010",
+        "ex_date": "2026-06-25",
+        "announcement_date": "2026-06-22",
+        "pdf": "2026-11-03-official-01/511010_20260622.pdf",
+        "sha256": "82418fe2913770fd1ab6211869dbc8a83683e73490fcdb277c9c3be226a992a9",
+        "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-06-22/511010_20260622_0EYP.pdf"
+      },
+      {
+        "symbol": "511010",
+        "ex_date": "2026-03-25",
+        "announcement_date": "2026-03-20",
+        "pdf": "2026-11-03-official-01/511010_20260320.pdf",
+        "sha256": "a45a301dd556b3b1f36bad19abf952e7490110fda539a1d716cadb903bd22656",
+        "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-03-20/511010_20260320_Y87H.pdf"
+      },
+      {
+        "symbol": "511010",
+        "ex_date": "2025-12-26",
+        "announcement_date": "2025-12-23",
+        "pdf": "2026-11-03-official-01/511010_20251223.pdf",
+        "sha256": "733995693eef19c61a55a30d2be7dcc0dcc471980b81b85363977478195c50a8",
+        "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2025-12-23/511010_20251223_0M89.pdf"
+      },
+      {
+        "symbol": "511010",
+        "ex_date": "2025-09-23",
+        "announcement_date": "2025-09-18",
+        "pdf": "2026-11-03-official-01/511010_20250918.pdf",
+        "sha256": "ddfaac7c7097b0a15666d6e6787553be48613468e221564bccabfceceb5d0d02",
+        "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2025-09-18/511010_20250918_FU3S.pdf"
+      }
+    ],
+    "start": "2024-03-11",
+    "end": "2026-10-30",
+    "session_count": 640,
+    "event_count": 7,
+    "excluded_current_or_unmatched_dates": true
+  }
+}

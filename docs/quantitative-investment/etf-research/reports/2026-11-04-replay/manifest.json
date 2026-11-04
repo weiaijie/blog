@@ -1,0 +1,23 @@
+{
+  "data/snapshots/2026-11-04-rules-05/csrc_etf_overview.body": "2f85832e31ca57711e6107af6b142363351ae516adb71c69afc643fac26be7f6",
+  "data/snapshots/2026-11-04-rules-05/fetch_rules.py": "1fcda48b66f46db9a29678fb652de5cb1167e0f1177cc16efce90bef2020ed8c",
+  "data/snapshots/2026-11-04-rules-05/manifest.json": "f19b07af5b07ebfa9de09795c0f26f480793107535c66ce6d46e39c3397e3d38",
+  "data/snapshots/2026-11-04-rules-05/requests.json": "85b6ad096d42f4cb238a5bd1a5db66ad062af507de19a6fac32cb0cd55ff1d92",
+  "data/snapshots/2026-11-04-rules-05/sse_bond_etf_guide.body": "d54d85cde8a3ebb7ab619fd4fb846591a8bd220359eac9a416abd4de4675c0e2",
+  "data/snapshots/2026-11-04-rules-05/sse_etf_faq.body": "a72b0d15f30216fafd50053acd66b2daf9e7d6d870090ae03d0ebb00e6c5d2e5",
+  "data/snapshots/2026-11-04-rules-05/sse_fees_2025.body": "dadc2a971bcaa2d9ace79809ed636a4454103a5d8097ec5bfaf067491a51290e",
+  "data/snapshots/2026-11-04-rules-05/sse_fees_current.body": "a28de66ea31037ffa240a2212a8599a06f1f1513f4c4a424976f3a193ae1eb7a",
+  "reports/2026-11-04-replay/PROGRESS.md": "4ee58827606f8353bc9ed336afd61927903d78dc5675dbb8cf6ec2a8c77c8e7a",
+  "reports/2026-11-04-replay/daily_accounting.csv": "8e290870ae56e44066dc530fae3b91d74113ebb6c9ba23e8ce20466394fdef2b",
+  "reports/2026-11-04-replay/journal.json": "d6e0226258476f2bfaf575a30f7df2cd83a4a65a72f6569ffd0f4e8b2fa8eec3",
+  "reports/2026-11-04-replay/replay_summary.json": "dfe16935678da3a5313b68a214998c81a1f9803f6ea59519d978136cd29e504e",
+  "reports/2026-11-04-replay/research_gate.json": "0a9d77d1e88d793bf82dc1c407c68c4357b83d5de116f9403e108ef18ad1865d",
+  "reports/2026-11-04-replay/test_results.txt": "64db3fbb1c46cf045b3edb6e672f3c8d56453373bcb999628ff08007d443ea6c",
+  "scripts/replay_accounting.py": "0472a5ebc5004923dbe464b7f62ac368cb8f8f86e4586bc130a8370d2dc02f4d",
+  "src/etf_research/__init__.py": "0e5b3291772ca5ff38d19a19ea965f144e38bc6bfe653b69657ee3668b4d0f26",
+  "src/etf_research/accounting.py": "090c39bc7d3caddb7376c9230be85de81e3feba1fecd19c16c5006843674a42e",
+  "src/etf_research/data.py": "cede8c11f75c85bd086f0c873c30efe16bb422c6bf4ffb43ee13391c3e8564d1",
+  "tests/dividend_fixture.json": "345f7feea5533f54009e92d117488d051c35baad2affe5fea71927fa7e9fa9a4",
+  "tests/test_accounting.py": "ca0002c8e073529b08f06529625287c7e4f2bd6c28fae591b7b9db153bb48ad7",
+  "tests/test_data_and_rules.py": "43bf5975162f51f878e6c7c478c338ef1e5567b9dffa800b89c254e3075f1226"
+}

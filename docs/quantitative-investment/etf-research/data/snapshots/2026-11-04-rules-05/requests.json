@@ -1,0 +1,47 @@
+[
+  {
+    "name": "sse_etf_faq",
+    "url": "https://www.sse.com.cn/assortment/fund/etf/question/",
+    "requested_at_utc": "2026-11-04T06:52:43.911261+00:00",
+    "status": 200,
+    "content_type": "text/html",
+    "bytes": 35424,
+    "sha256": "a72b0d15f30216fafd50053acd66b2daf9e7d6d870090ae03d0ebb00e6c5d2e5"
+  },
+  {
+    "name": "sse_bond_etf_guide",
+    "url": "https://etf.sse.com.cn/ruleguide/guide/c/5287915.shtml",
+    "requested_at_utc": "2026-11-04T06:52:43.912514+00:00",
+    "status": 200,
+    "content_type": "text/html",
+    "bytes": 79016,
+    "sha256": "d54d85cde8a3ebb7ab619fd4fb846591a8bd220359eac9a416abd4de4675c0e2"
+  },
+  {
+    "name": "sse_fees_2025",
+    "url": "https://www.sse.com.cn/services/tradingservice/charge/ssecharge/c/c_20250102_10767593.shtml",
+    "requested_at_utc": "2026-11-04T06:52:43.913606+00:00",
+    "status": 200,
+    "content_type": "text/html",
+    "bytes": 40688,
+    "sha256": "dadc2a971bcaa2d9ace79809ed636a4454103a5d8097ec5bfaf067491a51290e"
+  },
+  {
+    "name": "sse_fees_current",
+    "url": "https://www.sse.com.cn/services/tradingservice/charge/ssecharge/",
+    "requested_at_utc": "2026-11-04T06:52:43.914560+00:00",
+    "status": 200,
+    "content_type": "text/html",
+    "bytes": 40445,
+    "sha256": "a28de66ea31037ffa240a2212a8599a06f1f1513f4c4a424976f3a193ae1eb7a"
+  },
+  {
+    "name": "csrc_etf_overview",
+    "url": "https://www.csrc.gov.cn/qinghai/c105501/c7422297/content.shtml",
+    "requested_at_utc": "2026-11-04T06:52:43.915221+00:00",
+    "status": 503,
+    "error": "HTTP Error 503: Service Unavailable",
+    "bytes": 91,
+    "sha256": "2f85832e31ca57711e6107af6b142363351ae516adb71c69afc643fac26be7f6"
+  }
+]

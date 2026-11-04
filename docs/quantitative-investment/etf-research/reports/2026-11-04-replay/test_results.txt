@@ -1,0 +1,29 @@
+test_commission_minimum_and_adverse_slippage (test_accounting.AccountingTests.test_commission_minimum_and_adverse_slippage) ... ok
+test_end_before_pay_keeps_receivable (test_accounting.AccountingTests.test_end_before_pay_keeps_receivable) ... ok
+test_equity_no_dividend_double_count (test_accounting.AccountingTests.test_equity_no_dividend_double_count) ... ok
+test_ex_date_buy_does_not_receive_dividend (test_accounting.AccountingTests.test_ex_date_buy_does_not_receive_dividend) ... ok
+test_no_skipped_or_duplicate_sessions (test_accounting.AccountingTests.test_no_skipped_or_duplicate_sessions) ... ok
+test_receivable_then_payment_then_available (test_accounting.AccountingTests.test_receivable_then_payment_then_available) ... ok
+test_record_day_purchase_qualifies (test_accounting.AccountingTests.test_record_day_purchase_qualifies) ... ok
+test_reject_incomplete_start_and_duplicate_event (test_accounting.AccountingTests.test_reject_incomplete_start_and_duplicate_event) ... ok
+test_reject_nonfinite_float_and_short_sale (test_accounting.AccountingTests.test_reject_nonfinite_float_and_short_sale) ... ok
+test_sale_fee_slippage_and_tax (test_accounting.AccountingTests.test_sale_fee_slippage_and_tax) ... ok
+test_same_day_future_and_unknown_signals_rejected (test_accounting.AccountingTests.test_same_day_future_and_unknown_signals_rejected) ... ok
+test_same_session_buy_cannot_be_resold (test_accounting.AccountingTests.test_same_session_buy_cannot_be_resold) ... ok
+test_selling_on_ex_date_keeps_recorded_entitlement (test_accounting.AccountingTests.test_selling_on_ex_date_keeps_recorded_entitlement) ... ok
+test_announcement_day_excluded_until_next_session (test_data_and_rules.DataTests.test_announcement_day_excluded_until_next_session) ... ok
+test_future_bar_change_does_not_affect_prefix (test_data_and_rules.DataTests.test_future_bar_change_does_not_affect_prefix) ... ok
+test_real_dataset_shape_and_event_publication (test_data_and_rules.DataTests.test_real_dataset_shape_and_event_publication) ... ok
+test_tampered_official_pdf_rejected (test_data_and_rules.DataTests.test_tampered_official_pdf_rejected) ... ok
+test_tampered_raw_price_rejected (test_data_and_rules.DataTests.test_tampered_raw_price_rejected) ... ok
+test_today_price_not_visible_before_open (test_data_and_rules.DataTests.test_today_price_not_visible_before_open) ... ok
+test_bond_same_day_resale_allowed (test_data_and_rules.RulesTests.test_bond_same_day_resale_allowed) ... ok
+test_equity_same_day_resale_rejected (test_data_and_rules.RulesTests.test_equity_same_day_resale_rejected) ... ok
+test_fee_rounds_half_cent_up (test_data_and_rules.RulesTests.test_fee_rounds_half_cent_up) ... ok
+test_slippage_rounded_adversely_to_tick (test_data_and_rules.RulesTests.test_slippage_rounded_adversely_to_tick) ... ok
+test_unapproved_symbol_and_off_tick_and_off_lot_rejected (test_data_and_rules.RulesTests.test_unapproved_symbol_and_off_tick_and_off_lot_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 24 tests in 0.152s
+
+OK

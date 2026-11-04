@@ -1,0 +1,23 @@
+{
+  "as_of": "2026-11-04",
+  "research_only": true,
+  "raw_price_loader": "verified_640_common_sessions",
+  "official_events_in_window": 7,
+  "accounting_replay_checks": 3200,
+  "accounting_replay": "passed",
+  "unit_tests_passed": 24,
+  "vendor_adjusted_price_inputs_enabled": false,
+  "volume_signals_or_capacity_enabled": false,
+  "real_funds_or_order_routing_enabled": false,
+  "historical_strategy_backtest_enabled": false,
+  "pending": [
+    "daily_execution_constraints_and_price_limit_rules",
+    "explicit_fee_sensitivity_scenarios",
+    "strategy_runner_and_strategy_level_prefix_checks"
+  ],
+  "not_claimed": [
+    "provider_hfq_algorithm_confirmed",
+    "volume_endpoint_unit_spec_confirmed",
+    "net_return_or_target_feasibility"
+  ]
+}

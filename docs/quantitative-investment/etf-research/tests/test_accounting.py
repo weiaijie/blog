@@ -53,7 +53,7 @@ class AccountingTests(unittest.TestCase):
  def test_sale_fee_slippage_and_tax(self):
   costs=Costs(D('.01'),D(0),D(50),D('.001'));l=ledger(0,100,costs);advance(l,date(2026,1,16))
   r=l.trade('510300','sell',100,D(4),signal_date=date(2026,1,15))
-  self.assertEqual(r['notional'],398);self.assertEqual(r['tax'],D('.398'));self.assertEqual(l.cash,D('393.622'))
+  self.assertEqual(r['notional'],398);self.assertEqual(r['tax'],D('.40'));self.assertEqual(l.cash,D('393.62'))
  def test_no_skipped_or_duplicate_sessions(self):
   l=ledger()
   with self.assertRaises(ValueError):l.open_session(date(2026,1,16))

@@ -5,7 +5,7 @@ Call open_session -> trade(s) -> close_session for every supplied trading sessio
 """
 from dataclasses import dataclass
 from datetime import date
-from decimal import Decimal
+from decimal import Decimal, ROUND_HALF_UP, ROUND_CEILING, ROUND_FLOOR
 from typing import Mapping
 
 ZERO = Decimal('0')
@@ -58,8 +58,20 @@ configured in a future broker-specific fee model before net-return research.
             raise ValueError('Invalid cost rate')
 
 
+@dataclass(frozen=True)
+class InstrumentRules:
+    lot_size: int
+    price_tick: Decimal
+    same_day_resale: bool
+
+    def __post_init__(self):
+        if type(self.lot_size) is not int or self.lot_size <= 0 or type(self.same_day_resale) is not bool:
+            raise ValueError('Invalid instrument rules')
+        object.__setattr__(self, 'price_tick', money(self.price_tick, positive=True))
+
+
 class Ledger:
-    def __init__(self, sessions, dividends, *, cash, holdings, costs, lot_size):
+    def __init__(self, sessions, dividends, *, cash, holdings, costs, lot_size, instruments=None):
         self.sessions = tuple(sessions)
         if not self.sessions or list(self.sessions) != sorted(set(self.sessions)):
             raise ValueError('Sessions must be nonempty, unique and increasing')
@@ -68,11 +80,14 @@ class Ledger:
         if type(lot_size) is not int or lot_size <= 0:
             raise ValueError('Positive integer lot_size required')
         self.lot_size, self.costs = lot_size, costs
+        self.instruments = dict(instruments) if instruments is not None else None
         self.cash = money(cash)
         self.holdings = dict(holdings)
         if any(type(n) is not int or n < 0 for n in self.holdings.values()):
             raise ValueError('Nonnegative integer initial units required')
         events = tuple(dividends)
+        if self.instruments is not None and (set(self.holdings) | {e.symbol for e in events}) - set(self.instruments):
+            raise ValueError("Unknown instrument in holdings/events")
         if len({e.key for e in events}) != len(events):
             raise ValueError('Duplicate dividend event')
         first, last = self.sessions[0], self.sessions[-1]
@@ -123,14 +138,25 @@ class Ledger:
             raise ValueError('Open a session before trading')
         if signal_date not in self.sessions or signal_date >= self.day:
             raise ValueError('Signal must come from an earlier supplied trading session')
-        if side not in ('buy', 'sell') or type(units) is not int or units <= 0 or units % self.lot_size:
+        if self.instruments is not None and symbol not in self.instruments:
+            raise ValueError('Instrument is not approved')
+        rules = self.instruments[symbol] if self.instruments is not None else None
+        lot = rules.lot_size if rules else self.lot_size
+        if side not in ('buy', 'sell') or type(units) is not int or units <= 0 or units % lot:
             raise ValueError('Invalid side, units or lot multiple')
         price = money(raw_price, positive=True)
+        if rules and price % rules.price_tick:
+            raise ValueError('Raw price violates instrument price tick')
         direction = Decimal(1 if side == 'buy' else -1)
         fill_price = price * (1 + direction * self.costs.slippage_bps / 10000)
+        if rules:
+            rounding = ROUND_CEILING if side == 'buy' else ROUND_FLOOR
+            fill_price = (fill_price / rules.price_tick).to_integral_value(rounding=rounding) * rules.price_tick
+        if fill_price <= ZERO:
+            raise ValueError('Slippage-adjusted fill is not positive')
         notional = fill_price * units
-        commission = max(self.costs.minimum_commission, notional * self.costs.commission_rate)
-        tax = notional * self.costs.sell_tax_rate if side == 'sell' else ZERO
+        commission = max(self.costs.minimum_commission, notional * self.costs.commission_rate).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+        tax = (notional * self.costs.sell_tax_rate).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP) if side == 'sell' else ZERO
         fees = commission + tax
         if side == 'buy':
             if notional + fees > self.available_cash:
@@ -139,8 +165,9 @@ class Ledger:
             self.holdings[symbol] = self.holdings.get(symbol, 0) + units
             self.bought_this_session[symbol] = self.bought_this_session.get(symbol, 0) + units
         else:
-            # Conservative common rule: today's buys cannot be resold in this session.
-            sellable = self.holdings.get(symbol, 0) - self.bought_this_session.get(symbol, 0)
+            # Respect explicit instrument rules; conservative T+1 fallback if absent.
+            locked = 0 if rules and rules.same_day_resale else self.bought_this_session.get(symbol, 0)
+            sellable = self.holdings.get(symbol, 0) - locked
             if units > sellable or self.available_cash + notional < fees:
                 raise ValueError('Insufficient holdings or cash for fees')
             self.holdings[symbol] -= units

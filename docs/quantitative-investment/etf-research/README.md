@@ -22,3 +22,7 @@ GitHub 下载备份：登录仓库后选择 Code → Download ZIP。新云环境
 ## 会计组件（2026-11-04）
 
 新增分红现金账本及13项合成会计测试：[说明与限制](reports/2026-11-04/PROGRESS.md)。在本项目目录运行 `PYTHONPATH=src python -m unittest discover -s tests -v`。尚未开展策略回测。
+
+## 真实数据账本回放（2026-11-04）
+
+[640日会计对账报告](reports/2026-11-04-replay/PROGRESS.md)：24项测试通过，7次分红、3200项每日核对一致。仅验证会计，未计算策略收益。在项目目录运行 `PYTHONPATH=src python scripts/replay_accounting.py --output /tmp/etf-accounting-replay`。
