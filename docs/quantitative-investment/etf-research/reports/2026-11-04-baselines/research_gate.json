@@ -1,0 +1,11 @@
+{
+  "historical_scenario_research": true,
+  "reason": "Cross-source raw OHLC, official cash events, independent calendar, accounting and prefix tests passed; explicit daily-bar execution assumptions only.",
+  "actual_execution_verified": false,
+  "vendor_adjusted_prices_allowed": false,
+  "volume_allowed": false,
+  "untouched_out_of_sample_claim_allowed": false,
+  "long_term_4_to_5_percent_feasibility_established": false,
+  "live_trading_allowed": false,
+  "next": "Independent execution/reference-price evidence and longer cross-verified history; forward frozen protocol."
+}

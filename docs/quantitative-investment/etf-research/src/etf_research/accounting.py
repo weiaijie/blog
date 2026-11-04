@@ -43,8 +43,8 @@ class Dividend:
 class Costs:
     """Explicit scenario assumptions, not a verified broker tariff.
 
-Fees are rounded neither here nor silently to cents; precise treatment can be
-configured in a future broker-specific fee model before net-return research.
+    Rates are stored here; Ledger.trade rounds commission and sell tax separately
+    to cents, half up. This rounding convention is a research assumption.
 """
     commission_rate: Decimal
     minimum_commission: Decimal

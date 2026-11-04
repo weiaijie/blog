@@ -1,0 +1,692 @@
+{
+  "summary": {
+    "strategy": "trend_120",
+    "scenario": "high",
+    "initial_cash": "100000",
+    "ending_equity": "106945.9100",
+    "ending_cash": "8159.8100",
+    "total_return": 0.0694591,
+    "annualized_scenario_return": 0.025797159244351574,
+    "max_close_drawdown": -0.05255019254108917,
+    "trades": 23,
+    "commissions": "792.00",
+    "sell_tax": "0.00",
+    "slippage_cost": "768.000",
+    "excluded_orders": 1,
+    "cash_limited_orders": 0,
+    "ending_holdings": {
+      "511010": 700,
+      "510300": 0
+    },
+    "terminal_liquidation_included": false
+  },
+  "decisions": [
+    {
+      "day": "2024-09-03",
+      "signal_date": "2024-09-02",
+      "symbol": "511010",
+      "side": "buy",
+      "target_units": 700,
+      "requested_units": 700,
+      "filled_units": 700,
+      "reason": "filled"
+    },
+    {
+      "day": "2024-10-08",
+      "signal_date": "2024-09-30",
+      "symbol": "511010",
+      "side": "sell",
+      "target_units": 300,
+      "requested_units": 400,
+      "filled_units": 400,
+      "reason": "filled"
+    },
+    {
+      "day": "2024-10-08",
+      "signal_date": "2024-09-30",
+      "symbol": "510300",
+      "side": "buy",
+      "target_units": 11700,
+      "requested_units": 11700,
+      "filled_units": 0,
+      "reason": "conservative_9pct_buffer"
+    },
+    {
+      "day": "2024-11-01",
+      "signal_date": "2024-10-31",
+      "symbol": "510300",
+      "side": "buy",
+      "target_units": 12500,
+      "requested_units": 12500,
+      "filled_units": 12500,
+      "reason": "filled"
+    },
+    {
+      "day": "2025-02-05",
+      "signal_date": "2025-01-27",
+      "symbol": "510300",
+      "side": "buy",
+      "target_units": 12700,
+      "requested_units": 200,
+      "filled_units": 200,
+      "reason": "filled"
+    },
+    {
+      "day": "2025-03-03",
+      "signal_date": "2025-02-28",
+      "symbol": "510300",
+      "side": "sell",
+      "target_units": 12500,
+      "requested_units": 200,
+      "filled_units": 200,
+      "reason": "filled"
+    },
+    {
+      "day": "2025-04-01",
+      "signal_date": "2025-03-31",
+      "symbol": "510300",
+      "side": "sell",
+      "target_units": 0,
+      "requested_units": 12500,
+      "filled_units": 12500,
+      "reason": "filled"
+    },
+    {
+      "day": "2025-04-01",
+      "signal_date": "2025-03-31",
+      "symbol": "511010",
+      "side": "buy",
+      "target_units": 700,
+      "requested_units": 400,
+      "filled_units": 400,
+      "reason": "filled"
+    },
+    {
+      "day": "2025-07-01",
+      "signal_date": "2025-06-30",
+      "symbol": "511010",
+      "side": "sell",
+      "target_units": 300,
+      "requested_units": 400,
+      "filled_units": 400,
+      "reason": "filled"
+    },
+    {
+      "day": "2025-07-01",
+      "signal_date": "2025-06-30",
+      "symbol": "510300",
+      "side": "buy",
+      "target_units": 12600,
+      "requested_units": 12600,
+      "filled_units": 12600,
+      "reason": "filled"
+    },
+    {
+      "day": "2025-08-01",
+      "signal_date": "2025-07-31",
+      "symbol": "510300",
+      "side": "sell",
+      "target_units": 12300,
+      "requested_units": 300,
+      "filled_units": 300,
+      "reason": "filled"
+    },
+    {
+      "day": "2025-09-01",
+      "signal_date": "2025-08-29",
+      "symbol": "510300",
+      "side": "sell",
+      "target_units": 11700,
+      "requested_units": 600,
+      "filled_units": 600,
+      "reason": "filled"
+    },
+    {
+      "day": "2025-10-09",
+      "signal_date": "2025-09-30",
+      "symbol": "510300",
+      "side": "sell",
+      "target_units": 11500,
+      "requested_units": 200,
+      "filled_units": 200,
+      "reason": "filled"
+    },
+    {
+      "day": "2025-12-01",
+      "signal_date": "2025-11-28",
+      "symbol": "510300",
+      "side": "buy",
+      "target_units": 11700,
+      "requested_units": 200,
+      "filled_units": 200,
+      "reason": "filled"
+    },
+    {
+      "day": "2026-01-05",
+      "signal_date": "2025-12-31",
+      "symbol": "510300",
+      "side": "sell",
+      "target_units": 11500,
+      "requested_units": 200,
+      "filled_units": 200,
+      "reason": "filled"
+    },
+    {
+      "day": "2026-02-02",
+      "signal_date": "2026-01-30",
+      "symbol": "510300",
+      "side": "buy",
+      "target_units": 11800,
+      "requested_units": 300,
+      "filled_units": 300,
+      "reason": "filled"
+    },
+    {
+      "day": "2026-04-01",
+      "signal_date": "2026-03-31",
+      "symbol": "510300",
+      "side": "sell",
+      "target_units": 0,
+      "requested_units": 11800,
+      "filled_units": 11800,
+      "reason": "filled"
+    },
+    {
+      "day": "2026-04-01",
+      "signal_date": "2026-03-31",
+      "symbol": "511010",
+      "side": "buy",
+      "target_units": 700,
+      "requested_units": 400,
+      "filled_units": 400,
+      "reason": "filled"
+    },
+    {
+      "day": "2026-05-06",
+      "signal_date": "2026-04-30",
+      "symbol": "511010",
+      "side": "sell",
+      "target_units": 300,
+      "requested_units": 400,
+      "filled_units": 400,
+      "reason": "filled"
+    },
+    {
+      "day": "2026-05-06",
+      "signal_date": "2026-04-30",
+      "symbol": "510300",
+      "side": "buy",
+      "target_units": 11300,
+      "requested_units": 11300,
+      "filled_units": 11300,
+      "reason": "filled"
+    },
+    {
+      "day": "2026-06-01",
+      "signal_date": "2026-05-29",
+      "symbol": "510300",
+      "side": "sell",
+      "target_units": 11100,
+      "requested_units": 200,
+      "filled_units": 200,
+      "reason": "filled"
+    },
+    {
+      "day": "2026-07-01",
+      "signal_date": "2026-06-30",
+      "symbol": "510300",
+      "side": "sell",
+      "target_units": 11000,
+      "requested_units": 100,
+      "filled_units": 100,
+      "reason": "filled"
+    },
+    {
+      "day": "2026-08-03",
+      "signal_date": "2026-07-31",
+      "symbol": "510300",
+      "side": "sell",
+      "target_units": 0,
+      "requested_units": 11000,
+      "filled_units": 11000,
+      "reason": "filled"
+    },
+    {
+      "day": "2026-08-03",
+      "signal_date": "2026-07-31",
+      "symbol": "511010",
+      "side": "buy",
+      "target_units": 700,
+      "requested_units": 400,
+      "filled_units": 400,
+      "reason": "filled"
+    }
+  ],
+  "journal": [
+    {
+      "kind": "trade",
+      "day": "2024-09-03",
+      "symbol": "511010",
+      "side": "buy",
+      "units": 700,
+      "signal_date": "2024-09-02",
+      "raw_price": "138.157",
+      "fill_price": "138.296",
+      "commission": "96.81",
+      "tax": "0",
+      "notional": "96807.200"
+    },
+    {
+      "kind": "trade",
+      "day": "2024-10-08",
+      "symbol": "511010",
+      "side": "sell",
+      "units": 400,
+      "signal_date": "2024-09-30",
+      "raw_price": "137.049",
+      "fill_price": "136.911",
+      "commission": "54.76",
+      "tax": "0.00",
+      "notional": "54764.400"
+    },
+    {
+      "kind": "trade",
+      "day": "2024-11-01",
+      "symbol": "510300",
+      "side": "buy",
+      "units": 12500,
+      "signal_date": "2024-10-31",
+      "raw_price": "3.964",
+      "fill_price": "3.968",
+      "commission": "49.60",
+      "tax": "0",
+      "notional": "49600.000"
+    },
+    {
+      "kind": "trade",
+      "day": "2025-02-05",
+      "symbol": "510300",
+      "side": "buy",
+      "units": 200,
+      "signal_date": "2025-01-27",
+      "raw_price": "3.930",
+      "fill_price": "3.934",
+      "commission": "5.00",
+      "tax": "0",
+      "notional": "786.800"
+    },
+    {
+      "kind": "trade",
+      "day": "2025-03-03",
+      "symbol": "510300",
+      "side": "sell",
+      "units": 200,
+      "signal_date": "2025-02-28",
+      "raw_price": "3.995",
+      "fill_price": "3.991",
+      "commission": "5.00",
+      "tax": "0.00",
+      "notional": "798.200"
+    },
+    {
+      "kind": "trade",
+      "day": "2025-04-01",
+      "symbol": "510300",
+      "side": "sell",
+      "units": 12500,
+      "signal_date": "2025-03-31",
+      "raw_price": "3.988",
+      "fill_price": "3.984",
+      "commission": "49.80",
+      "tax": "0.00",
+      "notional": "49800.000"
+    },
+    {
+      "kind": "trade",
+      "day": "2025-04-01",
+      "symbol": "511010",
+      "side": "buy",
+      "units": 400,
+      "signal_date": "2025-03-31",
+      "raw_price": "140.231",
+      "fill_price": "140.372",
+      "commission": "56.15",
+      "tax": "0",
+      "notional": "56148.800"
+    },
+    {
+      "kind": "record_entitlement",
+      "day": "2025-06-17",
+      "symbol": "510300",
+      "units": 0
+    },
+    {
+      "kind": "dividend_receivable",
+      "day": "2025-06-18",
+      "symbol": "510300",
+      "amount": "0.0000"
+    },
+    {
+      "kind": "dividend_paid",
+      "day": "2025-06-27",
+      "symbol": "510300",
+      "amount": "0.0000"
+    },
+    {
+      "kind": "trade",
+      "day": "2025-07-01",
+      "symbol": "511010",
+      "side": "sell",
+      "units": 400,
+      "signal_date": "2025-06-30",
+      "raw_price": "141.594",
+      "fill_price": "141.452",
+      "commission": "56.58",
+      "tax": "0.00",
+      "notional": "56580.800"
+    },
+    {
+      "kind": "trade",
+      "day": "2025-07-01",
+      "symbol": "510300",
+      "side": "buy",
+      "units": 12600,
+      "signal_date": "2025-06-30",
+      "raw_price": "3.980",
+      "fill_price": "3.984",
+      "commission": "50.20",
+      "tax": "0",
+      "notional": "50198.400"
+    },
+    {
+      "kind": "trade",
+      "day": "2025-08-01",
+      "symbol": "510300",
+      "side": "sell",
+      "units": 300,
+      "signal_date": "2025-07-31",
+      "raw_price": "4.148",
+      "fill_price": "4.143",
+      "commission": "5.00",
+      "tax": "0.00",
+      "notional": "1242.900"
+    },
+    {
+      "kind": "trade",
+      "day": "2025-09-01",
+      "symbol": "510300",
+      "side": "sell",
+      "units": 600,
+      "signal_date": "2025-08-29",
+      "raw_price": "4.607",
+      "fill_price": "4.602",
+      "commission": "5.00",
+      "tax": "0.00",
+      "notional": "2761.200"
+    },
+    {
+      "kind": "record_entitlement",
+      "day": "2025-09-22",
+      "symbol": "511010",
+      "units": 300
+    },
+    {
+      "kind": "dividend_receivable",
+      "day": "2025-09-23",
+      "symbol": "511010",
+      "amount": "435.0000"
+    },
+    {
+      "kind": "dividend_paid",
+      "day": "2025-09-26",
+      "symbol": "511010",
+      "amount": "435.0000"
+    },
+    {
+      "kind": "trade",
+      "day": "2025-10-09",
+      "symbol": "510300",
+      "side": "sell",
+      "units": 200,
+      "signal_date": "2025-09-30",
+      "raw_price": "4.754",
+      "fill_price": "4.749",
+      "commission": "5.00",
+      "tax": "0.00",
+      "notional": "949.800"
+    },
+    {
+      "kind": "trade",
+      "day": "2025-12-01",
+      "symbol": "510300",
+      "side": "buy",
+      "units": 200,
+      "signal_date": "2025-11-28",
+      "raw_price": "4.646",
+      "fill_price": "4.651",
+      "commission": "5.00",
+      "tax": "0",
+      "notional": "930.200"
+    },
+    {
+      "kind": "record_entitlement",
+      "day": "2025-12-25",
+      "symbol": "511010",
+      "units": 300
+    },
+    {
+      "kind": "dividend_receivable",
+      "day": "2025-12-26",
+      "symbol": "511010",
+      "amount": "196.2600"
+    },
+    {
+      "kind": "dividend_paid",
+      "day": "2025-12-31",
+      "symbol": "511010",
+      "amount": "196.2600"
+    },
+    {
+      "kind": "trade",
+      "day": "2026-01-05",
+      "symbol": "510300",
+      "side": "sell",
+      "units": 200,
+      "signal_date": "2025-12-31",
+      "raw_price": "4.783",
+      "fill_price": "4.778",
+      "commission": "5.00",
+      "tax": "0.00",
+      "notional": "955.600"
+    },
+    {
+      "kind": "record_entitlement",
+      "day": "2026-01-16",
+      "symbol": "510300",
+      "units": 11500
+    },
+    {
+      "kind": "dividend_receivable",
+      "day": "2026-01-19",
+      "symbol": "510300",
+      "amount": "1414.5000"
+    },
+    {
+      "kind": "dividend_paid",
+      "day": "2026-01-27",
+      "symbol": "510300",
+      "amount": "1414.5000"
+    },
+    {
+      "kind": "trade",
+      "day": "2026-02-02",
+      "symbol": "510300",
+      "side": "buy",
+      "units": 300,
+      "signal_date": "2026-01-30",
+      "raw_price": "4.680",
+      "fill_price": "4.685",
+      "commission": "5.00",
+      "tax": "0",
+      "notional": "1405.500"
+    },
+    {
+      "kind": "record_entitlement",
+      "day": "2026-03-24",
+      "symbol": "511010",
+      "units": 300
+    },
+    {
+      "kind": "dividend_receivable",
+      "day": "2026-03-25",
+      "symbol": "511010",
+      "amount": "171.4500"
+    },
+    {
+      "kind": "dividend_paid",
+      "day": "2026-03-30",
+      "symbol": "511010",
+      "amount": "171.4500"
+    },
+    {
+      "kind": "trade",
+      "day": "2026-04-01",
+      "symbol": "510300",
+      "side": "sell",
+      "units": 11800,
+      "signal_date": "2026-03-31",
+      "raw_price": "4.520",
+      "fill_price": "4.515",
+      "commission": "53.28",
+      "tax": "0.00",
+      "notional": "53277.000"
+    },
+    {
+      "kind": "trade",
+      "day": "2026-04-01",
+      "symbol": "511010",
+      "side": "buy",
+      "units": 400,
+      "signal_date": "2026-03-31",
+      "raw_price": "140.503",
+      "fill_price": "140.644",
+      "commission": "56.26",
+      "tax": "0",
+      "notional": "56257.600"
+    },
+    {
+      "kind": "trade",
+      "day": "2026-05-06",
+      "symbol": "511010",
+      "side": "sell",
+      "units": 400,
+      "signal_date": "2026-04-30",
+      "raw_price": "140.800",
+      "fill_price": "140.659",
+      "commission": "56.26",
+      "tax": "0.00",
+      "notional": "56263.600"
+    },
+    {
+      "kind": "trade",
+      "day": "2026-05-06",
+      "symbol": "510300",
+      "side": "buy",
+      "units": 11300,
+      "signal_date": "2026-04-30",
+      "raw_price": "4.866",
+      "fill_price": "4.871",
+      "commission": "55.04",
+      "tax": "0",
+      "notional": "55042.300"
+    },
+    {
+      "kind": "trade",
+      "day": "2026-06-01",
+      "symbol": "510300",
+      "side": "sell",
+      "units": 200,
+      "signal_date": "2026-05-29",
+      "raw_price": "4.923",
+      "fill_price": "4.918",
+      "commission": "5.00",
+      "tax": "0.00",
+      "notional": "983.600"
+    },
+    {
+      "kind": "record_entitlement",
+      "day": "2026-06-24",
+      "symbol": "511010",
+      "units": 300
+    },
+    {
+      "kind": "dividend_receivable",
+      "day": "2026-06-25",
+      "symbol": "511010",
+      "amount": "244.3200"
+    },
+    {
+      "kind": "dividend_paid",
+      "day": "2026-06-30",
+      "symbol": "511010",
+      "amount": "244.3200"
+    },
+    {
+      "kind": "trade",
+      "day": "2026-07-01",
+      "symbol": "510300",
+      "side": "sell",
+      "units": 100,
+      "signal_date": "2026-06-30",
+      "raw_price": "5.009",
+      "fill_price": "5.003",
+      "commission": "5.00",
+      "tax": "0.00",
+      "notional": "500.300"
+    },
+    {
+      "kind": "trade",
+      "day": "2026-08-03",
+      "symbol": "510300",
+      "side": "sell",
+      "units": 11000,
+      "signal_date": "2026-07-31",
+      "raw_price": "4.624",
+      "fill_price": "4.619",
+      "commission": "50.81",
+      "tax": "0.00",
+      "notional": "50809.000"
+    },
+    {
+      "kind": "trade",
+      "day": "2026-08-03",
+      "symbol": "511010",
+      "side": "buy",
+      "units": 400,
+      "signal_date": "2026-07-31",
+      "raw_price": "140.993",
+      "fill_price": "141.134",
+      "commission": "56.45",
+      "tax": "0",
+      "notional": "56453.600"
+    },
+    {
+      "kind": "record_entitlement",
+      "day": "2026-09-17",
+      "symbol": "511010",
+      "units": 700
+    },
+    {
+      "kind": "dividend_receivable",
+      "day": "2026-09-18",
+      "symbol": "511010",
+      "amount": "434.2800"
+    },
+    {
+      "kind": "dividend_paid",
+      "day": "2026-09-23",
+      "symbol": "511010",
+      "amount": "434.2800"
+    }
+  ]
+}

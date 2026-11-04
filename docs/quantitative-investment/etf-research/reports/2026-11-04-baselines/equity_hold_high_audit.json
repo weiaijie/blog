@@ -1,0 +1,175 @@
+{
+  "summary": {
+    "strategy": "equity_hold",
+    "scenario": "high",
+    "initial_cash": "100000",
+    "ending_equity": "119054.4800",
+    "ending_cash": "6047.4800",
+    "total_return": 0.1905448,
+    "annualized_scenario_return": 0.06838826582145931,
+    "max_close_drawdown": -0.19327365296338297,
+    "trades": 1,
+    "commissions": "99.72",
+    "sell_tax": "0",
+    "slippage_cost": "111.200",
+    "excluded_orders": 0,
+    "cash_limited_orders": 1,
+    "ending_holdings": {
+      "510300": 27800
+    },
+    "terminal_liquidation_included": false
+  },
+  "decisions": [
+    {
+      "day": "2024-03-12",
+      "signal_date": "2024-03-11",
+      "symbol": "510300",
+      "side": "buy",
+      "target_units": 27900,
+      "requested_units": 27900,
+      "filled_units": 27800,
+      "reason": "cash_limited_partial_or_zero"
+    }
+  ],
+  "journal": [
+    {
+      "kind": "trade",
+      "day": "2024-03-12",
+      "symbol": "510300",
+      "side": "buy",
+      "units": 27800,
+      "signal_date": "2024-03-11",
+      "raw_price": "3.583",
+      "fill_price": "3.587",
+      "commission": "99.72",
+      "tax": "0",
+      "notional": "99718.600"
+    },
+    {
+      "kind": "record_entitlement",
+      "day": "2025-06-17",
+      "symbol": "510300",
+      "units": 27800
+    },
+    {
+      "kind": "dividend_receivable",
+      "day": "2025-06-18",
+      "symbol": "510300",
+      "amount": "2446.4000"
+    },
+    {
+      "kind": "dividend_paid",
+      "day": "2025-06-27",
+      "symbol": "510300",
+      "amount": "2446.4000"
+    },
+    {
+      "kind": "record_entitlement",
+      "day": "2025-09-22",
+      "symbol": "511010",
+      "units": 0
+    },
+    {
+      "kind": "dividend_receivable",
+      "day": "2025-09-23",
+      "symbol": "511010",
+      "amount": "0.0000"
+    },
+    {
+      "kind": "dividend_paid",
+      "day": "2025-09-26",
+      "symbol": "511010",
+      "amount": "0.0000"
+    },
+    {
+      "kind": "record_entitlement",
+      "day": "2025-12-25",
+      "symbol": "511010",
+      "units": 0
+    },
+    {
+      "kind": "dividend_receivable",
+      "day": "2025-12-26",
+      "symbol": "511010",
+      "amount": "0.0000"
+    },
+    {
+      "kind": "dividend_paid",
+      "day": "2025-12-31",
+      "symbol": "511010",
+      "amount": "0.0000"
+    },
+    {
+      "kind": "record_entitlement",
+      "day": "2026-01-16",
+      "symbol": "510300",
+      "units": 27800
+    },
+    {
+      "kind": "dividend_receivable",
+      "day": "2026-01-19",
+      "symbol": "510300",
+      "amount": "3419.4000"
+    },
+    {
+      "kind": "dividend_paid",
+      "day": "2026-01-27",
+      "symbol": "510300",
+      "amount": "3419.4000"
+    },
+    {
+      "kind": "record_entitlement",
+      "day": "2026-03-24",
+      "symbol": "511010",
+      "units": 0
+    },
+    {
+      "kind": "dividend_receivable",
+      "day": "2026-03-25",
+      "symbol": "511010",
+      "amount": "0.0000"
+    },
+    {
+      "kind": "dividend_paid",
+      "day": "2026-03-30",
+      "symbol": "511010",
+      "amount": "0.0000"
+    },
+    {
+      "kind": "record_entitlement",
+      "day": "2026-06-24",
+      "symbol": "511010",
+      "units": 0
+    },
+    {
+      "kind": "dividend_receivable",
+      "day": "2026-06-25",
+      "symbol": "511010",
+      "amount": "0.0000"
+    },
+    {
+      "kind": "dividend_paid",
+      "day": "2026-06-30",
+      "symbol": "511010",
+      "amount": "0.0000"
+    },
+    {
+      "kind": "record_entitlement",
+      "day": "2026-09-17",
+      "symbol": "511010",
+      "units": 0
+    },
+    {
+      "kind": "dividend_receivable",
+      "day": "2026-09-18",
+      "symbol": "511010",
+      "amount": "0.0000"
+    },
+    {
+      "kind": "dividend_paid",
+      "day": "2026-09-23",
+      "symbol": "511010",
+      "amount": "0.0000"
+    }
+  ]
+}

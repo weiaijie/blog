@@ -26,3 +26,7 @@ GitHub 下载备份：登录仓库后选择 Code → Download ZIP。新云环境
 ## 真实数据账本回放（2026-11-04）
 
 [640日会计对账报告](reports/2026-11-04-replay/PROGRESS.md)：24项测试通过，7次分红、3200项每日核对一致。仅验证会计，未计算策略收益。在项目目录运行 `PYTHONPATH=src python scripts/replay_accounting.py --output /tmp/etf-accounting-replay`。
+
+## 最新研究与自主接续
+
+[目标、当前状态及下一任务](CONTINUATION.md) · [18组基准/趋势费用场景报告](reports/2026-11-04-baselines/PROGRESS.md)。35项测试通过；结果仅为明示假设下历史场景，不保证长期净收益。运行方式见报告。
