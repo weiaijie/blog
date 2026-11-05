@@ -1,0 +1,168 @@
+{
+  "reviewed_on_shanghai": "2026-11-05",
+  "scope": "General rule evidence, not per-instrument daily reference prices, queue availability, tax opinion or complete historical simulation",
+  "versions": [
+    {
+      "version": "2020",
+      "effective_from": "2020-03-13",
+      "superseded_from_exclusive": "2023-04-10",
+      "notice_url": "https://www.sse.com.cn/lawandrules/sselawsrules/repeal/rules/c/c_20230217_5716494.shtml",
+      "rules_url": "https://www.sse.com.cn/lawandrules/sselawsrules/repeal/rules/c/10118619/files/b39b8db2daa74eac916d8b3d6907af51.docx",
+      "rules_file": "sse_rules_2020_attachment_1.body",
+      "rules_sha256": "bc0abb073a0463e3b9e0a3d8d0fa190ffee44286fdae8bf431f1f64fb8eccb2f",
+      "deferred_file": "sse_rules_2020_attachment_3.txt",
+      "clauses": {
+        "round_trip": {
+          "clause": "3.1.5",
+          "text_file": "sse_rules_2020_attachment_1.txt",
+          "first_line": 49,
+          "text_sha256": "4df8e0bb186891d52905dec722c1d2bc0625fe9c28cb3527280ba9f2a5c8a4ba"
+        },
+        "buy_lot": {
+          "clause": "3.4.7",
+          "text_file": "sse_rules_2020_attachment_1.txt",
+          "first_line": 102,
+          "text_sha256": "2888fd2505678ff79dec31394a7a80047ff1ca1a3e268dfd800d6303f53d6cd9"
+        },
+        "price_tick": {
+          "clause": "3.4.11",
+          "text_file": "sse_rules_2020_attachment_1.txt",
+          "first_line": 109,
+          "text_sha256": "accce1bd50e5d338a577b0c3269a0ed672e030c154ca07c04862c0a55b60b49b"
+        },
+        "limit_formula": {
+          "clause": "3.4.13",
+          "text_file": "sse_rules_2020_attachment_1.txt",
+          "first_line": 111,
+          "text_sha256": "78193f68fd6a48e802353b0421c1e6cedf32780ab7f2d6021ce83f61ed5cf9f7"
+        },
+        "ex_reference": {
+          "clause": "4.3.2",
+          "text_file": "sse_rules_2020_attachment_1.txt",
+          "first_line": 233,
+          "text_sha256": "645f411104eb13453350a9f0a8164b64b01f787d62068bb92894fc449dca7381"
+        },
+        "ex_limit_base": {
+          "clause": "4.3.3",
+          "text_file": "sse_rules_2020_attachment_1.txt",
+          "first_line": 237,
+          "text_sha256": "a7aef6bea395d9b6bfcda995eb1a521409da5d4c8a60e089dd0295c006a009c6"
+        }
+      }
+    },
+    {
+      "version": "2023",
+      "effective_from": "2023-04-10",
+      "superseded_from_exclusive": "2026-07-06",
+      "notice_url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/repeal/rules/c/c_20250612_10824490.shtml",
+      "rules_url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/repeal/rules/c/10824490/files/dcbe58edb194451d93f19b1f7dd8fb4c.docx",
+      "rules_file": "sse_rules_2023_attachment_1.body",
+      "rules_sha256": "7aa2319f6dcf597be1e86b3b69d7c2ad0e6acb2a5d0cc6be48a01af602fded40",
+      "deferred_file": "sse_rules_2023_attachment_4.txt",
+      "clauses": {
+        "round_trip": {
+          "clause": "3.1.5",
+          "text_file": "sse_rules_2023_attachment_1.txt",
+          "first_line": 84,
+          "text_sha256": "9808c53b62d41b0ebdaaa0ba610f5be3c4a8aaf58e79e74087da0846643822d0"
+        },
+        "buy_lot": {
+          "clause": "3.3.8",
+          "text_file": "sse_rules_2023_attachment_1.txt",
+          "first_line": 142,
+          "text_sha256": "922845a69b54d9b6d0e0e255086d0abb49f878b2944842c9f923a827fb3127f2"
+        },
+        "price_tick": {
+          "clause": "3.3.11",
+          "text_file": "sse_rules_2023_attachment_1.txt",
+          "first_line": 147,
+          "text_sha256": "011d4e566fa39bd063284f15d279d6912b0812726770b5c117e69ec23556c13e"
+        },
+        "limit_formula": {
+          "clause": "3.3.13",
+          "text_file": "sse_rules_2023_attachment_1.txt",
+          "first_line": 150,
+          "text_sha256": "45b18806ee0e1c78f09ac34cf99f19cc189fe57609bf450df155ecf31b15059f"
+        },
+        "ex_reference": {
+          "clause": "4.3.2",
+          "text_file": "sse_rules_2023_attachment_1.txt",
+          "first_line": 271,
+          "text_sha256": "67a0caa278383f4db1be1aff70f4e538277eccd4cec7fac563035ac8e27c2d74"
+        },
+        "ex_limit_base": {
+          "clause": "4.3.3",
+          "text_file": "sse_rules_2023_attachment_1.txt",
+          "first_line": 275,
+          "text_sha256": "1ba55c9971d415f5ba2c0927769a816d44ac483cb26ae262564bf2a601e4fdae"
+        }
+      }
+    },
+    {
+      "version": "2026",
+      "effective_from": "2026-07-06",
+      "superseded_from_exclusive": null,
+      "notice_url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/exchange/c/c_20260424_10816482.shtml",
+      "rules_url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/exchange/c/10816482/files/e3a3b98e36894edca77841837936e006.docx",
+      "rules_file": "sse_rules_2026_attachment_1.body",
+      "rules_sha256": "fc922c433438b2636cb631eab25cca405209712acbb6aaded768c45456ff8888",
+      "deferred_file": "sse_rules_2026_attachment_3.txt",
+      "clauses": {
+        "round_trip": {
+          "clause": "3.1.5",
+          "text_file": "sse_rules_2026_attachment_1.txt",
+          "first_line": 81,
+          "text_sha256": "9808c53b62d41b0ebdaaa0ba610f5be3c4a8aaf58e79e74087da0846643822d0"
+        },
+        "buy_lot": {
+          "clause": "3.3.8",
+          "text_file": "sse_rules_2026_attachment_1.txt",
+          "first_line": 139,
+          "text_sha256": "922845a69b54d9b6d0e0e255086d0abb49f878b2944842c9f923a827fb3127f2"
+        },
+        "price_tick": {
+          "clause": "3.3.11",
+          "text_file": "sse_rules_2026_attachment_1.txt",
+          "first_line": 144,
+          "text_sha256": "011d4e566fa39bd063284f15d279d6912b0812726770b5c117e69ec23556c13e"
+        },
+        "limit_formula": {
+          "clause": "3.3.13",
+          "text_file": "sse_rules_2026_attachment_1.txt",
+          "first_line": 147,
+          "text_sha256": "45b18806ee0e1c78f09ac34cf99f19cc189fe57609bf450df155ecf31b15059f"
+        },
+        "ex_reference": {
+          "clause": "4.3.2",
+          "text_file": "sse_rules_2026_attachment_1.txt",
+          "first_line": 286,
+          "text_sha256": "67a0caa278383f4db1be1aff70f4e538277eccd4cec7fac563035ac8e27c2d74"
+        },
+        "ex_limit_base": {
+          "clause": "4.3.3",
+          "text_file": "sse_rules_2026_attachment_1.txt",
+          "first_line": 290,
+          "text_sha256": "1ba55c9971d415f5ba2c0927769a816d44ac483cb26ae262564bf2a601e4fdae"
+        }
+      }
+    }
+  ],
+  "effective_2023_basis": [
+    "sse_rules_2023.body",
+    "sse_rules_2023_attachment_1.txt",
+    "sse_2023_events.body",
+    "sse_2023_events.txt"
+  ],
+  "limitations": [
+    "Specific exceptions and issuer-adjusted ex references still need event/day evidence",
+    "No broker fee or full ETF tax conclusion",
+    "Odd-lot liquidation and deferred provisions are not implemented as full matching rules",
+    "Frozen protocol 9pct buffer and scenario costs unchanged"
+  ],
+  "requests": 19,
+  "status_counts": {
+    "200": 16,
+    "403": 1,
+    "503": 2
+  }
+}

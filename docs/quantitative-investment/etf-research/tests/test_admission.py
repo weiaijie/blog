@@ -63,3 +63,9 @@ class AdmissionTests(unittest.TestCase):
     row=next(r for r in x if r['name']=='sina_510300');row['url']=row['url'].replace('sh510300','sh511010')
    self.change_json(p,'requests.json',patch)
   with self.assertRaisesRegex(ValueError,'symbol'):load_incremental(self.mutate(change),SNAP,now=NOW)
+ def test_nonofficial_catalog_endpoint_rejected(self):
+  def change(p):
+   def patch(x):
+    row=next(r for r in x if r['name']=='catalog_510300');row['url']=row['url'].replace('query.sse.com.cn','example.invalid')
+   self.change_json(p,'requests.json',patch)
+  with self.assertRaisesRegex(ValueError,'catalog endpoint'):load_incremental(self.mutate(change),SNAP,now=NOW)

@@ -11,6 +11,7 @@ from urllib.parse import urlparse,parse_qs
 from zoneinfo import ZoneInfo
 import hashlib,json,re
 from .data import load_dataset,verify_manifest,RawBar,SYMBOLS
+from .catalog_changes import diff_catalogs,CatalogChanged
 TZ=ZoneInfo('Asia/Shanghai')
 
 def completed_date(timestamp):
@@ -39,7 +40,7 @@ def catalog_rows(payload,symbol):
 
 def check_catalog(current,previous,symbol):
  current=catalog_rows(current,symbol);previous=catalog_rows(previous,symbol)
- if current!=previous:raise ValueError('Official catalog changed: review new/changed/removed notices before admitting prices')
+ if current!=previous:raise CatalogChanged(diff_catalogs(current,previous))
  return len(current)
 
 def parse_prices(body,provider,through):
@@ -90,7 +91,8 @@ def load_incremental(root,snapshot,*,now=None):
  newbars={s:dict(v) for s,v in base.bars.items()};source_checks={};catalog_counts={}
  for symbol in SYMBOLS:
   body,meta=response('catalog_'+symbol)
-  params=parse_qs(urlparse(meta['url']).query)
+  url=urlparse(meta['url']);params=parse_qs(url.query)
+  if url.scheme!='https' or url.hostname!='query.sse.com.cn' or params.get('sqlId')!=['COMMON_PL_JJXX_JJGG_NEW_L']:raise ValueError('Wrong official catalog endpoint')
   capture=datetime.fromisoformat(meta['requested_at_utc']).astimezone(TZ)
   if params.get('SECURITY_CODE')!=[symbol] or params.get('START_DATE')!=['2012-01-01'] or params.get('END_DATE')!=[str(capture.date())]:raise ValueError('Official catalog scope/date is not current')
   old=json.loads((root/'2026-11-03-official-02'/f'{symbol}_all_index.body').read_text())

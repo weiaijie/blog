@@ -1,0 +1,46 @@
+[
+  {
+    "name": "sse_rules_2020_attachment_1",
+    "url": "https://www.sse.com.cn/lawandrules/sselawsrules/repeal/rules/c/10118619/files/b39b8db2daa74eac916d8b3d6907af51.docx",
+    "requested_at_utc": "2026-11-05T03:23:07.645004+00:00",
+    "status": 200,
+    "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "final_url": "https://www.sse.com.cn/lawandrules/sselawsrules/repeal/rules/c/10118619/files/b39b8db2daa74eac916d8b3d6907af51.docx",
+    "bytes": 37763,
+    "sha256": "bc0abb073a0463e3b9e0a3d8d0fa190ffee44286fdae8bf431f1f64fb8eccb2f",
+    "elapsed_seconds": 1.67
+  },
+  {
+    "name": "sse_rules_2020_attachment_2",
+    "url": "https://www.sse.com.cn/lawandrules/sselawsrules/repeal/rules/c/10118619/files/dbc1dab581e34f4a9076607f90c18c62.docx",
+    "requested_at_utc": "2026-11-05T03:23:07.645761+00:00",
+    "status": 200,
+    "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "final_url": "https://www.sse.com.cn/lawandrules/sselawsrules/repeal/rules/c/10118619/files/dbc1dab581e34f4a9076607f90c18c62.docx",
+    "bytes": 14290,
+    "sha256": "8e1b52144c3b27a9550dd3ef6e8e3562f59c55fc86f9e0da37b317af44a5a350",
+    "elapsed_seconds": 3.37
+  },
+  {
+    "name": "sse_rules_2020_attachment_3",
+    "url": "https://www.sse.com.cn/lawandrules/sselawsrules/repeal/rules/c/10118619/files/b79c255874ea49679c46eca9ff1f3aed.docx",
+    "requested_at_utc": "2026-11-05T03:23:07.646956+00:00",
+    "status": 200,
+    "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "final_url": "https://www.sse.com.cn/lawandrules/sselawsrules/repeal/rules/c/10118619/files/b79c255874ea49679c46eca9ff1f3aed.docx",
+    "bytes": 16581,
+    "sha256": "6cf12c92b1329d5a67f6313272b221b30a17aa6f83d76e9912b4e856d28a09ea",
+    "elapsed_seconds": 3.3
+  },
+  {
+    "name": "sse_2023_events",
+    "url": "https://www.sse.com.cn/aboutus/publication/yearly/documents/c/10764669/files/d712ddc42b2a460483be185fbbb52ea2.pdf",
+    "requested_at_utc": "2026-11-05T03:23:07.647749+00:00",
+    "status": 200,
+    "content_type": "application/pdf",
+    "final_url": "https://www.sse.com.cn/aboutus/publication/yearly/documents/c/10764669/files/d712ddc42b2a460483be185fbbb52ea2.pdf",
+    "bytes": 16607318,
+    "sha256": "f1bdf5dca340c85a475f9131e501d16057ccc2ade03347e0a995bf45b552c023",
+    "elapsed_seconds": 14.72
+  }
+]

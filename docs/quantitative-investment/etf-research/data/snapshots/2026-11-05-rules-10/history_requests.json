@@ -1,0 +1,34 @@
+[
+  {
+    "name": "sse_rules_2020",
+    "url": "https://www.sse.com.cn/lawandrules/sselawsrules/repeal/rules/c/c_20230217_5716494.shtml",
+    "requested_at_utc": "2026-11-05T03:21:40.213748+00:00",
+    "status": 200,
+    "content_type": "text/html",
+    "final_url": "https://www.sse.com.cn/lawandrules/sselawsrules/repeal/rules/c/c_20230217_5716494.shtml",
+    "bytes": 28215,
+    "sha256": "e0b98469957c627da3e21777f715da03f02afee72a0de29656ff05fb45068c55",
+    "elapsed_seconds": 2.11
+  },
+  {
+    "name": "csrc_first_listing_2023",
+    "url": "https://www.csrc.gov.cn/shanghai/c105566/c7402810/content.shtml",
+    "requested_at_utc": "2026-11-05T03:21:40.215025+00:00",
+    "status": 503,
+    "error": "HTTP Error 503: Service Unavailable",
+    "bytes": 91,
+    "sha256": "2f85832e31ca57711e6107af6b142363351ae516adb71c69afc643fac26be7f6",
+    "elapsed_seconds": 7.52
+  },
+  {
+    "name": "sse_first_listing_plan_2023",
+    "url": "https://www.sse.com.cn/aboutus/mediacenter/hotandd/c/c_20230404_5719112.shtml",
+    "requested_at_utc": "2026-11-05T03:21:40.215660+00:00",
+    "status": 200,
+    "content_type": "text/html",
+    "final_url": "https://www.sse.com.cn/aboutus/mediacenter/hotandd/c/c_20230404_5719112.shtml",
+    "bytes": 26446,
+    "sha256": "02650e7c119d5551be8a4039157ebcd554fd565803e499a5a9287c57498424a2",
+    "elapsed_seconds": 2.6
+  }
+]
