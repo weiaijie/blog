@@ -1,0 +1,32 @@
+{
+  "sample_start": "2018-09-14",
+  "sample_end": "2026-10-30",
+  "initial_shares": 0,
+  "initial_receivable": "0",
+  "split_events": [
+    {
+      "symbol": "510300",
+      "effective_date": "2012-05-11",
+      "ratio": "0.37094933",
+      "pdf": "split_510300.body",
+      "text": "split_510300.txt",
+      "pdf_sha256": "1dfbe8fba6307a0df3a29e4efffe0914221e549a2d95d768985904d1525c3aff",
+      "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/2012-05-15/510300_20120515_1.pdf",
+      "ratio_basis": "explicit ratio",
+      "applies_to_expanded_sample": false
+    },
+    {
+      "symbol": "511010",
+      "effective_date": "2013-03-05",
+      "ratio": "0.01",
+      "pdf": "split_511010.body",
+      "text": "split_511010.txt",
+      "pdf_sha256": "f740849c413f92abb95916659d4e46703ca17f59c0f6c9852e416ad7b941e418",
+      "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/2013-03-06/511010_20130307_1.pdf",
+      "ratio_basis": "unit NAV 1.00 to 100.00; matches previously verified annual report",
+      "applies_to_expanded_sample": false
+    }
+  ],
+  "catalog_scope": "All split/fold/merge-title notices in the two existing complete SSE catalogs predate sample start. Current catalog equality independently checked in close-12b. Not proof against upstream omissions or unusually titled events.",
+  "action": "Do not apply 2012/2013 conversion to post-listing prices or positions."
+}

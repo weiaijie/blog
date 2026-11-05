@@ -1,0 +1,644 @@
+{
+  "format": 1,
+  "protocol_commit": "0c797f5ed5321d8653d64ccf0f795e1529f6f9b2",
+  "engine_sha256": "86805dd5d4cb93901c59be86f2f332641286442f65140dbddd9f196c0eb7e274",
+  "as_of": "2026-11-05",
+  "forward_start": "2026-11-05",
+  "admitted_prefix_sha256": "79dff1c0f2d8ee4851af6f0e5344501a025cee10992cb0e332623b53a20fa6a4",
+  "status": "research_account_active",
+  "forward_sessions": 1,
+  "portfolios": {
+    "cash_low": {
+      "daily": [
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-05",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        }
+      ],
+      "decisions": [],
+      "journal": [],
+      "summary": {
+        "annualized_scenario_return": null,
+        "cash_limited_orders": 0,
+        "commissions": "0",
+        "ending_cash": "100000",
+        "ending_equity": "100000",
+        "ending_holdings": {},
+        "excluded_orders": 0,
+        "execution_delay_sessions": 1,
+        "initial_cash": "100000",
+        "max_close_drawdown": 0.0,
+        "pending_target_batches_at_end": 0,
+        "scenario": "low",
+        "sell_tax": "0",
+        "slippage_cost": "0",
+        "strategy": "cash",
+        "terminal_liquidation_included": false,
+        "total_return": 0.0,
+        "trades": 0
+      }
+    },
+    "cash_base": {
+      "daily": [
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-05",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        }
+      ],
+      "decisions": [],
+      "journal": [],
+      "summary": {
+        "annualized_scenario_return": null,
+        "cash_limited_orders": 0,
+        "commissions": "0",
+        "ending_cash": "100000",
+        "ending_equity": "100000",
+        "ending_holdings": {},
+        "excluded_orders": 0,
+        "execution_delay_sessions": 1,
+        "initial_cash": "100000",
+        "max_close_drawdown": 0.0,
+        "pending_target_batches_at_end": 0,
+        "scenario": "base",
+        "sell_tax": "0",
+        "slippage_cost": "0",
+        "strategy": "cash",
+        "terminal_liquidation_included": false,
+        "total_return": 0.0,
+        "trades": 0
+      }
+    },
+    "cash_high": {
+      "daily": [
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-05",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        }
+      ],
+      "decisions": [],
+      "journal": [],
+      "summary": {
+        "annualized_scenario_return": null,
+        "cash_limited_orders": 0,
+        "commissions": "0",
+        "ending_cash": "100000",
+        "ending_equity": "100000",
+        "ending_holdings": {},
+        "excluded_orders": 0,
+        "execution_delay_sessions": 1,
+        "initial_cash": "100000",
+        "max_close_drawdown": 0.0,
+        "pending_target_batches_at_end": 0,
+        "scenario": "high",
+        "sell_tax": "0",
+        "slippage_cost": "0",
+        "strategy": "cash",
+        "terminal_liquidation_included": false,
+        "total_return": 0.0,
+        "trades": 0
+      }
+    },
+    "equity_hold_low": {
+      "daily": [
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-05",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        }
+      ],
+      "decisions": [],
+      "journal": [],
+      "summary": {
+        "annualized_scenario_return": null,
+        "cash_limited_orders": 0,
+        "commissions": "0",
+        "ending_cash": "100000",
+        "ending_equity": "100000",
+        "ending_holdings": {},
+        "excluded_orders": 0,
+        "execution_delay_sessions": 1,
+        "initial_cash": "100000",
+        "max_close_drawdown": 0.0,
+        "pending_target_batches_at_end": 0,
+        "scenario": "low",
+        "sell_tax": "0",
+        "slippage_cost": "0",
+        "strategy": "equity_hold",
+        "terminal_liquidation_included": false,
+        "total_return": 0.0,
+        "trades": 0
+      }
+    },
+    "equity_hold_base": {
+      "daily": [
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-05",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        }
+      ],
+      "decisions": [],
+      "journal": [],
+      "summary": {
+        "annualized_scenario_return": null,
+        "cash_limited_orders": 0,
+        "commissions": "0",
+        "ending_cash": "100000",
+        "ending_equity": "100000",
+        "ending_holdings": {},
+        "excluded_orders": 0,
+        "execution_delay_sessions": 1,
+        "initial_cash": "100000",
+        "max_close_drawdown": 0.0,
+        "pending_target_batches_at_end": 0,
+        "scenario": "base",
+        "sell_tax": "0",
+        "slippage_cost": "0",
+        "strategy": "equity_hold",
+        "terminal_liquidation_included": false,
+        "total_return": 0.0,
+        "trades": 0
+      }
+    },
+    "equity_hold_high": {
+      "daily": [
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-05",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        }
+      ],
+      "decisions": [],
+      "journal": [],
+      "summary": {
+        "annualized_scenario_return": null,
+        "cash_limited_orders": 0,
+        "commissions": "0",
+        "ending_cash": "100000",
+        "ending_equity": "100000",
+        "ending_holdings": {},
+        "excluded_orders": 0,
+        "execution_delay_sessions": 1,
+        "initial_cash": "100000",
+        "max_close_drawdown": 0.0,
+        "pending_target_batches_at_end": 0,
+        "scenario": "high",
+        "sell_tax": "0",
+        "slippage_cost": "0",
+        "strategy": "equity_hold",
+        "terminal_liquidation_included": false,
+        "total_return": 0.0,
+        "trades": 0
+      }
+    },
+    "bond_hold_low": {
+      "daily": [
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-05",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        }
+      ],
+      "decisions": [],
+      "journal": [],
+      "summary": {
+        "annualized_scenario_return": null,
+        "cash_limited_orders": 0,
+        "commissions": "0",
+        "ending_cash": "100000",
+        "ending_equity": "100000",
+        "ending_holdings": {},
+        "excluded_orders": 0,
+        "execution_delay_sessions": 1,
+        "initial_cash": "100000",
+        "max_close_drawdown": 0.0,
+        "pending_target_batches_at_end": 0,
+        "scenario": "low",
+        "sell_tax": "0",
+        "slippage_cost": "0",
+        "strategy": "bond_hold",
+        "terminal_liquidation_included": false,
+        "total_return": 0.0,
+        "trades": 0
+      }
+    },
+    "bond_hold_base": {
+      "daily": [
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-05",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        }
+      ],
+      "decisions": [],
+      "journal": [],
+      "summary": {
+        "annualized_scenario_return": null,
+        "cash_limited_orders": 0,
+        "commissions": "0",
+        "ending_cash": "100000",
+        "ending_equity": "100000",
+        "ending_holdings": {},
+        "excluded_orders": 0,
+        "execution_delay_sessions": 1,
+        "initial_cash": "100000",
+        "max_close_drawdown": 0.0,
+        "pending_target_batches_at_end": 0,
+        "scenario": "base",
+        "sell_tax": "0",
+        "slippage_cost": "0",
+        "strategy": "bond_hold",
+        "terminal_liquidation_included": false,
+        "total_return": 0.0,
+        "trades": 0
+      }
+    },
+    "bond_hold_high": {
+      "daily": [
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-05",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        }
+      ],
+      "decisions": [],
+      "journal": [],
+      "summary": {
+        "annualized_scenario_return": null,
+        "cash_limited_orders": 0,
+        "commissions": "0",
+        "ending_cash": "100000",
+        "ending_equity": "100000",
+        "ending_holdings": {},
+        "excluded_orders": 0,
+        "execution_delay_sessions": 1,
+        "initial_cash": "100000",
+        "max_close_drawdown": 0.0,
+        "pending_target_batches_at_end": 0,
+        "scenario": "high",
+        "sell_tax": "0",
+        "slippage_cost": "0",
+        "strategy": "bond_hold",
+        "terminal_liquidation_included": false,
+        "total_return": 0.0,
+        "trades": 0
+      }
+    },
+    "monthly_20_80_low": {
+      "daily": [
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-05",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        }
+      ],
+      "decisions": [],
+      "journal": [],
+      "summary": {
+        "annualized_scenario_return": null,
+        "cash_limited_orders": 0,
+        "commissions": "0",
+        "ending_cash": "100000",
+        "ending_equity": "100000",
+        "ending_holdings": {},
+        "excluded_orders": 0,
+        "execution_delay_sessions": 1,
+        "initial_cash": "100000",
+        "max_close_drawdown": 0.0,
+        "pending_target_batches_at_end": 0,
+        "scenario": "low",
+        "sell_tax": "0",
+        "slippage_cost": "0",
+        "strategy": "monthly_20_80",
+        "terminal_liquidation_included": false,
+        "total_return": 0.0,
+        "trades": 0
+      }
+    },
+    "monthly_20_80_base": {
+      "daily": [
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-05",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        }
+      ],
+      "decisions": [],
+      "journal": [],
+      "summary": {
+        "annualized_scenario_return": null,
+        "cash_limited_orders": 0,
+        "commissions": "0",
+        "ending_cash": "100000",
+        "ending_equity": "100000",
+        "ending_holdings": {},
+        "excluded_orders": 0,
+        "execution_delay_sessions": 1,
+        "initial_cash": "100000",
+        "max_close_drawdown": 0.0,
+        "pending_target_batches_at_end": 0,
+        "scenario": "base",
+        "sell_tax": "0",
+        "slippage_cost": "0",
+        "strategy": "monthly_20_80",
+        "terminal_liquidation_included": false,
+        "total_return": 0.0,
+        "trades": 0
+      }
+    },
+    "monthly_20_80_high": {
+      "daily": [
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-05",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        }
+      ],
+      "decisions": [],
+      "journal": [],
+      "summary": {
+        "annualized_scenario_return": null,
+        "cash_limited_orders": 0,
+        "commissions": "0",
+        "ending_cash": "100000",
+        "ending_equity": "100000",
+        "ending_holdings": {},
+        "excluded_orders": 0,
+        "execution_delay_sessions": 1,
+        "initial_cash": "100000",
+        "max_close_drawdown": 0.0,
+        "pending_target_batches_at_end": 0,
+        "scenario": "high",
+        "sell_tax": "0",
+        "slippage_cost": "0",
+        "strategy": "monthly_20_80",
+        "terminal_liquidation_included": false,
+        "total_return": 0.0,
+        "trades": 0
+      }
+    },
+    "monthly_50_50_low": {
+      "daily": [
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-05",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        }
+      ],
+      "decisions": [],
+      "journal": [],
+      "summary": {
+        "annualized_scenario_return": null,
+        "cash_limited_orders": 0,
+        "commissions": "0",
+        "ending_cash": "100000",
+        "ending_equity": "100000",
+        "ending_holdings": {},
+        "excluded_orders": 0,
+        "execution_delay_sessions": 1,
+        "initial_cash": "100000",
+        "max_close_drawdown": 0.0,
+        "pending_target_batches_at_end": 0,
+        "scenario": "low",
+        "sell_tax": "0",
+        "slippage_cost": "0",
+        "strategy": "monthly_50_50",
+        "terminal_liquidation_included": false,
+        "total_return": 0.0,
+        "trades": 0
+      }
+    },
+    "monthly_50_50_base": {
+      "daily": [
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-05",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        }
+      ],
+      "decisions": [],
+      "journal": [],
+      "summary": {
+        "annualized_scenario_return": null,
+        "cash_limited_orders": 0,
+        "commissions": "0",
+        "ending_cash": "100000",
+        "ending_equity": "100000",
+        "ending_holdings": {},
+        "excluded_orders": 0,
+        "execution_delay_sessions": 1,
+        "initial_cash": "100000",
+        "max_close_drawdown": 0.0,
+        "pending_target_batches_at_end": 0,
+        "scenario": "base",
+        "sell_tax": "0",
+        "slippage_cost": "0",
+        "strategy": "monthly_50_50",
+        "terminal_liquidation_included": false,
+        "total_return": 0.0,
+        "trades": 0
+      }
+    },
+    "monthly_50_50_high": {
+      "daily": [
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-05",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        }
+      ],
+      "decisions": [],
+      "journal": [],
+      "summary": {
+        "annualized_scenario_return": null,
+        "cash_limited_orders": 0,
+        "commissions": "0",
+        "ending_cash": "100000",
+        "ending_equity": "100000",
+        "ending_holdings": {},
+        "excluded_orders": 0,
+        "execution_delay_sessions": 1,
+        "initial_cash": "100000",
+        "max_close_drawdown": 0.0,
+        "pending_target_batches_at_end": 0,
+        "scenario": "high",
+        "sell_tax": "0",
+        "slippage_cost": "0",
+        "strategy": "monthly_50_50",
+        "terminal_liquidation_included": false,
+        "total_return": 0.0,
+        "trades": 0
+      }
+    },
+    "trend_120_low": {
+      "daily": [
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-05",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        }
+      ],
+      "decisions": [],
+      "journal": [],
+      "summary": {
+        "annualized_scenario_return": null,
+        "cash_limited_orders": 0,
+        "commissions": "0",
+        "ending_cash": "100000",
+        "ending_equity": "100000",
+        "ending_holdings": {},
+        "excluded_orders": 0,
+        "execution_delay_sessions": 1,
+        "initial_cash": "100000",
+        "max_close_drawdown": 0.0,
+        "pending_target_batches_at_end": 0,
+        "scenario": "low",
+        "sell_tax": "0",
+        "slippage_cost": "0",
+        "strategy": "trend_120",
+        "terminal_liquidation_included": false,
+        "total_return": 0.0,
+        "trades": 0
+      }
+    },
+    "trend_120_base": {
+      "daily": [
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-05",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        }
+      ],
+      "decisions": [],
+      "journal": [],
+      "summary": {
+        "annualized_scenario_return": null,
+        "cash_limited_orders": 0,
+        "commissions": "0",
+        "ending_cash": "100000",
+        "ending_equity": "100000",
+        "ending_holdings": {},
+        "excluded_orders": 0,
+        "execution_delay_sessions": 1,
+        "initial_cash": "100000",
+        "max_close_drawdown": 0.0,
+        "pending_target_batches_at_end": 0,
+        "scenario": "base",
+        "sell_tax": "0",
+        "slippage_cost": "0",
+        "strategy": "trend_120",
+        "terminal_liquidation_included": false,
+        "total_return": 0.0,
+        "trades": 0
+      }
+    },
+    "trend_120_high": {
+      "daily": [
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-05",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        }
+      ],
+      "decisions": [],
+      "journal": [],
+      "summary": {
+        "annualized_scenario_return": null,
+        "cash_limited_orders": 0,
+        "commissions": "0",
+        "ending_cash": "100000",
+        "ending_equity": "100000",
+        "ending_holdings": {},
+        "excluded_orders": 0,
+        "execution_delay_sessions": 1,
+        "initial_cash": "100000",
+        "max_close_drawdown": 0.0,
+        "pending_target_batches_at_end": 0,
+        "scenario": "high",
+        "sell_tax": "0",
+        "slippage_cost": "0",
+        "strategy": "trend_120",
+        "terminal_liquidation_included": false,
+        "total_return": 0.0,
+        "trades": 0
+      }
+    }
+  },
+  "real_money": false,
+  "checkpoint_sha256": "e11f23cb1d2a62e56590fa30f804721de74d1f7f2e6d353a80ee92eaacfb659d"
+}

@@ -4,12 +4,13 @@ from decimal import Decimal as D
 from datetime import date
 import argparse,csv,json,hashlib
 from etf_research.data import load_dataset
+from etf_research.long_history import load_long_history
 from etf_research.baselines import run,STRATEGIES,SCENARIOS
 from etf_research.evaluation import chronological_folds
 PROTOCOL_COMMIT='0c797f5ed5321d8653d64ccf0f795e1529f6f9b2'
 def main():
- p=argparse.ArgumentParser();p.add_argument('--snapshots',type=Path,default=Path(__file__).resolve().parents[1]/'data/snapshots');p.add_argument('--output',type=Path,required=True);p.add_argument('--extended',action='store_true');a=p.parse_args()
- d=load_dataset(a.snapshots,extended=a.extended);a.output.mkdir(parents=True,exist_ok=True)
+ p=argparse.ArgumentParser();p.add_argument('--snapshots',type=Path,default=Path(__file__).resolve().parents[1]/'data/snapshots');p.add_argument('--output',type=Path,required=True);m=p.add_mutually_exclusive_group();m.add_argument('--extended',action='store_true');m.add_argument('--long-history',action='store_true');a=p.parse_args()
+ d=load_long_history(a.snapshots) if a.long_history else load_dataset(a.snapshots,extended=a.extended);a.output.mkdir(parents=True,exist_ok=True)
  def save(name,value):(a.output/name).write_text(json.dumps(value,default=str,ensure_ascii=False,indent=2)+'\n')
  all_summaries=[];audits={};baseline=[];evaluations={}
  for strategy in STRATEGIES:

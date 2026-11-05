@@ -1,0 +1,31 @@
+{
+  "same_end_date": true,
+  "same_strategy_and_costs": true,
+  "retrospective_only": true,
+  "samples": [
+    {
+      "report": "2026-11-04-closure",
+      "start": "2024-03-11",
+      "end": "2026-10-30",
+      "sessions": 640,
+      "annualized_scenario_return": 0.04900937872106944,
+      "max_close_drawdown": -0.10096191298792147
+    },
+    {
+      "report": "2026-11-04-extension",
+      "start": "2022-01-04",
+      "end": "2026-10-30",
+      "sessions": 1167,
+      "annualized_scenario_return": 0.005055789109250997,
+      "max_close_drawdown": -0.1508733
+    },
+    {
+      "report": "2026-11-05-long-history",
+      "start": "2018-09-14",
+      "end": "2026-10-30",
+      "sessions": 1967,
+      "annualized_scenario_return": 0.04021703090593041,
+      "max_close_drawdown": -0.1973181185691339
+    }
+  ]
+}

@@ -1,0 +1,3239 @@
+{
+  "independent_endpoint_checks": 162,
+  "all_passed": true,
+  "range_check_is_posthoc_only": true,
+  "range_check_used_to_change_orders": false,
+  "interpretation": "Slipped fill prices are cost-model prices and can fall outside observed daily high/low; these are not actual fills. This diagnostic never uses future H/L to select orders.",
+  "runs": [
+    {
+      "run": "cash_low_10000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "cash_low_10000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "cash_low_10000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "cash_low_100000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "cash_low_100000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "cash_low_100000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "cash_low_1000000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "cash_low_1000000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "cash_low_1000000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "cash_base_10000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "cash_base_10000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "cash_base_10000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "cash_base_100000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "cash_base_100000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "cash_base_100000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "cash_base_1000000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "cash_base_1000000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "cash_base_1000000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "cash_high_10000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "cash_high_10000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "cash_high_10000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "cash_high_100000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "cash_high_100000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "cash_high_100000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "cash_high_1000000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "cash_high_1000000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "cash_high_1000000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "equity_hold_low_10000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "equity_hold_low_10000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "equity_hold_low_10000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "equity_hold_low_100000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "equity_hold_low_100000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "equity_hold_low_100000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "equity_hold_low_1000000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "equity_hold_low_1000000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "equity_hold_low_1000000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "equity_hold_base_10000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "equity_hold_base_10000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "equity_hold_base_10000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "equity_hold_base_100000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "equity_hold_base_100000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "equity_hold_base_100000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "equity_hold_base_1000000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "equity_hold_base_1000000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "equity_hold_base_1000000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "equity_hold_high_10000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "equity_hold_high_10000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "equity_hold_high_10000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "equity_hold_high_100000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "equity_hold_high_100000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "equity_hold_high_100000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "equity_hold_high_1000000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "equity_hold_high_1000000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "equity_hold_high_1000000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "bond_hold_low_10000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "bond_hold_low_10000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "bond_hold_low_10000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "bond_hold_low_100000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "bond_hold_low_100000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "bond_hold_low_100000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "bond_hold_low_1000000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "bond_hold_low_1000000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "bond_hold_low_1000000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "bond_hold_base_10000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "bond_hold_base_10000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "bond_hold_base_10000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "bond_hold_base_100000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "bond_hold_base_100000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "bond_hold_base_100000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "bond_hold_base_1000000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "bond_hold_base_1000000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "bond_hold_base_1000000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "bond_hold_high_10000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "bond_hold_high_10000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "bond_hold_high_10000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "bond_hold_high_100000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "bond_hold_high_100000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 1,
+      "examples": [
+        {
+          "day": "2018-09-18",
+          "symbol": "511010",
+          "fill_price": "113.167",
+          "low": "113.0300",
+          "high": "113.1120"
+        }
+      ]
+    },
+    {
+      "run": "bond_hold_high_100000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "bond_hold_high_1000000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "bond_hold_high_1000000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 1,
+      "examples": [
+        {
+          "day": "2018-09-18",
+          "symbol": "511010",
+          "fill_price": "113.167",
+          "low": "113.0300",
+          "high": "113.1120"
+        }
+      ]
+    },
+    {
+      "run": "bond_hold_high_1000000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "monthly_20_80_low_10000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "monthly_20_80_low_10000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 1,
+      "examples": [
+        {
+          "day": "2022-08-02",
+          "symbol": "510300",
+          "fill_price": "4.211",
+          "low": "4.1320",
+          "high": "4.2100"
+        }
+      ]
+    },
+    {
+      "run": "monthly_20_80_low_10000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "monthly_20_80_low_100000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 5,
+      "examples": [
+        {
+          "day": "2019-01-02",
+          "symbol": "510300",
+          "fill_price": "3.071",
+          "low": "3.0090",
+          "high": "3.0700"
+        },
+        {
+          "day": "2019-04-01",
+          "symbol": "510300",
+          "fill_price": "3.893",
+          "low": "3.8940",
+          "high": "3.9730"
+        },
+        {
+          "day": "2020-11-02",
+          "symbol": "510300",
+          "fill_price": "4.758",
+          "low": "4.7590",
+          "high": "4.8040"
+        },
+        {
+          "day": "2023-11-01",
+          "symbol": "510300",
+          "fill_price": "3.681",
+          "low": "3.6320",
+          "high": "3.6800"
+        },
+        {
+          "day": "2024-01-02",
+          "symbol": "510300",
+          "fill_price": "3.503",
+          "low": "3.4510",
+          "high": "3.5020"
+        }
+      ]
+    },
+    {
+      "run": "monthly_20_80_low_100000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 5,
+      "examples": [
+        {
+          "day": "2019-01-03",
+          "symbol": "511010",
+          "fill_price": "116.256",
+          "low": "116.2680",
+          "high": "116.7000"
+        },
+        {
+          "day": "2020-11-03",
+          "symbol": "510300",
+          "fill_price": "4.799",
+          "low": "4.8000",
+          "high": "4.8630"
+        },
+        {
+          "day": "2022-02-08",
+          "symbol": "510300",
+          "fill_price": "4.627",
+          "low": "4.5150",
+          "high": "4.6260"
+        },
+        {
+          "day": "2022-08-02",
+          "symbol": "510300",
+          "fill_price": "4.211",
+          "low": "4.1320",
+          "high": "4.2100"
+        },
+        {
+          "day": "2025-12-02",
+          "symbol": "510300",
+          "fill_price": "4.687",
+          "low": "4.6510",
+          "high": "4.6860"
+        }
+      ]
+    },
+    {
+      "run": "monthly_20_80_low_100000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 3,
+      "examples": [
+        {
+          "day": "2023-08-03",
+          "symbol": "510300",
+          "fill_price": "4.030",
+          "low": "4.0310",
+          "high": "4.0750"
+        },
+        {
+          "day": "2023-12-05",
+          "symbol": "510300",
+          "fill_price": "3.520",
+          "low": "3.4570",
+          "high": "3.5190"
+        },
+        {
+          "day": "2024-01-04",
+          "symbol": "510300",
+          "fill_price": "3.443",
+          "low": "3.3870",
+          "high": "3.4420"
+        }
+      ]
+    },
+    {
+      "run": "monthly_20_80_low_1000000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 15,
+      "examples": [
+        {
+          "day": "2018-11-01",
+          "symbol": "511010",
+          "fill_price": "114.294",
+          "low": "114.3050",
+          "high": "114.3940"
+        },
+        {
+          "day": "2019-01-02",
+          "symbol": "510300",
+          "fill_price": "3.071",
+          "low": "3.0090",
+          "high": "3.0700"
+        },
+        {
+          "day": "2019-04-01",
+          "symbol": "510300",
+          "fill_price": "3.893",
+          "low": "3.8940",
+          "high": "3.9730"
+        },
+        {
+          "day": "2019-06-03",
+          "symbol": "511010",
+          "fill_price": "116.944",
+          "low": "116.9560",
+          "high": "117.0500"
+        },
+        {
+          "day": "2020-04-01",
+          "symbol": "511010",
+          "fill_price": "123.302",
+          "low": "123.3150",
+          "high": "124.1400"
+        }
+      ]
+    },
+    {
+      "run": "monthly_20_80_low_1000000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 14,
+      "examples": [
+        {
+          "day": "2019-01-03",
+          "symbol": "511010",
+          "fill_price": "116.256",
+          "low": "116.2680",
+          "high": "116.7000"
+        },
+        {
+          "day": "2019-04-02",
+          "symbol": "511010",
+          "fill_price": "116.752",
+          "low": "116.6950",
+          "high": "116.7490"
+        },
+        {
+          "day": "2019-06-04",
+          "symbol": "511010",
+          "fill_price": "116.890",
+          "low": "116.9020",
+          "high": "117.0250"
+        },
+        {
+          "day": "2020-11-03",
+          "symbol": "510300",
+          "fill_price": "4.799",
+          "low": "4.8000",
+          "high": "4.8630"
+        },
+        {
+          "day": "2021-06-02",
+          "symbol": "511010",
+          "fill_price": "123.073",
+          "low": "122.9800",
+          "high": "123.0600"
+        }
+      ]
+    },
+    {
+      "run": "monthly_20_80_low_1000000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 14,
+      "examples": [
+        {
+          "day": "2019-06-05",
+          "symbol": "511010",
+          "fill_price": "116.980",
+          "low": "116.9910",
+          "high": "117.0560"
+        },
+        {
+          "day": "2020-03-04",
+          "symbol": "511010",
+          "fill_price": "121.805",
+          "low": "121.8180",
+          "high": "122.0000"
+        },
+        {
+          "day": "2020-05-08",
+          "symbol": "511010",
+          "fill_price": "125.461",
+          "low": "125.2500",
+          "high": "125.4480"
+        },
+        {
+          "day": "2020-07-03",
+          "symbol": "511010",
+          "fill_price": "122.293",
+          "low": "122.0850",
+          "high": "122.2870"
+        },
+        {
+          "day": "2022-04-07",
+          "symbol": "511010",
+          "fill_price": "127.237",
+          "low": "127.2500",
+          "high": "127.4890"
+        }
+      ]
+    },
+    {
+      "run": "monthly_20_80_base_10000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "monthly_20_80_base_10000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 1,
+      "examples": [
+        {
+          "day": "2022-08-02",
+          "symbol": "510300",
+          "fill_price": "4.213",
+          "low": "4.1320",
+          "high": "4.2100"
+        }
+      ]
+    },
+    {
+      "run": "monthly_20_80_base_10000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "monthly_20_80_base_100000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 9,
+      "examples": [
+        {
+          "day": "2019-01-02",
+          "symbol": "510300",
+          "fill_price": "3.072",
+          "low": "3.0090",
+          "high": "3.0700"
+        },
+        {
+          "day": "2019-04-01",
+          "symbol": "510300",
+          "fill_price": "3.892",
+          "low": "3.8940",
+          "high": "3.9730"
+        },
+        {
+          "day": "2020-01-02",
+          "symbol": "510300",
+          "fill_price": "4.117",
+          "low": "4.1180",
+          "high": "4.1740"
+        },
+        {
+          "day": "2020-11-02",
+          "symbol": "510300",
+          "fill_price": "4.756",
+          "low": "4.7590",
+          "high": "4.8040"
+        },
+        {
+          "day": "2020-12-01",
+          "symbol": "510300",
+          "fill_price": "5.024",
+          "low": "5.0260",
+          "high": "5.1500"
+        }
+      ]
+    },
+    {
+      "run": "monthly_20_80_base_100000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 11,
+      "examples": [
+        {
+          "day": "2019-01-03",
+          "symbol": "511010",
+          "fill_price": "116.209",
+          "low": "116.2680",
+          "high": "116.7000"
+        },
+        {
+          "day": "2019-11-04",
+          "symbol": "510300",
+          "fill_price": "4.022",
+          "low": "4.0230",
+          "high": "4.0470"
+        },
+        {
+          "day": "2020-11-03",
+          "symbol": "510300",
+          "fill_price": "4.797",
+          "low": "4.8000",
+          "high": "4.8630"
+        },
+        {
+          "day": "2021-07-02",
+          "symbol": "510300",
+          "fill_price": "5.223",
+          "low": "5.1110",
+          "high": "5.2220"
+        },
+        {
+          "day": "2022-02-08",
+          "symbol": "510300",
+          "fill_price": "4.629",
+          "low": "4.5150",
+          "high": "4.6260"
+        }
+      ]
+    },
+    {
+      "run": "monthly_20_80_base_100000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 6,
+      "examples": [
+        {
+          "day": "2023-08-03",
+          "symbol": "510300",
+          "fill_price": "4.028",
+          "low": "4.0310",
+          "high": "4.0750"
+        },
+        {
+          "day": "2023-12-05",
+          "symbol": "510300",
+          "fill_price": "3.521",
+          "low": "3.4570",
+          "high": "3.5190"
+        },
+        {
+          "day": "2024-01-04",
+          "symbol": "510300",
+          "fill_price": "3.444",
+          "low": "3.3870",
+          "high": "3.4420"
+        },
+        {
+          "day": "2024-03-05",
+          "symbol": "511010",
+          "fill_price": "134.595",
+          "low": "134.5010",
+          "high": "134.5780"
+        },
+        {
+          "day": "2025-10-13",
+          "symbol": "510300",
+          "fill_price": "4.595",
+          "low": "4.5960",
+          "high": "4.7040"
+        }
+      ]
+    },
+    {
+      "run": "monthly_20_80_base_1000000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 34,
+      "examples": [
+        {
+          "day": "2018-11-01",
+          "symbol": "511010",
+          "fill_price": "114.248",
+          "low": "114.3050",
+          "high": "114.3940"
+        },
+        {
+          "day": "2019-01-02",
+          "symbol": "510300",
+          "fill_price": "3.072",
+          "low": "3.0090",
+          "high": "3.0700"
+        },
+        {
+          "day": "2019-03-01",
+          "symbol": "511010",
+          "fill_price": "116.504",
+          "low": "116.3660",
+          "high": "116.5000"
+        },
+        {
+          "day": "2019-04-01",
+          "symbol": "510300",
+          "fill_price": "3.892",
+          "low": "3.8940",
+          "high": "3.9730"
+        },
+        {
+          "day": "2019-04-01",
+          "symbol": "511010",
+          "fill_price": "116.921",
+          "low": "116.7240",
+          "high": "116.8880"
+        }
+      ]
+    },
+    {
+      "run": "monthly_20_80_base_1000000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 34,
+      "examples": [
+        {
+          "day": "2019-01-03",
+          "symbol": "511010",
+          "fill_price": "116.209",
+          "low": "116.2680",
+          "high": "116.7000"
+        },
+        {
+          "day": "2019-04-02",
+          "symbol": "511010",
+          "fill_price": "116.799",
+          "low": "116.6950",
+          "high": "116.7490"
+        },
+        {
+          "day": "2019-06-04",
+          "symbol": "511010",
+          "fill_price": "116.843",
+          "low": "116.9020",
+          "high": "117.0250"
+        },
+        {
+          "day": "2019-11-04",
+          "symbol": "510300",
+          "fill_price": "4.022",
+          "low": "4.0230",
+          "high": "4.0470"
+        },
+        {
+          "day": "2020-08-04",
+          "symbol": "511010",
+          "fill_price": "121.699",
+          "low": "121.5130",
+          "high": "121.6980"
+        }
+      ]
+    },
+    {
+      "run": "monthly_20_80_base_1000000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 31,
+      "examples": [
+        {
+          "day": "2019-06-05",
+          "symbol": "511010",
+          "fill_price": "116.933",
+          "low": "116.9910",
+          "high": "117.0560"
+        },
+        {
+          "day": "2019-12-04",
+          "symbol": "511010",
+          "fill_price": "118.959",
+          "low": "119.0000",
+          "high": "119.0690"
+        },
+        {
+          "day": "2020-03-04",
+          "symbol": "511010",
+          "fill_price": "121.757",
+          "low": "121.8180",
+          "high": "122.0000"
+        },
+        {
+          "day": "2020-05-08",
+          "symbol": "511010",
+          "fill_price": "125.511",
+          "low": "125.2500",
+          "high": "125.4480"
+        },
+        {
+          "day": "2020-07-03",
+          "symbol": "511010",
+          "fill_price": "122.342",
+          "low": "122.0850",
+          "high": "122.2870"
+        }
+      ]
+    },
+    {
+      "run": "monthly_20_80_high_10000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 2,
+      "examples": [
+        {
+          "day": "2024-09-02",
+          "symbol": "510300",
+          "fill_price": "3.385",
+          "low": "3.3300",
+          "high": "3.3830"
+        },
+        {
+          "day": "2024-11-01",
+          "symbol": "510300",
+          "fill_price": "3.960",
+          "low": "3.9610",
+          "high": "4.0180"
+        }
+      ]
+    },
+    {
+      "run": "monthly_20_80_high_10000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 1,
+      "examples": [
+        {
+          "day": "2022-08-02",
+          "symbol": "510300",
+          "fill_price": "4.215",
+          "low": "4.1320",
+          "high": "4.2100"
+        }
+      ]
+    },
+    {
+      "run": "monthly_20_80_high_10000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "monthly_20_80_high_100000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 17,
+      "examples": [
+        {
+          "day": "2019-01-02",
+          "symbol": "510300",
+          "fill_price": "3.074",
+          "low": "3.0090",
+          "high": "3.0700"
+        },
+        {
+          "day": "2019-04-01",
+          "symbol": "510300",
+          "fill_price": "3.890",
+          "low": "3.8940",
+          "high": "3.9730"
+        },
+        {
+          "day": "2020-01-02",
+          "symbol": "510300",
+          "fill_price": "4.115",
+          "low": "4.1180",
+          "high": "4.1740"
+        },
+        {
+          "day": "2020-06-01",
+          "symbol": "510300",
+          "fill_price": "3.894",
+          "low": "3.8950",
+          "high": "3.9760"
+        },
+        {
+          "day": "2020-07-01",
+          "symbol": "510300",
+          "fill_price": "4.182",
+          "low": "4.1830",
+          "high": "4.2760"
+        }
+      ]
+    },
+    {
+      "run": "monthly_20_80_high_100000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 13,
+      "examples": [
+        {
+          "day": "2018-09-18",
+          "symbol": "511010",
+          "fill_price": "113.167",
+          "low": "113.0300",
+          "high": "113.1120"
+        },
+        {
+          "day": "2019-01-03",
+          "symbol": "511010",
+          "fill_price": "116.151",
+          "low": "116.2680",
+          "high": "116.7000"
+        },
+        {
+          "day": "2019-11-04",
+          "symbol": "510300",
+          "fill_price": "4.020",
+          "low": "4.0230",
+          "high": "4.0470"
+        },
+        {
+          "day": "2020-11-03",
+          "symbol": "510300",
+          "fill_price": "4.795",
+          "low": "4.8000",
+          "high": "4.8630"
+        },
+        {
+          "day": "2021-07-02",
+          "symbol": "510300",
+          "fill_price": "5.226",
+          "low": "5.1110",
+          "high": "5.2220"
+        }
+      ]
+    },
+    {
+      "run": "monthly_20_80_high_100000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 11,
+      "examples": [
+        {
+          "day": "2020-05-08",
+          "symbol": "510300",
+          "fill_price": "3.925",
+          "low": "3.9270",
+          "high": "3.9720"
+        },
+        {
+          "day": "2021-04-06",
+          "symbol": "510300",
+          "fill_price": "5.179",
+          "low": "5.1200",
+          "high": "5.1770"
+        },
+        {
+          "day": "2023-08-03",
+          "symbol": "510300",
+          "fill_price": "4.026",
+          "low": "4.0310",
+          "high": "4.0750"
+        },
+        {
+          "day": "2023-09-05",
+          "symbol": "510300",
+          "fill_price": "3.914",
+          "low": "3.8850",
+          "high": "3.9120"
+        },
+        {
+          "day": "2023-12-05",
+          "symbol": "510300",
+          "fill_price": "3.523",
+          "low": "3.4570",
+          "high": "3.5190"
+        }
+      ]
+    },
+    {
+      "run": "monthly_20_80_high_1000000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 48,
+      "examples": [
+        {
+          "day": "2018-11-01",
+          "symbol": "511010",
+          "fill_price": "114.191",
+          "low": "114.3050",
+          "high": "114.3940"
+        },
+        {
+          "day": "2019-01-02",
+          "symbol": "510300",
+          "fill_price": "3.074",
+          "low": "3.0090",
+          "high": "3.0700"
+        },
+        {
+          "day": "2019-03-01",
+          "symbol": "511010",
+          "fill_price": "116.562",
+          "low": "116.3660",
+          "high": "116.5000"
+        },
+        {
+          "day": "2019-04-01",
+          "symbol": "510300",
+          "fill_price": "3.890",
+          "low": "3.8940",
+          "high": "3.9730"
+        },
+        {
+          "day": "2019-06-03",
+          "symbol": "511010",
+          "fill_price": "116.839",
+          "low": "116.9560",
+          "high": "117.0500"
+        }
+      ]
+    },
+    {
+      "run": "monthly_20_80_high_1000000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 51,
+      "examples": [
+        {
+          "day": "2018-09-18",
+          "symbol": "511010",
+          "fill_price": "113.167",
+          "low": "113.0300",
+          "high": "113.1120"
+        },
+        {
+          "day": "2019-01-03",
+          "symbol": "511010",
+          "fill_price": "116.151",
+          "low": "116.2680",
+          "high": "116.7000"
+        },
+        {
+          "day": "2019-03-04",
+          "symbol": "511010",
+          "fill_price": "116.417",
+          "low": "116.2000",
+          "high": "116.4150"
+        },
+        {
+          "day": "2019-04-02",
+          "symbol": "511010",
+          "fill_price": "116.857",
+          "low": "116.6950",
+          "high": "116.7490"
+        },
+        {
+          "day": "2019-06-04",
+          "symbol": "511010",
+          "fill_price": "116.785",
+          "low": "116.9020",
+          "high": "117.0250"
+        }
+      ]
+    },
+    {
+      "run": "monthly_20_80_high_1000000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 43,
+      "examples": [
+        {
+          "day": "2019-01-04",
+          "symbol": "511010",
+          "fill_price": "116.372",
+          "low": "116.4200",
+          "high": "116.6000"
+        },
+        {
+          "day": "2019-04-03",
+          "symbol": "511010",
+          "fill_price": "116.864",
+          "low": "116.4020",
+          "high": "116.7470"
+        },
+        {
+          "day": "2019-06-05",
+          "symbol": "511010",
+          "fill_price": "116.875",
+          "low": "116.9910",
+          "high": "117.0560"
+        },
+        {
+          "day": "2020-03-04",
+          "symbol": "511010",
+          "fill_price": "121.696",
+          "low": "121.8180",
+          "high": "122.0000"
+        },
+        {
+          "day": "2020-04-03",
+          "symbol": "511010",
+          "fill_price": "123.153",
+          "low": "123.1850",
+          "high": "123.4100"
+        }
+      ]
+    },
+    {
+      "run": "monthly_50_50_low_10000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 2,
+      "examples": [
+        {
+          "day": "2020-11-02",
+          "symbol": "510300",
+          "fill_price": "4.758",
+          "low": "4.7590",
+          "high": "4.8040"
+        },
+        {
+          "day": "2023-11-01",
+          "symbol": "510300",
+          "fill_price": "3.681",
+          "low": "3.6320",
+          "high": "3.6800"
+        }
+      ]
+    },
+    {
+      "run": "monthly_50_50_low_10000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 2,
+      "examples": [
+        {
+          "day": "2020-11-03",
+          "symbol": "510300",
+          "fill_price": "4.799",
+          "low": "4.8000",
+          "high": "4.8630"
+        },
+        {
+          "day": "2022-02-08",
+          "symbol": "510300",
+          "fill_price": "4.627",
+          "low": "4.5150",
+          "high": "4.6260"
+        }
+      ]
+    },
+    {
+      "run": "monthly_50_50_low_10000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "monthly_50_50_low_100000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 6,
+      "examples": [
+        {
+          "day": "2019-01-02",
+          "symbol": "510300",
+          "fill_price": "3.071",
+          "low": "3.0090",
+          "high": "3.0700"
+        },
+        {
+          "day": "2019-04-01",
+          "symbol": "510300",
+          "fill_price": "3.893",
+          "low": "3.8940",
+          "high": "3.9730"
+        },
+        {
+          "day": "2020-11-02",
+          "symbol": "510300",
+          "fill_price": "4.758",
+          "low": "4.7590",
+          "high": "4.8040"
+        },
+        {
+          "day": "2022-04-01",
+          "symbol": "511010",
+          "fill_price": "126.963",
+          "low": "126.9760",
+          "high": "127.1660"
+        },
+        {
+          "day": "2023-11-01",
+          "symbol": "510300",
+          "fill_price": "3.681",
+          "low": "3.6320",
+          "high": "3.6800"
+        }
+      ]
+    },
+    {
+      "run": "monthly_50_50_low_100000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 5,
+      "examples": [
+        {
+          "day": "2020-11-03",
+          "symbol": "510300",
+          "fill_price": "4.799",
+          "low": "4.8000",
+          "high": "4.8630"
+        },
+        {
+          "day": "2022-02-08",
+          "symbol": "510300",
+          "fill_price": "4.627",
+          "low": "4.5150",
+          "high": "4.6260"
+        },
+        {
+          "day": "2022-04-06",
+          "symbol": "511010",
+          "fill_price": "127.156",
+          "low": "127.1690",
+          "high": "127.3900"
+        },
+        {
+          "day": "2022-08-02",
+          "symbol": "510300",
+          "fill_price": "4.211",
+          "low": "4.1320",
+          "high": "4.2100"
+        },
+        {
+          "day": "2025-12-02",
+          "symbol": "510300",
+          "fill_price": "4.687",
+          "low": "4.6510",
+          "high": "4.6860"
+        }
+      ]
+    },
+    {
+      "run": "monthly_50_50_low_100000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 4,
+      "examples": [
+        {
+          "day": "2022-04-07",
+          "symbol": "511010",
+          "fill_price": "127.237",
+          "low": "127.2500",
+          "high": "127.4890"
+        },
+        {
+          "day": "2023-08-03",
+          "symbol": "510300",
+          "fill_price": "4.030",
+          "low": "4.0310",
+          "high": "4.0750"
+        },
+        {
+          "day": "2023-12-05",
+          "symbol": "510300",
+          "fill_price": "3.520",
+          "low": "3.4570",
+          "high": "3.5190"
+        },
+        {
+          "day": "2024-01-04",
+          "symbol": "510300",
+          "fill_price": "3.443",
+          "low": "3.3870",
+          "high": "3.4420"
+        }
+      ]
+    },
+    {
+      "run": "monthly_50_50_low_1000000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 17,
+      "examples": [
+        {
+          "day": "2018-11-01",
+          "symbol": "511010",
+          "fill_price": "114.294",
+          "low": "114.3050",
+          "high": "114.3940"
+        },
+        {
+          "day": "2019-01-02",
+          "symbol": "510300",
+          "fill_price": "3.071",
+          "low": "3.0090",
+          "high": "3.0700"
+        },
+        {
+          "day": "2019-04-01",
+          "symbol": "510300",
+          "fill_price": "3.893",
+          "low": "3.8940",
+          "high": "3.9730"
+        },
+        {
+          "day": "2019-06-03",
+          "symbol": "511010",
+          "fill_price": "116.944",
+          "low": "116.9560",
+          "high": "117.0500"
+        },
+        {
+          "day": "2020-02-03",
+          "symbol": "511010",
+          "fill_price": "120.802",
+          "low": "120.8150",
+          "high": "126.8180"
+        }
+      ]
+    },
+    {
+      "run": "monthly_50_50_low_1000000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 16,
+      "examples": [
+        {
+          "day": "2019-01-03",
+          "symbol": "511010",
+          "fill_price": "116.256",
+          "low": "116.2680",
+          "high": "116.7000"
+        },
+        {
+          "day": "2019-04-02",
+          "symbol": "511010",
+          "fill_price": "116.752",
+          "low": "116.6950",
+          "high": "116.7490"
+        },
+        {
+          "day": "2019-06-04",
+          "symbol": "511010",
+          "fill_price": "116.890",
+          "low": "116.9020",
+          "high": "117.0250"
+        },
+        {
+          "day": "2020-03-03",
+          "symbol": "511010",
+          "fill_price": "121.388",
+          "low": "121.4010",
+          "high": "121.7730"
+        },
+        {
+          "day": "2020-06-02",
+          "symbol": "511010",
+          "fill_price": "123.713",
+          "low": "123.0500",
+          "high": "123.7000"
+        }
+      ]
+    },
+    {
+      "run": "monthly_50_50_low_1000000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 15,
+      "examples": [
+        {
+          "day": "2019-04-03",
+          "symbol": "511010",
+          "fill_price": "116.759",
+          "low": "116.4020",
+          "high": "116.7470"
+        },
+        {
+          "day": "2019-06-05",
+          "symbol": "511010",
+          "fill_price": "116.980",
+          "low": "116.9910",
+          "high": "117.0560"
+        },
+        {
+          "day": "2020-05-08",
+          "symbol": "511010",
+          "fill_price": "125.461",
+          "low": "125.2500",
+          "high": "125.4480"
+        },
+        {
+          "day": "2020-07-03",
+          "symbol": "511010",
+          "fill_price": "122.293",
+          "low": "122.0850",
+          "high": "122.2870"
+        },
+        {
+          "day": "2022-01-06",
+          "symbol": "511010",
+          "fill_price": "126.296",
+          "low": "126.1630",
+          "high": "126.2830"
+        }
+      ]
+    },
+    {
+      "run": "monthly_50_50_base_10000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 3,
+      "examples": [
+        {
+          "day": "2020-01-02",
+          "symbol": "510300",
+          "fill_price": "4.117",
+          "low": "4.1180",
+          "high": "4.1740"
+        },
+        {
+          "day": "2020-11-02",
+          "symbol": "510300",
+          "fill_price": "4.756",
+          "low": "4.7590",
+          "high": "4.8040"
+        },
+        {
+          "day": "2023-11-01",
+          "symbol": "510300",
+          "fill_price": "3.682",
+          "low": "3.6320",
+          "high": "3.6800"
+        }
+      ]
+    },
+    {
+      "run": "monthly_50_50_base_10000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 3,
+      "examples": [
+        {
+          "day": "2020-11-03",
+          "symbol": "510300",
+          "fill_price": "4.797",
+          "low": "4.8000",
+          "high": "4.8630"
+        },
+        {
+          "day": "2022-02-08",
+          "symbol": "510300",
+          "fill_price": "4.629",
+          "low": "4.5150",
+          "high": "4.6260"
+        },
+        {
+          "day": "2025-06-04",
+          "symbol": "510300",
+          "fill_price": "3.957",
+          "low": "3.9580",
+          "high": "3.9850"
+        }
+      ]
+    },
+    {
+      "run": "monthly_50_50_base_10000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "monthly_50_50_base_100000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 11,
+      "examples": [
+        {
+          "day": "2019-01-02",
+          "symbol": "510300",
+          "fill_price": "3.072",
+          "low": "3.0090",
+          "high": "3.0700"
+        },
+        {
+          "day": "2019-04-01",
+          "symbol": "510300",
+          "fill_price": "3.892",
+          "low": "3.8940",
+          "high": "3.9730"
+        },
+        {
+          "day": "2020-01-02",
+          "symbol": "510300",
+          "fill_price": "4.117",
+          "low": "4.1180",
+          "high": "4.1740"
+        },
+        {
+          "day": "2020-08-03",
+          "symbol": "511010",
+          "fill_price": "121.721",
+          "low": "120.7000",
+          "high": "121.6960"
+        },
+        {
+          "day": "2020-11-02",
+          "symbol": "510300",
+          "fill_price": "4.756",
+          "low": "4.7590",
+          "high": "4.8040"
+        }
+      ]
+    },
+    {
+      "run": "monthly_50_50_base_100000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 13,
+      "examples": [
+        {
+          "day": "2019-11-04",
+          "symbol": "510300",
+          "fill_price": "4.022",
+          "low": "4.0230",
+          "high": "4.0470"
+        },
+        {
+          "day": "2020-08-04",
+          "symbol": "511010",
+          "fill_price": "121.699",
+          "low": "121.5130",
+          "high": "121.6980"
+        },
+        {
+          "day": "2020-11-03",
+          "symbol": "510300",
+          "fill_price": "4.797",
+          "low": "4.8000",
+          "high": "4.8630"
+        },
+        {
+          "day": "2021-07-02",
+          "symbol": "510300",
+          "fill_price": "5.223",
+          "low": "5.1110",
+          "high": "5.2220"
+        },
+        {
+          "day": "2022-02-08",
+          "symbol": "510300",
+          "fill_price": "4.629",
+          "low": "4.5150",
+          "high": "4.6260"
+        }
+      ]
+    },
+    {
+      "run": "monthly_50_50_base_100000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 6,
+      "examples": [
+        {
+          "day": "2022-04-07",
+          "symbol": "511010",
+          "fill_price": "127.186",
+          "low": "127.2500",
+          "high": "127.4890"
+        },
+        {
+          "day": "2023-08-03",
+          "symbol": "510300",
+          "fill_price": "4.028",
+          "low": "4.0310",
+          "high": "4.0750"
+        },
+        {
+          "day": "2023-12-05",
+          "symbol": "510300",
+          "fill_price": "3.521",
+          "low": "3.4570",
+          "high": "3.5190"
+        },
+        {
+          "day": "2024-01-04",
+          "symbol": "510300",
+          "fill_price": "3.444",
+          "low": "3.3870",
+          "high": "3.4420"
+        },
+        {
+          "day": "2025-10-13",
+          "symbol": "510300",
+          "fill_price": "4.595",
+          "low": "4.5960",
+          "high": "4.7040"
+        }
+      ]
+    },
+    {
+      "run": "monthly_50_50_base_1000000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 37,
+      "examples": [
+        {
+          "day": "2018-11-01",
+          "symbol": "511010",
+          "fill_price": "114.248",
+          "low": "114.3050",
+          "high": "114.3940"
+        },
+        {
+          "day": "2019-01-02",
+          "symbol": "510300",
+          "fill_price": "3.072",
+          "low": "3.0090",
+          "high": "3.0700"
+        },
+        {
+          "day": "2019-03-01",
+          "symbol": "511010",
+          "fill_price": "116.504",
+          "low": "116.3660",
+          "high": "116.5000"
+        },
+        {
+          "day": "2019-04-01",
+          "symbol": "510300",
+          "fill_price": "3.892",
+          "low": "3.8940",
+          "high": "3.9730"
+        },
+        {
+          "day": "2019-04-01",
+          "symbol": "511010",
+          "fill_price": "116.921",
+          "low": "116.7240",
+          "high": "116.8880"
+        }
+      ]
+    },
+    {
+      "run": "monthly_50_50_base_1000000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 41,
+      "examples": [
+        {
+          "day": "2019-01-03",
+          "symbol": "511010",
+          "fill_price": "116.209",
+          "low": "116.2680",
+          "high": "116.7000"
+        },
+        {
+          "day": "2019-04-02",
+          "symbol": "511010",
+          "fill_price": "116.799",
+          "low": "116.6950",
+          "high": "116.7490"
+        },
+        {
+          "day": "2019-06-04",
+          "symbol": "511010",
+          "fill_price": "116.843",
+          "low": "116.9020",
+          "high": "117.0250"
+        },
+        {
+          "day": "2019-11-04",
+          "symbol": "510300",
+          "fill_price": "4.022",
+          "low": "4.0230",
+          "high": "4.0470"
+        },
+        {
+          "day": "2020-01-03",
+          "symbol": "511010",
+          "fill_price": "119.441",
+          "low": "119.2510",
+          "high": "119.4380"
+        }
+      ]
+    },
+    {
+      "run": "monthly_50_50_base_1000000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 39,
+      "examples": [
+        {
+          "day": "2019-04-03",
+          "symbol": "511010",
+          "fill_price": "116.806",
+          "low": "116.4020",
+          "high": "116.7470"
+        },
+        {
+          "day": "2019-06-05",
+          "symbol": "511010",
+          "fill_price": "116.933",
+          "low": "116.9910",
+          "high": "117.0560"
+        },
+        {
+          "day": "2020-05-08",
+          "symbol": "511010",
+          "fill_price": "125.511",
+          "low": "125.2500",
+          "high": "125.4480"
+        },
+        {
+          "day": "2020-07-03",
+          "symbol": "511010",
+          "fill_price": "122.342",
+          "low": "122.0850",
+          "high": "122.2870"
+        },
+        {
+          "day": "2020-09-03",
+          "symbol": "511010",
+          "fill_price": "120.727",
+          "low": "120.4800",
+          "high": "120.6970"
+        }
+      ]
+    },
+    {
+      "run": "monthly_50_50_high_10000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 5,
+      "examples": [
+        {
+          "day": "2020-01-02",
+          "symbol": "510300",
+          "fill_price": "4.115",
+          "low": "4.1180",
+          "high": "4.1740"
+        },
+        {
+          "day": "2020-07-01",
+          "symbol": "510300",
+          "fill_price": "4.182",
+          "low": "4.1830",
+          "high": "4.2760"
+        },
+        {
+          "day": "2020-11-02",
+          "symbol": "510300",
+          "fill_price": "4.754",
+          "low": "4.7590",
+          "high": "4.8040"
+        },
+        {
+          "day": "2023-11-01",
+          "symbol": "510300",
+          "fill_price": "3.684",
+          "low": "3.6320",
+          "high": "3.6800"
+        },
+        {
+          "day": "2024-11-01",
+          "symbol": "510300",
+          "fill_price": "3.960",
+          "low": "3.9610",
+          "high": "4.0180"
+        }
+      ]
+    },
+    {
+      "run": "monthly_50_50_high_10000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 2,
+      "examples": [
+        {
+          "day": "2020-11-03",
+          "symbol": "510300",
+          "fill_price": "4.795",
+          "low": "4.8000",
+          "high": "4.8630"
+        },
+        {
+          "day": "2022-02-08",
+          "symbol": "510300",
+          "fill_price": "4.631",
+          "low": "4.5150",
+          "high": "4.6260"
+        }
+      ]
+    },
+    {
+      "run": "monthly_50_50_high_10000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "monthly_50_50_high_100000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 18,
+      "examples": [
+        {
+          "day": "2019-01-02",
+          "symbol": "510300",
+          "fill_price": "3.074",
+          "low": "3.0090",
+          "high": "3.0700"
+        },
+        {
+          "day": "2019-04-01",
+          "symbol": "510300",
+          "fill_price": "3.890",
+          "low": "3.8940",
+          "high": "3.9730"
+        },
+        {
+          "day": "2020-01-02",
+          "symbol": "510300",
+          "fill_price": "4.115",
+          "low": "4.1180",
+          "high": "4.1740"
+        },
+        {
+          "day": "2020-07-01",
+          "symbol": "510300",
+          "fill_price": "4.182",
+          "low": "4.1830",
+          "high": "4.2760"
+        },
+        {
+          "day": "2020-08-03",
+          "symbol": "511010",
+          "fill_price": "121.782",
+          "low": "120.7000",
+          "high": "121.6960"
+        }
+      ]
+    },
+    {
+      "run": "monthly_50_50_high_100000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 15,
+      "examples": [
+        {
+          "day": "2018-09-18",
+          "symbol": "511010",
+          "fill_price": "113.167",
+          "low": "113.0300",
+          "high": "113.1120"
+        },
+        {
+          "day": "2019-11-04",
+          "symbol": "510300",
+          "fill_price": "4.020",
+          "low": "4.0230",
+          "high": "4.0470"
+        },
+        {
+          "day": "2020-08-04",
+          "symbol": "511010",
+          "fill_price": "121.760",
+          "low": "121.5130",
+          "high": "121.6980"
+        },
+        {
+          "day": "2020-11-03",
+          "symbol": "510300",
+          "fill_price": "4.795",
+          "low": "4.8000",
+          "high": "4.8630"
+        },
+        {
+          "day": "2021-07-02",
+          "symbol": "510300",
+          "fill_price": "5.226",
+          "low": "5.1110",
+          "high": "5.2220"
+        }
+      ]
+    },
+    {
+      "run": "monthly_50_50_high_100000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 12,
+      "examples": [
+        {
+          "day": "2020-05-08",
+          "symbol": "510300",
+          "fill_price": "3.925",
+          "low": "3.9270",
+          "high": "3.9720"
+        },
+        {
+          "day": "2021-04-06",
+          "symbol": "510300",
+          "fill_price": "5.179",
+          "low": "5.1200",
+          "high": "5.1770"
+        },
+        {
+          "day": "2022-04-07",
+          "symbol": "511010",
+          "fill_price": "127.122",
+          "low": "127.2500",
+          "high": "127.4890"
+        },
+        {
+          "day": "2022-07-05",
+          "symbol": "511010",
+          "fill_price": "127.814",
+          "low": "127.5460",
+          "high": "127.7800"
+        },
+        {
+          "day": "2023-08-03",
+          "symbol": "510300",
+          "fill_price": "4.026",
+          "low": "4.0310",
+          "high": "4.0750"
+        }
+      ]
+    },
+    {
+      "run": "monthly_50_50_high_1000000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 55,
+      "examples": [
+        {
+          "day": "2018-11-01",
+          "symbol": "511010",
+          "fill_price": "114.191",
+          "low": "114.3050",
+          "high": "114.3940"
+        },
+        {
+          "day": "2019-01-02",
+          "symbol": "510300",
+          "fill_price": "3.074",
+          "low": "3.0090",
+          "high": "3.0700"
+        },
+        {
+          "day": "2019-03-01",
+          "symbol": "511010",
+          "fill_price": "116.562",
+          "low": "116.3660",
+          "high": "116.5000"
+        },
+        {
+          "day": "2019-04-01",
+          "symbol": "510300",
+          "fill_price": "3.890",
+          "low": "3.8940",
+          "high": "3.9730"
+        },
+        {
+          "day": "2019-04-01",
+          "symbol": "511010",
+          "fill_price": "116.979",
+          "low": "116.7240",
+          "high": "116.8880"
+        }
+      ]
+    },
+    {
+      "run": "monthly_50_50_high_1000000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 61,
+      "examples": [
+        {
+          "day": "2018-09-18",
+          "symbol": "511010",
+          "fill_price": "113.167",
+          "low": "113.0300",
+          "high": "113.1120"
+        },
+        {
+          "day": "2019-01-03",
+          "symbol": "511010",
+          "fill_price": "116.151",
+          "low": "116.2680",
+          "high": "116.7000"
+        },
+        {
+          "day": "2019-03-04",
+          "symbol": "511010",
+          "fill_price": "116.417",
+          "low": "116.2000",
+          "high": "116.4150"
+        },
+        {
+          "day": "2019-04-02",
+          "symbol": "511010",
+          "fill_price": "116.857",
+          "low": "116.6950",
+          "high": "116.7490"
+        },
+        {
+          "day": "2019-06-04",
+          "symbol": "511010",
+          "fill_price": "116.785",
+          "low": "116.9020",
+          "high": "117.0250"
+        }
+      ]
+    },
+    {
+      "run": "monthly_50_50_high_1000000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 55,
+      "examples": [
+        {
+          "day": "2019-01-04",
+          "symbol": "511010",
+          "fill_price": "116.372",
+          "low": "116.4200",
+          "high": "116.6000"
+        },
+        {
+          "day": "2019-04-03",
+          "symbol": "511010",
+          "fill_price": "116.864",
+          "low": "116.4020",
+          "high": "116.7470"
+        },
+        {
+          "day": "2019-06-05",
+          "symbol": "511010",
+          "fill_price": "116.875",
+          "low": "116.9910",
+          "high": "117.0560"
+        },
+        {
+          "day": "2020-04-03",
+          "symbol": "511010",
+          "fill_price": "123.153",
+          "low": "123.1850",
+          "high": "123.4100"
+        },
+        {
+          "day": "2020-05-08",
+          "symbol": "510300",
+          "fill_price": "3.925",
+          "low": "3.9270",
+          "high": "3.9720"
+        }
+      ]
+    },
+    {
+      "run": "trend_120_low_10000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 2,
+      "examples": [
+        {
+          "day": "2019-10-08",
+          "symbol": "510300",
+          "fill_price": "3.873",
+          "low": "3.8740",
+          "high": "3.9210"
+        },
+        {
+          "day": "2020-03-02",
+          "symbol": "510300",
+          "fill_price": "3.947",
+          "low": "3.9480",
+          "high": "4.0900"
+        }
+      ]
+    },
+    {
+      "run": "trend_120_low_10000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 2,
+      "examples": [
+        {
+          "day": "2023-06-02",
+          "symbol": "510300",
+          "fill_price": "3.829",
+          "low": "3.8300",
+          "high": "3.8730"
+        },
+        {
+          "day": "2024-10-09",
+          "symbol": "510300",
+          "fill_price": "4.286",
+          "low": "4.0050",
+          "high": "4.2850"
+        }
+      ]
+    },
+    {
+      "run": "trend_120_low_10000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 0,
+      "examples": []
+    },
+    {
+      "run": "trend_120_low_100000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 10,
+      "examples": [
+        {
+          "day": "2020-03-02",
+          "symbol": "510300",
+          "fill_price": "3.947",
+          "low": "3.9480",
+          "high": "4.0900"
+        },
+        {
+          "day": "2020-11-02",
+          "symbol": "510300",
+          "fill_price": "4.758",
+          "low": "4.7590",
+          "high": "4.8040"
+        },
+        {
+          "day": "2023-02-01",
+          "symbol": "511010",
+          "fill_price": "128.828",
+          "low": "128.8310",
+          "high": "128.9240"
+        },
+        {
+          "day": "2023-03-01",
+          "symbol": "511010",
+          "fill_price": "128.943",
+          "low": "128.9560",
+          "high": "128.9910"
+        },
+        {
+          "day": "2023-08-01",
+          "symbol": "511010",
+          "fill_price": "131.716",
+          "low": "131.7300",
+          "high": "131.8800"
+        }
+      ]
+    },
+    {
+      "run": "trend_120_low_100000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 8,
+      "examples": [
+        {
+          "day": "2020-11-03",
+          "symbol": "510300",
+          "fill_price": "4.799",
+          "low": "4.8000",
+          "high": "4.8630"
+        },
+        {
+          "day": "2023-06-02",
+          "symbol": "510300",
+          "fill_price": "3.829",
+          "low": "3.8300",
+          "high": "3.8730"
+        },
+        {
+          "day": "2023-08-02",
+          "symbol": "511010",
+          "fill_price": "131.808",
+          "low": "131.8170",
+          "high": "131.8710"
+        },
+        {
+          "day": "2023-09-04",
+          "symbol": "511010",
+          "fill_price": "132.144",
+          "low": "131.7910",
+          "high": "132.1300"
+        },
+        {
+          "day": "2024-10-09",
+          "symbol": "510300",
+          "fill_price": "4.286",
+          "low": "4.0050",
+          "high": "4.2850"
+        }
+      ]
+    },
+    {
+      "run": "trend_120_low_100000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 4,
+      "examples": [
+        {
+          "day": "2021-04-06",
+          "symbol": "511010",
+          "fill_price": "122.045",
+          "low": "121.9010",
+          "high": "122.0320"
+        },
+        {
+          "day": "2023-02-03",
+          "symbol": "511010",
+          "fill_price": "128.959",
+          "low": "128.9720",
+          "high": "129.0400"
+        },
+        {
+          "day": "2023-08-03",
+          "symbol": "511010",
+          "fill_price": "131.816",
+          "low": "131.8300",
+          "high": "131.8990"
+        },
+        {
+          "day": "2026-05-08",
+          "symbol": "511010",
+          "fill_price": "140.833",
+          "low": "140.8480",
+          "high": "140.9000"
+        }
+      ]
+    },
+    {
+      "run": "trend_120_low_1000000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 13,
+      "examples": [
+        {
+          "day": "2019-04-01",
+          "symbol": "510300",
+          "fill_price": "3.893",
+          "low": "3.8940",
+          "high": "3.9730"
+        },
+        {
+          "day": "2019-06-03",
+          "symbol": "511010",
+          "fill_price": "116.944",
+          "low": "116.9560",
+          "high": "117.0500"
+        },
+        {
+          "day": "2020-03-02",
+          "symbol": "510300",
+          "fill_price": "3.947",
+          "low": "3.9480",
+          "high": "4.0900"
+        },
+        {
+          "day": "2020-11-02",
+          "symbol": "510300",
+          "fill_price": "4.758",
+          "low": "4.7590",
+          "high": "4.8040"
+        },
+        {
+          "day": "2020-12-01",
+          "symbol": "511010",
+          "fill_price": "120.793",
+          "low": "120.5700",
+          "high": "120.7800"
+        }
+      ]
+    },
+    {
+      "run": "trend_120_low_1000000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 10,
+      "examples": [
+        {
+          "day": "2019-04-02",
+          "symbol": "511010",
+          "fill_price": "116.752",
+          "low": "116.6950",
+          "high": "116.7490"
+        },
+        {
+          "day": "2019-06-04",
+          "symbol": "511010",
+          "fill_price": "116.890",
+          "low": "116.9020",
+          "high": "117.0250"
+        },
+        {
+          "day": "2020-11-03",
+          "symbol": "510300",
+          "fill_price": "4.799",
+          "low": "4.8000",
+          "high": "4.8630"
+        },
+        {
+          "day": "2023-06-02",
+          "symbol": "510300",
+          "fill_price": "3.829",
+          "low": "3.8300",
+          "high": "3.8730"
+        },
+        {
+          "day": "2023-08-02",
+          "symbol": "511010",
+          "fill_price": "131.808",
+          "low": "131.8170",
+          "high": "131.8710"
+        }
+      ]
+    },
+    {
+      "run": "trend_120_low_1000000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 8,
+      "examples": [
+        {
+          "day": "2019-04-03",
+          "symbol": "511010",
+          "fill_price": "116.759",
+          "low": "116.4020",
+          "high": "116.7470"
+        },
+        {
+          "day": "2019-06-05",
+          "symbol": "511010",
+          "fill_price": "116.980",
+          "low": "116.9910",
+          "high": "117.0560"
+        },
+        {
+          "day": "2021-04-06",
+          "symbol": "511010",
+          "fill_price": "122.045",
+          "low": "121.9010",
+          "high": "122.0320"
+        },
+        {
+          "day": "2021-07-05",
+          "symbol": "511010",
+          "fill_price": "123.407",
+          "low": "123.4180",
+          "high": "123.6360"
+        },
+        {
+          "day": "2023-02-03",
+          "symbol": "511010",
+          "fill_price": "128.959",
+          "low": "128.9720",
+          "high": "129.0400"
+        }
+      ]
+    },
+    {
+      "run": "trend_120_base_10000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 4,
+      "examples": [
+        {
+          "day": "2019-04-01",
+          "symbol": "510300",
+          "fill_price": "3.892",
+          "low": "3.8940",
+          "high": "3.9730"
+        },
+        {
+          "day": "2020-03-02",
+          "symbol": "510300",
+          "fill_price": "3.946",
+          "low": "3.9480",
+          "high": "4.0900"
+        },
+        {
+          "day": "2020-12-01",
+          "symbol": "510300",
+          "fill_price": "5.024",
+          "low": "5.0260",
+          "high": "5.1500"
+        },
+        {
+          "day": "2022-01-04",
+          "symbol": "510300",
+          "fill_price": "5.028",
+          "low": "4.9420",
+          "high": "5.0270"
+        }
+      ]
+    },
+    {
+      "run": "trend_120_base_10000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 2,
+      "examples": [
+        {
+          "day": "2023-06-02",
+          "symbol": "510300",
+          "fill_price": "3.828",
+          "low": "3.8300",
+          "high": "3.8730"
+        },
+        {
+          "day": "2024-10-09",
+          "symbol": "510300",
+          "fill_price": "4.288",
+          "low": "4.0050",
+          "high": "4.2850"
+        }
+      ]
+    },
+    {
+      "run": "trend_120_base_10000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 1,
+      "examples": [
+        {
+          "day": "2021-08-04",
+          "symbol": "510300",
+          "fill_price": "4.981",
+          "low": "4.9820",
+          "high": "5.0400"
+        }
+      ]
+    },
+    {
+      "run": "trend_120_base_100000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 18,
+      "examples": [
+        {
+          "day": "2020-03-02",
+          "symbol": "510300",
+          "fill_price": "3.946",
+          "low": "3.9480",
+          "high": "4.0900"
+        },
+        {
+          "day": "2020-03-02",
+          "symbol": "511010",
+          "fill_price": "122.035",
+          "low": "121.7010",
+          "high": "121.9880"
+        },
+        {
+          "day": "2020-11-02",
+          "symbol": "510300",
+          "fill_price": "4.756",
+          "low": "4.7590",
+          "high": "4.8040"
+        },
+        {
+          "day": "2020-12-01",
+          "symbol": "510300",
+          "fill_price": "5.024",
+          "low": "5.0260",
+          "high": "5.1500"
+        },
+        {
+          "day": "2021-06-01",
+          "symbol": "511010",
+          "fill_price": "122.858",
+          "low": "122.9020",
+          "high": "123.1460"
+        }
+      ]
+    },
+    {
+      "run": "trend_120_base_100000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 15,
+      "examples": [
+        {
+          "day": "2019-11-04",
+          "symbol": "510300",
+          "fill_price": "4.022",
+          "low": "4.0230",
+          "high": "4.0470"
+        },
+        {
+          "day": "2020-11-03",
+          "symbol": "510300",
+          "fill_price": "4.797",
+          "low": "4.8000",
+          "high": "4.8630"
+        },
+        {
+          "day": "2021-07-02",
+          "symbol": "510300",
+          "fill_price": "5.223",
+          "low": "5.1110",
+          "high": "5.2220"
+        },
+        {
+          "day": "2023-02-02",
+          "symbol": "511010",
+          "fill_price": "128.822",
+          "low": "128.8680",
+          "high": "128.9870"
+        },
+        {
+          "day": "2023-06-02",
+          "symbol": "510300",
+          "fill_price": "3.828",
+          "low": "3.8300",
+          "high": "3.8730"
+        }
+      ]
+    },
+    {
+      "run": "trend_120_base_100000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 19,
+      "examples": [
+        {
+          "day": "2019-12-04",
+          "symbol": "511010",
+          "fill_price": "119.079",
+          "low": "119.0000",
+          "high": "119.0690"
+        },
+        {
+          "day": "2020-01-06",
+          "symbol": "511010",
+          "fill_price": "119.210",
+          "low": "119.2300",
+          "high": "119.4580"
+        },
+        {
+          "day": "2021-04-06",
+          "symbol": "511010",
+          "fill_price": "122.094",
+          "low": "121.9010",
+          "high": "122.0320"
+        },
+        {
+          "day": "2021-08-04",
+          "symbol": "510300",
+          "fill_price": "4.981",
+          "low": "4.9820",
+          "high": "5.0400"
+        },
+        {
+          "day": "2022-08-03",
+          "symbol": "511010",
+          "fill_price": "128.933",
+          "low": "128.7260",
+          "high": "128.8920"
+        }
+      ]
+    },
+    {
+      "run": "trend_120_base_1000000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 28,
+      "examples": [
+        {
+          "day": "2019-04-01",
+          "symbol": "510300",
+          "fill_price": "3.892",
+          "low": "3.8940",
+          "high": "3.9730"
+        },
+        {
+          "day": "2019-04-01",
+          "symbol": "511010",
+          "fill_price": "116.921",
+          "low": "116.7240",
+          "high": "116.8880"
+        },
+        {
+          "day": "2019-06-03",
+          "symbol": "511010",
+          "fill_price": "116.897",
+          "low": "116.9560",
+          "high": "117.0500"
+        },
+        {
+          "day": "2020-03-02",
+          "symbol": "510300",
+          "fill_price": "3.946",
+          "low": "3.9480",
+          "high": "4.0900"
+        },
+        {
+          "day": "2020-03-02",
+          "symbol": "511010",
+          "fill_price": "122.035",
+          "low": "121.7010",
+          "high": "121.9880"
+        }
+      ]
+    },
+    {
+      "run": "trend_120_base_1000000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 29,
+      "examples": [
+        {
+          "day": "2019-04-02",
+          "symbol": "511010",
+          "fill_price": "116.799",
+          "low": "116.6950",
+          "high": "116.7490"
+        },
+        {
+          "day": "2019-06-04",
+          "symbol": "511010",
+          "fill_price": "116.843",
+          "low": "116.9020",
+          "high": "117.0250"
+        },
+        {
+          "day": "2019-11-04",
+          "symbol": "510300",
+          "fill_price": "4.022",
+          "low": "4.0230",
+          "high": "4.0470"
+        },
+        {
+          "day": "2020-08-04",
+          "symbol": "511010",
+          "fill_price": "121.699",
+          "low": "121.5130",
+          "high": "121.6980"
+        },
+        {
+          "day": "2020-09-02",
+          "symbol": "511010",
+          "fill_price": "120.910",
+          "low": "120.7000",
+          "high": "120.8810"
+        }
+      ]
+    },
+    {
+      "run": "trend_120_base_1000000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 24,
+      "examples": [
+        {
+          "day": "2019-04-03",
+          "symbol": "511010",
+          "fill_price": "116.806",
+          "low": "116.4020",
+          "high": "116.7470"
+        },
+        {
+          "day": "2019-06-05",
+          "symbol": "511010",
+          "fill_price": "116.933",
+          "low": "116.9910",
+          "high": "117.0560"
+        },
+        {
+          "day": "2019-12-04",
+          "symbol": "511010",
+          "fill_price": "119.079",
+          "low": "119.0000",
+          "high": "119.0690"
+        },
+        {
+          "day": "2020-01-06",
+          "symbol": "511010",
+          "fill_price": "119.210",
+          "low": "119.2300",
+          "high": "119.4580"
+        },
+        {
+          "day": "2020-09-03",
+          "symbol": "511010",
+          "fill_price": "120.727",
+          "low": "120.4800",
+          "high": "120.6970"
+        }
+      ]
+    },
+    {
+      "run": "trend_120_high_10000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 5,
+      "examples": [
+        {
+          "day": "2019-04-01",
+          "symbol": "510300",
+          "fill_price": "3.890",
+          "low": "3.8940",
+          "high": "3.9730"
+        },
+        {
+          "day": "2020-03-02",
+          "symbol": "510300",
+          "fill_price": "3.944",
+          "low": "3.9480",
+          "high": "4.0900"
+        },
+        {
+          "day": "2020-12-01",
+          "symbol": "510300",
+          "fill_price": "5.021",
+          "low": "5.0260",
+          "high": "5.1500"
+        },
+        {
+          "day": "2021-04-01",
+          "symbol": "510300",
+          "fill_price": "5.050",
+          "low": "5.0520",
+          "high": "5.1200"
+        },
+        {
+          "day": "2022-01-04",
+          "symbol": "510300",
+          "fill_price": "5.031",
+          "low": "4.9420",
+          "high": "5.0270"
+        }
+      ]
+    },
+    {
+      "run": "trend_120_high_10000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 4,
+      "examples": [
+        {
+          "day": "2023-02-02",
+          "symbol": "510300",
+          "fill_price": "4.207",
+          "low": "4.1630",
+          "high": "4.2050"
+        },
+        {
+          "day": "2023-06-02",
+          "symbol": "510300",
+          "fill_price": "3.826",
+          "low": "3.8300",
+          "high": "3.8730"
+        },
+        {
+          "day": "2024-10-09",
+          "symbol": "510300",
+          "fill_price": "4.290",
+          "low": "4.0050",
+          "high": "4.2850"
+        },
+        {
+          "day": "2026-08-04",
+          "symbol": "510300",
+          "fill_price": "4.613",
+          "low": "4.6150",
+          "high": "4.6720"
+        }
+      ]
+    },
+    {
+      "run": "trend_120_high_10000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 2,
+      "examples": [
+        {
+          "day": "2021-08-04",
+          "symbol": "510300",
+          "fill_price": "4.979",
+          "low": "4.9820",
+          "high": "5.0400"
+        },
+        {
+          "day": "2023-02-03",
+          "symbol": "510300",
+          "fill_price": "4.159",
+          "low": "4.1010",
+          "high": "4.1570"
+        }
+      ]
+    },
+    {
+      "run": "trend_120_high_100000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 26,
+      "examples": [
+        {
+          "day": "2019-03-20",
+          "symbol": "511010",
+          "fill_price": "116.492",
+          "low": "116.3670",
+          "high": "116.4440"
+        },
+        {
+          "day": "2020-03-02",
+          "symbol": "510300",
+          "fill_price": "3.944",
+          "low": "3.9480",
+          "high": "4.0900"
+        },
+        {
+          "day": "2020-03-02",
+          "symbol": "511010",
+          "fill_price": "122.096",
+          "low": "121.7010",
+          "high": "121.9880"
+        },
+        {
+          "day": "2020-07-01",
+          "symbol": "511010",
+          "fill_price": "121.993",
+          "low": "122.0200",
+          "high": "122.2500"
+        },
+        {
+          "day": "2020-11-02",
+          "symbol": "510300",
+          "fill_price": "4.754",
+          "low": "4.7590",
+          "high": "4.8040"
+        }
+      ]
+    },
+    {
+      "run": "trend_120_high_100000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 25,
+      "examples": [
+        {
+          "day": "2019-03-21",
+          "symbol": "511010",
+          "fill_price": "116.518",
+          "low": "116.3920",
+          "high": "116.4610"
+        },
+        {
+          "day": "2019-11-04",
+          "symbol": "510300",
+          "fill_price": "4.020",
+          "low": "4.0230",
+          "high": "4.0470"
+        },
+        {
+          "day": "2020-11-03",
+          "symbol": "510300",
+          "fill_price": "4.795",
+          "low": "4.8000",
+          "high": "4.8630"
+        },
+        {
+          "day": "2021-03-02",
+          "symbol": "510300",
+          "fill_price": "5.452",
+          "low": "5.3070",
+          "high": "5.4510"
+        },
+        {
+          "day": "2021-06-02",
+          "symbol": "511010",
+          "fill_price": "122.936",
+          "low": "122.9800",
+          "high": "123.0600"
+        }
+      ]
+    },
+    {
+      "run": "trend_120_high_100000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 22,
+      "examples": [
+        {
+          "day": "2019-03-22",
+          "symbol": "511010",
+          "fill_price": "116.522",
+          "low": "116.4050",
+          "high": "116.5080"
+        },
+        {
+          "day": "2019-12-04",
+          "symbol": "511010",
+          "fill_price": "119.139",
+          "low": "119.0000",
+          "high": "119.0690"
+        },
+        {
+          "day": "2020-01-06",
+          "symbol": "511010",
+          "fill_price": "119.150",
+          "low": "119.2300",
+          "high": "119.4580"
+        },
+        {
+          "day": "2021-04-06",
+          "symbol": "511010",
+          "fill_price": "122.155",
+          "low": "121.9010",
+          "high": "122.0320"
+        },
+        {
+          "day": "2021-08-04",
+          "symbol": "510300",
+          "fill_price": "4.979",
+          "low": "4.9820",
+          "high": "5.0400"
+        }
+      ]
+    },
+    {
+      "run": "trend_120_high_1000000_d1",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 42,
+      "examples": [
+        {
+          "day": "2019-03-20",
+          "symbol": "511010",
+          "fill_price": "116.492",
+          "low": "116.3670",
+          "high": "116.4440"
+        },
+        {
+          "day": "2019-04-01",
+          "symbol": "510300",
+          "fill_price": "3.890",
+          "low": "3.8940",
+          "high": "3.9730"
+        },
+        {
+          "day": "2019-04-01",
+          "symbol": "511010",
+          "fill_price": "116.979",
+          "low": "116.7240",
+          "high": "116.8880"
+        },
+        {
+          "day": "2019-06-03",
+          "symbol": "511010",
+          "fill_price": "116.839",
+          "low": "116.9560",
+          "high": "117.0500"
+        },
+        {
+          "day": "2019-09-02",
+          "symbol": "511010",
+          "fill_price": "118.072",
+          "low": "118.0800",
+          "high": "118.2360"
+        }
+      ]
+    },
+    {
+      "run": "trend_120_high_1000000_d2",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 42,
+      "examples": [
+        {
+          "day": "2019-03-21",
+          "symbol": "511010",
+          "fill_price": "116.518",
+          "low": "116.3920",
+          "high": "116.4610"
+        },
+        {
+          "day": "2019-04-02",
+          "symbol": "511010",
+          "fill_price": "116.857",
+          "low": "116.6950",
+          "high": "116.7490"
+        },
+        {
+          "day": "2019-06-04",
+          "symbol": "511010",
+          "fill_price": "116.785",
+          "low": "116.9020",
+          "high": "117.0250"
+        },
+        {
+          "day": "2019-11-04",
+          "symbol": "510300",
+          "fill_price": "4.020",
+          "low": "4.0230",
+          "high": "4.0470"
+        },
+        {
+          "day": "2019-11-04",
+          "symbol": "511010",
+          "fill_price": "118.069",
+          "low": "117.9500",
+          "high": "118.0200"
+        }
+      ]
+    },
+    {
+      "run": "trend_120_high_1000000_d3",
+      "endpoint_accounting_passed": true,
+      "fills_outside_daily_range": 36,
+      "examples": [
+        {
+          "day": "2019-03-22",
+          "symbol": "511010",
+          "fill_price": "116.522",
+          "low": "116.4050",
+          "high": "116.5080"
+        },
+        {
+          "day": "2019-04-03",
+          "symbol": "511010",
+          "fill_price": "116.864",
+          "low": "116.4020",
+          "high": "116.7470"
+        },
+        {
+          "day": "2019-06-05",
+          "symbol": "511010",
+          "fill_price": "116.875",
+          "low": "116.9910",
+          "high": "117.0560"
+        },
+        {
+          "day": "2019-09-04",
+          "symbol": "511010",
+          "fill_price": "117.956",
+          "low": "118.0000",
+          "high": "118.1380"
+        },
+        {
+          "day": "2019-12-04",
+          "symbol": "511010",
+          "fill_price": "119.139",
+          "low": "119.0000",
+          "high": "119.0690"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "updated_on_shanghai": "2026-11-05",
+  "account_input_through": "2026-11-05",
+  "account_input_sessions": 1171,
+  "forward_sessions": 1,
+  "forward_first_day_trades": 0,
+  "forward_total_return": 0,
+  "forward_annualized_return": null,
+  "note": "First observation holds cash; one day is insufficient for performance assessment."
+}
