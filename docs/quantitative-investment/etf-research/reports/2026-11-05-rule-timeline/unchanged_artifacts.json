@@ -1,0 +1,15 @@
+{
+  "reference_commit": "eca32fa10b6176520f006e684b2837037717664b",
+  "existing_reports_compared": 186,
+  "existing_report_files_unchanged": true,
+  "frozen_engine_and_protocol_sha256": {
+    "src/etf_research/data.py": "53ce725951c7ffecde8384eb838879c23b5110ddd41730519cf6eb3dddf7998c",
+    "src/etf_research/accounting.py": "fb84f2a01632529287a5c24c26f3ee40f124d4717bfb902c83551036b546ad56",
+    "src/etf_research/baselines.py": "6670f22463069640b23c1f72b3dcc0f531160781e2bc73cc61ce9cd7d24e3f5b",
+    "src/etf_research/forward.py": "dcc7f0d7c0e043dc4d15839f002bc933092ed956fc1dbec501eafbd1f7204456",
+    "src/etf_research/long_history.py": "eaf4bc4b5e8fdebcd0ce738c8e13e62ab176df5e5cb22b9471af842da64bfdd7",
+    "PROTOCOL_V1.md": "c48927e3535d2d4221d2f96a8b3e9d20409d8e4bf6911b1ff414321189eacbfc"
+  },
+  "forward_observations_remain": 1,
+  "new_prices_fetched": false
+}

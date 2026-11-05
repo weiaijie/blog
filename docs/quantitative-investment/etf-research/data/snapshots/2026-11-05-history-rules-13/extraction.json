@@ -1,0 +1,10 @@
+{
+  "document": "rules_2018_doc.body",
+  "format": "OLE Word .doc",
+  "extractor": "antiword 0.37 Debian amd64 package 0.37-16, UTF-8.txt mapping",
+  "package_url": "https://deb.debian.org/debian/pool/main/a/antiword/antiword_0.37-16_amd64.deb",
+  "package_sha256": "f26b6a843c0d42aa760f45e74e5abd5f9b7cb431803d19c51b6351777c95d12b",
+  "command": "antiword -m UTF-8.txt rules_2018_doc.body > rules_2018_doc.txt",
+  "duplicate_attachment_same_bytes": "rules_2018_doc2.body",
+  "note": "Documents parsed as data; no macros executed. System package installation unavailable; package extracted in workspace instead."
+}

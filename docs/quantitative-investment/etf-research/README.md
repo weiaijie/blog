@@ -15,7 +15,8 @@
 
 50/50基准费用年化：原640日4.90%，1167日0.51%，新1967日4.02%（最大收盘回撤19.73%）。同策略、同历史终点对起点敏感；最新数字落入研究目标范围也不证明长期目标成立。
 
-- [最新报告与来源限制](reports/2026-11-05-long-history/PROGRESS.md) · [三种历史区间比较](reports/2026-11-05-long-history/sample_comparison.json)
+- [最新规则时间线证据](reports/2026-11-05-rule-timeline/PROGRESS.md)
+- [最新研究报告与来源限制](reports/2026-11-05-long-history/PROGRESS.md) · [三种历史区间比较](reports/2026-11-05-long-history/sample_comparison.json)
 - [前瞻检查点](reports/2026-11-05-long-history/forward_checkpoint.json) · [官方收盘交叉验证](reports/2026-11-05-long-history/official_close.json)
 - [原1167日报告](reports/2026-11-04-extension/PROGRESS.md) · [原640日报告](reports/2026-11-04-closure/PROGRESS.md)
 - [冻结协议](PROTOCOL_V1.md) · [接续入口](CONTINUATION.md) · [计划](PROJECT_PLAN.md) · [数据来源](DATA_SOURCES.md) · [静态看板](site/index.html)
@@ -30,6 +31,6 @@ python scripts/reproduce.py
 python -m http.server 8765 --bind 127.0.0.1
 ```
 
-依赖Python3标准库；可选网页验收需Playwright/Chromium，PDF文本提取需pdftotext。已有原始快照不覆盖。最新清单reports/2026-11-05-long-history/manifest.json；旧阶段清单在相应历史提交核验。新环境先读CONTINUATION.md，不依赖聊天记忆。
+依赖Python3标准库；可选网页验收需Playwright/Chromium，PDF文本提取需pdftotext。已有原始快照不覆盖。最新清单reports/2026-11-05-rule-timeline/manifest.json；旧阶段清单在相应历史提交核验。新环境先读CONTINUATION.md，不依赖聊天记忆。
 
 旧/workspace/quant-research、旧策略/看板和旧10项测试未恢复；当前是持续重建并已保存到仓库的版本。无实盘、无后台调度，未来收益不能在当前会话完成。

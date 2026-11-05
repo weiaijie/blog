@@ -38,5 +38,5 @@ def main():
   for file in review.iterdir():
    if file.read_bytes()!=(ROOT/'reports/2026-11-05-notices/review'/file.name).read_bytes():raise AssertionError('Review packet reproduction mismatch: '+file.name)
   result={'first_forward_day_byte_identical':True,'medium_core_result_files_unchanged':len(list(medium.iterdir())),'review_packet_byte_identical':True,'admission_and_checkpoint_byte_identical':True,'checkpoint_retry_idempotent':True,'old_core_result_files_unchanged':len(list(old.iterdir())),'offline_reproduction_passed':True,'research_files_byte_identical':len(files),'dashboard_byte_identical':True,'network_used_by_pipeline':False}
-  (ROOT/'reports/2026-11-05-long-history/reproducibility.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result))
+  (ROOT/'reports/2026-11-05-rule-timeline/reproducibility.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result))
 if __name__=='__main__':main()

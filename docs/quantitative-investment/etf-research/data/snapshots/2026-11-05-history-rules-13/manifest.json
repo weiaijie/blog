@@ -1,0 +1,19 @@
+{
+  "amendment_2020_jan.body": "333e5f39094f2d1c3cc96728bee9fc91dda768c2830bbc148493e8b1e032b80f",
+  "amendment_2020_jan.txt": "38a11d5d0593b7c797f2b52680c6f38881e9d5dfd18de0b37cad22a57e02b01c",
+  "attachment_requests.json": "540ffea8da499c9a6d67c2114cfce4572a576d6c8040c3ab6494c2de5b05832a",
+  "attachments.py": "13a9c7de78414a4f33851e6f76c3c94fafde05e7ca8366be73770c3c7f32db38",
+  "closing_2018_explanation.body": "e373158f643847e34625a7d15b2c4f6e95fb450fd1ded6b9bce4dae4f9e041a5",
+  "closing_2018_explanation.txt": "31876201668eb31944189a423e66da4bce185618fabb90774b07051ec84c6a04",
+  "extract.py": "d47dd30c7bcd6be75b2e49211e9bd4864cc2b7598cc1cb42d0f7c09190434036",
+  "extraction.json": "6194b9207702ca7ccf7a1dcd7886bc79258faa6b75e48c1a6a40b3c272cf23a5",
+  "fetch.py": "560fcc8da19624f5aa71857a2644eb73d8b68cddfe7b1bced904fdd43eff369c",
+  "requests.json": "0cc011117bb22a6e77a17b14a90b2d3309e106eda0960b9e982350c1ff91bc22",
+  "rule_revision_history.body": "1607a6841cb962ccea0936afc3bb5afbe51766960a4bfad691567a123fa74a54",
+  "rule_revision_history.txt": "79eea8f8ed7a034b257319c7e0b8683aa9ce34dbd31a576b9ebba651f76cddae",
+  "rules_2018_doc.body": "0dd8168dfcd2b105a70459319b5f8dcdbc84eeb1216aad23f83214501ad5ce64",
+  "rules_2018_doc.txt": "2ec6ac265f2577e3b1d8404e9dba22887c37c54b3491e0ff6205d23cc4a0a224",
+  "rules_2018_doc2.body": "0dd8168dfcd2b105a70459319b5f8dcdbc84eeb1216aad23f83214501ad5ce64",
+  "rules_2018_notice.body": "4551ab9bc210b73d6ef4647adba5e3b3a3ba07fa223d8ebd4c5bf9e5f2a61855",
+  "rules_2018_notice.txt": "e3d37085d9c47b9e7a689403ca9e1b5661d7e012bb2d07a6358b4b3cd9e943a1"
+}

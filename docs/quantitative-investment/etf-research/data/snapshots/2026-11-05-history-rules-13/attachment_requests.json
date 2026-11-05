@@ -1,0 +1,35 @@
+[
+  {
+    "name": "rules_2018_doc",
+    "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/repeal/rules/c/10784917/files/ab243f7259464115b6522389422784b3.doc",
+    "requested_at_utc": "2026-11-05T09:30:18.832182+00:00",
+    "status": 200,
+    "content_type": "application/msword",
+    "final_url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/repeal/rules/c/10784917/files/ab243f7259464115b6522389422784b3.doc",
+    "bytes": 79872,
+    "sha256": "0dd8168dfcd2b105a70459319b5f8dcdbc84eeb1216aad23f83214501ad5ce64",
+    "elapsed_seconds": 1.3
+  },
+  {
+    "name": "rules_2018_doc2",
+    "url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/repeal/rules/c/10784917/files/70b36f9242f84deaa456ad74cf8de5d0.doc",
+    "requested_at_utc": "2026-11-05T09:30:18.835598+00:00",
+    "status": 200,
+    "content_type": "application/msword",
+    "final_url": "https://www.sse.com.cn/lawandrules/sselawsrules2025/repeal/rules/c/10784917/files/70b36f9242f84deaa456ad74cf8de5d0.doc",
+    "bytes": 79872,
+    "sha256": "0dd8168dfcd2b105a70459319b5f8dcdbc84eeb1216aad23f83214501ad5ce64",
+    "elapsed_seconds": 1.4
+  },
+  {
+    "name": "amendment_2020_jan",
+    "url": "https://www.sse.com.cn/lawandrules/sselawsrules/repeal/rules/c/c_20210531_5478094.shtml",
+    "requested_at_utc": "2026-11-05T09:30:18.834876+00:00",
+    "status": 200,
+    "content_type": "text/html",
+    "final_url": "https://www.sse.com.cn/lawandrules/sselawsrules/repeal/rules/c/c_20210531_5478094.shtml",
+    "bytes": 27440,
+    "sha256": "333e5f39094f2d1c3cc96728bee9fc91dda768c2830bbc148493e8b1e032b80f",
+    "elapsed_seconds": 1.01
+  }
+]

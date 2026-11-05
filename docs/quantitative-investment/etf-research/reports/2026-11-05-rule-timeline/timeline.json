@@ -1,0 +1,222 @@
+{
+  "reviewed_on_shanghai": "2026-11-05",
+  "general_rule_versions": [
+    {
+      "version": "2018",
+      "effective_from": "2018-08-20",
+      "end_exclusive": "2020-01-20",
+      "basis": [
+        0
+      ],
+      "fund_close": "last-minute volume-weighted price; no trade uses previous close",
+      "sample_sessions": 326
+    },
+    {
+      "version": "2018_plus_2020_Jan_amendment",
+      "effective_from": "2020-01-20",
+      "end_exclusive": "2020-03-13",
+      "basis": [
+        0,
+        1
+      ],
+      "change_scope": "Adds commodity-futures ETF same-day resale; bond ETF already listed",
+      "fund_close": "last-minute volume-weighted price; no trade uses previous close",
+      "sample_sessions": 33
+    },
+    {
+      "version": "2020",
+      "effective_from": "2020-03-13",
+      "end_exclusive": "2023-04-10",
+      "prior_evidence_file": "2026-11-05-rules-10/rule_versions.json",
+      "fund_close": "last-minute volume-weighted price; no trade uses previous close",
+      "sample_sessions": 746
+    },
+    {
+      "version": "2023",
+      "effective_from": "2023-04-10",
+      "end_exclusive": "2026-07-06",
+      "prior_evidence_file": "2026-11-05-rules-10/rule_versions.json",
+      "fund_close": "last-minute volume-weighted price; no trade uses previous close",
+      "sample_sessions": 783
+    },
+    {
+      "version": "2026",
+      "effective_from": "2026-07-06",
+      "end_exclusive": null,
+      "prior_evidence_file": "2026-11-05-rules-10/rule_versions.json",
+      "fund_close": "closing auction with fallback under general rule",
+      "sample_sessions": 79
+    }
+  ],
+  "sample_sessions": 1967,
+  "coverage_complete_for_declared_general_versions": true,
+  "source_anchors": [
+    {
+      "snapshot": "2026-11-05-history-rules-13",
+      "file": "rules_2018_notice.txt",
+      "sha256": "e3d37085d9c47b9e7a689403ca9e1b5661d7e012bb2d07a6358b4b3cd9e943a1",
+      "matching_lines": [
+        80
+      ],
+      "anchor": "自2018年8月20日起实施"
+    },
+    {
+      "snapshot": "2026-11-05-history-rules-13",
+      "file": "amendment_2020_jan.txt",
+      "sha256": "38a11d5d0593b7c797f2b52680c6f38881e9d5dfd18de0b37cad22a57e02b01c",
+      "matching_lines": [
+        50
+      ],
+      "anchor": "自2020年1月20日起施行"
+    },
+    {
+      "snapshot": "2026-11-05-history-rules-13",
+      "file": "amendment_2020_jan.txt",
+      "sha256": "38a11d5d0593b7c797f2b52680c6f38881e9d5dfd18de0b37cad22a57e02b01c",
+      "matching_lines": [
+        38,
+        43
+      ],
+      "anchor": "商品期货交易型开放式指数基金"
+    },
+    {
+      "snapshot": "2026-11-05-history-rules-13",
+      "file": "rules_2018_notice.txt",
+      "sha256": "e3d37085d9c47b9e7a689403ca9e1b5661d7e012bb2d07a6358b4b3cd9e943a1",
+      "matching_lines": [
+        81
+      ],
+      "anchor": "暂缓实施的条款"
+    },
+    {
+      "snapshot": "2026-11-05-history-rules-13",
+      "file": "rules_2018_doc.txt",
+      "sha256": "2ec6ac265f2577e3b1d8404e9dba22887c37c54b3491e0ff6205d23cc4a0a224",
+      "matching_lines": [
+        76
+      ],
+      "anchor": "3.1.4"
+    },
+    {
+      "snapshot": "2026-11-05-history-rules-13",
+      "file": "rules_2018_doc.txt",
+      "sha256": "2ec6ac265f2577e3b1d8404e9dba22887c37c54b3491e0ff6205d23cc4a0a224",
+      "matching_lines": [
+        79
+      ],
+      "anchor": "3.1.5"
+    },
+    {
+      "snapshot": "2026-11-05-history-rules-13",
+      "file": "rules_2018_doc.txt",
+      "sha256": "2ec6ac265f2577e3b1d8404e9dba22887c37c54b3491e0ff6205d23cc4a0a224",
+      "matching_lines": [
+        81,
+        432
+      ],
+      "anchor": "债券交易型开放式指数基金"
+    },
+    {
+      "snapshot": "2026-11-05-history-rules-13",
+      "file": "rules_2018_doc.txt",
+      "sha256": "2ec6ac265f2577e3b1d8404e9dba22887c37c54b3491e0ff6205d23cc4a0a224",
+      "matching_lines": [
+        161
+      ],
+      "anchor": "3.4.7"
+    },
+    {
+      "snapshot": "2026-11-05-history-rules-13",
+      "file": "rules_2018_doc.txt",
+      "sha256": "2ec6ac265f2577e3b1d8404e9dba22887c37c54b3491e0ff6205d23cc4a0a224",
+      "matching_lines": [
+        180
+      ],
+      "anchor": "3.4.11"
+    },
+    {
+      "snapshot": "2026-11-05-history-rules-13",
+      "file": "rules_2018_doc.txt",
+      "sha256": "2ec6ac265f2577e3b1d8404e9dba22887c37c54b3491e0ff6205d23cc4a0a224",
+      "matching_lines": [
+        185,
+        500,
+        511
+      ],
+      "anchor": "3.4.13"
+    },
+    {
+      "snapshot": "2026-11-05-history-rules-13",
+      "file": "rules_2018_doc.txt",
+      "sha256": "2ec6ac265f2577e3b1d8404e9dba22887c37c54b3491e0ff6205d23cc4a0a224",
+      "matching_lines": [
+        356
+      ],
+      "anchor": "4.1.3"
+    },
+    {
+      "snapshot": "2026-11-05-history-rules-13",
+      "file": "rules_2018_doc.txt",
+      "sha256": "2ec6ac265f2577e3b1d8404e9dba22887c37c54b3491e0ff6205d23cc4a0a224",
+      "matching_lines": [
+        389
+      ],
+      "anchor": "4.3.2"
+    },
+    {
+      "snapshot": "2026-11-05-history-rules-13",
+      "file": "rules_2018_doc.txt",
+      "sha256": "2ec6ac265f2577e3b1d8404e9dba22887c37c54b3491e0ff6205d23cc4a0a224",
+      "matching_lines": [
+        395
+      ],
+      "anchor": "4.3.3"
+    },
+    {
+      "snapshot": "2026-11-05-history-rules-13",
+      "file": "rules_2018_notice.txt",
+      "sha256": "e3d37085d9c47b9e7a689403ca9e1b5661d7e012bb2d07a6358b4b3cd9e943a1",
+      "matching_lines": [
+        52
+      ],
+      "anchor": "基金、债券、债券买断式回购的收盘价"
+    },
+    {
+      "snapshot": "2026-11-05-rules-10",
+      "file": "sse_rules_2023_attachment_1.txt",
+      "sha256": "f50b3ecd78fa37a3d8ca514579ab8410bdac9fac1e3bffc1da5e9166a16ecce1",
+      "matching_lines": [
+        253
+      ],
+      "anchor": "基金的收盘价为"
+    },
+    {
+      "snapshot": "2026-11-05-rules-10",
+      "file": "sse_rules_2026_attachment_2.txt",
+      "sha256": "68dbdf575e60846034ab839ab30b10c27a642474fdb150cf15e329988f1d6a60",
+      "matching_lines": [
+        10
+      ],
+      "anchor": "基金收盘阶段交易方式由连续竞价调整为收盘集合竞价"
+    }
+  ],
+  "source_manifests": {
+    "2026-11-05-history-rules-13": "78fe7771b39b2faa54f16d81041f1e46c2a5a5cc89e099d1df3eb6cb4ef3a495",
+    "2026-11-05-rules-10": "ba91fc7b252160db5df2d0251103484d0aa59073da04beb8104aa14eca861865",
+    "2026-11-04-calendar-08": "dd8766c2432983c0d5a1d123add8b175696bade27c76b62688db17fdcbf25d86"
+  },
+  "requests": 6,
+  "http_status_counts": {
+    "200": 6
+  },
+  "separate_2019_revision_claimed": false,
+  "trading_engine_changed": false,
+  "all_special_rules_or_actual_fills_verified": false,
+  "limitations": [
+    "General-version timeline does not prove no other special notices apply",
+    "Ex-reference remains a formula with possible issuer adjustments; no complete historical official reference series",
+    "Daily OHLC does not reconstruct closing auctions or last-minute volume-weighted calculations",
+    "Frozen 9pct buffer is a research assumption, not the formal daily limit",
+    "Deferred block-trade provisions are not treated as active ordinary-auction rules"
+  ]
+}
