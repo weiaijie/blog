@@ -1,0 +1,24 @@
+[
+  {
+    "name": "suspensions_control",
+    "url": "https://query.sse.com.cn/sseQuery/commonSoaQuery.do?isPagination=true&sqlId=SSE_PL_JYTS_TFPXX_JJ&secCode=&stopReason=&order=startStopDate%7Cdesc%2CsecCode%7Casc&startDate=20261001&endDate=20261104&pageHelp.pageSize=25&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.cacheSize=1&pageHelp.endPage=1",
+    "requested_at_utc": "2026-11-05T06:56:11.013282+00:00",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "final_url": "https://query.sse.com.cn/sseQuery/commonSoaQuery.do?isPagination=true&sqlId=SSE_PL_JYTS_TFPXX_JJ&secCode=&stopReason=&order=startStopDate%7Cdesc%2CsecCode%7Casc&startDate=20261001&endDate=20261104&pageHelp.pageSize=25&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.cacheSize=1&pageHelp.endPage=1",
+    "bytes": 17182,
+    "sha256": "66a0ff65ad9e09d754a6fd2ab55ed95adb24951ce3cbcb2da4050cada0237504",
+    "elapsed_seconds": 0.97
+  },
+  {
+    "name": "sse_table_config",
+    "url": "https://www.sse.com.cn/xhtml/js/common/table_config.js?v=V3.8.1_20260819",
+    "requested_at_utc": "2026-11-05T06:56:11.014560+00:00",
+    "status": 200,
+    "content_type": "application/javascript",
+    "final_url": "https://www.sse.com.cn/xhtml/js/common/table_config.js?v=V3.8.1_20260819",
+    "bytes": 117837,
+    "sha256": "323ac9f0d5dab6a98d016ce9da5f7146a98de97b28b82c3c2718d7910d6fd5c5",
+    "elapsed_seconds": 1.51
+  }
+]

@@ -1,0 +1,35 @@
+[
+  {
+    "name": "suspensions_510300",
+    "url": "https://query.sse.com.cn/sseQuery/commonSoaQuery.do?isPagination=true&sqlId=SSE_PL_JYTS_TFPXX_JJ&secCode=510300&stopReason=&order=startStopDate%7Cdesc%2CsecCode%7Casc&startDate=20220101&endDate=20261104&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.cacheSize=1&pageHelp.endPage=1",
+    "requested_at_utc": "2026-11-05T06:55:46.773555+00:00",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "final_url": "https://query.sse.com.cn/sseQuery/commonSoaQuery.do?isPagination=true&sqlId=SSE_PL_JYTS_TFPXX_JJ&secCode=510300&stopReason=&order=startStopDate%7Cdesc%2CsecCode%7Casc&startDate=20220101&endDate=20261104&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.cacheSize=1&pageHelp.endPage=1",
+    "bytes": 486,
+    "sha256": "143d5b1608525bd505c019ecae2963c2f0e5d66210cbfb598e6043d4a92ed1fc",
+    "elapsed_seconds": 1.14
+  },
+  {
+    "name": "suspensions_511010",
+    "url": "https://query.sse.com.cn/sseQuery/commonSoaQuery.do?isPagination=true&sqlId=SSE_PL_JYTS_TFPXX_JJ&secCode=511010&stopReason=&order=startStopDate%7Cdesc%2CsecCode%7Casc&startDate=20220101&endDate=20261104&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.cacheSize=1&pageHelp.endPage=1",
+    "requested_at_utc": "2026-11-05T06:55:46.774515+00:00",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "final_url": "https://query.sse.com.cn/sseQuery/commonSoaQuery.do?isPagination=true&sqlId=SSE_PL_JYTS_TFPXX_JJ&secCode=511010&stopReason=&order=startStopDate%7Cdesc%2CsecCode%7Casc&startDate=20220101&endDate=20261104&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.cacheSize=1&pageHelp.endPage=1",
+    "bytes": 486,
+    "sha256": "143d5b1608525bd505c019ecae2963c2f0e5d66210cbfb598e6043d4a92ed1fc",
+    "elapsed_seconds": 1.32
+  },
+  {
+    "name": "sse_full_js",
+    "url": "https://www.sse.com.cn/xhtml/js/sse_full.js?v=3.8.3_20261030",
+    "requested_at_utc": "2026-11-05T06:55:46.775175+00:00",
+    "status": 200,
+    "content_type": "application/javascript",
+    "final_url": "https://www.sse.com.cn/xhtml/js/sse_full.js?v=3.8.3_20261030",
+    "bytes": 390990,
+    "sha256": "ca9d19b6226fa97e02323f055fecc907cbf406301956798abbd4e5095801da78",
+    "elapsed_seconds": 1.54
+  }
+]

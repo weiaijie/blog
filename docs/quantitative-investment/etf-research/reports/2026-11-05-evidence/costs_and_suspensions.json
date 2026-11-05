@@ -1,0 +1,148 @@
+{
+  "claims": [
+    {
+      "id": "etf_stamp_duty",
+      "source": "csrc_etf_tax",
+      "url": "https://www.csrc.gov.cn/qinghai/c105501/c7422297/content.shtml",
+      "body_sha256": "ff6a5069547aeb89ee252f2009f01b5c3e295f8fcf5b71c5fade61933b50aefb",
+      "text_sha256": "e3e94465a9efda5e1c7edf5e7dcd03e883c7149ba62931f325b129d4c1d646b6",
+      "matching_text_lines": [
+        291
+      ],
+      "research_interpretation": "ETF二级市场交易不收印花税的监管投教证据",
+      "scope_limit": "不是适用于所有投资者、所有税种的无税证明。"
+    },
+    {
+      "id": "exchange_fee",
+      "source": "sse_fees",
+      "url": "https://www.sse.com.cn/services/tradingservice/charge/ssecharge/",
+      "body_sha256": "a28de66ea31037ffa240a2212a8599a06f1f1513f4c4a424976f3a193ae1eb7a",
+      "text_sha256": "21da2315b598a1592a9c3a951dc13c3f1cc2a8bc8f916484348cfdd5bbebff59",
+      "matching_text_lines": [
+        186,
+        249
+      ],
+      "research_interpretation": "基金竞价经手费0.004%双向；债券ETF暂免；付款人为会员等机构",
+      "scope_limit": "不是个人总佣金，也未证明全部历史版本收费。"
+    },
+    {
+      "id": "broker_commission",
+      "source": "broker_fees_boc",
+      "url": "https://www.bocichina.com/main/a/20240627/493318.shtml",
+      "body_sha256": "7730f232e36074f757c39454e92ffbf15cd19b2a22c9bf9c0a430dd05bb2ca2b",
+      "text_sha256": "73b1cab18cd0101dcc4b6864ca7c6d5a6e72acefb9e50ced5f4c779db584a769",
+      "matching_text_lines": [
+        263
+      ],
+      "research_interpretation": "此券商公布证券基金佣金上限3‰、不足5元按5元、包含代收经手费等",
+      "scope_limit": "一个公开券商收费说明；不是用户合同，固定万一/万三/千一仍是研究场景。"
+    },
+    {
+      "id": "distribution_income",
+      "source": "tax_2002_128",
+      "url": "https://fgk.chinatax.gov.cn/zcfgk/c102416/c5202818/content.html",
+      "body_sha256": "d12d135f81cc88fc075bc0f2b7f560985097b8c92525b282b762243824421dbb",
+      "text_sha256": "3839836219a14d980a9a28ad206e829ad3065b66f24ecbb0d18403f3a29fbd25",
+      "matching_text_lines": [
+        71
+      ],
+      "research_interpretation": "原条文对从基金分配取得的收入规定暂不征个人所得税",
+      "scope_limit": "须结合后续有效性证据；不把申赎差价条款直接扩大到二级买卖或企业。"
+    },
+    {
+      "id": "partial_repeal",
+      "source": "tax_2002_128_gd",
+      "url": "https://guangdong.chinatax.gov.cn/gdsw/grsdsgg_hmqsc_pyzbsc_zjtz/2021-08/31/content_ba332d505b274cd5bac5ceab045542dc.shtml",
+      "body_sha256": "febb21aec8d99f46472a04e2434a8f8ebe9691c789e72d5cf390284fcf4459d5",
+      "text_sha256": "b4de7f464e3d56ba26f7b52f9c01e6e13fe6fe7c5273e00dbc6e0d7ec72203d7",
+      "matching_text_lines": [
+        64
+      ],
+      "research_interpretation": "税务局标注旧文废止与个税优惠后续继续有效的关系",
+      "scope_limit": "不能照抄已过时的营业税、2‰股票印花税或旧基金内部股息扣税口径。"
+    },
+    {
+      "id": "continued_pit_relief",
+      "source": "tax_2018_177_gx",
+      "url": "https://guangxi.chinatax.gov.cn/zcwj/zxwj/201901/t20190104_254522.html",
+      "body_sha256": "98d769860f2ddba308ca904da3418c619e46fb58c5d70ae634d08c5112798de8",
+      "text_sha256": "993f10cc016f8831868f357d16d2946686a5e993e0f0fd184ee0d974772969a2",
+      "matching_text_lines": [
+        191,
+        607
+      ],
+      "research_interpretation": "2018年第177号目录第30项列出2002年128号文件",
+      "scope_limit": "目录附注排除已废止/失效条款；本研究不声称税收全项核验完成。"
+    },
+    {
+      "id": "fund_cost_510300",
+      "source": "prospectus_510300",
+      "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-08-13/510300_20260813_FPSL.pdf",
+      "body_sha256": "e5c1d3bf755f595766c5f4ff4c64b5555e332bd8d466d8d2603cd0c8466f7432",
+      "text_sha256": "a9226c5574d5662979a351bab99c997b899c89e001d06ff5565a6a371b053341",
+      "matching_text_lines": [
+        2788,
+        4042
+      ],
+      "research_interpretation": "2026招募说明书管理费0.15%、托管费0.05%，从基金财产支付",
+      "scope_limit": "当前条款不能套用到所有历史年份；使用ETF实际价格不再额外扣同一基金内部费用。"
+    },
+    {
+      "id": "fund_cost_511010",
+      "source": "prospectus_511010",
+      "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-09-21/511010_20260921_4HQ6.pdf",
+      "body_sha256": "a53997c202a27fecf4766796998a79a33fd47edbec457926206c8050b925d68e",
+      "text_sha256": "258dfeb0d183cb05936bd55eec31cf13ced02217b6cd7f3990dc88dc93b48712",
+      "matching_text_lines": [
+        2914
+      ],
+      "research_interpretation": "2026招募说明书管理费0.15%、托管费0.05%，从基金财产支付",
+      "scope_limit": "基金份额二级买卖与一级申赎收费不同，不能混用。"
+    }
+  ],
+  "suspension_responses": {
+    "suspensions_510300": {
+      "url": "https://query.sse.com.cn/sseQuery/commonSoaQuery.do?isPagination=true&sqlId=SSE_PL_JYTS_TFPXX_JJ&secCode=510300&stopReason=&order=startStopDate%7Cdesc%2CsecCode%7Casc&startDate=20220101&endDate=20261104&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.cacheSize=1&pageHelp.endPage=1",
+      "body_sha256": "143d5b1608525bd505c019ecae2963c2f0e5d66210cbfb598e6043d4a92ed1fc",
+      "reported_total": 0,
+      "rows_returned": 0,
+      "symbols": []
+    },
+    "suspensions_511010": {
+      "url": "https://query.sse.com.cn/sseQuery/commonSoaQuery.do?isPagination=true&sqlId=SSE_PL_JYTS_TFPXX_JJ&secCode=511010&stopReason=&order=startStopDate%7Cdesc%2CsecCode%7Casc&startDate=20220101&endDate=20261104&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.cacheSize=1&pageHelp.endPage=1",
+      "body_sha256": "143d5b1608525bd505c019ecae2963c2f0e5d66210cbfb598e6043d4a92ed1fc",
+      "reported_total": 0,
+      "rows_returned": 0,
+      "symbols": []
+    },
+    "suspensions_control": {
+      "url": "https://query.sse.com.cn/sseQuery/commonSoaQuery.do?isPagination=true&sqlId=SSE_PL_JYTS_TFPXX_JJ&secCode=&stopReason=&order=startStopDate%7Cdesc%2CsecCode%7Casc&startDate=20261001&endDate=20261104&pageHelp.pageSize=25&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.cacheSize=1&pageHelp.endPage=1",
+      "body_sha256": "66a0ff65ad9e09d754a6fd2ab55ed95adb24951ce3cbcb2da4050cada0237504",
+      "reported_total": 122,
+      "rows_returned": 25,
+      "symbols": [
+        "501225",
+        "513100",
+        "513110",
+        "513300",
+        "513390",
+        "513500",
+        "513850",
+        "513870"
+      ]
+    },
+    "suspensions_positive_code": {
+      "url": "https://query.sse.com.cn/sseQuery/commonSoaQuery.do?isPagination=true&sqlId=SSE_PL_JYTS_TFPXX_JJ&secCode=513100&stopReason=&order=startStopDate%7Cdesc%2CsecCode%7Casc&startDate=20220101&endDate=20261104&pageHelp.pageSize=25&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.cacheSize=1&pageHelp.endPage=1",
+      "body_sha256": "a333d56fe0139efdecf8a1295b59366b93396fea2cb247d30cd9e9e7449b4189",
+      "reported_total": 75,
+      "rows_returned": 25,
+      "symbols": [
+        "513100"
+      ]
+    }
+  },
+  "suspension_scope": "Two target queries returned zero; positive controls confirm nonempty responses and symbol filter. Controls are first pages, not complete catalogs. Historical retention/overlap semantics and all-day/intraday/creation-redemption distinctions remain unverified; no absence-of-suspension certification.",
+  "frozen_costs_changed": false,
+  "additional_fund_expense_deducted": false,
+  "specific_account_fee_confirmed": false
+}

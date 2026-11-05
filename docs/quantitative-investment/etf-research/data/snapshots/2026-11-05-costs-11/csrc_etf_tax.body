@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <meta name="ContentSource" content="青海证监局">
+    
+<meta name="SiteName" content="青海监管局"/>
+<meta name="SiteDomain" content="www.csrc.gov.cn"/>
+<meta name="SiteIDCode" content="zq56000031"/>
+<meta name="ColumnName" content="投资知识园地" />
+<meta name="ColumnDescription" content="投资知识园地"/>
+<meta name="ColumnKeywords" content="投资知识园地"/>
+<meta name="ColumnType" content="专题专栏"/>
+<meta name="ArticleTitle" content="ETF基金概览"/>
+<meta name="PubDate" content="2025-10-12 23:37:05"/>
+<meta name="ContentSource" content="青海证监局"/>
+<meta name="Keywords" content=""/>
+<meta name="Description" content="一、什么是ETFETF英文全称是ExchangeTradedFund,直译为“交易所交易基金”,也翻译成“交易型开放式指数证券"/>
+
+<meta name="others" content="页面生成时间 2025-10-12 23:37:05" />
+<meta name="template,templategroup,version" content="334,default,3.1" />
+<title>ETF基金概览_青海监管局</title>
+    <link rel="stylesheet" href="/qinghai/xhtml/css/common.css">
+    <link rel="stylesheet" href="/qinghai/xhtml/css/footer.css">
+    <link rel="stylesheet" href="/qinghai/xhtml/css/common_detail.css">
+    <script src="/qinghai/xhtml/js/jquery.min.js"></script>
+<link rel="icon" href="/favicon.ico?v=1.0" type="image/x-icon"></head>
+<body>
+    <!--公共头-->
+	<div class="header">
+    <div class="head-box">
+        <div class="tips">
+            <ul>
+                <li>
+                 <script src="/qinghai/xhtml/js/trans.js"></script>|
+                </li>
+                <li>
+                    <img src="/qinghai/xhtml/images/index/wza.png" alt="" class="logoimg">
+                    <a id="cniil_wza" href="/wza">无障碍</a>
+                </li>
+                <div class="clear"></div>
+            </ul>
+            <div class="clear"></div>
+        </div>
+        <div class="logo">
+        		 <a href="/" target="_blank"><img src="/qinghai/xhtml/images/index/logo.png?v=1.0" alt="" class="logoimg1"></a>
+        		 <div class="logoxian"></div>
+          <h1><a href="/qinghai/index.shtml">青海监管局</a></h1>
+            <div class="fr r-box">
+         <!--       <p  id="sc">打造一个规范、透明、开放、有活力、有韧性的资本市场</p>
+              	<p id="zy">建制度、不干预、零容忍</p>
+              	<p  id="hl">敬畏市场、敬畏法治、敬畏专业、敬畏风险、发挥合力</p>-->
+                <!--<div class="slideBox">
+					<div class="hd">
+						<ul></ul>
+					</div>
+					<div class="bd">
+						<ul>
+							<li>打造一个规范、透明、开放、有活力、有韧性的资本市场</li>
+							<li>建制度、不干预、零容忍</li>
+							<li>敬畏市场、敬畏法治、敬畏专业、敬畏风险、发挥合力</li>
+					<!--<li>忠诚、专业、进去、公开、公平、公正</li>
+						</ul>
+					</div>
+				</div>-->
+                 <form action="/guestweb4/s" method="post" name="form1" target="_blank" id="form1" class="search-group"  onsubmit="return check()">
+                    <input name="searchWord" type="text" id="searchWord" size="50" placeholder="请输入关键字">
+                    <input name="uc" type="hidden" id="uc" value="1">
+                    <input name="siteCode" type="hidden" id="siteCode" size="50" value="zq56000031">
+                    <input name="column" type="hidden" id="siteCode" size="50" value="全部">
+                    <div class="searth-btn">
+                      <a href="#"><img src="/qinghai/xhtml/images/index/search.png" alt=""></a>
+                      <input type="submit" name="button" id="button" value="提交" >
+                  	</div>
+
+				</form>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+ <script>
+    function check(){
+      if(!$('#searchWord').val()){
+             alert('请输入关键字!');
+             return false;
+      }else{
+      		return true;
+      }
+    }
+  </script>
+<div class="nav">
+    <ul class="nav-bar">
+        <li class="sy hover">
+            <a href="/qinghai/index.shtml">首页</a>
+            <div></div>
+        </li>
+        <li class="zjjjs">
+            <a href="/qinghai/c101412/tz.shtml?channelid=0435c54426ab4ef5a6bf594f955d3c13">证监局介绍</a>
+        </li>
+        <li class="xqjgdt">
+            <a href="/qinghai/c101416/tz.shtml">辖区监管动态</a>
+        </li>
+        <li class="zwxx">
+            <a href="/qinghai/c104489/tz.shtml">政务信息</a>
+        </li>
+        <li class="bsfw">
+            <a href="/qinghai/c101429/tz.shtml">办事服务</a>
+        </li>
+        <li class="xqsj">
+            <a href="/qinghai/c104519/zfxxgk_zdgk.shtml?channelid=0b3991337bca41f58ac918711d7b70bd">辖区数据</a>
+        </li>
+        <li class="hdjl">
+            <a href="/qinghai/c101437/common_list.shtml?channelid=ddaa52ec03364f79ab3735f2fdcf66fa">互动交流</a>
+        </li>
+        <li class="ztzl">
+            <a href="/qinghai/c101441/tz.shtml?channelid=bd28660e79074515bbc368a7b63e2b54">专题专栏</a>
+        </li>
+        <div class="clear"></div>
+    </ul>
+</div>
+<script src="/qinghai/xhtml/js/head.js"></script>
+<script src="/qinghai/xhtml/js/jquery.SuperSlide.js"></script>
+    <div class="BreadcrumbNav mt10">
+        <img src="/qinghai/xhtml/images/public/location.png" alt="">
+        当前位置：
+<a href='/qinghai/index.shtml'  target="_parent">首页</a>><a href='/qinghai/c101441/tz.shtml'  target="_parent">专题专栏</a>><a href='/qinghai/c101442/common_list_zt.shtml'  target="_parent">投资者保护</a>><a href='/qinghai/c105501/common_list.shtml'  target="_parent"><span>投资知识园地</span></a>
+
+    </div>
+    <div class="main">
+        <div class="content">
+            <h2>ETF基金概览</h2>
+            <div class="info">
+                <p class="fl">日期：2023-07-27     来源：青海证监局</p>
+                <div class="share fr m-hide" id="share">
+                    <div class="print-icon"></div>
+                    <div class="share-icon"></div>
+                    <div class="share-box" id="share-box">
+                        <a class="share-btn gwds_weixin" data-w="gwds_weixin" title="微信"> </a>
+                        <a class="share-btn gwds_tsina" data-w="gwds_tsina" title="新浪微博"> </a>
+                        <span class="gwds_more"> </span>
+                    </div>
+                    <div class="right share-popup bottom" id="share-popup" style="display: none;">
+                        <h6>分享到：<b></b></h6>
+                        <ul>
+                            <li><a data-w="gwds_qzone" class="share-btn gwds_qzone">QQ空间</a></li>
+                            <li><a data-w="gwds_douban" class="share-btn gwds_douban">豆瓣网</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="fr m-hide changeSize" id="changeSize">
+                	【字号：
+                	<span class="">大</span>
+                  	<span class="">中</span>
+               	 	<span class="on">小</span>】
+                </p>
+                <div class="clear"></div>
+            </div>
+            <div class="repeatX"></div>
+            <div class="detail-news">
+                <p style="text-indent: 2em;"><span><font face="宋体">一、什么是</font>ETF</span><span><o:p></o:p></span></p>
+<p style="text-indent: 2em;"><span><o:p></o:p></span></p>
+<p style="text-indent: 2em;"><span>ETF<font face="宋体">英文全称是</font><font face="sans-serif">ExchangeTradedFund</font><font face="宋体">,直译为</font><font face="sans-serif">“</font><font face="宋体">交易所交易基金</font><font face="sans-serif">”</font><font face="宋体">,也翻译成</font><font face="sans-serif">“</font><font face="宋体">交易型开放式指数证券投资基金</font><font face="sans-serif">”</font><font face="宋体">。</font><font face="sans-serif">ETF</font><font face="宋体">通常是以某一选定的指数所包含的成分证券为投资对象,依据构成指数的证券种类和比例,采用完全复制或抽样复制的方法进行被动投资的指数型基金。另外还有一些与特殊标的挂钩的</font><font face="sans-serif">ETF</font><font face="宋体">,如黄金</font><font face="sans-serif">ETF</font><font face="宋体">、商品期货</font><font face="sans-serif">ETF</font><font face="宋体">等。</font><font face="sans-serif">ETF</font><font face="宋体">是一种跟踪</font><font face="sans-serif">“</font><font face="宋体">标的指数</font><font face="sans-serif">”</font><font face="宋体">变化,并且可以在证券交易所买卖的基金。证券市场投资者可以像买卖股票那么简单地去买卖</font><font face="sans-serif">“</font><font face="宋体">标的指数</font><font face="sans-serif">”</font><font face="宋体">的</font><font face="sans-serif">ETF</font><font face="宋体">,从而获得与</font><font face="sans-serif">“</font><font face="宋体">标的指数</font><font face="sans-serif">”</font><font face="宋体">基本相同的收益率。</font></span><span><o:p></o:p></span></p>
+<p style="text-indent: 2em;"><span><o:p></o:p></span></p>
+<p style="text-indent: 2em;"><span><font face="宋体">二、</font>ETF<font face="宋体">的发展</font></span><span><o:p></o:p></span></p>
+<p style="text-indent: 2em;"><span><o:p></o:p></span></p>
+<p style="text-indent: 2em;"><span>ETF<font face="宋体">的概念雏形起源于美国,最早可以追溯到</font><font face="sans-serif">1975</font><font face="宋体">年美国先锋基金发行的指数投资信托,该产品跟踪的指数是标普</font><font face="sans-serif">500</font><font face="宋体">指数。</font><font face="sans-serif">1990</font><font face="宋体">年,加拿大多伦多证券交易所推出了世界上第一只</font><font face="sans-serif">ETF</font><font face="宋体">指数参与份额(</font><font face="sans-serif">TIPs</font><font face="宋体">)。</font><font face="sans-serif">1993</font><font face="宋体">年,美国证券交易所正式推出了美国第一只</font><font face="sans-serif">ETF——</font><font face="宋体">标普存托凭证</font><font face="sans-serif">SPDR</font><font face="宋体">。</font><font face="sans-serif">20</font><font face="宋体">世纪以来,全球</font><font face="sans-serif">ETF</font><font face="宋体">开始进入快车道,规模不断扩大。</font></span><span><o:p></o:p></span></p>
+<p style="text-indent: 2em;"><span><o:p></o:p></span></p>
+<p style="text-indent: 2em;"><span><font face="宋体">在国内,</font>2005<font face="宋体">、</font><font face="sans-serif">2006</font><font face="宋体">年,上海、深圳两地证券交易所分别推出了自己的首只</font><font face="sans-serif">ETF</font><font face="宋体">产品,华夏上证</font><font face="sans-serif">50ETF</font><font face="宋体">,易方达深证</font><font face="sans-serif">100ETF</font><font face="宋体">。</font><font face="sans-serif">2012</font><font face="宋体">年,华泰柏瑞推出了首只跨市场</font><font face="sans-serif">ETF——</font><font face="宋体">沪深</font><font face="sans-serif">300ETF</font><font face="宋体">。从发展历程看,我国</font><font face="sans-serif">ETF</font><font face="宋体">的发展可分为两阶段。第一阶段是</font><font face="sans-serif">2005</font><font face="宋体">年至</font><font face="sans-serif">2017</font><font face="宋体">年,这一阶段中,</font><font face="sans-serif">ETF</font><font face="宋体">的种类不断丰富,总量不超</font><font face="sans-serif">4000</font><font face="宋体">亿市值。第二阶段是</font><font face="sans-serif">2018</font><font face="宋体">至今,伴随着</font><font face="sans-serif">2018</font><font face="宋体">年出现的牛市,特别是芯片、新能源、光伏、医药等板块的崛起,</font><font face="sans-serif">A</font><font face="宋体">股的</font><font face="sans-serif">ETF</font><font face="宋体">规模快速增长。</font><font face="sans-serif">Choice</font><font face="宋体">数据显示,截至</font><font face="sans-serif">2022</font><font face="宋体">年末,</font><font face="sans-serif">A</font><font face="宋体">股</font><font face="sans-serif">ETF</font><font face="宋体">总体量达到</font><font face="sans-serif">1.67</font><font face="宋体">万亿元,</font><font face="sans-serif">ETF</font><font face="宋体">基金已经开始成为投资者</font><font face="sans-serif">A</font><font face="宋体">股资产配置中不可缺少的重要组成部分。</font></span><span><o:p></o:p></span></p>
+<p style="text-indent: 2em;"><span><o:p></o:p></span></p>
+<p style="text-indent: 2em;"><span><font face="宋体">三、</font>ETF<font face="宋体">的分类</font></span><span><o:p></o:p></span></p>
+<p style="text-indent: 2em;"><span><o:p></o:p></span></p>
+<p style="text-indent: 2em;"><span><font face="宋体">通过前文介绍,我们知道</font>ETF<font face="宋体">通常跟踪的是某一个指数,指数可以按照地区、产品类别、行业类别细分,相应的也就产生了对应的</font><font face="sans-serif">ETF</font><font face="宋体">。按产品大类分,</font><font face="sans-serif">ETF</font><font face="宋体">可以分为股票</font><font face="sans-serif">ETF</font><font face="宋体">、商品</font><font face="sans-serif">ETF</font><font face="宋体">、债券</font><font face="sans-serif">ETF</font><font face="宋体">、货币</font><font face="sans-serif">ETF</font><font face="宋体">等。按涉及的地区来分,可分为</font><font face="sans-serif">A</font><font face="宋体">股</font><font face="sans-serif">ETF</font><font face="宋体">、港股</font><font face="sans-serif">ETF</font><font face="宋体">、美股</font><font face="sans-serif">ETF</font><font face="宋体">、海外</font><font face="sans-serif">ETF</font><font face="宋体">等。按指数覆盖的范围分,可分为宽基</font><font face="sans-serif">ETF</font><font face="宋体">和窄基</font><font face="sans-serif">ETF</font><font face="宋体">,窄基</font><font face="sans-serif">ETF</font><font face="宋体">包含行业</font><font face="sans-serif">ETF</font><font face="宋体">、主题</font><font face="sans-serif">ETF</font><font face="宋体">、策略</font><font face="sans-serif">ETF</font><font face="宋体">等。其中,宽基</font><font face="sans-serif">ETF</font><font face="宋体">跟踪的指数所覆盖的行业最广,例如国内的上证</font><font face="sans-serif">50ETF</font><font face="宋体">,沪深</font><font face="sans-serif">300ETF</font><font face="宋体">,中证</font><font face="sans-serif">500ETF</font><font face="宋体">等。行业</font><font face="sans-serif">ETF</font><font face="宋体">是在宽基的基础上</font><font face="sans-serif">,</font><font face="宋体">进一步细分行业产生的,例如养殖</font><font face="sans-serif">ETF</font><font face="宋体">、证券</font><font face="sans-serif">ETF</font><font face="宋体">、煤炭</font><font face="sans-serif">ETF</font><font face="宋体">等。由于市场常常会诞生一些比较热门的主题,例如新能源和碳中和,对应的有新能源</font><font face="sans-serif">ETT</font><font face="宋体">与碳中和</font><font face="sans-serif">ETF</font><font face="宋体">。策略</font><font face="sans-serif">ETF</font><font face="宋体">是通过选定一个或多个指标构成的</font><font face="sans-serif">EFT</font><font face="宋体">。比如有些投资者比较关注股票的分红,因次,产生了一种叫做分红策略的</font><font face="sans-serif">ETF</font><font face="宋体">;再比如,目前市场对</font><font face="sans-serif">ESG</font><font face="宋体">(环境、社会和公司治理)越来越重视,国际资本市场开始出现了</font><font face="sans-serif">ESG-ETF</font><font face="宋体">基金。</font></span><span><o:p></o:p></span></p>
+<p style="text-indent: 2em;"><span><o:p></o:p></span></p>
+<p style="text-indent: 2em;"><span><font face="宋体">四、</font>ETF<font face="宋体">的交易特征</font></span><span><o:p></o:p></span></p>
+<p style="text-indent: 2em;"><span><o:p></o:p></span></p>
+<p style="text-indent: 2em;"><span>ETF<font face="宋体">实行一级市场和二级市场并存的交易制度。</font></span><span><o:p></o:p></span></p>
+<p style="text-indent: 2em;"><span><o:p></o:p></span></p>
+<p style="text-indent: 2em;"><span><font face="宋体">在一级市场,投资者可以在交易时间内以</font>ETF<font face="宋体">指定的一篮子股票申购</font><font face="sans-serif">ETF</font><font face="宋体">份额或以</font><font face="sans-serif">ETF</font><font face="宋体">份额赎回一篮子股票,</font><font face="sans-serif">ETF</font><font face="宋体">有最小申购、赎回份额的规定,通常最小申购、赎回单位在</font><font face="sans-serif">30</font><font face="宋体">万份、</font><font face="sans-serif">50</font><font face="宋体">万份、</font><font face="sans-serif">100</font><font face="宋体">万份,申购和赎回必须以最小申购、赎回单位的整数倍进行。可见一级市场门槛较高,一般只有机构投资者才有实力参与一级市场的实物申购和赎回交易。中小投资者主要参与的是二级市场,以下重点介绍二级市场的交易特征。</font></span><span><o:p></o:p></span></p>
+<p style="text-indent: 2em;"><span><o:p></o:p></span></p>
+<p style="text-indent: 2em;"><span><font face="宋体">交易门槛上,</font>ETF<font face="宋体">与普通股票一样在证券交易所挂牌交易,基金买入申报数量为</font><font face="sans-serif">100</font><font face="宋体">份或者其整数倍,不足</font><font face="sans-serif">100</font><font face="宋体">份的基金可以卖出,机构投资者和中小投资者都可以按市场价格在二级市场进行</font><font face="sans-serif">ETF</font><font face="宋体">份额交易。</font></span><span><o:p></o:p></span></p>
+<p style="text-indent: 2em;"><span><o:p></o:p></span></p>
+<p style="text-indent: 2em;"><span><font face="宋体">交易效率上,由于</font>ETF<font face="宋体">锚定的是某一个指数,因此</font><font face="sans-serif">ETF</font><font face="宋体">的交易效率就取决于该指数底层资产交易情况。如果</font><font face="sans-serif">ETF</font><font face="宋体">标的资产是</font><font face="sans-serif">T+0</font><font face="宋体">交易,</font><font face="sans-serif">ETF</font><font face="宋体">就是</font><font face="sans-serif">T+0</font><font face="宋体">交易,如果</font><font face="sans-serif">ETF</font><font face="宋体">标的资产是</font><font face="sans-serif">T+1</font><font face="宋体">交易,</font><font face="sans-serif">ETF</font><font face="宋体">就是</font><font face="sans-serif">T+1</font><font face="宋体">交易。目前</font><font face="sans-serif">A</font><font face="宋体">股股票是</font><font face="sans-serif">T+1</font><font face="宋体">交易,因此</font><font face="sans-serif">A</font><font face="宋体">股</font><font face="sans-serif">ETF</font><font face="宋体">就是</font><font face="sans-serif">T+1</font><font face="宋体">交易。黄金</font><font face="sans-serif">ETF</font><font face="宋体">、债券</font><font face="sans-serif">ETF</font><font face="宋体">、货币</font><font face="sans-serif">ETF</font><font face="宋体">以及投资于境外资产的跨境</font><font face="sans-serif">ETF</font><font face="宋体">可实现</font><font face="sans-serif">T</font><font face="宋体">+</font><font face="sans-serif">0</font><font face="宋体">交易。</font></span><span><o:p></o:p></span></p>
+<p style="text-indent: 2em;"><span><o:p></o:p></span></p>
+<p style="text-indent: 2em;"><span><font face="宋体">交易费用上,在二级市场交易</font>ETF<font face="宋体">基金时,证券公司会收取一笔佣金,和交易股票的佣金大体一致,费率是开立账户时和证券公司协商好的。此外,交易</font><font face="sans-serif">ETF</font><font face="宋体">时,不收取印花税。</font></span><span><o:p></o:p></span></p>
+<p style="text-indent: 2em;"><span><o:p></o:p></span></p>
+<p style="text-indent: 2em;"><span><font face="宋体">五、</font>ETF<font face="宋体">联接基金</font></span><span><o:p></o:p></span></p>
+<p style="text-indent: 2em;"><span><o:p></o:p></span></p>
+<p style="text-indent: 2em;"><span><font face="宋体">由于</font>ETF<font face="宋体">是一种场内基金,交易时需要通过股票账户进行。如果投资者没有股票账户,但又想投资</font><font face="sans-serif">ETF</font><font face="宋体">该怎么办呢?</font><font face="sans-serif">ETF</font><font face="宋体">联接基金的出现便解决了上述问题。我们知道基金按照是否可在交易所进行买卖,分为场内基金和场外基金,</font><font face="sans-serif">ETF</font><font face="宋体">联接是一种场外基金,它不需要用股票账户,通常是在银行、证券公司柜台或者</font><font face="sans-serif">APP,</font><font face="宋体">以及第三方销售机构的</font><font face="sans-serif">APP</font><font face="宋体">进行买卖。</font><font face="sans-serif">ETF</font><font face="宋体">联接基金是一种以绝大部分资产投资于目标</font><font face="sans-serif">ETF</font><font face="宋体">的基金产品,投资比例不低于基金资产净值的</font><font face="sans-serif">90%</font><font face="宋体">。比如说某一位投资者想投资上证</font><font face="sans-serif">50ETF,</font><font face="宋体">但是没有股票账户,那么他便可以通过买入相应的上证</font><font face="sans-serif">50ETF</font><font face="宋体">联接基金,从而投资上证</font><font face="sans-serif">50ETF</font><font face="宋体">。</font></span><span><o:p></o:p></span></p>
+              <div  id="files" style="display: none">
+              </div>
+            </div>
+        </div>
+    </div>
+   <div class="footpc">
+	<div class="footcont">
+		<div class="foot-head">
+			<div class="footcont-left">
+				<p>
+					<span>链接：</span>
+					
+						<a href="http://www.gov.cn/"><img src="/qinghai/xhtml/images/public/gh_f.png" class="foot-icon" />中国政府网</a> 
+
+
+				</p>
+			</div>
+			<div class="footcont-right">
+				<select name="--相关机构--" class="k105" onchange="javascript:window.open(this.options[this.selectedIndex].value);this.selectedIndex=0">
+					<option value="/csrc/c100225/common_list.shtml">行业相关网站</option>
+
+							<option value="http://www.investor.org.cn/"><a href="http://www.investor.org.cn/" target="_blank"  >中国投资者网</a></option>
+
+							<option value="http://www.csisc.cn/"><a href="http://www.csisc.cn/" target="_blank"  >中国资本市场标准网</a></option>
+
+						
+					</select>
+					<select name="--其他连接--" class="k105 qtlj" onchange="javascript:window.open(this.options[this.selectedIndex].value);this.selectedIndex=0">
+					<option value="/qinghai/c101445/common_list.shtml">其他链接</option>
+
+							<option value="/qinghai/c101445/c1362699/content.shtml"><a href="/qinghai/c101445/c1362699/content.shtml" target="_blank"  >12348青海法网</a></option>
+
+					</select>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="foot-bottom">
+			<div class="footcont-left">
+				<p>主办单位：中国证券监督管理委员会   版权所有：中国证券监督管理委员会 </p>
+				<p>网站识别码：bm56000001<a href="https://beian.miit.gov.cn">京ICP备 05035542号</a>
+					<a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11040102700080"  TARGET='_blank'><img src="/qinghai/xhtml/images/public/footer_tu.png" class="footer_xiao" />京公网安备 11040102700080号</a>
+				</p>
+			</div>
+			<div class="footcont-right">
+              <script id="_jiucuo_" sitecode='bm56000001' src='https://zfwzgl.www.gov.cn/exposure/jiucuo.js'></script>
+				<script type="text/javascript">document.write(unescape("%3Cspan id='_ideConac' %3E%3C/span%3E%3Cscript src='http://dcs.conac.cn/js/33/000/0000/60407915/CA330000000604079150001.js' type='text/javascript'%3E%3C/script%3E"));</script>
+				<p>
+
+						<a href="/qinghai/c101415/c1306520/content.shtml">联系我们</a> |
+
+						<a href="/csrc/c100227/c1362477/content.shtml">法律声明</a> |
+                  		<a href="/qinghai/c105979/common_list.shtml">归档数据</a>
+					</p>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+</div>
+<!---->
+<div class="footsj">
+	<p>主办单位：中国证券监督管理委员会</p>
+	<p>版权所有：中国证券监督管理委员会</p>
+</div>
+<script language="JavaScript">var _trackDataType = 'web';var _trackData = _trackData || [];</script>
+<script type="text/javascript" charset="utf-8" id="kpyfx_js_id_10008998" src="//fxsjcj.kaipuyun.cn/count/10008998/10008998.js"></script>
+<script type="text/JavaScript" src="/qinghai/xhtml/js/foot.js"></script>
+</body>
+<script src="/qinghai/xhtml/js/share.js"></script>
+<script src="/qinghai/xhtml/js/wxShare.js"></script>
+<script src="/qinghai/xhtml/js/commonDetail.js"></script>
+</html>

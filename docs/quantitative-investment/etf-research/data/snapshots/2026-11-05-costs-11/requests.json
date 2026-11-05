@@ -1,0 +1,100 @@
+[
+  {
+    "name": "sse_fees",
+    "url": "https://www.sse.com.cn/services/tradingservice/charge/ssecharge/",
+    "requested_at_utc": "2026-11-05T06:53:38.989174+00:00",
+    "status": 200,
+    "content_type": "text/html",
+    "final_url": "https://www.sse.com.cn/services/tradingservice/charge/ssecharge/",
+    "bytes": 40445,
+    "sha256": "a28de66ea31037ffa240a2212a8599a06f1f1513f4c4a424976f3a193ae1eb7a",
+    "elapsed_seconds": 2.0
+  },
+  {
+    "name": "tax_2002_128",
+    "url": "https://fgk.chinatax.gov.cn/zcfgk/c102416/c5202818/content.html",
+    "requested_at_utc": "2026-11-05T06:53:38.990415+00:00",
+    "status": 200,
+    "content_type": "text/html",
+    "final_url": "https://fgk.chinatax.gov.cn/zcfgk/c102416/c5202818/content.html",
+    "bytes": 40571,
+    "sha256": "d12d135f81cc88fc075bc0f2b7f560985097b8c92525b282b762243824421dbb",
+    "elapsed_seconds": 2.31
+  },
+  {
+    "name": "tax_2002_128_gd",
+    "url": "https://guangdong.chinatax.gov.cn/gdsw/grsdsgg_hmqsc_pyzbsc_zjtz/2021-08/31/content_ba332d505b274cd5bac5ceab045542dc.shtml",
+    "requested_at_utc": "2026-11-05T06:53:38.991180+00:00",
+    "status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "final_url": "https://guangdong.chinatax.gov.cn/gdsw/grsdsgg_hmqsc_pyzbsc_zjtz/2021-08/31/content_ba332d505b274cd5bac5ceab045542dc.shtml",
+    "bytes": 25295,
+    "sha256": "febb21aec8d99f46472a04e2434a8f8ebe9691c789e72d5cf390284fcf4459d5",
+    "elapsed_seconds": 2.09
+  },
+  {
+    "name": "csrc_etf_tax",
+    "url": "https://www.csrc.gov.cn/qinghai/c105501/c7422297/content.shtml",
+    "requested_at_utc": "2026-11-05T06:53:38.991730+00:00",
+    "status": 200,
+    "content_type": "text/html",
+    "final_url": "https://www.csrc.gov.cn/qinghai/c105501/c7422297/content.shtml",
+    "bytes": 25995,
+    "sha256": "ff6a5069547aeb89ee252f2009f01b5c3e295f8fcf5b71c5fade61933b50aefb",
+    "elapsed_seconds": 3.66
+  },
+  {
+    "name": "broker_fees_boc",
+    "url": "https://www.bocichina.com/main/a/20240627/493318.shtml",
+    "requested_at_utc": "2026-11-05T06:53:38.993857+00:00",
+    "status": 200,
+    "content_type": "text/html; charset=UTF-8",
+    "final_url": "https://www.bocichina.com/main/a/20240627/493318.shtml",
+    "bytes": 63433,
+    "sha256": "7730f232e36074f757c39454e92ffbf15cd19b2a22c9bf9c0a430dd05bb2ca2b",
+    "elapsed_seconds": 2.17
+  },
+  {
+    "name": "sse_publicdata",
+    "url": "https://www.sse.com.cn/market/publicdata/",
+    "requested_at_utc": "2026-11-05T06:53:38.993205+00:00",
+    "status": 200,
+    "content_type": "text/html",
+    "final_url": "https://www.sse.com.cn/market/publicdata/",
+    "bytes": 37285,
+    "sha256": "63fd7b954da553c4cae6c5614faa4d8cc9e06e0cf4e20b36ada2a09df12e83e2",
+    "elapsed_seconds": 2.54
+  },
+  {
+    "name": "sse_market_trend",
+    "url": "https://www.sse.com.cn/market/trend/",
+    "requested_at_utc": "2026-11-05T06:53:40.992501+00:00",
+    "status": 404,
+    "error": "HTTP Error 404: Not Found",
+    "bytes": 150,
+    "sha256": "d03c9c9c5fef19b7e84125dd79b77167d00e1df5f56da4818992e23e67360bbb",
+    "elapsed_seconds": 2.35
+  },
+  {
+    "name": "prospectus_510300",
+    "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-08-13/510300_20260813_FPSL.pdf",
+    "requested_at_utc": "2026-11-05T06:53:41.085980+00:00",
+    "status": 200,
+    "content_type": "application/pdf",
+    "final_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-08-13/510300_20260813_FPSL.pdf",
+    "bytes": 1222262,
+    "sha256": "e5c1d3bf755f595766c5f4ff4c64b5555e332bd8d466d8d2603cd0c8466f7432",
+    "elapsed_seconds": 2.86
+  },
+  {
+    "name": "prospectus_511010",
+    "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-09-21/511010_20260921_4HQ6.pdf",
+    "requested_at_utc": "2026-11-05T06:53:41.168695+00:00",
+    "status": 200,
+    "content_type": "application/pdf",
+    "final_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-09-21/511010_20260921_4HQ6.pdf",
+    "bytes": 589469,
+    "sha256": "a53997c202a27fecf4766796998a79a33fd47edbec457926206c8050b925d68e",
+    "elapsed_seconds": 1.09
+  }
+]

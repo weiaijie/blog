@@ -1,0 +1,57 @@
+[
+  {
+    "name": "official_dayk_510300",
+    "url": "https://yunhq.sse.com.cn:32042/v1/sh1/dayk/510300?begin=-1000&end=-1&period=day",
+    "requested_at_utc": "2026-11-05T06:56:43.186383+00:00",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "final_url": "https://yunhq.sse.com.cn:32042/v1/sh1/dayk/510300?begin=-1000&end=-1&period=day",
+    "bytes": 60425,
+    "sha256": "dcd5de74fdfa06af516555eac21bf229ba9228bf3ac5e057e78257286ded571f",
+    "elapsed_seconds": 1.55
+  },
+  {
+    "name": "official_snap_510300",
+    "url": "https://yunhq.sse.com.cn:32042/v1/sh1/snap/510300?select=name%2Cprev_close%2Copen%2Chigh%2Clow%2Clast%2Cup_limit%2Cdown_limit%2Ctradephase%2Chlt_tag",
+    "requested_at_utc": "2026-11-05T06:56:43.187848+00:00",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "final_url": "https://yunhq.sse.com.cn:32042/v1/sh1/snap/510300?select=name%2Cprev_close%2Copen%2Chigh%2Clow%2Clast%2Cup_limit%2Cdown_limit%2Ctradephase%2Chlt_tag",
+    "bytes": 128,
+    "sha256": "a61984dd4ad16a3345e8e60d41c973d4ba0b0054e6d104f2b5c5cb528fe1d118",
+    "elapsed_seconds": 1.61
+  },
+  {
+    "name": "official_dayk_511010",
+    "url": "https://yunhq.sse.com.cn:32042/v1/sh1/dayk/511010?begin=-1000&end=-1&period=day",
+    "requested_at_utc": "2026-11-05T06:56:43.188594+00:00",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "final_url": "https://yunhq.sse.com.cn:32042/v1/sh1/dayk/511010?begin=-1000&end=-1&period=day",
+    "bytes": 65307,
+    "sha256": "d5bb61946041cfdb5f6288116da7af3cd96763fcbb421824face8c70fe97264e",
+    "elapsed_seconds": 2.02
+  },
+  {
+    "name": "official_snap_511010",
+    "url": "https://yunhq.sse.com.cn:32042/v1/sh1/snap/511010?select=name%2Cprev_close%2Copen%2Chigh%2Clow%2Clast%2Cup_limit%2Cdown_limit%2Ctradephase%2Chlt_tag",
+    "requested_at_utc": "2026-11-05T06:56:43.189698+00:00",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "final_url": "https://yunhq.sse.com.cn:32042/v1/sh1/snap/511010?select=name%2Cprev_close%2Copen%2Chigh%2Clow%2Clast%2Cup_limit%2Cdown_limit%2Ctradephase%2Chlt_tag",
+    "bytes": 145,
+    "sha256": "fe81ab682fbd8bd341090c7eca79a74b45a69ef15369e6e19bd61c04d35820ce",
+    "elapsed_seconds": 1.57
+  },
+  {
+    "name": "suspensions_positive_code",
+    "url": "https://query.sse.com.cn/sseQuery/commonSoaQuery.do?isPagination=true&sqlId=SSE_PL_JYTS_TFPXX_JJ&secCode=513100&stopReason=&order=startStopDate%7Cdesc%2CsecCode%7Casc&startDate=20220101&endDate=20261104&pageHelp.pageSize=25&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.cacheSize=1&pageHelp.endPage=1",
+    "requested_at_utc": "2026-11-05T06:56:44.741642+00:00",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "final_url": "https://query.sse.com.cn/sseQuery/commonSoaQuery.do?isPagination=true&sqlId=SSE_PL_JYTS_TFPXX_JJ&secCode=513100&stopReason=&order=startStopDate%7Cdesc%2CsecCode%7Casc&startDate=20220101&endDate=20261104&pageHelp.pageSize=25&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.cacheSize=1&pageHelp.endPage=1",
+    "bytes": 16981,
+    "sha256": "a333d56fe0139efdecf8a1295b59366b93396fea2cb247d30cd9e9e7449b4189",
+    "elapsed_seconds": 1.25
+  }
+]

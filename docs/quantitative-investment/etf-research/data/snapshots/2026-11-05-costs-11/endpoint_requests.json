@@ -1,0 +1,35 @@
+[
+  {
+    "name": "sse_trade_js",
+    "url": "https://www.sse.com.cn/xhtml/home/2021public/querySearch/search_tradeTip_2021.js",
+    "requested_at_utc": "2026-11-05T06:55:08.979521+00:00",
+    "status": 200,
+    "content_type": "application/javascript",
+    "final_url": "https://www.sse.com.cn/xhtml/home/2021public/querySearch/search_tradeTip_2021.js",
+    "bytes": 39627,
+    "sha256": "32fc98ea41e599f457609247ba68defb82e6d855aa2551da6923dbf7e44153a7",
+    "elapsed_seconds": 0.46
+  },
+  {
+    "name": "sse_price_js",
+    "url": "https://www.sse.com.cn/xhtml/home/2021public/querySearch/search_price_2021.js",
+    "requested_at_utc": "2026-11-05T06:55:08.981601+00:00",
+    "status": 200,
+    "content_type": "application/javascript",
+    "final_url": "https://www.sse.com.cn/xhtml/home/2021public/querySearch/search_price_2021.js",
+    "bytes": 21980,
+    "sha256": "7cd1bfe577b5dda51ea5d010a1b690bb048355ed6b4b7791d3434892135606bf",
+    "elapsed_seconds": 5.89
+  },
+  {
+    "name": "sse_hq_js",
+    "url": "https://www.sse.com.cn/xhtml/home/2021public/querySearch/search_HQ_2021.js",
+    "requested_at_utc": "2026-11-05T06:55:08.983100+00:00",
+    "status": 200,
+    "content_type": "application/javascript",
+    "final_url": "https://www.sse.com.cn/xhtml/home/2021public/querySearch/search_HQ_2021.js",
+    "bytes": 160211,
+    "sha256": "e2c944248245259c646f54014920795e8dff32b83ddf1d2b6f64dc465c243d96",
+    "elapsed_seconds": 0.97
+  }
+]

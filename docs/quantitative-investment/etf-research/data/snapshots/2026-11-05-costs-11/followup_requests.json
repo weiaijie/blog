@@ -1,0 +1,46 @@
+[
+  {
+    "name": "tax_2018_177",
+    "url": "https://fgk.chinatax.gov.cn/zcfgk/c102416/c5251984/content.html",
+    "requested_at_utc": "2026-11-05T06:54:46.750727+00:00",
+    "status": 200,
+    "content_type": "text/html",
+    "final_url": "https://fgk.chinatax.gov.cn/zcfgk/c102416/c5251984/content.html",
+    "bytes": 36237,
+    "sha256": "355786984f4bbe8761a255550d0fd702d86e1b13854fe7c999dbb07caed80ad7",
+    "elapsed_seconds": 1.82
+  },
+  {
+    "name": "tax_2018_177_gx",
+    "url": "https://guangxi.chinatax.gov.cn/zcwj/zxwj/201901/t20190104_254522.html",
+    "requested_at_utc": "2026-11-05T06:54:46.751980+00:00",
+    "status": 200,
+    "content_type": "text/html",
+    "final_url": "https://guangxi.chinatax.gov.cn/zcwj/zxwj/201901/t20190104_254522.html",
+    "bytes": 150023,
+    "sha256": "98d769860f2ddba308ca904da3418c619e46fb58c5d70ae634d08c5112798de8",
+    "elapsed_seconds": 1.73
+  },
+  {
+    "name": "sse_suspension",
+    "url": "https://www.sse.com.cn/disclosure/dealinstruc/suspension/stock/",
+    "requested_at_utc": "2026-11-05T06:54:46.752780+00:00",
+    "status": 200,
+    "content_type": "text/html",
+    "final_url": "https://www.sse.com.cn/disclosure/dealinstruc/suspension/stock/",
+    "bytes": 25991,
+    "sha256": "88db3e9308f8143d2cb5b8021f4a44eb38f8759fa998158c52dd14806861580b",
+    "elapsed_seconds": 2.03
+  },
+  {
+    "name": "sse_price_trends",
+    "url": "https://www.sse.com.cn/market/price/trends/",
+    "requested_at_utc": "2026-11-05T06:54:46.753872+00:00",
+    "status": 200,
+    "content_type": "text/html",
+    "final_url": "https://www.sse.com.cn/market/price/trends/",
+    "bytes": 27095,
+    "sha256": "f7c037d76339983c85bea7e93cec611cdbc16232e38abd33f1b78a3838769fc1",
+    "elapsed_seconds": 2.88
+  }
+]
