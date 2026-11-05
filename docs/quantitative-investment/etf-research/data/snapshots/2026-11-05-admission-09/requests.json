@@ -1,0 +1,67 @@
+[
+  {
+    "name": "sina_510300",
+    "url": "https://quotes.sina.cn/cn/api/jsonp_v2.php/var%20_data=/CN_MarketDataService.getKLineData?symbol=sh510300&scale=240&ma=no&datalen=64",
+    "requested_at_utc": "2026-11-05T01:36:38.772548+00:00",
+    "status": 200,
+    "content_type": "application/javascript; charset=gbk",
+    "final_url": "https://quotes.sina.cn/cn/api/jsonp_v2.php/var%20_data=/CN_MarketDataService.getKLineData?symbol=sh510300&scale=240&ma=no&datalen=64",
+    "bytes": 6613,
+    "sha256": "e56c1813fe2b443dfc2f28d79adb2469bb6b951bc06ccf8e30aa721c82f61d48",
+    "elapsed_seconds": 6.77
+  },
+  {
+    "name": "sohu_510300",
+    "url": "https://q.stock.sohu.com/hisHq?code=cn_510300&start=20261001&end=20261104&stat=1&order=D&period=d&rt=json",
+    "requested_at_utc": "2026-11-05T01:36:38.776373+00:00",
+    "status": 200,
+    "content_type": "application/x-javascript",
+    "final_url": "https://q.stock.sohu.com/hisHq?code=cn_510300&start=20261001&end=20261104&stat=1&order=D&period=d&rt=json",
+    "bytes": 2314,
+    "sha256": "e2723f838eade46ac7afbc736341d226649215c2aa5eabd2d8a64b2e0e3c3a2a",
+    "elapsed_seconds": 3.95
+  },
+  {
+    "name": "catalog_510300",
+    "url": "https://query.sse.com.cn/commonQuery.do?sqlId=COMMON_PL_JJXX_JJGG_NEW_L&isPagination=true&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.endPage=1&pageHelp.cacheSize=1&SECURITY_CODE=510300&TITLE=&START_DATE=2012-01-01&END_DATE=2026-11-05",
+    "requested_at_utc": "2026-11-05T01:36:38.777886+00:00",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "final_url": "https://query.sse.com.cn/commonQuery.do?sqlId=COMMON_PL_JJXX_JJGG_NEW_L&isPagination=true&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.endPage=1&pageHelp.cacheSize=1&SECURITY_CODE=510300&TITLE=&START_DATE=2012-01-01&END_DATE=2026-11-05",
+    "bytes": 202471,
+    "sha256": "1fadf896aa649e34b03a7c671cdef072d1163d3dbff5414f7c1ae945e1e0d462",
+    "elapsed_seconds": 7.65
+  },
+  {
+    "name": "sina_511010",
+    "url": "https://quotes.sina.cn/cn/api/jsonp_v2.php/var%20_data=/CN_MarketDataService.getKLineData?symbol=sh511010&scale=240&ma=no&datalen=64",
+    "requested_at_utc": "2026-11-05T01:36:38.787280+00:00",
+    "status": 200,
+    "content_type": "application/javascript; charset=gbk",
+    "final_url": "https://quotes.sina.cn/cn/api/jsonp_v2.php/var%20_data=/CN_MarketDataService.getKLineData?symbol=sh511010&scale=240&ma=no&datalen=64",
+    "bytes": 7022,
+    "sha256": "bb9a7ed299adbb67476e521fb31c8b160aeac20eb0c14e0348bc7b7988018946",
+    "elapsed_seconds": 6.99
+  },
+  {
+    "name": "sohu_511010",
+    "url": "https://q.stock.sohu.com/hisHq?code=cn_511010&start=20261001&end=20261104&stat=1&order=D&period=d&rt=json",
+    "requested_at_utc": "2026-11-05T01:36:38.782202+00:00",
+    "status": 503,
+    "error": "HTTP Error 503: Service Unavailable",
+    "bytes": 206,
+    "sha256": "1e2ea44c8bb71ad3a3195b4625c66b931827a2eb5e4099533860bf4270f67bcb",
+    "elapsed_seconds": 3.77
+  },
+  {
+    "name": "catalog_511010",
+    "url": "https://query.sse.com.cn/commonQuery.do?sqlId=COMMON_PL_JJXX_JJGG_NEW_L&isPagination=true&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.endPage=1&pageHelp.cacheSize=1&SECURITY_CODE=511010&TITLE=&START_DATE=2012-01-01&END_DATE=2026-11-05",
+    "requested_at_utc": "2026-11-05T01:36:38.784144+00:00",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "final_url": "https://query.sse.com.cn/commonQuery.do?sqlId=COMMON_PL_JJXX_JJGG_NEW_L&isPagination=true&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.endPage=1&pageHelp.cacheSize=1&SECURITY_CODE=511010&TITLE=&START_DATE=2012-01-01&END_DATE=2026-11-05",
+    "bytes": 174523,
+    "sha256": "0a6284491e607f6e20b8bbcb24247dcd7f2da94188f5f1f118445367d6149c07",
+    "elapsed_seconds": 6.77
+  }
+]

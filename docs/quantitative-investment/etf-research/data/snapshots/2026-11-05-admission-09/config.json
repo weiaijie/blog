@@ -1,0 +1,15 @@
+{
+  "format": 1,
+  "through": "2026-11-04",
+  "calendar_snapshot": "2026-11-04-calendar-08",
+  "prices": {
+    "510300": {
+      "sina": "sina_510300",
+      "sohu": "sohu_510300"
+    },
+    "511010": {
+      "sina": "sina_511010",
+      "sohu": "sohu_year_511010"
+    }
+  }
+}

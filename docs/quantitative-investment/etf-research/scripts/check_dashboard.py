@@ -8,6 +8,10 @@ with sync_playwright() as pw:
  page.on('pageerror',lambda e:errors.append(str(e)))
  response=page.goto(a.url);assert response.status==200
  assert page.locator('#baseline-rows tr').count()==6
+ if page.locator('#latest-admission').count():
+  assert page.locator('#account-through').inner_text()=='2026-11-04'
+  assert page.locator('#account-sessions').inner_text()=='1170'
+  assert page.locator('#forward-sessions').inner_text()=='0'
  assert page.locator('#chart polyline').count()==6
  assert page.locator('#sensitivity-rows tr').count()==9
  assert page.locator('#fold-rows tr').count()==(8 if a.extended else 4)

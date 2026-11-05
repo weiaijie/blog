@@ -1,0 +1,24 @@
+[
+  {
+    "name": "sohu_year_511010",
+    "url": "https://q.stock.sohu.com/hisHq?code=cn_511010&start=20260101&end=20261104&stat=1&order=D&period=d&rt=json",
+    "requested_at_utc": "2026-11-05T01:37:23.156107+00:00",
+    "status": 200,
+    "content_type": "application/x-javascript",
+    "final_url": "https://q.stock.sohu.com/hisHq?code=cn_511010&start=20260101&end=20261104&stat=1&order=D&period=d&rt=json",
+    "bytes": 21156,
+    "sha256": "1c58288ab7378481a2fd74b30a40e980dd2516ea401422370a468f0ae36e0a06",
+    "elapsed_seconds": 1.19
+  },
+  {
+    "name": "sohu_recent_511010",
+    "url": "https://q.stock.sohu.com/hisHq?code=cn_511010&start=20240101&end=20261104&stat=1&order=D&period=d&rt=json",
+    "requested_at_utc": "2026-11-05T01:37:23.157010+00:00",
+    "status": 200,
+    "content_type": "application/x-javascript",
+    "final_url": "https://q.stock.sohu.com/hisHq?code=cn_511010&start=20240101&end=20261104&stat=1&order=D&period=d&rt=json",
+    "bytes": 70205,
+    "sha256": "f65db48f4f055c27a63d86b1aa5043fbd9b222a60550d15615de9d4203f9139a",
+    "elapsed_seconds": 1.4
+  }
+]

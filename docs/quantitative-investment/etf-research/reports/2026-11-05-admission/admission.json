@@ -1,0 +1,36 @@
+{
+  "admitted": true,
+  "snapshot": "2026-11-05-admission-09",
+  "through": "2026-11-04",
+  "added_sessions": [
+    "2026-11-02",
+    "2026-11-03",
+    "2026-11-04"
+  ],
+  "total_sessions": 1170,
+  "source_checks": {
+    "510300": {
+      "unchanged_overlap_days": {
+        "sina": 61,
+        "sohu": 17
+      },
+      "new_days": 3,
+      "exact_ohlc_fields": 12
+    },
+    "511010": {
+      "unchanged_overlap_days": {
+        "sina": 61,
+        "sohu": 198
+      },
+      "new_days": 3,
+      "exact_ohlc_fields": 12
+    }
+  },
+  "official_catalog_counts": {
+    "510300": 259,
+    "511010": 230
+  },
+  "new_or_changed_notices": 0,
+  "new_events_automatically_created": false,
+  "scope_limit": "Catalog equality is not proof of upstream completeness; any notice change requires manual event/suspension review. Current sources are not proven operationally independent."
+}

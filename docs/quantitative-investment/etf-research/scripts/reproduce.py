@@ -17,6 +17,13 @@ def main():
   old_saved=ROOT/'reports/2026-11-04-closure'
   for f in old.iterdir():
    if f.read_bytes()!=(old_saved/f.name).read_bytes():raise AssertionError('Old result changed: '+f.name)
-  result={'old_core_result_files_unchanged':len(list(old.iterdir())),'offline_reproduction_passed':True,'research_files_byte_identical':len(files),'dashboard_byte_identical':True,'network_used_by_pipeline':False}
-  (saved/'reproducibility.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result))
+  state=Path(temp)/'forward.json';state.write_bytes((ROOT/'reports/2026-11-04-extension/forward_checkpoint.json').read_bytes());audit=Path(temp)/'admission.json'
+  command=[sys.executable,'scripts/advance_forward.py','--snapshot','2026-11-05-admission-09','--state',str(state),'--audit',str(audit)]
+  subprocess.run(command,cwd=ROOT,env=env,check=True)
+  current=ROOT/'reports/2026-11-05-admission'
+  if state.read_bytes()!=(current/'forward_checkpoint.json').read_bytes() or audit.read_bytes()!=(current/'admission.json').read_bytes():raise AssertionError('Admission/checkpoint reproduction mismatch')
+  before=state.read_bytes();subprocess.run(command,cwd=ROOT,env=env,check=True)
+  if before!=state.read_bytes():raise AssertionError('Checkpoint retry is not idempotent')
+  result={'admission_and_checkpoint_byte_identical':True,'checkpoint_retry_idempotent':True,'old_core_result_files_unchanged':len(list(old.iterdir())),'offline_reproduction_passed':True,'research_files_byte_identical':len(files),'dashboard_byte_identical':True,'network_used_by_pipeline':False}
+  (ROOT/'reports/2026-11-05-admission/reproducibility.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result))
 if __name__=='__main__':main()
