@@ -10,11 +10,12 @@
 |保留的旧历史|640日和1167日结果均保留，不覆盖、不拼接。|
 |前瞻账户输入|1171日，截至2026-11-05；保持原2022起预热历史。|
 |真正前瞻观察|1日；首日只观察，18组合各持现金10万元，零交易、总收益0、年化空。|
-|验证|108项测试、162组独立期末核对、离线复现和浏览器验收。|
+|验证|117项测试、162组独立期末核对、离线复现和浏览器验收。|
 |看板部署|静态代码和页面已保存，未配置公开域名托管。|
 
 50/50基准费用年化：原640日4.90%，1167日0.51%，新1967日4.02%（最大收盘回撤19.73%）。同策略、同历史终点对起点敏感；最新数字落入研究目标范围也不证明长期目标成立。
 
+- [计划逐项对照](docs/PLAN_ALIGNMENT.md) · [风险监控页面](site/risk.html) · [统一监控配置](config/research.json)
 - [最新停复牌查询核验](reports/2026-11-06-suspension/PROGRESS.md)
 - [11月6日模拟目标与时间说明](reports/2026-11-06-intent/PROGRESS.md)
 - [最新规则时间线证据](reports/2026-11-05-rule-timeline/PROGRESS.md)
@@ -26,13 +27,17 @@
 ## 复现
 
 ```sh
+python -m pip install -r requirements-lock.txt
 python scripts/verify_project.py
+python scripts/build_risk_report.py
 PYTHONPATH=src python -m unittest discover -s tests -v
 PYTHONPATH=src python scripts/audit_official_close.py
 python scripts/reproduce.py
 python -m http.server 8765 --bind 127.0.0.1
 ```
 
-依赖Python3标准库；可选网页验收需Playwright/Chromium，PDF文本提取需pdftotext。已有原始快照不覆盖。最新清单reports/2026-11-06-suspension/manifest.json；旧阶段清单在相应历史提交核验。新环境先读CONTINUATION.md，不依赖聊天记忆。
+Python 3.11+；监控使用固定版本pandas、NumPy和matplotlib，完整依赖见requirements-lock.txt。旧冻结模拟引擎仍使用标准库；可选网页验收需Playwright/Chromium，PDF文本提取需pdftotext。已有原始快照不覆盖。最新清单reports/2026-11-06-plan-alignment/manifest.json；旧阶段清单在相应历史提交核验。新环境先读CONTINUATION.md，不依赖聊天记忆。
 
 旧/workspace/quant-research、旧策略/看板和旧10项测试未恢复；当前是持续重建并已保存到仓库的版本。无实盘、无后台调度，未来收益不能在当前会话完成。
+
+监控页面使用现有报告离线生成，浏览器无需安装框架或联网加载图表。可用上面的http.server打开/site/risk.html。配置仅控制分析输入和风险监控；策略权重/费用仍由冻结协议控制。原规划的剩余项见PLAN_ALIGNMENT，不以测试通过代替完整交付。

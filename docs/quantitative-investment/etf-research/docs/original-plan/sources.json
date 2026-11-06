@@ -1,0 +1,83 @@
+{
+  "commit": "12b284882f67c6a3f6138954e7319f03e81a6fa2",
+  "files": [
+    {
+      "path": "01-stock-screening/README.md",
+      "original_path": "docs/quantitative-investment/01-stock-screening/README.md",
+      "git_blob": "92ac73c286a883c5ea5f3e2fad44c5302cac77aa",
+      "sha256": "86ec3d5f10acddbb431c4c8a63e52fe3b5dfd158d09d4dc13f2a2ea2c802a489"
+    },
+    {
+      "path": "02-valuation-system/README.md",
+      "original_path": "docs/quantitative-investment/02-valuation-system/README.md",
+      "git_blob": "0b5670c5308cf671760650b31a9083313258e4cc",
+      "sha256": "a8d9a12fd85cc899a564770e07388911b50f7f22c537aaf1d338c465fbfa3dc3"
+    },
+    {
+      "path": "03-position-management/README.md",
+      "original_path": "docs/quantitative-investment/03-position-management/README.md",
+      "git_blob": "87482d9860751ade4395fb92f638618f02767b44",
+      "sha256": "dd064ebc8bcba686a4d8774137d063303cadea745362a9128178e21bd7ba838b"
+    },
+    {
+      "path": "04-bond-screening/README.md",
+      "original_path": "docs/quantitative-investment/04-bond-screening/README.md",
+      "git_blob": "e2caafa65d4415aace0d9c3851326f3efc525e8d",
+      "sha256": "3fb103b928f2beaea9204aeee1fb229dfb54742f54f98574eee12346e33fa69d"
+    },
+    {
+      "path": "05-alert-system/README.md",
+      "original_path": "docs/quantitative-investment/05-alert-system/README.md",
+      "git_blob": "9215dea6d7edbd7881a775d579a34c916af05988",
+      "sha256": "5f868dadf18bcda10499ca8cf43e802ae692dad5c2defd1d0b44cc777dce1204"
+    },
+    {
+      "path": "06-trading-execution/README.md",
+      "original_path": "docs/quantitative-investment/06-trading-execution/README.md",
+      "git_blob": "678c922e5e20be7e18f1e394a9df277d764b9ca5",
+      "sha256": "5ac73e83a4c1be482ff5d71b62e052e05100515b9f658f20e6ca60bf2b7cd7cc"
+    },
+    {
+      "path": "07-risk-control/README.md",
+      "original_path": "docs/quantitative-investment/07-risk-control/README.md",
+      "git_blob": "d11320786a633e882add1d0b51a871468a055d91",
+      "sha256": "30a8b7de7c06b1e3a76efc7f019968ca43a705435c504708316230fd856509ce"
+    },
+    {
+      "path": "08-performance-tracking/README.md",
+      "original_path": "docs/quantitative-investment/08-performance-tracking/README.md",
+      "git_blob": "47b40656f2ad50e89233acbbfdcb97954a7a217c",
+      "sha256": "a84e09769167a3a884968e57379bca668d2eb798e3eef1a3559f23727c8901ed"
+    },
+    {
+      "path": "README.md",
+      "original_path": "docs/quantitative-investment/README.md",
+      "git_blob": "021ef38680bd4dbd5c6910c034de6f0d3d07a7ac",
+      "sha256": "0c4f8be304f5f7487315354aa87af0c538aaab9c7647e21f7e462c7e421e2f12"
+    },
+    {
+      "path": "examples/README.md",
+      "original_path": "docs/quantitative-investment/examples/README.md",
+      "git_blob": "696e73eacbefabd29d550ee5ce308ab136913531",
+      "sha256": "409a7286f8139627988485ff9bc5b85b9b7cca8896669c0b19cfec5f86273882"
+    },
+    {
+      "path": "quick-start-guide.md",
+      "original_path": "docs/quantitative-investment/quick-start-guide.md",
+      "git_blob": "6be94c2c23c76c6ad95ff29b5e8addefdc3ee246",
+      "sha256": "e29e6735e3edcd15cc489e3ae49ec63bdc8c8a094e1d7fcbd6b953504b74a2bd"
+    },
+    {
+      "path": "templates/README.md",
+      "original_path": "docs/quantitative-investment/templates/README.md",
+      "git_blob": "ad73e5564e5eccc3f20d519ec8ae57c4d095d946",
+      "sha256": "568acdacfc8cbfcce19c7b7c7b58077ef8e932de3c36a8c8efc04954cba192a6"
+    },
+    {
+      "path": "tools/README.md",
+      "original_path": "docs/quantitative-investment/tools/README.md",
+      "git_blob": "48fbc627885c67da08714fe223774679bd4abc9a",
+      "sha256": "fec00548168145cad139942e84da6bc90833fccd7b8e1355ca6306bd1b5f6dc1"
+    }
+  ]
+}

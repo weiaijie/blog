@@ -43,6 +43,9 @@ def main():
   suspension=Path(temp)/'suspension.json'
   subprocess.run([sys.executable,'scripts/audit_suspensions.py','--output',str(suspension)],cwd=ROOT,env=env,check=True)
   if suspension.read_bytes()!=(ROOT/'reports/2026-11-06-suspension/audit.json').read_bytes():raise AssertionError('Suspension audit mismatch')
-  result={'suspension_audit_byte_identical':True,'saved_intent_byte_identical':True,'first_forward_day_byte_identical':True,'medium_core_result_files_unchanged':len(list(medium.iterdir())),'review_packet_byte_identical':True,'admission_and_checkpoint_byte_identical':True,'checkpoint_retry_idempotent':True,'old_core_result_files_unchanged':len(list(old.iterdir())),'offline_reproduction_passed':True,'research_files_byte_identical':len(files),'dashboard_byte_identical':True,'network_used_by_pipeline':False}
-  (ROOT/'reports/2026-11-06-suspension/reproducibility.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result))
+  risk=Path(temp)/'risk.json';risk_page=Path(temp)/'risk.html'
+  subprocess.run([sys.executable,'scripts/build_risk_report.py','--output',str(risk),'--page',str(risk_page)],cwd=ROOT,env=env,check=True)
+  if risk.read_bytes()!=(ROOT/'reports/2026-11-06-plan-alignment/risk.json').read_bytes() or risk_page.read_bytes()!=(ROOT/'site/risk.html').read_bytes():raise AssertionError('Risk report/page reproduction mismatch')
+  result={'risk_report_and_page_byte_identical':True,'suspension_audit_byte_identical':True,'saved_intent_byte_identical':True,'first_forward_day_byte_identical':True,'medium_core_result_files_unchanged':len(list(medium.iterdir())),'review_packet_byte_identical':True,'admission_and_checkpoint_byte_identical':True,'checkpoint_retry_idempotent':True,'old_core_result_files_unchanged':len(list(old.iterdir())),'offline_reproduction_passed':True,'research_files_byte_identical':len(files),'dashboard_byte_identical':True,'network_used_by_pipeline':False}
+  (ROOT/'reports/2026-11-06-plan-alignment/reproducibility.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result))
 if __name__=='__main__':main()
