@@ -40,6 +40,9 @@ def main():
   plan_audit=Path(temp)/'intent.json'
   subprocess.run([sys.executable,'scripts/audit_first_session.py','--output',str(plan_audit)],cwd=ROOT,env=env,check=True)
   if plan_audit.read_bytes()!=(ROOT/'reports/2026-11-06-intent/intent_replay.json').read_bytes():raise AssertionError('Intent replay mismatch')
-  result={'saved_intent_byte_identical':True,'first_forward_day_byte_identical':True,'medium_core_result_files_unchanged':len(list(medium.iterdir())),'review_packet_byte_identical':True,'admission_and_checkpoint_byte_identical':True,'checkpoint_retry_idempotent':True,'old_core_result_files_unchanged':len(list(old.iterdir())),'offline_reproduction_passed':True,'research_files_byte_identical':len(files),'dashboard_byte_identical':True,'network_used_by_pipeline':False}
-  (ROOT/'reports/2026-11-06-intent/reproducibility.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result))
+  suspension=Path(temp)/'suspension.json'
+  subprocess.run([sys.executable,'scripts/audit_suspensions.py','--output',str(suspension)],cwd=ROOT,env=env,check=True)
+  if suspension.read_bytes()!=(ROOT/'reports/2026-11-06-suspension/audit.json').read_bytes():raise AssertionError('Suspension audit mismatch')
+  result={'suspension_audit_byte_identical':True,'saved_intent_byte_identical':True,'first_forward_day_byte_identical':True,'medium_core_result_files_unchanged':len(list(medium.iterdir())),'review_packet_byte_identical':True,'admission_and_checkpoint_byte_identical':True,'checkpoint_retry_idempotent':True,'old_core_result_files_unchanged':len(list(old.iterdir())),'offline_reproduction_passed':True,'research_files_byte_identical':len(files),'dashboard_byte_identical':True,'network_used_by_pipeline':False}
+  (ROOT/'reports/2026-11-06-suspension/reproducibility.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result))
 if __name__=='__main__':main()

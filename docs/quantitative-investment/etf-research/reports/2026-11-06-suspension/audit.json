@@ -1,0 +1,109 @@
+{
+  "snapshot": "data/snapshots/2026-11-06-suspension-15",
+  "requests": 42,
+  "http_200": 42,
+  "query_end": "2026-11-05",
+  "annual": [
+    {
+      "year": 2018,
+      "returned_rows": 42,
+      "complete_under_reported_total": true,
+      "target_matches": 0
+    },
+    {
+      "year": 2019,
+      "returned_rows": 64,
+      "complete_under_reported_total": true,
+      "target_matches": 0
+    },
+    {
+      "year": 2020,
+      "returned_rows": 190,
+      "complete_under_reported_total": true,
+      "target_matches": 0
+    },
+    {
+      "year": 2021,
+      "returned_rows": 91,
+      "complete_under_reported_total": true,
+      "target_matches": 0
+    },
+    {
+      "year": 2022,
+      "returned_rows": 53,
+      "complete_under_reported_total": true,
+      "target_matches": 0
+    },
+    {
+      "year": 2023,
+      "returned_rows": 48,
+      "complete_under_reported_total": true,
+      "target_matches": 0
+    },
+    {
+      "year": 2024,
+      "returned_rows": 82,
+      "complete_under_reported_total": true,
+      "target_matches": 0
+    },
+    {
+      "year": 2025,
+      "returned_rows": 148,
+      "complete_under_reported_total": true,
+      "target_matches": 0
+    },
+    {
+      "year": 2026,
+      "returned_rows": 647,
+      "complete_under_reported_total": true,
+      "target_matches": 0
+    }
+  ],
+  "queried_rows": 1365,
+  "distinct_full_records": 1340,
+  "repeated_record_appearances": 25,
+  "open_end_distinct_records": [
+    {
+      "dateSource": "0",
+      "endStopDate": "",
+      "endStopReason": "",
+      "endStopType": "",
+      "endType": "",
+      "expandAbbr": "港中小企LOF",
+      "secAbbr": "港中小企",
+      "secCode": "501023",
+      "startStopDate": "20211012",
+      "startStopReason": "基金清盘",
+      "startStopType": "",
+      "startType": "TR",
+      "stopTime": " "
+    }
+  ],
+  "cross_year_overlap_control": [
+    {
+      "endStopType": "",
+      "startStopReason": "退市摘牌",
+      "endStopDate": "20210311",
+      "endType": "",
+      "secCode": "512300",
+      "expandAbbr": "",
+      "startType": "TR",
+      "startStopDate": "20201222",
+      "endStopReason": "",
+      "startStopType": "",
+      "dateSource": "0",
+      "secAbbr": "500医药",
+      "stopTime": " "
+    }
+  ],
+  "target_returned_records": 0,
+  "absence_proves_no_suspensions": false,
+  "changes_account_or_execution_permissions": false,
+  "limitations": [
+    "Completeness is relative to this API reported totals, not an independent historical census.",
+    "Identical full records are deduplicated only for counting; these are not necessarily distinct trading halts.",
+    "Legacy and unknown type codes remain unclassified; creation/redemption events are not trading-halt proof.",
+    "An empty end date remains unknown. One overlap control does not prove all interval semantics.",
+    "No current-day quotes or account updates are included."
+  ]
+}

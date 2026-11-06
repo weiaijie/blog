@@ -1,0 +1,5 @@
+{
+  "command": "PYTHONPATH=src python -m unittest discover -s tests -v",
+  "tests": 108,
+  "passed": true
+}

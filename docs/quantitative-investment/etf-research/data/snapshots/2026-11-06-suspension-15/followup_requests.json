@@ -1,0 +1,145 @@
+[
+  {
+    "name": "all_2018",
+    "url": "https://query.sse.com.cn/sseQuery/commonSoaQuery.do?isPagination=true&sqlId=SSE_PL_JYTS_TFPXX_JJ&secCode=&stopReason=&order=startStopDate%7Cdesc%2CsecCode%7Casc&startDate=20180914&endDate=20181231&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.cacheSize=1&pageHelp.endPage=1",
+    "requested_at_utc": "2026-11-06T02:25:58.500834+00:00",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "final_url": "https://query.sse.com.cn/sseQuery/commonSoaQuery.do?isPagination=true&sqlId=SSE_PL_JYTS_TFPXX_JJ&secCode=&stopReason=&order=startStopDate%7Cdesc%2CsecCode%7Casc&startDate=20180914&endDate=20181231&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.cacheSize=1&pageHelp.endPage=1",
+    "bytes": 25207,
+    "sha256": "a35b7e6435d91fc55a2124019cb767ad8a8828ceba924b4f4f5ac0a8f6484066",
+    "elapsed_seconds": 0.45
+  },
+  {
+    "name": "all_2019",
+    "url": "https://query.sse.com.cn/sseQuery/commonSoaQuery.do?isPagination=true&sqlId=SSE_PL_JYTS_TFPXX_JJ&secCode=&stopReason=&order=startStopDate%7Cdesc%2CsecCode%7Casc&startDate=20190101&endDate=20191231&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.cacheSize=1&pageHelp.endPage=1",
+    "requested_at_utc": "2026-11-06T02:25:58.502394+00:00",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "final_url": "https://query.sse.com.cn/sseQuery/commonSoaQuery.do?isPagination=true&sqlId=SSE_PL_JYTS_TFPXX_JJ&secCode=&stopReason=&order=startStopDate%7Cdesc%2CsecCode%7Casc&startDate=20190101&endDate=20191231&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.cacheSize=1&pageHelp.endPage=1",
+    "bytes": 37895,
+    "sha256": "edfff8ea8c1d02f2d8649c139c5c38d52b0cc33a553ed37c5dea2152e60d4426",
+    "elapsed_seconds": 0.71
+  },
+  {
+    "name": "all_2020",
+    "url": "https://query.sse.com.cn/sseQuery/commonSoaQuery.do?isPagination=true&sqlId=SSE_PL_JYTS_TFPXX_JJ&secCode=&stopReason=&order=startStopDate%7Cdesc%2CsecCode%7Casc&startDate=20200101&endDate=20201231&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.cacheSize=1&pageHelp.endPage=1",
+    "requested_at_utc": "2026-11-06T02:25:58.503584+00:00",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "final_url": "https://query.sse.com.cn/sseQuery/commonSoaQuery.do?isPagination=true&sqlId=SSE_PL_JYTS_TFPXX_JJ&secCode=&stopReason=&order=startStopDate%7Cdesc%2CsecCode%7Casc&startDate=20200101&endDate=20201231&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.cacheSize=1&pageHelp.endPage=1",
+    "bytes": 111838,
+    "sha256": "8fa75d44522bcce197806c73db469a0daf9e328ccb3a4102931558188d70ad4d",
+    "elapsed_seconds": 1.67
+  },
+  {
+    "name": "all_2021",
+    "url": "https://query.sse.com.cn/sseQuery/commonSoaQuery.do?isPagination=true&sqlId=SSE_PL_JYTS_TFPXX_JJ&secCode=&stopReason=&order=startStopDate%7Cdesc%2CsecCode%7Casc&startDate=20210101&endDate=20211231&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.cacheSize=1&pageHelp.endPage=1",
+    "requested_at_utc": "2026-11-06T02:25:58.504357+00:00",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "final_url": "https://query.sse.com.cn/sseQuery/commonSoaQuery.do?isPagination=true&sqlId=SSE_PL_JYTS_TFPXX_JJ&secCode=&stopReason=&order=startStopDate%7Cdesc%2CsecCode%7Casc&startDate=20210101&endDate=20211231&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.cacheSize=1&pageHelp.endPage=1",
+    "bytes": 52135,
+    "sha256": "89c9216163a085f8bf47297ae7291342d121e87df0ca9ad33ca74e61de206042",
+    "elapsed_seconds": 0.99
+  },
+  {
+    "name": "all_2022",
+    "url": "https://query.sse.com.cn/sseQuery/commonSoaQuery.do?isPagination=true&sqlId=SSE_PL_JYTS_TFPXX_JJ&secCode=&stopReason=&order=startStopDate%7Cdesc%2CsecCode%7Casc&startDate=20220101&endDate=20221231&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.cacheSize=1&pageHelp.endPage=1",
+    "requested_at_utc": "2026-11-06T02:25:58.950451+00:00",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "final_url": "https://query.sse.com.cn/sseQuery/commonSoaQuery.do?isPagination=true&sqlId=SSE_PL_JYTS_TFPXX_JJ&secCode=&stopReason=&order=startStopDate%7Cdesc%2CsecCode%7Casc&startDate=20220101&endDate=20221231&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.cacheSize=1&pageHelp.endPage=1",
+    "bytes": 31799,
+    "sha256": "cfeab04bbdbc59dbe7b9395ff12ac9bbd93a98e726e86d9ebb335c7a315f8f8d",
+    "elapsed_seconds": 0.4
+  },
+  {
+    "name": "all_2023",
+    "url": "https://query.sse.com.cn/sseQuery/commonSoaQuery.do?isPagination=true&sqlId=SSE_PL_JYTS_TFPXX_JJ&secCode=&stopReason=&order=startStopDate%7Cdesc%2CsecCode%7Casc&startDate=20230101&endDate=20231231&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.cacheSize=1&pageHelp.endPage=1",
+    "requested_at_utc": "2026-11-06T02:25:59.217059+00:00",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "final_url": "https://query.sse.com.cn/sseQuery/commonSoaQuery.do?isPagination=true&sqlId=SSE_PL_JYTS_TFPXX_JJ&secCode=&stopReason=&order=startStopDate%7Cdesc%2CsecCode%7Casc&startDate=20230101&endDate=20231231&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.cacheSize=1&pageHelp.endPage=1",
+    "bytes": 29947,
+    "sha256": "9564bae2f8ff412c47223ef174a99249498ba0397199897619ea56b1164c52c2",
+    "elapsed_seconds": 0.53
+  },
+  {
+    "name": "all_2024",
+    "url": "https://query.sse.com.cn/sseQuery/commonSoaQuery.do?isPagination=true&sqlId=SSE_PL_JYTS_TFPXX_JJ&secCode=&stopReason=&order=startStopDate%7Cdesc%2CsecCode%7Casc&startDate=20240101&endDate=20241231&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.cacheSize=1&pageHelp.endPage=1",
+    "requested_at_utc": "2026-11-06T02:25:59.348972+00:00",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "final_url": "https://query.sse.com.cn/sseQuery/commonSoaQuery.do?isPagination=true&sqlId=SSE_PL_JYTS_TFPXX_JJ&secCode=&stopReason=&order=startStopDate%7Cdesc%2CsecCode%7Casc&startDate=20240101&endDate=20241231&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.cacheSize=1&pageHelp.endPage=1",
+    "bytes": 51039,
+    "sha256": "f9bd3b01b970a4ebd7835438ab43b2c31441b8181aa4352f46682c8b0b9a967b",
+    "elapsed_seconds": 0.54
+  },
+  {
+    "name": "all_2025",
+    "url": "https://query.sse.com.cn/sseQuery/commonSoaQuery.do?isPagination=true&sqlId=SSE_PL_JYTS_TFPXX_JJ&secCode=&stopReason=&order=startStopDate%7Cdesc%2CsecCode%7Casc&startDate=20250101&endDate=20251231&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.cacheSize=1&pageHelp.endPage=1",
+    "requested_at_utc": "2026-11-06T02:25:59.491046+00:00",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "final_url": "https://query.sse.com.cn/sseQuery/commonSoaQuery.do?isPagination=true&sqlId=SSE_PL_JYTS_TFPXX_JJ&secCode=&stopReason=&order=startStopDate%7Cdesc%2CsecCode%7Casc&startDate=20250101&endDate=20251231&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.cacheSize=1&pageHelp.endPage=1",
+    "bytes": 95438,
+    "sha256": "dd400dbec6004a20a0acdd27e7bc75811391c17cffe1035b0c1c14562fb7cbb2",
+    "elapsed_seconds": 0.75
+  },
+  {
+    "name": "all_2026",
+    "url": "https://query.sse.com.cn/sseQuery/commonSoaQuery.do?isPagination=true&sqlId=SSE_PL_JYTS_TFPXX_JJ&secCode=&stopReason=&order=startStopDate%7Cdesc%2CsecCode%7Casc&startDate=20260101&endDate=20261105&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.cacheSize=1&pageHelp.endPage=1",
+    "requested_at_utc": "2026-11-06T02:25:59.744660+00:00",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "final_url": "https://query.sse.com.cn/sseQuery/commonSoaQuery.do?isPagination=true&sqlId=SSE_PL_JYTS_TFPXX_JJ&secCode=&stopReason=&order=startStopDate%7Cdesc%2CsecCode%7Casc&startDate=20260101&endDate=20261105&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.cacheSize=1&pageHelp.endPage=1",
+    "bytes": 432014,
+    "sha256": "08efea885fff04e8e6d0684442c1fb5e5275dd6d9190f379319a9cc7cb2414df",
+    "elapsed_seconds": 3.6
+  },
+  {
+    "name": "lookback_510300",
+    "url": "https://query.sse.com.cn/sseQuery/commonSoaQuery.do?isPagination=true&sqlId=SSE_PL_JYTS_TFPXX_JJ&secCode=510300&stopReason=&order=startStopDate%7Cdesc%2CsecCode%7Casc&startDate=20120101&endDate=20180913&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.cacheSize=1&pageHelp.endPage=1",
+    "requested_at_utc": "2026-11-06T02:25:59.894236+00:00",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "final_url": "https://query.sse.com.cn/sseQuery/commonSoaQuery.do?isPagination=true&sqlId=SSE_PL_JYTS_TFPXX_JJ&secCode=510300&stopReason=&order=startStopDate%7Cdesc%2CsecCode%7Casc&startDate=20120101&endDate=20180913&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.cacheSize=1&pageHelp.endPage=1",
+    "bytes": 486,
+    "sha256": "143d5b1608525bd505c019ecae2963c2f0e5d66210cbfb598e6043d4a92ed1fc",
+    "elapsed_seconds": 0.23
+  },
+  {
+    "name": "lookback_511010",
+    "url": "https://query.sse.com.cn/sseQuery/commonSoaQuery.do?isPagination=true&sqlId=SSE_PL_JYTS_TFPXX_JJ&secCode=511010&stopReason=&order=startStopDate%7Cdesc%2CsecCode%7Casc&startDate=20120101&endDate=20180913&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.cacheSize=1&pageHelp.endPage=1",
+    "requested_at_utc": "2026-11-06T02:26:00.125058+00:00",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "final_url": "https://query.sse.com.cn/sseQuery/commonSoaQuery.do?isPagination=true&sqlId=SSE_PL_JYTS_TFPXX_JJ&secCode=511010&stopReason=&order=startStopDate%7Cdesc%2CsecCode%7Casc&startDate=20120101&endDate=20180913&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.cacheSize=1&pageHelp.endPage=1",
+    "bytes": 486,
+    "sha256": "143d5b1608525bd505c019ecae2963c2f0e5d66210cbfb598e6043d4a92ed1fc",
+    "elapsed_seconds": 0.22
+  },
+  {
+    "name": "overlap_inside",
+    "url": "https://query.sse.com.cn/sseQuery/commonSoaQuery.do?isPagination=true&sqlId=SSE_PL_JYTS_TFPXX_JJ&secCode=512300&stopReason=&order=startStopDate%7Cdesc%2CsecCode%7Casc&startDate=20210101&endDate=20210131&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.cacheSize=1&pageHelp.endPage=1",
+    "requested_at_utc": "2026-11-06T02:26:00.171329+00:00",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "final_url": "https://query.sse.com.cn/sseQuery/commonSoaQuery.do?isPagination=true&sqlId=SSE_PL_JYTS_TFPXX_JJ&secCode=512300&stopReason=&order=startStopDate%7Cdesc%2CsecCode%7Casc&startDate=20210101&endDate=20210131&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.cacheSize=1&pageHelp.endPage=1",
+    "bytes": 1006,
+    "sha256": "79f71dbca96c3468c27be60bdc7a8ccd2b6047be9ca3f7f9a7a1492cea8fc304",
+    "elapsed_seconds": 0.21
+  },
+  {
+    "name": "overlap_with_start",
+    "url": "https://query.sse.com.cn/sseQuery/commonSoaQuery.do?isPagination=true&sqlId=SSE_PL_JYTS_TFPXX_JJ&secCode=512300&stopReason=&order=startStopDate%7Cdesc%2CsecCode%7Casc&startDate=20201201&endDate=20210311&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.cacheSize=1&pageHelp.endPage=1",
+    "requested_at_utc": "2026-11-06T02:26:00.240779+00:00",
+    "status": 200,
+    "content_type": "application/json;charset=UTF-8",
+    "final_url": "https://query.sse.com.cn/sseQuery/commonSoaQuery.do?isPagination=true&sqlId=SSE_PL_JYTS_TFPXX_JJ&secCode=512300&stopReason=&order=startStopDate%7Cdesc%2CsecCode%7Casc&startDate=20201201&endDate=20210311&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.cacheSize=1&pageHelp.endPage=1",
+    "bytes": 1006,
+    "sha256": "79f71dbca96c3468c27be60bdc7a8ccd2b6047be9ca3f7f9a7a1492cea8fc304",
+    "elapsed_seconds": 0.21
+  }
+]
