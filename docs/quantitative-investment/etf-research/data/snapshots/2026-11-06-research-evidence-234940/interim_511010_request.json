@@ -1,0 +1,54 @@
+{
+  "name": "interim_511010",
+  "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-08-31/511010_20260831_XPI1.pdf",
+  "requested_at_utc": "2026-11-06T15:49:44.242187+00:00",
+  "status": 200,
+  "curl_exit": 0,
+  "final_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-08-31/511010_20260831_XPI1.pdf",
+  "content_type": "application/pdf",
+  "address_family": "ipv4",
+  "certificate_verification_enabled": true,
+  "client_version": "curl 8.18.0 (x86_64-pc-linux-gnu) libcurl/8.18.0 OpenSSL/3.5.5 zlib/1.3.1 brotli/1.2.0 zstd/1.5.7 libidn2/2.3.8 libpsl/0.21.2 libssh2/1.11.1 nghttp2/1.68.0 librtmp/2.3 mit-krb5/1.22.1 OpenLDAP/2.6.10",
+  "metrics": {
+    "remote_ip": "202.122.113.73",
+    "http_version": "1.1",
+    "ssl_verify_result": 0,
+    "time_connect": 0.006088,
+    "time_appconnect": 0.023837,
+    "time_starttransfer": 0.210986,
+    "time_total": 0.252447
+  },
+  "bytes": 454900,
+  "sha256": "e105b4ba25355f019f440f2de9b943509df2d63f238a8343198a7a60d3ede43c",
+  "elapsed_seconds": 0.262,
+  "retry_delay_seconds": null,
+  "selected_attempt": "interim_511010_attempt_01",
+  "attempts": [
+    {
+      "name": "interim_511010_attempt_01",
+      "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-08-31/511010_20260831_XPI1.pdf",
+      "requested_at_utc": "2026-11-06T15:49:44.242187+00:00",
+      "status": 200,
+      "curl_exit": 0,
+      "final_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-08-31/511010_20260831_XPI1.pdf",
+      "content_type": "application/pdf",
+      "address_family": "ipv4",
+      "certificate_verification_enabled": true,
+      "client_version": "curl 8.18.0 (x86_64-pc-linux-gnu) libcurl/8.18.0 OpenSSL/3.5.5 zlib/1.3.1 brotli/1.2.0 zstd/1.5.7 libidn2/2.3.8 libpsl/0.21.2 libssh2/1.11.1 nghttp2/1.68.0 librtmp/2.3 mit-krb5/1.22.1 OpenLDAP/2.6.10",
+      "metrics": {
+        "remote_ip": "202.122.113.73",
+        "http_version": "1.1",
+        "ssl_verify_result": 0,
+        "time_connect": 0.006088,
+        "time_appconnect": 0.023837,
+        "time_starttransfer": 0.210986,
+        "time_total": 0.252447
+      },
+      "bytes": 454900,
+      "sha256": "e105b4ba25355f019f440f2de9b943509df2d63f238a8343198a7a60d3ede43c",
+      "elapsed_seconds": 0.262,
+      "retry_delay_seconds": null
+    }
+  ],
+  "actual_requests": 1
+}

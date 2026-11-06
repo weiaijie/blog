@@ -1,6 +1,6 @@
 # 项目计划与当前状态
 
-更新：2026-11-06，Asia/Shanghai。旧阶段原文见[历史计划记录](docs/history/PROJECT_PLAN-before-closure-20261106.md)；历史“下一步/最新”只代表当时状态。
+更新：2026-11-07，Asia/Shanghai。旧阶段原文见[历史计划记录](docs/history/PROJECT_PLAN-before-closure-20261106.md)；历史“下一步/最新”只代表当时状态。
 
 ## 目标
 
@@ -14,9 +14,13 @@
 - Backtrader 162场景执行对照；精确现金边界拒单反例尚存，未迁移冻结引擎。
 - 每日严格准入、旧前缀重放、会计对账、原子整包发布、有限重试和Ubuntu定时运行已启用。
 
-## 本轮任务
+## 上轮任务
 
 已完成[运行闭环计划](docs/OPERATIONS_CLOSURE_PLAN.md)：独立健康检查、安全增量归档与隔离恢复、证据绑定公告审阅和过时文档整理。实施与验证的最终结果见[本轮报告](reports/2026-11-06-closure/PROGRESS.md)。
+
+## 本轮任务
+
+已完成[研究证据计划](docs/RESEARCH_EVIDENCE_PLAN.md)：一年/两年历史持有期审计、独立Decimal复核、官方中期完整股票表与债券代码归并、2027日历证据可取得性及跨年阻断检查。见[研究报告](reports/2026-11-06-research-audit/PROGRESS.md)与[验收](reports/2026-11-06-research-audit/VALIDATION.md)。这不是长期收益目标完成。
 
 ## 后续按序
 

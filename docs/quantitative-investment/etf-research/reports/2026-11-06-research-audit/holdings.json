@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "report_date": "2026-06-30",
+  "financial_statements_audited": false,
+  "not_current_holdings": true,
+  "not_historical_holdings_series": true,
+  "announcement_dates": {
+    "510300": "2026-08-29",
+    "511010": "2026-08-31"
+  },
+  "sources_sha256": {
+    "data/snapshots/2026-11-06-research-evidence-234940/manifest.json": "3555a59e5dcdbd92ff18720f0e19db2eb1411f5c52da7d63de495ac77270d465",
+    "data/snapshots/2026-11-06-research-evidence-234940/interim_510300.pdf": "c58a800bd564014e2d49826a0e9ccd965fdee8333a37f138e41442ad71dfe0ad",
+    "data/snapshots/2026-11-06-research-evidence-234940/interim_511010.pdf": "e105b4ba25355f019f440f2de9b943509df2d63f238a8343198a7a60d3ede43c",
+    "data/snapshots/2026-11-07-bond-identities-000043/manifest.json": "659b055ad378b52fcb0dedc786ea6fef3e1b3c8644ef399bdba71a14956adbcf",
+    "data/reference/holdings_2026q3.json": "d67903700b11d5b846366e3cf646734e4a18ed8eba2939f415ab78bbff0c7a2a",
+    "scripts/build_holdings_audit.py": "722cf86608b34b99074e1f49dcc86c75546b93182fc19da2b0e44d7d9c2ac097"
+  },
+  "stock": {
+    "pdf_pages": [
+      13,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56
+    ],
+    "assets": "95683574830.88",
+    "liabilities": "811390834.48",
+    "nav": "94872183996.40",
+    "stock_total": "91003211192.29",
+    "rows": 339,
+    "unique_security_codes": 339,
+    "index_rows": 300,
+    "active_rows": 39,
+    "stock_fraction_of_nav": "0.9592191025742928904141961611",
+    "stock_fraction_of_assets": "0.9510849835317868549006012046",
+    "top1_fraction_of_nav": "0.04747460478163872117894850398",
+    "top10_fraction_of_nav": "0.2324334427720854449179699247",
+    "stock_sleeve_hhi": "0.01103211160528047669864681603",
+    "stock_sleeve_effective_count": "90.64447820862816008481458043",
+    "full_fund_hhi": null,
+    "ultimate_issuer_hhi": null,
+    "numpy_decimal_hhi_crosscheck": true,
+    "notes": "Full disclosed stock sleeve only; excludes refundable substitution valuation adjustments. No real-time or ultimate-owner claim."
+  },
+  "bond": {
+    "pdf_pages": [
+      14,
+      34,
+      35
+    ],
+    "assets": "5179839036.35",
+    "liabilities": "62594104.83",
+    "nav": "5117244931.52",
+    "bond_total": "5060489774.03",
+    "government_bond_fraction_of_nav": "0.9889090402649259664804265156",
+    "listed_positions": [
+      {
+        "code": "250020",
+        "quantity": 10400000,
+        "fair_value": "1061756515.07",
+        "reported_percent": "20.75"
+      },
+      {
+        "code": "019793",
+        "quantity": 10361050,
+        "fair_value": "1057780032.71",
+        "reported_percent": "20.67"
+      },
+      {
+        "code": "019834",
+        "quantity": 9082590,
+        "fair_value": "914402812.28",
+        "reported_percent": "17.87"
+      },
+      {
+        "code": "260008",
+        "quantity": 8300000,
+        "fair_value": "835614438.36",
+        "reported_percent": "16.33"
+      },
+      {
+        "code": "019829",
+        "quantity": 5905070,
+        "fair_value": "597607320.89",
+        "reported_percent": "11.68"
+      }
+    ],
+    "listed_total": "4467161119.31",
+    "listed_fraction_of_nav": "0.8729621464460755325623948961",
+    "listed_fraction_of_bonds": "0.8827527213344226428546414687",
+    "undisclosed_bond_value": "593328654.72",
+    "full_security_hhi": null,
+    "known_issue_nav_lower_bounds": {
+      "2025年记账式附息（二十期）国债": "0.4141948599576655035865849076",
+      "2026年记账式附息（八期）国债": "0.3419842657639183817685357616",
+      "2026年记账式附息（三期）国债": "0.1167830207244916472072742268"
+    },
+    "issuer_category": "中华人民共和国财政部（国家债券）",
+    "notes": "Five codes map to three known issues; unlisted codes remain unknown. Issuer category share is not a full-fund issuer HHI."
+  },
+  "identities": [
+    {
+      "BOND_CODE": "019793",
+      "BANK_CODE": "250020",
+      "BOND_FULL": "2025年记账式附息（二十期）国债",
+      "ISSUE_OWNER": "财政部",
+      "START_DATE": "2025-10-25",
+      "END_DATE": "2030-10-25"
+    },
+    {
+      "BOND_CODE": "019834",
+      "BANK_CODE": "260008",
+      "BOND_FULL": "2026年记账式附息（八期）国债",
+      "ISSUE_OWNER": "财政部",
+      "START_DATE": "2026-04-15",
+      "END_DATE": "2031-04-15"
+    },
+    {
+      "BOND_CODE": "019829",
+      "BANK_CODE": "260003",
+      "BOND_FULL": "2026年记账式附息（三期）国债",
+      "ISSUE_OWNER": "财政部",
+      "START_DATE": "2026-01-25",
+      "END_DATE": "2031-01-25"
+    },
+    {
+      "BOND_CODE": "019848",
+      "BANK_CODE": "260015",
+      "BOND_FULL": "2026年记账式附息（十五期）国债",
+      "ISSUE_OWNER": "财政部",
+      "START_DATE": "2026-07-25",
+      "END_DATE": "2031-07-25"
+    }
+  ],
+  "q3_separate_observation": {
+    "report_date": "2026-09-30",
+    "known_issue_nav_lower_bounds": {
+      "2026年记账式附息（八期）国债": "0.3832087672308376604057446670",
+      "2026年记账式附息（十五期）国债": "0.3822211750204662354862103732",
+      "2026年记账式附息（三期）国债": "0.1058640054010114073245861420"
+    },
+    "full_security_hhi": null
+  },
+  "visual_review": {
+    "renderer": "PyMuPDF 1.26.7",
+    "pages": [
+      13,
+      48,
+      55,
+      56,
+      14,
+      34,
+      35
+    ],
+    "review": "Compared balance sheets, table boundaries, top rows and wrapped bond values; every intermediate stock row is additionally constrained by ranks, exact sums and rounded NAV percentages."
+  }
+}

@@ -1,0 +1,218 @@
+[
+  {
+    "name": "identity_019793",
+    "url": "https://query.sse.com.cn/commonQuery.do?isPagination=false&sqlId=COMMON_BOND_BASIC_ZQJBYS_L&BONDCODE=019793",
+    "requested_at_utc": "2026-11-06T16:00:43.304117+00:00",
+    "status": 200,
+    "curl_exit": 0,
+    "final_url": "https://query.sse.com.cn/commonQuery.do?isPagination=false&sqlId=COMMON_BOND_BASIC_ZQJBYS_L&BONDCODE=019793",
+    "content_type": "application/json;charset=UTF-8",
+    "address_family": "ipv4",
+    "certificate_verification_enabled": true,
+    "client_version": "curl 8.18.0 (x86_64-pc-linux-gnu) libcurl/8.18.0 OpenSSL/3.5.5 zlib/1.3.1 brotli/1.2.0 zstd/1.5.7 libidn2/2.3.8 libpsl/0.21.2 libssh2/1.11.1 nghttp2/1.68.0 librtmp/2.3 mit-krb5/1.22.1 OpenLDAP/2.6.10",
+    "metrics": {
+      "remote_ip": "202.122.113.77",
+      "http_version": "1.1",
+      "ssl_verify_result": 0,
+      "time_connect": 0.010753,
+      "time_appconnect": 0.027634,
+      "time_starttransfer": 0.04366,
+      "time_total": 0.043743
+    },
+    "bytes": 1153,
+    "sha256": "c901ffca76a8079e8672e346bbb1882441cf063cf027cb35ca09ee0d984edff5",
+    "elapsed_seconds": 0.053,
+    "retry_delay_seconds": null,
+    "selected_attempt": "identity_019793_attempt_01",
+    "attempts": [
+      {
+        "name": "identity_019793_attempt_01",
+        "url": "https://query.sse.com.cn/commonQuery.do?isPagination=false&sqlId=COMMON_BOND_BASIC_ZQJBYS_L&BONDCODE=019793",
+        "requested_at_utc": "2026-11-06T16:00:43.304117+00:00",
+        "status": 200,
+        "curl_exit": 0,
+        "final_url": "https://query.sse.com.cn/commonQuery.do?isPagination=false&sqlId=COMMON_BOND_BASIC_ZQJBYS_L&BONDCODE=019793",
+        "content_type": "application/json;charset=UTF-8",
+        "address_family": "ipv4",
+        "certificate_verification_enabled": true,
+        "client_version": "curl 8.18.0 (x86_64-pc-linux-gnu) libcurl/8.18.0 OpenSSL/3.5.5 zlib/1.3.1 brotli/1.2.0 zstd/1.5.7 libidn2/2.3.8 libpsl/0.21.2 libssh2/1.11.1 nghttp2/1.68.0 librtmp/2.3 mit-krb5/1.22.1 OpenLDAP/2.6.10",
+        "metrics": {
+          "remote_ip": "202.122.113.77",
+          "http_version": "1.1",
+          "ssl_verify_result": 0,
+          "time_connect": 0.010753,
+          "time_appconnect": 0.027634,
+          "time_starttransfer": 0.04366,
+          "time_total": 0.043743
+        },
+        "bytes": 1153,
+        "sha256": "c901ffca76a8079e8672e346bbb1882441cf063cf027cb35ca09ee0d984edff5",
+        "elapsed_seconds": 0.053,
+        "retry_delay_seconds": null
+      }
+    ],
+    "actual_requests": 1
+  },
+  {
+    "name": "identity_019834",
+    "url": "https://query.sse.com.cn/commonQuery.do?isPagination=false&sqlId=COMMON_BOND_BASIC_ZQJBYS_L&BONDCODE=019834",
+    "requested_at_utc": "2026-11-06T16:00:43.359167+00:00",
+    "status": 200,
+    "curl_exit": 0,
+    "final_url": "https://query.sse.com.cn/commonQuery.do?isPagination=false&sqlId=COMMON_BOND_BASIC_ZQJBYS_L&BONDCODE=019834",
+    "content_type": "application/json;charset=UTF-8",
+    "address_family": "ipv4",
+    "certificate_verification_enabled": true,
+    "client_version": "curl 8.18.0 (x86_64-pc-linux-gnu) libcurl/8.18.0 OpenSSL/3.5.5 zlib/1.3.1 brotli/1.2.0 zstd/1.5.7 libidn2/2.3.8 libpsl/0.21.2 libssh2/1.11.1 nghttp2/1.68.0 librtmp/2.3 mit-krb5/1.22.1 OpenLDAP/2.6.10",
+    "metrics": {
+      "remote_ip": "202.122.113.77",
+      "http_version": "1.1",
+      "ssl_verify_result": 0,
+      "time_connect": 0.006256,
+      "time_appconnect": 0.027801,
+      "time_starttransfer": 0.04412,
+      "time_total": 0.044193
+    },
+    "bytes": 1149,
+    "sha256": "00fd78e762abab1401670d4e73aa2485bd58a057013dbe1433f9fd93f05f7a73",
+    "elapsed_seconds": 0.054,
+    "retry_delay_seconds": null,
+    "selected_attempt": "identity_019834_attempt_01",
+    "attempts": [
+      {
+        "name": "identity_019834_attempt_01",
+        "url": "https://query.sse.com.cn/commonQuery.do?isPagination=false&sqlId=COMMON_BOND_BASIC_ZQJBYS_L&BONDCODE=019834",
+        "requested_at_utc": "2026-11-06T16:00:43.359167+00:00",
+        "status": 200,
+        "curl_exit": 0,
+        "final_url": "https://query.sse.com.cn/commonQuery.do?isPagination=false&sqlId=COMMON_BOND_BASIC_ZQJBYS_L&BONDCODE=019834",
+        "content_type": "application/json;charset=UTF-8",
+        "address_family": "ipv4",
+        "certificate_verification_enabled": true,
+        "client_version": "curl 8.18.0 (x86_64-pc-linux-gnu) libcurl/8.18.0 OpenSSL/3.5.5 zlib/1.3.1 brotli/1.2.0 zstd/1.5.7 libidn2/2.3.8 libpsl/0.21.2 libssh2/1.11.1 nghttp2/1.68.0 librtmp/2.3 mit-krb5/1.22.1 OpenLDAP/2.6.10",
+        "metrics": {
+          "remote_ip": "202.122.113.77",
+          "http_version": "1.1",
+          "ssl_verify_result": 0,
+          "time_connect": 0.006256,
+          "time_appconnect": 0.027801,
+          "time_starttransfer": 0.04412,
+          "time_total": 0.044193
+        },
+        "bytes": 1149,
+        "sha256": "00fd78e762abab1401670d4e73aa2485bd58a057013dbe1433f9fd93f05f7a73",
+        "elapsed_seconds": 0.054,
+        "retry_delay_seconds": null
+      }
+    ],
+    "actual_requests": 1
+  },
+  {
+    "name": "identity_019829",
+    "url": "https://query.sse.com.cn/commonQuery.do?isPagination=false&sqlId=COMMON_BOND_BASIC_ZQJBYS_L&BONDCODE=019829",
+    "requested_at_utc": "2026-11-06T16:00:43.415302+00:00",
+    "status": 200,
+    "curl_exit": 0,
+    "final_url": "https://query.sse.com.cn/commonQuery.do?isPagination=false&sqlId=COMMON_BOND_BASIC_ZQJBYS_L&BONDCODE=019829",
+    "content_type": "application/json;charset=UTF-8",
+    "address_family": "ipv4",
+    "certificate_verification_enabled": true,
+    "client_version": "curl 8.18.0 (x86_64-pc-linux-gnu) libcurl/8.18.0 OpenSSL/3.5.5 zlib/1.3.1 brotli/1.2.0 zstd/1.5.7 libidn2/2.3.8 libpsl/0.21.2 libssh2/1.11.1 nghttp2/1.68.0 librtmp/2.3 mit-krb5/1.22.1 OpenLDAP/2.6.10",
+    "metrics": {
+      "remote_ip": "202.122.113.77",
+      "http_version": "1.1",
+      "ssl_verify_result": 0,
+      "time_connect": 0.007223,
+      "time_appconnect": 0.046966,
+      "time_starttransfer": 0.082044,
+      "time_total": 0.08212
+    },
+    "bytes": 1148,
+    "sha256": "55586f8a0db05e027bf91baa5f98d2351ff1f732e5c8a8f130c37fb5dd1ae793",
+    "elapsed_seconds": 0.093,
+    "retry_delay_seconds": null,
+    "selected_attempt": "identity_019829_attempt_01",
+    "attempts": [
+      {
+        "name": "identity_019829_attempt_01",
+        "url": "https://query.sse.com.cn/commonQuery.do?isPagination=false&sqlId=COMMON_BOND_BASIC_ZQJBYS_L&BONDCODE=019829",
+        "requested_at_utc": "2026-11-06T16:00:43.415302+00:00",
+        "status": 200,
+        "curl_exit": 0,
+        "final_url": "https://query.sse.com.cn/commonQuery.do?isPagination=false&sqlId=COMMON_BOND_BASIC_ZQJBYS_L&BONDCODE=019829",
+        "content_type": "application/json;charset=UTF-8",
+        "address_family": "ipv4",
+        "certificate_verification_enabled": true,
+        "client_version": "curl 8.18.0 (x86_64-pc-linux-gnu) libcurl/8.18.0 OpenSSL/3.5.5 zlib/1.3.1 brotli/1.2.0 zstd/1.5.7 libidn2/2.3.8 libpsl/0.21.2 libssh2/1.11.1 nghttp2/1.68.0 librtmp/2.3 mit-krb5/1.22.1 OpenLDAP/2.6.10",
+        "metrics": {
+          "remote_ip": "202.122.113.77",
+          "http_version": "1.1",
+          "ssl_verify_result": 0,
+          "time_connect": 0.007223,
+          "time_appconnect": 0.046966,
+          "time_starttransfer": 0.082044,
+          "time_total": 0.08212
+        },
+        "bytes": 1148,
+        "sha256": "55586f8a0db05e027bf91baa5f98d2351ff1f732e5c8a8f130c37fb5dd1ae793",
+        "elapsed_seconds": 0.093,
+        "retry_delay_seconds": null
+      }
+    ],
+    "actual_requests": 1
+  },
+  {
+    "name": "identity_019848",
+    "url": "https://query.sse.com.cn/commonQuery.do?isPagination=false&sqlId=COMMON_BOND_BASIC_ZQJBYS_L&BONDCODE=019848",
+    "requested_at_utc": "2026-11-06T16:00:43.510401+00:00",
+    "status": 200,
+    "curl_exit": 0,
+    "final_url": "https://query.sse.com.cn/commonQuery.do?isPagination=false&sqlId=COMMON_BOND_BASIC_ZQJBYS_L&BONDCODE=019848",
+    "content_type": "application/json;charset=UTF-8",
+    "address_family": "ipv4",
+    "certificate_verification_enabled": true,
+    "client_version": "curl 8.18.0 (x86_64-pc-linux-gnu) libcurl/8.18.0 OpenSSL/3.5.5 zlib/1.3.1 brotli/1.2.0 zstd/1.5.7 libidn2/2.3.8 libpsl/0.21.2 libssh2/1.11.1 nghttp2/1.68.0 librtmp/2.3 mit-krb5/1.22.1 OpenLDAP/2.6.10",
+    "metrics": {
+      "remote_ip": "202.122.113.77",
+      "http_version": "1.1",
+      "ssl_verify_result": 0,
+      "time_connect": 0.006295,
+      "time_appconnect": 0.023063,
+      "time_starttransfer": 0.037824,
+      "time_total": 0.037916
+    },
+    "bytes": 1152,
+    "sha256": "7d7fb902f140b0e390a76a7aab688755faa75aafa7ed51ca3a08d1cb44bed511",
+    "elapsed_seconds": 0.049,
+    "retry_delay_seconds": null,
+    "selected_attempt": "identity_019848_attempt_01",
+    "attempts": [
+      {
+        "name": "identity_019848_attempt_01",
+        "url": "https://query.sse.com.cn/commonQuery.do?isPagination=false&sqlId=COMMON_BOND_BASIC_ZQJBYS_L&BONDCODE=019848",
+        "requested_at_utc": "2026-11-06T16:00:43.510401+00:00",
+        "status": 200,
+        "curl_exit": 0,
+        "final_url": "https://query.sse.com.cn/commonQuery.do?isPagination=false&sqlId=COMMON_BOND_BASIC_ZQJBYS_L&BONDCODE=019848",
+        "content_type": "application/json;charset=UTF-8",
+        "address_family": "ipv4",
+        "certificate_verification_enabled": true,
+        "client_version": "curl 8.18.0 (x86_64-pc-linux-gnu) libcurl/8.18.0 OpenSSL/3.5.5 zlib/1.3.1 brotli/1.2.0 zstd/1.5.7 libidn2/2.3.8 libpsl/0.21.2 libssh2/1.11.1 nghttp2/1.68.0 librtmp/2.3 mit-krb5/1.22.1 OpenLDAP/2.6.10",
+        "metrics": {
+          "remote_ip": "202.122.113.77",
+          "http_version": "1.1",
+          "ssl_verify_result": 0,
+          "time_connect": 0.006295,
+          "time_appconnect": 0.023063,
+          "time_starttransfer": 0.037824,
+          "time_total": 0.037916
+        },
+        "bytes": 1152,
+        "sha256": "7d7fb902f140b0e390a76a7aab688755faa75aafa7ed51ca3a08d1cb44bed511",
+        "elapsed_seconds": 0.049,
+        "retry_delay_seconds": null
+      }
+    ],
+    "actual_requests": 1
+  }
+]

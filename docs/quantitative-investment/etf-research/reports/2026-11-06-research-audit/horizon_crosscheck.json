@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "independent_engine": "stdlib calendar/bisect/Decimal; no pandas/numpy",
+  "numeric_fields_checked": 291000,
+  "summary_groups_checked": 474,
+  "fresh_accounts_checked": 255,
+  "disjoint_groups_checked": 432,
+  "tolerance_absolute": 1e-09
+}

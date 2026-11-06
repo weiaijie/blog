@@ -1,0 +1,7 @@
+{
+  "stage": "PDF text extraction",
+  "error": "FileNotFoundError: pdftotext unavailable",
+  "transport_metadata_complete": false,
+  "excluded_from_analysis": true,
+  "explanation": "Interrupted collector did not persist request metadata; raw bytes retained but not admitted as complete evidence."
+}

@@ -1,0 +1,6 @@
+{"continuous_windows": 57726, "disjoint_windows": 2232, "fresh_windows": 474, "fresh_accounts": 255}
+{"passed": true, "independent_engine": "stdlib calendar/bisect/Decimal; no pandas/numpy", "numeric_fields_checked": 291000, "summary_groups_checked": 474, "fresh_accounts_checked": 255, "disjoint_groups_checked": 432, "tolerance_absolute": 1e-09}
+{"stock_rows": 339, "stock_codes": 339, "bond_issues": 3, "bond_coverage": 0.8827527213344226}
+PASS 5 synthetic calendar boundary cases; missing 2027 blocks admission
+Built offline research page, SVG and evidence report
+{"passed": true, "derived_files_byte_identical": 12, "page_byte_identical": true, "offline": true}

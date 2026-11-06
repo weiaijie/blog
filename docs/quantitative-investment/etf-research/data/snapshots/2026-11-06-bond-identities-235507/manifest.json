@@ -1,0 +1,9 @@
+{
+  "collector.py": "e5f7fdf5ef3ad351c5374b7882639604855a4fe1241f20950d38392544fb9fbf",
+  "disclosure_js.body": "993fdf81013d0fc6d8d4f7108dbdfd92400231717b3300880f1778a35dca2dd1",
+  "disclosure_js_attempt_01.body": "993fdf81013d0fc6d8d4f7108dbdfd92400231717b3300880f1778a35dca2dd1",
+  "disclosure_js_request.json": "77fcdc24e05ad9995197dcee872652cfa38160cce331923e8728c9e27402201c",
+  "http_capture.py": "ba877468ec284d90d48b04674a02e1595992ba16506e9ed086e95811214efabf",
+  "requests.json": "c0a87478e88959f1f12bd9b8f3ffb51de96645a6d7288e70d5b8a8f520621154",
+  "transport_policy.json": "3c8f68ffb1e664ea4562fb160e861c6e3ed2ad70dc1a5009d8fbc136c5ceb319"
+}

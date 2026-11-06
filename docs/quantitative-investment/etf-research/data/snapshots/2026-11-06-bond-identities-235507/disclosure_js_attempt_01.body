@@ -1,0 +1,4045 @@
+require(["/xhtml/js/common.js", "/xhtml/js/bondConfig.js"], function () {
+  if ($(".page_content .js_insertJzsgz").length > 0) {
+    //记账式国债
+    var url = destinationHostURI + "/sseQuery/commonSoaQuery.do?jsonCallBack=?"; //action地址
+    var bondlistT = new wideContainer(
+      true,
+      "bondlistT",
+      "basic_data_container",
+      "bond_details_table_over",
+      "extendZQ"
+    ); //参数分别为isPagination、targetDivId、tableId、表格外框样式、表格扩展样式
+    var params = {
+      isPagination: true,
+      sqlId: "CP_ZQ_ZQLB",
+      "pageHelp.pageSize": 20,
+      BOND_TYPE: "记账式国债",
+      BOND_CODE: "",
+    }; //传递到后台参数
+
+    var ransactionDate = "-"; //交易日期
+
+    var contentLink = function (data) {
+      return (
+        "<a target='_blank'  href='/disclosure/info/index.shtml?BONDCODE=" +
+        data.BOND_CODE +
+        "'>" +
+        data.BOND_CODE +
+        "</a>"
+      );
+    };
+
+    var contentForm = function (data) {
+      if (data.IS_NOT_DB == "N") {
+        return "否";
+      } else if (data.IS_NOT_DB == "Y") {
+        return "是";
+      } else {
+        return data.IS_NOT_DB;
+      }
+    };
+
+    var headers = new Array();
+
+    headers[0] = {
+      headName: "序号",
+      code: "NUM",
+    };
+    headers[1] = {
+      headName: "债券代码",
+      code: "BOND_CODE",
+      formatter: contentLink,
+    };
+    headers[2] = {
+      headName: "债券简称",
+      code: "BOND_ABBR",
+    };
+    headers[3] = {
+      headName: "债券扩位简称",
+      code: "SECURITY_ABBR_FULL",
+    };
+    headers[4] = {
+      headName: "债券全称",
+      code: "BOND_FULL",
+    };
+    headers[5] = {
+      headName: "期限(年)",
+      code: "TERM_YEAR",
+      className: "td_content_right",
+    };
+    headers[6] = {
+      headName: "计息方式",
+      code: "INTEREST_TYPE",
+    };
+    headers[7] = {
+      headName: "付息方式",
+      code: "PAY_TYPE",
+    };
+    headers[8] = {
+      headName: "发行量(亿元)",
+      code: "ISSUE_VALUE",
+      className: "td_content_right",
+    };
+    headers[9] = {
+      headName: "上市日期",
+      code: "LISTING_DATE",
+    };
+    headers[10] = {
+      headName: "发行起始日",
+      code: "ONLINE_START_DATE_CVS",
+    };
+    headers[11] = {
+      headName: "发行终止日",
+      code: "ONLINE_END_DATE_CVS",
+    };
+    headers[12] = {
+      headName: "到期日",
+      code: "END_DATE",
+    };
+    headers[13] = {
+      headName: "是否非担保",
+      code: "IS_NOT_DB",
+      formatter: contentForm,
+    };
+    var doDynamicRequest = function (p) {
+      $("#bondlistT").empty();
+      bondlistT.init(headers);
+      bondlistT.getDataByAjax(url, utils.mergeJson(params, p), null, true);
+    };
+
+    var defaultRequest = function (p) {
+      $("#bondlistT").empty();
+      bondlistT.init(headers);
+      var Data1 = bondlistT.getDataByAjax(
+        url,
+        utils.mergeJson(params, p),
+        bondlistT,
+        true
+      );
+      setTimeout(function () {
+        var res = Data1.data;
+        if (res.result && res.result.length > 0) {
+          if (res.result[0].TRADE_DATE) {
+            ransactionDate = dateReplace(res.result[0].TRADE_DATE);
+          } else {
+            ransactionDate = "-";
+          }
+          if (
+            ransactionDate != null &&
+            ransactionDate != undefined &&
+            ransactionDate.length > 0
+          )
+            $("#updateDate").text("日期：" + ransactionDate + "|");
+        }
+      }, 500);
+    };
+    var goSwitch = function (event) {
+      var eventTarget;
+      if (/msie/.test(navigator.userAgent.toLowerCase())) {
+        eventTarget = event.srcElement;
+      } else if (/firefox/.test(navigator.userAgent.toLowerCase())) {
+        eventTarget = event.target;
+      }
+      var keyword = $("#keywordsearch").val();
+
+      if (
+        keyword == "输入债券代码/简称" ||
+        keyword == null ||
+        keyword == undefined ||
+        keyword == ""
+      ) {
+        alert("请输入债券代码或简称！");
+        return false;
+      }
+      $("#bondlistT").empty();
+
+      var p = {
+        BOND_CODE: keyword,
+      };
+
+      bondlistT.init(headers);
+      downloadParams = utils.mergeJson(params, p);
+      bondlistT.getDataByAjax(url, utils.mergeJson(params, p), null, true);
+    };
+
+    var downloadParams = params;
+    var download = function () {
+      var ddUrl =
+        destinationHostURI +
+        "/commonExcelDd.do?" +
+        "sqlId=COMMON_SSE_CP_ZQ_ZQLB_JBXX_C" +
+        "&BOND_CODE=" +
+        downloadParams.BOND_CODE +
+        "&BOND_TYPE=" +
+        downloadParams.BOND_TYPE +
+        "&display=1" +
+        "&" +
+        Math.floor(Math.random() * (100000000 + 1));
+      window.location.href = ddUrl;
+    };
+
+    $(document).ready(function () {
+      $("tr").attr("bgColor", "white");
+      $("tr:even").css("background-color", "#f9f9f9");
+      utils.dynamicRequest({
+        element: document.getElementById("staticPagination"),
+        method: doDynamicRequest,
+      }); //分页相关 (必须)
+      var total = 886;
+      if (total == null || total == undefined) {
+        total = 0;
+      }
+      utils.compositeInfo({
+        info: "总共" + total + "条数据",
+        target: "deadling",
+      }); //表格右上角显示信息（总共134条, 现在显示1到30条）(必须)
+      utils.dynamicCompositeInfo(bondlistT, {
+        target: "deadling",
+      }); //表格右上角显示信息（总共134条, 现在显示1到30条）(必须)
+      //发送请求
+      defaultRequest();
+      $(".search-btn").click(function () {
+        goSwitch();
+      });
+      $(".download-btn").click(function () {
+        download();
+      });
+    });
+  }
+
+  if ($(".page_content .js_insertDfzfzq").length > 0) {
+    //地方政府债券
+    var url = destinationHostURI + "/sseQuery/commonSoaQuery.do?jsonCallBack=?"; //action地址
+    var bondlistT = new wideContainer(
+      true,
+      "bondlistT",
+      "basic_data_container",
+      "bond_details_table_over",
+      "extendZQ"
+    ); //参数分别为isPagination、targetDivId、tableId、表格外框样式、表格扩展样式
+    var params = {
+      isPagination: true,
+      sqlId: "CP_ZQ_ZQLB",
+      "pageHelp.pageSize": 20,
+      BOND_TYPE: "地方政府债券",
+      BOND_CODE: "",
+    }; //传递到后台参数
+
+    var ransactionDate = "-"; //交易日期
+
+    var contentLink = function (data) {
+      return (
+        "<a target='_blank'  href='/disclosure/info/index.shtml?BONDCODE=" +
+        data.BOND_CODE +
+        "'>" +
+        data.BOND_CODE +
+        "</a>"
+      );
+    };
+    var contentForm = function (data) {
+      if (data.IS_NOT_DB == "N") {
+        return "否";
+      } else if (data.IS_NOT_DB == "Y") {
+        return "是";
+      } else {
+        return data.IS_NOT_DB;
+      }
+    };
+    var headers = new Array();
+
+    headers[0] = {
+      headName: "序号",
+      code: "NUM",
+    };
+    headers[1] = {
+      headName: "债券代码",
+      code: "BOND_CODE",
+      formatter: contentLink,
+    };
+    headers[2] = {
+      headName: "债券简称",
+      code: "BOND_ABBR",
+    };
+    headers[3] = {
+      headName: "债券扩位简称",
+      code: "SECURITY_ABBR_FULL",
+    };
+    headers[4] = {
+      headName: "债券全称",
+      code: "BOND_FULL",
+    };
+    headers[5] = {
+      headName: "期限(年)",
+      code: "TERM_YEAR",
+      className: "td_content_right",
+    };
+    headers[6] = {
+      headName: "计息方式",
+      code: "INTEREST_TYPE",
+    };
+    headers[7] = {
+      headName: "付息方式",
+      code: "PAY_TYPE",
+    };
+    headers[8] = {
+      headName: "发行量(亿元)",
+      code: "ISSUE_VALUE",
+      className: "td_content_right",
+    };
+    headers[9] = {
+      headName: "上市日期",
+      code: "LISTING_DATE",
+    };
+    headers[10] = {
+      headName: "发行起始日",
+      code: "ONLINE_START_DATE_CVS",
+    };
+    headers[11] = {
+      headName: "发行终止日",
+      code: "ONLINE_END_DATE_CVS",
+    };
+    headers[12] = {
+      headName: "到期日",
+      code: "END_DATE",
+    };
+    headers[13] = {
+      headName: "是否非担保",
+      code: "IS_NOT_DB",
+      formatter: contentForm,
+    };
+
+    var doDynamicRequest = function (p) {
+      $("#bondlistT").empty();
+      bondlistT.init(headers);
+      bondlistT.getDataByAjax(url, utils.mergeJson(params, p), null, true);
+    };
+    //进入发请求
+    var defaultRequest = function (p) {
+      $("#bondlistT").empty();
+      bondlistT.init(headers);
+      var Data1 = bondlistT.getDataByAjax(
+        url,
+        utils.mergeJson(params, p),
+        bondlistT,
+        true
+      );
+      setTimeout(function () {
+        var res = Data1.data;
+        if (res.result && res.result.length > 0) {
+          if (res.result[0].TRADE_DATE) {
+            ransactionDate = dateReplace(res.result[0].TRADE_DATE);
+          } else {
+            ransactionDate = "-";
+          }
+          if (
+            ransactionDate != null &&
+            ransactionDate != undefined &&
+            ransactionDate.length > 0
+          )
+            $("#updateDate").text("日期：" + ransactionDate + "|");
+        }
+      }, 500);
+    };
+    var goSwitch = function (event) {
+      var eventTarget;
+      if (/msie/.test(navigator.userAgent.toLowerCase())) {
+        eventTarget = event.srcElement;
+      } else if (/firefox/.test(navigator.userAgent.toLowerCase())) {
+        eventTarget = event.target;
+      }
+      var keyword = $("#keywordsearch").val();
+
+      if (
+        keyword == "输入债券代码/简称" ||
+        keyword == null ||
+        keyword == undefined ||
+        keyword == ""
+      ) {
+        alert("请输入债券代码或简称！");
+        return false;
+      }
+      $("#bondlistT").empty();
+
+      var p = {
+        BOND_CODE: keyword,
+      };
+
+      bondlistT.init(headers);
+      downloadParams = utils.mergeJson(params, p);
+      bondlistT.getDataByAjax(url, utils.mergeJson(params, p), null, true);
+    };
+
+    var downloadParams = params;
+    var download = function () {
+      var ddUrl =
+        destinationHostURI +
+        "/commonExcelDd.do?" +
+        "sqlId=COMMON_SSE_CP_ZQ_ZQLB_JBXX_C" +
+        "&BOND_CODE=" +
+        downloadParams.BOND_CODE +
+        "&BOND_TYPE=" +
+        downloadParams.BOND_TYPE +
+        "&display=1" +
+        "&" +
+        Math.floor(Math.random() * (100000000 + 1));
+      window.location.href = ddUrl;
+    };
+
+    $(document).ready(function () {
+      $("tr").attr("bgColor", "white");
+      $("tr:even").css("background-color", "#f9f9f9");
+      utils.dynamicRequest({
+        element: document.getElementById("staticPagination"),
+        method: doDynamicRequest,
+      }); //分页相关 (必须)
+      var total = 6943;
+      if (total == null || total == undefined) {
+        total = 0;
+      }
+      utils.compositeInfo({
+        info: "总共" + total + "条数据",
+        target: "deadling",
+      }); //表格右上角显示信息
+      utils.dynamicCompositeInfo(bondlistT, {
+        target: "deadling",
+      }); //表格右上角显示信息
+      //发送请求
+      defaultRequest();
+      $(".search-btn").click(function () {
+        goSwitch();
+      });
+      $(".download-btn").click(function () {
+        download();
+      });
+    });
+  }
+
+  if ($(".page_content .js_insertJrz").length > 0) {
+    //金融债
+    var url = destinationHostURI + "/sseQuery/commonSoaQuery.do?jsonCallBack=?"; //action地址
+    var bondlistT = new wideContainer(
+      true,
+      "bondlistT",
+      "basic_data_container",
+      "bond_details_table_over",
+      "extendZQ"
+    ); //参数分别为isPagination、targetDivId、tableId、表格外框样式、表格扩展样式
+    var params = {
+      isPagination: true,
+      sqlId: "CP_ZQ_ZQLB",
+      "pageHelp.pageSize": 20,
+      BOND_TYPE: "普通金融债,政策性金融债",
+      BOND_CODE: "",
+    }; //传递到后台参数
+
+    var ransactionDate = "-"; //交易日期
+
+    var contentLink = function (data) {
+      return (
+        "<a target='_blank'  href='/disclosure/info/index.shtml?BONDCODE=" +
+        data.BOND_CODE +
+        "'>" +
+        data.BOND_CODE +
+        "</a>"
+      );
+    };
+
+    var contentForm = function (data) {
+      if (data.IS_NOT_DB == "N") {
+        return "否";
+      } else if (data.IS_NOT_DB == "Y") {
+        return "是";
+      } else {
+        return data.IS_NOT_DB;
+      }
+    };
+
+    var headers = new Array();
+
+    headers[0] = {
+      headName: "序号",
+      code: "NUM",
+    };
+    headers[1] = {
+      headName: "债券代码",
+      code: "BOND_CODE",
+      formatter: contentLink,
+    };
+    headers[2] = {
+      headName: "债券简称",
+      code: "BOND_ABBR",
+    };
+    headers[3] = {
+      headName: "债券扩位简称",
+      code: "SECURITY_ABBR_FULL",
+    };
+    headers[4] = {
+      headName: "债券全称",
+      code: "BOND_FULL",
+    };
+    headers[5] = {
+      headName: "期限(年)",
+      code: "TERM_YEAR",
+      className: "td_content_right",
+    };
+    headers[6] = {
+      headName: "计息方式",
+      code: "INTEREST_TYPE",
+    };
+    headers[7] = {
+      headName: "付息方式",
+      code: "PAY_TYPE",
+    };
+    headers[8] = {
+      headName: "发行量(亿元)",
+      code: "ISSUE_VALUE",
+      className: "td_content_right",
+    };
+    headers[9] = {
+      headName: "上市日期",
+      code: "LISTING_DATE",
+    };
+    headers[10] = {
+      headName: "发行起始日",
+      code: "ONLINE_START_DATE_CVS",
+    };
+    headers[11] = {
+      headName: "发行终止日",
+      code: "ONLINE_END_DATE_CVS",
+    };
+    headers[12] = {
+      headName: "到期日",
+      code: "END_DATE",
+    };
+    headers[13] = {
+      headName: "是否非担保",
+      code: "IS_NOT_DB",
+      formatter: contentForm,
+    };
+
+    var doDynamicRequest = function (p) {
+      $("#bondlistT").empty();
+      bondlistT.init(headers);
+      bondlistT.getDataByAjax(url, utils.mergeJson(params, p), null, true);
+    };
+    //进入发请求
+    var defaultRequest = function (p) {
+      $("#bondlistT").empty();
+      bondlistT.init(headers);
+      var Data1 = bondlistT.getDataByAjax(
+        url,
+        utils.mergeJson(params, p),
+        bondlistT,
+        true
+      );
+      setTimeout(function () {
+        var res = Data1.data;
+        if (res.result && res.result.length > 0) {
+          if (res.result[0].TRADE_DATE) {
+            ransactionDate = dateReplace(res.result[0].TRADE_DATE);
+          } else {
+            ransactionDate = "-";
+          }
+          if (
+            ransactionDate != null &&
+            ransactionDate != undefined &&
+            ransactionDate.length > 0
+          )
+            $("#updateDate").text("日期：" + ransactionDate + "|");
+        }
+      }, 500);
+    };
+    var goSwitch = function (event) {
+      var eventTarget;
+      if (/msie/.test(navigator.userAgent.toLowerCase())) {
+        eventTarget = event.srcElement;
+      } else if (/firefox/.test(navigator.userAgent.toLowerCase())) {
+        eventTarget = event.target;
+      }
+      var keyword = $("#keywordsearch").val();
+
+      if (
+        keyword == "输入债券代码/简称" ||
+        keyword == null ||
+        keyword == undefined ||
+        keyword == ""
+      ) {
+        alert("请输入债券代码或简称！");
+        return false;
+      }
+      $("#bondlistT").empty();
+
+      var p = {
+        BOND_CODE: keyword,
+      };
+
+      bondlistT.init(headers);
+      downloadParams = utils.mergeJson(params, p);
+      bondlistT.getDataByAjax(url, utils.mergeJson(params, p), null, true);
+    };
+
+    var downloadParams = params;
+    var download = function () {
+      var ddUrl =
+        destinationHostURI +
+        "/commonExcelDd.do?" +
+        "sqlId=COMMON_SSE_CP_ZQ_ZQLB_JBXX_C" +
+        "&BOND_CODE=" +
+        downloadParams.BOND_CODE +
+        "&BOND_TYPE=" +
+        downloadParams.BOND_TYPE +
+        "&type=inParams&display=1" +
+        "&" +
+        Math.floor(Math.random() * (100000000 + 1));
+      window.location.href = ddUrl;
+    };
+
+    $(document).ready(function () {
+      $("tr").attr("bgColor", "white");
+      $("tr:even").css("background-color", "#f9f9f9");
+      utils.dynamicRequest({
+        element: document.getElementById("staticPagination"),
+        method: doDynamicRequest,
+      }); //分页相关 (必须)
+      var total = 5;
+      if (total == null || total == undefined) {
+        total = 0;
+      }
+      utils.compositeInfo({
+        info: "总共" + total + "条数据",
+        target: "deadling",
+      }); //表格右上角显示信息
+      utils.dynamicCompositeInfo(bondlistT, {
+        target: "deadling",
+      }); //表格右上角显示信息
+      //发送请求
+      defaultRequest();
+      $(".search-btn").click(function () {
+        goSwitch();
+      });
+      $(".download-btn").click(function () {
+        download();
+      });
+    });
+  }
+
+  if ($(".page_content .js_insertEb").length > 0) {
+    //企业债券
+    var url = destinationHostURI + "/sseQuery/commonSoaQuery.do?jsonCallBack=?"; //action地址
+    var bondlistT = new wideContainer(
+      true,
+      "bondlistT",
+      "basic_data_container",
+      "bond_details_table_over",
+      "extendZQ"
+    ); //参数分别为isPagination、targetDivId、tableId
+    var params = {
+      isPagination: true,
+      sqlId: "CP_ZQ_ZQLB",
+      "pageHelp.pageSize": 20,
+      BOND_TYPE: "企业债券",
+      BOND_CODE: "",
+    }; //传递到后台参数
+
+    var ransactionDate = "-"; //交易日期
+
+    var contentLink = function (data) {
+      return (
+        "<a target='_blank'  href='/disclosure/info/index.shtml?BONDCODE=" +
+        data.BOND_CODE +
+        "'>" +
+        data.BOND_CODE +
+        "</a>"
+      );
+    };
+
+    var contentForm = function (data) {
+      if (data.IS_NOT_DB == "N") {
+        return "否";
+      } else if (data.IS_NOT_DB == "Y") {
+        return "是";
+      } else {
+        return data.IS_NOT_DB;
+      }
+    };
+
+    var headers = new Array();
+
+    headers[0] = {
+      headName: "序号",
+      code: "NUM",
+    };
+    headers[1] = {
+      headName: "债券代码",
+      code: "BOND_CODE",
+      formatter: contentLink,
+    };
+    headers[2] = {
+      headName: "债券简称",
+      code: "BOND_ABBR",
+    };
+    headers[3] = {
+      headName: "债券扩位简称",
+      code: "SECURITY_ABBR_FULL",
+    };
+    headers[4] = {
+      headName: "债券全称",
+      code: "BOND_FULL",
+    };
+    headers[5] = {
+      headName: "期限(年)",
+      code: "TERM_YEAR",
+      className: "td_content_right",
+    };
+    headers[6] = {
+      headName: "计息方式",
+      code: "INTEREST_TYPE",
+    };
+    headers[7] = {
+      headName: "付息方式",
+      code: "PAY_TYPE",
+    };
+    headers[8] = {
+      headName: "发行量(亿元)",
+      code: "ISSUE_VALUE",
+      className: "td_content_right",
+    };
+    headers[9] = {
+      headName: "上市日期",
+      code: "LISTING_DATE",
+    };
+    headers[10] = {
+      headName: "发行起始日",
+      code: "ONLINE_START_DATE_CVS",
+    };
+    headers[11] = {
+      headName: "发行终止日",
+      code: "ONLINE_END_DATE_CVS",
+    };
+    headers[12] = {
+      headName: "到期日",
+      code: "END_DATE",
+    };
+    headers[13] = {
+      headName: "是否非担保",
+      code: "IS_NOT_DB",
+      formatter: contentForm,
+    };
+
+    var doDynamicRequest = function (p) {
+      $("#bondlistT").empty();
+      bondlistT.init(headers);
+      bondlistT.getDataByAjax(url, utils.mergeJson(params, p), null, true);
+    };
+    //进入发请求
+    var defaultRequest = function (p) {
+      $("#bondlistT").empty();
+      bondlistT.init(headers);
+      var Data1 = bondlistT.getDataByAjax(
+        url,
+        utils.mergeJson(params, p),
+        bondlistT,
+        true
+      );
+      setTimeout(function () {
+        var res = Data1.data;
+        if (res.result && res.result.length > 0) {
+          if (res.result[0].TRADE_DATE) {
+            ransactionDate = dateReplace(res.result[0].TRADE_DATE);
+          } else {
+            ransactionDate = "-";
+          }
+          if (
+            ransactionDate != null &&
+            ransactionDate != undefined &&
+            ransactionDate.length > 0
+          )
+            $("#updateDate").text("日期：" + ransactionDate + "|");
+        }
+      }, 500);
+    };
+    var goSwitch = function (event) {
+      var eventTarget;
+      if (/msie/.test(navigator.userAgent.toLowerCase())) {
+        eventTarget = event.srcElement;
+      } else if (/firefox/.test(navigator.userAgent.toLowerCase())) {
+        eventTarget = event.target;
+      }
+      var keyword = $("#keywordsearch").val();
+
+      if (
+        keyword == "输入债券代码/简称" ||
+        keyword == null ||
+        keyword == undefined ||
+        keyword == ""
+      ) {
+        alert("请输入债券代码或简称！");
+        return false;
+      }
+      $("#bondlistT").empty();
+
+      var p = {
+        BOND_CODE: keyword,
+      };
+
+      bondlistT.init(headers);
+      downloadParams = utils.mergeJson(params, p);
+      bondlistT.getDataByAjax(url, utils.mergeJson(params, p), null, true);
+    };
+
+    var downloadParams = params;
+    var download = function () {
+      var ddUrl =
+        destinationHostURI +
+        "/commonExcelDd.do?" +
+        "sqlId=COMMON_SSE_CP_ZQ_ZQLB_JBXX_C" +
+        "&BOND_CODE=" +
+        downloadParams.BOND_CODE +
+        "&BOND_TYPE=" +
+        downloadParams.BOND_TYPE +
+        "&display=1" +
+        "&" +
+        Math.floor(Math.random() * (100000000 + 1));
+      window.location.href = ddUrl;
+    };
+
+    $(document).ready(function () {
+      $("tr").attr("bgColor", "white");
+      $("tr:even").css("background-color", "#f9f9f9");
+      utils.dynamicRequest({
+        element: document.getElementById("staticPagination"),
+        method: doDynamicRequest,
+      }); //分页相关 (必须)
+      var total = 3992;
+      if (total == null || total == undefined) {
+        total = 0;
+      }
+      utils.compositeInfo({
+        info: "总共" + total + "条数据",
+        target: "deadling",
+      }); //表格右上角显示信息
+      utils.dynamicCompositeInfo(bondlistT, {
+        target: "deadling",
+      }); //表格右上角显示信息
+      //发送请求
+      defaultRequest();
+      $(".search-btn").click(function () {
+        goSwitch();
+      });
+      $(".download-btn").click(function () {
+        download();
+      });
+    });
+  }
+
+  if ($(".page_content .js_insertPb").length > 0) {
+    //中小企业私募债券
+    var url = destinationHostURI + "/sseQuery/commonSoaQuery.do?jsonCallBack=?"; //action地址
+    var bondlistT = new wideContainer(
+      true,
+      "bondlistT",
+      "basic_data_container",
+      "bond_details_table_over",
+      "extendZQ"
+    ); //参数分别为isPagination、targetDivId、tableId、表格外框样式、表格扩展样式
+    var params = {
+      isPagination: true,
+      sqlId: "CP_ZQ_ZQLB",
+      "pageHelp.pageSize": 20,
+      BOND_TYPE: "中小企业私募债券",
+      BOND_CODE: "",
+    }; //传递到后台参数
+
+    var ransactionDate = "-"; //交易日期
+
+    var contentLink = function (data) {
+      return (
+        "<a target='_blank'  href='/disclosure/info/index.shtml?BONDCODE=" +
+        data.BOND_CODE +
+        "'>" +
+        data.BOND_CODE +
+        "</a>"
+      );
+    };
+
+    var contentForm = function (data) {
+      if (data.IS_NOT_DB == "N") {
+        return "否";
+      } else if (data.IS_NOT_DB == "Y") {
+        return "是";
+      } else {
+        return data.IS_NOT_DB;
+      }
+    };
+
+    var headers = new Array();
+
+    headers[0] = {
+      headName: "序号",
+      code: "NUM",
+    };
+    headers[1] = {
+      headName: "债券代码",
+      code: "BOND_CODE",
+      formatter: contentLink,
+    };
+    headers[2] = {
+      headName: "债券简称",
+      code: "BOND_ABBR",
+    };
+    headers[3] = {
+      headName: "债券扩位简称",
+      code: "SECURITY_ABBR_FULL",
+    };
+    headers[4] = {
+      headName: "债券全称",
+      code: "BOND_FULL",
+    };
+    headers[5] = {
+      headName: "期限(年)",
+      code: "TERM_YEAR",
+      className: "td_content_right",
+    };
+    headers[6] = {
+      headName: "计息方式",
+      code: "INTEREST_TYPE",
+    };
+    headers[7] = {
+      headName: "付息方式",
+      code: "PAY_TYPE",
+    };
+    headers[8] = {
+      headName: "发行量(亿元)",
+      code: "ISSUE_VALUE",
+      className: "td_content_right",
+    };
+    headers[9] = {
+      headName: "上市日期",
+      code: "LISTING_DATE",
+    };
+    headers[10] = {
+      headName: "发行起始日",
+      code: "ONLINE_START_DATE_CVS",
+    };
+    headers[11] = {
+      headName: "发行终止日",
+      code: "ONLINE_END_DATE_CVS",
+    };
+    headers[12] = {
+      headName: "到期日",
+      code: "END_DATE",
+    };
+    headers[13] = {
+      headName: "是否非担保",
+      code: "IS_NOT_DB",
+      formatter: contentForm,
+    };
+    var doDynamicRequest = function (p) {
+      $("#bondlistT").empty();
+      bondlistT.init(headers);
+      bondlistT.getDataByAjax(url, utils.mergeJson(params, p), null, true);
+    };
+
+    var defaultRequest = function (p) {
+      $("#bondlistT").empty();
+      bondlistT.init(headers);
+      var Data1 = bondlistT.getDataByAjax(
+        url,
+        utils.mergeJson(params, p),
+        bondlistT,
+        true
+      );
+      setTimeout(function () {
+        var res = Data1.data;
+        if (res.result && res.result.length > 0) {
+          if (res.result[0].TRADE_DATE) {
+            ransactionDate = dateReplace(res.result[0].TRADE_DATE);
+          } else {
+            ransactionDate = "-";
+          }
+          if (
+            ransactionDate != null &&
+            ransactionDate != undefined &&
+            ransactionDate.length > 0
+          )
+            $("#updateDate").text("日期：" + ransactionDate + "|");
+        }
+      }, 500);
+    };
+    var goSwitch = function (event) {
+      var eventTarget;
+      if (/msie/.test(navigator.userAgent.toLowerCase())) {
+        eventTarget = event.srcElement;
+      } else if (/firefox/.test(navigator.userAgent.toLowerCase())) {
+        eventTarget = event.target;
+      }
+      var keyword = $("#keywordsearch").val();
+
+      if (
+        keyword == "输入债券代码/简称" ||
+        keyword == null ||
+        keyword == undefined ||
+        keyword == ""
+      ) {
+        alert("请输入债券代码或简称！");
+        return false;
+      }
+      $("#bondlistT").empty();
+
+      var p = {
+        BOND_CODE: keyword,
+      };
+
+      bondlistT.init(headers);
+      downloadParams = utils.mergeJson(params, p);
+      bondlistT.getDataByAjax(url, utils.mergeJson(params, p), null, true);
+    };
+
+    var downloadParams = params;
+    var download = function () {
+      var ddUrl =
+        destinationHostURI +
+        "/commonExcelDd.do?" +
+        "sqlId=COMMON_SSE_CP_ZQ_ZQLB_JBXX_C" +
+        "&BOND_CODE=" +
+        downloadParams.BOND_CODE +
+        "&BOND_TYPE=" +
+        downloadParams.BOND_TYPE +
+        "&display=1" +
+        "&" +
+        Math.floor(Math.random() * (100000000 + 1));
+      window.location.href = ddUrl;
+    };
+
+    $(document).ready(function () {
+      $("tr").attr("bgColor", "white");
+      $("tr:even").css("background-color", "#f9f9f9");
+      utils.dynamicRequest({
+        element: document.getElementById("staticPagination"),
+        method: doDynamicRequest,
+      }); //分页相关 (必须)
+      var total = 561;
+      if (total == null || total == undefined) {
+        total = 0;
+      }
+      utils.compositeInfo({
+        info: "总共" + total + "条数据",
+        target: "deadling",
+      }); //表格右上角显示信息
+      utils.dynamicCompositeInfo(bondlistT, {
+        target: "deadling",
+      }); //表格右上角显示信息
+      //发送请求
+      defaultRequest();
+      $(".search-btn").click(function () {
+        goSwitch();
+      });
+      $(".download-btn").click(function () {
+        download();
+      });
+    });
+  }
+
+  if ($(".page_content .js_insertCb").length > 0) {
+    //公司债券
+    var url = destinationHostURI + "/sseQuery/commonSoaQuery.do?jsonCallBack=?"; //action地址
+    var bondlistT = new wideContainer(
+      true,
+      "bondlistT",
+      "basic_data_container",
+      "bond_details_table_over",
+      "extendZQ"
+    ); //参数分别为isPagination、targetDivId、tableId、表格外框样式、表格扩展样式
+    var params = {
+      isPagination: true,
+      sqlId: "CP_ZQ_ZQLB",
+      "pageHelp.pageSize": 20,
+      BOND_TYPE: "公司债券",
+      BOND_CODE: "",
+    }; //传递到后台参数
+
+    var ransactionDate = "-"; //交易日期
+
+    var contentLink = function (data) {
+      return (
+        "<a target='_blank'  href='/disclosure/info/index.shtml?BONDCODE=" +
+        data.BOND_CODE +
+        "'>" +
+        data.BOND_CODE +
+        "</a>"
+      );
+    };
+
+    var contentForm = function (data) {
+      if (data.IS_NOT_DB == "N") {
+        return "否";
+      } else if (data.IS_NOT_DB == "Y") {
+        return "是";
+      } else {
+        return data.IS_NOT_DB;
+      }
+    };
+
+    var headers = new Array();
+
+    headers[0] = {
+      headName: "序号",
+      code: "NUM",
+    };
+    headers[1] = {
+      headName: "债券代码",
+      code: "BOND_CODE",
+      formatter: contentLink,
+    };
+    headers[2] = {
+      headName: "债券简称",
+      code: "BOND_ABBR",
+    };
+    headers[3] = {
+      headName: "债券扩位简称",
+      code: "SECURITY_ABBR_FULL",
+    };
+    headers[4] = {
+      headName: "债券全称",
+      code: "BOND_FULL",
+    };
+    headers[5] = {
+      headName: "期限(年)",
+      code: "TERM_YEAR",
+      className: "td_content_right",
+    };
+    headers[6] = {
+      headName: "计息方式",
+      code: "INTEREST_TYPE",
+    };
+    headers[7] = {
+      headName: "付息方式",
+      code: "PAY_TYPE",
+    };
+    headers[8] = {
+      headName: "发行量(亿元)",
+      code: "ISSUE_VALUE",
+      className: "td_content_right",
+    };
+    headers[9] = {
+      headName: "上市日期",
+      code: "LISTING_DATE",
+    };
+    headers[10] = {
+      headName: "发行起始日",
+      code: "ONLINE_START_DATE_CVS",
+    };
+    headers[11] = {
+      headName: "发行终止日",
+      code: "ONLINE_END_DATE_CVS",
+    };
+    headers[12] = {
+      headName: "到期日",
+      code: "END_DATE",
+    };
+    headers[13] = {
+      headName: "是否非担保",
+      code: "IS_NOT_DB",
+      formatter: contentForm,
+    };
+
+    var doDynamicRequest = function (p) {
+      $("#bondlistT").empty();
+      bondlistT.init(headers);
+      bondlistT.getDataByAjax(url, utils.mergeJson(params, p), null, true);
+    };
+
+    var defaultRequest = function (p) {
+      $("#bondlistT").empty();
+      bondlistT.init(headers);
+      var Data1 = bondlistT.getDataByAjax(
+        url,
+        utils.mergeJson(params, p),
+        bondlistT,
+        true
+      );
+      setTimeout(function () {
+        var res = Data1.data;
+        if (res.result && res.result.length > 0) {
+          if (res.result[0].TRADE_DATE) {
+            ransactionDate = dateReplace(res.result[0].TRADE_DATE);
+          } else {
+            ransactionDate = "-";
+          }
+          if (
+            ransactionDate != null &&
+            ransactionDate != undefined &&
+            ransactionDate.length > 0
+          )
+            $("#updateDate").text("日期：" + ransactionDate + "|");
+        }
+      }, 500);
+    };
+    var goSwitch = function (event) {
+      var eventTarget;
+      if (/msie/.test(navigator.userAgent.toLowerCase())) {
+        eventTarget = event.srcElement;
+      } else if (/firefox/.test(navigator.userAgent.toLowerCase())) {
+        eventTarget = event.target;
+      }
+      var keyword = $("#keywordsearch").val();
+
+      if (
+        keyword == "输入债券代码/简称" ||
+        keyword == null ||
+        keyword == undefined ||
+        keyword == ""
+      ) {
+        alert("请输入债券代码或简称！");
+        return false;
+      }
+      $("#bondlistT").empty();
+
+      var p = {
+        BOND_CODE: keyword,
+      };
+
+      bondlistT.init(headers);
+      downloadParams = utils.mergeJson(params, p);
+      bondlistT.getDataByAjax(url, utils.mergeJson(params, p), null, true);
+    };
+
+    var downloadParams = params;
+    var download = function () {
+      var ddUrl =
+        destinationHostURI +
+        "/commonExcelDd.do?" +
+        "sqlId=COMMON_SSE_CP_ZQ_ZQLB_JBXX_C" +
+        "&BOND_CODE=" +
+        downloadParams.BOND_CODE +
+        "&BOND_TYPE=" +
+        downloadParams.BOND_TYPE +
+        "&" +
+        Math.floor(Math.random() * (100000000 + 1));
+      window.location.href = ddUrl;
+    };
+
+    $(document).ready(function () {
+      $("tr").attr("bgColor", "white");
+      $("tr:even").css("background-color", "#f9f9f9");
+      utils.dynamicRequest({
+        element: document.getElementById("staticPagination"),
+        method: doDynamicRequest,
+      }); //分页相关 (必须)
+      var total = 6033;
+      if (total == null || total == undefined) {
+        total = 0;
+      }
+      utils.compositeInfo({
+        info: "总共" + total + "条数据",
+        target: "deadling",
+      }); //表格右上角显示信息
+      utils.dynamicCompositeInfo(bondlistT, {
+        target: "deadling",
+      }); //表格右上角显示信息
+      //发送请求
+      defaultRequest();
+      $(".search-btn").click(function () {
+        goSwitch();
+      });
+      $(".download-btn").click(function () {
+        download();
+      });
+    });
+  }
+
+  /**
+   * 公司（企业）债券
+   */
+   if ($(".page_content .js_insertCbEb").length > 0) {
+    //公司（企业）债券
+    var url = destinationHostURI + "/sseQuery/commonSoaQuery.do?jsonCallBack=?"; //action地址
+    var bondlistT = new wideContainer(
+      true,
+      "bondlistT",
+      "basic_data_container",
+      "bond_details_table_over",
+      "extendZQ"
+    ); //参数分别为isPagination、targetDivId、tableId、表格外框样式、表格扩展样式
+    var params = {
+      isPagination: true,
+      sqlId: "CP_ZQ_ZQLB",
+      "pageHelp.pageSize": 20,
+      BOND_TYPE: "公司债券,企业债券,新企业债券",
+      BOND_CODE: "",
+    }; //传递到后台参数
+
+    var ransactionDate = "-"; //交易日期
+
+    var contentLink = function (data) {
+      return (
+        "<a target='_blank'  href='/disclosure/info/index.shtml?BONDCODE=" +
+        data.BOND_CODE +
+        "'>" +
+        data.BOND_CODE +
+        "</a>"
+      );
+    };
+
+    var contentForm = function (data) {
+      if (data.IS_NOT_DB == "N") {
+        return "否";
+      } else if (data.IS_NOT_DB == "Y") {
+        return "是";
+      } else {
+        return data.IS_NOT_DB;
+      }
+    };
+
+    var headers = new Array();
+
+    headers[0] = {
+      headName: "序号",
+      code: "NUM",
+    };
+    headers[1] = {
+      headName: "债券代码",
+      code: "BOND_CODE",
+      formatter: contentLink,
+    };
+    headers[2] = {
+      headName: "债券简称",
+      code: "BOND_ABBR",
+    };
+    headers[3] = {
+      headName: "债券扩位简称",
+      code: "SECURITY_ABBR_FULL",
+    };
+    headers[4] = {
+      headName: "债券全称",
+      code: "BOND_FULL",
+    };
+    headers[5] = {
+      headName: "期限(年)",
+      code: "TERM_YEAR",
+      className: "td_content_right",
+    };
+    headers[6] = {
+      headName: "计息方式",
+      code: "INTEREST_TYPE",
+    };
+    headers[7] = {
+      headName: "付息方式",
+      code: "PAY_TYPE",
+    };
+    headers[8] = {
+      headName: "发行量(亿元)",
+      code: "ISSUE_VALUE",
+      className: "td_content_right",
+    };
+    headers[9] = {
+      headName: "上市日期",
+      code: "LISTING_DATE",
+    };
+    headers[10] = {
+      headName: "发行起始日",
+      code: "ONLINE_START_DATE_CVS",
+    };
+    headers[11] = {
+      headName: "发行终止日",
+      code: "ONLINE_END_DATE_CVS",
+    };
+    headers[12] = {
+      headName: "到期日",
+      code: "END_DATE",
+    };
+    headers[13] = {
+      headName: "是否非担保",
+      code: "IS_NOT_DB",
+      formatter: contentForm,
+    };
+
+    var doDynamicRequest = function (p) {
+      $("#bondlistT").empty();
+      bondlistT.init(headers);
+      bondlistT.getDataByAjax(url, utils.mergeJson(params, p), null, true);
+    };
+
+    var defaultRequest = function (p) {
+      $("#bondlistT").empty();
+      bondlistT.init(headers);
+      var Data1 = bondlistT.getDataByAjax(
+        url,
+        utils.mergeJson(params, p),
+        bondlistT,
+        true
+      );
+      setTimeout(function () {
+        var res = Data1.data;
+        if (res.result && res.result.length > 0) {
+          if (res.result[0].TRADE_DATE) {
+            ransactionDate = dateReplace(res.result[0].TRADE_DATE);
+          } else {
+            ransactionDate = "-";
+          }
+          if (
+            ransactionDate != null &&
+            ransactionDate != undefined &&
+            ransactionDate.length > 0
+          )
+            $("#updateDate").text("日期：" + ransactionDate + "|");
+        }
+      }, 500);
+    };
+    var goSwitch = function (event) {
+      var eventTarget;
+      if (/msie/.test(navigator.userAgent.toLowerCase())) {
+        eventTarget = event.srcElement;
+      } else if (/firefox/.test(navigator.userAgent.toLowerCase())) {
+        eventTarget = event.target;
+      }
+      var keyword = $("#keywordsearch").val();
+
+      if (
+        keyword == "输入债券代码/简称" ||
+        keyword == null ||
+        keyword == undefined ||
+        keyword == ""
+      ) {
+        alert("请输入债券代码或简称！");
+        return false;
+      }
+      $("#bondlistT").empty();
+
+      var p = {
+        BOND_CODE: keyword,
+      };
+
+      bondlistT.init(headers);
+      downloadParams = utils.mergeJson(params, p);
+      bondlistT.getDataByAjax(url, utils.mergeJson(params, p), null, true);
+    };
+
+    var downloadParams = params;
+    var download = function () {
+      var ddUrl =
+        destinationHostURI +
+        "/commonExcelDd.do?" +
+        "sqlId=COMMON_SSE_CP_ZQ_ZQLB_JBXX_C" +
+        "&BOND_CODE=" +
+        downloadParams.BOND_CODE +
+        "&type=" +
+        'inParams' +
+        "&BOND_TYPE=" +
+        downloadParams.BOND_TYPE +
+        "&" +
+        Math.floor(Math.random() * (100000000 + 1));
+      window.location.href = ddUrl;
+    };
+
+    $(document).ready(function () {
+      $("tr").attr("bgColor", "white");
+      $("tr:even").css("background-color", "#f9f9f9");
+      utils.dynamicRequest({
+        element: document.getElementById("staticPagination"),
+        method: doDynamicRequest,
+      }); //分页相关 (必须)
+      var total = 6033;
+      if (total == null || total == undefined) {
+        total = 0;
+      }
+      utils.compositeInfo({
+        info: "总共" + total + "条数据",
+        target: "deadling",
+      }); //表格右上角显示信息
+      utils.dynamicCompositeInfo(bondlistT, {
+        target: "deadling",
+      }); //表格右上角显示信息
+      //发送请求
+      defaultRequest();
+      $(".search-btn").click(function () {
+        goSwitch();
+      });
+      $(".download-btn").click(function () {
+        download();
+      });
+    });
+  }
+
+  if ($(".page_content .js_insertKzhgszq").length > 0) {
+    //可转换公司债券
+    var url = destinationHostURI + "/sseQuery/commonSoaQuery.do?jsonCallBack=?"; //action地址
+    var bondlistT = new wideContainer(
+      true,
+      "bondlistT",
+      "basic_data_container",
+      "bond_details_table_over",
+      "extendZQ"
+    ); //参数分别为isPagination、targetDivId、tableId、表格外框样式、表格扩展样式
+    var params = {
+      isPagination: true,
+      sqlId: "CP_ZQ_ZQLB",
+      "pageHelp.pageSize": 20,
+      BOND_CODE: "",
+      BOND_TYPE: "",
+    }; //传递到后台参数
+
+    var contentLink = function (data) {
+      //点击跳转详情页面时，添加判断可转债参数 type y为可转债
+      return (
+        "<a target='_blank'  href='/disclosure/info/index.shtml?BONDCODE=" +
+        data.BOND_CODE +
+        "&type=y'>" +
+        data.BOND_CODE +
+        "</a>"
+      );
+    };
+
+    var contentForm = function (data) {
+      if (data.IS_NOT_DB == "N") {
+        return "否";
+      } else if (data.IS_NOT_DB == "Y") {
+        return "是";
+      } else {
+        return data.IS_NOT_DB;
+      }
+    };
+
+    var headers = new Array();
+
+    headers[0] = {
+      headName: "序号",
+      code: "NUM",
+    };
+    headers[1] = {
+      headName: "债券代码",
+      code: "BOND_CODE",
+      formatter: contentLink,
+    };
+    headers[2] = {
+      headName: "债券简称",
+      code: "BOND_ABBR",
+    };
+    headers[3] = {
+      headName: "债券扩位简称",
+      code: "SECURITY_ABBR_FULL",
+    };
+    headers[4] = {
+      headName: "债券全称",
+      code: "BOND_FULL",
+    };
+    headers[5] = {
+      headName: "期限(年)",
+      code: "TERM_YEAR",
+      className: "td_content_right",
+    };
+    headers[6] = {
+      headName: "计息方式",
+      code: "INTEREST_TYPE",
+    };
+    headers[7] = {
+      headName: "付息方式",
+      code: "PAY_TYPE",
+    };
+    headers[8] = {
+      headName: "发行量(亿元)",
+      code: "ISSUE_VALUE",
+      className: "td_content_right",
+    };
+    headers[9] = {
+      headName: "上市日期",
+      code: "LISTING_DATE",
+    };
+    headers[10] = {
+      headName: "发行起始日",
+      code: "ONLINE_START_DATE_CVS",
+    };
+    headers[11] = {
+      headName: "发行终止日",
+      code: "ONLINE_END_DATE_CVS",
+    };
+    headers[12] = {
+      headName: "到期日",
+      code: "END_DATE",
+    };
+    headers[13] = {
+      headName: "是否非担保",
+      code: "IS_NOT_DB",
+      formatter: contentForm,
+    };
+    var doDynamicRequest = function (p) {
+      $("#bondlistT").empty();
+      bondlistT.init(headers);
+      bondlistT.getDataByAjax(url, utils.mergeJson(params, p), null, true);
+    };
+
+    var defaultRequest = function (p) {
+      $("#bondlistT").empty();
+      bondlistT.init(headers);
+      params.BOND_TYPE = "可转换公司债券";
+      var Data1 = bondlistT.getDataByAjax(
+        url,
+        utils.mergeJson(params, p),
+        bondlistT,
+        true
+      );
+      setTimeout(function () {
+        var res = Data1.data;
+        if (res.result && res.result.length > 0) {
+          if (res.result[0].TRADE_DATE) {
+            ransactionDate = dateReplace(res.result[0].TRADE_DATE);
+          } else {
+            ransactionDate = "-";
+          }
+          if (
+            ransactionDate != null &&
+            ransactionDate != undefined &&
+            ransactionDate.length > 0
+          )
+            $("#updateDate").text("日期：" + ransactionDate + "|");
+        }
+      }, 500);
+    };
+    var goSwitch = function (event) {
+      var eventTarget;
+      if (/msie/.test(navigator.userAgent.toLowerCase())) {
+        eventTarget = event.srcElement;
+      } else if (/firefox/.test(navigator.userAgent.toLowerCase())) {
+        eventTarget = event.target;
+      }
+      var keyword = $("#keywordsearch").val();
+
+      if (
+        keyword == "输入债券代码/简称" ||
+        keyword == null ||
+        keyword == undefined ||
+        keyword == ""
+      ) {
+        alert("请输入债券代码或简称！");
+        return false;
+      }
+      $("#bondlistT").empty();
+
+      var p = {
+        BOND_CODE: keyword,
+      };
+
+      bondlistT.init(headers);
+      downloadParams = utils.mergeJson(params, p);
+      bondlistT.getDataByAjax(url, utils.mergeJson(params, p), null, true);
+    };
+
+    var downloadParams = params;
+    var download = function () {
+      var ddUrl =
+        destinationHostURI +
+        "/commonExcelDd.do?" +
+        "sqlId=COMMON_SSE_CP_ZQ_KZZLB_L" +
+        "&BOND_CODE=" +
+        downloadParams.BOND_CODE +
+        "&BOND_TYPE=" +
+        downloadParams.BOND_TYPE +
+        "&" +
+        Math.floor(Math.random() * (100000000 + 1));
+      window.location.href = ddUrl;
+    };
+
+    $(document).ready(function () {
+      $("tr").attr("bgColor", "white");
+      $("tr:even").css("background-color", "#f9f9f9");
+      utils.dynamicRequest({
+        element: document.getElementById("staticPagination"),
+        method: doDynamicRequest,
+      }); //分页相关 (必须)
+      var total = 249;
+      if (total == null || total == undefined) {
+        total = 0;
+      }
+      utils.compositeInfo({
+        info: "总共" + total + "条数据",
+        target: "deadling",
+      }); //表格右上角显示信息
+      utils.dynamicCompositeInfo(bondlistT, {
+        target: "deadling",
+      }); //表格右上角显示信息
+      //发送请求
+      defaultRequest();
+      $(".search-btn").click(function () {
+        goSwitch();
+      });
+      $(".download-btn").click(function () {
+        download();
+      });
+    });
+  }
+
+  if ($(".page_content .js_insertWb").length > 0) {
+    //分离交易的可转换公司债券
+    var url = destinationHostURI + "/sseQuery/commonSoaQuery.do?jsonCallBack=?"; //action地址
+    var bondlistT = new wideContainer(
+      true,
+      "bondlistT",
+      "basic_data_container",
+      "bond_details_table_over",
+      "extendZQ"
+    ); //参数分别为isPagination、targetDivId、tableId、表格外框样式、表格扩展样式
+    var params = {
+      isPagination: true,
+      sqlId: "CP_ZQ_ZQLB",
+      "pageHelp.pageSize": 20,
+      BOND_CODE: "",
+      BOND_TYPE: "",
+    };
+    var contentLink = function (data) {
+      //点击跳转详情页面时，添加判断分离交易可转债参数 type y为可转债或分离交易可转债
+      return (
+        "<a target='_blank'  href='/disclosure/info/index.shtml?BONDCODE=" +
+        data.BOND_CODE +
+        "&type=y'>" +
+        data.BOND_CODE +
+        "</a>"
+      );
+    };
+
+    var contentForm = function (data) {
+      if (data.IS_NOT_DB == "N") {
+        return "否";
+      } else if (data.IS_NOT_DB == "Y") {
+        return "是";
+      } else {
+        return data.IS_NOT_DB;
+      }
+    };
+
+    var headers = new Array();
+
+    headers[0] = {
+      headName: "序号",
+      code: "NUM",
+    };
+    headers[1] = {
+      headName: "债券代码",
+      code: "BOND_CODE",
+      formatter: contentLink,
+    };
+    headers[2] = {
+      headName: "债券简称",
+      code: "BOND_ABBR",
+    };
+    // headers[3] = {
+    //   headName: "债券扩位简称",
+    //   code: "SECURITY_ABBR_FULL",
+    // };
+    headers[3] = {
+      headName: "债券全称",
+      code: "BOND_FULL",
+    };
+    headers[4] = {
+      headName: "期限(年)",
+      code: "TERM_YEAR",
+      className: "td_content_right",
+    };
+    headers[5] = {
+      headName: "计息方式",
+      code: "INTEREST_TYPE",
+    };
+    headers[6] = {
+      headName: "付息方式",
+      code: "PAY_TYPE",
+    };
+    headers[7] = {
+      headName: "发行量(亿元)",
+      code: "ISSUE_VALUE",
+      className: "td_content_right",
+    };
+    headers[8] = {
+      headName: "上市日期",
+      code: "LISTING_DATE",
+    };
+    headers[9] = {
+      headName: "发行起始日",
+      code: "ONLINE_START_DATE_CVS",
+    };
+    headers[10] = {
+      headName: "发行终止日",
+      code: "ONLINE_END_DATE_CVS",
+    };
+    headers[11] = {
+      headName: "到期日",
+      code: "END_DATE",
+    };
+    headers[12] = {
+      headName: "是否非担保",
+      code: "IS_NOT_DB",
+      formatter: contentForm,
+    };
+
+    var doDynamicRequest = function (p) {
+      $("#bondlistT").empty();
+      bondlistT.init(headers);
+      bondlistT.getDataByAjax(url, utils.mergeJson(params, p), null, true);
+    };
+    // 进入请求
+    var defaultRequest = function (p) {
+      $("#bondlistT").empty();
+      bondlistT.init(headers);
+      params.BOND_TYPE = "分离交易的可转换公司债券";
+      var Data1 = bondlistT.getDataByAjax(
+        url,
+        utils.mergeJson(params, p),
+        bondlistT,
+        true
+      );
+      setTimeout(function () {
+        var res = Data1.data;
+        if (res.result && res.result.length > 0) {
+          if (res.result[0].TRADE_DATE) {
+            ransactionDate = dateReplace(res.result[0].TRADE_DATE);
+          } else {
+            ransactionDate = "-";
+          }
+          if (
+            ransactionDate != null &&
+            ransactionDate != undefined &&
+            ransactionDate.length > 0
+          )
+            $("#updateDate").text("日期：" + ransactionDate + "|");
+        }
+      }, 500);
+    };
+    var goSwitch = function (event) {
+      var eventTarget;
+      if (/msie/.test(navigator.userAgent.toLowerCase())) {
+        eventTarget = event.srcElement;
+      } else if (/firefox/.test(navigator.userAgent.toLowerCase())) {
+        eventTarget = event.target;
+      }
+      var keyword = $("#keywordsearch").val();
+
+      if (
+        keyword == "输入债券代码/简称" ||
+        keyword == null ||
+        keyword == undefined ||
+        keyword == ""
+      ) {
+        alert("请输入债券代码或简称！");
+        return false;
+      }
+      $("#bondlistT").empty();
+
+      var p = {
+        BOND_CODE: keyword,
+      };
+
+      bondlistT.init(headers);
+      downloadParams = utils.mergeJson(params, p);
+      bondlistT.getDataByAjax(url, utils.mergeJson(params, p), null, true);
+    };
+
+    var downloadParams = params;
+    var download = function () {
+      var ddUrl =
+        destinationHostURI +
+        "/commonExcelDd.do?" +
+        "sqlId=COMMON_SSE_CP_ZQ_ZQLB_JBXX_C" +
+        "&BOND_CODE=" +
+        downloadParams.BOND_CODE +
+        "&BOND_TYPE=" +
+        downloadParams.BOND_TYPE +
+        "&" +
+        Math.floor(Math.random() * (100000000 + 1));
+      window.location.href = ddUrl;
+    };
+
+    $(document).ready(function () {
+      $("tr").attr("bgColor", "white");
+      $("tr:even").css("background-color", "#f9f9f9");
+      utils.dynamicRequest({
+        element: document.getElementById("staticPagination"),
+        method: doDynamicRequest,
+      }); //分页相关 (必须)
+      var total = 18;
+      if (total == null || total == undefined) {
+        total = 0;
+      }
+      utils.compositeInfo({
+        info: "总共" + total + "条数据",
+        target: "deadling",
+      }); //表格右上角显示信息
+      utils.dynamicCompositeInfo(bondlistT, {
+        target: "deadling",
+      }); //表格右上角显示信息
+      //进入请求
+      defaultRequest();
+      $(".search-btn").click(function () {
+        goSwitch();
+      });
+      $(".download-btn").click(function () {
+        download();
+      });
+    });
+  }
+
+  if ($(".page_content .js_insertExchange").length > 0) {
+    //可交换公司债券
+    var url = destinationHostURI + "/sseQuery/commonSoaQuery.do?jsonCallBack=?"; //action地址
+    var bondlistT = new wideContainer(
+      true,
+      "bondlistT",
+      "basic_data_container",
+      "bond_details_table_over",
+      "extendZQ"
+    ); //参数分别为isPagination、targetDivId、tableId、表格外框样式、表格扩展样式
+    var params = {
+      isPagination: true,
+      sqlId: "CP_ZQ_ZQLB",
+      "pageHelp.pageSize": 20,
+      BOND_TYPE: "可交换公司债券",
+      BOND_CODE: "",
+    }; //传递到后台参数
+
+    var contentLink = function (data) {
+      return (
+        "<a target='_blank'  href='/disclosure/info/index.shtml?BONDCODE=" +
+        data.BOND_CODE +
+        "'>" +
+        data.BOND_CODE +
+        "</a>"
+      );
+    };
+
+    var ransactionDate = "-"; //交易日期
+
+    var contentForm = function (data) {
+      if (data.IS_NOT_DB == "N") {
+        return "否";
+      } else if (data.IS_NOT_DB == "Y") {
+        return "是";
+      } else {
+        return data.IS_NOT_DB;
+      }
+    };
+
+    var headers = new Array();
+
+    headers[0] = {
+      headName: "序号",
+      code: "NUM",
+    };
+    headers[1] = {
+      headName: "债券代码",
+      code: "BOND_CODE",
+      formatter: contentLink,
+    };
+    headers[2] = {
+      headName: "债券简称",
+      code: "BOND_ABBR",
+    };
+    headers[3] = {
+      headName: "债券扩位简称",
+      code: "SECURITY_ABBR_FULL",
+    };
+    headers[4] = {
+      headName: "债券全称",
+      code: "BOND_FULL",
+    };
+    headers[5] = {
+      headName: "期限(年)",
+      code: "TERM_YEAR",
+      className: "td_content_right",
+    };
+    headers[6] = {
+      headName: "计息方式",
+      code: "INTEREST_TYPE",
+    };
+    headers[7] = {
+      headName: "付息方式",
+      code: "PAY_TYPE",
+    };
+    headers[8] = {
+      headName: "发行量(亿元)",
+      code: "ISSUE_VALUE",
+      className: "td_content_right",
+    };
+    headers[9] = {
+      headName: "上市日期",
+      code: "LISTING_DATE",
+    };
+    headers[10] = {
+      headName: "发行起始日",
+      code: "ONLINE_START_DATE_CVS",
+    };
+    headers[11] = {
+      headName: "发行终止日",
+      code: "ONLINE_END_DATE_CVS",
+    };
+    headers[12] = {
+      headName: "到期日",
+      code: "END_DATE",
+    };
+    headers[13] = {
+      headName: "是否非担保",
+      code: "IS_NOT_DB",
+      formatter: contentForm,
+    };
+
+    var doDynamicRequest = function (p) {
+      $("#bondlistT").empty();
+      bondlistT.init(headers);
+      bondlistT.getDataByAjax(url, utils.mergeJson(params, p), null, true);
+    };
+
+    var defaultRequest = function (p) {
+      $("#bondlistT").empty();
+      bondlistT.init(headers);
+      var Data1 = bondlistT.getDataByAjax(
+        url,
+        utils.mergeJson(params, p),
+        bondlistT,
+        true
+      );
+      setTimeout(function () {
+        var res = Data1.data;
+        if (res.result && res.result.length > 0) {
+          if (res.result[0].TRADE_DATE) {
+            ransactionDate = dateReplace(res.result[0].TRADE_DATE);
+          } else {
+            ransactionDate = "-";
+          }
+          if (
+            ransactionDate != null &&
+            ransactionDate != undefined &&
+            ransactionDate.length > 0
+          )
+            $("#updateDate").text("日期：" + ransactionDate + "|");
+        }
+      }, 500);
+    };
+    var goSwitch = function (event) {
+      var eventTarget;
+      if (/msie/.test(navigator.userAgent.toLowerCase())) {
+        eventTarget = event.srcElement;
+      } else if (/firefox/.test(navigator.userAgent.toLowerCase())) {
+        eventTarget = event.target;
+      }
+      var keyword = $("#keywordsearch").val();
+
+      if (
+        keyword == "输入债券代码/简称" ||
+        keyword == null ||
+        keyword == undefined ||
+        keyword == ""
+      ) {
+        alert("请输入债券代码或简称！");
+        return false;
+      }
+      $("#bondlistT").empty();
+
+      var p = {
+        BOND_CODE: keyword,
+      };
+
+      bondlistT.init(headers);
+      downloadParams = utils.mergeJson(params, p);
+      bondlistT.getDataByAjax(url, utils.mergeJson(params, p), null, true);
+    };
+
+    var downloadParams = params;
+    var download = function () {
+      var ddUrl =
+        destinationHostURI +
+        "/commonExcelDd.do?" +
+        "sqlId=COMMON_SSE_CP_ZQ_ZQLB_JBXX_C" +
+        "&BOND_CODE=" +
+        downloadParams.BOND_CODE +
+        "&BOND_TYPE=" +
+        downloadParams.BOND_TYPE +
+        "&" +
+        Math.floor(Math.random() * (100000000 + 1));
+      window.location.href = ddUrl;
+    };
+
+    $(document).ready(function () {
+      $("tr").attr("bgColor", "white");
+      $("tr:even").css("background-color", "#f9f9f9");
+      utils.dynamicRequest({
+        element: document.getElementById("staticPagination"),
+        method: doDynamicRequest,
+      }); //分页相关 (必须)
+      var total = 149;
+      if (total == null || total == undefined) {
+        total = 0;
+      }
+      utils.compositeInfo({
+        info: "总共" + total + "条数据",
+        target: "deadling",
+      }); //表格右上角显示信息
+      utils.dynamicCompositeInfo(bondlistT, {
+        target: "deadling",
+      }); //表格右上角显示信息
+      //发送请求
+      defaultRequest();
+      $(".search-btn").click(function () {
+        goSwitch();
+      });
+      $(".download-btn").click(function () {
+        download();
+      });
+    });
+  }
+
+  /**
+   * 非公开发行公司（企业）债券
+   */
+  if ($(".page_content .js_insertPpbPb").length > 0) {
+    //非公开发行公司（企业）债券
+    var url = destinationHostURI + "/sseQuery/commonSoaQuery.do?jsonCallBack=?"; //action地址
+    var bondlistT = new wideContainer(
+      true,
+      "bondlistT",
+      "basic_data_container",
+      "bond_details_table_over",
+      "extendZQ"
+    ); //参数分别为isPagination、targetDivId、tableId、表格外框样式、表格扩展样式
+    var params = {
+      isPagination: true,
+      sqlId: "CP_ZQ_ZQLB",
+      "pageHelp.pageSize": 20,
+      BOND_TYPE: "中小企业私募债券,非公开发行公司债券",
+      BOND_CODE: "",
+    }; //传递到后台参数
+
+    var ransactionDate = "-"; //交易日期
+
+    var contentLink = function (data) {
+      return (
+        "<a target='_blank'  href='/disclosure/info/index.shtml?BONDCODE=" +
+        data.BOND_CODE +
+        "'>" +
+        data.BOND_CODE +
+        "</a>"
+      );
+    };
+
+    var contentForm = function (data) {
+      if (data.IS_NOT_DB == "N") {
+        return "否";
+      } else if (data.IS_NOT_DB == "Y") {
+        return "是";
+      } else {
+        return data.IS_NOT_DB;
+      }
+    };
+
+    var headers = new Array();
+
+    headers[0] = {
+      headName: "序号",
+      code: "NUM",
+    };
+    headers[1] = {
+      headName: "债券代码",
+      code: "BOND_CODE",
+      formatter: contentLink,
+    };
+    headers[2] = {
+      headName: "债券简称",
+      code: "BOND_ABBR",
+    };
+    headers[3] = {
+      headName: "债券扩位简称",
+      code: "SECURITY_ABBR_FULL",
+    };
+    headers[4] = {
+      headName: "债券全称",
+      code: "BOND_FULL",
+    };
+    headers[5] = {
+      headName: "期限(年)",
+      code: "TERM_YEAR",
+      className: "td_content_right",
+    };
+    headers[6] = {
+      headName: "计息方式",
+      code: "INTEREST_TYPE",
+    };
+    headers[7] = {
+      headName: "付息方式",
+      code: "PAY_TYPE",
+    };
+    headers[8] = {
+      headName: "发行量(亿元)",
+      code: "ISSUE_VALUE",
+      className: "td_content_right",
+    };
+    headers[9] = {
+      headName: "上市日期",
+      code: "LISTING_DATE",
+    };
+    headers[10] = {
+      headName: "发行起始日",
+      code: "ONLINE_START_DATE_CVS",
+    };
+    headers[11] = {
+      headName: "发行终止日",
+      code: "ONLINE_END_DATE_CVS",
+    };
+    headers[12] = {
+      headName: "到期日",
+      code: "END_DATE",
+    };
+    headers[13] = {
+      headName: "是否非担保",
+      code: "IS_NOT_DB",
+      formatter: contentForm,
+    };
+    var doDynamicRequest = function (p) {
+      $("#bondlistT").empty();
+      bondlistT.init(headers);
+      bondlistT.getDataByAjax(url, utils.mergeJson(params, p), null, true);
+    };
+
+    var defaultRequest = function (p) {
+      $("#bondlistT").empty();
+      bondlistT.init(headers);
+      var Data1 = bondlistT.getDataByAjax(
+        url,
+        utils.mergeJson(params, p),
+        bondlistT,
+        true
+      );
+      setTimeout(function () {
+        var res = Data1.data;
+        if (res.result && res.result.length > 0) {
+          if (res.result[0].TRADE_DATE) {
+            ransactionDate = dateReplace(res.result[0].TRADE_DATE);
+          } else {
+            ransactionDate = "-";
+          }
+          if (
+            ransactionDate != null &&
+            ransactionDate != undefined &&
+            ransactionDate.length > 0
+          )
+            $("#updateDate").text("日期：" + ransactionDate + "|");
+        }
+      }, 500);
+    };
+    var goSwitch = function (event) {
+      var eventTarget;
+      if (/msie/.test(navigator.userAgent.toLowerCase())) {
+        eventTarget = event.srcElement;
+      } else if (/firefox/.test(navigator.userAgent.toLowerCase())) {
+        eventTarget = event.target;
+      }
+      var keyword = $("#keywordsearch").val();
+
+      if (
+        keyword == "输入债券代码/简称" ||
+        keyword == null ||
+        keyword == undefined ||
+        keyword == ""
+      ) {
+        alert("请输入债券代码或简称！");
+        return false;
+      }
+      $("#bondlistT").empty();
+
+      var p = {
+        BOND_CODE: keyword,
+      };
+
+      bondlistT.init(headers);
+      downloadParams = utils.mergeJson(params, p);
+      bondlistT.getDataByAjax(url, utils.mergeJson(params, p), null, true);
+    };
+
+    var downloadParams = params;
+    var download = function () {
+      var ddUrl =
+        destinationHostURI +
+        "/commonExcelDd.do?" +
+        "sqlId=COMMON_SSE_CP_ZQ_ZQLB_JBXX_C" +
+        "&BOND_CODE=" +
+        downloadParams.BOND_CODE +
+        "&type=" +
+        'inParams' +
+        "&BOND_TYPE=" +
+        downloadParams.BOND_TYPE +
+        "&" +
+        Math.floor(Math.random() * (100000000 + 1));
+      window.location.href = ddUrl;
+    };
+
+    $(document).ready(function () {
+      $("tr").attr("bgColor", "white");
+      $("tr:even").css("background-color", "#f9f9f9");
+      utils.dynamicRequest({
+        element: document.getElementById("staticPagination"),
+        method: doDynamicRequest,
+      }); //分页相关 (必须)
+      var total = 9333;
+      if (total == null || total == undefined) {
+        total = 0;
+      }
+      utils.compositeInfo({
+        info: "总共" + total + "条数据",
+        target: "deadling",
+      }); //表格右上角显示信息
+      utils.dynamicCompositeInfo(bondlistT, {
+        target: "deadling",
+      }); //表格右上角显示信息
+      //发送请求
+      defaultRequest();
+      $(".search-btn").click(function () {
+        goSwitch();
+      });
+      $(".download-btn").click(function () {
+        download();
+      });
+    });
+  }
+
+  if ($(".page_content .js_insertPpb").length > 0) {
+    //非公开发行公司债券
+    var url = destinationHostURI + "/sseQuery/commonSoaQuery.do?jsonCallBack=?"; //action地址
+    var bondlistT = new wideContainer(
+      true,
+      "bondlistT",
+      "basic_data_container",
+      "bond_details_table_over",
+      "extendZQ"
+    ); //参数分别为isPagination、targetDivId、tableId、表格外框样式、表格扩展样式
+    var params = {
+      isPagination: true,
+      sqlId: "CP_ZQ_ZQLB",
+      "pageHelp.pageSize": 20,
+      BOND_TYPE: "非公开发行公司债券",
+      BOND_CODE: "",
+    }; //传递到后台参数
+
+    var ransactionDate = "-"; //交易日期
+
+    var contentLink = function (data) {
+      return (
+        "<a target='_blank'  href='/disclosure/info/index.shtml?BONDCODE=" +
+        data.BOND_CODE +
+        "'>" +
+        data.BOND_CODE +
+        "</a>"
+      );
+    };
+
+    var contentForm = function (data) {
+      if (data.IS_NOT_DB == "N") {
+        return "否";
+      } else if (data.IS_NOT_DB == "Y") {
+        return "是";
+      } else {
+        return data.IS_NOT_DB;
+      }
+    };
+
+    var headers = new Array();
+
+    headers[0] = {
+      headName: "序号",
+      code: "NUM",
+    };
+    headers[1] = {
+      headName: "债券代码",
+      code: "BOND_CODE",
+      formatter: contentLink,
+    };
+    headers[2] = {
+      headName: "债券简称",
+      code: "BOND_ABBR",
+    };
+    headers[3] = {
+      headName: "债券扩位简称",
+      code: "SECURITY_ABBR_FULL",
+    };
+    headers[4] = {
+      headName: "债券全称",
+      code: "BOND_FULL",
+    };
+    headers[5] = {
+      headName: "期限(年)",
+      code: "TERM_YEAR",
+      className: "td_content_right",
+    };
+    headers[6] = {
+      headName: "计息方式",
+      code: "INTEREST_TYPE",
+    };
+    headers[7] = {
+      headName: "付息方式",
+      code: "PAY_TYPE",
+    };
+    headers[8] = {
+      headName: "发行量(亿元)",
+      code: "ISSUE_VALUE",
+      className: "td_content_right",
+    };
+    headers[9] = {
+      headName: "上市日期",
+      code: "LISTING_DATE",
+    };
+    headers[10] = {
+      headName: "发行起始日",
+      code: "ONLINE_START_DATE_CVS",
+    };
+    headers[11] = {
+      headName: "发行终止日",
+      code: "ONLINE_END_DATE_CVS",
+    };
+    headers[12] = {
+      headName: "到期日",
+      code: "END_DATE",
+    };
+    headers[13] = {
+      headName: "是否非担保",
+      code: "IS_NOT_DB",
+      formatter: contentForm,
+    };
+    var doDynamicRequest = function (p) {
+      $("#bondlistT").empty();
+      bondlistT.init(headers);
+      bondlistT.getDataByAjax(url, utils.mergeJson(params, p), null, true);
+    };
+
+    var defaultRequest = function (p) {
+      $("#bondlistT").empty();
+      bondlistT.init(headers);
+      var Data1 = bondlistT.getDataByAjax(
+        url,
+        utils.mergeJson(params, p),
+        bondlistT,
+        true
+      );
+      setTimeout(function () {
+        var res = Data1.data;
+        if (res.result && res.result.length > 0) {
+          if (res.result[0].TRADE_DATE) {
+            ransactionDate = dateReplace(res.result[0].TRADE_DATE);
+          } else {
+            ransactionDate = "-";
+          }
+          if (
+            ransactionDate != null &&
+            ransactionDate != undefined &&
+            ransactionDate.length > 0
+          )
+            $("#updateDate").text("日期：" + ransactionDate + "|");
+        }
+      }, 500);
+    };
+    var goSwitch = function (event) {
+      var eventTarget;
+      if (/msie/.test(navigator.userAgent.toLowerCase())) {
+        eventTarget = event.srcElement;
+      } else if (/firefox/.test(navigator.userAgent.toLowerCase())) {
+        eventTarget = event.target;
+      }
+      var keyword = $("#keywordsearch").val();
+
+      if (
+        keyword == "输入债券代码/简称" ||
+        keyword == null ||
+        keyword == undefined ||
+        keyword == ""
+      ) {
+        alert("请输入债券代码或简称！");
+        return false;
+      }
+      $("#bondlistT").empty();
+
+      var p = {
+        BOND_CODE: keyword,
+      };
+
+      bondlistT.init(headers);
+      downloadParams = utils.mergeJson(params, p);
+      bondlistT.getDataByAjax(url, utils.mergeJson(params, p), null, true);
+    };
+
+    var downloadParams = params;
+    var download = function () {
+      var ddUrl =
+        destinationHostURI +
+        "/commonExcelDd.do?" +
+        "sqlId=COMMON_SSE_CP_ZQ_ZQLB_JBXX_C" +
+        "&BOND_CODE=" +
+        downloadParams.BOND_CODE +
+        "&BOND_TYPE=" +
+        downloadParams.BOND_TYPE +
+        "&" +
+        Math.floor(Math.random() * (100000000 + 1));
+      window.location.href = ddUrl;
+    };
+
+    $(document).ready(function () {
+      $("tr").attr("bgColor", "white");
+      $("tr:even").css("background-color", "#f9f9f9");
+      utils.dynamicRequest({
+        element: document.getElementById("staticPagination"),
+        method: doDynamicRequest,
+      }); //分页相关 (必须)
+      var total = 9333;
+      if (total == null || total == undefined) {
+        total = 0;
+      }
+      utils.compositeInfo({
+        info: "总共" + total + "条数据",
+        target: "deadling",
+      }); //表格右上角显示信息
+      utils.dynamicCompositeInfo(bondlistT, {
+        target: "deadling",
+      }); //表格右上角显示信息
+      //发送请求
+      defaultRequest();
+      $(".search-btn").click(function () {
+        goSwitch();
+      });
+      $(".download-btn").click(function () {
+        download();
+      });
+    });
+  }
+
+  if ($(".page_content .js_insertIb").length > 0) {
+    //次级债券
+    var url = destinationHostURI + "/sseQuery/commonSoaQuery.do?jsonCallBack=?"; //action地址
+    var bondlistT = new wideContainer(
+      true,
+      "bondlistT",
+      "basic_data_container",
+      "bond_details_table_over",
+      "extendZQ"
+    ); //参数分别为isPagination、targetDivId、tableId、表格外框样式、表格扩展样式
+    var params = {
+      isPagination: true,
+      sqlId: "CP_ZQ_ZQLB",
+      "pageHelp.pageSize": 20,
+      BOND_TYPE: "次级债券",
+      BOND_CODE: "",
+    }; //传递到后台参数
+
+    var ransactionDate = "-"; //交易日期
+
+    var contentLink = function (data) {
+      return (
+        "<a target='_blank'  href='/disclosure/info/index.shtml?BONDCODE=" +
+        data.BOND_CODE +
+        "'>" +
+        data.BOND_CODE +
+        "</a>"
+      );
+    };
+
+    var contentForm = function (data) {
+      if (data.IS_NOT_DB == "N") {
+        return "否";
+      } else if (data.IS_NOT_DB == "Y") {
+        return "是";
+      } else {
+        return data.IS_NOT_DB;
+      }
+    };
+
+    var headers = new Array();
+
+    headers[0] = {
+      headName: "序号",
+      code: "NUM",
+    };
+    headers[1] = {
+      headName: "债券代码",
+      code: "BOND_CODE",
+      formatter: contentLink,
+    };
+    headers[2] = {
+      headName: "债券简称",
+      code: "BOND_ABBR",
+    };
+    headers[3] = {
+      headName: "债券扩位简称",
+      code: "SECURITY_ABBR_FULL",
+    };
+    headers[4] = {
+      headName: "债券全称",
+      code: "BOND_FULL",
+    };
+    headers[5] = {
+      headName: "期限(年)",
+      code: "TERM_YEAR",
+      className: "td_content_right",
+    };
+    headers[6] = {
+      headName: "计息方式",
+      code: "INTEREST_TYPE",
+    };
+    headers[7] = {
+      headName: "付息方式",
+      code: "PAY_TYPE",
+    };
+    headers[8] = {
+      headName: "发行量(亿元)",
+      code: "ISSUE_VALUE",
+      className: "td_content_right",
+    };
+    headers[9] = {
+      headName: "上市日期",
+      code: "LISTING_DATE",
+    };
+    headers[10] = {
+      headName: "发行起始日",
+      code: "ONLINE_START_DATE_CVS",
+    };
+    headers[11] = {
+      headName: "发行终止日",
+      code: "ONLINE_END_DATE_CVS",
+    };
+    headers[12] = {
+      headName: "到期日",
+      code: "END_DATE",
+    };
+    headers[13] = {
+      headName: "是否非担保",
+      code: "IS_NOT_DB",
+      formatter: contentForm,
+    };
+
+    var doDynamicRequest = function (p) {
+      $("#bondlistT").empty();
+      bondlistT.init(headers);
+      bondlistT.getDataByAjax(url, utils.mergeJson(params, p), null, true);
+    };
+
+    var defaultRequest = function (p) {
+      $("#bondlistT").empty();
+      bondlistT.init(headers);
+      var Data1 = bondlistT.getDataByAjax(
+        url,
+        utils.mergeJson(params, p),
+        bondlistT,
+        true
+      );
+      setTimeout(function () {
+        var res = Data1.data;
+        if (res.result && res.result.length > 0) {
+          if (res.result[0].TRADE_DATE) {
+            ransactionDate = dateReplace(res.result[0].TRADE_DATE);
+          } else {
+            ransactionDate = "-";
+          }
+          if (
+            ransactionDate != null &&
+            ransactionDate != undefined &&
+            ransactionDate.length > 0
+          )
+            $("#updateDate").text("日期：" + ransactionDate + "|");
+        }
+      }, 500);
+    };
+    var goSwitch = function (event) {
+      var eventTarget;
+      if (/msie/.test(navigator.userAgent.toLowerCase())) {
+        eventTarget = event.srcElement;
+      } else if (/firefox/.test(navigator.userAgent.toLowerCase())) {
+        eventTarget = event.target;
+      }
+      var keyword = $("#keywordsearch").val();
+
+      if (
+        keyword == "输入债券代码/简称" ||
+        keyword == null ||
+        keyword == undefined ||
+        keyword == ""
+      ) {
+        alert("请输入债券代码或简称！");
+        return false;
+      }
+      $("#bondlistT").empty();
+
+      var p = {
+        BOND_CODE: keyword,
+      };
+
+      bondlistT.init(headers);
+      downloadParams = utils.mergeJson(params, p);
+      bondlistT.getDataByAjax(url, utils.mergeJson(params, p), null, true);
+    };
+
+    var downloadParams = params;
+    var download = function () {
+      var ddUrl =
+        destinationHostURI +
+        "/commonExcelDd.do?" +
+        "sqlId=COMMON_SSE_CP_ZQ_ZQLB_JBXX_C" +
+        "&BOND_CODE=" +
+        downloadParams.BOND_CODE +
+        "&BOND_TYPE=" +
+        downloadParams.BOND_TYPE +
+        "&" +
+        Math.floor(Math.random() * (100000000 + 1));
+      window.location.href = ddUrl;
+    };
+
+    $(document).ready(function () {
+      $("tr").attr("bgColor", "white");
+      $("tr:even").css("background-color", "#f9f9f9");
+      utils.dynamicRequest({
+        element: document.getElementById("staticPagination"),
+        method: doDynamicRequest,
+      }); //分页相关 (必须)
+      var total = 308;
+      if (total == null || total == undefined) {
+        total = 0;
+      }
+      utils.compositeInfo({
+        info: "总共" + total + "条数据",
+        target: "deadling",
+      }); //表格右上角显示信息
+      utils.dynamicCompositeInfo(bondlistT, {
+        target: "deadling",
+      }); //表格右上角显示信息
+      //发送请求
+      defaultRequest();
+      $(".search-btn").click(function () {
+        goSwitch();
+      });
+      $(".download-btn").click(function () {
+        download();
+      });
+    });
+  }
+
+  if ($(".page_content .js_insertAbs").length > 0) {
+    //企业资产支持证券
+    var url = destinationHostURI + "/sseQuery/commonSoaQuery.do?jsonCallBack=?"; //action地址
+    var bondlistT = new wideContainer(
+      true,
+      "bondlistT",
+      "basic_data_container",
+      "bond_details_table_over",
+      "extendZQ"
+    ); //参数分别为isPagination、targetDivId、tableId、表格外框样式、表格扩展样式
+    var params = {
+      isPagination: true,
+      sqlId: "CP_ZQ_ZQLB",
+      "pageHelp.pageSize": 20,
+      BOND_TYPE: "证券公司资产支持证券",
+      BOND_CODE: "",
+    }; //传递到后台参数
+
+    var contentLink = function (data) {
+      return (
+        "<a target='_blank'  href='/disclosure/info/index.shtml?BONDCODE=" +
+        data.BOND_CODE +
+        "'>" +
+        data.BOND_CODE +
+        "</a>"
+      );
+    };
+
+    var ransactionDate = "-"; //交易日期
+
+    var contentForm = function (data) {
+      if (data.IS_NOT_DB == "N") {
+        return "否";
+      } else if (data.IS_NOT_DB == "Y") {
+        return "是";
+      } else {
+        return data.IS_NOT_DB;
+      }
+    };
+
+    var headers = new Array();
+
+    headers[0] = {
+      headName: "序号",
+      code: "NUM",
+    };
+    headers[1] = {
+      headName: "债券代码",
+      code: "BOND_CODE",
+      formatter: contentLink,
+    };
+    headers[2] = {
+      headName: "债券简称",
+      code: "BOND_ABBR",
+    };
+    headers[3] = {
+      headName: "债券扩位简称",
+      code: "SECURITY_ABBR_FULL",
+    };
+    headers[4] = {
+      headName: "债券全称",
+      code: "BOND_FULL",
+    };
+    headers[5] = {
+      headName: "期限(年)",
+      code: "TERM_YEAR",
+      className: "td_content_right",
+    };
+    headers[6] = {
+      headName: "计息方式",
+      code: "INTEREST_TYPE",
+    };
+    headers[7] = {
+      headName: "付息方式",
+      code: "PAY_TYPE",
+    };
+    headers[8] = {
+      headName: "发行量(亿元)",
+      code: "ISSUE_VALUE",
+      className: "td_content_right",
+    };
+    headers[9] = {
+      headName: "上市日期",
+      code: "LISTING_DATE",
+    };
+    headers[10] = {
+      headName: "发行起始日",
+      code: "ONLINE_START_DATE_CVS",
+    };
+    headers[11] = {
+      headName: "发行终止日",
+      code: "ONLINE_END_DATE_CVS",
+    };
+    headers[12] = {
+      headName: "到期日",
+      code: "END_DATE",
+    };
+    headers[13] = {
+      headName: "是否非担保",
+      code: "IS_NOT_DB",
+      formatter: contentForm,
+    };
+    var doDynamicRequest = function (p) {
+      $("#bondlistT").empty();
+      bondlistT.init(headers);
+      bondlistT.getDataByAjax(url, utils.mergeJson(params, p), null, true);
+    };
+
+    var defaultRequest = function (p) {
+      $("#bondlistT").empty();
+      bondlistT.init(headers);
+      var Data1 = bondlistT.getDataByAjax(
+        url,
+        utils.mergeJson(params, p),
+        bondlistT,
+        true
+      );
+      setTimeout(function () {
+        var res = Data1.data;
+        if (res.result && res.result.length > 0) {
+          if (res.result[0].TRADE_DATE) {
+            ransactionDate = dateReplace(res.result[0].TRADE_DATE);
+          } else {
+            ransactionDate = "-";
+          }
+          if (
+            ransactionDate != null &&
+            ransactionDate != undefined &&
+            ransactionDate.length > 0
+          )
+            $("#updateDate").text("日期：" + ransactionDate + "|");
+        }
+      }, 500);
+    };
+    var goSwitch = function (event) {
+      var eventTarget;
+      if (/msie/.test(navigator.userAgent.toLowerCase())) {
+        eventTarget = event.srcElement;
+      } else if (/firefox/.test(navigator.userAgent.toLowerCase())) {
+        eventTarget = event.target;
+      }
+      var keyword = $("#keywordsearch").val();
+
+      if (
+        keyword == "输入债券代码/简称" ||
+        keyword == null ||
+        keyword == undefined ||
+        keyword == ""
+      ) {
+        alert("请输入债券代码或简称！");
+        return false;
+      }
+      $("#bondlistT").empty();
+
+      var p = {
+        BOND_CODE: keyword,
+      };
+
+      bondlistT.init(headers);
+      downloadParams = utils.mergeJson(params, p);
+      bondlistT.getDataByAjax(url, utils.mergeJson(params, p), null, true);
+    };
+
+    var downloadParams = params;
+    var download = function () {
+      var ddUrl =
+        destinationHostURI +
+        "/commonExcelDd.do?" +
+        "sqlId=COMMON_SSE_CP_ZQ_ZQLB_JBXX_C" +
+        "&BOND_CODE=" +
+        downloadParams.BOND_CODE +
+        "&BOND_TYPE=" +
+        downloadParams.BOND_TYPE +
+        "&" +
+        Math.floor(Math.random() * (100000000 + 1));
+      window.location.href = ddUrl;
+    };
+
+    $(document).ready(function () {
+      $("tr").attr("bgColor", "white");
+      $("tr:even").css("background-color", "#f9f9f9");
+      utils.dynamicRequest({
+        element: document.getElementById("staticPagination"),
+        method: doDynamicRequest,
+      }); //分页相关 (必须)
+      var total = 11404;
+      if (total == null || total == undefined) {
+        total = 0;
+      }
+      utils.compositeInfo({
+        info: "总共" + total + "条数据",
+        target: "deadling",
+      }); //表格右上角显示信息
+      utils.dynamicCompositeInfo(bondlistT, {
+        target: "deadling",
+      }); //表格右上角显示信息
+      //发送请求
+      defaultRequest();
+      $(".search-btn").click(function () {
+        goSwitch();
+      });
+      $(".download-btn").click(function () {
+        download();
+      });
+    });
+  }
+
+  if ($(".page_content .js_insertCreditabs").length > 0) {
+    //信贷资产支持证券
+    var url = destinationHostURI + "/sseQuery/commonSoaQuery.do?jsonCallBack=?"; //action地址
+    var bondlistT = new wideContainer(
+      true,
+      "bondlistT",
+      "basic_data_container",
+      "bond_details_table_over",
+      "extendZQ"
+    ); //参数分别为isPagination、targetDivId、tableId、表格外框样式、表格扩展样式
+    var params = {
+      isPagination: true,
+      sqlId: "CP_ZQ_ZQLB",
+      "pageHelp.pageSize": 20,
+      BOND_TYPE: "信贷资产支持证券",
+      BOND_CODE: "",
+    }; //传递到后台参数
+
+    var contentLink = function (data) {
+      return (
+        "<a target='_blank'  href='/disclosure/info/index.shtml?BONDCODE=" +
+        data.BOND_CODE +
+        "'>" +
+        data.BOND_CODE +
+        "</a>"
+      );
+    };
+
+    var ransactionDate = "-"; //交易日期
+
+    var contentForm = function (data) {
+      if (data.IS_NOT_DB == "N") {
+        return "否";
+      } else if (data.IS_NOT_DB == "Y") {
+        return "是";
+      } else {
+        return data.IS_NOT_DB;
+      }
+    };
+
+    var headers = new Array();
+
+    headers[0] = {
+      headName: "序号",
+      code: "NUM",
+    };
+    headers[1] = {
+      headName: "债券代码",
+      code: "BOND_CODE",
+      formatter: contentLink,
+    };
+    headers[2] = {
+      headName: "债券简称",
+      code: "BOND_ABBR",
+    };
+    headers[3] = {
+      headName: "债券扩位简称",
+      code: "SECURITY_ABBR_FULL",
+    };
+    headers[4] = {
+      headName: "债券全称",
+      code: "BOND_FULL",
+    };
+    headers[5] = {
+      headName: "期限(年)",
+      code: "TERM_YEAR",
+      className: "td_content_right",
+    };
+    headers[6] = {
+      headName: "计息方式",
+      code: "INTEREST_TYPE",
+    };
+    headers[7] = {
+      headName: "付息方式",
+      code: "PAY_TYPE",
+    };
+    headers[8] = {
+      headName: "发行量(亿元)",
+      code: "ISSUE_VALUE",
+      className: "td_content_right",
+    };
+    headers[9] = {
+      headName: "上市日期",
+      code: "LISTING_DATE",
+    };
+    headers[10] = {
+      headName: "发行起始日",
+      code: "ONLINE_START_DATE_CVS",
+    };
+    headers[11] = {
+      headName: "发行终止日",
+      code: "ONLINE_END_DATE_CVS",
+    };
+    headers[12] = {
+      headName: "到期日",
+      code: "END_DATE",
+    };
+    headers[13] = {
+      headName: "是否非担保",
+      code: "IS_NOT_DB",
+      formatter: contentForm,
+    };
+
+    var doDynamicRequest = function (p) {
+      $("#bondlistT").empty();
+      bondlistT.init(headers);
+      bondlistT.getDataByAjax(url, utils.mergeJson(params, p), null, true);
+    };
+
+    var defaultRequest = function (p) {
+      $("#bondlistT").empty();
+      bondlistT.init(headers);
+      var Data1 = bondlistT.getDataByAjax(
+        url,
+        utils.mergeJson(params, p),
+        bondlistT,
+        true
+      );
+      setTimeout(function () {
+        var res = Data1.data;
+        if (res.result && res.result.length > 0) {
+          if (res.result[0].TRADE_DATE) {
+            ransactionDate = dateReplace(res.result[0].TRADE_DATE);
+          } else {
+            ransactionDate = "-";
+          }
+          if (
+            ransactionDate != null &&
+            ransactionDate != undefined &&
+            ransactionDate.length > 0
+          )
+            $("#updateDate").text("日期：" + ransactionDate + "|");
+        }
+      }, 500);
+    };
+    var goSwitch = function (event) {
+      var eventTarget;
+      if (/msie/.test(navigator.userAgent.toLowerCase())) {
+        eventTarget = event.srcElement;
+      } else if (/firefox/.test(navigator.userAgent.toLowerCase())) {
+        eventTarget = event.target;
+      }
+      var keyword = $("#keywordsearch").val();
+
+      if (
+        keyword == "输入债券代码/简称" ||
+        keyword == null ||
+        keyword == undefined ||
+        keyword == ""
+      ) {
+        alert("请输入债券代码或简称！");
+        return false;
+      }
+      $("#bondlistT").empty();
+
+      var p = {
+        BOND_CODE: keyword,
+      };
+
+      bondlistT.init(headers);
+      downloadParams = utils.mergeJson(params, p);
+      bondlistT.getDataByAjax(url, utils.mergeJson(params, p), null, true);
+    };
+
+    var downloadParams = params;
+    var download = function () {
+      var ddUrl =
+        destinationHostURI +
+        "/commonExcelDd.do?" +
+        "sqlId=COMMON_SSE_CP_ZQ_ZQLB_JBXX_C" +
+        "&BOND_CODE=" +
+        downloadParams.BOND_CODE +
+        "&BOND_TYPE=" +
+        downloadParams.BOND_TYPE +
+        "&display=1" +
+        "&" +
+        Math.floor(Math.random() * (100000000 + 1));
+      window.location.href = ddUrl;
+    };
+
+    $(document).ready(function () {
+      $("tr").attr("bgColor", "white");
+      $("tr:even").css("background-color", "#f9f9f9");
+      utils.dynamicRequest({
+        element: document.getElementById("staticPagination"),
+        method: doDynamicRequest,
+      }); //分页相关 (必须)
+      var total = 3;
+      if (total == null || total == undefined) {
+        total = 0;
+      }
+      utils.compositeInfo({
+        info: "总共" + total + "条数据",
+        target: "deadling",
+      }); //表格右上角显示信息
+      utils.dynamicCompositeInfo(bondlistT, {
+        target: "deadling",
+      }); //表格右上角显示信息
+      //发送请求
+      defaultRequest();
+      $(".search-btn").click(function () {
+        goSwitch();
+      });
+      $(".download-btn").click(function () {
+        download();
+      });
+    });
+  }
+
+  /**
+   * 首页-信息披露-债券信息-新
+  */
+
+  if ($(".page_content .js_insertDetail_new").length > 0) {
+    //获取url中的参数方法
+    function getUrlParam(name) {
+      //构造一个含有目标参数的正则表达式对象
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+      //匹配目标参数
+      var r = window.location.search.substr(1).match(reg);
+      //返回参数
+      if (r != null) {
+        return unescape(r[2]);
+      } else {
+        return null;
+      }
+    }
+    var str1 =
+      "<tr>" +
+      "<th>债券代码</th>" +
+      '<td id="BOND_CODE"></td>' +
+      "+<th>债券简称</th>" +
+      '<td id="BOND_ABBR"></td>' +
+      "</tr>" +
+      "<tr>" +
+      '<th><span id="ownerName">发行人</span></th>' +
+      '<td id="ISSUE_OWNER"  colspan="3"></td>' +
+      "</tr>" +
+      '<th>债券扩位简称</th>' +
+      '<td id="SECURITY_ABBR_FULL"  colspan="3"></td>' +
+      "</tr>" +
+      "<tr>" +
+      "<th>债券全称</th>" +
+      '<td id="BOND_FULL"  colspan="3"></td>' +
+      "</tr>" +
+      "<tr>" +
+      "<th>债券类型</th>" +
+      '<td id="BOND_TYPE" colspan="3"></td>' +
+      "</tr>" +
+      "<tr>" +
+      "<th>发行量（亿元）</th>" +
+      '<td id="ISSUE_VALUE"></td>' +
+      "<th>上交所上市总量</br>（亿元）</th>" +
+      '<td id="SSE_TOTAL_AMT"></td>' +
+      "</tr>" +
+      '<tr style="display:none;" id="issueDay">' +
+      "<th>发行起始日</th>" +
+      '<td id="ISSUED_START_DAY">-</td>' +
+      "<th>发行终止日</th>" +
+      '<td id="ISSUED_END_DAY">-</td>' +
+      "</tr>" +
+      "<tr>" +
+      "<th>起息日期</th>" +
+      '<td id="START_DATE"></td>' +
+      "<th>到期日期</th>" +
+      '<td id="END_DATE"></td>' +
+      "</tr>" +
+      "<tr>" +
+      '<th id="LISTING_HEAD">上市日期</th>' +
+      '<td id="LISTING_DATE"></td>' +
+      "<th>银行间代码</th>" +
+      '<td id="BANK_CODE" colspan="3"></td>' +
+      "</tr>" +
+      "<tr>" +
+      "<th>计息方式</th>" +
+      '<td id="INTEREST_TYPE"></td>' +
+      "<th>付息方式</th>" +
+      '<td id="PAY_TYPE"></td>' +
+      "</tr>" +
+      "<tr>" +
+      '<th id="FACE_HEAD">票面利率（%）</th>' +
+      '<td id="FACE_RATE"></td>' +
+      "<th>债券期限（年）</th>" +
+      '<td id="TERM_YEAR"></td>' +
+      "</tr>" +
+      "<tr>" +
+      "<th>基准利率（%）</th>" +
+      '<td id="BASE_RATE"></td>' +
+      "<th>浮动利差（%）</th>" +
+      '<td id="">-</td>' +
+      "</tr>" +
+      "<tr>" +
+      "<th>标准券折算率</th>" +
+      '<td id="RATE"></td>' +
+      "<th>债券估值（元）</th>" +
+      '<td id="CLEAN_PRICE"></td>' +
+      "</tr>" +
+      "<tr>" +
+      "<th>发行类型</th>" +
+      '<td id="MANAGE_TYPE"></td>' +
+      "<th>交易方式</th>" +
+      '<td id="TRADE_TYPE"></td>' +
+      "</tr>" +
+      '<tr class="add_part">' +
+      "<th>债券评级</th>" +
+      '<td id="BOND_RATING"></td>' +
+      "<th>主体评级</th>" +
+      '<td id="MAIN_RATING"></td>' +
+      "</tr>" +
+      "<tr>" +
+      "<th>是否非担保</th>" +
+      '<td id="IS_NOT_DB" colspan="3"></td>' +
+      "</tr>";
+    var str2 =
+      "<tr>" +
+      "<th>债券代码</th>" +
+      '<td id="BOND_CODE" colspan="3"></td>' +
+      "</tr>" +
+      "<tr>" +
+      "<th>债券简称</th>" +
+      '<td id="BOND_ABBR" colspan="3"></td>' +
+      "</tr>" +
+      "<tr>" +
+      '<th><span id="ownerName">发行人</span></th>' +
+      '<td id="ISSUE_OWNER"  colspan="3"></td>' +
+      "</tr>" +
+      '<th>债券扩位简称</th>' +
+      '<td id="SECURITY_ABBR_FULL"  colspan="3"></td>' +
+      "</tr>" +
+      "<tr>" +
+      "<th>债券全称</th>" +
+      '<td id="BOND_FULL"  colspan="3"></td>' +
+      "</tr>" +
+      "<tr>" +
+      "<th>债券类型</th>" +
+      '<td id="BOND_TYPE" colspan="3"></td>' +
+      "</tr>" +
+      "<tr>" +
+      "<th>发行量（亿元）</th>" +
+      '<td id="ISSUE_VALUE" colspan="3"></td>' +
+      "</tr>" +
+      "<tr>" +
+      "<th>上交所上市总量（亿元）</th>" +
+      '<td id="SSE_TOTAL_AMT" colspan="3"></td>' +
+      "</tr>" +
+      '<tr style="display:none;" id="issueDay">' +
+      "<th>发行起始日</th>" +
+      '<td id="ISSUED_START_DAY" colspan="3">-</td>' +
+      "</tr>" +
+      "<tr>" +
+      "<th>发行终止日</th>" +
+      '<td id="ISSUED_END_DAY" colspan="3">-</td>' +
+      "</tr>" +
+      "<tr>" +
+      "<th>起息日期</th>" +
+      '<td id="START_DATE" colspan="3"></td>' +
+      "</tr>" +
+      "<tr>" +
+      "<th>到期日期</th>" +
+      '<td id="END_DATE" colspan="3"></td>' +
+      "</tr>" +
+      "<tr>" +
+      '<th id="LISTING_HEAD">上市日期</th>' +
+      '<td id="LISTING_DATE" colspan="3"></td>' +
+      "</tr>" +
+      "<tr>" +
+      "<th>银行间代码</th>" +
+      '<td id="BANK_CODE" colspan="3"></td>' +
+      "</tr>" +
+      "<tr>" +
+      "<th>计息方式</th>" +
+      '<td id="INTEREST_TYPE" colspan="3"></td>' +
+      "</tr>" +
+      "<tr>" +
+      "<th>付息方式</th>" +
+      '<td id="PAY_TYPE" colspan="3"></td>' +
+      "</tr>" +
+      "<tr>" +
+      '<th id="FACE_HEAD">票面利率（%）</th>' +
+      '<td id="FACE_RATE" colspan="3"></td>' +
+      "</tr>" +
+      "<tr>" +
+      "<th>债券期限（年）</th>" +
+      '<td id="TERM_YEAR" colspan="3"></td>' +
+      "</tr>" +
+      "<tr>" +
+      "<th>基准利率（%）</th>" +
+      '<td id="BASE_RATE" colspan="3"></td>' +
+      "</tr>" +
+      "<tr>" +
+      "<th>浮动利差（%）</th>" +
+      '<td id="" colspan="3">-</td>' +
+      "</tr>" +
+      "<tr>" +
+      "<th>标准券折算率</th>" +
+      '<td id="RATE" colspan="3"></td>' +
+      "</tr>" +
+      "<tr>" +
+      "<th>债券估值（元）</th>" +
+      '<td id="CLEAN_PRICE" colspan="3"></td>' +
+      "</tr>" +
+      "<tr>" +
+      "<th>发行类型</th>" +
+      '<td id="MANAGE_TYPE" colspan="3"></td>' +
+      "</tr>" +
+      "<tr>" +
+      "<th>交易方式</th>" +
+      '<td id="TRADE_TYPE" colspan="3"></td>' +
+      "</tr>" +
+      '<tr class="add_part">' +
+      "<th>债券评级</th>" +
+      '<td id="BOND_RATING" colspan="3"></td>' +
+      "</tr>" +
+      '<tr class="add_part">' +
+      "<th>主体评级</th>" +
+      '<td id="MAIN_RATING" colspan="3"></td>' +
+      "</tr>" +
+      "<tr>" +
+      "<th>是否非担保</th>" +
+      '<td id="IS_NOT_DB" colspan="3"></td>' +
+      "</tr>";
+    var str3 =
+      "<tr>" +
+      '<th colspan="2">匹配成交行情</th>' +
+      "</tr>" +
+      '<tr class="table_bjcolor">' +
+      '<td  width="119">昨收盘价</td>' +
+      '<td class="td_right"  width="119" id="prev_close"></td>' +
+      "</tr>" +
+      "<tr>" +
+      "<td>最新成交价</td>" +
+      '<td class="td_right" id="last"></td>' +
+      "</tr>" +
+      '<tr class="table_bjcolor">' +
+      "<td>开盘价</td>" +
+      '<td class="td_right" id="open"></td>' +
+      "</tr>" +
+      "<tr>" +
+      "<td>收盘价</td>" +
+      '<td class="td_right" id="close"></td>' +
+      "</tr>" +
+      '<tr class="table_bjcolor">' +
+      "<td>最高价</td>" +
+      '<td class="td_right" id="high"></td>' +
+      "</tr>" +
+      "<tr>" +
+      "<td>最低价</td>" +
+      '<td class="td_right green" id="low"></td>' +
+      "</tr>" +
+      '<tr class="table_bjcolor">' +
+      "<td>买一价</td>" +
+      '<td class="td_right" id="bidpx1"></td>' +
+      "</tr>" +
+      "<tr>" +
+      "<td>买一量</td>" +
+      '<td class="td_right"  id="bidax1"></td>' +
+      "</tr>" +
+      '<tr class="table_bjcolor">' +
+      "<td>卖一价</td>" +
+      '<td class="td_right" id="askpx1"></td>' +
+      "</tr>" +
+      "<tr>" +
+      "<td>卖一量</td>" +
+      '<td class="td_right" id="askax1"></td>' +
+      "</tr>" +
+      "<tr>" +
+      '<th colspan="2">非匹配成交行情</th>' +
+      "</tr>" +
+      '<tr class="table_bjcolor">' +
+      "<td>最新成交价</td>" +
+      '<td class="td_right" id="last1"></td>' +
+      "</tr>" +
+      "<tr>" +
+      "<td>加权平均价</td>" +
+      '<td class="td_right" id="weightedAvgPx"></td>' +
+      "</tr>" +
+      '<tr class="table_bjcolor">' +
+      "<td>总成交量</td>" +
+      '<td class="td_right" id="volume"></td>' +
+      "</tr>" +
+      "<tr>" +
+      "<td>总成交笔数</td>" +
+      '<td class="td_right" id="num_trades"></td>' +
+      "</tr>";
+    $(".table.bond_details_table1.mbHidden").html(str1);
+    $(".table.bond_details_table1.mbShow").html(str2);
+    $(".mb_zqxxhq").html(str3);
+    var url = destinationHostURI + "/commonQuery.do?jsonCallBack=?"; //action地址
+    var paramsparent = {};
+    paramsparent = utils.getParamsFromParentPage("BONDCODE", paramsparent);
+    var BONDCODE = paramsparent.BONDCODE;
+    var params = {
+      isPagination: false,
+      sqlId: "COMMON_BOND_BASIC_ZQJBYS_L",
+      BONDCODE: BONDCODE,
+    };
+
+    var defaultSet = function () {
+      $("[id='BOND_CODE']").text("-");
+      $("[id='#BOND_ABBR']").text("-");
+      $("[id='#ISSUE_OWNER']").text("-");
+      $("[id='SECURITY_ABBR_FULL']").text("-");
+      $("[id='BOND_FULL']").text("-");
+      $("[id='ISSUE_VALUE']").text("-");
+      $("[id='BOND_TYPE']").text("-");
+      $("[id='START_DATE']").text("-");
+      $("[id='END_DATE']").text("-");
+      $("[id='LISTING_DATE']").text("-");
+      $("[id='INTEREST_TYPE']").text("-");
+      $("[id='PAY_TYPE']").text("-");
+      $("[id='FACE_RATE']").text("-");
+      $("[id='TERM_YEAR']").text("-");
+      $("[id='RATE']").text("-");
+      $("[id='CLEAN_PRICE']").text("-");
+      $("[id='SSE_TOTAL_AMT']").text("-");
+      $("[id='BANK_CODE']").text("-");
+      $("[id='BASE_RATE']").text("-");
+      $("[id='MANAGE_TYPE']").text("-");
+      $("[id='TRADE_TYPE']").text("-");
+      $("[id='BOND_RATING']").text("-");
+      $("[id='MAIN_RATING']").text("-");
+      $("[id='IS_NOT_DB']").text("-");
+    };
+
+    // 时间格式化
+    function dateFormat(date) {
+      return date.replace(/^(\d{4})(\d{2})(\d{2})$/, "$1-$2-$3");
+    }
+
+    var formatter = function (value) {
+      if (isNaN(Number(value))) {
+        return value;
+      }
+      return Number(value).toFixed(4);
+    };
+
+    var formatter1 = function (value) {
+      if (value == "N") {
+        return "否";
+      } else if (value == "Y") {
+        return "是";
+      } else {
+        return value;
+      }
+    };
+    /*
+            @params { args } String 交易方式枚举值如果多个则以逗号分割
+            */
+    var TradeMethod = function (args) {
+      if (!args) {
+        return "-";
+      }
+      return args.split(",").reduce(function (total, item, index, arr) {
+        var isSymbol = "";
+        if (index != 0) {
+          isSymbol = ",";
+        }
+        if (!item) {
+          return total + isSymbol + "-";
+        }
+        switch (item) {
+          case "PPCJ":
+            return total + isSymbol + "匹配成交";
+          case "DJCJ":
+            return total + isSymbol + "点击成交";
+          case "XJCJ":
+            return total + isSymbol + "询价成交";
+          case "JMCJ":
+            return total + isSymbol + "竞买成交";
+          case "XSCJ":
+            return total + isSymbol + "协商成交";
+          default:
+            return total + isSymbol + item;
+        }
+      }, "");
+    };
+
+    var hq = {};
+
+    // hq.paramsparent = utils.getParamsFromParentPage("BONDCODE", oneBond.paramsparent);
+    hq.paramsparent = paramsparent;
+    hq.BONDCODE = hq.paramsparent.BONDCODE;
+    var hCodes = hq.BONDCODE;
+
+    var jjUrl = hqHostURI + _get_global_setting()["snap_url"];
+    var bjUrl = hqHostURI + "/v2/shfi/snap/";
+
+    var pasJJ = {
+      select: "prev_close,last,open,high,low,bid,ask",
+    };
+    var pasBJ = {
+      select: "prev_close,last,avg_px,volume,num_trades,amount",
+    };
+
+    var resetClass = function (target, className) {
+      $("#" + target).removeClass("red");
+      $("#" + target).removeClass("green");
+      $("#" + target).addClass(className);
+    };
+    var jjFilling = function (arr) {
+      resetClass("last", "");
+      resetClass("close", "");
+      resetClass("open", "");
+      resetClass("high", "");
+      resetClass("low", "");
+      resetClass("bidpx1", "");
+      resetClass("askpx1", "");
+      if (arr == null || arr == undefined || arr.length <= 0) {
+        $("#prev_close").text("-");
+        $("#last").text("-");
+        $("#open").text("-");
+        $("#high").text("-");
+        $("#low").text("-");
+        $("#bidpx1").text("-");
+        $("#bidax1").text("-");
+        $("#askpx1").text("-");
+        $("#askax1").text("-");
+
+        return;
+      }
+      $("#open").text(arr[2].toFixed(3));
+      $("#prev_close").text(arr[0].toFixed(3));
+      $("#last").text(arr[1].toFixed(3));
+      $("#high").text(arr[3].toFixed(3));
+      $("#low").text(arr[4].toFixed(3));
+      $("#bidpx1").text(arr[5][0].toFixed(3));
+      $("#askpx1").text(arr[6][0].toFixed(3));
+      if (Number(arr[7]) > Number("153001")) {
+        $("#close").text(arr[1].toFixed(3));
+        if (arr[1] > arr[0]) {
+          resetClass("close", "red");
+        } else if (arr[1] < arr[0]) {
+          resetClass("last", "green");
+        }
+      }
+      if (arr[1] > arr[0]) {
+        resetClass("last", "red");
+      } else if (arr[1] < arr[0]) {
+        resetClass("last", "green");
+      }
+
+      if (arr[2] > arr[0]) {
+        resetClass("open", "red");
+      } else if (arr[2] < arr[0]) {
+        resetClass("open", "green");
+      }
+      if (arr[3] > arr[0]) {
+        resetClass("high", "red");
+      } else if (arr[3] < arr[0]) {
+        resetClass("high", "green");
+      }
+      if (arr[4] > arr[0]) {
+        resetClass("low", "red");
+      } else if (arr[4] < arr[0]) {
+        resetClass("low", "green");
+      }
+      if (arr[5][0] > arr[0]) {
+        resetClass("bidpx1", "red");
+      } else if (arr[5][0] < arr[0]) {
+        resetClass("bidpx1", "green");
+      }
+      $("#bidax1").text(arr[5][1]);
+
+      if (arr[6][0] > arr[0]) {
+        resetClass("askpx1", "red");
+      } else if (arr[6][0] < arr[0]) {
+        resetClass("askpx1", "green");
+      }
+      $("#askax1").text(arr[6][1]);
+    };
+
+    var bjFilling = function (arr) {
+      resetClass("last1", "");
+      if (arr == null || arr == undefined || arr.length <= 0) {
+        $("#last1").text("-");
+        $("#weightedAvgPx").text("-");
+        $("#volume").text("-");
+        $("#num_trades").text("-");
+
+        return;
+      }
+      $("#last1").text(arr[1].toFixed(3));
+      $("#weightedAvgPx").text(arr[2].toFixed(3));
+
+      if (arr[1] > arr[0]) {
+        resetClass("last1", "red");
+      } else if (arr[1] < arr[0]) {
+        resetClass("last2", "green");
+      }
+      $("#volume").text(arr[3].toFixed(2));
+      $("#num_trades").text(arr[4].toFixed(2));
+    };
+
+    var snapAjax = function (url, pas, func) {
+      if (hCodes == undefined || hCodes == null || hCodes.length == 0) {
+        filling([]);
+        return;
+      }
+      $.ajax({
+        type: "POST",
+        url: url + hCodes,
+        data: pas,
+        dataType: "jsonp",
+        jsonp: "callback",
+        jsonpCallback: "callback" + Math.floor(Math.random() * (100000 + 1)),
+        timeout: 30000,
+        contentType: "application/json; charset=utf-8",
+        success: function (result) {
+          if ($.isEmptyObject(result)) {
+            result = {};
+          }
+          if ($.isEmptyObject(result.snap)) {
+            result.snap = [];
+          }
+          result.snap.push(result.time);
+          func(result.snap);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          if (
+            jqXHR.status === 0 ||
+            jqXHR.status === 400 ||
+            jqXHR.status === 404
+          ) {
+            func([]);
+            return;
+          }
+        },
+      });
+    };
+
+    // 检查数据
+    function checkTradeDate(str) {
+      if (str == null || str === "" || str === "-") {
+        return "-";
+      } else {
+      }
+      return str;
+    }
+    var oneBond = {};
+    oneBond.paramsparent = utils.getParamsFromParentPage(
+      "BONDCODE",
+      oneBond.paramsparent
+    );
+    oneBond.BONDCODE = oneBond.paramsparent.BONDCODE;
+    oneBond.allBonds = getAllBonds();
+    oneBond.bondType = "";
+    if (
+      oneBond.allBonds[oneBond.BONDCODE] != null &&
+      oneBond.allBonds[oneBond.BONDCODE] != undefined
+    ) {
+      oneBond.bondType = oneBond.allBonds[oneBond.BONDCODE][1];
+    }
+    oneBond.listLen = 7;
+    oneBond.bondlistT = new noticeContainer(
+      true,
+      "onelistT",
+      "onebasic_data_container"
+    );
+    oneBond.url1 = destinationHostURI + "/commonSoaQuery.do?jsonCallBack=?"; //action地址
+    oneBond.params1 = {
+      isPagination: true,
+      "pageHelp.pageSize": oneBond.listLen,
+      sqlId: "BS_ZQ_GGLL",
+      orgBulletinType: "",
+      title: "",
+      order: "sseDate|desc,securityCode|asc,bulletinId|asc",
+      securityCode: oneBond.BONDCODE,
+    }; //传递到后台参数
+    oneBond.url2 =
+      destinationHostURI + "/infodisplay/queryBulletinKflTipsNew.do?"; //action地址
+    oneBond.url3 =
+      destinationHostURI + "/infodisplay/queryBulletinKzzTipsNew.do?"; //action地址
+    oneBond.params2 = {
+      isPagination: true,
+      "pageHelp.pageSize": oneBond.listLen,
+      flag: "1",
+      companyCode: oneBond.BONDCODE,
+    }; //传递到后台参数
+    // oneBond.filePath = "//www.sse.com.cn";
+    oneBond.dateFormatter = function (d) {
+      var ds = jQuery.trim(d).replace(" ", ":").replace(/\:/g, "-").split("-");
+      if (ds[1].length == 1) {
+        ds[1] = "0" + ds[1];
+      }
+      if (ds[2].length == 1) {
+        ds[2] = "0" + ds[2];
+      }
+      return ds[0] + "-" + ds[1] + "-" + ds[2];
+    };
+
+    oneBond.titleLen = 220;
+    oneBond.subTitle = function (title) {
+      oneBond.subTitles = "";
+      oneBond.count = 0;
+      for (
+        var i = 0;
+        oneBond.count < oneBond.titleLen && i < title.length;
+        i++
+      ) {
+        var single = title.charCodeAt(i);
+        if (
+          !(single >= 0x0001 && single <= 0x007e) &&
+          !(0xff60 <= single && single <= 0xff9f)
+        ) {
+          oneBond.count += 8;
+        } else {
+          oneBond.count += 5;
+        }
+
+        if (oneBond.count >= oneBond.titleLen) {
+          oneBond.subTitles += "...";
+          break;
+        }
+        oneBond.subTitles += String.fromCharCode(single);
+      }
+
+      return oneBond.subTitles;
+    };
+    var openerURLs = {};
+    oneBond.openNewHtml = function (urls, title) {
+      window.open(
+        "/disclosure/announ/s_announ_content.shtml?content=" +
+        utils.decToHex(urls),
+        "_blank"
+      );
+    };
+    oneBond.links1 = function (data) {
+      var suffixex =
+        data.url.indexOf("://") > -1
+          ? data.url.indexOf("/", 8)
+          : data.url.indexOf("/"); // 截取前缀
+      var exUrl = suffixex == 0 ? data.url : data.url.substr(suffixex); // 截取后地址
+      var bulletinUrl = staticBondUrl + exUrl;
+      if (bulletinUrl.match(/.*?\.(s)?htm(l)?/gi)) {
+        bulletinUrl = siteUrl + exUrl;
+      }
+      return (
+        "<span style='float:right;'>" +
+        oneBond.dateFormatter(data.sseDate) +
+        "</span><a target='_blank' href='" +
+        bulletinUrl +
+        "' title = '" +
+        data.title +
+        "'>" +
+        oneBond.subTitle(data.title) +
+        "</a>"
+      );
+    };
+    oneBond.links2 = function (data) {
+      var suffixex =
+        data.URL.indexOf("://") > -1
+          ? data.URL.indexOf("/", 8)
+          : data.URL.indexOf("/"); // 截取前缀
+      var exUrl = suffixex == 0 ? data.URL : data.URL.substr(suffixex); // 截取后地址
+      var bulletinUrl = staticBondUrl + exUrl;
+      if (bulletinUrl.match(/.*?\.(s)?htm(l)?/gi)) {
+        bulletinUrl = siteUrl + exUrl;
+      }
+      return (
+        "<span style='float:right;'>" +
+        data.SSEDate +
+        "</span><a target='_blank' href='" +
+        bulletinUrl +
+        "' title = '" +
+        data.title +
+        "'>" +
+        oneBond.subTitle(data.title) +
+        "</a>"
+      );
+    };
+    oneBond.headers = new Array();
+
+    oneBond.doDynamicRequest = function (p) {
+      $("#onelistT").empty();
+      oneBond.bondlistT.init(oneBond.headers);
+      oneBond.bondlistT.getDataByAjax(
+        oneBond.url,
+        utils.mergeJson(oneBond.params, p),
+        null
+      );
+    };
+    $(document).ready(function () {
+      if (BONDCODE === null || BONDCODE === undefined || BONDCODE === "") {
+        defaultSet();
+        $("[id='issueDay']").remove();
+        $("table.bond_details_table1 tr:even").css(
+          "background-color",
+          "rgba(240,240,240,0.7)"
+        );
+      } else {
+        var allBonds = getAllBonds();
+        var bondType = "";
+        if (allBonds[BONDCODE] != null && allBonds[BONDCODE] != undefined) {
+          bondType = allBonds[BONDCODE][1];
+        }
+
+        var paramsDetail = {
+          isPagination: false,
+          sqlId: "COMMON_SSEBOND_XXPL_ZQXX_KZHGSZQ_XQ_C",
+          BOND_CODE: BONDCODE,
+        };
+        if (bondType.match(/^((可转)|(分离))+.*?/gi)) {
+          $(".bond_details_table1 .add_part").remove();
+        }
+
+        if (
+          bondType.match(
+            /^(次级债|非公开发行|可转换|分离|可交换|公司债|证券公司资产支持|企业债|中小企业|新企业债券)+.*?/gi
+          )
+        ) {
+          $("[id='issueDay']").css("display", "");
+        } else {
+          $("[id='issueDay']").remove();
+        }
+        if (bondType == "可转换公司债券") {
+          $("[id='FACE_HEAD']").remove();
+          $("[id='FACE_RATE']").remove();
+          $("[id='TERM_YEAR']").attr("colspan", "3");
+          $("[id='LISTING_DATE']").remove();
+          $("[id='LISTING_HEAD']").remove();
+        }
+        $("table.bond_details_table1 tr:even").css(
+          "background-color",
+          "rgba(240,240,240,0.7)"
+        );
+
+        var conversion = function(val){
+          if(val == '企业债券' || val == '公司债券' || val == '新企业债券'){
+            return '公开发行公司债券（含企业债券）';
+          } else if(val == '中小企业私募债券' || val == '非公开发行公司债券'){
+            return '非公开发行公司债券（含企业债券）';
+          } else {
+            return val;
+          }
+        }
+
+        utils.getJSON(url, paramsDetail, function (data) {
+          if (data.result === null || data.result[0] === undefined) {
+            defaultSet();
+          } else {
+            $("[id='BOND_CODE']").text(
+              checkTradeDate(
+                utils.ifEmptyThenSetToOther(data.result[0].BOND_CODE)
+              )
+            );
+            $("[id='BOND_ABBR']").text(
+              checkTradeDate(
+                utils.ifEmptyThenSetToOther(data.result[0].BOND_ABBR)
+              )
+            );
+            $("[id='ISSUE_OWNER']").text(
+              checkTradeDate(
+                utils.ifEmptyThenSetToOther(data.result[0].ISSUE_OWNER)
+              )
+            );
+            $("[id='SECURITY_ABBR_FULL']").text(
+              checkTradeDate(
+                utils.ifEmptyThenSetToOther(data.result[0].SECURITY_ABBR_FULL)
+              )
+            );
+            $("[id='BOND_FULL']").text(
+              checkTradeDate(
+                utils.ifEmptyThenSetToOther(data.result[0].BOND_FULL)
+              )
+            );
+            $("[id='ISSUE_VALUE']").text(
+              checkTradeDate(
+                formatter(
+                  utils.ifEmptyThenSetToOther(data.result[0].ISSUE_VALUE_HM)
+                )
+              )
+            );
+            $("[id='BOND_TYPE']").text(
+              checkTradeDate(
+                utils.ifEmptyThenSetToOther(conversion(data.result[0].BOND_TYPE))//转义
+              )
+            );
+            $("[id='START_DATE']").text(
+              checkTradeDate(
+                utils.ifEmptyThenSetToOther(
+                  dateFormat(data.result[0].START_DATE)
+                )
+              )
+            );
+            $("[id='END_DATE']").text(
+              checkTradeDate(
+                utils.ifEmptyThenSetToOther(dateFormat(data.result[0].END_DATE))
+              )
+            );
+            $("[id='LISTING_DATE']").text(
+              checkTradeDate(
+                utils.ifEmptyThenSetToOther(
+                  dateFormat(data.result[0].LISTING_DATE)
+                )
+              )
+            );
+            $("[id='INTEREST_TYPE']").text(
+              checkTradeDate(
+                utils.ifEmptyThenSetToOther(data.result[0].INTEREST_TYPE)
+              )
+            );
+            $("[id='PAY_TYPE']").text(
+              checkTradeDate(
+                utils.ifEmptyThenSetToOther(data.result[0].PAY_TYPE)
+              )
+            );
+            $("[id='FACE_RATE']").text(
+              checkTradeDate(
+                utils.ifEmptyThenSetToOther(data.result[0].FACE_RATE)
+              )
+            );
+            $("[id='TERM_YEAR']").text(
+              checkTradeDate(
+                utils.ifEmptyThenSetToOther(data.result[0].TERM_YEAR)
+              )
+            );
+            $("[id='RATE']").text(
+              checkTradeDate(utils.ifEmptyThenSetToOther(data.result[0].RATE))
+            );
+            $("[id='CLEAN_PRICE']").text(
+              checkTradeDate(
+                utils.ifEmptyThenSetToOther(data.result[0].CLEAN_PRICE)
+              )
+            );
+            $("[id='SSE_TOTAL_AMT']").text(
+              checkTradeDate(
+                formatter(
+                  utils.ifEmptyThenSetToOther(data.result[0].SSE_TOTAL_AMT)
+                )
+              )
+            );
+            $("[id='BANK_CODE']").text(
+              checkTradeDate(
+                utils.ifEmptyThenSetToOther(data.result[0].BANK_CODE)
+              )
+            );
+            $("[id='BASE_RATE']").text(
+              checkTradeDate(
+                utils.ifEmptyThenSetToOther(data.result[0].BASE_RATE)
+              )
+            );
+            $("[id='MANAGE_TYPE']").text(
+              checkTradeDate(
+                utils.ifEmptyThenSetToOther(data.result[0].MANAGE_TYPE)
+              )
+            );
+            $("[id='TRADE_TYPE']").text(
+              checkTradeDate(TradeMethod(data.result[0].TRADE_TYPE))
+            );
+            $("[id='BOND_RATING']").text(
+              checkTradeDate(
+                utils.ifEmptyThenSetToOther(data.result[0].BOND_RATING)
+              )
+            );
+            $("[id='MAIN_RATING']").text(
+              checkTradeDate(
+                utils.ifEmptyThenSetToOther(data.result[0].MAIN_RATING)
+              )
+            );
+            $("[id='IS_NOT_DB']").text(
+              checkTradeDate(
+                formatter1(
+                  utils.ifEmptyThenSetToOther(data.result[0].IS_NOT_DB)
+                )
+              )
+            );
+
+            if (
+              bondType.match(
+                /^(次级债|非公开发行|可转换|分离|可交换|公司债|证券公司资产支持|企业债|中小企业|新企业债券)+.*?/gi
+              )
+            ) {
+              $("[id='ISSUED_START_DAY']").text(
+                utils.ifEmptyThenSetToOther(
+                  dateFormat(data.result[0].ONLINE_START_DATE)
+                )
+              );
+              $("[id='ISSUED_END_DAY']").text(
+                utils.ifEmptyThenSetToOther(
+                  dateFormat(data.result[0].ONLINE_END_DATE)
+                )
+              );
+            }
+
+            if (bondType.match(/^((信贷)|(证券公司)|(企业))资产支持证券/gi)) {
+              $("[id='ownerName']").text("原始权益人");
+            }
+
+            if (bondType.match(/^((可转)|(分离))+.*?/gi)) {
+              $("[id='MANAGE_TYPE']").text("公开发行");
+              $("[id='BOND_TYPE']").text(bondType);
+            }
+          }
+        });
+      }
+      snapAjax(jjUrl, pasJJ, jjFilling);
+      snapAjax(bjUrl, pasBJ, bjFilling);
+      if (oneBond.bondType.match(/^(可转)+.*?/gi)) {
+        oneBond.url = oneBond.url3;
+        oneBond.params = oneBond.params2;
+        oneBond.headers[0] = {
+          code: "",
+          formatter: oneBond.links2,
+        };
+      } else if (oneBond.bondType.match(/^(分离)+.*?/gi)) {
+        oneBond.url = oneBond.url2;
+        oneBond.params = utils.mergeJson(oneBond.params2, {
+          bulletinType: "kfl",
+        });
+        oneBond.headers[0] = {
+          code: "",
+          formatter: oneBond.links2,
+        };
+      } 
+      else {
+        oneBond.url = oneBond.url1;
+        oneBond.params = oneBond.params1;
+        oneBond.headers[0] = {
+          code: "",
+          formatter: oneBond.links1,
+        };
+      }
+      oneBond.doDynamicRequest();
+    });
+  }
+});

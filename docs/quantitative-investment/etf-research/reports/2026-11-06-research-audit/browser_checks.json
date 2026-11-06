@@ -1,0 +1,22 @@
+[
+  {
+    "viewport": "desktop",
+    "width": 1440,
+    "height": 1000,
+    "table_rows": 40,
+    "no_page_overflow": true,
+    "image_loaded": true,
+    "console_errors": [],
+    "http_errors": []
+  },
+  {
+    "viewport": "mobile",
+    "width": 390,
+    "height": 844,
+    "table_rows": 40,
+    "no_page_overflow": true,
+    "image_loaded": true,
+    "console_errors": [],
+    "http_errors": []
+  }
+]

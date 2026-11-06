@@ -1,0 +1,48 @@
+{
+  "checked_at_utc": "2026-11-06T16:17:15.753223+00:00",
+  "base_commit": "2ea80be8980fdae51f91870bc23957a9e6786152",
+  "canonical_git_deployment_verified": true,
+  "archive_receipt": {
+    "snapshot": "bf84b013ad125015fe1bf0875af4b8724b93271f8ca948f382717027afda29b6",
+    "files": 1904,
+    "new_objects": 130,
+    "new_bytes": 24620214,
+    "finished_at_utc": "2026-11-06T16:16:10.799605+00:00"
+  },
+  "restored": {
+    "snapshot": "bf84b013ad125015fe1bf0875af4b8724b93271f8ca948f382717027afda29b6",
+    "verified_files": 1904,
+    "destination_was_new": true,
+    "activates_services": false
+  },
+  "comparison": {
+    "added": [],
+    "conflicts": [],
+    "identical": 1904,
+    "writes_performed": 0
+  },
+  "timers": {
+    "etf-research-daily.timer": {
+      "ActiveState": "active",
+      "UnitFileState": "enabled"
+    },
+    "etf-research-health.timer": {
+      "ActiveState": "active",
+      "UnitFileState": "enabled"
+    },
+    "etf-research-archive.timer": {
+      "ActiveState": "active",
+      "UnitFileState": "enabled"
+    }
+  },
+  "health_observation": "reports/health/20261107T001715-007cc45c",
+  "health_state": "market_closed",
+  "health_issues": [],
+  "account_through": "2026-11-06",
+  "checkpoint_sha256": "ae5c0f77a8d6ffe51fc3bb9030c971097957e1e982d5033017b0b16c5997d418",
+  "forward_sessions": 2,
+  "archive_parallel_capture_rejected": true,
+  "archive_race_note": "Manual capture was rejected while the enabled archive timer was holding its lock; timer completed successfully. No lock bypass.",
+  "local_checkout_note": "227 existing source files had CRLF checkout conversion; restored only bytes proven equal to original Git blobs and remote hashes. No historical content changed.",
+  "public_deployment_verified": false
+}

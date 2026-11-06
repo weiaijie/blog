@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "synthetic_boundary_checks": true,
+  "not_actual_future_runs": true,
+  "evidence_status": "No official 2027 calendar obtained in this collection; absence from this index snapshot is not proof of global nonpublication",
+  "calendar_years": [
+    "2018",
+    "2019",
+    "2020",
+    "2021",
+    "2022",
+    "2023",
+    "2024",
+    "2025",
+    "2026"
+  ],
+  "index_mentions_2027": false,
+  "admission_block": "Calendar year lacks independent evidence",
+  "cases": [
+    {
+      "when": "2026-12-31T15:59:59+08:00",
+      "state": "before_collection_window",
+      "issues": [],
+      "expected_through": "2026-12-30"
+    },
+    {
+      "when": "2026-12-31T16:00:00+08:00",
+      "state": "awaiting_scheduled_collection",
+      "issues": [],
+      "expected_through": "2026-12-31"
+    },
+    {
+      "when": "2027-01-01T00:00:00+08:00",
+      "state": "calendar_missing",
+      "issues": [
+        "calendar_missing"
+      ],
+      "expected_through": null
+    },
+    {
+      "when": "2027-01-01T15:59:59+08:00",
+      "state": "calendar_missing",
+      "issues": [
+        "calendar_missing"
+      ],
+      "expected_through": null
+    },
+    {
+      "when": "2027-01-04T16:30:00+08:00",
+      "state": "calendar_missing",
+      "issues": [
+        "calendar_missing"
+      ],
+      "expected_through": null
+    }
+  ],
+  "sources_sha256": {
+    "data/snapshots/2026-11-04-calendar-08/calendar.json": "950a3bfe2bab7ad484abc03aa27207bc70a49a4a144f495899cf1bd2aa10c8c6",
+    "data/snapshots/2026-11-06-research-evidence-234940/calendar_index.body": "4511d76abb438945008cd8b91df2c6a1e94e744c01a826f8e17d53feedb32b5f",
+    "data/snapshots/2026-11-06-research-evidence-234940/calendar_index_request.json": "b12cb1a2d13b0b0498f92c51a029b99fe1d855a2233e5cfb0618ebd02d766e3b"
+  },
+  "next_steps": [
+    "Obtain formal SSE 2027 holiday notice and retain raw response/URL/time/hash",
+    "Cross-check official dates, weekends and year boundaries independently",
+    "Add a new immutable calendar snapshot and versioned loader migration, regression-test all old admitted sessions",
+    "Review deployment separately; do not extend year coverage with guessed weekdays"
+  ]
+}

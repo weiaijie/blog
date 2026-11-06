@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "mode": "research_only",
+  "history_results": "reports/2026-11-05-long-history/results.json",
+  "horizons_calendar_years": [
+    1,
+    2
+  ],
+  "annualization_days": 365.25,
+  "target_thresholds": [
+    0.04,
+    0.05
+  ],
+  "main_run": "monthly_50_50_base_100000_d1",
+  "starting_cash": 100000,
+  "execution_delay_sessions": 1,
+  "rolling_anchors": "all observed closes with complete next-session-on-or-after anniversary endpoint",
+  "disjoint_phases_months": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "fresh_accounts": "monthly_50_50 only, all three frozen fees; first observed session of every fully observed calendar month; first day observes, trade next session; separate from continuous windows",
+  "terminal_liquidation_included": false,
+  "fitting_or_selection": false,
+  "historical_frequency_is_future_probability": false
+}

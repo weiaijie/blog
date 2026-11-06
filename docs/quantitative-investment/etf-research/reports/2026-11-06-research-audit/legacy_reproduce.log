@@ -1,0 +1,19 @@
+Completed 162 predeclared scenarios and 18 chronological evaluations; 1967 verified sessions
+PASS independent endpoints: 162 ; cost-model fills outside daily range: 1215
+Built dashboard from 18 saved NAV series and 162 sensitivity scenarios
+Completed 162 predeclared scenarios and 18 chronological evaluations; 1167 verified sessions
+Completed 162 predeclared scenarios and 18 chronological evaluations; 640 verified sessions
+{"status": "pending_future_observations", "as_of": "2026-11-04", "forward_sessions": 0, "checkpoint_sha256": "420829ce04d674596a8340c093e8c53263205823cb9af8b1fdb89696f0bd4c00"}
+{"status": "pending_future_observations", "as_of": "2026-11-04", "forward_sessions": 0, "checkpoint_sha256": "420829ce04d674596a8340c093e8c53263205823cb9af8b1fdb89696f0bd4c00"}
+{"status": "research_account_active", "as_of": "2026-11-05", "forward_sessions": 1, "checkpoint_sha256": "e11f23cb1d2a62e56590fa30f804721de74d1f7f2e6d353a80ee92eaacfb659d"}
+{"status": "research_account_active", "as_of": "2026-11-05", "forward_sessions": 1, "checkpoint_sha256": "e11f23cb1d2a62e56590fa30f804721de74d1f7f2e6d353a80ee92eaacfb659d"}
+{"status": "research_account_active", "as_of": "2026-11-06", "forward_sessions": 2, "checkpoint_sha256": "ae5c0f77a8d6ffe51fc3bb9030c971097957e1e982d5033017b0b16c5997d418"}
+{"status": "research_account_active", "as_of": "2026-11-06", "forward_sessions": 2, "checkpoint_sha256": "ae5c0f77a8d6ffe51fc3bb9030c971097957e1e982d5033017b0b16c5997d418"}
+{"target_session": "2026-11-06", "portfolios_checked": 18, "decisions_checked": 21, "target_units_match": true, "scope": "Compares intended targets, not a claim that every target was filled."}
+{"portfolios": 18, "trades": 21, "outside_daily_range": 8}
+{"source_manifest_sha256": "80ce419ac25698edab1103d60557a59010a85cfbde1556f92bdabfbaa43b120b", "symbols": {"510300": {"compared_days": 63, "today": {"open": "4.1130", "high": "4.1690", "low": "4.0950", "close": "4.1240"}, "source_snapshot_date": 20261106, "source_snapshot_time": 162900, "reported_phase": "E110    ", "prev_close": "4.1950", "up_limit": "4.6150", "down_limit": "3.7760", "ohlc_matches_admitted_sina_and_sohu": true}, "511010": {"compared_days": 63, "today": {"open": "141.3790", "high": "141.4490", "low": "141.3550", "close": "141.4490"}, "source_snapshot_date": 20261106, "source_snapshot_time": 162900, "reported_phase": "E110    ", "prev_close": "141.3520", "up_limit": "155.4870", "down_limit": "127.2170", "ohlc_matches_admitted_sina_and_sohu": true}}, "scope": "Third-source check of observed closing quotes; not proof of every intraday fill or historical ex-reference price."}
+{"status": "no_catalog_changes_in_observed_snapshot", "changes": 0, "evidence_requests": 0, "approves_prices_or_events": false}
+{"plan_sha256": "f7655945a125f86e49d82a08f39653e78c6245a6bc075f897a37842057d1ff80", "creation_timestamp_replayed": "2026-11-06T09:15:00.584687+08:00", "exact_replay": true, "new_market_data_fetched": false, "no_current_day_prices": true, "account_state_changed": false, "portfolios": 18}
+Suspension evidence audit passed: 42 responses; 1340 distinct records
+Risk monitor: 18 historical + 18 forward portfolios; 54 independent metrics matched
+{"risk_report_and_page_byte_identical": true, "suspension_audit_byte_identical": true, "saved_intent_byte_identical": true, "first_forward_day_byte_identical": true, "medium_core_result_files_unchanged": 23, "review_packet_byte_identical": true, "admission_and_checkpoint_byte_identical": true, "checkpoint_retry_idempotent": true, "old_core_result_files_unchanged": 23, "offline_reproduction_passed": true, "research_files_byte_identical": 24, "dashboard_byte_identical": true, "network_used_by_pipeline": false, "second_forward_day_byte_identical": true, "second_forward_retry_idempotent": true, "first_execution_audits_byte_identical": true}
