@@ -1,0 +1,9 @@
+{
+  "plan_sha256": "f7655945a125f86e49d82a08f39653e78c6245a6bc075f897a37842057d1ff80",
+  "creation_timestamp_replayed": "2026-11-06T09:15:00.584687+08:00",
+  "exact_replay": true,
+  "new_market_data_fetched": false,
+  "no_current_day_prices": true,
+  "account_state_changed": false,
+  "portfolios": 18
+}

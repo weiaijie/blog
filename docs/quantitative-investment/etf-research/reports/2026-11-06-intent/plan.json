@@ -1,0 +1,275 @@
+{
+  "format": 1,
+  "created_at_shanghai": "2026-11-06T09:15:00.584687+08:00",
+  "target_session": "2026-11-06",
+  "source_through": "2026-11-05",
+  "created_before_opening_auction": false,
+  "created_before_continuous_trading": true,
+  "protocol_commit": "0c797f5ed5321d8653d64ccf0f795e1529f6f9b2",
+  "checkpoint_sha256": "e11f23cb1d2a62e56590fa30f804721de74d1f7f2e6d353a80ee92eaacfb659d",
+  "engine_sha256": "86805dd5d4cb93901c59be86f2f332641286442f65140dbddd9f196c0eb7e274",
+  "admitted_prefix_sha256": "79dff1c0f2d8ee4851af6f0e5344501a025cee10992cb0e332623b53a20fa6a4",
+  "previous_closes": {
+    "510300": "4.195",
+    "511010": "141.352"
+  },
+  "portfolios": {
+    "cash_low": {
+      "signal_date": "2026-11-05",
+      "weights": {
+        "510300": "0",
+        "511010": "0"
+      },
+      "target_units": {
+        "510300": 0,
+        "511010": 0
+      },
+      "previous_equity": "100000",
+      "previous_holdings": {},
+      "actual_fills": null
+    },
+    "cash_base": {
+      "signal_date": "2026-11-05",
+      "weights": {
+        "510300": "0",
+        "511010": "0"
+      },
+      "target_units": {
+        "510300": 0,
+        "511010": 0
+      },
+      "previous_equity": "100000",
+      "previous_holdings": {},
+      "actual_fills": null
+    },
+    "cash_high": {
+      "signal_date": "2026-11-05",
+      "weights": {
+        "510300": "0",
+        "511010": "0"
+      },
+      "target_units": {
+        "510300": 0,
+        "511010": 0
+      },
+      "previous_equity": "100000",
+      "previous_holdings": {},
+      "actual_fills": null
+    },
+    "equity_hold_low": {
+      "signal_date": "2026-11-05",
+      "weights": {
+        "510300": "1",
+        "511010": "0"
+      },
+      "target_units": {
+        "510300": 23800,
+        "511010": 0
+      },
+      "previous_equity": "100000",
+      "previous_holdings": {},
+      "actual_fills": null
+    },
+    "equity_hold_base": {
+      "signal_date": "2026-11-05",
+      "weights": {
+        "510300": "1",
+        "511010": "0"
+      },
+      "target_units": {
+        "510300": 23800,
+        "511010": 0
+      },
+      "previous_equity": "100000",
+      "previous_holdings": {},
+      "actual_fills": null
+    },
+    "equity_hold_high": {
+      "signal_date": "2026-11-05",
+      "weights": {
+        "510300": "1",
+        "511010": "0"
+      },
+      "target_units": {
+        "510300": 23800,
+        "511010": 0
+      },
+      "previous_equity": "100000",
+      "previous_holdings": {},
+      "actual_fills": null
+    },
+    "bond_hold_low": {
+      "signal_date": "2026-11-05",
+      "weights": {
+        "510300": "0",
+        "511010": "1"
+      },
+      "target_units": {
+        "510300": 0,
+        "511010": 700
+      },
+      "previous_equity": "100000",
+      "previous_holdings": {},
+      "actual_fills": null
+    },
+    "bond_hold_base": {
+      "signal_date": "2026-11-05",
+      "weights": {
+        "510300": "0",
+        "511010": "1"
+      },
+      "target_units": {
+        "510300": 0,
+        "511010": 700
+      },
+      "previous_equity": "100000",
+      "previous_holdings": {},
+      "actual_fills": null
+    },
+    "bond_hold_high": {
+      "signal_date": "2026-11-05",
+      "weights": {
+        "510300": "0",
+        "511010": "1"
+      },
+      "target_units": {
+        "510300": 0,
+        "511010": 700
+      },
+      "previous_equity": "100000",
+      "previous_holdings": {},
+      "actual_fills": null
+    },
+    "monthly_20_80_low": {
+      "signal_date": "2026-11-05",
+      "weights": {
+        "510300": "0.2",
+        "511010": "0.8"
+      },
+      "target_units": {
+        "510300": 4700,
+        "511010": 500
+      },
+      "previous_equity": "100000",
+      "previous_holdings": {},
+      "actual_fills": null
+    },
+    "monthly_20_80_base": {
+      "signal_date": "2026-11-05",
+      "weights": {
+        "510300": "0.2",
+        "511010": "0.8"
+      },
+      "target_units": {
+        "510300": 4700,
+        "511010": 500
+      },
+      "previous_equity": "100000",
+      "previous_holdings": {},
+      "actual_fills": null
+    },
+    "monthly_20_80_high": {
+      "signal_date": "2026-11-05",
+      "weights": {
+        "510300": "0.2",
+        "511010": "0.8"
+      },
+      "target_units": {
+        "510300": 4700,
+        "511010": 500
+      },
+      "previous_equity": "100000",
+      "previous_holdings": {},
+      "actual_fills": null
+    },
+    "monthly_50_50_low": {
+      "signal_date": "2026-11-05",
+      "weights": {
+        "510300": "0.5",
+        "511010": "0.5"
+      },
+      "target_units": {
+        "510300": 11900,
+        "511010": 300
+      },
+      "previous_equity": "100000",
+      "previous_holdings": {},
+      "actual_fills": null
+    },
+    "monthly_50_50_base": {
+      "signal_date": "2026-11-05",
+      "weights": {
+        "510300": "0.5",
+        "511010": "0.5"
+      },
+      "target_units": {
+        "510300": 11900,
+        "511010": 300
+      },
+      "previous_equity": "100000",
+      "previous_holdings": {},
+      "actual_fills": null
+    },
+    "monthly_50_50_high": {
+      "signal_date": "2026-11-05",
+      "weights": {
+        "510300": "0.5",
+        "511010": "0.5"
+      },
+      "target_units": {
+        "510300": 11900,
+        "511010": 300
+      },
+      "previous_equity": "100000",
+      "previous_holdings": {},
+      "actual_fills": null
+    },
+    "trend_120_low": {
+      "signal_date": "2026-11-05",
+      "weights": {
+        "510300": "0",
+        "511010": "1"
+      },
+      "target_units": {
+        "510300": 0,
+        "511010": 700
+      },
+      "previous_equity": "100000",
+      "previous_holdings": {},
+      "actual_fills": null
+    },
+    "trend_120_base": {
+      "signal_date": "2026-11-05",
+      "weights": {
+        "510300": "0",
+        "511010": "1"
+      },
+      "target_units": {
+        "510300": 0,
+        "511010": 700
+      },
+      "previous_equity": "100000",
+      "previous_holdings": {},
+      "actual_fills": null
+    },
+    "trend_120_high": {
+      "signal_date": "2026-11-05",
+      "weights": {
+        "510300": "0",
+        "511010": "1"
+      },
+      "target_units": {
+        "510300": 0,
+        "511010": 700
+      },
+      "previous_equity": "100000",
+      "previous_holdings": {},
+      "actual_fills": null
+    }
+  },
+  "real_money": false,
+  "execution_authorized": false,
+  "price_or_return_for_target_day_used": false,
+  "scope": "Fixed first-execution-day target shares only. Closing admission, announcement review, opening-price guards, fees and cash constraints still determine simulated fills. No broker orders.",
+  "plan_sha256": "f7655945a125f86e49d82a08f39653e78c6245a6bc075f897a37842057d1ff80"
+}
