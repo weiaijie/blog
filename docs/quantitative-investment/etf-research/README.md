@@ -16,6 +16,7 @@
 50/50基准费用年化：原640日4.90%，1167日0.51%，新1967日4.02%（最大收盘回撤19.73%）。同策略、同历史终点对起点敏感；最新数字落入研究目标范围也不证明长期目标成立。
 
 - [计划逐项对照](docs/PLAN_ALIGNMENT.md) · [风险监控页面](site/risk.html) · [统一监控配置](config/research.json)
+- [Backtrader 固定样例初评](reports/2026-11-06-backtrader/PROGRESS.md) · [引擎对照页面](site/backtrader.html)：暂不替换冻结引擎，分红和交易制度仍需双引擎验证。
 - [最新停复牌查询核验](reports/2026-11-06-suspension/PROGRESS.md)
 - [11月6日模拟目标与时间说明](reports/2026-11-06-intent/PROGRESS.md)
 - [最新规则时间线证据](reports/2026-11-05-rule-timeline/PROGRESS.md)
@@ -36,7 +37,7 @@ python scripts/reproduce.py
 python -m http.server 8765 --bind 127.0.0.1
 ```
 
-Python 3.11+；监控使用固定版本pandas、NumPy和matplotlib，完整依赖见requirements-lock.txt。旧冻结模拟引擎仍使用标准库；可选网页验收需Playwright/Chromium，PDF文本提取需pdftotext。已有原始快照不覆盖。最新清单reports/2026-11-06-plan-alignment/manifest.json；旧阶段清单在相应历史提交核验。新环境先读CONTINUATION.md，不依赖聊天记忆。
+Python 3.11+；监控使用固定版本pandas、NumPy和matplotlib，完整依赖见requirements-lock.txt。旧冻结模拟引擎仍使用标准库；可选网页验收需Playwright/Chromium，PDF文本提取需pdftotext。已有原始快照不覆盖。最新清单reports/2026-11-06-backtrader/manifest.json；旧阶段清单在相应历史提交核验。新环境先读CONTINUATION.md，不依赖聊天记忆。
 
 旧/workspace/quant-research、旧策略/看板和旧10项测试未恢复；当前是持续重建并已保存到仓库的版本。无实盘、无后台调度，未来收益不能在当前会话完成。
 

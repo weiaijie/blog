@@ -16,6 +16,8 @@
 
 ## 计划纠偏优先项
 
+2026-11-06新增 [Backtrader 初评](reports/2026-11-06-backtrader/PROGRESS.md)：默认非整手、卖空、费用及滑点口径有差异；单一买入样例经定制后相符。分红生命周期及当日回卖尚未完成双引擎对照，暂不替换冻结引擎。继续按报告列出的完整订单和逐日账本矩阵进行适配验证；不要把此初评误记为迁移完成。另有独立[引擎对照页面](site/backtrader.html)。
+
 先读docs/PLAN_ALIGNMENT.md，禁止再次忽略上层原规划。13份原文已按提交归档；pandas/NumPy/matplotlib监控已落地，config/research.json只控制分析与预警，不是可随意改写冻结策略的总开关。未来工程优先评估成熟回测引擎的固定样例对照；穿透集中度、Beta、压力测试、外部提醒、调度仍未实现。运行前安装requirements-lock.txt，新增报告后运行build_risk_report.py并更新配置输入；当前配置绑定已核验报告，不自动猜测最新目录。
 
 ## 按序推进

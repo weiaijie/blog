@@ -1,0 +1,244 @@
+{
+  "backtrader_version": "1.9.78.123",
+  "fixture": "synthetic only; daily OHLC 1/1.1/0.9/1",
+  "normal_100": {
+    "backtrader": [
+      {
+        "date": "2026-01-05",
+        "cash": 1000.0,
+        "units": 0
+      },
+      {
+        "status": "Completed",
+        "date": "2026-01-06",
+        "price": 1.0005,
+        "commission": 0.030014999999999997
+      },
+      {
+        "date": "2026-01-06",
+        "cash": 899.919985,
+        "units": 100
+      },
+      {
+        "date": "2026-01-07",
+        "cash": 899.919985,
+        "units": 100
+      },
+      {
+        "date": "2026-01-08",
+        "cash": 899.919985,
+        "units": 100
+      },
+      {
+        "date": "2026-01-09",
+        "cash": 899.919985,
+        "units": 100
+      }
+    ],
+    "ledger": {
+      "status": "filled",
+      "price": "1.001",
+      "commission": "5.00",
+      "cash": "894.900"
+    }
+  },
+  "adapted_100": {
+    "backtrader": [
+      {
+        "date": "2026-01-05",
+        "cash": 1000.0,
+        "units": 0
+      },
+      {
+        "status": "Completed",
+        "date": "2026-01-06",
+        "price": 1.001,
+        "commission": 5.0
+      },
+      {
+        "date": "2026-01-06",
+        "cash": 894.9,
+        "units": 100
+      },
+      {
+        "date": "2026-01-07",
+        "cash": 894.9,
+        "units": 100
+      },
+      {
+        "date": "2026-01-08",
+        "cash": 894.9,
+        "units": 100
+      },
+      {
+        "date": "2026-01-09",
+        "cash": 894.9,
+        "units": 100
+      }
+    ],
+    "ledger": {
+      "status": "filled",
+      "price": "1.001",
+      "commission": "5.00",
+      "cash": "894.900"
+    }
+  },
+  "odd_101": {
+    "backtrader": [
+      {
+        "date": "2026-01-05",
+        "cash": 1000.0,
+        "units": 0
+      },
+      {
+        "status": "Completed",
+        "date": "2026-01-06",
+        "price": 1.0,
+        "commission": 0.030299999999999997
+      },
+      {
+        "date": "2026-01-06",
+        "cash": 898.9697,
+        "units": 101
+      },
+      {
+        "date": "2026-01-07",
+        "cash": 898.9697,
+        "units": 101
+      },
+      {
+        "date": "2026-01-08",
+        "cash": 898.9697,
+        "units": 101
+      },
+      {
+        "date": "2026-01-09",
+        "cash": 898.9697,
+        "units": 101
+      }
+    ],
+    "ledger": {
+      "status": "rejected",
+      "reason": "Invalid side, units or lot multiple"
+    }
+  },
+  "insufficient_cash": {
+    "backtrader": [
+      {
+        "date": "2026-01-05",
+        "cash": 100.0,
+        "units": 0
+      },
+      {
+        "status": "Margin",
+        "date": "2026-01-06",
+        "price": 0.0,
+        "commission": 0.0
+      },
+      {
+        "date": "2026-01-06",
+        "cash": 100.0,
+        "units": 0
+      },
+      {
+        "date": "2026-01-07",
+        "cash": 100.0,
+        "units": 0
+      },
+      {
+        "date": "2026-01-08",
+        "cash": 100.0,
+        "units": 0
+      },
+      {
+        "date": "2026-01-09",
+        "cash": 100.0,
+        "units": 0
+      }
+    ],
+    "ledger": {
+      "status": "rejected",
+      "reason": "Insufficient available cash; receivables/payment-day cash cannot be spent"
+    }
+  },
+  "short_from_zero": {
+    "backtrader": [
+      {
+        "date": "2026-01-05",
+        "cash": 1000.0,
+        "units": 0
+      },
+      {
+        "status": "Completed",
+        "date": "2026-01-06",
+        "price": 1.0,
+        "commission": 0.03
+      },
+      {
+        "date": "2026-01-06",
+        "cash": 1099.97,
+        "units": -100
+      },
+      {
+        "date": "2026-01-07",
+        "cash": 1099.97,
+        "units": -100
+      },
+      {
+        "date": "2026-01-08",
+        "cash": 1099.97,
+        "units": -100
+      },
+      {
+        "date": "2026-01-09",
+        "cash": 1099.97,
+        "units": -100
+      }
+    ],
+    "ledger": {
+      "status": "rejected",
+      "reason": "Insufficient holdings or cash for fees"
+    }
+  },
+  "dividend_ledger": [
+    {
+      "date": "2026-01-05",
+      "cash": "0",
+      "available_cash": "0",
+      "receivable": "0",
+      "entitlement": null
+    },
+    {
+      "date": "2026-01-06",
+      "cash": "0",
+      "available_cash": "0",
+      "receivable": "0",
+      "entitlement": 100
+    },
+    {
+      "date": "2026-01-07",
+      "cash": "0",
+      "available_cash": "0",
+      "receivable": "10.0",
+      "entitlement": 100
+    },
+    {
+      "date": "2026-01-08",
+      "cash": "10.0",
+      "available_cash": "0.0",
+      "receivable": "0",
+      "entitlement": 100
+    },
+    {
+      "date": "2026-01-09",
+      "cash": "10.0",
+      "available_cash": "10.0",
+      "receivable": "0",
+      "entitlement": 100
+    }
+  ],
+  "same_session_resale_ledger": {
+    "t_plus_0": "filled",
+    "t_plus_1": "Insufficient holdings or cash for fees"
+  }
+}
