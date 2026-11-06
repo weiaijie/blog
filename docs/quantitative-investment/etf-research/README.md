@@ -47,3 +47,7 @@ Python 3.11+；监控使用固定版本pandas、NumPy和matplotlib，完整依�
 Windows 检出须保留快照原始字节（本项目 `.gitattributes` 已设定）；Linux 默认在独立 Ubuntu 执行。首次执行 `audit_official_close.py` 的输出必须为不存在的新文件，避免覆盖旧报告。
 
 下一阶段大目标见[工程计划](docs/PHASE2_PLAN.md)。[独立执行矩阵](reports/2026-11-06-engine-matrix-final/PROGRESS.md)已完成162场景对照；存在精确现金边界反例，冻结引擎不迁移。风险扩展和每日流程仍在进行。
+
+## 2026-11-06 风险扩展阶段
+
+Beta、预设压力测试和官方2026Q3披露代理穿透已实现，见[验收报告](reports/2026-11-06-risk-expansion/PROGRESS.md)。当前完整持仓、完整集中度仍未知；前瞻样本不足的Beta为空。下一项为docs/PHASE2_PLAN.md阶段三每日管线，不能将本阶段通过视作整个规划完成。

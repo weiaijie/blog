@@ -1,0 +1,260 @@
+{
+  "schema_version": 1,
+  "not_current_holdings": true,
+  "not_historical_holdings_series": true,
+  "funds": {
+    "510300": {
+      "report_date": "2026-09-30",
+      "announcement_date": "2026-10-27",
+      "nav": "106879396730.03",
+      "pdf_sha256": "fd19ca5832055d08712a104814792c2461c7280602f661c97f4d2f02d559cff1",
+      "pdf_path": "data/snapshots/2026-11-06-holdings-windows-1720/quarterly_510300.pdf",
+      "official_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-10-27/510300_20261027_82OP.pdf",
+      "pages": {
+        "net_assets": 3,
+        "holdings": 9
+      },
+      "listed_positions": [
+        {
+          "rank": 1,
+          "code": "300308",
+          "name": "中际旭创",
+          "quantity": 4706344,
+          "fair_value": "3804796743.36",
+          "reported_percent": "3.56",
+          "nav_fraction": "0.03559897285882567902864542328"
+        },
+        {
+          "rank": 2,
+          "code": "600519",
+          "name": "贵州茅台",
+          "quantity": 2627369,
+          "fair_value": "3306859170.78",
+          "reported_percent": "3.09",
+          "nav_fraction": "0.03094009951359380017539693112"
+        },
+        {
+          "rank": 3,
+          "code": "300750",
+          "name": "宁德时代",
+          "quantity": 11112950,
+          "fair_value": "3235090874.50",
+          "reported_percent": "3.03",
+          "nav_fraction": "0.03026861091545657662014889540"
+        },
+        {
+          "rank": 4,
+          "code": "601318",
+          "name": "中国平安",
+          "quantity": 44797247,
+          "fair_value": "2387245292.63",
+          "reported_percent": "2.23",
+          "nav_fraction": "0.02233587918408650175419527188"
+        },
+        {
+          "rank": 5,
+          "code": "300502",
+          "name": "新易盛",
+          "quantity": 5864205,
+          "fair_value": "2281175745.00",
+          "reported_percent": "2.13",
+          "nav_fraction": "0.02134345640780601453445129134"
+        },
+        {
+          "rank": 6,
+          "code": "600036",
+          "name": "招商银行",
+          "quantity": 52009993,
+          "fair_value": "2145932311.18",
+          "reported_percent": "2.01",
+          "nav_fraction": "0.02007807282633225672975044338"
+        },
+        {
+          "rank": 7,
+          "code": "601899",
+          "name": "紫金矿业",
+          "quantity": 69332902,
+          "fair_value": "2065427150.58",
+          "reported_percent": "1.93",
+          "nav_fraction": "0.01932483915302335422178434389"
+        },
+        {
+          "rank": 8,
+          "code": "603259",
+          "name": "药明康德",
+          "quantity": 10393994,
+          "fair_value": "1739330955.96",
+          "reported_percent": "1.63",
+          "nav_fraction": "0.01627377220656877660534866809"
+        },
+        {
+          "rank": 9,
+          "code": "000333",
+          "name": "美的集团",
+          "quantity": 20466395,
+          "fair_value": "1639358239.50",
+          "reported_percent": "1.53",
+          "nav_fraction": "0.01533839345707485682770552212"
+        },
+        {
+          "rank": 10,
+          "code": "600900",
+          "name": "长江电力",
+          "quantity": 51320997,
+          "fair_value": "1464701254.38",
+          "reported_percent": "1.37",
+          "nav_fraction": "0.01370424327973832560293127181"
+        }
+      ],
+      "security_nav_fraction": "0.9719539225803117178796092429",
+      "listed_nav_fraction": "0.2252063398025061421003580623",
+      "full_security_hhi": null,
+      "coverage": "index top ten stocks",
+      "unlisted_security_nav_fraction": "0.7467475827778055757792511806",
+      "known_hhi_contribution": "0.005559686739879122371261370670",
+      "sectors": {
+        "A": {
+          "name": "农、林、牧、渔业",
+          "fair_value": "822532882.14",
+          "nav_fraction": "0.007695897500410312458871489091"
+        },
+        "B": {
+          "name": "采矿业",
+          "fair_value": "5838998855.40",
+          "nav_fraction": "0.05463165992739376355761526562"
+        },
+        "C": {
+          "name": "制造业",
+          "fair_value": "59409013564.35",
+          "nav_fraction": "0.5558509439795312406763863857"
+        },
+        "D": {
+          "name": "电力、热力、燃气及水生产和供应业",
+          "fair_value": "3120551197.64",
+          "nav_fraction": "0.02919693872825926916923151145"
+        },
+        "E": {
+          "name": "建筑业",
+          "fair_value": "1352456179.27",
+          "nav_fraction": "0.01265404016721961131521240213"
+        },
+        "F": {
+          "name": "批发和零售业",
+          "fair_value": "176139741.71",
+          "nav_fraction": "0.001648023352479401286937125641"
+        },
+        "G": {
+          "name": "交通运输、仓储和邮政业",
+          "fair_value": "3018030947.67",
+          "nav_fraction": "0.02823772438848376411740947415"
+        },
+        "I": {
+          "name": "信息传输、软件和信息技术服务业",
+          "fair_value": "5185177112.01",
+          "nav_fraction": "0.04851428124269264456169913882"
+        },
+        "J": {
+          "name": "金融业",
+          "fair_value": "21985201010.09",
+          "nav_fraction": "0.2057010208021954370304755942"
+        },
+        "K": {
+          "name": "房地产业",
+          "fair_value": "475102178.18",
+          "nav_fraction": "0.004445217625807482825143990458"
+        },
+        "L": {
+          "name": "租赁和商务服务业",
+          "fair_value": "536844070.38",
+          "nav_fraction": "0.005022895776030914289823939883"
+        },
+        "M": {
+          "name": "科学研究和技术服务业",
+          "fair_value": "1739330955.96",
+          "nav_fraction": "0.01627377220656877660534866809"
+        },
+        "Q": {
+          "name": "卫生和社会工作",
+          "fair_value": "155170708.98",
+          "nav_fraction": "0.001451829947842525075427273365"
+        },
+        "R": {
+          "name": "文化、体育和娱乐业",
+          "fair_value": "67299490.99",
+          "nav_fraction": "0.0006296769353965749100269842321"
+        }
+      }
+    },
+    "511010": {
+      "report_date": "2026-09-30",
+      "announcement_date": "2026-10-27",
+      "nav": "7325939587.23",
+      "pdf_sha256": "50ecd6f6daa0a7b1579a90d07efdab7fbbaada035b5888a2dab7477fa44132f1",
+      "pdf_path": "data/snapshots/2026-11-06-holdings-windows-1720/quarterly_511010.pdf",
+      "official_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-10-27/511010_20261027_RYVD.pdf",
+      "pages": {
+        "net_assets": 3,
+        "holdings": 10
+      },
+      "listed_positions": [
+        {
+          "rank": 1,
+          "code": "019834",
+          "name": "26 国债 08",
+          "quantity": 19355970,
+          "fair_value": "1957750305.43",
+          "reported_percent": "26.72",
+          "nav_fraction": "0.2672353876412789289416380013"
+        },
+        {
+          "rank": 2,
+          "code": "019848",
+          "name": "26 国债 15",
+          "quantity": 17025610,
+          "fair_value": "1707171908.39",
+          "reported_percent": "23.30",
+          "nav_fraction": "0.2330311201809263353345732337"
+        },
+        {
+          "rank": 3,
+          "code": "260015",
+          "name": "26 附息国债 15",
+          "quantity": 10900000,
+          "fair_value": "1092957328.77",
+          "reported_percent": "14.92",
+          "nav_fraction": "0.1491900548395399001516371395"
+        },
+        {
+          "rank": 4,
+          "code": "260008",
+          "name": "26 附息国债 08",
+          "quantity": 8400000,
+          "fair_value": "849613972.60",
+          "reported_percent": "11.60",
+          "nav_fraction": "0.1159733795895587314641066657"
+        },
+        {
+          "rank": 5,
+          "code": "019829",
+          "name": "26 国债 03",
+          "quantity": 7625100,
+          "fair_value": "775553308.03",
+          "reported_percent": "10.59",
+          "nav_fraction": "0.1058640054010114073245861420"
+        }
+      ],
+      "security_nav_fraction": "0.9814111346266928257479583076",
+      "listed_nav_fraction": "0.8712939476523153032165411822",
+      "full_security_hhi": null,
+      "coverage": "top five bond code rows; cross-market aliases not consolidated",
+      "unlisted_security_nav_fraction": "0.1101171869743775225314171254",
+      "known_hhi_contribution": "0.1726329402565561210309213966",
+      "sectors": {},
+      "issuer_category": {
+        "name": "中国中央政府（国家债券）",
+        "nav_fraction": "0.9814111346266928257479583076",
+        "source_page": 10
+      }
+    }
+  }
+}

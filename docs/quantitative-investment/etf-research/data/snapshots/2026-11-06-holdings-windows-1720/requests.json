@@ -1,0 +1,24 @@
+[
+  {
+    "name": "quarterly_510300",
+    "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-10-27/510300_20261027_82OP.pdf",
+    "requested_at_utc": "2026-11-06T09:19:42.082237+00:00",
+    "status": 200,
+    "final_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-10-27/510300_20261027_82OP.pdf",
+    "content_type": "application/pdf",
+    "bytes": 517357,
+    "sha256": "fd19ca5832055d08712a104814792c2461c7280602f661c97f4d2f02d559cff1",
+    "pdf_magic": true
+  },
+  {
+    "name": "quarterly_511010",
+    "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-10-27/511010_20261027_RYVD.pdf",
+    "requested_at_utc": "2026-11-06T09:19:42.287580+00:00",
+    "status": 200,
+    "final_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-10-27/511010_20261027_RYVD.pdf",
+    "content_type": "application/pdf",
+    "bytes": 260161,
+    "sha256": "50ecd6f6daa0a7b1579a90d07efdab7fbbaada035b5888a2dab7477fa44132f1",
+    "pdf_magic": true
+  }
+]

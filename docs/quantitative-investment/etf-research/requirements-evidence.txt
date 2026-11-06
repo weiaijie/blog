@@ -1,0 +1,2 @@
+# Optional PDF evidence extraction; not needed for frozen trading/accounting.
+pypdf==6.21.4

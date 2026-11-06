@@ -1,0 +1,20 @@
+[
+  {
+    "name": "quarterly_510300",
+    "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-10-27/510300_20261027_82OP.pdf",
+    "requested_at_utc": "2026-11-06T09:18:33.757617+00:00",
+    "error": "URLError: <urlopen error _ssl.c:994: The handshake operation timed out>",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pdf_magic": false
+  },
+  {
+    "name": "quarterly_511010",
+    "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-10-27/511010_20261027_RYVD.pdf",
+    "requested_at_utc": "2026-11-06T09:18:58.789092+00:00",
+    "error": "URLError: <urlopen error _ssl.c:994: The handshake operation timed out>",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pdf_magic": false
+  }
+]

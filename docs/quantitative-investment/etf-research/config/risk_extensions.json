@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "mode": "report_only",
+  "lookback_returns": 252,
+  "holdings_reference": "data/reference/holdings_2026q3.json",
+  "forward_price_snapshot": "2026-11-06-close-windows-1653",
+  "published_report": "reports/2026-11-06-risk-expansion/risk_extensions.json",
+  "stress_scenarios": [
+    {"name": "股票ETF下跌10%", "510300": -0.10, "511010": 0.0},
+    {"name": "股票ETF下跌20%", "510300": -0.20, "511010": 0.0},
+    {"name": "债券ETF下跌3%", "510300": 0.0, "511010": -0.03},
+    {"name": "股债同时下跌20%和5%", "510300": -0.20, "511010": -0.05}
+  ],
+  "stress_scope": "Fixed hypothetical one-step ETF price shocks; no probability, liquidation, rebalancing, liquidity or convexity model. Chosen before computing outputs, not optimized."
+}

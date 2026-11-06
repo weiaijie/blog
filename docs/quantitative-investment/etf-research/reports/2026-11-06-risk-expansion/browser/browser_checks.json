@@ -1,0 +1,9 @@
+{
+  "historical_rows": 18,
+  "forward_beta_null_label": true,
+  "dated_holdings_unknown_label": true,
+  "stress_not_forecast_label": true,
+  "local_links_ok": true,
+  "mobile_no_page_overflow": true,
+  "page_errors": []
+}
