@@ -1,0 +1,2363 @@
+{
+  "schema_version": 1,
+  "mode": "report_only",
+  "changes_trades": false,
+  "settings": {
+    "action": "report_only",
+    "drawdown_warning": 0.15,
+    "annual_drawdown_limit": 0.2,
+    "annual_volatility_limit": 0.25,
+    "annual_volatility_warning": 0.3,
+    "sharpe_target": 1.0,
+    "daily_var_limit": 0.03,
+    "daily_move_warning": 0.05,
+    "var_confidence": 0.95,
+    "lookback_returns": 252,
+    "annualization_sessions": 252,
+    "annual_risk_free_assumption": 0.0
+  },
+  "input_sha256": {
+    "config/research.json": "6d53fe70951d0bd0418c358124d732714540e6d1605d12ea0c26d2236e5b76fc",
+    "reports/2026-11-05-long-history/results.json": "40bfc1bdeeee60f448e5f714cda61bb13dfccfbe29b11dbbf77ddbf18c0112e2",
+    "PROTOCOL_V1.md": "c48927e3535d2d4221d2f96a8b3e9d20409d8e4bf6911b1ff414321189eacbfc",
+    "reports/2026-11-06-close/forward_checkpoint.json": "6a447a1a22d48f28b2414fa86909ff96eaf94e059958c3792fbb9a2c7c389e09",
+    "docs/original-plan/sources.json": "3c99cf864373a61964b86cb7d583f11b2b6d89e24a9d4bde3e17071096e6149c",
+    "docs/original-plan/01-stock-screening/README.md": "86ec3d5f10acddbb431c4c8a63e52fe3b5dfd158d09d4dc13f2a2ea2c802a489",
+    "docs/original-plan/02-valuation-system/README.md": "a8d9a12fd85cc899a564770e07388911b50f7f22c537aaf1d338c465fbfa3dc3",
+    "docs/original-plan/03-position-management/README.md": "dd064ebc8bcba686a4d8774137d063303cadea745362a9128178e21bd7ba838b",
+    "docs/original-plan/04-bond-screening/README.md": "3fb103b928f2beaea9204aeee1fb229dfb54742f54f98574eee12346e33fa69d",
+    "docs/original-plan/05-alert-system/README.md": "5f868dadf18bcda10499ca8cf43e802ae692dad5c2defd1d0b44cc777dce1204",
+    "docs/original-plan/06-trading-execution/README.md": "5ac73e83a4c1be482ff5d71b62e052e05100515b9f658f20e6ca60bf2b7cd7cc",
+    "docs/original-plan/07-risk-control/README.md": "30a8b7de7c06b1e3a76efc7f019968ca43a705435c504708316230fd856509ce",
+    "docs/original-plan/08-performance-tracking/README.md": "a84e09769167a3a884968e57379bca668d2eb798e3eef1a3559f23727c8901ed",
+    "docs/original-plan/README.md": "0c4f8be304f5f7487315354aa87af0c538aaab9c7647e21f7e462c7e421e2f12",
+    "docs/original-plan/examples/README.md": "409a7286f8139627988485ff9bc5b85b9b7cca8896669c0b19cfec5f86273882",
+    "docs/original-plan/quick-start-guide.md": "e29e6735e3edcd15cc489e3ae49ec63bdc8c8a094e1d7fcbd6b953504b74a2bd",
+    "docs/original-plan/templates/README.md": "568acdacfc8cbfcce19c7b7c7b58077ef8e932de3c36a8c8efc04954cba192a6",
+    "docs/original-plan/tools/README.md": "fec00548168145cad139942e84da6bc90833fccd7b8e1355ca6306bd1b5f6dc1",
+    "reports/2026-11-05-long-history/cash_low_100000_d1_daily.csv": "e315423cd9b52bc911b0060e89f9decd53951cd454701cd14049e4f3b6833c73",
+    "reports/2026-11-05-long-history/cash_base_100000_d1_daily.csv": "e315423cd9b52bc911b0060e89f9decd53951cd454701cd14049e4f3b6833c73",
+    "reports/2026-11-05-long-history/cash_high_100000_d1_daily.csv": "e315423cd9b52bc911b0060e89f9decd53951cd454701cd14049e4f3b6833c73",
+    "reports/2026-11-05-long-history/equity_hold_low_100000_d1_daily.csv": "f4e568e48ed243755b9bde420ab606b7faf8ec7704e521b0ceee69877a19f8da",
+    "reports/2026-11-05-long-history/equity_hold_base_100000_d1_daily.csv": "6d4efb665d678a0ac86c63020a957453d9b4f5f9ca0d27f5824f5935a0e4f36b",
+    "reports/2026-11-05-long-history/equity_hold_high_100000_d1_daily.csv": "7b235a2241d6ab0d5f3ab3db890a4bb4e29e6107b8798ac91e18b5201ff263dc",
+    "reports/2026-11-05-long-history/bond_hold_low_100000_d1_daily.csv": "9ed93843cff1bef9e364e3fe6f2d578143031dcc7207eb619f7777d10f189de1",
+    "reports/2026-11-05-long-history/bond_hold_base_100000_d1_daily.csv": "1b5375508d2aeee249f37f2804014f0483d1598e030027536c402c701ec8a09c",
+    "reports/2026-11-05-long-history/bond_hold_high_100000_d1_daily.csv": "e0b7a83c2ede4689c101f34fa2ff8cff0189d061ca24cd39e03c4d608d0e8022",
+    "reports/2026-11-05-long-history/monthly_20_80_low_100000_d1_daily.csv": "c00042b29adc2c68e083c93b0d101024f54fabbfbd5e8affc9cbff231f45afa2",
+    "reports/2026-11-05-long-history/monthly_20_80_base_100000_d1_daily.csv": "ed680e1f30b283de14d0dc2ef5322cabecfcd56e41b753d47d0642617ae6afd5",
+    "reports/2026-11-05-long-history/monthly_20_80_high_100000_d1_daily.csv": "a373f62bbc00d7559c6fcdc06d59267b377daae9f9e1a648d00dae70eb0eca2c",
+    "reports/2026-11-05-long-history/monthly_50_50_low_100000_d1_daily.csv": "7f21a30a0cf2f771ccfd4651f870620e147e7b646f631a9137b170501231bb69",
+    "reports/2026-11-05-long-history/monthly_50_50_base_100000_d1_daily.csv": "6d212971712f3e96a9b4a96792ebf3e76bf17e256b28f73258b2012db2b74c8d",
+    "reports/2026-11-05-long-history/monthly_50_50_high_100000_d1_daily.csv": "c533b87eeda320068f6faf22e1c6144fb668ac2290f4514e8aa3c4b747fd36c7",
+    "reports/2026-11-05-long-history/trend_120_low_100000_d1_daily.csv": "9e5738187c20eca190698fc5c4209058d2cb482659d04b6956f0daa785476d6c",
+    "reports/2026-11-05-long-history/trend_120_base_100000_d1_daily.csv": "9b5af600769c13b82139ecc0c62b85ec1f7b40b222a11391374c9f328aed729f",
+    "reports/2026-11-05-long-history/trend_120_high_100000_d1_daily.csv": "5a7256c2011b451cc6869a31ad8d8350a5ab998b32f6e249a62c3498dcb61643"
+  },
+  "libraries": {
+    "pandas": "2.2.3",
+    "numpy": "2.3.5",
+    "matplotlib": "3.10.8"
+  },
+  "historical_cross_checks": 54,
+  "history": [
+    {
+      "run": "cash_low_100000_d1",
+      "strategy": "cash",
+      "scenario": "low",
+      "sessions": 1967,
+      "as_of": "2026-10-30",
+      "total_return": 0.0,
+      "max_close_drawdown": 0.0,
+      "current_drawdown": 0.0,
+      "annualized_return": 0.0,
+      "rolling_volatility": 0.0,
+      "rolling_sharpe": null,
+      "daily_var": 0.0,
+      "latest_daily_return": 0.0,
+      "risk_window_complete": true,
+      "years": [
+        {
+          "year": 2018,
+          "observed_start": "2018-09-14",
+          "observed_end": "2018-12-28",
+          "previous_close_anchor": false,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2019,
+          "observed_start": "2019-01-02",
+          "observed_end": "2019-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2020,
+          "observed_start": "2020-01-02",
+          "observed_end": "2020-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2021,
+          "observed_start": "2021-01-04",
+          "observed_end": "2021-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2022,
+          "observed_start": "2022-01-04",
+          "observed_end": "2022-12-30",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2023,
+          "observed_start": "2023-01-03",
+          "observed_end": "2023-12-29",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2024,
+          "observed_start": "2024-01-02",
+          "observed_end": "2024-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2025,
+          "observed_start": "2025-01-02",
+          "observed_end": "2025-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2026,
+          "observed_start": "2026-01-05",
+          "observed_end": "2026-10-30",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        }
+      ],
+      "alerts": []
+    },
+    {
+      "run": "cash_base_100000_d1",
+      "strategy": "cash",
+      "scenario": "base",
+      "sessions": 1967,
+      "as_of": "2026-10-30",
+      "total_return": 0.0,
+      "max_close_drawdown": 0.0,
+      "current_drawdown": 0.0,
+      "annualized_return": 0.0,
+      "rolling_volatility": 0.0,
+      "rolling_sharpe": null,
+      "daily_var": 0.0,
+      "latest_daily_return": 0.0,
+      "risk_window_complete": true,
+      "years": [
+        {
+          "year": 2018,
+          "observed_start": "2018-09-14",
+          "observed_end": "2018-12-28",
+          "previous_close_anchor": false,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2019,
+          "observed_start": "2019-01-02",
+          "observed_end": "2019-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2020,
+          "observed_start": "2020-01-02",
+          "observed_end": "2020-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2021,
+          "observed_start": "2021-01-04",
+          "observed_end": "2021-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2022,
+          "observed_start": "2022-01-04",
+          "observed_end": "2022-12-30",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2023,
+          "observed_start": "2023-01-03",
+          "observed_end": "2023-12-29",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2024,
+          "observed_start": "2024-01-02",
+          "observed_end": "2024-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2025,
+          "observed_start": "2025-01-02",
+          "observed_end": "2025-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2026,
+          "observed_start": "2026-01-05",
+          "observed_end": "2026-10-30",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        }
+      ],
+      "alerts": []
+    },
+    {
+      "run": "cash_high_100000_d1",
+      "strategy": "cash",
+      "scenario": "high",
+      "sessions": 1967,
+      "as_of": "2026-10-30",
+      "total_return": 0.0,
+      "max_close_drawdown": 0.0,
+      "current_drawdown": 0.0,
+      "annualized_return": 0.0,
+      "rolling_volatility": 0.0,
+      "rolling_sharpe": null,
+      "daily_var": 0.0,
+      "latest_daily_return": 0.0,
+      "risk_window_complete": true,
+      "years": [
+        {
+          "year": 2018,
+          "observed_start": "2018-09-14",
+          "observed_end": "2018-12-28",
+          "previous_close_anchor": false,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2019,
+          "observed_start": "2019-01-02",
+          "observed_end": "2019-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2020,
+          "observed_start": "2020-01-02",
+          "observed_end": "2020-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2021,
+          "observed_start": "2021-01-04",
+          "observed_end": "2021-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2022,
+          "observed_start": "2022-01-04",
+          "observed_end": "2022-12-30",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2023,
+          "observed_start": "2023-01-03",
+          "observed_end": "2023-12-29",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2024,
+          "observed_start": "2024-01-02",
+          "observed_end": "2024-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2025,
+          "observed_start": "2025-01-02",
+          "observed_end": "2025-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2026,
+          "observed_start": "2026-01-05",
+          "observed_end": "2026-10-30",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        }
+      ],
+      "alerts": []
+    },
+    {
+      "run": "equity_hold_low_100000_d1",
+      "strategy": "equity_hold",
+      "scenario": "low",
+      "sessions": 1967,
+      "as_of": "2026-10-30",
+      "total_return": 0.4199827999999999,
+      "max_close_drawdown": 0.4001706375848517,
+      "current_drawdown": 0.21958762070707538,
+      "annualized_return": 0.044095833417242325,
+      "rolling_volatility": 0.15320424067190813,
+      "rolling_sharpe": -0.6243019654479403,
+      "daily_var": 0.01599985759781001,
+      "latest_daily_return": -0.009688433048687495,
+      "risk_window_complete": true,
+      "years": [
+        {
+          "year": 2018,
+          "observed_start": "2018-09-14",
+          "observed_end": "2018-12-28",
+          "previous_close_anchor": false,
+          "max_drawdown": 0.1290713446468833,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2019,
+          "observed_start": "2019-01-02",
+          "observed_end": "2019-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.13130571300835825,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2020,
+          "observed_start": "2020-01-02",
+          "observed_end": "2020-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.15547629122118567,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2021,
+          "observed_start": "2021-01-04",
+          "observed_end": "2021-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.16564508349634255,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2022,
+          "observed_start": "2022-01-04",
+          "observed_end": "2022-12-30",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.2617715989321714,
+          "limit_breached": true,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2023,
+          "observed_start": "2023-01-03",
+          "observed_end": "2023-12-29",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.1832557791128827,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2024,
+          "observed_start": "2024-01-02",
+          "observed_end": "2024-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.11347828979446917,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2025,
+          "observed_start": "2025-01-02",
+          "observed_end": "2025-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.09129138005159076,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2026,
+          "observed_start": "2026-01-05",
+          "observed_end": "2026-10-30",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.17912230693936793,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        }
+      ],
+      "alerts": [
+        "current_drawdown_warning",
+        "sharpe_below_or_equal_target"
+      ]
+    },
+    {
+      "run": "equity_hold_base_100000_d1",
+      "strategy": "equity_hold",
+      "scenario": "base",
+      "sessions": 1967,
+      "as_of": "2026-10-30",
+      "total_return": 0.4194822,
+      "max_close_drawdown": 0.4002807653009448,
+      "current_drawdown": 0.21964805163548318,
+      "annualized_return": 0.04405052889094074,
+      "rolling_volatility": 0.1532518963272653,
+      "rolling_sharpe": -0.6242944337616101,
+      "daily_var": 0.01600502675092279,
+      "latest_daily_return": -0.009691816693784605,
+      "risk_window_complete": true,
+      "years": [
+        {
+          "year": 2018,
+          "observed_start": "2018-09-14",
+          "observed_end": "2018-12-28",
+          "previous_close_anchor": false,
+          "max_drawdown": 0.1291319320785841,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2019,
+          "observed_start": "2019-01-02",
+          "observed_end": "2019-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.1313575074726996,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2020,
+          "observed_start": "2020-01-02",
+          "observed_end": "2020-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.15553558800713907,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2021,
+          "observed_start": "2021-01-04",
+          "observed_end": "2021-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.16569066933651722,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2022,
+          "observed_start": "2022-01-04",
+          "observed_end": "2022-12-30",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.2618546567721147,
+          "limit_breached": true,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2023,
+          "observed_start": "2023-01-03",
+          "observed_end": "2023-12-29",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.18332239085880053,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2024,
+          "observed_start": "2024-01-02",
+          "observed_end": "2024-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.11351718409354483,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2025,
+          "observed_start": "2025-01-02",
+          "observed_end": "2025-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.0913247612465361,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2026,
+          "observed_start": "2026-01-05",
+          "observed_end": "2026-10-30",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.17917415847093066,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        }
+      ],
+      "alerts": [
+        "current_drawdown_warning",
+        "sharpe_below_or_equal_target"
+      ]
+    },
+    {
+      "run": "equity_hold_high_100000_d1",
+      "strategy": "equity_hold",
+      "scenario": "high",
+      "sessions": 1967,
+      "as_of": "2026-10-30",
+      "total_return": 0.4181826999999998,
+      "max_close_drawdown": 0.4005669272867838,
+      "current_drawdown": 0.21980507872269395,
+      "annualized_return": 0.0439328581271754,
+      "rolling_volatility": 0.1533757437179778,
+      "rolling_sharpe": -0.624274863057283,
+      "daily_var": 0.016018460933679698,
+      "latest_daily_return": -0.00970061128794475,
+      "risk_window_complete": true,
+      "years": [
+        {
+          "year": 2018,
+          "observed_start": "2018-09-14",
+          "observed_end": "2018-12-28",
+          "previous_close_anchor": false,
+          "max_drawdown": 0.12928947588060102,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2019,
+          "observed_start": "2019-01-02",
+          "observed_end": "2019-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.1314921508484037,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2020,
+          "observed_start": "2020-01-02",
+          "observed_end": "2020-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.1556897269504246,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2021,
+          "observed_start": "2021-01-04",
+          "observed_end": "2021-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.16580912212036925,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2022,
+          "observed_start": "2022-01-04",
+          "observed_end": "2022-12-30",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.2620705115676827,
+          "limit_breached": true,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2023,
+          "observed_start": "2023-01-03",
+          "observed_end": "2023-12-29",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.18349553351410663,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2024,
+          "observed_start": "2024-01-02",
+          "observed_end": "2024-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.11361827376673861,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2025,
+          "observed_start": "2025-01-02",
+          "observed_end": "2025-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.09141152903307448,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2026,
+          "observed_start": "2026-01-05",
+          "observed_end": "2026-10-30",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.17930889929467275,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        }
+      ],
+      "alerts": [
+        "current_drawdown_warning",
+        "sharpe_below_or_equal_target"
+      ]
+    },
+    {
+      "run": "bond_hold_low_100000_d1",
+      "strategy": "bond_hold",
+      "scenario": "low",
+      "sessions": 1967,
+      "as_of": "2026-10-30",
+      "total_return": 0.2568094999999999,
+      "max_close_drawdown": 0.044995510300549935,
+      "current_drawdown": 0.0010301202880045324,
+      "annualized_return": 0.02852857987840185,
+      "rolling_volatility": 0.006815816698832063,
+      "rolling_sharpe": 3.4405784197736877,
+      "daily_var": 0.0007122914229475522,
+      "latest_daily_return": -0.0010301202880045324,
+      "risk_window_complete": true,
+      "years": [
+        {
+          "year": 2018,
+          "observed_start": "2018-09-14",
+          "observed_end": "2018-12-28",
+          "previous_close_anchor": false,
+          "max_drawdown": 0.006773106333550993,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2019,
+          "observed_start": "2019-01-02",
+          "observed_end": "2019-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.010020499561069984,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2020,
+          "observed_start": "2020-01-02",
+          "observed_end": "2020-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.044995510300549935,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2021,
+          "observed_start": "2021-01-04",
+          "observed_end": "2021-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.007061823293176506,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2022,
+          "observed_start": "2022-01-04",
+          "observed_end": "2022-12-30",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.011116079251500932,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2023,
+          "observed_start": "2023-01-03",
+          "observed_end": "2023-12-29",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.00881992409776855,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2024,
+          "observed_start": "2024-01-02",
+          "observed_end": "2024-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.008000546847651169,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2025,
+          "observed_start": "2025-01-02",
+          "observed_end": "2025-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.014369696730576753,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2026,
+          "observed_start": "2026-01-05",
+          "observed_end": "2026-10-30",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.002345441380747215,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        }
+      ],
+      "alerts": []
+    },
+    {
+      "run": "bond_hold_base_100000_d1",
+      "strategy": "bond_hold",
+      "scenario": "base",
+      "sessions": 1967,
+      "as_of": "2026-10-30",
+      "total_return": 0.25626839999999995,
+      "max_close_drawdown": 0.04501752630754641,
+      "current_drawdown": 0.001030563524221928,
+      "annualized_return": 0.028474075326963888,
+      "rolling_volatility": 0.00681879360379415,
+      "rolling_sharpe": 3.4405766829147866,
+      "daily_var": 0.0007126036724338195,
+      "latest_daily_return": -0.001030563524221928,
+      "risk_window_complete": true,
+      "years": [
+        {
+          "year": 2018,
+          "observed_start": "2018-09-14",
+          "observed_end": "2018-12-28",
+          "previous_close_anchor": false,
+          "max_drawdown": 0.006776703687257135,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2019,
+          "observed_start": "2019-01-02",
+          "observed_end": "2019-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.010025758906105908,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2020,
+          "observed_start": "2020-01-02",
+          "observed_end": "2020-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.04501752630754641,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2021,
+          "observed_start": "2021-01-04",
+          "observed_end": "2021-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.007065305957277945,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2022,
+          "observed_start": "2022-01-04",
+          "observed_end": "2022-12-30",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.01112139168601789,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2023,
+          "observed_start": "2023-01-03",
+          "observed_end": "2023-12-29",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.00882405601128422,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2024,
+          "observed_start": "2024-01-02",
+          "observed_end": "2024-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.008004135359411912,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2025,
+          "observed_start": "2025-01-02",
+          "observed_end": "2025-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.014376024853334335,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2026,
+          "observed_start": "2026-01-05",
+          "observed_end": "2026-10-30",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.002346458434508314,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        }
+      ],
+      "alerts": []
+    },
+    {
+      "run": "bond_hold_high_100000_d1",
+      "strategy": "bond_hold",
+      "scenario": "high",
+      "sessions": 1967,
+      "as_of": "2026-10-30",
+      "total_return": 0.2551782,
+      "max_close_drawdown": 0.045061949318522254,
+      "current_drawdown": 0.0010314577091992128,
+      "annualized_return": 0.028364197837173588,
+      "rolling_volatility": 0.006824799331523021,
+      "rolling_sharpe": 3.440573178817083,
+      "daily_var": 0.0007132336201021486,
+      "latest_daily_return": -0.0010314577091992128,
+      "risk_window_complete": true,
+      "years": [
+        {
+          "year": 2018,
+          "observed_start": "2018-09-14",
+          "observed_end": "2018-12-28",
+          "previous_close_anchor": false,
+          "max_drawdown": 0.006783963198375265,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2019,
+          "observed_start": "2019-01-02",
+          "observed_end": "2019-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.010036372138891081,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2020,
+          "observed_start": "2020-01-02",
+          "observed_end": "2020-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.045061949318522254,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2021,
+          "observed_start": "2021-01-04",
+          "observed_end": "2021-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.007072333218562932,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2022,
+          "observed_start": "2022-01-04",
+          "observed_end": "2022-12-30",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.011132110533936368,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2023,
+          "observed_start": "2023-01-03",
+          "observed_end": "2023-12-29",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.00883239269622127,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2024,
+          "observed_start": "2024-01-02",
+          "observed_end": "2024-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.008011375223577533,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2025,
+          "observed_start": "2025-01-02",
+          "observed_end": "2025-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.01438879160054285,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2026,
+          "observed_start": "2026-01-05",
+          "observed_end": "2026-10-30",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.0023485102600542263,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        }
+      ],
+      "alerts": []
+    },
+    {
+      "run": "monthly_20_80_low_100000_d1",
+      "strategy": "monthly_20_80",
+      "scenario": "low",
+      "sessions": 1967,
+      "as_of": "2026-10-30",
+      "total_return": 0.3238793,
+      "max_close_drawdown": 0.04680451436368094,
+      "current_drawdown": 0.036889897967223195,
+      "annualized_return": 0.035130221166421505,
+      "rolling_volatility": 0.03420468210124836,
+      "rolling_sharpe": -0.08334107248371529,
+      "daily_var": 0.003522296312875184,
+      "latest_daily_return": -0.0029327295555648947,
+      "risk_window_complete": true,
+      "years": [
+        {
+          "year": 2018,
+          "observed_start": "2018-09-14",
+          "observed_end": "2018-12-28",
+          "previous_close_anchor": false,
+          "max_drawdown": 0.017945042055559468,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2019,
+          "observed_start": "2019-01-02",
+          "observed_end": "2019-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.023481152307770814,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2020,
+          "observed_start": "2020-01-02",
+          "observed_end": "2020-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.03315089071856825,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2021,
+          "observed_start": "2021-01-04",
+          "observed_end": "2021-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.030079017682519305,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2022,
+          "observed_start": "2022-01-04",
+          "observed_end": "2022-12-30",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.04680451436368094,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2023,
+          "observed_start": "2023-01-03",
+          "observed_end": "2023-12-29",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.033887328485689205,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2024,
+          "observed_start": "2024-01-02",
+          "observed_end": "2024-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.02549797214952143,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2025,
+          "observed_start": "2025-01-02",
+          "observed_end": "2025-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.01610490046877089,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2026,
+          "observed_start": "2026-01-05",
+          "observed_end": "2026-10-30",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.036889897967223195,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        }
+      ],
+      "alerts": [
+        "sharpe_below_or_equal_target"
+      ]
+    },
+    {
+      "run": "monthly_20_80_base_100000_d1",
+      "strategy": "monthly_20_80",
+      "scenario": "base",
+      "sessions": 1967,
+      "as_of": "2026-10-30",
+      "total_return": 0.3232427,
+      "max_close_drawdown": 0.046837461542455494,
+      "current_drawdown": 0.03691960758069457,
+      "annualized_return": 0.03506895352749817,
+      "rolling_volatility": 0.03422025074784807,
+      "rolling_sharpe": -0.08412810331904431,
+      "daily_var": 0.003523945675007645,
+      "latest_daily_return": -0.0029341363252182173,
+      "risk_window_complete": true,
+      "years": [
+        {
+          "year": 2018,
+          "observed_start": "2018-09-14",
+          "observed_end": "2018-12-28",
+          "previous_close_anchor": false,
+          "max_drawdown": 0.01763895111521596,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2019,
+          "observed_start": "2019-01-02",
+          "observed_end": "2019-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.023492401632672633,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2020,
+          "observed_start": "2020-01-02",
+          "observed_end": "2020-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.03316529158837589,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2021,
+          "observed_start": "2021-01-04",
+          "observed_end": "2021-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.03009226420588873,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2022,
+          "observed_start": "2022-01-04",
+          "observed_end": "2022-12-30",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.046837461542455494,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2023,
+          "observed_start": "2023-01-03",
+          "observed_end": "2023-12-29",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.03371519962011227,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2024,
+          "observed_start": "2024-01-02",
+          "observed_end": "2024-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.025509311773259435,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2025,
+          "observed_start": "2025-01-02",
+          "observed_end": "2025-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.016115320897933216,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2026,
+          "observed_start": "2026-01-05",
+          "observed_end": "2026-10-30",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.03691960758069457,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        }
+      ],
+      "alerts": [
+        "sharpe_below_or_equal_target"
+      ]
+    },
+    {
+      "run": "monthly_20_80_high_100000_d1",
+      "strategy": "monthly_20_80",
+      "scenario": "high",
+      "sessions": 1967,
+      "as_of": "2026-10-30",
+      "total_return": 0.3212146,
+      "max_close_drawdown": 0.04652365553549076,
+      "current_drawdown": 0.03698752150208462,
+      "annualized_return": 0.03487359268959778,
+      "rolling_volatility": 0.03421363138602256,
+      "rolling_sharpe": -0.08357855770556863,
+      "daily_var": 0.0035103286947925968,
+      "latest_daily_return": -0.002938627068000299,
+      "risk_window_complete": true,
+      "years": [
+        {
+          "year": 2018,
+          "observed_start": "2018-09-14",
+          "observed_end": "2018-12-28",
+          "previous_close_anchor": false,
+          "max_drawdown": 0.01766590845922611,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2019,
+          "observed_start": "2019-01-02",
+          "observed_end": "2019-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.0235316997640298,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2020,
+          "observed_start": "2020-01-02",
+          "observed_end": "2020-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.03322455911527533,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2021,
+          "observed_start": "2021-01-04",
+          "observed_end": "2021-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.030143860549909696,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2022,
+          "observed_start": "2022-01-04",
+          "observed_end": "2022-12-30",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.04652365553549076,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2023,
+          "observed_start": "2023-01-03",
+          "observed_end": "2023-12-29",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.033670659834014516,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2024,
+          "observed_start": "2024-01-02",
+          "observed_end": "2024-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.025548930165918637,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2025,
+          "observed_start": "2025-01-02",
+          "observed_end": "2025-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.01619163387528022,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2026,
+          "observed_start": "2026-01-05",
+          "observed_end": "2026-10-30",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.03698752150208462,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        }
+      ],
+      "alerts": [
+        "sharpe_below_or_equal_target"
+      ]
+    },
+    {
+      "run": "monthly_50_50_low_100000_d1",
+      "strategy": "monthly_50_50",
+      "scenario": "low",
+      "sessions": 1967,
+      "as_of": "2026-10-30",
+      "total_return": 0.3804645000000002,
+      "max_close_drawdown": 0.19698213124399977,
+      "current_drawdown": 0.10088282485717459,
+      "annualized_return": 0.04047555190368701,
+      "rolling_volatility": 0.08561117317226376,
+      "rolling_sharpe": -0.49241567166561007,
+      "daily_var": 0.008842569362232268,
+      "latest_daily_return": -0.0059493355963178285,
+      "risk_window_complete": true,
+      "years": [
+        {
+          "year": 2018,
+          "observed_start": "2018-09-14",
+          "observed_end": "2018-12-28",
+          "previous_close_anchor": false,
+          "max_drawdown": 0.05758941931746864,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2019,
+          "observed_start": "2019-01-02",
+          "observed_end": "2019-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.06590579886766446,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2020,
+          "observed_start": "2020-01-02",
+          "observed_end": "2020-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.081732432717043,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2021,
+          "observed_start": "2021-01-04",
+          "observed_end": "2021-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.0774969665062879,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2022,
+          "observed_start": "2022-01-04",
+          "observed_end": "2022-12-30",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.13537085119494063,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2023,
+          "observed_start": "2023-01-03",
+          "observed_end": "2023-12-29",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.09265532104228391,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2024,
+          "observed_start": "2024-01-02",
+          "observed_end": "2024-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.06744105990790128,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2025,
+          "observed_start": "2025-01-02",
+          "observed_end": "2025-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.04708550469239969,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2026,
+          "observed_start": "2026-01-05",
+          "observed_end": "2026-10-30",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.10088282485717459,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        }
+      ],
+      "alerts": [
+        "sharpe_below_or_equal_target"
+      ]
+    },
+    {
+      "run": "monthly_50_50_base_100000_d1",
+      "strategy": "monthly_50_50",
+      "scenario": "base",
+      "sessions": 1967,
+      "as_of": "2026-10-30",
+      "total_return": 0.3776798000000001,
+      "max_close_drawdown": 0.19731811856913395,
+      "current_drawdown": 0.1008766336619964,
+      "annualized_return": 0.04021703090593043,
+      "rolling_volatility": 0.08572974129186271,
+      "rolling_sharpe": -0.49036749073779917,
+      "daily_var": 0.008835894006800146,
+      "latest_daily_return": -0.005928295619338608,
+      "risk_window_complete": true,
+      "years": [
+        {
+          "year": 2018,
+          "observed_start": "2018-09-14",
+          "observed_end": "2018-12-28",
+          "previous_close_anchor": false,
+          "max_drawdown": 0.05762872919403905,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2019,
+          "observed_start": "2019-01-02",
+          "observed_end": "2019-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.06590162040495884,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2020,
+          "observed_start": "2020-01-02",
+          "observed_end": "2020-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.08129528024480326,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2021,
+          "observed_start": "2021-01-04",
+          "observed_end": "2021-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.07765430464724954,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2022,
+          "observed_start": "2022-01-04",
+          "observed_end": "2022-12-30",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.13532347958572333,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2023,
+          "observed_start": "2023-01-03",
+          "observed_end": "2023-12-29",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.09243098664156413,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2024,
+          "observed_start": "2024-01-02",
+          "observed_end": "2024-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.06757850499137896,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2025,
+          "observed_start": "2025-01-02",
+          "observed_end": "2025-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.04719159375578419,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2026,
+          "observed_start": "2026-01-05",
+          "observed_end": "2026-10-30",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.1008766336619964,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        }
+      ],
+      "alerts": [
+        "sharpe_below_or_equal_target"
+      ]
+    },
+    {
+      "run": "monthly_50_50_high_100000_d1",
+      "strategy": "monthly_50_50",
+      "scenario": "high",
+      "sessions": 1967,
+      "as_of": "2026-10-30",
+      "total_return": 0.3751882999999998,
+      "max_close_drawdown": 0.1973266200775986,
+      "current_drawdown": 0.10088400095378247,
+      "annualized_return": 0.039985340782870304,
+      "rolling_volatility": 0.0856754834573653,
+      "rolling_sharpe": -0.49440780622820857,
+      "daily_var": 0.008851757843615313,
+      "latest_daily_return": -0.005938972431992595,
+      "risk_window_complete": true,
+      "years": [
+        {
+          "year": 2018,
+          "observed_start": "2018-09-14",
+          "observed_end": "2018-12-28",
+          "previous_close_anchor": false,
+          "max_drawdown": 0.05771658465806595,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2019,
+          "observed_start": "2019-01-02",
+          "observed_end": "2019-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.06566378623211322,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2020,
+          "observed_start": "2020-01-02",
+          "observed_end": "2020-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.0814026535488146,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2021,
+          "observed_start": "2021-01-04",
+          "observed_end": "2021-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.07749612116802229,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2022,
+          "observed_start": "2022-01-04",
+          "observed_end": "2022-12-30",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.1357012400563159,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2023,
+          "observed_start": "2023-01-03",
+          "observed_end": "2023-12-29",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.09245390645561435,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2024,
+          "observed_start": "2024-01-02",
+          "observed_end": "2024-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.06767220806311447,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2025,
+          "observed_start": "2025-01-02",
+          "observed_end": "2025-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.04725561943005896,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2026,
+          "observed_start": "2026-01-05",
+          "observed_end": "2026-10-30",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.10088400095378247,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        }
+      ],
+      "alerts": [
+        "sharpe_below_or_equal_target"
+      ]
+    },
+    {
+      "run": "trend_120_low_100000_d1",
+      "strategy": "trend_120",
+      "scenario": "low",
+      "sessions": 1967,
+      "as_of": "2026-10-30",
+      "total_return": 0.09235890000000002,
+      "max_close_drawdown": 0.19547263084499678,
+      "current_drawdown": 0.09273307832448308,
+      "annualized_return": 0.010930600143715274,
+      "rolling_volatility": 0.07427094761785114,
+      "rolling_sharpe": -0.22273542204506952,
+      "daily_var": 0.008633378289202576,
+      "latest_daily_return": -0.0010370437704716462,
+      "risk_window_complete": true,
+      "years": [
+        {
+          "year": 2018,
+          "observed_start": "2018-09-14",
+          "observed_end": "2018-12-28",
+          "previous_close_anchor": false,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2019,
+          "observed_start": "2019-01-02",
+          "observed_end": "2019-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.06546233830836179,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2020,
+          "observed_start": "2020-01-02",
+          "observed_end": "2020-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.054481963129533795,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2021,
+          "observed_start": "2021-01-04",
+          "observed_end": "2021-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.09874050101722542,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2022,
+          "observed_start": "2022-01-04",
+          "observed_end": "2022-12-30",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.06140103091101279,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2023,
+          "observed_start": "2023-01-03",
+          "observed_end": "2023-12-29",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.07255122964161276,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2024,
+          "observed_start": "2024-01-02",
+          "observed_end": "2024-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.0376858896278397,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2025,
+          "observed_start": "2025-01-02",
+          "observed_end": "2025-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.03135807567232751,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2026,
+          "observed_start": "2026-01-05",
+          "observed_end": "2026-10-30",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.04909514722932118,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        }
+      ],
+      "alerts": [
+        "sharpe_below_or_equal_target"
+      ]
+    },
+    {
+      "run": "trend_120_base_100000_d1",
+      "strategy": "trend_120",
+      "scenario": "base",
+      "sessions": 1967,
+      "as_of": "2026-10-30",
+      "total_return": 0.07781979999999988,
+      "max_close_drawdown": 0.199821555258749,
+      "current_drawdown": 0.10251388088584534,
+      "annualized_return": 0.009265009865467855,
+      "rolling_volatility": 0.07438805593927303,
+      "rolling_sharpe": -0.25798516395836557,
+      "daily_var": 0.00865503760255517,
+      "latest_daily_return": -0.0010510181251506268,
+      "risk_window_complete": true,
+      "years": [
+        {
+          "year": 2018,
+          "observed_start": "2018-09-14",
+          "observed_end": "2018-12-28",
+          "previous_close_anchor": false,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2019,
+          "observed_start": "2019-01-02",
+          "observed_end": "2019-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.06550011752424956,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2020,
+          "observed_start": "2020-01-02",
+          "observed_end": "2020-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.05450138374342539,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2021,
+          "observed_start": "2021-01-04",
+          "observed_end": "2021-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.0993874757271852,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2022,
+          "observed_start": "2022-01-04",
+          "observed_end": "2022-12-30",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.06366013058810327,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2023,
+          "observed_start": "2023-01-03",
+          "observed_end": "2023-12-29",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.07421867925088155,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2024,
+          "observed_start": "2024-01-02",
+          "observed_end": "2024-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.03774008824290931,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2025,
+          "observed_start": "2025-01-02",
+          "observed_end": "2025-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.031422883145343694,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2026,
+          "observed_start": "2026-01-05",
+          "observed_end": "2026-10-30",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.050421545182774086,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        }
+      ],
+      "alerts": [
+        "sharpe_below_or_equal_target"
+      ]
+    },
+    {
+      "run": "trend_120_high_100000_d1",
+      "strategy": "trend_120",
+      "scenario": "high",
+      "sessions": 1967,
+      "as_of": "2026-10-30",
+      "total_return": 0.046749200000000046,
+      "max_close_drawdown": 0.20902903289956154,
+      "current_drawdown": 0.12279467647628928,
+      "annualized_return": 0.0056384915556038084,
+      "rolling_volatility": 0.07443612754661529,
+      "rolling_sharpe": -0.3013819911553106,
+      "daily_var": 0.008663223760843086,
+      "latest_daily_return": -0.0010821816782634608,
+      "risk_window_complete": true,
+      "years": [
+        {
+          "year": 2018,
+          "observed_start": "2018-09-14",
+          "observed_end": "2018-12-28",
+          "previous_close_anchor": false,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2019,
+          "observed_start": "2019-01-02",
+          "observed_end": "2019-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.06558546199064519,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2020,
+          "observed_start": "2020-01-02",
+          "observed_end": "2020-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.054691210100227816,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2021,
+          "observed_start": "2021-01-04",
+          "observed_end": "2021-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.10226239952775429,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2022,
+          "observed_start": "2022-01-04",
+          "observed_end": "2022-12-30",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.06733692884437636,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2023,
+          "observed_start": "2023-01-03",
+          "observed_end": "2023-12-29",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.07710885077111485,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2024,
+          "observed_start": "2024-01-02",
+          "observed_end": "2024-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.03763563883043741,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2025,
+          "observed_start": "2025-01-02",
+          "observed_end": "2025-12-31",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.0314109233324259,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        },
+        {
+          "year": 2026,
+          "observed_start": "2026-01-05",
+          "observed_end": "2026-10-30",
+          "previous_close_anchor": true,
+          "max_drawdown": 0.0525325595393773,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        }
+      ],
+      "alerts": [
+        "sharpe_below_or_equal_target"
+      ]
+    }
+  ],
+  "forward": [
+    {
+      "run": "cash_low",
+      "sessions": 2,
+      "as_of": "2026-11-06",
+      "total_return": 0.0,
+      "max_close_drawdown": 0.0,
+      "current_drawdown": 0.0,
+      "annualized_return": null,
+      "rolling_volatility": null,
+      "rolling_sharpe": null,
+      "daily_var": null,
+      "latest_daily_return": 0.0,
+      "risk_window_complete": false,
+      "years": [
+        {
+          "year": 2026,
+          "observed_start": "2026-11-05",
+          "observed_end": "2026-11-06",
+          "previous_close_anchor": false,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        }
+      ],
+      "alerts": []
+    },
+    {
+      "run": "cash_base",
+      "sessions": 2,
+      "as_of": "2026-11-06",
+      "total_return": 0.0,
+      "max_close_drawdown": 0.0,
+      "current_drawdown": 0.0,
+      "annualized_return": null,
+      "rolling_volatility": null,
+      "rolling_sharpe": null,
+      "daily_var": null,
+      "latest_daily_return": 0.0,
+      "risk_window_complete": false,
+      "years": [
+        {
+          "year": 2026,
+          "observed_start": "2026-11-05",
+          "observed_end": "2026-11-06",
+          "previous_close_anchor": false,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        }
+      ],
+      "alerts": []
+    },
+    {
+      "run": "cash_high",
+      "sessions": 2,
+      "as_of": "2026-11-06",
+      "total_return": 0.0,
+      "max_close_drawdown": 0.0,
+      "current_drawdown": 0.0,
+      "annualized_return": null,
+      "rolling_volatility": null,
+      "rolling_sharpe": null,
+      "daily_var": null,
+      "latest_daily_return": 0.0,
+      "risk_window_complete": false,
+      "years": [
+        {
+          "year": 2026,
+          "observed_start": "2026-11-05",
+          "observed_end": "2026-11-06",
+          "previous_close_anchor": false,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        }
+      ],
+      "alerts": []
+    },
+    {
+      "run": "equity_hold_low",
+      "sessions": 2,
+      "as_of": "2026-11-06",
+      "total_return": 0.0022820999999999536,
+      "max_close_drawdown": 0.0,
+      "current_drawdown": 0.0,
+      "annualized_return": null,
+      "rolling_volatility": null,
+      "rolling_sharpe": null,
+      "daily_var": null,
+      "latest_daily_return": 0.0022820999999999536,
+      "risk_window_complete": false,
+      "years": [
+        {
+          "year": 2026,
+          "observed_start": "2026-11-05",
+          "observed_end": "2026-11-06",
+          "previous_close_anchor": false,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        }
+      ],
+      "alerts": []
+    },
+    {
+      "run": "equity_hold_base",
+      "sessions": 2,
+      "as_of": "2026-11-06",
+      "total_return": 0.0016100999999999477,
+      "max_close_drawdown": 0.0,
+      "current_drawdown": 0.0,
+      "annualized_return": null,
+      "rolling_volatility": null,
+      "rolling_sharpe": null,
+      "daily_var": null,
+      "latest_daily_return": 0.0016100999999999477,
+      "risk_window_complete": false,
+      "years": [
+        {
+          "year": 2026,
+          "observed_start": "2026-11-05",
+          "observed_end": "2026-11-06",
+          "previous_close_anchor": false,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        }
+      ],
+      "alerts": []
+    },
+    {
+      "run": "equity_hold_high",
+      "sessions": 2,
+      "as_of": "2026-11-06",
+      "total_return": 0.00044789999999994556,
+      "max_close_drawdown": 0.0,
+      "current_drawdown": 0.0,
+      "annualized_return": null,
+      "rolling_volatility": null,
+      "rolling_sharpe": null,
+      "daily_var": null,
+      "latest_daily_return": 0.00044789999999994556,
+      "risk_window_complete": false,
+      "years": [
+        {
+          "year": 2026,
+          "observed_start": "2026-11-05",
+          "observed_end": "2026-11-06",
+          "previous_close_anchor": false,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        }
+      ],
+      "alerts": []
+    },
+    {
+      "run": "bond_hold_low",
+      "sessions": 2,
+      "as_of": "2026-11-06",
+      "total_return": 0.00028600000000000847,
+      "max_close_drawdown": 0.0,
+      "current_drawdown": 0.0,
+      "annualized_return": null,
+      "rolling_volatility": null,
+      "rolling_sharpe": null,
+      "daily_var": null,
+      "latest_daily_return": 0.00028600000000000847,
+      "risk_window_complete": false,
+      "years": [
+        {
+          "year": 2026,
+          "observed_start": "2026-11-05",
+          "observed_end": "2026-11-06",
+          "previous_close_anchor": false,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        }
+      ],
+      "alerts": []
+    },
+    {
+      "run": "bond_hold_base",
+      "sessions": 2,
+      "as_of": "2026-11-06",
+      "total_return": -0.00030399999999997096,
+      "max_close_drawdown": 0.00030399999999997096,
+      "current_drawdown": 0.00030399999999997096,
+      "annualized_return": null,
+      "rolling_volatility": null,
+      "rolling_sharpe": null,
+      "daily_var": null,
+      "latest_daily_return": -0.00030399999999997096,
+      "risk_window_complete": false,
+      "years": [
+        {
+          "year": 2026,
+          "observed_start": "2026-11-05",
+          "observed_end": "2026-11-06",
+          "previous_close_anchor": false,
+          "max_drawdown": 0.00030399999999997096,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        }
+      ],
+      "alerts": []
+    },
+    {
+      "run": "bond_hold_high",
+      "sessions": 2,
+      "as_of": "2026-11-06",
+      "total_return": -0.0014946000000000126,
+      "max_close_drawdown": 0.0014946000000000126,
+      "current_drawdown": 0.0014946000000000126,
+      "annualized_return": null,
+      "rolling_volatility": null,
+      "rolling_sharpe": null,
+      "daily_var": null,
+      "latest_daily_return": -0.0014946000000000126,
+      "risk_window_complete": false,
+      "years": [
+        {
+          "year": 2026,
+          "observed_start": "2026-11-05",
+          "observed_end": "2026-11-06",
+          "previous_close_anchor": false,
+          "max_drawdown": 0.0014946000000000126,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        }
+      ],
+      "alerts": []
+    },
+    {
+      "run": "monthly_20_80_low",
+      "sessions": 2,
+      "as_of": "2026-11-06",
+      "total_return": 0.000624299999999911,
+      "max_close_drawdown": 0.0,
+      "current_drawdown": 0.0,
+      "annualized_return": null,
+      "rolling_volatility": null,
+      "rolling_sharpe": null,
+      "daily_var": null,
+      "latest_daily_return": 0.000624299999999911,
+      "risk_window_complete": false,
+      "years": [
+        {
+          "year": 2026,
+          "observed_start": "2026-11-05",
+          "observed_end": "2026-11-06",
+          "previous_close_anchor": false,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        }
+      ],
+      "alerts": []
+    },
+    {
+      "run": "monthly_20_80_base",
+      "sessions": 2,
+      "as_of": "2026-11-06",
+      "total_return": 0.00010080000000001199,
+      "max_close_drawdown": 0.0,
+      "current_drawdown": 0.0,
+      "annualized_return": null,
+      "rolling_volatility": null,
+      "rolling_sharpe": null,
+      "daily_var": null,
+      "latest_daily_return": 0.00010080000000001199,
+      "risk_window_complete": false,
+      "years": [
+        {
+          "year": 2026,
+          "observed_start": "2026-11-05",
+          "observed_end": "2026-11-06",
+          "previous_close_anchor": false,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        }
+      ],
+      "alerts": []
+    },
+    {
+      "run": "monthly_20_80_high",
+      "sessions": 2,
+      "as_of": "2026-11-06",
+      "total_return": -0.0009791000000000105,
+      "max_close_drawdown": 0.0009791000000000105,
+      "current_drawdown": 0.0009791000000000105,
+      "annualized_return": null,
+      "rolling_volatility": null,
+      "rolling_sharpe": null,
+      "daily_var": null,
+      "latest_daily_return": -0.0009791000000000105,
+      "risk_window_complete": false,
+      "years": [
+        {
+          "year": 2026,
+          "observed_start": "2026-11-05",
+          "observed_end": "2026-11-06",
+          "previous_close_anchor": false,
+          "max_drawdown": 0.0009791000000000105,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        }
+      ],
+      "alerts": []
+    },
+    {
+      "run": "monthly_50_50_low",
+      "sessions": 2,
+      "as_of": "2026-11-06",
+      "total_return": 0.0012550000000000061,
+      "max_close_drawdown": 0.0,
+      "current_drawdown": 0.0,
+      "annualized_return": null,
+      "rolling_volatility": null,
+      "rolling_sharpe": null,
+      "daily_var": null,
+      "latest_daily_return": 0.0012550000000000061,
+      "risk_window_complete": false,
+      "years": [
+        {
+          "year": 2026,
+          "observed_start": "2026-11-05",
+          "observed_end": "2026-11-06",
+          "previous_close_anchor": false,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        }
+      ],
+      "alerts": []
+    },
+    {
+      "run": "monthly_50_50_base",
+      "sessions": 2,
+      "as_of": "2026-11-06",
+      "total_return": 0.0006747999999998644,
+      "max_close_drawdown": 0.0,
+      "current_drawdown": 0.0,
+      "annualized_return": null,
+      "rolling_volatility": null,
+      "rolling_sharpe": null,
+      "daily_var": null,
+      "latest_daily_return": 0.0006747999999998644,
+      "risk_window_complete": false,
+      "years": [
+        {
+          "year": 2026,
+          "observed_start": "2026-11-05",
+          "observed_end": "2026-11-06",
+          "previous_close_anchor": false,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        }
+      ],
+      "alerts": []
+    },
+    {
+      "run": "monthly_50_50_high",
+      "sessions": 2,
+      "as_of": "2026-11-06",
+      "total_return": -0.0004165999999999892,
+      "max_close_drawdown": 0.0004165999999999892,
+      "current_drawdown": 0.0004165999999999892,
+      "annualized_return": null,
+      "rolling_volatility": null,
+      "rolling_sharpe": null,
+      "daily_var": null,
+      "latest_daily_return": -0.0004165999999999892,
+      "risk_window_complete": false,
+      "years": [
+        {
+          "year": 2026,
+          "observed_start": "2026-11-05",
+          "observed_end": "2026-11-06",
+          "previous_close_anchor": false,
+          "max_drawdown": 0.0004165999999999892,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        }
+      ],
+      "alerts": []
+    },
+    {
+      "run": "trend_120_low",
+      "sessions": 2,
+      "as_of": "2026-11-06",
+      "total_return": 0.00028600000000000847,
+      "max_close_drawdown": 0.0,
+      "current_drawdown": 0.0,
+      "annualized_return": null,
+      "rolling_volatility": null,
+      "rolling_sharpe": null,
+      "daily_var": null,
+      "latest_daily_return": 0.00028600000000000847,
+      "risk_window_complete": false,
+      "years": [
+        {
+          "year": 2026,
+          "observed_start": "2026-11-05",
+          "observed_end": "2026-11-06",
+          "previous_close_anchor": false,
+          "max_drawdown": 0.0,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        }
+      ],
+      "alerts": []
+    },
+    {
+      "run": "trend_120_base",
+      "sessions": 2,
+      "as_of": "2026-11-06",
+      "total_return": -0.00030399999999997096,
+      "max_close_drawdown": 0.00030399999999997096,
+      "current_drawdown": 0.00030399999999997096,
+      "annualized_return": null,
+      "rolling_volatility": null,
+      "rolling_sharpe": null,
+      "daily_var": null,
+      "latest_daily_return": -0.00030399999999997096,
+      "risk_window_complete": false,
+      "years": [
+        {
+          "year": 2026,
+          "observed_start": "2026-11-05",
+          "observed_end": "2026-11-06",
+          "previous_close_anchor": false,
+          "max_drawdown": 0.00030399999999997096,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        }
+      ],
+      "alerts": []
+    },
+    {
+      "run": "trend_120_high",
+      "sessions": 2,
+      "as_of": "2026-11-06",
+      "total_return": -0.0014946000000000126,
+      "max_close_drawdown": 0.0014946000000000126,
+      "current_drawdown": 0.0014946000000000126,
+      "annualized_return": null,
+      "rolling_volatility": null,
+      "rolling_sharpe": null,
+      "daily_var": null,
+      "latest_daily_return": -0.0014946000000000126,
+      "risk_window_complete": false,
+      "years": [
+        {
+          "year": 2026,
+          "observed_start": "2026-11-05",
+          "observed_end": "2026-11-06",
+          "previous_close_anchor": false,
+          "max_drawdown": 0.0014946000000000126,
+          "limit_breached": false,
+          "coverage": "observed dates only; boundary years may be partial"
+        }
+      ],
+      "alerts": []
+    }
+  ],
+  "methodology": "Daily close NAV including receivables; yearly drawdown anchored to previous observed year-end close; rolling sample standard deviation and historical linear-quantile VaR; zero risk-free rate is an assumption; insufficient windows stay null."
+}

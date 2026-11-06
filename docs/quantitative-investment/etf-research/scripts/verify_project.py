@@ -13,6 +13,6 @@ def main():
  count=0;snapshots=list((ROOT/'data/snapshots').glob('*/manifest.json'))
  if not snapshots:raise ValueError('No source manifests')
  for m in snapshots:count+=verify(m,m.parent)
- report=ROOT/'reports/2026-11-06-backtrader/manifest.json';n=verify(report,ROOT)
+ report=ROOT/'reports/2026-11-06-close/manifest.json';n=verify(report,ROOT)
  print('PASS:',len(snapshots),'source manifests /',count,'source files;',n,'current report, code and input-manifest entries')
 if __name__=='__main__':main()

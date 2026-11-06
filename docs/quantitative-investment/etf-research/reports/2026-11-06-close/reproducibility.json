@@ -1,0 +1,18 @@
+{
+  "risk_report_and_page_byte_identical": true,
+  "suspension_audit_byte_identical": true,
+  "saved_intent_byte_identical": true,
+  "first_forward_day_byte_identical": true,
+  "medium_core_result_files_unchanged": 23,
+  "review_packet_byte_identical": true,
+  "admission_and_checkpoint_byte_identical": true,
+  "checkpoint_retry_idempotent": true,
+  "old_core_result_files_unchanged": 23,
+  "offline_reproduction_passed": true,
+  "research_files_byte_identical": 24,
+  "dashboard_byte_identical": true,
+  "network_used_by_pipeline": false,
+  "second_forward_day_byte_identical": true,
+  "second_forward_retry_idempotent": true,
+  "first_execution_audits_byte_identical": true
+}

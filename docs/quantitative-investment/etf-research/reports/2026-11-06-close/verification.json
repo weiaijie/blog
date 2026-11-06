@@ -1,0 +1,17 @@
+{
+  "tests_passed": 120,
+  "python": "3.12.16",
+  "research_execution_environment": "independent Ubuntu",
+  "browser": "Windows Edge via Playwright 1.56.0",
+  "source_requests": 22,
+  "http_200": 18,
+  "tls_timeouts": 4,
+  "official_catalog_changed": false,
+  "forward_sessions": 2,
+  "input_sessions": 1172,
+  "portfolios": 18,
+  "model_trades": 21,
+  "model_fills_outside_daily_range": 8,
+  "annualization_displayed": false,
+  "history_and_frozen_engine_changed": false
+}

@@ -22,7 +22,7 @@ def main():
  replacements={'__PAYLOAD__':payload,'__SAMPLE_COUNT__':str(len(dates)),'__START__':dates[0],'__END__':dates[-1],'__MAIN_ANNUAL__':format(main['annualized_scenario_return'],'.2%'),'__MAIN_DD__':format(abs(main['max_close_drawdown']),'.2%'),'__REPORT_NAME__':'2026-11-04-extension' if results['sample'].get('historical_extension') else '2026-11-04-closure','__SOURCE_NOTE__':'本轮13次请求：12次HTTP200，首次债券ETF大区间请求503；改为按年分段后返回成功。两只ETF在2022-01-04至2026-10-30共1167日的OHLC与新浪精确一致，期间10条分红有官方依据。2018～2021年度休市及2019劳动节、2020春节修订已归档，2018年末跨年休市已处理。2018起全历史仍有搜狐缺日及精度问题，不整体准入。' if snapshot.endswith('08') else '此前24次请求与640日冻结研究；完整事实见原报告。'}
  if results['sample'].get('long_history_extension'):
   replacements.update({'__REPORT_NAME__':'2026-11-05-long-history','__SOURCE_NOTE__':'上交所官方日线与新浪原价逐字段一致，独立日历核验通过；本页回顾样本为2018-09-14至2026-10-30，共1967日、13条官方分红。两次上市前份额折算未重复施加。28次证据请求27次200、1次404原样保存；今天收盘准入另见最新报告。'})
- status=json.loads((root/'reports/2026-11-05-long-history/site_status.json').read_text())
+ status=json.loads((root/'reports/2026-11-06-close/site_status.json').read_text())
  replacements.update({'__UPDATE_DAY__':status['updated_on_shanghai'],'__ACCOUNT_THROUGH__':status['account_input_through'],'__ACCOUNT_SESSIONS__':str(status['account_input_sessions']),'__FORWARD_SESSIONS__':str(status['forward_sessions'])})
  html=(root/'site/template.html').read_text()
  for key,value in replacements.items():html=html.replace(key,value)

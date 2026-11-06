@@ -1,0 +1,31 @@
+{
+  "format": 1,
+  "candidate_snapshot": "2026-11-06-close-windows-1653",
+  "baseline_snapshot": "2026-11-03-official-02",
+  "snapshot_manifest_sha256": {
+    "candidate": "ed3d303a6e6bac1a4454894ace6dbf6c52927f15c25997e600b30d67601b1cad",
+    "baseline": "368c8bb592152e72acaf10ef0451cc9f1ef1d3e7c4ab5ca99babb683aa3b813f"
+  },
+  "symbols": {
+    "510300": {
+      "current_count": 259,
+      "baseline_count": 259,
+      "candidate_body_sha256": "1fadf896aa649e34b03a7c671cdef072d1163d3dbff5414f7c1ae945e1e0d462",
+      "baseline_body_sha256": "1fadf896aa649e34b03a7c671cdef072d1163d3dbff5414f7c1ae945e1e0d462",
+      "captured_at_utc": "2026-11-06T08:51:26.152509+00:00",
+      "changes": 0
+    },
+    "511010": {
+      "current_count": 230,
+      "baseline_count": 230,
+      "candidate_body_sha256": "0a6284491e607f6e20b8bbcb24247dcd7f2da94188f5f1f118445367d6149c07",
+      "baseline_body_sha256": "0a6284491e607f6e20b8bbcb24247dcd7f2da94188f5f1f118445367d6149c07",
+      "captured_at_utc": "2026-11-06T08:51:26.688115+00:00",
+      "changes": 0
+    }
+  },
+  "changes": [],
+  "approves_prices_or_events": false,
+  "status": "no_catalog_changes_in_observed_snapshot",
+  "packet_sha256": "fce7b7264e84d379bca6640dfce85c43f1b900adc6a6a3fd3b0e0b3eb24c6f38"
+}

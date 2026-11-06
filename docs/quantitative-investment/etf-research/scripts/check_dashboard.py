@@ -9,9 +9,9 @@ with sync_playwright() as pw:
  response=page.goto(a.url);assert response.status==200
  assert page.locator('#baseline-rows tr').count()==6
  if page.locator('#latest-admission').count():
-  assert page.locator('#account-through').inner_text()=='2026-11-05'
-  assert page.locator('#account-sessions').inner_text()=='1171'
-  assert page.locator('#forward-sessions').inner_text()=='1'
+  assert page.locator('#account-through').inner_text()=='2026-11-06'
+  assert page.locator('#account-sessions').inner_text()=='1172'
+  assert page.locator('#forward-sessions').inner_text()=='2'
  assert page.locator('#chart polyline').count()==6
  assert page.locator('#sensitivity-rows tr').count()==9
  assert page.locator('#fold-rows tr').count()==(14 if a.long_history else 8 if a.extended else 4)

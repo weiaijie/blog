@@ -1,0 +1,319 @@
+{
+  "as_of": "2026-11-06",
+  "portfolios_checked": 18,
+  "trades_checked": 21,
+  "independent_arithmetic_passed": true,
+  "model_fills_outside_daily_range": [
+    {
+      "run": "bond_hold_base",
+      "symbol": "511010",
+      "model_fill": "141.450",
+      "low": "141.355",
+      "high": "141.449"
+    },
+    {
+      "run": "bond_hold_high",
+      "symbol": "511010",
+      "model_fill": "141.521",
+      "low": "141.355",
+      "high": "141.449"
+    },
+    {
+      "run": "monthly_20_80_base",
+      "symbol": "511010",
+      "model_fill": "141.450",
+      "low": "141.355",
+      "high": "141.449"
+    },
+    {
+      "run": "monthly_20_80_high",
+      "symbol": "511010",
+      "model_fill": "141.521",
+      "low": "141.355",
+      "high": "141.449"
+    },
+    {
+      "run": "monthly_50_50_base",
+      "symbol": "511010",
+      "model_fill": "141.450",
+      "low": "141.355",
+      "high": "141.449"
+    },
+    {
+      "run": "monthly_50_50_high",
+      "symbol": "511010",
+      "model_fill": "141.521",
+      "low": "141.355",
+      "high": "141.449"
+    },
+    {
+      "run": "trend_120_base",
+      "symbol": "511010",
+      "model_fill": "141.450",
+      "low": "141.355",
+      "high": "141.449"
+    },
+    {
+      "run": "trend_120_high",
+      "symbol": "511010",
+      "model_fill": "141.521",
+      "low": "141.355",
+      "high": "141.449"
+    }
+  ],
+  "portfolios": [
+    {
+      "run": "cash_low",
+      "equity": "100000.000",
+      "cash": "100000",
+      "holdings": {
+        "510300": 0,
+        "511010": 0
+      },
+      "commissions": "0",
+      "slippage_cost": "0",
+      "total_return": "0.000",
+      "annualized_return": null,
+      "trades": 0
+    },
+    {
+      "run": "cash_base",
+      "equity": "100000.000",
+      "cash": "100000",
+      "holdings": {
+        "510300": 0,
+        "511010": 0
+      },
+      "commissions": "0",
+      "slippage_cost": "0",
+      "total_return": "0.000",
+      "annualized_return": null,
+      "trades": 0
+    },
+    {
+      "run": "cash_high",
+      "equity": "100000.000",
+      "cash": "100000",
+      "holdings": {
+        "510300": 0,
+        "511010": 0
+      },
+      "commissions": "0",
+      "slippage_cost": "0",
+      "total_return": "0.000",
+      "annualized_return": null,
+      "trades": 0
+    },
+    {
+      "run": "equity_hold_low",
+      "equity": "100228.210",
+      "cash": "2077.010",
+      "holdings": {
+        "510300": 23800,
+        "511010": 0
+      },
+      "commissions": "9.79",
+      "slippage_cost": "23.800",
+      "total_return": "0.0022821",
+      "annualized_return": null,
+      "trades": 1
+    },
+    {
+      "run": "equity_hold_base",
+      "equity": "100161.010",
+      "cash": "2009.810",
+      "holdings": {
+        "510300": 23800,
+        "511010": 0
+      },
+      "commissions": "29.39",
+      "slippage_cost": "71.400",
+      "total_return": "0.0016101",
+      "annualized_return": null,
+      "trades": 1
+    },
+    {
+      "run": "equity_hold_high",
+      "equity": "100044.790",
+      "cash": "1893.590",
+      "holdings": {
+        "510300": 23800,
+        "511010": 0
+      },
+      "commissions": "98.01",
+      "slippage_cost": "119.000",
+      "total_return": "0.0004479",
+      "annualized_return": null,
+      "trades": 1
+    },
+    {
+      "run": "bond_hold_low",
+      "equity": "100028.600",
+      "cash": "1014.300",
+      "holdings": {
+        "510300": 0,
+        "511010": 700
+      },
+      "commissions": "9.90",
+      "slippage_cost": "10.500",
+      "total_return": "0.000286",
+      "annualized_return": null,
+      "trades": 1
+    },
+    {
+      "run": "bond_hold_base",
+      "equity": "99969.600",
+      "cash": "955.300",
+      "holdings": {
+        "510300": 0,
+        "511010": 700
+      },
+      "commissions": "29.70",
+      "slippage_cost": "49.700",
+      "total_return": "-0.000304",
+      "annualized_return": null,
+      "trades": 1
+    },
+    {
+      "run": "bond_hold_high",
+      "equity": "99850.540",
+      "cash": "836.240",
+      "holdings": {
+        "510300": 0,
+        "511010": 700
+      },
+      "commissions": "99.06",
+      "slippage_cost": "99.400",
+      "total_return": "-0.0014946",
+      "annualized_return": null,
+      "trades": 1
+    },
+    {
+      "run": "monthly_20_80_low",
+      "equity": "100062.430",
+      "cash": "9955.130",
+      "holdings": {
+        "510300": 4700,
+        "511010": 500
+      },
+      "commissions": "12.07",
+      "slippage_cost": "12.200",
+      "total_return": "0.0006243",
+      "annualized_return": null,
+      "trades": 2
+    },
+    {
+      "run": "monthly_20_80_base",
+      "equity": "100010.080",
+      "cash": "9902.780",
+      "holdings": {
+        "510300": 4700,
+        "511010": 500
+      },
+      "commissions": "27.02",
+      "slippage_cost": "49.600",
+      "total_return": "0.0001008",
+      "annualized_return": null,
+      "trades": 2
+    },
+    {
+      "run": "monthly_20_80_high",
+      "equity": "99902.090",
+      "cash": "9794.790",
+      "holdings": {
+        "510300": 4700,
+        "511010": 500
+      },
+      "commissions": "90.11",
+      "slippage_cost": "94.500",
+      "total_return": "-0.0009791",
+      "annualized_return": null,
+      "trades": 2
+    },
+    {
+      "run": "monthly_50_50_low",
+      "equity": "100125.500",
+      "cash": "8615.200",
+      "holdings": {
+        "510300": 11900,
+        "511010": 300
+      },
+      "commissions": "10.00",
+      "slippage_cost": "16.400",
+      "total_return": "0.001255",
+      "annualized_return": null,
+      "trades": 2
+    },
+    {
+      "run": "monthly_50_50_base",
+      "equity": "100067.480",
+      "cash": "8557.180",
+      "holdings": {
+        "510300": 11900,
+        "511010": 300
+      },
+      "commissions": "27.42",
+      "slippage_cost": "57.000",
+      "total_return": "0.0006748",
+      "annualized_return": null,
+      "trades": 2
+    },
+    {
+      "run": "monthly_50_50_high",
+      "equity": "99958.340",
+      "cash": "8448.040",
+      "holdings": {
+        "510300": 11900,
+        "511010": 300
+      },
+      "commissions": "91.46",
+      "slippage_cost": "102.100",
+      "total_return": "-0.0004166",
+      "annualized_return": null,
+      "trades": 2
+    },
+    {
+      "run": "trend_120_low",
+      "equity": "100028.600",
+      "cash": "1014.300",
+      "holdings": {
+        "510300": 0,
+        "511010": 700
+      },
+      "commissions": "9.90",
+      "slippage_cost": "10.500",
+      "total_return": "0.000286",
+      "annualized_return": null,
+      "trades": 1
+    },
+    {
+      "run": "trend_120_base",
+      "equity": "99969.600",
+      "cash": "955.300",
+      "holdings": {
+        "510300": 0,
+        "511010": 700
+      },
+      "commissions": "29.70",
+      "slippage_cost": "49.700",
+      "total_return": "-0.000304",
+      "annualized_return": null,
+      "trades": 1
+    },
+    {
+      "run": "trend_120_high",
+      "equity": "99850.540",
+      "cash": "836.240",
+      "holdings": {
+        "510300": 0,
+        "511010": 700
+      },
+      "commissions": "99.06",
+      "slippage_cost": "99.400",
+      "total_return": "-0.0014946",
+      "annualized_return": null,
+      "trades": 1
+    }
+  ],
+  "scope": "Cost-model simulation only. Out-of-range fills are not proven executable. Annualization suppressed for this two-session sample; frozen engine raw summary is retained unchanged."
+}

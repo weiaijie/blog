@@ -33,6 +33,20 @@ def main():
   if state.read_bytes()!=(saved/'forward_checkpoint.json').read_bytes() or audit.read_bytes()!=(saved/'admission.json').read_bytes():raise AssertionError('First forward observation changed')
   before=state.read_bytes();subprocess.run(command,cwd=ROOT,env=env,check=True)
   if before!=state.read_bytes():raise AssertionError('First forward retry mismatch')
+  latest=ROOT/'reports/2026-11-06-close'
+  command=[sys.executable,'scripts/advance_forward.py','--snapshot','2026-11-06-close-windows-1653','--state',str(state),'--audit',str(audit)]
+  subprocess.run(command,cwd=ROOT,env=env,check=True)
+  if state.read_bytes()!=(latest/'forward_checkpoint.json').read_bytes() or audit.read_bytes()!=(latest/'admission.json').read_bytes():raise AssertionError('Second forward observation mismatch')
+  before=state.read_bytes();subprocess.run(command,cwd=ROOT,env=env,check=True)
+  if before!=state.read_bytes():raise AssertionError('Second forward retry mismatch')
+  comparison=Path(temp)/'comparison.json';execution=Path(temp)/'execution.json';official=Path(temp)/'official.json'
+  for command in [
+   ['scripts/check_first_session.py','--state',str(state),'--output',str(comparison)],
+   ['scripts/audit_first_execution.py','--output',str(execution)],
+   ['scripts/audit_official_close.py','--official-snapshot','2026-11-06-official-close-1650','--price-snapshot','2026-11-06-close-windows-1653','--day','2026-11-06','--output',str(official)]]:
+   subprocess.run([sys.executable,*command],cwd=ROOT,env=env,check=True)
+  for candidate,name in [(comparison,'intent_comparison.json'),(execution,'execution_audit.json'),(official,'official_close.json')]:
+   if candidate.read_bytes()!=(latest/name).read_bytes():raise AssertionError('Latest audit mismatch: '+name)
   review=Path(temp)/'review'
   subprocess.run([sys.executable,'scripts/review_catalog.py','--snapshot','2026-11-05-rules-10','--output',str(review),'--download-evidence'],cwd=ROOT,env=env,check=True)
   for file in review.iterdir():
@@ -45,7 +59,8 @@ def main():
   if suspension.read_bytes()!=(ROOT/'reports/2026-11-06-suspension/audit.json').read_bytes():raise AssertionError('Suspension audit mismatch')
   risk=Path(temp)/'risk.json';risk_page=Path(temp)/'risk.html'
   subprocess.run([sys.executable,'scripts/build_risk_report.py','--output',str(risk),'--page',str(risk_page)],cwd=ROOT,env=env,check=True)
-  if risk.read_bytes()!=(ROOT/'reports/2026-11-06-plan-alignment/risk.json').read_bytes() or risk_page.read_bytes()!=(ROOT/'site/risk.html').read_bytes():raise AssertionError('Risk report/page reproduction mismatch')
+  if risk.read_bytes()!=(ROOT/'reports/2026-11-06-close/risk.json').read_bytes() or risk_page.read_bytes()!=(ROOT/'site/risk.html').read_bytes():raise AssertionError('Risk report/page reproduction mismatch')
   result={'risk_report_and_page_byte_identical':True,'suspension_audit_byte_identical':True,'saved_intent_byte_identical':True,'first_forward_day_byte_identical':True,'medium_core_result_files_unchanged':len(list(medium.iterdir())),'review_packet_byte_identical':True,'admission_and_checkpoint_byte_identical':True,'checkpoint_retry_idempotent':True,'old_core_result_files_unchanged':len(list(old.iterdir())),'offline_reproduction_passed':True,'research_files_byte_identical':len(files),'dashboard_byte_identical':True,'network_used_by_pipeline':False}
-  (ROOT/'reports/2026-11-06-plan-alignment/reproducibility.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result))
+  result.update(second_forward_day_byte_identical=True,second_forward_retry_idempotent=True,first_execution_audits_byte_identical=True)
+  (ROOT/'reports/2026-11-06-close/reproducibility.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result))
 if __name__=='__main__':main()

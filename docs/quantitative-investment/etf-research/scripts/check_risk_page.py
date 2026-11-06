@@ -2,9 +2,9 @@
 from pathlib import Path
 import argparse,json
 from playwright.sync_api import sync_playwright
-p=argparse.ArgumentParser();p.add_argument('--url',default='http://127.0.0.1:8774/site/risk.html');p.add_argument('--output',type=Path,required=True);a=p.parse_args();a.output.mkdir(parents=True,exist_ok=True)
+p=argparse.ArgumentParser();p.add_argument('--url',default='http://127.0.0.1:8774/site/risk.html');p.add_argument('--output',type=Path,required=True);p.add_argument('--chromium',default='/usr/bin/chromium');a=p.parse_args();a.output.mkdir(parents=True,exist_ok=True)
 with sync_playwright() as pw:
- b=pw.chromium.launch(executable_path='/usr/bin/chromium',headless=True,args=['--no-sandbox']);page=b.new_page(viewport={'width':1360,'height':1000});errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
+ b=pw.chromium.launch(executable_path=a.chromium,headless=True,args=['--no-sandbox']);page=b.new_page(viewport={'width':1360,'height':1000});errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
  assert page.goto(a.url).status==200
  assert page.locator('tbody tr').count()==18 and page.locator('svg').count()==1
  assert '样本不足' in page.locator('body').inner_text() and '不改变交易' in page.locator('body').inner_text()
