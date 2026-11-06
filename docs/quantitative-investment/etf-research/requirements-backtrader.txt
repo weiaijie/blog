@@ -1,0 +1,3 @@
+# Optional isolated execution comparator; never required by the frozen engine.
+-r requirements-lock.txt
+backtrader==1.9.78.123

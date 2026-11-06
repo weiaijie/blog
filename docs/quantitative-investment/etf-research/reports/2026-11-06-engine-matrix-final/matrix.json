@@ -1,0 +1,1766 @@
+{
+  "scope": "Independent execution/accounting with shared frozen target schedules; not independent strategy signal generation or proof of real fills.",
+  "python": "3.12.16",
+  "backtrader": "1.9.78.123",
+  "sessions": 1967,
+  "cases": [
+    {
+      "run": "cash_low_10000_1",
+      "rows": 1967,
+      "field_checks": 13925,
+      "max_daily_money_delta": "0",
+      "mismatches": 0,
+      "reference_trades": 0,
+      "native_trades": 0,
+      "target_schedule_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "run": "cash_low_10000_2",
+      "rows": 1967,
+      "field_checks": 13925,
+      "max_daily_money_delta": "0",
+      "mismatches": 0,
+      "reference_trades": 0,
+      "native_trades": 0,
+      "target_schedule_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "run": "cash_low_10000_3",
+      "rows": 1967,
+      "field_checks": 13925,
+      "max_daily_money_delta": "0",
+      "mismatches": 0,
+      "reference_trades": 0,
+      "native_trades": 0,
+      "target_schedule_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "run": "cash_low_100000_1",
+      "rows": 1967,
+      "field_checks": 13925,
+      "max_daily_money_delta": "0",
+      "mismatches": 0,
+      "reference_trades": 0,
+      "native_trades": 0,
+      "target_schedule_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "run": "cash_low_100000_2",
+      "rows": 1967,
+      "field_checks": 13925,
+      "max_daily_money_delta": "0",
+      "mismatches": 0,
+      "reference_trades": 0,
+      "native_trades": 0,
+      "target_schedule_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "run": "cash_low_100000_3",
+      "rows": 1967,
+      "field_checks": 13925,
+      "max_daily_money_delta": "0",
+      "mismatches": 0,
+      "reference_trades": 0,
+      "native_trades": 0,
+      "target_schedule_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "run": "cash_low_1000000_1",
+      "rows": 1967,
+      "field_checks": 13925,
+      "max_daily_money_delta": "0",
+      "mismatches": 0,
+      "reference_trades": 0,
+      "native_trades": 0,
+      "target_schedule_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "run": "cash_low_1000000_2",
+      "rows": 1967,
+      "field_checks": 13925,
+      "max_daily_money_delta": "0",
+      "mismatches": 0,
+      "reference_trades": 0,
+      "native_trades": 0,
+      "target_schedule_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "run": "cash_low_1000000_3",
+      "rows": 1967,
+      "field_checks": 13925,
+      "max_daily_money_delta": "0",
+      "mismatches": 0,
+      "reference_trades": 0,
+      "native_trades": 0,
+      "target_schedule_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "run": "cash_base_10000_1",
+      "rows": 1967,
+      "field_checks": 13925,
+      "max_daily_money_delta": "0",
+      "mismatches": 0,
+      "reference_trades": 0,
+      "native_trades": 0,
+      "target_schedule_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "run": "cash_base_10000_2",
+      "rows": 1967,
+      "field_checks": 13925,
+      "max_daily_money_delta": "0",
+      "mismatches": 0,
+      "reference_trades": 0,
+      "native_trades": 0,
+      "target_schedule_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "run": "cash_base_10000_3",
+      "rows": 1967,
+      "field_checks": 13925,
+      "max_daily_money_delta": "0",
+      "mismatches": 0,
+      "reference_trades": 0,
+      "native_trades": 0,
+      "target_schedule_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "run": "cash_base_100000_1",
+      "rows": 1967,
+      "field_checks": 13925,
+      "max_daily_money_delta": "0",
+      "mismatches": 0,
+      "reference_trades": 0,
+      "native_trades": 0,
+      "target_schedule_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "run": "cash_base_100000_2",
+      "rows": 1967,
+      "field_checks": 13925,
+      "max_daily_money_delta": "0",
+      "mismatches": 0,
+      "reference_trades": 0,
+      "native_trades": 0,
+      "target_schedule_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "run": "cash_base_100000_3",
+      "rows": 1967,
+      "field_checks": 13925,
+      "max_daily_money_delta": "0",
+      "mismatches": 0,
+      "reference_trades": 0,
+      "native_trades": 0,
+      "target_schedule_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "run": "cash_base_1000000_1",
+      "rows": 1967,
+      "field_checks": 13925,
+      "max_daily_money_delta": "0",
+      "mismatches": 0,
+      "reference_trades": 0,
+      "native_trades": 0,
+      "target_schedule_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "run": "cash_base_1000000_2",
+      "rows": 1967,
+      "field_checks": 13925,
+      "max_daily_money_delta": "0",
+      "mismatches": 0,
+      "reference_trades": 0,
+      "native_trades": 0,
+      "target_schedule_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "run": "cash_base_1000000_3",
+      "rows": 1967,
+      "field_checks": 13925,
+      "max_daily_money_delta": "0",
+      "mismatches": 0,
+      "reference_trades": 0,
+      "native_trades": 0,
+      "target_schedule_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "run": "cash_high_10000_1",
+      "rows": 1967,
+      "field_checks": 13925,
+      "max_daily_money_delta": "0",
+      "mismatches": 0,
+      "reference_trades": 0,
+      "native_trades": 0,
+      "target_schedule_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "run": "cash_high_10000_2",
+      "rows": 1967,
+      "field_checks": 13925,
+      "max_daily_money_delta": "0",
+      "mismatches": 0,
+      "reference_trades": 0,
+      "native_trades": 0,
+      "target_schedule_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "run": "cash_high_10000_3",
+      "rows": 1967,
+      "field_checks": 13925,
+      "max_daily_money_delta": "0",
+      "mismatches": 0,
+      "reference_trades": 0,
+      "native_trades": 0,
+      "target_schedule_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "run": "cash_high_100000_1",
+      "rows": 1967,
+      "field_checks": 13925,
+      "max_daily_money_delta": "0",
+      "mismatches": 0,
+      "reference_trades": 0,
+      "native_trades": 0,
+      "target_schedule_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "run": "cash_high_100000_2",
+      "rows": 1967,
+      "field_checks": 13925,
+      "max_daily_money_delta": "0",
+      "mismatches": 0,
+      "reference_trades": 0,
+      "native_trades": 0,
+      "target_schedule_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "run": "cash_high_100000_3",
+      "rows": 1967,
+      "field_checks": 13925,
+      "max_daily_money_delta": "0",
+      "mismatches": 0,
+      "reference_trades": 0,
+      "native_trades": 0,
+      "target_schedule_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "run": "cash_high_1000000_1",
+      "rows": 1967,
+      "field_checks": 13925,
+      "max_daily_money_delta": "0",
+      "mismatches": 0,
+      "reference_trades": 0,
+      "native_trades": 0,
+      "target_schedule_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "run": "cash_high_1000000_2",
+      "rows": 1967,
+      "field_checks": 13925,
+      "max_daily_money_delta": "0",
+      "mismatches": 0,
+      "reference_trades": 0,
+      "native_trades": 0,
+      "target_schedule_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "run": "cash_high_1000000_3",
+      "rows": 1967,
+      "field_checks": 13925,
+      "max_daily_money_delta": "0",
+      "mismatches": 0,
+      "reference_trades": 0,
+      "native_trades": 0,
+      "target_schedule_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "run": "equity_hold_low_10000_1",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "2E-12",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "8f518e4a321a7988d1e8b8cdd34498620b80baae130d07ee9d9a6e1012db9324"
+    },
+    {
+      "run": "equity_hold_low_10000_2",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "2E-12",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "68420ffb1fe622d0dfd9a48afef5524b2970cc978198c8eb4db04c2891738dd3"
+    },
+    {
+      "run": "equity_hold_low_10000_3",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "2E-12",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "706eed8c57c45d5e0e9b6aee09cc847c411c183041d2eb11ba9039e5cae0073c"
+    },
+    {
+      "run": "equity_hold_low_100000_1",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "4E-11",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "1034dc0fa101bfd474eddebaaa47fd6dfdf37e3cd9effae0b07a3ce02266a8b7"
+    },
+    {
+      "run": "equity_hold_low_100000_2",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "4E-11",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "755f32d795f8846929637571617031da5b73c01e749219063ddd79d991cb6b04"
+    },
+    {
+      "run": "equity_hold_low_100000_3",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "2E-11",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "b7a2d5654f4e46dde09743e5638b489707df30cd477a5cf44fe769ebbbf6eff6"
+    },
+    {
+      "run": "equity_hold_low_1000000_1",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "4E-10",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "d2037477e9383bee0ef1ef98afbf8edc1dbc6bd57375dba49aae087b409e1404"
+    },
+    {
+      "run": "equity_hold_low_1000000_2",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "3E-10",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "8f664d5628a2dda7a5240bdc910ac1f57b05403c87a27bd21be9f02817ed52ef"
+    },
+    {
+      "run": "equity_hold_low_1000000_3",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "3E-10",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "1e6f1ce076a7365e6a56279de4b058fe9ca598dd4e2bbec6b15aa8ef696120da"
+    },
+    {
+      "run": "equity_hold_base_10000_1",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "2E-12",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "8f518e4a321a7988d1e8b8cdd34498620b80baae130d07ee9d9a6e1012db9324"
+    },
+    {
+      "run": "equity_hold_base_10000_2",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "2E-12",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "68420ffb1fe622d0dfd9a48afef5524b2970cc978198c8eb4db04c2891738dd3"
+    },
+    {
+      "run": "equity_hold_base_10000_3",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "4E-12",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "706eed8c57c45d5e0e9b6aee09cc847c411c183041d2eb11ba9039e5cae0073c"
+    },
+    {
+      "run": "equity_hold_base_100000_1",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "4E-11",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "1034dc0fa101bfd474eddebaaa47fd6dfdf37e3cd9effae0b07a3ce02266a8b7"
+    },
+    {
+      "run": "equity_hold_base_100000_2",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "5E-11",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "755f32d795f8846929637571617031da5b73c01e749219063ddd79d991cb6b04"
+    },
+    {
+      "run": "equity_hold_base_100000_3",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "2E-11",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "b7a2d5654f4e46dde09743e5638b489707df30cd477a5cf44fe769ebbbf6eff6"
+    },
+    {
+      "run": "equity_hold_base_1000000_1",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "3E-10",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "d2037477e9383bee0ef1ef98afbf8edc1dbc6bd57375dba49aae087b409e1404"
+    },
+    {
+      "run": "equity_hold_base_1000000_2",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "4E-10",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "8f664d5628a2dda7a5240bdc910ac1f57b05403c87a27bd21be9f02817ed52ef"
+    },
+    {
+      "run": "equity_hold_base_1000000_3",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "4E-10",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "1e6f1ce076a7365e6a56279de4b058fe9ca598dd4e2bbec6b15aa8ef696120da"
+    },
+    {
+      "run": "equity_hold_high_10000_1",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "3E-12",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "8f518e4a321a7988d1e8b8cdd34498620b80baae130d07ee9d9a6e1012db9324"
+    },
+    {
+      "run": "equity_hold_high_10000_2",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "3E-12",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "68420ffb1fe622d0dfd9a48afef5524b2970cc978198c8eb4db04c2891738dd3"
+    },
+    {
+      "run": "equity_hold_high_10000_3",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "5E-12",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "706eed8c57c45d5e0e9b6aee09cc847c411c183041d2eb11ba9039e5cae0073c"
+    },
+    {
+      "run": "equity_hold_high_100000_1",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "4E-11",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "1034dc0fa101bfd474eddebaaa47fd6dfdf37e3cd9effae0b07a3ce02266a8b7"
+    },
+    {
+      "run": "equity_hold_high_100000_2",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "3E-11",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "755f32d795f8846929637571617031da5b73c01e749219063ddd79d991cb6b04"
+    },
+    {
+      "run": "equity_hold_high_100000_3",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "4E-11",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "b7a2d5654f4e46dde09743e5638b489707df30cd477a5cf44fe769ebbbf6eff6"
+    },
+    {
+      "run": "equity_hold_high_1000000_1",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "3E-10",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "d2037477e9383bee0ef1ef98afbf8edc1dbc6bd57375dba49aae087b409e1404"
+    },
+    {
+      "run": "equity_hold_high_1000000_2",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "4E-10",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "8f664d5628a2dda7a5240bdc910ac1f57b05403c87a27bd21be9f02817ed52ef"
+    },
+    {
+      "run": "equity_hold_high_1000000_3",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "3E-10",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "1e6f1ce076a7365e6a56279de4b058fe9ca598dd4e2bbec6b15aa8ef696120da"
+    },
+    {
+      "run": "bond_hold_low_10000_1",
+      "rows": 1967,
+      "field_checks": 13925,
+      "max_daily_money_delta": "0",
+      "mismatches": 0,
+      "reference_trades": 0,
+      "native_trades": 0,
+      "target_schedule_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "run": "bond_hold_low_10000_2",
+      "rows": 1967,
+      "field_checks": 13925,
+      "max_daily_money_delta": "0",
+      "mismatches": 0,
+      "reference_trades": 0,
+      "native_trades": 0,
+      "target_schedule_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "run": "bond_hold_low_10000_3",
+      "rows": 1967,
+      "field_checks": 13925,
+      "max_daily_money_delta": "0",
+      "mismatches": 0,
+      "reference_trades": 0,
+      "native_trades": 0,
+      "target_schedule_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "run": "bond_hold_low_100000_1",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "3E-11",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "1d272f54043d98b97db07ec9543e31bee45ff920ded81baac1bd42cfad95120f"
+    },
+    {
+      "run": "bond_hold_low_100000_2",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "3E-11",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "abc67cf79a7308e7597914f11b28879a2a2d94b7f5624046e2e6f0d63037771d"
+    },
+    {
+      "run": "bond_hold_low_100000_3",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "4E-11",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "0da20c0bd7710b1cf90c966ecf117b878cab74f80be027ec96aa2dcd46fd6c98"
+    },
+    {
+      "run": "bond_hold_low_1000000_1",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "4E-10",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "c3ac45ebc4c7642ec2c089be482641d664423bdc69ecc25495b91e5ad54a4a0a"
+    },
+    {
+      "run": "bond_hold_low_1000000_2",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "3E-10",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "c0c5f1cd22c0b88e08eac48b32a44b196a66bdf1e839ac4fe6e72d9a3607816e"
+    },
+    {
+      "run": "bond_hold_low_1000000_3",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "3E-10",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "86ea49e9e0af0ffa79baf6eb9cb1d2aaca477ad5a6ea93ba60d0ceaf2d3aa61c"
+    },
+    {
+      "run": "bond_hold_base_10000_1",
+      "rows": 1967,
+      "field_checks": 13925,
+      "max_daily_money_delta": "0",
+      "mismatches": 0,
+      "reference_trades": 0,
+      "native_trades": 0,
+      "target_schedule_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "run": "bond_hold_base_10000_2",
+      "rows": 1967,
+      "field_checks": 13925,
+      "max_daily_money_delta": "0",
+      "mismatches": 0,
+      "reference_trades": 0,
+      "native_trades": 0,
+      "target_schedule_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "run": "bond_hold_base_10000_3",
+      "rows": 1967,
+      "field_checks": 13925,
+      "max_daily_money_delta": "0",
+      "mismatches": 0,
+      "reference_trades": 0,
+      "native_trades": 0,
+      "target_schedule_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "run": "bond_hold_base_100000_1",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "4E-11",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "1d272f54043d98b97db07ec9543e31bee45ff920ded81baac1bd42cfad95120f"
+    },
+    {
+      "run": "bond_hold_base_100000_2",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "3E-11",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "abc67cf79a7308e7597914f11b28879a2a2d94b7f5624046e2e6f0d63037771d"
+    },
+    {
+      "run": "bond_hold_base_100000_3",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "4E-11",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "0da20c0bd7710b1cf90c966ecf117b878cab74f80be027ec96aa2dcd46fd6c98"
+    },
+    {
+      "run": "bond_hold_base_1000000_1",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "4E-10",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "c3ac45ebc4c7642ec2c089be482641d664423bdc69ecc25495b91e5ad54a4a0a"
+    },
+    {
+      "run": "bond_hold_base_1000000_2",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "3E-10",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "c0c5f1cd22c0b88e08eac48b32a44b196a66bdf1e839ac4fe6e72d9a3607816e"
+    },
+    {
+      "run": "bond_hold_base_1000000_3",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "4E-10",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "86ea49e9e0af0ffa79baf6eb9cb1d2aaca477ad5a6ea93ba60d0ceaf2d3aa61c"
+    },
+    {
+      "run": "bond_hold_high_10000_1",
+      "rows": 1967,
+      "field_checks": 13925,
+      "max_daily_money_delta": "0",
+      "mismatches": 0,
+      "reference_trades": 0,
+      "native_trades": 0,
+      "target_schedule_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "run": "bond_hold_high_10000_2",
+      "rows": 1967,
+      "field_checks": 13925,
+      "max_daily_money_delta": "0",
+      "mismatches": 0,
+      "reference_trades": 0,
+      "native_trades": 0,
+      "target_schedule_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "run": "bond_hold_high_10000_3",
+      "rows": 1967,
+      "field_checks": 13925,
+      "max_daily_money_delta": "0",
+      "mismatches": 0,
+      "reference_trades": 0,
+      "native_trades": 0,
+      "target_schedule_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "run": "bond_hold_high_100000_1",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "3E-11",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "1d272f54043d98b97db07ec9543e31bee45ff920ded81baac1bd42cfad95120f"
+    },
+    {
+      "run": "bond_hold_high_100000_2",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "2E-11",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "abc67cf79a7308e7597914f11b28879a2a2d94b7f5624046e2e6f0d63037771d"
+    },
+    {
+      "run": "bond_hold_high_100000_3",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "4E-11",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "0da20c0bd7710b1cf90c966ecf117b878cab74f80be027ec96aa2dcd46fd6c98"
+    },
+    {
+      "run": "bond_hold_high_1000000_1",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "4E-10",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "c3ac45ebc4c7642ec2c089be482641d664423bdc69ecc25495b91e5ad54a4a0a"
+    },
+    {
+      "run": "bond_hold_high_1000000_2",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "3E-10",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "c0c5f1cd22c0b88e08eac48b32a44b196a66bdf1e839ac4fe6e72d9a3607816e"
+    },
+    {
+      "run": "bond_hold_high_1000000_3",
+      "rows": 1967,
+      "field_checks": 13944,
+      "max_daily_money_delta": "4E-10",
+      "mismatches": 0,
+      "reference_trades": 1,
+      "native_trades": 1,
+      "target_schedule_sha256": "86ea49e9e0af0ffa79baf6eb9cb1d2aaca477ad5a6ea93ba60d0ceaf2d3aa61c"
+    },
+    {
+      "run": "monthly_20_80_low_10000_1",
+      "rows": 1967,
+      "field_checks": 14180,
+      "max_daily_money_delta": "4E-12",
+      "mismatches": 0,
+      "reference_trades": 13,
+      "native_trades": 13,
+      "target_schedule_sha256": "4741cefcfc245415a4a360b069e4947beb68a1b24b022c969bef1b4460504783"
+    },
+    {
+      "run": "monthly_20_80_low_10000_2",
+      "rows": 1967,
+      "field_checks": 14191,
+      "max_daily_money_delta": "4E-12",
+      "mismatches": 0,
+      "reference_trades": 14,
+      "native_trades": 14,
+      "target_schedule_sha256": "75ece8e64a2877f057aaf64f9a01f4774a4090242e041674a4bd4d10672d9b5c"
+    },
+    {
+      "run": "monthly_20_80_low_10000_3",
+      "rows": 1967,
+      "field_checks": 14172,
+      "max_daily_money_delta": "4E-12",
+      "mismatches": 0,
+      "reference_trades": 13,
+      "native_trades": 13,
+      "target_schedule_sha256": "132511c512d90c101539559d303e7a0fac8817ea751f4f9b439aa7d14d3ba4d4"
+    },
+    {
+      "run": "monthly_20_80_low_100000_1",
+      "rows": 1967,
+      "field_checks": 15415,
+      "max_daily_money_delta": "5E-11",
+      "mismatches": 0,
+      "reference_trades": 78,
+      "native_trades": 78,
+      "target_schedule_sha256": "9474f7c6b0932ba7d92c50bc1ad4051d4a490c52a37e570a139add546fa3ae67"
+    },
+    {
+      "run": "monthly_20_80_low_100000_2",
+      "rows": 1967,
+      "field_checks": 15426,
+      "max_daily_money_delta": "4E-11",
+      "mismatches": 0,
+      "reference_trades": 79,
+      "native_trades": 79,
+      "target_schedule_sha256": "3c6fdca1753c57d534b89126efe5fcb3621a06efadf8887580acaecbe637fed2"
+    },
+    {
+      "run": "monthly_20_80_low_100000_3",
+      "rows": 1967,
+      "field_checks": 15483,
+      "max_daily_money_delta": "5E-11",
+      "mismatches": 0,
+      "reference_trades": 82,
+      "native_trades": 82,
+      "target_schedule_sha256": "1f51481bea0f073882f26408e2507d56bdc7e6c4ed2026744905d44b795b6cab"
+    },
+    {
+      "run": "monthly_20_80_low_1000000_1",
+      "rows": 1967,
+      "field_checks": 16734,
+      "max_daily_money_delta": "6E-10",
+      "mismatches": 0,
+      "reference_trades": 147,
+      "native_trades": 147,
+      "target_schedule_sha256": "37b06f287b980ce67f2b5a99ea7cd12040ec54160ec8cb8ab02c0a3dbfacd679"
+    },
+    {
+      "run": "monthly_20_80_low_1000000_2",
+      "rows": 1967,
+      "field_checks": 16623,
+      "max_daily_money_delta": "4E-10",
+      "mismatches": 0,
+      "reference_trades": 142,
+      "native_trades": 142,
+      "target_schedule_sha256": "5c66fab28e0f284ad4ddabb16790b8a1ca6d4ae0555cda6c4dd9cbe0796b832b"
+    },
+    {
+      "run": "monthly_20_80_low_1000000_3",
+      "rows": 1967,
+      "field_checks": 16718,
+      "max_daily_money_delta": "4E-10",
+      "mismatches": 0,
+      "reference_trades": 147,
+      "native_trades": 147,
+      "target_schedule_sha256": "98fc88add1fde5ab83f9c8581c9ca93ea6dc59d9c4ce8235943e56e005dad55b"
+    },
+    {
+      "run": "monthly_20_80_base_10000_1",
+      "rows": 1967,
+      "field_checks": 14180,
+      "max_daily_money_delta": "3E-12",
+      "mismatches": 0,
+      "reference_trades": 13,
+      "native_trades": 13,
+      "target_schedule_sha256": "4741cefcfc245415a4a360b069e4947beb68a1b24b022c969bef1b4460504783"
+    },
+    {
+      "run": "monthly_20_80_base_10000_2",
+      "rows": 1967,
+      "field_checks": 14191,
+      "max_daily_money_delta": "3E-12",
+      "mismatches": 0,
+      "reference_trades": 14,
+      "native_trades": 14,
+      "target_schedule_sha256": "75ece8e64a2877f057aaf64f9a01f4774a4090242e041674a4bd4d10672d9b5c"
+    },
+    {
+      "run": "monthly_20_80_base_10000_3",
+      "rows": 1967,
+      "field_checks": 14172,
+      "max_daily_money_delta": "2E-12",
+      "mismatches": 0,
+      "reference_trades": 13,
+      "native_trades": 13,
+      "target_schedule_sha256": "132511c512d90c101539559d303e7a0fac8817ea751f4f9b439aa7d14d3ba4d4"
+    },
+    {
+      "run": "monthly_20_80_base_100000_1",
+      "rows": 1967,
+      "field_checks": 15453,
+      "max_daily_money_delta": "3E-11",
+      "mismatches": 0,
+      "reference_trades": 80,
+      "native_trades": 80,
+      "target_schedule_sha256": "b7ff402ea777ec0dedcfa540a66ee993681471c2d6f7b689efc58720c00f5af7"
+    },
+    {
+      "run": "monthly_20_80_base_100000_2",
+      "rows": 1967,
+      "field_checks": 15426,
+      "max_daily_money_delta": "4E-11",
+      "mismatches": 0,
+      "reference_trades": 79,
+      "native_trades": 79,
+      "target_schedule_sha256": "ce134cf67846c995bc05505ceb100dddd34f1b802b5124cb63c67fa8eee12069"
+    },
+    {
+      "run": "monthly_20_80_base_100000_3",
+      "rows": 1967,
+      "field_checks": 15464,
+      "max_daily_money_delta": "4E-11",
+      "mismatches": 0,
+      "reference_trades": 81,
+      "native_trades": 81,
+      "target_schedule_sha256": "88d10870ce2fb0b29ffcffcd6074ad14f9cc1d51661825377387c06eb518cd82"
+    },
+    {
+      "run": "monthly_20_80_base_1000000_1",
+      "rows": 1967,
+      "field_checks": 16753,
+      "max_daily_money_delta": "5E-10",
+      "mismatches": 0,
+      "reference_trades": 148,
+      "native_trades": 148,
+      "target_schedule_sha256": "0aa2ee49621cf0ba80a17dc297046fb8037403189f66363e0c37b869952de9b3"
+    },
+    {
+      "run": "monthly_20_80_base_1000000_2",
+      "rows": 1967,
+      "field_checks": 16718,
+      "max_daily_money_delta": "5E-10",
+      "mismatches": 0,
+      "reference_trades": 147,
+      "native_trades": 147,
+      "target_schedule_sha256": "7b3950436585c2e0f869e0a2a8c41137fc3862c97f4e771d3c7b10ad3cd99c54"
+    },
+    {
+      "run": "monthly_20_80_base_1000000_3",
+      "rows": 1967,
+      "field_checks": 16699,
+      "max_daily_money_delta": "4E-10",
+      "mismatches": 0,
+      "reference_trades": 146,
+      "native_trades": 146,
+      "target_schedule_sha256": "156044e2eb46e559263d4216dec922020a50579a93aa4f8f4cf56c103ca87159"
+    },
+    {
+      "run": "monthly_20_80_high_10000_1",
+      "rows": 1967,
+      "field_checks": 14180,
+      "max_daily_money_delta": "3E-12",
+      "mismatches": 0,
+      "reference_trades": 13,
+      "native_trades": 13,
+      "target_schedule_sha256": "4741cefcfc245415a4a360b069e4947beb68a1b24b022c969bef1b4460504783"
+    },
+    {
+      "run": "monthly_20_80_high_10000_2",
+      "rows": 1967,
+      "field_checks": 14191,
+      "max_daily_money_delta": "2E-12",
+      "mismatches": 0,
+      "reference_trades": 14,
+      "native_trades": 14,
+      "target_schedule_sha256": "75ece8e64a2877f057aaf64f9a01f4774a4090242e041674a4bd4d10672d9b5c"
+    },
+    {
+      "run": "monthly_20_80_high_10000_3",
+      "rows": 1967,
+      "field_checks": 14172,
+      "max_daily_money_delta": "3E-12",
+      "mismatches": 0,
+      "reference_trades": 13,
+      "native_trades": 13,
+      "target_schedule_sha256": "132511c512d90c101539559d303e7a0fac8817ea751f4f9b439aa7d14d3ba4d4"
+    },
+    {
+      "run": "monthly_20_80_high_100000_1",
+      "rows": 1967,
+      "field_checks": 15491,
+      "max_daily_money_delta": "5E-11",
+      "mismatches": 0,
+      "reference_trades": 82,
+      "native_trades": 82,
+      "target_schedule_sha256": "0e8449b57547412c91de12383a5ec6c71f68c5ea06d288974b4fe60c3661d675"
+    },
+    {
+      "run": "monthly_20_80_high_100000_2",
+      "rows": 1967,
+      "field_checks": 15464,
+      "max_daily_money_delta": "4E-11",
+      "mismatches": 0,
+      "reference_trades": 81,
+      "native_trades": 81,
+      "target_schedule_sha256": "ee6ade88c14914dcc1d4826ac169528c5c860f84c83ee25b09b8ae29828f1656"
+    },
+    {
+      "run": "monthly_20_80_high_100000_3",
+      "rows": 1967,
+      "field_checks": 15597,
+      "max_daily_money_delta": "3E-11",
+      "mismatches": 0,
+      "reference_trades": 88,
+      "native_trades": 88,
+      "target_schedule_sha256": "289535bfc10db4629015d118e08b346d8e725f3ccf3aef434f744bba7e3292d0"
+    },
+    {
+      "run": "monthly_20_80_high_1000000_1",
+      "rows": 1967,
+      "field_checks": 16677,
+      "max_daily_money_delta": "4E-10",
+      "mismatches": 0,
+      "reference_trades": 144,
+      "native_trades": 144,
+      "target_schedule_sha256": "7d233b4c07dd2792cdfaa0c399c79568cb75360fb6a0cce8fa15664619fe83f2"
+    },
+    {
+      "run": "monthly_20_80_high_1000000_2",
+      "rows": 1967,
+      "field_checks": 16794,
+      "max_daily_money_delta": "5E-10",
+      "mismatches": 0,
+      "reference_trades": 151,
+      "native_trades": 151,
+      "target_schedule_sha256": "310985e21eddbe17952548ad80e38603e9483f2f864750a9101eeacf43750f1a"
+    },
+    {
+      "run": "monthly_20_80_high_1000000_3",
+      "rows": 1967,
+      "field_checks": 16623,
+      "max_daily_money_delta": "5E-10",
+      "mismatches": 0,
+      "reference_trades": 142,
+      "native_trades": 142,
+      "target_schedule_sha256": "ef7d4613a2ab63c3d9f5a35faaecef7050a936c695cfed12569810c321b60006"
+    },
+    {
+      "run": "monthly_50_50_low_10000_1",
+      "rows": 1967,
+      "field_checks": 14389,
+      "max_daily_money_delta": "5E-12",
+      "mismatches": 0,
+      "reference_trades": 24,
+      "native_trades": 24,
+      "target_schedule_sha256": "d6324138cb76366dae42042797317e37e7618f96f36093868312a4242097f09a"
+    },
+    {
+      "run": "monthly_50_50_low_10000_2",
+      "rows": 1967,
+      "field_checks": 14514,
+      "max_daily_money_delta": "7E-12",
+      "mismatches": 0,
+      "reference_trades": 31,
+      "native_trades": 31,
+      "target_schedule_sha256": "7f1e5df5e6ba064591c2f32de9d4fa951fd078dc82d2d618d38df11e7da7b0da"
+    },
+    {
+      "run": "monthly_50_50_low_10000_3",
+      "rows": 1967,
+      "field_checks": 14419,
+      "max_daily_money_delta": "3E-12",
+      "mismatches": 0,
+      "reference_trades": 26,
+      "native_trades": 26,
+      "target_schedule_sha256": "0a3eb08a39ed384ac2eda94cfbac3ce575410ca2c3900bdee5dcdc93145aded7"
+    },
+    {
+      "run": "monthly_50_50_low_100000_1",
+      "rows": 1967,
+      "field_checks": 15624,
+      "max_daily_money_delta": "5E-11",
+      "mismatches": 0,
+      "reference_trades": 89,
+      "native_trades": 89,
+      "target_schedule_sha256": "223c82a5e976f5e3e981cde04f429e99e08753a1992d08896917fc0fa128ba0c"
+    },
+    {
+      "run": "monthly_50_50_low_100000_2",
+      "rows": 1967,
+      "field_checks": 15635,
+      "max_daily_money_delta": "5E-11",
+      "mismatches": 0,
+      "reference_trades": 90,
+      "native_trades": 90,
+      "target_schedule_sha256": "36bfbd073d69a77c9f0529840c8e9892f81ccd440fb30ae478ce6c04d0213769"
+    },
+    {
+      "run": "monthly_50_50_low_100000_3",
+      "rows": 1967,
+      "field_checks": 15635,
+      "max_daily_money_delta": "4E-11",
+      "mismatches": 0,
+      "reference_trades": 90,
+      "native_trades": 90,
+      "target_schedule_sha256": "a9ff257d101171946d07ac6a1f6b8affbcc061420f9fccd5627ffa1de455d3ae"
+    },
+    {
+      "run": "monthly_50_50_low_1000000_1",
+      "rows": 1967,
+      "field_checks": 17000,
+      "max_daily_money_delta": "5E-10",
+      "mismatches": 0,
+      "reference_trades": 161,
+      "native_trades": 161,
+      "target_schedule_sha256": "32097545927b98c2bbccb41ab89411b109c4a9ff0d829bca5f954ddcdb42de73"
+    },
+    {
+      "run": "monthly_50_50_low_1000000_2",
+      "rows": 1967,
+      "field_checks": 16984,
+      "max_daily_money_delta": "6E-10",
+      "mismatches": 0,
+      "reference_trades": 161,
+      "native_trades": 161,
+      "target_schedule_sha256": "926825da936b20b00ad675697d9ef66c553f0a673550e12ff186b701062c16c8"
+    },
+    {
+      "run": "monthly_50_50_low_1000000_3",
+      "rows": 1967,
+      "field_checks": 16946,
+      "max_daily_money_delta": "5E-10",
+      "mismatches": 0,
+      "reference_trades": 159,
+      "native_trades": 159,
+      "target_schedule_sha256": "5c13296da9ffb88bdc5c419fffc2324e185f7befca6c6d36b065afd4350f2d2d"
+    },
+    {
+      "run": "monthly_50_50_base_10000_1",
+      "rows": 1967,
+      "field_checks": 14389,
+      "max_daily_money_delta": "3E-12",
+      "mismatches": 0,
+      "reference_trades": 24,
+      "native_trades": 24,
+      "target_schedule_sha256": "d6324138cb76366dae42042797317e37e7618f96f36093868312a4242097f09a"
+    },
+    {
+      "run": "monthly_50_50_base_10000_2",
+      "rows": 1967,
+      "field_checks": 14514,
+      "max_daily_money_delta": "4E-12",
+      "mismatches": 0,
+      "reference_trades": 31,
+      "native_trades": 31,
+      "target_schedule_sha256": "7f1e5df5e6ba064591c2f32de9d4fa951fd078dc82d2d618d38df11e7da7b0da"
+    },
+    {
+      "run": "monthly_50_50_base_10000_3",
+      "rows": 1967,
+      "field_checks": 14419,
+      "max_daily_money_delta": "4E-12",
+      "mismatches": 0,
+      "reference_trades": 26,
+      "native_trades": 26,
+      "target_schedule_sha256": "0a3eb08a39ed384ac2eda94cfbac3ce575410ca2c3900bdee5dcdc93145aded7"
+    },
+    {
+      "run": "monthly_50_50_base_100000_1",
+      "rows": 1967,
+      "field_checks": 15586,
+      "max_daily_money_delta": "5E-11",
+      "mismatches": 0,
+      "reference_trades": 87,
+      "native_trades": 87,
+      "target_schedule_sha256": "052e455d363c5a9b5f0b735e22579f322c1598fb82f40775453d8ebc3325adce"
+    },
+    {
+      "run": "monthly_50_50_base_100000_2",
+      "rows": 1967,
+      "field_checks": 15635,
+      "max_daily_money_delta": "5E-11",
+      "mismatches": 0,
+      "reference_trades": 90,
+      "native_trades": 90,
+      "target_schedule_sha256": "fe9c4865a1b867f4e9e4c1c3382a2c983205449716f2e3faad5a0d40ce353281"
+    },
+    {
+      "run": "monthly_50_50_base_100000_3",
+      "rows": 1967,
+      "field_checks": 15578,
+      "max_daily_money_delta": "6E-11",
+      "mismatches": 0,
+      "reference_trades": 87,
+      "native_trades": 87,
+      "target_schedule_sha256": "8835285804c7be1e8501b4b765c20b2a05c65e798f6441e8d7f9e0ffc26f10e4"
+    },
+    {
+      "run": "monthly_50_50_base_1000000_1",
+      "rows": 1967,
+      "field_checks": 16981,
+      "max_daily_money_delta": "5E-10",
+      "mismatches": 0,
+      "reference_trades": 160,
+      "native_trades": 160,
+      "target_schedule_sha256": "4790e639c0c031b116656d33b73e82e0ceffa3a38715f208ca407bae45fdb60e"
+    },
+    {
+      "run": "monthly_50_50_base_1000000_2",
+      "rows": 1967,
+      "field_checks": 17022,
+      "max_daily_money_delta": "5E-10",
+      "mismatches": 0,
+      "reference_trades": 163,
+      "native_trades": 163,
+      "target_schedule_sha256": "39bbd9e62d85247c3729a80179147cc209170a4b680655c4b188eebb4f6806c8"
+    },
+    {
+      "run": "monthly_50_50_base_1000000_3",
+      "rows": 1967,
+      "field_checks": 16984,
+      "max_daily_money_delta": "5E-10",
+      "mismatches": 0,
+      "reference_trades": 161,
+      "native_trades": 161,
+      "target_schedule_sha256": "2a389de8a8f00c53de973d01a0e0d3981aa8fc9d23c0eff8dacfdc40ffc624e9"
+    },
+    {
+      "run": "monthly_50_50_high_10000_1",
+      "rows": 1967,
+      "field_checks": 14427,
+      "max_daily_money_delta": "3E-12",
+      "mismatches": 0,
+      "reference_trades": 26,
+      "native_trades": 26,
+      "target_schedule_sha256": "d5c740e078d556005cedde9396068afba1aa159f5bbfe9d54aef27c0382ac504"
+    },
+    {
+      "run": "monthly_50_50_high_10000_2",
+      "rows": 1967,
+      "field_checks": 14381,
+      "max_daily_money_delta": "4E-12",
+      "mismatches": 0,
+      "reference_trades": 24,
+      "native_trades": 24,
+      "target_schedule_sha256": "0ee891be7a60887a33f9e7629316df499af1621c66158665cdc912da8b20e6ab"
+    },
+    {
+      "run": "monthly_50_50_high_10000_3",
+      "rows": 1967,
+      "field_checks": 14419,
+      "max_daily_money_delta": "2E-12",
+      "mismatches": 0,
+      "reference_trades": 26,
+      "native_trades": 26,
+      "target_schedule_sha256": "9729a4027edcf104d741cb865ad5a1d1500f60a09995b6bb628e2c1a64fdd604"
+    },
+    {
+      "run": "monthly_50_50_high_100000_1",
+      "rows": 1967,
+      "field_checks": 15529,
+      "max_daily_money_delta": "6E-11",
+      "mismatches": 0,
+      "reference_trades": 84,
+      "native_trades": 84,
+      "target_schedule_sha256": "70061c8c72855be62d1deb1b19be7b4fa0ad535eed68e2e657d553195e81cebc"
+    },
+    {
+      "run": "monthly_50_50_high_100000_2",
+      "rows": 1967,
+      "field_checks": 15654,
+      "max_daily_money_delta": "4E-11",
+      "mismatches": 0,
+      "reference_trades": 91,
+      "native_trades": 91,
+      "target_schedule_sha256": "b2e8958587cbabe430e526207b892562f0cc6ea3ecc17a864f7dc4cba4ed7aba"
+    },
+    {
+      "run": "monthly_50_50_high_100000_3",
+      "rows": 1967,
+      "field_checks": 15616,
+      "max_daily_money_delta": "4E-11",
+      "mismatches": 0,
+      "reference_trades": 89,
+      "native_trades": 89,
+      "target_schedule_sha256": "18dbe942a291eec7ab776608231835a3582f6baac8c46a5eddab72b2f68bd8e1"
+    },
+    {
+      "run": "monthly_50_50_high_1000000_1",
+      "rows": 1967,
+      "field_checks": 16943,
+      "max_daily_money_delta": "5E-10",
+      "mismatches": 0,
+      "reference_trades": 158,
+      "native_trades": 158,
+      "target_schedule_sha256": "1391c359abd314b9c92d0e0f84d8c903f7fad025dbceae381f74586bf2945259"
+    },
+    {
+      "run": "monthly_50_50_high_1000000_2",
+      "rows": 1967,
+      "field_checks": 17060,
+      "max_daily_money_delta": "5E-10",
+      "mismatches": 0,
+      "reference_trades": 165,
+      "native_trades": 165,
+      "target_schedule_sha256": "9f4152869fcf9c475ce6720484d4c81a6e1a05ae42379949c1e6a82626f3d439"
+    },
+    {
+      "run": "monthly_50_50_high_1000000_3",
+      "rows": 1967,
+      "field_checks": 17003,
+      "max_daily_money_delta": "5E-10",
+      "mismatches": 0,
+      "reference_trades": 162,
+      "native_trades": 162,
+      "target_schedule_sha256": "4963ad5986af02ad1028243d925d42b55a92c39a04669ad8dd5c91f4da580bfb"
+    },
+    {
+      "run": "trend_120_low_10000_1",
+      "rows": 1967,
+      "field_checks": 14579,
+      "max_daily_money_delta": "6E-12",
+      "mismatches": 0,
+      "reference_trades": 34,
+      "native_trades": 34,
+      "target_schedule_sha256": "64ee3e729b74adf3197beae7a6bb12d8a6388f40026a78d9d16152b5096c7a2f"
+    },
+    {
+      "run": "trend_120_low_10000_2",
+      "rows": 1967,
+      "field_checks": 14590,
+      "max_daily_money_delta": "4E-12",
+      "mismatches": 0,
+      "reference_trades": 35,
+      "native_trades": 35,
+      "target_schedule_sha256": "bd2bdd7987d6b9cbeb2d6d51e75b069f66ee8ef2dd5690c8e5af92f1bd4fc2a3"
+    },
+    {
+      "run": "trend_120_low_10000_3",
+      "rows": 1967,
+      "field_checks": 14590,
+      "max_daily_money_delta": "5E-12",
+      "mismatches": 0,
+      "reference_trades": 35,
+      "native_trades": 35,
+      "target_schedule_sha256": "8b1554dc861566e2ebb2eea603bb91bcb62f776c5448621825ab457257397a86"
+    },
+    {
+      "run": "trend_120_low_100000_1",
+      "rows": 1967,
+      "field_checks": 15453,
+      "max_daily_money_delta": "5E-11",
+      "mismatches": 0,
+      "reference_trades": 80,
+      "native_trades": 80,
+      "target_schedule_sha256": "f34c486c02a73120e2a5de0be3364493e471d8e5e47d27c1357dfd34b5602d7e"
+    },
+    {
+      "run": "trend_120_low_100000_2",
+      "rows": 1967,
+      "field_checks": 15464,
+      "max_daily_money_delta": "8E-11",
+      "mismatches": 0,
+      "reference_trades": 81,
+      "native_trades": 81,
+      "target_schedule_sha256": "82e6eda9137dae994390fd9731ccc863d7ee26baed64d01d1c0aafaa9fe7a27a"
+    },
+    {
+      "run": "trend_120_low_100000_3",
+      "rows": 1967,
+      "field_checks": 15445,
+      "max_daily_money_delta": "6E-11",
+      "mismatches": 0,
+      "reference_trades": 80,
+      "native_trades": 80,
+      "target_schedule_sha256": "889a20e56b4b476135a021e05deb3faaf458e6a3e080b03e3d553322cc216c1d"
+    },
+    {
+      "run": "trend_120_low_1000000_1",
+      "rows": 1967,
+      "field_checks": 15909,
+      "max_daily_money_delta": "5E-10",
+      "mismatches": 0,
+      "reference_trades": 104,
+      "native_trades": 104,
+      "target_schedule_sha256": "ed16861207d26dce1705f592696ba531594891990d6e59e493db19dd5f336143"
+    },
+    {
+      "run": "trend_120_low_1000000_2",
+      "rows": 1967,
+      "field_checks": 15996,
+      "max_daily_money_delta": "6E-10",
+      "mismatches": 0,
+      "reference_trades": 109,
+      "native_trades": 109,
+      "target_schedule_sha256": "243803c0d5fb89099d670e99dd260ce19c7ce5cdf4dd404b0fe0f498073de8a2"
+    },
+    {
+      "run": "trend_120_low_1000000_3",
+      "rows": 1967,
+      "field_checks": 16053,
+      "max_daily_money_delta": "5E-10",
+      "mismatches": 0,
+      "reference_trades": 112,
+      "native_trades": 112,
+      "target_schedule_sha256": "52fd34268254d83e8be9008e145088dca6857101b1aff199cddd49148f9616ce"
+    },
+    {
+      "run": "trend_120_base_10000_1",
+      "rows": 1967,
+      "field_checks": 14579,
+      "max_daily_money_delta": "4E-12",
+      "mismatches": 0,
+      "reference_trades": 34,
+      "native_trades": 34,
+      "target_schedule_sha256": "01bf47aff97a5bc745646c1d7d2ff967c98193cf87d5d100cc860c2a9400bd19"
+    },
+    {
+      "run": "trend_120_base_10000_2",
+      "rows": 1967,
+      "field_checks": 14571,
+      "max_daily_money_delta": "3E-12",
+      "mismatches": 0,
+      "reference_trades": 34,
+      "native_trades": 34,
+      "target_schedule_sha256": "c976627efdbfdc8976b9da2c696ad07422b22433d227a2f82eca566e4d070878"
+    },
+    {
+      "run": "trend_120_base_10000_3",
+      "rows": 1967,
+      "field_checks": 14609,
+      "max_daily_money_delta": "4E-12",
+      "mismatches": 0,
+      "reference_trades": 36,
+      "native_trades": 36,
+      "target_schedule_sha256": "1dca9c77da209a7ec17914a4f55cf74671a70fb54de2ede2fc7f97e6f4f65ef2"
+    },
+    {
+      "run": "trend_120_base_100000_1",
+      "rows": 1967,
+      "field_checks": 15358,
+      "max_daily_money_delta": "5E-11",
+      "mismatches": 0,
+      "reference_trades": 75,
+      "native_trades": 75,
+      "target_schedule_sha256": "5a9d0d82653ae4360d591646d66d2b8d67349146261f870b08e2f7413e25d7b2"
+    },
+    {
+      "run": "trend_120_base_100000_2",
+      "rows": 1967,
+      "field_checks": 15350,
+      "max_daily_money_delta": "4E-11",
+      "mismatches": 0,
+      "reference_trades": 75,
+      "native_trades": 75,
+      "target_schedule_sha256": "2852681be898d79baa139c25b0cc14a03ad3fc3277968cd955bb98f2fc24407c"
+    },
+    {
+      "run": "trend_120_base_100000_3",
+      "rows": 1967,
+      "field_checks": 15445,
+      "max_daily_money_delta": "4E-11",
+      "mismatches": 0,
+      "reference_trades": 80,
+      "native_trades": 80,
+      "target_schedule_sha256": "94fbe64b80f0d6d654fce1d10da6b9ffafcb16b4d21beba0a1f6be342f225b8d"
+    },
+    {
+      "run": "trend_120_base_1000000_1",
+      "rows": 1967,
+      "field_checks": 15928,
+      "max_daily_money_delta": "5E-10",
+      "mismatches": 0,
+      "reference_trades": 105,
+      "native_trades": 105,
+      "target_schedule_sha256": "bbb81b9140525d5a66ae37f37f3a1bb70cc24621a925daf10792a06b80c1ae95"
+    },
+    {
+      "run": "trend_120_base_1000000_2",
+      "rows": 1967,
+      "field_checks": 15977,
+      "max_daily_money_delta": "5E-10",
+      "mismatches": 0,
+      "reference_trades": 108,
+      "native_trades": 108,
+      "target_schedule_sha256": "dd6eda0a3cb51a303a1689028401acbd9e285140183e416678e3ceab6dd04d67"
+    },
+    {
+      "run": "trend_120_base_1000000_3",
+      "rows": 1967,
+      "field_checks": 15958,
+      "max_daily_money_delta": "6E-10",
+      "mismatches": 0,
+      "reference_trades": 107,
+      "native_trades": 107,
+      "target_schedule_sha256": "bb1d303c8505650f2a4a1e7ee71efccaf87415d44bad06f4b81953d42839e939"
+    },
+    {
+      "run": "trend_120_high_10000_1",
+      "rows": 1967,
+      "field_checks": 14560,
+      "max_daily_money_delta": "6E-12",
+      "mismatches": 0,
+      "reference_trades": 33,
+      "native_trades": 33,
+      "target_schedule_sha256": "79bb9895079d798c09932920bfd31994d03d1e5a7f89f09a305c15669cc57451"
+    },
+    {
+      "run": "trend_120_high_10000_2",
+      "rows": 1967,
+      "field_checks": 14590,
+      "max_daily_money_delta": "3E-12",
+      "mismatches": 0,
+      "reference_trades": 35,
+      "native_trades": 35,
+      "target_schedule_sha256": "e8a7ad4c8e5eba8df10dbc25cc658d9180496b95407ba508c92ad1d0bdeb6ecf"
+    },
+    {
+      "run": "trend_120_high_10000_3",
+      "rows": 1967,
+      "field_checks": 14609,
+      "max_daily_money_delta": "4E-12",
+      "mismatches": 0,
+      "reference_trades": 36,
+      "native_trades": 36,
+      "target_schedule_sha256": "72f5e2cb5c87d1882891b2c5c2bd012b9784bb2104d6383f956db99b51c3bd6b"
+    },
+    {
+      "run": "trend_120_high_100000_1",
+      "rows": 1967,
+      "field_checks": 15358,
+      "max_daily_money_delta": "8E-11",
+      "mismatches": 0,
+      "reference_trades": 75,
+      "native_trades": 75,
+      "target_schedule_sha256": "3ad8992b832db8ff6f71a23e92789522d429fb64a026c4724a6d8e757f218970"
+    },
+    {
+      "run": "trend_120_high_100000_2",
+      "rows": 1967,
+      "field_checks": 15388,
+      "max_daily_money_delta": "5E-11",
+      "mismatches": 0,
+      "reference_trades": 77,
+      "native_trades": 77,
+      "target_schedule_sha256": "b78b1a6613cac9128e31b0b6169489239aa207cf842e7b63b97c2d3a7c394e7e"
+    },
+    {
+      "run": "trend_120_high_100000_3",
+      "rows": 1967,
+      "field_checks": 15407,
+      "max_daily_money_delta": "4E-11",
+      "mismatches": 0,
+      "reference_trades": 78,
+      "native_trades": 78,
+      "target_schedule_sha256": "b1da35aad9b2e0ac85035ee4c266658d82c28e4c1f7a154f2c4792757abc20b0"
+    },
+    {
+      "run": "trend_120_high_1000000_1",
+      "rows": 1967,
+      "field_checks": 15909,
+      "max_daily_money_delta": "7E-10",
+      "mismatches": 0,
+      "reference_trades": 104,
+      "native_trades": 104,
+      "target_schedule_sha256": "be9bf473cc087c69ae78c0db7333761801a8f05fe66a88688e27e690b0eba528"
+    },
+    {
+      "run": "trend_120_high_1000000_2",
+      "rows": 1967,
+      "field_checks": 16034,
+      "max_daily_money_delta": "7E-10",
+      "mismatches": 0,
+      "reference_trades": 111,
+      "native_trades": 111,
+      "target_schedule_sha256": "04b2af5cbd7abe7cbf2ce9c4e3570acd8d65bfc3603e2cb626b700c191f78990"
+    },
+    {
+      "run": "trend_120_high_1000000_3",
+      "rows": 1967,
+      "field_checks": 15958,
+      "max_daily_money_delta": "5E-10",
+      "mismatches": 0,
+      "reference_trades": 107,
+      "native_trades": 107,
+      "target_schedule_sha256": "edc9acd91f2fd1142df12d500e08df1d9d1df668d9f6d4b8aa075c898fff427c"
+    }
+  ],
+  "case_count": 162,
+  "mismatch_count": 0,
+  "daily_money_tolerance": "1E-7",
+  "trade_comparison_requires_exact_equality": true,
+  "source": {
+    "manifests_sha256": {
+      "2026-11-03-official-01": "8e9a629c570486158b1dc5194d7691889775b02e771b8ec5d77f841708a5ed34",
+      "2026-11-03-official-02": "368c8bb592152e72acaf10ef0451cc9f1ef1d3e7c4ab5ca99babb683aa3b813f",
+      "2026-11-04-expansion-07": "03e51be9790eaa6451b76491b71dcb976ae5047b54adb02f19a105d18270befd",
+      "2026-11-04-calendar-08": "dd8766c2432983c0d5a1d123add8b175696bade27c76b62688db17fdcbf25d86",
+      "2026-11-05-costs-11": "67e05926f9b3f92ee9ae85b1a91aa0c2a09226efdce4126654e828c389af03db",
+      "2026-11-05-events-12": "d2b38943ef1611e146fd18e4e414602c3cee54abb9ee3f241ff88e321e12073f"
+    },
+    "price_mode": "unadjusted",
+    "volume_loaded": false,
+    "event_sources": [
+      {
+        "symbol": "510300",
+        "ex_date": "2026-01-19",
+        "announcement_date": "2026-01-12",
+        "pdf": "2026-11-03-official-01/510300_20260112.pdf",
+        "sha256": "c8ff747d02fa90db72320458c38249f73720b932d61b7e088f033583aab63992",
+        "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-01-12/510300_20260112_VTCZ.pdf"
+      },
+      {
+        "symbol": "510300",
+        "ex_date": "2025-06-18",
+        "announcement_date": "2025-06-11",
+        "pdf": "2026-11-03-official-01/510300_20250611.pdf",
+        "sha256": "9a2f554b8ba5e340c79905171388f65225e9239027a36794522aa6bb4a82be67",
+        "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2025-06-11/510300_20250611_ZAU4.pdf"
+      },
+      {
+        "symbol": "510300",
+        "ex_date": "2024-01-18",
+        "announcement_date": "2024-01-11",
+        "pdf": "2026-11-03-official-02/510300_20240111.pdf",
+        "sha256": "165ddaec9b36480ff4cbc738227043db7b7acc4f80ac31bedaa0e4f5c4001f4b",
+        "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2024-01-11/510300_20240111_QQFV.pdf"
+      },
+      {
+        "symbol": "510300",
+        "ex_date": "2023-01-16",
+        "announcement_date": "2023-01-09",
+        "pdf": "2026-11-03-official-02/510300_20230109.pdf",
+        "sha256": "68f2227ae25acec3b831d50d042b87f12696dc0df1514ef9dacb36e018d571d7",
+        "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2023-01-09/510300_20230109_0ED5.pdf"
+      },
+      {
+        "symbol": "510300",
+        "ex_date": "2022-01-19",
+        "announcement_date": "2022-01-12",
+        "pdf": "2026-11-03-official-02/510300_20220112.pdf",
+        "sha256": "1f5411e65cb9043bec5ae100df3925e6bb0aa122ea18186c7ba9a7e0747a9b50",
+        "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2022-01-12/510300_20220112_1_pWPNE0aG.pdf"
+      },
+      {
+        "symbol": "510300",
+        "ex_date": "2021-01-18",
+        "announcement_date": "2021-01-11",
+        "pdf": "2026-11-03-official-02/510300_20210111.pdf",
+        "sha256": "1992271ca55dc3c7f88cf528f8f0f757fc48143b2a805159d2b3efdfb9143fc2",
+        "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/2021-01-11/510300_20210111_1.pdf"
+      },
+      {
+        "symbol": "510300",
+        "ex_date": "2019-12-11",
+        "announcement_date": "2019-12-05",
+        "pdf": "2026-11-03-official-02/510300_20191205.pdf",
+        "sha256": "c010184f267a231457103e8a3798c2fa91445033be875bdf6711162f419b26db",
+        "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/2019-12-05/510300_20191205_1.pdf"
+      },
+      {
+        "symbol": "510300",
+        "ex_date": "2019-01-16",
+        "announcement_date": "2019-01-10",
+        "pdf": "2026-11-03-official-02/510300_20190110.pdf",
+        "sha256": "39a65a900bc8f30e0d572cecad642d06fd7ddfd7317b3265f99a3146f483d7ea",
+        "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/2019-01-10/510300_20190110_1.pdf"
+      },
+      {
+        "symbol": "511010",
+        "ex_date": "2026-09-18",
+        "announcement_date": "2026-09-15",
+        "pdf": "2026-11-03-official-02/511010_20260915.pdf",
+        "sha256": "3c67fc24bc804d1e25b3fceecbda509b42f1348e2fb1d8e32069e5a03f930a93",
+        "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-09-15/511010_20260915_H5ST.pdf"
+      },
+      {
+        "symbol": "511010",
+        "ex_date": "2026-06-25",
+        "announcement_date": "2026-06-22",
+        "pdf": "2026-11-03-official-01/511010_20260622.pdf",
+        "sha256": "82418fe2913770fd1ab6211869dbc8a83683e73490fcdb277c9c3be226a992a9",
+        "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-06-22/511010_20260622_0EYP.pdf"
+      },
+      {
+        "symbol": "511010",
+        "ex_date": "2026-03-25",
+        "announcement_date": "2026-03-20",
+        "pdf": "2026-11-03-official-01/511010_20260320.pdf",
+        "sha256": "a45a301dd556b3b1f36bad19abf952e7490110fda539a1d716cadb903bd22656",
+        "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-03-20/511010_20260320_Y87H.pdf"
+      },
+      {
+        "symbol": "511010",
+        "ex_date": "2025-12-26",
+        "announcement_date": "2025-12-23",
+        "pdf": "2026-11-03-official-01/511010_20251223.pdf",
+        "sha256": "733995693eef19c61a55a30d2be7dcc0dcc471980b81b85363977478195c50a8",
+        "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2025-12-23/511010_20251223_0M89.pdf"
+      },
+      {
+        "symbol": "511010",
+        "ex_date": "2025-09-23",
+        "announcement_date": "2025-09-18",
+        "pdf": "2026-11-03-official-01/511010_20250918.pdf",
+        "sha256": "ddfaac7c7097b0a15666d6e6787553be48613468e221564bccabfceceb5d0d02",
+        "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2025-09-18/511010_20250918_FU3S.pdf"
+      }
+    ],
+    "start": "2018-09-14",
+    "end": "2026-10-30",
+    "session_count": 1967,
+    "event_count": 13,
+    "historical_extension": true,
+    "long_history_extension": true,
+    "not_forward_observations": true,
+    "cross_source": "SSE official dayk and Sina daily; exact OHLC",
+    "excluded_current_or_unmatched_dates": true,
+    "initial_entitlement_checked": true,
+    "prelisting_splits_not_reapplied": true,
+    "catalog_scope_limit": "Current complete SSE catalogs and dividend/share-change title coverage; no guarantee against upstream omissions."
+  },
+  "implementation_sha256": {
+    "src/etf_research/backtrader_adapter.py": "e7f6264ba56db6ee5925a41945c775bc5e5e27d86a106b73058e8ae4cb9b5a6a",
+    "scripts/compare_execution_matrix.py": "94773b3d631ca8e3cc7e3978ec7c875ac51b0af24629828bd29b9ac4240d86f9"
+  }
+}

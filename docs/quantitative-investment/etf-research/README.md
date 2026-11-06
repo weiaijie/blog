@@ -38,10 +38,12 @@ python scripts/reproduce.py
 python -m http.server 8765 --bind 127.0.0.1
 ```
 
-Python 3.11+；监控使用固定版本pandas、NumPy和matplotlib，完整依赖见requirements-lock.txt。旧冻结模拟引擎仍使用标准库；可选网页验收需Playwright/Chromium，PDF文本提取需pdftotext。已有原始快照不覆盖。最新清单reports/2026-11-06-close/manifest.json；旧阶段清单在相应历史提交核验。新环境先读CONTINUATION.md，不依赖聊天记忆。
+Python 3.11+；监控使用固定版本pandas、NumPy和matplotlib，完整依赖见requirements-lock.txt。旧冻结模拟引擎仍使用标准库；可选网页验收需Playwright/Chromium，PDF文本提取需pdftotext。已有原始快照不覆盖。最新清单reports/2026-11-06-engine-matrix-final/manifest.json；旧阶段清单在相应历史提交核验。新环境先读CONTINUATION.md，不依赖聊天记忆。
 
 旧/workspace/quant-research、旧策略/看板和旧10项测试未恢复；当前是持续重建并已保存到仓库的版本。无实盘、无后台调度，未来收益不能在当前会话完成。
 
 监控页面使用现有报告离线生成，浏览器无需安装框架或联网加载图表。可用上面的http.server打开/site/risk.html。配置仅控制分析输入和风险监控；策略权重/费用仍由冻结协议控制。原规划的剩余项见PLAN_ALIGNMENT，不以测试通过代替完整交付。
 
 Windows 检出须保留快照原始字节（本项目 `.gitattributes` 已设定）；Linux 默认在独立 Ubuntu 执行。首次执行 `audit_official_close.py` 的输出必须为不存在的新文件，避免覆盖旧报告。
+
+下一阶段大目标见[工程计划](docs/PHASE2_PLAN.md)。[独立执行矩阵](reports/2026-11-06-engine-matrix-final/PROGRESS.md)已完成162场景对照；存在精确现金边界反例，冻结引擎不迁移。风险扩展和每日流程仍在进行。
