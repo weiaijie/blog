@@ -5,6 +5,9 @@ data/snapshots/** -text whitespace=cr-at-eol
 reports/daily/** -text
 reports/daily/*/site/risk.html -whitespace
 reports/operations/** -text
+reports/health/** -text
+reports/notice-reviews/** -text
+reports/notice-decisions/** -text
 
 # HTTP headers preserve server spacing and the terminating blank line.
 data/snapshots/**/*.headers -whitespace

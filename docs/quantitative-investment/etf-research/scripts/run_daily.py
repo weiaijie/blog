@@ -13,6 +13,8 @@ from etf_research.publication import read,sha,inside,create,lock,seal,promote,ve
 from etf_research.admission import load_incremental,completed_date,sessions_between
 from etf_research.forward import advance,digest,engine_digest
 from etf_research.first_session_plan import check_execution
+from etf_research.catalog_changes import CatalogChanged
+from etf_research.notice_workflow import write_packet
 from audit_official_close import audit as official_audit
 from collect_official_close import collect as collect_official
 from build_risk_report import build as risk_build
@@ -126,7 +128,14 @@ def run(args):
             create(folder/'ready.json',dict(previous_pointer_sha256=pointer_sha,input_sha256=inputs,pointer=new))
             seal(folder)
         except Exception as e:
-            if not (folder/'manifest.json').exists():create(folder/'failure.json',dict(error_type=type(e).__name__,error=str(e),account_published=False))
+            failure=dict(error_type=type(e).__name__,error=str(e),account_published=False)
+            if isinstance(e,CatalogChanged):
+                try:
+                    write_packet(ROOT,candidate,folder/'notice_review')
+                    failure['review_packet']=rel+'/notice_review'
+                except Exception as review_error:failure['review_packet_error']=str(review_error)
+            if not (folder/'manifest.json').exists():create(folder/'failure.json',failure)
+            print(json.dumps(dict(status='blocked',bundle=rel,**failure),ensure_ascii=False),flush=True)
             raise
         status='prepared' if getattr(args,'prepare_only',False) else promote(ROOT,folder,pointer_path)
         return dict(status=status,bundle=rel,as_of=state['as_of'],forward_sessions=state['forward_sessions'])

@@ -1,0 +1,13 @@
+{
+  "snapshot": "8debcb0a5d46aa51f06591922938f7e56837ca77de1e0ecfcdfb1cd5f49458d9",
+  "production_capture_files": 1738,
+  "new_objects": 1007,
+  "new_bytes": 105528358,
+  "automatic_timer_trigger": "2026-11-06T20:43:08+08:00",
+  "capture_finished_utc": "2026-11-06T12:43:16.436412+00:00",
+  "isolated_restore_verified_files": 1738,
+  "restored_project_integrity_passed": true,
+  "windows_independent_copy_verified_files": 1738,
+  "production_cutover": false,
+  "checkpoint_sha256": "ae5c0f77a8d6ffe51fc3bb9030c971097957e1e982d5033017b0b16c5997d418"
+}

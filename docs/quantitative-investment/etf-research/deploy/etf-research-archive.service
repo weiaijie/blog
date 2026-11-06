@@ -1,0 +1,17 @@
+[Unit]
+Description=ETF incremental immutable evidence archive
+StartLimitIntervalSec=20min
+StartLimitBurst=3
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/projects/etf-research-git-snapshot/docs/quantitative-investment/etf-research
+ExecStart=%h/projects/etf-research-py312/bin/python scripts/archive_evidence.py capture --store %h/projects/etf-research-evidence-archive
+Environment=PYTHONUTF8=1
+Environment=PYTHONDONTWRITEBYTECODE=1
+TimeoutStartSec=5min
+NoNewPrivileges=yes
+PrivateTmp=yes
+UMask=0022
+Restart=on-failure
+RestartSec=120s

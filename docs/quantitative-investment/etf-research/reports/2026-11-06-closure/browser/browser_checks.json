@@ -1,0 +1,11 @@
+{
+  "actual_enabled_active_linger_view": true,
+  "actual_health_and_archive_visible": true,
+  "synthetic_missed_schedule_and_expired_health": true,
+  "synthetic_notice_review_visible": true,
+  "local_links_ok": true,
+  "mobile_no_overflow": true,
+  "synthetic_failure_and_stale_views": true,
+  "synthetic_views_do_not_modify_server": true,
+  "page_errors": []
+}

@@ -44,7 +44,17 @@ class DailyPipelineTests(unittest.TestCase):
         self.rejected('Failed/mismatched')
     def test_changed_notice_retained_without_account_change(self):
         p=self.candidate/'catalog_510300.body';data=read(p);data['result'][0]['TITLE']+='(test revision)';data['pageHelp']['data']=data['result'];p.write_text(json.dumps(data));self.resign()
-        self.rejected('catalog changed')
+        failed=self.rejected('catalog changed')[0]
+        review=read(failed)['review_packet']
+        from etf_research.notice_workflow import review_queue
+        self.assertTrue((self.root/review/'packet.json').exists())
+        self.assertEqual(review_queue(self.root)[0]['pending_changes'],1)
+        from etf_research.notice_workflow import save_decision
+        packet=read(self.root/review/'packet.json')
+        decision=dict(packet_sha256=packet['packet_sha256'],reviews=[dict(change_id=packet['changes'][0]['change_id'],conclusion='unresolved',rationale='Synthetic test remains unresolved',evidence=[])])
+        result=save_decision(self.root,review,decision)
+        self.assertFalse(result['approves_prices_or_events']);self.assertEqual(review_queue(self.root)[0]['pending_changes'],1)
+        self.assertEqual((self.root/'active.json').read_bytes(),self.before)
     def test_source_tamper_without_resign_is_blocked(self):
         (self.candidate/'sina_510300.body').write_bytes(b'corrupt test fixture')
         self.rejected('hash|Hash|checksum')

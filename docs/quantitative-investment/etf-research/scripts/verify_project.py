@@ -16,7 +16,7 @@ def main():
  count=0;snapshots=list((ROOT/'data/snapshots').glob('*/manifest.json'))
  if not snapshots:raise ValueError('No source manifests')
  for m in snapshots:count+=verify(m,m.parent)
- report=ROOT/'reports/2026-11-06-operations/manifest.json';n=verify(report,ROOT)
+ report=ROOT/'reports/2026-11-06-closure/manifest.json';n=verify(report,ROOT)
  # These two live pointers are validated against immutable records, not an obsolete Git hash.
  active=read(ROOT/'config/active_run.json');state=read(inside(ROOT,active['checkpoint']))
  if digest({k:v for k,v in state.items() if k!='checkpoint_sha256'})!=state['checkpoint_sha256'] or state['engine_sha256']!=engine_digest() or state['real_money'] is not False:raise ValueError('Active checkpoint integrity failed')
@@ -31,5 +31,8 @@ def main():
    verify_bundle(operation)
    if read(operation/'result.json')!=status:raise ValueError('Live operation status differs from sealed record')
   else:raise ValueError('Unknown operation phase')
+ if (ROOT/'site/health_status.json').exists():
+  health=read(ROOT/'site/health_status.json');observation=inside(ROOT,health['observation']);verify_bundle(observation)
+  if read(observation/'result.json')!=health:raise ValueError('Health status differs from sealed observation')
  print('PASS integrity:',len(snapshots),'source manifests /',count,'source files;',n,'immutable entries; account',active['as_of'],'operation phase',phase)
 if __name__=='__main__':main()

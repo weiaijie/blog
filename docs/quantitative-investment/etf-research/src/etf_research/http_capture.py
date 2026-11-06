@@ -7,7 +7,7 @@ from urllib.parse import urlparse
 import hashlib,json,re,subprocess,tempfile,time
 
 ROOT=Path(__file__).resolve().parents[2]
-HOSTS={'quotes.sina.cn','q.stock.sohu.com','query.sse.com.cn','yunhq.sse.com.cn'}
+HOSTS={'quotes.sina.cn','q.stock.sohu.com','query.sse.com.cn','yunhq.sse.com.cn','www.sse.com.cn'}
 TRANSIENT_EXIT={6,7,18,28,52,55,56,124}
 TRANSIENT_HTTP={408,429,500,502,503,504}
 

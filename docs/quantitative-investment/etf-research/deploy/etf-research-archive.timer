@@ -1,0 +1,12 @@
+[Unit]
+Description=ETF daily evidence archive after collection attempts
+
+[Timer]
+OnActiveSec=60s
+OnCalendar=*-*-* 17:45:00 Asia/Shanghai
+Persistent=true
+AccuracySec=1s
+Unit=etf-research-archive.service
+
+[Install]
+WantedBy=timers.target

@@ -1,4 +1,4 @@
-# 下一阶段工程目标（2026-11-06启动）
+# 三阶段工程目标（2026-11-06启动，已完成）
 
 本目标跨三个阶段，不能以单日行情更新、局部测试或一次提交结束。长期收益观察另行持续，不宣称本阶段证明4%～5%可行。
 
@@ -29,4 +29,4 @@
 
 - 阶段一：已完成隔离对照及不迁移结论；162场景字段核对通过，但精确现金边界有原生拒单反例，见reports/2026-11-06-engine-matrix-final/PROGRESS.md。
 - 阶段二：已完成Beta、固定压力情景和官方季度披露代理穿透，见reports/2026-11-06-risk-expansion/PROGRESS.md；完整实时持仓仍未知。
-- 阶段三：已完成统一每日管线、真实证据重放、失败/幂等/中断恢复及Ubuntu定时方案受控验证；持续timer未启用，公告接口TLS可靠性仍待解决。见reports/2026-11-06-daily-pipeline/PROGRESS.md。
+- 阶段三：已完成统一每日管线、真实证据重放、失败/幂等/中断恢复及Ubuntu定时方案受控验证；后续运维阶段已修复公告TLS超时并启用持续timer，运行闭环阶段又补独立健康、归档和公告审阅。见reports/2026-11-06-daily-pipeline/PROGRESS.md、reports/2026-11-06-operations/PROGRESS.md和reports/2026-11-06-closure/PROGRESS.md。跨交易日运行仍待观察。

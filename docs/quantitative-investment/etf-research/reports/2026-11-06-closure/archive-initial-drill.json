@@ -1,0 +1,13 @@
+{
+  "scope": "Isolated validation copy, not production cutover",
+  "first_snapshot": "6d990bc24cae4ff38a4074023baab462f45e4e7120cb51d41f8e820e58f24579",
+  "second_snapshot": "d211c5b03ec6deda711491e1076fd2d28edc009b82c5ab493a1c4d4c97cc921b",
+  "files": 1720,
+  "first_new_objects": 993,
+  "first_new_bytes": 105256634,
+  "second_new_objects": 0,
+  "second_new_bytes": 0,
+  "restored_and_compared_files": 1720,
+  "conflicts": [],
+  "activates_services": false
+}

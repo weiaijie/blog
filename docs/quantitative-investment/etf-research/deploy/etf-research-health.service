@@ -1,0 +1,13 @@
+[Unit]
+Description=ETF independent calendar and collection health observation
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/projects/etf-research-git-snapshot/docs/quantitative-investment/etf-research
+ExecStart=%h/projects/etf-research-py312/bin/python scripts/check_health.py --record
+Environment=PYTHONUTF8=1
+Environment=PYTHONDONTWRITEBYTECODE=1
+TimeoutStartSec=2min
+NoNewPrivileges=yes
+PrivateTmp=yes
+UMask=0022

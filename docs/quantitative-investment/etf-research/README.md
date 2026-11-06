@@ -1,61 +1,36 @@
 # 个人量化投资研究系统
 
-## 最新状态：2026-11-06每日定时运行已启用
+研究中国股票ETF 510300和债券ETF 511010，用1～2年评估长期年化净收益4%～5%可行性。仅研究模拟，不接实盘、不保证收益、不为目标调参。当前是重建后持续保存的项目，不能称找回旧系统。
 
-Ubuntu公告超时已定位并通过采集器IPv4 HTTPS修复，正常证书校验与严格准入保留。5轮真实完整采集全部通过，55请求含5次搜狐503后成功重试；这是约17分钟的当日验收，跨交易日稳定性仍待观察。用户systemd定时器已启用并自动触发成功，linger=yes；北京时间16:10执行、16:40/17:10补尝试，进程失败有界重启。
+## 当前事实（2026-11-06）
 
-169项基础测试+18项框架测试通过。当前账户仍前瞻2日，冻结策略/引擎/目标与旧历史不变。site/daily.html为当前账户和运行状态入口。详见[本轮运维验收](reports/2026-11-06-operations/PROGRESS.md)、[接续说明](CONTINUATION.md)、[运行与恢复](docs/DAILY_PIPELINE.md)。未来定时输出先保存在Ubuntu，不自动推送GitHub；无实盘、外部消息或公网实时部署。
+- 独立历史1967日，2018-09-14至2026-10-30，13次官方分红、162固定场景。50/50基准费用年化约4.02%、最大收盘回撤约19.73%；旧640日4.90%及1167日0.51%结果保留，起点敏感，未证明目标成立。
+- 前瞻输入1172日，截至11月6日，真正前瞻2日。18组合21笔模型交易，主观察净值100067.48元、总收益0.06748%；8笔模型价超日线范围，不是实际成交证据。短样本不展示年化。
+- 冻结Python引擎保留；Backtrader 162场景执行对照通过声明容差，但现金边界有拒单反例，暂不迁移。
+- 风险监控、Beta、固定压力测试和官方季度披露代理已实现；完整当前持仓/集中度仍未知。
+- Ubuntu每日采集已启用，16:10/16:40/17:10执行；IPv6路径TLS超时由采集器IPv4解决，证书及严格准入不变。此前5轮当日试验不能证明跨交易日长期稳定。
 
-以下保留历次建设过程与当时状态；有冲突时以当前接续说明及最新证据为准。
+本轮运行闭环已完成：独立健康检查与每日归档已启用，201项基础测试、归档恢复和桌面/手机验收通过；公告审核记录仍不自动放行数据。
 
-只研究中国股票ETF和债券ETF，用1～2年评估长期年化净收益4%～5%的可行性；不保证收益、不实盘、不使用真实资金。研究代码、行情与来源保存于用户授权公开的weiaijie/blog / redesign-pc / docs/quantitative-investment/etf-research，不保存凭据或私人账户资料。
+## 当前入口
 
-## 当前状态（2026-11-06收盘后）
+- [每日账户与运行健康页面](site/daily.html) · [接续说明](CONTINUATION.md) · [当前计划](PROJECT_PLAN.md)
+- [运行手册](docs/DAILY_PIPELINE.md) · [归档恢复与公告审阅](docs/OPERATIONS_CLOSURE.md)
+- [本轮闭环验收](reports/2026-11-06-closure/PROGRESS.md) · [原规划对照](docs/PLAN_ALIGNMENT.md)
+- [独立历史研究](site/index.html) · [数据来源](DATA_SOURCES.md) · [冻结协议](PROTOCOL_V1.md)
 
-|对象|状态|
-|---|---|
-|最新独立历史研究|1967日，2018-09-14～2026-10-30；13次官方分红、162固定场景。|
-|保留的旧历史|640日和1167日结果均保留，不覆盖、不拼接。|
-|前瞻账户输入|1172日，截至2026-11-06；保持原2022起预热历史。|
-|真正前瞻观察|2日；首日观察，第二日21笔成本模型交易；50/50基准费用净值100067.48元、总收益0.06748%，不展示年化。8笔模型价超日内范围，实际可成交性未证明。|
-|验证|169项基础测试+18项框架测试；162场景执行对照、离线复现和浏览器验收。|
-|看板部署|静态代码和页面已保存，未配置公开域名托管。|
+页面文件保存在GitHub，未验收公网实时托管。Ubuntu未来输出先存持久目录，无自动Git推送、外部消息或实盘。当前账户以config/active_run.json指向的整包为准；默认监控配置仍对应固定11月6日报告，不能混用。
 
-50/50基准费用年化：原640日4.90%，1167日0.51%，新1967日4.02%（最大收盘回撤19.73%）。同策略、同历史终点对起点敏感；最新数字落入研究目标范围也不证明长期目标成立。
+## 验证
 
-- [11月6日收盘准入与模拟对账](reports/2026-11-06-close/PROGRESS.md)
-- [计划逐项对照](docs/PLAN_ALIGNMENT.md) · [风险监控页面](site/risk.html) · [统一监控配置](config/research.json)
-- [Backtrader 固定样例初评](reports/2026-11-06-backtrader/PROGRESS.md) · [引擎对照页面](site/backtrader.html)：暂不替换冻结引擎，分红和交易制度仍需双引擎验证。
-- [最新停复牌查询核验](reports/2026-11-06-suspension/PROGRESS.md)
-- [11月6日模拟目标与时间说明](reports/2026-11-06-intent/PROGRESS.md)
-- [最新规则时间线证据](reports/2026-11-05-rule-timeline/PROGRESS.md)
-- [最新研究报告与来源限制](reports/2026-11-05-long-history/PROGRESS.md) · [三种历史区间比较](reports/2026-11-05-long-history/sample_comparison.json)
-- [前瞻检查点](reports/2026-11-06-close/forward_checkpoint.json) · [官方收盘交叉验证](reports/2026-11-06-close/official_close.json)
-- [原1167日报告](reports/2026-11-04-extension/PROGRESS.md) · [原640日报告](reports/2026-11-04-closure/PROGRESS.md)
-- [冻结协议](PROTOCOL_V1.md) · [接续入口](CONTINUATION.md) · [计划](PROJECT_PLAN.md) · [数据来源](DATA_SOURCES.md) · [静态看板](site/index.html)
-
-## 复现
+计算与管线使用独立Ubuntu，已验证Python3.12.16；不使用WSL。
 
 ```sh
 python -m pip install -r requirements-lock.txt
 python scripts/verify_project.py
-python scripts/build_risk_report.py
 PYTHONPATH=src python -m unittest discover -s tests -v
-PYTHONPATH=src python scripts/audit_official_close.py --official-snapshot 2026-11-06-official-close-1650 --price-snapshot 2026-11-06-close-windows-1653 --day 2026-11-06 --output /tmp/etf-official-close-check.json
+python scripts/check_health.py
 python scripts/reproduce.py
-python -m http.server 8765 --bind 127.0.0.1
 ```
 
-Python 3.11+；监控使用固定版本pandas、NumPy和matplotlib，完整依赖见requirements-lock.txt。旧冻结模拟引擎仍使用标准库；可选网页验收需Playwright/Chromium，PDF文本提取需pdftotext。已有原始快照不覆盖。最新清单reports/2026-11-06-engine-matrix-final/manifest.json；旧阶段清单在相应历史提交核验。新环境先读CONTINUATION.md，不依赖聊天记忆。
-
-旧/workspace/quant-research、旧策略/看板和旧10项测试未恢复；当前是持续重建并已保存到仓库的版本。无实盘、无后台调度，未来收益不能在当前会话完成。
-
-监控页面使用现有报告离线生成，浏览器无需安装框架或联网加载图表。可用上面的http.server打开/site/risk.html。配置仅控制分析输入和风险监控；策略权重/费用仍由冻结协议控制。原规划的剩余项见PLAN_ALIGNMENT，不以测试通过代替完整交付。
-
-Windows 检出须保留快照原始字节（本项目 `.gitattributes` 已设定）；Linux 默认在独立 Ubuntu 执行。首次执行 `audit_official_close.py` 的输出必须为不存在的新文件，避免覆盖旧报告。
-
-下一阶段大目标见[工程计划](docs/PHASE2_PLAN.md)。[独立执行矩阵](reports/2026-11-06-engine-matrix-final/PROGRESS.md)已完成162场景对照；存在精确现金边界反例，冻结引擎不迁移。风险扩展和每日流程仍在进行。
-
-## 2026-11-06 风险扩展阶段
-
-Beta、预设压力测试和官方2026Q3披露代理穿透已实现，见[验收报告](reports/2026-11-06-risk-expansion/PROGRESS.md)。当前完整持仓、完整集中度仍未知；前瞻样本不足的Beta为空。下一项为docs/PHASE2_PLAN.md阶段三每日管线，不能将本阶段通过视作整个规划完成。
+可选框架对照另装requirements-backtrader.txt。历史报告和原始快照不覆盖；最新静态清单见reports/2026-11-06-closure/manifest.json，动态状态另对照封存记录。旧阶段清单应在相应Git提交验证。历史建设记录见[历史计划](docs/history/PROJECT_PLAN-before-closure-20261106.md)。

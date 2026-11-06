@@ -19,7 +19,7 @@ python scripts/run_scheduled.py
 5. 用显式新输入配置生成标准风险、Beta/压力/披露代理页面和当日主页面；历史研究保持原样。
 6. 检查期间输入未变化，写ready.json和完整manifest，fsync文件/目录；最后os.replace一次切换config/active_run.json。读者从site/daily.html进入同一个完整报告包。旧报告/检查点不覆盖，失败包不会成为当前状态。
 
-config/research.json保留固定报告的基础配置；管线产生每次独立research.json与risk_extensions_config.json。当前指针列出实际配置，不能混读旧默认输入和新日报。静态完整性清单保护代码、配置、历史证据与报告。两个可变入口config/active_run.json与site/operation_status.json由verify_project.py分别对照封存账户包/运行记录验证，不使用过期Git哈希把正常日更新误报为篡改；其他静态文件仍按哈希阻断。新输出须审阅提交后才算已存GitHub。
+config/research.json保留固定报告的基础配置；管线产生每次独立research.json与risk_extensions_config.json。当前指针列出实际配置，不能混读旧默认输入和新日报。静态完整性清单保护代码、配置、历史证据与报告。三个可变入口config/active_run.json、site/operation_status.json与site/health_status.json由verify_project.py分别对照封存账户包/运行记录验证，不使用过期Git哈希把正常日更新误报为篡改；其他静态文件仍按哈希阻断。新输出须审阅提交后才算已存GitHub。
 
 ## 重放、准备及恢复
 
@@ -57,7 +57,7 @@ loginctl show-user ubuntu -p Linger
 python scripts/verify_project.py
 ```
 
-需要停用本项目后台任务时，先disable --now本项目timer，再stop本项目service；不要停止其他用户服务或整个user manager。更新代码前暂停本项目timer，等正在运行的service完成，先增量取回并核对config/active_run.json、site/operation_status.json、reports/daily、reports/operations及新快照；不能用旧Git归档覆盖未保存运行数据。代码/依赖检查通过后daemon-reload并重新enable --now本项目timer。
+需要停用本项目后台任务时，先disable --now本项目timer，再stop本项目service；不要停止其他用户服务或整个user manager。更新代码前暂停本项目daily/health/archive三个timer，等对应正在运行的service完成，先增量取回并核对config/active_run.json、site/operation_status.json、reports/daily、reports/operations、reports/health、reports/notice-reviews、reports/notice-decisions、site/health_status.json及新快照；不能用旧Git归档覆盖未保存运行数据。代码/依赖检查通过后daemon-reload并重新enable --now本项目timer。
 
 未发送邮件/微信等外部消息，不接实盘、不自动Git推送、不保存凭据。新的日报先存Ubuntu持久目录，后续交接由会话核验后提交GitHub。GitHub页面代码和状态文件是提交时快照，未验收公网实时托管。
 
@@ -68,3 +68,7 @@ python scripts/verify_project.py
 2027年日历尚未在当前准入基线覆盖，跨年缺年会阻断，须新增独立官方证据和审阅。新公告仍须人工原文核对；不得自动重签旧目录、伪造行情或放宽条件。
 
 参考：[curl地址族与HTTPS选项](https://curl.se/docs/manpage.html#-4)、[loginctl linger语义](https://www.freedesktop.org/software/systemd/man/254/loginctl.html)、[Python flock](https://docs.python.org/3.12/library/fcntl.html#fcntl.flock)。实际部署参数、触发及重启结果以reports/2026-11-06-operations中保存的主机证据为准。
+
+## 运行闭环补充
+
+新增独立健康观察、每日内容寻址归档和证据绑定公告审阅，操作及维护顺序见[闭环手册](OPERATIONS_CLOSURE.md)。维护时应同时管理本项目daily/health/archive三个timer；所有维护只针对本项目单位。动态health_status也须对照封存记录校验。

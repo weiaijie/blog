@@ -37,6 +37,11 @@ def supervise(root=ROOT,refresh=False,*,runner=invoke):
             before=read(root/'config/active_run.json');load_policy(root/'config/collection.json');transport=client_version()
             with (folder/'stdout.log').open('xb') as out,(folder/'stderr.log').open('xb') as err:
                 exit_code=runner(root,refresh,out,err)
+            if exit_code!=0:
+                try:
+                    candidate=json.loads((folder/'stdout.log').read_text(encoding='utf-8').splitlines()[-1])
+                    if isinstance(candidate,dict) and candidate.get('status')=='blocked':result=candidate
+                except (ValueError,IndexError):pass
             if exit_code==0:
                 lines=(folder/'stdout.log').read_text(encoding='utf-8').splitlines()
                 result=json.loads(lines[-1]) if lines else None
