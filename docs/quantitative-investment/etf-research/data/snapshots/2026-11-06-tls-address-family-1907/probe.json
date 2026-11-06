@@ -1,0 +1,26 @@
+[
+  {
+    "address_family": "ipv6",
+    "requested_at_utc": "2026-11-06T11:05:01.017390+00:00",
+    "hostname": "query.sse.com.cn",
+    "certificate_validation": true,
+    "remote_address": "2400:8200:8000:110:0:127:0:19",
+    "tcp_seconds": 0.007670929015148431,
+    "error_type": "TimeoutError",
+    "error": "_ssl.c:994: The handshake operation timed out",
+    "failed_phase": "tls_handshake",
+    "elapsed_seconds": 5.0148540980299
+  },
+  {
+    "address_family": "ipv4",
+    "requested_at_utc": "2026-11-06T11:05:06.032263+00:00",
+    "hostname": "query.sse.com.cn",
+    "certificate_validation": true,
+    "remote_address": "202.122.113.77",
+    "tcp_seconds": 0.0067942580208182335,
+    "tls_seconds": 0.024228123016655445,
+    "tls_version": "TLSv1.2",
+    "tls_verified": true,
+    "elapsed_seconds": 0.024336833972483873
+  }
+]

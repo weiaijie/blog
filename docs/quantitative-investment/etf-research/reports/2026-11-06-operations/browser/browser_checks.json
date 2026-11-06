@@ -1,0 +1,8 @@
+{
+  "actual_enabled_active_linger_view": true,
+  "local_links_ok": true,
+  "mobile_no_overflow": true,
+  "synthetic_failure_and_stale_views": true,
+  "synthetic_views_do_not_modify_server": true,
+  "page_errors": []
+}

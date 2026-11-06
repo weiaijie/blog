@@ -72,3 +72,7 @@
 ## 2026-11-06追加证据
 
 2026Q3官方季报两份成功PDF及Ubuntu两次TLS失败均保存于holdings快照；净资产分母与行业/证券表复核见reports/2026-11-06-risk-expansion。每日管线实际联网试运行保留20261106T174852-891c8b2a-prices及-official两快照：11请求8成功、2公告TLS超时、1搜狐503后重试成功；来源失败阻断发布。成功日报仍使用此前已核验的2026-11-06-close-windows-1653和official-close-1650，不冒称新前瞻日。
+
+## 2026-11-06 19时：Ubuntu来源运行修复
+
+默认/IPv4/IPv6 HTTP对照及逐地址TCP/TLS探针已保存于network-diagnosis-1904与tls-address-family-1907快照。IPv6 TCP可连接但TLS超时；IPv4证书验证正常，公告返回259/230条并与基线一致。五轮新完整证据的10个价格/官方快照见reports/2026-11-06-operations/stability.json：55次真实请求，50次HTTP200、5次搜狐503保留后重试成功，全部五轮严格准入。重试attempt原文与选中响应分别保存，不把逻辑选中响应重复计为新请求，不增加前瞻观察日。

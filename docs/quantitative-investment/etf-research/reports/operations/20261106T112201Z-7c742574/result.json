@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "started_at_utc": "2026-11-06T11:22:01.305321+00:00",
+  "mode": "scheduled",
+  "operation": "reports/operations/20261106T112201Z-7c742574",
+  "unfinished_prior_operations": [],
+  "finished_at_utc": "2026-11-06T11:22:02.035532+00:00",
+  "phase": "success",
+  "exit_code": 0,
+  "result": {
+    "status": "up_to_date",
+    "as_of": "2026-11-06",
+    "network_requests": 0,
+    "account_changes": 0
+  },
+  "error": null,
+  "account_through": "2026-11-06",
+  "checkpoint_sha256": "ae5c0f77a8d6ffe51fc3bb9030c971097957e1e982d5033017b0b16c5997d418",
+  "account_changed": false,
+  "transport_version": "curl 8.18.0 (x86_64-pc-linux-gnu) libcurl/8.18.0 OpenSSL/3.5.5 zlib/1.3.1 brotli/1.2.0 zstd/1.5.7 libidn2/2.3.8 libpsl/0.21.2 libssh2/1.11.1 nghttp2/1.68.0 librtmp/2.3 mit-krb5/1.22.1 OpenLDAP/2.6.10",
+  "scheduler": {
+    "timer_enabled": "enabled",
+    "timer_active": "active",
+    "linger": "yes"
+  },
+  "last_success": {
+    "finished_at_utc": "2026-11-06T11:22:02.035532+00:00",
+    "operation": "reports/operations/20261106T112201Z-7c742574",
+    "mode": "scheduled"
+  }
+}

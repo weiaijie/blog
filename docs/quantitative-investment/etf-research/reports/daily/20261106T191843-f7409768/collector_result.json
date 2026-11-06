@@ -1,0 +1,5 @@
+{
+  "returncode": 0,
+  "stdout": "{\"candidate_only\": true, \"through\": \"2026-11-06\", \"requests\": 6, \"actual_requests\": 7, \"statuses\": [200, 200, 200, 200, 200, 200], \"output\": \"/home/ubuntu/projects/etf-research-git-snapshot/docs/quantitative-investment/etf-research/data/snapshots/20261106T191843-f7409768-prices\"}\n",
+  "stderr": ""
+}

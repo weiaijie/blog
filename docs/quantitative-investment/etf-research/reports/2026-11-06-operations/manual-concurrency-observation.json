@@ -1,0 +1,8 @@
+{
+  "context": "Manual acceptance refresh overlapped etf-acceptance-c-20261106; captured terminal output on 2026-11-06",
+  "observed_stdout": {
+    "phase": "busy",
+    "account_changed": false
+  },
+  "source": "Observed run_scheduled.py process output; complementary to process-lock tests, not market evidence"
+}

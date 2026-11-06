@@ -1,0 +1,65 @@
+[
+  {
+    "name": "catalog_auto",
+    "url": "https://query.sse.com.cn/commonQuery.do?sqlId=COMMON_PL_JJXX_JJGG_NEW_L&isPagination=true&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.endPage=1&pageHelp.cacheSize=1&SECURITY_CODE=510300&TITLE=&START_DATE=2012-01-01&END_DATE=2026-11-06",
+    "requested_at_utc": "2026-11-06T11:02:59.825396+00:00",
+    "exit_code": 28,
+    "error": "curl: (28) Connection timed out after 8002 milliseconds",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "metrics": {
+      "response_code": 0,
+      "remote_ip": "",
+      "remote_port": -1,
+      "http_version": "0",
+      "ssl_verify_result": 1,
+      "time_connect": 0.0,
+      "time_appconnect": 0.0,
+      "time_starttransfer": 0.0,
+      "time_total": 8.002188,
+      "num_connects": 1
+    }
+  },
+  {
+    "name": "catalog_ipv4",
+    "url": "https://query.sse.com.cn/commonQuery.do?sqlId=COMMON_PL_JJXX_JJGG_NEW_L&isPagination=true&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.endPage=1&pageHelp.cacheSize=1&SECURITY_CODE=510300&TITLE=&START_DATE=2012-01-01&END_DATE=2026-11-06",
+    "requested_at_utc": "2026-11-06T11:02:59.825627+00:00",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 202471,
+    "sha256": "1fadf896aa649e34b03a7c671cdef072d1163d3dbff5414f7c1ae945e1e0d462",
+    "metrics": {
+      "response_code": 200,
+      "remote_ip": "202.122.113.77",
+      "remote_port": 443,
+      "http_version": "1.1",
+      "ssl_verify_result": 0,
+      "time_connect": 0.008028,
+      "time_appconnect": 0.026145,
+      "time_starttransfer": 0.096626,
+      "time_total": 0.117963,
+      "num_connects": 1
+    }
+  },
+  {
+    "name": "catalog_ipv6",
+    "url": "https://query.sse.com.cn/commonQuery.do?sqlId=COMMON_PL_JJXX_JJGG_NEW_L&isPagination=true&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.endPage=1&pageHelp.cacheSize=1&SECURITY_CODE=510300&TITLE=&START_DATE=2012-01-01&END_DATE=2026-11-06",
+    "requested_at_utc": "2026-11-06T11:02:59.826024+00:00",
+    "exit_code": 28,
+    "error": "curl: (28) Connection timed out after 8002 milliseconds",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "metrics": {
+      "response_code": 0,
+      "remote_ip": "",
+      "remote_port": -1,
+      "http_version": "0",
+      "ssl_verify_result": 1,
+      "time_connect": 0.0,
+      "time_appconnect": 0.0,
+      "time_starttransfer": 0.0,
+      "time_total": 8.002407,
+      "num_connects": 1
+    }
+  }
+]

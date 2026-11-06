@@ -1,0 +1,247 @@
+{
+  "schema_version": 1,
+  "acceptance": "bounded same-day live-source engineering test, not multi-day uptime",
+  "since": "2026-11-06T11:01:00+00:00",
+  "baseline": "reports/2026-11-06-close/forward_checkpoint.json",
+  "admitted_rounds": 5,
+  "rounds": [
+    {
+      "bundle": "reports/daily/20261106T190757-7d1d2e98",
+      "created_at_shanghai": "2026-11-06T19:07:57.791327+08:00",
+      "price_snapshot": "20261106T190757-7d1d2e98-prices",
+      "official_snapshot": "20261106T190757-7d1d2e98-official",
+      "catalog_counts": {
+        "510300": 259,
+        "511010": 230
+      },
+      "actual_requests": 11,
+      "checkpoint_unchanged": true
+    },
+    {
+      "bundle": "reports/daily/20261106T191712-bbc1ae1c",
+      "created_at_shanghai": "2026-11-06T19:17:12.369160+08:00",
+      "price_snapshot": "20261106T191712-bbc1ae1c-prices",
+      "official_snapshot": "20261106T191712-bbc1ae1c-official",
+      "catalog_counts": {
+        "510300": 259,
+        "511010": 230
+      },
+      "actual_requests": 11,
+      "checkpoint_unchanged": true
+    },
+    {
+      "bundle": "reports/daily/20261106T191843-f7409768",
+      "created_at_shanghai": "2026-11-06T19:18:43.364237+08:00",
+      "price_snapshot": "20261106T191843-f7409768-prices",
+      "official_snapshot": "20261106T191843-f7409768-official",
+      "catalog_counts": {
+        "510300": 259,
+        "511010": 230
+      },
+      "actual_requests": 11,
+      "checkpoint_unchanged": true
+    },
+    {
+      "bundle": "reports/daily/20261106T192336-b27477e8",
+      "created_at_shanghai": "2026-11-06T19:23:36.405140+08:00",
+      "price_snapshot": "20261106T192336-b27477e8-prices",
+      "official_snapshot": "20261106T192336-b27477e8-official",
+      "catalog_counts": {
+        "510300": 259,
+        "511010": 230
+      },
+      "actual_requests": 11,
+      "checkpoint_unchanged": true
+    },
+    {
+      "bundle": "reports/daily/20261106T192520-fbb0790c",
+      "created_at_shanghai": "2026-11-06T19:25:20.758711+08:00",
+      "price_snapshot": "20261106T192520-fbb0790c-prices",
+      "official_snapshot": "20261106T192520-fbb0790c-official",
+      "catalog_counts": {
+        "510300": 259,
+        "511010": 230
+      },
+      "actual_requests": 11,
+      "checkpoint_unchanged": true
+    }
+  ],
+  "failed_or_incomplete_live_rounds": [],
+  "actual_requests": 55,
+  "failed_attempts": [
+    {
+      "snapshot": "20261106T190757-7d1d2e98-prices",
+      "logical": "sohu_511010",
+      "attempt": "sohu_511010_attempt_01",
+      "status": 503,
+      "curl_exit": 0,
+      "elapsed_seconds": 0.04
+    },
+    {
+      "snapshot": "20261106T191712-bbc1ae1c-prices",
+      "logical": "sohu_511010",
+      "attempt": "sohu_511010_attempt_01",
+      "status": 503,
+      "curl_exit": 0,
+      "elapsed_seconds": 0.037
+    },
+    {
+      "snapshot": "20261106T191843-f7409768-prices",
+      "logical": "sohu_511010",
+      "attempt": "sohu_511010_attempt_01",
+      "status": 503,
+      "curl_exit": 0,
+      "elapsed_seconds": 0.044
+    },
+    {
+      "snapshot": "20261106T192336-b27477e8-prices",
+      "logical": "sohu_511010",
+      "attempt": "sohu_511010_attempt_01",
+      "status": 503,
+      "curl_exit": 0,
+      "elapsed_seconds": 0.042
+    },
+    {
+      "snapshot": "20261106T192520-fbb0790c-prices",
+      "logical": "sohu_511010",
+      "attempt": "sohu_511010_attempt_01",
+      "status": 503,
+      "curl_exit": 0,
+      "elapsed_seconds": 0.037
+    }
+  ],
+  "catalog_successful_attempts": 10,
+  "catalog_elapsed_median_seconds": 0.1255,
+  "catalog_elapsed_max_seconds": 0.138,
+  "observation_span_seconds": 1042.967384,
+  "new_forward_observations": 0,
+  "checkpoint_sha256": "ae5c0f77a8d6ffe51fc3bb9030c971097957e1e982d5033017b0b16c5997d418",
+  "operations": [
+    {
+      "operation": "reports/operations/20261106T111407Z-37d66bc6",
+      "mode": "scheduled",
+      "phase": "success",
+      "exit_code": 0,
+      "started_at_utc": "2026-11-06T11:14:07.685837+00:00",
+      "finished_at_utc": "2026-11-06T11:14:08.365500+00:00",
+      "account_changed": false,
+      "scheduler": {
+        "timer_enabled": "not-found",
+        "timer_active": "inactive",
+        "linger": "yes"
+      }
+    },
+    {
+      "operation": "reports/operations/20261106T111537Z-ffe7997f",
+      "mode": "scheduled",
+      "phase": "success",
+      "exit_code": 0,
+      "started_at_utc": "2026-11-06T11:15:37.762601+00:00",
+      "finished_at_utc": "2026-11-06T11:15:38.493567+00:00",
+      "account_changed": false,
+      "scheduler": {
+        "timer_enabled": "enabled",
+        "timer_active": "active",
+        "linger": "yes"
+      }
+    },
+    {
+      "operation": "reports/operations/20261106T111711Z-04b80aa9",
+      "mode": "validation_refresh",
+      "phase": "success",
+      "exit_code": 0,
+      "started_at_utc": "2026-11-06T11:17:11.780302+00:00",
+      "finished_at_utc": "2026-11-06T11:17:17.073010+00:00",
+      "account_changed": false,
+      "scheduler": {
+        "timer_enabled": "enabled",
+        "timer_active": "active",
+        "linger": "yes"
+      }
+    },
+    {
+      "operation": "reports/operations/20261106T111842Z-821208c0",
+      "mode": "validation_refresh",
+      "phase": "success",
+      "exit_code": 0,
+      "started_at_utc": "2026-11-06T11:18:42.781524+00:00",
+      "finished_at_utc": "2026-11-06T11:18:48.124388+00:00",
+      "account_changed": false,
+      "scheduler": {
+        "timer_enabled": "enabled",
+        "timer_active": "active",
+        "linger": "yes"
+      }
+    },
+    {
+      "operation": "reports/operations/20261106T112005Z-3c5f2a23",
+      "mode": "scheduled",
+      "phase": "success",
+      "exit_code": 0,
+      "started_at_utc": "2026-11-06T11:20:05.769934+00:00",
+      "finished_at_utc": "2026-11-06T11:20:06.500579+00:00",
+      "account_changed": false,
+      "scheduler": {
+        "timer_enabled": "enabled",
+        "timer_active": "active",
+        "linger": "yes"
+      }
+    },
+    {
+      "operation": "reports/operations/20261106T112201Z-7c742574",
+      "mode": "scheduled",
+      "phase": "success",
+      "exit_code": 0,
+      "started_at_utc": "2026-11-06T11:22:01.305321+00:00",
+      "finished_at_utc": "2026-11-06T11:22:02.035532+00:00",
+      "account_changed": false,
+      "scheduler": {
+        "timer_enabled": "enabled",
+        "timer_active": "active",
+        "linger": "yes"
+      }
+    },
+    {
+      "operation": "reports/operations/20261106T112335Z-0bb241ba",
+      "mode": "validation_refresh",
+      "phase": "success",
+      "exit_code": 0,
+      "started_at_utc": "2026-11-06T11:23:35.773588+00:00",
+      "finished_at_utc": "2026-11-06T11:23:41.263687+00:00",
+      "account_changed": false,
+      "scheduler": {
+        "timer_enabled": "enabled",
+        "timer_active": "active",
+        "linger": "yes"
+      }
+    },
+    {
+      "operation": "reports/operations/20261106T112520Z-8fa99ea5",
+      "mode": "validation_refresh",
+      "phase": "success",
+      "exit_code": 0,
+      "started_at_utc": "2026-11-06T11:25:20.194563+00:00",
+      "finished_at_utc": "2026-11-06T11:25:25.586153+00:00",
+      "account_changed": false,
+      "scheduler": {
+        "timer_enabled": "enabled",
+        "timer_active": "active",
+        "linger": "yes"
+      }
+    },
+    {
+      "operation": "reports/operations/20261106T112525Z-ac02028f",
+      "mode": "scheduled",
+      "phase": "success",
+      "exit_code": 0,
+      "started_at_utc": "2026-11-06T11:25:25.691857+00:00",
+      "finished_at_utc": "2026-11-06T11:25:26.371219+00:00",
+      "account_changed": false,
+      "scheduler": {
+        "timer_enabled": "enabled",
+        "timer_active": "active",
+        "linger": "yes"
+      }
+    }
+  ]
+}

@@ -2,16 +2,22 @@
 Description=ETF research daily admission and report pipeline
 After=network-online.target
 Wants=network-online.target
+StartLimitIntervalSec=20min
+StartLimitBurst=3
 
 [Service]
 Type=oneshot
 WorkingDirectory=%h/projects/etf-research-git-snapshot/docs/quantitative-investment/etf-research
-ExecStart=%h/projects/etf-research-py312/bin/python scripts/run_daily.py
+ExecStart=%h/projects/etf-research-py312/bin/python scripts/run_scheduled.py
 Environment=PYTHONUTF8=1
 Environment=PYTHONDONTWRITEBYTECODE=1
 TimeoutStartSec=15min
+TimeoutStopSec=30s
+KillMode=control-group
+Restart=on-failure
+RestartSec=120s
 UMask=0022
 NoNewPrivileges=yes
 PrivateTmp=yes
 
-# User unit, supplied for review/validation. No notification or Git credentials.
+# No notification, broker access or Git credentials. Failure remains visible in journal.

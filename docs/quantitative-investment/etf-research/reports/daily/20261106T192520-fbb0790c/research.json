@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "mode": "research_only",
+  "history_results": "reports/2026-11-05-long-history/results.json",
+  "forward_checkpoint": "reports/daily/20261106T192520-fbb0790c/forward_checkpoint.json",
+  "protocol": "PROTOCOL_V1.md",
+  "risk": {
+    "action": "report_only",
+    "drawdown_warning": 0.15,
+    "annual_drawdown_limit": 0.2,
+    "annual_volatility_limit": 0.25,
+    "annual_volatility_warning": 0.3,
+    "sharpe_target": 1.0,
+    "daily_var_limit": 0.03,
+    "daily_move_warning": 0.05,
+    "var_confidence": 0.95,
+    "lookback_returns": 252,
+    "annualization_sessions": 252,
+    "annual_risk_free_assumption": 0.0
+  },
+  "provenance": {
+    "thresholds": "docs/original-plan/07-risk-control/README.md",
+    "technology": "docs/original-plan/tools/README.md",
+    "method_decisions": "docs/PLAN_ALIGNMENT.md"
+  }
+}

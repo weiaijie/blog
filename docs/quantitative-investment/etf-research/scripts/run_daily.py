@@ -51,7 +51,7 @@ def reconcile(data,previous,state):
     return dict(**counts,model_fills_outside_daily_range=outside,scope='Independent journal arithmetic; not broker fill evidence. Frozen engine validates previous history and dividend availability; this check does not independently verify all dividend entitlements or fee rules.')
 
 def dependencies(pointer):
-    names=[ROOT/'config/research.json',ROOT/'config/risk_extensions.json',inside(ROOT,pointer['checkpoint']),ROOT/'PROTOCOL_V1.md',ROOT/'requirements-lock.txt']
+    names=[ROOT/'config/research.json',ROOT/'config/risk_extensions.json',inside(ROOT,pointer['checkpoint']),ROOT/'PROTOCOL_V1.md',ROOT/'requirements-lock.txt',ROOT/'config/collection.json']
     names+=list((ROOT/'src/etf_research').glob('*.py'))+list((ROOT/'scripts').glob('*.py'))
     names+=list((ROOT/'data/snapshots').glob('*/manifest.json'))+list((ROOT/'data/reference').glob('*.json'))
     # Include all immutable source bytes, not only a possibly unchanged manifest.

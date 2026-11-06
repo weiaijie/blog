@@ -1,20 +1,14 @@
 """Capture immutable official closing quotes, retaining every failed response."""
 from pathlib import Path
 from datetime import datetime,timezone
-import argparse,concurrent.futures,hashlib,json,time,urllib.request,urllib.error
+import argparse,concurrent.futures,hashlib,json,sys
+ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'src'))
+from etf_research.http_capture import fetch as fetch_public,load_policy,save_transport
 
 def collect(folder):
     folder=Path(folder);folder.mkdir(parents=True,exist_ok=False)
-    def fetch(job):
-        name,url=job;start=time.monotonic();r=dict(name=name,url=url,requested_at_utc=datetime.now(timezone.utc).isoformat())
-        try:
-            q=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0','Referer':'https://www.sse.com.cn/'})
-            with urllib.request.urlopen(q,timeout=25) as response:
-                body=response.read();r.update(status=response.status,final_url=response.url,content_type=response.headers.get('Content-Type'))
-        except urllib.error.HTTPError as e:body=e.read();r.update(status=e.code,error=str(e))
-        except Exception as e:body=b'';r['error']=type(e).__name__+': '+str(e)
-        (folder/(name+'.body')).write_bytes(body)
-        r.update(bytes=len(body),sha256=hashlib.sha256(body).hexdigest(),elapsed_seconds=round(time.monotonic()-start,2));return r
+    policy=load_policy();save_transport(folder,policy)
+    def fetch(job):return fetch_public(folder,*job,policy)
     jobs=[]
     for s in ['510300','511010']:
         for kind,query in [('dayk','begin=-64&end=-1&period=day'),('snap','select=name,prev_close,open,high,low,last,up_limit,down_limit,tradephase,hlt_tag')]:

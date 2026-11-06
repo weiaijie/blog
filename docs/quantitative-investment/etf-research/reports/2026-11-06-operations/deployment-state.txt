@@ -1,0 +1,33 @@
+ActiveState=active
+UnitFileState=enabled
+NextElapseUSecRealtime=Mon 2026-11-09 16:10:00 CST
+LastTriggerUSec=Fri 2026-11-06 19:20:05 CST
+AccuracyUSec=1s
+Persistent=yes
+StartLimitIntervalUSec=20min
+StartLimitBurst=3
+Restart=on-failure
+RestartUSec=2min
+TimeoutStartUSec=15min
+Result=success
+ExecMainStatus=0
+PrivateTmp=yes
+NoNewPrivileges=yes
+KillMode=control-group
+Linger=yes
+# /home/ubuntu/.config/systemd/user/etf-research-daily.timer -> /home/ubuntu/projects/etf-research-git-snapshot/docs/quantitative-investment/etf-research/deploy/etf-research-daily.timer
+[Unit]
+Description=Evaluate completed ETF session after Shanghai close
+
+[Timer]
+OnActiveSec=30s
+OnCalendar=Mon..Fri *-*-* 16:10:00 Asia/Shanghai
+OnCalendar=Mon..Fri *-*-* 16:40:00 Asia/Shanghai
+OnCalendar=Mon..Fri *-*-* 17:10:00 Asia/Shanghai
+Persistent=true
+RandomizedDelaySec=0
+AccuracySec=1s
+Unit=etf-research-daily.service
+
+[Install]
+WantedBy=timers.target
