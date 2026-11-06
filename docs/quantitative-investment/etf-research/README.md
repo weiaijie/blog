@@ -1,5 +1,11 @@
 # 个人量化投资研究系统
 
+## 最新状态：2026-11-06三阶段工程验收
+
+Backtrader独立执行矩阵、Beta/固定压力/官方披露代理、每日管线与故障恢复均已验收。145项基础测试+18项可选框架测试通过；保留冻结引擎，前瞻仍仅2日。当前日报入口为site/daily.html，状态与实际输入由config/active_run.json明确指向。Ubuntu定时方案已受控验证但未启用，公告TLS可靠性仍待解决；外部提醒、完整实时穿透和长期收益评估仍未完成。先读[当前接续说明](CONTINUATION.md)、[本轮验收](reports/2026-11-06-daily-pipeline/PROGRESS.md)与[操作说明](docs/DAILY_PIPELINE.md)。
+
+以下保留历次建设过程与当时状态；有冲突时以当前接续说明及最新证据为准。
+
 只研究中国股票ETF和债券ETF，用1～2年评估长期年化净收益4%～5%的可行性；不保证收益、不实盘、不使用真实资金。研究代码、行情与来源保存于用户授权公开的weiaijie/blog / redesign-pc / docs/quantitative-investment/etf-research，不保存凭据或私人账户资料。
 
 ## 当前状态（2026-11-06收盘后）

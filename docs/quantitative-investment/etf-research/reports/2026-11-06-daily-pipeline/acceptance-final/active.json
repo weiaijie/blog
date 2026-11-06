@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-11-06",
+  "checkpoint": "reports/daily/20261106T175024-395e80bd/forward_checkpoint.json",
+  "checkpoint_sha256": "ae5c0f77a8d6ffe51fc3bb9030c971097957e1e982d5033017b0b16c5997d418",
+  "bundle": "reports/daily/20261106T175024-395e80bd",
+  "dashboard": "reports/daily/20261106T175024-395e80bd/site/index.html",
+  "research_config": "reports/daily/20261106T175024-395e80bd/research.json",
+  "extensions_config": "reports/daily/20261106T175024-395e80bd/risk_extensions_config.json",
+  "bundle_manifest_sha256": "16b36010c10c54527d82c54034f2d5093c5b757a257b7de58be508d68346f33b"
+}

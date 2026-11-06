@@ -1,2 +1,6 @@
 # Preserve original response and manifest bytes across Windows/Linux checkouts.
 data/snapshots/** -text whitespace=cr-at-eol
+
+# Sealed daily bundles keep exact bytes; matplotlib SVG whitespace is evidence.
+reports/daily/** -text
+reports/daily/*/site/risk.html -whitespace

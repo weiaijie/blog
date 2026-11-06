@@ -29,4 +29,4 @@
 
 - 阶段一：已完成隔离对照及不迁移结论；162场景字段核对通过，但精确现金边界有原生拒单反例，见reports/2026-11-06-engine-matrix-final/PROGRESS.md。
 - 阶段二：已完成Beta、固定压力情景和官方季度披露代理穿透，见reports/2026-11-06-risk-expansion/PROGRESS.md；完整实时持仓仍未知。
-- 阶段三：进行中，统一每日管线与故障恢复。
+- 阶段三：已完成统一每日管线、真实证据重放、失败/幂等/中断恢复及Ubuntu定时方案受控验证；持续timer未启用，公告接口TLS可靠性仍待解决。见reports/2026-11-06-daily-pipeline/PROGRESS.md。

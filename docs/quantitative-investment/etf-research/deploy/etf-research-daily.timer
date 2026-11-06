@@ -1,0 +1,12 @@
+[Unit]
+Description=Evaluate completed ETF session after Shanghai close
+
+[Timer]
+OnCalendar=Mon..Fri *-*-* 16:10:00 Asia/Shanghai
+Persistent=true
+RandomizedDelaySec=0
+AccuracySec=1min
+Unit=etf-research-daily.service
+
+[Install]
+WantedBy=timers.target

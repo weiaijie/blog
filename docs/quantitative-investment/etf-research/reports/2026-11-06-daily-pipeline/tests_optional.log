@@ -1,0 +1,27 @@
+test_adjusted_price_or_invalid_cost_rejected (test_backtrader_adapter.AdapterTests.test_adjusted_price_or_invalid_cost_rejected) ... ok
+test_buy_after_record_has_no_entitlement (test_backtrader_adapter.AdapterTests.test_buy_after_record_has_no_entitlement) ... /home/ubuntu/projects/etf-research-py312/lib/python3.12/site-packages/backtrader/cerebro.py:1543: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  qstart = datetime.datetime.utcnow()
+/home/ubuntu/projects/etf-research-py312/lib/python3.12/site-packages/backtrader/cerebro.py:1545: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  qlapse = datetime.datetime.utcnow() - qstart
+ok
+test_cash_partial_no_late_remainder (test_backtrader_adapter.AdapterTests.test_cash_partial_no_late_remainder) ... ok
+test_cent_half_up_rounding (test_backtrader_adapter.AdapterTests.test_cent_half_up_rounding) ... ok
+test_current_close_high_low_do_not_change_fill (test_backtrader_adapter.AdapterTests.test_current_close_high_low_do_not_change_fill) ... ok
+test_dividend_paid_but_not_spendable (test_backtrader_adapter.AdapterTests.test_dividend_paid_but_not_spendable) ... ok
+test_entitlement_survives_sale_after_record (test_backtrader_adapter.AdapterTests.test_entitlement_survives_sale_after_record) ... ok
+test_exact_cash_boundary_is_known_native_difference (test_backtrader_adapter.AdapterTests.test_exact_cash_boundary_is_known_native_difference) ... ok
+test_known_ex_date_rejected (test_backtrader_adapter.AdapterTests.test_known_ex_date_rejected) ... ok
+test_missing_bar_rejected (test_backtrader_adapter.AdapterTests.test_missing_bar_rejected) ... ok
+test_native_fee_tick_cash (test_backtrader_adapter.AdapterTests.test_native_fee_tick_cash) ... ok
+test_nine_percent_guard (test_backtrader_adapter.AdapterTests.test_nine_percent_guard) ... ok
+test_odd_lot_and_short_rejected (test_backtrader_adapter.AdapterTests.test_odd_lot_and_short_rejected) ... ok
+test_same_day_signal_rejected (test_backtrader_adapter.AdapterTests.test_same_day_signal_rejected) ... ok
+test_same_session_resale (test_backtrader_adapter.AdapterTests.test_same_session_resale) ... ok
+test_sell_tax_and_sell_before_buy (test_backtrader_adapter.AdapterTests.test_sell_tax_and_sell_before_buy) ... ok
+test_target_execution_delay_is_preserved (test_backtrader_adapter.AdapterTests.test_target_execution_delay_is_preserved) ... ok
+test_weekend_payment_available_next_session (test_backtrader_adapter.AdapterTests.test_weekend_payment_available_next_session) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.106s
+
+OK

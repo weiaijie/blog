@@ -1,0 +1,8 @@
+Normalized form: Mon..Fri *-*-* 16:10:00 Asia/Shanghai
+    Next elapse: Mon 2026-11-09 16:10:00 CST
+       (in UTC): Mon 2026-11-09 08:10:00 UTC
+       From now: 2 days left
+Started etf-research-final-smoke-20261106.service - [systemd-run] /home/ubuntu/projects/etf-research-py312/bin/python scripts/run_daily.py.
+{"status": "up_to_date", "as_of": "2026-11-06", "network_requests": 0, "account_changes": 0}
+etf-research-final-smoke-20261106.service: Consumed 1.225s CPU time over 687ms wall clock time, 65.3M memory peak.
+not-found
