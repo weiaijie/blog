@@ -1,0 +1,193 @@
+{
+  "accounts": {
+    "cash_low_100000_d1": {
+      "episodes": 0,
+      "recovered": 0,
+      "underwater_closes": 0,
+      "max_depth": "0",
+      "longest_completed_sessions": null,
+      "open_peak": null,
+      "open_elapsed_sessions": null
+    },
+    "cash_base_100000_d1": {
+      "episodes": 0,
+      "recovered": 0,
+      "underwater_closes": 0,
+      "max_depth": "0",
+      "longest_completed_sessions": null,
+      "open_peak": null,
+      "open_elapsed_sessions": null
+    },
+    "cash_high_100000_d1": {
+      "episodes": 0,
+      "recovered": 0,
+      "underwater_closes": 0,
+      "max_depth": "0",
+      "longest_completed_sessions": null,
+      "open_peak": null,
+      "open_elapsed_sessions": null
+    },
+    "equity_hold_low_100000_d1": {
+      "episodes": 28,
+      "recovered": 27,
+      "underwater_closes": 1919,
+      "max_depth": "0.4001706375848516385121246776",
+      "longest_completed_sessions": 171,
+      "open_peak": "2021-02-10",
+      "open_elapsed_sessions": 1382
+    },
+    "equity_hold_base_100000_d1": {
+      "episodes": 28,
+      "recovered": 27,
+      "underwater_closes": 1919,
+      "max_depth": "0.4002807653009447572060730010",
+      "longest_completed_sessions": 171,
+      "open_peak": "2021-02-10",
+      "open_elapsed_sessions": 1382
+    },
+    "equity_hold_high_100000_d1": {
+      "episodes": 28,
+      "recovered": 27,
+      "underwater_closes": 1919,
+      "max_depth": "0.4005669272867837758186906550",
+      "longest_completed_sessions": 171,
+      "open_peak": "2021-02-10",
+      "open_elapsed_sessions": 1382
+    },
+    "bond_hold_low_100000_d1": {
+      "episodes": 117,
+      "recovered": 116,
+      "underwater_closes": 1678,
+      "max_depth": "0.0449955103005500164268319081",
+      "longest_completed_sessions": 407,
+      "open_peak": "2026-10-29",
+      "open_elapsed_sessions": 1
+    },
+    "bond_hold_base_100000_d1": {
+      "episodes": 117,
+      "recovered": 116,
+      "underwater_closes": 1678,
+      "max_depth": "0.0450175263075464580075747793",
+      "longest_completed_sessions": 407,
+      "open_peak": "2026-10-29",
+      "open_elapsed_sessions": 1
+    },
+    "bond_hold_high_100000_d1": {
+      "episodes": 116,
+      "recovered": 115,
+      "underwater_closes": 1679,
+      "max_depth": "0.0450619493185221954358393114",
+      "longest_completed_sessions": 407,
+      "open_peak": "2026-10-29",
+      "open_elapsed_sessions": 1
+    },
+    "monthly_20_80_low_100000_d1": {
+      "episodes": 80,
+      "recovered": 79,
+      "underwater_closes": 1813,
+      "max_depth": "0.0468045143636809503462773014",
+      "longest_completed_sessions": 370,
+      "open_peak": "2026-06-22",
+      "open_elapsed_sessions": 88
+    },
+    "monthly_20_80_base_100000_d1": {
+      "episodes": 80,
+      "recovered": 79,
+      "underwater_closes": 1811,
+      "max_depth": "0.0468374615424554537762169438",
+      "longest_completed_sessions": 370,
+      "open_peak": "2026-06-22",
+      "open_elapsed_sessions": 88
+    },
+    "monthly_20_80_high_100000_d1": {
+      "episodes": 79,
+      "recovered": 78,
+      "underwater_closes": 1813,
+      "max_depth": "0.0465236555354906987589149289",
+      "longest_completed_sessions": 370,
+      "open_peak": "2026-06-22",
+      "open_elapsed_sessions": 88
+    },
+    "monthly_50_50_low_100000_d1": {
+      "episodes": 47,
+      "recovered": 46,
+      "underwater_closes": 1890,
+      "max_depth": "0.1969821312439998761264748692",
+      "longest_completed_sessions": 1102,
+      "open_peak": "2026-06-22",
+      "open_elapsed_sessions": 88
+    },
+    "monthly_50_50_base_100000_d1": {
+      "episodes": 47,
+      "recovered": 46,
+      "underwater_closes": 1891,
+      "max_depth": "0.1973181185691339017762318623",
+      "longest_completed_sessions": 1102,
+      "open_peak": "2026-06-22",
+      "open_elapsed_sessions": 88
+    },
+    "monthly_50_50_high_100000_d1": {
+      "episodes": 47,
+      "recovered": 46,
+      "underwater_closes": 1891,
+      "max_depth": "0.1973266200775985349044024275",
+      "longest_completed_sessions": 1102,
+      "open_peak": "2026-06-22",
+      "open_elapsed_sessions": 88
+    },
+    "trend_120_low_100000_d1": {
+      "episodes": 23,
+      "recovered": 22,
+      "underwater_closes": 1808,
+      "max_depth": "0.1954726308449967836659231792",
+      "longest_completed_sessions": 113,
+      "open_peak": "2021-02-10",
+      "open_elapsed_sessions": 1382
+    },
+    "trend_120_base_100000_d1": {
+      "episodes": 24,
+      "recovered": 23,
+      "underwater_closes": 1809,
+      "max_depth": "0.1998215552587490382469615265",
+      "longest_completed_sessions": 113,
+      "open_peak": "2021-02-10",
+      "open_elapsed_sessions": 1382
+    },
+    "trend_120_high_100000_d1": {
+      "episodes": 23,
+      "recovered": 22,
+      "underwater_closes": 1812,
+      "max_depth": "0.2090290328995615687988030946",
+      "longest_completed_sessions": 114,
+      "open_peak": "2021-02-10",
+      "open_elapsed_sessions": 1382
+    }
+  },
+  "dates": [
+    "2018-09-14",
+    "2026-10-30"
+  ],
+  "sessions": 1967,
+  "sha256": {
+    "reports/2026-11-07-historical-pnl/summary.json": "647fcb493b39d63d36c35953bd43595f6f362e3eac88fa3eb54b95c37a2a3c3a",
+    "reports/2026-11-05-long-history/results.json": "40bfc1bdeeee60f448e5f714cda61bb13dfccfbe29b11dbbf77ddbf18c0112e2",
+    "reports/2026-11-05-long-history/cash_low_100000_d1_daily.csv": "e315423cd9b52bc911b0060e89f9decd53951cd454701cd14049e4f3b6833c73",
+    "reports/2026-11-05-long-history/cash_base_100000_d1_daily.csv": "e315423cd9b52bc911b0060e89f9decd53951cd454701cd14049e4f3b6833c73",
+    "reports/2026-11-05-long-history/cash_high_100000_d1_daily.csv": "e315423cd9b52bc911b0060e89f9decd53951cd454701cd14049e4f3b6833c73",
+    "reports/2026-11-05-long-history/equity_hold_low_100000_d1_daily.csv": "f4e568e48ed243755b9bde420ab606b7faf8ec7704e521b0ceee69877a19f8da",
+    "reports/2026-11-05-long-history/equity_hold_base_100000_d1_daily.csv": "6d4efb665d678a0ac86c63020a957453d9b4f5f9ca0d27f5824f5935a0e4f36b",
+    "reports/2026-11-05-long-history/equity_hold_high_100000_d1_daily.csv": "7b235a2241d6ab0d5f3ab3db890a4bb4e29e6107b8798ac91e18b5201ff263dc",
+    "reports/2026-11-05-long-history/bond_hold_low_100000_d1_daily.csv": "9ed93843cff1bef9e364e3fe6f2d578143031dcc7207eb619f7777d10f189de1",
+    "reports/2026-11-05-long-history/bond_hold_base_100000_d1_daily.csv": "1b5375508d2aeee249f37f2804014f0483d1598e030027536c402c701ec8a09c",
+    "reports/2026-11-05-long-history/bond_hold_high_100000_d1_daily.csv": "e0b7a83c2ede4689c101f34fa2ff8cff0189d061ca24cd39e03c4d608d0e8022",
+    "reports/2026-11-05-long-history/monthly_20_80_low_100000_d1_daily.csv": "c00042b29adc2c68e083c93b0d101024f54fabbfbd5e8affc9cbff231f45afa2",
+    "reports/2026-11-05-long-history/monthly_20_80_base_100000_d1_daily.csv": "ed680e1f30b283de14d0dc2ef5322cabecfcd56e41b753d47d0642617ae6afd5",
+    "reports/2026-11-05-long-history/monthly_20_80_high_100000_d1_daily.csv": "a373f62bbc00d7559c6fcdc06d59267b377daae9f9e1a648d00dae70eb0eca2c",
+    "reports/2026-11-05-long-history/monthly_50_50_low_100000_d1_daily.csv": "7f21a30a0cf2f771ccfd4651f870620e147e7b646f631a9137b170501231bb69",
+    "reports/2026-11-05-long-history/monthly_50_50_base_100000_d1_daily.csv": "6d212971712f3e96a9b4a96792ebf3e76bf17e256b28f73258b2012db2b74c8d",
+    "reports/2026-11-05-long-history/monthly_50_50_high_100000_d1_daily.csv": "c533b87eeda320068f6faf22e1c6144fb668ac2290f4514e8aa3c4b747fd36c7",
+    "reports/2026-11-05-long-history/trend_120_low_100000_d1_daily.csv": "9e5738187c20eca190698fc5c4209058d2cb482659d04b6956f0daa785476d6c",
+    "reports/2026-11-05-long-history/trend_120_base_100000_d1_daily.csv": "9b5af600769c13b82139ecc0c62b85ec1f7b40b222a11391374c9f328aed729f",
+    "reports/2026-11-05-long-history/trend_120_high_100000_d1_daily.csv": "5a7256c2011b451cc6869a31ad8d8350a5ab998b32f6e249a62c3498dcb61643"
+  }
+}

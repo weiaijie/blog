@@ -1,0 +1,174 @@
+{
+  "report_dates": [
+    "2026-06-30",
+    "2026-09-30"
+  ],
+  "announcement_dates": {
+    "510300": [
+      "2026-08-29",
+      "2026-10-27"
+    ],
+    "511010": [
+      "2026-08-31",
+      "2026-10-27"
+    ]
+  },
+  "sources": {
+    "reports/2026-11-06-research-audit/holdings.json": "a891f2abdb00151d41a8d8408c70511706024b8505b24962b4ad4186a40956f1",
+    "reports/2026-11-06-research-audit/stocks_2026h1.csv": "098f42323fd269975a897e1ef45ed84c6cb50ca140b3769cfcf4d5bb79a9ced1",
+    "data/reference/holdings_2026q3.json": "d67903700b11d5b846366e3cf646734e4a18ed8eba2939f415ab78bbff0c7a2a"
+  },
+  "stock": {
+    "shared_top10": 8,
+    "june_top10": "0.2324334427720854449179699247",
+    "september_top10": "0.2252063398025061421003580623",
+    "rows": [
+      {
+        "code": "000333",
+        "name": "美的集团",
+        "june_index_rank": 10,
+        "september_top10_rank": 9,
+        "june_weight": "0.01245247189476347354690547131",
+        "september_weight": "0.01533839345707485682770552212",
+        "delta_pp": "0.2885921562311383280800050810"
+      },
+      {
+        "code": "300308",
+        "name": "中际旭创",
+        "june_index_rank": 1,
+        "september_top10_rank": 1,
+        "june_weight": "0.04747460478163872117894850398",
+        "september_weight": "0.03559897285882567902864542328",
+        "delta_pp": "-1.187563192281304215030308070"
+      },
+      {
+        "code": "300502",
+        "name": "新易盛",
+        "june_index_rank": 3,
+        "september_top10_rank": 5,
+        "june_weight": "0.02894945220302104595727316413",
+        "september_weight": "0.02134345640780601453445129134",
+        "delta_pp": "-0.7605995795215031422821872790"
+      },
+      {
+        "code": "300750",
+        "name": "宁德时代",
+        "june_index_rank": 2,
+        "september_top10_rank": 3,
+        "june_weight": "0.03545996602226060146017233213",
+        "september_weight": "0.03026861091545657662014889540",
+        "delta_pp": "-0.5191355106804024840023436730"
+      },
+      {
+        "code": "600036",
+        "name": "招商银行",
+        "june_index_rank": 8,
+        "september_top10_rank": 6,
+        "june_weight": "0.01490848892604465140313161490",
+        "september_weight": "0.02007807282633225672975044338",
+        "delta_pp": "0.5169583900287605326618828480"
+      },
+      {
+        "code": "600519",
+        "name": "贵州茅台",
+        "june_index_rank": 4,
+        "september_top10_rank": 2,
+        "june_weight": "0.02517691875366373886273335354",
+        "september_weight": "0.03094009951359380017539693112",
+        "delta_pp": "0.5763180759930061312663577580"
+      },
+      {
+        "code": "600900",
+        "name": "长江电力",
+        "june_index_rank": 17,
+        "september_top10_rank": 10,
+        "june_weight": "0.01098396009877397000110787259",
+        "september_weight": "0.01370424327973832560293127181",
+        "delta_pp": "0.2720283180964355601823399220"
+      },
+      {
+        "code": "601318",
+        "name": "中国平安",
+        "june_index_rank": 7,
+        "september_top10_rank": 4,
+        "june_weight": "0.01728502421238901896855879768",
+        "september_weight": "0.02233587918408650175419527188",
+        "delta_pp": "0.5050854971697482785636474200"
+      },
+      {
+        "code": "601899",
+        "name": "紫金矿业",
+        "june_index_rank": 9,
+        "september_top10_rank": 7,
+        "june_weight": "0.01409146204846226859681510196",
+        "september_weight": "0.01932483915302335422178434389",
+        "delta_pp": "0.5233377104561085624969241930"
+      },
+      {
+        "code": "603259",
+        "name": "药明康德",
+        "june_index_rank": 20,
+        "september_top10_rank": 8,
+        "june_weight": "0.01045467647764530049523813093",
+        "september_weight": "0.01627377220656877660534866809",
+        "delta_pp": "0.5819095728923476110110537160"
+      },
+      {
+        "code": "603986",
+        "name": "兆易创新",
+        "june_index_rank": 5,
+        "september_top10_rank": null,
+        "june_weight": "0.01862960174994038891631065856",
+        "september_weight": null,
+        "delta_pp": null
+      },
+      {
+        "code": "688256",
+        "name": "寒武纪",
+        "june_index_rank": 6,
+        "september_top10_rank": null,
+        "june_weight": "0.01800545217990153602712092651",
+        "september_weight": null,
+        "delta_pp": null
+      }
+    ]
+  },
+  "bond": {
+    "june_unlisted_fraction": "0.1159468938188504339180316195",
+    "september_unlisted_fraction": "0.1101171869743775225314171254",
+    "issues": [
+      {
+        "issue": "2025年记账式附息（二十期）国债",
+        "june_disclosed": "0.4141948599576655035865849076",
+        "september_disclosed": "0",
+        "change_min_pp": "-53.01417537765159375046165271",
+        "change_max_pp": "-30.40776729832879810551677822",
+        "direction": "decrease"
+      },
+      {
+        "issue": "2026年记账式附息（三期）国债",
+        "june_disclosed": "0.1167830207244916472072742268",
+        "september_disclosed": "0.1058640054010114073245861420",
+        "change_min_pp": "-12.68659091423306738007197043",
+        "change_max_pp": "9.919817165089728264872904060",
+        "direction": "unknown"
+      },
+      {
+        "issue": "2026年记账式附息（八期）国债",
+        "june_disclosed": "0.3419842657639183817685357616",
+        "september_disclosed": "0.3832087672308376604057446670",
+        "change_min_pp": "-7.472239235193115528082271410",
+        "change_max_pp": "15.13416884412968011686260308",
+        "direction": "unknown"
+      },
+      {
+        "issue": "2026年记账式附息（十五期）国债",
+        "june_disclosed": "0",
+        "september_disclosed": "0.3822211750204662354862103732",
+        "change_min_pp": "26.62742812016158015681787537",
+        "change_max_pp": "49.23383619948437580176274986",
+        "direction": "increase"
+      }
+    ]
+  }
+}
