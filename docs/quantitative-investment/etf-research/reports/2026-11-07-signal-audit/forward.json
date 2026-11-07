@@ -1,0 +1,245 @@
+{
+  "target_session": "2026-11-06",
+  "source_through": "2026-11-05",
+  "previous_closes": {
+    "510300": "4.195",
+    "511010": "141.352"
+  },
+  "prior_checkpoint_sha256": "e11f23cb1d2a62e56590fa30f804721de74d1f7f2e6d353a80ee92eaacfb659d",
+  "portfolios": {
+    "cash_low": {
+      "signal_date": "2026-11-05",
+      "weights": {
+        "510300": "0",
+        "511010": "0"
+      },
+      "target_units": {
+        "510300": 0,
+        "511010": 0
+      },
+      "previous_equity": "100000",
+      "previous_holdings": {}
+    },
+    "cash_base": {
+      "signal_date": "2026-11-05",
+      "weights": {
+        "510300": "0",
+        "511010": "0"
+      },
+      "target_units": {
+        "510300": 0,
+        "511010": 0
+      },
+      "previous_equity": "100000",
+      "previous_holdings": {}
+    },
+    "cash_high": {
+      "signal_date": "2026-11-05",
+      "weights": {
+        "510300": "0",
+        "511010": "0"
+      },
+      "target_units": {
+        "510300": 0,
+        "511010": 0
+      },
+      "previous_equity": "100000",
+      "previous_holdings": {}
+    },
+    "equity_hold_low": {
+      "signal_date": "2026-11-05",
+      "weights": {
+        "510300": "1",
+        "511010": "0"
+      },
+      "target_units": {
+        "510300": 23800,
+        "511010": 0
+      },
+      "previous_equity": "100000",
+      "previous_holdings": {}
+    },
+    "equity_hold_base": {
+      "signal_date": "2026-11-05",
+      "weights": {
+        "510300": "1",
+        "511010": "0"
+      },
+      "target_units": {
+        "510300": 23800,
+        "511010": 0
+      },
+      "previous_equity": "100000",
+      "previous_holdings": {}
+    },
+    "equity_hold_high": {
+      "signal_date": "2026-11-05",
+      "weights": {
+        "510300": "1",
+        "511010": "0"
+      },
+      "target_units": {
+        "510300": 23800,
+        "511010": 0
+      },
+      "previous_equity": "100000",
+      "previous_holdings": {}
+    },
+    "bond_hold_low": {
+      "signal_date": "2026-11-05",
+      "weights": {
+        "510300": "0",
+        "511010": "1"
+      },
+      "target_units": {
+        "510300": 0,
+        "511010": 700
+      },
+      "previous_equity": "100000",
+      "previous_holdings": {}
+    },
+    "bond_hold_base": {
+      "signal_date": "2026-11-05",
+      "weights": {
+        "510300": "0",
+        "511010": "1"
+      },
+      "target_units": {
+        "510300": 0,
+        "511010": 700
+      },
+      "previous_equity": "100000",
+      "previous_holdings": {}
+    },
+    "bond_hold_high": {
+      "signal_date": "2026-11-05",
+      "weights": {
+        "510300": "0",
+        "511010": "1"
+      },
+      "target_units": {
+        "510300": 0,
+        "511010": 700
+      },
+      "previous_equity": "100000",
+      "previous_holdings": {}
+    },
+    "monthly_20_80_low": {
+      "signal_date": "2026-11-05",
+      "weights": {
+        "510300": "0.2",
+        "511010": "0.8"
+      },
+      "target_units": {
+        "510300": 4700,
+        "511010": 500
+      },
+      "previous_equity": "100000",
+      "previous_holdings": {}
+    },
+    "monthly_20_80_base": {
+      "signal_date": "2026-11-05",
+      "weights": {
+        "510300": "0.2",
+        "511010": "0.8"
+      },
+      "target_units": {
+        "510300": 4700,
+        "511010": 500
+      },
+      "previous_equity": "100000",
+      "previous_holdings": {}
+    },
+    "monthly_20_80_high": {
+      "signal_date": "2026-11-05",
+      "weights": {
+        "510300": "0.2",
+        "511010": "0.8"
+      },
+      "target_units": {
+        "510300": 4700,
+        "511010": 500
+      },
+      "previous_equity": "100000",
+      "previous_holdings": {}
+    },
+    "monthly_50_50_low": {
+      "signal_date": "2026-11-05",
+      "weights": {
+        "510300": "0.5",
+        "511010": "0.5"
+      },
+      "target_units": {
+        "510300": 11900,
+        "511010": 300
+      },
+      "previous_equity": "100000",
+      "previous_holdings": {}
+    },
+    "monthly_50_50_base": {
+      "signal_date": "2026-11-05",
+      "weights": {
+        "510300": "0.5",
+        "511010": "0.5"
+      },
+      "target_units": {
+        "510300": 11900,
+        "511010": 300
+      },
+      "previous_equity": "100000",
+      "previous_holdings": {}
+    },
+    "monthly_50_50_high": {
+      "signal_date": "2026-11-05",
+      "weights": {
+        "510300": "0.5",
+        "511010": "0.5"
+      },
+      "target_units": {
+        "510300": 11900,
+        "511010": 300
+      },
+      "previous_equity": "100000",
+      "previous_holdings": {}
+    },
+    "trend_120_low": {
+      "signal_date": "2026-11-05",
+      "weights": {
+        "510300": "0",
+        "511010": "1"
+      },
+      "target_units": {
+        "510300": 0,
+        "511010": 700
+      },
+      "previous_equity": "100000",
+      "previous_holdings": {}
+    },
+    "trend_120_base": {
+      "signal_date": "2026-11-05",
+      "weights": {
+        "510300": "0",
+        "511010": "1"
+      },
+      "target_units": {
+        "510300": 0,
+        "511010": 700
+      },
+      "previous_equity": "100000",
+      "previous_holdings": {}
+    },
+    "trend_120_high": {
+      "signal_date": "2026-11-05",
+      "weights": {
+        "510300": "0",
+        "511010": "1"
+      },
+      "target_units": {
+        "510300": 0,
+        "511010": 700
+      },
+      "previous_equity": "100000",
+      "previous_holdings": {}
+    }
+  }
+}

@@ -29,3 +29,4 @@ reports/2026-11-07-daily-evidence/** -text whitespace=cr-at-eol
 reports/2026-11-07-period-review/** -text whitespace=cr-at-eol
 reports/2026-11-07-recovery/** -text whitespace=cr-at-eol
 reports/2026-11-07-rolling-risk/** -text whitespace=cr-at-eol
+reports/2026-11-07-signal-audit/** -text whitespace=cr-at-eol

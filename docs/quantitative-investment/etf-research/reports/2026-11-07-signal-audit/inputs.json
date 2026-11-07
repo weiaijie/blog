@@ -1,0 +1,13 @@
+{
+  "reports/2026-11-07-historical-pnl/fills.csv": "627077297b9a576e08146e4612d362be1395a75d80c23570109ff2fca8b3ecdd",
+  "reports/2026-11-05-long-history/forward_checkpoint.json": "b95aeb032bb5978794f3f23a609f9c9d4a8e0b37985a5a7d94e4862dfdd1df50",
+  "PROTOCOL_V1.md": "c48927e3535d2d4221d2f96a8b3e9d20409d8e4bf6911b1ff414321189eacbfc",
+  "data/snapshots/2026-11-04-calendar-08/calendar.json": "950a3bfe2bab7ad484abc03aa27207bc70a49a4a144f495899cf1bd2aa10c8c6",
+  "data/snapshots/2026-11-05-close-12b/manifest.json": "982f1d451439488cd828509929f7705df68d0389c93ff1379e925bdbfdf6d63a",
+  "data/snapshots/2026-11-03-official-01/manifest.json": "8e9a629c570486158b1dc5194d7691889775b02e771b8ec5d77f841708a5ed34",
+  "data/snapshots/2026-11-03-official-02/manifest.json": "368c8bb592152e72acaf10ef0451cc9f1ef1d3e7c4ab5ca99babb683aa3b813f",
+  "data/snapshots/2026-11-04-expansion-07/manifest.json": "03e51be9790eaa6451b76491b71dcb976ae5047b54adb02f19a105d18270befd",
+  "data/snapshots/2026-11-04-calendar-08/manifest.json": "dd8766c2432983c0d5a1d123add8b175696bade27c76b62688db17fdcbf25d86",
+  "data/snapshots/2026-11-05-costs-11/manifest.json": "67e05926f9b3f92ee9ae85b1a91aa0c2a09226efdce4126654e828c389af03db",
+  "data/snapshots/2026-11-05-events-12/manifest.json": "d2b38943ef1611e146fd18e4e414602c3cee54abb9ee3f241ff88e321e12073f"
+}
