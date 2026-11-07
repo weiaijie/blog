@@ -1,0 +1,18 @@
+{
+  "status": "replayed_extension",
+  "bundle": "20261106T174810-2233e152",
+  "target": "2026-11-06",
+  "old_through": "2026-11-05",
+  "sessions_appended": [
+    "2026-11-06"
+  ],
+  "accounts": 18,
+  "prior_checkpoint": "e11f23cb1d2a62e56590fa30f804721de74d1f7f2e6d353a80ee92eaacfb659d",
+  "checkpoint": "ae5c0f77a8d6ffe51fc3bb9030c971097957e1e982d5033017b0b16c5997d418",
+  "offline": true,
+  "prices": "2026-11-06-close-windows-1653",
+  "official": "2026-11-06-official-close-1650",
+  "prior_daily_rows": 18,
+  "new_daily_rows": 36,
+  "added_model_trades": 21
+}

@@ -1,12 +1,21 @@
 """Supervise one scheduled run and retain success, failure and interrupted logs."""
 from pathlib import Path
 from datetime import datetime,timezone
-import argparse,json,os,signal,subprocess,sys,uuid
+import argparse,json,os,re,signal,subprocess,sys,uuid
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'src'))
 from etf_research.publication import read,sha,create,atomic,lock,seal
 from etf_research.http_capture import client_version,load_policy
 
 def timestamp():return datetime.now(timezone.utc).isoformat()
+
+def timer_context(env):
+    """Retain only the expected timer name and systemd's bounded identifiers."""
+    unit = env.get('TRIGGER_UNIT')
+    invocation = env.get('INVOCATION_ID', '')
+    usec = env.get('TRIGGER_TIMER_REALTIME_USEC', '')
+    return dict(daily_timer=unit == 'etf-research-daily.timer',
+                invocation_id=invocation if re.fullmatch('[0-9a-f]{32}', invocation) else None,
+                trigger_unix_usec=int(usec) if re.fullmatch('[0-9]{1,18}', usec) else None)
 def invoke(root,refresh,out,err):
     command=[sys.executable,str(root/'scripts/run_daily.py')]
     if refresh:command+=['--rebuild']
@@ -59,6 +68,9 @@ def supervise(root=ROOT,refresh=False,*,runner=invoke):
             'account_changed':None if not before or not after else before['checkpoint_sha256']!=after['checkpoint_sha256'],
             'transport_version':transport,'scheduler':scheduler_state(),
             'last_success':dict(finished_at_utc=finished,operation=relative,mode=mode) if ok else previous.get('last_success')}
+        summary['systemd_trigger'] = timer_context(os.environ)
+        summary['account_before'] = before
+        summary['account_after'] = after
         create(folder/'result.json',summary);seal(folder);atomic(status_path,summary)
         return summary
 

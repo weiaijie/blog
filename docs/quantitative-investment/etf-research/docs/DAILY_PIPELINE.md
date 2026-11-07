@@ -71,4 +71,6 @@ python scripts/verify_project.py
 
 ## 运行闭环补充
 
+新增交易日收盘后运行 `python scripts/check_session_transition.py --day YYYY-MM-DD --require-timer`。按北京时间扫描当天操作，核对定时触发、来源、前后指针、旧账本前缀与新增会计结果。退出2表示本日定时新增尚未证实；退出1提示数据或完整性错误。手动按封存日报路径加 `--bundle` 可只读复验历史。见[11月6日演练和后续运行说明](../reports/2026-11-07-period-review/PROGRESS.md)。
+
 新增独立健康观察、每日内容寻址归档和证据绑定公告审阅，操作及维护顺序见[闭环手册](OPERATIONS_CLOSURE.md)。维护时应同时管理本项目daily/health/archive三个timer；所有维护只针对本项目单位。动态health_status也须对照封存记录校验。

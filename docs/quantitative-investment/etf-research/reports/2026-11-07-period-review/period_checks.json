@@ -1,0 +1,17 @@
+{
+  "accounts": 18,
+  "rows": 774,
+  "annual": 162,
+  "partial": 72,
+  "complete": 702,
+  "quarterly": 612,
+  "monthly_basis": "reports/daily/20261107T135033-e268ce3b/monthly.json",
+  "upstream": {
+    "fills_checked": 6674,
+    "daily_rows_checked": 35406,
+    "components_per_day": 7,
+    "method": "raw SSE OHLC, signed trades and prior-unit close-to-close revaluation"
+  },
+  "monetary_check": "Decimal equality",
+  "ratio_tolerance": 1e-11
+}
