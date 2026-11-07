@@ -22,3 +22,6 @@ data/snapshots/**/*.txt -whitespace
 data/snapshots/**/*.pdf -diff -whitespace
 data/snapshots/**/interim_*.body -diff
 reports/2026-11-06-research-audit/*.csv whitespace=cr-at-eol
+
+# Preserve exact independently reproduced monetary audit exports.
+reports/2026-11-07-historical-pnl/** -text whitespace=cr-at-eol

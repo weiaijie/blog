@@ -1,0 +1,2027 @@
+{
+  "schema_version": 1,
+  "begin": "2018-09-14",
+  "end": "2026-10-30",
+  "currency": "CNY",
+  "precision": "exact Decimal monetary identities",
+  "sessions": 1967,
+  "daily_reconciliations": 35406,
+  "trades": 6674,
+  "outside": 1215,
+  "affected_runs": 74,
+  "portfolios": [
+    {
+      "run": "cash_low_100000_d1",
+      "full_period": {
+        "price_510300": "0.0000",
+        "price_511010": "0.0000",
+        "dividend_510300": "0.0000",
+        "dividend_511010": "0.0000",
+        "slippage": "0",
+        "commission": "0",
+        "sell_tax": "0"
+      },
+      "net_pnl": "0.0000",
+      "max_drawdown": {
+        "peak": "2018-09-14",
+        "trough": "2018-09-14",
+        "peak_equity": "100000",
+        "trough_equity": "100000",
+        "fraction": "0",
+        "components": {
+          "price_510300": "0",
+          "price_511010": "0",
+          "dividend_510300": "0",
+          "dividend_511010": "0",
+          "slippage": "0",
+          "commission": "0",
+          "sell_tax": "0"
+        }
+      }
+    },
+    {
+      "run": "cash_base_100000_d1",
+      "full_period": {
+        "price_510300": "0.0000",
+        "price_511010": "0.0000",
+        "dividend_510300": "0.0000",
+        "dividend_511010": "0.0000",
+        "slippage": "0",
+        "commission": "0",
+        "sell_tax": "0"
+      },
+      "net_pnl": "0.0000",
+      "max_drawdown": {
+        "peak": "2018-09-14",
+        "trough": "2018-09-14",
+        "peak_equity": "100000",
+        "trough_equity": "100000",
+        "fraction": "0",
+        "components": {
+          "price_510300": "0",
+          "price_511010": "0",
+          "dividend_510300": "0",
+          "dividend_511010": "0",
+          "slippage": "0",
+          "commission": "0",
+          "sell_tax": "0"
+        }
+      }
+    },
+    {
+      "run": "cash_high_100000_d1",
+      "full_period": {
+        "price_510300": "0.0000",
+        "price_511010": "0.0000",
+        "dividend_510300": "0.0000",
+        "dividend_511010": "0.0000",
+        "slippage": "0",
+        "commission": "0",
+        "sell_tax": "0"
+      },
+      "net_pnl": "0.0000",
+      "max_drawdown": {
+        "peak": "2018-09-14",
+        "trough": "2018-09-14",
+        "peak_equity": "100000",
+        "trough_equity": "100000",
+        "fraction": "0",
+        "components": {
+          "price_510300": "0",
+          "price_511010": "0",
+          "dividend_510300": "0",
+          "dividend_511010": "0",
+          "slippage": "0",
+          "commission": "0",
+          "sell_tax": "0"
+        }
+      }
+    },
+    {
+      "run": "equity_hold_low_100000_d1",
+      "full_period": {
+        "price_510300": "23556.0000",
+        "price_511010": "0.0000",
+        "dividend_510300": "18482.4000",
+        "dividend_511010": "0.0000",
+        "slippage": "-30.2000",
+        "commission": "-9.92",
+        "sell_tax": "0"
+      },
+      "net_pnl": "41998.2800",
+      "max_drawdown": {
+        "peak": "2021-02-10",
+        "trough": "2024-02-02",
+        "peak_equity": "181952.8800",
+        "trough_equity": "109140.6800",
+        "fraction": "0.4001706375848516385121246776",
+        "components": {
+          "price_510300": "-79093.8000",
+          "price_511010": "0.0000",
+          "dividend_510300": "6281.6000",
+          "dividend_511010": "0",
+          "slippage": "0",
+          "commission": "0",
+          "sell_tax": "0"
+        }
+      }
+    },
+    {
+      "run": "equity_hold_base_100000_d1",
+      "full_period": {
+        "price_510300": "23556.0000",
+        "price_511010": "0.0000",
+        "dividend_510300": "18482.4000",
+        "dividend_511010": "0.0000",
+        "slippage": "-60.4000",
+        "commission": "-29.78",
+        "sell_tax": "0"
+      },
+      "net_pnl": "41948.2200",
+      "max_drawdown": {
+        "peak": "2021-02-10",
+        "trough": "2024-02-02",
+        "peak_equity": "181902.8200",
+        "trough_equity": "109090.6200",
+        "fraction": "0.4002807653009447572060730010",
+        "components": {
+          "price_510300": "-79093.8000",
+          "price_511010": "0.0000",
+          "dividend_510300": "6281.6000",
+          "dividend_511010": "0",
+          "slippage": "0",
+          "commission": "0",
+          "sell_tax": "0"
+        }
+      }
+    },
+    {
+      "run": "equity_hold_high_100000_d1",
+      "full_period": {
+        "price_510300": "23556.0000",
+        "price_511010": "0.0000",
+        "dividend_510300": "18482.4000",
+        "dividend_511010": "0.0000",
+        "slippage": "-120.8000",
+        "commission": "-99.33",
+        "sell_tax": "0"
+      },
+      "net_pnl": "41818.2700",
+      "max_drawdown": {
+        "peak": "2021-02-10",
+        "trough": "2024-02-02",
+        "peak_equity": "181772.8700",
+        "trough_equity": "108960.6700",
+        "fraction": "0.4005669272867837758186906550",
+        "components": {
+          "price_510300": "-79093.8000",
+          "price_511010": "0.0000",
+          "dividend_510300": "6281.6000",
+          "dividend_511010": "0",
+          "slippage": "0",
+          "commission": "0",
+          "sell_tax": "0"
+        }
+      }
+    },
+    {
+      "run": "bond_hold_low_100000_d1",
+      "full_period": {
+        "price_510300": "0.0000",
+        "price_511010": "22411.2000",
+        "dividend_510300": "0.0000",
+        "dividend_511010": "3288.4000",
+        "slippage": "-9.6000",
+        "commission": "-9.05",
+        "sell_tax": "0"
+      },
+      "net_pnl": "25680.9500",
+      "max_drawdown": {
+        "peak": "2020-04-30",
+        "trough": "2020-09-07",
+        "peak_equity": "110642.1500",
+        "trough_equity": "105663.7500",
+        "fraction": "0.0449955103005500164268319081",
+        "components": {
+          "price_510300": "0.0000",
+          "price_511010": "-4978.4000",
+          "dividend_510300": "0",
+          "dividend_511010": "0",
+          "slippage": "0",
+          "commission": "0",
+          "sell_tax": "0"
+        }
+      }
+    },
+    {
+      "run": "bond_hold_base_100000_d1",
+      "full_period": {
+        "price_510300": "0.0000",
+        "price_511010": "22411.2000",
+        "dividend_510300": "0.0000",
+        "dividend_511010": "3288.4000",
+        "slippage": "-45.6000",
+        "commission": "-27.16",
+        "sell_tax": "0"
+      },
+      "net_pnl": "25626.8400",
+      "max_drawdown": {
+        "peak": "2020-04-30",
+        "trough": "2020-09-07",
+        "peak_equity": "110588.0400",
+        "trough_equity": "105609.6400",
+        "fraction": "0.0450175263075464580075747793",
+        "components": {
+          "price_510300": "0.0000",
+          "price_511010": "-4978.4000",
+          "dividend_510300": "0",
+          "dividend_511010": "0",
+          "slippage": "0",
+          "commission": "0",
+          "sell_tax": "0"
+        }
+      }
+    },
+    {
+      "run": "bond_hold_high_100000_d1",
+      "full_period": {
+        "price_510300": "0.0000",
+        "price_511010": "22411.2000",
+        "dividend_510300": "0.0000",
+        "dividend_511010": "3288.4000",
+        "slippage": "-91.2000",
+        "commission": "-90.58",
+        "sell_tax": "0"
+      },
+      "net_pnl": "25517.8200",
+      "max_drawdown": {
+        "peak": "2020-04-30",
+        "trough": "2020-09-07",
+        "peak_equity": "110479.0200",
+        "trough_equity": "105500.6200",
+        "fraction": "0.0450619493185221954358393114",
+        "components": {
+          "price_510300": "0.0000",
+          "price_511010": "-4978.4000",
+          "dividend_510300": "0",
+          "dividend_511010": "0",
+          "slippage": "0",
+          "commission": "0",
+          "sell_tax": "0"
+        }
+      }
+    },
+    {
+      "run": "monthly_20_80_low_100000_d1",
+      "full_period": {
+        "price_510300": "6893.5000",
+        "price_511010": "19547.9000",
+        "dividend_510300": "3499.1000",
+        "dividend_511010": "2877.3500",
+        "slippage": "-37.0000",
+        "commission": "-392.92",
+        "sell_tax": "0.00"
+      },
+      "net_pnl": "32387.9300",
+      "max_drawdown": {
+        "peak": "2022-01-24",
+        "trough": "2022-04-26",
+        "peak_equity": "120622.9800",
+        "trough_equity": "114977.2800",
+        "fraction": "0.0468045143636809503462773014",
+        "components": {
+          "price_510300": "-5272.4000",
+          "price_511010": "-362.6000",
+          "dividend_510300": "0",
+          "dividend_511010": "0",
+          "slippage": "-0.7000",
+          "commission": "-10.00",
+          "sell_tax": "0"
+        }
+      }
+    },
+    {
+      "run": "monthly_20_80_base_100000_d1",
+      "full_period": {
+        "price_510300": "6940.8000",
+        "price_511010": "19547.9000",
+        "dividend_510300": "3499.1000",
+        "dividend_511010": "2877.3500",
+        "slippage": "-121.2000",
+        "commission": "-419.68",
+        "sell_tax": "0.00"
+      },
+      "net_pnl": "32324.2700",
+      "max_drawdown": {
+        "peak": "2022-01-24",
+        "trough": "2022-04-26",
+        "peak_equity": "120568.0200",
+        "trough_equity": "114920.9200",
+        "fraction": "0.0468374615424554537762169438",
+        "components": {
+          "price_510300": "-5272.4000",
+          "price_511010": "-362.6000",
+          "dividend_510300": "0",
+          "dividend_511010": "0",
+          "slippage": "-2.1000",
+          "commission": "-10.00",
+          "sell_tax": "0"
+        }
+      }
+    },
+    {
+      "run": "monthly_20_80_high_100000_d1",
+      "full_period": {
+        "price_510300": "6975.5000",
+        "price_511010": "19547.9000",
+        "dividend_510300": "3485.7000",
+        "dividend_511010": "2877.3500",
+        "slippage": "-235.8000",
+        "commission": "-529.19",
+        "sell_tax": "0.00"
+      },
+      "net_pnl": "32121.4600",
+      "max_drawdown": {
+        "peak": "2022-01-24",
+        "trough": "2022-04-26",
+        "peak_equity": "120343.0800",
+        "trough_equity": "114744.2800",
+        "fraction": "0.0465236555354906987589149289",
+        "components": {
+          "price_510300": "-5216.2000",
+          "price_511010": "-362.6000",
+          "dividend_510300": "0",
+          "dividend_511010": "0",
+          "slippage": "-5.0000",
+          "commission": "-15.00",
+          "sell_tax": "0.00"
+        }
+      }
+    },
+    {
+      "run": "monthly_50_50_low_100000_d1",
+      "full_period": {
+        "price_510300": "15453.4000",
+        "price_511010": "11812.9000",
+        "dividend_510300": "9226.4000",
+        "dividend_511010": "2055.2500",
+        "slippage": "-56.5000",
+        "commission": "-445.00",
+        "sell_tax": "0.00"
+      },
+      "net_pnl": "38046.4500",
+      "max_drawdown": {
+        "peak": "2021-02-10",
+        "trough": "2024-02-02",
+        "peak_equity": "142080.4000",
+        "trough_equity": "114093.1000",
+        "fraction": "0.1969821312439998761264748692",
+        "components": {
+          "price_510300": "-36621.7000",
+          "price_511010": "5668.4000",
+          "dividend_510300": "3156.2000",
+          "dividend_511010": "0",
+          "slippage": "-15.2000",
+          "commission": "-175.00",
+          "sell_tax": "0.00"
+        }
+      }
+    },
+    {
+      "run": "monthly_50_50_base_100000_d1",
+      "full_period": {
+        "price_510300": "15303.9000",
+        "price_511010": "11812.9000",
+        "dividend_510300": "9206.6000",
+        "dividend_511010": "2055.2500",
+        "slippage": "-157.2000",
+        "commission": "-453.47",
+        "sell_tax": "0.00"
+      },
+      "net_pnl": "37767.9800",
+      "max_drawdown": {
+        "peak": "2021-02-10",
+        "trough": "2024-02-02",
+        "peak_equity": "141813.1300",
+        "trough_equity": "113830.8300",
+        "fraction": "0.1973181185691339017762318623",
+        "components": {
+          "price_510300": "-36583.5000",
+          "price_511010": "5668.4000",
+          "dividend_510300": "3149.8000",
+          "dividend_511010": "0",
+          "slippage": "-47.0000",
+          "commission": "-170.00",
+          "sell_tax": "0.00"
+        }
+      }
+    },
+    {
+      "run": "monthly_50_50_high_100000_d1",
+      "full_period": {
+        "price_510300": "15307.8000",
+        "price_511010": "11812.9000",
+        "dividend_510300": "9186.3000",
+        "dividend_511010": "2055.2500",
+        "slippage": "-298.7000",
+        "commission": "-544.72",
+        "sell_tax": "0.00"
+      },
+      "net_pnl": "37518.8300",
+      "max_drawdown": {
+        "peak": "2021-02-10",
+        "trough": "2024-02-02",
+        "peak_equity": "141582.5700",
+        "trough_equity": "113644.5600",
+        "fraction": "0.1973266200775985349044024275",
+        "components": {
+          "price_510300": "-36458.9000",
+          "price_511010": "5668.4000",
+          "dividend_510300": "3135.4000",
+          "dividend_511010": "0",
+          "slippage": "-89.6000",
+          "commission": "-193.31",
+          "sell_tax": "0.00"
+        }
+      }
+    },
+    {
+      "run": "trend_120_low_100000_d1",
+      "full_period": {
+        "price_510300": "-6878.1000",
+        "price_511010": "12384.0000",
+        "dividend_510300": "3034.5000",
+        "dividend_511010": "1538.4600",
+        "slippage": "-432.1000",
+        "commission": "-410.87",
+        "sell_tax": "0.00"
+      },
+      "net_pnl": "9235.8900",
+      "max_drawdown": {
+        "peak": "2021-02-10",
+        "trough": "2023-08-23",
+        "peak_equity": "120401.0500",
+        "trough_equity": "96865.9400",
+        "fraction": "0.1954726308449967836659231792",
+        "components": {
+          "price_510300": "-29719.6000",
+          "price_511010": "5662.6000",
+          "dividend_510300": "825.0000",
+          "dividend_511010": "0",
+          "slippage": "-172.3000",
+          "commission": "-130.81",
+          "sell_tax": "0.00"
+        }
+      }
+    },
+    {
+      "run": "trend_120_base_100000_d1",
+      "full_period": {
+        "price_510300": "-6786.2000",
+        "price_511010": "12357.4000",
+        "dividend_510300": "3014.7000",
+        "dividend_511010": "1481.3100",
+        "slippage": "-1401.7000",
+        "commission": "-883.53",
+        "sell_tax": "0.00"
+      },
+      "net_pnl": "7781.9800",
+      "max_drawdown": {
+        "peak": "2021-02-10",
+        "trough": "2023-08-23",
+        "peak_equity": "120093.2000",
+        "trough_equity": "96095.9900",
+        "fraction": "0.1998215552587490382469615265",
+        "components": {
+          "price_510300": "-29535.4000",
+          "price_511010": "5662.6000",
+          "dividend_510300": "817.5000",
+          "dividend_511010": "0",
+          "slippage": "-606.3000",
+          "commission": "-335.61",
+          "sell_tax": "0.00"
+        }
+      }
+    },
+    {
+      "run": "trend_120_high_100000_d1",
+      "full_period": {
+        "price_510300": "-6777.9000",
+        "price_511010": "12175.4000",
+        "dividend_510300": "2963.1000",
+        "dividend_511010": "1481.3100",
+        "slippage": "-2594.1000",
+        "commission": "-2572.89",
+        "sell_tax": "0.00"
+      },
+      "net_pnl": "4674.9200",
+      "max_drawdown": {
+        "peak": "2021-02-10",
+        "trough": "2023-08-23",
+        "peak_equity": "119327.7300",
+        "trough_equity": "94384.7700",
+        "fraction": "0.2090290328995615687988030946",
+        "components": {
+          "price_510300": "-29212.9000",
+          "price_511010": "5616.9000",
+          "dividend_510300": "810.0000",
+          "dividend_511010": "0",
+          "slippage": "-1108.3000",
+          "commission": "-1048.66",
+          "sell_tax": "0.00"
+        }
+      }
+    }
+  ],
+  "matrix": [
+    {
+      "run": "cash_low_10000_d1",
+      "trades": 0,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": null,
+      "excess_amount": "0"
+    },
+    {
+      "run": "cash_low_10000_d2",
+      "trades": 0,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": null,
+      "excess_amount": "0"
+    },
+    {
+      "run": "cash_low_10000_d3",
+      "trades": 0,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": null,
+      "excess_amount": "0"
+    },
+    {
+      "run": "cash_low_100000_d1",
+      "trades": 0,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": null,
+      "excess_amount": "0"
+    },
+    {
+      "run": "cash_low_100000_d2",
+      "trades": 0,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": null,
+      "excess_amount": "0"
+    },
+    {
+      "run": "cash_low_100000_d3",
+      "trades": 0,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": null,
+      "excess_amount": "0"
+    },
+    {
+      "run": "cash_low_1000000_d1",
+      "trades": 0,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": null,
+      "excess_amount": "0"
+    },
+    {
+      "run": "cash_low_1000000_d2",
+      "trades": 0,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": null,
+      "excess_amount": "0"
+    },
+    {
+      "run": "cash_low_1000000_d3",
+      "trades": 0,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": null,
+      "excess_amount": "0"
+    },
+    {
+      "run": "cash_base_10000_d1",
+      "trades": 0,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": null,
+      "excess_amount": "0"
+    },
+    {
+      "run": "cash_base_10000_d2",
+      "trades": 0,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": null,
+      "excess_amount": "0"
+    },
+    {
+      "run": "cash_base_10000_d3",
+      "trades": 0,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": null,
+      "excess_amount": "0"
+    },
+    {
+      "run": "cash_base_100000_d1",
+      "trades": 0,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": null,
+      "excess_amount": "0"
+    },
+    {
+      "run": "cash_base_100000_d2",
+      "trades": 0,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": null,
+      "excess_amount": "0"
+    },
+    {
+      "run": "cash_base_100000_d3",
+      "trades": 0,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": null,
+      "excess_amount": "0"
+    },
+    {
+      "run": "cash_base_1000000_d1",
+      "trades": 0,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": null,
+      "excess_amount": "0"
+    },
+    {
+      "run": "cash_base_1000000_d2",
+      "trades": 0,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": null,
+      "excess_amount": "0"
+    },
+    {
+      "run": "cash_base_1000000_d3",
+      "trades": 0,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": null,
+      "excess_amount": "0"
+    },
+    {
+      "run": "cash_high_10000_d1",
+      "trades": 0,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": null,
+      "excess_amount": "0"
+    },
+    {
+      "run": "cash_high_10000_d2",
+      "trades": 0,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": null,
+      "excess_amount": "0"
+    },
+    {
+      "run": "cash_high_10000_d3",
+      "trades": 0,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": null,
+      "excess_amount": "0"
+    },
+    {
+      "run": "cash_high_100000_d1",
+      "trades": 0,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": null,
+      "excess_amount": "0"
+    },
+    {
+      "run": "cash_high_100000_d2",
+      "trades": 0,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": null,
+      "excess_amount": "0"
+    },
+    {
+      "run": "cash_high_100000_d3",
+      "trades": 0,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": null,
+      "excess_amount": "0"
+    },
+    {
+      "run": "cash_high_1000000_d1",
+      "trades": 0,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": null,
+      "excess_amount": "0"
+    },
+    {
+      "run": "cash_high_1000000_d2",
+      "trades": 0,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": null,
+      "excess_amount": "0"
+    },
+    {
+      "run": "cash_high_1000000_d3",
+      "trades": 0,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": null,
+      "excess_amount": "0"
+    },
+    {
+      "run": "equity_hold_low_10000_d1",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "equity_hold_low_10000_d2",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "equity_hold_low_10000_d3",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "equity_hold_low_100000_d1",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "equity_hold_low_100000_d2",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "equity_hold_low_100000_d3",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "equity_hold_low_1000000_d1",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "equity_hold_low_1000000_d2",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "equity_hold_low_1000000_d3",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "equity_hold_base_10000_d1",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "equity_hold_base_10000_d2",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "equity_hold_base_10000_d3",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "equity_hold_base_100000_d1",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "equity_hold_base_100000_d2",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "equity_hold_base_100000_d3",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "equity_hold_base_1000000_d1",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "equity_hold_base_1000000_d2",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "equity_hold_base_1000000_d3",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "equity_hold_high_10000_d1",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "equity_hold_high_10000_d2",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "equity_hold_high_10000_d3",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "equity_hold_high_100000_d1",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "equity_hold_high_100000_d2",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "equity_hold_high_100000_d3",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "equity_hold_high_1000000_d1",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "equity_hold_high_1000000_d2",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "equity_hold_high_1000000_d3",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "bond_hold_low_10000_d1",
+      "trades": 0,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": null,
+      "excess_amount": "0"
+    },
+    {
+      "run": "bond_hold_low_10000_d2",
+      "trades": 0,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": null,
+      "excess_amount": "0"
+    },
+    {
+      "run": "bond_hold_low_10000_d3",
+      "trades": 0,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": null,
+      "excess_amount": "0"
+    },
+    {
+      "run": "bond_hold_low_100000_d1",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "bond_hold_low_100000_d2",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "bond_hold_low_100000_d3",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "bond_hold_low_1000000_d1",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "bond_hold_low_1000000_d2",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "bond_hold_low_1000000_d3",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "bond_hold_base_10000_d1",
+      "trades": 0,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": null,
+      "excess_amount": "0"
+    },
+    {
+      "run": "bond_hold_base_10000_d2",
+      "trades": 0,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": null,
+      "excess_amount": "0"
+    },
+    {
+      "run": "bond_hold_base_10000_d3",
+      "trades": 0,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": null,
+      "excess_amount": "0"
+    },
+    {
+      "run": "bond_hold_base_100000_d1",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "bond_hold_base_100000_d2",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "bond_hold_base_100000_d3",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "bond_hold_base_1000000_d1",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "bond_hold_base_1000000_d2",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "bond_hold_base_1000000_d3",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "bond_hold_high_10000_d1",
+      "trades": 0,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": null,
+      "excess_amount": "0"
+    },
+    {
+      "run": "bond_hold_high_10000_d2",
+      "trades": 0,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": null,
+      "excess_amount": "0"
+    },
+    {
+      "run": "bond_hold_high_10000_d3",
+      "trades": 0,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": null,
+      "excess_amount": "0"
+    },
+    {
+      "run": "bond_hold_high_100000_d1",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "bond_hold_high_100000_d2",
+      "trades": 1,
+      "above": 1,
+      "below": 0,
+      "outside": 1,
+      "max_excess_bps_of_open": "4.864974834811990836156492972",
+      "excess_amount": "44.0000"
+    },
+    {
+      "run": "bond_hold_high_100000_d3",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0",
+      "excess_amount": "0.0000"
+    },
+    {
+      "run": "bond_hold_high_1000000_d1",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "bond_hold_high_1000000_d2",
+      "trades": 1,
+      "above": 1,
+      "below": 0,
+      "outside": 1,
+      "max_excess_bps_of_open": "4.864974834811990836156492972",
+      "excess_amount": "484.0000"
+    },
+    {
+      "run": "bond_hold_high_1000000_d3",
+      "trades": 1,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0",
+      "excess_amount": "0.0000"
+    },
+    {
+      "run": "monthly_20_80_low_10000_d1",
+      "trades": 13,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "monthly_20_80_low_10000_d2",
+      "trades": 14,
+      "above": 1,
+      "below": 0,
+      "outside": 1,
+      "max_excess_bps_of_open": "2.375296912114014251781472684",
+      "excess_amount": "0.1000"
+    },
+    {
+      "run": "monthly_20_80_low_10000_d3",
+      "trades": 13,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "monthly_20_80_low_100000_d1",
+      "trades": 78,
+      "above": 3,
+      "below": 2,
+      "outside": 5,
+      "max_excess_bps_of_open": "3.257328990228013029315960912",
+      "excess_amount": "1.0000"
+    },
+    {
+      "run": "monthly_20_80_low_100000_d2",
+      "trades": 79,
+      "above": 3,
+      "below": 2,
+      "outside": 5,
+      "max_excess_bps_of_open": "2.375296912114014251781472684",
+      "excess_amount": "2.1000"
+    },
+    {
+      "run": "monthly_20_80_low_100000_d3",
+      "trades": 82,
+      "above": 2,
+      "below": 1,
+      "outside": 3,
+      "max_excess_bps_of_open": "2.905287623474723997675769901",
+      "excess_amount": "0.6000"
+    },
+    {
+      "run": "monthly_20_80_low_1000000_d1",
+      "trades": 147,
+      "above": 5,
+      "below": 10,
+      "outside": 15,
+      "max_excess_bps_of_open": "3.257328990228013029315960912",
+      "excess_amount": "23.9000"
+    },
+    {
+      "run": "monthly_20_80_low_1000000_d2",
+      "trades": 142,
+      "above": 6,
+      "below": 8,
+      "outside": 14,
+      "max_excess_bps_of_open": "2.375296912114014251781472684",
+      "excess_amount": "20.3000"
+    },
+    {
+      "run": "monthly_20_80_low_1000000_d3",
+      "trades": 147,
+      "above": 5,
+      "below": 9,
+      "outside": 14,
+      "max_excess_bps_of_open": "2.905287623474723997675769901",
+      "excess_amount": "19.0000"
+    },
+    {
+      "run": "monthly_20_80_base_10000_d1",
+      "trades": 13,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0.0000"
+    },
+    {
+      "run": "monthly_20_80_base_10000_d2",
+      "trades": 14,
+      "above": 1,
+      "below": 0,
+      "outside": 1,
+      "max_excess_bps_of_open": "7.125890736342042755344418052",
+      "excess_amount": "0.3000"
+    },
+    {
+      "run": "monthly_20_80_base_10000_d3",
+      "trades": 13,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "monthly_20_80_base_100000_d1",
+      "trades": 80,
+      "above": 4,
+      "below": 5,
+      "outside": 9,
+      "max_excess_bps_of_open": "6.514657980456026058631921824",
+      "excess_amount": "7.2000"
+    },
+    {
+      "run": "monthly_20_80_base_100000_d2",
+      "trades": 79,
+      "above": 5,
+      "below": 6,
+      "outside": 11,
+      "max_excess_bps_of_open": "7.125890736342042755344418052",
+      "excess_amount": "13.5000"
+    },
+    {
+      "run": "monthly_20_80_base_100000_d3",
+      "trades": 81,
+      "above": 3,
+      "below": 3,
+      "outside": 6,
+      "max_excess_bps_of_open": "7.442322004465393202679235922",
+      "excess_amount": "3.4000"
+    },
+    {
+      "run": "monthly_20_80_base_1000000_d1",
+      "trades": 148,
+      "above": 15,
+      "below": 19,
+      "outside": 34,
+      "max_excess_bps_of_open": "6.514657980456026058631921824",
+      "excess_amount": "126.1000"
+    },
+    {
+      "run": "monthly_20_80_base_1000000_d2",
+      "trades": 147,
+      "above": 15,
+      "below": 19,
+      "outside": 34,
+      "max_excess_bps_of_open": "7.125890736342042755344418052",
+      "excess_amount": "135.0000"
+    },
+    {
+      "run": "monthly_20_80_base_1000000_d3",
+      "trades": 146,
+      "above": 13,
+      "below": 18,
+      "outside": 31,
+      "max_excess_bps_of_open": "7.442322004465393202679235922",
+      "excess_amount": "124.1000"
+    },
+    {
+      "run": "monthly_20_80_high_10000_d1",
+      "trades": 13,
+      "above": 1,
+      "below": 1,
+      "outside": 2,
+      "max_excess_bps_of_open": "5.915409642117716651878142561",
+      "excess_amount": "0.3000"
+    },
+    {
+      "run": "monthly_20_80_high_10000_d2",
+      "trades": 14,
+      "above": 1,
+      "below": 0,
+      "outside": 1,
+      "max_excess_bps_of_open": "11.87648456057007125890736342",
+      "excess_amount": "0.5000"
+    },
+    {
+      "run": "monthly_20_80_high_10000_d3",
+      "trades": 13,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0.0000"
+    },
+    {
+      "run": "monthly_20_80_high_100000_d1",
+      "trades": 82,
+      "above": 6,
+      "below": 11,
+      "outside": 17,
+      "max_excess_bps_of_open": "13.02931596091205211726384365",
+      "excess_amount": "19.7000"
+    },
+    {
+      "run": "monthly_20_80_high_100000_d2",
+      "trades": 81,
+      "above": 7,
+      "below": 6,
+      "outside": 13,
+      "max_excess_bps_of_open": "11.87648456057007125890736342",
+      "excess_amount": "74.5000"
+    },
+    {
+      "run": "monthly_20_80_high_100000_d3",
+      "trades": 88,
+      "above": 5,
+      "below": 6,
+      "outside": 11,
+      "max_excess_bps_of_open": "12.40387000744232200446539320",
+      "excess_amount": "15.9000"
+    },
+    {
+      "run": "monthly_20_80_high_1000000_d1",
+      "trades": 144,
+      "above": 19,
+      "below": 29,
+      "outside": 48,
+      "max_excess_bps_of_open": "13.02931596091205211726384365",
+      "excess_amount": "331.6000"
+    },
+    {
+      "run": "monthly_20_80_high_1000000_d2",
+      "trades": 151,
+      "above": 27,
+      "below": 24,
+      "outside": 51,
+      "max_excess_bps_of_open": "11.87648456057007125890736342",
+      "excess_amount": "797.1000"
+    },
+    {
+      "run": "monthly_20_80_high_1000000_d3",
+      "trades": 142,
+      "above": 21,
+      "below": 22,
+      "outside": 43,
+      "max_excess_bps_of_open": "12.40387000744232200446539320",
+      "excess_amount": "357.4000"
+    },
+    {
+      "run": "monthly_50_50_low_10000_d1",
+      "trades": 24,
+      "above": 1,
+      "below": 1,
+      "outside": 2,
+      "max_excess_bps_of_open": "2.717391304347826086956521739",
+      "excess_amount": "0.2000"
+    },
+    {
+      "run": "monthly_50_50_low_10000_d2",
+      "trades": 31,
+      "above": 1,
+      "below": 1,
+      "outside": 2,
+      "max_excess_bps_of_open": "2.161694768698659749243406831",
+      "excess_amount": "0.2000"
+    },
+    {
+      "run": "monthly_50_50_low_10000_d3",
+      "trades": 26,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "monthly_50_50_low_100000_d1",
+      "trades": 89,
+      "above": 3,
+      "below": 3,
+      "outside": 6,
+      "max_excess_bps_of_open": "3.257328990228013029315960912",
+      "excess_amount": "2.9000"
+    },
+    {
+      "run": "monthly_50_50_low_100000_d2",
+      "trades": 90,
+      "above": 3,
+      "below": 2,
+      "outside": 5,
+      "max_excess_bps_of_open": "2.375296912114014251781472684",
+      "excess_amount": "3.0000"
+    },
+    {
+      "run": "monthly_50_50_low_100000_d3",
+      "trades": 90,
+      "above": 2,
+      "below": 2,
+      "outside": 4,
+      "max_excess_bps_of_open": "2.905287623474723997675769901",
+      "excess_amount": "2.0000"
+    },
+    {
+      "run": "monthly_50_50_low_1000000_d1",
+      "trades": 161,
+      "above": 6,
+      "below": 11,
+      "outside": 17,
+      "max_excess_bps_of_open": "3.257328990228013029315960912",
+      "excess_amount": "40.8000"
+    },
+    {
+      "run": "monthly_50_50_low_1000000_d2",
+      "trades": 161,
+      "above": 7,
+      "below": 9,
+      "outside": 16,
+      "max_excess_bps_of_open": "2.375296912114014251781472684",
+      "excess_amount": "35.4000"
+    },
+    {
+      "run": "monthly_50_50_low_1000000_d3",
+      "trades": 159,
+      "above": 6,
+      "below": 9,
+      "outside": 15,
+      "max_excess_bps_of_open": "2.905287623474723997675769901",
+      "excess_amount": "27.7000"
+    },
+    {
+      "run": "monthly_50_50_base_10000_d1",
+      "trades": 24,
+      "above": 1,
+      "below": 2,
+      "outside": 3,
+      "max_excess_bps_of_open": "6.303845345660853120403446102",
+      "excess_amount": "0.6000"
+    },
+    {
+      "run": "monthly_50_50_base_10000_d2",
+      "trades": 31,
+      "above": 1,
+      "below": 2,
+      "outside": 3,
+      "max_excess_bps_of_open": "6.485084306095979247730220493",
+      "excess_amount": "0.7000"
+    },
+    {
+      "run": "monthly_50_50_base_10000_d3",
+      "trades": 26,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "monthly_50_50_base_100000_d1",
+      "trades": 87,
+      "above": 5,
+      "below": 6,
+      "outside": 11,
+      "max_excess_bps_of_open": "6.514657980456026058631921824",
+      "excess_amount": "17.4000"
+    },
+    {
+      "run": "monthly_50_50_base_100000_d2",
+      "trades": 90,
+      "above": 7,
+      "below": 6,
+      "outside": 13,
+      "max_excess_bps_of_open": "7.125890736342042755344418052",
+      "excess_amount": "19.5000"
+    },
+    {
+      "run": "monthly_50_50_base_100000_d3",
+      "trades": 87,
+      "above": 2,
+      "below": 4,
+      "outside": 6,
+      "max_excess_bps_of_open": "7.442322004465393202679235922",
+      "excess_amount": "8.7000"
+    },
+    {
+      "run": "monthly_50_50_base_1000000_d1",
+      "trades": 160,
+      "above": 17,
+      "below": 20,
+      "outside": 37,
+      "max_excess_bps_of_open": "6.514657980456026058631921824",
+      "excess_amount": "213.0000"
+    },
+    {
+      "run": "monthly_50_50_base_1000000_d2",
+      "trades": 163,
+      "above": 19,
+      "below": 22,
+      "outside": 41,
+      "max_excess_bps_of_open": "7.125890736342042755344418052",
+      "excess_amount": "217.5000"
+    },
+    {
+      "run": "monthly_50_50_base_1000000_d3",
+      "trades": 161,
+      "above": 18,
+      "below": 21,
+      "outside": 39,
+      "max_excess_bps_of_open": "7.442322004465393202679235922",
+      "excess_amount": "203.5000"
+    },
+    {
+      "run": "monthly_50_50_high_10000_d1",
+      "trades": 26,
+      "above": 1,
+      "below": 4,
+      "outside": 5,
+      "max_excess_bps_of_open": "10.86956521739130434782608696",
+      "excess_amount": "1.4000"
+    },
+    {
+      "run": "monthly_50_50_high_10000_d2",
+      "trades": 24,
+      "above": 1,
+      "below": 1,
+      "outside": 2,
+      "max_excess_bps_of_open": "10.80847384349329874621703415",
+      "excess_amount": "1.0000"
+    },
+    {
+      "run": "monthly_50_50_high_10000_d3",
+      "trades": 26,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0.0000"
+    },
+    {
+      "run": "monthly_50_50_high_100000_d1",
+      "trades": 84,
+      "above": 7,
+      "below": 11,
+      "outside": 18,
+      "max_excess_bps_of_open": "13.02931596091205211726384365",
+      "excess_amount": "46.2000"
+    },
+    {
+      "run": "monthly_50_50_high_100000_d2",
+      "trades": 91,
+      "above": 9,
+      "below": 6,
+      "outside": 15,
+      "max_excess_bps_of_open": "11.87648456057007125890736342",
+      "excess_amount": "78.5000"
+    },
+    {
+      "run": "monthly_50_50_high_100000_d3",
+      "trades": 89,
+      "above": 6,
+      "below": 6,
+      "outside": 12,
+      "max_excess_bps_of_open": "12.40387000744232200446539320",
+      "excess_amount": "26.3000"
+    },
+    {
+      "run": "monthly_50_50_high_1000000_d1",
+      "trades": 158,
+      "above": 23,
+      "below": 32,
+      "outside": 55,
+      "max_excess_bps_of_open": "13.02931596091205211726384365",
+      "excess_amount": "589.7000"
+    },
+    {
+      "run": "monthly_50_50_high_1000000_d2",
+      "trades": 165,
+      "above": 33,
+      "below": 28,
+      "outside": 61,
+      "max_excess_bps_of_open": "11.87648456057007125890736342",
+      "excess_amount": "928.1000"
+    },
+    {
+      "run": "monthly_50_50_high_1000000_d3",
+      "trades": 162,
+      "above": 27,
+      "below": 28,
+      "outside": 55,
+      "max_excess_bps_of_open": "12.40387000744232200446539320",
+      "excess_amount": "658.9000"
+    },
+    {
+      "run": "trend_120_low_10000_d1",
+      "trades": 34,
+      "above": 0,
+      "below": 2,
+      "outside": 2,
+      "max_excess_bps_of_open": "2.581311306143520908621579763",
+      "excess_amount": "1.3000"
+    },
+    {
+      "run": "trend_120_low_10000_d2",
+      "trades": 35,
+      "above": 1,
+      "below": 1,
+      "outside": 2,
+      "max_excess_bps_of_open": "2.610966057441253263707571802",
+      "excess_amount": "2.2000"
+    },
+    {
+      "run": "trend_120_low_10000_d3",
+      "trades": 35,
+      "above": 0,
+      "below": 0,
+      "outside": 0,
+      "max_excess_bps_of_open": "0E+4",
+      "excess_amount": "0"
+    },
+    {
+      "run": "trend_120_low_100000_d1",
+      "trades": 80,
+      "above": 3,
+      "below": 7,
+      "outside": 10,
+      "max_excess_bps_of_open": "2.532928064842958459979736575",
+      "excess_amount": "40.1000"
+    },
+    {
+      "run": "trend_120_low_100000_d2",
+      "trades": 81,
+      "above": 4,
+      "below": 4,
+      "outside": 8,
+      "max_excess_bps_of_open": "2.610966057441253263707571802",
+      "excess_amount": "41.7000"
+    },
+    {
+      "run": "trend_120_low_100000_d3",
+      "trades": 80,
+      "above": 1,
+      "below": 3,
+      "outside": 4,
+      "max_excess_bps_of_open": "1.065294349023207027664874787",
+      "excess_amount": "23.3000"
+    },
+    {
+      "run": "trend_120_low_1000000_d1",
+      "trades": 104,
+      "above": 5,
+      "below": 8,
+      "outside": 13,
+      "max_excess_bps_of_open": "2.568053415511042629686697483",
+      "excess_amount": "381.9000"
+    },
+    {
+      "run": "trend_120_low_1000000_d2",
+      "trades": 109,
+      "above": 5,
+      "below": 5,
+      "outside": 10,
+      "max_excess_bps_of_open": "2.610966057441253263707571802",
+      "excess_amount": "405.3000"
+    },
+    {
+      "run": "trend_120_low_1000000_d3",
+      "trades": 112,
+      "above": 2,
+      "below": 6,
+      "outside": 8,
+      "max_excess_bps_of_open": "1.065294349023207027664874787",
+      "excess_amount": "232.5000"
+    },
+    {
+      "run": "trend_120_base_10000_d1",
+      "trades": 34,
+      "above": 1,
+      "below": 3,
+      "outside": 4,
+      "max_excess_bps_of_open": "5.136106831022085259373394967",
+      "excess_amount": "3.8000"
+    },
+    {
+      "run": "trend_120_base_10000_d2",
+      "trades": 34,
+      "above": 1,
+      "below": 1,
+      "outside": 2,
+      "max_excess_bps_of_open": "7.001166861143523920653442240",
+      "excess_amount": "5.4000"
+    },
+    {
+      "run": "trend_120_base_10000_d3",
+      "trades": 36,
+      "above": 0,
+      "below": 1,
+      "outside": 1,
+      "max_excess_bps_of_open": "2.006420545746388443017656501",
+      "excess_amount": "1.0000"
+    },
+    {
+      "run": "trend_120_base_100000_d1",
+      "trades": 75,
+      "above": 8,
+      "below": 10,
+      "outside": 18,
+      "max_excess_bps_of_open": "6.303845345660853120403446102",
+      "excess_amount": "292.3000"
+    },
+    {
+      "run": "trend_120_base_100000_d2",
+      "trades": 75,
+      "above": 7,
+      "below": 8,
+      "outside": 15,
+      "max_excess_bps_of_open": "7.001166861143523920653442240",
+      "excess_amount": "213.5000"
+    },
+    {
+      "run": "trend_120_base_100000_d3",
+      "trades": 80,
+      "above": 8,
+      "below": 11,
+      "outside": 19,
+      "max_excess_bps_of_open": "5.080634587649141208863248984",
+      "excess_amount": "239.1000"
+    },
+    {
+      "run": "trend_120_base_1000000_d1",
+      "trades": 105,
+      "above": 14,
+      "below": 14,
+      "outside": 28,
+      "max_excess_bps_of_open": "6.303845345660853120403446102",
+      "excess_amount": "2770.1000"
+    },
+    {
+      "run": "trend_120_base_1000000_d2",
+      "trades": 108,
+      "above": 17,
+      "below": 12,
+      "outside": 29,
+      "max_excess_bps_of_open": "7.001166861143523920653442240",
+      "excess_amount": "2168.0000"
+    },
+    {
+      "run": "trend_120_base_1000000_d3",
+      "trades": 107,
+      "above": 12,
+      "below": 12,
+      "outside": 24,
+      "max_excess_bps_of_open": "5.080634587649141208863248984",
+      "excess_amount": "2305.6000"
+    },
+    {
+      "run": "trend_120_high_10000_d1",
+      "trades": 33,
+      "above": 1,
+      "below": 4,
+      "outside": 5,
+      "max_excess_bps_of_open": "10.27221366204417051874678993",
+      "excess_amount": "11.7000"
+    },
+    {
+      "run": "trend_120_high_10000_d2",
+      "trades": 35,
+      "above": 2,
+      "below": 2,
+      "outside": 4,
+      "max_excess_bps_of_open": "11.66861143523920653442240373",
+      "excess_amount": "13.8000"
+    },
+    {
+      "run": "trend_120_high_10000_d3",
+      "trades": 36,
+      "above": 1,
+      "below": 1,
+      "outside": 2,
+      "max_excess_bps_of_open": "6.019261637239165329052969502",
+      "excess_amount": "5.2000"
+    },
+    {
+      "run": "trend_120_high_100000_d1",
+      "trades": 75,
+      "above": 10,
+      "below": 16,
+      "outside": 26,
+      "max_excess_bps_of_open": "10.50640890943475520067241017",
+      "excess_amount": "793.9000"
+    },
+    {
+      "run": "trend_120_high_100000_d2",
+      "trades": 77,
+      "above": 12,
+      "below": 13,
+      "outside": 25,
+      "max_excess_bps_of_open": "11.66861143523920653442240373",
+      "excess_amount": "628.3000"
+    },
+    {
+      "run": "trend_120_high_100000_d3",
+      "trades": 78,
+      "above": 9,
+      "below": 13,
+      "outside": 22,
+      "max_excess_bps_of_open": "10.07932345614265110790612298",
+      "excess_amount": "655.3000"
+    },
+    {
+      "run": "trend_120_high_1000000_d1",
+      "trades": 104,
+      "above": 20,
+      "below": 22,
+      "outside": 42,
+      "max_excess_bps_of_open": "10.50640890943475520067241017",
+      "excess_amount": "7838.6000"
+    },
+    {
+      "run": "trend_120_high_1000000_d2",
+      "trades": 111,
+      "above": 23,
+      "below": 19,
+      "outside": 42,
+      "max_excess_bps_of_open": "11.66861143523920653442240373",
+      "excess_amount": "6284.1000"
+    },
+    {
+      "run": "trend_120_high_1000000_d3",
+      "trades": 107,
+      "above": 19,
+      "below": 17,
+      "outside": 36,
+      "max_excess_bps_of_open": "10.07932345614265110790612298",
+      "excess_amount": "6334.2000"
+    }
+  ],
+  "sources": {
+    "reports/2026-11-05-long-history/audit.json": "7f0072a1f5422d0c443e213057a13042ed849a36efcefaf2907286c480af1285",
+    "reports/2026-11-05-long-history/execution_diagnostics.json": "cd8282171833da0216f8b64588bbe920cd1cbf72fa56b72949eec127b081898a",
+    "reports/2026-11-05-long-history/sensitivity.json": "d85a31064ce43f8981e4b207f8fea31aca6b6c7d99720051d8fa4c6a862956d9",
+    "reports/2026-11-05-long-history/cash_low_100000_d1_daily.csv": "e315423cd9b52bc911b0060e89f9decd53951cd454701cd14049e4f3b6833c73",
+    "reports/2026-11-05-long-history/cash_base_100000_d1_daily.csv": "e315423cd9b52bc911b0060e89f9decd53951cd454701cd14049e4f3b6833c73",
+    "reports/2026-11-05-long-history/cash_high_100000_d1_daily.csv": "e315423cd9b52bc911b0060e89f9decd53951cd454701cd14049e4f3b6833c73",
+    "reports/2026-11-05-long-history/equity_hold_low_100000_d1_daily.csv": "f4e568e48ed243755b9bde420ab606b7faf8ec7704e521b0ceee69877a19f8da",
+    "reports/2026-11-05-long-history/equity_hold_base_100000_d1_daily.csv": "6d4efb665d678a0ac86c63020a957453d9b4f5f9ca0d27f5824f5935a0e4f36b",
+    "reports/2026-11-05-long-history/equity_hold_high_100000_d1_daily.csv": "7b235a2241d6ab0d5f3ab3db890a4bb4e29e6107b8798ac91e18b5201ff263dc",
+    "reports/2026-11-05-long-history/bond_hold_low_100000_d1_daily.csv": "9ed93843cff1bef9e364e3fe6f2d578143031dcc7207eb619f7777d10f189de1",
+    "reports/2026-11-05-long-history/bond_hold_base_100000_d1_daily.csv": "1b5375508d2aeee249f37f2804014f0483d1598e030027536c402c701ec8a09c",
+    "reports/2026-11-05-long-history/bond_hold_high_100000_d1_daily.csv": "e0b7a83c2ede4689c101f34fa2ff8cff0189d061ca24cd39e03c4d608d0e8022",
+    "reports/2026-11-05-long-history/monthly_20_80_low_100000_d1_daily.csv": "c00042b29adc2c68e083c93b0d101024f54fabbfbd5e8affc9cbff231f45afa2",
+    "reports/2026-11-05-long-history/monthly_20_80_base_100000_d1_daily.csv": "ed680e1f30b283de14d0dc2ef5322cabecfcd56e41b753d47d0642617ae6afd5",
+    "reports/2026-11-05-long-history/monthly_20_80_high_100000_d1_daily.csv": "a373f62bbc00d7559c6fcdc06d59267b377daae9f9e1a648d00dae70eb0eca2c",
+    "reports/2026-11-05-long-history/monthly_50_50_low_100000_d1_daily.csv": "7f21a30a0cf2f771ccfd4651f870620e147e7b646f631a9137b170501231bb69",
+    "reports/2026-11-05-long-history/monthly_50_50_base_100000_d1_daily.csv": "6d212971712f3e96a9b4a96792ebf3e76bf17e256b28f73258b2012db2b74c8d",
+    "reports/2026-11-05-long-history/monthly_50_50_high_100000_d1_daily.csv": "c533b87eeda320068f6faf22e1c6144fb668ac2290f4514e8aa3c4b747fd36c7",
+    "reports/2026-11-05-long-history/trend_120_low_100000_d1_daily.csv": "9e5738187c20eca190698fc5c4209058d2cb482659d04b6956f0daa785476d6c",
+    "reports/2026-11-05-long-history/trend_120_base_100000_d1_daily.csv": "9b5af600769c13b82139ecc0c62b85ec1f7b40b222a11391374c9f328aed729f",
+    "reports/2026-11-05-long-history/trend_120_high_100000_d1_daily.csv": "5a7256c2011b451cc6869a31ad8d8350a5ab998b32f6e249a62c3498dcb61643"
+  },
+  "market_sources": {
+    "2026-11-03-official-01": "8e9a629c570486158b1dc5194d7691889775b02e771b8ec5d77f841708a5ed34",
+    "2026-11-03-official-02": "368c8bb592152e72acaf10ef0451cc9f1ef1d3e7c4ab5ca99babb683aa3b813f",
+    "2026-11-04-expansion-07": "03e51be9790eaa6451b76491b71dcb976ae5047b54adb02f19a105d18270befd",
+    "2026-11-04-calendar-08": "dd8766c2432983c0d5a1d123add8b175696bade27c76b62688db17fdcbf25d86",
+    "2026-11-05-costs-11": "67e05926f9b3f92ee9ae85b1a91aa0c2a09226efdce4126654e828c389af03db",
+    "2026-11-05-events-12": "d2b38943ef1611e146fd18e4e414602c3cee54abb9ee3f241ff88e321e12073f"
+  }
+}

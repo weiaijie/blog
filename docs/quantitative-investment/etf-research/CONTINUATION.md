@@ -20,9 +20,13 @@
 
 11月6日目标仅用此前核验数据生成，09:15已到集合竞价开始，不能称集合竞价前冻结；原plan不可改。已核对18组合21条目标决策一致；这不是成交保证。
 
+## 2026-11-07 历史净收益与成交核查
+
+[历史净收益与成交价核查](reports/2026-11-07-historical-pnl/PROGRESS.md)已完成。历史主组合全期净增37,767.98元，最大回撤期间净值下降27,982.30元。18个账户35,406个每日记录与原净值精确对账。6,674笔历史模型成交中1,215笔超出当日日线范围，独立复核用原始上交所OHLC逐笔重算。报告给出新的离线复现命令。实际成交证据与下一交易日无人值守验收仍待取得。
+
 ## 下一步顺序
 
-1. 核实仓库与北京时间。安装requirements-lock.txt，执行verify_project.py及基础测试；若研究框架对照才另装requirements-backtrader.txt。读取AGENTS.md、README、PROJECT_PLAN、DATA_SOURCES、PLAN_ALIGNMENT、PROTOCOL_V1及两配置。最新静态提交清单在reports/2026-11-06-research-audit/manifest.json；活动账户/运行状态/健康状态指针另按封存记录校验，允许合法每日更新；旧阶段清单须在相应提交核验。
+1. 核实仓库与北京时间。安装requirements-lock.txt，执行verify_project.py及基础测试；若研究框架对照才另装requirements-backtrader.txt。读取AGENTS.md、README、PROJECT_PLAN、DATA_SOURCES、PLAN_ALIGNMENT、PROTOCOL_V1及两配置。最新静态提交清单在reports/2026-11-07-historical-pnl/manifest.json；活动账户/运行状态/健康状态指针另按封存记录校验，允许合法每日更新；旧阶段清单须在相应提交核验。
 2. 下一完整交易日候选11月9日，16:00后才采集；周末不增加记录。正式用户timer已enabled/active，linger=yes；北京时间16:10、16:40、17:10调用run_scheduled.py，启动/重载定时器后30秒也补检查。进程失败120秒后重试，20分钟最多3次启动。当前账户已是最新时零请求、零收益变化；新日合格后才发布整包。
 3. 超时已定位为该主机到官方公告IPv6地址的TLS握手失败（TCP已连通）；IPv4的TLS证书验证及HTTP200正常。采集器使用curl、DNS解析IPv4、正常证书校验，最多3次尝试，2/4秒退避，每次响应原文与错误均保存。5轮真实全链路、跨度约17分23秒全部准入，55请求中50成功、5次搜狐503后重试成功；10次公告请求均成功（中位0.1255秒、最长0.138秒）。这是当日工程验收，不是跨交易日长期稳定证明；没有修复或关闭主机全局IPv6。
 4. 来源失败保留原快照与失败运行。未封存中断用--retry-of旧运行路径创建新运行；已封存未发布用--resume路径，核验所有输入及原指针后恢复。路径和命令见docs/DAILY_PIPELINE.md。不得直接覆写旧检查点、报告、目标或快照。
