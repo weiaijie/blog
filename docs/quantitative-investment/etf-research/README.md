@@ -4,6 +4,8 @@
 
 ## 当前事实（2026-11-07）
 
+- [18 个历史账户的滚动风险预警](reports/2026-11-07-rolling-risk/PROGRESS.md)列出 7 条规则的首次越线、全部区间和期末未解除清单。
+
 - [回撤恢复和披露变化](reports/2026-11-07-recovery/PROGRESS.md)覆盖18个历史账户及两次已公布的持仓。
 
 - [主组合历史年报及季报](reports/2026-11-07-period-review/PERIODS.md)和[新增交易日验收说明](reports/2026-11-07-period-review/PROGRESS.md)已归档，覆盖18个历史账户774条期间记录。
@@ -40,6 +42,6 @@ python scripts/check_health.py
 python scripts/reproduce.py
 ```
 
-可选框架对照另装requirements-backtrader.txt。历史报告和原始快照不覆盖；最新静态清单见reports/2026-11-07-recovery/manifest.json，动态状态另对照封存记录。旧阶段清单应在相应Git提交验证。历史建设记录见[历史计划](docs/history/PROJECT_PLAN-before-closure-20261106.md)。
+可选框架对照另装requirements-backtrader.txt。历史报告和原始快照不覆盖；最新静态清单见reports/2026-11-07-rolling-risk/manifest.json，动态状态另对照封存记录。旧阶段清单应在相应Git提交验证。历史建设记录见[历史计划](docs/history/PROJECT_PLAN-before-closure-20261106.md)。
 
 最新研究证据审计见[报告](reports/2026-11-06-research-audit/PROGRESS.md)与[离线页面](site/research-audit.html)：57,726个一年/两年连续窗口、255个现金新账户；历史50/50两年窗口中位年化约3.71%，不支持稳定达标结论。完整中期股票339项及债券跨市场代码归并已核对，当前实时全持仓仍未知。新增复现：`python scripts/reproduce_research_audit.py`。

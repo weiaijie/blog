@@ -1,0 +1,52 @@
+{
+  "scope": "historical_only",
+  "start": "2018-09-14",
+  "end": "2026-10-30",
+  "sessions": 1967,
+  "runs": 18,
+  "settings": {
+    "action": "report_only",
+    "drawdown_warning": 0.15,
+    "annual_drawdown_limit": 0.2,
+    "annual_volatility_limit": 0.25,
+    "annual_volatility_warning": 0.3,
+    "sharpe_target": 1.0,
+    "daily_var_limit": 0.03,
+    "daily_move_warning": 0.05,
+    "var_confidence": 0.95,
+    "lookback_returns": 252,
+    "annualization_sessions": 252,
+    "annual_risk_free_assumption": 0.0
+  },
+  "input_sha256": {
+    "config/research.json": "6d53fe70951d0bd0418c358124d732714540e6d1605d12ea0c26d2236e5b76fc",
+    "reports/2026-11-05-long-history/results.json": "40bfc1bdeeee60f448e5f714cda61bb13dfccfbe29b11dbbf77ddbf18c0112e2",
+    "reports/2026-11-05-long-history/bond_hold_base_100000_d1_daily.csv": "1b5375508d2aeee249f37f2804014f0483d1598e030027536c402c701ec8a09c",
+    "reports/2026-11-05-long-history/bond_hold_high_100000_d1_daily.csv": "e0b7a83c2ede4689c101f34fa2ff8cff0189d061ca24cd39e03c4d608d0e8022",
+    "reports/2026-11-05-long-history/bond_hold_low_100000_d1_daily.csv": "9ed93843cff1bef9e364e3fe6f2d578143031dcc7207eb619f7777d10f189de1",
+    "reports/2026-11-05-long-history/cash_base_100000_d1_daily.csv": "e315423cd9b52bc911b0060e89f9decd53951cd454701cd14049e4f3b6833c73",
+    "reports/2026-11-05-long-history/cash_high_100000_d1_daily.csv": "e315423cd9b52bc911b0060e89f9decd53951cd454701cd14049e4f3b6833c73",
+    "reports/2026-11-05-long-history/cash_low_100000_d1_daily.csv": "e315423cd9b52bc911b0060e89f9decd53951cd454701cd14049e4f3b6833c73",
+    "reports/2026-11-05-long-history/equity_hold_base_100000_d1_daily.csv": "6d4efb665d678a0ac86c63020a957453d9b4f5f9ca0d27f5824f5935a0e4f36b",
+    "reports/2026-11-05-long-history/equity_hold_high_100000_d1_daily.csv": "7b235a2241d6ab0d5f3ab3db890a4bb4e29e6107b8798ac91e18b5201ff263dc",
+    "reports/2026-11-05-long-history/equity_hold_low_100000_d1_daily.csv": "f4e568e48ed243755b9bde420ab606b7faf8ec7704e521b0ceee69877a19f8da",
+    "reports/2026-11-05-long-history/monthly_20_80_base_100000_d1_daily.csv": "ed680e1f30b283de14d0dc2ef5322cabecfcd56e41b753d47d0642617ae6afd5",
+    "reports/2026-11-05-long-history/monthly_20_80_high_100000_d1_daily.csv": "a373f62bbc00d7559c6fcdc06d59267b377daae9f9e1a648d00dae70eb0eca2c",
+    "reports/2026-11-05-long-history/monthly_20_80_low_100000_d1_daily.csv": "c00042b29adc2c68e083c93b0d101024f54fabbfbd5e8affc9cbff231f45afa2",
+    "reports/2026-11-05-long-history/monthly_50_50_base_100000_d1_daily.csv": "6d212971712f3e96a9b4a96792ebf3e76bf17e256b28f73258b2012db2b74c8d",
+    "reports/2026-11-05-long-history/monthly_50_50_high_100000_d1_daily.csv": "c533b87eeda320068f6faf22e1c6144fb668ac2290f4514e8aa3c4b747fd36c7",
+    "reports/2026-11-05-long-history/monthly_50_50_low_100000_d1_daily.csv": "7f21a30a0cf2f771ccfd4651f870620e147e7b646f631a9137b170501231bb69",
+    "reports/2026-11-05-long-history/trend_120_base_100000_d1_daily.csv": "9b5af600769c13b82139ecc0c62b85ec1f7b40b222a11391374c9f328aed729f",
+    "reports/2026-11-05-long-history/trend_120_high_100000_d1_daily.csv": "5a7256c2011b451cc6869a31ad8d8350a5ab998b32f6e249a62c3498dcb61643",
+    "reports/2026-11-05-long-history/trend_120_low_100000_d1_daily.csv": "9e5738187c20eca190698fc5c4209058d2cb482659d04b6956f0daa785476d6c"
+  },
+  "source_manifests": {
+    "2026-11-03-official-01": "8e9a629c570486158b1dc5194d7691889775b02e771b8ec5d77f841708a5ed34",
+    "2026-11-03-official-02": "368c8bb592152e72acaf10ef0451cc9f1ef1d3e7c4ab5ca99babb683aa3b813f",
+    "2026-11-04-expansion-07": "03e51be9790eaa6451b76491b71dcb976ae5047b54adb02f19a105d18270befd",
+    "2026-11-04-calendar-08": "dd8766c2432983c0d5a1d123add8b175696bade27c76b62688db17fdcbf25d86",
+    "2026-11-05-costs-11": "67e05926f9b3f92ee9ae85b1a91aa0c2a09226efdce4126654e828c389af03db",
+    "2026-11-05-events-12": "d2b38943ef1611e146fd18e4e414602c3cee54abb9ee3f241ff88e321e12073f"
+  },
+  "reference_sha256": "1f89686985e8f940874c7e314452805099dc1002730b539891a3adaf30d21a6e"
+}
