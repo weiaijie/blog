@@ -26,7 +26,7 @@
 
 ## 下一步顺序
 
-1. 核实仓库与北京时间。安装requirements-lock.txt，执行verify_project.py及基础测试；若研究框架对照才另装requirements-backtrader.txt。读取AGENTS.md、README、PROJECT_PLAN、DATA_SOURCES、PLAN_ALIGNMENT、PROTOCOL_V1及两配置。最新静态提交清单在reports/2026-11-07-historical-pnl/manifest.json；活动账户/运行状态/健康状态指针另按封存记录校验，允许合法每日更新；旧阶段清单须在相应提交核验。
+1. 核实仓库与北京时间。安装requirements-lock.txt，执行verify_project.py及基础测试；若研究框架对照才另装requirements-backtrader.txt。读取AGENTS.md、README、PROJECT_PLAN、DATA_SOURCES、PLAN_ALIGNMENT、PROTOCOL_V1及两配置。最新静态提交清单在reports/2026-11-07-daily-evidence/manifest.json；活动账户/运行状态/健康状态指针另按封存记录校验，允许合法每日更新；旧阶段清单须在相应提交核验。
 2. 下一完整交易日候选11月9日，16:00后才采集；周末不增加记录。正式用户timer已enabled/active，linger=yes；北京时间16:10、16:40、17:10调用run_scheduled.py，启动/重载定时器后30秒也补检查。进程失败120秒后重试，20分钟最多3次启动。当前账户已是最新时零请求、零收益变化；新日合格后才发布整包。
 3. 超时已定位为该主机到官方公告IPv6地址的TLS握手失败（TCP已连通）；IPv4的TLS证书验证及HTTP200正常。采集器使用curl、DNS解析IPv4、正常证书校验，最多3次尝试，2/4秒退避，每次响应原文与错误均保存。5轮真实全链路、跨度约17分23秒全部准入，55请求中50成功、5次搜狐503后重试成功；10次公告请求均成功（中位0.1255秒、最长0.138秒）。这是当日工程验收，不是跨交易日长期稳定证明；没有修复或关闭主机全局IPv6。
 4. 来源失败保留原快照与失败运行。未封存中断用--retry-of旧运行路径创建新运行；已封存未发布用--resume路径，核验所有输入及原指针后恢复。路径和命令见docs/DAILY_PIPELINE.md。不得直接覆写旧检查点、报告、目标或快照。
@@ -40,7 +40,9 @@ Windows用于Git工作树、浏览器检查及必要的数据源交叉采集；�
 
 ## 当前部署与观测入口
 
-config/active_run.json目前指向reports/daily/20261106T192520-fbb0790c；账户哈希与原11月6日完全一致，前瞻仍2日。site/daily.html同时显示最近运行结果与定时状态；site/operation_status.json指向不可变reports/operations记录。页面不是公网实时部署，GitHub文件只是提交时快照。
+当前日报及月报位置以[活动指针](config/active_run.json)为准；11月7日同日重放后账户哈希与原11月6日一致，前瞻仍2日。site/daily.html同时显示最近运行结果与定时状态；site/operation_status.json指向不可变reports/operations记录。页面不是公网实时部署，GitHub文件只是提交时快照。
+
+[本轮证据与月报](reports/2026-11-07-daily-evidence/PROGRESS.md)：18账户已接入同一期国债穿透，股债基准独立起算；离线运行 python scripts/check_monthly_evidence.py。13次错日上交所快照及供应商差异已留证，不重复将相同接口的空结果作为新证据。优先寻同日官方历史行情、ETF盘中事件独立登记，以及11月9日完整交易日严格准入。
 
 正式timer已实际自动触发两次成功；三个独立短期验收timer均触发真实采集并已结束。隔离的受控首次退出失败触发systemd自动重启后实际监督器成功；未重启整台主机，开机运行依据已启用用户timer和linger配置，不能冒称已做主机断电验收。
 

@@ -1,0 +1,46 @@
+{
+  "account_month_checks": {
+    "history": {
+      "accounts": 18,
+      "account_months": 1764
+    },
+    "forward": {
+      "accounts": 18,
+      "account_months": 18
+    }
+  },
+  "latest_main": {
+    "history": {
+      "month": "2026-10",
+      "complete": true,
+      "anchor": "2026-09-30",
+      "through": "2026-10-30",
+      "paired_returns": 17,
+      "net_return": -0.039832515677087954,
+      "benchmark_return": -0.04002495232289377,
+      "relative_return": 0.00019243664580582048,
+      "max_drawdown": 0.039832515677087954,
+      "cumulative_net": 0.3776798,
+      "cumulative_benchmark": 0.4059783816937184,
+      "tracking_error_annualized": 0.00037992067480472697
+    },
+    "forward": {
+      "month": "2026-11",
+      "complete": false,
+      "anchor": "2026-11-05",
+      "through": "2026-11-06",
+      "paired_returns": 1,
+      "net_return": 0.0006748,
+      "benchmark_return": -0.008119340243658195,
+      "relative_return": 0.008794140243658197,
+      "max_drawdown": 0.0,
+      "cumulative_net": 0.0006748,
+      "cumulative_benchmark": -0.008119340243658195,
+      "tracking_error_annualized": null
+    }
+  },
+  "issue_accounts": 18,
+  "dividend_events": 13,
+  "checkpoint": "ae5c0f77a8d6ffe51fc3bb9030c971097957e1e982d5033017b0b16c5997d418",
+  "scope": "Independent monthly return path and seven metrics, Q3 amounts, source audit reproduction."
+}

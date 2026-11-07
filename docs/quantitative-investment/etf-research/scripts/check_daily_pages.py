@@ -10,15 +10,20 @@ with sync_playwright() as pw:
     page.get_by_role('link',name='打开完整日报').wait_for()
     destination=page.get_by_role('link',name='打开完整日报').get_attribute('href');base=urljoin(a.url,destination)
     checked=0
-    for name in ['index','risk','exposure']:
+    for name in ['index','risk','exposure','monthly']:
         url=urljoin(base,name+'.html');assert page.goto(url).status==200
         for href in page.locator('a[href]').evaluate_all('(n)=>n.map(x=>x.href)'):
             if urlparse(href).netloc==urlparse(base).netloc:assert page.request.get(href).status==200,href;checked+=1
+        if name=='index':assert '同一期国债合计敞口' in page.locator('body').inner_text()
+        if name=='monthly':
+            assert page.locator('section').first.locator('tbody tr').count()>=1
+            assert page.locator('section').last.locator('tbody tr').count()==98
+            assert '部分月' in page.locator('body').inner_text()
         if name=='risk':assert page.locator('tbody tr').count()==18
         if name=='exposure':assert page.locator('table').first.locator('tbody tr').count()==18 and '当前实际穿透持仓仍未知' in page.locator('body').inner_text()
-        page.set_viewport_size({'width':1360,'height':1000});page.screenshot(path=str(a.output/(name+'-desktop.png')),full_page=True)
+        page.set_viewport_size({'width':1360,'height':1000});page.screenshot(path=str(a.output/(name+'-desktop.png')),full_page=name!='monthly')
         page.set_viewport_size({'width':390,'height':844});assert page.evaluate('document.documentElement.scrollWidth<=window.innerWidth'),name
-        page.screenshot(path=str(a.output/(name+'-mobile.png')),full_page=True)
+        page.screenshot(path=str(a.output/(name+'-mobile.png')),full_page=name!='monthly')
     assert not errors
-    result=dict(active_pointer_routed=True,pages=3,local_links_checked=checked,desktop_and_mobile=True,mobile_no_overflow=True,page_errors=errors)
+    result=dict(active_pointer_routed=True,pages=4,local_links_checked=checked,desktop_and_mobile=True,mobile_no_overflow=True,page_errors=errors)
     (a.output/'browser_checks.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result));b.close()

@@ -9,6 +9,7 @@ from etf_research.long_history import load_long_history
 from etf_research.admission import load_incremental
 from etf_research.forward import digest,engine_digest
 from etf_research.risk_extensions import benchmark_returns,beta_metrics,exposure_stress
+from etf_research.bond_issues import identity_map, issue_exposures
 
 def build(output,page,config_path=ROOT/'config/research.json',extra_path=ROOT/'config/risk_extensions.json'):
     config=json.loads(config_path.read_text());extra=json.loads(extra_path.read_text())
@@ -18,6 +19,8 @@ def build(output,page,config_path=ROOT/'config/research.json',extra_path=ROOT/'c
     if digest({k:v for k,v in state.items() if k!='checkpoint_sha256'})!=state['checkpoint_sha256'] or engine_digest()!=state['engine_sha256']:raise ValueError('Checkpoint integrity mismatch')
     if str(current.sessions[-1])!=state['as_of']:raise ValueError('Prices and checkpoint disagree')
     disclosure=json.loads((ROOT/extra['holdings_reference']).read_text())
+    identity_source = extra.get('bond_identity_snapshot')
+    identities = identity_map(ROOT / identity_source) if identity_source else None
     for fund in disclosure['funds'].values():
         if hashlib.sha256((ROOT/fund['pdf_path']).read_bytes()).hexdigest()!=fund['pdf_sha256']:raise ValueError('Official holdings PDF changed')
         if fund['announcement_date']>state['as_of']:raise ValueError('Future disclosure is unavailable')
@@ -40,8 +43,15 @@ def build(output,page,config_path=ROOT/'config/research.json',extra_path=ROOT/'c
                 unlisted_security_proxy_fraction=str(weight*D(fund['unlisted_security_nav_fraction'])),
                 sector_proxy={k:dict(name=v['name'],portfolio_fraction=str(weight*D(v['nav_fraction']))) for k,v in fund['sectors'].items()})
             if 'issuer_category' in fund:lookthrough[s]['issuer_proxy']=dict(name=fund['issuer_category']['name'],portfolio_fraction=str(weight*D(fund['issuer_category']['nav_fraction'])))
+            if s == '511010' and identities is not None:
+                lookthrough[s]['disclosed_issues'] = issue_exposures(fund, identities, values[s], equity)
         forward.append(dict(run=name,as_of=state['as_of'],equity=str(equity),beta={s:beta_metrics([r['date'] for r in daily],[r['equity'] for r in daily],b) for s,b in forward_benchmarks.items()},stress=exposure_stress(equity,values,extra['stress_scenarios']),lookthrough=lookthrough))
     result=dict(schema_version=1,mode='report_only',changes_trades=False,benchmark_method='ETF gross total-return proxy from unadjusted close plus official ex-date cash dividend; fractional reinvestment, no fees. Not CSI300 or official bond index returns.',beta_method='Last 252 paired daily returns, sample covariance / benchmark variance; insufficient forward samples remain null.',holdings_method='2026Q3 disclosed weights applied to current ETF exposure as a dated proxy only; top code rows not full portfolio, bond cross-market aliases not consolidated.',stress_method=extra['stress_scope'],history=historical,forward=forward,disclosure=disclosure,input_sha256={n:hashlib.sha256((ROOT/n).read_bytes()).hexdigest() for n in (str(config_path.relative_to(ROOT)),str(extra_path.relative_to(ROOT)),config['forward_checkpoint'],extra['holdings_reference'])})
+    if identities is not None:
+        result['holdings_method'] = 'Q3 disclosed codes grouped by verified issue; lower bounds at disclosure date applied to account ETF value.'
+        result['bond_identity_snapshot'] = identity_source
+        manifest = identity_source + '/manifest.json'
+        result['input_sha256'][manifest] = hashlib.sha256((ROOT/manifest).read_bytes()).hexdigest()
     output.parent.mkdir(parents=True,exist_ok=True);output.write_text(json.dumps(result,ensure_ascii=False,indent=2,allow_nan=False)+'\n')
     esc=html.escape;main=next(x for x in forward if x['run']=='monthly_50_50_base')
     body='<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>组合风险扩展</title><link rel="stylesheet" href="style.css"><main><h1>组合风险扩展</h1><p>只分析，不改变冻结策略或交易。</p><a href="index.html">研究看板</a> · <a href="risk.html">风险标准</a>'
@@ -53,6 +63,12 @@ def build(output,page,config_path=ROOT/'config/research.json',extra_path=ROOT/'c
     for code,fund in disclosure['funds'].items():
         body+='<h3>'+code+'</h3><p>已披露的前'+str(len(fund['listed_positions']))+'条证券代码占基金净资产 '+f"{D(fund['listed_nav_fraction']):.2%}"+'；未逐项列出的证券占 '+f"{D(fund['unlisted_security_nav_fraction']):.2%}"+'。完整证券集中度不计算。</p>'
         if code=='510300':body+='<p>基金制造业披露权重 '+f"{D(fund['sectors']['C']['nav_fraction']):.2%}"+'，主观察组合制造业代理暴露 '+f"{D(main['lookthrough'][code]['sector_proxy']['C']['portfolio_fraction']):.2%}"+'。</p>'
+        elif identities is not None:
+            body += '<p>按三季报公允价值与官方代码映射归并。以下为主观察账户按披露持仓估算的敞口，只覆盖前五个代码。</p><div class="table-wrap"><table><tr><th>国债期次及原代码</th><th>占基金净资产</th><th>组合敞口（元）</th><th>占组合净值</th></tr>'
+            for issue in main['lookthrough'][code]['disclosed_issues']:
+                label = esc(issue['issue'] or '期次未知') + ' · ' + esc(' / '.join(issue['codes']))
+                body += f'<tr><td>{label}</td><td>{D(issue["fund_fraction"]):.2%}</td><td>{D(issue["portfolio_amount"]):,.2f}</td><td>{D(issue["portfolio_fraction"]):.2%}</td></tr>'
+            body += '</table></div><p>当期未披露的各券权重未知。代码身份于11月7日核验。</p>'
         else:body+='<p>国家债券占基金净资产 '+f"{D(fund['issuer_category']['nav_fraction']):.2%}"+'。前五条含可能跨市场对应同一期国债的代码，未核实映射前不声称五个独立风险来源。</p>'
         body+='<a href="../'+esc(fund['pdf_path'])+'">官方季报原文</a> · <a href="'+esc(fund['official_url'])+'">上交所来源</a>'
     body+='</section><p><a href="../'+esc(extra['published_report'])+'">全部组合与计算结果</a></p></main></html>'

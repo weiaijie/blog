@@ -2,7 +2,9 @@
 
 研究中国股票ETF 510300和债券ETF 511010，用1～2年评估长期年化净收益4%～5%可行性。仅研究模拟，不接实盘、不保证收益、不为目标调参。当前是重建后持续保存的项目，不能称找回旧系统。
 
-## 当前事实（2026-11-06）
+## 当前事实（2026-11-07）
+
+- [本轮日报与13次除息证据](reports/2026-11-07-daily-evidence/PROGRESS.md)：日报合并同一期国债；18个历史与18个前瞻账户分别生成股债基准月报。13次正式除息价仍未知。
 
 - [历史净收益与成交价核查](reports/2026-11-07-historical-pnl/PROGRESS.md)覆盖162个冻结场景、6,674笔模型成交和18个账户的逐日净值。
 - 独立历史1967日，2018-09-14至2026-10-30，13次官方分红、162固定场景。50/50基准费用年化约4.02%、最大收盘回撤约19.73%；旧640日4.90%及1167日0.51%结果保留，起点敏感，未证明目标成立。
@@ -34,6 +36,6 @@ python scripts/check_health.py
 python scripts/reproduce.py
 ```
 
-可选框架对照另装requirements-backtrader.txt。历史报告和原始快照不覆盖；最新静态清单见reports/2026-11-07-historical-pnl/manifest.json，动态状态另对照封存记录。旧阶段清单应在相应Git提交验证。历史建设记录见[历史计划](docs/history/PROJECT_PLAN-before-closure-20261106.md)。
+可选框架对照另装requirements-backtrader.txt。历史报告和原始快照不覆盖；最新静态清单见reports/2026-11-07-daily-evidence/manifest.json，动态状态另对照封存记录。旧阶段清单应在相应Git提交验证。历史建设记录见[历史计划](docs/history/PROJECT_PLAN-before-closure-20261106.md)。
 
 最新研究证据审计见[报告](reports/2026-11-06-research-audit/PROGRESS.md)与[离线页面](site/research-audit.html)：57,726个一年/两年连续窗口、255个现金新账户；历史50/50两年窗口中位年化约3.71%，不支持稳定达标结论。完整中期股票339项及债券跨市场代码归并已核对，当前实时全持仓仍未知。新增复现：`python scripts/reproduce_research_audit.py`。

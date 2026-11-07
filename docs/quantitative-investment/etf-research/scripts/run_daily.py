@@ -19,6 +19,7 @@ from audit_official_close import audit as official_audit
 from collect_official_close import collect as collect_official
 from build_risk_report import build as risk_build
 from build_risk_extensions import build as extension_build
+from build_monthly_report import build as monthly_build
 
 def reconcile(data,previous,state):
     """Independent daily cash/position/receivable arithmetic from event journal."""
@@ -54,6 +55,7 @@ def reconcile(data,previous,state):
 
 def dependencies(pointer):
     names=[ROOT/'config/research.json',ROOT/'config/risk_extensions.json',inside(ROOT,pointer['checkpoint']),ROOT/'PROTOCOL_V1.md',ROOT/'requirements-lock.txt',ROOT/'config/collection.json']
+    names.append(ROOT/'config/monthly_benchmark.json')
     names+=list((ROOT/'src/etf_research').glob('*.py'))+list((ROOT/'scripts').glob('*.py'))
     names+=list((ROOT/'data/snapshots').glob('*/manifest.json'))+list((ROOT/'data/reference').glob('*.json'))
     # Include all immutable source bytes, not only a possibly unchanged manifest.
@@ -109,7 +111,10 @@ def run(args):
             create(folder/'intent_check.json',check_execution(read(ROOT/'reports/2026-11-06-intent/plan.json'),state))
             create(folder/'reconciliation.json',reconcile(data,previous,state))
             config=read(ROOT/'config/research.json');config['forward_checkpoint']=rel+'/forward_checkpoint.json';create(folder/'research.json',config)
-            extra=read(ROOT/'config/risk_extensions.json');extra.update(forward_price_snapshot=candidate,published_report=rel+'/risk_extensions.json');create(folder/'risk_extensions_config.json',extra)
+            extra=read(ROOT/'config/risk_extensions.json')
+            extra.update(forward_price_snapshot=candidate, published_report=rel+'/risk_extensions.json',
+                         bond_identity_snapshot='data/snapshots/2026-11-07-bond-identities-000043')
+            create(folder/'risk_extensions_config.json',extra)
             pages=folder/'site';pages.mkdir()
             risk_build(folder/'research.json',folder/'risk.json',pages/'risk.html')
             extension_build(folder/'risk_extensions.json',pages/'exposure.html',folder/'research.json',folder/'risk_extensions_config.json')
@@ -119,8 +124,15 @@ def run(args):
                 text=text.replace('href="../../../../config/research.json"','href="../research.json"').replace('href="../../../../reports/2026-11-06-close/risk.json"','href="../risk.json"').replace('href="../../../../reports/2026-11-06-close/PROGRESS.md"','href="index.html"')
                 p.write_text(text,encoding='utf-8')
             shutil.copyfile(ROOT/'site/style.css',pages/'style.css')
+            monthly_build(folder, data, state, ROOT/config['history_results'])
             main=state['portfolios']['monthly_50_50_base']['daily'][-1]
             text='<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>每日研究检查点</title><link rel="stylesheet" href="style.css"><main><h1>每日研究检查点 · '+state['as_of']+'</h1><p>前瞻 '+str(state['forward_sessions'])+' 个观察日；仅研究模拟。样本不足时年化和窗口风险为空。目标、模型成交、实际成交证据分别处理。</p><section><h2>50/50基准费用观察组合</h2><p>收盘净值 '+html.escape(main['equity'])+' 元；现金 '+html.escape(main['cash'])+' 元。完整对账见报告，不代表实际成交或未来收益。</p></section><nav><a href="risk.html">风险监控</a><a href="exposure.html">Beta与披露穿透</a><a href="../../../../site/index.html">独立历史研究</a><a href="../reconciliation.json">逐日会计核对</a><a href="../intent_check.json">11月6日冻结目标对账</a><a href="../admission.json">数据准入</a><a href="../official_close.json">官方价格复核</a><a href="../forward_checkpoint.json">检查点</a><a href="../manifest.json">完整性清单</a></nav><p>日报未接实盘；模拟成交价可能超出日线范围。公告变化会阻断更新，完整停复牌及实际成交证据仍有限。</p></main></html>'
+            text=text.replace('<nav>', '<nav><a href="monthly.html">股债基准与月报</a>').replace('Beta与披露穿透', 'Beta、国债期次与披露穿透')
+            ext=read(folder/'risk_extensions.json')
+            observed=next(r for r in ext['forward'] if r['run']=='monthly_50_50_base')
+            issues=observed['lookthrough']['511010']['disclosed_issues']
+            items=''.join('<li>'+html.escape(r['issue'] or '未核实期次')+'：'+f"{D(r['portfolio_amount']):,.2f} 元（占组合净值 {D(r['portfolio_fraction']):.2%}）"+'</li>' for r in issues)
+            text=text.replace('<nav>', '<section><h2>主观察组合 · 同一期国债合计敞口</h2><p>以 2026-09-30 季报披露部分估算；未披露部分未知。</p><ul>'+items+'</ul></section><nav><a href="../../../../reports/2026-11-07-daily-evidence/PROGRESS.md">13次除息与停复牌证据核对</a>')
             (pages/'index.html').write_text(text,encoding='utf-8')
             for name,value in inputs.items():
                 if sha(ROOT/name)!=value:raise ValueError('Source changed during build')

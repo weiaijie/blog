@@ -1,6 +1,6 @@
 # 数据源与证据
 
-各节为按日期保存的来源事实，旧“最新/下一步”仅代表当时状态；当前账户与计划见CONTINUATION.md。本轮运行闭环未新增市场请求，使用已有真实来源做归档恢复和公告流程验证。
+各节为按日期保存的来源事实，旧“最新/下一步”仅代表当时状态；当前账户与计划见CONTINUATION.md。11月7日[逐笔证据](reports/2026-11-07-daily-evidence/PROGRESS.md)新增搜狐除息日期行情、13次按日期探查上交所快照及官方资料入口；返回日期与市价字段单独检查。历史产品介绍不等于已取得目标日的记录。
 
 精确 URL、请求 UTC 时间、HTTP 状态、错误和响应 SHA256：见快照内 requests.json、extra_requests.json、calendar_requests.json。完整参数与采集实现：probe.py、extra.py、calendar_probe.py。
 
