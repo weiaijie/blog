@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#102f35"><title>ETF 研究手记 · 行情与进度</title>
+<link rel="stylesheet" href="market.css">
+<script src="vendor-charts/lightweight-charts-5.0.9.js" defer></script><script src="market.js" defer></script>
+</head>
+<body>
+<header><div class="shell mast"><div class="brand"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>ETF 研究手记</div><span class="mode">仅模拟 · 人民币</span></div></header>
+<main class="shell">
+<div class="intro"><div><h1>行情与进度</h1><p id="progress">正在读取已核验的研究记录…</p></div><span id="asof"></span></div>
+<div id="error" role="status" hidden></div>
+<div class="layout">
+<section class="panel prices" aria-label="ETF 日 K 线">
+<div class="tabs" role="group" aria-label="选择 ETF">
+<button type="button" data-code="510300" aria-pressed="true">沪深300</button><button type="button" data-code="513500" aria-pressed="false">标普500</button>
+<button type="button" data-code="159920" aria-pressed="false">恒生指数</button><button type="button" data-code="511010" aria-pressed="false">国债</button></div>
+<div class="chart-head"><div><div class="security"><span id="code">510300</span><h2 id="fund">沪深300 ETF</h2></div><div class="quote"><strong id="close">—</strong><span>元</span><b id="change"></b></div></div>
+<div class="ranges" role="group" aria-label="显示的交易日数量"><button data-count="20" aria-pressed="false">20日</button><button data-count="60" aria-pressed="true">60日</button><button data-count="120" aria-pressed="false">120日</button></div></div>
+<div class="ohlc"><b id="bar-date">—</b><span>开 <em id="open">—</em></span><span>高 <em id="high">—</em></span><span>低 <em id="low">—</em></span><span>收 <em id="last">—</em></span></div>
+<div id="candles" tabindex="0" aria-label="日 K 线。可拖动或缩放，用左右方向键查看逐日价格。"></div>
+<div class="caption"><span><i class="legend up"></i>收高于开 <i class="legend down"></i>收低于开</span><span id="market-date">日 K · 未复权</span></div>
+</section>
+<aside class="panel account"><div class="account-head"><h2>前瞻模拟账户</h2><span id="days"></span></div><p class="muted">沪深300 / 国债 · 各占 50% 的目标组合</p>
+<p class="amount-label">账户总资产（元）</p><strong class="balance" id="balance">—</strong><p id="gain">—</p>
+<div class="equity-title"><h3>账户净值走势</h3><span id="curve-note"></span></div><div id="equity" aria-label="主账户逐日收盘净值曲线"></div><p id="curve-values" class="muted"></p>
+<div class="next"><h3>下一次看什么</h3><p id="next">等待读取账户记录</p></div></aside>
+</div>
+<section class="research"><h2>研究做到了哪一步</h2><div class="steps"><article><span>已回测</span><h3>过去的表现</h3><p>沪深300与国债各半，1,967 个历史交易日，模型年化约 4.02%，最大回撤约 19.73%。</p></article><article><span>已对比</span><h3>四组市场组合</h3><p>两年历史比较中，标普组收益最高，三地平分组回撤最浅。四组仍按原权重观察。</p></article><article><span>观察中</span><h3>长期目标</h3><p id="goal">用 1～2 年的模拟观察，评估年化净收益 4%～5% 是否可行。</p></article></div></section>
+</main><footer class="shell"><a href="https://github.com/weiaijie/blog/tree/redesign-pc/docs/quantitative-investment/etf-research">研究记录 ↗</a><a href="https://www.tradingview.com/">图表来自 TradingView™ Lightweight Charts™</a></footer>
+</body></html>

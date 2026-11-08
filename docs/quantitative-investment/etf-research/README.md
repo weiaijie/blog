@@ -33,6 +33,8 @@
 
 ## 当前入口
 
+[行情与进度看板预览及使用说明](reports/2026-11-08-market-view/README.md)。可查看四只 ETF 的日 K、主账户净值和下一次核验。
+
 - [每日账户与运行健康页面](site/daily.html) · [接续说明](CONTINUATION.md) · [当前计划](PROJECT_PLAN.md)
 - [运行手册](docs/DAILY_PIPELINE.md) · [归档恢复与公告审阅](docs/OPERATIONS_CLOSURE.md)
 - [本轮闭环验收](reports/2026-11-06-closure/PROGRESS.md) · [原规划对照](docs/PLAN_ALIGNMENT.md)
@@ -52,6 +54,6 @@ python scripts/check_health.py
 python scripts/reproduce.py
 ```
 
-可选框架对照另装requirements-backtrader.txt。历史报告和原始快照不覆盖；最新静态清单见reports/2026-11-08-residual-events/manifest.json，动态状态另对照封存记录。旧阶段清单应在相应Git提交验证。历史建设记录见[历史计划](docs/history/PROJECT_PLAN-before-closure-20261106.md)。
+可选框架对照另装requirements-backtrader.txt。历史报告和原始快照不覆盖；最新静态清单见reports/2026-11-08-market-view/manifest.json，动态状态另对照封存记录。旧阶段清单应在相应Git提交验证。历史建设记录见[历史计划](docs/history/PROJECT_PLAN-before-closure-20261106.md)。
 
 最新研究证据审计见[报告](reports/2026-11-06-research-audit/PROGRESS.md)与[离线页面](site/research-audit.html)：57,726个一年/两年连续窗口、255个现金新账户；历史50/50两年窗口中位年化约3.71%，不支持稳定达标结论。完整中期股票339项及债券跨市场代码归并已核对，当前实时全持仓仍未知。新增复现：`python scripts/reproduce_research_audit.py`。

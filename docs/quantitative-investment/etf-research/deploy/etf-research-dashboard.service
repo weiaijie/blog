@@ -1,0 +1,16 @@
+[Unit]
+Description=Read-only ETF research dashboard
+After=network-online.target
+
+[Service]
+WorkingDirectory=%h/projects/etf-research-git-snapshot/docs/quantitative-investment/etf-research
+Environment=ETF_DASHBOARD_BIND=127.0.0.1
+ExecStart=%h/projects/etf-research-py312/bin/python scripts/serve_market.py --bind ${ETF_DASHBOARD_BIND} --port 18766
+Environment=PYTHONDONTWRITEBYTECODE=1
+Restart=on-failure
+RestartSec=10
+NoNewPrivileges=yes
+PrivateTmp=yes
+
+[Install]
+WantedBy=default.target
