@@ -64,4 +64,40 @@ async function init() {
     byId('bt-range').textContent = '历史回测载入失败，请刷新重试。';
   }
 }
+async function initEntryWindows() {
+  try {
+    const response = await fetch('entry-windows.json');
+    if (!response.ok) throw Error('Entry results unavailable');
+    const report = await response.json();
+    const buttons = document.querySelectorAll('[data-years]');
+    function show(years) {
+      const period = report.periods[years];
+      const rows = byId('entry-rows');
+      rows.replaceChildren();
+      byId('entry-range').textContent = '可用起点 '+period.firstStart+' 至 '+period.lastStart+'，只计截至 '+report.lastSession+' 已满期的窗口。';
+      for (const key of order.filter(key => key in period.groups)) {
+        const result = period.groups[key];
+        const row = rows.insertRow();
+        const heading = document.createElement('th');
+        heading.scope = 'row';
+        heading.textContent = groups[key][0];
+        row.append(heading);
+        for (const n of [result.profitable, result.reached]) {
+          row.insertCell().textContent = n+' / '+result.count+'（'+pct.format(n/result.count)+'）';
+        }
+        const sign = result.worstPnl > 0 ? '+' : '';
+        row.insertCell().textContent = sign+money.format(result.worstPnl)+' 元（'+sign+pct.format(result.worstReturn)+'）';
+        row.insertCell().textContent = result.worstStart+' 至 '+result.worstEnd+
+          (result.worstTies > 1 ? '（并列 '+result.worstTies+' 次，列最早一期）' : '');
+      }
+      buttons.forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.years === years)));
+    }
+    show('1');
+    buttons.forEach(b=>b.addEventListener('click',()=>show(b.dataset.years)));
+  } catch {
+    byId('entry-range').textContent = '逐日起点结果载入失败，请刷新重试。';
+  }
+}
+
+initEntryWindows();
 init();

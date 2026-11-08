@@ -1,0 +1,98 @@
+{
+  "firstSession": "2023-10-30",
+  "lastSession": "2026-10-30",
+  "periods": {
+    "1": {
+      "firstStart": "2023-10-30",
+      "lastStart": "2025-10-30",
+      "groups": {
+        "510300": {
+          "count": 486,
+          "profitable": 466,
+          "reached": 444,
+          "worstPnl": -5848.32,
+          "worstReturn": -0.0584832,
+          "worstStart": "2025-10-30",
+          "worstEnd": "2026-10-30",
+          "worstTies": 1
+        },
+        "513500": {
+          "count": 486,
+          "profitable": 485,
+          "reached": 479,
+          "worstPnl": -593.06,
+          "worstReturn": -0.0059306,
+          "worstStart": "2024-04-09",
+          "worstEnd": "2025-04-09",
+          "worstTies": 1
+        },
+        "159920": {
+          "count": 486,
+          "profitable": 404,
+          "reached": 351,
+          "worstPnl": -8019.4,
+          "worstReturn": -0.080194,
+          "worstStart": "2025-10-29",
+          "worstEnd": "2026-10-29",
+          "worstTies": 1
+        },
+        "equal": {
+          "count": 486,
+          "profitable": 477,
+          "reached": 455,
+          "worstPnl": -2735.21,
+          "worstReturn": -0.0273521,
+          "worstStart": "2025-10-29",
+          "worstEnd": "2026-10-29",
+          "worstTies": 1
+        }
+      }
+    },
+    "2": {
+      "firstStart": "2023-10-30",
+      "lastStart": "2024-10-30",
+      "groups": {
+        "510300": {
+          "count": 243,
+          "profitable": 243,
+          "reached": 233,
+          "worstPnl": 5782.62,
+          "worstReturn": 0.0578262,
+          "worstStart": "2024-10-22",
+          "worstEnd": "2026-10-22",
+          "worstTies": 1
+        },
+        "513500": {
+          "count": 243,
+          "profitable": 243,
+          "reached": 243,
+          "worstPnl": 11024.07,
+          "worstReturn": 0.1102407,
+          "worstStart": "2024-03-28",
+          "worstEnd": "2026-03-30",
+          "worstTies": 1
+        },
+        "159920": {
+          "count": 243,
+          "profitable": 243,
+          "reached": 235,
+          "worstPnl": 6250.57,
+          "worstReturn": 0.0625057,
+          "worstStart": "2024-10-28",
+          "worstEnd": "2026-10-28",
+          "worstTies": 1
+        },
+        "equal": {
+          "count": 243,
+          "profitable": 243,
+          "reached": 243,
+          "worstPnl": 10053.28,
+          "worstReturn": 0.1005328,
+          "worstStart": "2024-10-22",
+          "worstEnd": "2026-10-22",
+          "worstTies": 1
+        }
+      }
+    }
+  }
+}

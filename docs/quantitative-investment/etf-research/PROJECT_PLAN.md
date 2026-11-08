@@ -1,5 +1,7 @@
 # 项目计划与当前状态
 
+[每个交易日起步的持有期研究](reports/2026-11-08-entry-windows/README.md)已核算四组独立建仓的一年、两年到期盈亏与年化达标次数，可在[回测看板](site/backtest.html#entries)切换查看。
+
 [历史模型回测面板](site/backtest.html)支持四组股债组合近 1、2、3 年与六种境内策略完整区间。按历史快照独立起账，17,630 条收盘记录逐日对账。[回放命令与结果](reports/2026-11-08-model-backtest/README.md)。
 
 更新：2026-11-08，Asia/Shanghai。旧阶段原文见[历史计划记录](docs/history/PROJECT_PLAN-before-closure-20261106.md)；历史“下一步/最新”只代表当时状态。

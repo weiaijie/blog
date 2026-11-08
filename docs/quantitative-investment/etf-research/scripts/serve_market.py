@@ -22,6 +22,7 @@ ASSETS = {'/': ('market.html','text/html'), '/market.html': ('market.html','text
           '/vendor-charts/lightweight-charts-5.0.9.js': ('vendor-charts/lightweight-charts-5.0.9.js','text/javascript'),
           '/backtest.html': ('backtest.html','text/html'), '/backtest.css': ('backtest.css','text/css'),
           '/backtest.js': ('backtest.js','text/javascript'), '/backtest-data.json': ('backtest-data.json','application/json'),
+          '/entry-windows.json': ('entry-windows.json','application/json'),
           '/vendor-charts/LICENSE.txt': ('vendor-charts/LICENSE.txt','text/plain')}
 guard = Lock()
 
