@@ -1,0 +1,123 @@
+[
+  {
+    "name": "pcf_example",
+    "url": "https://www.bosera.com/fund/etfList.do?fundCode=513500&pcfType=0&queryDate=2025-02-28",
+    "requested_at_utc": "2026-11-08T06:02:05.226791+00:00",
+    "status": 200,
+    "effective_url": "https://www.bosera.com/fund/etfList.do?fundCode=513500&pcfType=0&queryDate=2025-02-28",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 144286,
+    "sha256": "56fb251052baba36f26d71aa146a10e8d37b564cad0a0bf5289c39ed06be67ca"
+  },
+  {
+    "name": "sse_pcf",
+    "url": "https://www.sse.com.cn/disclosure/fund/etflist/",
+    "requested_at_utc": "2026-11-08T06:02:05.227053+00:00",
+    "status": 200,
+    "effective_url": "https://www.sse.com.cn/disclosure/fund/etflist/",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 28409,
+    "sha256": "371c6e7d84edfcf26db4d2400d6401200c3cdce569696d90a80b909536b43f5c"
+  },
+  {
+    "name": "sse_snap",
+    "url": "https://yunhq.sse.com.cn:32042/v1/sh1/snap/513500?select=code,name,date,time,price,iopv&date=20250228",
+    "requested_at_utc": "2026-11-08T06:02:05.227321+00:00",
+    "status": 200,
+    "effective_url": "https://yunhq.sse.com.cn:32042/v1/sh1/snap/513500?select=code,name,date,time,price,iopv&date=20250228",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 105,
+    "sha256": "92d1e652b27dd9e1591bf4ee1b1e551f33d04bc83cf014b2c70028ae9ddbeb42"
+  },
+  {
+    "name": "sse_min",
+    "url": "https://yunhq.sse.com.cn:32042/v1/sh1/times/513500?date=20250228&select=time,price,iopv",
+    "requested_at_utc": "2026-11-08T06:02:05.227712+00:00",
+    "status": 503,
+    "effective_url": "https://yunhq.sse.com.cn:32042/v1/sh1/times/513500?date=20250228&select=time,price,iopv",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 537,
+    "sha256": "3c264d74770fd706d59c68d90ca1eb893ac379a666ff136f9acc66ca01daec02"
+  },
+  {
+    "name": "cme_spec",
+    "url": "https://www.cmegroup.com/markets/equities/sp/e-mini-sandp500.contractSpecs.html",
+    "requested_at_utc": "2026-11-08T06:02:05.228222+00:00",
+    "status": 0,
+    "effective_url": "https://www.cmegroup.com/markets/equities/sp/e-mini-sandp500.contractSpecs.html",
+    "exit_code": 28,
+    "error": "curl: (28) Connection timed out after 6002 milliseconds\n",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "cme_archive",
+    "url": "https://datamine.cmegroup.com/",
+    "requested_at_utc": "2026-11-08T06:02:05.332109+00:00",
+    "status": 0,
+    "effective_url": "https://datamine.cmegroup.com/",
+    "exit_code": 28,
+    "error": "curl: (28) Connection timed out after 6002 milliseconds\n",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "sp_hist",
+    "url": "https://www.barchart.com/futures/quotes/ESH25/historical-download",
+    "requested_at_utc": "2026-11-08T06:02:05.350442+00:00",
+    "status": 202,
+    "effective_url": "https://www.barchart.com/futures/quotes/ESH25/historical-download",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "vendor_iopv",
+    "url": "https://datacube.foundersc.com/document/2?doc_id=10471",
+    "requested_at_utc": "2026-11-08T06:02:05.352595+00:00",
+    "status": 200,
+    "effective_url": "https://datacube.foundersc.com/document/2?doc_id=10471",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 78477,
+    "sha256": "d7dff2403f2995a82690c57c9fe145019aca66088f34002872b0e4be7b8999ad"
+  },
+  {
+    "name": "yah_rolling",
+    "url": "https://query1.finance.yahoo.com/v8/finance/chart/ES%3DF?period1=1738368000&period2=1740787200&interval=1h&includePrePost=true",
+    "requested_at_utc": "2026-11-08T06:02:05.587311+00:00",
+    "status": 403,
+    "effective_url": "https://query1.finance.yahoo.com/v8/finance/chart/ES%3DF?period1=1738368000&period2=1740787200&interval=1h&includePrePost=true",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 3369,
+    "sha256": "b65a7e7bf75ac9e294b4876d46525966682c9ef5ab0f745ea654b4de340b857a"
+  },
+  {
+    "name": "yah_mar",
+    "url": "https://query1.finance.yahoo.com/v8/finance/chart/ESH25.CME?period1=1738368000&period2=1740787200&interval=1h&includePrePost=true",
+    "requested_at_utc": "2026-11-08T06:02:05.842688+00:00",
+    "status": 403,
+    "effective_url": "https://query1.finance.yahoo.com/v8/finance/chart/ESH25.CME?period1=1738368000&period2=1740787200&interval=1h&includePrePost=true",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 3369,
+    "sha256": "b65a7e7bf75ac9e294b4876d46525966682c9ef5ab0f745ea654b4de340b857a"
+  },
+  {
+    "name": "yah_jun",
+    "url": "https://query1.finance.yahoo.com/v8/finance/chart/ESM25.CME?period1=1738368000&period2=1740787200&interval=1h&includePrePost=true",
+    "requested_at_utc": "2026-11-08T06:02:05.954870+00:00",
+    "status": 403,
+    "effective_url": "https://query1.finance.yahoo.com/v8/finance/chart/ESM25.CME?period1=1738368000&period2=1740787200&interval=1h&includePrePost=true",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 3369,
+    "sha256": "b65a7e7bf75ac9e294b4876d46525966682c9ef5ab0f745ea654b4de340b857a"
+  }
+]

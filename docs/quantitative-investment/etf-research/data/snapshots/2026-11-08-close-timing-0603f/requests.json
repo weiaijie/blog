@@ -1,0 +1,91 @@
+[
+  {
+    "name": "hour_bridge",
+    "url": "https://query1.finance.yahoo.com/v8/finance/chart/ES%3DF?period1=1731369600&period2=1746057600&interval=1h&includePrePost=true",
+    "requested_at_utc": "2026-11-08T06:07:46.971009+00:00",
+    "status": 200,
+    "effective_url": "https://query1.finance.yahoo.com/v8/finance/chart/ES%3DF?period1=1731369600&period2=1746057600&interval=1h&includePrePost=true",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 194957,
+    "sha256": "94ac959eb2e5f9a51100311c7581a3edce05a8efc30077edfe720c3de61a1652"
+  },
+  {
+    "name": "hour_late25",
+    "url": "https://query1.finance.yahoo.com/v8/finance/chart/ES%3DF?period1=1746057600&period2=1767225600&interval=1h&includePrePost=true",
+    "requested_at_utc": "2026-11-08T06:07:46.972017+00:00",
+    "status": 200,
+    "effective_url": "https://query1.finance.yahoo.com/v8/finance/chart/ES%3DF?period1=1746057600&period2=1767225600&interval=1h&includePrePost=true",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 254525,
+    "sha256": "e4004903df91b17e8722197eaf8cc7241e1b0ce57be24ca44e45431e3e1aaf4e"
+  },
+  {
+    "name": "hour_26",
+    "url": "https://query1.finance.yahoo.com/v8/finance/chart/ES%3DF?period1=1767225600&period2=1793404800&interval=1h&includePrePost=true",
+    "requested_at_utc": "2026-11-08T06:07:46.972017+00:00",
+    "status": 200,
+    "effective_url": "https://query1.finance.yahoo.com/v8/finance/chart/ES%3DF?period1=1767225600&period2=1793404800&interval=1h&includePrePost=true",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 290195,
+    "sha256": "76702ea48b3cd7891a5ad2097d27a510b7df1cc6e85ab2f7d4c5e9ce30164b42"
+  },
+  {
+    "name": "hour_early",
+    "url": "https://query1.finance.yahoo.com/v8/finance/chart/ES%3DF?period1=1698624000&period2=1731369600&interval=1h&includePrePost=true",
+    "requested_at_utc": "2026-11-08T06:07:46.973018+00:00",
+    "status": 422,
+    "effective_url": "https://query1.finance.yahoo.com/v8/finance/chart/ES%3DF?period1=1698624000&period2=1731369600&interval=1h&includePrePost=true",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 206,
+    "sha256": "a4f67dd21d6db77280364dea913a2fc6abc79a6f4fb8fbd839b53981884211e9"
+  },
+  {
+    "name": "expiry_feb",
+    "url": "https://query1.finance.yahoo.com/v8/finance/chart/ESH25.CME?period1=1738368000&period2=1740787200&interval=1h",
+    "requested_at_utc": "2026-11-08T06:07:46.973018+00:00",
+    "status": 404,
+    "effective_url": "https://query1.finance.yahoo.com/v8/finance/chart/ESH25.CME?period1=1738368000&period2=1740787200&interval=1h",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 108,
+    "sha256": "f0b5f9feeac9f1fc93c31b1edc03fbc1fda4acb3ec5e233ebb39d6f8b66e1769"
+  },
+  {
+    "name": "nyse_2025",
+    "url": "https://ir.theice.com/press/news-details/2023/NYSE-Group-Announces-2024-2025-and-2026-Holiday-and-Early-Closings-Calendar/default.aspx",
+    "requested_at_utc": "2026-11-08T06:07:48.085821+00:00",
+    "status": 0,
+    "effective_url": "https://ir.theice.com/press/news-details/2023/NYSE-Group-Announces-2024-2025-and-2026-Holiday-and-Early-Closings-Calendar/default.aspx",
+    "exit_code": 35,
+    "error": "curl: (35) schannel: next InitializeSecurityContext failed: CRYPT_E_REVOCATION_OFFLINE (0x80092013) - ���ڵ������������ѻ������������޷���������\r\n",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "tv_time",
+    "url": "https://www.tradingview.com/pine-script-docs/concepts/time/",
+    "requested_at_utc": "2026-11-08T06:07:48.117234+00:00",
+    "status": 200,
+    "effective_url": "https://www.tradingview.com/pine-script-docs/concepts/time/",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 64902,
+    "sha256": "adceccd40da4654b3f32ff26530bf57aaf288f817ee41199aeab5dc657c25ec4"
+  },
+  {
+    "name": "cme_roll",
+    "url": "https://www.cmegroup.com/trading/equity-index/rolldates.html",
+    "requested_at_utc": "2026-11-08T06:07:48.585023+00:00",
+    "status": 403,
+    "effective_url": "https://www.cmegroup.com/trading/equity-index/rolldates.html",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 602,
+    "sha256": "eecde3fafbde4090c30e610a7ed4b8d877f8351c0490e4189574890e8a5a4f7e",
+    "body_withheld_reason": "Access-denial page contains request-specific network identifiers. Original length and SHA-256 retained."
+  }
+]

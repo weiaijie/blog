@@ -1,0 +1,20 @@
+[
+  {
+    "url": "https://raw.githubusercontent.com/kfccolonel1/BARS/b8f2d8ab36e44c289036ce093bf7c9f04073a7d9/raw/ES/3min/ES_3min_2024-01-01_2025-12-19_tradingview-chart.csv",
+    "requested_at_utc": "2026-11-08T06:14:39.841190+00:00",
+    "status": 200,
+    "source_blob": "a77b04622e75ea0e4f53508d531bf9052b59ce4a",
+    "bytes": 12797014,
+    "sha256": "185eb51857be44c8fe97cba471a98cf97c739d6321911bf181b32d3a569970b7",
+    "excerpt_minutes": 3
+  },
+  {
+    "url": "https://raw.githubusercontent.com/kfccolonel1/BARS/b8f2d8ab36e44c289036ce093bf7c9f04073a7d9/raw/ES/1min/ES_1min_2025-06-20_2026-10-09_alfordlabs-gh.csv.gz",
+    "requested_at_utc": "2026-11-08T06:14:41.322421+00:00",
+    "status": 200,
+    "source_blob": "665debfd7284ffc0f17fd80f8064df017dacb54c",
+    "bytes": 4675719,
+    "sha256": "2079039e0043401f2a4abb283ecb8ac1f1faf6c03c6aaf22a0b6f38d87d94279",
+    "excerpt_minutes": 1
+  }
+]

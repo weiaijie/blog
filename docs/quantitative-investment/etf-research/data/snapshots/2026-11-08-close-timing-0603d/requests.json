@@ -1,0 +1,46 @@
+[
+  {
+    "name": "bars_readme",
+    "url": "https://raw.githubusercontent.com/kfccolonel1/BARS/b8f2d8ab36e44c289036ce093bf7c9f04073a7d9/README.md",
+    "requested_at_utc": "2026-11-08T06:04:38.355679+00:00",
+    "status": 200,
+    "effective_url": "https://raw.githubusercontent.com/kfccolonel1/BARS/b8f2d8ab36e44c289036ce093bf7c9f04073a7d9/README.md",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 7007,
+    "sha256": "cc5e1f10a2020573da49f8846d978623a8ad6dfeb6f795c40b1f95d57c3a35a1"
+  },
+  {
+    "name": "dayk_control",
+    "url": "https://yunhq.sse.com.cn:32042/v1/sh1/dayk/513500?begin=0&end=-1&period=day&select=date,iopv,close,preCloseIopv,time",
+    "requested_at_utc": "2026-11-08T06:04:38.356028+00:00",
+    "status": 200,
+    "effective_url": "https://yunhq.sse.com.cn:32042/v1/sh1/dayk/513500?begin=0&end=-1&period=day&select=date,iopv,close,preCloseIopv,time",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 108981,
+    "sha256": "ed9f38535d6fe923fa9d638f95adc13f01bb789b2ab01469515784beeda8e7c9"
+  },
+  {
+    "name": "sse_info",
+    "url": "https://www.sseinfo.com/services/assortment/historical/",
+    "requested_at_utc": "2026-11-08T06:04:38.356311+00:00",
+    "status": 200,
+    "effective_url": "https://www.sseinfo.com/services/assortment/historical/",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 23029,
+    "sha256": "dbae0135ca890931f4161f0b9c239029096dddb55015738f0c988fd92005a85f"
+  },
+  {
+    "name": "sse_tech",
+    "url": "https://www.sse.com.cn/services/tradingtech/data/c/10781067/files/f5aa3dd0d64d412c9a858fd93664e9ea.pdf",
+    "requested_at_utc": "2026-11-08T06:04:38.356892+00:00",
+    "status": 404,
+    "effective_url": "https://www.sse.com.cn/services/tradingtech/data/c/10781067/files/f5aa3dd0d64d412c9a858fd93664e9ea.pdf",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 150,
+    "sha256": "d03c9c9c5fef19b7e84125dd79b77167d00e1df5f56da4818992e23e67360bbb"
+  }
+]

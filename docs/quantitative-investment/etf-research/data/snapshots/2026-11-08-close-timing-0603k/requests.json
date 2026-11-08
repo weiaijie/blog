@@ -1,0 +1,10 @@
+[
+  {
+    "name": "eid_nav",
+    "url": "http://eid.csrc.gov.cn/fund/disclose/getPublicFundJZInfoMore.do?aoData=%5B%7B%22name%22%3A%22sEcho%22%2C%22value%22%3A1%7D%2C%7B%22name%22%3A%22iDisplayStart%22%2C%22value%22%3A0%7D%2C%7B%22name%22%3A%22iDisplayLength%22%2C%22value%22%3A200%7D%2C%7B%22name%22%3A%22fundType%22%2C%22value%22%3A%22all%22%7D%2C%7B%22name%22%3A%22fundCompanyShortName%22%2C%22value%22%3A%22%22%7D%2C%7B%22name%22%3A%22fundCode%22%2C%22value%22%3A%22513500%22%7D%2C%7B%22name%22%3A%22fundName%22%2C%22value%22%3A%22%22%7D%2C%7B%22name%22%3A%22startDate%22%2C%22value%22%3A%222024-12-01%22%7D%2C%7B%22name%22%3A%22endDate%22%2C%22value%22%3A%222025-04-07%22%7D%5D",
+    "status": 200,
+    "requested_at_utc": "2026-11-08T06:15:25.652265+00:00",
+    "bytes": 132784,
+    "sha256": "1dd429a90d32f423ced6b66c069f949528284b0a2099f7a262da5b43ed70de91"
+  }
+]

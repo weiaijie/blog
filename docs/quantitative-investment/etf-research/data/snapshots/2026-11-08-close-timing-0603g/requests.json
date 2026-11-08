@@ -1,0 +1,47 @@
+[
+  {
+    "name": "us_schedule",
+    "url": "https://ir.theice.com/press/news-details/2023/NYSE-Group-Announces-2024-2025-and-2026-Holiday-and-Early-Closings-Calendar/default.aspx",
+    "requested_at_utc": "2026-11-08T06:08:54.366353+00:00",
+    "status": 403,
+    "effective_url": "https://ir.theice.com/press/news-details/2023/NYSE-Group-Announces-2024-2025-and-2026-Holiday-and-Early-Closings-Calendar/default.aspx",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 5963,
+    "sha256": "d2e0a51d0255d100b84a7e66540469ba342b9507cb6f7798d6ef40538897d040",
+    "body_withheld_reason": "Access-denial page contains request-specific network identifiers. Original length and SHA-256 retained."
+  },
+  {
+    "name": "nyse_calendar",
+    "url": "https://www.nyse.com/publicdocs/ICE_NYSE_2025_Yearly_Trading_Calendar.pdf",
+    "requested_at_utc": "2026-11-08T06:08:54.366606+00:00",
+    "status": 200,
+    "effective_url": "https://www.nyse.com/publicdocs/ICE_NYSE_2025_Yearly_Trading_Calendar.pdf",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 115262,
+    "sha256": "3e8b540ad74474bc12a0aba473dbca28f37e0a5c1795cf66701b9a506a34226e"
+  },
+  {
+    "name": "sse_hours",
+    "url": "https://english.sse.com.cn/start/trading/schedule/",
+    "requested_at_utc": "2026-11-08T06:08:54.367075+00:00",
+    "status": 200,
+    "effective_url": "https://english.sse.com.cn/start/trading/schedule/",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 73210,
+    "sha256": "04d2fd1faf8cc722b647201cafd8b7e891343f04e8f67a0dcd7ed18db6fb7ada"
+  },
+  {
+    "name": "nyse_hours",
+    "url": "https://www.nyse.com/markets/hours-calendars",
+    "requested_at_utc": "2026-11-08T06:08:54.367426+00:00",
+    "status": 200,
+    "effective_url": "https://www.nyse.com/trade/hours-calendars",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 125160,
+    "sha256": "d2a7bccb73687e31814ef3209fa1e51822b7022301571ff4c9936eade47dd910"
+  }
+]

@@ -1,0 +1,5964 @@
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html class="" lang="zh-CN">
+<head>
+
+
+
+
+
+
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width">
+<meta name="copyright" content="本页版权归中国博时基金所有。all rights reserved">
+<meta name="version" content="2017版">
+<meta name="author" content="BOSERA FUNDS">
+<meta name="apple-itunes-app" content="app-id=672198904">
+<link rel="shortcut icon" href="/static/images/favicon.ico">
+
+	
+	
+	
+	
+	
+	
+		<title>博时基金-申购赎回清单</title>
+		<meta name="keywords" content="申购赎回清单">
+		<meta name="description" content="申购赎回清单">
+	
+	
+	
+	
+	
+	
+	
+
+<script src="/static/js/rev-manifest-b0e63394e1.js" charset="utf-8"></script>
+<script src="/static/js/assetsLoader-4acf7e81fe.js" charset="utf-8"></script>
+
+
+<!--[if IE 8]>
+<script>
+  window.BROWSER_IE8 = true;
+</script>
+<![endif]-->
+<script>
+  var __devConfig = {
+    debug: true,
+    jsBase: 'http://localhost:9000',
+    cssBase: 'http://localhost:8899/css'
+  };
+  var __revConfig = {
+    jsBase: '/static/js',
+    cssBase: '/static/css'
+  };
+  assetsLoader.setDefault(__revConfig);
+  assetsLoader({
+    css: [
+      'icon.css',
+      'main.css',
+      'ui.css'
+    ],
+    js: [
+      'boot.js',
+      'vendor.js',
+      'commons.js',
+      'ui.js',
+      'validate.methods.js',
+      'plugin.js',
+      'init.js'
+    ]
+  });
+</script>
+<script>
+	assetsLoader({
+		css : [],
+		js : []
+	});
+</script>
+</head>
+<body>
+	
+
+	<div class="g-top">
+		<div class="container">
+			<div class="external-nav">
+				<a class="external-nav_link" href="http://capital.bosera.com/index.html" target="_blank"
+					rel="noopener">博时资本</a>
+				
+				<a class="external-nav_link" href="https://www.boserawealth.com/index" target="_blank"
+					rel="noopener">博时财富</a>
+				<a class="external-nav_link" href="/english/index.html" target="_blank">English</a>
+			</div>
+			<div class="assistant-nav">
+				<span id="userNotice" data-trade-host="https://trade.bosera.com/indi/api/www/" style="display: none">
+					欢迎回来，<span id="userName"></span>&nbsp;&nbsp;
+					<span class="assistant-nav_link assistant-nav_link--highlight" id="logoutBtn">安全退出</span>
+				</span>
+				<a class="assistant-nav_link" href="/column/index.do?classid=00020002001100001" target="_blank">帮助中心</a>
+				<a class="assistant-nav_link last" id="onlineService" href="/service/webchat/robot.jsp"
+					target="_blank">在线客服</a>
+			</div>
+		</div>
+	</div>
+
+<div class="g-header">
+	<div class="container">
+		<h1 class="logo-wrap">
+		  <a class="logo" href="/index.html" title="博时基金">博时基金</a>
+		  
+		</h1>
+    <div class="nav-wrap" style="width: 930px;">
+      <ul class="nav" id="topNav" data-focus-id="fund">
+        <li><a class="nav_link" id="indexMenu" href="/index.html">首页</a></li
+          ><li><a class="nav_link" id="fundMenu" href="/fund/index.html">基金产品</a></li
+          ><li><a class="nav_link" href="https://trade.bosera.com/indi/pension/index" target="_blank" rel="noopener">养老专区</a></li
+          >
+          <!-- <li><a class="nav_link" href="https://trade.bosera.com/indi/specialfund/index" target="_blank" rel="noopener">高端理财</a></li> -->
+          <li><a class="nav_link" href="https://trade.bosera.com/indi/fundportfolio/propaganda" target="_blank" rel="noopener">博乐智投</a></li
+          ><li class="dropdown-nav J_dropdownNav">
+            <span class="nav_link J_rootNav">&nbsp;企业理财&nbsp;</span>
+          <ul class="sub-nav">
+            <li><a class="sub-nav_link" href="https://trade.bosera.com/corp/asset/share/list" target="_blank">企业法人</a></li>
+            <li><a class="sub-nav_link last-child" href="https://trade.bosera.com/pro/asset/share/list" target="_blank">专业投资者</a></li>
+          </ul>
+        </li
+        ><li class="dropdown-nav J_dropdownNav">
+          <span class="nav_link J_rootNav">专户与养老金</span>
+          <ul class="sub-nav">
+            <li><a class="sub-nav_link" id="netAccountMenu" href="/column/index.do?classid=00020002000700010004">专户理财</a></li>
+            <li><a class="sub-nav_link last-child" id="pensionFundMenu" href="/column/index.do?classid=00020002000600090001">养老基金</a></li>
+          </ul>
+        </li
+        ><li><a class="nav_link" id="aboutMenu" href="/column/index.do?classid=00020002000200010001" >关于博时</a></li>
+      </ul>
+      <div class="account-nav" id="accountNav" style="display: none">
+        <a class="btn-primary btn--middle" href="https://trade.bosera.com/indi/api/www/myaccturl.do">我的账户</a>
+      </div>
+      <div class="header-action" id="headerAction" style="display: none">
+        <a class="btn-primary btn--middle" href="https://trade.bosera.com/indi/login" target="_blank">登录</a>
+        <a class="btn-default btn--middle" href="https://trade.bosera.com/indi/openacct/mobilenoform" target="_blank">注册</a>
+      </div>
+    </div>
+    <!-- .nav-wrap -->
+  </div>
+  <!-- .container -->
+</div>
+<!-- .g-header -->
+	<div class="main" id="main">
+		<div class="container">
+			
+
+
+
+
+
+
+
+
+<h2 class="h2">
+	<span class="h2-title">申购／赎回清单&nbsp;
+	  
+	  
+	  
+	</span>
+	<span class="h2-toolbox">
+	  <form action="/fund/etfList.do" method="get" novalidate>
+	  <input type="hidden" name="fundCode" value="513500">
+	  <input type="hidden" name="pcfType" value="0">
+	   <label class="form-label">
+	     <input 
+	       class="form-text form-text--small J_date" 
+	       type="text" 
+	       name="queryDate" 
+	       value="2026-08-27" 
+	       readonly style="width: 70px;">
+	   </label>
+	   <label class="form-label" style="margin-right: 0;">
+	     <button class="btn-primary btn--small" type="submit">查 询</button>
+	     
+	       <a class="btn-default btn--small" href="/jjcp/etf/files/513500/2026/ssepcf_513500_20260827.xml" target="_blank">文件下载</a>
+	     
+	   </label>
+	  </form>
+	</span>
+</h2>
+
+
+  <div class="panel">
+		<p>
+		  <b>基本信息</b>
+		</p>
+		<table class="table-default table--border">
+		  <tbody class="tbody-default tbody--left">
+		    <tr>
+		      <th style="width:380px;">最新公告日期</th>
+		      <td>2026年08月27日</td>
+		    </tr>
+		    <tr>
+		      <th>基金名称</th>
+		      <td>标普500</td>
+		    </tr>
+		    <tr>
+		      <th>基金管理公司名称</th>
+		      <td>博时基金管理有限公司</td>
+		    </tr>
+		      <tr>
+		        <th>基金代码</th>
+		        <td>513500</td>
+		      </tr>
+		  </tbody>
+		</table>
+	  <p>
+	    <b>2026年08月25日 信息内容</b>
+	  </p>
+		<table class="table-default table--border">
+		    <tbody class="tbody-default tbody--left">
+			    <tr>
+			      <th style="width:380px;">现金差额(单位：元)</th>
+			      <td>￥26,199.81</td>
+			    </tr>
+			    <tr>
+			      <th style="width:380px;">最小申购、赎回单位资产净值(单位：元)</th>
+			      <td>￥2,463,248.10</td>
+			    </tr>
+			    <tr>
+			      <th>基金份额净值(单位：元)</th>
+			      <td>￥2.4632</td>
+			    </tr>
+			  </tbody>
+		</table>
+		<p>
+		  <b>2026年08月27日 信息内容</b>
+		</p>
+	   <table class="table-default table--border">
+	     <tbody class="tbody-default tbody--left">
+		    <tr>
+		      <th style="width:380px;">预估现金部分(单位：元)</th>
+		      <td>￥26,212.98</td>
+		    </tr>
+		    <tr>
+		      <th>现金替代比例上限</th>
+		      <td>100.0%</td>
+		    </tr>
+		    <tr>
+		      <th>是否需要公布IOPV</th>
+		      <td>是</td>
+		    </tr>
+		    <tr>
+		      <th>最小申购、赎回单位(单位：份)</th>
+		      <td>1,000,000</td>
+		    </tr>
+		    <tr>
+		      <th>申赎模式</th>
+		      <td>现金申赎</td>
+		    </tr>
+		    <tr>
+		      <th>是否允许申购</th>
+		      <td>是</td>
+		    </tr>
+		    <tr>
+		      <th>是否允许赎回</th>
+		      <td>是</td>
+		    </tr>
+		    <tr>
+		      <th>单个账户净申购总额限制(单位：份)</th>
+		      <td>不限</td>
+		    </tr>
+		    <tr>
+		      <th>单个账户净赎回总额限制(单位：份)</th>
+		      <td>不限</td>
+		    </tr>
+		    <tr>
+		      <th>当日净申购基金份额上限(单位：份)</th>
+		      <td>不限</td>
+		    </tr>
+		    <tr>
+		      <th>当日净赎回基金份额上限(单位：份)</th>
+		      <td>不限</td>
+		    </tr>
+		    <tr>
+		      <th>单个账户累计申购总额限制(单位：份)</th>
+		      <td>1,000,000.00</td>
+		    </tr>
+		    <tr>
+		      <th>单个账户累计赎回总额限制(单位：份)</th>
+		      <td>不限</td>
+		    </tr>
+		    <tr>
+		      <th>当日累计申购份额上限(单位：份)</th>
+		      <td>1,000,000.00</td>
+		    </tr>
+		    <tr>
+		      <th>当日累计赎回份额上限(单位：份)</th>
+		      <td>800,000,000.00</td>
+		    </tr>
+		  </tbody>
+		</table>
+		<p>
+	        <b>成分券信息内容</b>
+		</p>
+	  <table class="table-default table--border">
+	    <thead class="thead-default">
+	    <tr>
+	      <td>证券代码</td>
+	      <td>证券简称</td>
+	      <td>证券数量</td>
+	      <td>现金替代标志</td>
+          <td>申购现金替代溢价比例</td>
+          <td>赎回现金替代折价比例</td>
+	      <td>固定替代金额</td>
+	      <td>挂牌市场</td>
+	    </tr>
+	   </thead>
+	   <tbody class="tbody-default">
+	      
+	        
+	          <tr>
+	            <td>A</td>
+	            <td>A</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,100.290</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>AAPL</td>
+	            <td>AAPL</td>
+	            <td>81</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>170,321.410</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ABBV</td>
+	            <td>ABBV</td>
+	            <td>10</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>18,034.380</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ABNB</td>
+	            <td>ABNB</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,585.160</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ABT</td>
+	            <td>ABT</td>
+	            <td>10</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>7,879.650</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ACGL</td>
+	            <td>ACGL</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,364.640</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ACN</td>
+	            <td>ACN</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>3,805.070</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ADBE</td>
+	            <td>ADBE</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>3,717.200</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ADI</td>
+	            <td>ADI</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>7,606.070</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ADM</td>
+	            <td>ADM</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,611.350</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ADP</td>
+	            <td>ADP</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>3,837.440</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ADSK</td>
+	            <td>ADSK</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,704.510</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>AEE</td>
+	            <td>AEE</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,449.730</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>AEP</td>
+	            <td>AEP</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,499.060</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>AES</td>
+	            <td>AES</td>
+	            <td>4</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>399.780</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>AFL</td>
+	            <td>AFL</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,364.910</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>AIG</td>
+	            <td>AIG</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,554.760</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>AIZ</td>
+	            <td>AIZ</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>AJG</td>
+	            <td>AJG</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,821.890</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>AKAM</td>
+	            <td>AKAM</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>717.470</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ALB</td>
+	            <td>ALB</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>903.650</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ALGN</td>
+	            <td>ALGN</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ALL</td>
+	            <td>ALL</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,748.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ALLE</td>
+	            <td>ALLE</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>AMAT</td>
+	            <td>AMAT</td>
+	            <td>4</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>13,028.670</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>AMCR</td>
+	            <td>AMCR</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>962.210</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>AMD</td>
+	            <td>AMD</td>
+	            <td>9</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>29,261.990</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>AME</td>
+	            <td>AME</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,640.460</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>AMGN</td>
+	            <td>AMGN</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>9,002.060</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>AMP</td>
+	            <td>AMP</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>AMT</td>
+	            <td>AMT</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>3,634.900</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>AMZN</td>
+	            <td>AMZN</td>
+	            <td>54</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>95,652.590</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ANET</td>
+	            <td>ANET</td>
+	            <td>6</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>7,773.400</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>AON</td>
+	            <td>AON</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,407.590</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>AOS</td>
+	            <td>AOS</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>421.700</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>APA</td>
+	            <td>APA</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>561.140</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>APD</td>
+	            <td>APD</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,061.680</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>APH</td>
+	            <td>APH</td>
+	            <td>7</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>7,541.480</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>APO</td>
+	            <td>APO</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,710.960</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>APP</td>
+	            <td>APP</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,107.080</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>APTV</td>
+	            <td>APTV</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>316.390</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ARE</td>
+	            <td>ARE</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>358.940</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ARES</td>
+	            <td>ARES</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>968.660</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ATO</td>
+	            <td>ATO</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,136.930</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>AVGO</td>
+	            <td>AVGO</td>
+	            <td>26</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>62,934.360</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>AVY</td>
+	            <td>AVY</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>AWK</td>
+	            <td>AWK</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>933.640</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>AXON</td>
+	            <td>AXON</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>AXP</td>
+	            <td>AXP</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>6,838.460</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>AZO</td>
+	            <td>AZO</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>BA</td>
+	            <td>BA</td>
+	            <td>4</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>5,728.880</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>BAC</td>
+	            <td>BAC</td>
+	            <td>36</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>15,249.600</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>BALL</td>
+	            <td>BALL</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>434.800</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>BAX</td>
+	            <td>BAX</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>535.150</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>BBY</td>
+	            <td>BBY</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>578.710</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>BDX</td>
+	            <td>BDX</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,575.390</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>BEN</td>
+	            <td>BEN</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>475.370</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>BF/B</td>
+	            <td>BF/B</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>191.210</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>BG</td>
+	            <td>BG</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>757.970</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>BIIB</td>
+	            <td>BIIB</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,497.970</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>BKNG</td>
+	            <td>BKNG</td>
+	            <td>4</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>5,802.160</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>BKR</td>
+	            <td>BKR</td>
+	            <td>5</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,097.310</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>BLDR</td>
+	            <td>BLDR</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>470.620</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>BLK</td>
+	            <td>BLK</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>7,983.740</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>BMY</td>
+	            <td>BMY</td>
+	            <td>11</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>5,069.360</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>BNY</td>
+	            <td>BNY</td>
+	            <td>4</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>4,441.590</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>BR</td>
+	            <td>BR</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,254.040</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>BRK/B</td>
+	            <td>BRK/B</td>
+	            <td>10</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>34,219.120</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>BRO</td>
+	            <td>BRO</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>995.250</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>BSX</td>
+	            <td>BSX</td>
+	            <td>8</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,706.480</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>BX</td>
+	            <td>BX</td>
+	            <td>4</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>3,892.260</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>BXP</td>
+	            <td>BXP</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>489.420</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>C</td>
+	            <td>C</td>
+	            <td>9</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>8,137.150</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CAH</td>
+	            <td>CAH</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,614.330</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CARR</td>
+	            <td>CARR</td>
+	            <td>4</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,588.280</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CASY</td>
+	            <td>CASY</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CAT</td>
+	            <td>CAT</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>16,514.290</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CB</td>
+	            <td>CB</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>4,656.140</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CBOE</td>
+	            <td>CBOE</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,095.410</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CBRE</td>
+	            <td>CBRE</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,059.170</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CCI</td>
+	            <td>CCI</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,035.290</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CCL</td>
+	            <td>CCL</td>
+	            <td>7</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,241.560</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CDNS</td>
+	            <td>CDNS</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>4,504.020</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CDW</td>
+	            <td>CDW</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>964.110</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CEG</td>
+	            <td>CEG</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>3,778.270</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CF</td>
+	            <td>CF</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>863.480</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CFG</td>
+	            <td>CFG</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>947.620</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CHD</td>
+	            <td>CHD</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>695.890</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CHRW</td>
+	            <td>CHRW</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>974.760</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CHTR</td>
+	            <td>CHTR</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,052.660</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CI</td>
+	            <td>CI</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,895.240</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CIEN</td>
+	            <td>CIEN</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,630.350</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CINF</td>
+	            <td>CINF</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,163.120</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CL</td>
+	            <td>CL</td>
+	            <td>4</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,478.770</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CLX</td>
+	            <td>CLX</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>711.970</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CMCSA</td>
+	            <td>CMCSA</td>
+	            <td>20</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>3,677.580</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CME</td>
+	            <td>CME</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>3,763.340</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CMG</td>
+	            <td>CMG</td>
+	            <td>7</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,777.790</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CMI</td>
+	            <td>CMI</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>3,885.680</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CMS</td>
+	            <td>CMS</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>932.830</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CNC</td>
+	            <td>CNC</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,323.110</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CNP</td>
+	            <td>CNP</td>
+	            <td>4</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,056.590</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>COF</td>
+	            <td>COF</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>4,401.690</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>COHR</td>
+	            <td>COHR</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,955.090</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>COIN</td>
+	            <td>COIN</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,269.920</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>COO</td>
+	            <td>COO</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>495.590</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>COP</td>
+	            <td>COP</td>
+	            <td>7</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>6,261.930</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>COR</td>
+	            <td>COR</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,225.950</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>COST</td>
+	            <td>COST</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>13,027.720</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CPAY</td>
+	            <td>CPAY</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CPRT</td>
+	            <td>CPRT</td>
+	            <td>5</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,130.750</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CPT</td>
+	            <td>CPT</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>734.700</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CRH</td>
+	            <td>CRH</td>
+	            <td>4</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,610.940</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CRL</td>
+	            <td>CRL</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CRM</td>
+	            <td>CRM</td>
+	            <td>4</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>5,582.590</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CRWD</td>
+	            <td>CRWD</td>
+	            <td>6</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>7,547.040</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CSCO</td>
+	            <td>CSCO</td>
+	            <td>22</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>16,585.880</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CSGP</td>
+	            <td>CSGP</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>445.240</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CSX</td>
+	            <td>CSX</td>
+	            <td>10</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>3,495.060</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CTAS</td>
+	            <td>CTAS</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,778.680</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CTSH</td>
+	            <td>CTSH</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,283.620</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CTVA</td>
+	            <td>CTVA</td>
+	            <td>4</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,254.040</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CVNA</td>
+	            <td>CVNA</td>
+	            <td>4</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,056.460</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CVS</td>
+	            <td>CVS</td>
+	            <td>7</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>4,412.420</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>CVX</td>
+	            <td>CVX</td>
+	            <td>10</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>13,562.940</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>D</td>
+	            <td>D</td>
+	            <td>5</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,270.670</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>DAL</td>
+	            <td>DAL</td>
+	            <td>4</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,269.510</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>DASH</td>
+	            <td>DASH</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>3,168.690</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>DD</td>
+	            <td>DD</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>923.060</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>DDOG</td>
+	            <td>DDOG</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>3,026.060</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>DE</td>
+	            <td>DE</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>4,279.150</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>DECK</td>
+	            <td>DECK</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>602.120</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>DELL</td>
+	            <td>DELL</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>6,127.040</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>DG</td>
+	            <td>DG</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>831.730</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>DGX</td>
+	            <td>DGX</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,659.050</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>DHI</td>
+	            <td>DHI</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,023.210</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>DHR</td>
+	            <td>DHR</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>4,396.200</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>DIS</td>
+	            <td>DIS</td>
+	            <td>10</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>7,548.540</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>DLR</td>
+	            <td>DLR</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,609.860</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>DLTR</td>
+	            <td>DLTR</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>912.470</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>DOC</td>
+	            <td>DOC</td>
+	            <td>4</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>587.870</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>DOV</td>
+	            <td>DOV</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,371.020</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>DOW</td>
+	            <td>DOW</td>
+	            <td>4</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>818.570</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>DPZ</td>
+	            <td>DPZ</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>DRI</td>
+	            <td>DRI</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,495.530</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>DTE</td>
+	            <td>DTE</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>923.740</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>DUK</td>
+	            <td>DUK</td>
+	            <td>4</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>3,300.050</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>DVA</td>
+	            <td>DVA</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>DVN</td>
+	            <td>DVN</td>
+	            <td>6</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,909.760</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>DXCM</td>
+	            <td>DXCM</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,209.940</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>EBAY</td>
+	            <td>EBAY</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,438.460</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ECHO</td>
+	            <td>ECHO</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>587.060</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ECL</td>
+	            <td>ECL</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,964.590</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ED</td>
+	            <td>ED</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,453.250</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>EFX</td>
+	            <td>EFX</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,302.010</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>EG</td>
+	            <td>EG</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>EIX</td>
+	            <td>EIX</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,014.790</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>EL</td>
+	            <td>EL</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>711.430</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ELV</td>
+	            <td>ELV</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,706.410</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>EME</td>
+	            <td>EME</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>EMR</td>
+	            <td>EMR</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>3,154.300</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>EOG</td>
+	            <td>EOG</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,988.810</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>EQIX</td>
+	            <td>EQIX</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>7,283.510</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>EQT</td>
+	            <td>EQT</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,099.200</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ERIE</td>
+	            <td>ERIE</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ES</td>
+	            <td>ES</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>963.910</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ESS</td>
+	            <td>ESS</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ETN</td>
+	            <td>ETN</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>5,553.010</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ETR</td>
+	            <td>ETR</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,162.580</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>EVRG</td>
+	            <td>EVRG</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>552.380</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>EW</td>
+	            <td>EW</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,849.710</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>EXC</td>
+	            <td>EXC</td>
+	            <td>6</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,803.910</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>EXE</td>
+	            <td>EXE</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>642.290</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>EXPD</td>
+	            <td>EXPD</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,282.740</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>EXPE</td>
+	            <td>EXPE</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,293.190</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>EXR</td>
+	            <td>EXR</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>982.970</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>F</td>
+	            <td>F</td>
+	            <td>22</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,082.380</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>FANG</td>
+	            <td>FANG</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,356.290</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>FAST</td>
+	            <td>FAST</td>
+	            <td>6</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,048.180</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>FCX</td>
+	            <td>FCX</td>
+	            <td>8</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>4,337.640</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>FDS</td>
+	            <td>FDS</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>FDX</td>
+	            <td>FDX</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,264.290</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>FDXF</td>
+	            <td>FDXF</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>873.590</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>FE</td>
+	            <td>FE</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>948.980</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>FERG</td>
+	            <td>FERG</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,578.710</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>FFIV</td>
+	            <td>FFIV</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>FICO</td>
+	            <td>FICO</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>FIS</td>
+	            <td>FIS</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>823.790</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>FISV</td>
+	            <td>FISV</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,067.450</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>FITB</td>
+	            <td>FITB</td>
+	            <td>5</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,862.200</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>FIX</td>
+	            <td>FIX</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>FLEX</td>
+	            <td>FLEX</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,482.570</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>FOX</td>
+	            <td>FOX</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>425.360</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>FOXA</td>
+	            <td>FOXA</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>477.200</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>FRT</td>
+	            <td>FRT</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>FSLR</td>
+	            <td>FSLR</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,403.320</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>FTNT</td>
+	            <td>FTNT</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>3,127.840</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>FTV</td>
+	            <td>FTV</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>807.440</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>GD</td>
+	            <td>GD</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,555.170</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>GDDY</td>
+	            <td>GDDY</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>677.100</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>GE</td>
+	            <td>GE</td>
+	            <td>6</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>14,230.190</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>GEHC</td>
+	            <td>GEHC</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,504.480</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>GEN</td>
+	            <td>GEN</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>596.620</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>GEV</td>
+	            <td>GEV</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>6,288.050</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>GILD</td>
+	            <td>GILD</td>
+	            <td>7</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>7,066.040</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>GIS</td>
+	            <td>GIS</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>809.750</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>GL</td>
+	            <td>GL</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>GLW</td>
+	            <td>GLW</td>
+	            <td>4</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>3,994.040</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>GM</td>
+	            <td>GM</td>
+	            <td>5</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,911.190</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>GNRC</td>
+	            <td>GNRC</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>GOOG</td>
+	            <td>GOOG</td>
+	            <td>26</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>60,570.390</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>GOOGL</td>
+	            <td>GOOGL</td>
+	            <td>32</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>75,334.180</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>GPC</td>
+	            <td>GPC</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>936.020</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>GPN</td>
+	            <td>GPN</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>636.590</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>GRMN</td>
+	            <td>GRMN</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,957.190</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>GS</td>
+	            <td>GS</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>14,369.430</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>GWW</td>
+	            <td>GWW</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>HAL</td>
+	            <td>HAL</td>
+	            <td>5</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,146.700</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>HAS</td>
+	            <td>HAS</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>656.400</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>HBAN</td>
+	            <td>HBAN</td>
+	            <td>11</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,265.100</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>HCA</td>
+	            <td>HCA</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,909.220</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>HD</td>
+	            <td>HD</td>
+	            <td>5</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>11,462.920</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>HIG</td>
+	            <td>HIG</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,875.700</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>HII</td>
+	            <td>HII</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>HLT</td>
+	            <td>HLT</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,234.430</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>HON</td>
+	            <td>HON</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,926.860</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>HONA</td>
+	            <td>HONA</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,176.150</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>HOOD</td>
+	            <td>HOOD</td>
+	            <td>4</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>3,042.210</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>HPE</td>
+	            <td>HPE</td>
+	            <td>7</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,538.210</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>HPQ</td>
+	            <td>HPQ</td>
+	            <td>5</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,001.500</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>HRL</td>
+	            <td>HRL</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>322.700</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>HSIC</td>
+	            <td>HSIC</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>608.290</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>HST</td>
+	            <td>HST</td>
+	            <td>4</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>624.240</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>HSY</td>
+	            <td>HSY</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,270.050</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>HUBB</td>
+	            <td>HUBB</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>HUM</td>
+	            <td>HUM</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,644.260</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>HWM</td>
+	            <td>HWM</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>3,583.130</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>IBKR</td>
+	            <td>IBKR</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,332.480</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>IBM</td>
+	            <td>IBM</td>
+	            <td>5</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>7,945.130</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ICE</td>
+	            <td>ICE</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>3,293.130</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>IDXX</td>
+	            <td>IDXX</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>IEX</td>
+	            <td>IEX</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>IFF</td>
+	            <td>IFF</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>591.400</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>INCY</td>
+	            <td>INCY</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>880.180</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>INTC</td>
+	            <td>INTC</td>
+	            <td>27</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>16,026.370</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>INTU</td>
+	            <td>INTU</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>4,850.880</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>INVH</td>
+	            <td>INVH</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>614.940</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>IP</td>
+	            <td>IP</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>834.380</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>IQV</td>
+	            <td>IQV</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,760.220</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>IR</td>
+	            <td>IR</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,066.230</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>IRM</td>
+	            <td>IRM</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,640.660</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ISRG</td>
+	            <td>ISRG</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>5,046.020</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>IT</td>
+	            <td>IT</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ITW</td>
+	            <td>ITW</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,911.050</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>IVZ</td>
+	            <td>IVZ</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>444.020</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>J</td>
+	            <td>J</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,023.680</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>JBHT</td>
+	            <td>JBHT</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>JBL</td>
+	            <td>JBL</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,094.460</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>JCI</td>
+	            <td>JCI</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,886.830</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>JKHY</td>
+	            <td>JKHY</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>JNJ</td>
+	            <td>JNJ</td>
+	            <td>13</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>24,093.020</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>JPM</td>
+	            <td>JPM</td>
+	            <td>15</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>36,303.190</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>KDP</td>
+	            <td>KDP</td>
+	            <td>7</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,512.290</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>KEY</td>
+	            <td>KEY</td>
+	            <td>5</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>742.640</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>KEYS</td>
+	            <td>KEYS</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,172.080</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>KHC</td>
+	            <td>KHC</td>
+	            <td>5</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>859.010</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>KIM</td>
+	            <td>KIM</td>
+	            <td>4</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>653.010</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>KKR</td>
+	            <td>KKR</td>
+	            <td>4</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,919.810</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>KLAC</td>
+	            <td>KLAC</td>
+	            <td>7</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>8,707.990</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>KMB</td>
+	            <td>KMB</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,506.590</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>KMI</td>
+	            <td>KMI</td>
+	            <td>11</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,309.270</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>KO</td>
+	            <td>KO</td>
+	            <td>21</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>13,057.710</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>KR</td>
+	            <td>KR</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,189.780</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>KVUE</td>
+	            <td>KVUE</td>
+	            <td>11</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,442.740</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>L</td>
+	            <td>L</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>751.870</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>LDOS</td>
+	            <td>LDOS</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>912.880</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>LEN</td>
+	            <td>LEN</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>594.930</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>LH</td>
+	            <td>LH</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>LHX</td>
+	            <td>LHX</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,778.880</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>LII</td>
+	            <td>LII</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>LIN</td>
+	            <td>LIN</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>9,917.250</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>LITE</td>
+	            <td>LITE</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>LLY</td>
+	            <td>LLY</td>
+	            <td>4</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>33,482.520</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>LMT</td>
+	            <td>LMT</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>3,776.100</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>LNT</td>
+	            <td>LNT</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>463.700</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>LOW</td>
+	            <td>LOW</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>4,368.310</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>LRCX</td>
+	            <td>LRCX</td>
+	            <td>7</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>14,945.220</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>LULU</td>
+	            <td>LULU</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>802.890</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>LUV</td>
+	            <td>LUV</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>830.920</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>LVS</td>
+	            <td>LVS</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>641.470</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>LYB</td>
+	            <td>LYB</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>424.410</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>LYV</td>
+	            <td>LYV</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,267.270</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>MA</td>
+	            <td>MA</td>
+	            <td>4</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>16,267.380</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>MAA</td>
+	            <td>MAA</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>895.510</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>MAR</td>
+	            <td>MAR</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,427.540</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>MAS</td>
+	            <td>MAS</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>494.780</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>MCD</td>
+	            <td>MCD</td>
+	            <td>4</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>7,276.450</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>MCHP</td>
+	            <td>MCHP</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,496.140</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>MCK</td>
+	            <td>MCK</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>6,141.220</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>MCO</td>
+	            <td>MCO</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>3,481.550</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>MDLZ</td>
+	            <td>MDLZ</td>
+	            <td>7</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,991.800</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>MDT</td>
+	            <td>MDT</td>
+	            <td>7</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>4,328.820</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>MET</td>
+	            <td>MET</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,951.490</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>META</td>
+	            <td>META</td>
+	            <td>12</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>46,414.840</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>MGM</td>
+	            <td>MGM</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>294.070</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>MKC</td>
+	            <td>MKC</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>369.660</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>MLM</td>
+	            <td>MLM</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>MMM</td>
+	            <td>MMM</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>3,651.180</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>MNST</td>
+	            <td>MNST</td>
+	            <td>8</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,645.140</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>MO</td>
+	            <td>MO</td>
+	            <td>9</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>4,156.820</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>MOS</td>
+	            <td>MOS</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>329.350</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>MPC</td>
+	            <td>MPC</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>4,815.860</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>MPWR</td>
+	            <td>MPWR</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>MRK</td>
+	            <td>MRK</td>
+	            <td>14</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>14,861.620</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>MRNA</td>
+	            <td>MRNA</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,155.390</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>MRSH</td>
+	            <td>MRSH</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>3,936.770</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>MRVL</td>
+	            <td>MRVL</td>
+	            <td>5</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>8,155.130</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>MS</td>
+	            <td>MS</td>
+	            <td>7</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>10,295.790</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>MSCI</td>
+	            <td>MSCI</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>MSFT</td>
+	            <td>MSFT</td>
+	            <td>41</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>136,790.380</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>MSI</td>
+	            <td>MSI</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>3,293.470</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>MTB</td>
+	            <td>MTB</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,631.230</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>MTD</td>
+	            <td>MTD</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>MU</td>
+	            <td>MU</td>
+	            <td>6</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>37,982.330</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>NCLH</td>
+	            <td>NCLH</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>351.340</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>NDAQ</td>
+	            <td>NDAQ</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,339.810</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>NDSN</td>
+	            <td>NDSN</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>NEE</td>
+	            <td>NEE</td>
+	            <td>11</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>6,285.940</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>NEM</td>
+	            <td>NEM</td>
+	            <td>6</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>5,501.710</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>NFLX</td>
+	            <td>NFLX</td>
+	            <td>23</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>12,832.780</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>NI</td>
+	            <td>NI</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>827.460</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>NKE</td>
+	            <td>NKE</td>
+	            <td>7</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,875.160</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>NOC</td>
+	            <td>NOC</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>3,681.110</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>NOW</td>
+	            <td>NOW</td>
+	            <td>6</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>5,170.320</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>NRG</td>
+	            <td>NRG</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>770.870</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>NSC</td>
+	            <td>NSC</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,383.230</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>NTAP</td>
+	            <td>NTAP</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,271.750</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>NTRS</td>
+	            <td>NTRS</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,267.610</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>NUE</td>
+	            <td>NUE</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,679.680</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>NVDA</td>
+	            <td>NVDA</td>
+	            <td>133</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>192,263.050</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>NVR</td>
+	            <td>NVR</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>NWS</td>
+	            <td>NWS</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>238.500</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>NWSA</td>
+	            <td>NWSA</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>419.600</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>NXPI</td>
+	            <td>NXPI</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,524.970</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>O</td>
+	            <td>O</td>
+	            <td>5</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,131.570</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ODFL</td>
+	            <td>ODFL</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,345.780</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>OKE</td>
+	            <td>OKE</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,866.610</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>OMC</td>
+	            <td>OMC</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,196.910</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ON</td>
+	            <td>ON</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>983.990</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ORCL</td>
+	            <td>ORCL</td>
+	            <td>9</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>8,840.030</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ORLY</td>
+	            <td>ORLY</td>
+	            <td>5</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>3,064.200</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>OTIS</td>
+	            <td>OTIS</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>969.740</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>OXY</td>
+	            <td>OXY</td>
+	            <td>4</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,585.290</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>PANW</td>
+	            <td>PANW</td>
+	            <td>4</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>9,225.160</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>PAYX</td>
+	            <td>PAYX</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,696.160</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>PCAR</td>
+	            <td>PCAR</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,630.350</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>PCG</td>
+	            <td>PCG</td>
+	            <td>12</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,494.920</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>PEG</td>
+	            <td>PEG</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,491.660</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>PEP</td>
+	            <td>PEP</td>
+	            <td>8</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>7,722.640</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>PFE</td>
+	            <td>PFE</td>
+	            <td>31</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>6,009.450</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>PFG</td>
+	            <td>PFG</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>757.160</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>PG</td>
+	            <td>PG</td>
+	            <td>13</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>12,825.390</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>PGR</td>
+	            <td>PGR</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>4,520.780</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>PH</td>
+	            <td>PH</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>6,895.870</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>PHM</td>
+	            <td>PHM</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>887.910</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>PKG</td>
+	            <td>PKG</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>PLD</td>
+	            <td>PLD</td>
+	            <td>5</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>4,862.610</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>PLTR</td>
+	            <td>PLTR</td>
+	            <td>13</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>15,236.100</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>PM</td>
+	            <td>PM</td>
+	            <td>9</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>11,842.070</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>PNC</td>
+	            <td>PNC</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>3,312.670</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>PNR</td>
+	            <td>PNR</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>423.800</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>PNW</td>
+	            <td>PNW</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>662.710</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>PODD</td>
+	            <td>PODD</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>PPG</td>
+	            <td>PPG</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>771.140</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>PPL</td>
+	            <td>PPL</td>
+	            <td>4</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>949.660</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>PRU</td>
+	            <td>PRU</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,630.480</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>PSA</td>
+	            <td>PSA</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,189.380</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>PSKY</td>
+	            <td>PSKY</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>144.800</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>PSX</td>
+	            <td>PSX</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>3,214.830</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>PTC</td>
+	            <td>PTC</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,025.520</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>PWR</td>
+	            <td>PWR</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>4,096.770</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>PYPL</td>
+	            <td>PYPL</td>
+	            <td>5</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,112.570</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>Q</td>
+	            <td>Q</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>859.140</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>QCOM</td>
+	            <td>QCOM</td>
+	            <td>6</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>6,536.590</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>RCL</td>
+	            <td>RCL</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,983.250</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>RDDT</td>
+	            <td>RDDT</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,102.260</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>REG</td>
+	            <td>REG</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>520.560</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>REGN</td>
+	            <td>REGN</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>5,655.870</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>RF</td>
+	            <td>RF</td>
+	            <td>5</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,039.150</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>RJF</td>
+	            <td>RJF</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,185.440</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>RL</td>
+	            <td>RL</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>RMD</td>
+	            <td>RMD</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,605.310</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ROK</td>
+	            <td>ROK</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,913.560</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ROL</td>
+	            <td>ROL</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>493.420</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ROP</td>
+	            <td>ROP</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,804.800</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ROST</td>
+	            <td>ROST</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>3,273.040</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>RSG</td>
+	            <td>RSG</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,499.260</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>RTX</td>
+	            <td>RTX</td>
+	            <td>7</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>9,987.540</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>RVTY</td>
+	            <td>RVTY</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>847.060</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>SBAC</td>
+	            <td>SBAC</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,273.040</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>SBUX</td>
+	            <td>SBUX</td>
+	            <td>6</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>4,305.620</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>SCHW</td>
+	            <td>SCHW</td>
+	            <td>9</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>6,855.970</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>SHW</td>
+	            <td>SHW</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,377.870</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>SJM</td>
+	            <td>SJM</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>851.200</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>SLB</td>
+	            <td>SLB</td>
+	            <td>8</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,892.670</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>SMCI</td>
+	            <td>SMCI</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>782.880</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>SNA</td>
+	            <td>SNA</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>SNDK</td>
+	            <td>SNDK</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>10,047.320</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>SNPS</td>
+	            <td>SNPS</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,773.720</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>SO</td>
+	            <td>SO</td>
+	            <td>6</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>3,662.790</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>SOLV</td>
+	            <td>SOLV</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>621.590</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>SPG</td>
+	            <td>SPG</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,971.780</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>SPGI</td>
+	            <td>SPGI</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>5,862.680</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>SRE</td>
+	            <td>SRE</td>
+	            <td>4</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,280.640</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>STE</td>
+	            <td>STE</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,604.290</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>STLD</td>
+	            <td>STLD</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,567.920</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>STT</td>
+	            <td>STT</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,618.410</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>STX</td>
+	            <td>STX</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>5,575.200</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>STZ</td>
+	            <td>STZ</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>916.070</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>SW</td>
+	            <td>SW</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,006.180</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>SWK</td>
+	            <td>SWK</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>668.070</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>SWKS</td>
+	            <td>SWKS</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>445.790</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>SYF</td>
+	            <td>SYF</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,096.080</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>SYK</td>
+	            <td>SYK</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>4,486.240</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>SYY</td>
+	            <td>SYY</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,698.880</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>T</td>
+	            <td>T</td>
+	            <td>38</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>6,644.470</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>TAP</td>
+	            <td>TAP</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>285.050</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>TDG</td>
+	            <td>TDG</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>TDY</td>
+	            <td>TDY</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>TECH</td>
+	            <td>TECH</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>490.770</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>TEL</td>
+	            <td>TEL</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,733.210</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>TER</td>
+	            <td>TER</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,486.300</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>TFC</td>
+	            <td>TFC</td>
+	            <td>7</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,389.070</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>TGT</td>
+	            <td>TGT</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,218.350</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>TJX</td>
+	            <td>TJX</td>
+	            <td>6</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>5,678.400</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>TKO</td>
+	            <td>TKO</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>TMO</td>
+	            <td>TMO</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>8,524.250</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>TMUS</td>
+	            <td>TMUS</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>3,696.780</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>TPL</td>
+	            <td>TPL</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>TPR</td>
+	            <td>TPR</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>882.890</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>TRGP</td>
+	            <td>TRGP</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,946.740</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>TRMB</td>
+	            <td>TRMB</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>403.240</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>TROW</td>
+	            <td>TROW</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>765.850</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>TRV</td>
+	            <td>TRV</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,508.220</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>TSCO</td>
+	            <td>TSCO</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>720.180</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>TSLA</td>
+	            <td>TSLA</td>
+	            <td>15</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>35,647.740</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>TSN</td>
+	            <td>TSN</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>775.820</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>TT</td>
+	            <td>TT</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>3,088.960</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>TTD</td>
+	            <td>TTD</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>179.810</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>TTWO</td>
+	            <td>TTWO</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,580.480</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>TXN</td>
+	            <td>TXN</td>
+	            <td>5</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>8,822.460</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>TXT</td>
+	            <td>TXT</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>555.030</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>TYL</td>
+	            <td>TYL</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>UAL</td>
+	            <td>UAL</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,593.300</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>UBER</td>
+	            <td>UBER</td>
+	            <td>11</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>5,997.100</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>UDR</td>
+	            <td>UDR</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>517.980</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>UHS</td>
+	            <td>UHS</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ULTA</td>
+	            <td>ULTA</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>UNH</td>
+	            <td>UNH</td>
+	            <td>5</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>13,454.710</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>UNP</td>
+	            <td>UNP</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>6,301.890</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>UPS</td>
+	            <td>UPS</td>
+	            <td>4</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,853.580</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>URI</td>
+	            <td>URI</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>USB</td>
+	            <td>USB</td>
+	            <td>9</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>3,811.180</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>V</td>
+	            <td>V</td>
+	            <td>9</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>23,458.200</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>VEEV</td>
+	            <td>VEEV</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,674.450</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>VICI</td>
+	            <td>VICI</td>
+	            <td>6</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,070.300</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>VLO</td>
+	            <td>VLO</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>4,619.500</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>VLTO</td>
+	            <td>VLTO</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>670.170</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>VMC</td>
+	            <td>VMC</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,859.760</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>VMRK</td>
+	            <td>VMRK</td>
+	            <td>4</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,835.260</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>VRSK</td>
+	            <td>VRSK</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,278.940</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>VRSN</td>
+	            <td>VRSN</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>VRT</td>
+	            <td>VRT</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>3,470.630</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>VRTX</td>
+	            <td>VRTX</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>3,751.200</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>VST</td>
+	            <td>VST</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,886.690</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>VTR</td>
+	            <td>VTR</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,909.970</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>VTRS</td>
+	            <td>VTRS</td>
+	            <td>6</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>680.690</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>VZ</td>
+	            <td>VZ</td>
+	            <td>23</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>7,841.990</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>WAB</td>
+	            <td>WAB</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,014.800</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>WAT</td>
+	            <td>WAT</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,812.060</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>WBD</td>
+	            <td>WBD</td>
+	            <td>14</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,745.290</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>WDAY</td>
+	            <td>WDAY</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,319.180</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>WDC</td>
+	            <td>WDC</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>6,116.860</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>WEC</td>
+	            <td>WEC</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,447.550</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>WELL</td>
+	            <td>WELL</td>
+	            <td>4</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>6,545.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>WFC</td>
+	            <td>WFC</td>
+	            <td>17</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>9,780.390</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>WM</td>
+	            <td>WM</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>3,014.390</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>WMB</td>
+	            <td>WMB</td>
+	            <td>7</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>3,376.040</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>WMT</td>
+	            <td>WMT</td>
+	            <td>24</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>17,160.590</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>WRB</td>
+	            <td>WRB</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>929.300</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>WSM</td>
+	            <td>WSM</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,592.760</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>WST</td>
+	            <td>WST</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>WTW</td>
+	            <td>WTW</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,353.240</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>WY</td>
+	            <td>WY</td>
+	            <td>4</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>663.050</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>WYNN</td>
+	            <td>WYNN</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>XEL</td>
+	            <td>XEL</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,571.250</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>XOM</td>
+	            <td>XOM</td>
+	            <td>23</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>25,069.410</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>XYL</td>
+	            <td>XYL</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>765.440</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>XYZ</td>
+	            <td>XYZ</td>
+	            <td>3</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,683.820</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>YUM</td>
+	            <td>YUM</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>2,120.650</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ZBH</td>
+	            <td>ZBH</td>
+	            <td>1</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>680.150</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ZBRA</td>
+	            <td>ZBRA</td>
+	            <td>0</td>
+	            <td>必须</td>
+	            <td></td>
+			    <td></td>
+	            <td>0.000</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	          <tr>
+	            <td>ZTS</td>
+	            <td>ZTS</td>
+	            <td>2</td>
+	            <td>允许</td>
+	            <td>4.0%</td>
+			    <td>0.0%</td>
+	            <td>1,048.860</td>
+	            <td>其他</td>
+	          </tr>
+	        
+	      
+		</tbody>
+	</table>
+	</div>
+
+		</div>
+	</div>
+	
+
+
+
+
+
+
+<div class="g-footer">
+  <div class="container">
+    <div class="footer-nav-wrap">
+      <div class="footer-nav">
+        <dl class="footer-nav_list">
+          <dt>新手指南</dt>
+          <dd><a class="footer-nav_link" href="https://trade.bosera.com/indi/openacct/mobilenoform" target="_blank">个人开户</a></dd>
+          <dd><a class="footer-nav_link" href="/column/index.do?classid=00020002000500030001" target="_blank">投资者教育</a></dd>
+        </dl>
+        <dl class="footer-nav_list">
+          <dt>交易须知</dt>
+          <dd><a class="footer-nav_link" href="/column/index.do?classid=0002000200100001" target="_blank">业务规则</a></dd>
+          <dd><a class="footer-nav_link" href="/column/index.do?classid=00020002001100002" target="_blank">费率优惠</a></dd>
+          <dd><a class="footer-nav_link" href="/column/infoDetail.do?infoid=1415734&classid=000200020011000050001" target="_blank">风险提示</a></dd>
+          <dd><a class="footer-nav_link" href="/column/infoDetail.do?infoid=1415742&classid=000200020011000050001" target="_blank">权益须知</a></dd>
+        </dl>
+        <dl class="footer-nav_list">
+          <dt>法律条款</dt>
+          <dd><a class="footer-nav_link" href="/column/infoDetail.do?infoid=1415741&classid=000200020011000050001" target="_blank">免责条款</a></dd>
+          <dd><a class="footer-nav_link" href="/column/index.do?classid=000200020005000300030001" target="_blank">反洗钱专栏</a></dd>
+          <dd><a class="footer-nav_link" href="/column/index.do?classid=000200020005000300040001" target="_blank">防范证券欺诈活动</a></dd>
+          <dd><a class="footer-nav_link" href="/column/infoDetail.do?infoid=2737595&classid=000200020011000050001" target="_blank">隐私政策</a></dd>
+        </dl>
+        <dl class="footer-nav_list">
+          <dt>客户服务</dt>
+          <dd><a class="footer-nav_link" href="https://bosera.hotjob.cn" target="_blank">加入我们</a></dd>
+          <dd><a class="footer-nav_link" href="/column/index.do?classid=00020002001100003" target="_blank">下载中心</a></dd>
+          <dd><a class="footer-nav_link" href="/column/index.do?classid=0002000200020004" target="_blank">联系我们</a></dd>
+          <dd><a class="footer-nav_link" href="/column/infoDetail.do?infoid=12398&classid=0002000200110002" target="_blank">应急处理提示</a></dd>
+        </dl>
+      </div>
+      <div class="footer-qr">
+        <ul class="footer-qr_tab" id="footerQrTab">
+          <li class="text-primary" data-target="#footerAppQr">APP</li
+          ><li data-target="#footerWechatQr">微信</li>
+        </ul>
+        <div class="footer-qr_con"><img class="footer-qr_img" id="footerAppQr" src="/static/images/common/app_qr_code.png?v=20180124"><img class="footer-qr_img" id="footerWechatQr" src="/static/images/common/wechat_qr_code.png" style="display:none"></div>
+      </div>
+      <!-- .footer-qr end -->
+    </div>
+    <!-- .footer-nav-wrap end -->
+    <div class="footer-copyright">
+      <p>客服热线：95105568　客服邮箱：service@bosera.com&nbsp;&nbsp;
+        <span
+          class="J_popover"
+          data-placement="top-left"
+          data-width="156"
+          data-content="&lt;a class=&quot;footer-qr_popover-item&quot; href=&quot;http://www.weibo.com/bosera&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;/static/images/common/weibo_qr_code.png&quot;&gt;点击关注微博&lt;/a&gt;"
+          ><i class="icon icon-weibo"></i></span>&nbsp;&nbsp;
+        <span
+          class="J_popover"
+          data-placement="top-left"
+          data-width="300"
+          data-content="&lt;span class=&quot;footer-qr_popover-item&quot;&gt;&lt;img src=&quot;/static/images/common/wechat_qr_code.png&quot;&gt;博时服务号&lt;/span&gt;&lt;span class=&quot;footer-qr_popover-item&quot;&gt;&lt;img src=&quot;/static/images/common/wechat_tzh_qr_code.png&quot;&gt;博时投资汇&lt;/span&gt;"
+          ><i class="icon icon-wechat"></i></span>
+      </p>
+      <p>人工服务时间：工作日9：00－21：00，公休日及法定节假日（十一和春节除外）9：00－17：00<p>
+	    <p><a class="footer-nav_link" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030402003685"><img src="/static/images/common/beian.png"/>粤公网安备 44030402003685号</a> &copy;2026 博时基金管理有限公司 版权所有 <a class="footer-nav_link" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" title="粤ICP备10063309号">粤ICP备10063309号</a>&nbsp;本网站支持IPv6</p>
+    </div>
+  </div>
+</div>
+<div class="container" id="sideToolbarContainer">
+  <div class="side-toolbar" id="sideToolbar">
+    <ul class="side-toolbar_list">
+      <li class="side-toolbar_item">
+        <span class="side-toolbar_link side-toolbar_link--qr" id="sideToolbarQr" title="扫描下载手机APP">
+	        <span class="side-toolbar_qr">
+	          <span class="side-toolbar_qr-title">扫描下载手机APP</span>
+	          <img src="/static/images/common/app_qr_code.png?v=20180124">
+	        </span>
+        </span>
+      </li>
+      <li class="side-toolbar_item">
+        <a class="side-toolbar_link side-toolbar_link--service" id="sideToolbarService" href="/service/webchat/robot.jsp" title="在线客服" target="_blank">在线客服</a>
+      </li>
+      <li class="side-toolbar_item">
+        <span class="side-toolbar_link side-toolbar_link--backtop" id="sideToolbarBackTop" title="返回顶部">返回顶部</span>
+      </li>
+    </ul>
+  </div>
+</div>
+<script>
+  // 百度统计代码
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?3c5b5c9332a21f25e5643038564d17c1";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</body>
+</html>

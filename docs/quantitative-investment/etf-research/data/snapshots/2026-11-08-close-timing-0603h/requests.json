@@ -1,0 +1,46 @@
+[
+  {
+    "name": "eid",
+    "url": "https://eid.csrc.gov.cn/fund/disclose/netvalue/index",
+    "requested_at_utc": "2026-11-08T06:10:15.333148+00:00",
+    "status": 0,
+    "effective_url": "https://eid.csrc.gov.cn/fund/disclose/netvalue/index",
+    "exit_code": 35,
+    "error": "curl: (35) TLS connect error: error:0A000438:SSL routines::tlsv1 alert internal error\n",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "csrc_fund",
+    "url": "https://eid.csrc.gov.cn/fund",
+    "requested_at_utc": "2026-11-08T06:10:15.333407+00:00",
+    "status": 0,
+    "effective_url": "https://eid.csrc.gov.cn/fund",
+    "exit_code": 35,
+    "error": "curl: (35) TLS connect error: error:0A000438:SSL routines::tlsv1 alert internal error\n",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "fund_eid",
+    "url": "https://fund.eastmoney.com/f10/jjjz_513500.html",
+    "requested_at_utc": "2026-11-08T06:10:15.333816+00:00",
+    "status": 200,
+    "effective_url": "https://fundf10.eastmoney.com/jjjz_513500.html",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 49721,
+    "sha256": "0a0aa190bbe77fd3ff87f000b6f3550ebe905157b55997e57ade29252e6e4f00"
+  },
+  {
+    "name": "issuer_disclosure",
+    "url": "https://www.csrc.gov.cn/csrc/c101877/c1029609/content.shtml",
+    "requested_at_utc": "2026-11-08T06:10:15.334158+00:00",
+    "status": 200,
+    "effective_url": "https://www.csrc.gov.cn/csrc/c101877/c1029609/content.shtml",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 15718,
+    "sha256": "0def2044c0c2b65d1def9faa4210052aaf8f427af16556975c92eab3a0837574"
+  }
+]

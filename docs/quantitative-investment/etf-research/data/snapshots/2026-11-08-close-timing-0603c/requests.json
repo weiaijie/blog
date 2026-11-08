@@ -1,0 +1,123 @@
+[
+  {
+    "name": "repo_meta",
+    "url": "https://api.github.com/repos/kfccolonel1/BARS",
+    "requested_at_utc": "2026-11-08T06:03:58.673492+00:00",
+    "status": 200,
+    "effective_url": "https://api.github.com/repos/kfccolonel1/BARS",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 4953,
+    "sha256": "65df352fb141f50c70647c42310368cbc7b471bc13e0834e8865455928550fd9"
+  },
+  {
+    "name": "hf_es",
+    "url": "https://huggingface.co/api/datasets?search=databento&limit=50",
+    "requested_at_utc": "2026-11-08T06:03:58.673711+00:00",
+    "status": 0,
+    "effective_url": "https://huggingface.co/api/datasets?search=databento&limit=50",
+    "exit_code": 28,
+    "error": "curl: (28) Connection timed out after 6002 milliseconds\n",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "hf_futures",
+    "url": "https://huggingface.co/api/datasets?search=futures%20ohlcv&limit=50",
+    "requested_at_utc": "2026-11-08T06:03:58.674037+00:00",
+    "status": 0,
+    "effective_url": "https://huggingface.co/api/datasets?search=futures%20ohlcv&limit=50",
+    "exit_code": 28,
+    "error": "curl: (28) Connection timed out after 6002 milliseconds\n",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "dayk_select",
+    "url": "https://yunhq.sse.com.cn:32042/v1/sh1/dayk/513500?begin=0&end=-1&period=day&select=date,close,iopv",
+    "requested_at_utc": "2026-11-08T06:03:58.674385+00:00",
+    "status": 200,
+    "effective_url": "https://yunhq.sse.com.cn:32042/v1/sh1/dayk/513500?begin=0&end=-1&period=day&select=date,close,iopv",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 77861,
+    "sha256": "200f0d15bfca4302b5a943aa80f0aaebef4acf2f535ef4a461b0b5e04f1a3843"
+  },
+  {
+    "name": "sse_history",
+    "url": "https://www.sseinfo.com/services/assortment/historical/",
+    "requested_at_utc": "2026-11-08T06:03:58.674814+00:00",
+    "status": 200,
+    "effective_url": "https://www.sseinfo.com/services/assortment/historical/",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 23029,
+    "sha256": "dbae0135ca890931f4161f0b9c239029096dddb55015738f0c988fd92005a85f"
+  },
+  {
+    "name": "sse_pcf_sample",
+    "url": "https://www.bosera.com/jjcp/etf/files/513500/2025/51350002282.ETF",
+    "requested_at_utc": "2026-11-08T06:03:58.845103+00:00",
+    "status": 200,
+    "effective_url": "https://www.bosera.com/jjcp/etf/files/513500/2025/51350002282.ETF",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 55696,
+    "sha256": "57825143f5407924cb20159fbd6962549bf8ca81ba1f96140c42fe4ad8620160"
+  },
+  {
+    "name": "qdii_method",
+    "url": "https://qdiilens.com/methodology",
+    "requested_at_utc": "2026-11-08T06:03:58.992509+00:00",
+    "status": 200,
+    "effective_url": "https://qdiilens.com/methodology",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 113831,
+    "sha256": "5de672269c87393372955b7f88c0137ae3b4c8373a88ae63518206bace42bf89"
+  },
+  {
+    "name": "cme_access",
+    "url": "https://dataservices.cmegroup.com/pages/home",
+    "requested_at_utc": "2026-11-08T06:03:59.053300+00:00",
+    "status": 0,
+    "effective_url": "https://dataservices.cmegroup.com/pages/home",
+    "exit_code": 28,
+    "error": "curl: (28) Connection timed out after 6002 milliseconds\n",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "dataapi",
+    "url": "https://zhundata.cn/hist-quotes-api.html",
+    "requested_at_utc": "2026-11-08T06:03:59.268663+00:00",
+    "status": 200,
+    "effective_url": "https://zhundata.cn/hist-quotes-api.html",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 333048,
+    "sha256": "30c6ad364864bcb2188f989122695d30197a10654d23c3fab5acc1699ae6bf12"
+  },
+  {
+    "name": "bars_index",
+    "url": "https://api.github.com/repos/kfccolonel1/BARS/git/trees/main?recursive=1",
+    "requested_at_utc": "2026-11-08T06:03:59.480930+00:00",
+    "status": 200,
+    "effective_url": "https://api.github.com/repos/kfccolonel1/BARS/git/trees/main?recursive=1",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 11593,
+    "sha256": "18dfcd29ca4c461ce97bbfb8b7e4f4a960855686d7c587a07242074c9ffed1c5"
+  },
+  {
+    "name": "jisilu",
+    "url": "https://www.jisilu.cn/data/qdii/detail_hists/?qdii_id=513500",
+    "requested_at_utc": "2026-11-08T06:04:01.165837+00:00",
+    "status": 200,
+    "effective_url": "https://www.jisilu.cn/account/login/url-L2RhdGEvcWRpaS9kZXRhaWxfaGlzdHMvP3FkaWlfaWQ9NTEzNTAw",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 65731,
+    "sha256": "57282a2cffe3133839cbc578b246d0229c653563d9e6229040006ef5964341be"
+  }
+]

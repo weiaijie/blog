@@ -1,0 +1,96 @@
+{
+  "all": {
+    "original_gap_pnl": "-5514.4000",
+    "intervals": 72,
+    "methods": {
+      "documented_nav": {
+        "timing_cny": "5411.3100",
+        "remaining_cny": "-10925.7100",
+        "directly_valued_intervals": 72,
+        "unvalued_intervals": 0
+      },
+      "iopv": {
+        "timing_cny": "339.9700",
+        "remaining_cny": "-5854.3700",
+        "directly_valued_intervals": 72,
+        "unvalued_intervals": 0
+      },
+      "es_hour": {
+        "timing_cny": "-1907.740609084046035214317174",
+        "remaining_cny": "-3606.659390915953964785682826",
+        "directly_valued_intervals": 59,
+        "unvalued_intervals": 13
+      },
+      "es_3m": {
+        "timing_cny": "-1905.733170977956146045918963",
+        "remaining_cny": "-3608.666829022043853954081037",
+        "directly_valued_intervals": 64,
+        "unvalued_intervals": 8
+      }
+    },
+    "nonzero_endpoint_coefficients": {
+      "2024-12-16": -23900,
+      "2025-01-02": -200,
+      "2025-02-05": 100,
+      "2025-03-03": -800,
+      "2025-04-01": -900,
+      "2025-04-07": 25700
+    },
+    "causal_timing_amount": null
+  },
+  "february": {
+    "original_gap_pnl": "-3503.6700",
+    "intervals": 18,
+    "methods": {
+      "documented_nav": {
+        "timing_cny": "-859.0500",
+        "remaining_cny": "-2644.6200",
+        "directly_valued_intervals": 18,
+        "unvalued_intervals": 0
+      },
+      "iopv": {
+        "timing_cny": "-1470.3000",
+        "remaining_cny": "-2033.3700",
+        "directly_valued_intervals": 18,
+        "unvalued_intervals": 0
+      },
+      "es_hour": {
+        "timing_cny": "-732.5750515015140874114099163",
+        "remaining_cny": "-2771.094948498485912588590084",
+        "directly_valued_intervals": 16,
+        "unvalued_intervals": 2
+      },
+      "es_3m": {
+        "timing_cny": "-732.5666972103440590232092190",
+        "remaining_cny": "-2771.103302789655940976790781",
+        "directly_valued_intervals": 16,
+        "unvalued_intervals": 2
+      }
+    },
+    "nonzero_endpoint_coefficients": {
+      "2025-01-27": -24100,
+      "2025-02-05": 100,
+      "2025-02-28": 24000
+    },
+    "causal_timing_amount": null
+  },
+  "coverage": {
+    "selected": {
+      "one_source": 61,
+      "missing": 3,
+      "equal": 209,
+      "different": 18
+    },
+    "high": {
+      "one_source": 60,
+      "missing": 3,
+      "equal": 181,
+      "different": 13
+    },
+    "february": {
+      "equal": 16,
+      "one_source": 1,
+      "different": 1
+    }
+  }
+}

@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en" style="height:100%">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数立方投研服务平台</title>
+<meta content="免费股票数据,开源股票数据接口,股票数据,股票数据接口,python股票数据,财经数据,金融数据,行业大数据,区块链数据,量化投资,知识图谱" name="keywords"/>
+<meta name="description" content="方正证券量化投研服务平台"/>
+<meta content="index,follow" name="robots"/>
+<meta name="application-name" content="Tushare"/>
+<!-- <link rel="icon" type="image/png" href="/static/frontend/images/favicon-192x192.png?v=811d9139fa2ea47f5595907da1f3c34d" sizes="192x192">
+<link rel="icon" type="image/png" href="/static/frontend/images/favicon-160x160.png?v=cd2ec63ff48c4013c10af56ed4c25b6c" sizes="160x160">
+<link rel="icon" type="image/png" href="/static/frontend/images/favicon-96x96.png?v=4960eb8103c873c586ad41ef3f53db84" sizes="96x96">
+<link rel="icon" type="image/png" href="/static/frontend/images/favicon-16x16.png?v=f7299bbce2cff4db7e3dfa6fb8c6a73c" sizes="16x16">
+<link rel="icon" type="image/png" href="/static/frontend/images/favicon-32x32.png?v=a5df4bdd9f96de59f57bb9a7a50d8f96" sizes="32x32"> -->
+<link rel="shortcut icon" href="/static/frontend/images/newhome/bitbug_favicon.ico?v=0a93a2f6c3542f47151f1a81718f3b0a" type="image/x-icon"/>
+<link href="/static/vendors/bootstrap/dist/css/bootstrap.min.css?v=d7ac98c842e4ec59d2c21fef89fce09c" rel="stylesheet">
+<link href="/static/vendors/jstree/themes/default/style.min.css?v=779fc4b400d1748ec2fb99685ad80550" rel="stylesheet">
+<link href="/static/vendors/carousel/stylesheets/jquery.carousel.css?v=e4e9329e9648d8266163d14debff3717" rel="stylesheet">
+<link href="/static/frontend/css/custom.css?v=3e6df28f776d44bbd15fd7e66327ee1e" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/static/vendors/codemirror/lib/codemirror.css?v=fc217d502b05f65616356459c0ec1d62">
+<link rel="stylesheet" href="/static/vendors/tui-editor/dist/tui-editor.css?v=144c2e273b8a0e79b208d0d86ccd3999">
+<link rel="stylesheet" href="/static/vendors/tui-editor/dist/tui-editor-contents.css?v=3ed3a3154a2304c111075714324b0e7b">
+<link rel="stylesheet" href="/static/vendors/highlightjs/styles/github.css?v=bf6c14925e66edb1526b6c9489b3c042">
+<link rel="stylesheet" href="/static/common/css/md.css?v=087ce310ed8e685ac6526e2a54db3c68">
+
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="/static/vendors/requirejs/require.js?v=6da8be361b9ee26c5e721e76c6d4afce"></script>
+<script type="text/javascript" src="/static/frontend/js/config.js?v=d5f8af90b6de140680584e21c27e9c98"></script>
+</head>
+<body style="height:100%">
+<div id="page" style="height:100%;">
+<header id="header" class="site-header">
+<nav id="navbar" class="site-navbar navbar navbar-static-top" role="navigation">
+<div class="container">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
+<span class="sr-only">Toggle navigation</span>
+<i class="fa fa-bars" style="font-size: 1.5em; padding: 15px 0;"></i>
+</button>
+<h1 class="navbar-brand">
+<a href="/"><img src="/static/frontend/images/logo.png?v=6298d656b89cb139bb48aa6d89bf2746" alt="tushare"></a>
+</h1>
+</div>
+<div class="collapse navbar-collapse" id="navbar-collapse-1">
+<ul id="navigation" class="nav navbar-nav navbar-right">
+<li><a href="/">首页</a></li>
+<li><a href="/document/1">平台介绍</a></li>
+<li><a href="/document/2">数据接口</a></li>
+<li><a href="/document/41">量化101</a></li>
+<!-- <li><a href="/news">资讯数据</a></li>-->
+<!-- -->
+<!-- <li class="navbar-tail"><a href="/login" class="btn btn-xs pull-right">登 录</a><a href="/register" class="btn btn-xs pull-right">注 册</a></li>-->
+<!-- -->
+</ul>
+</div>
+</div>
+</nav>
+</header>
+
+
+<section id="document" class="whole">
+<div class="container">
+<div class="document">
+<nav class="sidebar col-md-3 col-sm-4 col-xs-12">
+
+            <div id="jstree">
+                <ul class="list-unstyled components">
+                    
+                    <li class="  in"><a href="/document/2?doc_id=10645">高频数据</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10646">level1 深圳快照</a></li> <li ><a href="/document/2?doc_id=10793"> level1_new 上海快照</a></li> <li ><a href="/document/2?doc_id=10794">level2_sh_new 上海快照</a></li> <li ><a href="/document/2?doc_id=10659">tick 深圳逐笔成交</a></li> <li ><a href="/document/2?doc_id=10795">tick_new 上海逐笔成交</a></li> <li ><a href="/document/2?doc_id=10662">order 深圳逐笔委托</a></li> <li ><a href="/document/2?doc_id=10667">stk_mins 分钟数据</a></li> <li ><a href="/document/2?doc_id=10796">level2_sz_new 深圳快照</a></li> <li ><a href="/document/2?doc_id=10859">k1min 一分钟K线数据</a></li>
+                        </ul>
+                    </li>
+                  
+                    <li class="  in"><a href="/document/2?doc_id=93">指数</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=94">指数基本信息</a></li> <li ><a href="/document/2?doc_id=95">指数日线行情</a></li> <li ><a href="/document/2?doc_id=171">指数周线行情</a></li> <li ><a href="/document/2?doc_id=172">指数月线行情</a></li> <li ><a href="/document/2?doc_id=96">指数成分和权重</a></li> <li ><a href="/document/2?doc_id=128">大盘指数每日指标</a></li> <li ><a href="/document/2?doc_id=181">申万行业分类</a></li> <li ><a href="/document/2?doc_id=182">申万行业成分</a></li> <li ><a href="/document/2?doc_id=215">市场每日交易统计</a></li> <li ><a href="/document/2?doc_id=10689">指数当日收盘权重</a></li> <li ><a href="/document/2?doc_id=10690">指数隔日权重</a></li> <li ><a href="/document/2?doc_id=211">国际主要指数</a></li>
+                        </ul>
+                    </li>
+                  
+                    <li class="  in"><a href="/document/2?doc_id=14">沪深股票</a>
+                        <ul class="list-unstyled">
+                            
+                    <li class="  in"><a href="/document/2?doc_id=24">基础数据</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=25">股票列表</a></li> <li ><a href="/document/2?doc_id=26">交易日历</a></li> <li ><a href="/document/2?doc_id=100">股票曾用名</a></li> <li ><a href="/document/2?doc_id=104">沪深股通成分股</a></li> <li ><a href="/document/2?doc_id=112">上市公司基本信息</a></li> <li ><a href="/document/2?doc_id=193">上市公司管理层</a></li> <li ><a href="/document/2?doc_id=194">管理层薪酬和持股</a></li> <li ><a href="/document/2?doc_id=10708">可交易股票信息</a></li> <li ><a href="/document/2?doc_id=123">IPO新股上市</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=15">行情数据</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=27">日线行情</a></li> <li ><a href="/document/2?doc_id=144">周线行情</a></li> <li ><a href="/document/2?doc_id=145">月线行情</a></li> <li ><a href="/document/2?doc_id=146">复权行情</a></li> <li ><a href="/document/2?doc_id=28">复权因子</a></li> <li ><a href="/document/2?doc_id=31">停复牌信息(停)</a></li> <li ><a href="/document/2?doc_id=214">每日停复牌信息</a></li> <li ><a href="/document/2?doc_id=32">每日指标</a></li> <li ><a href="/document/2?doc_id=109">通用行情接口</a></li> <li ><a href="/document/2?doc_id=170">个股资金流向</a></li> <li ><a href="/document/2?doc_id=183">每日涨跌停价格</a></li> <li ><a href="/document/2?doc_id=198">每日涨跌停统计</a></li> <li ><a href="/document/2?doc_id=47">沪深港通资金流向</a></li> <li ><a href="/document/2?doc_id=48">沪深股通十大成交股</a></li> <li ><a href="/document/2?doc_id=188">沪深股通持股明细</a></li> <li ><a href="/document/2?doc_id=196">港股通每日成交统计</a></li> <li ><a href="/document/2?doc_id=197">港股通每月成交统计</a></li> <li ><a href="/document/2?doc_id=10886">涨跌停列表（新）</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=16">财务数据</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=33">利润表</a></li> <li ><a href="/document/2?doc_id=36">资产负债表</a></li> <li ><a href="/document/2?doc_id=44">现金流量表</a></li> <li ><a href="/document/2?doc_id=45">业绩预告</a></li> <li ><a href="/document/2?doc_id=46">业绩快报</a></li> <li ><a href="/document/2?doc_id=103">分红送股数据</a></li> <li ><a href="/document/2?doc_id=79">财务指标数据</a></li> <li ><a href="/document/2?doc_id=80">财务审计意见</a></li> <li ><a href="/document/2?doc_id=81">主营业务构成</a></li> <li ><a href="/document/2?doc_id=162">财报披露日期表</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=17">市场参考数据</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=49">港股通十大成交股</a></li> <li ><a href="/document/2?doc_id=58">融资融券交易汇总</a></li> <li ><a href="/document/2?doc_id=59">融资融券交易明细</a></li> <li ><a href="/document/2?doc_id=61">前十大股东</a></li> <li ><a href="/document/2?doc_id=62">前十大流通股东</a></li> <li ><a href="/document/2?doc_id=106">龙虎榜每日明细</a></li> <li ><a href="/document/2?doc_id=107">龙虎榜机构交易明细</a></li> <li ><a href="/document/2?doc_id=110">股权质押统计数据</a></li> <li ><a href="/document/2?doc_id=111">股权质押明细数据</a></li> <li ><a href="/document/2?doc_id=124">股票回购</a></li> <li ><a href="/document/2?doc_id=125">概念股分类表</a></li> <li ><a href="/document/2?doc_id=126">概念股明细列表</a></li> <li ><a href="/document/2?doc_id=160">限售股解禁</a></li> <li ><a href="/document/2?doc_id=161">大宗交易</a></li> <li ><a href="/document/2?doc_id=164">股票开户数据</a></li> <li ><a href="/document/2?doc_id=165">股票开户数据（旧）</a></li> <li ><a href="/document/2?doc_id=166">股东人数</a></li> <li ><a href="/document/2?doc_id=175">股东增减持</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10849">特色数据</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10850">涨跌停和炸板数据</a></li>
+                        </ul>
+                    </li>
+                
+                        </ul>
+                    </li>
+                  
+                    <li class="  in"><a href="/document/2?doc_id=18">公募基金</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=19">基金列表</a></li> <li ><a href="/document/2?doc_id=118">基金管理人</a></li> <li ><a href="/document/2?doc_id=208">基金经理</a></li> <li ><a href="/document/2?doc_id=207">基金规模</a></li> <li ><a href="/document/2?doc_id=119">基金净值</a></li> <li ><a href="/document/2?doc_id=120">基金分红</a></li> <li ><a href="/document/2?doc_id=121">基金持仓</a></li> <li ><a href="/document/2?doc_id=127">基金行情</a></li> <li ><a href="/document/2?doc_id=199">复权因子</a></li>
+                        </ul>
+                    </li>
+                  
+                    <li class="  in"><a href="/document/2?doc_id=134">期货</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=135">期货合约信息</a></li> <li ><a href="/document/2?doc_id=137">期货交易日历</a></li> <li ><a href="/document/2?doc_id=138">期货日线行情</a></li> <li ><a href="/document/2?doc_id=139">每日持仓排名</a></li> <li ><a href="/document/2?doc_id=140">仓单日报</a></li> <li ><a href="/document/2?doc_id=141">每日结算参数</a></li> <li ><a href="/document/2?doc_id=155">南华期货指数行情</a></li> <li ><a href="/document/2?doc_id=189">期货主力与连续合约</a></li> <li ><a href="/document/2?doc_id=216">期货主要品种交易周报</a></li>
+                        </ul>
+                    </li>
+                  
+                    <li class="  in"><a href="/document/2?doc_id=157">期权</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=158">期权合约信息</a></li> <li ><a href="/document/2?doc_id=159">期权日线行情</a></li> <li ><a href="/document/2?doc_id=235">TICK数据</a></li>
+                        </ul>
+                    </li>
+                  
+                    <li class="  in"><a href="/document/2?doc_id=184">债券</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=185">可转债基础信息</a></li> <li ><a href="/document/2?doc_id=186">可转债发行</a></li> <li ><a href="/document/2?doc_id=187">可转债行情</a></li> <li ><a href="/document/2?doc_id=246">可转债转股价变动</a></li> <li ><a href="/document/2?doc_id=247">可转债转股结果</a></li> <li ><a href="/document/2?doc_id=233">全球财经事件</a></li>
+                        </ul>
+                    </li>
+                  
+                    <li class="  in"><a href="/document/2?doc_id=177">外汇</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=178">外汇基础信息（海外）</a></li> <li ><a href="/document/2?doc_id=179">外汇日线行情</a></li>
+                        </ul>
+                    </li>
+                  
+                    <li class="  in"><a href="/document/2?doc_id=82">行业经济</a>
+                        <ul class="list-unstyled">
+                            
+                    <li class="  in"><a href="/document/2?doc_id=83">TMT行业</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=88">台湾电子产业月营收</a></li> <li ><a href="/document/2?doc_id=87">台湾电子产业月营收明细</a></li> <li ><a href="/document/2?doc_id=113">电影月度票房</a></li> <li ><a href="/document/2?doc_id=114">电影周度票房</a></li> <li ><a href="/document/2?doc_id=115">电影日度票房</a></li> <li ><a href="/document/2?doc_id=116">影院日度票房</a></li> <li ><a href="/document/2?doc_id=156">全国电影剧本备案数据</a></li> <li ><a href="/document/2?doc_id=180">全国电视剧备案公示数据</a></li>
+                        </ul>
+                    </li>
+                
+                        </ul>
+                    </li>
+                  
+                    <li class="  in"><a href="/document/2?doc_id=147">宏观经济</a>
+                        <ul class="list-unstyled">
+                            
+                    <li class="  in"><a href="/document/2?doc_id=224">国内宏观</a>
+                        <ul class="list-unstyled">
+                            
+                    <li class="  in"><a href="/document/2?doc_id=148">利率数据</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=149">Shibor利率</a></li> <li ><a href="/document/2?doc_id=150">Shibor报价数据</a></li> <li ><a href="/document/2?doc_id=151">LPR贷款基础利率</a></li> <li ><a href="/document/2?doc_id=152">Libor利率</a></li> <li ><a href="/document/2?doc_id=153">Hibor利率</a></li> <li ><a href="/document/2?doc_id=173">温州民间借贷利率</a></li> <li ><a href="/document/2?doc_id=174">广州民间借贷利率</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=225">国民经济</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=227">国内生产总值（GDP）</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=226">价格指数</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=228">居民消费价格指数（CPI）</a></li> <li ><a href="/document/2?doc_id=245">工业生产者出厂价格指数（PPI）</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=240">金融</a>
+                        <ul class="list-unstyled">
+                            
+                    <li class="  in"><a href="/document/2?doc_id=241">货币供应量</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=242">货币供应量（月）</a></li>
+                        </ul>
+                    </li>
+                
+                        </ul>
+                    </li>
+                
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=217">国际宏观</a>
+                        <ul class="list-unstyled">
+                            
+                    <li class="  in"><a href="/document/2?doc_id=218">美国利率</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=219">国债收益率曲线利率</a></li> <li ><a href="/document/2?doc_id=220">国债实际收益率曲线利率</a></li> <li ><a href="/document/2?doc_id=221">短期国债利率</a></li> <li ><a href="/document/2?doc_id=222">国债长期利率</a></li> <li ><a href="/document/2?doc_id=223">国债长期利率平均值</a></li>
+                        </ul>
+                    </li>
+                
+                        </ul>
+                    </li>
+                
+                        </ul>
+                    </li>
+                  
+                    <li class="  in"><a href="/document/2?doc_id=142">另类数据</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10691">飞笛股票舆情数据</a></li> <li ><a href="/document/2?doc_id=10724">AI年度资产负债表预测</a></li> <li ><a href="/document/2?doc_id=10725">AI年度现金流量预测</a></li> <li ><a href="/document/2?doc_id=10734">AI年度财务衍生指标预测表</a></li> <li ><a href="/document/2?doc_id=10735">AI年度财务摘要预测表</a></li> <li ><a href="/document/2?doc_id=10736">AI季度财务摘要预测表</a></li> <li ><a href="/document/2?doc_id=10739">AI年度利润表预测表</a></li> <li ><a href="/document/2?doc_id=10740">AI季度利润表预测表</a></li> <li ><a href="/document/2?doc_id=10741">AI年度营收预测表</a></li> <li ><a href="/document/2?doc_id=10742">AI季度营收预测表</a></li> <li ><a href="/document/2?doc_id=10744">研报情感总分表</a></li> <li ><a href="/document/2?doc_id=10746">分行业招聘数据统计表</a></li> <li ><a href="/document/2?doc_id=10747">上市公司招聘数据统计表</a></li> <li ><a href="/document/2?doc_id=10748">分城市招聘数据统计表</a></li> <li ><a href="/document/2?doc_id=10749">招聘衍生数据汇总表</a></li> <li ><a href="/document/2?doc_id=10750">活跃招聘链接数统计表</a></li> <li ><a href="/document/2?doc_id=10751">沪港通合资格股票名单</a></li> <li ><a href="/document/2?doc_id=10752">深港通合资格股票名单</a></li> <li ><a href="/document/2?doc_id=10753">沪深港通股份编号对应</a></li> <li ><a href="/document/2?doc_id=10754">中央结算系统参与者概况</a></li> <li ><a href="/document/2?doc_id=10755">沪港通汇率信息</a></li> <li ><a href="/document/2?doc_id=10756">深港通汇率信息</a></li> <li ><a href="/document/2?doc_id=10757">沪港通十大成交活跃股</a></li> <li ><a href="/document/2?doc_id=10758">深港通十大成交活跃股</a></li> <li ><a href="/document/2?doc_id=10759">沪港通每日成交统计</a></li> <li ><a href="/document/2?doc_id=10760">深港通每日成交统计</a></li> <li ><a href="/document/2?doc_id=10761">沪港通额度信息</a></li> <li ><a href="/document/2?doc_id=10762">深港通额度信息</a></li> <li ><a href="/document/2?doc_id=10763">沪深股通股票卖空数据</a></li> <li ><a href="/document/2?doc_id=10764">沪深港通区间成交</a></li> <li ><a href="/document/2?doc_id=10765">沪深港通持股记录</a></li> <li ><a href="/document/2?doc_id=10766">沪深港通持股明细</a></li> <li ><a href="/document/2?doc_id=10767">陆港通个股流向</a></li> <li ><a href="/document/2?doc_id=10768">北向资金板块流向</a></li> <li ><a href="/document/2?doc_id=10769">新闻关联公司及情感得分表</a></li> <li ><a href="/document/2?doc_id=10770">新闻关联特征标签表</a></li> <li ><a href="/document/2?doc_id=10771">新闻分类表</a></li> <li ><a href="/document/2?doc_id=10772">公司新闻指数统计表</a></li> <li ><a href="/document/2?doc_id=10773">新闻热度信息表</a></li> <li ><a href="/document/2?doc_id=10774">股市新闻标签</a></li> <li ><a href="/document/2?doc_id=10775">新闻关键词表</a></li>
+                        </ul>
+                    </li>
+                  <li ><a href="/document/2?doc_id=209">数据索引</a></li>  
+                    <li class=" jstree-open  in"><a href="/document/2?doc_id=10206">Wind</a>
+                        <ul class="list-unstyled">
+                            
+                    <li class="  in"><a href="/document/2?doc_id=10209">债券数据</a>
+                        <ul class="list-unstyled">
+                            
+                    <li class="  in"><a href="/document/2?doc_id=10370">基础数据</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10371">中国债券发行涉及银行账号</a></li> <li ><a href="/document/2?doc_id=10373">中国债券赎回条款执行说明</a></li> <li ><a href="/document/2?doc_id=10374">中国债券调换条款执行说明</a></li> <li ><a href="/document/2?doc_id=10375">中国债券抵押品信息</a></li> <li ><a href="/document/2?doc_id=10380">中国债券可转债回售赎回条款</a></li> <li ><a href="/document/2?doc_id=10381">中国债券基本资料</a></li> <li ><a href="/document/2?doc_id=10382">中国债券浮息债基础利率属性</a></li> <li ><a href="/document/2?doc_id=10388">中国债券板块代码</a></li> <li ><a href="/document/2?doc_id=10389">中国债券分类板块</a></li> <li ><a href="/document/2?doc_id=10390">中国债券国民经济行业分类</a></li> <li ><a href="/document/2?doc_id=10391">中国债券证监会行业分类(旧)</a></li> <li ><a href="/document/2?doc_id=10399">中国债券概念板块</a></li> <li ><a href="/document/2?doc_id=10406">中国债券国债预发行资料</a></li> <li ><a href="/document/2?doc_id=10411">中国债券曾用名</a></li> <li ><a href="/document/2?doc_id=10412">中国债券回售条款执行说明</a></li> <li ><a href="/document/2?doc_id=10464">中国债券证监会行业分类</a></li> <li ><a href="/document/2?doc_id=10465">中国债券特殊条款</a></li> <li ><a href="/document/2?doc_id=10466">中国债券市场承销团成员明细</a></li> <li ><a href="/document/2?doc_id=10467">中国可转债发行</a></li> <li ><a href="/document/2?doc_id=10468">中国可转债有条件赎回价格和触发比例</a></li> <li ><a href="/document/2?doc_id=10469">中国可转债有条件回售价格和触发比例</a></li> <li ><a href="/document/2?doc_id=10470">中资美元债基本资料</a></li> <li ><a href="/document/2?doc_id=10477">中国债券信用风险缓释工具基本资料</a></li> <li ><a href="/document/2?doc_id=10478">中国债券利率品种简介条款</a></li> <li ><a href="/document/2?doc_id=10479"> 中国债券质押券代码</a></li> <li ><a href="/document/2?doc_id=10951">中国债券发行主体</a></li> <li ><a href="/document/2?doc_id=10952">WIND计算基准利率</a></li> <li ><a href="/document/2?doc_id=10961">中国可转债条款触发日期</a></li> <li ><a href="/document/2?doc_id=10968">中国债券基本资料</a></li> <li ><a href="/document/2?doc_id=10969">中国债券Wind分类板块</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10503">市场行情</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10518">中国债券交易日历</a></li> <li ><a href="/document/2?doc_id=10519">中国债券债券行情(沪深交易所)</a></li> <li ><a href="/document/2?doc_id=10520">银行间本币货币市场日行情</a></li> <li ><a href="/document/2?doc_id=10521">中国债券行情-全价</a></li> <li ><a href="/document/2?doc_id=10530">中国债券行情-净价</a></li> <li ><a href="/document/2?doc_id=10532">中国债券同业拆借日行情</a></li> <li ><a href="/document/2?doc_id=10533">中国债券停复牌信息</a></li> <li ><a href="/document/2?doc_id=10534">中国债券衍生指标</a></li> <li ><a href="/document/2?doc_id=10541">中国含权债行权衍生指标</a></li> <li ><a href="/document/2?doc_id=10808">中国债券衍生指标</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10546">权益数据</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10547">中国债券应计利息</a></li> <li ><a href="/document/2?doc_id=10548">中国债券实际现金流发生表</a></li> <li ><a href="/document/2?doc_id=10549">中国债券份额变动</a></li> <li ><a href="/document/2?doc_id=10554">中国债券现金流</a></li> <li ><a href="/document/2?doc_id=10555">中国可转债转股价格变动</a></li> <li ><a href="/document/2?doc_id=10556">中国债券违约兑付表</a></li> <li ><a href="/document/2?doc_id=10557">中国债券违约报表</a></li> <li ><a href="/document/2?doc_id=10562">中国债券本金提前偿还明细</a></li> <li ><a href="/document/2?doc_id=10563">中国债券事件日期信息</a></li> <li ><a href="/document/2?doc_id=10564">中国债券募集资金用途</a></li> <li ><a href="/document/2?doc_id=10566">中国债券持有人</a></li> <li ><a href="/document/2?doc_id=10574">中国债券持有人大会通知</a></li> <li ><a href="/document/2?doc_id=10575">中国债券发行主承销商承销金额</a></li> <li ><a href="/document/2?doc_id=10576">中国债券付息和兑付</a></li> <li ><a href="/document/2?doc_id=10582">中国债券配售机构获配明细</a></li> <li ><a href="/document/2?doc_id=10584">中国债券票面利率调整幅度</a></li> <li ><a href="/document/2?doc_id=10585">中国债券招标</a></li> <li ><a href="/document/2?doc_id=10586">中国债券招标结果</a></li> <li ><a href="/document/2?doc_id=10590">中国可转换债券份额变动</a></li> <li ><a href="/document/2?doc_id=10596">中国可转债转股</a></li> <li ><a href="/document/2?doc_id=10597">中国可转债修正条款</a></li> <li ><a href="/document/2?doc_id=10598">中国可转债衍生指标</a></li> <li ><a href="/document/2?doc_id=10599">中国浮息债票面利率变动</a></li> <li ><a href="/document/2?doc_id=10600">中国含权债票面利率变动</a></li> <li ><a href="/document/2?doc_id=10953">中国债券重大事件汇总</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10601">信用评级</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10602">中国债券发行主体信用评级</a></li> <li ><a href="/document/2?doc_id=10603">中国债券主体信用评级观察名单明细</a></li> <li ><a href="/document/2?doc_id=10604">中国债券评级定价估值(银行间)</a></li> <li ><a href="/document/2?doc_id=10605">中国债券信用评级</a></li> <li ><a href="/document/2?doc_id=10607">中国债券短融投资评级(中金)</a></li> <li ><a href="/document/2?doc_id=10608">中国债券信用评估机构名单</a></li> <li ><a href="/document/2?doc_id=10609">中国债券信用评级观察名单明细</a></li> <li ><a href="/document/2?doc_id=10613">中国债券评级机构客户名单</a></li> <li ><a href="/document/2?doc_id=10614">中国债券信用等级定义</a></li> <li ><a href="/document/2?doc_id=10971">中国债券发行主体信用评级</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10809">中国债券第三方数据</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10810">中证估值</a></li> <li ><a href="/document/2?doc_id=10884">中债登指数行情</a></li> <li ><a href="/document/2?doc_id=10897">中债登债券收益率曲线技术服务费(第三方中债) </a></li> <li ><a href="/document/2?doc_id=10938">银行间外汇市场行情</a></li> <li ><a href="/document/2?doc_id=10954">中债登估值(国债金融债企债)(第三方中债)</a></li> <li ><a href="/document/2?doc_id=10955">中债登估值(中票短融)(第三方中债)</a></li> <li ><a href="/document/2?doc_id=10956">中债登估值(债务融资工具)(第三方中债)</a></li> <li ><a href="/document/2?doc_id=10957">中债登估值(同业存单)(第三方中债)</a></li> <li ><a href="/document/2?doc_id=10958">中债登估值(公司债)(第三方中债)</a></li> <li ><a href="/document/2?doc_id=10959">中债登估值证券代码表</a></li> <li ><a href="/document/2?doc_id=10970">中证估值(第三方中证)</a></li> <li ><a href="/document/2?doc_id=10904">中国外汇牌价</a></li> <li ><a href="/document/2?doc_id=10974">中债登总指数行情</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10877">指数数据</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10878">中国债券指数日行情</a></li> <li ><a href="/document/2?doc_id=10885">中国债券指数成分</a></li> <li ><a href="/document/2?doc_id=10965">中国债券指数日行情</a></li> <li ><a href="/document/2?doc_id=10973">中国债券指数日行情(不含中债系列)</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10943">资产支持证券</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10944">资产支持证券基本资料</a></li> <li ><a href="/document/2?doc_id=10945">资产支持证券分档基本资料</a></li> <li ><a href="/document/2?doc_id=10946">资产支持证券交易数据</a></li>
+                        </ul>
+                    </li>
+                
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10256">股票数据</a>
+                        <ul class="list-unstyled">
+                            
+                    <li class="  in"><a href="/document/2?doc_id=10257">基础数据</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10319">A股国证行业分类</a></li> <li ><a href="/document/2?doc_id=10320">A股概念板块</a></li> <li ><a href="/document/2?doc_id=10326">A股基本资料</a></li> <li ><a href="/document/2?doc_id=10327">A股行业分类</a></li> <li ><a href="/document/2?doc_id=10328">A股公司简介</a></li> <li ><a href="/document/2?doc_id=10329">A股国民经济行业分类</a></li> <li ><a href="/document/2?doc_id=10330">A股企业所有制板块</a></li> <li ><a href="/document/2?doc_id=10331">A股证券曾用英文名</a></li> <li ><a href="/document/2?doc_id=10332">A股证券曾用名</a></li> <li ><a href="/document/2?doc_id=10333">A股企业地域板块</a></li> <li ><a href="/document/2?doc_id=10340">A股证监会行业分类</a></li> <li ><a href="/document/2?doc_id=10341">A股证监会新版行业分类</a></li> <li ><a href="/document/2?doc_id=10347">A股上证所行业分类</a></li> <li ><a href="/document/2?doc_id=10348">A股科创板上市概念板块</a></li> <li ><a href="/document/2?doc_id=10349">A股科创板所属新兴产业分类</a></li> <li ><a href="/document/2?doc_id=10350">A股科创板股份权益概念</a></li> <li ><a href="/document/2?doc_id=10351">A股公司曾用名</a></li> <li ><a href="/document/2?doc_id=10352">沪股通成分股</a></li> <li ><a href="/document/2?doc_id=10353">深股通成分股</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10258">行情数据</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10300">A股沪深交易所盘后行情</a></li> <li ><a href="/document/2?doc_id=10301">A股大宗交易数据</a></li> <li ><a href="/document/2?doc_id=10302">A股交易日历</a></li> <li ><a href="/document/2?doc_id=10303">A股日行情</a></li> <li ><a href="/document/2?doc_id=10304">A股除权除息记录</a></li> <li ><a href="/document/2?doc_id=10305">沪深市场总体指标（月）</a></li> <li ><a href="/document/2?doc_id=10316">A股证券交易异动营业部买卖信息</a></li> <li ><a href="/document/2?doc_id=10317">A股交易异动</a></li> <li ><a href="/document/2?doc_id=10318">A股停复牌信息</a></li> <li ><a href="/document/2?doc_id=10976">中国A股分红</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10259">市场参考</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10260">股权质押信息</a></li> <li ><a href="/document/2?doc_id=10261">股票质押比例</a></li> <li ><a href="/document/2?doc_id=10262">股权冻结信息</a></li> <li ><a href="/document/2?doc_id=10413">沪深公司公告栏目</a></li> <li ><a href="/document/2?doc_id=10414">沪深公司公告信息</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10280">财务数据</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10363">中国A股资产负债表</a></li> <li ><a href="/document/2?doc_id=10364">中国A股利润表</a></li> <li ><a href="/document/2?doc_id=10365">中国A股现金流量表</a></li> <li ><a href="/document/2?doc_id=10366">中国A股业绩快报</a></li> <li ><a href="/document/2?doc_id=10367">中国A股业绩预告</a></li> <li ><a href="/document/2?doc_id=10376">中国A股公司会计变更</a></li> <li ><a href="/document/2?doc_id=10377">中国A股公布重要财务指标</a></li> <li ><a href="/document/2?doc_id=10378">中国A股审计事项描述</a></li> <li ><a href="/document/2?doc_id=10379">中国A股审计意见</a></li> <li ><a href="/document/2?doc_id=10383">中国A股银行专用指标</a></li> <li ><a href="/document/2?doc_id=10384">中国A股财务衍生指标表</a></li> <li ><a href="/document/2?doc_id=10385">中国A股财务指标</a></li> <li ><a href="/document/2?doc_id=10386">中国A股金融机构经营分部业务数据</a></li> <li ><a href="/document/2?doc_id=10387">中国A股券商专用指标</a></li> <li ><a href="/document/2?doc_id=10392">中国A股保险专用指标</a></li> <li ><a href="/document/2?doc_id=10393">中国A股定期报告披露日期</a></li> <li ><a href="/document/2?doc_id=10394">中国券商月报</a></li> <li ><a href="/document/2?doc_id=10396">中国A股WIND计算调整后财务指标</a></li> <li ><a href="/document/2?doc_id=10397">中国A股TTM与MRQ</a></li> <li ><a href="/document/2?doc_id=10398">中国A股TTM指标历史数据</a></li> <li ><a href="/document/2?doc_id=10400">银行五级分类贷款明细</a></li> <li ><a href="/document/2?doc_id=10401">银行业存款结构</a></li> <li ><a href="/document/2?doc_id=10404">银行业贷款结构</a></li> <li ><a href="/document/2?doc_id=10911">中国A股存货明细</a></li> <li ><a href="/document/2?doc_id=10912">中国A股应收账款账龄结构</a></li> <li ><a href="/document/2?doc_id=10913">中国A股其它应收款账龄结构</a></li> <li ><a href="/document/2?doc_id=10914">中国A股财务费用明细</a></li> <li ><a href="/document/2?doc_id=10915">中国A股关联方往来及委托理财合计</a></li> <li ><a href="/document/2?doc_id=10916">中国A股主营业务构成</a></li> <li ><a href="/document/2?doc_id=10917">中国A股财务附注－－应付职工薪酬</a></li> <li ><a href="/document/2?doc_id=10918">中国A股财务附注明细</a></li> <li ><a href="/document/2?doc_id=10919">中国A股财务附注－－应收票据</a></li> <li ><a href="/document/2?doc_id=10920">中国A股财务附注－－总资产减值损失</a></li> <li ><a href="/document/2?doc_id=10921">中国A股财务附注－－无形资产</a></li> <li ><a href="/document/2?doc_id=10922">中国A股财务附注－－应付利息</a></li> <li ><a href="/document/2?doc_id=10923">中国A股财务附注--管理费用明细</a></li> <li ><a href="/document/2?doc_id=10924">中国A股财务附注--营业收入和营业成本</a></li> <li ><a href="/document/2?doc_id=10925">中国A股财务附注--研发费用</a></li> <li ><a href="/document/2?doc_id=10926">中国A股财务附注--销售费用明细</a></li> <li ><a href="/document/2?doc_id=10927">中国A股财务附注--盈余公积</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10620">股东数据</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10621">中国A股股权冻结质押情况(报告期)</a></li> <li ><a href="/document/2?doc_id=10622">中国A股股东拟增减持计划</a></li> <li ><a href="/document/2?doc_id=10623">中国A股股权冻结信息</a></li> <li ><a href="/document/2?doc_id=10624">中国A股股权质押信息</a></li> <li ><a href="/document/2?doc_id=10625">中国A股股权关系</a></li> <li ><a href="/document/2?doc_id=10626">中国A股流通股东</a></li> <li ><a href="/document/2?doc_id=10643">中国A股股东户数</a></li> <li ><a href="/document/2?doc_id=10644">中国A股前十大股东</a></li> <li ><a href="/document/2?doc_id=10826">中国A股内部人交易</a></li> <li ><a href="/document/2?doc_id=10827">中国A股重要股东增减持</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10713">代码表</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10714">行业代码表</a></li> <li ><a href="/document/2?doc_id=10818">指数板块对照</a></li> <li ><a href="/document/2?doc_id=10843">类型编码表</a></li> <li ><a href="/document/2?doc_id=10860">Wind兼容代码</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10816">重大事件</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10817">中国A股特别处理</a></li> <li ><a href="/document/2?doc_id=10828">中国A股诉讼事件</a></li> <li ><a href="/document/2?doc_id=10831">中国A股违规事件</a></li> <li ><a href="/document/2?doc_id=10838">中国A股立案调查</a></li> <li ><a href="/document/2?doc_id=10879">中国A股重大事件汇总</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10829">权益数据</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10830">中国A股限售股解禁公司明细</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10844">融资融券数据</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10845">中国A股融资融券交易明细</a></li> <li ><a href="/document/2?doc_id=10861">中国A股融资融券交易汇总</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10846">机构调研</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10847">中国A股机构调研活动</a></li> <li ><a href="/document/2?doc_id=10848">中国A股机构调研参与主体</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10854">公司治理</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10632">中国A股公司员工持股计划基本资料</a></li> <li ><a href="/document/2?doc_id=10633">中国A股公司员工持股计划股票买卖情况</a></li> <li ><a href="/document/2?doc_id=10634">中国A股股权激励期权行权数量与价格</a></li> <li ><a href="/document/2?doc_id=10635">中国A股股权激励基本资料</a></li> <li ><a href="/document/2?doc_id=10636">中国A股股权激励期权行权比例</a></li> <li ><a href="/document/2?doc_id=10637">中国A股股权激励数量明细</a></li> <li ><a href="/document/2?doc_id=10638">中国A股股权激励数量与价格</a></li> <li ><a href="/document/2?doc_id=10639">中国A股公司管理层成员</a></li> <li ><a href="/document/2?doc_id=10640">中国A股公司管理层持股及报酬</a></li> <li ><a href="/document/2?doc_id=10641">中国A股员工人数变更</a></li> <li ><a href="/document/2?doc_id=10642">中国A股员工构成</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10855">第三方数据</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10716">申万行业分类</a></li> <li ><a href="/document/2?doc_id=10717">中信指数成份股</a></li> <li ><a href="/document/2?doc_id=10799">中国A股中信行业分类</a></li> <li ><a href="/document/2?doc_id=10800">中国A股中信行业指数日行情</a></li> <li ><a href="/document/2?doc_id=10803">沪深300免费指数权重</a></li> <li ><a href="/document/2?doc_id=10804">中证红利指数权重</a></li> <li ><a href="/document/2?doc_id=10805">中证800指数权重</a></li> <li ><a href="/document/2?doc_id=10806">中证国企红利指数权重</a></li> <li ><a href="/document/2?doc_id=10856">申万行业分类(2021版)</a></li> <li ><a href="/document/2?doc_id=10857">中国A股中信指数成份股二级</a></li> <li ><a href="/document/2?doc_id=10858">中国A股中信指数成份股三级</a></li> <li ><a href="/document/2?doc_id=10862">中证1000指数权重</a></li> <li ><a href="/document/2?doc_id=10880">中证指数除数</a></li> <li ><a href="/document/2?doc_id=10881">上证50指数权重</a></li> <li ><a href="/document/2?doc_id=10972">中国A股中信行业指数日行情</a></li>
+                        </ul>
+                    </li>
+                 <li ><a href="/document/2?doc_id=10888">A股股本</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10263">指数数据</a>
+                        <ul class="list-unstyled">
+                            
+                    <li class="  in"><a href="/document/2?doc_id=10264">申万指数</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10265">申万行情</a></li> <li ><a href="/document/2?doc_id=10279">申万日收盘权重</a></li> <li ><a href="/document/2?doc_id=10281">申万成份明细</a></li> <li ><a href="/document/2?doc_id=10698">申万行业分类</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10282">中国A股指数数据</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10283">A股指数基本资料</a></li> <li ><a href="/document/2?doc_id=10284">A股指数日行情</a></li> <li ><a href="/document/2?doc_id=10285">A股指数成分股</a></li> <li ><a href="/document/2?doc_id=10286">A股万得指数成份股</a></li> <li ><a href="/document/2?doc_id=10288">A股万得行业指数日行情</a></li> <li ><a href="/document/2?doc_id=10289">ETF申购赎回清单</a></li> <li ><a href="/document/2?doc_id=10290">ETF申购赎回成份</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10703">指数衍生数据</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10704">指数估值数据</a></li> <li ><a href="/document/2?doc_id=10705">指数行情衍生指标</a></li> <li ><a href="/document/2?doc_id=10707">指数财务衍生指标</a></li>
+                        </ul>
+                    </li>
+                
+                        </ul>
+                    </li>
+                 
+                    <li class=" jstree-open  in"><a href="/document/2?doc_id=10276">基金数据</a>
+                        <ul class="list-unstyled">
+                            
+                    <li class=" jstree-open  in"><a href="/document/2?doc_id=10277">中国共同基金</a>
+                        <ul class="list-unstyled">
+                            
+                    <li class="  in"><a href="/document/2?doc_id=10291">共同基金基础信息</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10278">中国共同基金基本资料</a></li> <li ><a href="/document/2?doc_id=10928">中国共同基金份额</a></li> <li ><a href="/document/2?doc_id=10292">中国共同基金公司曾用名</a></li> <li ><a href="/document/2?doc_id=10293">中国共同基金公司派系风格</a></li> <li ><a href="/document/2?doc_id=10294">中国共同基金曾用名</a></li> <li ><a href="/document/2?doc_id=10295">中国共同基金风格系数</a></li> <li ><a href="/document/2?doc_id=10296">中国共同基金申购赎回天数</a></li> <li ><a href="/document/2?doc_id=10297">中国共同基金股票风格分类门限值</a></li> <li ><a href="/document/2?doc_id=10298">中国联接基金基本资料</a></li> <li ><a href="/document/2?doc_id=10299">中国分级基金基本资料</a></li> <li ><a href="/document/2?doc_id=10306">中国共同基金业绩比较基准配置</a></li> <li ><a href="/document/2?doc_id=10307">中国共同基金基金经理</a></li> <li ><a href="/document/2?doc_id=10308">中国Wind基金分类</a></li> <li ><a href="/document/2?doc_id=10309">中国共同基金暂停申购赎回</a></li> <li ><a href="/document/2?doc_id=10310">中国共同基金被动型基金跟踪指数</a></li> <li ><a href="/document/2?doc_id=10311">中国共同基金业务代码及简称</a></li> <li ><a href="/document/2?doc_id=10312">中国共同基金Wind概念分类</a></li> <li ><a href="/document/2?doc_id=10313">中国共同基金WIND行业板块主题分类</a></li> <li ><a href="/document/2?doc_id=10321">中国共同基金投资品种比例信息</a></li> <li ><a href="/document/2?doc_id=10322">中国共同基金初始风险等级</a></li> <li ><a href="/document/2?doc_id=10323">中国共同基金证监会分类</a></li> <li ><a href="/document/2?doc_id=10324">中国共同基金代销机构</a></li> <li ><a href="/document/2?doc_id=10325">中国开放式基金费率表</a></li> <li ><a href="/document/2?doc_id=10334">中国共同基金WIND概念板块主题分类</a></li> <li ><a href="/document/2?doc_id=10335">中国共同基金滚动运作周期</a></li> <li ><a href="/document/2?doc_id=10336">中国货币市场基金份额结转方式</a></li> <li ><a href="/document/2?doc_id=10337">中国保本基金基本资料</a></li> <li ><a href="/document/2?doc_id=10338">中国共同基金金融机构资格</a></li> <li ><a href="/document/2?doc_id=10339">中国LOF基金基本资料</a></li> <li ><a href="/document/2?doc_id=10929">中国共同基金场内流通份额</a></li> <li ><a href="/document/2?doc_id=10967">中国共同基金暂停申购赎回</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10342">基金公司基本资料</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10343">中国基金公司银行账号信息表</a></li> <li ><a href="/document/2?doc_id=10344">中国基金公司简介</a></li> <li ><a href="/document/2?doc_id=10345">中国基金公司管理层成员</a></li> <li ><a href="/document/2?doc_id=10346">中国基金公司TA代码</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10354">共同基金权益数据</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10355">中国共同基金分红</a></li> <li ><a href="/document/2?doc_id=10356">中国共同基金发行</a></li> <li ><a href="/document/2?doc_id=10357">中国共同基金持有人</a></li> <li ><a href="/document/2?doc_id=10358">中国共同基金持有人结构</a></li> <li ><a href="/document/2?doc_id=10359">中国共同基金单一投资者持有基金份额比例异常信息</a></li> <li ><a href="/document/2?doc_id=10360">中国共同基金基金份额拆分与折算</a></li> <li ><a href="/document/2?doc_id=10874">中国共同基金转型</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class=" jstree-open  in"><a href="/document/2?doc_id=10361">共同基金市场表现</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10362">中国共同基金利率敏感分析</a></li> <li ><a href="/document/2?doc_id=10368">中国上市基金日行情</a></li> <li ><a href="/document/2?doc_id=10369">中国共同基金业绩比较基准行情</a></li> <li ><a href="/document/2?doc_id=10451">中国共同基金场内流通份额</a></li> <li ><a href="/document/2?doc_id=10452">中国共同基金净值</a></li> <li ><a href="/document/2?doc_id=10453">中国Wind基金仓位估算</a></li> <li ><a href="/document/2?doc_id=10454">中国共同基金净值表现(报告期)</a></li> <li ><a href="/document/2?doc_id=10462">中国共同基金席位交易量及佣金</a></li> <li ><a href="/document/2?doc_id=10463">中国共同基金份额</a></li> <li class="active jstree-clicked "  ><a href="/document/2?doc_id=10471">中国上市基金IOPV收盘净值</a></li> <li ><a href="/document/2?doc_id=10472">中国共同基金净值操作记录表</a></li> <li ><a href="/document/2?doc_id=10473">中国共同基金停复牌</a></li> <li ><a href="/document/2?doc_id=10474">中国货币式基金重要指标(报告期)</a></li> <li ><a href="/document/2?doc_id=10475">中国货币式基金日收益(拆分)</a></li> <li ><a href="/document/2?doc_id=10476">中国货币式基金日收益</a></li> <li ><a href="/document/2?doc_id=10891">中国上市基金集合竞价数据</a></li> <li ><a href="/document/2?doc_id=10966">中国共同基金净值</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10480">共同基金市场衍生数据</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10481">中国共同基金业绩表现</a></li> <li ><a href="/document/2?doc_id=10892">中国ETF跟踪业绩表现</a></li> <li ><a href="/document/2?doc_id=10893">中国ETF资金流向数据</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10482">共同基金申购赎回</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10483">中国共同基金申购赎回情况</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10485">共同基金投资组合</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10486">中国共同基金投资组合重大变动(报告期)</a></li> <li ><a href="/document/2?doc_id=10487">中国共同基金投资组合—资产配置</a></li> <li ><a href="/document/2?doc_id=10488">中国共同基金投资组合—持券明细</a></li> <li ><a href="/document/2?doc_id=10489">中国共同基金投资组合—行业配置</a></li> <li ><a href="/document/2?doc_id=10490">中国共同基金投资组合—持股明细</a></li> <li ><a href="/document/2?doc_id=10507">中国共同基金投资组合—其他证券</a></li> <li ><a href="/document/2?doc_id=10508">中国货币式基金投资组合剩余期限(报告期)</a></li> <li ><a href="/document/2?doc_id=10798">中国共同基金投资组合第三方行业配置</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10513">共同基金评级</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10514">中国共同基金机构奖项排名</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10515">共同基金财务数据</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10516">中国共同基金资产负债表</a></li> <li ><a href="/document/2?doc_id=10517">中国共同基金公允价值变动收益(报告期)</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10522">共同基金分级基金</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10523">中国分级基金折算</a></li> <li ><a href="/document/2?doc_id=10524">中国分级基金收益分配</a></li> <li ><a href="/document/2?doc_id=10890">中国分级基金条款</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10528">共同基金指数数据</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10529">中国共同基金指数行情</a></li>
+                        </ul>
+                    </li>
+                 <li ><a href="/document/2?doc_id=10615">中国共同基金业绩表现</a></li>
+                        </ul>
+                    </li>
+                
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10627">期货数据</a>
+                        <ul class="list-unstyled">
+                            
+                    <li class="  in"><a href="/document/2?doc_id=10628">期货-商品期货</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10629">商品期货行情</a></li> <li ><a href="/document/2?doc_id=10939">商品期货夜盘行情</a></li> <li ><a href="/document/2?doc_id=10940">中国商品期货成交及持仓</a></li> <li ><a href="/document/2?doc_id=10941">中国期货库存(仓单)</a></li> <li ><a href="/document/2?doc_id=10942">中国期货库存报告</a></li> <li ><a href="/document/2?doc_id=10963">中国商品期货日行情</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10811">中国期权数据</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10812">中国期权衍生指标</a></li> <li ><a href="/document/2?doc_id=10813">中国期权基本资料</a></li> <li ><a href="/document/2?doc_id=10814">中国期权隐含波动率</a></li> <li ><a href="/document/2?doc_id=10815">Wind中国期权衍生指标</a></li> <li ><a href="/document/2?doc_id=10889">中国期权日行情</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10820">期货-国债期货</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10821">中国国债期货交易日行情</a></li> <li ><a href="/document/2?doc_id=10822">中国国债期货成交及持仓</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10823">期货-股指期货</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10824">中国股指期货日行情</a></li> <li ><a href="/document/2?doc_id=10825">中国股指期货成交及持仓</a></li>
+                        </ul>
+                    </li>
+                 <li ><a href="/document/2?doc_id=10906">期货指数EOD</a></li> 
+                    <li class="  in"><a href="/document/2?doc_id=10882">期货-基础信息</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10883">中国期货基本资料</a></li> <li ><a href="/document/2?doc_id=10898">中国期货交易交割手续费</a></li> <li ><a href="/document/2?doc_id=10948">中国期货标准合约属性</a></li> <li ><a href="/document/2?doc_id=10949">中国期货交易日历</a></li> <li ><a href="/document/2?doc_id=10950">中国期货保证金比例</a></li> <li ><a href="/document/2?doc_id=10960">中国期货连续(主力)合约和月合约映射表</a></li>
+                        </ul>
+                    </li>
+                 <li ><a href="/document/2?doc_id=10907">期货指数描述</a></li> <li ><a href="/document/2?doc_id=10908">黄金EOD价格</a></li> <li ><a href="/document/2?doc_id=10947">其他第三方商品期货指数行情</a></li> <li ><a href="/document/2?doc_id=10962">中国黄金现货日行情</a></li> <li ><a href="/document/2?doc_id=10964">中国期货指数日行情</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10660">新三板数据</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10661">新三板IPO公开发行信息</a></li> <li ><a href="/document/2?doc_id=10797">股转系统-日行情数据</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10787">香港股票数据库</a>
+                        <ul class="list-unstyled">
+                            
+                    <li class="  in"><a href="/document/2?doc_id=10788">行情交易数据</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10789">陆港通通道持股数量统计</a></li> <li ><a href="/document/2?doc_id=10865">香港股票日行情</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10866">第三方产品</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10867">港股通申万行业分类</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10869">股票基本信息</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10870">香港股票基本资料</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10871">行情衍生数据</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10872">香港股票日行情估值指标</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10875">行业数据</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10876">香港港股通成分股</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10900">指数数据</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10902">香港股票指数估值数据</a></li> <li ><a href="/document/2?doc_id=10903">香港股票指数基本资料(增量)</a></li> <li ><a href="/document/2?doc_id=10899">香港股票指数日行情</a></li>
+                        </ul>
+                    </li>
+                
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10832">一致预测</a>
+                        <ul class="list-unstyled">
+                            
+                    <li class="  in"><a href="/document/2?doc_id=10833">万得一致预测</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10711">Wind一致预测个股滚动指标</a></li> <li ><a href="/document/2?doc_id=10839">中国A股投资评级汇总</a></li> <li ><a href="/document/2?doc_id=10905">A股一致预期数据</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10834">盈利预测明细</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10835">中国A股投资评级明细</a></li> <li ><a href="/document/2?doc_id=10836">中国A股盈利预测明细</a></li> <li ><a href="/document/2?doc_id=10837">中国A股行业投资评级</a></li>
+                        </ul>
+                    </li>
+                
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10841">行情衍生</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10701">日行情估值指标</a></li> <li ><a href="/document/2?doc_id=10819">中国A股资金流向数据</a></li> <li ><a href="/document/2?doc_id=10842">中国A股日收益率</a></li> <li ><a href="/document/2?doc_id=10909">中国A股Level2指标</a></li> <li ><a href="/document/2?doc_id=10910">中国A股成交量技术指标</a></li> <li ><a href="/document/2?doc_id=10975">中国A股企业价值指标</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10894">宏观经济数据库</a>
+                        <ul class="list-unstyled">
+                            
+                    <li class="  in"><a href="/document/2?doc_id=10895">中国宏观-预测综合值</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10896">中国宏观预测综合值</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10930">中国宏观-宏观经济</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10931">中国宏观货币因子-货币供应</a></li> <li ><a href="/document/2?doc_id=10932">中国宏观经济就业与工资-企业（PIT）</a></li> <li ><a href="/document/2?doc_id=10933">中国宏观经济景气指数（PIT）</a></li> <li ><a href="/document/2?doc_id=10934">中国宏观经济价格指数（PIT）</a></li> <li ><a href="/document/2?doc_id=10935">中国宏观经济人口与资源（PIT）</a></li> <li ><a href="/document/2?doc_id=10936">中国宏观经济国民经济（PIT）</a></li> <li ><a href="/document/2?doc_id=10937">中国宏观经济进出口贸易（PIT）</a></li>
+                        </ul>
+                    </li>
+                
+                        </ul>
+                    </li>
+                
+                        </ul>
+                    </li>
+                  
+                    <li class="  in"><a href="/document/2?doc_id=10801">通联数据</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10802">因子暴露表</a></li> <li ><a href="/document/2?doc_id=10807">因子收益</a></li>
+                        </ul>
+                    </li>
+                  
+                    <li class="  in"><a href="/document/2?doc_id=10663">东财数据</a>
+                        <ul class="list-unstyled">
+                            
+                    <li class="  in"><a href="/document/2?doc_id=10664">公募基金库</a>
+                        <ul class="list-unstyled">
+                            
+                    <li class="  in"><a href="/document/2?doc_id=10665">市场表现</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10666">基金净值</a></li>
+                        </ul>
+                    </li>
+                
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10669">香港上市公司库</a>
+                        <ul class="list-unstyled">
+                            
+                    <li class="  in"><a href="/document/2?doc_id=10670">交易数据</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10671">港股复权因子</a></li> <li ><a href="/document/2?doc_id=10673">港股牛熊证日行情</a></li> <li ><a href="/document/2?doc_id=10674">港股日行情</a></li> <li ><a href="/document/2?doc_id=10675">交易日期</a></li> <li ><a href="/document/2?doc_id=10676">证券停复牌每日情况表</a></li> <li ><a href="/document/2?doc_id=10677">证券交易停复牌</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10684">证券市场统计</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10685">沪深港通成交数据统计表</a></li> <li ><a href="/document/2?doc_id=10686">沪深港通合资格股份名单表</a></li> <li ><a href="/document/2?doc_id=10687">沪深港通十大成交活跃股表</a></li> <li ><a href="/document/2?doc_id=10688">沪深股通卖空数据表</a></li>
+                        </ul>
+                    </li>
+                
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10692">沪深上市公司库</a>
+                        <ul class="list-unstyled">
+                            
+                    <li class="  in"><a href="/document/2?doc_id=10693">行业板块</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10694">板块对应股票明细新表</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10695">指数数据</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10696">指数日行情</a></li> <li ><a href="/document/2?doc_id=10697">系列指数分类表</a></li> <li ><a href="/document/2?doc_id=10737">指数概况</a></li> <li ><a href="/document/2?doc_id=10738">指数权重明细表</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10780">衍生数据（非财务类）</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10781">机构持股情况</a></li>
+                        </ul>
+                    </li>
+                
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10782">综合资讯库</a>
+                        <ul class="list-unstyled">
+                            
+                    <li class="  in"><a href="/document/2?doc_id=10783">研报</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10784">股票盈利预测表</a></li> <li ><a href="/document/2?doc_id=10785">研报个股评级信息表</a></li> <li ><a href="/document/2?doc_id=10786">研报基础信息表</a></li>
+                        </ul>
+                    </li>
+                
+                        </ul>
+                    </li>
+                
+                        </ul>
+                    </li>
+                  
+                    <li class="  in"><a href="/document/2?doc_id=10718">CYYX</a>
+                        <ul class="list-unstyled">
+                            
+                    <li class="  in"><a href="/document/2?doc_id=10719">一致预期</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10720">个股一致预期数据表</a></li> <li ><a href="/document/2?doc_id=10721">个股一致预期评级表</a></li> <li ><a href="/document/2?doc_id=10722">个股一致预期目标价表</a></li> <li ><a href="/document/2?doc_id=10726">指数一致预期数据表</a></li> <li ><a href="/document/2?doc_id=10727">申万行业一致预期数据表</a></li> <li ><a href="/document/2?doc_id=10728">中信行业一致预期数据表</a></li> <li ><a href="/document/2?doc_id=10729">个股一致预期数据表（滚动）</a></li> <li ><a href="/document/2?doc_id=10730">指数一致预期数据表（滚动）</a></li> <li ><a href="/document/2?doc_id=10731">申万行业一致预期数据表（滚动）</a></li> <li ><a href="/document/2?doc_id=10732">中信行业一致预期数据表（滚动）</a></li> <li ><a href="/document/2?doc_id=10792">卖方预测数据表</a></li>
+                        </ul>
+                    </li>
+                 
+                    <li class="  in"><a href="/document/2?doc_id=10790">一致预期衍生品</a>
+                        <ul class="list-unstyled">
+                            <li ><a href="/document/2?doc_id=10791">个股市场分歧度</a></li> <li ><a href="/document/2?doc_id=10840">个股市场信心</a></li> <li ><a href="/document/2?doc_id=10851">个股市场关注度</a></li> <li ><a href="/document/2?doc_id=10852">个股一致预期标准差和偏离度</a></li>
+                        </ul>
+                    </li>
+                 <li ><a href="/document/2?doc_id=10887">私募数据库</a></li>
+                        </ul>
+                    </li>
+                
+                </ul>
+            </div>
+        
+</nav>
+<div class="content col-md-9 col-sm-8 col-xs-12">
+<div class="search-panel">
+<div class="search-container">
+<span class="fa fa-search search-icon"></span>
+<input type="text" class="search-input" placeholder="Search">
+</div>
+</div>
+<h2 id="中国上市基金iopv收盘净值">中国上市基金IOPV收盘净值</h2>
+<hr>
+<p>接口：mf_iopvnav<br>描述：获取中国上市基金IOPV收盘净值<br>限量：单次最大10000<br>数据更新频率：日<br>数据更新时间：02:30;03:00;03:30;04:00;04:30;05:00;05:30;06:00;06:30;15:30;16:00</p>
+<h2 id="中国上市基金iopv收盘净值-1">中国上市基金IOPV收盘净值</h2>
+<hr>
+<p>接口：mf_iopvnav<br>描述：获取中国上市基金IOPV收盘净值<br>限量：单次最大100000</p>
+<p><strong>输入参数</strong></p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>必选</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>code</td>
+<td>str</td>
+<td>N</td>
+<td>Wind代码（样例格式‘159901.SZ’）</td>
+</tr>
+<tr>
+<td>price_date</td>
+<td>str</td>
+<td>N</td>
+<td>日期</td>
+</tr>
+<tr>
+<td>start_date</td>
+<td>str</td>
+<td>N</td>
+<td></td>
+</tr>
+<tr>
+<td>end_date</td>
+<td>str</td>
+<td>N</td>
+<td></td>
+</tr>
+</tbody></table>
+<p><strong>输出参数</strong></p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认显示</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>code</td>
+<td>str</td>
+<td>Y</td>
+<td>Wind代码</td>
+</tr>
+<tr>
+<td>price_date</td>
+<td>str</td>
+<td>Y</td>
+<td>日期</td>
+</tr>
+<tr>
+<td>iopv_nav</td>
+<td>float</td>
+<td>Y</td>
+<td>IOPV收盘净值</td>
+</tr>
+<tr>
+<td>opmode</td>
+<td>str</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>opdate</td>
+<td>datetime</td>
+<td>Y</td>
+<td></td>
+</tr>
+</tbody></table>
+<p><strong>表信息</strong></p>
+<table>
+<thead>
+<tr>
+<th>表中文名</th>
+<th>表名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>中国上市基金IOPV收盘净值</td>
+<td>CMFIOPVNAV</td>
+<td>记录基金的IOPV收盘净值</td>
+</tr>
+</tbody></table>
+<h3 id="示例">示例</h3>
+<p><strong>安装Python包</strong></p>
+<pre><code class="language-在终端输入">pip install dcube</code></pre>
+<p><strong>导入datacube</strong></p>
+<pre><code class="language-python">import dcube as dc</code></pre>
+<p><strong>用token初始化pro接口</strong></p>
+<pre><code class="language-python">pro = dc.pro_api(&#39;your token&#39;)
+</code></pre>
+<p><strong>数据调取</strong></p>
+<pre><code class="language-python">df = pro.query(&#39;mf_iopvnav&#39;, code=&#39;159901.SZ&#39;, fields=&#39;code,price_date,iopv_nav&#39;)</code></pre>
+<p>或者</p>
+<pre><code class="language-python">df = pro.mf_iopvnav(code=&#39;159901.SZ&#39;)</code></pre>
+
+</div>
+</div>
+</div>
+</section>
+
+<footer id="footer" class="site-footer">
+<div class="container">
+<div class="row footer-panel">
+<div class="col-md-4">
+<div class=""><img width="140" style="margin-top: 50px;" height="38" src="/static/frontend/images/newhome/founder_logo.png?v=755a8f78a9bbe12ce170d0fd257f3d07" alt=""></div>
+</div>
+<div class="col-md-4">
+<div class="title">使用文档</div>
+<div class="content">
+<ul>
+<li><a href="/document/1">平台介绍</a></li>
+<li><a href="/document/2">数据接口</a></li>
+<li><a href="/news">资讯数据</a></li>
+</ul>
+</div>
+</div>
+<div class="col-md-4">
+<div class="title">关注我们</div>
+<div class="content">
+<ul>
+<li>QQ群: 1109980501</li>
+<li>邮箱: wukun0@foundersc.com</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- <div class="row footer-footer">
+<div class="copyright"><p>&copy; 2018 Tushare</p></div>
+</div> -->
+</div>
+</footer>
+
+</div>
+<div class="scroll-to-top" data-spy="affix" data-offset-top="200">
+<a href="#page" class="smooth-scroll">置顶</a>
+</div>
+</body>
+<script type="text/javascript">
+require(['custom', 'carousel']);
+</script>
+
+
+<script type="text/javascript">
+require([
+'jquery',
+'jstree'
+], function ($, jstree) {
+$(document).ready(function() {
+const tree = $('#jstree').jstree({
+// plugins : ['state']
+plugins : ['wholerow'],
+core: {
+themes: {
+multiple: false,
+icons: false,
+stripes: false,
+expand_selected_onload: true
+}
+}
+});
+tree.on("select_node.jstree", function (e, data) {
+window.location = `${location.protocol}//${location.host}${data.node.a_attr.href}`;
+});
+const searchInput = document.querySelector('.search-input');
+const searchIcon = document.querySelector('.search-icon');
+const onSearch = () => {
+const query = searchInput.value;
+if (query) {
+window.location = `${location.protocol}//${location.host}/document/search?q=${encodeURIComponent(query)}`;
+}
+}
+searchInput.addEventListener('change', onSearch);
+searchIcon.addEventListener('click', onSearch);
+});
+});
+</script>
+
+</html>

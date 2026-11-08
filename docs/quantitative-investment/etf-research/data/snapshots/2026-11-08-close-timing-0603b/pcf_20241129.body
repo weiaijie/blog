@@ -1,0 +1,6975 @@
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html class="" lang="zh-CN">
+<head>
+
+
+
+
+
+
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width">
+<meta name="copyright" content="本页版权归中国博时基金所有。all rights reserved">
+<meta name="version" content="2017版">
+<meta name="author" content="BOSERA FUNDS">
+<meta name="apple-itunes-app" content="app-id=672198904">
+<link rel="shortcut icon" href="/static/images/favicon.ico">
+
+	
+	
+	
+	
+	
+	
+		<title>博时基金-申购赎回清单</title>
+		<meta name="keywords" content="申购赎回清单">
+		<meta name="description" content="申购赎回清单">
+	
+	
+	
+	
+	
+	
+	
+
+<script src="/static/js/rev-manifest-b0e63394e1.js" charset="utf-8"></script>
+<script src="/static/js/assetsLoader-4acf7e81fe.js" charset="utf-8"></script>
+
+
+<!--[if IE 8]>
+<script>
+  window.BROWSER_IE8 = true;
+</script>
+<![endif]-->
+<script>
+  var __devConfig = {
+    debug: true,
+    jsBase: 'http://localhost:9000',
+    cssBase: 'http://localhost:8899/css'
+  };
+  var __revConfig = {
+    jsBase: '/static/js',
+    cssBase: '/static/css'
+  };
+  assetsLoader.setDefault(__revConfig);
+  assetsLoader({
+    css: [
+      'icon.css',
+      'main.css',
+      'ui.css'
+    ],
+    js: [
+      'boot.js',
+      'vendor.js',
+      'commons.js',
+      'ui.js',
+      'validate.methods.js',
+      'plugin.js',
+      'init.js'
+    ]
+  });
+</script>
+<script>
+	assetsLoader({
+		css : [],
+		js : []
+	});
+</script>
+</head>
+<body>
+	
+
+	<div class="g-top">
+		<div class="container">
+			<div class="external-nav">
+				<a class="external-nav_link" href="http://capital.bosera.com/index.html" target="_blank"
+					rel="noopener">博时资本</a>
+				
+				<a class="external-nav_link" href="https://www.boserawealth.com/index" target="_blank"
+					rel="noopener">博时财富</a>
+				<a class="external-nav_link" href="/english/index.html" target="_blank">English</a>
+			</div>
+			<div class="assistant-nav">
+				<span id="userNotice" data-trade-host="https://trade.bosera.com/indi/api/www/" style="display: none">
+					欢迎回来，<span id="userName"></span>&nbsp;&nbsp;
+					<span class="assistant-nav_link assistant-nav_link--highlight" id="logoutBtn">安全退出</span>
+				</span>
+				<a class="assistant-nav_link" href="/column/index.do?classid=00020002001100001" target="_blank">帮助中心</a>
+				<a class="assistant-nav_link last" id="onlineService" href="/service/webchat/robot.jsp"
+					target="_blank">在线客服</a>
+			</div>
+		</div>
+	</div>
+
+<div class="g-header">
+	<div class="container">
+		<h1 class="logo-wrap">
+		  <a class="logo" href="/index.html" title="博时基金">博时基金</a>
+		  
+		</h1>
+    <div class="nav-wrap" style="width: 930px;">
+      <ul class="nav" id="topNav" data-focus-id="fund">
+        <li><a class="nav_link" id="indexMenu" href="/index.html">首页</a></li
+          ><li><a class="nav_link" id="fundMenu" href="/fund/index.html">基金产品</a></li
+          ><li><a class="nav_link" href="https://trade.bosera.com/indi/pension/index" target="_blank" rel="noopener">养老专区</a></li
+          >
+          <!-- <li><a class="nav_link" href="https://trade.bosera.com/indi/specialfund/index" target="_blank" rel="noopener">高端理财</a></li> -->
+          <li><a class="nav_link" href="https://trade.bosera.com/indi/fundportfolio/propaganda" target="_blank" rel="noopener">博乐智投</a></li
+          ><li class="dropdown-nav J_dropdownNav">
+            <span class="nav_link J_rootNav">&nbsp;企业理财&nbsp;</span>
+          <ul class="sub-nav">
+            <li><a class="sub-nav_link" href="https://trade.bosera.com/corp/asset/share/list" target="_blank">企业法人</a></li>
+            <li><a class="sub-nav_link last-child" href="https://trade.bosera.com/pro/asset/share/list" target="_blank">专业投资者</a></li>
+          </ul>
+        </li
+        ><li class="dropdown-nav J_dropdownNav">
+          <span class="nav_link J_rootNav">专户与养老金</span>
+          <ul class="sub-nav">
+            <li><a class="sub-nav_link" id="netAccountMenu" href="/column/index.do?classid=00020002000700010004">专户理财</a></li>
+            <li><a class="sub-nav_link last-child" id="pensionFundMenu" href="/column/index.do?classid=00020002000600090001">养老基金</a></li>
+          </ul>
+        </li
+        ><li><a class="nav_link" id="aboutMenu" href="/column/index.do?classid=00020002000200010001" >关于博时</a></li>
+      </ul>
+      <div class="account-nav" id="accountNav" style="display: none">
+        <a class="btn-primary btn--middle" href="https://trade.bosera.com/indi/api/www/myaccturl.do">我的账户</a>
+      </div>
+      <div class="header-action" id="headerAction" style="display: none">
+        <a class="btn-primary btn--middle" href="https://trade.bosera.com/indi/login" target="_blank">登录</a>
+        <a class="btn-default btn--middle" href="https://trade.bosera.com/indi/openacct/mobilenoform" target="_blank">注册</a>
+      </div>
+    </div>
+    <!-- .nav-wrap -->
+  </div>
+  <!-- .container -->
+</div>
+<!-- .g-header -->
+	<div class="main" id="main">
+		<div class="container">
+			
+
+
+
+
+
+
+
+
+<h2 class="h2">
+	<span class="h2-title">申购／赎回清单&nbsp;
+	  
+	  
+	  
+	</span>
+	<span class="h2-toolbox">
+	  <form action="/fund/etfList.do" method="get" novalidate>
+	  <input type="hidden" name="fundCode" value="513500">
+	  <input type="hidden" name="pcfType" value="0">
+	   <label class="form-label">
+	     <input 
+	       class="form-text form-text--small J_date" 
+	       type="text" 
+	       name="queryDate" 
+	       value="2024-11-29" 
+	       readonly style="width: 70px;">
+	   </label>
+	   <label class="form-label" style="margin-right: 0;">
+	     <button class="btn-primary btn--small" type="submit">查 询</button>
+	     
+	       <a class="btn-default btn--small" href="/jjcp/etf/files/513500/2024/51350011292.ETF" target="_blank">文件下载</a>
+	     
+	   </label>
+	  </form>
+	</span>
+</h2>
+
+
+  <div class="panel">
+  	
+		<p>
+		  <b>基本信息</b>
+		</p>
+		<table class="table-default table--border">
+		  <tbody class="tbody-default tbody--left">
+		    <tr>
+		      <th style="width:380px;">最新公告日期</th>
+		      <td>2024年11月29日</td>
+		    </tr>
+		    <tr>
+		      <th>基金名称</th>
+		      <td>标普500</td>
+		    </tr>
+		    <tr>
+		      <th>基金管理公司名称</th>
+		      <td>博时基金管理有限公司</td>
+		    </tr>
+		    
+		      
+		      <tr>
+		        <th>基金代码</th>
+		        <td>513500</td>
+		      </tr>
+		    
+		    
+		  </tbody>
+		</table>
+	  <p>
+	    <b>2024年11月27日 信息内容</b>
+	  </p>
+		<table class="table-default table--border">
+	    <tbody class="tbody-default tbody--left">
+	      
+			    <tr>
+			      <th style="width:380px;">现金差额(单位：元)</th>
+			      <td>￥43,675.17</td>
+			    </tr>
+		    
+		    <tr>
+		      <th style="width:380px;">最小申购、赎回单位资产净值(单位：元)</th>
+		      <td>￥2,039,537.00</td>
+		    </tr>
+		    <tr>
+		      <th>基金份额净值(单位：元)</th>
+		      <td>￥2.0395</td>
+		    </tr>
+		  </tbody>
+		</table>
+		<p>
+		  <b>2024年11月29日 信息内容</b>
+		</p>
+	   <table class="table-default table--border">
+	     <tbody class="tbody-default tbody--left">
+	      
+			    <tr>
+			      <th style="width:380px;">预估现金部分(单位：元)</th>
+			      <td>￥44,921.26</td>
+			    </tr>
+			    <tr>
+			      <th>现金替代比例上限</th>
+			      <td>100.0%</td>
+			    </tr>
+			    <tr>
+			      <th>是否需要公布IOPV</th>
+			      <td>是</td>
+			    </tr>
+			    <tr>
+			      <th>最小申购、赎回单位(单位：份)</th>
+			      <td>1,000,000</td>
+			    </tr>
+			    
+			    
+			    <tr>
+			      <th>是否允许申购</th>
+			      <td>是</td>
+			    </tr>
+			    <tr>
+			      <th>是否允许赎回</th>
+			      <td>是</td>
+			    </tr>
+			    
+			    
+			    
+			    <tr>
+			      <th>当日累计申购份额上限(单位：份)</th>
+			      <td>5,000,000.00</td>
+			    </tr>
+			    <tr>
+			      <th>当日累计赎回份额上限(单位：份)</th>
+			      <td>800,000,000.00</td>
+			    </tr>
+		    
+		    
+		  </tbody>
+		</table>
+		<p>
+		  
+	        <b>成分券信息内容</b>
+          
+          
+		</p>
+	  <table class="table-default table--border">
+    <thead class="thead-default">
+    <tr>
+      <td>证券代码</td>
+      <td>证券简称</td>
+      <td>
+		证券数量
+        
+      </td>
+      <td>现金替代标志</td>
+      
+        
+        
+        	
+        	<td>申购现金替代溢价比例</td>
+        	<td>赎回现金替代折价比例</td>
+        
+        
+        <td>固定替代金额</td>
+      
+      
+    </tr>
+   </thead>
+   <tbody class="tbody-default">
+    
+      
+      
+        
+          <tr>
+            <td>A</td>
+            <td>A</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,988.720</td>
+          </tr>
+        
+          <tr>
+            <td>AAPL</td>
+            <td>AAPL</td>
+            <td>85</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>143,741.220</td>
+          </tr>
+        
+          <tr>
+            <td>ABBV</td>
+            <td>ABBV</td>
+            <td>10</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>13,178.460</td>
+          </tr>
+        
+          <tr>
+            <td>ABNB</td>
+            <td>ABNB</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,990.730</td>
+          </tr>
+        
+          <tr>
+            <td>ABT</td>
+            <td>ABT</td>
+            <td>10</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>8,562.260</td>
+          </tr>
+        
+          <tr>
+            <td>ACGL</td>
+            <td>ACGL</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,450.290</td>
+          </tr>
+        
+          <tr>
+            <td>ACN</td>
+            <td>ACN</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>7,820.700</td>
+          </tr>
+        
+          <tr>
+            <td>ADBE</td>
+            <td>ADBE</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>7,395.140</td>
+          </tr>
+        
+          <tr>
+            <td>ADI</td>
+            <td>ADI</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>4,689.700</td>
+          </tr>
+        
+          <tr>
+            <td>ADM</td>
+            <td>ADM</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,174.100</td>
+          </tr>
+        
+          <tr>
+            <td>ADP</td>
+            <td>ADP</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>4,418.540</td>
+          </tr>
+        
+          <tr>
+            <td>ADSK</td>
+            <td>ADSK</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,092.080</td>
+          </tr>
+        
+          <tr>
+            <td>AEE</td>
+            <td>AEE</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>683.690</td>
+          </tr>
+        
+          <tr>
+            <td>AEP</td>
+            <td>AEP</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,157.080</td>
+          </tr>
+        
+          <tr>
+            <td>AES</td>
+            <td>AES</td>
+            <td>4</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>374.020</td>
+          </tr>
+        
+          <tr>
+            <td>AFL</td>
+            <td>AFL</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,463.940</td>
+          </tr>
+        
+          <tr>
+            <td>AIG</td>
+            <td>AIG</td>
+            <td>4</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,221.080</td>
+          </tr>
+        
+          <tr>
+            <td>AIZ</td>
+            <td>AIZ</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>AJG</td>
+            <td>AJG</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,268.580</td>
+          </tr>
+        
+          <tr>
+            <td>AKAM</td>
+            <td>AKAM</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>675.620</td>
+          </tr>
+        
+          <tr>
+            <td>ALB</td>
+            <td>ALB</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>777.260</td>
+          </tr>
+        
+          <tr>
+            <td>ALGN</td>
+            <td>ALGN</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>ALL</td>
+            <td>ALL</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,492.040</td>
+          </tr>
+        
+          <tr>
+            <td>ALLE</td>
+            <td>ALLE</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>AMAT</td>
+            <td>AMAT</td>
+            <td>5</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>6,165.980</td>
+          </tr>
+        
+          <tr>
+            <td>AMCR</td>
+            <td>AMCR</td>
+            <td>8</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>604.650</td>
+          </tr>
+        
+          <tr>
+            <td>AMD</td>
+            <td>AMD</td>
+            <td>9</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>8,826.140</td>
+          </tr>
+        
+          <tr>
+            <td>AME</td>
+            <td>AME</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,404.370</td>
+          </tr>
+        
+          <tr>
+            <td>AMGN</td>
+            <td>AMGN</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>6,048.000</td>
+          </tr>
+        
+          <tr>
+            <td>AMP</td>
+            <td>AMP</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>4,116.720</td>
+          </tr>
+        
+          <tr>
+            <td>AMT</td>
+            <td>AMT</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>4,519.750</td>
+          </tr>
+        
+          <tr>
+            <td>AMTM</td>
+            <td>AMTM</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>172.040</td>
+          </tr>
+        
+          <tr>
+            <td>AMZN</td>
+            <td>AMZN</td>
+            <td>52</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>77,009.800</td>
+          </tr>
+        
+          <tr>
+            <td>ANET</td>
+            <td>ANET</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,895.760</td>
+          </tr>
+        
+          <tr>
+            <td>ANSS</td>
+            <td>ANSS</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>AON</td>
+            <td>AON</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,831.120</td>
+          </tr>
+        
+          <tr>
+            <td>AOS</td>
+            <td>AOS</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>533.390</td>
+          </tr>
+        
+          <tr>
+            <td>APA</td>
+            <td>APA</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>324.210</td>
+          </tr>
+        
+          <tr>
+            <td>APD</td>
+            <td>APD</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,398.580</td>
+          </tr>
+        
+          <tr>
+            <td>APH</td>
+            <td>APH</td>
+            <td>7</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>3,665.180</td>
+          </tr>
+        
+          <tr>
+            <td>APTV</td>
+            <td>APTV</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>399.640</td>
+          </tr>
+        
+          <tr>
+            <td>ARE</td>
+            <td>ARE</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>795.550</td>
+          </tr>
+        
+          <tr>
+            <td>ATO</td>
+            <td>ATO</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,090.020</td>
+          </tr>
+        
+          <tr>
+            <td>AVB</td>
+            <td>AVB</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,711.800</td>
+          </tr>
+        
+          <tr>
+            <td>AVGO</td>
+            <td>AVGO</td>
+            <td>26</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>29,882.750</td>
+          </tr>
+        
+          <tr>
+            <td>AVY</td>
+            <td>AVY</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>AWK</td>
+            <td>AWK</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>995.580</td>
+          </tr>
+        
+          <tr>
+            <td>AXON</td>
+            <td>AXON</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>AXP</td>
+            <td>AXP</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>6,570.160</td>
+          </tr>
+        
+          <tr>
+            <td>AZO</td>
+            <td>AZO</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>BA</td>
+            <td>BA</td>
+            <td>4</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>4,388.020</td>
+          </tr>
+        
+          <tr>
+            <td>BAC</td>
+            <td>BAC</td>
+            <td>38</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>13,066.600</td>
+          </tr>
+        
+          <tr>
+            <td>BALL</td>
+            <td>BALL</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>901.210</td>
+          </tr>
+        
+          <tr>
+            <td>BAX</td>
+            <td>BAX</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>715.650</td>
+          </tr>
+        
+          <tr>
+            <td>BBY</td>
+            <td>BBY</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>634.670</td>
+          </tr>
+        
+          <tr>
+            <td>BDX</td>
+            <td>BDX</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>3,195.710</td>
+          </tr>
+        
+          <tr>
+            <td>BEN</td>
+            <td>BEN</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>326.510</td>
+          </tr>
+        
+          <tr>
+            <td>BF/B</td>
+            <td>BF/B</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>300.160</td>
+          </tr>
+        
+          <tr>
+            <td>BG</td>
+            <td>BG</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>639.990</td>
+          </tr>
+        
+          <tr>
+            <td>BIIB</td>
+            <td>BIIB</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,150.490</td>
+          </tr>
+        
+          <tr>
+            <td>BK</td>
+            <td>BK</td>
+            <td>4</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,353.520</td>
+          </tr>
+        
+          <tr>
+            <td>BKNG</td>
+            <td>BKNG</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>BKR</td>
+            <td>BKR</td>
+            <td>6</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,883.480</td>
+          </tr>
+        
+          <tr>
+            <td>BLDR</td>
+            <td>BLDR</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,329.870</td>
+          </tr>
+        
+          <tr>
+            <td>BLK</td>
+            <td>BLK</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>7,338.200</td>
+          </tr>
+        
+          <tr>
+            <td>BMY</td>
+            <td>BMY</td>
+            <td>11</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>4,693.010</td>
+          </tr>
+        
+          <tr>
+            <td>BR</td>
+            <td>BR</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,697.340</td>
+          </tr>
+        
+          <tr>
+            <td>BRK/B</td>
+            <td>BRK/B</td>
+            <td>10</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>34,773.060</td>
+          </tr>
+        
+          <tr>
+            <td>BRO</td>
+            <td>BRO</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>814.840</td>
+          </tr>
+        
+          <tr>
+            <td>BSX</td>
+            <td>BSX</td>
+            <td>8</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>5,225.890</td>
+          </tr>
+        
+          <tr>
+            <td>BWA</td>
+            <td>BWA</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>246.750</td>
+          </tr>
+        
+          <tr>
+            <td>BX</td>
+            <td>BX</td>
+            <td>4</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>5,442.420</td>
+          </tr>
+        
+          <tr>
+            <td>BXP</td>
+            <td>BXP</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>596.440</td>
+          </tr>
+        
+          <tr>
+            <td>C</td>
+            <td>C</td>
+            <td>11</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>5,555.280</td>
+          </tr>
+        
+          <tr>
+            <td>CAG</td>
+            <td>CAG</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>592.770</td>
+          </tr>
+        
+          <tr>
+            <td>CAH</td>
+            <td>CAH</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>882.720</td>
+          </tr>
+        
+          <tr>
+            <td>CARR</td>
+            <td>CARR</td>
+            <td>5</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,767.710</td>
+          </tr>
+        
+          <tr>
+            <td>CAT</td>
+            <td>CAT</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>8,717.740</td>
+          </tr>
+        
+          <tr>
+            <td>CB</td>
+            <td>CB</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>4,179.850</td>
+          </tr>
+        
+          <tr>
+            <td>CBOE</td>
+            <td>CBOE</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,563.520</td>
+          </tr>
+        
+          <tr>
+            <td>CBRE</td>
+            <td>CBRE</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,025.720</td>
+          </tr>
+        
+          <tr>
+            <td>CCI</td>
+            <td>CCI</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,536.100</td>
+          </tr>
+        
+          <tr>
+            <td>CCL</td>
+            <td>CCL</td>
+            <td>6</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,085.780</td>
+          </tr>
+        
+          <tr>
+            <td>CDNS</td>
+            <td>CDNS</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>4,386.300</td>
+          </tr>
+        
+          <tr>
+            <td>CDW</td>
+            <td>CDW</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,272.280</td>
+          </tr>
+        
+          <tr>
+            <td>CE</td>
+            <td>CE</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>524.820</td>
+          </tr>
+        
+          <tr>
+            <td>CEG</td>
+            <td>CEG</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>3,647.900</td>
+          </tr>
+        
+          <tr>
+            <td>CF</td>
+            <td>CF</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>638.190</td>
+          </tr>
+        
+          <tr>
+            <td>CFG</td>
+            <td>CFG</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,040.000</td>
+          </tr>
+        
+          <tr>
+            <td>CHD</td>
+            <td>CHD</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>794.390</td>
+          </tr>
+        
+          <tr>
+            <td>CHRW</td>
+            <td>CHRW</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>757.610</td>
+          </tr>
+        
+          <tr>
+            <td>CHTR</td>
+            <td>CHTR</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,805.930</td>
+          </tr>
+        
+          <tr>
+            <td>CI</td>
+            <td>CI</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>4,844.390</td>
+          </tr>
+        
+          <tr>
+            <td>CINF</td>
+            <td>CINF</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,152.860</td>
+          </tr>
+        
+          <tr>
+            <td>CL</td>
+            <td>CL</td>
+            <td>5</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>3,482.490</td>
+          </tr>
+        
+          <tr>
+            <td>CLX</td>
+            <td>CLX</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,203.180</td>
+          </tr>
+        
+          <tr>
+            <td>CMCSA</td>
+            <td>CMCSA</td>
+            <td>22</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>6,739.820</td>
+          </tr>
+        
+          <tr>
+            <td>CME</td>
+            <td>CME</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>3,416.700</td>
+          </tr>
+        
+          <tr>
+            <td>CMG</td>
+            <td>CMG</td>
+            <td>8</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>3,573.190</td>
+          </tr>
+        
+          <tr>
+            <td>CMI</td>
+            <td>CMI</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,670.750</td>
+          </tr>
+        
+          <tr>
+            <td>CMS</td>
+            <td>CMS</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,014.800</td>
+          </tr>
+        
+          <tr>
+            <td>CNC</td>
+            <td>CNC</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,294.160</td>
+          </tr>
+        
+          <tr>
+            <td>CNP</td>
+            <td>CNP</td>
+            <td>4</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>940.370</td>
+          </tr>
+        
+          <tr>
+            <td>COF</td>
+            <td>COF</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,753.890</td>
+          </tr>
+        
+          <tr>
+            <td>COO</td>
+            <td>COO</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>744.510</td>
+          </tr>
+        
+          <tr>
+            <td>COP</td>
+            <td>COP</td>
+            <td>7</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>5,411.100</td>
+          </tr>
+        
+          <tr>
+            <td>COR</td>
+            <td>COR</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,797.320</td>
+          </tr>
+        
+          <tr>
+            <td>COST</td>
+            <td>COST</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>13,842.860</td>
+          </tr>
+        
+          <tr>
+            <td>CPAY</td>
+            <td>CPAY</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>CPB</td>
+            <td>CPB</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>331.620</td>
+          </tr>
+        
+          <tr>
+            <td>CPRT</td>
+            <td>CPRT</td>
+            <td>5</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,285.790</td>
+          </tr>
+        
+          <tr>
+            <td>CPT</td>
+            <td>CPT</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>914.390</td>
+          </tr>
+        
+          <tr>
+            <td>CRL</td>
+            <td>CRL</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>CRM</td>
+            <td>CRM</td>
+            <td>5</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>11,877.390</td>
+          </tr>
+        
+          <tr>
+            <td>CRWD</td>
+            <td>CRWD</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,502.020</td>
+          </tr>
+        
+          <tr>
+            <td>CSCO</td>
+            <td>CSCO</td>
+            <td>22</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>9,389.190</td>
+          </tr>
+        
+          <tr>
+            <td>CSGP</td>
+            <td>CSGP</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,180.070</td>
+          </tr>
+        
+          <tr>
+            <td>CSX</td>
+            <td>CSX</td>
+            <td>11</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,886.910</td>
+          </tr>
+        
+          <tr>
+            <td>CTAS</td>
+            <td>CTAS</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>3,225.510</td>
+          </tr>
+        
+          <tr>
+            <td>CTLT</td>
+            <td>CTLT</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>439.090</td>
+          </tr>
+        
+          <tr>
+            <td>CTRA</td>
+            <td>CTRA</td>
+            <td>4</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>768.190</td>
+          </tr>
+        
+          <tr>
+            <td>CTSH</td>
+            <td>CTSH</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,743.760</td>
+          </tr>
+        
+          <tr>
+            <td>CTVA</td>
+            <td>CTVA</td>
+            <td>4</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,799.550</td>
+          </tr>
+        
+          <tr>
+            <td>CVS</td>
+            <td>CVS</td>
+            <td>7</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>3,021.230</td>
+          </tr>
+        
+          <tr>
+            <td>CVX</td>
+            <td>CVX</td>
+            <td>9</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>10,502.100</td>
+          </tr>
+        
+          <tr>
+            <td>CZR</td>
+            <td>CZR</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>275.330</td>
+          </tr>
+        
+          <tr>
+            <td>D</td>
+            <td>D</td>
+            <td>5</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,124.640</td>
+          </tr>
+        
+          <tr>
+            <td>DAL</td>
+            <td>DAL</td>
+            <td>4</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,831.800</td>
+          </tr>
+        
+          <tr>
+            <td>DAY</td>
+            <td>DAY</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>574.920</td>
+          </tr>
+        
+          <tr>
+            <td>DD</td>
+            <td>DD</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,202.390</td>
+          </tr>
+        
+          <tr>
+            <td>DE</td>
+            <td>DE</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>3,354.360</td>
+          </tr>
+        
+          <tr>
+            <td>DECK</td>
+            <td>DECK</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,380.400</td>
+          </tr>
+        
+          <tr>
+            <td>DELL</td>
+            <td>DELL</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,790.620</td>
+          </tr>
+        
+          <tr>
+            <td>DFS</td>
+            <td>DFS</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,314.100</td>
+          </tr>
+        
+          <tr>
+            <td>DG</td>
+            <td>DG</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>548.930</td>
+          </tr>
+        
+          <tr>
+            <td>DGX</td>
+            <td>DGX</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,175.610</td>
+          </tr>
+        
+          <tr>
+            <td>DHI</td>
+            <td>DHI</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,439.180</td>
+          </tr>
+        
+          <tr>
+            <td>DHR</td>
+            <td>DHR</td>
+            <td>4</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>6,876.580</td>
+          </tr>
+        
+          <tr>
+            <td>DIS</td>
+            <td>DIS</td>
+            <td>10</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>8,465.080</td>
+          </tr>
+        
+          <tr>
+            <td>DLR</td>
+            <td>DLR</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,811.330</td>
+          </tr>
+        
+          <tr>
+            <td>DLTR</td>
+            <td>DLTR</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>514.670</td>
+          </tr>
+        
+          <tr>
+            <td>DOC</td>
+            <td>DOC</td>
+            <td>4</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>640.350</td>
+          </tr>
+        
+          <tr>
+            <td>DOV</td>
+            <td>DOV</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,482.790</td>
+          </tr>
+        
+          <tr>
+            <td>DOW</td>
+            <td>DOW</td>
+            <td>4</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,265.160</td>
+          </tr>
+        
+          <tr>
+            <td>DPZ</td>
+            <td>DPZ</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>DRI</td>
+            <td>DRI</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,259.540</td>
+          </tr>
+        
+          <tr>
+            <td>DTE</td>
+            <td>DTE</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>907.550</td>
+          </tr>
+        
+          <tr>
+            <td>DUK</td>
+            <td>DUK</td>
+            <td>4</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>3,380.850</td>
+          </tr>
+        
+          <tr>
+            <td>DVA</td>
+            <td>DVA</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>DVN</td>
+            <td>DVN</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>817.140</td>
+          </tr>
+        
+          <tr>
+            <td>DXCM</td>
+            <td>DXCM</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,124.360</td>
+          </tr>
+        
+          <tr>
+            <td>EA</td>
+            <td>EA</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,174.030</td>
+          </tr>
+        
+          <tr>
+            <td>EBAY</td>
+            <td>EBAY</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,382.920</td>
+          </tr>
+        
+          <tr>
+            <td>ECL</td>
+            <td>ECL</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,782.990</td>
+          </tr>
+        
+          <tr>
+            <td>ED</td>
+            <td>ED</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,462.390</td>
+          </tr>
+        
+          <tr>
+            <td>EFX</td>
+            <td>EFX</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,880.100</td>
+          </tr>
+        
+          <tr>
+            <td>EG</td>
+            <td>EG</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>EIX</td>
+            <td>EIX</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,272.070</td>
+          </tr>
+        
+          <tr>
+            <td>EL</td>
+            <td>EL</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>529.860</td>
+          </tr>
+        
+          <tr>
+            <td>ELV</td>
+            <td>ELV</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,899.080</td>
+          </tr>
+        
+          <tr>
+            <td>EMN</td>
+            <td>EMN</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>750.270</td>
+          </tr>
+        
+          <tr>
+            <td>EMR</td>
+            <td>EMR</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,863.230</td>
+          </tr>
+        
+          <tr>
+            <td>ENPH</td>
+            <td>ENPH</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>520.860</td>
+          </tr>
+        
+          <tr>
+            <td>EOG</td>
+            <td>EOG</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,874.030</td>
+          </tr>
+        
+          <tr>
+            <td>EPAM</td>
+            <td>EPAM</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>EQIX</td>
+            <td>EQIX</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>7,047.760</td>
+          </tr>
+        
+          <tr>
+            <td>EQR</td>
+            <td>EQR</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,115.430</td>
+          </tr>
+        
+          <tr>
+            <td>EQT</td>
+            <td>EQT</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>977.800</td>
+          </tr>
+        
+          <tr>
+            <td>ERIE</td>
+            <td>ERIE</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>ES</td>
+            <td>ES</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>929.860</td>
+          </tr>
+        
+          <tr>
+            <td>ESS</td>
+            <td>ESS</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>ETN</td>
+            <td>ETN</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>5,355.170</td>
+          </tr>
+        
+          <tr>
+            <td>ETR</td>
+            <td>ETR</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,125.800</td>
+          </tr>
+        
+          <tr>
+            <td>EVRG</td>
+            <td>EVRG</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>467.880</td>
+          </tr>
+        
+          <tr>
+            <td>EW</td>
+            <td>EW</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,556.320</td>
+          </tr>
+        
+          <tr>
+            <td>EXC</td>
+            <td>EXC</td>
+            <td>6</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,706.410</td>
+          </tr>
+        
+          <tr>
+            <td>EXPD</td>
+            <td>EXPD</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>872.780</td>
+          </tr>
+        
+          <tr>
+            <td>EXPE</td>
+            <td>EXPE</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,331.090</td>
+          </tr>
+        
+          <tr>
+            <td>EXR</td>
+            <td>EXR</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,242.990</td>
+          </tr>
+        
+          <tr>
+            <td>F</td>
+            <td>F</td>
+            <td>22</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,757.800</td>
+          </tr>
+        
+          <tr>
+            <td>FANG</td>
+            <td>FANG</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,268.250</td>
+          </tr>
+        
+          <tr>
+            <td>FAST</td>
+            <td>FAST</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,807.680</td>
+          </tr>
+        
+          <tr>
+            <td>FCX</td>
+            <td>FCX</td>
+            <td>8</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,519.950</td>
+          </tr>
+        
+          <tr>
+            <td>FDS</td>
+            <td>FDS</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>FDX</td>
+            <td>FDX</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,183.860</td>
+          </tr>
+        
+          <tr>
+            <td>FE</td>
+            <td>FE</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>920.360</td>
+          </tr>
+        
+          <tr>
+            <td>FFIV</td>
+            <td>FFIV</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>FI</td>
+            <td>FI</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>4,763.550</td>
+          </tr>
+        
+          <tr>
+            <td>FICO</td>
+            <td>FICO</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>FIS</td>
+            <td>FIS</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,847.420</td>
+          </tr>
+        
+          <tr>
+            <td>FITB</td>
+            <td>FITB</td>
+            <td>4</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,386.660</td>
+          </tr>
+        
+          <tr>
+            <td>FMC</td>
+            <td>FMC</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>428.290</td>
+          </tr>
+        
+          <tr>
+            <td>FOX</td>
+            <td>FOX</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>319.310</td>
+          </tr>
+        
+          <tr>
+            <td>FOXA</td>
+            <td>FOXA</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>336.230</td>
+          </tr>
+        
+          <tr>
+            <td>FRT</td>
+            <td>FRT</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>FSLR</td>
+            <td>FSLR</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,386.160</td>
+          </tr>
+        
+          <tr>
+            <td>FTNT</td>
+            <td>FTNT</td>
+            <td>4</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,708.250</td>
+          </tr>
+        
+          <tr>
+            <td>FTV</td>
+            <td>FTV</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,141.920</td>
+          </tr>
+        
+          <tr>
+            <td>GD</td>
+            <td>GD</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,032.120</td>
+          </tr>
+        
+          <tr>
+            <td>GDDY</td>
+            <td>GDDY</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,424.160</td>
+          </tr>
+        
+          <tr>
+            <td>GE</td>
+            <td>GE</td>
+            <td>6</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>7,799.970</td>
+          </tr>
+        
+          <tr>
+            <td>GEHC</td>
+            <td>GEHC</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,792.350</td>
+          </tr>
+        
+          <tr>
+            <td>GEN</td>
+            <td>GEN</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>665.980</td>
+          </tr>
+        
+          <tr>
+            <td>GEV</td>
+            <td>GEV</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>4,827.540</td>
+          </tr>
+        
+          <tr>
+            <td>GILD</td>
+            <td>GILD</td>
+            <td>7</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>4,656.300</td>
+          </tr>
+        
+          <tr>
+            <td>GIS</td>
+            <td>GIS</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,430.210</td>
+          </tr>
+        
+          <tr>
+            <td>GL</td>
+            <td>GL</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>804.040</td>
+          </tr>
+        
+          <tr>
+            <td>GLW</td>
+            <td>GLW</td>
+            <td>4</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,388.390</td>
+          </tr>
+        
+          <tr>
+            <td>GM</td>
+            <td>GM</td>
+            <td>6</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,397.000</td>
+          </tr>
+        
+          <tr>
+            <td>GNRC</td>
+            <td>GNRC</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>GOOG</td>
+            <td>GOOG</td>
+            <td>27</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>33,199.110</td>
+          </tr>
+        
+          <tr>
+            <td>GOOGL</td>
+            <td>GOOGL</td>
+            <td>33</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>40,199.000</td>
+          </tr>
+        
+          <tr>
+            <td>GPC</td>
+            <td>GPC</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>913.240</td>
+          </tr>
+        
+          <tr>
+            <td>GPN</td>
+            <td>GPN</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>859.320</td>
+          </tr>
+        
+          <tr>
+            <td>GRMN</td>
+            <td>GRMN</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,526.670</td>
+          </tr>
+        
+          <tr>
+            <td>GS</td>
+            <td>GS</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>8,716.010</td>
+          </tr>
+        
+          <tr>
+            <td>GWW</td>
+            <td>GWW</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>HAL</td>
+            <td>HAL</td>
+            <td>5</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,147.390</td>
+          </tr>
+        
+          <tr>
+            <td>HAS</td>
+            <td>HAS</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>459.890</td>
+          </tr>
+        
+          <tr>
+            <td>HBAN</td>
+            <td>HBAN</td>
+            <td>8</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,036.540</td>
+          </tr>
+        
+          <tr>
+            <td>HCA</td>
+            <td>HCA</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,342.800</td>
+          </tr>
+        
+          <tr>
+            <td>HD</td>
+            <td>HD</td>
+            <td>6</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>18,449.990</td>
+          </tr>
+        
+          <tr>
+            <td>HES</td>
+            <td>HES</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,112.820</td>
+          </tr>
+        
+          <tr>
+            <td>HIG</td>
+            <td>HIG</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,781.410</td>
+          </tr>
+        
+          <tr>
+            <td>HII</td>
+            <td>HII</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>HLT</td>
+            <td>HLT</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,802.570</td>
+          </tr>
+        
+          <tr>
+            <td>HOLX</td>
+            <td>HOLX</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>571.830</td>
+          </tr>
+        
+          <tr>
+            <td>HON</td>
+            <td>HON</td>
+            <td>4</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>6,611.980</td>
+          </tr>
+        
+          <tr>
+            <td>HPE</td>
+            <td>HPE</td>
+            <td>7</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,048.060</td>
+          </tr>
+        
+          <tr>
+            <td>HPQ</td>
+            <td>HPQ</td>
+            <td>5</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,247.450</td>
+          </tr>
+        
+          <tr>
+            <td>HRL</td>
+            <td>HRL</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>459.530</td>
+          </tr>
+        
+          <tr>
+            <td>HSIC</td>
+            <td>HSIC</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>559.010</td>
+          </tr>
+        
+          <tr>
+            <td>HST</td>
+            <td>HST</td>
+            <td>4</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>530.650</td>
+          </tr>
+        
+          <tr>
+            <td>HSY</td>
+            <td>HSY</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,253.130</td>
+          </tr>
+        
+          <tr>
+            <td>HUBB</td>
+            <td>HUBB</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>HUM</td>
+            <td>HUM</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,135.560</td>
+          </tr>
+        
+          <tr>
+            <td>HWM</td>
+            <td>HWM</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,680.060</td>
+          </tr>
+        
+          <tr>
+            <td>IBM</td>
+            <td>IBM</td>
+            <td>5</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>8,167.080</td>
+          </tr>
+        
+          <tr>
+            <td>ICE</td>
+            <td>ICE</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>3,480.830</td>
+          </tr>
+        
+          <tr>
+            <td>IDXX</td>
+            <td>IDXX</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>IEX</td>
+            <td>IEX</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>IFF</td>
+            <td>IFF</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>653.740</td>
+          </tr>
+        
+          <tr>
+            <td>INCY</td>
+            <td>INCY</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>543.100</td>
+          </tr>
+        
+          <tr>
+            <td>INTC</td>
+            <td>INTC</td>
+            <td>24</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>4,085.700</td>
+          </tr>
+        
+          <tr>
+            <td>INTU</td>
+            <td>INTU</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>9,158.560</td>
+          </tr>
+        
+          <tr>
+            <td>INVH</td>
+            <td>INVH</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>747.390</td>
+          </tr>
+        
+          <tr>
+            <td>IP</td>
+            <td>IP</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>840.460</td>
+          </tr>
+        
+          <tr>
+            <td>IPG</td>
+            <td>IPG</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>438.800</td>
+          </tr>
+        
+          <tr>
+            <td>IQV</td>
+            <td>IQV</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,449.930</td>
+          </tr>
+        
+          <tr>
+            <td>IR</td>
+            <td>IR</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,497.950</td>
+          </tr>
+        
+          <tr>
+            <td>IRM</td>
+            <td>IRM</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,788.610</td>
+          </tr>
+        
+          <tr>
+            <td>ISRG</td>
+            <td>ISRG</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>7,753.180</td>
+          </tr>
+        
+          <tr>
+            <td>IT</td>
+            <td>IT</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>ITW</td>
+            <td>ITW</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>3,973.980</td>
+          </tr>
+        
+          <tr>
+            <td>IVZ</td>
+            <td>IVZ</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>389.570</td>
+          </tr>
+        
+          <tr>
+            <td>J</td>
+            <td>J</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,016.460</td>
+          </tr>
+        
+          <tr>
+            <td>JBHT</td>
+            <td>JBHT</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>JBL</td>
+            <td>JBL</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>959.740</td>
+          </tr>
+        
+          <tr>
+            <td>JCI</td>
+            <td>JCI</td>
+            <td>4</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,410.250</td>
+          </tr>
+        
+          <tr>
+            <td>JKHY</td>
+            <td>JKHY</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>JNJ</td>
+            <td>JNJ</td>
+            <td>13</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>14,541.800</td>
+          </tr>
+        
+          <tr>
+            <td>JNPR</td>
+            <td>JNPR</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>519.280</td>
+          </tr>
+        
+          <tr>
+            <td>JPM</td>
+            <td>JPM</td>
+            <td>16</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>28,768.610</td>
+          </tr>
+        
+          <tr>
+            <td>K</td>
+            <td>K</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>584.130</td>
+          </tr>
+        
+          <tr>
+            <td>KDP</td>
+            <td>KDP</td>
+            <td>6</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,407.100</td>
+          </tr>
+        
+          <tr>
+            <td>KEY</td>
+            <td>KEY</td>
+            <td>5</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>702.540</td>
+          </tr>
+        
+          <tr>
+            <td>KEYS</td>
+            <td>KEYS</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,213.690</td>
+          </tr>
+        
+          <tr>
+            <td>KHC</td>
+            <td>KHC</td>
+            <td>5</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,134.800</td>
+          </tr>
+        
+          <tr>
+            <td>KIM</td>
+            <td>KIM</td>
+            <td>4</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>742.280</td>
+          </tr>
+        
+          <tr>
+            <td>KKR</td>
+            <td>KKR</td>
+            <td>4</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>4,607.710</td>
+          </tr>
+        
+          <tr>
+            <td>KLAC</td>
+            <td>KLAC</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>4,550.270</td>
+          </tr>
+        
+          <tr>
+            <td>KMB</td>
+            <td>KMB</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,003.980</td>
+          </tr>
+        
+          <tr>
+            <td>KMI</td>
+            <td>KMI</td>
+            <td>11</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,222.590</td>
+          </tr>
+        
+          <tr>
+            <td>KMX</td>
+            <td>KMX</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>608.900</td>
+          </tr>
+        
+          <tr>
+            <td>KO</td>
+            <td>KO</td>
+            <td>22</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>10,126.360</td>
+          </tr>
+        
+          <tr>
+            <td>KR</td>
+            <td>KR</td>
+            <td>4</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,741.960</td>
+          </tr>
+        
+          <tr>
+            <td>KVUE</td>
+            <td>KVUE</td>
+            <td>11</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,910.620</td>
+          </tr>
+        
+          <tr>
+            <td>L</td>
+            <td>L</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>626.600</td>
+          </tr>
+        
+          <tr>
+            <td>LDOS</td>
+            <td>LDOS</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,180.290</td>
+          </tr>
+        
+          <tr>
+            <td>LEN</td>
+            <td>LEN</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,253.210</td>
+          </tr>
+        
+          <tr>
+            <td>LH</td>
+            <td>LH</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>LHX</td>
+            <td>LHX</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,765.930</td>
+          </tr>
+        
+          <tr>
+            <td>LIN</td>
+            <td>LIN</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>9,871.320</td>
+          </tr>
+        
+          <tr>
+            <td>LKQ</td>
+            <td>LKQ</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>281.670</td>
+          </tr>
+        
+          <tr>
+            <td>LLY</td>
+            <td>LLY</td>
+            <td>4</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>22,694.200</td>
+          </tr>
+        
+          <tr>
+            <td>LMT</td>
+            <td>LMT</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>3,784.450</td>
+          </tr>
+        
+          <tr>
+            <td>LNT</td>
+            <td>LNT</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>457.730</td>
+          </tr>
+        
+          <tr>
+            <td>LOW</td>
+            <td>LOW</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>5,899.430</td>
+          </tr>
+        
+          <tr>
+            <td>LRCX</td>
+            <td>LRCX</td>
+            <td>7</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>3,606.230</td>
+          </tr>
+        
+          <tr>
+            <td>LULU</td>
+            <td>LULU</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,299.970</td>
+          </tr>
+        
+          <tr>
+            <td>LUV</td>
+            <td>LUV</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>698.800</td>
+          </tr>
+        
+          <tr>
+            <td>LVS</td>
+            <td>LVS</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>740.260</td>
+          </tr>
+        
+          <tr>
+            <td>LW</td>
+            <td>LW</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>552.170</td>
+          </tr>
+        
+          <tr>
+            <td>LYB</td>
+            <td>LYB</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>597.740</td>
+          </tr>
+        
+          <tr>
+            <td>LYV</td>
+            <td>LYV</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,005.800</td>
+          </tr>
+        
+          <tr>
+            <td>MA</td>
+            <td>MA</td>
+            <td>5</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>19,160.890</td>
+          </tr>
+        
+          <tr>
+            <td>MAA</td>
+            <td>MAA</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,189.140</td>
+          </tr>
+        
+          <tr>
+            <td>MAR</td>
+            <td>MAR</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,055.810</td>
+          </tr>
+        
+          <tr>
+            <td>MAS</td>
+            <td>MAS</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>578.880</td>
+          </tr>
+        
+          <tr>
+            <td>MCD</td>
+            <td>MCD</td>
+            <td>4</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>8,496.180</td>
+          </tr>
+        
+          <tr>
+            <td>MCHP</td>
+            <td>MCHP</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,465.630</td>
+          </tr>
+        
+          <tr>
+            <td>MCK</td>
+            <td>MCK</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>4,508.810</td>
+          </tr>
+        
+          <tr>
+            <td>MCO</td>
+            <td>MCO</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>3,605.430</td>
+          </tr>
+        
+          <tr>
+            <td>MDLZ</td>
+            <td>MDLZ</td>
+            <td>7</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>3,278.200</td>
+          </tr>
+        
+          <tr>
+            <td>MDT</td>
+            <td>MDT</td>
+            <td>7</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>4,346.920</td>
+          </tr>
+        
+          <tr>
+            <td>MET</td>
+            <td>MET</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,905.720</td>
+          </tr>
+        
+          <tr>
+            <td>META</td>
+            <td>META</td>
+            <td>12</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>49,166.590</td>
+          </tr>
+        
+          <tr>
+            <td>MGM</td>
+            <td>MGM</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>269.000</td>
+          </tr>
+        
+          <tr>
+            <td>MHK</td>
+            <td>MHK</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>MKC</td>
+            <td>MKC</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>559.950</td>
+          </tr>
+        
+          <tr>
+            <td>MKTX</td>
+            <td>MKTX</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>MLM</td>
+            <td>MLM</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>MMC</td>
+            <td>MMC</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>5,036.720</td>
+          </tr>
+        
+          <tr>
+            <td>MMM</td>
+            <td>MMM</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,860.850</td>
+          </tr>
+        
+          <tr>
+            <td>MNST</td>
+            <td>MNST</td>
+            <td>4</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,587.630</td>
+          </tr>
+        
+          <tr>
+            <td>MO</td>
+            <td>MO</td>
+            <td>10</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>4,149.760</td>
+          </tr>
+        
+          <tr>
+            <td>MOH</td>
+            <td>MOH</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>MOS</td>
+            <td>MOS</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>370.420</td>
+          </tr>
+        
+          <tr>
+            <td>MPC</td>
+            <td>MPC</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,236.620</td>
+          </tr>
+        
+          <tr>
+            <td>MPWR</td>
+            <td>MPWR</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>MRK</td>
+            <td>MRK</td>
+            <td>14</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>10,391.900</td>
+          </tr>
+        
+          <tr>
+            <td>MRNA</td>
+            <td>MRNA</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>624.660</td>
+          </tr>
+        
+          <tr>
+            <td>MS</td>
+            <td>MS</td>
+            <td>7</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>6,611.330</td>
+          </tr>
+        
+          <tr>
+            <td>MSCI</td>
+            <td>MSCI</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>MSFT</td>
+            <td>MSFT</td>
+            <td>42</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>127,880.200</td>
+          </tr>
+        
+          <tr>
+            <td>MSI</td>
+            <td>MSI</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>3,603.850</td>
+          </tr>
+        
+          <tr>
+            <td>MTB</td>
+            <td>MTB</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,589.360</td>
+          </tr>
+        
+          <tr>
+            <td>MTCH</td>
+            <td>MTCH</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>234.010</td>
+          </tr>
+        
+          <tr>
+            <td>MTD</td>
+            <td>MTD</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>MU</td>
+            <td>MU</td>
+            <td>6</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>4,241.180</td>
+          </tr>
+        
+          <tr>
+            <td>NCLH</td>
+            <td>NCLH</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>387.550</td>
+          </tr>
+        
+          <tr>
+            <td>NDAQ</td>
+            <td>NDAQ</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,195.620</td>
+          </tr>
+        
+          <tr>
+            <td>NDSN</td>
+            <td>NDSN</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>NEE</td>
+            <td>NEE</td>
+            <td>11</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>6,217.230</td>
+          </tr>
+        
+          <tr>
+            <td>NEM</td>
+            <td>NEM</td>
+            <td>6</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,815.670</td>
+          </tr>
+        
+          <tr>
+            <td>NFLX</td>
+            <td>NFLX</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>12,630.540</td>
+          </tr>
+        
+          <tr>
+            <td>NI</td>
+            <td>NI</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>825.990</td>
+          </tr>
+        
+          <tr>
+            <td>NKE</td>
+            <td>NKE</td>
+            <td>7</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>3,947.350</td>
+          </tr>
+        
+          <tr>
+            <td>NOC</td>
+            <td>NOC</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>3,520.500</td>
+          </tr>
+        
+          <tr>
+            <td>NOW</td>
+            <td>NOW</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>7,496.210</td>
+          </tr>
+        
+          <tr>
+            <td>NRG</td>
+            <td>NRG</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>711.830</td>
+          </tr>
+        
+          <tr>
+            <td>NSC</td>
+            <td>NSC</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,982.240</td>
+          </tr>
+        
+          <tr>
+            <td>NTAP</td>
+            <td>NTAP</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>881.280</td>
+          </tr>
+        
+          <tr>
+            <td>NTRS</td>
+            <td>NTRS</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>796.050</td>
+          </tr>
+        
+          <tr>
+            <td>NUE</td>
+            <td>NUE</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,114.070</td>
+          </tr>
+        
+          <tr>
+            <td>NVDA</td>
+            <td>NVDA</td>
+            <td>137</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>133,466.000</td>
+          </tr>
+        
+          <tr>
+            <td>NVR</td>
+            <td>NVR</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>NWS</td>
+            <td>NWS</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>228.330</td>
+          </tr>
+        
+          <tr>
+            <td>NWSA</td>
+            <td>NWSA</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>418.220</td>
+          </tr>
+        
+          <tr>
+            <td>NXPI</td>
+            <td>NXPI</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,630.610</td>
+          </tr>
+        
+          <tr>
+            <td>O</td>
+            <td>O</td>
+            <td>5</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,099.000</td>
+          </tr>
+        
+          <tr>
+            <td>ODFL</td>
+            <td>ODFL</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,613.190</td>
+          </tr>
+        
+          <tr>
+            <td>OKE</td>
+            <td>OKE</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,431.340</td>
+          </tr>
+        
+          <tr>
+            <td>OMC</td>
+            <td>OMC</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>751.130</td>
+          </tr>
+        
+          <tr>
+            <td>ON</td>
+            <td>ON</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,012.790</td>
+          </tr>
+        
+          <tr>
+            <td>ORCL</td>
+            <td>ORCL</td>
+            <td>9</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>11,836.000</td>
+          </tr>
+        
+          <tr>
+            <td>ORLY</td>
+            <td>ORLY</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>OTIS</td>
+            <td>OTIS</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,475.920</td>
+          </tr>
+        
+          <tr>
+            <td>OXY</td>
+            <td>OXY</td>
+            <td>4</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,448.850</td>
+          </tr>
+        
+          <tr>
+            <td>PANW</td>
+            <td>PANW</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>5,533.540</td>
+          </tr>
+        
+          <tr>
+            <td>PARA</td>
+            <td>PARA</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>232.570</td>
+          </tr>
+        
+          <tr>
+            <td>PAYC</td>
+            <td>PAYC</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>PAYX</td>
+            <td>PAYX</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,097.700</td>
+          </tr>
+        
+          <tr>
+            <td>PCAR</td>
+            <td>PCAR</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,508.860</td>
+          </tr>
+        
+          <tr>
+            <td>PCG</td>
+            <td>PCG</td>
+            <td>12</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,868.360</td>
+          </tr>
+        
+          <tr>
+            <td>PEG</td>
+            <td>PEG</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,034.210</td>
+          </tr>
+        
+          <tr>
+            <td>PEP</td>
+            <td>PEP</td>
+            <td>8</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>9,370.330</td>
+          </tr>
+        
+          <tr>
+            <td>PFE</td>
+            <td>PFE</td>
+            <td>32</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>5,949.740</td>
+          </tr>
+        
+          <tr>
+            <td>PFG</td>
+            <td>PFG</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>628.260</td>
+          </tr>
+        
+          <tr>
+            <td>PG</td>
+            <td>PG</td>
+            <td>13</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>16,783.900</td>
+          </tr>
+        
+          <tr>
+            <td>PGR</td>
+            <td>PGR</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>5,762.730</td>
+          </tr>
+        
+          <tr>
+            <td>PH</td>
+            <td>PH</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>5,037.880</td>
+          </tr>
+        
+          <tr>
+            <td>PHM</td>
+            <td>PHM</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>982.770</td>
+          </tr>
+        
+          <tr>
+            <td>PKG</td>
+            <td>PKG</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>PLD</td>
+            <td>PLD</td>
+            <td>5</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>4,239.740</td>
+          </tr>
+        
+          <tr>
+            <td>PLTR</td>
+            <td>PLTR</td>
+            <td>11</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>5,229.850</td>
+          </tr>
+        
+          <tr>
+            <td>PM</td>
+            <td>PM</td>
+            <td>9</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>8,539.800</td>
+          </tr>
+        
+          <tr>
+            <td>PNC</td>
+            <td>PNC</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>3,095.230</td>
+          </tr>
+        
+          <tr>
+            <td>PNR</td>
+            <td>PNR</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>784.320</td>
+          </tr>
+        
+          <tr>
+            <td>PNW</td>
+            <td>PNW</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>680.370</td>
+          </tr>
+        
+          <tr>
+            <td>PODD</td>
+            <td>PODD</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>POOL</td>
+            <td>POOL</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>PPG</td>
+            <td>PPG</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>888.620</td>
+          </tr>
+        
+          <tr>
+            <td>PPL</td>
+            <td>PPL</td>
+            <td>4</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,007.750</td>
+          </tr>
+        
+          <tr>
+            <td>PRU</td>
+            <td>PRU</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,864.620</td>
+          </tr>
+        
+          <tr>
+            <td>PSA</td>
+            <td>PSA</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,529.160</td>
+          </tr>
+        
+          <tr>
+            <td>PSX</td>
+            <td>PSX</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,919.760</td>
+          </tr>
+        
+          <tr>
+            <td>PTC</td>
+            <td>PTC</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,432.510</td>
+          </tr>
+        
+          <tr>
+            <td>PWR</td>
+            <td>PWR</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,475.750</td>
+          </tr>
+        
+          <tr>
+            <td>PYPL</td>
+            <td>PYPL</td>
+            <td>6</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>3,738.890</td>
+          </tr>
+        
+          <tr>
+            <td>QCOM</td>
+            <td>QCOM</td>
+            <td>6</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>6,754.790</td>
+          </tr>
+        
+          <tr>
+            <td>QRVO</td>
+            <td>QRVO</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>492.360</td>
+          </tr>
+        
+          <tr>
+            <td>RCL</td>
+            <td>RCL</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,739.230</td>
+          </tr>
+        
+          <tr>
+            <td>REG</td>
+            <td>REG</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>546.420</td>
+          </tr>
+        
+          <tr>
+            <td>REGN</td>
+            <td>REGN</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>5,433.710</td>
+          </tr>
+        
+          <tr>
+            <td>RF</td>
+            <td>RF</td>
+            <td>5</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>980.750</td>
+          </tr>
+        
+          <tr>
+            <td>RJF</td>
+            <td>RJF</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,224.410</td>
+          </tr>
+        
+          <tr>
+            <td>RL</td>
+            <td>RL</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>RMD</td>
+            <td>RMD</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,794.730</td>
+          </tr>
+        
+          <tr>
+            <td>ROK</td>
+            <td>ROK</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,123.110</td>
+          </tr>
+        
+          <tr>
+            <td>ROL</td>
+            <td>ROL</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>736.520</td>
+          </tr>
+        
+          <tr>
+            <td>ROP</td>
+            <td>ROP</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>4,062.300</td>
+          </tr>
+        
+          <tr>
+            <td>ROST</td>
+            <td>ROST</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,229.860</td>
+          </tr>
+        
+          <tr>
+            <td>RSG</td>
+            <td>RSG</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,571.220</td>
+          </tr>
+        
+          <tr>
+            <td>RTX</td>
+            <td>RTX</td>
+            <td>7</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>6,063.620</td>
+          </tr>
+        
+          <tr>
+            <td>RVTY</td>
+            <td>RVTY</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>836.650</td>
+          </tr>
+        
+          <tr>
+            <td>SBAC</td>
+            <td>SBAC</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,644.860</td>
+          </tr>
+        
+          <tr>
+            <td>SBUX</td>
+            <td>SBUX</td>
+            <td>6</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>4,384.140</td>
+          </tr>
+        
+          <tr>
+            <td>SCHW</td>
+            <td>SCHW</td>
+            <td>8</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>4,756.570</td>
+          </tr>
+        
+          <tr>
+            <td>SHW</td>
+            <td>SHW</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,835.800</td>
+          </tr>
+        
+          <tr>
+            <td>SJM</td>
+            <td>SJM</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>849.390</td>
+          </tr>
+        
+          <tr>
+            <td>SLB</td>
+            <td>SLB</td>
+            <td>8</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,514.190</td>
+          </tr>
+        
+          <tr>
+            <td>SMCI</td>
+            <td>SMCI</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>757.320</td>
+          </tr>
+        
+          <tr>
+            <td>SNA</td>
+            <td>SNA</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>SNPS</td>
+            <td>SNPS</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>3,942.740</td>
+          </tr>
+        
+          <tr>
+            <td>SO</td>
+            <td>SO</td>
+            <td>6</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>3,875.800</td>
+          </tr>
+        
+          <tr>
+            <td>SOLV</td>
+            <td>SOLV</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>521.730</td>
+          </tr>
+        
+          <tr>
+            <td>SPG</td>
+            <td>SPG</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,645.340</td>
+          </tr>
+        
+          <tr>
+            <td>SPGI</td>
+            <td>SPGI</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>7,527.300</td>
+          </tr>
+        
+          <tr>
+            <td>SRE</td>
+            <td>SRE</td>
+            <td>4</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,714.590</td>
+          </tr>
+        
+          <tr>
+            <td>STE</td>
+            <td>STE</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,565.390</td>
+          </tr>
+        
+          <tr>
+            <td>STLD</td>
+            <td>STLD</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,035.320</td>
+          </tr>
+        
+          <tr>
+            <td>STT</td>
+            <td>STT</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,422.220</td>
+          </tr>
+        
+          <tr>
+            <td>STX</td>
+            <td>STX</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>719.820</td>
+          </tr>
+        
+          <tr>
+            <td>STZ</td>
+            <td>STZ</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,698.560</td>
+          </tr>
+        
+          <tr>
+            <td>SW</td>
+            <td>SW</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,182.520</td>
+          </tr>
+        
+          <tr>
+            <td>SWK</td>
+            <td>SWK</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>640.280</td>
+          </tr>
+        
+          <tr>
+            <td>SWKS</td>
+            <td>SWKS</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>624.800</td>
+          </tr>
+        
+          <tr>
+            <td>SYF</td>
+            <td>SYF</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>967.730</td>
+          </tr>
+        
+          <tr>
+            <td>SYK</td>
+            <td>SYK</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>5,587.820</td>
+          </tr>
+        
+          <tr>
+            <td>SYY</td>
+            <td>SYY</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,655.230</td>
+          </tr>
+        
+          <tr>
+            <td>T</td>
+            <td>T</td>
+            <td>40</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>6,700.080</td>
+          </tr>
+        
+          <tr>
+            <td>TAP</td>
+            <td>TAP</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>440.890</td>
+          </tr>
+        
+          <tr>
+            <td>TDG</td>
+            <td>TDG</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>TDY</td>
+            <td>TDY</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>TECH</td>
+            <td>TECH</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>542.600</td>
+          </tr>
+        
+          <tr>
+            <td>TEL</td>
+            <td>TEL</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,176.020</td>
+          </tr>
+        
+          <tr>
+            <td>TER</td>
+            <td>TER</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>778.050</td>
+          </tr>
+        
+          <tr>
+            <td>TFC</td>
+            <td>TFC</td>
+            <td>7</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,406.000</td>
+          </tr>
+        
+          <tr>
+            <td>TFX</td>
+            <td>TFX</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>TGT</td>
+            <td>TGT</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,809.240</td>
+          </tr>
+        
+          <tr>
+            <td>TJX</td>
+            <td>TJX</td>
+            <td>6</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>5,457.390</td>
+          </tr>
+        
+          <tr>
+            <td>TMO</td>
+            <td>TMO</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>7,510.030</td>
+          </tr>
+        
+          <tr>
+            <td>TMUS</td>
+            <td>TMUS</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>5,316.590</td>
+          </tr>
+        
+          <tr>
+            <td>TPL</td>
+            <td>TPL</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>TPR</td>
+            <td>TPR</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>438.510</td>
+          </tr>
+        
+          <tr>
+            <td>TRGP</td>
+            <td>TRGP</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,449.650</td>
+          </tr>
+        
+          <tr>
+            <td>TRMB</td>
+            <td>TRMB</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>521.370</td>
+          </tr>
+        
+          <tr>
+            <td>TROW</td>
+            <td>TROW</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>893.730</td>
+          </tr>
+        
+          <tr>
+            <td>TRV</td>
+            <td>TRV</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,919.470</td>
+          </tr>
+        
+          <tr>
+            <td>TSCO</td>
+            <td>TSCO</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,029.600</td>
+          </tr>
+        
+          <tr>
+            <td>TSLA</td>
+            <td>TSLA</td>
+            <td>15</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>35,943.130</td>
+          </tr>
+        
+          <tr>
+            <td>TSN</td>
+            <td>TSN</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>920.650</td>
+          </tr>
+        
+          <tr>
+            <td>TT</td>
+            <td>TT</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,995.100</td>
+          </tr>
+        
+          <tr>
+            <td>TTWO</td>
+            <td>TTWO</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,335.700</td>
+          </tr>
+        
+          <tr>
+            <td>TXN</td>
+            <td>TXN</td>
+            <td>5</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>7,169.050</td>
+          </tr>
+        
+          <tr>
+            <td>TXT</td>
+            <td>TXT</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>612.420</td>
+          </tr>
+        
+          <tr>
+            <td>TYL</td>
+            <td>TYL</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>UAL</td>
+            <td>UAL</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,387.090</td>
+          </tr>
+        
+          <tr>
+            <td>UBER</td>
+            <td>UBER</td>
+            <td>12</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>6,186.420</td>
+          </tr>
+        
+          <tr>
+            <td>UDR</td>
+            <td>UDR</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>666.990</td>
+          </tr>
+        
+          <tr>
+            <td>UHS</td>
+            <td>UHS</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>ULTA</td>
+            <td>ULTA</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>UNH</td>
+            <td>UNH</td>
+            <td>5</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>21,896.200</td>
+          </tr>
+        
+          <tr>
+            <td>UNP</td>
+            <td>UNP</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>5,295.640</td>
+          </tr>
+        
+          <tr>
+            <td>UPS</td>
+            <td>UPS</td>
+            <td>4</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>3,906.610</td>
+          </tr>
+        
+          <tr>
+            <td>URI</td>
+            <td>URI</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>USB</td>
+            <td>USB</td>
+            <td>9</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>3,464.640</td>
+          </tr>
+        
+          <tr>
+            <td>V</td>
+            <td>V</td>
+            <td>9</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>20,387.460</td>
+          </tr>
+        
+          <tr>
+            <td>VICI</td>
+            <td>VICI</td>
+            <td>6</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,407.970</td>
+          </tr>
+        
+          <tr>
+            <td>VLO</td>
+            <td>VLO</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,994.770</td>
+          </tr>
+        
+          <tr>
+            <td>VLTO</td>
+            <td>VLTO</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>777.190</td>
+          </tr>
+        
+          <tr>
+            <td>VMC</td>
+            <td>VMC</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,061.490</td>
+          </tr>
+        
+          <tr>
+            <td>VRSK</td>
+            <td>VRSK</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,120.300</td>
+          </tr>
+        
+          <tr>
+            <td>VRSN</td>
+            <td>VRSN</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>VRTX</td>
+            <td>VRTX</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>3,344.000</td>
+          </tr>
+        
+          <tr>
+            <td>VST</td>
+            <td>VST</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,224.530</td>
+          </tr>
+        
+          <tr>
+            <td>VTR</td>
+            <td>VTR</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>929.140</td>
+          </tr>
+        
+          <tr>
+            <td>VTRS</td>
+            <td>VTRS</td>
+            <td>7</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>666.120</td>
+          </tr>
+        
+          <tr>
+            <td>VZ</td>
+            <td>VZ</td>
+            <td>24</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>7,666.950</td>
+          </tr>
+        
+          <tr>
+            <td>WAB</td>
+            <td>WAB</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,439.930</td>
+          </tr>
+        
+          <tr>
+            <td>WAT</td>
+            <td>WAT</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>WBA</td>
+            <td>WBA</td>
+            <td>4</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>260.860</td>
+          </tr>
+        
+          <tr>
+            <td>WBD</td>
+            <td>WBD</td>
+            <td>12</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>896.610</td>
+          </tr>
+        
+          <tr>
+            <td>WDC</td>
+            <td>WDC</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,029.340</td>
+          </tr>
+        
+          <tr>
+            <td>WEC</td>
+            <td>WEC</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,465.840</td>
+          </tr>
+        
+          <tr>
+            <td>WELL</td>
+            <td>WELL</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>3,008.130</td>
+          </tr>
+        
+          <tr>
+            <td>WFC</td>
+            <td>WFC</td>
+            <td>19</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>10,559.690</td>
+          </tr>
+        
+          <tr>
+            <td>WM</td>
+            <td>WM</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>3,289.000</td>
+          </tr>
+        
+          <tr>
+            <td>WMB</td>
+            <td>WMB</td>
+            <td>7</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,929.520</td>
+          </tr>
+        
+          <tr>
+            <td>WMT</td>
+            <td>WMT</td>
+            <td>24</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>15,872.890</td>
+          </tr>
+        
+          <tr>
+            <td>WRB</td>
+            <td>WRB</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>934.900</td>
+          </tr>
+        
+          <tr>
+            <td>WST</td>
+            <td>WST</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>WTW</td>
+            <td>WTW</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,309.610</td>
+          </tr>
+        
+          <tr>
+            <td>WY</td>
+            <td>WY</td>
+            <td>4</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>925.690</td>
+          </tr>
+        
+          <tr>
+            <td>WYNN</td>
+            <td>WYNN</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>659.860</td>
+          </tr>
+        
+          <tr>
+            <td>XEL</td>
+            <td>XEL</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>1,574.680</td>
+          </tr>
+        
+          <tr>
+            <td>XOM</td>
+            <td>XOM</td>
+            <td>25</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>21,173.510</td>
+          </tr>
+        
+          <tr>
+            <td>XYL</td>
+            <td>XYL</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>904.170</td>
+          </tr>
+        
+          <tr>
+            <td>YUM</td>
+            <td>YUM</td>
+            <td>2</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>2,005.850</td>
+          </tr>
+        
+          <tr>
+            <td>ZBH</td>
+            <td>ZBH</td>
+            <td>1</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>806.340</td>
+          </tr>
+        
+          <tr>
+            <td>ZBRA</td>
+            <td>ZBRA</td>
+            <td>0</td>
+            <td>必须</td>
+            <td></td>
+            
+		        	
+		        	<td></td>
+		        
+            <td>0.000</td>
+          </tr>
+        
+          <tr>
+            <td>ZTS</td>
+            <td>ZTS</td>
+            <td>3</td>
+            <td>退补</td>
+            <td>4.0%</td>
+            
+		        	
+		        	<td>0.0%</td>
+		        
+            <td>3,816.630</td>
+          </tr>
+        
+      
+    
+    
+	  </tbody>
+	</table>
+  </div>
+  
+
+		</div>
+	</div>
+	
+
+
+
+
+
+
+<div class="g-footer">
+  <div class="container">
+    <div class="footer-nav-wrap">
+      <div class="footer-nav">
+        <dl class="footer-nav_list">
+          <dt>新手指南</dt>
+          <dd><a class="footer-nav_link" href="https://trade.bosera.com/indi/openacct/mobilenoform" target="_blank">个人开户</a></dd>
+          <dd><a class="footer-nav_link" href="/column/index.do?classid=00020002000500030001" target="_blank">投资者教育</a></dd>
+        </dl>
+        <dl class="footer-nav_list">
+          <dt>交易须知</dt>
+          <dd><a class="footer-nav_link" href="/column/index.do?classid=0002000200100001" target="_blank">业务规则</a></dd>
+          <dd><a class="footer-nav_link" href="/column/index.do?classid=00020002001100002" target="_blank">费率优惠</a></dd>
+          <dd><a class="footer-nav_link" href="/column/infoDetail.do?infoid=1415734&classid=000200020011000050001" target="_blank">风险提示</a></dd>
+          <dd><a class="footer-nav_link" href="/column/infoDetail.do?infoid=1415742&classid=000200020011000050001" target="_blank">权益须知</a></dd>
+        </dl>
+        <dl class="footer-nav_list">
+          <dt>法律条款</dt>
+          <dd><a class="footer-nav_link" href="/column/infoDetail.do?infoid=1415741&classid=000200020011000050001" target="_blank">免责条款</a></dd>
+          <dd><a class="footer-nav_link" href="/column/index.do?classid=000200020005000300030001" target="_blank">反洗钱专栏</a></dd>
+          <dd><a class="footer-nav_link" href="/column/index.do?classid=000200020005000300040001" target="_blank">防范证券欺诈活动</a></dd>
+          <dd><a class="footer-nav_link" href="/column/infoDetail.do?infoid=2737595&classid=000200020011000050001" target="_blank">隐私政策</a></dd>
+        </dl>
+        <dl class="footer-nav_list">
+          <dt>客户服务</dt>
+          <dd><a class="footer-nav_link" href="https://bosera.hotjob.cn" target="_blank">加入我们</a></dd>
+          <dd><a class="footer-nav_link" href="/column/index.do?classid=00020002001100003" target="_blank">下载中心</a></dd>
+          <dd><a class="footer-nav_link" href="/column/index.do?classid=0002000200020004" target="_blank">联系我们</a></dd>
+          <dd><a class="footer-nav_link" href="/column/infoDetail.do?infoid=12398&classid=0002000200110002" target="_blank">应急处理提示</a></dd>
+        </dl>
+      </div>
+      <div class="footer-qr">
+        <ul class="footer-qr_tab" id="footerQrTab">
+          <li class="text-primary" data-target="#footerAppQr">APP</li
+          ><li data-target="#footerWechatQr">微信</li>
+        </ul>
+        <div class="footer-qr_con"><img class="footer-qr_img" id="footerAppQr" src="/static/images/common/app_qr_code.png?v=20180124"><img class="footer-qr_img" id="footerWechatQr" src="/static/images/common/wechat_qr_code.png" style="display:none"></div>
+      </div>
+      <!-- .footer-qr end -->
+    </div>
+    <!-- .footer-nav-wrap end -->
+    <div class="footer-copyright">
+      <p>客服热线：95105568　客服邮箱：service@bosera.com&nbsp;&nbsp;
+        <span
+          class="J_popover"
+          data-placement="top-left"
+          data-width="156"
+          data-content="&lt;a class=&quot;footer-qr_popover-item&quot; href=&quot;http://www.weibo.com/bosera&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;/static/images/common/weibo_qr_code.png&quot;&gt;点击关注微博&lt;/a&gt;"
+          ><i class="icon icon-weibo"></i></span>&nbsp;&nbsp;
+        <span
+          class="J_popover"
+          data-placement="top-left"
+          data-width="300"
+          data-content="&lt;span class=&quot;footer-qr_popover-item&quot;&gt;&lt;img src=&quot;/static/images/common/wechat_qr_code.png&quot;&gt;博时服务号&lt;/span&gt;&lt;span class=&quot;footer-qr_popover-item&quot;&gt;&lt;img src=&quot;/static/images/common/wechat_tzh_qr_code.png&quot;&gt;博时投资汇&lt;/span&gt;"
+          ><i class="icon icon-wechat"></i></span>
+      </p>
+      <p>人工服务时间：工作日9：00－21：00，公休日及法定节假日（十一和春节除外）9：00－17：00<p>
+	    <p><a class="footer-nav_link" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030402003685"><img src="/static/images/common/beian.png"/>粤公网安备 44030402003685号</a> &copy;2026 博时基金管理有限公司 版权所有 <a class="footer-nav_link" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" title="粤ICP备10063309号">粤ICP备10063309号</a>&nbsp;本网站支持IPv6</p>
+    </div>
+  </div>
+</div>
+<div class="container" id="sideToolbarContainer">
+  <div class="side-toolbar" id="sideToolbar">
+    <ul class="side-toolbar_list">
+      <li class="side-toolbar_item">
+        <span class="side-toolbar_link side-toolbar_link--qr" id="sideToolbarQr" title="扫描下载手机APP">
+	        <span class="side-toolbar_qr">
+	          <span class="side-toolbar_qr-title">扫描下载手机APP</span>
+	          <img src="/static/images/common/app_qr_code.png?v=20180124">
+	        </span>
+        </span>
+      </li>
+      <li class="side-toolbar_item">
+        <a class="side-toolbar_link side-toolbar_link--service" id="sideToolbarService" href="/service/webchat/robot.jsp" title="在线客服" target="_blank">在线客服</a>
+      </li>
+      <li class="side-toolbar_item">
+        <span class="side-toolbar_link side-toolbar_link--backtop" id="sideToolbarBackTop" title="返回顶部">返回顶部</span>
+      </li>
+    </ul>
+  </div>
+</div>
+<script>
+  // 百度统计代码
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?3c5b5c9332a21f25e5643038564d17c1";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</body>
+</html>
