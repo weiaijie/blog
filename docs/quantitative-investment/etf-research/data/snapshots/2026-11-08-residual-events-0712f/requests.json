@@ -1,0 +1,28 @@
+[
+  {
+    "name": "bosera_p1",
+    "url": "https://www.bosera.com/column/infoList.json",
+    "referer": "https://www.bosera.com/column/index.do?classid=0002000200030005&fundCode=513500",
+    "post": "pageNo=1&pageSize=100&classid=0002000200030005&fundCode=513500&startDate=2024-11-20&endDate=2025-04-07",
+    "requested_at_utc": "2026-11-08T07:13:48.584595+00:00",
+    "status": 200,
+    "effective_url": "https://www.bosera.com/column/infoList.json",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 114318,
+    "sha256": "6ab6c72fe65e9703537f82c74219602a63e7d07f93ad698666e7be71af71a28d"
+  },
+  {
+    "name": "bosera_p2",
+    "url": "https://www.bosera.com/column/infoList.json",
+    "referer": "https://www.bosera.com/column/index.do?classid=0002000200030005&fundCode=513500",
+    "post": "pageNo=2&pageSize=100&classid=0002000200030005&fundCode=513500&startDate=2024-11-20&endDate=2025-04-07",
+    "requested_at_utc": "2026-11-08T07:13:48.584947+00:00",
+    "status": 200,
+    "effective_url": "https://www.bosera.com/column/infoList.json",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 38214,
+    "sha256": "fe0c731089aafcb468f3cbafea94222d8497d4cb15226775c1ae894180701ac3"
+  }
+]

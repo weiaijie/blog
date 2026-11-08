@@ -1,0 +1,25 @@
+[
+  {
+    "name": "shares_20241218",
+    "url": "https://query.sse.com.cn/commonQuery.do?sqlId=COMMON_SSE_ZQPZ_ETFZL_XXPL_ETFGM_SEARCH_L&isPagination=true&STAT_DATE=2024-12-18&SEC_CODE=513500&pageHelp.pageSize=1500&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.endPage=1&pageHelp.cacheSize=1",
+    "referer": "https://www.sse.com.cn/market/funddata/volumn/etfvolumn/",
+    "requested_at_utc": "2026-11-08T07:19:30.631018+00:00",
+    "status": 200,
+    "effective_url": "https://query.sse.com.cn/commonQuery.do?sqlId=COMMON_SSE_ZQPZ_ETFZL_XXPL_ETFGM_SEARCH_L&isPagination=true&STAT_DATE=2024-12-18&SEC_CODE=513500&pageHelp.pageSize=1500&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.endPage=1&pageHelp.cacheSize=1",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 142371,
+    "sha256": "f90d52d675be8eab0813059ffc63e5d10b47e125c455a5ce680f541947fcbf6f"
+  },
+  {
+    "name": "sse_units",
+    "url": "https://www.sse.com.cn/market/funddata/volumn/etfvolumn/",
+    "requested_at_utc": "2026-11-08T07:19:30.631337+00:00",
+    "status": 200,
+    "effective_url": "https://www.sse.com.cn/market/funddata/volumn/etfvolumn/",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 26283,
+    "sha256": "c55eefedc917993c553191c7b45efd47fa735c7ddec706f9796d87adc217856e"
+  }
+]

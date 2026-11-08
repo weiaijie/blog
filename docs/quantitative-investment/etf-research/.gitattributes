@@ -36,6 +36,8 @@ reports/2026-11-08-three-markets/*.svg -whitespace
 reports/2026-11-08-nav-fx/** -text whitespace=cr-at-eol
 reports/2026-11-08-nav-fx/*.svg -whitespace
 reports/2026-11-08-close-timing/** -text whitespace=cr-at-eol
+reports/2026-11-08-residual-events/** -text whitespace=cr-at-eol
+data/snapshots/2026-11-08-residual-events*/*.body -diff -whitespace
 data/snapshots/*close-timing*/*.body -diff -whitespace
 data/snapshots/2026-11-08-nav-fx*/prospect.body -diff
 data/snapshots/2026-11-08-nav-fx*/*_prospect.body -diff

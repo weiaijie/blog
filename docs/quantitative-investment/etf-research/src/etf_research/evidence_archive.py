@@ -35,8 +35,15 @@ def inventory(root):
             if not p.is_file(): continue
             rel = p.relative_to(root).as_posix()
             if '__pycache__' in p.parts or p.suffix == '.pyc': continue
-            if any(x.startswith('.') for x in p.relative_to(folder).parts) or p.suffix not in EXTENSIONS:
+            if any(x.startswith('.') for x in p.relative_to(folder).parts):
                 raise ValueError('Unreviewed runtime file type: ' + rel)
+            if p.suffix not in EXTENSIONS:
+                # Only previously reviewed, sealed market inputs may use these opaque formats.
+                manifest = p.parent / 'manifest.json'
+                if (prefix != 'data/snapshots' or p.suffix not in {'.zip', '.jsonl'} or
+                        rel not in names or not safe_path(root, manifest.relative_to(root).as_posix()).is_file() or
+                        read(manifest).get(p.name) != sha(p)):
+                    raise ValueError('Unreviewed runtime file type: ' + rel)
             names.add(rel)
     names.update(p for p in POINTERS if (root / p).exists())
     for name in names:

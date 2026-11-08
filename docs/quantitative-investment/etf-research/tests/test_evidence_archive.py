@@ -27,6 +27,25 @@ class ArchiveTests(unittest.TestCase):
     def test_changed_snapshot_manifest_rejected(self):
         identity=self.snapshot();(self.store/'snapshots'/f'{identity}.json').write_text('{}')
         with self.assertRaises(ValueError):verify(self.store,identity)
+    def test_new_snapshot_formats_require_review_and_seal(self):
+        directory = self.root/'data/snapshots/public'
+        directory.mkdir(parents=True)
+        files = [directory/'responses.zip', directory/'bars.jsonl']
+        for f in files:
+            f.write_bytes(b'public market response')
+        manifest = directory/'manifest.json'
+        create(manifest, {f.name:hashlib.sha256(f.read_bytes()).hexdigest() for f in files})
+        names = [f.relative_to(self.root).as_posix() for f in files]
+        approved = self.root/'config/archive_inventory.json'
+        create(approved, {'files':names})
+        result = capture(self.root,self.store)
+        self.assertTrue(all(n in verify(self.store,result['snapshot'])['files'] for n in names))
+        approved.write_bytes(encoded({'files':names[:1]}))
+        with self.assertRaises(ValueError): inventory(self.root)
+        approved.write_bytes(encoded({'files':names}))
+        files[0].write_bytes(b'changed')
+        with self.assertRaises(ValueError): inventory(self.root)
+
     def test_malicious_paths_rejected(self):
         for name in ['../escape','/absolute','C:/secret','a\\b','a/../b','a//b']:
             with self.subTest(name=name),self.assertRaises(ValueError):safe_path(self.root,name)

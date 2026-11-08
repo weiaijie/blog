@@ -1,0 +1,44 @@
+{
+  "es_3m": {
+    "observable": 64,
+    "missing": 8,
+    "losing_days": 40,
+    "gross_loss": "-8579.064808814880215084184260",
+    "positive_offsets": "5260.625737280382013279523967",
+    "directly_allocated": "-3318.439071534498201804660293",
+    "net": "-3608.666829022043853954081066",
+    "top10_loss": "-4504.934033160157863039703404"
+  },
+  "es_hour": {
+    "observable": 59,
+    "missing": 13,
+    "losing_days": 37,
+    "gross_loss": "-8144.856448850180588849286356",
+    "positive_offsets": "4708.438052994991225429677424",
+    "directly_allocated": "-3436.418395855189363419608932",
+    "net": "-3606.659390915953964785682806",
+    "top10_loss": "-4480.673957823379475671997685"
+  },
+  "creation_cohorts": {
+    "否": {
+      "days": 24,
+      "net_equals_effective_cap": 24,
+      "pnl_sign": {
+        "unknown": 7,
+        "loss": 13,
+        "gain": 4
+      }
+    },
+    "是": {
+      "days": 48,
+      "net_equals_effective_cap": 48,
+      "pnl_sign": {
+        "loss": 27,
+        "gain": 20,
+        "unknown": 1
+      }
+    }
+  },
+  "source_pdfs": 115,
+  "causal_cny": null
+}

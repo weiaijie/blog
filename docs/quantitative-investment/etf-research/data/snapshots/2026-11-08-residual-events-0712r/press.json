@@ -1,0 +1,421 @@
+[
+  {
+    "name": "copy_0",
+    "url": "https://finance.sina.com.cn/roll/2024-12-18/doc-inczvhaz4393493.shtml",
+    "requested_at_utc": "2026-11-08T07:15:52.834438+00:00",
+    "status": 200,
+    "effective_url": "https://finance.sina.com.cn/roll/2024-12-18/doc-inczvhaz4393493.shtml",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 107660,
+    "sha256": "a12e192fd5f1eb1c0a06f437d36bb1169e3cfda7b252bb7dbf5082268f02ba9a",
+    "title_and_code_present": true,
+    "publisher_clock": "2024-12-18T03:00:29+08:00",
+    "signed_notices": {
+      "2024-12-18": {
+        "signed_text": "博时基金管理有限公司2024年12月18日",
+        "fund_code": "513500",
+        "notice_text_sha256": "9c13f769c6f8f48832373cd62025f005a1915c16064b4186eb97baf84f5e6881"
+      }
+    }
+  },
+  {
+    "name": "copy_1",
+    "url": "https://finance.sina.com.cn/roll/2025-01-07/doc-ineeakcr8629801.shtml",
+    "requested_at_utc": "2026-11-08T07:15:52.850371+00:00",
+    "status": 200,
+    "effective_url": "https://finance.sina.com.cn/roll/2025-01-07/doc-ineeakcr8629801.shtml",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 98547,
+    "sha256": "5a67acc25e5e501b9a8e1064b3f8179cd8e41ebe09a9cd924a86f5f93227e880",
+    "title_and_code_present": true,
+    "publisher_clock": "2025-01-07T02:16:27+08:00",
+    "signed_notices": {
+      "2025-01-06": {
+        "signed_text": "博时基金管理有限公司2025年1月6日",
+        "fund_code": "513500",
+        "notice_text_sha256": "4d19784fcd561dbfa9655bf27561f9a45d0c93dfda4e150acb351c3acbd4fe2a"
+      },
+      "2025-01-07": {
+        "signed_text": "博时基金管理有限公司2025年1月7日",
+        "fund_code": "513500",
+        "notice_text_sha256": "b82ad1d4cecb46a0c4ba7801bd6633026a4e39878318117391745d1b21f39d48"
+      }
+    }
+  },
+  {
+    "name": "copy_3",
+    "url": "https://finance.sina.com.cn/roll/2025-02-14/doc-inekksvs7830192.shtml",
+    "requested_at_utc": "2026-11-08T07:15:53.003633+00:00",
+    "status": 200,
+    "effective_url": "https://finance.sina.com.cn/roll/2025-02-14/doc-inekksvs7830192.shtml",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 109592,
+    "sha256": "8cc7d03c370d03a32691578009c1144e3c67b46e0d016b27c7abb17eba213552",
+    "title_and_code_present": true,
+    "publisher_clock": "2025-02-14T03:45:44+08:00",
+    "signed_notices": {
+      "2025-02-14": {
+        "signed_text": "博时基金管理有限公司2025年2月14日",
+        "fund_code": "513500",
+        "notice_text_sha256": "b1d851300dc7e74cc48c6f830d6db1996a26964f744d53f0e78ea4377e229cad"
+      },
+      "2025-02-13": {
+        "signed_text": "博时基金管理有限公司2025年2月13日",
+        "fund_code": "513500",
+        "notice_text_sha256": "f3d23da5263dd437d76e13c3248c53c80892ca55506976d41d28224b5dd31e06"
+      }
+    }
+  },
+  {
+    "name": "copy_4",
+    "url": "https://finance.sina.com.cn/roll/2025-02-21/doc-inemekkr3324044.shtml",
+    "requested_at_utc": "2026-11-08T07:15:53.042360+00:00",
+    "status": 200,
+    "effective_url": "https://finance.sina.com.cn/roll/2025-02-21/doc-inemekkr3324044.shtml",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 99127,
+    "sha256": "99c2c3f4fc46d7c3f3862b769fd51288501760c9aa855d2c46a0c0a45b4ca30b",
+    "title_and_code_present": true,
+    "publisher_clock": "2025-02-21T02:46:20+08:00",
+    "signed_notices": {
+      "2025-02-20": {
+        "signed_text": "博时基金管理有限公司2025年2月20日",
+        "fund_code": "513500",
+        "notice_text_sha256": "01a067ae72bdaa375a5b3d2b5a82ea2ec6fa30718078a08521e3ec1cc1305337"
+      }
+    }
+  },
+  {
+    "name": "copy_5",
+    "url": "https://finance.sina.com.cn/roll/2025-02-25/doc-inemrkva0506588.shtml",
+    "requested_at_utc": "2026-11-08T07:15:53.057649+00:00",
+    "status": 200,
+    "effective_url": "https://finance.sina.com.cn/roll/2025-02-25/doc-inemrkva0506588.shtml",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 102211,
+    "sha256": "d6f0855331c1fceea2dd60a8742b1a87b5eee606a3ad261e7510439a0857854c",
+    "title_and_code_present": true,
+    "publisher_clock": "2025-02-25T02:46:52+08:00",
+    "signed_notices": {
+      "2025-02-24": {
+        "signed_text": "博时基金管理有限公司2025年2月24日",
+        "fund_code": "513500",
+        "notice_text_sha256": "71f6f2aac51e979fd4e563016e065b0ed0c7674d02e37e6643d06e2309272be9"
+      }
+    }
+  },
+  {
+    "name": "article_20241218",
+    "url": "https://paper.cnstock.com/html/2024-12/18/content_2007303.htm",
+    "requested_at_utc": "2026-11-08T07:16:27.286587+00:00",
+    "status": 200,
+    "effective_url": "https://paper.cnstock.com/html/2024-12/18/content_2007303.htm",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 38120,
+    "sha256": "e34671a05929fd23882fffebe48455b533088b91b0bfdbc6eb23558464665e6b",
+    "title_and_code_present": true,
+    "publisher_clock": null,
+    "signed_notices": {
+      "2024-12-18": {
+        "signed_text": "博时基金管理有限公司2024年12月18日",
+        "fund_code": "513500",
+        "notice_text_sha256": "9c13f769c6f8f48832373cd62025f005a1915c16064b4186eb97baf84f5e6881"
+      }
+    }
+  },
+  {
+    "name": "article_20241217",
+    "url": "https://paper.cnstock.com/html/2024-12/17/content_2007087.htm",
+    "requested_at_utc": "2026-11-08T07:16:27.286980+00:00",
+    "status": 200,
+    "effective_url": "https://paper.cnstock.com/html/2024-12/17/content_2007087.htm",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 32391,
+    "sha256": "827baa1637b1f0d5955edc66b3e0a41eadffad8e1376edad33b095984fe75718",
+    "title_and_code_present": true,
+    "publisher_clock": null,
+    "signed_notices": {
+      "2024-12-17": {
+        "signed_text": "博时基金管理有限公司2024年12月17日",
+        "fund_code": "513500",
+        "notice_text_sha256": "c544550fda3623509b2effc8d0f13c99eb7edc5d7c641f1cd065821761dda89c"
+      }
+    }
+  },
+  {
+    "name": "article_20250107",
+    "url": "https://paper.cnstock.com/html/2025-01/07/content_2015533.htm",
+    "requested_at_utc": "2026-11-08T07:16:27.287262+00:00",
+    "status": 200,
+    "effective_url": "https://paper.cnstock.com/html/2025-01/07/content_2015533.htm",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 30358,
+    "sha256": "c9a475e3e1d86eb541da5aa489ddc285f0284f2941240acc1e62c74375c7811a",
+    "title_and_code_present": true,
+    "publisher_clock": null,
+    "signed_notices": {
+      "2025-01-06": {
+        "signed_text": "博时基金管理有限公司2025年1月6日",
+        "fund_code": "513500",
+        "notice_text_sha256": "4d19784fcd561dbfa9655bf27561f9a45d0c93dfda4e150acb351c3acbd4fe2a"
+      },
+      "2025-01-07": {
+        "signed_text": "博时基金管理有限公司2025年1月7日",
+        "fund_code": "513500",
+        "notice_text_sha256": "b82ad1d4cecb46a0c4ba7801bd6633026a4e39878318117391745d1b21f39d48"
+      }
+    }
+  },
+  {
+    "name": "article_20250214",
+    "url": "https://paper.cnstock.com/html/2025-02/14/content_2027101.htm",
+    "requested_at_utc": "2026-11-08T07:16:27.287736+00:00",
+    "status": 200,
+    "effective_url": "https://paper.cnstock.com/html/2025-02/14/content_2027101.htm",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 36535,
+    "sha256": "134d8c50c7b73530814be048c4b23a315253a4fdfca88b6542697825cbe739af",
+    "title_and_code_present": true,
+    "publisher_clock": null,
+    "signed_notices": {
+      "2025-02-14": {
+        "signed_text": "博时基金管理有限公司2025年2月14日",
+        "fund_code": "513500",
+        "notice_text_sha256": "608efe67b452dd858228cf28d6d2936d829357c743a0d5889bedb0aa21bd13e6"
+      },
+      "2025-02-13": {
+        "signed_text": "博时基金管理有限公司2025年2月13日",
+        "fund_code": "513500",
+        "notice_text_sha256": "f3d23da5263dd437d76e13c3248c53c80892ca55506976d41d28224b5dd31e06"
+      }
+    }
+  },
+  {
+    "name": "article_20250123",
+    "url": "https://paper.cnstock.com/html/2025-01/23/content_2022217.htm",
+    "requested_at_utc": "2026-11-08T07:16:27.288040+00:00",
+    "status": 200,
+    "effective_url": "https://paper.cnstock.com/html/2025-01/23/content_2022217.htm",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 84664,
+    "sha256": "55a69dba7939d875178543fe43ec3181f6c985ab2ee52766d21a4de4f56425a0",
+    "title_and_code_present": true,
+    "publisher_clock": null,
+    "signed_notices": {
+      "2025-01-23": {
+        "signed_text": "博时基金管理有限公司2025年1月23日",
+        "fund_code": "513500",
+        "notice_text_sha256": "ac821d8ac432aad74f1035ff0a53c947ffcee8f59450f4f944701159e758ee44"
+      },
+      "2025-01-22": {
+        "signed_text": "博时基金管理有限公司2025年1月22日",
+        "fund_code": "513500",
+        "notice_text_sha256": "605b21d0ac24f1cd0116f03d38fc2288a6cee8923e246ec998a17cc4633bdf3d"
+      }
+    }
+  },
+  {
+    "name": "article_20250206",
+    "url": "https://paper.cnstock.com/html/2025-02/06/content_2024960.htm",
+    "requested_at_utc": "2026-11-08T07:16:27.359314+00:00",
+    "status": 200,
+    "effective_url": "https://paper.cnstock.com/html/2025-02/06/content_2024960.htm",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 30125,
+    "sha256": "8afd7be7edb81c8a4e599f7467c7184fb7ace19dfc9bc564c3ed4573cb81f99f",
+    "title_and_code_present": true,
+    "publisher_clock": null,
+    "signed_notices": {
+      "2025-02-05": {
+        "signed_text": "博时基金管理有限公司2025年2月5日",
+        "fund_code": "513500",
+        "notice_text_sha256": "68aa0650003b2e8fc12057a6fba82c165997ecc511978a22544ee0ed405af720"
+      },
+      "2025-02-06": {
+        "signed_text": "博时基金管理有限公司2025年2月6日",
+        "fund_code": "513500",
+        "notice_text_sha256": "a7a442c6353d4d354aeb8c429145874bcd6b3210f4ee4a50ba7eb40e8b01d8b8"
+      }
+    }
+  },
+  {
+    "name": "article_20250221",
+    "url": "https://paper.cnstock.com/html/2025-02/21/content_2029277.htm",
+    "requested_at_utc": "2026-11-08T07:16:27.368435+00:00",
+    "status": 200,
+    "effective_url": "https://paper.cnstock.com/html/2025-02/21/content_2029277.htm",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 28041,
+    "sha256": "69fff9a503c0ed57a9eaafb879645b1f6102b13e68f7a560e025baa248cb3867",
+    "title_and_code_present": true,
+    "publisher_clock": null,
+    "signed_notices": {
+      "2025-02-20": {
+        "signed_text": "博时基金管理有限公司2025年2月20日",
+        "fund_code": "513500",
+        "notice_text_sha256": "01a067ae72bdaa375a5b3d2b5a82ea2ec6fa30718078a08521e3ec1cc1305337"
+      }
+    }
+  },
+  {
+    "name": "article_20250212",
+    "url": "https://paper.cnstock.com/html/2025-02/12/content_2026738.htm",
+    "requested_at_utc": "2026-11-08T07:16:27.379279+00:00",
+    "status": 200,
+    "effective_url": "https://paper.cnstock.com/html/2025-02/12/content_2026738.htm",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 32130,
+    "sha256": "519805fefe613592d6dfa77b1547d743fcb1ef3d5916b2ed81b7936faf7ab16f",
+    "title_and_code_present": true,
+    "publisher_clock": null,
+    "signed_notices": {
+      "2025-02-11": {
+        "signed_text": "博时基金管理有限公司2025年2月11日",
+        "fund_code": "513500",
+        "notice_text_sha256": "b9aa8139ee996c3dec985d13363a24ef9da9fb898649c34c90809bc4c3cc28d3"
+      },
+      "2025-02-12": {
+        "signed_text": "博时基金管理有限公司2025年2月12日",
+        "fund_code": "513500",
+        "notice_text_sha256": "5c6d62b7b4b896d7c0fd7eea5c629b67b9512701351267d8d947798333e0525b"
+      }
+    }
+  },
+  {
+    "name": "article_20250228",
+    "url": "https://paper.cnstock.com/html/2025-02/28/content_2031748.htm",
+    "requested_at_utc": "2026-11-08T07:16:27.381689+00:00",
+    "status": 200,
+    "effective_url": "https://paper.cnstock.com/html/2025-02/28/content_2031748.htm",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 69393,
+    "sha256": "0da05b3e08766bb2d99ff1f83a6f4fce9786c31aa0a50d82a041475a567308f8",
+    "title_and_code_present": true,
+    "publisher_clock": null,
+    "signed_notices": {
+      "2025-02-27": {
+        "signed_text": "博时基金管理有限公司2025年2月27日",
+        "fund_code": "513500",
+        "notice_text_sha256": "e01bf510c048c75837f88df0f61c3b8d40bab16a3cb498cb4d10493f16b70724"
+      }
+    }
+  },
+  {
+    "name": "article_20250225",
+    "url": "https://paper.cnstock.com/html/2025-02/25/content_2030058.htm",
+    "requested_at_utc": "2026-11-08T07:16:27.394469+00:00",
+    "status": 200,
+    "effective_url": "https://paper.cnstock.com/html/2025-02/25/content_2030058.htm",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 32324,
+    "sha256": "c94fef65a5e0cdcc733872d544a92a650c1710d8fc5b29fdbb27ce6ee6bea1c0",
+    "title_and_code_present": true,
+    "publisher_clock": null,
+    "signed_notices": {
+      "2025-02-24": {
+        "signed_text": "博时基金管理有限公司2025年2月24日",
+        "fund_code": "513500",
+        "notice_text_sha256": "d82327d1b7e1d867df9f3c8b93cab322785553ae0a4621d5294935d94415a4ef"
+      }
+    }
+  },
+  {
+    "name": "copy_20241217",
+    "url": "https://finance.sina.com.cn/roll/2024-12-17/doc-incztccz5272766.shtml",
+    "requested_at_utc": "2026-11-08T07:17:17.236176+00:00",
+    "status": 200,
+    "effective_url": "https://finance.sina.com.cn/roll/2024-12-17/doc-incztccz5272766.shtml",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 101787,
+    "sha256": "412693c9ea00c13e677a8055f23f3a42a381e8aa702a8aca69b76c097274688e",
+    "title_and_code_present": true,
+    "publisher_clock": "2024-12-17T04:15:33+08:00",
+    "signed_notices": {
+      "2024-12-17": {
+        "signed_text": "博时基金管理有限公司2024年12月17日",
+        "fund_code": "513500",
+        "notice_text_sha256": "2959f8be8e06a4f8929de1ba62579be7c9f1b9a8216c9dd665b7bc1dbb61c75c"
+      }
+    }
+  },
+  {
+    "name": "copy_20250206",
+    "url": "https://finance.sina.com.cn/roll/2025-02-06/doc-ineinmtq2154910.shtml",
+    "requested_at_utc": "2026-11-08T07:17:17.236633+00:00",
+    "status": 200,
+    "effective_url": "https://finance.sina.com.cn/roll/2025-02-06/doc-ineinmtq2154910.shtml",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 98964,
+    "sha256": "5678f98ccd24138d237820a6a7d1925dec07001ee9774fc892eccd0d52dd98fb",
+    "title_and_code_present": true,
+    "publisher_clock": "2025-02-06T02:46:13+08:00",
+    "signed_notices": {
+      "2025-02-05": {
+        "signed_text": "博时基金管理有限公司2025年2月5日",
+        "fund_code": "513500",
+        "notice_text_sha256": "68aa0650003b2e8fc12057a6fba82c165997ecc511978a22544ee0ed405af720"
+      },
+      "2025-02-06": {
+        "signed_text": "博时基金管理有限公司2025年2月6日",
+        "fund_code": "513500",
+        "notice_text_sha256": "a7a442c6353d4d354aeb8c429145874bcd6b3210f4ee4a50ba7eb40e8b01d8b8"
+      }
+    }
+  },
+  {
+    "name": "copy_20250212",
+    "url": "https://finance.sina.com.cn/roll/2025-02-12/doc-inekcyis2266736.shtml",
+    "requested_at_utc": "2026-11-08T07:17:17.236942+00:00",
+    "status": 200,
+    "effective_url": "https://finance.sina.com.cn/roll/2025-02-12/doc-inekcyis2266736.shtml",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 106963,
+    "sha256": "1d4dc2450b6764c2f2bde3e2f329f4e3137dc4a8628ddcdb94523ebe2dd71c77",
+    "title_and_code_present": true,
+    "publisher_clock": "2025-02-12T02:31:05+08:00",
+    "signed_notices": {
+      "2025-02-11": {
+        "signed_text": "博时基金管理有限公司2025年2月11日",
+        "fund_code": "513500",
+        "notice_text_sha256": "b9aa8139ee996c3dec985d13363a24ef9da9fb898649c34c90809bc4c3cc28d3"
+      },
+      "2025-02-12": {
+        "signed_text": "博时基金管理有限公司2025年2月12日",
+        "fund_code": "513500",
+        "notice_text_sha256": "5c6d62b7b4b896d7c0fd7eea5c629b67b9512701351267d8d947798333e0525b"
+      }
+    }
+  },
+  {
+    "name": "copy_20250123",
+    "url": "https://fund.stockstar.com/SN2025012300013235.shtml",
+    "requested_at_utc": "2026-11-08T07:17:29.115027+00:00",
+    "status": 200,
+    "effective_url": "https://fund.stockstar.com/SN2025012300013235.shtml",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 23897,
+    "sha256": "7ece27d1f0c650d97b5bdd9216c16e79d1037dff429c274fccada31d907bc9cb",
+    "title_and_code_present": true,
+    "publisher_clock": "2025-01-23 09:29:50",
+    "signed_notices": {}
+  }
+]
