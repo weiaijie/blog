@@ -2,7 +2,9 @@
 
 研究中国股票ETF 510300和债券ETF 511010，用1～2年评估长期年化净收益4%～5%可行性。仅研究模拟，不接实盘、不保证收益、不为目标调参。当前是重建后持续保存的项目，不能称找回旧系统。
 
-## 当前事实（2026-11-07）
+## 当前事实（2026-11-08）
+
+- [目标仓位偏离与三档执行延迟](reports/2026-11-08-position-delay/PROGRESS.md)覆盖 162 个历史账户场景。
 
 - [162 个场景的独立信号与目标审计](reports/2026-11-07-signal-audit/PROGRESS.md)核对 7,857 批目标及 11 月 6 日已封存的 18 个账户计划。
 
@@ -44,6 +46,6 @@ python scripts/check_health.py
 python scripts/reproduce.py
 ```
 
-可选框架对照另装requirements-backtrader.txt。历史报告和原始快照不覆盖；最新静态清单见reports/2026-11-07-signal-audit/manifest.json，动态状态另对照封存记录。旧阶段清单应在相应Git提交验证。历史建设记录见[历史计划](docs/history/PROJECT_PLAN-before-closure-20261106.md)。
+可选框架对照另装requirements-backtrader.txt。历史报告和原始快照不覆盖；最新静态清单见reports/2026-11-08-position-delay/manifest.json，动态状态另对照封存记录。旧阶段清单应在相应Git提交验证。历史建设记录见[历史计划](docs/history/PROJECT_PLAN-before-closure-20261106.md)。
 
 最新研究证据审计见[报告](reports/2026-11-06-research-audit/PROGRESS.md)与[离线页面](site/research-audit.html)：57,726个一年/两年连续窗口、255个现金新账户；历史50/50两年窗口中位年化约3.71%，不支持稳定达标结论。完整中期股票339项及债券跨市场代码归并已核对，当前实时全持仓仍未知。新增复现：`python scripts/reproduce_research_audit.py`。

@@ -30,3 +30,4 @@ reports/2026-11-07-period-review/** -text whitespace=cr-at-eol
 reports/2026-11-07-recovery/** -text whitespace=cr-at-eol
 reports/2026-11-07-rolling-risk/** -text whitespace=cr-at-eol
 reports/2026-11-07-signal-audit/** -text whitespace=cr-at-eol
+reports/2026-11-08-position-delay/** -text whitespace=cr-at-eol

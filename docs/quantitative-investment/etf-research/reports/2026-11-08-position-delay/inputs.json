@@ -1,0 +1,22 @@
+{
+  "source_sha256": {
+    "reports/2026-11-07-signal-audit/targets.csv": "dac5d6e0c46c4db7ef3e5b85327229d0e5198110a7e74edc047930c6673941ad",
+    "reports/2026-11-07-historical-pnl/fills.csv": "627077297b9a576e08146e4612d362be1395a75d80c23570109ff2fca8b3ecdd",
+    "reports/2026-11-05-long-history/audit.json": "7f0072a1f5422d0c443e213057a13042ed849a36efcefaf2907286c480af1285",
+    "reports/2026-11-05-long-history/sensitivity.json": "d85a31064ce43f8981e4b207f8fea31aca6b6c7d99720051d8fa4c6a862956d9"
+  },
+  "market_manifests": {
+    "2026-11-03-official-01": "8e9a629c570486158b1dc5194d7691889775b02e771b8ec5d77f841708a5ed34",
+    "2026-11-03-official-02": "368c8bb592152e72acaf10ef0451cc9f1ef1d3e7c4ab5ca99babb683aa3b813f",
+    "2026-11-04-expansion-07": "03e51be9790eaa6451b76491b71dcb976ae5047b54adb02f19a105d18270befd",
+    "2026-11-04-calendar-08": "dd8766c2432983c0d5a1d123add8b175696bade27c76b62688db17fdcbf25d86",
+    "2026-11-05-costs-11": "67e05926f9b3f92ee9ae85b1a91aa0c2a09226efdce4126654e828c389af03db",
+    "2026-11-05-events-12": "d2b38943ef1611e146fd18e4e414602c3cee54abb9ee3f241ff88e321e12073f"
+  },
+  "sessions": 1967,
+  "start": "2018-09-14",
+  "end": "2026-10-30",
+  "position_rows": 15714,
+  "batches": 7857,
+  "groups": 54
+}
