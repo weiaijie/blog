@@ -4,6 +4,8 @@
 
 ## 当前事实（2026-11-08）
 
+[历史模型回测面板](site/backtest.html)支持四组股债组合近 1、2、3 年与六种境内策略完整区间。按历史快照独立起账，17,630 条收盘记录逐日对账。[回放命令与结果](reports/2026-11-08-model-backtest/README.md)。
+
 - [标普 ETF 剩余价差的逐日损益与公告核查](reports/2026-11-08-residual-events/PROGRESS.md)逐日核算两套期货口径，核对申赎清单、清算份额、停复牌登记与带日期的公开提示。
 - [标普 ETF 高溢价日与收盘时差核验](reports/2026-11-08-close-timing/PROGRESS.md)覆盖 257 个高溢价日，另附 2025 年 2 月逐日行情与全区间人民币损益分解。
 - [跨境 ETF 净值、折溢价、汇率与标普账户回撤归因](reports/2026-11-08-nav-fx/PROGRESS.md)已对账 1,456 个基金日期和标普组 72 段每日损益。
@@ -54,6 +56,6 @@ python scripts/check_health.py
 python scripts/reproduce.py
 ```
 
-可选框架对照另装requirements-backtrader.txt。历史报告和原始快照不覆盖；最新静态清单见reports/2026-11-08-market-view/manifest.json，动态状态另对照封存记录。旧阶段清单应在相应Git提交验证。历史建设记录见[历史计划](docs/history/PROJECT_PLAN-before-closure-20261106.md)。
+可选框架对照另装requirements-backtrader.txt。历史报告和原始快照不覆盖；最新静态清单见reports/2026-11-08-model-backtest/manifest.json，动态状态另对照封存记录。旧阶段清单应在相应Git提交验证。历史建设记录见[历史计划](docs/history/PROJECT_PLAN-before-closure-20261106.md)。
 
 最新研究证据审计见[报告](reports/2026-11-06-research-audit/PROGRESS.md)与[离线页面](site/research-audit.html)：57,726个一年/两年连续窗口、255个现金新账户；历史50/50两年窗口中位年化约3.71%，不支持稳定达标结论。完整中期股票339项及债券跨市场代码归并已核对，当前实时全持仓仍未知。新增复现：`python scripts/reproduce_research_audit.py`。

@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "started_at_utc": "2026-11-08T08:56:40.776201+00:00",
+  "started_at_utc": "2026-11-08T09:00:19.793000+00:00",
   "mode": "scheduled",
-  "operation": "reports/operations/20261108T085640Z-754f45f5",
+  "operation": "reports/operations/20261108T090019Z-4c7d1ac1",
   "unfinished_prior_operations": [],
-  "finished_at_utc": "2026-11-08T08:56:41.510536+00:00",
+  "finished_at_utc": "2026-11-08T09:00:20.682822+00:00",
   "phase": "success",
   "exit_code": 0,
   "result": {
@@ -24,14 +24,14 @@
     "linger": "yes"
   },
   "last_success": {
-    "finished_at_utc": "2026-11-08T08:56:41.510536+00:00",
-    "operation": "reports/operations/20261108T085640Z-754f45f5",
+    "finished_at_utc": "2026-11-08T09:00:20.682822+00:00",
+    "operation": "reports/operations/20261108T090019Z-4c7d1ac1",
     "mode": "scheduled"
   },
   "systemd_trigger": {
     "daily_timer": true,
-    "invocation_id": "2c0e121cdf5340a9a0cdd9db3efb4ee6",
-    "trigger_unix_usec": 1794128200715695
+    "invocation_id": "68cd7ad6de104cd194eefea7ef65278e",
+    "trigger_unix_usec": 1794128419715428
   },
   "account_before": {
     "schema_version": 1,

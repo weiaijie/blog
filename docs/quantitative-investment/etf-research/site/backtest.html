@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>历史回测 · ETF 研究手记</title>
+<link rel="stylesheet" href="market.css"><link rel="stylesheet" href="backtest.css">
+<script defer src="vendor-charts/lightweight-charts-5.0.9.js"></script><script defer src="backtest.js"></script>
+</head>
+<body>
+<header><div class="shell mast"><div class="brand">ETF 研究手记</div><a href="market.html">返回行情与 K 线 ↗</a></div></header>
+<main class="shell">
+<div class="intro"><div><h1>历史回测</h1><p>每个区间从 10 万元人民币现金开始，看看一路赚亏多少，以及跌下去后多久回到前高。</p></div></div>
+<section class="panel" aria-label="历史模拟账户比较">
+<div class="tabs" aria-label="回测区间" role="group"><button data-period="1" aria-pressed="false">近 1 年</button><button data-period="2" aria-pressed="true">近 2 年</button><button data-period="3" aria-pressed="false">近 3 年</button><button data-period="full" aria-pressed="false">境内全历史</button></div>
+<div class="bt-content"><h2 id="bt-title">股债各半的四组组合</h2><p id="bt-range" role="status">正在读取已复核的历史回测…</p>
+<div id="bt-chart" aria-label="所选区间各组合逐日收盘总资产走势，单位人民币元"></div>
+<div class="table-wrap" tabindex="0" aria-label="各组合收益、收盘最大回撤及恢复时间"><table><thead><tr><th>组合</th><th>期末资产（元）</th><th>累计收益</th><th>年化收益</th><th>最大回撤</th><th>回到前高</th></tr></thead><tbody id="bt-rows"></tbody></table></div>
+<p class="muted">最大回撤按每日收盘总资产计算。恢复天数从回撤前高算到首次收复该前高，以交易日计。</p></div>
+</section>
+<section class="research"><h2>这些结果怎么算</h2><p id="bt-method"></p><p>按境内 ETF 的人民币场内价估值，分红按权益登记、应收和到账处理。基准佣金万分之三、每笔最低 5 元，单边滑点 5 个基点，按整手执行并检查现金。期末按收盘价估值，未扣假设清仓费用。模型成交价可能超出当日高低价，实际成交仍未知。</p></section>
+</main><footer class="shell"><a href="https://github.com/weiaijie/blog/tree/redesign-pc/docs/quantitative-investment/etf-research/reports/2026-11-08-model-backtest">复核记录 ↗</a><a href="https://www.tradingview.com/">图表来自 TradingView™ Lightweight Charts™</a></footer>
+</body></html>

@@ -16,7 +16,7 @@ def main():
  count=0;snapshots=list((ROOT/'data/snapshots').glob('*/manifest.json'))
  if not snapshots:raise ValueError('No source manifests')
  for m in snapshots:count+=verify(m,m.parent)
- report=ROOT/'reports/2026-11-08-market-view/manifest.json';n=verify(report,ROOT)
+ report=ROOT/'reports/2026-11-08-model-backtest/manifest.json';n=verify(report,ROOT)
  # These two live pointers are validated against immutable records, not an obsolete Git hash.
  active=read(ROOT/'config/active_run.json');state=read(inside(ROOT,active['checkpoint']))
  if digest({k:v for k,v in state.items() if k!='checkpoint_sha256'})!=state['checkpoint_sha256'] or state['engine_sha256']!=engine_digest() or state['real_money'] is not False:raise ValueError('Active checkpoint integrity failed')
