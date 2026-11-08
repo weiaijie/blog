@@ -14,6 +14,7 @@ sys.path.insert(0, str(ROOT/'src'))
 from etf_research.admission import load_incremental, sessions_between
 from etf_research.forward import digest, prefix_digest
 from etf_research.publication import inside, read, sha, verify_bundle
+import interactive_backtest as interactive
 from market_evidence import SNAPS, evidence, verified_inputs
 
 SITE = ROOT/'site'
@@ -22,6 +23,7 @@ ASSETS = {'/': ('market.html','text/html'), '/market.html': ('market.html','text
           '/vendor-charts/lightweight-charts-5.0.9.js': ('vendor-charts/lightweight-charts-5.0.9.js','text/javascript'),
           '/backtest.html': ('backtest.html','text/html'), '/backtest.css': ('backtest.css','text/css'),
           '/backtest.js': ('backtest.js','text/javascript'), '/backtest-data.json': ('backtest-data.json','application/json'),
+          '/interactive.js': ('interactive.js','text/javascript'), '/interactive.css': ('interactive.css','text/css'),
           '/entry-windows.json': ('entry-windows.json','application/json'),
           '/vendor-charts/LICENSE.txt': ('vendor-charts/LICENSE.txt','text/plain')}
 guard = Lock()
@@ -90,8 +92,21 @@ class Handler(BaseHTTPRequestHandler):
         self.reply(False)
 
     def reply(self, send_body):
-        path=urlsplit(self.path).path
-        if path=='/market-data.json':
+        url = urlsplit(self.path)
+        path = url.path
+        status = 200
+        if path == '/api/v1/backtest/options':
+            body, kind = interactive.encode(interactive.OPTIONS), 'application/json'
+        elif path == '/api/v1/backtest':
+            kind = 'application/json'
+            try:
+                body = interactive.encode(interactive.backtest(interactive.request_params(url.query)))
+            except interactive.InputError as exc:
+                status, body = 400, interactive.encode({'error': str(exc)})
+            except (OSError, ValueError, KeyError, IndexError) as exc:
+                self.log_error('Historical replay unavailable: %s', exc)
+                status, body = 503, interactive.encode({'error': '已核验的历史数据暂时不可用。'})
+        elif path=='/market-data.json':
             try:
                 body,kind=latest(),'application/json'
             except (OSError,ValueError,KeyError,IndexError) as exc:
@@ -104,7 +119,7 @@ class Handler(BaseHTTPRequestHandler):
         else:
             self.send_error(404)
             return
-        self.send_response(200)
+        self.send_response(status)
         self.send_header('Content-Type',kind+'; charset=utf-8')
         self.send_header('Cache-Control','no-store')
         self.send_header('X-Content-Type-Options','nosniff')

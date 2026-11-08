@@ -4,12 +4,30 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>历史回测 · ETF 研究手记</title>
 <link rel="stylesheet" href="market.css"><link rel="stylesheet" href="backtest.css">
-<script defer src="vendor-charts/lightweight-charts-5.0.9.js"></script><script defer src="backtest.js"></script>
+<script defer src="vendor-charts/lightweight-charts-5.0.9.js"></script><script defer src="backtest.js"></script><script defer src="interactive.js"></script><link rel="stylesheet" href="interactive.css">
 </head>
 <body>
 <header><div class="shell mast"><div class="brand">ETF 研究手记</div><a href="market.html">返回行情与 K 线 ↗</a></div></header>
 <main class="shell">
-<div class="intro"><div><h1>历史回测</h1><p>每个区间从 10 万元人民币现金开始，看看一路赚亏多少，以及跌下去后多久回到前高。</p></div></div>
+<div class="intro"><div><h1>历史回测</h1><p>设置本金、日期和 ETF 配比，查看模拟账户的收益、回撤和恢复时间。</p></div></div>
+<section id="workbench" class="panel bt-content" aria-labelledby="work-title">
+<h2 id="work-title">自己运行回测</h2>
+<form id="work-form">
+<div class="work-fields"><label>开始日期<input name="start" type="date" required></label><label>结束日期<input name="end" type="date" required></label>
+<label>本金（元）<input name="capital" type="number" min="1" max="1000000000" step=".01" required></label>
+<label>调仓方式<select name="rebalance"><option value="monthly">每月调回目标配比</option><option value="hold">仅初始建仓</option></select></label>
+<label>费用与滑点<select name="fees"><option value="low">低 · 万一 / 1 bp</option><option value="base">基准 · 万三 / 5 bp</option><option value="high">高 · 千一 / 10 bp</option></select></label></div>
+<fieldset><legend>目标配比</legend>
+<label>从组合开始 <select id="work-preset"><option value="1,1,1,3">三地平分 / 国债各半</option><option value="1,0,0,1">沪深300 / 国债各半</option><option value="0,1,0,1">标普500 / 国债各半</option><option value="0,0,1,1">恒生 / 国债各半</option><option value="">自定义</option></select></label>
+<div class="work-fields weights"><label>沪深300 · 510300<input aria-label="沪深300 配比" data-weight type="number" required></label><label>标普500 · 513500<input aria-label="标普500 配比" data-weight type="number" required></label><label>恒生 · 159920<input aria-label="恒生配比" data-weight type="number" required></label><label>国债 · 511010<input aria-label="国债配比" data-weight type="number" required></label></div>
+<p class="muted" id="work-mix"></p></fieldset>
+<p class="muted" id="work-limits"></p><div class="work-actions"><button disabled id="work-run" type="submit">运行回测</button><a href="api/v1/backtest/options">Agent 接口参数 ↗</a></div>
+</form><p id="work-status" role="status" aria-live="polite"></p>
+<div id="work-result" hidden><h3 id="work-range"></h3><div id="work-numbers"></div>
+<h3>收盘走势</h3><div class="ranges work-toggle" role="group" aria-label="查看模拟走势"><button data-view="drawdown" aria-pressed="true">回撤</button><button data-view="equity" aria-pressed="false">总资产</button></div>
+<p id="work-point"></p><div id="work-chart"></div><p id="work-recovery"></p>
+<div class="work-actions"><a id="work-permalink">重开本次设置</a><a id="work-json">查看本次 JSON</a><a id="work-download" download="etf-backtest.json">下载结果与订单</a></div></div>
+</section>
 <p><a href="#entries">查看每个交易日起步的结果 ↓</a></p>
 <section class="panel" aria-label="历史模拟账户比较">
 <div class="tabs" aria-label="回测区间" role="group"><button data-period="1" aria-pressed="false">近 1 年</button><button data-period="2" aria-pressed="true">近 2 年</button><button data-period="3" aria-pressed="false">近 3 年</button><button data-period="full" aria-pressed="false">境内全历史</button></div>

@@ -1,0 +1,18 @@
+#workbench{margin-bottom:20px;scroll-margin-top:10px}
+.work-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(154px,1fr));gap:12px;margin:14px 0}
+#workbench label{display:grid;gap:4px;color:var(--muted);font-size:13px}
+#workbench input,#workbench select{width:100%;min-width:0;background:white;border:1px solid #a8bab4;color:var(--ink);padding:8px;border-radius:5px;font:inherit}
+#workbench fieldset{margin:12px 0;padding:10px 14px 12px;border:1px solid var(--line);border-radius:8px}
+#workbench legend{font-weight:650}
+#work-preset{max-width:300px}
+.work-actions{display:flex;align-items:center;flex-wrap:wrap;gap:15px;margin:10px 0}
+#work-run{color:#fff;background:#185948;border-radius:6px;padding:9px 20px;font-weight:650}
+#work-run:disabled{opacity:.6}
+#work-status,#work-point,#work-recovery{font-size:13px}
+#work-numbers{display:flex;flex-wrap:wrap;gap:8px 28px;margin:15px 0}
+#work-numbers div{display:grid;font-size:12px;color:var(--muted)}
+#work-numbers strong{font-size:20px;color:var(--ink);font-variant-numeric:tabular-nums}
+#work-result{border-top:1px solid var(--line);padding-top:14px}
+#work-chart{height:260px}
+.work-toggle{width:fit-content;margin:6px 0}
+@media(max-width:550px){.work-fields,.work-fields.weights{grid-template-columns:repeat(2,minmax(0,1fr))}#work-chart{height:215px}}

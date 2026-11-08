@@ -22,15 +22,18 @@ COST = SCENARIOS['base']
 RULES = {s: InstrumentRules(100, D('.001'), s != '510300') for s in CODES}
 
 
-def simulate(days, bars, events, halts, denominators):
+def simulate(days, bars, events, halts, denominators, *, initial=D(100000), costs=COST, rebalance='monthly'):
+    """Denominators may be integers or exact Fractions for user-defined allocations."""
+    if rebalance not in ('monthly', 'hold'):
+        raise ValueError('Unknown rebalance frequency')
     events = [e for e in events if e.symbol in denominators and e.record_date >= days[0]]
-    ledger = Ledger(days, events, cash=D(100000), holdings={}, costs=COST, lot_size=100, instruments=RULES)
+    ledger = Ledger(days, events, cash=initial, holdings={}, costs=costs, lot_size=100, instruments=RULES)
     daily, orders = [], []
     for i, day in enumerate(days):
         ledger.open_session(day)
-        if i == 1 or (i > 1 and day.month != days[i-1].month):
+        if i == 1 or (rebalance == 'monthly' and i > 1 and day.month != days[i-1].month):
             prev = days[i-1]
-            targets = {s: int(daily[-1]['equity'] // (den * bars[s][prev].close * 100)) * 100
+            targets = {s: int((daily[-1]['equity'] * den.denominator) // (den.numerator * bars[s][prev].close * 100)) * 100
                        for s, den in denominators.items()}
             for side in ('sell', 'buy'):
                 for s in denominators:
@@ -38,7 +41,7 @@ def simulate(days, bars, events, halts, denominators):
                     if (delta <= 0 if side == 'buy' else delta >= 0):
                         continue
                     raw = bars[s][day].open
-                    fill = fill_price(raw, side, COST)
+                    fill = fill_price(raw, side, costs)
                     reason = guard_reason(raw, bars[s][prev].close, fill, ex_day=any(
                         e.symbol == s and e.ex_date == day and e.announcement_date < day for e in events))
                     if (day, s) in halts:
@@ -48,7 +51,7 @@ def simulate(days, bars, events, halts, denominators):
                         units = abs(delta)
                         if side == 'buy':
                             units = min(units, int(ledger.available_cash // (fill*100))*100)
-                            while units and debit(units, fill, COST) > ledger.available_cash:
+                            while units and debit(units, fill, costs) > ledger.available_cash:
                                 units -= 100
                         if units:
                             fee = ledger.trade(s, side, units, raw, signal_date=prev)['commission']
