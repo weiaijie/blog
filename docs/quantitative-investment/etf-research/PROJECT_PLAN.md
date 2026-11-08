@@ -1,5 +1,7 @@
 # 项目计划与当前状态
 
+[两至三套自定义配比并排比较](reports/2026-11-08-compare-windows/README.md)支持共享参数、两个持有期的逐项对照与各自最差期回放。
+
 [自定义配比逐日起点回测](reports/2026-11-08-custom-windows/README.md)支持在所选区间同时统计一年、两年满期结果，并查看最差一期的逐日回撤。
 
 [自助回测及 Agent 调用说明](reports/2026-11-08-interactive-backtest/README.md)支持任意区间、本金、配比、调仓和费用，生成收盘回撤曲线。

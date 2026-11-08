@@ -84,6 +84,11 @@ def latest():
         return payload((ROOT/'config/active_run.json').read_bytes())
 
 
+CALCULATIONS = {'/api/v1/backtest': interactive.backtest,
+                '/api/v1/backtest/windows': interactive.entry_windows,
+                '/api/v1/backtest/compare': interactive.compare_windows}
+
+
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
         self.reply(True)
@@ -97,10 +102,10 @@ class Handler(BaseHTTPRequestHandler):
         status = 200
         if path == '/api/v1/backtest/options':
             body, kind = interactive.encode(interactive.OPTIONS), 'application/json'
-        elif path in ('/api/v1/backtest', '/api/v1/backtest/windows'):
+        elif path in CALCULATIONS:
             kind = 'application/json'
             try:
-                calculate = interactive.entry_windows if path.endswith('/windows') else interactive.backtest
+                calculate = CALCULATIONS[path]
                 body = interactive.encode(calculate(interactive.request_params(url.query)))
             except interactive.InputError as exc:
                 status, body = 400, interactive.encode({'error': str(exc)})

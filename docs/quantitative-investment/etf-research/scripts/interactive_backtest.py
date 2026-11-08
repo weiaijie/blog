@@ -15,7 +15,8 @@ from market_evidence import END, START, evidence, verified_inputs
 DEFAULTS = dict(start='2024-10-30', end=str(END), capital='100000',
                 weights='1,1,1,3', rebalance='monthly', fees='base')
 OPTIONS = dict(version=1, method='GET', endpoint='/api/v1/backtest',
-               windowsEndpoint='/api/v1/backtest/windows', horizons=[1, 2], annualTarget='0.04',
+               windowsEndpoint='/api/v1/backtest/windows', compareEndpoint='/api/v1/backtest/compare',
+               compareWeightsFormat='2 or 3 four-ETF relative weight vectors, in input order, separated by |', horizons=[1, 2], annualTarget='0.04',
                first=str(START), last=str(END), symbols=list(CODES), required=list(DEFAULTS),
                defaults=DEFAULTS, fees=list(SCENARIOS), rebalance=['monthly', 'hold'],
                capitalRange=[1, 1000000000], weightsFormat='Four nonnegative relative amounts in symbols order; up to 2 decimal places each; positive sum.')
@@ -96,7 +97,10 @@ def backtest(params):
 
 
 def entry_windows(params):
-    days, capital, replay = configured_replay(params)
+    return window_report(params, *configured_replay(params))
+
+
+def window_report(params, days, capital, replay):
     cohorts = {1: [], 2: []}
     for sessions, endpoints in entry_schedule(days):
         ledger, _ = replay(sessions)
@@ -118,6 +122,22 @@ def entry_windows(params):
                 firstSession=days[0], lastSession=days[-1], periods=periods)
 
 
+def compare_windows(params):
+    vectors = params['weights'].split('|')
+    if len(vectors) not in (2, 3):
+        raise InputError('请提供两套或三套配比，用 | 分隔。')
+    prepared = []
+    for label, weights in zip('ABC', vectors):
+        portfolio = dict(params, weights=weights)
+        try:
+            config = configured_replay(portfolio)
+        except InputError as exc:
+            raise InputError(f'组合 {label}：{exc}') from exc
+        prepared.append((label, portfolio, config))
+    reports = [dict(id=label, **window_report(portfolio, *config)) for label, portfolio, config in prepared]
+    return dict(version=1, parameters=params, symbols=list(CODES), portfolios=reports)
+
+
 def encode(result):
     return json.dumps(result, ensure_ascii=False, default=str, allow_nan=False, separators=(',', ':')).encode()
 
@@ -126,9 +146,14 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     for key, default in DEFAULTS.items():
         parser.add_argument('--'+key, default=default)
-    parser.add_argument('--windows', action='store_true', help='Scan all mature one- and two-year entries')
+    modes = parser.add_mutually_exclusive_group()
+    modes.add_argument('--compare', action='store_true', help='Compare 2 or 3 weight vectors separated by |')
+    modes.add_argument('--windows', action='store_true', help='Scan all mature one- and two-year entries')
     args = vars(parser.parse_args())
+    comparison = args.pop('compare')
     calculate = entry_windows if args.pop('windows') else backtest
+    if comparison:
+        calculate = compare_windows
     try:
         print(encode(calculate(args)).decode())
     except InputError as exc:

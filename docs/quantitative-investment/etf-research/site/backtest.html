@@ -17,16 +17,21 @@
 <label>本金（元）<input name="capital" type="number" min="1" max="1000000000" step=".01" required></label>
 <label>调仓方式<select name="rebalance"><option value="monthly">每月调回目标配比</option><option value="hold">仅初始建仓</option></select></label>
 <label>费用与滑点<select name="fees"><option value="low">低 · 万一 / 1 bp</option><option value="base">基准 · 万三 / 5 bp</option><option value="high">高 · 千一 / 10 bp</option></select></label></div>
-<fieldset><legend>目标配比</legend>
-<label>从组合开始 <select id="work-preset"><option value="1,1,1,3">三地平分 / 国债各半</option><option value="1,0,0,1">沪深300 / 国债各半</option><option value="0,1,0,1">标普500 / 国债各半</option><option value="0,0,1,1">恒生 / 国债各半</option><option value="">自定义</option></select></label>
+<div id="portfolio-cards"><fieldset><legend>组合 A 配比</legend>
+<label>从组合开始 <select id="work-preset" data-preset><option value="1,1,1,3">三地平分 / 国债各半</option><option value="1,0,0,1">沪深300 / 国债各半</option><option value="0,1,0,1">标普500 / 国债各半</option><option value="0,0,1,1">恒生 / 国债各半</option><option value="">自定义</option></select></label>
 <div class="work-fields weights"><label>沪深300 · 510300<input aria-label="沪深300 配比" data-weight type="number" required></label><label>标普500 · 513500<input aria-label="标普500 配比" data-weight type="number" required></label><label>恒生 · 159920<input aria-label="恒生配比" data-weight type="number" required></label><label>国债 · 511010<input aria-label="国债配比" data-weight type="number" required></label></div>
-<p class="muted" id="work-mix"></p></fieldset>
-<p class="muted" id="work-limits"></p><div class="work-actions"><button disabled id="work-run" type="submit">运行回测</button><button disabled id="work-windows" type="submit">逐日起点 · 测 1 年和 2 年</button><button type="button" id="work-all-dates">用全部可用日期</button><a href="api/v1/backtest/options">Agent 接口参数 ↗</a></div>
+<p class="muted" id="work-mix" data-mix></p></fieldset></div>
+<div class="work-actions"><button type="button" id="add-portfolio" disabled>添加对比组合</button><button type="button" id="remove-portfolio" hidden>移除最后一组</button></div>
+<p class="muted" id="work-limits"></p><div class="work-actions"><button disabled id="work-run" type="submit">运行回测</button><button disabled id="work-windows" type="submit">逐日起点 · 测 1 年和 2 年</button><button type="submit" id="work-compare" hidden disabled>并排比较 · 测 1 年和 2 年</button><button type="button" id="work-all-dates">用全部可用日期</button><a href="api/v1/backtest/options">Agent 接口参数 ↗</a></div>
 </form><p id="work-status" role="status" aria-live="polite"></p>
 <section id="work-cohorts" hidden aria-labelledby="cohort-title"><h3 id="cohort-title">逐日起点结果</h3>
 <p id="cohort-range"></p><div class="table-wrap" tabindex="0" aria-label="自定义配比逐日起点结果"><table><thead><tr><th>持有期</th><th>满期次数</th><th>赚钱次数</th><th>年化 ≥ 4%</th><th>最差到期盈亏</th><th>最差一期</th></tr></thead><tbody id="cohort-rows"></tbody></table></div>
 <p class="muted">每个起点从所填本金重新建仓，周年休市顺延，只统计在所选区间内到期的窗口。相邻起点共享行情。最差按到期盈亏排序，并列时打开最早一期。</p>
 <div class="work-actions"><a id="cohort-permalink">重开逐日起点设置</a><a id="cohort-json">逐日起点 JSON（含最差期走势）</a></div></section>
+<section id="comparison" hidden aria-labelledby="comparison-title"><h3 id="comparison-title">组合并排比较</h3>
+<p id="comparison-range"></p><div id="comparison-tables"></div>
+<p class="muted">只统计在所选日期内满期的起点。最差按到期盈亏排序，并列时打开最早一期。相邻起点共享行情。</p>
+<div class="work-actions"><a id="compare-permalink">重开本次比较</a><a id="compare-json">比较结果 JSON</a></div></section>
 <div id="work-result" hidden><h3 id="work-range"></h3><div id="work-numbers"></div>
 <h3>收盘走势</h3><div class="ranges work-toggle" role="group" aria-label="查看模拟走势"><button data-view="drawdown" aria-pressed="true">回撤</button><button data-view="equity" aria-pressed="false">总资产</button></div>
 <p id="work-point"></p><div id="work-chart"></div><p id="work-recovery"></p>

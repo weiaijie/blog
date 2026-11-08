@@ -3,8 +3,11 @@
   const get = id => document.getElementById(id);
   const form = get('work-form');
   const fields = form.elements;
-  const weights = [...form.querySelectorAll('[data-weight]')];
-  const preset = get('work-preset');
+  const cards = get('portfolio-cards');
+  const compare = get('work-compare');
+  const comparison = get('comparison');
+  const inputsOf = card => [...card.querySelectorAll('[data-weight]')];
+  const vectorOf = card => inputsOf(card).map(i=>i.value).join(',');
   const run = get('work-run');
   const windows = get('work-windows');
   const cohorts = get('work-cohorts');
@@ -16,30 +19,68 @@
   let chart, series, response, view = 'drawdown', generation = 0, controller, downloadUrl;
   function parameters() {
     return new URLSearchParams({start:fields.start.value,end:fields.end.value,capital:fields.capital.value,
-      weights:weights.map(input=>input.value).join(','),rebalance:fields.rebalance.value,fees:fields.fees.value});
+      weights:[...cards.children].map(vectorOf).join('|'),rebalance:fields.rebalance.value,fees:fields.fees.value});
   }
-  function mix() {
+  function mix(card) {
+    const weights = inputsOf(card), preset = card.querySelector('[data-preset]');
     const values = weights.map(input=>Number(input.value));
     const total = values.reduce((a,b)=>a+b,0);
-    get('work-mix').textContent = total > 0 && values.every(n=>Number.isFinite(n) && n>=0)
+    card.querySelector('[data-mix]').textContent = total > 0 && values.every(n=>Number.isFinite(n) && n>=0)
       ? '折算仓位（按上方顺序） '+values.map(n=>percent(n/total)).join(' / ') : '请给至少一只 ETF 填写正数。';
     weights[0].setCustomValidity(total > 0 ? '' : '目标配比合计须大于零。');
     const raw = weights.map(i=>i.value).join(',');
     preset.value = [...preset.options].some(o=>o.value===raw) ? raw : '';
   }
+  function setWeights(card, vector) {
+    const values = vector.split(',');
+    inputsOf(card).forEach((input,i)=>{
+      input.min='0'; input.max='99999.99'; input.step='.01'; input.value=values[i] ?? '';
+    });
+    mix(card);
+  }
+  function updateControls() {
+    const n = cards.children.length;
+    run.hidden = windows.hidden = n > 1;
+    compare.hidden = n === 1;
+    get('add-portfolio').hidden = n === 3;
+    get('remove-portfolio').hidden = n === 1;
+  }
+  function addCard(vector) {
+    const card = cards.firstElementChild.cloneNode(true);
+    card.querySelectorAll('[id]').forEach(el=>el.removeAttribute('id'));
+    card.querySelector('legend').textContent = '组合 '+'ABC'[cards.children.length]+' 配比';
+    cards.append(card);
+    setWeights(card,vector);
+    updateControls();
+  }
   function changed() {
     generation++;
     controller?.abort();
-    run.disabled = windows.disabled = false;
-    cohorts.hidden = true;
+    run.disabled = windows.disabled = compare.disabled = false;
+    comparison.hidden = cohorts.hidden = true;
     result.hidden = true;
     status.textContent = '参数已修改，点击运行查看结果。';
-    mix();
   }
-  form.addEventListener('input', event=>{if (event.target !== preset) changed();});
-  preset.addEventListener('change', () => {
-    if (!preset.value) { weights[0].focus(); weights[0].select(); return; }
-    preset.value.split(',').forEach((v,i)=>weights[i].value=v);
+  form.addEventListener('input', event=>{
+    if (event.target.matches('[data-preset]')) return;
+    if (event.target.matches('[data-weight]')) mix(event.target.closest('fieldset'));
+    changed();
+  });
+  cards.addEventListener('change', event=>{
+    const preset = event.target;
+    if (!preset.matches('[data-preset]')) return;
+    const card = preset.closest('fieldset');
+    if (!preset.value) { inputsOf(card)[0].focus(); return; }
+    setWeights(card,preset.value);
+    changed();
+  });
+  get('add-portfolio').addEventListener('click',()=>{
+    addCard(cards.children.length===1?'1,0,0,1':'3,1,0,6');
+    changed();
+  });
+  get('remove-portfolio').addEventListener('click',()=>{
+    cards.lastElementChild.remove();
+    updateControls();
     changed();
   });
   function showPoint(point) {
@@ -91,6 +132,71 @@
     get('work-download').href = downloadUrl;
     plot();
   }
+  function showWorst(period, label) {
+    const replay = period.worstReplay, replayParams = new URLSearchParams(replay.parameters);
+    view = 'drawdown';
+    display(replay,replayParams,'api/v1/backtest?'+replayParams.toString());
+    get('work-range').prepend(label+'最差一期 · ');
+    result.scrollIntoView({block:'start'});
+  }
+  function displayComparison(data, params, url) {
+    const portfolios = data.portfolios;
+    const first = portfolios[0];
+    get('comparison-range').textContent = first.firstSession+' 至 '+first.lastSession+' · 每组每次从 '+amount.format(data.parameters.capital)+' 元起步';
+    const tables = get('comparison-tables');
+    tables.replaceChildren();
+    for (const years of ['1','2']) {
+      const wrap = document.createElement('div');
+      wrap.className = 'table-wrap';
+      wrap.tabIndex = 0;
+      const table = document.createElement('table');
+      table.createCaption().textContent = '持有 '+years+' 年';
+      const head = table.createTHead().insertRow();
+      for (const label of ['指标', ...portfolios.map(p=>'组合 '+p.id)]) {
+        const th = document.createElement('th');
+        th.scope = 'col'; th.textContent = label; head.append(th);
+      }
+      portfolios.forEach((p,i)=>{
+        const weightsLabel = document.createElement('small');
+        weightsLabel.textContent = p.parameters.weights.split(',').join(' / ');
+        head.cells[i+1].append(weightsLabel);
+      });
+      const body = table.createTBody();
+      const metrics = [
+        ['满期次数', p=>p.count],
+        ['赚钱次数', p=>p.profitable+' / '+p.count],
+        ['年化 ≥ 4% 次数', p=>p.reached+' / '+p.count],
+        ['最差到期盈亏', p=>(p.worstPnl>0?'+':'')+amount.format(p.worstPnl)+' 元（'+percent(p.worstReturn)+'）']
+      ];
+      for (const [label,format] of metrics) {
+        const row = body.insertRow(), th = document.createElement('th');
+        th.scope = 'row'; th.textContent = label; row.append(th);
+        for (const portfolio of portfolios) {
+          const period = portfolio.periods[years];
+          row.insertCell().textContent = period.count || label==='满期次数' ? format(period) : '—';
+        }
+      }
+      const last = body.insertRow(), th = document.createElement('th');
+      th.scope = 'row'; th.textContent = '最差一期'; last.append(th);
+      for (const portfolio of portfolios) {
+        const p = portfolio.periods[years], cell = last.insertCell();
+        if (!p.count) { cell.textContent = '没有满期窗口'; continue; }
+        const button = document.createElement('button'), date = document.createElement('small');
+        button.type = 'button'; button.textContent = '查看回撤';
+        const label = '组合 '+portfolio.id+' · '+years+' 年';
+        button.setAttribute('aria-label',label+'最差期回撤');
+        button.addEventListener('click',()=>showWorst(p,label));
+        date.textContent = p.worstStart+' 至 '+p.worstEnd+(p.worstTies>1?'（并列 '+p.worstTies+' 次）':'');
+        cell.append(button,date);
+      }
+      wrap.append(table); tables.append(wrap);
+    }
+    const page = new URL(location.href);
+    page.search = params.toString(); page.searchParams.set('mode','compare'); page.hash = 'workbench';
+    get('compare-permalink').href = page.href;
+    get('compare-json').href = url;
+    comparison.hidden = false;
+  }
   function displayWindows(data, params, url) {
     const rows = get('cohort-rows');
     rows.replaceChildren();
@@ -117,13 +223,7 @@
       link.type = 'button';
       link.textContent = '查看 '+years+' 年最差期回撤';
       dates.textContent = period.worstStart+' 至 '+period.worstEnd+(period.worstTies>1?'（并列 '+period.worstTies+' 次）':'');
-      link.addEventListener('click',()=>{
-        const replay = period.worstReplay, replayParams = new URLSearchParams(replay.parameters);
-        view = 'drawdown';
-        display(replay,replayParams,'api/v1/backtest?'+replayParams.toString());
-        get('work-range').prepend(years+' 年最差一期 · ');
-        result.scrollIntoView({block:'start'});
-      });
+      link.addEventListener('click',()=>showWorst(period,years+' 年'));
       cell.append(link,dates);
     }
     const headers = rows.closest('table').tHead.rows[0].cells;
@@ -142,23 +242,26 @@
     const token = ++generation;
     controller?.abort();
     controller = new AbortController();
-    const scanning = event.submitter === windows;
-    run.disabled = windows.disabled = true;
-    cohorts.hidden = true;
+    const comparing = cards.children.length > 1;
+    const scanning = comparing || event.submitter === windows;
+    run.disabled = windows.disabled = compare.disabled = true;
+    comparison.hidden = cohorts.hidden = true;
     result.hidden = true;
     status.textContent = scanning ? '正在逐个交易日重新建仓并计算满期结果…' : '正在按所选参数从现金起步回放…';
-    const params = parameters(), url = (scanning?'api/v1/backtest/windows?':'api/v1/backtest?')+params.toString();
+    const endpoint = comparing ? 'compare' : 'windows';
+    const params = parameters(), url = 'api/v1/backtest'+(scanning?'/'+endpoint:'')+'?'+params.toString();
     try {
       const res = await fetch(url,{signal:controller.signal});
       const data = await res.json();
       if (!res.ok) throw Error(data.error || '服务暂时不可用。');
       if (token !== generation) return;
-      if (scanning) displayWindows(data,params,url);
+      if (comparing) displayComparison(data,params,url);
+      else if (scanning) displayWindows(data,params,url);
       else display(data,params,url);
       status.textContent = '回测完成。';
     } catch (err) {
       if (token === generation) {result.hidden = true;status.textContent = '运行失败。'+err.message;}
-    } finally {if (token === generation) run.disabled = windows.disabled = false;}
+    } finally {if (token === generation) run.disabled = windows.disabled = compare.disabled = false;}
   });
   async function setup() {
     try {
@@ -168,17 +271,22 @@
       const params = Object.fromEntries(config.required.map(k=>[k,query.get(k) ?? config.defaults[k]]));
       for (const key of ['start','end','capital','fees','rebalance']) fields[key].value = params[key];
       for (const input of [fields.start,fields.end]) {input.min=config.first;input.max=config.last;}
-      const parts = params.weights.split(',');
-      weights.forEach((input,i)=>{input.min='0';input.max='99999.99';input.step='.01';input.value=parts[i] ?? '';});
-      mix();
+      const vectors = query.get('mode')==='compare' ? params.weights.split('|') : [params.weights];
+      if (vectors.length>3 || (query.get('mode')==='compare' && vectors.length<2)) throw Error();
+      setWeights(cards.firstElementChild,vectors[0]);
+      vectors.slice(1).forEach(addCard);
+      updateControls();
       get('work-limits').textContent = '可用日期 '+config.first+' 至 '+config.last+'。休市端点取区间内交易日。按场内人民币收盘价计入分红，起点后的首个开盘模拟建仓。';
       get('work-all-dates').addEventListener('click',()=>{
         fields.start.value = config.first;
         fields.end.value = config.last;
         changed();
       });
-      run.disabled = windows.disabled = false;
-      if (config.required.every(k=>query.has(k))) form.requestSubmit(query.get('mode')==='windows'?windows:run);
+      run.disabled = windows.disabled = compare.disabled = get('add-portfolio').disabled = false;
+      if (config.required.every(k=>query.has(k))) {
+        const submit = cards.children.length>1 ? compare : (query.get('mode')==='windows'?windows:run);
+        form.requestSubmit(submit);
+      }
     } catch {status.textContent = '回测服务暂时不可用，请刷新重试。';}
   }
   setup();

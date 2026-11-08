@@ -4,6 +4,8 @@
 
 ## 当前事实（2026-11-08）
 
+[两至三套自定义配比并排比较](reports/2026-11-08-compare-windows/README.md)支持共享参数、两个持有期的逐项对照与各自最差期回放。
+
 [自定义配比逐日起点回测](reports/2026-11-08-custom-windows/README.md)支持在所选区间同时统计一年、两年满期结果，并查看最差一期的逐日回撤。
 
 [自助回测及 Agent 调用说明](reports/2026-11-08-interactive-backtest/README.md)支持任意区间、本金、配比、调仓和费用，生成收盘回撤曲线。
@@ -62,6 +64,6 @@ python scripts/check_health.py
 python scripts/reproduce.py
 ```
 
-可选框架对照另装requirements-backtrader.txt。历史报告和原始快照不覆盖；最新静态清单见reports/2026-11-08-custom-windows/manifest.json，动态状态另对照封存记录。旧阶段清单应在相应Git提交验证。历史建设记录见[历史计划](docs/history/PROJECT_PLAN-before-closure-20261106.md)。
+可选框架对照另装requirements-backtrader.txt。历史报告和原始快照不覆盖；最新静态清单见reports/2026-11-08-compare-windows/manifest.json，动态状态另对照封存记录。旧阶段清单应在相应Git提交验证。历史建设记录见[历史计划](docs/history/PROJECT_PLAN-before-closure-20261106.md)。
 
 最新研究证据审计见[报告](reports/2026-11-06-research-audit/PROGRESS.md)与[离线页面](site/research-audit.html)：57,726个一年/两年连续窗口、255个现金新账户；历史50/50两年窗口中位年化约3.71%，不支持稳定达标结论。完整中期股票339项及债券跨市场代码归并已核对，当前实时全持仓仍未知。新增复现：`python scripts/reproduce_research_audit.py`。

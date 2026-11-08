@@ -4,7 +4,18 @@
 #workbench input,#workbench select{width:100%;min-width:0;background:white;border:1px solid #a8bab4;color:var(--ink);padding:8px;border-radius:5px;font:inherit}
 #workbench fieldset{margin:12px 0;padding:10px 14px 12px;border:1px solid var(--line);border-radius:8px}
 #workbench legend{font-weight:650}
-#work-preset{max-width:300px}
+[data-preset]{max-width:300px}
+#portfolio-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,245px),1fr));gap:10px}
+#portfolio-cards fieldset{min-width:0}
+#portfolio-cards .weights{grid-template-columns:repeat(auto-fit,minmax(115px,1fr))}
+#work-compare{color:#fff;background:#185948;border-radius:6px;padding:9px 16px;font-weight:650}
+#comparison-tables table{width:100%;margin-bottom:12px}
+#comparison-tables caption{text-align:left;font-weight:bold;margin:12px 0}
+#comparison-tables td,#comparison-tables th{white-space:normal}
+#comparison-tables small{display:block;color:var(--muted);font-weight:normal}
+#comparison-tables button{color:#185948;text-decoration:underline}
+@media(max-width:700px){#comparison-tables table{min-width:490px}#comparison-tables th:first-child{position:sticky;left:0;background:#fff}#comparison-tables .table-wrap{margin-bottom:8px}}
+
 .work-actions{display:flex;align-items:center;flex-wrap:wrap;gap:15px;margin:10px 0}
 #work-run{color:#fff;background:#185948;border-radius:6px;padding:9px 20px;font-weight:650}
 #work-windows{background:#e2eee9;color:#174f41;border:1px solid #92afa3;border-radius:6px;padding:8px 14px;font-weight:650}
