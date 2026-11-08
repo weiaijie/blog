@@ -24,6 +24,7 @@ ASSETS = {'/': ('market.html','text/html'), '/market.html': ('market.html','text
           '/backtest.html': ('backtest.html','text/html'), '/backtest.css': ('backtest.css','text/css'),
           '/backtest.js': ('backtest.js','text/javascript'), '/backtest-data.json': ('backtest-data.json','application/json'),
           '/interactive.js': ('interactive.js','text/javascript'), '/interactive.css': ('interactive.css','text/css'),
+          '/overlay.js': ('overlay.js','text/javascript'),
           '/entry-windows.json': ('entry-windows.json','application/json'),
           '/vendor-charts/LICENSE.txt': ('vendor-charts/LICENSE.txt','text/plain')}
 guard = Lock()
@@ -86,7 +87,8 @@ def latest():
 
 CALCULATIONS = {'/api/v1/backtest': interactive.backtest,
                 '/api/v1/backtest/windows': interactive.entry_windows,
-                '/api/v1/backtest/compare': interactive.compare_windows}
+                '/api/v1/backtest/compare': interactive.compare_windows,
+                '/api/v1/backtest/overlay': interactive.same_window}
 
 
 class Handler(BaseHTTPRequestHandler):

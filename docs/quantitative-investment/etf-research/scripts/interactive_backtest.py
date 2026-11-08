@@ -16,6 +16,7 @@ DEFAULTS = dict(start='2024-10-30', end=str(END), capital='100000',
                 weights='1,1,1,3', rebalance='monthly', fees='base')
 OPTIONS = dict(version=1, method='GET', endpoint='/api/v1/backtest',
                windowsEndpoint='/api/v1/backtest/windows', compareEndpoint='/api/v1/backtest/compare',
+               overlayEndpoint='/api/v1/backtest/overlay',
                compareWeightsFormat='2 or 3 four-ETF relative weight vectors, in input order, separated by |', horizons=[1, 2], annualTarget='0.04',
                first=str(START), last=str(END), symbols=list(CODES), required=list(DEFAULTS),
                defaults=DEFAULTS, fees=list(SCENARIOS), rebalance=['monthly', 'hold'],
@@ -80,7 +81,10 @@ def configured_replay(params):
 
 
 def backtest(params):
-    days, capital, replay = configured_replay(params)
+    return account_report(params, *configured_replay(params))
+
+
+def account_report(params, days, capital, replay):
     daily, orders = replay(days)
     summary = metrics(daily)
     peak = capital
@@ -122,7 +126,7 @@ def window_report(params, days, capital, replay):
                 firstSession=days[0], lastSession=days[-1], periods=periods)
 
 
-def compare_windows(params):
+def comparison_inputs(params):
     vectors = params['weights'].split('|')
     if len(vectors) not in (2, 3):
         raise InputError('请提供两套或三套配比，用 | 分隔。')
@@ -134,8 +138,41 @@ def compare_windows(params):
         except InputError as exc:
             raise InputError(f'组合 {label}：{exc}') from exc
         prepared.append((label, portfolio, config))
-    reports = [dict(id=label, **window_report(portfolio, *config)) for label, portfolio, config in prepared]
-    return dict(version=1, parameters=params, symbols=list(CODES), portfolios=reports)
+    return prepared
+
+
+def compare_windows(params):
+    reports = [dict(id=label, **window_report(portfolio, *config))
+               for label, portfolio, config in comparison_inputs(params)]
+    # Each link takes the chosen maturity's dates and the entire comparison's weights.
+    overlays = {p['id']: {y: dict(params, start=s['worstStart'], end=s['worstEnd']) if s['count'] else None
+                          for y, s in p['periods'].items()} for p in reports}
+    return dict(version=1, parameters=params, symbols=list(CODES), portfolios=reports, overlays=overlays)
+
+
+def same_window(params):
+    portfolios = []
+    for label, portfolio, config in comparison_inputs(params):
+        account = account_report(portfolio, *config)
+        summary = account['summary']
+        if summary['max_drawdown'] == 0:
+            state = 'no_drawdown'
+        elif summary['recovery'] is None:
+            state = 'unrecovered'
+        else:
+            state = 'recovered'
+        capital = D(portfolio['capital'])
+        curve = [dict(**row, nav=row['equity']/capital) for row in account['daily']]
+        portfolios.append(dict(id=label, weights=portfolio['weights'], summary=summary, daily=curve,
+                               recoveryState=state))
+    best_pnl = max(p['summary']['pnl'] for p in portfolios)
+    shallowest = max(p['summary']['max_drawdown'] for p in portfolios)
+    recovered = [p for p in portfolios if p['recoveryState'] == 'recovered']
+    earliest = min((p['summary']['recovery'] for p in recovered), default=None)
+    leaders = dict(highestPnl=[p['id'] for p in portfolios if p['summary']['pnl']==best_pnl],
+                   shallowestDrawdown=[p['id'] for p in portfolios if p['summary']['max_drawdown']==shallowest],
+                   firstRecovery=[p['id'] for p in recovered if p['summary']['recovery']==earliest])
+    return dict(version=1, parameters=params, symbols=list(CODES), portfolios=portfolios, leaders=leaders)
 
 
 def encode(result):
@@ -149,11 +186,15 @@ if __name__ == '__main__':
     modes = parser.add_mutually_exclusive_group()
     modes.add_argument('--compare', action='store_true', help='Compare 2 or 3 weight vectors separated by |')
     modes.add_argument('--windows', action='store_true', help='Scan all mature one- and two-year entries')
+    modes.add_argument('--overlay', action='store_true', help='Replay all portfolios on the same dates')
     args = vars(parser.parse_args())
+    overlay = args.pop('overlay')
     comparison = args.pop('compare')
     calculate = entry_windows if args.pop('windows') else backtest
     if comparison:
         calculate = compare_windows
+    if overlay:
+        calculate = same_window
     try:
         print(encode(calculate(args)).decode())
     except InputError as exc:

@@ -4,7 +4,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>历史回测 · ETF 研究手记</title>
 <link rel="stylesheet" href="market.css"><link rel="stylesheet" href="backtest.css">
-<script defer src="vendor-charts/lightweight-charts-5.0.9.js"></script><script defer src="backtest.js"></script><script defer src="interactive.js"></script><link rel="stylesheet" href="interactive.css">
+<script defer src="vendor-charts/lightweight-charts-5.0.9.js"></script><script defer src="backtest.js"></script><script defer src="overlay.js"></script><script defer src="interactive.js"></script><link rel="stylesheet" href="interactive.css">
 </head>
 <body>
 <header><div class="shell mast"><div class="brand">ETF 研究手记</div><a href="market.html">返回行情与 K 线 ↗</a></div></header>
@@ -31,7 +31,16 @@
 <section id="comparison" hidden aria-labelledby="comparison-title"><h3 id="comparison-title">组合并排比较</h3>
 <p id="comparison-range"></p><div id="comparison-tables"></div>
 <p class="muted">只统计在所选日期内满期的起点。最差按到期盈亏排序，并列时打开最早一期。相邻起点共享行情。</p>
-<div class="work-actions"><a id="compare-permalink">重开本次比较</a><a id="compare-json">比较结果 JSON</a></div></section>
+<div class="work-actions"><a id="compare-permalink">重开本次比较</a><a id="compare-json">比较结果 JSON</a></div>
+<section id="overlay" hidden aria-labelledby="overlay-title">
+<h3 id="overlay-title">同区间净值与回撤</h3><p id="overlay-status" role="status"></p>
+<div id="overlay-body" hidden><p id="overlay-summary"></p><p id="overlay-legend"></p>
+<p class="muted">上图为净值，起点为 1。下图为相对各自此前最高收盘净值的回撤，两图共用日期轴。</p>
+<div id="overlay-chart" aria-label="同区间各组合归一化净值与回撤走势"></div><p id="overlay-point"></p>
+<div class="table-wrap" tabindex="0" aria-label="同区间表现"><table><thead><tr><th>组合</th><th>到期盈亏</th><th>最大回撤</th><th>前高日期</th><th>谷底日期</th><th>收复前高日期</th><th>前高至恢复交易日数</th></tr></thead><tbody id="overlay-rows"></tbody></table></div>
+<p class="muted">收复日期按各组自身最大回撤的前高计算。各组前高可能发生在不同日期。</p>
+<div class="work-actions"><a id="overlay-json">同区间数据 JSON</a><button type="button" id="overlay-single">查看所选组合单独回放与订单</button></div>
+</div></section></section>
 <div id="work-result" hidden><h3 id="work-range"></h3><div id="work-numbers"></div>
 <h3>收盘走势</h3><div class="ranges work-toggle" role="group" aria-label="查看模拟走势"><button data-view="drawdown" aria-pressed="true">回撤</button><button data-view="equity" aria-pressed="false">总资产</button></div>
 <p id="work-point"></p><div id="work-chart"></div><p id="work-recovery"></p>

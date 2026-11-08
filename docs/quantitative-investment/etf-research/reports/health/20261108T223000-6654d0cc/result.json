@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-11-08T22:30:00.656133+08:00",
+  "account_through": "2026-11-06",
+  "scheduler": {
+    "timer_enabled": "enabled",
+    "timer_active": "active",
+    "linger": "yes"
+  },
+  "issues": [],
+  "review_queue": [],
+  "report_only": true,
+  "expected_through": "2026-11-06",
+  "state": "market_closed",
+  "actionable": false,
+  "operation": "reports/operations/20261108T141310Z-abf24886",
+  "last_archive": {
+    "snapshot": "4dd2de4ce8e797a84471363a830fc77f9fca445f18f72594aa040ed33cc0ec34",
+    "files": 3552,
+    "new_objects": 49,
+    "new_bytes": 807206,
+    "finished_at_utc": "2026-11-08T14:13:46.866975+00:00"
+  },
+  "archive_scheduler": {
+    "ActiveState": "active",
+    "UnitFileState": "enabled",
+    "Result": "success"
+  },
+  "observation": "reports/health/20261108T223000-6654d0cc"
+}

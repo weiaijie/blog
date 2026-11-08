@@ -55,6 +55,7 @@
   }
   function changed() {
     generation++;
+    sameWindowView.clear();
     controller?.abort();
     run.disabled = windows.disabled = compare.disabled = false;
     comparison.hidden = cohorts.hidden = true;
@@ -182,10 +183,13 @@
         const p = portfolio.periods[years], cell = last.insertCell();
         if (!p.count) { cell.textContent = '没有满期窗口'; continue; }
         const button = document.createElement('button'), date = document.createElement('small');
-        button.type = 'button'; button.textContent = '查看回撤';
+        button.type = 'button'; button.textContent = '同区间对比';
         const label = '组合 '+portfolio.id+' · '+years+' 年';
-        button.setAttribute('aria-label',label+'最差期回撤');
-        button.addEventListener('click',()=>showWorst(p,label));
+        button.setAttribute('aria-label',label+'最差期同区间对比');
+        button.addEventListener('click',()=>{
+          result.hidden = true;
+          sameWindowView.open(data.overlays[portfolio.id][years],label,()=>showWorst(p,label));
+        });
         date.textContent = p.worstStart+' 至 '+p.worstEnd+(p.worstTies>1?'（并列 '+p.worstTies+' 次）':'');
         cell.append(button,date);
       }
@@ -240,6 +244,7 @@
   form.addEventListener('submit',async event=>{
     event.preventDefault();
     const token = ++generation;
+    sameWindowView.clear();
     controller?.abort();
     controller = new AbortController();
     const comparing = cards.children.length > 1;
