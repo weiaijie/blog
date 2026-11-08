@@ -6,6 +6,8 @@
   const weights = [...form.querySelectorAll('[data-weight]')];
   const preset = get('work-preset');
   const run = get('work-run');
+  const windows = get('work-windows');
+  const cohorts = get('work-cohorts');
   const status = get('work-status');
   const result = get('work-result');
   const amount = new Intl.NumberFormat('zh-CN', {minimumFractionDigits:2, maximumFractionDigits:2});
@@ -28,7 +30,8 @@
   function changed() {
     generation++;
     controller?.abort();
-    run.disabled = false;
+    run.disabled = windows.disabled = false;
+    cohorts.hidden = true;
     result.hidden = true;
     status.textContent = '参数已修改，点击运行查看结果。';
     mix();
@@ -88,25 +91,74 @@
     get('work-download').href = downloadUrl;
     plot();
   }
+  function displayWindows(data, params, url) {
+    const rows = get('cohort-rows');
+    rows.replaceChildren();
+    cohorts.hidden = false;
+    get('cohort-range').textContent = data.firstSession+' 至 '+data.lastSession+' · 每次从 '+amount.format(data.parameters.capital)+' 元起步';
+    for (const [years, period] of Object.entries(data.periods)) {
+      const row = rows.insertRow();
+      const heading = document.createElement('th');
+      heading.scope = 'row';
+      heading.textContent = years+' 年';
+      row.append(heading);
+      row.insertCell().textContent = period.count;
+      if (!period.count) {
+        const empty = row.insertCell();
+        empty.colSpan = 4;
+        empty.textContent = '没有满期窗口，可扩大日期范围后再运行。';
+        continue;
+      }
+      for (const n of [period.profitable,period.reached]) {
+        row.insertCell().textContent = n+'（'+percent(n/period.count)+'）';
+      }
+      row.insertCell().textContent = (period.worstPnl>0?'+':'')+amount.format(period.worstPnl)+' 元（'+percent(period.worstReturn)+'）';
+      const cell = row.insertCell(), link = document.createElement('button'), dates = document.createElement('small');
+      link.type = 'button';
+      link.textContent = '查看 '+years+' 年最差期回撤';
+      dates.textContent = period.worstStart+' 至 '+period.worstEnd+(period.worstTies>1?'（并列 '+period.worstTies+' 次）':'');
+      link.addEventListener('click',()=>{
+        const replay = period.worstReplay, replayParams = new URLSearchParams(replay.parameters);
+        view = 'drawdown';
+        display(replay,replayParams,'api/v1/backtest?'+replayParams.toString());
+        get('work-range').prepend(years+' 年最差一期 · ');
+        result.scrollIntoView({block:'start'});
+      });
+      cell.append(link,dates);
+    }
+    const headers = rows.closest('table').tHead.rows[0].cells;
+    for (const cell of rows.querySelectorAll('td')) {
+      if (cell.colSpan === 1) cell.dataset.label = headers[cell.cellIndex].textContent;
+    }
+    const page = new URL(location.href);
+    page.search = params.toString();
+    page.searchParams.set('mode','windows');
+    page.hash = 'workbench';
+    get('cohort-permalink').href = page.href;
+    get('cohort-json').href = url;
+  }
   form.addEventListener('submit',async event=>{
     event.preventDefault();
     const token = ++generation;
     controller?.abort();
     controller = new AbortController();
-    run.disabled = true;
+    const scanning = event.submitter === windows;
+    run.disabled = windows.disabled = true;
+    cohorts.hidden = true;
     result.hidden = true;
-    status.textContent = '正在按所选参数从现金起步回放…';
-    const params = parameters(), url = 'api/v1/backtest?'+params.toString();
+    status.textContent = scanning ? '正在逐个交易日重新建仓并计算满期结果…' : '正在按所选参数从现金起步回放…';
+    const params = parameters(), url = (scanning?'api/v1/backtest/windows?':'api/v1/backtest?')+params.toString();
     try {
       const res = await fetch(url,{signal:controller.signal});
       const data = await res.json();
       if (!res.ok) throw Error(data.error || '服务暂时不可用。');
       if (token !== generation) return;
-      display(data,params,url);
+      if (scanning) displayWindows(data,params,url);
+      else display(data,params,url);
       status.textContent = '回测完成。';
     } catch (err) {
       if (token === generation) {result.hidden = true;status.textContent = '运行失败。'+err.message;}
-    } finally {if (token === generation) run.disabled = false;}
+    } finally {if (token === generation) run.disabled = windows.disabled = false;}
   });
   async function setup() {
     try {
@@ -120,8 +172,13 @@
       weights.forEach((input,i)=>{input.min='0';input.max='99999.99';input.step='.01';input.value=parts[i] ?? '';});
       mix();
       get('work-limits').textContent = '可用日期 '+config.first+' 至 '+config.last+'。休市端点取区间内交易日。按场内人民币收盘价计入分红，起点后的首个开盘模拟建仓。';
-      run.disabled = false;
-      if (config.required.every(k=>query.has(k))) form.requestSubmit();
+      get('work-all-dates').addEventListener('click',()=>{
+        fields.start.value = config.first;
+        fields.end.value = config.last;
+        changed();
+      });
+      run.disabled = windows.disabled = false;
+      if (config.required.every(k=>query.has(k))) form.requestSubmit(query.get('mode')==='windows'?windows:run);
     } catch {status.textContent = '回测服务暂时不可用，请刷新重试。';}
   }
   setup();

@@ -11,27 +11,36 @@ INITIAL = D('100000')
 TARGET = D('.04')
 
 
-def outcomes():
-    base, days, bars, halts = verified_inputs(evidence())
-    results = []
+def entry_schedule(days):
     for i, start in enumerate(days):
         endpoints = {y: bisect_left(days, anniversary(start, y)) for y in (1, 2)}
         if endpoints[1] == len(days):
             break
-        eligible = {y: j for y, j in endpoints.items() if j < len(days)}
+        eligible = {y: j-i for y, j in endpoints.items() if j < len(days)}
+        yield days[i:i+max(eligible.values())+1], eligible
+
+
+def measure_entry(ledger, endpoints, initial):
+    start = ledger[0]['date']
+    if ledger[0]['equity'] != initial or ledger[0]['available_cash'] != initial:
+        raise ValueError(f'Unexpected opening account on {start}')
+    for years, offset in endpoints.items():
+        end = ledger[offset]['date']
+        equity = ledger[offset]['equity']
+        ratio = equity / initial
+        annual = ratio ** (D('365.25') / (end-start).days) - 1
+        yield dict(years=years, start=start, end=end, ending_equity=equity,
+                   pnl=equity-initial, total_return=ratio-1, annualized_return=annual)
+
+
+def outcomes():
+    base, days, bars, halts = verified_inputs(evidence())
+    results = []
+    for sessions, endpoints in entry_schedule(days):
         for group, weights in GROUPS.items():
-            # A shared entry has identical trades up to its first anniversary.
-            ledger, _ = simulate(days[i:max(eligible.values())+1], bars, base.dividends, halts, weights)
-            if ledger[0]['equity'] != INITIAL or ledger[0]['available_cash'] != INITIAL:
-                raise ValueError(f'Unexpected opening account on {start}')
-            for years, j in eligible.items():
-                end = days[j]
-                equity = ledger[j-i]['equity']
-                ratio = equity / INITIAL
-                annual = ratio ** (D('365.25') / (end-start).days) - 1
-                results.append(dict(years=years, group=group, start=start, end=end,
-                                    ending_equity=equity, pnl=equity-INITIAL,
-                                    total_return=ratio-1, annualized_return=annual))
+            ledger, _ = simulate(sessions, bars, base.dividends, halts, weights)
+            for row in measure_entry(ledger, endpoints, INITIAL):
+                results.append({'years': row['years'], 'group': group, **row})
     return days, results
 
 

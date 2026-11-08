@@ -5,15 +5,17 @@ import re
 from datetime import date
 from decimal import Decimal as D
 from fractions import Fraction
-from functools import lru_cache
+from functools import lru_cache, partial
 from urllib.parse import parse_qsl
 
 from compare_three_markets import CODES, SCENARIOS, metrics, simulate
+from build_entry_windows import entry_schedule, measure_entry, summarize
 from market_evidence import END, START, evidence, verified_inputs
 
 DEFAULTS = dict(start='2024-10-30', end=str(END), capital='100000',
                 weights='1,1,1,3', rebalance='monthly', fees='base')
 OPTIONS = dict(version=1, method='GET', endpoint='/api/v1/backtest',
+               windowsEndpoint='/api/v1/backtest/windows', horizons=[1, 2], annualTarget='0.04',
                first=str(START), last=str(END), symbols=list(CODES), required=list(DEFAULTS),
                defaults=DEFAULTS, fees=list(SCENARIOS), rebalance=['monthly', 'hold'],
                capitalRange=[1, 1000000000], weightsFormat='Four nonnegative relative amounts in symbols order; up to 2 decimal places each; positive sum.')
@@ -39,7 +41,7 @@ def inputs():
     return verified_inputs(evidence())
 
 
-def backtest(params):
+def configured_replay(params):
     def parse_date(value):
         if not re.fullmatch(r'[0-9]{4}-[0-9]{2}-[0-9]{2}', value):
             raise InputError('日期格式应为 YYYY-MM-DD。')
@@ -71,8 +73,14 @@ def backtest(params):
     if len(days) < 2:
         raise InputError('区间至少需要两个已核验交易日。')
     denominators = {s: total/w for s,w in zip(CODES, shares) if w}
-    daily, orders = simulate(days, bars, base.dividends, halts, denominators, initial=capital,
-                             costs=SCENARIOS[params['fees']], rebalance=params['rebalance'])
+    replay = partial(simulate, bars=bars, events=base.dividends, halts=halts, denominators=denominators,
+                     initial=capital, costs=SCENARIOS[params['fees']], rebalance=params['rebalance'])
+    return days, capital, replay
+
+
+def backtest(params):
+    days, capital, replay = configured_replay(params)
+    daily, orders = replay(days)
     summary = metrics(daily)
     peak = capital
     curve = []
@@ -87,6 +95,29 @@ def backtest(params):
     return dict(version=1, parameters=params, symbols=list(CODES), summary=summary, daily=curve, orders=orders)
 
 
+def entry_windows(params):
+    days, capital, replay = configured_replay(params)
+    cohorts = {1: [], 2: []}
+    for sessions, endpoints in entry_schedule(days):
+        ledger, _ = replay(sessions)
+        for row in measure_entry(ledger, endpoints, capital):
+            cohorts[row['years']].append(row)
+
+    periods = {}
+    for years, rows in cohorts.items():
+        if not rows:
+            periods[years] = dict(count=0, profitable=0, reached=0, worstReplay=None)
+            continue
+        stats = summarize(rows)
+        worst = backtest(dict(params, start=stats['worstStart'], end=stats['worstEnd']))
+        if worst['summary']['pnl'] != min(r['pnl'] for r in rows):
+            raise ValueError('Worst window failed endpoint reconciliation')
+        periods[years] = dict(**stats, firstStart=rows[0]['start'], lastStart=rows[-1]['start'],
+                              worstReplay=worst)
+    return dict(version=1, parameters=params, symbols=list(CODES), annualTarget='0.04',
+                firstSession=days[0], lastSession=days[-1], periods=periods)
+
+
 def encode(result):
     return json.dumps(result, ensure_ascii=False, default=str, allow_nan=False, separators=(',', ':')).encode()
 
@@ -95,8 +126,10 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     for key, default in DEFAULTS.items():
         parser.add_argument('--'+key, default=default)
-    args = parser.parse_args()
+    parser.add_argument('--windows', action='store_true', help='Scan all mature one- and two-year entries')
+    args = vars(parser.parse_args())
+    calculate = entry_windows if args.pop('windows') else backtest
     try:
-        print(encode(backtest(vars(args))).decode())
+        print(encode(calculate(args)).decode())
     except InputError as exc:
         parser.error(str(exc))

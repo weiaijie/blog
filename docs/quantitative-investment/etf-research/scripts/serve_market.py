@@ -97,10 +97,11 @@ class Handler(BaseHTTPRequestHandler):
         status = 200
         if path == '/api/v1/backtest/options':
             body, kind = interactive.encode(interactive.OPTIONS), 'application/json'
-        elif path == '/api/v1/backtest':
+        elif path in ('/api/v1/backtest', '/api/v1/backtest/windows'):
             kind = 'application/json'
             try:
-                body = interactive.encode(interactive.backtest(interactive.request_params(url.query)))
+                calculate = interactive.entry_windows if path.endswith('/windows') else interactive.backtest
+                body = interactive.encode(calculate(interactive.request_params(url.query)))
             except interactive.InputError as exc:
                 status, body = 400, interactive.encode({'error': str(exc)})
             except (OSError, ValueError, KeyError, IndexError) as exc:

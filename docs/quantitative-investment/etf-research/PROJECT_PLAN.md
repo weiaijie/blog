@@ -1,5 +1,7 @@
 # 项目计划与当前状态
 
+[自定义配比逐日起点回测](reports/2026-11-08-custom-windows/README.md)支持在所选区间同时统计一年、两年满期结果，并查看最差一期的逐日回撤。
+
 [自助回测及 Agent 调用说明](reports/2026-11-08-interactive-backtest/README.md)支持任意区间、本金、配比、调仓和费用，生成收盘回撤曲线。
 
 [每个交易日起步的持有期研究](reports/2026-11-08-entry-windows/README.md)已核算四组独立建仓的一年、两年到期盈亏与年化达标次数，可在[回测看板](site/backtest.html#entries)切换查看。
