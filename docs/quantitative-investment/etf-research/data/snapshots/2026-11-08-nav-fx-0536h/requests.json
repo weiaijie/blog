@@ -1,0 +1,46 @@
+[
+  {
+    "name": "pbc_xml",
+    "url": "https://wzdt.pbc.gov.cn/huilv/flex-xml/flex_xml_1.xml",
+    "requested_at_utc": "2026-11-08T05:40:54.439331+00:00",
+    "status": 200,
+    "effective_url": "https://wzdt.pbc.gov.cn/huilv/flex-xml/flex_xml_1.xml",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 409121,
+    "sha256": "8fe1d4857c16187b0d7300d9d9674b43c6510922bb1ebfe6dc87ffa0c53402b9"
+  },
+  {
+    "name": "pbc_hkd_page",
+    "url": "https://wzdt.pbc.gov.cn/huilv/llChart4.jsp",
+    "requested_at_utc": "2026-11-08T05:40:54.439659+00:00",
+    "status": 200,
+    "effective_url": "https://wzdt.pbc.gov.cn/huilv/llChart4.jsp",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 1669,
+    "sha256": "a777adabcdeb84a5e1f7c3712fab464aa7e856f04f6c97703ed6e7ee2f912fec"
+  },
+  {
+    "name": "pbc_series",
+    "url": "https://wzdt.pbc.gov.cn/huilv/",
+    "requested_at_utc": "2026-11-08T05:40:54.440027+00:00",
+    "status": 200,
+    "effective_url": "https://wzdt.pbc.gov.cn/huilv/",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 626,
+    "sha256": "68989d9834e09a8d147956ab236a6a415ff4acde73b42fd60bbee316d905a00c"
+  },
+  {
+    "name": "pbc_other",
+    "url": "https://wzdt.pbc.gov.cn/huilv/flex-xml/flex_xml_4.xml",
+    "requested_at_utc": "2026-11-08T05:40:54.440367+00:00",
+    "status": 200,
+    "effective_url": "https://wzdt.pbc.gov.cn/huilv/flex-xml/flex_xml_4.xml",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 414299,
+    "sha256": "b717e09ed06e21850037681a76db6d71b13bc0cd6e30338d468a4cd6a01a1872"
+  }
+]

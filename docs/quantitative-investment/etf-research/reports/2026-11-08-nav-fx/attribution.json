@@ -1,0 +1,120 @@
+{
+  "peak": "2024-12-16",
+  "trough": "2025-04-07",
+  "peak_equity": "107263.6400",
+  "trough_equity": "93197.6400",
+  "intervals": 72,
+  "pnl_cny": {
+    "nav_in_fx_units": "-8640.346832098536363104582580",
+    "fx_translation": "59.34683209853636310458258300",
+    "nav_without_fx_split": "0",
+    "premium_gap": "-5514.4000",
+    "stock_without_nav_split": "0",
+    "bond_price": "16.2000",
+    "dividend_entitlement": "0",
+    "rebalance_intraday": "36.3000",
+    "slippage": "-3.1000",
+    "commission": "-20.00",
+    "account_change": "-14066.0000"
+  },
+  "peak_percentage_points": {
+    "nav_in_fx_units": "-8.055242980844707827465656191",
+    "fx_translation": "0.05532800499641478053940979721",
+    "nav_without_fx_split": "0E+4",
+    "premium_gap": "-5.140977874701995941961320723",
+    "stock_without_nav_split": "0E+4",
+    "bond_price": "0.01510297431636666441675855863",
+    "dividend_entitlement": "0E+4",
+    "rebalance_intraday": "0.03384184985704382211903306656",
+    "slippage": "-0.002890075332144238252589600726",
+    "commission": "-0.01864564730415637582315871436",
+    "account_change": "-13.11348374901317911642752381"
+  },
+  "constant_peak_positions_pnl": "-13535.1000",
+  "actual_minus_constant_peak_positions": "-530.9000",
+  "symmetric_rate_premium_cny": "-5164.081133545361352149427099",
+  "endpoints": {
+    "2024-12-16": [
+      {
+        "date": "2024-12-16",
+        "symbol": "513500",
+        "close_cny": "2.2740",
+        "manager_nav": "2.0631",
+        "eastmoney_nav": "2.0631",
+        "ths_nav": "2.0631",
+        "nav_status": "matched",
+        "nav_cny": "2.0631",
+        "premium_cny": "0.2109",
+        "premium_pct": "10.22248073287770830303911590",
+        "currency": "USD",
+        "safe_cny_per_fc": "7.1882",
+        "pbc_cny_per_fc": "7.1882",
+        "fx_status": "matched",
+        "cny_per_fc": "7.1882"
+      },
+      {
+        "date": "2024-12-16",
+        "symbol": "159920",
+        "close_cny": "1.2230",
+        "manager_nav": "1.2142",
+        "eastmoney_nav": "1.2142",
+        "ths_nav": "1.2142",
+        "nav_status": "matched",
+        "nav_cny": "1.2142",
+        "premium_cny": "0.0088",
+        "premium_pct": "0.724757041673529896227969000",
+        "currency": "HKD",
+        "safe_cny_per_fc": "0.92444",
+        "pbc_cny_per_fc": "0.92444",
+        "fx_status": "matched",
+        "cny_per_fc": "0.92444"
+      }
+    ],
+    "2025-04-07": [
+      {
+        "date": "2025-04-07",
+        "symbol": "513500",
+        "close_cny": "1.7070",
+        "manager_nav": "1.7208",
+        "eastmoney_nav": "1.7208",
+        "ths_nav": "1.7208",
+        "nav_status": "matched",
+        "nav_cny": "1.7208",
+        "premium_cny": "-0.0138",
+        "premium_pct": "-0.8019525801952580195258019500",
+        "currency": "USD",
+        "safe_cny_per_fc": "7.198",
+        "pbc_cny_per_fc": "7.1980",
+        "fx_status": "matched",
+        "cny_per_fc": "7.198"
+      },
+      {
+        "date": "2025-04-07",
+        "symbol": "159920",
+        "close_cny": "1.2750",
+        "manager_nav": "1.2224",
+        "eastmoney_nav": "1.2224",
+        "ths_nav": "1.2224",
+        "nav_status": "matched",
+        "nav_cny": "1.2224",
+        "premium_cny": "0.0526",
+        "premium_pct": "4.303010471204188481675392700",
+        "currency": "HKD",
+        "safe_cny_per_fc": "0.92612",
+        "pbc_cny_per_fc": "0.92612",
+        "fx_status": "matched",
+        "cny_per_fc": "0.92612"
+      }
+    ]
+  },
+  "actual_currency_exposure_pnl": null,
+  "synchronous_intraday_premium_pnl": null,
+  "coverage": {
+    "513500": {
+      "matched/matched": 728
+    },
+    "159920": {
+      "matched/matched": 728
+    }
+  }
+}

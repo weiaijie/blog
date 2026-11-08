@@ -1,0 +1,112 @@
+[
+  {
+    "name": "safe_table",
+    "url": "https://www.safe.gov.cn/AppStructured/hlw/RMBQuery.do?startDate=2024-12-16&endDate=2025-04-07&queryYN=true",
+    "requested_at_utc": "2026-11-08T05:37:23.725828+00:00",
+    "status": 200,
+    "effective_url": "https://www.safe.gov.cn/AppStructured/hlw/RMBQuery.do?startDate=2024-12-16&endDate=2025-04-07&queryYN=true",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 196379,
+    "sha256": "f74f10685a4ed6531db07e4accd1cc6d9f46fe268f200b5a5281f4cfed819982"
+  },
+  {
+    "name": "safe_export",
+    "url": "https://www.safe.gov.cn/AppStructured/hlw/exportRMBExcel.do?startDate=2023-10-30&endDate=2026-10-30&queryYN=true",
+    "requested_at_utc": "2026-11-08T05:37:23.726048+00:00",
+    "status": 200,
+    "effective_url": "https://www.safe.gov.cn/AppStructured/hlw/exportRMBExcel.do?startDate=2023-10-30&endDate=2026-10-30&queryYN=true",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 542720,
+    "sha256": "fcbc81ba6698d81846fd65176f4a6c4316db8244b766bd607aef469ed954d54c"
+  },
+  {
+    "name": "h_nav_page",
+    "url": "https://www.chinaamc.com.cn/fund/159920/lishijingzhi.shtml",
+    "requested_at_utc": "2026-11-08T05:37:23.726407+00:00",
+    "status": 200,
+    "effective_url": "https://www.chinaamc.com.cn/fund/159920/lishijingzhi.shtml",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 49940,
+    "sha256": "6c7927e5457ff4e20e09a399f4014ed11a66ce66ba8ddb85a2ac04e1a9188e87"
+  },
+  {
+    "name": "h_chart",
+    "url": "https://www.chinaamc.com.cn/fund/static/new/js/zoust_all.js",
+    "requested_at_utc": "2026-11-08T05:37:23.726846+00:00",
+    "status": 200,
+    "effective_url": "https://www.chinaamc.com.cn/fund/static/new/js/zoust_all.js",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 35470,
+    "sha256": "c78bcb4ed2264edb93f65092c6aab4f4d088536044d338462d4d9b5761a6b36d"
+  },
+  {
+    "name": "b_fund",
+    "url": "https://www.bosera.com/fund/513500.html",
+    "requested_at_utc": "2026-11-08T05:37:23.727303+00:00",
+    "status": 200,
+    "effective_url": "https://www.bosera.com/fund/513500.html",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 33971,
+    "sha256": "7f61b1b44fb5ddbe40d9c7217aced897dad058dc3279ada95f955b21b2e00b4d"
+  },
+  {
+    "name": "b_detail",
+    "url": "https://www.bosera.com/fund/fundDetail.do?fundCode=513500",
+    "requested_at_utc": "2026-11-08T05:37:23.878972+00:00",
+    "status": 200,
+    "effective_url": "https://www.bosera.com/fund/fundDetail.do?fundCode=513500",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 34698,
+    "sha256": "26d70c5cce7c181ef3161609afb1dbc3b1e403c68e44f83269783671cc1c9fd0"
+  },
+  {
+    "name": "b_pcf",
+    "url": "https://www.bosera.com/fund/etfList.do?fundCode=513500",
+    "requested_at_utc": "2026-11-08T05:37:23.903118+00:00",
+    "status": 200,
+    "effective_url": "https://www.bosera.com/fund/etfList.do?fundCode=513500",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 143937,
+    "sha256": "8c726782d185ed441e1460b4ffb07509577ebe06bcbd3cc8287abef37897df9e"
+  },
+  {
+    "name": "sina_page",
+    "url": "https://stock.finance.sina.com.cn/fundInfo/view/FundInfo_LSJZ.php?symbol=513500",
+    "requested_at_utc": "2026-11-08T05:37:24.007676+00:00",
+    "status": 200,
+    "effective_url": "https://stock.finance.sina.com.cn/fundInfo/view/FundInfo_LSJZ.php?symbol=513500",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 41502,
+    "sha256": "e35ca3ef418090af1536b4fd04cd0805bbf7a27b9505c2f36402c152a7333ed5"
+  },
+  {
+    "name": "ths_513500",
+    "url": "https://fund.10jqka.com.cn/513500/json/jsondwjz.json",
+    "requested_at_utc": "2026-11-08T05:37:24.066048+00:00",
+    "status": 200,
+    "effective_url": "https://fund.10jqka.com.cn/513500/json/jsondwjz.json",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 67667,
+    "sha256": "ad825370ea2606aee92115e8831c90651f7e3e4bf9a731aadbe6668d70e62989"
+  },
+  {
+    "name": "ths_159920",
+    "url": "https://fund.10jqka.com.cn/159920/json/jsondwjz.json",
+    "requested_at_utc": "2026-11-08T05:37:24.156102+00:00",
+    "status": 200,
+    "effective_url": "https://fund.10jqka.com.cn/159920/json/jsondwjz.json",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 75653,
+    "sha256": "6bc607048be3335435459779c5c274459dc9968b61fba84c571b619e737b1a08"
+  }
+]

@@ -2,7 +2,7 @@
 
 ## 当前状态（2026-11-08，北京时间）
 
-[三地股票 ETF 与同一国债 ETF 的四组人民币模拟](reports/2026-11-08-three-markets/PROGRESS.md)已经完成历史比较。共同截止日为 2026-10-30。跨市场下一项是对照官方净值和市价折溢价，再按新一期完整持仓披露复核发行人重叠。独立模拟使用历史数据，每日冻结账户照原流程接续。
+[三地股票 ETF 与同一国债 ETF 的四组人民币模拟](reports/2026-11-08-three-markets/PROGRESS.md)已经完成历史比较。共同截止日为 2026-10-30。[跨境 ETF 净值、折溢价、汇率与标普账户回撤归因](reports/2026-11-08-nav-fx/PROGRESS.md)已核对两只基金各 728 日数据，并解释标普组 2024-12-16 至 2025-04-07 的回撤。跨市场下一项是补境内收盘时实际可知的净值、IOPV 与期货时间戳，以及新一期完整持仓。独立模拟使用历史数据，每日冻结账户照原流程接续。
 
 先检查远端redesign-pc最新提交、当前北京时间及工作区状态，不回退旧交接提交。研究中国股票ETF/债券ETF（510300、511010），用1～2年评估长期年化净收益4%～5%可行性，允许不支持目标；不实盘、不使用真实资金、不为收益目标调参。用户已授权在现有公开blog仓库保存研究代码、公开证据和报告，提交及推送；不另建仓库，不提交凭据/私人资料，不删除或重建旧环境。当前项目为重建后持续保存，不能称恢复旧项目。
 
@@ -36,7 +36,7 @@
 
 11月7日已完成新增交易日验收工具及18个历史账户季度、年度归因。11月9日收盘后运行 `python scripts/check_session_transition.py --day 2026-11-09 --require-timer`。可先读[实测分类、复现命令与离线候选任务](reports/2026-11-07-period-review/PROGRESS.md)。
 
-1. 核实仓库与北京时间。安装requirements-lock.txt，执行verify_project.py及基础测试；若研究框架对照才另装requirements-backtrader.txt。读取AGENTS.md、README、PROJECT_PLAN、DATA_SOURCES、PLAN_ALIGNMENT、PROTOCOL_V1及两配置。最新静态提交清单在reports/2026-11-08-three-markets/manifest.json；活动账户/运行状态/健康状态指针另按封存记录校验，允许合法每日更新；旧阶段清单须在相应提交核验。
+1. 核实仓库与北京时间。安装requirements-lock.txt，执行verify_project.py及基础测试；若研究框架对照才另装requirements-backtrader.txt。读取AGENTS.md、README、PROJECT_PLAN、DATA_SOURCES、PLAN_ALIGNMENT、PROTOCOL_V1及两配置。最新静态提交清单在reports/2026-11-08-nav-fx/manifest.json；活动账户/运行状态/健康状态指针另按封存记录校验，允许合法每日更新；旧阶段清单须在相应提交核验。
 2. 下一完整交易日候选11月9日，16:00后才采集；周末不增加记录。正式用户timer已enabled/active，linger=yes；北京时间16:10、16:40、17:10调用run_scheduled.py，启动/重载定时器后30秒也补检查。进程失败120秒后重试，20分钟最多3次启动。当前账户已是最新时零请求、零收益变化；新日合格后才发布整包。
 3. 超时已定位为该主机到官方公告IPv6地址的TLS握手失败（TCP已连通）；IPv4的TLS证书验证及HTTP200正常。采集器使用curl、DNS解析IPv4、正常证书校验，最多3次尝试，2/4秒退避，每次响应原文与错误均保存。5轮真实全链路、跨度约17分23秒全部准入，55请求中50成功、5次搜狐503后重试成功；10次公告请求均成功（中位0.1255秒、最长0.138秒）。这是当日工程验收，不是跨交易日长期稳定证明；没有修复或关闭主机全局IPv6。
 4. 来源失败保留原快照与失败运行。未封存中断用--retry-of旧运行路径创建新运行；已封存未发布用--resume路径，核验所有输入及原指针后恢复。路径和命令见docs/DAILY_PIPELINE.md。不得直接覆写旧检查点、报告、目标或快照。

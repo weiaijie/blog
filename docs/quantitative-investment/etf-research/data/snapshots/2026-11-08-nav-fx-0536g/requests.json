@@ -1,0 +1,24 @@
+[
+  {
+    "name": "pbc_usd",
+    "url": "https://wzdt.pbc.gov.cn/huilv/llChart1.jsp",
+    "requested_at_utc": "2026-11-08T05:40:16.299581+00:00",
+    "status": 200,
+    "effective_url": "https://wzdt.pbc.gov.cn/huilv/llChart1.jsp",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 1669,
+    "sha256": "2ec104f2ec443e8ef61e9d0c7ea9167a068da397e9ec3c3cca5ba2162760ca4d"
+  },
+  {
+    "name": "hk_prospect",
+    "url": "https://static.cninfo.com.cn/finalpage/2024-05-31/1220209802.PDF",
+    "requested_at_utc": "2026-11-08T05:40:16.299988+00:00",
+    "status": 200,
+    "effective_url": "https://static.cninfo.com.cn/finalpage/2024-05-31/1220209802.PDF",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 1723152,
+    "sha256": "20393244f0dd9bb2295e8e0ebde04f3c413529c2d4114620ca7678f90536738f"
+  }
+]

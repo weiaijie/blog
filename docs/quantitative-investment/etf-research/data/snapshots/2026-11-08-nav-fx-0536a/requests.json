@@ -1,0 +1,123 @@
+[
+  {
+    "name": "em_513500",
+    "url": "https://fund.eastmoney.com/pingzhongdata/513500.js",
+    "requested_at_utc": "2026-11-08T05:36:07.292727+00:00",
+    "status": 200,
+    "effective_url": "https://fund.eastmoney.com/pingzhongdata/513500.js",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 472694,
+    "sha256": "6f38823fd9e70155092618df4397685ba450574cbf360559c44a5e363f6f1f0e"
+  },
+  {
+    "name": "sina_513500",
+    "url": "https://stock.finance.sina.com.cn/fundInfo/api/openapi.php/FundPageInfoService.tabjjhq?symbol=513500&datefrom=2023-10-30&dateto=2026-10-30&page=1&num=1000",
+    "requested_at_utc": "2026-11-08T05:36:07.293063+00:00",
+    "status": 200,
+    "effective_url": "https://stock.finance.sina.com.cn/fundInfo/api/openapi.php/FundPageInfoService.tabjjhq?symbol=513500&datefrom=2023-10-30&dateto=2026-10-30&page=1&num=1000",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 194,
+    "sha256": "5c362634ccdf720d97794f70c6b6c578ef6e752abf8bf20aa96241d1d64cac66"
+  },
+  {
+    "name": "em_159920",
+    "url": "https://fund.eastmoney.com/pingzhongdata/159920.js",
+    "requested_at_utc": "2026-11-08T05:36:07.293380+00:00",
+    "status": 200,
+    "effective_url": "https://fund.eastmoney.com/pingzhongdata/159920.js",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 530410,
+    "sha256": "fcb04fd61426c56c7d004adfd32ca83c2d84dced5bf8308e753e3ff1c370a0cb"
+  },
+  {
+    "name": "sina_159920",
+    "url": "https://stock.finance.sina.com.cn/fundInfo/api/openapi.php/FundPageInfoService.tabjjhq?symbol=159920&datefrom=2023-10-30&dateto=2026-10-30&page=1&num=1000",
+    "requested_at_utc": "2026-11-08T05:36:07.294059+00:00",
+    "status": 200,
+    "effective_url": "https://stock.finance.sina.com.cn/fundInfo/api/openapi.php/FundPageInfoService.tabjjhq?symbol=159920&datefrom=2023-10-30&dateto=2026-10-30&page=1&num=1000",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 194,
+    "sha256": "5c362634ccdf720d97794f70c6b6c578ef6e752abf8bf20aa96241d1d64cac66"
+  },
+  {
+    "name": "bosera",
+    "url": "https://www.bosera.com/fund/fundetail/513500/index.shtml",
+    "requested_at_utc": "2026-11-08T05:36:07.294328+00:00",
+    "status": 200,
+    "effective_url": "https://www.bosera.com/index.html",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 31065,
+    "sha256": "f979aa4ef45aba2be0178e69135c3f848624d75e80ed33116ecc0b5fc5e3810d"
+  },
+  {
+    "name": "chinaamc",
+    "url": "https://www.chinaamc.com.cn/fund/159920/index.shtml",
+    "requested_at_utc": "2026-11-08T05:36:07.395099+00:00",
+    "status": 200,
+    "effective_url": "https://www.chinaamc.com.cn/fund/159920/index.shtml",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 50706,
+    "sha256": "8f974b1ce7f377afe0e169cb8334ca3a3ea061a370c55d6b7054cec80e492114"
+  },
+  {
+    "name": "safe",
+    "url": "https://www.safe.gov.cn/safe/rmbhlzjj/",
+    "requested_at_utc": "2026-11-08T05:36:07.427959+00:00",
+    "status": 200,
+    "effective_url": "https://www.safe.gov.cn/safe/rmbhlzjj/",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 16020,
+    "sha256": "5badfb5c6ea885f942e57019c586fecffe1ecc73789e9d7e7eb64f80a2a5ca5f"
+  },
+  {
+    "name": "safe_query",
+    "url": "https://www.safe.gov.cn/AppStructured/hlw/RMBQuery.do",
+    "requested_at_utc": "2026-11-08T05:36:07.474225+00:00",
+    "status": 200,
+    "effective_url": "https://www.safe.gov.cn/AppStructured/hlw/RMBQuery.do",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 36855,
+    "sha256": "c54a892005c6d88dccf99483f4fbed547bbaef2c05cbd744eddd302f2d511efc"
+  },
+  {
+    "name": "fx_cfets",
+    "url": "https://www.chinamoney.org.cn/r/cms/www/chinamoney/data/fx/ccpr.json",
+    "requested_at_utc": "2026-11-08T05:36:07.595128+00:00",
+    "status": 0,
+    "effective_url": "https://www.chinamoney.org.cn/r/cms/www/chinamoney/data/fx/ccpr.json",
+    "exit_code": 35,
+    "error": "curl: (35) TLS connect error: error:0A000152:SSL routines::unsafe legacy renegotiation disabled\n",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "ecb",
+    "url": "https://data-api.ecb.europa.eu/service/data/EXR/D.CNY+USD+HKD.EUR.SP00.A?startPeriod=2023-10-30&endPeriod=2026-10-30&format=csvdata",
+    "requested_at_utc": "2026-11-08T05:36:07.609671+00:00",
+    "status": 200,
+    "effective_url": "https://data-api.ecb.europa.eu/service/data/EXR/D.CNY+USD+HKD.EUR.SP00.A?startPeriod=2023-10-30&endPeriod=2026-10-30&format=csvdata",
+    "exit_code": 28,
+    "error": "curl: (28) Operation timed out after 24000 milliseconds with 462752 bytes received\n",
+    "bytes": 462752,
+    "sha256": "f0b5216f52510aa5fd1ac1a4f8f04e6a352edbce5963e1edc4f0a8df27966b72"
+  },
+  {
+    "name": "prospect",
+    "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2024-09-30/513500_20240930_FVQQ.pdf",
+    "requested_at_utc": "2026-11-08T05:36:07.628995+00:00",
+    "status": 200,
+    "effective_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2024-09-30/513500_20240930_FVQQ.pdf",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 2004638,
+    "sha256": "dd18cb54f92e0b624b9656901234f48b2aeb8ab0675eb3b0b192efa9cef6f219"
+  }
+]

@@ -4,6 +4,8 @@
 
 ## 当前事实（2026-11-08）
 
+- [跨境 ETF 净值、折溢价、汇率与标普账户回撤归因](reports/2026-11-08-nav-fx/PROGRESS.md)已对账 1,456 个基金日期和标普组 72 段每日损益。
+
 - [三地股票 ETF 与同一国债 ETF 的四组人民币模拟](reports/2026-11-08-three-markets/PROGRESS.md)提供一年、两年收益和回撤恢复时间、滚动窗口及同期持仓。
 
 - [目标仓位偏离与三档执行延迟](reports/2026-11-08-position-delay/PROGRESS.md)覆盖 162 个历史账户场景。
@@ -48,6 +50,6 @@ python scripts/check_health.py
 python scripts/reproduce.py
 ```
 
-可选框架对照另装requirements-backtrader.txt。历史报告和原始快照不覆盖；最新静态清单见reports/2026-11-08-three-markets/manifest.json，动态状态另对照封存记录。旧阶段清单应在相应Git提交验证。历史建设记录见[历史计划](docs/history/PROJECT_PLAN-before-closure-20261106.md)。
+可选框架对照另装requirements-backtrader.txt。历史报告和原始快照不覆盖；最新静态清单见reports/2026-11-08-nav-fx/manifest.json，动态状态另对照封存记录。旧阶段清单应在相应Git提交验证。历史建设记录见[历史计划](docs/history/PROJECT_PLAN-before-closure-20261106.md)。
 
 最新研究证据审计见[报告](reports/2026-11-06-research-audit/PROGRESS.md)与[离线页面](site/research-audit.html)：57,726个一年/两年连续窗口、255个现金新账户；历史50/50两年窗口中位年化约3.71%，不支持稳定达标结论。完整中期股票339项及债券跨市场代码归并已核对，当前实时全持仓仍未知。新增复现：`python scripts/reproduce_research_audit.py`。

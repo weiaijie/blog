@@ -1,0 +1,35 @@
+[
+  {
+    "name": "b_details_js",
+    "url": "https://www.bosera.com/static/js/fund/fundDetail-2b669096fd.js",
+    "requested_at_utc": "2026-11-08T05:38:15.810910+00:00",
+    "status": 200,
+    "effective_url": "https://www.bosera.com/static/js/fund/fundDetail-2b669096fd.js",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 8473,
+    "sha256": "e979f57b5c0783347c3c7e138b4eccd4f7036853b32079cbbcc8e2e0b1822617"
+  },
+  {
+    "name": "h_first",
+    "url": "https://www.chinaamc.com.cn/product/fundLishijingzhi.do?fundcode=159920&beginDate=2023-10-30&endDate=2026-10-30&pageIndex=1&pageSize=1000",
+    "requested_at_utc": "2026-11-08T05:38:15.811302+00:00",
+    "status": 200,
+    "effective_url": "https://www.chinaamc.com.cn/product/fundLishijingzhi.do?fundcode=159920&beginDate=2023-10-30&endDate=2026-10-30&pageIndex=1&pageSize=1000",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 15153,
+    "sha256": "cd694f8f2023dfdf2742b544559aa0f217d31eb2444aac04393afaa69459ecf3"
+  },
+  {
+    "name": "h_second",
+    "url": "https://www.chinaamc.com.cn/product/fundLishijingzhi.do?fundcode=159920&beginDate=2023-10-30&endDate=2026-10-30&pageIndex=2&pageSize=1000",
+    "requested_at_utc": "2026-11-08T05:38:15.811591+00:00",
+    "status": 200,
+    "effective_url": "https://www.chinaamc.com.cn/product/fundLishijingzhi.do?fundcode=159920&beginDate=2023-10-30&endDate=2026-10-30&pageIndex=2&pageSize=1000",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 15153,
+    "sha256": "143ef76fd1da3b42fd7e87fa2ccd3fa56fddce2922878cd2d808e07993959f10"
+  }
+]

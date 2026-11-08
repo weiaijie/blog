@@ -1,0 +1,57 @@
+[
+  {
+    "name": "safe_full",
+    "url": "https://www.safe.gov.cn/AppStructured/hlw/RMBQuery.do?startDate=2023-10-30&endDate=2026-10-30&queryYN=true",
+    "requested_at_utc": "2026-11-08T05:37:50.439737+00:00",
+    "status": 200,
+    "effective_url": "https://www.safe.gov.cn/AppStructured/hlw/RMBQuery.do?startDate=2023-10-30&endDate=2026-10-30&queryYN=true",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 1856835,
+    "sha256": "2213bc9b99ffba4ea55d1ebb4f99ce2fe3b7ed60e1b667a99a4fc6048d1a6bf4"
+  },
+  {
+    "name": "b_manifest",
+    "url": "https://www.bosera.com/static/js/rev-manifest-b0e63394e1.js",
+    "requested_at_utc": "2026-11-08T05:37:50.440071+00:00",
+    "status": 200,
+    "effective_url": "https://www.bosera.com/static/js/rev-manifest-b0e63394e1.js",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 4248,
+    "sha256": "db814d0d128e73e05d8b6a3a4abd800b07f38db25b9ad00a3510f520d5df2ae1"
+  },
+  {
+    "name": "h_frame",
+    "url": "https://www.chinaamc.com.cn/product/fundLishijingzhi.do?fundcode=159920",
+    "requested_at_utc": "2026-11-08T05:37:50.440329+00:00",
+    "status": 200,
+    "effective_url": "https://www.chinaamc.com.cn/product/fundLishijingzhi.do?fundcode=159920",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 15118,
+    "sha256": "13c27f35173de56c4cc2ef577e80746d7c76372444ffdaa03640b26b54aac43b"
+  },
+  {
+    "name": "b_js",
+    "url": "https://www.bosera.com/static/js/fund/fundDetail.js",
+    "requested_at_utc": "2026-11-08T05:37:50.440723+00:00",
+    "status": 200,
+    "effective_url": "https://www.bosera.com/index.html",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 31065,
+    "sha256": "f979aa4ef45aba2be0178e69135c3f848624d75e80ed33116ecc0b5fc5e3810d"
+  },
+  {
+    "name": "safe_unit",
+    "url": "https://www.safe.gov.cn/safe/rmbhlzjj/index.html",
+    "requested_at_utc": "2026-11-08T05:37:50.441028+00:00",
+    "status": 200,
+    "effective_url": "https://www.safe.gov.cn/safe/rmbhlzjj/index.html",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 16020,
+    "sha256": "5badfb5c6ea885f942e57019c586fecffe1ecc73789e9d7e7eb64f80a2a5ca5f"
+  }
+]
