@@ -31,3 +31,8 @@ reports/2026-11-07-recovery/** -text whitespace=cr-at-eol
 reports/2026-11-07-rolling-risk/** -text whitespace=cr-at-eol
 reports/2026-11-07-signal-audit/** -text whitespace=cr-at-eol
 reports/2026-11-08-position-delay/** -text whitespace=cr-at-eol
+reports/2026-11-08-three-markets/** -text whitespace=cr-at-eol
+reports/2026-11-08-three-markets/*.svg -whitespace
+data/snapshots/2026-11-08-markets-051007*/q3_*.body -diff
+data/snapshots/2026-11-08-markets-051007*/h1_*.body -diff
+data/snapshots/2026-11-08-markets-051007*/halt_*.body -diff

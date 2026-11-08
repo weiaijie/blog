@@ -1,0 +1,692 @@
+{
+  "quarter": "2026-09-30",
+  "announced": "2026-10-27",
+  "funds": {
+    "510300": {
+      "nav": "106879396730.03",
+      "source": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-10-27/510300_20261027_82OP.pdf",
+      "positions": [
+        {
+          "rank": 1,
+          "code": "300308",
+          "name": "中际旭创",
+          "quantity": 4706344,
+          "fair_value": "3804796743.36",
+          "reported_percent": "3.56",
+          "nav_fraction": "0.03559897285882567902864542328"
+        },
+        {
+          "rank": 2,
+          "code": "600519",
+          "name": "贵州茅台",
+          "quantity": 2627369,
+          "fair_value": "3306859170.78",
+          "reported_percent": "3.09",
+          "nav_fraction": "0.03094009951359380017539693112"
+        },
+        {
+          "rank": 3,
+          "code": "300750",
+          "name": "宁德时代",
+          "quantity": 11112950,
+          "fair_value": "3235090874.50",
+          "reported_percent": "3.03",
+          "nav_fraction": "0.03026861091545657662014889540"
+        },
+        {
+          "rank": 4,
+          "code": "601318",
+          "name": "中国平安",
+          "quantity": 44797247,
+          "fair_value": "2387245292.63",
+          "reported_percent": "2.23",
+          "nav_fraction": "0.02233587918408650175419527188"
+        },
+        {
+          "rank": 5,
+          "code": "300502",
+          "name": "新易盛",
+          "quantity": 5864205,
+          "fair_value": "2281175745.00",
+          "reported_percent": "2.13",
+          "nav_fraction": "0.02134345640780601453445129134"
+        },
+        {
+          "rank": 6,
+          "code": "600036",
+          "name": "招商银行",
+          "quantity": 52009993,
+          "fair_value": "2145932311.18",
+          "reported_percent": "2.01",
+          "nav_fraction": "0.02007807282633225672975044338"
+        },
+        {
+          "rank": 7,
+          "code": "601899",
+          "name": "紫金矿业",
+          "quantity": 69332902,
+          "fair_value": "2065427150.58",
+          "reported_percent": "1.93",
+          "nav_fraction": "0.01932483915302335422178434389"
+        },
+        {
+          "rank": 8,
+          "code": "603259",
+          "name": "药明康德",
+          "quantity": 10393994,
+          "fair_value": "1739330955.96",
+          "reported_percent": "1.63",
+          "nav_fraction": "0.01627377220656877660534866809"
+        },
+        {
+          "rank": 9,
+          "code": "000333",
+          "name": "美的集团",
+          "quantity": 20466395,
+          "fair_value": "1639358239.50",
+          "reported_percent": "1.53",
+          "nav_fraction": "0.01533839345707485682770552212"
+        },
+        {
+          "rank": 10,
+          "code": "600900",
+          "name": "长江电力",
+          "quantity": 51320997,
+          "fair_value": "1464701254.38",
+          "reported_percent": "1.37",
+          "nav_fraction": "0.01370424327973832560293127181"
+        }
+      ],
+      "sectors": {
+        "农、林、牧、渔业": {
+          "percent": "0.77",
+          "fair_value": "822532882.14"
+        },
+        "采矿业": {
+          "percent": "5.46",
+          "fair_value": "5838998855.40"
+        },
+        "制造业": {
+          "percent": "55.59",
+          "fair_value": "59409013564.35"
+        },
+        "电力、热力、燃气及水生产和供应业": {
+          "percent": "2.92",
+          "fair_value": "3120551197.64"
+        },
+        "建筑业": {
+          "percent": "1.27",
+          "fair_value": "1352456179.27"
+        },
+        "批发和零售业": {
+          "percent": "0.16",
+          "fair_value": "176139741.71"
+        },
+        "交通运输、仓储和邮政业": {
+          "percent": "2.82",
+          "fair_value": "3018030947.67"
+        },
+        "信息传输、软件和信息技术服务业": {
+          "percent": "4.85",
+          "fair_value": "5185177112.01"
+        },
+        "金融业": {
+          "percent": "20.57",
+          "fair_value": "21985201010.09"
+        },
+        "房地产业": {
+          "percent": "0.44",
+          "fair_value": "475102178.18"
+        },
+        "租赁和商务服务业": {
+          "percent": "0.50",
+          "fair_value": "536844070.38"
+        },
+        "科学研究和技术服务业": {
+          "percent": "1.63",
+          "fair_value": "1739330955.96"
+        },
+        "卫生和社会工作": {
+          "percent": "0.15",
+          "fair_value": "155170708.98"
+        },
+        "文化、体育和娱乐业": {
+          "percent": "0.06",
+          "fair_value": "67299490.99"
+        }
+      },
+      "companies": {
+        "中际旭创": "3.56",
+        "贵州茅台": "3.09",
+        "宁德时代": "3.03",
+        "中国平安": "2.23",
+        "新易盛": "2.13",
+        "招商银行": "2.01",
+        "紫金矿业": "1.93",
+        "药明康德": "1.63",
+        "美的集团": "1.53",
+        "长江电力": "1.37"
+      },
+      "top10_percent": "22.52",
+      "equity_percent": "97.20"
+    },
+    "513500": {
+      "nav": "25181037712.79",
+      "source": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-10-27/513500_20261027_WI0V.pdf",
+      "positions": [
+        {
+          "code": "NVDA",
+          "name": "英伟达",
+          "quantity": "1328704.00",
+          "fair_value": "2043762185.41",
+          "percent": "8.12"
+        },
+        {
+          "code": "AAPL",
+          "name": "苹果",
+          "quantity": "801295.00",
+          "fair_value": "1797242986.89",
+          "percent": "7.14"
+        },
+        {
+          "code": "MSFT",
+          "name": "微软",
+          "quantity": "407700.00",
+          "fair_value": "1408372248.48",
+          "percent": "5.59"
+        },
+        {
+          "code": "GOOGL",
+          "name": "Alphabet",
+          "quantity": "322183.00",
+          "fair_value": "746631139.59",
+          "percent": "2.97"
+        },
+        {
+          "code": "GOOG",
+          "name": "Alphabet",
+          "quantity": "260976.00",
+          "fair_value": "598918513.18",
+          "percent": "2.38"
+        },
+        {
+          "code": "AMZN",
+          "name": "亚马逊",
+          "quantity": "538923.00",
+          "fair_value": "904339829.07",
+          "percent": "3.59"
+        },
+        {
+          "code": "AVGO",
+          "name": "博通",
+          "quantity": "261215.00",
+          "fair_value": "617851779.16",
+          "percent": "2.45"
+        },
+        {
+          "code": "META",
+          "name": "Meta",
+          "quantity": "121072.00",
+          "fair_value": "591334997.48",
+          "percent": "2.35"
+        },
+        {
+          "code": "MU",
+          "name": "美光",
+          "quantity": "62009.00",
+          "fair_value": "444829148.98",
+          "percent": "1.77"
+        },
+        {
+          "code": "TSLA",
+          "name": "特斯拉",
+          "quantity": "154736.00",
+          "fair_value": "369769653.07",
+          "percent": "1.47"
+        },
+        {
+          "code": "AMD",
+          "name": "AMD",
+          "quantity": "89631.00",
+          "fair_value": "369303452.14",
+          "percent": "1.47"
+        }
+      ],
+      "sectors": {
+        "能源": {
+          "fair_value": "828003001.95",
+          "percent": "3.29"
+        },
+        "公用事业": {
+          "fair_value": "457805243.79",
+          "percent": "1.82"
+        },
+        "房地产": {
+          "fair_value": "413320028.90",
+          "percent": "1.64"
+        },
+        "原材料": {
+          "fair_value": "395114102.71",
+          "percent": "1.57"
+        },
+        "工业": {
+          "fair_value": "1804307830.91",
+          "percent": "7.17"
+        },
+        "非日常生活消费品": {
+          "fair_value": "2096983479.32",
+          "percent": "8.33"
+        },
+        "日常消费品": {
+          "fair_value": "1083623833.66",
+          "percent": "4.30"
+        },
+        "医疗保健": {
+          "fair_value": "2256901422.75",
+          "percent": "8.96"
+        },
+        "金融": {
+          "fair_value": "2779900407.43",
+          "percent": "11.04"
+        },
+        "信息技术": {
+          "fair_value": "9681762986.96",
+          "percent": "38.45"
+        },
+        "电信业务": {
+          "fair_value": "2425155363.49",
+          "percent": "9.63"
+        }
+      },
+      "companies": {
+        "英伟达": "8.12",
+        "苹果": "7.14",
+        "微软": "5.59",
+        "Alphabet": "5.34",
+        "亚马逊": "3.59",
+        "博通": "2.45",
+        "Meta": "2.35",
+        "美光": "1.77",
+        "特斯拉": "1.47",
+        "AMD": "1.47"
+      },
+      "top10_percent": "39.28",
+      "equity_percent": "96.19"
+    },
+    "159920": {
+      "nav": "8242901950.68",
+      "source": "https://static.cninfo.com.cn/finalpage/2026-10-27/1225624605.PDF",
+      "positions": [
+        {
+          "code": "00005",
+          "name": "汇丰控股",
+          "quantity": "4524112.00",
+          "fair_value": "613606939.24",
+          "percent": "7.44"
+        },
+        {
+          "code": "00700",
+          "name": "腾讯控股",
+          "quantity": "1646003.00",
+          "fair_value": "608986576.86",
+          "percent": "7.39"
+        },
+        {
+          "code": "09988",
+          "name": "阿里巴巴",
+          "quantity": "6581300.00",
+          "fair_value": "602238783.60",
+          "percent": "7.31"
+        },
+        {
+          "code": "00939",
+          "name": "建设银行",
+          "quantity": "51363465.00",
+          "fair_value": "432977799.65",
+          "percent": "5.25"
+        },
+        {
+          "code": "01299",
+          "name": "友邦保险",
+          "quantity": "5526160.00",
+          "fair_value": "349141197.27",
+          "percent": "4.24"
+        },
+        {
+          "code": "01398",
+          "name": "工商银行",
+          "quantity": "44039948.00",
+          "fair_value": "291474793.37",
+          "percent": "3.54"
+        },
+        {
+          "code": "00941",
+          "name": "中国移动",
+          "quantity": "3329730.00",
+          "fair_value": "227092477.38",
+          "percent": "2.76"
+        },
+        {
+          "code": "00388",
+          "name": "香港交易所",
+          "quantity": "643319.00",
+          "fair_value": "214157856.06",
+          "percent": "2.60"
+        },
+        {
+          "code": "01810",
+          "name": "小米集团",
+          "quantity": "9640600.00",
+          "fair_value": "208878260.42",
+          "percent": "2.53"
+        },
+        {
+          "code": "03988",
+          "name": "中国银行",
+          "quantity": "37964487.00",
+          "fair_value": "198306954.95",
+          "percent": "2.41"
+        }
+      ],
+      "sectors": {
+        "金融": {
+          "fair_value": "2538485879.50",
+          "percent": "30.80"
+        },
+        "非必需消费品": {
+          "fair_value": "1368399082.79",
+          "percent": "16.60"
+        },
+        "通信服务": {
+          "fair_value": "1149047867.98",
+          "percent": "13.94"
+        },
+        "信息技术": {
+          "fair_value": "523578247.21",
+          "percent": "6.35"
+        },
+        "保健": {
+          "fair_value": "444526855.36",
+          "percent": "5.39"
+        },
+        "工业": {
+          "fair_value": "388406486.07",
+          "percent": "4.71"
+        },
+        "能源": {
+          "fair_value": "375788218.19",
+          "percent": "4.56"
+        },
+        "房地产": {
+          "fair_value": "291199100.45",
+          "percent": "3.53"
+        },
+        "公用事业": {
+          "fair_value": "187417477.57",
+          "percent": "2.27"
+        },
+        "材料": {
+          "fair_value": "161751196.43",
+          "percent": "1.96"
+        },
+        "必需消费品": {
+          "fair_value": "150114309.40",
+          "percent": "1.82"
+        }
+      },
+      "companies": {
+        "汇丰控股": "7.44",
+        "腾讯控股": "7.39",
+        "阿里巴巴": "7.31",
+        "建设银行": "5.25",
+        "友邦保险": "4.24",
+        "工商银行": "3.54",
+        "中国移动": "2.76",
+        "香港交易所": "2.60",
+        "小米集团": "2.53",
+        "中国银行": "2.41"
+      },
+      "top10_percent": "45.46",
+      "equity_percent": "91.94"
+    }
+  },
+  "overlap_among_disclosed_top10": {
+    "510300 / 513500": [],
+    "510300 / 159920": [],
+    "513500 / 159920": []
+  },
+  "bond": {
+    "report_date": "2026-09-30",
+    "announcement_date": "2026-10-27",
+    "nav": "7325939587.23",
+    "pdf_sha256": "50ecd6f6daa0a7b1579a90d07efdab7fbbaada035b5888a2dab7477fa44132f1",
+    "pdf_path": "data/snapshots/2026-11-06-holdings-windows-1720/quarterly_511010.pdf",
+    "official_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-10-27/511010_20261027_RYVD.pdf",
+    "pages": {
+      "net_assets": 3,
+      "holdings": 10
+    },
+    "listed_positions": [
+      {
+        "rank": 1,
+        "code": "019834",
+        "name": "26 国债 08",
+        "quantity": 19355970,
+        "fair_value": "1957750305.43",
+        "reported_percent": "26.72",
+        "nav_fraction": "0.2672353876412789289416380013"
+      },
+      {
+        "rank": 2,
+        "code": "019848",
+        "name": "26 国债 15",
+        "quantity": 17025610,
+        "fair_value": "1707171908.39",
+        "reported_percent": "23.30",
+        "nav_fraction": "0.2330311201809263353345732337"
+      },
+      {
+        "rank": 3,
+        "code": "260015",
+        "name": "26 附息国债 15",
+        "quantity": 10900000,
+        "fair_value": "1092957328.77",
+        "reported_percent": "14.92",
+        "nav_fraction": "0.1491900548395399001516371395"
+      },
+      {
+        "rank": 4,
+        "code": "260008",
+        "name": "26 附息国债 08",
+        "quantity": 8400000,
+        "fair_value": "849613972.60",
+        "reported_percent": "11.60",
+        "nav_fraction": "0.1159733795895587314641066657"
+      },
+      {
+        "rank": 5,
+        "code": "019829",
+        "name": "26 国债 03",
+        "quantity": 7625100,
+        "fair_value": "775553308.03",
+        "reported_percent": "10.59",
+        "nav_fraction": "0.1058640054010114073245861420"
+      }
+    ],
+    "security_nav_fraction": "0.9814111346266928257479583076",
+    "listed_nav_fraction": "0.8712939476523153032165411822",
+    "full_security_hhi": null,
+    "coverage": "top five bond code rows; cross-market aliases not consolidated",
+    "unlisted_security_nav_fraction": "0.1101171869743775225314171254",
+    "known_hhi_contribution": "0.1726329402565561210309213966",
+    "sectors": {},
+    "issuer_category": {
+      "name": "中国中央政府（国家债券）",
+      "nav_fraction": "0.9814111346266928257479583076",
+      "source_page": 10
+    }
+  },
+  "earlier_ah_date": "2026-06-30",
+  "earlier_verified_pairs_lower_bound": [
+    {
+      "company": "建设银行",
+      "a_code": "601939",
+      "hk_code": "00939",
+      "a_nav_pct": "0.28",
+      "hk_nav_pct": "4.83",
+      "equal_portfolio_pct_from_printed_weights": "0.8516666666666666666666666667"
+    },
+    {
+      "company": "工商银行",
+      "a_code": "601398",
+      "hk_code": "01398",
+      "a_nav_pct": "0.78",
+      "hk_nav_pct": "3.30",
+      "equal_portfolio_pct_from_printed_weights": "0.68"
+    },
+    {
+      "company": "中国移动",
+      "a_code": "600941",
+      "hk_code": "00941",
+      "a_nav_pct": "0.27",
+      "hk_nav_pct": "2.95",
+      "equal_portfolio_pct_from_printed_weights": "0.5366666666666666666666666667"
+    },
+    {
+      "company": "中国银行",
+      "a_code": "601988",
+      "hk_code": "03988",
+      "a_nav_pct": "0.28",
+      "hk_nav_pct": "2.21",
+      "equal_portfolio_pct_from_printed_weights": "0.415"
+    },
+    {
+      "company": "中国平安",
+      "a_code": "601318",
+      "hk_code": "02318",
+      "a_nav_pct": "1.73",
+      "hk_nav_pct": "2.13",
+      "equal_portfolio_pct_from_printed_weights": "0.6433333333333333333333333333"
+    },
+    {
+      "company": "招商银行",
+      "a_code": "600036",
+      "hk_code": "03968",
+      "a_nav_pct": "1.49",
+      "hk_nav_pct": "1.09",
+      "equal_portfolio_pct_from_printed_weights": "0.43"
+    },
+    {
+      "company": "宁德时代",
+      "a_code": "300750",
+      "hk_code": "03750",
+      "a_nav_pct": "3.55",
+      "hk_nav_pct": "0.91",
+      "equal_portfolio_pct_from_printed_weights": "0.7433333333333333333333333333"
+    },
+    {
+      "company": "紫金矿业",
+      "a_code": "601899",
+      "hk_code": "02899",
+      "a_nav_pct": "1.41",
+      "hk_nav_pct": "1.02",
+      "equal_portfolio_pct_from_printed_weights": "0.405"
+    },
+    {
+      "company": "药明康德",
+      "a_code": "603259",
+      "hk_code": "02359",
+      "a_nav_pct": "1.05",
+      "hk_nav_pct": "0.46",
+      "equal_portfolio_pct_from_printed_weights": "0.2516666666666666666666666667"
+    },
+    {
+      "company": "美的集团",
+      "a_code": "000333",
+      "hk_code": "00300",
+      "a_nav_pct": "1.25",
+      "hk_nav_pct": "0.32",
+      "equal_portfolio_pct_from_printed_weights": "0.2616666666666666666666666667"
+    },
+    {
+      "company": "比亚迪",
+      "a_code": "002594",
+      "hk_code": "01211",
+      "a_nav_pct": "0.74",
+      "hk_nav_pct": "1.66",
+      "equal_portfolio_pct_from_printed_weights": "0.40"
+    },
+    {
+      "company": "中国人寿",
+      "a_code": "601628",
+      "hk_code": "02628",
+      "a_nav_pct": "0.20",
+      "hk_nav_pct": "1.23",
+      "equal_portfolio_pct_from_printed_weights": "0.2383333333333333333333333333"
+    },
+    {
+      "company": "中国神华",
+      "a_code": "601088",
+      "hk_code": "01088",
+      "a_nav_pct": "0.37",
+      "hk_nav_pct": "0.80",
+      "equal_portfolio_pct_from_printed_weights": "0.195"
+    },
+    {
+      "company": "中国石化",
+      "a_code": "600028",
+      "hk_code": "00386",
+      "a_nav_pct": "0.22",
+      "hk_nav_pct": "0.56",
+      "equal_portfolio_pct_from_printed_weights": "0.13"
+    },
+    {
+      "company": "洛阳钼业",
+      "a_code": "603993",
+      "hk_code": "03993",
+      "a_nav_pct": "0.52",
+      "hk_nav_pct": "0.35",
+      "equal_portfolio_pct_from_printed_weights": "0.145"
+    },
+    {
+      "company": "中国电信",
+      "a_code": "601728",
+      "hk_code": "00728",
+      "a_nav_pct": "0.27",
+      "hk_nav_pct": "0.35",
+      "equal_portfolio_pct_from_printed_weights": "0.1033333333333333333333333333"
+    },
+    {
+      "company": "海尔智家",
+      "a_code": "600690",
+      "hk_code": "06690",
+      "a_nav_pct": "0.26",
+      "hk_nav_pct": "0.30",
+      "equal_portfolio_pct_from_printed_weights": "0.09333333333333333333333333333"
+    },
+    {
+      "company": "中国铝业",
+      "a_code": "601600",
+      "hk_code": "02600",
+      "a_nav_pct": "0.22",
+      "hk_nav_pct": "0.17",
+      "equal_portfolio_pct_from_printed_weights": "0.065"
+    },
+    {
+      "company": "中芯国际",
+      "a_code": "688981",
+      "hk_code": "00981",
+      "a_nav_pct": "1.09",
+      "hk_nav_pct": "2.34",
+      "equal_portfolio_pct_from_printed_weights": "0.5716666666666666666666666667"
+    },
+    {
+      "company": "中国海油",
+      "a_code": "600938",
+      "hk_code": "00883",
+      "a_nav_pct": "0.22",
+      "hk_nav_pct": "1.97",
+      "equal_portfolio_pct_from_printed_weights": "0.365"
+    }
+  ]
+}

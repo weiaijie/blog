@@ -1,0 +1,24 @@
+[
+  {
+    "name": "h1_513500",
+    "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-08-31/513500_20260831_P1VK.pdf",
+    "requested_at_utc": "2026-11-08T05:16:30.755752+00:00",
+    "status": 200,
+    "effective_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-08-31/513500_20260831_P1VK.pdf",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 766862,
+    "sha256": "3a3be06de85e73dfcb24c7445454393b35f9cbd79631555f74e71c970c6ad5b8"
+  },
+  {
+    "name": "h1_159920",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-08-31/1225528031.PDF",
+    "requested_at_utc": "2026-11-08T05:16:30.756120+00:00",
+    "status": 200,
+    "effective_url": "https://static.cninfo.com.cn/finalpage/2026-08-31/1225528031.PDF",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 1822662,
+    "sha256": "f9b3af80bf521ed2e4257cbbe93b49b5cbb634ae71ec48f50937b98fbe22be90"
+  }
+]
