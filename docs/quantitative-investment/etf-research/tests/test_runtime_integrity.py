@@ -13,7 +13,7 @@ class RuntimeIntegrityTests(unittest.TestCase):
         create(self.root/'data/snapshots/example/body.json',{'source':'fixture'})
         create(self.root/'data/snapshots/example/manifest.json',{'body.json':sha(self.root/'data/snapshots/example/body.json')})
         create(self.root/'immutable.json',{'code':'fixture'})
-        create(self.root/'reports/2026-11-09-overlay-attribution/manifest.json',{'immutable.json':sha(self.root/'immutable.json')})
+        create(self.root/'reports/2026-11-09-daily-gap/manifest.json',{'immutable.json':sha(self.root/'immutable.json')})
         state=read(ROOT/'reports/2026-11-06-close/forward_checkpoint.json')
         folder=self.root/'reports/daily/example';create(folder/'forward_checkpoint.json',state);seal(folder)
         create(self.root/'config/active_run.json',dict(as_of=state['as_of'],checkpoint_sha256=state['checkpoint_sha256'],checkpoint='reports/daily/example/forward_checkpoint.json',bundle='reports/daily/example',bundle_manifest_sha256=sha(folder/'manifest.json')))

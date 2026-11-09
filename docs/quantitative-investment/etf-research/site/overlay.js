@@ -15,6 +15,9 @@ const sameWindowView = (() => {
     get('overlay-body').hidden = true;
     get('overlay-single').onclick = null;
     get('attribution-view').onchange = null;
+    get('gap-pair').onchange = null;
+    get('gap-day').onchange = null;
+    get('gap-ranks').replaceChildren();
   }
 
   function render(data) {
@@ -61,21 +64,107 @@ const sameWindowView = (() => {
     showDate(null);
   }
 
+  const names = {'510300':'沪深300','513500':'标普500','159920':'恒生','511010':'国债'};
+  const columns = ['price','dividend','commission','slippage','net'];
+  const currency = new Intl.NumberFormat('zh-CN',{minimumFractionDigits:2,maximumFractionDigits:8});
+  const format = n=>currency.format(Number(n));
+
+  function partsTable(symbols, caption, account) {
+    const wrap = document.createElement('div');
+    wrap.className = 'table-wrap'; wrap.tabIndex = 0;
+    const table = document.createElement('table');
+    table.createCaption().textContent = caption;
+    const head = table.createTHead().insertRow();
+    for (const text of ['ETF','价格贡献','分红','佣金','滑点','净贡献']) {
+      const th = document.createElement('th'); th.scope='col'; th.textContent=text; head.append(th);
+    }
+    const body = table.createTBody();
+    function appendRow(row, label, parts) {
+      const th = document.createElement('th'); th.scope='row'; th.textContent=label; row.append(th);
+      for (const k of columns) row.insertCell().textContent = format(parts[k]);
+    }
+    for (const symbol of symbols) appendRow(body.insertRow(),names[symbol]+' '+symbol,account.byEtf[symbol]);
+    appendRow(table.createTFoot().insertRow(),'合计',account.totals);
+    wrap.append(table);
+    return wrap;
+  }
+
+  function renderGap(data, anchor) {
+    const pair = get('gap-pair'), day = get('gap-day'), ranks = get('gap-ranks');
+    const gaps = data.attribution.dailyGaps;
+    pair.replaceChildren(...Object.keys(gaps).map(key=>new Option(key.replace('-', ' 减 '),key)));
+    pair.value = data.portfolios.find(p=>p.id!==anchor).id+'-'+anchor;
+    const series = chart.addSeries(LightweightCharts.LineSeries,{
+      color:'#675495',lineWidth:2,priceLineVisible:false,lastValueVisible:false,
+      priceFormat:{type:'price',precision:2,minMove:0.01}},2);
+    series.createPriceLine({price:0,color:'#838e92',lineWidth:1,lineStyle:2,axisLabelVisible:false});
+    const markers = LightweightCharts.createSeriesMarkers(series,[]);
+    let records;
+    const signed = value=>Number(value)>0?'+'+format(value):format(value);
+    function show(date) {
+      const row = records.get(date);
+      if (!row) return;
+      day.value = date;
+      const [target,base] = pair.value.split('-');
+      get('gap-check').textContent = date+'　'+target+' 当日盈亏 '+signed(row.targetChange)+' 元，'+base+
+        ' 当日盈亏 '+signed(row.referenceChange)+' 元。相减为 '+signed(row.change)+' 元，累计 '+signed(row.cumulative)+' 元。';
+      get('gap-table').replaceChildren(partsTable(data.symbols,date+' · '+pair.value+'（元）',row));
+    }
+    function update() {
+      const currentDay = day.value, gap = gaps[pair.value];
+      records = new Map(gap.days.map(r=>[r.date,r]));
+      series.setData(gap.days.map(r=>({time:r.date,value:Number(r.cumulative)})));
+      day.replaceChildren(...gap.days.map(r=>new Option(r.date,r.date)));
+      ranks.replaceChildren();
+      const points = [];
+      for (const [dates,up] of [[gap.increases,true],[gap.decreases,false]]) {
+        const line = document.createElement('div'), title = document.createElement('strong');
+        title.textContent = up?'差额增加最多':'差额减少最多'; line.append(title);
+        if (!dates.length) line.append('无');
+        for (const [i,date] of dates.entries()) {
+          const rank=(up?'↑':'↓')+(i+1), button=document.createElement('button');
+          button.type='button'; button.textContent=rank+' '+date+'　'+signed(records.get(date).change)+' 元';
+          button.onclick=()=>show(date); line.append(button);
+          points.push({time:date,position:up?'belowBar':'aboveBar',shape:up?'arrowUp':'arrowDown',
+                       color:up?'#137063':'#a74b29',text:rank});
+        }
+        ranks.append(line);
+      }
+      markers.setMarkers(points.sort((a,b)=>a.time.localeCompare(b.time)));
+      show(records.has(currentDay)?currentDay:gap.days[gap.days.length-1].date);
+    }
+    day.onchange=()=>show(day.value);
+    chart.subscribeClick(event=>show(event.time));
+    pair.onchange=()=>{
+      update();
+      const summary=get('attribution-view');
+      if ([...summary.options].some(o=>o.value===pair.value)) {
+        summary.value=pair.value;
+        summary.onchange();
+      }
+    };
+    update();
+    return key=>{
+      if (gaps[key] && pair.value!==key) {
+        pair.value=key;
+        update();
+      }
+    };
+  }
+
   function renderAttribution(data, anchor) {
     const select = get('attribution-view'), periods = get('attribution-periods');
     const ids = data.portfolios.map(p=>p.id);
-    const names = {'510300':'沪深300','513500':'标普500','159920':'恒生','511010':'国债'};
-    const columns = ['price','dividend','commission','slippage','net'];
-    const currency = new Intl.NumberFormat('zh-CN',{minimumFractionDigits:2,maximumFractionDigits:8});
-    const format = n=>currency.format(Number(n));
     select.replaceChildren();
     for (const id of ids.filter(id=>id!==anchor)) {
       select.add(new Option('差额 · '+id+' 减 '+anchor,id+'-'+anchor));
     }
     for (const id of ids) select.add(new Option('组合 '+id+' 本身',id));
+    const syncGap = renderGap(data,anchor);
     function update() {
       periods.replaceChildren();
       const choice = select.value;
+      syncGap(choice);
       for (const [title,span] of [['整个持有期',data.attribution.holding],
                                   ['组合 '+anchor+' 前高至谷底',data.attribution.peakToTrough[anchor]]]) {
         if (!span) {
@@ -86,22 +175,7 @@ const sameWindowView = (() => {
         }
         const diff = choice.includes('-');
         const account = diff ? span.differences[choice] : span.accounts[choice];
-        const wrap = document.createElement('div');
-        wrap.className = 'table-wrap'; wrap.tabIndex = 0;
-        const table = document.createElement('table');
-        table.createCaption().textContent = title+' · '+span.start+' 至 '+span.end+' · '+choice;
-        const head = table.createTHead().insertRow();
-        for (const text of ['ETF','价格贡献','分红','佣金','滑点','净贡献']) {
-          const th = document.createElement('th'); th.scope='col'; th.textContent=text; head.append(th);
-        }
-        const body = table.createTBody();
-        function appendRow(row, label, parts) {
-          const th = document.createElement('th'); th.scope='row'; th.textContent=label; row.append(th);
-          for (const k of columns) row.insertCell().textContent = format(parts[k]);
-        }
-        for (const symbol of data.symbols) appendRow(body.insertRow(),names[symbol]+' '+symbol,account.byEtf[symbol]);
-        appendRow(table.createTFoot().insertRow(),'合计',account.totals);
-        wrap.append(table);
+        const wrap = partsTable(data.symbols,title+' · '+span.start+' 至 '+span.end+' · '+choice,account);
         const note = document.createElement('p');
         if (diff) {
           const [target,base] = choice.split('-');

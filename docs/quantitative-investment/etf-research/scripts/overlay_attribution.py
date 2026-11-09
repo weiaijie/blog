@@ -74,6 +74,44 @@ def interval(ledgers, start, end):
     return dict(start=start, end=end, accounts=accounts, differences=differences)
 
 
+def daily_gap(target, reference, holding):
+    """Daily signed changes in target minus reference, including the zero starting close."""
+    if target.keys() != reference.keys():
+        raise ValueError('Gap accounts have different trading dates')
+    first = next(iter(target))
+    previous_day = first
+    rows = []
+    sums = {s: dict.fromkeys(PARTS, D(0)) for s in CODES}
+    running = D(0)
+    for day in target:
+        changes = []
+        for ledger in (target, reference):
+            opening, left = ledger[previous_day]
+            closing, right = ledger[day]
+            changes.append(breakdown(left, right, closing-opening))
+        a, b = changes
+        change = a['accountChange'] - b['accountChange']
+        detail = breakdown(b['byEtf'], a['byEtf'], change)
+        running += change
+        if running != (target[day][0]-target[first][0]) - (reference[day][0]-reference[first][0]):
+            raise ValueError(f'Cumulative gap differs from accounts on {day}')
+        for symbol, parts in detail['byEtf'].items():
+            for k in PARTS:
+                sums[symbol][k] += parts[k]
+        rows.append(dict(date=day, change=change, cumulative=running, targetChange=a['accountChange'],
+                         referenceChange=b['accountChange'], byEtf=detail['byEtf'], totals=detail['totals']))
+        previous_day = day
+    for symbol, parts in sums.items():
+        if any(v != holding['byEtf'][symbol][k] for k,v in parts.items()):
+            raise ValueError(f'Daily components differ from holding period for {symbol}')
+    if running != holding['accountChange']:
+        raise ValueError('Daily gaps differ from holding period')
+    increases = sorted((r for r in rows if r['change'] > 0), key=lambda r: -r['change'])
+    decreases = sorted((r for r in rows if r['change'] < 0), key=lambda r: r['change'])
+    return dict(days=rows, increases=[r['date'] for r in increases[:3]],
+                decreases=[r['date'] for r in decreases[:3]])
+
+
 def attribution(ledgers, portfolios):
     first = portfolios[0]['summary']
     holding = interval(ledgers, first['start'], first['end'])
@@ -86,4 +124,8 @@ def attribution(ledgers, portfolios):
             if segment['accounts'][portfolio['id']]['accountChange'] != -s['peak_to_trough_loss']:
                 raise ValueError('Peak to trough loss mismatch')
         stress[portfolio['id']] = segment
-    return dict(holding=holding, peakToTrough=stress)
+    gaps = {}
+    for target, reference in permutations(ledgers, 2):
+        key = target + '-' + reference
+        gaps[key] = daily_gap(ledgers[target], ledgers[reference], holding['differences'][key])
+    return dict(holding=holding, peakToTrough=stress, dailyGaps=gaps)

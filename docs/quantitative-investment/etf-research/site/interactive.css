@@ -40,7 +40,14 @@
 #work-result{border-top:1px solid var(--line);padding-top:14px}
 #work-chart{height:260px}
 #overlay{border-top:1px solid var(--line);margin-top:16px;padding-top:16px;scroll-margin-top:12px}
-#overlay-chart{height:420px}
+#overlay-chart{height:570px}
+#gap-detail{margin:14px 0 24px}
+#gap-detail h4{margin-bottom:4px}
+#gap-ranks>div{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:8px 0}
+#gap-ranks button{font-variant-numeric:tabular-nums}
+#gap-pair,#gap-day{max-width:260px}
+#gap-detail caption{text-align:left;font-weight:650}
+#gap-detail tfoot{font-weight:650}
 #overlay-legend{display:flex;gap:16px;flex-wrap:wrap}
 #overlay-legend span{font-weight:650;border-bottom:3px solid;padding-bottom:2px}
 #overlay-point{font-size:13px;font-variant-numeric:tabular-nums}
@@ -49,6 +56,6 @@
 #attribution caption{text-align:left;padding:8px 0;font-weight:650}
 #attribution tfoot{font-weight:650}
 #overlay-single{color:#185948;text-decoration:underline}
-@media(max-width:700px){#overlay-chart{height:340px}#overlay table{min-width:640px}}
+@media(max-width:700px){#overlay-chart{height:480px}#overlay table{min-width:640px}}
 .work-toggle{width:fit-content;margin:6px 0}
 @media(max-width:550px){.work-fields,.work-fields.weights{grid-template-columns:repeat(2,minmax(0,1fr))}#work-chart{height:215px}}

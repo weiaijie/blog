@@ -4,6 +4,8 @@
 
 ## 当前事实（2026-11-08）
 
+[同区间逐日盈亏差额](reports/2026-11-09-daily-gap/README.md)提供累计差额曲线、增加和减少最多的交易日与逐日 ETF 明细，看板和 Agent 共用同一份结果。
+
 [同区间盈亏归因](reports/2026-11-09-overlay-attribution/README.md)已接入看板和 Agent，可核对整个持有期和所选组合前高至谷底的逐 ETF 价格、分红、佣金及滑点。示例 B 相对 A 分别少亏 935.13 元和 2,310.40 元。
 
 [同区间净值与回撤叠图](reports/2026-11-08-same-window/README.md)可按所选组合最差一期的日期重放所有配比，对比到期盈亏、最大回撤和收复前高日期。
@@ -68,6 +70,6 @@ python scripts/check_health.py
 python scripts/reproduce.py
 ```
 
-可选框架对照另装requirements-backtrader.txt。历史报告和原始快照不覆盖；最新静态清单见reports/2026-11-09-overlay-attribution/manifest.json，动态状态另对照封存记录。旧阶段清单应在相应Git提交验证。历史建设记录见[历史计划](docs/history/PROJECT_PLAN-before-closure-20261106.md)。
+可选框架对照另装requirements-backtrader.txt。历史报告和原始快照不覆盖；最新静态清单见reports/2026-11-09-daily-gap/manifest.json，动态状态另对照封存记录。旧阶段清单应在相应Git提交验证。历史建设记录见[历史计划](docs/history/PROJECT_PLAN-before-closure-20261106.md)。
 
 最新研究证据审计见[报告](reports/2026-11-06-research-audit/PROGRESS.md)与[离线页面](site/research-audit.html)：57,726个一年/两年连续窗口、255个现金新账户；历史50/50两年窗口中位年化约3.71%，不支持稳定达标结论。完整中期股票339项及债券跨市场代码归并已核对，当前实时全持仓仍未知。新增复现：`python scripts/reproduce_research_audit.py`。

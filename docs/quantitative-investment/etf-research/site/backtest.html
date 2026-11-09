@@ -35,8 +35,14 @@
 <section id="overlay" hidden aria-labelledby="overlay-title">
 <h3 id="overlay-title">同区间净值与回撤</h3><p id="overlay-status" role="status"></p>
 <div id="overlay-body" hidden><p id="overlay-summary"></p><p id="overlay-legend"></p>
-<p class="muted">上图为净值，起点为 1。下图为相对各自此前最高收盘净值的回撤，两图共用日期轴。</p>
-<div id="overlay-chart" aria-label="同区间各组合归一化净值与回撤走势"></div><p id="overlay-point"></p>
+<p class="muted">三层图共用交易日轴，从上到下依次为净值、回撤和累计盈亏差额（元）。</p>
+<label>累计差额方向 <select id="gap-pair"></select></label>
+<div id="overlay-chart" aria-label="同区间各组合净值、回撤与累计盈亏差额"></div><p id="overlay-point"></p>
+<section id="gap-detail" aria-labelledby="gap-title"><h4 id="gap-title">逐日盈亏差额</h4>
+<p>按有方向的差额排名。向上表示前一组合当天表现更好，向下表示后一组合表现更好。点图中日期或以下交易日查看来源。</p>
+<div id="gap-ranks"></div>
+<label>查看交易日 <select id="gap-day"></select></label>
+<p id="gap-check" aria-live="polite"></p><div id="gap-table"></div></section>
 <div class="table-wrap" tabindex="0" aria-label="同区间表现"><table><thead><tr><th>组合</th><th>到期盈亏</th><th>最大回撤</th><th>前高日期</th><th>谷底日期</th><th>收复前高日期</th><th>前高至恢复交易日数</th></tr></thead><tbody id="overlay-rows"></tbody></table></div>
 <p class="muted">收复日期按各组自身最大回撤的前高计算。各组前高可能发生在不同日期。</p>
 <section id="attribution" aria-labelledby="attribution-title"><h3 id="attribution-title">盈亏差额从哪里来</h3>
