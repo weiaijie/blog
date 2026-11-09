@@ -188,7 +188,7 @@
         button.setAttribute('aria-label',label+'最差期同区间对比');
         button.addEventListener('click',()=>{
           result.hidden = true;
-          sameWindowView.open(data.overlays[portfolio.id][years],label,()=>showWorst(p,label));
+          sameWindowView.open(data.overlays[portfolio.id][years],portfolio.id,label,()=>showWorst(p,label));
         });
         date.textContent = p.worstStart+' 至 '+p.worstEnd+(p.worstTies>1?'（并列 '+p.worstTies+' 次）':'');
         cell.append(button,date);

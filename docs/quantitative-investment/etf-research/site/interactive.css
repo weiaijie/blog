@@ -44,6 +44,10 @@
 #overlay-legend{display:flex;gap:16px;flex-wrap:wrap}
 #overlay-legend span{font-weight:650;border-bottom:3px solid;padding-bottom:2px}
 #overlay-point{font-size:13px;font-variant-numeric:tabular-nums}
+#attribution{border-top:1px solid var(--line);padding:14px 0}
+#attribution-view{max-width:340px}
+#attribution caption{text-align:left;padding:8px 0;font-weight:650}
+#attribution tfoot{font-weight:650}
 #overlay-single{color:#185948;text-decoration:underline}
 @media(max-width:700px){#overlay-chart{height:340px}#overlay table{min-width:640px}}
 .work-toggle{width:fit-content;margin:6px 0}

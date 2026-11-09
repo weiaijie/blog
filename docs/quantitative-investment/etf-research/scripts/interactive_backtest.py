@@ -10,6 +10,7 @@ from urllib.parse import parse_qsl
 
 from compare_three_markets import CODES, SCENARIOS, metrics, simulate
 from build_entry_windows import entry_schedule, measure_entry, summarize
+from overlay_attribution import attribution, cumulative_ledger
 from market_evidence import END, START, evidence, verified_inputs
 
 DEFAULTS = dict(start='2024-10-30', end=str(END), capital='100000',
@@ -81,11 +82,11 @@ def configured_replay(params):
 
 
 def backtest(params):
-    return account_report(params, *configured_replay(params))
+    days, capital, replay = configured_replay(params)
+    return account_report(params, capital, *replay(days))
 
 
-def account_report(params, days, capital, replay):
-    daily, orders = replay(days)
+def account_report(params, capital, daily, orders):
     summary = metrics(daily)
     peak = capital
     curve = []
@@ -95,7 +96,7 @@ def account_report(params, days, capital, replay):
     equity = {r['date']: r['equity'] for r in daily}
     summary.update(ending_equity=daily[-1]['equity'], pnl=daily[-1]['equity']-capital,
                    peak_to_trough_loss=equity[summary['peak']]-equity[summary['trough']],
-                   sessions=len(days), filled_orders=sum(order['filled']>0 for order in orders),
+                   sessions=len(daily), filled_orders=sum(order['filled']>0 for order in orders),
                    commissions=sum((order['fee'] for order in orders), D(0)))
     return dict(version=1, parameters=params, symbols=list(CODES), summary=summary, daily=curve, orders=orders)
 
@@ -152,8 +153,12 @@ def compare_windows(params):
 
 def same_window(params):
     portfolios = []
-    for label, portfolio, config in comparison_inputs(params):
-        account = account_report(portfolio, *config)
+    ledgers = {}
+    base, _, bars, _ = inputs()
+    for label, portfolio, (days, capital, replay) in comparison_inputs(params):
+        daily, orders = replay(days)
+        account = account_report(portfolio, capital, daily, orders)
+        ledgers[label] = cumulative_ledger(daily, orders, bars, base.dividends)
         summary = account['summary']
         if summary['max_drawdown'] == 0:
             state = 'no_drawdown'
@@ -161,7 +166,6 @@ def same_window(params):
             state = 'unrecovered'
         else:
             state = 'recovered'
-        capital = D(portfolio['capital'])
         curve = [dict(**row, nav=row['equity']/capital) for row in account['daily']]
         portfolios.append(dict(id=label, weights=portfolio['weights'], summary=summary, daily=curve,
                                recoveryState=state))
@@ -172,7 +176,8 @@ def same_window(params):
     leaders = dict(highestPnl=[p['id'] for p in portfolios if p['summary']['pnl']==best_pnl],
                    shallowestDrawdown=[p['id'] for p in portfolios if p['summary']['max_drawdown']==shallowest],
                    firstRecovery=[p['id'] for p in recovered if p['summary']['recovery']==earliest])
-    return dict(version=1, parameters=params, symbols=list(CODES), portfolios=portfolios, leaders=leaders)
+    return dict(version=1, parameters=params, symbols=list(CODES), portfolios=portfolios, leaders=leaders,
+                attribution=attribution(ledgers,portfolios))
 
 
 def encode(result):

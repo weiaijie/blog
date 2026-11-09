@@ -39,6 +39,10 @@
 <div id="overlay-chart" aria-label="同区间各组合归一化净值与回撤走势"></div><p id="overlay-point"></p>
 <div class="table-wrap" tabindex="0" aria-label="同区间表现"><table><thead><tr><th>组合</th><th>到期盈亏</th><th>最大回撤</th><th>前高日期</th><th>谷底日期</th><th>收复前高日期</th><th>前高至恢复交易日数</th></tr></thead><tbody id="overlay-rows"></tbody></table></div>
 <p class="muted">收复日期按各组自身最大回撤的前高计算。各组前高可能发生在不同日期。</p>
+<section id="attribution" aria-labelledby="attribution-title"><h3 id="attribution-title">盈亏差额从哪里来</h3>
+<label>查看明细 <select id="attribution-view"></select></label>
+<div id="attribution-periods"></div>
+<p class="muted">金额单位为人民币元。差额为对比组合减去所选组合。费用列的正差额表示少付成本。峰谷段从前高收盘后算起，沿用当时持仓，至谷底收盘。</p></section>
 <div class="work-actions"><a id="overlay-json">同区间数据 JSON</a><button type="button" id="overlay-single">查看所选组合单独回放与订单</button></div>
 </div></section></section>
 <div id="work-result" hidden><h3 id="work-range"></h3><div id="work-numbers"></div>

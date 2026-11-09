@@ -14,6 +14,7 @@ const sameWindowView = (() => {
     get('overlay').hidden = true;
     get('overlay-body').hidden = true;
     get('overlay-single').onclick = null;
+    get('attribution-view').onchange = null;
   }
 
   function render(data) {
@@ -60,7 +61,64 @@ const sameWindowView = (() => {
     showDate(null);
   }
 
-  async function open(params, label, singleReplay) {
+  function renderAttribution(data, anchor) {
+    const select = get('attribution-view'), periods = get('attribution-periods');
+    const ids = data.portfolios.map(p=>p.id);
+    const names = {'510300':'沪深300','513500':'标普500','159920':'恒生','511010':'国债'};
+    const columns = ['price','dividend','commission','slippage','net'];
+    const currency = new Intl.NumberFormat('zh-CN',{minimumFractionDigits:2,maximumFractionDigits:8});
+    const format = n=>currency.format(Number(n));
+    select.replaceChildren();
+    for (const id of ids.filter(id=>id!==anchor)) {
+      select.add(new Option('差额 · '+id+' 减 '+anchor,id+'-'+anchor));
+    }
+    for (const id of ids) select.add(new Option('组合 '+id+' 本身',id));
+    function update() {
+      periods.replaceChildren();
+      const choice = select.value;
+      for (const [title,span] of [['整个持有期',data.attribution.holding],
+                                  ['组合 '+anchor+' 前高至谷底',data.attribution.peakToTrough[anchor]]]) {
+        if (!span) {
+          const note = document.createElement('p');
+          note.textContent = '组合 '+anchor+' 没有收盘回撤，无峰谷区间。';
+          periods.append(note);
+          continue;
+        }
+        const diff = choice.includes('-');
+        const account = diff ? span.differences[choice] : span.accounts[choice];
+        const wrap = document.createElement('div');
+        wrap.className = 'table-wrap'; wrap.tabIndex = 0;
+        const table = document.createElement('table');
+        table.createCaption().textContent = title+' · '+span.start+' 至 '+span.end+' · '+choice;
+        const head = table.createTHead().insertRow();
+        for (const text of ['ETF','价格贡献','分红','佣金','滑点','净贡献']) {
+          const th = document.createElement('th'); th.scope='col'; th.textContent=text; head.append(th);
+        }
+        const body = table.createTBody();
+        function appendRow(row, label, parts) {
+          const th = document.createElement('th'); th.scope='row'; th.textContent=label; row.append(th);
+          for (const k of columns) row.insertCell().textContent = format(parts[k]);
+        }
+        for (const symbol of data.symbols) appendRow(body.insertRow(),names[symbol]+' '+symbol,account.byEtf[symbol]);
+        appendRow(table.createTFoot().insertRow(),'合计',account.totals);
+        wrap.append(table);
+        const note = document.createElement('p');
+        if (diff) {
+          const [target,base] = choice.split('-');
+          note.textContent = '账户对账：'+target+' 的盈亏（'+format(span.accounts[target].accountChange)+'）减去 '+
+            base+' 的盈亏（'+format(span.accounts[base].accountChange)+'）＝ '+format(account.accountChange)+' 元。';
+        } else {
+          note.textContent = '账户对账：期末 '+format(account.endEquity)+' 减期初 '+format(account.startEquity)+
+            ' ＝ '+format(account.accountChange)+' 元。';
+        }
+        periods.append(wrap,note);
+      }
+    }
+    select.onchange = update;
+    update();
+  }
+
+  async function open(params, anchor, label, singleReplay) {
     clear();
     const current = new AbortController();
     controller = current;
@@ -77,6 +135,7 @@ const sameWindowView = (() => {
       if (controller!==current) return;
       get('overlay-body').hidden = false;
       render(data);
+      renderAttribution(data,anchor);
       const s = data.portfolios[0].summary;
       status.textContent = s.start+' 至 '+s.end+' · '+s.sessions+' 个交易日 · 每组期初 '+money.format(params.capital)+' 元';
       get('overlay-json').href = url;
