@@ -39,8 +39,9 @@ def cumulative_ledger(daily, orders, bars, events):
                 before, after = prev['units_'+s], row['units_'+s]
                 if before + traded[s] != after:
                     raise ValueError(f'Position change mismatch: {s} {day}')
-                bar = bars[s][day]
-                total[s]['price'] += before*(bar.open-bars[s][prev['date']].close) + after*(bar.close-bar.open)
+                if before or after:
+                    bar = bars[s][day]
+                    total[s]['price'] += before*(bar.open-bars[s][prev['date']].close) + after*(bar.close-bar.open)
                 total[s]['dividend'] += entitlements[day][s]
         if sum(sum(parts.values()) for parts in total.values()) != row['equity']-opening:
             raise ValueError(f'ETF attribution differs from closing account on {day}')

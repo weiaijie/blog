@@ -16,6 +16,7 @@
   const amount = new Intl.NumberFormat('zh-CN', {minimumFractionDigits:2, maximumFractionDigits:2});
   const percent = n => (Number(n)*100).toFixed(2)+'%';
   const buttons = [...document.querySelectorAll('[data-view]')];
+  let coverage;
   let chart, series, response, view = 'drawdown', generation = 0, controller, downloadUrl;
   function parameters() {
     return new URLSearchParams({start:fields.start.value,end:fields.end.value,capital:fields.capital.value,
@@ -53,7 +54,16 @@
     setWeights(card,vector);
     updateControls();
   }
+  function updateDates() {
+    if (!coverage) return;
+    const overseas = [...cards.children].some(card=>inputsOf(card).slice(1,3).some(i=>Number(i.value)>0));
+    const first = overseas ? coverage.first : coverage.domesticFirst;
+    for (const input of [fields.start,fields.end]) {input.min=first;input.max=coverage.last;}
+    get('work-limits').textContent = (overseas?'含跨境 ETF 的共同回测区间 ':'沪深300与国债可用区间 ')+first+
+      ' 至 '+coverage.last+'。休市端点取区间内交易日。使用场内人民币价格与分红，起点后的首个开盘模拟建仓。';
+  }
   function changed() {
+    updateDates();
     generation++;
     sameWindowView.clear();
     controller?.abort();
@@ -275,15 +285,15 @@
       const config = await res.json(), query = new URLSearchParams(location.search);
       const params = Object.fromEntries(config.required.map(k=>[k,query.get(k) ?? config.defaults[k]]));
       for (const key of ['start','end','capital','fees','rebalance']) fields[key].value = params[key];
-      for (const input of [fields.start,fields.end]) {input.min=config.first;input.max=config.last;}
+      coverage = config;
       const vectors = query.get('mode')==='compare' ? params.weights.split('|') : [params.weights];
       if (vectors.length>3 || (query.get('mode')==='compare' && vectors.length<2)) throw Error();
       setWeights(cards.firstElementChild,vectors[0]);
       vectors.slice(1).forEach(addCard);
       updateControls();
-      get('work-limits').textContent = '可用日期 '+config.first+' 至 '+config.last+'。休市端点取区间内交易日。按场内人民币收盘价计入分红，起点后的首个开盘模拟建仓。';
+      updateDates();
       get('work-all-dates').addEventListener('click',()=>{
-        fields.start.value = config.first;
+        fields.start.value = fields.start.min;
         fields.end.value = config.last;
         changed();
       });

@@ -41,9 +41,30 @@ def source(items, key):
     return path
 
 
-def verified_inputs(items):
+EXTENDED_START = date(2023, 1, 3)
+VALUATION_NOTICE = '/disclosure/fund/announcement/c/new/2023-03-16/513500_20230316_7KZF.pdf'
+# Dates in the domestic research calendar with no matching pair of foreign ETF quotes.
+QUOTE_GAPS = {'513500': {date(2018, 9, 14), date(2022, 3, 29)},
+              '159920': {date(2018, 9, 14), date(2018, 9, 17)}}
+
+
+def check_valuation_notice(notice):
+    folder = SNAPS / '20261109T215551-historical-notice-0jy6_hch'
+    hashes = verify_manifest(folder)
+    record, = json.loads((folder/'requests.json').read_text())
+    if (notice['URL'] != VALUATION_NOTICE or notice['SSEDATE'] != '2023-03-16'
+            or record['url'] != 'https://www.sse.com.cn'+notice['URL']
+            or record['status'] != 200 or record['exit_code'] or record['sha256'] != hashes['valuation_513500.pdf']):
+        raise ValueError('Unmatched ETF valuation notice')
+    body = ''.join(''.join(p.extract_text() for p in PdfReader(folder/'valuation_513500.pdf').pages).split())
+    if not all(fragment in body for fragment in ('所持停牌股票估值调整', '513500', 'SIVBUS', 'SBNYUS', '0.03%')):
+        raise ValueError('Underlying-stock valuation notice requires review')
+
+
+def verified_inputs(items, *, extended=False):
     domestic = load_long_history(SNAPS)
-    dates = tuple(d for d in domestic.sessions if START <= d <= END)
+    start = EXTENDED_START if extended else START
+    dates = tuple(d for d in domestic.sessions if start <= d <= END)
     bars = dict(domestic.bars)
     for code in ('513500', '159920'):
         market = 'sh' if code == '513500' else 'sz'
@@ -56,15 +77,25 @@ def verified_inputs(items):
         official = parse_dayk(source(items, 'official_' + code).read_text(), code)
         sina = parse_prices(source(items, 'sina_' + code + '_1970').read_bytes(), 'sina', END)
         for series in (official, sina):
-            if tuple(d for d in series if START <= d <= END) != dates:
+            if tuple(d for d in series if start <= d <= END) != dates:
                 raise ValueError('Calendar mismatch: ' + code)
-        bars[code] = {d: RawBar(d, **official[d]) for d in dates}
-        if any(bars[code][d] != sina[d] for d in dates):
+        price_days = dates
+        if extended:
+            # Price-only observations may precede the verified corporate-action window.
+            calendar = set(domestic.sessions)
+            for series in (official, sina):
+                if any(domestic.sessions[0] <= d <= END and d not in calendar for d in series):
+                    raise ValueError('Non-session quote: '+code)
+            price_days = [d for d in domestic.sessions if d in official and d in sina]
+            if calendar.difference(price_days) != QUOTE_GAPS[code]:
+                raise ValueError('Historical quote coverage changed: '+code)
+        bars[code] = {d: RawBar(d, **official[d]) for d in price_days}
+        if any(bars[code][d] != sina[d] for d in price_days):
             raise ValueError('Price source disagreement: ' + code)
         extra = ('sohu_all_513500','sohu_513500_2024') if code=='513500' else ('sohu_159920_2025',)
         for key in extra:
             sohu = parse_prices(source(items, key).read_bytes(), 'sohu', END)
-            if any(sohu[d] != bars[code][d] for d in sohu if START <= d <= END):
+            if any(sohu[d] != bars[code][d] for d in sohu if d in bars[code]):
                 raise ValueError('Sohu disagreement: '+key)
         vendor = source(items, 'distribution_' + code).read_text().split('权益登记日')[-1].split('分红送配公告')[0]
         expected = {'513500': {'2022-03-29'}, '159920': {'2018-06-22', '2018-06-26'}}
@@ -97,10 +128,22 @@ def verified_inputs(items):
         raise ValueError('Fund distribution or conversion notice requires review')
     if any(re.search('停牌|停复牌|复牌', r['announcementTitle']) for r in cn):
         raise ValueError('New opening restriction requires review')
+    if extended:
+        sse_params = parse_qs(urlparse(items['sse_catalog'][1]['url']).query)
+        if (sse_params.get('START_DATE') != ['2023-01-01'] or sse_params.get('END_DATE') != ['2026-11-08']
+                or sse_params.get('SECURITY_CODE') != ['513500']):
+            raise ValueError('Extended SSE disclosure window not verified')
+        for key in ('cninfo_fund','cninfo_fund_2','cninfo_fund_3','cninfo_fund_4'):
+            query = parse_qs(items[key][1]['post'])
+            if query.get('seDate') != ['2023-01-01~2026-11-08'] or query.get('stock') != ['159920,jjjl0000031']:
+                raise ValueError('Extended Shenzhen disclosure window not verified')
     halts = set()
     for r in notices:
         day = date.fromisoformat(r['SSEDATE'])
-        if START <= day <= END and re.search('停牌|停复牌|复牌', r['TITLE']):
+        if start <= day <= END and re.search('停牌|停复牌|复牌', r['TITLE']):
+            if extended and r['URL'] == VALUATION_NOTICE:
+                check_valuation_notice(r)
+                continue
             key = 'halt_' + day.strftime('%Y%m%d')
             path = source(items, key)
             content = ''.join(''.join(p.extract_text() for p in PdfReader(path).pages).split())

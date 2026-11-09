@@ -11,7 +11,8 @@ from urllib.parse import parse_qsl
 from compare_three_markets import CODES, SCENARIOS, metrics, simulate
 from build_entry_windows import entry_schedule, measure_entry, summarize
 from overlay_attribution import attribution, cumulative_ledger
-from market_evidence import END, START, evidence, verified_inputs
+from etf_research.long_history import START as DOMESTIC_START
+from market_evidence import END, EXTENDED_START, evidence, verified_inputs
 
 DEFAULTS = dict(start='2024-10-30', end=str(END), capital='100000',
                 weights='1,1,1,3', rebalance='monthly', fees='base')
@@ -19,7 +20,7 @@ OPTIONS = dict(version=1, method='GET', endpoint='/api/v1/backtest',
                windowsEndpoint='/api/v1/backtest/windows', compareEndpoint='/api/v1/backtest/compare',
                overlayEndpoint='/api/v1/backtest/overlay',
                compareWeightsFormat='2 or 3 four-ETF relative weight vectors, in input order, separated by |', horizons=[1, 2], annualTarget='0.04',
-               first=str(START), last=str(END), symbols=list(CODES), required=list(DEFAULTS),
+               first=str(EXTENDED_START), domesticFirst=str(DOMESTIC_START), last=str(END), symbols=list(CODES), required=list(DEFAULTS),
                defaults=DEFAULTS, fees=list(SCENARIOS), rebalance=['monthly', 'hold'],
                capitalRange=[1, 1000000000], weightsFormat='Four nonnegative relative amounts in symbols order; up to 2 decimal places each; positive sum.')
 
@@ -41,7 +42,7 @@ def request_params(query):
 
 @lru_cache(maxsize=1)
 def inputs():
-    return verified_inputs(evidence())
+    return verified_inputs(evidence(), extended=True)
 
 
 def configured_replay(params):
@@ -54,8 +55,6 @@ def configured_replay(params):
             raise InputError('日期无效。') from exc
 
     start, end = parse_date(params['start']), parse_date(params['end'])
-    if not START <= start < end <= END:
-        raise InputError(f'起始日期须早于结束日期，且均在 {START} 至 {END} 之间。')
     if not re.fullmatch(r'[0-9]{1,10}(\.[0-9]{1,2})?', params['capital']):
         raise InputError('本金应为人民币金额，最多两位小数。')
     capital = D(params['capital'])
@@ -71,7 +70,12 @@ def configured_replay(params):
     if params['fees'] not in SCENARIOS or params['rebalance'] not in OPTIONS['rebalance']:
         raise InputError('费用或调仓选项无效。')
 
-    base, calendar, bars, halts = inputs()
+    domestic_only = not (shares[1] or shares[2])
+    first = DOMESTIC_START if domestic_only else EXTENDED_START
+    if not first <= start < end <= END:
+        raise InputError(f'按所选配比，可用区间为 {first} 至 {END}，起始日期须早于结束日期。')
+    base, common_calendar, bars, halts = inputs()
+    calendar = base.sessions if domestic_only else common_calendar
     days = tuple(d for d in calendar if start <= d <= end)
     if len(days) < 2:
         raise InputError('区间至少需要两个已核验交易日。')

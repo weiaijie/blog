@@ -15,7 +15,7 @@ from etf_research.admission import load_incremental, sessions_between
 from etf_research.forward import digest, prefix_digest
 from etf_research.publication import inside, read, sha, verify_bundle
 import interactive_backtest as interactive
-from market_evidence import SNAPS, evidence, verified_inputs
+from market_evidence import SNAPS
 
 SITE = ROOT/'site'
 ASSETS = {'/': ('market.html','text/html'), '/market.html': ('market.html','text/html'),
@@ -32,8 +32,8 @@ guard = Lock()
 
 @lru_cache(maxsize=1)
 def history():
-    _, days, bars, _ = verified_inputs(evidence())
-    return {symbol: {day: prices[day] for day in days} for symbol,prices in bars.items()}
+    _, _, bars, _ = interactive.inputs()
+    return bars
 
 
 @lru_cache(maxsize=1)

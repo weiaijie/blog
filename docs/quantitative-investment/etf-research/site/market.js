@@ -9,7 +9,7 @@ function chartOptions() {
   return {autoSize:true,layout:{background:{color:'#ffffff'},textColor:'#53696b',fontSize:11,attributionLogo:false},
     grid:{vertLines:{color:'#f2f5f2'},horzLines:{color:'#e8eeeb'}},
     rightPriceScale:{borderVisible:false,minimumWidth:53},
-    timeScale:{borderColor:'#e0e8e4',rightOffset:1,fixLeftEdge:true},
+    timeScale:{borderColor:'#e0e8e4',rightOffset:1,fixLeftEdge:true,minBarSpacing:.05},
     localization:{locale:'zh-CN',dateFormat:'yyyy-MM-dd'},
     crosshair:{mode:LightweightCharts.CrosshairMode.Normal}};
 }
@@ -34,7 +34,7 @@ function showBar(bar){
   for(const [id,key] of [['open','open'],['high','high'],['low','low'],['last','close']])$(id).textContent=bar[key].toFixed(3);
 }
 function setRange(){
-  priceChart.timeScale().setVisibleLogicalRange({from:Math.max(-.5,records.length-count-.5),to:records.length+.5});
+  priceChart.timeScale().setVisibleLogicalRange({from:Math.max(-.5,records.length-(count || records.length)-.5),to:records.length+.5});
   document.querySelectorAll('[data-count]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.count)===count)));
 }
 function showFund(){
@@ -46,7 +46,8 @@ function showFund(){
   $('fund').textContent=names[selected];$('code').textContent=selected;$('close').textContent=last.close.toFixed(3);
   $('change').textContent=(delta>0?'+':'')+(100*delta/prev.close).toFixed(2)+'%';
   $('change').className=delta>=0?'positive':'negative';
-  $('market-date').textContent='未复权 · 行情截至 '+last.time;
+  $('market-date').textContent='未复权 · '+records[0].time+' 至 '+last.time+' · '+records.length+' 根日 K' +
+    (selected==='513500'?' · 2022-03-29 缺报价':'');
   document.querySelectorAll('[data-code]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.code===selected)));
 }
 function showAccount(){
