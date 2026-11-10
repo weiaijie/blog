@@ -18,6 +18,7 @@ from market_evidence import END, EXTENDED_START, evidence, verified_inputs
 DEFAULTS = dict(start='2024-10-30', end=str(END), capital='100000',
                 weights='1,1,1,3', rebalance='monthly', fees='base')
 OPTIONS = dict(version=1, method='GET', endpoint='/api/v1/backtest',
+               replayEndpoint='/api/v1/backtest/replay', replayModels=['allocation','trend_120'], replayStep='1..totalSessions or all',
                windowsEndpoint='/api/v1/backtest/windows', compareEndpoint='/api/v1/backtest/compare',
                overlayEndpoint='/api/v1/backtest/overlay',
                compareWeightsFormat='2 or 3 four-ETF relative weight vectors, in input order, separated by |', horizons=[1, 2], annualTarget='0.04',
@@ -31,14 +32,14 @@ class InputError(ValueError):
     pass
 
 
-def request_params(query):
+def request_params(query, keys=DEFAULTS):
     try:
-        items = parse_qsl(query, keep_blank_values=True, strict_parsing=True, max_num_fields=len(DEFAULTS))
+        items = parse_qsl(query, keep_blank_values=True, strict_parsing=True, max_num_fields=len(keys))
     except ValueError as exc:
         raise InputError('参数格式不正确，或参数过多。') from exc
     params = dict(items)
-    if len(items) != len(params) or params.keys() != DEFAULTS.keys():
-        raise InputError('请提供 start、end、capital、weights、rebalance、fees 各一次。')
+    if len(items) != len(params) or params.keys() != set(keys):
+        raise InputError('请各提供一次参数：' + '、'.join(keys))
     return params
 
 

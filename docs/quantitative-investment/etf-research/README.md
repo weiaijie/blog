@@ -1,5 +1,8 @@
 # 个人量化投资研究系统
 
+[逐日模型回放](reports/2026-11-10-model-replay/README.md)已接入工作台。可按日查看建仓与月度信号、开盘模拟订单、当日和累计盈亏，Agent 可按相同步数读取。
+
+
 [2022 年跨境 ETF 事件与回测](reports/2026-11-10-markets-2022/README.md)：恒生可从 2022-01-04 起；标普可选 01-04 至 03-28，或从 03-30 起。03-29 为拆分停牌。
 
 11 月 9 日 17:10 定时接续成功。[核验记录](reports/2026-11-10-forward-handoff/README.md)包含两个来源的行情、官方收盘对照和 18 个模拟账户的第 3 个前瞻交易日。
@@ -78,6 +81,6 @@ python scripts/check_health.py
 python scripts/reproduce.py
 ```
 
-可选框架对照另装requirements-backtrader.txt。历史报告和原始快照不覆盖；最新静态清单见reports/2026-11-10-market-coverage/manifest.json，动态状态另对照封存记录。旧阶段清单应在相应Git提交验证。历史建设记录见[历史计划](docs/history/PROJECT_PLAN-before-closure-20261106.md)。
+可选框架对照另装requirements-backtrader.txt。历史报告和原始快照不覆盖；最新静态清单见reports/2026-11-10-model-replay/manifest.json，动态状态另对照封存记录。旧阶段清单应在相应Git提交验证。历史建设记录见[历史计划](docs/history/PROJECT_PLAN-before-closure-20261106.md)。
 
 最新研究证据审计见[报告](reports/2026-11-06-research-audit/PROGRESS.md)与[离线页面](site/research-audit.html)：57,726个一年/两年连续窗口、255个现金新账户；历史50/50两年窗口中位年化约3.71%，不支持稳定达标结论。完整中期股票339项及债券跨市场代码归并已核对，当前实时全持仓仍未知。新增复现：`python scripts/reproduce_research_audit.py`。

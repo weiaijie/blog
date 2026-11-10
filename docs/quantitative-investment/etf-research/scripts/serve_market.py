@@ -15,6 +15,7 @@ from etf_research.admission import load_incremental, sessions_between
 from etf_research.forward import digest, prefix_digest
 from etf_research.publication import inside, read, sha, verify_bundle
 import interactive_backtest as interactive
+import model_replay
 from market_evidence import SNAPS
 from cross_market_quotes import THROUGH, cross_quotes
 
@@ -24,6 +25,7 @@ ASSETS = {'/': ('market.html','text/html'), '/market.html': ('market.html','text
           '/vendor-charts/lightweight-charts-5.0.9.js': ('vendor-charts/lightweight-charts-5.0.9.js','text/javascript'),
           '/backtest.html': ('backtest.html','text/html'), '/backtest.css': ('backtest.css','text/css'),
           '/backtest.js': ('backtest.js','text/javascript'), '/backtest-data.json': ('backtest-data.json','application/json'),
+          '/model-replay.js': ('model-replay.js','text/javascript'),
           '/interactive.js': ('interactive.js','text/javascript'), '/interactive.css': ('interactive.css','text/css'),
           '/overlay.js': ('overlay.js','text/javascript'),
           '/entry-windows.json': ('entry-windows.json','application/json'),
@@ -99,7 +101,8 @@ def latest():
         return payload((ROOT/'config/active_run.json').read_bytes())
 
 
-CALCULATIONS = {'/api/v1/backtest': interactive.backtest,
+CALCULATIONS = {'/api/v1/backtest/replay': model_replay.replay,
+                '/api/v1/backtest': interactive.backtest,
                 '/api/v1/backtest/windows': interactive.entry_windows,
                 '/api/v1/backtest/compare': interactive.compare_windows,
                 '/api/v1/backtest/overlay': interactive.same_window}
@@ -122,7 +125,8 @@ class Handler(BaseHTTPRequestHandler):
             kind = 'application/json'
             try:
                 calculate = CALCULATIONS[path]
-                body = interactive.encode(calculate(interactive.request_params(url.query)))
+                keys = (*interactive.DEFAULTS, 'model', 'step') if calculate is model_replay.replay else interactive.DEFAULTS
+                body = interactive.encode(calculate(interactive.request_params(url.query, keys)))
             except interactive.InputError as exc:
                 status, body = 400, interactive.encode({'error': str(exc)})
             except (OSError, ValueError, KeyError, IndexError) as exc:

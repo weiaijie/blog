@@ -4,14 +4,14 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>历史回测 · ETF 研究手记</title>
 <link rel="stylesheet" href="market.css"><link rel="stylesheet" href="backtest.css">
-<script defer src="vendor-charts/lightweight-charts-5.0.9.js"></script><script defer src="backtest.js"></script><script defer src="overlay.js"></script><script defer src="interactive.js"></script><link rel="stylesheet" href="interactive.css">
+<script defer src="vendor-charts/lightweight-charts-5.0.9.js"></script><script defer src="backtest.js"></script><script defer src="overlay.js"></script><script defer src="model-replay.js"></script><script defer src="interactive.js"></script><link rel="stylesheet" href="interactive.css">
 </head>
 <body>
 <header><div class="shell mast"><div class="brand">ETF 研究手记</div><a href="market.html">返回行情与 K 线 ↗</a></div></header>
 <main class="shell">
 <div class="intro"><div><h1>历史回测</h1><p>设置本金、日期和 ETF 配比，查看模拟账户的收益、回撤和恢复时间。</p></div></div>
 <section id="workbench" class="panel bt-content" aria-labelledby="work-title">
-<h2 id="work-title">自己运行回测</h2>
+<h2 id="work-title">自己运行回测</h2><a href="#replay">进入逐日模型回放 ↓</a>
 <form id="work-form">
 <div class="work-fields"><label>开始日期<input name="start" type="date" required></label><label>结束日期<input name="end" type="date" required></label>
 <label>本金（元）<input name="capital" type="number" min="1" max="1000000000" step=".01" required></label>
@@ -23,7 +23,18 @@
 <p class="muted" id="work-mix" data-mix></p></fieldset></div>
 <div class="work-actions"><button type="button" id="add-portfolio" disabled>添加对比组合</button><button type="button" id="remove-portfolio" hidden>移除最后一组</button></div>
 <p class="muted" id="work-limits"></p><a class="coverage-link" href="market.html#coverage">查看每只 ETF 的行情与回测覆盖</a><div class="work-actions"><button disabled id="work-run" type="submit">运行回测</button><button disabled id="work-windows" type="submit">逐日起点 · 测 1 年和 2 年</button><button type="submit" id="work-compare" hidden disabled>并排比较 · 测 1 年和 2 年</button><button type="button" id="work-all-dates">用最长连续区间</button><button type="button" id="work-pre-split" hidden>用标普拆分前区间</button><a href="api/v1/backtest/options">Agent 接口参数 ↗</a></div>
-</form><p id="work-status" role="status" aria-live="polite"></p>
+</form><section id="replay" aria-labelledby="replay-heading">
+<h3 id="replay-heading">逐日模型回放</h3>
+<div class="replay-controls"><label>回放模型<select id="replay-model"><option value="allocation">自定义配比</option><option value="trend_120">沪深300 · 120 日趋势</option></select></label>
+<button id="replay-start" type="button" disabled>开始回放</button></div>
+<p class="muted" id="replay-rule"></p><p id="replay-status" role="status"></p>
+<div id="replay-body" hidden>
+<div class="replay-controls"><strong id="replay-date"></strong><button id="replay-step" type="button">下一交易日</button><button id="replay-auto" type="button">自动走完</button><a id="replay-json">当前步 JSON</a><button id="replay-exit" type="button">退出回放</button></div>
+<div class="replay-columns"><div><label>查看日 K<select id="replay-symbol"></select></label><div id="replay-candles" aria-label="截至当前交易日的场内日 K"></div><p id="replay-ohlc" class="muted"></p></div>
+<div class="replay-ledger"><h4>收盘账户</h4><strong id="replay-equity"></strong><p id="replay-pnl"></p><p id="replay-cash"></p><p id="replay-holdings"></p></div></div>
+<h4>今日开盘执行</h4><p id="replay-reason"></p><ul id="replay-orders"></ul>
+<h4>收盘后模型决定</h4><p id="replay-plan"></p>
+</div></section><p id="work-status" role="status" aria-live="polite"></p>
 <section id="work-cohorts" hidden aria-labelledby="cohort-title"><h3 id="cohort-title">逐日起点结果</h3>
 <p id="cohort-range"></p><div class="table-wrap" tabindex="0" aria-label="自定义配比逐日起点结果"><table><thead><tr><th>持有期</th><th>满期次数</th><th>赚钱次数</th><th>年化 ≥ 4%</th><th>最差到期盈亏</th><th>最差一期</th></tr></thead><tbody id="cohort-rows"></tbody></table></div>
 <p class="muted">每个起点从所填本金重新建仓，周年休市顺延，只统计在所选区间内到期的窗口。相邻起点共享行情。最差按到期盈亏排序，并列时打开最早一期。</p>

@@ -22,6 +22,11 @@ COST = SCENARIOS['base']
 RULES = {s: InstrumentRules(100, D('.001'), s != '510300') for s in CODES}
 
 
+def allocation_targets(denominators, equity, marks):
+    return {s: int((equity * den.denominator) // (den.numerator * marks[s] * 100)) * 100
+            for s, den in denominators.items()}
+
+
 def simulate(days, bars, events, halts, denominators, *, initial=D(100000), costs=COST, rebalance='monthly'):
     """Denominators may be integers or exact Fractions for user-defined allocations."""
     if rebalance not in ('monthly', 'hold'):
@@ -33,8 +38,7 @@ def simulate(days, bars, events, halts, denominators, *, initial=D(100000), cost
         ledger.open_session(day)
         if i == 1 or (rebalance == 'monthly' and i > 1 and day.month != days[i-1].month):
             prev = days[i-1]
-            targets = {s: int((daily[-1]['equity'] * den.denominator) // (den.numerator * bars[s][prev].close * 100)) * 100
-                       for s, den in denominators.items()}
+            targets = allocation_targets(denominators, daily[-1]['equity'], {s: bars[s][prev].close for s in denominators})
             for side in ('sell', 'buy'):
                 for s in denominators:
                     delta = targets[s] - ledger.holdings.get(s, 0)

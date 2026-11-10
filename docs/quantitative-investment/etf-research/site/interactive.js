@@ -22,6 +22,7 @@
     return new URLSearchParams({start:fields.start.value,end:fields.end.value,capital:fields.capital.value,
       weights:[...cards.children].map(vectorOf).join('|'),rebalance:fields.rebalance.value,fees:fields.fees.value});
   }
+  const player = setupModelReplay(parameters);
   function mix(card) {
     const weights = inputsOf(card), preset = card.querySelector('[data-preset]');
     const values = weights.map(input=>Number(input.value));
@@ -43,6 +44,7 @@
     const n = cards.children.length;
     run.hidden = windows.hidden = n > 1;
     compare.hidden = n === 1;
+    document.querySelector('a[href="#replay"]').hidden = n > 1;
     get('add-portfolio').hidden = n === 3;
     get('remove-portfolio').hidden = n === 1;
   }
@@ -66,6 +68,7 @@
       '休市端点取区间内交易日。使用场内人民币价格与分红，起点后的首个开盘模拟建仓。';
   }
   function changed() {
+    player.reset(cards.children.length === 1);
     updateDates();
     generation++;
     sameWindowView.clear();
@@ -256,6 +259,7 @@
   }
   form.addEventListener('submit',async event=>{
     event.preventDefault();
+    player.reset(cards.children.length === 1);
     const token = ++generation;
     sameWindowView.clear();
     controller?.abort();
@@ -294,6 +298,7 @@
       setWeights(cards.firstElementChild,vectors[0]);
       vectors.slice(1).forEach(addCard);
       updateControls();
+      player.reset(cards.children.length === 1);
       updateDates();
       get('work-pre-split').addEventListener('click',()=>{
         fields.start.value=config.overseasFirst;
