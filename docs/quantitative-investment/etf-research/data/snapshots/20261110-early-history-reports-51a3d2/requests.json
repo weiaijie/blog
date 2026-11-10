@@ -1,0 +1,112 @@
+[
+  {
+    "name": "cn_2019_2",
+    "url": "https://www.cninfo.com.cn/new/hisAnnouncement/query",
+    "post": "pageNum=2&pageSize=30&column=fund&tabName=fulltext&stock=159920%2Cjjjl0000031&seDate=2019-01-01~2019-12-31&sortName=time&sortType=desc&isHLtitle=false",
+    "referer": "https://www.cninfo.com.cn/",
+    "requested_at_utc": "2026-11-10T08:04:45.945324+00:00",
+    "status": 200,
+    "effective_url": "https://www.cninfo.com.cn/new/hisAnnouncement/query",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 6169,
+    "sha256": "3b6b1be9db027a584bb2b67362e4988355b14d897070c28a57a4b30d5fc04779"
+  },
+  {
+    "name": "cn_2021_2",
+    "url": "https://www.cninfo.com.cn/new/hisAnnouncement/query",
+    "post": "pageNum=2&pageSize=30&column=fund&tabName=fulltext&stock=159920%2Cjjjl0000031&seDate=2021-01-01~2021-12-31&sortName=time&sortType=desc&isHLtitle=false",
+    "referer": "https://www.cninfo.com.cn/",
+    "requested_at_utc": "2026-11-10T08:04:45.945634+00:00",
+    "status": 200,
+    "effective_url": "https://www.cninfo.com.cn/new/hisAnnouncement/query",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 5725,
+    "sha256": "ef7218ca2d1669652c93776d8290c8d155ecfdc2e63f14db3395f61c3c74a05f"
+  },
+  {
+    "name": "sohu_2021_159920",
+    "url": "https://q.stock.sohu.com/hisHq?code=cn_159920&start=20210101&end=20211231&stat=1&order=D&period=d&rt=json",
+    "referer": "https://q.stock.sohu.com/",
+    "requested_at_utc": "2026-11-10T08:04:45.945932+00:00",
+    "status": 200,
+    "effective_url": "https://q.stock.sohu.com/hisHq?code=cn_159920&start=20210101&end=20211231&stat=1&order=D&period=d&rt=json",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 22160,
+    "sha256": "703a39c8430b980443e11b40dda324799aa6c6cc11c70406666c5e3f5c190c1f"
+  },
+  {
+    "name": "annual_513500_2019",
+    "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/2020-03-26/513500_2019_n.pdf",
+    "referer": "https://www.sse.com.cn/",
+    "requested_at_utc": "2026-11-10T08:04:45.946435+00:00",
+    "status": 200,
+    "effective_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/2020-03-26/513500_2019_n.pdf",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 2348934,
+    "sha256": "7fff26a4d0f5d3085129912b3b87791002045ca385e7e1e6ca0c32096c9c122f"
+  },
+  {
+    "name": "annual_159920_2019",
+    "url": "https://static.cninfo.com.cn/finalpage/2020-04-09/1207466828.PDF",
+    "referer": "https://www.cninfo.com.cn/",
+    "requested_at_utc": "2026-11-10T08:04:45.946711+00:00",
+    "status": 200,
+    "effective_url": "https://static.cninfo.com.cn/finalpage/2020-04-09/1207466828.PDF",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 677125,
+    "sha256": "ed80146f59d79ea73afc4fef9e5b54f735899c34f5c6a63e74b4a697d9499af3"
+  },
+  {
+    "name": "annual_513500_2020",
+    "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2021-03-31/513500_20210331_1.pdf",
+    "referer": "https://www.sse.com.cn/",
+    "requested_at_utc": "2026-11-10T08:04:46.049731+00:00",
+    "status": 200,
+    "effective_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2021-03-31/513500_20210331_1.pdf",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 1204875,
+    "sha256": "ad64f967331eb998f6e039ffc5d15fb23bedd8cc7fc4159f771c6938672458b9"
+  },
+  {
+    "name": "annual_159920_2020",
+    "url": "https://static.cninfo.com.cn/finalpage/2021-03-30/1209473866.PDF",
+    "referer": "https://www.cninfo.com.cn/",
+    "requested_at_utc": "2026-11-10T08:04:46.081239+00:00",
+    "status": 200,
+    "effective_url": "https://static.cninfo.com.cn/finalpage/2021-03-30/1209473866.PDF",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 1710786,
+    "sha256": "4ba2c715bebef20d9ad40011f0c0bf70e071a8b12f1bddf96527737f6123206c"
+  },
+  {
+    "name": "annual_513500_2021",
+    "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2022-03-30/513500_20220330_1_6Y8nAFck.pdf",
+    "referer": "https://www.sse.com.cn/",
+    "requested_at_utc": "2026-11-10T08:04:46.137139+00:00",
+    "status": 200,
+    "effective_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2022-03-30/513500_20220330_1_6Y8nAFck.pdf",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 830542,
+    "sha256": "c6c49a49a5e86d988e3848b23d490ccdabc615b6b47c908a09044d49345cdc6e"
+  },
+  {
+    "name": "annual_159920_2021",
+    "url": "https://static.cninfo.com.cn/finalpage/2022-03-30/1212731278.PDF",
+    "referer": "https://www.cninfo.com.cn/",
+    "requested_at_utc": "2026-11-10T08:04:46.166955+00:00",
+    "status": 200,
+    "effective_url": "https://static.cninfo.com.cn/finalpage/2022-03-30/1212731278.PDF",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 1028250,
+    "sha256": "8c5019cca091bd5ae71bc2bf097a68ddfcdbb1058a89b53d3ca8012549b208d6"
+  }
+]

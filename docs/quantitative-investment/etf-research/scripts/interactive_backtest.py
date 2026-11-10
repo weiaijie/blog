@@ -15,7 +15,7 @@ from etf_research.long_history import START as DOMESTIC_START
 from market_events_2022 import RESUMED, SPLIT_DAY
 from market_evidence import END, EXTENDED_START, evidence, verified_inputs
 
-DEFAULTS = dict(start='2024-10-30', end=str(END), capital='100000',
+DEFAULTS = dict(start=str(RESUMED), end=str(END), capital='100000',
                 weights='1,1,1,3', rebalance='monthly', fees='base')
 OPTIONS = dict(version=1, method='GET', endpoint='/api/v1/backtest',
                replayEndpoint='/api/v1/backtest/replay', replayModels=['allocation','trend_120'], replayStep='1..totalSessions or all',
@@ -23,7 +23,7 @@ OPTIONS = dict(version=1, method='GET', endpoint='/api/v1/backtest',
                overlayEndpoint='/api/v1/backtest/overlay',
                compareWeightsFormat='2 or 3 four-ETF relative weight vectors, in input order, separated by |', horizons=[1, 2], annualTarget='0.04',
                first=str(RESUMED), overseasFirst=str(EXTENDED_START), splitDay=str(SPLIT_DAY),
-               preSplitLast='2022-03-28', domesticFirst=str(DOMESTIC_START), last=str(END), symbols=list(CODES), required=list(DEFAULTS),
+               preSplitLast='2022-03-28', trendFirst='2019-03-20', domesticFirst=str(DOMESTIC_START), last=str(END), symbols=list(CODES), required=list(DEFAULTS),
                defaults=DEFAULTS, fees=list(SCENARIOS), rebalance=['monthly', 'hold'],
                capitalRange=[1, 1000000000], weightsFormat='Four nonnegative relative amounts in symbols order; up to 2 decimal places each; positive sum.')
 

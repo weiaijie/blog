@@ -15,7 +15,7 @@ class InteractiveBacktestTests(unittest.TestCase):
         with (ROOT/'reports/2026-11-08-three-markets/daily.csv').open() as f:
             expected = list(csv.DictReader(f))
         for group, weights in groups.items():
-            result = backtest(dict(DEFAULTS, weights=weights))
+            result = backtest(dict(DEFAULTS, start='2024-10-30', weights=weights))
             balances = [(str(p['date']),p['equity']) for p in result['daily']]
             self.assertEqual(balances, [(p['date'],Decimal(p['equity'])) for p in expected
                                        if p['years']=='2' and p['group']==group])

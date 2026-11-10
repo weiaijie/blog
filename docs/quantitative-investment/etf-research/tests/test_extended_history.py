@@ -27,10 +27,26 @@ class ExtendedHistoryTests(unittest.TestCase):
         with self.assertRaises(InputError):
             comparison_inputs(dict(p,weights='1,0,0,1|1,0.01,0,1'))
 
+    def test_earliest_replay_and_split_boundaries(self):
+        from interactive_backtest import OPTIONS
+        from model_replay import replay
+        self.assertEqual(str(inputs()[0].sessions[120]), OPTIONS['trendFirst'])
+        for weights, start, end, count in [
+                ('1,1,1,3','2019-01-02','2022-03-28',785),
+                ('1,1,1,3',DEFAULTS['start'],DEFAULTS['end'],1111),
+                ('0,0,1,1','2019-01-02','2026-10-30',1897)]:
+            params=dict(DEFAULTS, weights=weights, start=start, end=end)
+            result=replay(dict(params, model='allocation', step='all'))
+            self.assertEqual(len(result['frames']),count)
+            self.assertEqual(result['frames'][-1]['equity'],backtest(params)['summary']['ending_equity'])
+            self.assertEqual(replay(dict(params,model='allocation',step='3'))['frames'],result['frames'][:3])
+        with self.assertRaises(InputError):
+            backtest(dict(DEFAULTS,start='2018-12-31',end='2019-01-15'))
+
     def test_extended_quotes_and_unchanged_legacy_window(self):
         domestic, dates, bars, halts = inputs()
         _, old_dates, old_bars, old_halts = verified_inputs(evidence())
-        self.assertEqual((dates[0],len(dates)),(EXTENDED_START,1167))
+        self.assertEqual((dates[0],len(dates)),(EXTENDED_START,1897))
         self.assertEqual(tuple(d for d in dates if d>=START),old_dates)
         self.assertNotIn((date(2023,3,16),'513500'),halts)
         self.assertEqual(halts,old_halts | {(date(2022,3,29),'513500')})

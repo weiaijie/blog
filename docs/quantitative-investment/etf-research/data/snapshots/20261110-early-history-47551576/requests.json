@@ -1,0 +1,101 @@
+[
+  {
+    "url": "https://query.sse.com.cn/commonQuery.do?sqlId=COMMON_PL_JJXX_JJGG_NEW_L&isPagination=true&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.endPage=1&pageHelp.cacheSize=1&SECURITY_CODE=513500&TITLE=&START_DATE=2019-01-01&END_DATE=2019-12-31",
+    "referer": "https://www.sse.com.cn/",
+    "name": "sse_2019",
+    "requested_at_utc": "2026-11-10T08:03:33.008148+00:00",
+    "status": 0,
+    "effective_url": "https://query.sse.com.cn/commonQuery.do?sqlId=COMMON_PL_JJXX_JJGG_NEW_L&isPagination=true&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.endPage=1&pageHelp.cacheSize=1&SECURITY_CODE=513500&TITLE=&START_DATE=2019-01-01&END_DATE=2019-12-31",
+    "exit_code": 35,
+    "error": "curl: (35) schannel: next InitializeSecurityContext failed: CRYPT_E_REVOCATION_OFFLINE (0x80092013) - ���ڵ������������ѻ������������޷���������\r\n",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "url": "https://www.cninfo.com.cn/new/hisAnnouncement/query",
+    "referer": "https://www.cninfo.com.cn/",
+    "post": "pageNum=1&pageSize=30&column=fund&tabName=fulltext&stock=159920%2Cjjjl0000031&seDate=2019-01-01~2019-12-31&sortName=time&sortType=desc&isHLtitle=false",
+    "name": "cn_2019",
+    "requested_at_utc": "2026-11-10T08:03:33.009207+00:00",
+    "status": 0,
+    "effective_url": "https://www.cninfo.com.cn/new/hisAnnouncement/query",
+    "exit_code": 35,
+    "error": "curl: (35) schannel: next InitializeSecurityContext failed: CRYPT_E_REVOCATION_OFFLINE (0x80092013) - ���ڵ������������ѻ������������޷���������\r\n",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "url": "https://query.sse.com.cn/commonQuery.do?sqlId=COMMON_PL_JJXX_JJGG_NEW_L&isPagination=true&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.endPage=1&pageHelp.cacheSize=1&SECURITY_CODE=513500&TITLE=&START_DATE=2020-01-01&END_DATE=2020-12-31",
+    "referer": "https://www.sse.com.cn/",
+    "name": "sse_2020",
+    "requested_at_utc": "2026-11-10T08:03:33.009207+00:00",
+    "status": 0,
+    "effective_url": "https://query.sse.com.cn/commonQuery.do?sqlId=COMMON_PL_JJXX_JJGG_NEW_L&isPagination=true&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.endPage=1&pageHelp.cacheSize=1&SECURITY_CODE=513500&TITLE=&START_DATE=2020-01-01&END_DATE=2020-12-31",
+    "exit_code": 35,
+    "error": "curl: (35) schannel: next InitializeSecurityContext failed: CRYPT_E_REVOCATION_OFFLINE (0x80092013) - ���ڵ������������ѻ������������޷���������\r\n",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "url": "https://www.cninfo.com.cn/new/hisAnnouncement/query",
+    "referer": "https://www.cninfo.com.cn/",
+    "post": "pageNum=1&pageSize=30&column=fund&tabName=fulltext&stock=159920%2Cjjjl0000031&seDate=2020-01-01~2020-12-31&sortName=time&sortType=desc&isHLtitle=false",
+    "name": "cn_2020",
+    "requested_at_utc": "2026-11-10T08:03:33.009207+00:00",
+    "status": 0,
+    "effective_url": "https://www.cninfo.com.cn/new/hisAnnouncement/query",
+    "exit_code": 35,
+    "error": "curl: (35) schannel: next InitializeSecurityContext failed: CRYPT_E_REVOCATION_OFFLINE (0x80092013) - ���ڵ������������ѻ������������޷���������\r\n",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "url": "https://query.sse.com.cn/commonQuery.do?sqlId=COMMON_PL_JJXX_JJGG_NEW_L&isPagination=true&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.endPage=1&pageHelp.cacheSize=1&SECURITY_CODE=513500&TITLE=&START_DATE=2021-01-01&END_DATE=2021-12-31",
+    "referer": "https://www.sse.com.cn/",
+    "name": "sse_2021",
+    "requested_at_utc": "2026-11-10T08:03:33.009207+00:00",
+    "status": 0,
+    "effective_url": "https://query.sse.com.cn/commonQuery.do?sqlId=COMMON_PL_JJXX_JJGG_NEW_L&isPagination=true&pageHelp.pageSize=1000&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.endPage=1&pageHelp.cacheSize=1&SECURITY_CODE=513500&TITLE=&START_DATE=2021-01-01&END_DATE=2021-12-31",
+    "exit_code": 35,
+    "error": "curl: (35) schannel: next InitializeSecurityContext failed: CRYPT_E_REVOCATION_OFFLINE (0x80092013) - ���ڵ������������ѻ������������޷���������\r\n",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "url": "https://www.cninfo.com.cn/new/hisAnnouncement/query",
+    "referer": "https://www.cninfo.com.cn/",
+    "post": "pageNum=1&pageSize=30&column=fund&tabName=fulltext&stock=159920%2Cjjjl0000031&seDate=2021-01-01~2021-12-31&sortName=time&sortType=desc&isHLtitle=false",
+    "name": "cn_2021",
+    "requested_at_utc": "2026-11-10T08:03:33.105596+00:00",
+    "status": 0,
+    "effective_url": "https://www.cninfo.com.cn/new/hisAnnouncement/query",
+    "exit_code": 35,
+    "error": "curl: (35) schannel: next InitializeSecurityContext failed: CRYPT_E_REVOCATION_OFFLINE (0x80092013) - ���ڵ������������ѻ������������޷���������\r\n",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "quotes_513500",
+    "url": "https://yunhq.sse.com.cn:32042/v1/sh1/dayk/513500?begin=0&end=-1&period=day",
+    "referer": "https://www.sse.com.cn/",
+    "requested_at_utc": "2026-11-10T08:03:33.105596+00:00",
+    "status": 0,
+    "effective_url": "https://yunhq.sse.com.cn:32042/v1/sh1/dayk/513500?begin=0&end=-1&period=day",
+    "exit_code": 35,
+    "error": "curl: (35) schannel: next InitializeSecurityContext failed: CRYPT_E_REVOCATION_OFFLINE (0x80092013) - ���ڵ������������ѻ������������޷���������\r\n",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "quotes_159920",
+    "url": "https://yunhq.sse.com.cn:32042/v1/sz1/dayk/159920?begin=0&end=-1&period=day",
+    "referer": "https://www.sse.com.cn/",
+    "requested_at_utc": "2026-11-10T08:03:33.118741+00:00",
+    "status": 0,
+    "effective_url": "https://yunhq.sse.com.cn:32042/v1/sz1/dayk/159920?begin=0&end=-1&period=day",
+    "exit_code": 35,
+    "error": "curl: (35) schannel: next InitializeSecurityContext failed: CRYPT_E_REVOCATION_OFFLINE (0x80092013) - ���ڵ������������ѻ������������޷���������\r\n",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

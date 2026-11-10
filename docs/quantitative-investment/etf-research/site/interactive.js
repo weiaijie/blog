@@ -22,7 +22,7 @@
     return new URLSearchParams({start:fields.start.value,end:fields.end.value,capital:fields.capital.value,
       weights:[...cards.children].map(vectorOf).join('|'),rebalance:fields.rebalance.value,fees:fields.fees.value});
   }
-  const player = setupModelReplay(parameters);
+  const player = setupModelReplay(parameters, () => coverage);
   function mix(card) {
     const weights = inputsOf(card), preset = card.querySelector('[data-preset]');
     const values = weights.map(input=>Number(input.value));

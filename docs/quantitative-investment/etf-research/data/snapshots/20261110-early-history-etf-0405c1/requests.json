@@ -1,0 +1,14 @@
+[
+  {
+    "name": "annual_513500_2020",
+    "url": "https://static.cninfo.com.cn/finalpage/2021-03-31/1209619695.PDF",
+    "referer": "https://www.cninfo.com.cn/",
+    "requested_at_utc": "2026-11-10T08:06:08.162267+00:00",
+    "status": 200,
+    "effective_url": "https://static.cninfo.com.cn/finalpage/2021-03-31/1209619695.PDF",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 1560136,
+    "sha256": "ca78f1cb2da34a629baf7bb1791924226e02c92b3126fe3b26e54fce49186d5e"
+  }
+]

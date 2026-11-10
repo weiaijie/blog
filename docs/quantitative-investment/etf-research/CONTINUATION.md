@@ -11,13 +11,13 @@
 |---|---|---|
 | 前瞻账户 | 11-05 至 11-09，3 个收盘，18 户，1,173 个行情输入日。月度 50/50 基准账户 100,141.58 元，11-09 当日 +74.10 元 | [活动检查点](config/active_run.json)、[远端复算](reports/2026-11-10-forward-handoff/README.md) |
 | 场内人民币日 K | 四只 ETF 均核至 2026-11-09。两只跨境 ETF 在 10-30 后各补入 6 个交易日 | [逐只覆盖与缺口](reports/2026-11-10-market-coverage/README.md) |
-| 自定义历史回测 | 收益结算上限 2026-10-30。仅沪深300、国债可从 2018-09-14 起；恒生可从 2022-01-04 起；标普在 2022-03-29 因拆分停牌，前后分别起账 | [适用区间](reports/2026-11-10-markets-2022/README.md)、[逐日归因](reports/2026-11-09-daily-gap/README.md) |
+| 自定义历史回测 | 收益结算上限 2026-10-30。仅沪深300、国债可从 2018-09-14 起；恒生可从 2019-01-02 起；含标普的组合可选 2019-01-02～2022-03-28 或 2022-03-30 起。[早期行情与证据](reports/2026-11-10-earlier-history/README.md) | [适用区间](reports/2026-11-10-markets-2022/README.md)、[逐日归因](reports/2026-11-09-daily-gap/README.md) |
 
 范围为研究模拟，不使用真实资金。用 1～2 年评估长期年化净收益 4%～5% 的可行性，不为达到目标调参。保留冻结协议、旧目标和原始证据。1,967 日历史样本、162 个固定场景及旧 640/1,167 日结果分别可查。前瞻从真实观察日起算。11 月 6 日目标生成于 09:15；模拟成交与实际成交证据分开记录。
 
 ## 下一步顺序
 
-1. 先读 AGENTS、README、PROJECT_PLAN、DATA_SOURCES、[原规划对照](docs/PLAN_ALIGNMENT.md)、PROTOCOL_V1 及研究、风险扩展配置。检查远端最新提交，执行 `python verify_snapshot.py` 和 `python scripts/verify_project.py`。最新静态清单在 `reports/2026-11-10-model-replay/manifest.json`，旧清单在相应提交核验。
+1. 先读 AGENTS、README、PROJECT_PLAN、DATA_SOURCES、[原规划对照](docs/PLAN_ALIGNMENT.md)、PROTOCOL_V1 及研究、风险扩展配置。检查远端最新提交，执行 `python verify_snapshot.py` 和 `python scripts/verify_project.py`。最新静态清单在 `reports/2026-11-10-earlier-history/manifest.json`，旧清单在相应提交核验。
 2. 依据活动检查点、独立日历和北京时间确定下一完整交易日。11 月 9 日的定时接续已验收，前六次日期不齐的尝试均留证，17:10 的新快照通过。后续交易日 16:00 后核验多源行情、日历、分红和公告。按实际日期运行 `python scripts/check_session_transition.py --day YYYY-MM-DD --require-timer`，核对运行来源、旧前缀、18 户权益及新增交易。
 3. 推进跨境收益回测前先补齐相应日期的公告与执行约束。继续寻 13 次分红的正式逐日除息参考价、独立盘中停复牌与有披露日期的持仓证据，缺项保留未知。外部提醒、ETF 估值因子及 2027 年正式交易日历仍待完成。
 4. 按 6、12、24 个月观察点累计前瞻结果（最早 2027-05-05、2027-11-05、2028-11-05）。风险阈值仅用于报告。Backtrader 对照覆盖 162 场景，精确现金边界仍有差异，继续保留冻结引擎。

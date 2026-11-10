@@ -1,4 +1,4 @@
-function setupModelReplay(parameters) {
+function setupModelReplay(parameters, coverage) {
   'use strict';
   const el = id => document.getElementById('replay-' + id);
   const names = {'510300':'沪深300','513500':'标普500','159920':'恒生','511010':'国债'};
@@ -8,6 +8,21 @@ function setupModelReplay(parameters) {
     known_ex_dividend_day:'除息日保护',opening_halt:'开盘停牌',conservative_9pct_buffer:'价格保护'};
   const money = n => Number(n).toLocaleString('zh-CN',{minimumFractionDigits:2,maximumFractionDigits:2});
   let query, frames = [], shown = 0, total = 0, chart, series, timer, request, enabled = false;
+  function setRanges() {
+    const opts=coverage();
+    if (!opts) return;
+    const params=parameters(), weights=params.get('weights').split(',').map(Number);
+    const trend=el('model').value==='trend_120';
+    const split=!trend && weights[1]>0;
+    const first=trend ? opts.trendFirst : split ? opts.first : weights[2]>0 ? opts.overseasFirst : opts.domesticFirst;
+    const menu=el('range');
+    menu.replaceChildren(new Option('上方日期 · '+params.get('start')+' 至 '+params.get('end'),'custom'),
+      new Option('连续区间 · '+first+' 至 '+opts.last,first+'/'+opts.last));
+    if (params.get('start')===opts.defaults.start && params.get('end')===opts.last && !new URLSearchParams(location.search).has('start')) {
+      menu.selectedIndex=1;
+    }
+    if (split) menu.add(new Option('拆分前 · '+opts.overseasFirst+' 至 '+opts.preSplitLast,opts.overseasFirst+'/'+opts.preSplitLast));
+  }
   function endpoint(step) {
     const params = new URLSearchParams(query);
     params.set('step', step);
@@ -20,7 +35,10 @@ function setupModelReplay(parameters) {
     el('auto').textContent = timer ? '暂停' : '自动走完';
   }
   function stop() { clearInterval(timer); timer = null; buttons(); }
-  function reset(single) {
+  function reset(single, keepRange=false) {
+    const selected=el('range').value;
+    setRanges();
+    if (keepRange && [...el('range').options].some(o=>o.value===selected)) el('range').value=selected;
     document.body.classList.remove('playing-model');
     enabled = single;
     request?.abort(); request = null;
@@ -29,7 +47,7 @@ function setupModelReplay(parameters) {
     el('body').hidden = true;
     el('status').textContent = '';
     el('rule').textContent = el('model').value === 'trend_120'
-      ? '沿用上方本金、费用和日期。使用起点前行情预热，首次建仓及每月初按120日趋势在股债各半和全债之间切换。'
+      ? '沿用上方本金和费用，按所选回放区间运行。使用起点前行情预热，首次建仓及每月初按120日趋势在股债各半和全债之间切换。'
       : '沿用上方组合和调仓方式。前一日收盘定目标，次日开盘模拟成交，当日收盘计算盈亏。';
     el('start').textContent = '开始回放';
     if (chart) { chart.remove(); chart = series = null; }
@@ -101,9 +119,14 @@ function setupModelReplay(parameters) {
   }
   el('exit').onclick = ()=>{reset(true);el('start').focus();};
   el('model').onchange = ()=>reset(enabled);
+  el('range').onchange = ()=>reset(enabled,true);
   el('symbol').onchange = ()=>{series.setData(frames.slice(0,shown).map(candle));mark();};
   el('start').onclick = async ()=>{
-    reset(true); query = parameters(); query.set('model',el('model').value);
+    reset(true,true); query = parameters(); query.set('model',el('model').value);
+    if (el('range').value !== 'custom') {
+      const [start,end] = el('range').value.split('/');
+      query.set('start',start); query.set('end',end);
+    }
     if (el('model').value === 'trend_120') {query.set('weights','1,0,0,1');query.set('rebalance','monthly');}
     if (await load(1)) display(1);
   };

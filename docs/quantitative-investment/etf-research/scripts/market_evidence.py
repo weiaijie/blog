@@ -7,7 +7,8 @@ from urllib.parse import urlparse, parse_qs
 from pathlib import Path
 
 from pypdf import PdfReader
-from market_events_2022 import FIRST_2022, SPLIT_DAY, verify_2022
+from market_events_2019_2021 import FIRST as EXTENDED_START, verify_early
+from market_events_2022 import SPLIT_DAY, verify_2022
 
 from etf_research.admission import completed_date, parse_prices
 from etf_research.data import RawBar, verify_manifest
@@ -42,7 +43,6 @@ def source(items, key):
     return path
 
 
-EXTENDED_START = FIRST_2022
 VALUATION_NOTICE = '/disclosure/fund/announcement/c/new/2023-03-16/513500_20230316_7KZF.pdf'
 # Dates in the domestic research calendar with no matching pair of foreign ETF quotes.
 QUOTE_GAPS = {'513500': {date(2018, 9, 14), date(2022, 3, 29)},
@@ -155,4 +155,6 @@ def verified_inputs(items, *, extended=False):
                     f'{day.year}年{day.month}月{day.day}日开市起' not in content):
                 raise ValueError('Opening restriction not matched: ' + key)
             halts.add((day, '513500'))
+    if extended:
+        verify_early(SNAPS, domestic.sessions, bars)
     return domestic, dates, bars, halts
