@@ -46,6 +46,7 @@ function showFund(){
   $('fund').textContent=names[selected];$('code').textContent=selected;$('close').textContent=last.close.toFixed(3);
   $('change').textContent=(delta>0?'+':'')+(100*delta/prev.close).toFixed(2)+'%';
   $('change').className=delta>=0?'positive':'negative';
+  $('quote-date').textContent=last.time+' 收盘';
   $('market-date').textContent='未复权 · '+records[0].time+' 至 '+last.time+' · '+records.length+' 根日 K' +
     (selected==='513500'?' · 2022-03-29 份额拆分停牌，当日无日 K':'');
   document.querySelectorAll('[data-code]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.code===selected)));
@@ -55,7 +56,12 @@ function showAccount(){
   const total=curve.at(-1)[1], gain=total-initial;
   $('days').textContent='第 '+sessions+' 天';$('asof').textContent='账户核验至 '+asOf;
   $('progress').textContent='已观察 '+sessions+' 个交易日，主账户累计'+(gain>=0?'盈利 ':'亏损 ')+money(Math.abs(gain))+' 元。';
-  $('balance').textContent=money(total);$('gain').textContent='累计盈亏 '+signed(gain)+' 元（'+(gain>0?'+':'')+(gain/initial*100).toFixed(3)+'%）';
+  $('balance').textContent=money(total);
+  const previous = curve.length>1 ? curve.at(-2)[1] : initial;
+  const daily = total-previous;
+  $('day-gain').textContent=signed(daily)+' 元';
+  $('day-gain').className=daily>=0?'positive':'negative';
+  $('gain').textContent=signed(gain)+' 元';
   $('gain').className=gain>=0?'positive':'negative';
   $('curve-note').textContent=curve[0][0].slice(5)+' — '+asOf.slice(5);
   $('curve-values').textContent=money(curve[0][1])+' → '+money(total)+' 元';
@@ -63,6 +69,27 @@ function showAccount(){
   equityChart.timeScale().setVisibleLogicalRange({from:-.15,to:Math.max(1.15,curve.length-.85)});
   $('equity').setAttribute('aria-label','账户总资产从 '+money(curve[0][1])+' 元到 '+money(total)+' 元，共 '+sessions+' 个观测日');
   $('next').textContent=nextSession?nextSession+' 收盘后核验行情；通过后记下第 '+(sessions+1)+' 天的资产和盈亏。':'等待下一交易日历核验。';
+}
+function showCoverage(){
+  const rows=$('coverage-rows');
+  rows.replaceChildren();
+  for(const code of ['510300','513500','159920','511010']){
+    const item=model.coverage[code], row=rows.insertRow();
+    const name=document.createElement('th');
+    name.scope='row';name.textContent=names[code]+' '+code;row.append(name);
+    const dates=row.insertCell();
+    dates.dataset.label='日 K 起止';
+    dates.textContent=item.quoteStart+' 至 '+item.quoteThrough;
+    const count=row.insertCell();
+    count.dataset.label='收盘数';
+    count.textContent=item.quotes.toLocaleString('zh-CN');
+    const cell=row.insertCell();
+    cell.dataset.label='可回测区间';
+    for(const [start,end] of item.backtestWindows){
+      const line=document.createElement('span');
+      line.textContent=start+' 至 '+end;cell.append(line);
+    }
+  }
 }
 async function refresh(){
   if(busy)return;busy=true;
@@ -73,7 +100,7 @@ async function refresh(){
     if(!incoming.curve?.length || !Object.keys(names).every(s=>incoming.candles?.[s]?.length>=2))throw Error('数据不完整');
     if(!priceChart)initCharts();
     if(!model || JSON.stringify(model)!==JSON.stringify(incoming)){
-      model=incoming;showFund();showAccount();
+      model=incoming;showFund();showAccount();showCoverage();
     }
     $('error').hidden=true;
   }catch(e){

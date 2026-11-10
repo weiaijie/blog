@@ -16,6 +16,7 @@ from etf_research.forward import digest, prefix_digest
 from etf_research.publication import inside, read, sha, verify_bundle
 import interactive_backtest as interactive
 from market_evidence import SNAPS
+from cross_market_quotes import THROUGH, cross_quotes
 
 SITE = ROOT/'site'
 ASSETS = {'/': ('market.html','text/html'), '/market.html': ('market.html','text/html'),
@@ -56,9 +57,13 @@ def payload(pointer_bytes):
     as_of = date.fromisoformat(state['as_of'])
     if rebuilt!=audit or data.sessions[-1]!=as_of or prefix_digest(data,as_of)!=state['admitted_prefix_sha256']:
         raise ValueError('Account and market data differ')
+    calendar=read(SNAPS/'2026-11-04-calendar-08/calendar.json')['holiday_ranges']
+    historical = history()
+    extra = cross_quotes(historical, calendar) if as_of >= THROUGH else {}
     candles = {}
-    for symbol,old in history().items():
+    for symbol,old in historical.items():
         prices = dict(old)
+        prices.update(extra.get(symbol, {}))
         if symbol in data.bars:
             current = data.bars[symbol]
             if any(prices[d]!=current[d] for d in prices.keys() & current.keys()):
@@ -71,12 +76,21 @@ def payload(pointer_bytes):
     curve=[[r['date'],float(r['equity'])] for r in portfolio['daily']]
     if len(curve)!=state['forward_sessions'] or curve[-1][0]!=state['as_of']:
         raise ValueError('Forward observations incomplete')
-    calendar=read(SNAPS/'2026-11-04-calendar-08/calendar.json')['holiday_ranges']
     end=date(as_of.year,12,31)
     following=sessions_between(calendar,as_of+timedelta(days=1),end) if as_of<end else []
     view=dict(asOf=state['as_of'],start=state['forward_start'],sessions=state['forward_sessions'],
               initial=float(portfolio['summary']['initial_cash']),curve=curve,candles=candles,
               nextSession=str(following[0]) if following else None)
+    options = interactive.OPTIONS
+    coverage = {}
+    for symbol,rows in candles.items():
+        first = options['domesticFirst'] if symbol in ('510300','511010') else options['overseasFirst']
+        windows = [[first,options['last']]]
+        if symbol == '513500':
+            windows = [[first,options['preSplitLast']],[options['first'],options['last']]]
+        coverage[symbol] = dict(quoteStart=rows[0][0], quoteThrough=rows[-1][0], quotes=len(rows),
+                                backtestWindows=windows)
+    view['coverage'] = coverage
     return json.dumps(view,ensure_ascii=False,separators=(',',':')).encode()
 
 

@@ -15,7 +15,6 @@ class MarketViewTests(unittest.TestCase):
         pointer=json.loads((folder/'ready.json').read_bytes())['pointer']
         pointer['bundle_manifest_sha256']=hashlib.sha256((folder/'manifest.json').read_bytes()).hexdigest()
         result=payload(json.dumps(pointer).encode())
-        self.assertEqual(result,(ROOT/'site/market-data.json').read_bytes())
         view=json.loads(result)
         self.assertEqual(view['curve'],[['2026-11-05',100000],['2026-11-06',100067.48]])
         self.assertEqual(view['nextSession'],'2026-11-09')
@@ -24,6 +23,24 @@ class MarketViewTests(unittest.TestCase):
             self.assertEqual([row[0] for row in bars],sorted({row[0] for row in bars}))
             self.assertEqual(bars[-1][0], '2026-10-30' if symbol in ('513500','159920') else view['asOf'])
             self.assertTrue(all(low<=min(op,cl)<=max(op,cl)<=high for _,op,high,low,cl in bars))
+
+    def test_new_static_view_and_quote_only_extension(self):
+        from interactive_backtest import DEFAULTS, InputError, backtest
+        folder = ROOT/'reports/daily/20261109T171001-d2a48b21'
+        pointer = json.loads((folder/'ready.json').read_bytes())['pointer']
+        pointer['bundle_manifest_sha256'] = hashlib.sha256((folder/'manifest.json').read_bytes()).hexdigest()
+        result = payload(json.dumps(pointer).encode())
+        self.assertEqual(result,(ROOT/'site/market-data.json').read_bytes())
+        view = json.loads(result)
+        self.assertEqual(view['curve'][-1],['2026-11-09',100141.58])
+        for code,count in [('513500',1971),('159920',1971),('510300',1973),('511010',1973)]:
+            rows = view['candles'][code]
+            coverage = view['coverage'][code]
+            self.assertEqual((len(rows),rows[-1][0]),(count,'2026-11-09'))
+            self.assertEqual((coverage['quoteThrough'],coverage['quotes']),(rows[-1][0],len(rows)))
+            self.assertEqual(coverage['backtestWindows'][-1][1],'2026-10-30')
+        with self.assertRaises(InputError):
+            backtest(dict(DEFAULTS,end='2026-11-09'))
 
     def test_unbound_pointer_rejected(self):
         pointer=json.loads((ROOT/'config/active_run.json').read_bytes())

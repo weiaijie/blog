@@ -7,7 +7,7 @@
 <script src="vendor-charts/lightweight-charts-5.0.9.js" defer></script><script src="market.js" defer></script>
 </head>
 <body>
-<header><div class="shell mast"><div class="brand"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>ETF 研究手记</div><a href="backtest.html" style="color:#d6ebe3">查看历史回测 ↗</a><span class="mode">仅模拟 · 人民币</span></div></header>
+<header><div class="shell mast"><div class="brand"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>ETF 研究手记</div><nav aria-label="研究工具"><a href="#coverage">数据覆盖</a><a href="backtest.html#workbench">自定义回测</a></nav><span class="mode">仅模拟 · 人民币</span></div></header>
 <main class="shell">
 <div class="intro"><div><h1>行情与进度</h1><p id="progress">正在读取已核验的研究记录…</p></div><span id="asof"></span></div>
 <div id="error" role="status" hidden></div>
@@ -16,17 +16,22 @@
 <div class="tabs" role="group" aria-label="选择 ETF">
 <button type="button" data-code="510300" aria-pressed="true">沪深300</button><button type="button" data-code="513500" aria-pressed="false">标普500</button>
 <button type="button" data-code="159920" aria-pressed="false">恒生指数</button><button type="button" data-code="511010" aria-pressed="false">国债</button></div>
-<div class="chart-head"><div><div class="security"><span id="code">510300</span><h2 id="fund">沪深300 ETF</h2></div><div class="quote"><strong id="close">—</strong><span>元</span><b id="change"></b></div></div>
+<div class="chart-head"><div><div class="security"><span id="code">510300</span><h2 id="fund">沪深300 ETF</h2></div><div class="quote"><strong id="close">—</strong><span>元</span><b id="change"></b></div><small id="quote-date"></small></div>
 <div class="ranges" role="group" aria-label="显示的交易日数量"><button data-count="20" aria-pressed="false">20日</button><button data-count="60" aria-pressed="true">60日</button><button data-count="120" aria-pressed="false">120日</button><button data-count="0" aria-pressed="false">全部历史</button></div></div>
 <div class="ohlc"><b id="bar-date">—</b><span>开 <em id="open">—</em></span><span>高 <em id="high">—</em></span><span>低 <em id="low">—</em></span><span>收 <em id="last">—</em></span></div>
 <div id="candles" tabindex="0" aria-label="日 K 线。可拖动或缩放，用左右方向键查看逐日价格。"></div>
 <div class="caption"><span><i class="legend up"></i>收高于开 <i class="legend down"></i>收低于开</span><span id="market-date">日 K · 未复权</span></div>
 </section>
 <aside class="panel account"><div class="account-head"><h2>前瞻模拟账户</h2><span id="days"></span></div><p class="muted">沪深300 / 国债 · 各占 50% 的目标组合</p>
-<p class="amount-label">账户总资产（元）</p><strong class="balance" id="balance">—</strong><p id="gain">—</p>
+<p class="amount-label">账户总资产（元）</p><strong class="balance" id="balance">—</strong><dl class="account-returns"><div><dt>当日盈亏</dt><dd id="day-gain">—</dd></div><div><dt>累计盈亏</dt><dd id="gain">—</dd></div></dl>
 <div class="equity-title"><h3>账户净值走势</h3><span id="curve-note"></span></div><div id="equity" aria-label="主账户逐日收盘净值曲线"></div><p id="curve-values" class="muted"></p>
 <div class="next"><h3>下一次看什么</h3><p id="next">等待读取账户记录</p></div></aside>
 </div>
-<section class="research"><h2>研究做到了哪一步</h2><div class="steps"><article><span>已回测</span><h3>过去的表现</h3><p>沪深300与国债各半，1,967 个历史交易日，模型年化约 4.02%，最大回撤约 19.73%。</p></article><article><span>已对比</span><h3>四组市场组合</h3><p>两年历史比较中，标普组收益最高，三地平分组回撤最浅。四组仍按原权重观察。</p></article><article><span>观察中</span><h3>长期目标</h3><p id="goal">用 1～2 年的模拟观察，评估年化净收益 4%～5% 是否可行。</p></article></div></section>
+<section class="coverage" id="coverage" aria-labelledby="coverage-title">
+<div class="coverage-head"><h2 id="coverage-title">数据覆盖</h2><a href="backtest.html#workbench">按配比回测</a></div>
+<div class="coverage-scroll" tabindex="0" role="region" aria-label="四只 ETF 的行情与回测区间"><table><thead><tr><th scope="col">ETF</th><th scope="col">日 K 起止</th><th scope="col">收盘数</th><th scope="col">可回测区间</th></tr></thead><tbody id="coverage-rows"></tbody></table></div>
+<p class="coverage-note">行情按未复权场内价格展示。回测还需核验分红、份额拆分和交易限制；组合以各持仓共同可用的区间为准。</p>
+<details><summary>仍缺哪些数据？</summary><p>13 次历史分红的正式逐日除息参考价仍不完整；当期披露不能覆盖实时全持仓，日 K 也无法验证盘中排队成交。前瞻样本按通过核验的收盘日累计。</p><a href="https://github.com/weiaijie/blog/blob/redesign-pc/docs/quantitative-investment/etf-research/DATA_SOURCES.md">查看来源与待补记录</a></details>
+</section>
 </main><footer class="shell"><a href="https://github.com/weiaijie/blog/tree/redesign-pc/docs/quantitative-investment/etf-research">研究记录 ↗</a><a href="https://www.tradingview.com/">图表来自 TradingView™ Lightweight Charts™</a></footer>
 </body></html>
