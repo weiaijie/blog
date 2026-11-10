@@ -29,6 +29,7 @@ ASSETS = {'/': ('market.html','text/html'), '/market.html': ('market.html','text
           '/backtest.js': ('backtest.js','text/javascript'), '/backtest-data.json': ('backtest-data.json','application/json'),
           '/vendor-vue/vue-3.5.22.runtime.global.prod.js': ('vendor-vue/vue-3.5.22.runtime.global.prod.js','text/javascript'),
           '/vendor-vue/LICENSE': ('vendor-vue/LICENSE','text/plain'),
+          '/factor-shortfall.js': ('factor-shortfall.js','text/javascript'),
           '/method-gap.js': ('method-gap.js','text/javascript'),
           '/method-windows.js': ('method-windows.js','text/javascript'),
           '/strategy-controls.js': ('strategy-controls.js','text/javascript'),
@@ -131,6 +132,7 @@ class Handler(BaseHTTPRequestHandler):
         status = 200
         if path == '/api/v1/backtest/options':
             body, kind = interactive.encode(dict(interactive.OPTIONS, methodWindowsDefaults=method_windows.DEFAULTS,
+                factorShortfallEndpoint='/api/v1/backtest/factor-shortfall',
                 methodGapEndpoint='/api/v1/backtest/method-gap', methodGapCase=method_gap.CASE,
                 methodWindowsEndpoint='/api/v1/backtest/method-windows', methodDetailEndpoint='/api/v1/backtest/method-detail')), 'application/json'
         elif path in CALCULATIONS:
@@ -148,6 +150,16 @@ class Handler(BaseHTTPRequestHandler):
             except (OSError, ValueError, KeyError, IndexError, ImportError) as exc:
                 self.log_error('Historical replay unavailable: %s', exc)
                 status, body = 503, interactive.encode({'error': '已核验的历史数据暂时不可用。'})
+        elif path=='/api/v1/backtest/factor-shortfall':
+            if url.query:
+                status,body = 400,interactive.encode({'error':'本报告使用已归档的固定样本和基准费用。'})
+            else:
+                try:
+                    body=(ROOT/'reports/2026-11-10-multifactor-shortfall/cohort.json').read_bytes()
+                except OSError:
+                    self.send_error(503,'Archived cohort unavailable')
+                    return
+            kind='application/json'
         elif path=='/market-data.json':
             try:
                 body,kind=latest(),'application/json'

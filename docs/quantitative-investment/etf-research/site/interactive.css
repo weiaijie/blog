@@ -42,8 +42,11 @@
 .method-gap-ranks{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin:10px 0}
 .method-gap-ranks button[aria-pressed="true"]{outline:2px solid #296856}
 .method-gap h5{font-size:1rem;margin:16px 0 4px}
+#factor-shortfall{margin:12px 0}
+.shortfall-report select{max-width:100%}
+.shortfall-report li>strong,.shortfall-report li>small{display:block}
 #method-gap-case{scroll-margin-top:12px}
-.playing-model #method-windows:not(:target):not(:has(#method-gap-case:target)){display:none}
+.playing-model #method-windows:not(:target):not(:has(#method-gap-case:target,#factor-shortfall:target)){display:none}
 #workbench{margin-bottom:20px;scroll-margin-top:10px}
 .work-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(154px,1fr));gap:12px;margin:14px 0}
 #workbench label{display:grid;gap:4px;color:var(--muted);font-size:13px}

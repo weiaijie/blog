@@ -35,7 +35,7 @@
       h('thead',h('tr',head.map(s=>h('th',{scope:'col'},s)))),h('tbody',rows)])]);
   }
   createApp({
-    data:()=>({params:null,caseParams:null,caseOpen:false,bounds:[],report:null,detail:null,status:'',busy:false,selected:'',summaryUrl:'',detailUrl:'',generation:0}),
+    data:()=>({params:null,caseParams:null,caseOpen:false,shortfallOpen:false,bounds:[],report:null,detail:null,status:'',busy:false,selected:'',summaryUrl:'',detailUrl:'',generation:0}),
     async mounted() {
       try {
         const res=await fetch('api/v1/backtest/options');
@@ -43,7 +43,7 @@
         const opt=await res.json();
         this.params={...opt.methodWindowsDefaults};
         this.caseParams=opt.methodGapCase;
-        this.syncHash=()=>{if(location.hash==='#method-gap-case') this.caseOpen=true;};
+        this.syncHash=()=>{if(location.hash==='#method-gap-case') this.caseOpen=true;if(location.hash==='#factor-shortfall') this.shortfallOpen=true;};
         this.syncHash();window.addEventListener('hashchange',this.syncHash);
         this.bounds=[this.params.start,this.params.end];
         await this.calculate();
@@ -103,6 +103,11 @@
           (this.caseOpen?'收起':'打开')+' 2021-10-29 至 2022-10-31 三批建仓对账'),
         this.caseOpen?h('p','国债 ETF 贡献了 753.13 元差额。第三批按前一收盘计算，国债预算约 50,359.80 元，400 份需要 50,591.60 元。按每手 100 份取整，分批最终持有 300 份，一次建仓持有 400 份。'):null,
         this.caseOpen?h(window.MethodGap,{params:this.caseParams}):null
+      ]));
+      nodes.push(h('section',{id:'factor-shortfall'},[
+        h('button',{type:'button','aria-expanded':this.shortfallOpen,onClick:()=>{this.shortfallOpen=!this.shortfallOpen;}},
+          (this.shortfallOpen?'收起':'打开')+' 多因子两年盈利但未达 4% 的窗口归因'),
+        this.shortfallOpen?h(window.FactorShortfall,{eventCell}):null
       ]));
       if (!this.report) return nodes;
       for (const y of [1,2]) {

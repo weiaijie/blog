@@ -4,6 +4,8 @@
 
 ## 当前进度
 
+[多因子 514 个两年低收益窗口](reports/2026-11-10-multifactor-shortfall/README.md)按相同起点对照一次建仓，核对退出股票、费用和滑点的贡献，并回放最大差距期间的翻票。
+
 [四种方式逐日起点对比](reports/2026-11-10-multifactor-windows/README.md)提供相同本金和费用下的一年、两年结果。点开最差一期，可核对多因子哪些票改变、股票和国债次日成交多少。
 
 [多因子 v1 历史回放](reports/2026-11-10-multifactor/README.md)每日按趋势、股债强弱和波动表决；看板及 Agent 可查询收盘投票、次日目标与模拟成交。
@@ -27,7 +29,7 @@
 
 ## 下一步顺序
 
-1. 先读 AGENTS、README、PROJECT_PLAN、DATA_SOURCES、[原规划对照](docs/PLAN_ALIGNMENT.md)、PROTOCOL_V1 及研究、风险扩展配置。检查远端最新提交，执行 `python verify_snapshot.py` 和 `python scripts/verify_project.py`。最新静态清单在 `reports/2026-11-10-multifactor-windows/manifest.json`，旧清单在相应提交核验。
+1. 先读 AGENTS、README、PROJECT_PLAN、DATA_SOURCES、[原规划对照](docs/PLAN_ALIGNMENT.md)、PROTOCOL_V1 及研究、风险扩展配置。检查远端最新提交，执行 `python verify_snapshot.py` 和 `python scripts/verify_project.py`。最新静态清单在 `reports/2026-11-10-multifactor-shortfall/manifest.json`，旧清单在相应提交核验。
 2. 依据活动检查点、独立日历和北京时间确定下一完整交易日。11 月 9 日的定时接续已验收，前六次日期不齐的尝试均留证，17:10 的新快照通过。后续交易日 16:00 后核验多源行情、日历、分红和公告。按实际日期运行 `python scripts/check_session_transition.py --day YYYY-MM-DD --require-timer`，核对运行来源、旧前缀、18 户权益及新增交易。
 3. 推进跨境收益回测前先补齐相应日期的公告与执行约束。继续寻 13 次分红的正式逐日除息参考价、独立盘中停复牌与有披露日期的持仓证据，缺项保留未知。外部提醒、ETF 估值因子及 2027 年正式交易日历仍待完成。
 4. 按 6、12、24 个月观察点累计前瞻结果（最早 2027-05-05、2027-11-05、2028-11-05）。风险阈值仅用于报告。Backtrader 对照覆盖 162 场景，精确现金边界仍有差异，继续保留冻结引擎。
