@@ -24,17 +24,21 @@
       h('thead',h('tr',head.map(s=>h('th',{scope:'col'},s)))),h('tbody',rows)])]);
   }
   createApp({
-    data:()=>({params:null,bounds:[],report:null,detail:null,status:'',busy:false,selected:'',summaryUrl:'',detailUrl:'',generation:0}),
+    data:()=>({params:null,caseParams:null,caseOpen:false,bounds:[],report:null,detail:null,status:'',busy:false,selected:'',summaryUrl:'',detailUrl:'',generation:0}),
     async mounted() {
       try {
         const res=await fetch('api/v1/backtest/options');
         if (!res.ok) throw Error('接口暂时不可用');
         const opt=await res.json();
         this.params={...opt.methodWindowsDefaults};
+        this.caseParams=opt.methodGapCase;
+        this.syncHash=()=>{if(location.hash==='#method-gap-case') this.caseOpen=true;};
+        this.syncHash();window.addEventListener('hashchange',this.syncHash);
         this.bounds=[this.params.start,this.params.end];
         await this.calculate();
       } catch(e) {this.status=e.message;}
     },
+    beforeUnmount() {window.removeEventListener('hashchange',this.syncHash);},
     methods:{
       clear() {this.generation++;this.report=this.detail=null;this.selected=this.status='';this.busy=false;},
       async query(path,params) {
@@ -83,6 +87,12 @@
           h('button',{disabled:this.busy,type:'submit'},'逐日起点 · 并排比较')]));
       }
       nodes.push(h('p',{role:'status'},this.status));
+      if (this.caseParams) nodes.push(h('section',{id:'method-gap-case'},[
+        h('button',{type:'button','aria-expanded':this.caseOpen,onClick:()=>{this.caseOpen=!this.caseOpen;}},
+          (this.caseOpen?'收起':'打开')+' 2021-10-29 至 2022-10-31 三批建仓对账'),
+        this.caseOpen?h('p','国债 ETF 贡献了 753.13 元差额。第三批按前一收盘计算，国债预算约 50,359.80 元，400 份需要 50,591.60 元。按每手 100 份取整，分批最终持有 300 份，一次建仓持有 400 份。'):null,
+        this.caseOpen?h(window.MethodGap,{params:this.caseParams}):null
+      ]));
       if (!this.report) return nodes;
       for (const y of [1,2]) {
         const stats=this.report.periods[y];
@@ -102,6 +112,7 @@
           table(['开盘执行日',...models.map(m=>names[m])],[
             h('tr',[h('th','到期盈亏'),...models.map(m=>cell(names[m],money(d.models[m].pnl)+' 元'))]),
             ...Object.keys(entries).sort().map(day=>h('tr',[h('th',{scope:'row'},day),...models.map(m=>cell(names[m],eventCell(entries[day][m])))]))],'method-log'),
+          h(window.MethodGap,{key:this.detailUrl,params:d.parameters}),
           h('a',{href:this.detailUrl},'Agent · 同期逐日净值、信号和订单 JSON')]));
       }
       return nodes;

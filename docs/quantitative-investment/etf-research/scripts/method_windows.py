@@ -31,15 +31,20 @@ def prepare(params):
     return config, days, capital, simulate
 
 
+def allocation_ledgers(config, sessions, bars, simulate):
+    schedule = installment_schedule(sessions, sessions, bars['510300'], int(config['installments']),
+                                    config['rebalance'], simulate.keywords['denominators'])
+    return dict(allocation=simulate(sessions), installments=simulate(sessions, schedule=schedule))
+
+
 def calculate_entries(params):
     config, days, capital, simulate = prepare(params)
     base, _, bars, _ = work.inputs()
     for sessions, endpoints in entry_schedule(days):
         start = sessions[0]
-        schedule = installment_schedule(sessions, sessions, bars['510300'], int(params['installments']),
-                                        config['rebalance'], simulate.keywords['denominators'])
-        fixed, _ = simulate(sessions)
-        staged, _ = simulate(sessions, schedule=schedule)
+        books = allocation_ledgers(config,sessions,bars,simulate)
+        fixed, _ = books['allocation']
+        staged, _ = books['installments']
         # Preserve all pre-start history for the frozen trend calculation. The last
         # available close and each opening signal use the same cutoffs as replay.
         end_index = base.sessions.index(sessions[-1])

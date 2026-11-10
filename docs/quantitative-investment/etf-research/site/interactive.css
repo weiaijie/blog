@@ -36,7 +36,12 @@
   #method-windows tbody td{display:block;position:relative;min-height:22px;padding:3px 0 3px 8em;border:0}
   #method-windows tbody td:before{content:attr(data-label);position:absolute;left:0;color:var(--muted)}
 }
-.playing-model #method-windows:not(:target){display:none}
+.method-gap-chart{height:260px;width:100%;margin-top:16px}
+.method-gap-ranks{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin:10px 0}
+.method-gap-ranks button[aria-pressed="true"]{outline:2px solid #296856}
+.method-gap h5{font-size:1rem;margin:16px 0 4px}
+#method-gap-case{scroll-margin-top:12px}
+.playing-model #method-windows:not(:target):not(:has(#method-gap-case:target)){display:none}
 #workbench{margin-bottom:20px;scroll-margin-top:10px}
 .work-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(154px,1fr));gap:12px;margin:14px 0}
 #workbench label{display:grid;gap:4px;color:var(--muted);font-size:13px}

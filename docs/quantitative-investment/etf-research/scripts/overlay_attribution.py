@@ -75,7 +75,7 @@ def interval(ledgers, start, end):
     return dict(start=start, end=end, accounts=accounts, differences=differences)
 
 
-def daily_gap(target, reference, holding):
+def daily_gap(target, reference, holding, *, include_accounts=False):
     """Daily signed changes in target minus reference, including the zero starting close."""
     if target.keys() != reference.keys():
         raise ValueError('Gap accounts have different trading dates')
@@ -101,6 +101,8 @@ def daily_gap(target, reference, holding):
                 sums[symbol][k] += parts[k]
         rows.append(dict(date=day, change=change, cumulative=running, targetChange=a['accountChange'],
                          referenceChange=b['accountChange'], byEtf=detail['byEtf'], totals=detail['totals']))
+        if include_accounts:
+            rows[-1].update(targetBreakdown=a, referenceBreakdown=b)
         previous_day = day
     for symbol, parts in sums.items():
         if any(v != holding['byEtf'][symbol][k] for k,v in parts.items()):
