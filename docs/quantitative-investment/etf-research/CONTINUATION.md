@@ -1,5 +1,7 @@
 # 自主接续入口
 
+[2022 年跨境 ETF 事件与回测](reports/2026-11-10-markets-2022/README.md)：恒生可从 2022-01-04 起；标普可选 01-04 至 03-28，或从 03-30 起。03-29 为拆分停牌。
+
 11 月 9 日 17:10 定时接续成功。[核验记录](reports/2026-11-10-forward-handoff/README.md)包含两个来源的行情、官方收盘对照和 18 个模拟账户的第 3 个前瞻交易日。
 
 ## 当前状态（2026-11-08，北京时间）
@@ -56,7 +58,7 @@
 
 11月7日已完成新增交易日验收工具及18个历史账户季度、年度归因。11月9日收盘后运行 `python scripts/check_session_transition.py --day 2026-11-09 --require-timer`。可先读[实测分类、复现命令与离线候选任务](reports/2026-11-07-period-review/PROGRESS.md)。
 
-1. 核实仓库与北京时间。安装requirements-lock.txt，执行verify_project.py及基础测试；若研究框架对照才另装requirements-backtrader.txt。读取AGENTS.md、README、PROJECT_PLAN、DATA_SOURCES、PLAN_ALIGNMENT、PROTOCOL_V1及两配置。最新静态提交清单在reports/2026-11-10-forward-handoff/manifest.json；活动账户/运行状态/健康状态指针另按封存记录校验，允许合法每日更新；旧阶段清单须在相应提交核验。
+1. 核实仓库与北京时间。安装requirements-lock.txt，执行verify_project.py及基础测试；若研究框架对照才另装requirements-backtrader.txt。读取AGENTS.md、README、PROJECT_PLAN、DATA_SOURCES、PLAN_ALIGNMENT、PROTOCOL_V1及两配置。最新静态提交清单在reports/2026-11-10-markets-2022/manifest.json；活动账户/运行状态/健康状态指针另按封存记录校验，允许合法每日更新；旧阶段清单须在相应提交核验。
 2. 下一完整交易日候选11月9日，16:00后才采集；周末不增加记录。正式用户timer已enabled/active，linger=yes；北京时间16:10、16:40、17:10调用run_scheduled.py，启动/重载定时器后30秒也补检查。进程失败120秒后重试，20分钟最多3次启动。当前账户已是最新时零请求、零收益变化；新日合格后才发布整包。
 3. 超时已定位为该主机到官方公告IPv6地址的TLS握手失败（TCP已连通）；IPv4的TLS证书验证及HTTP200正常。采集器使用curl、DNS解析IPv4、正常证书校验，最多3次尝试，2/4秒退避，每次响应原文与错误均保存。5轮真实全链路、跨度约17分23秒全部准入，55请求中50成功、5次搜狐503后重试成功；10次公告请求均成功（中位0.1255秒、最长0.138秒）。这是当日工程验收，不是跨交易日长期稳定证明；没有修复或关闭主机全局IPv6。
 4. 来源失败保留原快照与失败运行。未封存中断用--retry-of旧运行路径创建新运行；已封存未发布用--resume路径，核验所有输入及原指针后恢复。路径和命令见docs/DAILY_PIPELINE.md。不得直接覆写旧检查点、报告、目标或快照。

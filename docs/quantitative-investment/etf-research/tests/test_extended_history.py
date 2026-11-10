@@ -30,12 +30,12 @@ class ExtendedHistoryTests(unittest.TestCase):
     def test_extended_quotes_and_unchanged_legacy_window(self):
         domestic, dates, bars, halts = inputs()
         _, old_dates, old_bars, old_halts = verified_inputs(evidence())
-        self.assertEqual((dates[0],len(dates)),(EXTENDED_START,925))
+        self.assertEqual((dates[0],len(dates)),(EXTENDED_START,1167))
         self.assertEqual(tuple(d for d in dates if d>=START),old_dates)
         self.assertNotIn((date(2023,3,16),'513500'),halts)
-        self.assertEqual(halts,old_halts)
+        self.assertEqual(halts,old_halts | {(date(2022,3,29),'513500')})
         for code in QUOTE_GAPS:
             self.assertEqual(set(domestic.sessions)-bars[code].keys(),QUOTE_GAPS[code])
             self.assertTrue(all(bars[code][d]==old_bars[code][d] for d in old_dates))
         with self.assertRaises(InputError):
-            backtest(dict(DEFAULTS,start='2022-12-30'))
+            backtest(dict(DEFAULTS,start='2021-12-31'))

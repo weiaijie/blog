@@ -7,6 +7,7 @@ from urllib.parse import urlparse, parse_qs
 from pathlib import Path
 
 from pypdf import PdfReader
+from market_events_2022 import FIRST_2022, SPLIT_DAY, verify_2022
 
 from etf_research.admission import completed_date, parse_prices
 from etf_research.data import RawBar, verify_manifest
@@ -41,7 +42,7 @@ def source(items, key):
     return path
 
 
-EXTENDED_START = date(2023, 1, 3)
+EXTENDED_START = FIRST_2022
 VALUATION_NOTICE = '/disclosure/fund/announcement/c/new/2023-03-16/513500_20230316_7KZF.pdf'
 # Dates in the domestic research calendar with no matching pair of foreign ETF quotes.
 QUOTE_GAPS = {'513500': {date(2018, 9, 14), date(2022, 3, 29)},
@@ -63,6 +64,8 @@ def check_valuation_notice(notice):
 
 def verified_inputs(items, *, extended=False):
     domestic = load_long_history(SNAPS)
+    if extended:
+        verify_2022(SNAPS)
     start = EXTENDED_START if extended else START
     dates = tuple(d for d in domestic.sessions if start <= d <= END)
     bars = dict(domestic.bars)
@@ -76,8 +79,9 @@ def verified_inputs(items, *, extended=False):
             raise ValueError('Unbound security identity or venue')
         official = parse_dayk(source(items, 'official_' + code).read_text(), code)
         sina = parse_prices(source(items, 'sina_' + code + '_1970').read_bytes(), 'sina', END)
+        quote_dates = tuple(d for d in dates if not (extended and code == '513500' and d == SPLIT_DAY))
         for series in (official, sina):
-            if tuple(d for d in series if start <= d <= END) != dates:
+            if tuple(d for d in series if start <= d <= END) != quote_dates:
                 raise ValueError('Calendar mismatch: ' + code)
         price_days = dates
         if extended:
@@ -137,7 +141,7 @@ def verified_inputs(items, *, extended=False):
             query = parse_qs(items[key][1]['post'])
             if query.get('seDate') != ['2023-01-01~2026-11-08'] or query.get('stock') != ['159920,jjjl0000031']:
                 raise ValueError('Extended Shenzhen disclosure window not verified')
-    halts = set()
+    halts = {(SPLIT_DAY, '513500')} if extended else set()
     for r in notices:
         day = date.fromisoformat(r['SSEDATE'])
         if start <= day <= END and re.search('停牌|停复牌|复牌', r['TITLE']):

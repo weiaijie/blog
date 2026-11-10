@@ -47,7 +47,7 @@ function showFund(){
   $('change').textContent=(delta>0?'+':'')+(100*delta/prev.close).toFixed(2)+'%';
   $('change').className=delta>=0?'positive':'negative';
   $('market-date').textContent='未复权 · '+records[0].time+' 至 '+last.time+' · '+records.length+' 根日 K' +
-    (selected==='513500'?' · 2022-03-29 缺报价':'');
+    (selected==='513500'?' · 2022-03-29 份额拆分停牌，当日无日 K':'');
   document.querySelectorAll('[data-code]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.code===selected)));
 }
 function showAccount(){

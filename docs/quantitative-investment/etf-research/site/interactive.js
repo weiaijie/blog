@@ -57,10 +57,13 @@
   function updateDates() {
     if (!coverage) return;
     const overseas = [...cards.children].some(card=>inputsOf(card).slice(1,3).some(i=>Number(i.value)>0));
-    const first = overseas ? coverage.first : coverage.domesticFirst;
+    const sp = [...cards.children].some(card=>Number(inputsOf(card)[1].value)>0);
+    const first = overseas ? coverage.overseasFirst : coverage.domesticFirst;
+    get('work-pre-split').hidden = !sp;
     for (const input of [fields.start,fields.end]) {input.min=first;input.max=coverage.last;}
     get('work-limits').textContent = (overseas?'含跨境 ETF 的共同回测区间 ':'沪深300与国债可用区间 ')+first+
-      ' 至 '+coverage.last+'。休市端点取区间内交易日。使用场内人民币价格与分红，起点后的首个开盘模拟建仓。';
+      ' 至 '+coverage.last+'。'+(sp?'标普 ETF 在 '+coverage.splitDay+' 拆分停牌，请选择拆分前或复牌后的区间。':'')+
+      '休市端点取区间内交易日。使用场内人民币价格与分红，起点后的首个开盘模拟建仓。';
   }
   function changed() {
     updateDates();
@@ -292,8 +295,13 @@
       vectors.slice(1).forEach(addCard);
       updateControls();
       updateDates();
+      get('work-pre-split').addEventListener('click',()=>{
+        fields.start.value=config.overseasFirst;
+        fields.end.value=config.preSplitLast;
+        changed();
+      });
       get('work-all-dates').addEventListener('click',()=>{
-        fields.start.value = fields.start.min;
+        fields.start.value = get('work-pre-split').hidden ? fields.start.min : config.first;
         fields.end.value = config.last;
         changed();
       });

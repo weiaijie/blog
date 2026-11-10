@@ -12,6 +12,7 @@ from compare_three_markets import CODES, SCENARIOS, metrics, simulate
 from build_entry_windows import entry_schedule, measure_entry, summarize
 from overlay_attribution import attribution, cumulative_ledger
 from etf_research.long_history import START as DOMESTIC_START
+from market_events_2022 import RESUMED, SPLIT_DAY
 from market_evidence import END, EXTENDED_START, evidence, verified_inputs
 
 DEFAULTS = dict(start='2024-10-30', end=str(END), capital='100000',
@@ -20,7 +21,8 @@ OPTIONS = dict(version=1, method='GET', endpoint='/api/v1/backtest',
                windowsEndpoint='/api/v1/backtest/windows', compareEndpoint='/api/v1/backtest/compare',
                overlayEndpoint='/api/v1/backtest/overlay',
                compareWeightsFormat='2 or 3 four-ETF relative weight vectors, in input order, separated by |', horizons=[1, 2], annualTarget='0.04',
-               first=str(EXTENDED_START), domesticFirst=str(DOMESTIC_START), last=str(END), symbols=list(CODES), required=list(DEFAULTS),
+               first=str(RESUMED), overseasFirst=str(EXTENDED_START), splitDay=str(SPLIT_DAY),
+               preSplitLast='2022-03-28', domesticFirst=str(DOMESTIC_START), last=str(END), symbols=list(CODES), required=list(DEFAULTS),
                defaults=DEFAULTS, fees=list(SCENARIOS), rebalance=['monthly', 'hold'],
                capitalRange=[1, 1000000000], weightsFormat='Four nonnegative relative amounts in symbols order; up to 2 decimal places each; positive sum.')
 
@@ -74,6 +76,8 @@ def configured_replay(params):
     first = DOMESTIC_START if domestic_only else EXTENDED_START
     if not first <= start < end <= END:
         raise InputError(f'按所选配比，可用区间为 {first} 至 {END}，起始日期须早于结束日期。')
+    if shares[1] and start <= SPLIT_DAY <= end:
+        raise InputError('标普 ETF 于 2022-03-29 拆分停牌，无场内收盘价。请选择截至 2022-03-28 或自 2022-03-30 起的区间。')
     base, common_calendar, bars, halts = inputs()
     calendar = base.sessions if domestic_only else common_calendar
     days = tuple(d for d in calendar if start <= d <= end)
