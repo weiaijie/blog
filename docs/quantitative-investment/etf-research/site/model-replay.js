@@ -8,11 +8,12 @@ function setupModelReplay(parameters, coverage) {
     known_ex_dividend_day:'除息日保护',opening_halt:'开盘停牌',conservative_9pct_buffer:'价格保护'};
   const money = n => Number(n).toLocaleString('zh-CN',{minimumFractionDigits:2,maximumFractionDigits:2});
   let query, frames = [], shown = 0, total = 0, chart, series, timer, request, enabled = false;
+  const strategy=mountStrategyControls(()=>reset(enabled));
   function setRanges() {
     const opts=coverage();
     if (!opts) return;
     const params=parameters(), weights=params.get('weights').split(',').map(Number);
-    const trend=el('model').value==='trend_120';
+    const trend=strategy.model==='trend_120';
     const split=!trend && weights[1]>0;
     const first=trend ? opts.trendFirst : split ? opts.first : weights[2]>0 ? opts.overseasFirst : opts.domesticFirst;
     const menu=el('range');
@@ -46,9 +47,7 @@ function setupModelReplay(parameters, coverage) {
     document.getElementById('replay').hidden = !single;
     el('body').hidden = true;
     el('status').textContent = '';
-    el('rule').textContent = el('model').value === 'trend_120'
-      ? '沿用上方本金和费用，按所选回放区间运行。使用起点前行情预热，首次建仓及每月初按120日趋势在股债各半和全债之间切换。'
-      : '沿用上方组合和调仓方式。前一日收盘定目标，次日开盘模拟成交，当日收盘计算盈亏。';
+    strategy.rebalance=parameters().get('rebalance');
     el('start').textContent = '开始回放';
     if (chart) { chart.remove(); chart = series = null; }
     buttons();
@@ -64,6 +63,19 @@ function setupModelReplay(parameters, coverage) {
   function describe(units) {
     return Object.entries(units).map(([s,n])=>names[s]+' '+n+' 份').join('、');
   }
+  function trigger(plan) {
+    if (plan.reason==='installment') return '第 '+plan.batch+' / '+plan.installments+' 批，目标投入总资产的 '+(100*plan.batch/plan.installments).toFixed(1)+'%';
+    if (plan.trendSpread != null) return reasons[plan.reason]+'（窗口首日指数为1，指数减均线 '+Number(plan.trendSpread).toFixed(5)+'）';
+    return reasons[plan.reason];
+  }
+  let markers, trades=[];
+  function paintTrades() {
+    const symbol=el('symbol').value;
+    markers.setMarkers(trades.filter(o=>o.symbol===symbol).map(o=>({
+      time:o.day, position:o.side==='buy'?'belowBar':'aboveBar', shape:o.side==='buy'?'arrowUp':'arrowDown',
+      color:o.side==='buy'?'#185948':'#9d4838', text:o.side==='buy'?'买':'卖'
+    })));
+  }
   function display(step) {
     const row = frames[step-1], previousPlan = frames[step-2]?.nextPlan;
     if (!shown) {
@@ -75,7 +87,14 @@ function setupModelReplay(parameters, coverage) {
       series = chart.addSeries(LightweightCharts.CandlestickSeries,{upColor:'#b34836',downColor:'#19735d',
         wickUpColor:'#b34836',wickDownColor:'#19735d',borderVisible:false,priceFormat:{type:'price',precision:3,minMove:.001}});
     }
-    for (let i=shown;i<step;i++) series.update(candle(frames[i]));
+    if (!shown) {trades=[];markers=LightweightCharts.createSeriesMarkers(series,[]);}
+    let newTrades=false;
+    for (let i=shown;i<step;i++) {
+      const frame=frames[i];
+      series.update(candle(frame));
+      for (const o of frame.orders) if (o.filled>0) {trades.push({...o,day:frame.date});newTrades=true;}
+    }
+    if (newTrades) paintTrades();
     shown = step;
     chart.timeScale().setVisibleLogicalRange({from:Math.max(-1,step-55),to:Math.max(step+2,10)});
     mark();
@@ -84,7 +103,7 @@ function setupModelReplay(parameters, coverage) {
     el('pnl').textContent = '当日盈亏 '+money(row.dayPnl)+' 元 · 累计 '+money(row.pnl)+' 元';
     el('cash').textContent = '可用现金 '+money(row.availableCash)+' 元 · 应收分红 '+money(row.receivables)+' 元 · 距前高 '+(100*row.drawdown).toFixed(2)+'%';
     el('holdings').textContent = describe(row.holdings);
-    el('reason').textContent = previousPlan ? previousPlan.signal+' 收盘决定：'+reasons[previousPlan.reason]+(row.orders.length?'。':'。当前持仓已达目标。') :
+    el('reason').textContent = previousPlan ? previousPlan.signal+' 收盘决定：'+trigger(previousPlan)+(row.orders.length?'。':'。当前持仓已达目标。') :
       (step===1?'首日以现金起步。':'沿用持仓，今天没有待执行调仓。');
     el('orders').replaceChildren(...row.orders.map(o=>{
       const li=document.createElement('li');
@@ -92,7 +111,7 @@ function setupModelReplay(parameters, coverage) {
         (o.price?'，模拟价 '+Number(o.price).toFixed(3)+' 元，佣金 '+money(o.fee)+' 元':'')+'（'+fills[o.reason]+'）。';
       return li;
     }));
-    el('plan').textContent = row.nextPlan ? reasons[row.nextPlan.reason]+'。'+row.nextPlan.execution+' 开盘目标持仓：'+describe(row.nextPlan.target)+'。' :
+    el('plan').textContent = row.nextPlan ? trigger(row.nextPlan)+'。'+row.nextPlan.execution+' 开盘目标持仓：'+describe(row.nextPlan.target)+'。'+Object.entries(row.nextPlan.change).filter(([,n])=>n!==0).map(([s,n])=>names[s]+(n>0?'计划买入':'计划卖出')+Math.abs(n)+' 份').join('、') :
       (shown===total?'已到所选区间末日。':'下一交易日维持现有持仓。');
     el('json').href = endpoint(shown);
     el('start').textContent = '从头回放';
@@ -118,16 +137,16 @@ function setupModelReplay(parameters, coverage) {
     }
   }
   el('exit').onclick = ()=>{reset(true);el('start').focus();};
-  el('model').onchange = ()=>reset(enabled);
   el('range').onchange = ()=>reset(enabled,true);
-  el('symbol').onchange = ()=>{series.setData(frames.slice(0,shown).map(candle));mark();};
+  el('symbol').onchange = ()=>{series.setData(frames.slice(0,shown).map(candle));paintTrades();mark();};
   el('start').onclick = async ()=>{
-    reset(true,true); query = parameters(); query.set('model',el('model').value);
+    reset(true,true); query = parameters(); query.set('model',strategy.model);
+    if (strategy.model==='installments') query.set('installments',strategy.batches);
     if (el('range').value !== 'custom') {
       const [start,end] = el('range').value.split('/');
       query.set('start',start); query.set('end',end);
     }
-    if (el('model').value === 'trend_120') {query.set('weights','1,0,0,1');query.set('rebalance','monthly');}
+    if (strategy.model === 'trend_120') {query.set('weights','1,0,0,1');query.set('rebalance','monthly');}
     if (await load(1)) display(1);
   };
   el('step').onclick = async ()=>{

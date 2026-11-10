@@ -1,4 +1,5 @@
 # Analysis and monitoring layer. Frozen simulation engine remains independently reproducible.
+backtrader==1.9.78.123
 pandas==2.2.3
 numpy==2.3.5
 matplotlib==3.10.8

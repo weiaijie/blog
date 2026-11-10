@@ -18,7 +18,7 @@ class ModelReplayTests(unittest.TestCase):
 
     def test_prefix_with_future_records_removed(self):
         base, calendar, bars, halts = work.inputs()
-        for model in ('allocation','trend_120'):
+        for model in ('allocation','installments','trend_120'):
             params = self.config(model)
             full = replay(params)['frames']
             for count in (1,2,3,8,24,46,len(full)-1):

@@ -27,7 +27,7 @@ def allocation_targets(denominators, equity, marks):
             for s, den in denominators.items()}
 
 
-def simulate(days, bars, events, halts, denominators, *, initial=D(100000), costs=COST, rebalance='monthly'):
+def simulate(days, bars, events, halts, denominators, *, initial=D(100000), costs=COST, rebalance='monthly', schedule=None):
     """Denominators may be integers or exact Fractions for user-defined allocations."""
     if rebalance not in ('monthly', 'hold'):
         raise ValueError('Unknown rebalance frequency')
@@ -36,9 +36,11 @@ def simulate(days, bars, events, halts, denominators, *, initial=D(100000), cost
     daily, orders = [], []
     for i, day in enumerate(days):
         ledger.open_session(day)
-        if i == 1 or (rebalance == 'monthly' and i > 1 and day.month != days[i-1].month):
+        due = i == 1 or (rebalance == 'monthly' and i > 1 and day.month != days[i-1].month)
+        if (day in schedule if schedule is not None else due):
             prev = days[i-1]
-            targets = allocation_targets(denominators, daily[-1]['equity'], {s: bars[s][prev].close for s in denominators})
+            planned_mix = denominators if schedule is None else schedule[day]['denominators']
+            targets = allocation_targets(planned_mix, daily[-1]['equity'], {s: bars[s][prev].close for s in denominators})
             for side in ('sell', 'buy'):
                 for s in denominators:
                     delta = targets[s] - ledger.holdings.get(s, 0)

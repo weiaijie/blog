@@ -1,3 +1,2 @@
-# Optional isolated execution comparator; never required by the frozen engine.
+# Historical install entry point for the execution comparator.
 -r requirements-lock.txt
-backtrader==1.9.78.123

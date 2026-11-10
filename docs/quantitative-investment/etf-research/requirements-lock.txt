@@ -1,4 +1,5 @@
 # Validated dependency closure for the current Python environment.
+backtrader==1.9.78.123
 contourpy==1.3.3
 cycler==0.12.1
 fonttools==4.61.1

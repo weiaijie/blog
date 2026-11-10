@@ -25,6 +25,9 @@ ASSETS = {'/': ('market.html','text/html'), '/market.html': ('market.html','text
           '/vendor-charts/lightweight-charts-5.0.9.js': ('vendor-charts/lightweight-charts-5.0.9.js','text/javascript'),
           '/backtest.html': ('backtest.html','text/html'), '/backtest.css': ('backtest.css','text/css'),
           '/backtest.js': ('backtest.js','text/javascript'), '/backtest-data.json': ('backtest-data.json','application/json'),
+          '/vendor-vue/vue-3.5.22.runtime.global.prod.js': ('vendor-vue/vue-3.5.22.runtime.global.prod.js','text/javascript'),
+          '/vendor-vue/LICENSE': ('vendor-vue/LICENSE','text/plain'),
+          '/strategy-controls.js': ('strategy-controls.js','text/javascript'),
           '/model-replay.js': ('model-replay.js','text/javascript'),
           '/interactive.js': ('interactive.js','text/javascript'), '/interactive.css': ('interactive.css','text/css'),
           '/overlay.js': ('overlay.js','text/javascript'),
@@ -126,10 +129,10 @@ class Handler(BaseHTTPRequestHandler):
             try:
                 calculate = CALCULATIONS[path]
                 keys = (*interactive.DEFAULTS, 'model', 'step') if calculate is model_replay.replay else interactive.DEFAULTS
-                body = interactive.encode(calculate(interactive.request_params(url.query, keys)))
+                body = interactive.encode(calculate(interactive.request_params(url.query, keys, ('installments',) if calculate is model_replay.replay else ())))
             except interactive.InputError as exc:
                 status, body = 400, interactive.encode({'error': str(exc)})
-            except (OSError, ValueError, KeyError, IndexError) as exc:
+            except (OSError, ValueError, KeyError, IndexError, ImportError) as exc:
                 self.log_error('Historical replay unavailable: %s', exc)
                 status, body = 503, interactive.encode({'error': '已核验的历史数据暂时不可用。'})
         elif path=='/market-data.json':
