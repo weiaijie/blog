@@ -27,10 +27,14 @@ def measure_entry(ledger, endpoints, initial):
     for years, offset in endpoints.items():
         end = ledger[offset]['date']
         equity = ledger[offset]['equity']
-        ratio = equity / initial
-        annual = ratio ** (D('365.25') / (end-start).days) - 1
-        yield dict(years=years, start=start, end=end, ending_equity=equity,
-                   pnl=equity-initial, total_return=ratio-1, annualized_return=annual)
+        yield measure_outcome(start, end, years, equity, initial)
+
+
+def measure_outcome(start, end, years, equity, initial):
+    ratio = equity / initial
+    annual = ratio ** (D('365.25') / (end-start).days) - 1
+    return dict(years=years, start=start, end=end, ending_equity=equity,
+                pnl=equity-initial, total_return=ratio-1, annualized_return=annual)
 
 
 def outcomes():

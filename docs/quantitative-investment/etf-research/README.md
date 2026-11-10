@@ -2,6 +2,8 @@
 
 [2019～2021 年跨境历史准入](reports/2026-11-10-earlier-history/README.md)新增 730 个交易日。恒生配比可从 2019-01-02 连续运行；含标普的组合保留拆分前后两段独立账户。
 
+[三种投资方式逐日起点与同区间成交对照](reports/2026-11-10-method-windows/README.md)提供沪深300与国债相同起点的 1 年、2 年满期窗口统计及交易原因。
+
 [投资方式与买卖规则](reports/2026-11-10-investment-methods/README.md)包括一次建仓、按月分批和 120 日趋势的买卖条件、图上成交标记和 Agent 参数。
 
 [逐日模型回放](reports/2026-11-10-model-replay/README.md)已接入工作台。可按日查看建仓与月度信号、开盘模拟订单、当日和累计盈亏，Agent 可按相同步数读取。
@@ -85,6 +87,6 @@ python scripts/check_health.py
 python scripts/reproduce.py
 ```
 
-可选框架对照另装requirements-backtrader.txt。历史报告和原始快照不覆盖；最新静态清单见reports/2026-11-10-investment-methods/manifest.json，动态状态另对照封存记录。旧阶段清单应在相应Git提交验证。历史建设记录见[历史计划](docs/history/PROJECT_PLAN-before-closure-20261106.md)。
+可选框架对照另装requirements-backtrader.txt。历史报告和原始快照不覆盖；最新静态清单见reports/2026-11-10-method-windows/manifest.json，动态状态另对照封存记录。旧阶段清单应在相应Git提交验证。历史建设记录见[历史计划](docs/history/PROJECT_PLAN-before-closure-20261106.md)。
 
 最新研究证据审计见[报告](reports/2026-11-06-research-audit/PROGRESS.md)与[离线页面](site/research-audit.html)：57,726个一年/两年连续窗口、255个现金新账户；历史50/50两年窗口中位年化约3.71%，不支持稳定达标结论。完整中期股票339项及债券跨市场代码归并已核对，当前实时全持仓仍未知。新增复现：`python scripts/reproduce_research_audit.py`。
