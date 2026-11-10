@@ -1,0 +1,5015 @@
+{
+  "schema_version": 1,
+  "mode": "report_only",
+  "changes_trades": false,
+  "benchmark_method": "ETF gross total-return proxy from unadjusted close plus official ex-date cash dividend; fractional reinvestment, no fees. Not CSI300 or official bond index returns.",
+  "beta_method": "Last 252 paired daily returns, sample covariance / benchmark variance; insufficient forward samples remain null.",
+  "holdings_method": "Q3 disclosed codes grouped by verified issue; lower bounds at disclosure date applied to account ETF value.",
+  "stress_method": "Fixed hypothetical one-step ETF price shocks; no probability, liquidation, rebalancing, liquidity or convexity model. Chosen before computing outputs, not optimized.",
+  "history": [
+    {
+      "run": "cash_low_100000_d1",
+      "as_of": "2026-10-30",
+      "beta": {
+        "510300": {
+          "observed_returns": 1966,
+          "window_returns": 252,
+          "required_returns": 252,
+          "beta": 0.0,
+          "correlation": null,
+          "status": "computed"
+        },
+        "511010": {
+          "observed_returns": 1966,
+          "window_returns": 252,
+          "required_returns": 252,
+          "beta": 0.0,
+          "correlation": null,
+          "status": "computed"
+        }
+      }
+    },
+    {
+      "run": "cash_base_100000_d1",
+      "as_of": "2026-10-30",
+      "beta": {
+        "510300": {
+          "observed_returns": 1966,
+          "window_returns": 252,
+          "required_returns": 252,
+          "beta": 0.0,
+          "correlation": null,
+          "status": "computed"
+        },
+        "511010": {
+          "observed_returns": 1966,
+          "window_returns": 252,
+          "required_returns": 252,
+          "beta": 0.0,
+          "correlation": null,
+          "status": "computed"
+        }
+      }
+    },
+    {
+      "run": "cash_high_100000_d1",
+      "as_of": "2026-10-30",
+      "beta": {
+        "510300": {
+          "observed_returns": 1966,
+          "window_returns": 252,
+          "required_returns": 252,
+          "beta": 0.0,
+          "correlation": null,
+          "status": "computed"
+        },
+        "511010": {
+          "observed_returns": 1966,
+          "window_returns": 252,
+          "required_returns": 252,
+          "beta": 0.0,
+          "correlation": null,
+          "status": "computed"
+        }
+      }
+    },
+    {
+      "run": "equity_hold_low_100000_d1",
+      "as_of": "2026-10-30",
+      "beta": {
+        "510300": {
+          "observed_returns": 1966,
+          "window_returns": 252,
+          "required_returns": 252,
+          "beta": 0.8842255505447402,
+          "correlation": 0.9999488366202338,
+          "status": "computed"
+        },
+        "511010": {
+          "observed_returns": 1966,
+          "window_returns": 252,
+          "required_returns": 252,
+          "beta": -0.6870880741541594,
+          "correlation": -0.03366080600626214,
+          "status": "computed"
+        }
+      }
+    },
+    {
+      "run": "equity_hold_base_100000_d1",
+      "as_of": "2026-10-30",
+      "beta": {
+        "510300": {
+          "observed_returns": 1966,
+          "window_returns": 252,
+          "required_returns": 252,
+          "beta": 0.8845006329925529,
+          "correlation": 0.9999488768327361,
+          "status": "computed"
+        },
+        "511010": {
+          "observed_returns": 1966,
+          "window_returns": 252,
+          "required_returns": 252,
+          "beta": -0.6873137138128123,
+          "correlation": -0.0336613895122018,
+          "status": "computed"
+        }
+      }
+    },
+    {
+      "run": "equity_hold_high_100000_d1",
+      "as_of": "2026-10-30",
+      "beta": {
+        "510300": {
+          "observed_returns": 1966,
+          "window_returns": 252,
+          "required_returns": 252,
+          "beta": 0.885215516043218,
+          "correlation": 0.9999489806722537,
+          "status": "computed"
+        },
+        "511010": {
+          "observed_returns": 1966,
+          "window_returns": 252,
+          "required_returns": 252,
+          "beta": -0.6879001376950779,
+          "correlation": -0.03366290580285088,
+          "status": "computed"
+        }
+      }
+    },
+    {
+      "run": "bond_hold_low_100000_d1",
+      "as_of": "2026-10-30",
+      "beta": {
+        "510300": {
+          "observed_returns": 1966,
+          "window_returns": 252,
+          "required_returns": 252,
+          "beta": -0.0012905741350802767,
+          "correlation": -0.03280579455342752,
+          "status": "computed"
+        },
+        "511010": {
+          "observed_returns": 1966,
+          "window_returns": 252,
+          "required_returns": 252,
+          "beta": 0.9080901435796015,
+          "correlation": 0.9999860619143794,
+          "status": "computed"
+        }
+      }
+    },
+    {
+      "run": "bond_hold_base_100000_d1",
+      "as_of": "2026-10-30",
+      "beta": {
+        "510300": {
+          "observed_returns": 1966,
+          "window_returns": 252,
+          "required_returns": 252,
+          "beta": -0.0012911462580715775,
+          "correlation": -0.03280600916242399,
+          "status": "computed"
+        },
+        "511010": {
+          "observed_returns": 1966,
+          "window_returns": 252,
+          "required_returns": 252,
+          "beta": 0.9084867509515805,
+          "correlation": 0.999986046587652,
+          "status": "computed"
+        }
+      }
+    },
+    {
+      "run": "bond_hold_high_100000_d1",
+      "as_of": "2026-10-30",
+      "beta": {
+        "510300": {
+          "observed_returns": 1966,
+          "window_returns": 252,
+          "required_returns": 252,
+          "beta": -0.0012923005043594304,
+          "correlation": -0.03280644212123344,
+          "status": "computed"
+        },
+        "511010": {
+          "observed_returns": 1966,
+          "window_returns": 252,
+          "required_returns": 252,
+          "beta": 0.9092868825424533,
+          "correlation": 0.9999860156380772,
+          "status": "computed"
+        }
+      }
+    },
+    {
+      "run": "monthly_20_80_low_100000_d1",
+      "as_of": "2026-10-30",
+      "beta": {
+        "510300": {
+          "observed_returns": 1966,
+          "window_returns": 252,
+          "required_returns": 252,
+          "beta": 0.19479291937743368,
+          "correlation": 0.9866727046551035,
+          "status": "computed"
+        },
+        "511010": {
+          "observed_returns": 1966,
+          "window_returns": 252,
+          "required_returns": 252,
+          "beta": 0.582788304920703,
+          "correlation": 0.12788162806015418,
+          "status": "computed"
+        }
+      }
+    },
+    {
+      "run": "monthly_20_80_base_100000_d1",
+      "as_of": "2026-10-30",
+      "beta": {
+        "510300": {
+          "observed_returns": 1966,
+          "window_returns": 252,
+          "required_returns": 252,
+          "beta": 0.194880053095468,
+          "correlation": 0.9866649660868952,
+          "status": "computed"
+        },
+        "511010": {
+          "observed_returns": 1966,
+          "window_returns": 252,
+          "required_returns": 252,
+          "beta": 0.5832627030088519,
+          "correlation": 0.12792749790773617,
+          "status": "computed"
+        }
+      }
+    },
+    {
+      "run": "monthly_20_80_high_100000_d1",
+      "as_of": "2026-10-30",
+      "beta": {
+        "510300": {
+          "observed_returns": 1966,
+          "window_returns": 252,
+          "required_returns": 252,
+          "beta": 0.1948209915319163,
+          "correlation": 0.9865567749288415,
+          "status": "computed"
+        },
+        "511010": {
+          "observed_returns": 1966,
+          "window_returns": 252,
+          "required_returns": 252,
+          "beta": 0.5865044188627122,
+          "correlation": 0.12866339404709487,
+          "status": "computed"
+        }
+      }
+    },
+    {
+      "run": "monthly_50_50_low_100000_d1",
+      "as_of": "2026-10-30",
+      "beta": {
+        "510300": {
+          "observed_returns": 1966,
+          "window_returns": 252,
+          "required_returns": 252,
+          "beta": 0.4936285582499249,
+          "correlation": 0.9989766447230484,
+          "status": "computed"
+        },
+        "511010": {
+          "observed_returns": 1966,
+          "window_returns": 252,
+          "required_returns": 252,
+          "beta": 0.10441439037016957,
+          "correlation": 0.00915403978899066,
+          "status": "computed"
+        }
+      }
+    },
+    {
+      "run": "monthly_50_50_base_100000_d1",
+      "as_of": "2026-10-30",
+      "beta": {
+        "510300": {
+          "observed_returns": 1966,
+          "window_returns": 252,
+          "required_returns": 252,
+          "beta": 0.4943109799154046,
+          "correlation": 0.9989741497853154,
+          "status": "computed"
+        },
+        "511010": {
+          "observed_returns": 1966,
+          "window_returns": 252,
+          "required_returns": 252,
+          "beta": 0.10499159071537284,
+          "correlation": 0.009191912671314542,
+          "status": "computed"
+        }
+      }
+    },
+    {
+      "run": "monthly_50_50_high_100000_d1",
+      "as_of": "2026-10-30",
+      "beta": {
+        "510300": {
+          "observed_returns": 1966,
+          "window_returns": 252,
+          "required_returns": 252,
+          "beta": 0.49401070010585674,
+          "correlation": 0.9989995622841815,
+          "status": "computed"
+        },
+        "511010": {
+          "observed_returns": 1966,
+          "window_returns": 252,
+          "required_returns": 252,
+          "beta": 0.10402228933025749,
+          "correlation": 0.009112818716204752,
+          "status": "computed"
+        }
+      }
+    },
+    {
+      "run": "trend_120_low_100000_d1",
+      "as_of": "2026-10-30",
+      "beta": {
+        "510300": {
+          "observed_returns": 1966,
+          "window_returns": 252,
+          "required_returns": 252,
+          "beta": 0.3732186926601525,
+          "correlation": 0.8706225832183838,
+          "status": "computed"
+        },
+        "511010": {
+          "observed_returns": 1966,
+          "window_returns": 252,
+          "required_returns": 252,
+          "beta": 0.23478288797431984,
+          "correlation": 0.023726318847669684,
+          "status": "computed"
+        }
+      }
+    },
+    {
+      "run": "trend_120_base_100000_d1",
+      "as_of": "2026-10-30",
+      "beta": {
+        "510300": {
+          "observed_returns": 1966,
+          "window_returns": 252,
+          "required_returns": 252,
+          "beta": 0.37355797057469864,
+          "correlation": 0.8700421729584368,
+          "status": "computed"
+        },
+        "511010": {
+          "observed_returns": 1966,
+          "window_returns": 252,
+          "required_returns": 252,
+          "beta": 0.23140870989320408,
+          "correlation": 0.023348521194837837,
+          "status": "computed"
+        }
+      }
+    },
+    {
+      "run": "trend_120_high_100000_d1",
+      "as_of": "2026-10-30",
+      "beta": {
+        "510300": {
+          "observed_returns": 1966,
+          "window_returns": 252,
+          "required_returns": 252,
+          "beta": 0.37298486883026566,
+          "correlation": 0.8681463595789279,
+          "status": "computed"
+        },
+        "511010": {
+          "observed_returns": 1966,
+          "window_returns": 252,
+          "required_returns": 252,
+          "beta": 0.28212330223320375,
+          "correlation": 0.028447104902467272,
+          "status": "computed"
+        }
+      }
+    }
+  ],
+  "forward": [
+    {
+      "run": "cash_low",
+      "as_of": "2026-11-09",
+      "equity": "100000",
+      "beta": {
+        "510300": {
+          "observed_returns": 2,
+          "window_returns": 2,
+          "required_returns": 252,
+          "beta": null,
+          "correlation": null,
+          "status": "insufficient_sample"
+        },
+        "511010": {
+          "observed_returns": 2,
+          "window_returns": 2,
+          "required_returns": 252,
+          "beta": null,
+          "correlation": null,
+          "status": "insufficient_sample"
+        }
+      },
+      "stress": [
+        {
+          "name": "股票ETF下跌10%",
+          "pnl": "0.0000",
+          "return_fraction": "0.0000",
+          "ending_equity": "100000.0000"
+        },
+        {
+          "name": "股票ETF下跌20%",
+          "pnl": "0.0000",
+          "return_fraction": "0.0000",
+          "ending_equity": "100000.0000"
+        },
+        {
+          "name": "债券ETF下跌3%",
+          "pnl": "0.00000",
+          "return_fraction": "0.00000",
+          "ending_equity": "100000.00000"
+        },
+        {
+          "name": "股债同时下跌20%和5%",
+          "pnl": "0.00000",
+          "return_fraction": "0.00000",
+          "ending_equity": "100000.00000"
+        }
+      ],
+      "lookthrough": {
+        "510300": {
+          "etf_weight": "0.000",
+          "disclosure_as_of": "2026-09-30",
+          "disclosure_age_days": 40,
+          "exact_current_holdings": null,
+          "listed_positions_proxy": [
+            {
+              "code": "300308",
+              "name": "中际旭创",
+              "portfolio_fraction": "0E-32"
+            },
+            {
+              "code": "600519",
+              "name": "贵州茅台",
+              "portfolio_fraction": "0E-32"
+            },
+            {
+              "code": "300750",
+              "name": "宁德时代",
+              "portfolio_fraction": "0E-32"
+            },
+            {
+              "code": "601318",
+              "name": "中国平安",
+              "portfolio_fraction": "0E-32"
+            },
+            {
+              "code": "300502",
+              "name": "新易盛",
+              "portfolio_fraction": "0E-32"
+            },
+            {
+              "code": "600036",
+              "name": "招商银行",
+              "portfolio_fraction": "0E-32"
+            },
+            {
+              "code": "601899",
+              "name": "紫金矿业",
+              "portfolio_fraction": "0E-32"
+            },
+            {
+              "code": "603259",
+              "name": "药明康德",
+              "portfolio_fraction": "0E-32"
+            },
+            {
+              "code": "000333",
+              "name": "美的集团",
+              "portfolio_fraction": "0E-32"
+            },
+            {
+              "code": "600900",
+              "name": "长江电力",
+              "portfolio_fraction": "0E-32"
+            }
+          ],
+          "unlisted_security_proxy_fraction": "0E-31",
+          "sector_proxy": {
+            "A": {
+              "name": "农、林、牧、渔业",
+              "portfolio_fraction": "0E-33"
+            },
+            "B": {
+              "name": "采矿业",
+              "portfolio_fraction": "0E-32"
+            },
+            "C": {
+              "name": "制造业",
+              "portfolio_fraction": "0E-31"
+            },
+            "D": {
+              "name": "电力、热力、燃气及水生产和供应业",
+              "portfolio_fraction": "0E-32"
+            },
+            "E": {
+              "name": "建筑业",
+              "portfolio_fraction": "0E-32"
+            },
+            "F": {
+              "name": "批发和零售业",
+              "portfolio_fraction": "0E-33"
+            },
+            "G": {
+              "name": "交通运输、仓储和邮政业",
+              "portfolio_fraction": "0E-32"
+            },
+            "I": {
+              "name": "信息传输、软件和信息技术服务业",
+              "portfolio_fraction": "0E-32"
+            },
+            "J": {
+              "name": "金融业",
+              "portfolio_fraction": "0E-31"
+            },
+            "K": {
+              "name": "房地产业",
+              "portfolio_fraction": "0E-33"
+            },
+            "L": {
+              "name": "租赁和商务服务业",
+              "portfolio_fraction": "0E-33"
+            },
+            "M": {
+              "name": "科学研究和技术服务业",
+              "portfolio_fraction": "0E-32"
+            },
+            "Q": {
+              "name": "卫生和社会工作",
+              "portfolio_fraction": "0E-33"
+            },
+            "R": {
+              "name": "文化、体育和娱乐业",
+              "portfolio_fraction": "0E-34"
+            }
+          }
+        },
+        "511010": {
+          "etf_weight": "0.000",
+          "disclosure_as_of": "2026-09-30",
+          "disclosure_age_days": 40,
+          "exact_current_holdings": null,
+          "listed_positions_proxy": [
+            {
+              "code": "019834",
+              "name": "26 国债 08",
+              "portfolio_fraction": "0E-31"
+            },
+            {
+              "code": "019848",
+              "name": "26 国债 15",
+              "portfolio_fraction": "0E-31"
+            },
+            {
+              "code": "260015",
+              "name": "26 附息国债 15",
+              "portfolio_fraction": "0E-31"
+            },
+            {
+              "code": "260008",
+              "name": "26 附息国债 08",
+              "portfolio_fraction": "0E-31"
+            },
+            {
+              "code": "019829",
+              "name": "26 国债 03",
+              "portfolio_fraction": "0E-31"
+            }
+          ],
+          "unlisted_security_proxy_fraction": "0E-31",
+          "sector_proxy": {},
+          "issuer_proxy": {
+            "name": "中国中央政府（国家债券）",
+            "portfolio_fraction": "0E-31"
+          },
+          "disclosed_issues": [
+            {
+              "issue": "2026年记账式附息（八期）国债",
+              "codes": [
+                "019834",
+                "260008"
+              ],
+              "fair_value": "2807364278.03",
+              "fund_fraction": "0.3832087672308376604057446670",
+              "portfolio_amount": "0E-31",
+              "portfolio_fraction": "0E-31"
+            },
+            {
+              "issue": "2026年记账式附息（十五期）国债",
+              "codes": [
+                "019848",
+                "260015"
+              ],
+              "fair_value": "2800129237.16",
+              "fund_fraction": "0.3822211750204662354862103732",
+              "portfolio_amount": "0E-31",
+              "portfolio_fraction": "0E-31"
+            },
+            {
+              "issue": "2026年记账式附息（三期）国债",
+              "codes": [
+                "019829"
+              ],
+              "fair_value": "775553308.03",
+              "fund_fraction": "0.1058640054010114073245861420",
+              "portfolio_amount": "0E-31",
+              "portfolio_fraction": "0E-31"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "run": "cash_base",
+      "as_of": "2026-11-09",
+      "equity": "100000",
+      "beta": {
+        "510300": {
+          "observed_returns": 2,
+          "window_returns": 2,
+          "required_returns": 252,
+          "beta": null,
+          "correlation": null,
+          "status": "insufficient_sample"
+        },
+        "511010": {
+          "observed_returns": 2,
+          "window_returns": 2,
+          "required_returns": 252,
+          "beta": null,
+          "correlation": null,
+          "status": "insufficient_sample"
+        }
+      },
+      "stress": [
+        {
+          "name": "股票ETF下跌10%",
+          "pnl": "0.0000",
+          "return_fraction": "0.0000",
+          "ending_equity": "100000.0000"
+        },
+        {
+          "name": "股票ETF下跌20%",
+          "pnl": "0.0000",
+          "return_fraction": "0.0000",
+          "ending_equity": "100000.0000"
+        },
+        {
+          "name": "债券ETF下跌3%",
+          "pnl": "0.00000",
+          "return_fraction": "0.00000",
+          "ending_equity": "100000.00000"
+        },
+        {
+          "name": "股债同时下跌20%和5%",
+          "pnl": "0.00000",
+          "return_fraction": "0.00000",
+          "ending_equity": "100000.00000"
+        }
+      ],
+      "lookthrough": {
+        "510300": {
+          "etf_weight": "0.000",
+          "disclosure_as_of": "2026-09-30",
+          "disclosure_age_days": 40,
+          "exact_current_holdings": null,
+          "listed_positions_proxy": [
+            {
+              "code": "300308",
+              "name": "中际旭创",
+              "portfolio_fraction": "0E-32"
+            },
+            {
+              "code": "600519",
+              "name": "贵州茅台",
+              "portfolio_fraction": "0E-32"
+            },
+            {
+              "code": "300750",
+              "name": "宁德时代",
+              "portfolio_fraction": "0E-32"
+            },
+            {
+              "code": "601318",
+              "name": "中国平安",
+              "portfolio_fraction": "0E-32"
+            },
+            {
+              "code": "300502",
+              "name": "新易盛",
+              "portfolio_fraction": "0E-32"
+            },
+            {
+              "code": "600036",
+              "name": "招商银行",
+              "portfolio_fraction": "0E-32"
+            },
+            {
+              "code": "601899",
+              "name": "紫金矿业",
+              "portfolio_fraction": "0E-32"
+            },
+            {
+              "code": "603259",
+              "name": "药明康德",
+              "portfolio_fraction": "0E-32"
+            },
+            {
+              "code": "000333",
+              "name": "美的集团",
+              "portfolio_fraction": "0E-32"
+            },
+            {
+              "code": "600900",
+              "name": "长江电力",
+              "portfolio_fraction": "0E-32"
+            }
+          ],
+          "unlisted_security_proxy_fraction": "0E-31",
+          "sector_proxy": {
+            "A": {
+              "name": "农、林、牧、渔业",
+              "portfolio_fraction": "0E-33"
+            },
+            "B": {
+              "name": "采矿业",
+              "portfolio_fraction": "0E-32"
+            },
+            "C": {
+              "name": "制造业",
+              "portfolio_fraction": "0E-31"
+            },
+            "D": {
+              "name": "电力、热力、燃气及水生产和供应业",
+              "portfolio_fraction": "0E-32"
+            },
+            "E": {
+              "name": "建筑业",
+              "portfolio_fraction": "0E-32"
+            },
+            "F": {
+              "name": "批发和零售业",
+              "portfolio_fraction": "0E-33"
+            },
+            "G": {
+              "name": "交通运输、仓储和邮政业",
+              "portfolio_fraction": "0E-32"
+            },
+            "I": {
+              "name": "信息传输、软件和信息技术服务业",
+              "portfolio_fraction": "0E-32"
+            },
+            "J": {
+              "name": "金融业",
+              "portfolio_fraction": "0E-31"
+            },
+            "K": {
+              "name": "房地产业",
+              "portfolio_fraction": "0E-33"
+            },
+            "L": {
+              "name": "租赁和商务服务业",
+              "portfolio_fraction": "0E-33"
+            },
+            "M": {
+              "name": "科学研究和技术服务业",
+              "portfolio_fraction": "0E-32"
+            },
+            "Q": {
+              "name": "卫生和社会工作",
+              "portfolio_fraction": "0E-33"
+            },
+            "R": {
+              "name": "文化、体育和娱乐业",
+              "portfolio_fraction": "0E-34"
+            }
+          }
+        },
+        "511010": {
+          "etf_weight": "0.000",
+          "disclosure_as_of": "2026-09-30",
+          "disclosure_age_days": 40,
+          "exact_current_holdings": null,
+          "listed_positions_proxy": [
+            {
+              "code": "019834",
+              "name": "26 国债 08",
+              "portfolio_fraction": "0E-31"
+            },
+            {
+              "code": "019848",
+              "name": "26 国债 15",
+              "portfolio_fraction": "0E-31"
+            },
+            {
+              "code": "260015",
+              "name": "26 附息国债 15",
+              "portfolio_fraction": "0E-31"
+            },
+            {
+              "code": "260008",
+              "name": "26 附息国债 08",
+              "portfolio_fraction": "0E-31"
+            },
+            {
+              "code": "019829",
+              "name": "26 国债 03",
+              "portfolio_fraction": "0E-31"
+            }
+          ],
+          "unlisted_security_proxy_fraction": "0E-31",
+          "sector_proxy": {},
+          "issuer_proxy": {
+            "name": "中国中央政府（国家债券）",
+            "portfolio_fraction": "0E-31"
+          },
+          "disclosed_issues": [
+            {
+              "issue": "2026年记账式附息（八期）国债",
+              "codes": [
+                "019834",
+                "260008"
+              ],
+              "fair_value": "2807364278.03",
+              "fund_fraction": "0.3832087672308376604057446670",
+              "portfolio_amount": "0E-31",
+              "portfolio_fraction": "0E-31"
+            },
+            {
+              "issue": "2026年记账式附息（十五期）国债",
+              "codes": [
+                "019848",
+                "260015"
+              ],
+              "fair_value": "2800129237.16",
+              "fund_fraction": "0.3822211750204662354862103732",
+              "portfolio_amount": "0E-31",
+              "portfolio_fraction": "0E-31"
+            },
+            {
+              "issue": "2026年记账式附息（三期）国债",
+              "codes": [
+                "019829"
+              ],
+              "fair_value": "775553308.03",
+              "fund_fraction": "0.1058640054010114073245861420",
+              "portfolio_amount": "0E-31",
+              "portfolio_fraction": "0E-31"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "run": "cash_high",
+      "as_of": "2026-11-09",
+      "equity": "100000",
+      "beta": {
+        "510300": {
+          "observed_returns": 2,
+          "window_returns": 2,
+          "required_returns": 252,
+          "beta": null,
+          "correlation": null,
+          "status": "insufficient_sample"
+        },
+        "511010": {
+          "observed_returns": 2,
+          "window_returns": 2,
+          "required_returns": 252,
+          "beta": null,
+          "correlation": null,
+          "status": "insufficient_sample"
+        }
+      },
+      "stress": [
+        {
+          "name": "股票ETF下跌10%",
+          "pnl": "0.0000",
+          "return_fraction": "0.0000",
+          "ending_equity": "100000.0000"
+        },
+        {
+          "name": "股票ETF下跌20%",
+          "pnl": "0.0000",
+          "return_fraction": "0.0000",
+          "ending_equity": "100000.0000"
+        },
+        {
+          "name": "债券ETF下跌3%",
+          "pnl": "0.00000",
+          "return_fraction": "0.00000",
+          "ending_equity": "100000.00000"
+        },
+        {
+          "name": "股债同时下跌20%和5%",
+          "pnl": "0.00000",
+          "return_fraction": "0.00000",
+          "ending_equity": "100000.00000"
+        }
+      ],
+      "lookthrough": {
+        "510300": {
+          "etf_weight": "0.000",
+          "disclosure_as_of": "2026-09-30",
+          "disclosure_age_days": 40,
+          "exact_current_holdings": null,
+          "listed_positions_proxy": [
+            {
+              "code": "300308",
+              "name": "中际旭创",
+              "portfolio_fraction": "0E-32"
+            },
+            {
+              "code": "600519",
+              "name": "贵州茅台",
+              "portfolio_fraction": "0E-32"
+            },
+            {
+              "code": "300750",
+              "name": "宁德时代",
+              "portfolio_fraction": "0E-32"
+            },
+            {
+              "code": "601318",
+              "name": "中国平安",
+              "portfolio_fraction": "0E-32"
+            },
+            {
+              "code": "300502",
+              "name": "新易盛",
+              "portfolio_fraction": "0E-32"
+            },
+            {
+              "code": "600036",
+              "name": "招商银行",
+              "portfolio_fraction": "0E-32"
+            },
+            {
+              "code": "601899",
+              "name": "紫金矿业",
+              "portfolio_fraction": "0E-32"
+            },
+            {
+              "code": "603259",
+              "name": "药明康德",
+              "portfolio_fraction": "0E-32"
+            },
+            {
+              "code": "000333",
+              "name": "美的集团",
+              "portfolio_fraction": "0E-32"
+            },
+            {
+              "code": "600900",
+              "name": "长江电力",
+              "portfolio_fraction": "0E-32"
+            }
+          ],
+          "unlisted_security_proxy_fraction": "0E-31",
+          "sector_proxy": {
+            "A": {
+              "name": "农、林、牧、渔业",
+              "portfolio_fraction": "0E-33"
+            },
+            "B": {
+              "name": "采矿业",
+              "portfolio_fraction": "0E-32"
+            },
+            "C": {
+              "name": "制造业",
+              "portfolio_fraction": "0E-31"
+            },
+            "D": {
+              "name": "电力、热力、燃气及水生产和供应业",
+              "portfolio_fraction": "0E-32"
+            },
+            "E": {
+              "name": "建筑业",
+              "portfolio_fraction": "0E-32"
+            },
+            "F": {
+              "name": "批发和零售业",
+              "portfolio_fraction": "0E-33"
+            },
+            "G": {
+              "name": "交通运输、仓储和邮政业",
+              "portfolio_fraction": "0E-32"
+            },
+            "I": {
+              "name": "信息传输、软件和信息技术服务业",
+              "portfolio_fraction": "0E-32"
+            },
+            "J": {
+              "name": "金融业",
+              "portfolio_fraction": "0E-31"
+            },
+            "K": {
+              "name": "房地产业",
+              "portfolio_fraction": "0E-33"
+            },
+            "L": {
+              "name": "租赁和商务服务业",
+              "portfolio_fraction": "0E-33"
+            },
+            "M": {
+              "name": "科学研究和技术服务业",
+              "portfolio_fraction": "0E-32"
+            },
+            "Q": {
+              "name": "卫生和社会工作",
+              "portfolio_fraction": "0E-33"
+            },
+            "R": {
+              "name": "文化、体育和娱乐业",
+              "portfolio_fraction": "0E-34"
+            }
+          }
+        },
+        "511010": {
+          "etf_weight": "0.000",
+          "disclosure_as_of": "2026-09-30",
+          "disclosure_age_days": 40,
+          "exact_current_holdings": null,
+          "listed_positions_proxy": [
+            {
+              "code": "019834",
+              "name": "26 国债 08",
+              "portfolio_fraction": "0E-31"
+            },
+            {
+              "code": "019848",
+              "name": "26 国债 15",
+              "portfolio_fraction": "0E-31"
+            },
+            {
+              "code": "260015",
+              "name": "26 附息国债 15",
+              "portfolio_fraction": "0E-31"
+            },
+            {
+              "code": "260008",
+              "name": "26 附息国债 08",
+              "portfolio_fraction": "0E-31"
+            },
+            {
+              "code": "019829",
+              "name": "26 国债 03",
+              "portfolio_fraction": "0E-31"
+            }
+          ],
+          "unlisted_security_proxy_fraction": "0E-31",
+          "sector_proxy": {},
+          "issuer_proxy": {
+            "name": "中国中央政府（国家债券）",
+            "portfolio_fraction": "0E-31"
+          },
+          "disclosed_issues": [
+            {
+              "issue": "2026年记账式附息（八期）国债",
+              "codes": [
+                "019834",
+                "260008"
+              ],
+              "fair_value": "2807364278.03",
+              "fund_fraction": "0.3832087672308376604057446670",
+              "portfolio_amount": "0E-31",
+              "portfolio_fraction": "0E-31"
+            },
+            {
+              "issue": "2026年记账式附息（十五期）国债",
+              "codes": [
+                "019848",
+                "260015"
+              ],
+              "fair_value": "2800129237.16",
+              "fund_fraction": "0.3822211750204662354862103732",
+              "portfolio_amount": "0E-31",
+              "portfolio_fraction": "0E-31"
+            },
+            {
+              "issue": "2026年记账式附息（三期）国债",
+              "codes": [
+                "019829"
+              ],
+              "fair_value": "775553308.03",
+              "fund_fraction": "0.1058640054010114073245861420",
+              "portfolio_amount": "0E-31",
+              "portfolio_fraction": "0E-31"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "run": "equity_hold_low",
+      "as_of": "2026-11-09",
+      "equity": "100371.010",
+      "beta": {
+        "510300": {
+          "observed_returns": 2,
+          "window_returns": 2,
+          "required_returns": 252,
+          "beta": null,
+          "correlation": null,
+          "status": "insufficient_sample"
+        },
+        "511010": {
+          "observed_returns": 2,
+          "window_returns": 2,
+          "required_returns": 252,
+          "beta": null,
+          "correlation": null,
+          "status": "insufficient_sample"
+        }
+      },
+      "stress": [
+        {
+          "name": "股票ETF下跌10%",
+          "pnl": "-9829.4000",
+          "return_fraction": "-0.09793066743076511833446729290",
+          "ending_equity": "90541.6100"
+        },
+        {
+          "name": "股票ETF下跌20%",
+          "pnl": "-19658.8000",
+          "return_fraction": "-0.1958613348615302366689345858",
+          "ending_equity": "80712.2100"
+        },
+        {
+          "name": "债券ETF下跌3%",
+          "pnl": "0.00000",
+          "return_fraction": "0.00",
+          "ending_equity": "100371.01000"
+        },
+        {
+          "name": "股债同时下跌20%和5%",
+          "pnl": "-19658.80000",
+          "return_fraction": "-0.1958613348615302366689345858",
+          "ending_equity": "80712.21000"
+        }
+      ],
+      "lookthrough": {
+        "510300": {
+          "etf_weight": "0.9793066743076511833446729290",
+          "disclosure_as_of": "2026-09-30",
+          "disclosure_age_days": 40,
+          "exact_current_holdings": null,
+          "listed_positions_proxy": [
+            {
+              "code": "300308",
+              "name": "中际旭创",
+              "portfolio_fraction": "0.03486231171914491340120691459"
+            },
+            {
+              "code": "600519",
+              "name": "贵州茅台",
+              "portfolio_fraction": "0.03029984595740532046494765717"
+            },
+            {
+              "code": "300750",
+              "name": "宁德时代",
+              "portfolio_fraction": "0.02964225269152804920764387570"
+            },
+            {
+              "code": "601318",
+              "name": "中国平安",
+              "portfolio_fraction": "0.02187367556150524542322399719"
+            },
+            {
+              "code": "300502",
+              "name": "新易盛",
+              "portfolio_fraction": "0.02090178931295883535145611498"
+            },
+            {
+              "code": "600036",
+              "name": "招商银行",
+              "portfolio_fraction": "0.01966259072606226482122766406"
+            },
+            {
+              "code": "601899",
+              "name": "紫金矿业",
+              "portfolio_fraction": "0.01892494396247758770063258603"
+            },
+            {
+              "code": "603259",
+              "name": "药明康德",
+              "portfolio_fraction": "0.01593701373805515484646554798"
+            },
+            {
+              "code": "000333",
+              "name": "美的集团",
+              "portfolio_fraction": "0.01502099108567021470664175434"
+            },
+            {
+              "code": "600900",
+              "name": "长江电力",
+              "portfolio_fraction": "0.01342065691018351789839044592"
+            }
+          ],
+          "unlisted_security_proxy_fraction": "0.7312948918374102369363994200",
+          "sector_proxy": {
+            "A": {
+              "name": "农、林、牧、渔业",
+              "portfolio_fraction": "0.007536643786939388702298742921"
+            },
+            "B": {
+              "name": "采矿业",
+              "portfolio_fraction": "0.05350114919540256290269705285"
+            },
+            "C": {
+              "name": "制造业",
+              "portfolio_fraction": "0.5443485393593632640644417486"
+            },
+            "D": {
+              "name": "电力、热力、燃气及水生产和供应业",
+              "portfolio_fraction": "0.02859275696593584744958172869"
+            },
+            "E": {
+              "name": "建筑业",
+              "portfolio_fraction": "0.01239218599271527181620955946"
+            },
+            "F": {
+              "name": "批发和零售业",
+              "portfolio_fraction": "0.001613920268497948462391658984"
+            },
+            "G": {
+              "name": "交通运输、仓储和邮政业",
+              "portfolio_fraction": "0.02765339196090208826389857841"
+            },
+            "I": {
+              "name": "信息传输、软件和信息技术服务业",
+              "portfolio_fraction": "0.04751035942020739658341243305"
+            },
+            "J": {
+              "name": "金融业",
+              "portfolio_fraction": "0.2014443825834869878012940993"
+            },
+            "K": {
+              "name": "房地产业",
+              "portfolio_fraction": "0.004353231289703279032608154467"
+            },
+            "L": {
+              "name": "租赁和商务服务业",
+              "portfolio_fraction": "0.004918955357818783423659424637"
+            },
+            "M": {
+              "name": "科学研究和技术服务业",
+              "portfolio_fraction": "0.01593701373805515484646554798"
+            },
+            "Q": {
+              "name": "卫生和社会工作",
+              "portfolio_fraction": "0.001421786757881913908847269826"
+            },
+            "R": {
+              "name": "文化、体育和娱乐业",
+              "portfolio_fraction": "0.0006166468254914535004299786175"
+            }
+          }
+        },
+        "511010": {
+          "etf_weight": "0",
+          "disclosure_as_of": "2026-09-30",
+          "disclosure_age_days": 40,
+          "exact_current_holdings": null,
+          "listed_positions_proxy": [
+            {
+              "code": "019834",
+              "name": "26 国债 08",
+              "portfolio_fraction": "0E-28"
+            },
+            {
+              "code": "019848",
+              "name": "26 国债 15",
+              "portfolio_fraction": "0E-28"
+            },
+            {
+              "code": "260015",
+              "name": "26 附息国债 15",
+              "portfolio_fraction": "0E-28"
+            },
+            {
+              "code": "260008",
+              "name": "26 附息国债 08",
+              "portfolio_fraction": "0E-28"
+            },
+            {
+              "code": "019829",
+              "name": "26 国债 03",
+              "portfolio_fraction": "0E-28"
+            }
+          ],
+          "unlisted_security_proxy_fraction": "0E-28",
+          "sector_proxy": {},
+          "issuer_proxy": {
+            "name": "中国中央政府（国家债券）",
+            "portfolio_fraction": "0E-28"
+          },
+          "disclosed_issues": [
+            {
+              "issue": "2026年记账式附息（八期）国债",
+              "codes": [
+                "019834",
+                "260008"
+              ],
+              "fair_value": "2807364278.03",
+              "fund_fraction": "0.3832087672308376604057446670",
+              "portfolio_amount": "0E-31",
+              "portfolio_fraction": "0E-28"
+            },
+            {
+              "issue": "2026年记账式附息（十五期）国债",
+              "codes": [
+                "019848",
+                "260015"
+              ],
+              "fair_value": "2800129237.16",
+              "fund_fraction": "0.3822211750204662354862103732",
+              "portfolio_amount": "0E-31",
+              "portfolio_fraction": "0E-28"
+            },
+            {
+              "issue": "2026年记账式附息（三期）国债",
+              "codes": [
+                "019829"
+              ],
+              "fair_value": "775553308.03",
+              "fund_fraction": "0.1058640054010114073245861420",
+              "portfolio_amount": "0E-31",
+              "portfolio_fraction": "0E-28"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "run": "equity_hold_base",
+      "as_of": "2026-11-09",
+      "equity": "100303.810",
+      "beta": {
+        "510300": {
+          "observed_returns": 2,
+          "window_returns": 2,
+          "required_returns": 252,
+          "beta": null,
+          "correlation": null,
+          "status": "insufficient_sample"
+        },
+        "511010": {
+          "observed_returns": 2,
+          "window_returns": 2,
+          "required_returns": 252,
+          "beta": null,
+          "correlation": null,
+          "status": "insufficient_sample"
+        }
+      },
+      "stress": [
+        {
+          "name": "股票ETF下跌10%",
+          "pnl": "-9829.4000",
+          "return_fraction": "-0.09799627750929899871201303320",
+          "ending_equity": "90474.4100"
+        },
+        {
+          "name": "股票ETF下跌20%",
+          "pnl": "-19658.8000",
+          "return_fraction": "-0.1959925550185979974240260664",
+          "ending_equity": "80645.0100"
+        },
+        {
+          "name": "债券ETF下跌3%",
+          "pnl": "0.00000",
+          "return_fraction": "0.00",
+          "ending_equity": "100303.81000"
+        },
+        {
+          "name": "股债同时下跌20%和5%",
+          "pnl": "-19658.80000",
+          "return_fraction": "-0.1959925550185979974240260664",
+          "ending_equity": "80645.01000"
+        }
+      ],
+      "lookthrough": {
+        "510300": {
+          "etf_weight": "0.9799627750929899871201303320",
+          "disclosure_as_of": "2026-09-30",
+          "disclosure_age_days": 40,
+          "exact_current_holdings": null,
+          "listed_positions_proxy": [
+            {
+              "code": "300308",
+              "name": "中际旭创",
+              "portfolio_fraction": "0.03488566823319484368980274265"
+            },
+            {
+              "code": "600519",
+              "name": "贵州茅台",
+              "portfolio_fraction": "0.03032014578099465009794210158"
+            },
+            {
+              "code": "300750",
+              "name": "宁德时代",
+              "portfolio_fraction": "0.02966211195092079495585377589"
+            },
+            {
+              "code": "601318",
+              "name": "中国平安",
+              "portfolio_fraction": "0.02188833014937915721672855751"
+            },
+            {
+              "code": "300502",
+              "name": "新易盛",
+              "portfolio_fraction": "0.02091579277146984140133216506"
+            },
+            {
+              "code": "600036",
+              "name": "招商银行",
+              "portfolio_fraction": "0.01967576396541171111041634492"
+            },
+            {
+              "code": "601899",
+              "name": "紫金矿业",
+              "portfolio_fraction": "0.01893762300462243238692598315"
+            },
+            {
+              "code": "603259",
+              "name": "药明康德",
+              "portfolio_fraction": "0.01594769097278030941841732613"
+            },
+            {
+              "code": "000333",
+              "name": "美的集团",
+              "portfolio_fraction": "0.01503105461766323708962288263"
+            },
+            {
+              "code": "600900",
+              "name": "长江电力",
+              "portfolio_fraction": "0.01342964827496182823777607681"
+            }
+          ],
+          "unlisted_security_proxy_fraction": "0.7317848335129206085556043738",
+          "sector_proxy": {
+            "A": {
+              "name": "农、林、牧、渔业",
+              "portfolio_fraction": "0.007541693071333294845253775990"
+            },
+            "B": {
+              "name": "采矿业",
+              "portfolio_fraction": "0.05353699307038528840661421454"
+            },
+            "C": {
+              "name": "制造业",
+              "portfolio_fraction": "0.5447132336002395499337933763"
+            },
+            "D": {
+              "name": "电力、热力、燃气及水生产和供应业",
+              "portfolio_fraction": "0.02861191310036494729084012049"
+            },
+            "E": {
+              "name": "建筑业",
+              "portfolio_fraction": "0.01240048831840669337104430883"
+            },
+            "F": {
+              "name": "批发和零售业",
+              "portfolio_fraction": "0.001615001537913766885806210430"
+            },
+            "G": {
+              "name": "交通运输、仓储和邮政业",
+              "portfolio_fraction": "0.02767191875404955315412890948"
+            },
+            "I": {
+              "name": "信息传输、软件和信息技术服务业",
+              "portfolio_fraction": "0.04754218967823087482467171637"
+            },
+            "J": {
+              "name": "金融业",
+              "portfolio_fraction": "0.2015793431847803018397164380"
+            },
+            "K": {
+              "name": "房地产业",
+              "portfolio_fraction": "0.004356147800478573214862958825"
+            },
+            "L": {
+              "name": "租赁和商务服务业",
+              "portfolio_fraction": "0.004922250883682112266761894158"
+            },
+            "M": {
+              "name": "科学研究和技术服务业",
+              "portfolio_fraction": "0.01594769097278030941841732613"
+            },
+            "Q": {
+              "name": "卫生和社会工作",
+              "portfolio_fraction": "0.001422739304650871784073291016"
+            },
+            "R": {
+              "name": "文化、体育和娱乐业",
+              "portfolio_fraction": "0.0006170599570232769244377894330"
+            }
+          }
+        },
+        "511010": {
+          "etf_weight": "0",
+          "disclosure_as_of": "2026-09-30",
+          "disclosure_age_days": 40,
+          "exact_current_holdings": null,
+          "listed_positions_proxy": [
+            {
+              "code": "019834",
+              "name": "26 国债 08",
+              "portfolio_fraction": "0E-28"
+            },
+            {
+              "code": "019848",
+              "name": "26 国债 15",
+              "portfolio_fraction": "0E-28"
+            },
+            {
+              "code": "260015",
+              "name": "26 附息国债 15",
+              "portfolio_fraction": "0E-28"
+            },
+            {
+              "code": "260008",
+              "name": "26 附息国债 08",
+              "portfolio_fraction": "0E-28"
+            },
+            {
+              "code": "019829",
+              "name": "26 国债 03",
+              "portfolio_fraction": "0E-28"
+            }
+          ],
+          "unlisted_security_proxy_fraction": "0E-28",
+          "sector_proxy": {},
+          "issuer_proxy": {
+            "name": "中国中央政府（国家债券）",
+            "portfolio_fraction": "0E-28"
+          },
+          "disclosed_issues": [
+            {
+              "issue": "2026年记账式附息（八期）国债",
+              "codes": [
+                "019834",
+                "260008"
+              ],
+              "fair_value": "2807364278.03",
+              "fund_fraction": "0.3832087672308376604057446670",
+              "portfolio_amount": "0E-31",
+              "portfolio_fraction": "0E-28"
+            },
+            {
+              "issue": "2026年记账式附息（十五期）国债",
+              "codes": [
+                "019848",
+                "260015"
+              ],
+              "fair_value": "2800129237.16",
+              "fund_fraction": "0.3822211750204662354862103732",
+              "portfolio_amount": "0E-31",
+              "portfolio_fraction": "0E-28"
+            },
+            {
+              "issue": "2026年记账式附息（三期）国债",
+              "codes": [
+                "019829"
+              ],
+              "fair_value": "775553308.03",
+              "fund_fraction": "0.1058640054010114073245861420",
+              "portfolio_amount": "0E-31",
+              "portfolio_fraction": "0E-28"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "run": "equity_hold_high",
+      "as_of": "2026-11-09",
+      "equity": "100187.590",
+      "beta": {
+        "510300": {
+          "observed_returns": 2,
+          "window_returns": 2,
+          "required_returns": 252,
+          "beta": null,
+          "correlation": null,
+          "status": "insufficient_sample"
+        },
+        "511010": {
+          "observed_returns": 2,
+          "window_returns": 2,
+          "required_returns": 252,
+          "beta": null,
+          "correlation": null,
+          "status": "insufficient_sample"
+        }
+      },
+      "stress": [
+        {
+          "name": "股票ETF下跌10%",
+          "pnl": "-9829.4000",
+          "return_fraction": "-0.09810995553441299466331109472",
+          "ending_equity": "90358.1900"
+        },
+        {
+          "name": "股票ETF下跌20%",
+          "pnl": "-19658.8000",
+          "return_fraction": "-0.1962199110688259893266221894",
+          "ending_equity": "80528.7900"
+        },
+        {
+          "name": "债券ETF下跌3%",
+          "pnl": "0.00000",
+          "return_fraction": "0.00",
+          "ending_equity": "100187.59000"
+        },
+        {
+          "name": "股债同时下跌20%和5%",
+          "pnl": "-19658.80000",
+          "return_fraction": "-0.1962199110688259893266221894",
+          "ending_equity": "80528.79000"
+        }
+      ],
+      "lookthrough": {
+        "510300": {
+          "etf_weight": "0.9810995553441299466331109472",
+          "disclosure_as_of": "2026-09-30",
+          "disclosure_age_days": 40,
+          "exact_current_holdings": null,
+          "listed_positions_proxy": [
+            {
+              "code": "300308",
+              "name": "中际旭创",
+              "portfolio_fraction": "0.03492613644250162414767810301"
+            },
+            {
+              "code": "600519",
+              "name": "贵州茅台",
+              "portfolio_fraction": "0.03035531787509000859727702750"
+            },
+            {
+              "code": "300750",
+              "name": "宁德时代",
+              "portfolio_fraction": "0.02969652071003892540284595652"
+            },
+            {
+              "code": "601318",
+              "name": "中国平安",
+              "portfolio_fraction": "0.02191372113572747486417100216"
+            },
+            {
+              "code": "300502",
+              "name": "新易盛",
+              "portfolio_fraction": "0.02094005559120530190065810777"
+            },
+            {
+              "code": "600036",
+              "name": "招商银行",
+              "portfolio_fraction": "0.01969858832208163548992534985"
+            },
+            {
+              "code": "601899",
+              "name": "紫金矿业",
+              "portfolio_fraction": "0.01895959110012804559802337094"
+            },
+            {
+              "code": "603259",
+              "name": "药明康德",
+              "portfolio_fraction": "0.01596619067563628716536790616"
+            },
+            {
+              "code": "000333",
+              "name": "美的集团",
+              "portfolio_fraction": "0.01504849100042945415717142803"
+            },
+            {
+              "code": "600900",
+              "name": "长江电力",
+              "portfolio_fraction": "0.01344522698807905227398449680"
+            }
+          ],
+          "unlisted_security_proxy_fraction": "0.7326337214176089200832729438",
+          "sector_proxy": {
+            "A": {
+              "name": "农、林、牧、渔业",
+              "portfolio_fraction": "0.007550441615626558666919866510"
+            },
+            "B": {
+              "name": "采矿业",
+              "portfolio_fraction": "0.05359909726247774395144383570"
+            },
+            "C": {
+              "name": "制造业",
+              "portfolio_fraction": "0.5453451139759329850238410106"
+            },
+            "D": {
+              "name": "电力、热力、燃气及水生产和供应业",
+              "portfolio_fraction": "0.02864510360370497587296432808"
+            },
+            "E": {
+              "name": "建筑业",
+              "portfolio_fraction": "0.01241487318136592041606637963"
+            },
+            "F": {
+              "name": "批发和零售业",
+              "portfolio_fraction": "0.001616874978314282937619298236"
+            },
+            "G": {
+              "name": "交通运输、仓储和邮政业",
+              "portfolio_fraction": "0.02770401884147151468716481604"
+            },
+            "I": {
+              "name": "信息传输、软件和信息技术服务业",
+              "portfolio_fraction": "0.04759733975504581759624775036"
+            },
+            "J": {
+              "name": "金融业",
+              "portfolio_fraction": "0.2018131800428675676046660875"
+            },
+            "K": {
+              "name": "房地产业",
+              "portfolio_fraction": "0.004361201036087610419760605062"
+            },
+            "L": {
+              "name": "租赁和商务服务业",
+              "portfolio_fraction": "0.004927960812403838531338605379"
+            },
+            "M": {
+              "name": "科学研究和技术服务业",
+              "portfolio_fraction": "0.01596619067563628716536790616"
+            },
+            "Q": {
+              "name": "卫生和社会工作",
+              "portfolio_fraction": "0.001424389716263592724049439737"
+            },
+            "R": {
+              "name": "文化、体育和娱乐业",
+              "portfolio_fraction": "0.0006177757613280340829257634415"
+            }
+          }
+        },
+        "511010": {
+          "etf_weight": "0",
+          "disclosure_as_of": "2026-09-30",
+          "disclosure_age_days": 40,
+          "exact_current_holdings": null,
+          "listed_positions_proxy": [
+            {
+              "code": "019834",
+              "name": "26 国债 08",
+              "portfolio_fraction": "0E-28"
+            },
+            {
+              "code": "019848",
+              "name": "26 国债 15",
+              "portfolio_fraction": "0E-28"
+            },
+            {
+              "code": "260015",
+              "name": "26 附息国债 15",
+              "portfolio_fraction": "0E-28"
+            },
+            {
+              "code": "260008",
+              "name": "26 附息国债 08",
+              "portfolio_fraction": "0E-28"
+            },
+            {
+              "code": "019829",
+              "name": "26 国债 03",
+              "portfolio_fraction": "0E-28"
+            }
+          ],
+          "unlisted_security_proxy_fraction": "0E-28",
+          "sector_proxy": {},
+          "issuer_proxy": {
+            "name": "中国中央政府（国家债券）",
+            "portfolio_fraction": "0E-28"
+          },
+          "disclosed_issues": [
+            {
+              "issue": "2026年记账式附息（八期）国债",
+              "codes": [
+                "019834",
+                "260008"
+              ],
+              "fair_value": "2807364278.03",
+              "fund_fraction": "0.3832087672308376604057446670",
+              "portfolio_amount": "0E-31",
+              "portfolio_fraction": "0E-28"
+            },
+            {
+              "issue": "2026年记账式附息（十五期）国债",
+              "codes": [
+                "019848",
+                "260015"
+              ],
+              "fair_value": "2800129237.16",
+              "fund_fraction": "0.3822211750204662354862103732",
+              "portfolio_amount": "0E-31",
+              "portfolio_fraction": "0E-28"
+            },
+            {
+              "issue": "2026年记账式附息（三期）国债",
+              "codes": [
+                "019829"
+              ],
+              "fair_value": "775553308.03",
+              "fund_fraction": "0.1058640054010114073245861420",
+              "portfolio_amount": "0E-31",
+              "portfolio_fraction": "0E-28"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "run": "bond_hold_low",
+      "as_of": "2026-11-09",
+      "equity": "100034.900",
+      "beta": {
+        "510300": {
+          "observed_returns": 2,
+          "window_returns": 2,
+          "required_returns": 252,
+          "beta": null,
+          "correlation": null,
+          "status": "insufficient_sample"
+        },
+        "511010": {
+          "observed_returns": 2,
+          "window_returns": 2,
+          "required_returns": 252,
+          "beta": null,
+          "correlation": null,
+          "status": "insufficient_sample"
+        }
+      },
+      "stress": [
+        {
+          "name": "股票ETF下跌10%",
+          "pnl": "0.0000",
+          "return_fraction": "0.0",
+          "ending_equity": "100034.9000"
+        },
+        {
+          "name": "股票ETF下跌20%",
+          "pnl": "0.0000",
+          "return_fraction": "0.0",
+          "ending_equity": "100034.9000"
+        },
+        {
+          "name": "债券ETF下跌3%",
+          "pnl": "-2970.61800",
+          "return_fraction": "-0.02969581616016010412366084237",
+          "ending_equity": "97064.28200"
+        },
+        {
+          "name": "股债同时下跌20%和5%",
+          "pnl": "-4951.03000",
+          "return_fraction": "-0.04949302693360017353943473728",
+          "ending_equity": "95083.87000"
+        }
+      ],
+      "lookthrough": {
+        "510300": {
+          "etf_weight": "0",
+          "disclosure_as_of": "2026-09-30",
+          "disclosure_age_days": 40,
+          "exact_current_holdings": null,
+          "listed_positions_proxy": [
+            {
+              "code": "300308",
+              "name": "中际旭创",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "600519",
+              "name": "贵州茅台",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "300750",
+              "name": "宁德时代",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "601318",
+              "name": "中国平安",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "300502",
+              "name": "新易盛",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "600036",
+              "name": "招商银行",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "601899",
+              "name": "紫金矿业",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "603259",
+              "name": "药明康德",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "000333",
+              "name": "美的集团",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "600900",
+              "name": "长江电力",
+              "portfolio_fraction": "0E-29"
+            }
+          ],
+          "unlisted_security_proxy_fraction": "0E-28",
+          "sector_proxy": {
+            "A": {
+              "name": "农、林、牧、渔业",
+              "portfolio_fraction": "0E-30"
+            },
+            "B": {
+              "name": "采矿业",
+              "portfolio_fraction": "0E-29"
+            },
+            "C": {
+              "name": "制造业",
+              "portfolio_fraction": "0E-28"
+            },
+            "D": {
+              "name": "电力、热力、燃气及水生产和供应业",
+              "portfolio_fraction": "0E-29"
+            },
+            "E": {
+              "name": "建筑业",
+              "portfolio_fraction": "0E-29"
+            },
+            "F": {
+              "name": "批发和零售业",
+              "portfolio_fraction": "0E-30"
+            },
+            "G": {
+              "name": "交通运输、仓储和邮政业",
+              "portfolio_fraction": "0E-29"
+            },
+            "I": {
+              "name": "信息传输、软件和信息技术服务业",
+              "portfolio_fraction": "0E-29"
+            },
+            "J": {
+              "name": "金融业",
+              "portfolio_fraction": "0E-28"
+            },
+            "K": {
+              "name": "房地产业",
+              "portfolio_fraction": "0E-30"
+            },
+            "L": {
+              "name": "租赁和商务服务业",
+              "portfolio_fraction": "0E-30"
+            },
+            "M": {
+              "name": "科学研究和技术服务业",
+              "portfolio_fraction": "0E-29"
+            },
+            "Q": {
+              "name": "卫生和社会工作",
+              "portfolio_fraction": "0E-30"
+            },
+            "R": {
+              "name": "文化、体育和娱乐业",
+              "portfolio_fraction": "0E-31"
+            }
+          }
+        },
+        "511010": {
+          "etf_weight": "0.9898605386720034707886947455",
+          "disclosure_as_of": "2026-09-30",
+          "disclosure_age_days": 40,
+          "exact_current_holdings": null,
+          "listed_positions_proxy": [
+            {
+              "code": "019834",
+              "name": "26 国债 08",
+              "portfolio_fraction": "0.2645257647628180196227352641"
+            },
+            {
+              "code": "019848",
+              "name": "26 国债 15",
+              "portfolio_fraction": "0.2306683101496321211960090163"
+            },
+            {
+              "code": "260015",
+              "name": "26 附息国债 15",
+              "portfolio_fraction": "0.1476773480479727038958923389"
+            },
+            {
+              "code": "260008",
+              "name": "26 附息国债 08",
+              "portfolio_fraction": "0.1147974719921333387129363902"
+            },
+            {
+              "code": "019829",
+              "name": "26 国债 03",
+              "portfolio_fraction": "0.1047906014122210364595247712"
+            }
+          ],
+          "unlisted_security_proxy_fraction": "0.1090006580155030585083250206",
+          "sector_proxy": {},
+          "issuer_proxy": {
+            "name": "中国中央政府（国家债券）",
+            "portfolio_fraction": "0.9714601543802802783954228013"
+          },
+          "disclosed_issues": [
+            {
+              "issue": "2026年记账式附息（八期）国债",
+              "codes": [
+                "019834",
+                "260008"
+              ],
+              "fair_value": "2807364278.03",
+              "fund_fraction": "0.3832087672308376604057446670",
+              "portfolio_amount": "37945.56205645788363597308037",
+              "portfolio_fraction": "0.3793232367549513583356716543"
+            },
+            {
+              "issue": "2026年记账式附息（十五期）国债",
+              "codes": [
+                "019848",
+                "260015"
+              ],
+              "fair_value": "2800129237.16",
+              "fund_fraction": "0.3822211750204662354862103732",
+              "portfolio_amount": "37847.77008323157891758584288",
+              "portfolio_fraction": "0.3783456581976048250919013552"
+            },
+            {
+              "issue": "2026年记账式附息（三期）国债",
+              "codes": [
+                "019829"
+              ],
+              "fair_value": "775553308.03",
+              "fund_fraction": "0.1058640054010114073245861420",
+              "portfolio_amount": "10482.71733321139016012491453",
+              "portfolio_fraction": "0.1047906014122210364595247712"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "run": "bond_hold_base",
+      "as_of": "2026-11-09",
+      "equity": "99975.900",
+      "beta": {
+        "510300": {
+          "observed_returns": 2,
+          "window_returns": 2,
+          "required_returns": 252,
+          "beta": null,
+          "correlation": null,
+          "status": "insufficient_sample"
+        },
+        "511010": {
+          "observed_returns": 2,
+          "window_returns": 2,
+          "required_returns": 252,
+          "beta": null,
+          "correlation": null,
+          "status": "insufficient_sample"
+        }
+      },
+      "stress": [
+        {
+          "name": "股票ETF下跌10%",
+          "pnl": "0.0000",
+          "return_fraction": "0.0",
+          "ending_equity": "99975.9000"
+        },
+        {
+          "name": "股票ETF下跌20%",
+          "pnl": "0.0000",
+          "return_fraction": "0.0",
+          "ending_equity": "99975.9000"
+        },
+        {
+          "name": "债券ETF下跌3%",
+          "pnl": "-2970.61800",
+          "return_fraction": "-0.02971334091516055369344011907",
+          "ending_equity": "97005.28200"
+        },
+        {
+          "name": "股债同时下跌20%和5%",
+          "pnl": "-4951.03000",
+          "return_fraction": "-0.04952223485860092282240019845",
+          "ending_equity": "95024.87000"
+        }
+      ],
+      "lookthrough": {
+        "510300": {
+          "etf_weight": "0",
+          "disclosure_as_of": "2026-09-30",
+          "disclosure_age_days": 40,
+          "exact_current_holdings": null,
+          "listed_positions_proxy": [
+            {
+              "code": "300308",
+              "name": "中际旭创",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "600519",
+              "name": "贵州茅台",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "300750",
+              "name": "宁德时代",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "601318",
+              "name": "中国平安",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "300502",
+              "name": "新易盛",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "600036",
+              "name": "招商银行",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "601899",
+              "name": "紫金矿业",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "603259",
+              "name": "药明康德",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "000333",
+              "name": "美的集团",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "600900",
+              "name": "长江电力",
+              "portfolio_fraction": "0E-29"
+            }
+          ],
+          "unlisted_security_proxy_fraction": "0E-28",
+          "sector_proxy": {
+            "A": {
+              "name": "农、林、牧、渔业",
+              "portfolio_fraction": "0E-30"
+            },
+            "B": {
+              "name": "采矿业",
+              "portfolio_fraction": "0E-29"
+            },
+            "C": {
+              "name": "制造业",
+              "portfolio_fraction": "0E-28"
+            },
+            "D": {
+              "name": "电力、热力、燃气及水生产和供应业",
+              "portfolio_fraction": "0E-29"
+            },
+            "E": {
+              "name": "建筑业",
+              "portfolio_fraction": "0E-29"
+            },
+            "F": {
+              "name": "批发和零售业",
+              "portfolio_fraction": "0E-30"
+            },
+            "G": {
+              "name": "交通运输、仓储和邮政业",
+              "portfolio_fraction": "0E-29"
+            },
+            "I": {
+              "name": "信息传输、软件和信息技术服务业",
+              "portfolio_fraction": "0E-29"
+            },
+            "J": {
+              "name": "金融业",
+              "portfolio_fraction": "0E-28"
+            },
+            "K": {
+              "name": "房地产业",
+              "portfolio_fraction": "0E-30"
+            },
+            "L": {
+              "name": "租赁和商务服务业",
+              "portfolio_fraction": "0E-30"
+            },
+            "M": {
+              "name": "科学研究和技术服务业",
+              "portfolio_fraction": "0E-29"
+            },
+            "Q": {
+              "name": "卫生和社会工作",
+              "portfolio_fraction": "0E-30"
+            },
+            "R": {
+              "name": "文化、体育和娱乐业",
+              "portfolio_fraction": "0E-31"
+            }
+          }
+        },
+        "511010": {
+          "etf_weight": "0.9904446971720184564480039690",
+          "disclosure_as_of": "2026-09-30",
+          "disclosure_age_days": 40,
+          "exact_current_holdings": null,
+          "listed_positions_proxy": [
+            {
+              "code": "019834",
+              "name": "26 国债 08",
+              "portfolio_fraction": "0.2646818725860134723584219784"
+            },
+            {
+              "code": "019848",
+              "name": "26 国债 15",
+              "portfolio_fraction": "0.2308044372592538229776440357"
+            },
+            {
+              "code": "260015",
+              "name": "26 附息国债 15",
+              "portfolio_fraction": "0.1477644986866249229759892188"
+            },
+            {
+              "code": "260008",
+              "name": "26 附息国债 08",
+              "portfolio_fraction": "0.1148652188275960438947258339"
+            },
+            {
+              "code": "019829",
+              "name": "26 国债 03",
+              "portfolio_fraction": "0.1048524427708216696236284398"
+            }
+          ],
+          "unlisted_security_proxy_fraction": "0.1090649839062718805989687776",
+          "sector_proxy": {},
+          "issuer_proxy": {
+            "name": "中国中央政府（国家债券）",
+            "portfolio_fraction": "0.9720334540365818124293782841"
+          },
+          "disclosed_issues": [
+            {
+              "issue": "2026年记账式附息（八期）国债",
+              "codes": [
+                "019834",
+                "260008"
+              ],
+              "fair_value": "2807364278.03",
+              "fund_fraction": "0.3832087672308376604057446670",
+              "portfolio_amount": "37945.56205645788363597308037",
+              "portfolio_fraction": "0.3795470914136095162531478123"
+            },
+            {
+              "issue": "2026年记账式附息（十五期）国债",
+              "codes": [
+                "019848",
+                "260015"
+              ],
+              "fair_value": "2800129237.16",
+              "fund_fraction": "0.3822211750204662354862103732",
+              "portfolio_amount": "37847.77008323157891758584288",
+              "portfolio_fraction": "0.3785689359458787459536332544"
+            },
+            {
+              "issue": "2026年记账式附息（三期）国债",
+              "codes": [
+                "019829"
+              ],
+              "fair_value": "775553308.03",
+              "fund_fraction": "0.1058640054010114073245861420",
+              "portfolio_amount": "10482.71733321139016012491453",
+              "portfolio_fraction": "0.1048524427708216696236284398"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "run": "bond_hold_high",
+      "as_of": "2026-11-09",
+      "equity": "99856.840",
+      "beta": {
+        "510300": {
+          "observed_returns": 2,
+          "window_returns": 2,
+          "required_returns": 252,
+          "beta": null,
+          "correlation": null,
+          "status": "insufficient_sample"
+        },
+        "511010": {
+          "observed_returns": 2,
+          "window_returns": 2,
+          "required_returns": 252,
+          "beta": null,
+          "correlation": null,
+          "status": "insufficient_sample"
+        }
+      },
+      "stress": [
+        {
+          "name": "股票ETF下跌10%",
+          "pnl": "0.0000",
+          "return_fraction": "0.0",
+          "ending_equity": "99856.8400"
+        },
+        {
+          "name": "股票ETF下跌20%",
+          "pnl": "0.0000",
+          "return_fraction": "0.0",
+          "ending_equity": "99856.8400"
+        },
+        {
+          "name": "债券ETF下跌3%",
+          "pnl": "-2970.61800",
+          "return_fraction": "-0.02974876833675089257781439909",
+          "ending_equity": "96886.22200"
+        },
+        {
+          "name": "股债同时下跌20%和5%",
+          "pnl": "-4951.03000",
+          "return_fraction": "-0.04958128056125148762969066516",
+          "ending_equity": "94905.81000"
+        }
+      ],
+      "lookthrough": {
+        "510300": {
+          "etf_weight": "0",
+          "disclosure_as_of": "2026-09-30",
+          "disclosure_age_days": 40,
+          "exact_current_holdings": null,
+          "listed_positions_proxy": [
+            {
+              "code": "300308",
+              "name": "中际旭创",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "600519",
+              "name": "贵州茅台",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "300750",
+              "name": "宁德时代",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "601318",
+              "name": "中国平安",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "300502",
+              "name": "新易盛",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "600036",
+              "name": "招商银行",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "601899",
+              "name": "紫金矿业",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "603259",
+              "name": "药明康德",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "000333",
+              "name": "美的集团",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "600900",
+              "name": "长江电力",
+              "portfolio_fraction": "0E-29"
+            }
+          ],
+          "unlisted_security_proxy_fraction": "0E-28",
+          "sector_proxy": {
+            "A": {
+              "name": "农、林、牧、渔业",
+              "portfolio_fraction": "0E-30"
+            },
+            "B": {
+              "name": "采矿业",
+              "portfolio_fraction": "0E-29"
+            },
+            "C": {
+              "name": "制造业",
+              "portfolio_fraction": "0E-28"
+            },
+            "D": {
+              "name": "电力、热力、燃气及水生产和供应业",
+              "portfolio_fraction": "0E-29"
+            },
+            "E": {
+              "name": "建筑业",
+              "portfolio_fraction": "0E-29"
+            },
+            "F": {
+              "name": "批发和零售业",
+              "portfolio_fraction": "0E-30"
+            },
+            "G": {
+              "name": "交通运输、仓储和邮政业",
+              "portfolio_fraction": "0E-29"
+            },
+            "I": {
+              "name": "信息传输、软件和信息技术服务业",
+              "portfolio_fraction": "0E-29"
+            },
+            "J": {
+              "name": "金融业",
+              "portfolio_fraction": "0E-28"
+            },
+            "K": {
+              "name": "房地产业",
+              "portfolio_fraction": "0E-30"
+            },
+            "L": {
+              "name": "租赁和商务服务业",
+              "portfolio_fraction": "0E-30"
+            },
+            "M": {
+              "name": "科学研究和技术服务业",
+              "portfolio_fraction": "0E-29"
+            },
+            "Q": {
+              "name": "卫生和社会工作",
+              "portfolio_fraction": "0E-30"
+            },
+            "R": {
+              "name": "文化、体育和娱乐业",
+              "portfolio_fraction": "0E-31"
+            }
+          }
+        },
+        "511010": {
+          "etf_weight": "0.9916256112250297525938133031",
+          "disclosure_as_of": "2026-09-30",
+          "disclosure_age_days": 40,
+          "exact_current_holdings": null,
+          "listed_positions_proxy": [
+            {
+              "code": "019834",
+              "name": "26 国债 08",
+              "portfolio_fraction": "0.2649974546107409798984061570"
+            },
+            {
+              "code": "019848",
+              "name": "26 国债 15",
+              "portfolio_fraction": "0.2310796269838644431431100999"
+            },
+            {
+              "code": "260015",
+              "name": "26 附息国债 15",
+              "portfolio_fraction": "0.1479406793189544615767452739"
+            },
+            {
+              "code": "260008",
+              "name": "26 附息国债 08",
+              "portfolio_fraction": "0.1150021734213285672249864957"
+            },
+            {
+              "code": "019829",
+              "name": "26 国债 03",
+              "portfolio_fraction": "0.1049774590625077877501923206"
+            }
+          ],
+          "unlisted_security_proxy_fraction": "0.1091950228398479954660536284",
+          "sector_proxy": {},
+          "issuer_proxy": {
+            "name": "中国中央政府（国家债券）",
+            "portfolio_fraction": "0.9731924162372442350594939755"
+          },
+          "disclosed_issues": [
+            {
+              "issue": "2026年记账式附息（八期）国债",
+              "codes": [
+                "019834",
+                "260008"
+              ],
+              "fair_value": "2807364278.03",
+              "fund_fraction": "0.3832087672308376604057446670",
+              "portfolio_amount": "37945.56205645788363597308037",
+              "portfolio_fraction": "0.3799996280320695471233926526"
+            },
+            {
+              "issue": "2026年记账式附息（十五期）国债",
+              "codes": [
+                "019848",
+                "260015"
+              ],
+              "fair_value": "2800129237.16",
+              "fund_fraction": "0.3822211750204662354862103732",
+              "portfolio_amount": "37847.77008323157891758584288",
+              "portfolio_fraction": "0.3790203063028189047198553738"
+            },
+            {
+              "issue": "2026年记账式附息（三期）国债",
+              "codes": [
+                "019829"
+              ],
+              "fair_value": "775553308.03",
+              "fund_fraction": "0.1058640054010114073245861420",
+              "portfolio_amount": "10482.71733321139016012491453",
+              "portfolio_fraction": "0.1049774590625077877501923206"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "run": "monthly_20_80_low",
+      "as_of": "2026-11-09",
+      "equity": "100095.130",
+      "beta": {
+        "510300": {
+          "observed_returns": 2,
+          "window_returns": 2,
+          "required_returns": 252,
+          "beta": null,
+          "correlation": null,
+          "status": "insufficient_sample"
+        },
+        "511010": {
+          "observed_returns": 2,
+          "window_returns": 2,
+          "required_returns": 252,
+          "beta": null,
+          "correlation": null,
+          "status": "insufficient_sample"
+        }
+      },
+      "stress": [
+        {
+          "name": "股票ETF下跌10%",
+          "pnl": "-1941.1000",
+          "return_fraction": "-0.01939255186541043505313395367",
+          "ending_equity": "98154.0300"
+        },
+        {
+          "name": "股票ETF下跌20%",
+          "pnl": "-3882.2000",
+          "return_fraction": "-0.03878510373082087010626790734",
+          "ending_equity": "96212.9300"
+        },
+        {
+          "name": "债券ETF下跌3%",
+          "pnl": "-2121.87000",
+          "return_fraction": "-0.02119853383476298996764378047",
+          "ending_equity": "97973.26000"
+        },
+        {
+          "name": "股债同时下跌20%和5%",
+          "pnl": "-7418.65000",
+          "return_fraction": "-0.07411599345542585338567420813",
+          "ending_equity": "92676.48000"
+        }
+      ],
+      "lookthrough": {
+        "510300": {
+          "etf_weight": "0.1939255186541043505313395367",
+          "disclosure_as_of": "2026-09-30",
+          "disclosure_age_days": 40,
+          "exact_current_holdings": null,
+          "listed_positions_proxy": [
+            {
+              "code": "300308",
+              "name": "中际旭创",
+              "portfolio_fraction": "0.006903549275201153698736754838"
+            },
+            {
+              "code": "600519",
+              "name": "贵州茅台",
+              "portfolio_fraction": "0.006000074845383279438316627692"
+            },
+            {
+              "code": "300750",
+              "name": "宁德时代",
+              "portfolio_fraction": "0.005869856070719200911909602481"
+            },
+            {
+              "code": "601318",
+              "name": "中国平安",
+              "portfolio_fraction": "0.004331496955369387956743594044"
+            },
+            {
+              "code": "300502",
+              "name": "新易盛",
+              "portfolio_fraction": "0.004139040853755048303830905821"
+            },
+            {
+              "code": "600036",
+              "name": "招商银行",
+              "portfolio_fraction": "0.003893650686421361712414838329"
+            },
+            {
+              "code": "601899",
+              "name": "紫金矿业",
+              "portfolio_fraction": "0.003747579455657196596867958504"
+            },
+            {
+              "code": "603259",
+              "name": "药明康德",
+              "portfolio_fraction": "0.003155899715617598205691155966"
+            },
+            {
+              "code": "000333",
+              "name": "美的集团",
+              "portfolio_fraction": "0.002974505906483962265522727128"
+            },
+            {
+              "code": "600900",
+              "name": "长江电力",
+              "portfolio_fraction": "0.002657602485785278847017821118"
+            }
+          ],
+          "unlisted_security_proxy_fraction": "0.1448134122938846678300037641",
+          "sector_proxy": {
+            "A": {
+              "name": "农、林、牧、渔业",
+              "portfolio_fraction": "0.001492430914275895092390153994"
+            },
+            "B": {
+              "name": "采矿业",
+              "portfolio_fraction": "0.01059447298635448442313696901"
+            },
+            "C": {
+              "name": "制造业",
+              "portfolio_fraction": "0.1077936826056040979493141788"
+            },
+            "D": {
+              "name": "电力、热力、燃气及水生产和供应业",
+              "portfolio_fraction": "0.005662031485989784656295994308"
+            },
+            "E": {
+              "name": "建筑业",
+              "portfolio_fraction": "0.002453941302497932469237893370"
+            },
+            "F": {
+              "name": "批发和零售业",
+              "portfolio_fraction": "0.0003195937833836437235331683551"
+            },
+            "G": {
+              "name": "交通运输、仓储和邮政业",
+              "portfolio_fraction": "0.005476015347648365562670584500"
+            },
+            "I": {
+              "name": "信息传输、软件和信息技术服务业",
+              "portfolio_fraction": "0.009408157152120257235163608695"
+            },
+            "J": {
+              "name": "金融业",
+              "portfolio_fraction": "0.03989067714674445827882497140"
+            },
+            "K": {
+              "name": "房地产业",
+              "portfolio_fraction": "0.0008620411336150824632414184265"
+            },
+            "L": {
+              "name": "租赁和商务服务业",
+              "portfolio_fraction": "0.0009740676685123050170350195566"
+            },
+            "M": {
+              "name": "科学研究和技术服务业",
+              "portfolio_fraction": "0.003155899715617598205691155966"
+            },
+            "Q": {
+              "name": "卫生和社会工作",
+              "portfolio_fraction": "0.0002815468756329229427957064773"
+            },
+            "R": {
+              "name": "文化、体育和娱乐业",
+              "portfolio_fraction": "0.0001221104262813077477249271861"
+            }
+          }
+        },
+        "511010": {
+          "etf_weight": "0.7066177944920996655881260157",
+          "disclosure_as_of": "2026-09-30",
+          "disclosure_age_days": 40,
+          "exact_current_holdings": null,
+          "listed_positions_proxy": [
+            {
+              "code": "019834",
+              "name": "26 国债 08",
+              "portfolio_fraction": "0.1888332802253218249990095841"
+            },
+            {
+              "code": "019848",
+              "name": "26 国债 15",
+              "portfolio_fraction": "0.1646639361902695842632806436"
+            },
+            {
+              "code": "260015",
+              "name": "26 附息国债 15",
+              "portfolio_fraction": "0.1054203475108710843157418672"
+            },
+            {
+              "code": "260008",
+              "name": "26 附息国债 08",
+              "portfolio_fraction": "0.08194885370536907757375209321"
+            },
+            {
+              "code": "019829",
+              "name": "26 国债 03",
+              "portfolio_fraction": "0.07480539001256240766819178153"
+            }
+          ],
+          "unlisted_security_proxy_fraction": "0.07781076379550881037993158970",
+          "sector_proxy": {},
+          "issuer_proxy": {
+            "name": "中国中央政府（国家债券）",
+            "portfolio_fraction": "0.6934825714399027891999075593"
+          },
+          "disclosed_issues": [
+            {
+              "issue": "2026年记账式附息（八期）国债",
+              "codes": [
+                "019834",
+                "260008"
+              ],
+              "fair_value": "2807364278.03",
+              "fund_fraction": "0.3832087672308376604057446670",
+              "portfolio_amount": "27103.97289746991688283791455",
+              "portfolio_fraction": "0.2707821339306909025727616773"
+            },
+            {
+              "issue": "2026年记账式附息（十五期）国债",
+              "codes": [
+                "019848",
+                "260015"
+              ],
+              "fair_value": "2800129237.16",
+              "fund_fraction": "0.3822211750204662354862103732",
+              "portfolio_amount": "27034.12148802255636970417349",
+              "portfolio_fraction": "0.2700842837011406685790225108"
+            },
+            {
+              "issue": "2026年记账式附息（三期）国债",
+              "codes": [
+                "019829"
+              ],
+              "fair_value": "775553308.03",
+              "fund_fraction": "0.1058640054010114073245861420",
+              "portfolio_amount": "7487.655238008135828660653238",
+              "portfolio_fraction": "0.07480539001256240766819178154"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "run": "monthly_20_80_base",
+      "as_of": "2026-11-09",
+      "equity": "100042.780",
+      "beta": {
+        "510300": {
+          "observed_returns": 2,
+          "window_returns": 2,
+          "required_returns": 252,
+          "beta": null,
+          "correlation": null,
+          "status": "insufficient_sample"
+        },
+        "511010": {
+          "observed_returns": 2,
+          "window_returns": 2,
+          "required_returns": 252,
+          "beta": null,
+          "correlation": null,
+          "status": "insufficient_sample"
+        }
+      },
+      "stress": [
+        {
+          "name": "股票ETF下跌10%",
+          "pnl": "-1941.1000",
+          "return_fraction": "-0.01940269952514314376309814661",
+          "ending_equity": "98101.6800"
+        },
+        {
+          "name": "股票ETF下跌20%",
+          "pnl": "-3882.2000",
+          "return_fraction": "-0.03880539905028628752619629323",
+          "ending_equity": "96160.5800"
+        },
+        {
+          "name": "债券ETF下跌3%",
+          "pnl": "-2121.87000",
+          "return_fraction": "-0.02120962652177398508917884929",
+          "ending_equity": "97920.91000"
+        },
+        {
+          "name": "股债同时下跌20%和5%",
+          "pnl": "-7418.65000",
+          "return_fraction": "-0.07415477658657626267482770871",
+          "ending_equity": "92624.13000"
+        }
+      ],
+      "lookthrough": {
+        "510300": {
+          "etf_weight": "0.1940269952514314376309814661",
+          "disclosure_as_of": "2026-09-30",
+          "disclosure_age_days": 40,
+          "exact_current_holdings": null,
+          "listed_positions_proxy": [
+            {
+              "code": "300308",
+              "name": "中际旭创",
+              "portfolio_fraction": "0.006907161737835206654843421096"
+            },
+            {
+              "code": "600519",
+              "name": "贵州茅台",
+              "portfolio_fraction": "0.006003214541402880399811259042"
+            },
+            {
+              "code": "300750",
+              "name": "宁德时代",
+              "portfolio_fraction": "0.005872927626360718972160811690"
+            },
+            {
+              "code": "601318",
+              "name": "中国平安",
+              "portfolio_fraction": "0.004333763524387297969435519709"
+            },
+            {
+              "code": "300502",
+              "name": "新易盛",
+              "portfolio_fraction": "0.004141206715086511471674757700"
+            },
+            {
+              "code": "600036",
+              "name": "招商银行",
+              "portfolio_fraction": "0.003895688140932663360426268206"
+            },
+            {
+              "code": "601899",
+              "name": "紫金矿业",
+              "portfolio_fraction": "0.003749540474578338674705519970"
+            },
+            {
+              "code": "603259",
+              "name": "药明康德",
+              "portfolio_fraction": "0.003157551122646796927138799984"
+            },
+            {
+              "code": "000333",
+              "name": "美的集团",
+              "portfolio_fraction": "0.002976062394460450278196906262"
+            },
+            {
+              "code": "600900",
+              "name": "长江电力",
+              "portfolio_fraction": "0.002658993145762249292537641568"
+            }
+          ],
+          "unlisted_security_proxy_fraction": "0.1448891896976471868479768821",
+          "sector_proxy": {
+            "A": {
+              "name": "农、林、牧、渔业",
+              "portfolio_fraction": "0.001493211867767614765794737758"
+            },
+            "B": {
+              "name": "采矿业",
+              "portfolio_fraction": "0.01060001682131024692053609387"
+            },
+            "C": {
+              "name": "制造业",
+              "portfolio_fraction": "0.1078500884680201900903726999"
+            },
+            "D": {
+              "name": "电力、热力、燃气及水生产和供应业",
+              "portfolio_fraction": "0.005664994291984295856672044386"
+            },
+            "E": {
+              "name": "建筑业",
+              "portfolio_fraction": "0.002455225391436542199642872156"
+            },
+            "F": {
+              "name": "批发和零售业",
+              "portfolio_fraction": "0.0003197610191857689118668688116"
+            },
+            "G": {
+              "name": "交通运输、仓储和邮政业",
+              "portfolio_fraction": "0.005478880815835568996413687251"
+            },
+            "I": {
+              "name": "信息传输、软件和信息技术服务业",
+              "portfolio_fraction": "0.009413080216302535011393545676"
+            },
+            "J": {
+              "name": "金融业",
+              "portfolio_fraction": "0.03991155098640217343219132613"
+            },
+            "K": {
+              "name": "房地产业",
+              "portfolio_fraction": "0.0008624922191741277993161525376"
+            },
+            "L": {
+              "name": "租赁和商务服务业",
+              "portfolio_fraction": "0.0009745773748843852327951352117"
+            },
+            "M": {
+              "name": "科学研究和技术服务业",
+              "portfolio_fraction": "0.003157551122646796927138799984"
+            },
+            "Q": {
+              "name": "卫生和社会工作",
+              "portfolio_fraction": "0.0002816942023959275645790611105"
+            },
+            "R": {
+              "name": "文化、体育和娱乐业",
+              "portfolio_fraction": "0.0001221743237541271401947625898"
+            }
+          }
+        },
+        "511010": {
+          "etf_weight": "0.7069875507257995029726283096",
+          "disclosure_as_of": "2026-09-30",
+          "disclosure_age_days": 40,
+          "exact_current_holdings": null,
+          "listed_positions_proxy": [
+            {
+              "code": "019834",
+              "name": "26 国债 08",
+              "portfolio_fraction": "0.1889320921757673803658106481"
+            },
+            {
+              "code": "019848",
+              "name": "26 国债 15",
+              "portfolio_fraction": "0.1647501008996025377531395094"
+            },
+            {
+              "code": "260015",
+              "name": "26 附息国债 15",
+              "portfolio_fraction": "0.1054755114636540247864477900"
+            },
+            {
+              "code": "260008",
+              "name": "26 附息国债 08",
+              "portfolio_fraction": "0.08199173558541555440307436837"
+            },
+            {
+              "code": "019829",
+              "name": "26 国债 03",
+              "portfolio_fraction": "0.07484453388848386488920692965"
+            }
+          ],
+          "unlisted_security_proxy_fraction": "0.07785148031183007700430357755",
+          "sector_proxy": {},
+          "issuer_proxy": {
+            "name": "中国中央政府（国家债券）",
+            "portfolio_fraction": "0.6938454543247534392019828231"
+          },
+          "disclosed_issues": [
+            {
+              "issue": "2026年记账式附息（八期）国债",
+              "codes": [
+                "019834",
+                "260008"
+              ],
+              "fair_value": "2807364278.03",
+              "fund_fraction": "0.3832087672308376604057446670",
+              "portfolio_amount": "27103.97289746991688283791455",
+              "portfolio_fraction": "0.2709238277611829347688850165"
+            },
+            {
+              "issue": "2026年记账式附息（十五期）国债",
+              "codes": [
+                "019848",
+                "260015"
+              ],
+              "fair_value": "2800129237.16",
+              "fund_fraction": "0.3822211750204662354862103732",
+              "portfolio_amount": "27034.12148802255636970417349",
+              "portfolio_fraction": "0.2702256123632565625395872995"
+            },
+            {
+              "issue": "2026年记账式附息（三期）国债",
+              "codes": [
+                "019829"
+              ],
+              "fair_value": "775553308.03",
+              "fund_fraction": "0.1058640054010114073245861420",
+              "portfolio_amount": "7487.655238008135828660653238",
+              "portfolio_fraction": "0.07484453388848386488920692966"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "run": "monthly_20_80_high",
+      "as_of": "2026-11-09",
+      "equity": "99934.790",
+      "beta": {
+        "510300": {
+          "observed_returns": 2,
+          "window_returns": 2,
+          "required_returns": 252,
+          "beta": null,
+          "correlation": null,
+          "status": "insufficient_sample"
+        },
+        "511010": {
+          "observed_returns": 2,
+          "window_returns": 2,
+          "required_returns": 252,
+          "beta": null,
+          "correlation": null,
+          "status": "insufficient_sample"
+        }
+      },
+      "stress": [
+        {
+          "name": "股票ETF下跌10%",
+          "pnl": "-1941.1000",
+          "return_fraction": "-0.01942366617271122498981585892",
+          "ending_equity": "97993.6900"
+        },
+        {
+          "name": "股票ETF下跌20%",
+          "pnl": "-3882.2000",
+          "return_fraction": "-0.03884733234542244997963171784",
+          "ending_equity": "96052.5900"
+        },
+        {
+          "name": "债券ETF下跌3%",
+          "pnl": "-2121.87000",
+          "return_fraction": "-0.02123254574307906185623645179",
+          "ending_equity": "97812.92000"
+        },
+        {
+          "name": "股债同时下跌20%和5%",
+          "pnl": "-7418.65000",
+          "return_fraction": "-0.07423490858388755307335913749",
+          "ending_equity": "92516.14000"
+        }
+      ],
+      "lookthrough": {
+        "510300": {
+          "etf_weight": "0.1942366617271122498981585892",
+          "disclosure_as_of": "2026-09-30",
+          "disclosure_age_days": 40,
+          "exact_current_holdings": null,
+          "listed_positions_proxy": [
+            {
+              "code": "300308",
+              "name": "中际旭创",
+              "portfolio_fraction": "0.006914625649012373525026032588"
+            },
+            {
+              "code": "600519",
+              "name": "贵州茅台",
+              "portfolio_fraction": "0.006009701643025109225772424497"
+            },
+            {
+              "code": "300750",
+              "name": "宁德时代",
+              "portfolio_fraction": "0.005879273939335116517217979930"
+            },
+            {
+              "code": "601318",
+              "name": "中国平安",
+              "portfolio_fraction": "0.004338446609457057802900115390"
+            },
+            {
+              "code": "300502",
+              "name": "新易盛",
+              "portfolio_fraction": "0.004145681722370383208172389377"
+            },
+            {
+              "code": "600036",
+              "name": "招商银行",
+              "portfolio_fraction": "0.003899897839700623130155032661"
+            },
+            {
+              "code": "601899",
+              "name": "紫金矿业",
+              "portfolio_fraction": "0.003753592245496651654534480927"
+            },
+            {
+              "code": "603259",
+              "name": "药明康德",
+              "portfolio_fraction": "0.003160963187111380558126184047"
+            },
+            {
+              "code": "000333",
+              "name": "美的集团",
+              "portfolio_fraction": "0.002979278341359200793663466845"
+            },
+            {
+              "code": "600900",
+              "name": "长江电力",
+              "portfolio_fraction": "0.002661866466152584483126435920"
+            }
+          ],
+          "unlisted_security_proxy_fraction": "0.1450457576315513749661258573",
+          "sector_proxy": {
+            "A": {
+              "name": "农、林、牧、渔业",
+              "portfolio_fraction": "0.001494825439473726568486855025"
+            },
+            "B": {
+              "name": "采矿业",
+              "portfolio_fraction": "0.01061147124890781623113302105"
+            },
+            "C": {
+              "name": "制造业",
+              "portfolio_fraction": "0.1079666317764482310191409431"
+            },
+            "D": {
+              "name": "电力、热力、燃气及水生产和供应业",
+              "portfolio_fraction": "0.005671115911228118594575051078"
+            },
+            "E": {
+              "name": "建筑业",
+              "portfolio_fraction": "0.002457878519441526571873398020"
+            },
+            "F": {
+              "name": "批发和零售业",
+              "portfolio_fraction": "0.0003201065544339229449597737266"
+            },
+            "G": {
+              "name": "交通运输、仓储和邮政业",
+              "portfolio_fraction": "0.005484801319989348506991762355"
+            },
+            "I": {
+              "name": "信息传输、软件和信息技术服务业",
+              "portfolio_fraction": "0.009423252034670878115490531211"
+            },
+            "J": {
+              "name": "金融业",
+              "portfolio_fraction": "0.03995467959447771520006758166"
+            },
+            "K": {
+              "name": "房地产业",
+              "portfolio_fraction": "0.0008634242322873650819586452203"
+            },
+            "L": {
+              "name": "租赁和商务服务业",
+              "portfolio_fraction": "0.0009756305077394576731463837274"
+            },
+            "M": {
+              "name": "科学研究和技术服务业",
+              "portfolio_fraction": "0.003160963187111380558126184047"
+            },
+            "Q": {
+              "name": "卫生和社会工作",
+              "portfolio_fraction": "0.0002819986024643795643050713699"
+            },
+            "R": {
+              "name": "文化、体育和娱乐业",
+              "portfolio_fraction": "0.0001223063458979892345651978748"
+            }
+          }
+        },
+        "511010": {
+          "etf_weight": "0.7077515247693020618745483930",
+          "disclosure_as_of": "2026-09-30",
+          "disclosure_age_days": 40,
+          "exact_current_holdings": null,
+          "listed_positions_proxy": [
+            {
+              "code": "019834",
+              "name": "26 国债 08",
+              "portfolio_fraction": "0.1891362530754306619858120900"
+            },
+            {
+              "code": "019848",
+              "name": "26 国债 15",
+              "portfolio_fraction": "0.1649281306267490908009015704"
+            },
+            {
+              "code": "260015",
+              "name": "26 附息国债 15",
+              "portfolio_fraction": "0.1055894887931001565903640088"
+            },
+            {
+              "code": "260008",
+              "name": "26 附息国债 08",
+              "portfolio_fraction": "0.08208033623715924672203544289"
+            },
+            {
+              "code": "019829",
+              "name": "26 国债 03",
+              "portfolio_fraction": "0.07492541124075145230865700761"
+            }
+          ],
+          "unlisted_security_proxy_fraction": "0.07793560698442201951016859957",
+          "sector_proxy": {},
+          "issuer_proxy": {
+            "name": "中国中央政府（国家债券）",
+            "portfolio_fraction": "0.6945952269576126279179387192"
+          },
+          "disclosed_issues": [
+            {
+              "issue": "2026年记账式附息（八期）国债",
+              "codes": [
+                "019834",
+                "260008"
+              ],
+              "fair_value": "2807364278.03",
+              "fund_fraction": "0.3832087672308376604057446670",
+              "portfolio_amount": "27103.97289746991688283791455",
+              "portfolio_fraction": "0.2712165893125899087078475329"
+            },
+            {
+              "issue": "2026年记账式附息（十五期）国债",
+              "codes": [
+                "019848",
+                "260015"
+              ],
+              "fair_value": "2800129237.16",
+              "fund_fraction": "0.3822211750204662354862103732",
+              "portfolio_amount": "27034.12148802255636970417349",
+              "portfolio_fraction": "0.2705176194198492473912655792"
+            },
+            {
+              "issue": "2026年记账式附息（三期）国债",
+              "codes": [
+                "019829"
+              ],
+              "fair_value": "775553308.03",
+              "fund_fraction": "0.1058640054010114073245861420",
+              "portfolio_amount": "7487.655238008135828660653238",
+              "portfolio_fraction": "0.07492541124075145230865700761"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "run": "monthly_50_50_low",
+      "as_of": "2026-11-09",
+      "equity": "100199.600",
+      "beta": {
+        "510300": {
+          "observed_returns": 2,
+          "window_returns": 2,
+          "required_returns": 252,
+          "beta": null,
+          "correlation": null,
+          "status": "insufficient_sample"
+        },
+        "511010": {
+          "observed_returns": 2,
+          "window_returns": 2,
+          "required_returns": 252,
+          "beta": null,
+          "correlation": null,
+          "status": "insufficient_sample"
+        }
+      },
+      "stress": [
+        {
+          "name": "股票ETF下跌10%",
+          "pnl": "-4914.7000",
+          "return_fraction": "-0.04904909800039121912662325997",
+          "ending_equity": "95284.9000"
+        },
+        {
+          "name": "股票ETF下跌20%",
+          "pnl": "-9829.4000",
+          "return_fraction": "-0.09809819600078243825324651995",
+          "ending_equity": "90370.2000"
+        },
+        {
+          "name": "债券ETF下跌3%",
+          "pnl": "-1273.12200",
+          "return_fraction": "-0.01270585910522596896594397582",
+          "ending_equity": "98926.47800"
+        },
+        {
+          "name": "股债同时下跌20%和5%",
+          "pnl": "-11951.27000",
+          "return_fraction": "-0.1192746278428257198631531463",
+          "ending_equity": "88248.33000"
+        }
+      ],
+      "lookthrough": {
+        "510300": {
+          "etf_weight": "0.4904909800039121912662325997",
+          "disclosure_as_of": "2026-09-30",
+          "disclosure_age_days": 40,
+          "exact_current_holdings": null,
+          "listed_positions_proxy": [
+            {
+              "code": "300308",
+              "name": "中际旭创",
+              "portfolio_fraction": "0.01746097508465807894663089092"
+            },
+            {
+              "code": "600519",
+              "name": "贵州茅台",
+              "portfolio_fraction": "0.01517583973184118995704806181"
+            },
+            {
+              "code": "300750",
+              "name": "宁德时代",
+              "portfolio_fraction": "0.01484648063127941000912636140"
+            },
+            {
+              "code": "601318",
+              "name": "中国平安",
+              "portfolio_fraction": "0.01095554727025157088165456775"
+            },
+            {
+              "code": "300502",
+              "name": "新易盛",
+              "portfolio_fraction": "0.01046877285013555140264709256"
+            },
+            {
+              "code": "600036",
+              "name": "招商银行",
+              "portfolio_fraction": "0.009848113617177627670140849272"
+            },
+            {
+              "code": "601899",
+              "name": "紫金矿业",
+              "portfolio_fraction": "0.009478659294584397442085947939"
+            },
+            {
+              "code": "603259",
+              "name": "药明康德",
+              "portfolio_fraction": "0.007982138477960347784053738643"
+            },
+            {
+              "code": "000333",
+              "name": "美的集团",
+              "portfolio_fraction": "0.007523343638446241187701780203"
+            },
+            {
+              "code": "600900",
+              "name": "长江电力",
+              "portfolio_fraction": "0.006721807716490879089410169458"
+            }
+          ],
+          "unlisted_security_proxy_fraction": "0.3662729536922383984848528115",
+          "sector_proxy": {
+            "A": {
+              "name": "农、林、牧、渔业",
+              "portfolio_fraction": "0.003774768306985912383045012898"
+            },
+            "B": {
+              "name": "采矿业",
+              "portfolio_fraction": "0.02679633641702782543609073748"
+            },
+            "C": {
+              "name": "制造业",
+              "portfolio_fraction": "0.2726398742486199733883404893"
+            },
+            "D": {
+              "name": "电力、热力、燃气及水生产和供应业",
+              "portfolio_fraction": "0.01432083508993806663759357416"
+            },
+            "E": {
+              "name": "建筑业",
+              "portfolio_fraction": "0.006206692562628416054642373098"
+            },
+            "F": {
+              "name": "批发和零售业",
+              "portfolio_fraction": "0.0008083405892269543496091692369"
+            },
+            "G": {
+              "name": "交通运输、仓储和邮政业",
+              "portfolio_fraction": "0.01385034910838777355476791750"
+            },
+            "I": {
+              "name": "信息传输、软件和信息技术服务业",
+              "portfolio_fraction": "0.02379581735091373021722469526"
+            },
+            "J": {
+              "name": "金融业",
+              "portfolio_fraction": "0.1008944952810739677976437434"
+            },
+            "K": {
+              "name": "房地产业",
+              "portfolio_fraction": "0.002180339149612976083810231768"
+            },
+            "L": {
+              "name": "租赁和商务服务业",
+              "portfolio_fraction": "0.002463685071642914189297933060"
+            },
+            "M": {
+              "name": "科学研究和技术服务业",
+              "portfolio_fraction": "0.007982138477960347784053738643"
+            },
+            "Q": {
+              "name": "卫生和社会工作",
+              "portfolio_fraction": "0.0007121094939163088463629016889"
+            },
+            "R": {
+              "name": "文化、体育和娱乐业",
+              "portfolio_fraction": "0.0003088508571285261328697539117"
+            }
+          }
+        },
+        "511010": {
+          "etf_weight": "0.4235286368408656321981325275",
+          "disclosure_as_of": "2026-09-30",
+          "disclosure_age_days": 40,
+          "exact_current_holdings": null,
+          "listed_positions_proxy": [
+            {
+              "code": "019834",
+              "name": "26 国债 08",
+              "portfolio_fraction": "0.1131818394433511752448898850"
+            },
+            {
+              "code": "019848",
+              "name": "26 国债 15",
+              "portfolio_fraction": "0.09869535267172766421350402745"
+            },
+            {
+              "code": "260015",
+              "name": "26 附息国债 15",
+              "portfolio_fraction": "0.06318626055640432255912285023"
+            },
+            {
+              "code": "260008",
+              "name": "26 附息国债 08",
+              "portfolio_fraction": "0.04911804736739407852561168124"
+            },
+            {
+              "code": "019829",
+              "name": "26 国债 03",
+              "portfolio_fraction": "0.04483643789800439819317035141"
+            }
+          ],
+          "unlisted_security_proxy_fraction": "0.04663778209200883710788028213",
+          "sector_proxy": {},
+          "issuer_proxy": {
+            "name": "中国中央政府（国家债券）",
+            "portfolio_fraction": "0.4156557200288904758441790774"
+          },
+          "disclosed_issues": [
+            {
+              "issue": "2026年记账式附息（八期）国债",
+              "codes": [
+                "019834",
+                "260008"
+              ],
+              "fair_value": "2807364278.03",
+              "fund_fraction": "0.3832087672308376604057446670",
+              "portfolio_amount": "16262.38373848195012970274873",
+              "portfolio_fraction": "0.1622998868107452537705015662"
+            },
+            {
+              "issue": "2026年记账式附息（十五期）国债",
+              "codes": [
+                "019848",
+                "260015"
+              ],
+              "fair_value": "2800129237.16",
+              "fund_fraction": "0.3822211750204662354862103732",
+              "portfolio_amount": "16220.47289281353382182250409",
+              "portfolio_fraction": "0.1618816132281319867726268777"
+            },
+            {
+              "issue": "2026年记账式附息（三期）国债",
+              "codes": [
+                "019829"
+              ],
+              "fair_value": "775553308.03",
+              "fund_fraction": "0.1058640054010114073245861420",
+              "portfolio_amount": "4492.593142804881497196391943",
+              "portfolio_fraction": "0.04483643789800439819317035141"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "run": "monthly_50_50_base",
+      "as_of": "2026-11-09",
+      "equity": "100141.580",
+      "beta": {
+        "510300": {
+          "observed_returns": 2,
+          "window_returns": 2,
+          "required_returns": 252,
+          "beta": null,
+          "correlation": null,
+          "status": "insufficient_sample"
+        },
+        "511010": {
+          "observed_returns": 2,
+          "window_returns": 2,
+          "required_returns": 252,
+          "beta": null,
+          "correlation": null,
+          "status": "insufficient_sample"
+        }
+      },
+      "stress": [
+        {
+          "name": "股票ETF下跌10%",
+          "pnl": "-4914.7000",
+          "return_fraction": "-0.04907751605277248471613889056",
+          "ending_equity": "95226.8800"
+        },
+        {
+          "name": "股票ETF下跌20%",
+          "pnl": "-9829.4000",
+          "return_fraction": "-0.09815503210554496943227778112",
+          "ending_equity": "90312.1800"
+        },
+        {
+          "name": "债券ETF下跌3%",
+          "pnl": "-1273.12200",
+          "return_fraction": "-0.01271322062224302832050383068",
+          "ending_equity": "98868.45800"
+        },
+        {
+          "name": "股债同时下跌20%和5%",
+          "pnl": "-11951.27000",
+          "return_fraction": "-0.1193437331426166832997841656",
+          "ending_equity": "88190.31000"
+        }
+      ],
+      "lookthrough": {
+        "510300": {
+          "etf_weight": "0.4907751605277248471613889056",
+          "disclosure_as_of": "2026-09-30",
+          "disclosure_age_days": 40,
+          "exact_current_holdings": null,
+          "listed_positions_proxy": [
+            {
+              "code": "300308",
+              "name": "中际旭创",
+              "portfolio_fraction": "0.01747109161941229254841831553"
+            },
+            {
+              "code": "600519",
+              "name": "贵州茅台",
+              "portfolio_fraction": "0.01518463230552777874305790835"
+            },
+            {
+              "code": "300750",
+              "name": "宁德时代",
+              "portfolio_fraction": "0.01485508238098444593295270319"
+            },
+            {
+              "code": "601318",
+              "name": "中国平安",
+              "portfolio_fraction": "0.01096189469209792078089276230"
+            },
+            {
+              "code": "300502",
+              "name": "新易盛",
+              "portfolio_fraction": "0.01047483824475749430281285372"
+            },
+            {
+              "code": "600036",
+              "name": "招商银行",
+              "portfolio_fraction": "0.009853819414430563423275776564"
+            },
+            {
+              "code": "601899",
+              "name": "紫金矿业",
+              "portfolio_fraction": "0.009484151037497498940380560694"
+            },
+            {
+              "code": "603259",
+              "name": "药明康德",
+              "portfolio_fraction": "0.007986763167070418339945015753"
+            },
+            {
+              "code": "000333",
+              "name": "美的集团",
+              "portfolio_fraction": "0.007527702511133317334430346472"
+            },
+            {
+              "code": "600900",
+              "name": "长江电力",
+              "portfolio_fraction": "0.006725702195524571196173090295"
+            }
+          ],
+          "unlisted_security_proxy_fraction": "0.3664851648114680298915081805",
+          "sector_proxy": {
+            "A": {
+              "name": "农、林、牧、渔业",
+              "portfolio_fraction": "0.003776955331168787494826395533"
+            },
+            "B": {
+              "name": "采矿业",
+              "portfolio_fraction": "0.02681186167076274707834764999"
+            },
+            "C": {
+              "name": "制造业",
+              "portfolio_fraction": "0.2727978362610418358240639073"
+            },
+            "D": {
+              "name": "电力、热力、燃气及水生产和供应业",
+              "portfolio_fraction": "0.01432913229127958937596372150"
+            },
+            "E": {
+              "name": "建筑业",
+              "portfolio_fraction": "0.006210288594391482911581222580"
+            },
+            "F": {
+              "name": "批发和零售业",
+              "portfolio_fraction": "0.0008088089253665174351063655465"
+            },
+            "G": {
+              "name": "交通运输、仓储和邮政业",
+              "portfolio_fraction": "0.01385837371969577027922191188"
+            },
+            "I": {
+              "name": "信息传输、软件和信息技术服务业",
+              "portfolio_fraction": "0.02380960416476967311953563720"
+            },
+            "J": {
+              "name": "金融业",
+              "portfolio_fraction": "0.1009529515049143337236818515"
+            },
+            "K": {
+              "name": "房地产业",
+              "portfolio_fraction": "0.002181602393886339304885659873"
+            },
+            "L": {
+              "name": "租赁和商务服务业",
+              "portfolio_fraction": "0.002465112480795603031248130631"
+            },
+            "M": {
+              "name": "科学研究和技术服务业",
+              "portfolio_fraction": "0.007986763167070418339945015753"
+            },
+            "Q": {
+              "name": "卫生和社会工作",
+              "portfolio_fraction": "0.0007125220757113736360263559260"
+            },
+            "R": {
+              "name": "文化、体育和娱乐业",
+              "portfolio_fraction": "0.0003090297990498598794136880410"
+            }
+          }
+        },
+        "511010": {
+          "etf_weight": "0.4237740207414342773501276892",
+          "disclosure_as_of": "2026-09-30",
+          "disclosure_age_days": 40,
+          "exact_current_holdings": null,
+          "listed_positions_proxy": [
+            {
+              "code": "019834",
+              "name": "26 国债 08",
+              "portfolio_fraction": "0.1132474147051405661770851680"
+            },
+            {
+              "code": "019848",
+              "name": "26 国债 15",
+              "portfolio_fraction": "0.09875253475695154064003601848"
+            },
+            {
+              "code": "260015",
+              "name": "26 附息国债 15",
+              "portfolio_fraction": "0.06322286939398689893543806622"
+            },
+            {
+              "code": "260008",
+              "name": "26 附息国债 08",
+              "portfolio_fraction": "0.04914650536763989254648149365"
+            },
+            {
+              "code": "019829",
+              "name": "26 国债 03",
+              "portfolio_fraction": "0.04486241522057951848968622167"
+            }
+          ],
+          "unlisted_security_proxy_fraction": "0.04666480307686825666895570369",
+          "sector_proxy": {},
+          "issuer_proxy": {
+            "name": "中国中央政府（国家债券）",
+            "portfolio_fraction": "0.4158965425211666734576826717"
+          },
+          "disclosed_issues": [
+            {
+              "issue": "2026年记账式附息（八期）国债",
+              "codes": [
+                "019834",
+                "260008"
+              ],
+              "fair_value": "2807364278.03",
+              "fund_fraction": "0.3832087672308376604057446670",
+              "portfolio_amount": "16262.38373848195012970274873",
+              "portfolio_fraction": "0.1623939200727804587235666616"
+            },
+            {
+              "issue": "2026年记账式附息（十五期）国债",
+              "codes": [
+                "019848",
+                "260015"
+              ],
+              "fair_value": "2800129237.16",
+              "fund_fraction": "0.3822211750204662354862103732",
+              "portfolio_amount": "16220.47289281353382182250409",
+              "portfolio_fraction": "0.1619754041509384395754740847"
+            },
+            {
+              "issue": "2026年记账式附息（三期）国债",
+              "codes": [
+                "019829"
+              ],
+              "fair_value": "775553308.03",
+              "fund_fraction": "0.1058640054010114073245861420",
+              "portfolio_amount": "4492.593142804881497196391943",
+              "portfolio_fraction": "0.04486241522057951848968622168"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "run": "monthly_50_50_high",
+      "as_of": "2026-11-09",
+      "equity": "100032.440",
+      "beta": {
+        "510300": {
+          "observed_returns": 2,
+          "window_returns": 2,
+          "required_returns": 252,
+          "beta": null,
+          "correlation": null,
+          "status": "insufficient_sample"
+        },
+        "511010": {
+          "observed_returns": 2,
+          "window_returns": 2,
+          "required_returns": 252,
+          "beta": null,
+          "correlation": null,
+          "status": "insufficient_sample"
+        }
+      },
+      "stress": [
+        {
+          "name": "股票ETF下跌10%",
+          "pnl": "-4914.7000",
+          "return_fraction": "-0.04913106188352498449502981233",
+          "ending_equity": "95117.7400"
+        },
+        {
+          "name": "股票ETF下跌20%",
+          "pnl": "-9829.4000",
+          "return_fraction": "-0.09826212376704996899005962466",
+          "ending_equity": "90203.0400"
+        },
+        {
+          "name": "债券ETF下跌3%",
+          "pnl": "-1273.12200",
+          "return_fraction": "-0.01272709133157203803086278811",
+          "ending_equity": "98759.31800"
+        },
+        {
+          "name": "股债同时下跌20%和5%",
+          "pnl": "-11951.27000",
+          "return_fraction": "-0.1194739426530033657081642715",
+          "ending_equity": "88081.17000"
+        }
+      ],
+      "lookthrough": {
+        "510300": {
+          "etf_weight": "0.4913106188352498449502981233",
+          "disclosure_as_of": "2026-09-30",
+          "disclosure_age_days": 40,
+          "exact_current_holdings": null,
+          "listed_positions_proxy": [
+            {
+              "code": "300308",
+              "name": "中际旭创",
+              "portfolio_fraction": "0.01749015338516890767855744215"
+            },
+            {
+              "code": "600519",
+              "name": "贵州茅台",
+              "portfolio_fraction": "0.01520119943884798268661879060"
+            },
+            {
+              "code": "300750",
+              "name": "宁德时代",
+              "portfolio_fraction": "0.01487128996015636898540571201"
+            },
+            {
+              "code": "601318",
+              "name": "中国平安",
+              "portfolio_fraction": "0.01097385462416291456764860506"
+            },
+            {
+              "code": "300502",
+              "name": "新易盛",
+              "portfolio_fraction": "0.01048626677580235168036166683"
+            },
+            {
+              "code": "600036",
+              "name": "招商银行",
+              "portfolio_fraction": "0.009864570385324514942323160775"
+            },
+            {
+              "code": "601899",
+              "name": "紫金矿业",
+              "portfolio_fraction": "0.009494498683163569637389982182"
+            },
+            {
+              "code": "603259",
+              "name": "药明康德",
+              "portfolio_fraction": "0.007995477093593195005770837847"
+            },
+            {
+              "code": "000333",
+              "name": "美的集团",
+              "portfolio_fraction": "0.007535915581333995137089960973"
+            },
+            {
+              "code": "600900",
+              "name": "长江电力",
+              "portfolio_fraction": "0.006733040246437050704823987255"
+            }
+          ],
+          "unlisted_security_proxy_fraction": "0.3668850170082906168521217494",
+          "sector_proxy": {
+            "A": {
+              "name": "农、林、牧、渔业",
+              "portfolio_fraction": "0.003781076163419243061712351257"
+            },
+            "B": {
+              "name": "采矿业",
+              "portfolio_fraction": "0.02684111464692475058657089100"
+            },
+            "C": {
+              "name": "制造业",
+              "portfolio_fraction": "0.2730954712667412879814024500"
+            },
+            "D": {
+              "name": "电力、热力、燃气及水生产和供应业",
+              "portfolio_fraction": "0.01434476603467593414556538952"
+            },
+            "E": {
+              "name": "建筑业",
+              "portfolio_fraction": "0.006217064305322775664661822980"
+            },
+            "F": {
+              "name": "批发和零售业",
+              "portfolio_fraction": "0.0008096913731615977281879649630"
+            },
+            "G": {
+              "name": "交通运输、仓储和邮政业",
+              "portfolio_fraction": "0.01387349384380518514872098917"
+            },
+            "I": {
+              "name": "信息传输、软件和信息技术服务业",
+              "portfolio_fraction": "0.02383558153969467706949693095"
+            },
+            "J": {
+              "name": "金融业",
+              "portfolio_fraction": "0.1010630958253692416553748367"
+            },
+            "K": {
+              "name": "房地产业",
+              "portfolio_fraction": "0.002183982622592834468571912262"
+            },
+            "L": {
+              "name": "租赁和商务服务业",
+              "portfolio_fraction": "0.002467802032066711004969759544"
+            },
+            "M": {
+              "name": "科学研究和技术服务业",
+              "portfolio_fraction": "0.007995477093593195005770837847"
+            },
+            "Q": {
+              "name": "卫生和社会工作",
+              "portfolio_fraction": "0.0007132994701180595003183387716"
+            },
+            "R": {
+              "name": "文化、体育和娱乐业",
+              "portfolio_fraction": "0.0003093669647959748567874201015"
+            }
+          }
+        },
+        "511010": {
+          "etf_weight": "0.4242363777190679343620929371",
+          "disclosure_as_of": "2026-09-30",
+          "disclosure_age_days": 40,
+          "exact_current_holdings": null,
+          "listed_positions_proxy": [
+            {
+              "code": "019834",
+              "name": "26 国债 08",
+              "portfolio_fraction": "0.1133709728512871466403085691"
+            },
+            {
+              "code": "019848",
+              "name": "26 国债 15",
+              "portfolio_fraction": "0.09886027832137297923680976040"
+            },
+            {
+              "code": "260015",
+              "name": "26 附息国债 15",
+              "portfolio_fraction": "0.06329184845683550814810761334"
+            },
+            {
+              "code": "260008",
+              "name": "26 附息国债 08",
+              "portfolio_fraction": "0.04920012646891288176750342404"
+            },
+            {
+              "code": "019829",
+              "name": "26 国债 03",
+              "portfolio_fraction": "0.04491136218215692326605641073"
+            }
+          ],
+          "unlisted_security_proxy_fraction": "0.04671571652662325016439428167",
+          "sector_proxy": {},
+          "issuer_proxy": {
+            "name": "中国中央政府（国家债券）",
+            "portfolio_fraction": "0.4163503048071886892231800593"
+          },
+          "disclosed_issues": [
+            {
+              "issue": "2026年记账式附息（八期）国债",
+              "codes": [
+                "019834",
+                "260008"
+              ],
+              "fair_value": "2807364278.03",
+              "fund_fraction": "0.3832087672308376604057446670",
+              "portfolio_amount": "16262.38373848195012970274873",
+              "portfolio_fraction": "0.1625710993202000284078119931"
+            },
+            {
+              "issue": "2026年记账式附息（十五期）国债",
+              "codes": [
+                "019848",
+                "260015"
+              ],
+              "fair_value": "2800129237.16",
+              "fund_fraction": "0.3822211750204662354862103732",
+              "portfolio_amount": "16220.47289281353382182250409",
+              "portfolio_fraction": "0.1621521267782084873849173737"
+            },
+            {
+              "issue": "2026年记账式附息（三期）国债",
+              "codes": [
+                "019829"
+              ],
+              "fair_value": "775553308.03",
+              "fund_fraction": "0.1058640054010114073245861420",
+              "portfolio_amount": "4492.593142804881497196391943",
+              "portfolio_fraction": "0.04491136218215692326605641073"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "run": "trend_120_low",
+      "as_of": "2026-11-09",
+      "equity": "100034.900",
+      "beta": {
+        "510300": {
+          "observed_returns": 2,
+          "window_returns": 2,
+          "required_returns": 252,
+          "beta": null,
+          "correlation": null,
+          "status": "insufficient_sample"
+        },
+        "511010": {
+          "observed_returns": 2,
+          "window_returns": 2,
+          "required_returns": 252,
+          "beta": null,
+          "correlation": null,
+          "status": "insufficient_sample"
+        }
+      },
+      "stress": [
+        {
+          "name": "股票ETF下跌10%",
+          "pnl": "0.0000",
+          "return_fraction": "0.0",
+          "ending_equity": "100034.9000"
+        },
+        {
+          "name": "股票ETF下跌20%",
+          "pnl": "0.0000",
+          "return_fraction": "0.0",
+          "ending_equity": "100034.9000"
+        },
+        {
+          "name": "债券ETF下跌3%",
+          "pnl": "-2970.61800",
+          "return_fraction": "-0.02969581616016010412366084237",
+          "ending_equity": "97064.28200"
+        },
+        {
+          "name": "股债同时下跌20%和5%",
+          "pnl": "-4951.03000",
+          "return_fraction": "-0.04949302693360017353943473728",
+          "ending_equity": "95083.87000"
+        }
+      ],
+      "lookthrough": {
+        "510300": {
+          "etf_weight": "0",
+          "disclosure_as_of": "2026-09-30",
+          "disclosure_age_days": 40,
+          "exact_current_holdings": null,
+          "listed_positions_proxy": [
+            {
+              "code": "300308",
+              "name": "中际旭创",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "600519",
+              "name": "贵州茅台",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "300750",
+              "name": "宁德时代",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "601318",
+              "name": "中国平安",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "300502",
+              "name": "新易盛",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "600036",
+              "name": "招商银行",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "601899",
+              "name": "紫金矿业",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "603259",
+              "name": "药明康德",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "000333",
+              "name": "美的集团",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "600900",
+              "name": "长江电力",
+              "portfolio_fraction": "0E-29"
+            }
+          ],
+          "unlisted_security_proxy_fraction": "0E-28",
+          "sector_proxy": {
+            "A": {
+              "name": "农、林、牧、渔业",
+              "portfolio_fraction": "0E-30"
+            },
+            "B": {
+              "name": "采矿业",
+              "portfolio_fraction": "0E-29"
+            },
+            "C": {
+              "name": "制造业",
+              "portfolio_fraction": "0E-28"
+            },
+            "D": {
+              "name": "电力、热力、燃气及水生产和供应业",
+              "portfolio_fraction": "0E-29"
+            },
+            "E": {
+              "name": "建筑业",
+              "portfolio_fraction": "0E-29"
+            },
+            "F": {
+              "name": "批发和零售业",
+              "portfolio_fraction": "0E-30"
+            },
+            "G": {
+              "name": "交通运输、仓储和邮政业",
+              "portfolio_fraction": "0E-29"
+            },
+            "I": {
+              "name": "信息传输、软件和信息技术服务业",
+              "portfolio_fraction": "0E-29"
+            },
+            "J": {
+              "name": "金融业",
+              "portfolio_fraction": "0E-28"
+            },
+            "K": {
+              "name": "房地产业",
+              "portfolio_fraction": "0E-30"
+            },
+            "L": {
+              "name": "租赁和商务服务业",
+              "portfolio_fraction": "0E-30"
+            },
+            "M": {
+              "name": "科学研究和技术服务业",
+              "portfolio_fraction": "0E-29"
+            },
+            "Q": {
+              "name": "卫生和社会工作",
+              "portfolio_fraction": "0E-30"
+            },
+            "R": {
+              "name": "文化、体育和娱乐业",
+              "portfolio_fraction": "0E-31"
+            }
+          }
+        },
+        "511010": {
+          "etf_weight": "0.9898605386720034707886947455",
+          "disclosure_as_of": "2026-09-30",
+          "disclosure_age_days": 40,
+          "exact_current_holdings": null,
+          "listed_positions_proxy": [
+            {
+              "code": "019834",
+              "name": "26 国债 08",
+              "portfolio_fraction": "0.2645257647628180196227352641"
+            },
+            {
+              "code": "019848",
+              "name": "26 国债 15",
+              "portfolio_fraction": "0.2306683101496321211960090163"
+            },
+            {
+              "code": "260015",
+              "name": "26 附息国债 15",
+              "portfolio_fraction": "0.1476773480479727038958923389"
+            },
+            {
+              "code": "260008",
+              "name": "26 附息国债 08",
+              "portfolio_fraction": "0.1147974719921333387129363902"
+            },
+            {
+              "code": "019829",
+              "name": "26 国债 03",
+              "portfolio_fraction": "0.1047906014122210364595247712"
+            }
+          ],
+          "unlisted_security_proxy_fraction": "0.1090006580155030585083250206",
+          "sector_proxy": {},
+          "issuer_proxy": {
+            "name": "中国中央政府（国家债券）",
+            "portfolio_fraction": "0.9714601543802802783954228013"
+          },
+          "disclosed_issues": [
+            {
+              "issue": "2026年记账式附息（八期）国债",
+              "codes": [
+                "019834",
+                "260008"
+              ],
+              "fair_value": "2807364278.03",
+              "fund_fraction": "0.3832087672308376604057446670",
+              "portfolio_amount": "37945.56205645788363597308037",
+              "portfolio_fraction": "0.3793232367549513583356716543"
+            },
+            {
+              "issue": "2026年记账式附息（十五期）国债",
+              "codes": [
+                "019848",
+                "260015"
+              ],
+              "fair_value": "2800129237.16",
+              "fund_fraction": "0.3822211750204662354862103732",
+              "portfolio_amount": "37847.77008323157891758584288",
+              "portfolio_fraction": "0.3783456581976048250919013552"
+            },
+            {
+              "issue": "2026年记账式附息（三期）国债",
+              "codes": [
+                "019829"
+              ],
+              "fair_value": "775553308.03",
+              "fund_fraction": "0.1058640054010114073245861420",
+              "portfolio_amount": "10482.71733321139016012491453",
+              "portfolio_fraction": "0.1047906014122210364595247712"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "run": "trend_120_base",
+      "as_of": "2026-11-09",
+      "equity": "99975.900",
+      "beta": {
+        "510300": {
+          "observed_returns": 2,
+          "window_returns": 2,
+          "required_returns": 252,
+          "beta": null,
+          "correlation": null,
+          "status": "insufficient_sample"
+        },
+        "511010": {
+          "observed_returns": 2,
+          "window_returns": 2,
+          "required_returns": 252,
+          "beta": null,
+          "correlation": null,
+          "status": "insufficient_sample"
+        }
+      },
+      "stress": [
+        {
+          "name": "股票ETF下跌10%",
+          "pnl": "0.0000",
+          "return_fraction": "0.0",
+          "ending_equity": "99975.9000"
+        },
+        {
+          "name": "股票ETF下跌20%",
+          "pnl": "0.0000",
+          "return_fraction": "0.0",
+          "ending_equity": "99975.9000"
+        },
+        {
+          "name": "债券ETF下跌3%",
+          "pnl": "-2970.61800",
+          "return_fraction": "-0.02971334091516055369344011907",
+          "ending_equity": "97005.28200"
+        },
+        {
+          "name": "股债同时下跌20%和5%",
+          "pnl": "-4951.03000",
+          "return_fraction": "-0.04952223485860092282240019845",
+          "ending_equity": "95024.87000"
+        }
+      ],
+      "lookthrough": {
+        "510300": {
+          "etf_weight": "0",
+          "disclosure_as_of": "2026-09-30",
+          "disclosure_age_days": 40,
+          "exact_current_holdings": null,
+          "listed_positions_proxy": [
+            {
+              "code": "300308",
+              "name": "中际旭创",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "600519",
+              "name": "贵州茅台",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "300750",
+              "name": "宁德时代",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "601318",
+              "name": "中国平安",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "300502",
+              "name": "新易盛",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "600036",
+              "name": "招商银行",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "601899",
+              "name": "紫金矿业",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "603259",
+              "name": "药明康德",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "000333",
+              "name": "美的集团",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "600900",
+              "name": "长江电力",
+              "portfolio_fraction": "0E-29"
+            }
+          ],
+          "unlisted_security_proxy_fraction": "0E-28",
+          "sector_proxy": {
+            "A": {
+              "name": "农、林、牧、渔业",
+              "portfolio_fraction": "0E-30"
+            },
+            "B": {
+              "name": "采矿业",
+              "portfolio_fraction": "0E-29"
+            },
+            "C": {
+              "name": "制造业",
+              "portfolio_fraction": "0E-28"
+            },
+            "D": {
+              "name": "电力、热力、燃气及水生产和供应业",
+              "portfolio_fraction": "0E-29"
+            },
+            "E": {
+              "name": "建筑业",
+              "portfolio_fraction": "0E-29"
+            },
+            "F": {
+              "name": "批发和零售业",
+              "portfolio_fraction": "0E-30"
+            },
+            "G": {
+              "name": "交通运输、仓储和邮政业",
+              "portfolio_fraction": "0E-29"
+            },
+            "I": {
+              "name": "信息传输、软件和信息技术服务业",
+              "portfolio_fraction": "0E-29"
+            },
+            "J": {
+              "name": "金融业",
+              "portfolio_fraction": "0E-28"
+            },
+            "K": {
+              "name": "房地产业",
+              "portfolio_fraction": "0E-30"
+            },
+            "L": {
+              "name": "租赁和商务服务业",
+              "portfolio_fraction": "0E-30"
+            },
+            "M": {
+              "name": "科学研究和技术服务业",
+              "portfolio_fraction": "0E-29"
+            },
+            "Q": {
+              "name": "卫生和社会工作",
+              "portfolio_fraction": "0E-30"
+            },
+            "R": {
+              "name": "文化、体育和娱乐业",
+              "portfolio_fraction": "0E-31"
+            }
+          }
+        },
+        "511010": {
+          "etf_weight": "0.9904446971720184564480039690",
+          "disclosure_as_of": "2026-09-30",
+          "disclosure_age_days": 40,
+          "exact_current_holdings": null,
+          "listed_positions_proxy": [
+            {
+              "code": "019834",
+              "name": "26 国债 08",
+              "portfolio_fraction": "0.2646818725860134723584219784"
+            },
+            {
+              "code": "019848",
+              "name": "26 国债 15",
+              "portfolio_fraction": "0.2308044372592538229776440357"
+            },
+            {
+              "code": "260015",
+              "name": "26 附息国债 15",
+              "portfolio_fraction": "0.1477644986866249229759892188"
+            },
+            {
+              "code": "260008",
+              "name": "26 附息国债 08",
+              "portfolio_fraction": "0.1148652188275960438947258339"
+            },
+            {
+              "code": "019829",
+              "name": "26 国债 03",
+              "portfolio_fraction": "0.1048524427708216696236284398"
+            }
+          ],
+          "unlisted_security_proxy_fraction": "0.1090649839062718805989687776",
+          "sector_proxy": {},
+          "issuer_proxy": {
+            "name": "中国中央政府（国家债券）",
+            "portfolio_fraction": "0.9720334540365818124293782841"
+          },
+          "disclosed_issues": [
+            {
+              "issue": "2026年记账式附息（八期）国债",
+              "codes": [
+                "019834",
+                "260008"
+              ],
+              "fair_value": "2807364278.03",
+              "fund_fraction": "0.3832087672308376604057446670",
+              "portfolio_amount": "37945.56205645788363597308037",
+              "portfolio_fraction": "0.3795470914136095162531478123"
+            },
+            {
+              "issue": "2026年记账式附息（十五期）国债",
+              "codes": [
+                "019848",
+                "260015"
+              ],
+              "fair_value": "2800129237.16",
+              "fund_fraction": "0.3822211750204662354862103732",
+              "portfolio_amount": "37847.77008323157891758584288",
+              "portfolio_fraction": "0.3785689359458787459536332544"
+            },
+            {
+              "issue": "2026年记账式附息（三期）国债",
+              "codes": [
+                "019829"
+              ],
+              "fair_value": "775553308.03",
+              "fund_fraction": "0.1058640054010114073245861420",
+              "portfolio_amount": "10482.71733321139016012491453",
+              "portfolio_fraction": "0.1048524427708216696236284398"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "run": "trend_120_high",
+      "as_of": "2026-11-09",
+      "equity": "99856.840",
+      "beta": {
+        "510300": {
+          "observed_returns": 2,
+          "window_returns": 2,
+          "required_returns": 252,
+          "beta": null,
+          "correlation": null,
+          "status": "insufficient_sample"
+        },
+        "511010": {
+          "observed_returns": 2,
+          "window_returns": 2,
+          "required_returns": 252,
+          "beta": null,
+          "correlation": null,
+          "status": "insufficient_sample"
+        }
+      },
+      "stress": [
+        {
+          "name": "股票ETF下跌10%",
+          "pnl": "0.0000",
+          "return_fraction": "0.0",
+          "ending_equity": "99856.8400"
+        },
+        {
+          "name": "股票ETF下跌20%",
+          "pnl": "0.0000",
+          "return_fraction": "0.0",
+          "ending_equity": "99856.8400"
+        },
+        {
+          "name": "债券ETF下跌3%",
+          "pnl": "-2970.61800",
+          "return_fraction": "-0.02974876833675089257781439909",
+          "ending_equity": "96886.22200"
+        },
+        {
+          "name": "股债同时下跌20%和5%",
+          "pnl": "-4951.03000",
+          "return_fraction": "-0.04958128056125148762969066516",
+          "ending_equity": "94905.81000"
+        }
+      ],
+      "lookthrough": {
+        "510300": {
+          "etf_weight": "0",
+          "disclosure_as_of": "2026-09-30",
+          "disclosure_age_days": 40,
+          "exact_current_holdings": null,
+          "listed_positions_proxy": [
+            {
+              "code": "300308",
+              "name": "中际旭创",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "600519",
+              "name": "贵州茅台",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "300750",
+              "name": "宁德时代",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "601318",
+              "name": "中国平安",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "300502",
+              "name": "新易盛",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "600036",
+              "name": "招商银行",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "601899",
+              "name": "紫金矿业",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "603259",
+              "name": "药明康德",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "000333",
+              "name": "美的集团",
+              "portfolio_fraction": "0E-29"
+            },
+            {
+              "code": "600900",
+              "name": "长江电力",
+              "portfolio_fraction": "0E-29"
+            }
+          ],
+          "unlisted_security_proxy_fraction": "0E-28",
+          "sector_proxy": {
+            "A": {
+              "name": "农、林、牧、渔业",
+              "portfolio_fraction": "0E-30"
+            },
+            "B": {
+              "name": "采矿业",
+              "portfolio_fraction": "0E-29"
+            },
+            "C": {
+              "name": "制造业",
+              "portfolio_fraction": "0E-28"
+            },
+            "D": {
+              "name": "电力、热力、燃气及水生产和供应业",
+              "portfolio_fraction": "0E-29"
+            },
+            "E": {
+              "name": "建筑业",
+              "portfolio_fraction": "0E-29"
+            },
+            "F": {
+              "name": "批发和零售业",
+              "portfolio_fraction": "0E-30"
+            },
+            "G": {
+              "name": "交通运输、仓储和邮政业",
+              "portfolio_fraction": "0E-29"
+            },
+            "I": {
+              "name": "信息传输、软件和信息技术服务业",
+              "portfolio_fraction": "0E-29"
+            },
+            "J": {
+              "name": "金融业",
+              "portfolio_fraction": "0E-28"
+            },
+            "K": {
+              "name": "房地产业",
+              "portfolio_fraction": "0E-30"
+            },
+            "L": {
+              "name": "租赁和商务服务业",
+              "portfolio_fraction": "0E-30"
+            },
+            "M": {
+              "name": "科学研究和技术服务业",
+              "portfolio_fraction": "0E-29"
+            },
+            "Q": {
+              "name": "卫生和社会工作",
+              "portfolio_fraction": "0E-30"
+            },
+            "R": {
+              "name": "文化、体育和娱乐业",
+              "portfolio_fraction": "0E-31"
+            }
+          }
+        },
+        "511010": {
+          "etf_weight": "0.9916256112250297525938133031",
+          "disclosure_as_of": "2026-09-30",
+          "disclosure_age_days": 40,
+          "exact_current_holdings": null,
+          "listed_positions_proxy": [
+            {
+              "code": "019834",
+              "name": "26 国债 08",
+              "portfolio_fraction": "0.2649974546107409798984061570"
+            },
+            {
+              "code": "019848",
+              "name": "26 国债 15",
+              "portfolio_fraction": "0.2310796269838644431431100999"
+            },
+            {
+              "code": "260015",
+              "name": "26 附息国债 15",
+              "portfolio_fraction": "0.1479406793189544615767452739"
+            },
+            {
+              "code": "260008",
+              "name": "26 附息国债 08",
+              "portfolio_fraction": "0.1150021734213285672249864957"
+            },
+            {
+              "code": "019829",
+              "name": "26 国债 03",
+              "portfolio_fraction": "0.1049774590625077877501923206"
+            }
+          ],
+          "unlisted_security_proxy_fraction": "0.1091950228398479954660536284",
+          "sector_proxy": {},
+          "issuer_proxy": {
+            "name": "中国中央政府（国家债券）",
+            "portfolio_fraction": "0.9731924162372442350594939755"
+          },
+          "disclosed_issues": [
+            {
+              "issue": "2026年记账式附息（八期）国债",
+              "codes": [
+                "019834",
+                "260008"
+              ],
+              "fair_value": "2807364278.03",
+              "fund_fraction": "0.3832087672308376604057446670",
+              "portfolio_amount": "37945.56205645788363597308037",
+              "portfolio_fraction": "0.3799996280320695471233926526"
+            },
+            {
+              "issue": "2026年记账式附息（十五期）国债",
+              "codes": [
+                "019848",
+                "260015"
+              ],
+              "fair_value": "2800129237.16",
+              "fund_fraction": "0.3822211750204662354862103732",
+              "portfolio_amount": "37847.77008323157891758584288",
+              "portfolio_fraction": "0.3790203063028189047198553738"
+            },
+            {
+              "issue": "2026年记账式附息（三期）国债",
+              "codes": [
+                "019829"
+              ],
+              "fair_value": "775553308.03",
+              "fund_fraction": "0.1058640054010114073245861420",
+              "portfolio_amount": "10482.71733321139016012491453",
+              "portfolio_fraction": "0.1049774590625077877501923206"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "disclosure": {
+    "schema_version": 1,
+    "not_current_holdings": true,
+    "not_historical_holdings_series": true,
+    "funds": {
+      "510300": {
+        "report_date": "2026-09-30",
+        "announcement_date": "2026-10-27",
+        "nav": "106879396730.03",
+        "pdf_sha256": "fd19ca5832055d08712a104814792c2461c7280602f661c97f4d2f02d559cff1",
+        "pdf_path": "data/snapshots/2026-11-06-holdings-windows-1720/quarterly_510300.pdf",
+        "official_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-10-27/510300_20261027_82OP.pdf",
+        "pages": {
+          "net_assets": 3,
+          "holdings": 9
+        },
+        "listed_positions": [
+          {
+            "rank": 1,
+            "code": "300308",
+            "name": "中际旭创",
+            "quantity": 4706344,
+            "fair_value": "3804796743.36",
+            "reported_percent": "3.56",
+            "nav_fraction": "0.03559897285882567902864542328"
+          },
+          {
+            "rank": 2,
+            "code": "600519",
+            "name": "贵州茅台",
+            "quantity": 2627369,
+            "fair_value": "3306859170.78",
+            "reported_percent": "3.09",
+            "nav_fraction": "0.03094009951359380017539693112"
+          },
+          {
+            "rank": 3,
+            "code": "300750",
+            "name": "宁德时代",
+            "quantity": 11112950,
+            "fair_value": "3235090874.50",
+            "reported_percent": "3.03",
+            "nav_fraction": "0.03026861091545657662014889540"
+          },
+          {
+            "rank": 4,
+            "code": "601318",
+            "name": "中国平安",
+            "quantity": 44797247,
+            "fair_value": "2387245292.63",
+            "reported_percent": "2.23",
+            "nav_fraction": "0.02233587918408650175419527188"
+          },
+          {
+            "rank": 5,
+            "code": "300502",
+            "name": "新易盛",
+            "quantity": 5864205,
+            "fair_value": "2281175745.00",
+            "reported_percent": "2.13",
+            "nav_fraction": "0.02134345640780601453445129134"
+          },
+          {
+            "rank": 6,
+            "code": "600036",
+            "name": "招商银行",
+            "quantity": 52009993,
+            "fair_value": "2145932311.18",
+            "reported_percent": "2.01",
+            "nav_fraction": "0.02007807282633225672975044338"
+          },
+          {
+            "rank": 7,
+            "code": "601899",
+            "name": "紫金矿业",
+            "quantity": 69332902,
+            "fair_value": "2065427150.58",
+            "reported_percent": "1.93",
+            "nav_fraction": "0.01932483915302335422178434389"
+          },
+          {
+            "rank": 8,
+            "code": "603259",
+            "name": "药明康德",
+            "quantity": 10393994,
+            "fair_value": "1739330955.96",
+            "reported_percent": "1.63",
+            "nav_fraction": "0.01627377220656877660534866809"
+          },
+          {
+            "rank": 9,
+            "code": "000333",
+            "name": "美的集团",
+            "quantity": 20466395,
+            "fair_value": "1639358239.50",
+            "reported_percent": "1.53",
+            "nav_fraction": "0.01533839345707485682770552212"
+          },
+          {
+            "rank": 10,
+            "code": "600900",
+            "name": "长江电力",
+            "quantity": 51320997,
+            "fair_value": "1464701254.38",
+            "reported_percent": "1.37",
+            "nav_fraction": "0.01370424327973832560293127181"
+          }
+        ],
+        "security_nav_fraction": "0.9719539225803117178796092429",
+        "listed_nav_fraction": "0.2252063398025061421003580623",
+        "full_security_hhi": null,
+        "coverage": "index top ten stocks",
+        "unlisted_security_nav_fraction": "0.7467475827778055757792511806",
+        "known_hhi_contribution": "0.005559686739879122371261370670",
+        "sectors": {
+          "A": {
+            "name": "农、林、牧、渔业",
+            "fair_value": "822532882.14",
+            "nav_fraction": "0.007695897500410312458871489091"
+          },
+          "B": {
+            "name": "采矿业",
+            "fair_value": "5838998855.40",
+            "nav_fraction": "0.05463165992739376355761526562"
+          },
+          "C": {
+            "name": "制造业",
+            "fair_value": "59409013564.35",
+            "nav_fraction": "0.5558509439795312406763863857"
+          },
+          "D": {
+            "name": "电力、热力、燃气及水生产和供应业",
+            "fair_value": "3120551197.64",
+            "nav_fraction": "0.02919693872825926916923151145"
+          },
+          "E": {
+            "name": "建筑业",
+            "fair_value": "1352456179.27",
+            "nav_fraction": "0.01265404016721961131521240213"
+          },
+          "F": {
+            "name": "批发和零售业",
+            "fair_value": "176139741.71",
+            "nav_fraction": "0.001648023352479401286937125641"
+          },
+          "G": {
+            "name": "交通运输、仓储和邮政业",
+            "fair_value": "3018030947.67",
+            "nav_fraction": "0.02823772438848376411740947415"
+          },
+          "I": {
+            "name": "信息传输、软件和信息技术服务业",
+            "fair_value": "5185177112.01",
+            "nav_fraction": "0.04851428124269264456169913882"
+          },
+          "J": {
+            "name": "金融业",
+            "fair_value": "21985201010.09",
+            "nav_fraction": "0.2057010208021954370304755942"
+          },
+          "K": {
+            "name": "房地产业",
+            "fair_value": "475102178.18",
+            "nav_fraction": "0.004445217625807482825143990458"
+          },
+          "L": {
+            "name": "租赁和商务服务业",
+            "fair_value": "536844070.38",
+            "nav_fraction": "0.005022895776030914289823939883"
+          },
+          "M": {
+            "name": "科学研究和技术服务业",
+            "fair_value": "1739330955.96",
+            "nav_fraction": "0.01627377220656877660534866809"
+          },
+          "Q": {
+            "name": "卫生和社会工作",
+            "fair_value": "155170708.98",
+            "nav_fraction": "0.001451829947842525075427273365"
+          },
+          "R": {
+            "name": "文化、体育和娱乐业",
+            "fair_value": "67299490.99",
+            "nav_fraction": "0.0006296769353965749100269842321"
+          }
+        }
+      },
+      "511010": {
+        "report_date": "2026-09-30",
+        "announcement_date": "2026-10-27",
+        "nav": "7325939587.23",
+        "pdf_sha256": "50ecd6f6daa0a7b1579a90d07efdab7fbbaada035b5888a2dab7477fa44132f1",
+        "pdf_path": "data/snapshots/2026-11-06-holdings-windows-1720/quarterly_511010.pdf",
+        "official_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-10-27/511010_20261027_RYVD.pdf",
+        "pages": {
+          "net_assets": 3,
+          "holdings": 10
+        },
+        "listed_positions": [
+          {
+            "rank": 1,
+            "code": "019834",
+            "name": "26 国债 08",
+            "quantity": 19355970,
+            "fair_value": "1957750305.43",
+            "reported_percent": "26.72",
+            "nav_fraction": "0.2672353876412789289416380013"
+          },
+          {
+            "rank": 2,
+            "code": "019848",
+            "name": "26 国债 15",
+            "quantity": 17025610,
+            "fair_value": "1707171908.39",
+            "reported_percent": "23.30",
+            "nav_fraction": "0.2330311201809263353345732337"
+          },
+          {
+            "rank": 3,
+            "code": "260015",
+            "name": "26 附息国债 15",
+            "quantity": 10900000,
+            "fair_value": "1092957328.77",
+            "reported_percent": "14.92",
+            "nav_fraction": "0.1491900548395399001516371395"
+          },
+          {
+            "rank": 4,
+            "code": "260008",
+            "name": "26 附息国债 08",
+            "quantity": 8400000,
+            "fair_value": "849613972.60",
+            "reported_percent": "11.60",
+            "nav_fraction": "0.1159733795895587314641066657"
+          },
+          {
+            "rank": 5,
+            "code": "019829",
+            "name": "26 国债 03",
+            "quantity": 7625100,
+            "fair_value": "775553308.03",
+            "reported_percent": "10.59",
+            "nav_fraction": "0.1058640054010114073245861420"
+          }
+        ],
+        "security_nav_fraction": "0.9814111346266928257479583076",
+        "listed_nav_fraction": "0.8712939476523153032165411822",
+        "full_security_hhi": null,
+        "coverage": "top five bond code rows; cross-market aliases not consolidated",
+        "unlisted_security_nav_fraction": "0.1101171869743775225314171254",
+        "known_hhi_contribution": "0.1726329402565561210309213966",
+        "sectors": {},
+        "issuer_category": {
+          "name": "中国中央政府（国家债券）",
+          "nav_fraction": "0.9814111346266928257479583076",
+          "source_page": 10
+        }
+      }
+    }
+  },
+  "input_sha256": {
+    "reports/daily/20261109T171001-d2a48b21/research.json": "30c2c668018783367dbb628aadc53685485a5a3bd0f63ea3329bc153915f05ef",
+    "reports/daily/20261109T171001-d2a48b21/risk_extensions_config.json": "ca769750234e5e4ad3777cd98c36175509c0ce89ec87d00eb5dbde5730c4e611",
+    "reports/daily/20261109T171001-d2a48b21/forward_checkpoint.json": "23d4f86551645de6cc79fbf5561e0084fa1f614fb2568e7f122b85346ad5b837",
+    "data/reference/holdings_2026q3.json": "d67903700b11d5b846366e3cf646734e4a18ed8eba2939f415ab78bbff0c7a2a",
+    "data/snapshots/2026-11-07-bond-identities-000043/manifest.json": "659b055ad378b52fcb0dedc786ea6fef3e1b3c8644ef399bdba71a14956adbcf"
+  },
+  "bond_identity_snapshot": "data/snapshots/2026-11-07-bond-identities-000043"
+}

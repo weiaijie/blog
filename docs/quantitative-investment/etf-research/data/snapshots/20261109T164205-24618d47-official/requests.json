@@ -1,0 +1,218 @@
+[
+  {
+    "name": "sse_dayk_510300",
+    "url": "https://yunhq.sse.com.cn:32042/v1/sh1/dayk/510300?begin=-64&end=-1&period=day",
+    "requested_at_utc": "2026-11-09T08:42:07.443979+00:00",
+    "status": 200,
+    "curl_exit": 0,
+    "final_url": "https://yunhq.sse.com.cn:32042/v1/sh1/dayk/510300?begin=-64&end=-1&period=day",
+    "content_type": "application/json;charset=UTF-8",
+    "address_family": "ipv4",
+    "certificate_verification_enabled": true,
+    "client_version": "curl 8.18.0 (x86_64-pc-linux-gnu) libcurl/8.18.0 OpenSSL/3.5.5 zlib/1.3.1 brotli/1.2.0 zstd/1.5.7 libidn2/2.3.8 libpsl/0.21.2 libssh2/1.11.1 nghttp2/1.68.0 librtmp/2.3 mit-krb5/1.22.1 OpenLDAP/2.6.10",
+    "metrics": {
+      "remote_ip": "58.63.252.133",
+      "http_version": "1.1",
+      "ssl_verify_result": 0,
+      "time_connect": 0.029214,
+      "time_appconnect": 0.089697,
+      "time_starttransfer": 0.242128,
+      "time_total": 0.242191
+    },
+    "bytes": 3872,
+    "sha256": "8dc1b6e12bd3ef762cee6896a41af360742234428f44b29b6a9269eeaf63c226",
+    "elapsed_seconds": 0.252,
+    "retry_delay_seconds": null,
+    "selected_attempt": "sse_dayk_510300_attempt_01",
+    "attempts": [
+      {
+        "name": "sse_dayk_510300_attempt_01",
+        "url": "https://yunhq.sse.com.cn:32042/v1/sh1/dayk/510300?begin=-64&end=-1&period=day",
+        "requested_at_utc": "2026-11-09T08:42:07.443979+00:00",
+        "status": 200,
+        "curl_exit": 0,
+        "final_url": "https://yunhq.sse.com.cn:32042/v1/sh1/dayk/510300?begin=-64&end=-1&period=day",
+        "content_type": "application/json;charset=UTF-8",
+        "address_family": "ipv4",
+        "certificate_verification_enabled": true,
+        "client_version": "curl 8.18.0 (x86_64-pc-linux-gnu) libcurl/8.18.0 OpenSSL/3.5.5 zlib/1.3.1 brotli/1.2.0 zstd/1.5.7 libidn2/2.3.8 libpsl/0.21.2 libssh2/1.11.1 nghttp2/1.68.0 librtmp/2.3 mit-krb5/1.22.1 OpenLDAP/2.6.10",
+        "metrics": {
+          "remote_ip": "58.63.252.133",
+          "http_version": "1.1",
+          "ssl_verify_result": 0,
+          "time_connect": 0.029214,
+          "time_appconnect": 0.089697,
+          "time_starttransfer": 0.242128,
+          "time_total": 0.242191
+        },
+        "bytes": 3872,
+        "sha256": "8dc1b6e12bd3ef762cee6896a41af360742234428f44b29b6a9269eeaf63c226",
+        "elapsed_seconds": 0.252,
+        "retry_delay_seconds": null
+      }
+    ],
+    "actual_requests": 1
+  },
+  {
+    "name": "sse_snap_510300",
+    "url": "https://yunhq.sse.com.cn:32042/v1/sh1/snap/510300?select=name,prev_close,open,high,low,last,up_limit,down_limit,tradephase,hlt_tag",
+    "requested_at_utc": "2026-11-09T08:42:07.443713+00:00",
+    "status": 200,
+    "curl_exit": 0,
+    "final_url": "https://yunhq.sse.com.cn:32042/v1/sh1/snap/510300?select=name,prev_close,open,high,low,last,up_limit,down_limit,tradephase,hlt_tag",
+    "content_type": "application/json;charset=UTF-8",
+    "address_family": "ipv4",
+    "certificate_verification_enabled": true,
+    "client_version": "curl 8.18.0 (x86_64-pc-linux-gnu) libcurl/8.18.0 OpenSSL/3.5.5 zlib/1.3.1 brotli/1.2.0 zstd/1.5.7 libidn2/2.3.8 libpsl/0.21.2 libssh2/1.11.1 nghttp2/1.68.0 librtmp/2.3 mit-krb5/1.22.1 OpenLDAP/2.6.10",
+    "metrics": {
+      "remote_ip": "58.63.252.133",
+      "http_version": "1.1",
+      "ssl_verify_result": 0,
+      "time_connect": 0.026933,
+      "time_appconnect": 0.082854,
+      "time_starttransfer": 0.109421,
+      "time_total": 0.109483
+    },
+    "bytes": 128,
+    "sha256": "c95698d6b8e38ad96aed9ca0d26b02e657064db3e872ca77dcd0babd3fb838ca",
+    "elapsed_seconds": 0.119,
+    "retry_delay_seconds": null,
+    "selected_attempt": "sse_snap_510300_attempt_01",
+    "attempts": [
+      {
+        "name": "sse_snap_510300_attempt_01",
+        "url": "https://yunhq.sse.com.cn:32042/v1/sh1/snap/510300?select=name,prev_close,open,high,low,last,up_limit,down_limit,tradephase,hlt_tag",
+        "requested_at_utc": "2026-11-09T08:42:07.443713+00:00",
+        "status": 200,
+        "curl_exit": 0,
+        "final_url": "https://yunhq.sse.com.cn:32042/v1/sh1/snap/510300?select=name,prev_close,open,high,low,last,up_limit,down_limit,tradephase,hlt_tag",
+        "content_type": "application/json;charset=UTF-8",
+        "address_family": "ipv4",
+        "certificate_verification_enabled": true,
+        "client_version": "curl 8.18.0 (x86_64-pc-linux-gnu) libcurl/8.18.0 OpenSSL/3.5.5 zlib/1.3.1 brotli/1.2.0 zstd/1.5.7 libidn2/2.3.8 libpsl/0.21.2 libssh2/1.11.1 nghttp2/1.68.0 librtmp/2.3 mit-krb5/1.22.1 OpenLDAP/2.6.10",
+        "metrics": {
+          "remote_ip": "58.63.252.133",
+          "http_version": "1.1",
+          "ssl_verify_result": 0,
+          "time_connect": 0.026933,
+          "time_appconnect": 0.082854,
+          "time_starttransfer": 0.109421,
+          "time_total": 0.109483
+        },
+        "bytes": 128,
+        "sha256": "c95698d6b8e38ad96aed9ca0d26b02e657064db3e872ca77dcd0babd3fb838ca",
+        "elapsed_seconds": 0.119,
+        "retry_delay_seconds": null
+      }
+    ],
+    "actual_requests": 1
+  },
+  {
+    "name": "sse_dayk_511010",
+    "url": "https://yunhq.sse.com.cn:32042/v1/sh1/dayk/511010?begin=-64&end=-1&period=day",
+    "requested_at_utc": "2026-11-09T08:42:07.444080+00:00",
+    "status": 200,
+    "curl_exit": 0,
+    "final_url": "https://yunhq.sse.com.cn:32042/v1/sh1/dayk/511010?begin=-64&end=-1&period=day",
+    "content_type": "application/json;charset=UTF-8",
+    "address_family": "ipv4",
+    "certificate_verification_enabled": true,
+    "client_version": "curl 8.18.0 (x86_64-pc-linux-gnu) libcurl/8.18.0 OpenSSL/3.5.5 zlib/1.3.1 brotli/1.2.0 zstd/1.5.7 libidn2/2.3.8 libpsl/0.21.2 libssh2/1.11.1 nghttp2/1.68.0 librtmp/2.3 mit-krb5/1.22.1 OpenLDAP/2.6.10",
+    "metrics": {
+      "remote_ip": "58.63.252.133",
+      "http_version": "1.1",
+      "ssl_verify_result": 0,
+      "time_connect": 0.030777,
+      "time_appconnect": 0.093522,
+      "time_starttransfer": 0.242726,
+      "time_total": 0.24278
+    },
+    "bytes": 4260,
+    "sha256": "024c10dd501bb6359f50122753b6d2d4363cf6a306eb034cdfd223a88948d1de",
+    "elapsed_seconds": 0.252,
+    "retry_delay_seconds": null,
+    "selected_attempt": "sse_dayk_511010_attempt_01",
+    "attempts": [
+      {
+        "name": "sse_dayk_511010_attempt_01",
+        "url": "https://yunhq.sse.com.cn:32042/v1/sh1/dayk/511010?begin=-64&end=-1&period=day",
+        "requested_at_utc": "2026-11-09T08:42:07.444080+00:00",
+        "status": 200,
+        "curl_exit": 0,
+        "final_url": "https://yunhq.sse.com.cn:32042/v1/sh1/dayk/511010?begin=-64&end=-1&period=day",
+        "content_type": "application/json;charset=UTF-8",
+        "address_family": "ipv4",
+        "certificate_verification_enabled": true,
+        "client_version": "curl 8.18.0 (x86_64-pc-linux-gnu) libcurl/8.18.0 OpenSSL/3.5.5 zlib/1.3.1 brotli/1.2.0 zstd/1.5.7 libidn2/2.3.8 libpsl/0.21.2 libssh2/1.11.1 nghttp2/1.68.0 librtmp/2.3 mit-krb5/1.22.1 OpenLDAP/2.6.10",
+        "metrics": {
+          "remote_ip": "58.63.252.133",
+          "http_version": "1.1",
+          "ssl_verify_result": 0,
+          "time_connect": 0.030777,
+          "time_appconnect": 0.093522,
+          "time_starttransfer": 0.242726,
+          "time_total": 0.24278
+        },
+        "bytes": 4260,
+        "sha256": "024c10dd501bb6359f50122753b6d2d4363cf6a306eb034cdfd223a88948d1de",
+        "elapsed_seconds": 0.252,
+        "retry_delay_seconds": null
+      }
+    ],
+    "actual_requests": 1
+  },
+  {
+    "name": "sse_snap_511010",
+    "url": "https://yunhq.sse.com.cn:32042/v1/sh1/snap/511010?select=name,prev_close,open,high,low,last,up_limit,down_limit,tradephase,hlt_tag",
+    "requested_at_utc": "2026-11-09T08:42:07.444116+00:00",
+    "status": 200,
+    "curl_exit": 0,
+    "final_url": "https://yunhq.sse.com.cn:32042/v1/sh1/snap/511010?select=name,prev_close,open,high,low,last,up_limit,down_limit,tradephase,hlt_tag",
+    "content_type": "application/json;charset=UTF-8",
+    "address_family": "ipv4",
+    "certificate_verification_enabled": true,
+    "client_version": "curl 8.18.0 (x86_64-pc-linux-gnu) libcurl/8.18.0 OpenSSL/3.5.5 zlib/1.3.1 brotli/1.2.0 zstd/1.5.7 libidn2/2.3.8 libpsl/0.21.2 libssh2/1.11.1 nghttp2/1.68.0 librtmp/2.3 mit-krb5/1.22.1 OpenLDAP/2.6.10",
+    "metrics": {
+      "remote_ip": "58.63.252.133",
+      "http_version": "1.1",
+      "ssl_verify_result": 0,
+      "time_connect": 0.026216,
+      "time_appconnect": 0.085929,
+      "time_starttransfer": 0.111765,
+      "time_total": 0.111861
+    },
+    "bytes": 145,
+    "sha256": "806eea330d1584b620b8e197dead0ce52cb0cf4ef98bbc78312308b7cd0acf03",
+    "elapsed_seconds": 0.121,
+    "retry_delay_seconds": null,
+    "selected_attempt": "sse_snap_511010_attempt_01",
+    "attempts": [
+      {
+        "name": "sse_snap_511010_attempt_01",
+        "url": "https://yunhq.sse.com.cn:32042/v1/sh1/snap/511010?select=name,prev_close,open,high,low,last,up_limit,down_limit,tradephase,hlt_tag",
+        "requested_at_utc": "2026-11-09T08:42:07.444116+00:00",
+        "status": 200,
+        "curl_exit": 0,
+        "final_url": "https://yunhq.sse.com.cn:32042/v1/sh1/snap/511010?select=name,prev_close,open,high,low,last,up_limit,down_limit,tradephase,hlt_tag",
+        "content_type": "application/json;charset=UTF-8",
+        "address_family": "ipv4",
+        "certificate_verification_enabled": true,
+        "client_version": "curl 8.18.0 (x86_64-pc-linux-gnu) libcurl/8.18.0 OpenSSL/3.5.5 zlib/1.3.1 brotli/1.2.0 zstd/1.5.7 libidn2/2.3.8 libpsl/0.21.2 libssh2/1.11.1 nghttp2/1.68.0 librtmp/2.3 mit-krb5/1.22.1 OpenLDAP/2.6.10",
+        "metrics": {
+          "remote_ip": "58.63.252.133",
+          "http_version": "1.1",
+          "ssl_verify_result": 0,
+          "time_connect": 0.026216,
+          "time_appconnect": 0.085929,
+          "time_starttransfer": 0.111765,
+          "time_total": 0.111861
+        },
+        "bytes": 145,
+        "sha256": "806eea330d1584b620b8e197dead0ce52cb0cf4ef98bbc78312308b7cd0acf03",
+        "elapsed_seconds": 0.121,
+        "retry_delay_seconds": null
+      }
+    ],
+    "actual_requests": 1
+  }
+]

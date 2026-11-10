@@ -1,0 +1,1517 @@
+{
+  "format": 1,
+  "protocol_commit": "0c797f5ed5321d8653d64ccf0f795e1529f6f9b2",
+  "engine_sha256": "86805dd5d4cb93901c59be86f2f332641286442f65140dbddd9f196c0eb7e274",
+  "as_of": "2026-11-09",
+  "forward_start": "2026-11-05",
+  "admitted_prefix_sha256": "fe9f78430ee4ef68411c85279049af67870e3499f18aea67576fcb2bfcde9666",
+  "status": "research_account_active",
+  "forward_sessions": 3,
+  "portfolios": {
+    "cash_low": {
+      "daily": [
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-05",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        },
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-06",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        },
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-09",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        }
+      ],
+      "decisions": [],
+      "journal": [],
+      "summary": {
+        "annualized_scenario_return": 0.0,
+        "cash_limited_orders": 0,
+        "commissions": "0",
+        "ending_cash": "100000",
+        "ending_equity": "100000",
+        "ending_holdings": {},
+        "excluded_orders": 0,
+        "execution_delay_sessions": 1,
+        "initial_cash": "100000",
+        "max_close_drawdown": 0.0,
+        "pending_target_batches_at_end": 0,
+        "scenario": "low",
+        "sell_tax": "0",
+        "slippage_cost": "0",
+        "strategy": "cash",
+        "terminal_liquidation_included": false,
+        "total_return": 0.0,
+        "trades": 0
+      }
+    },
+    "cash_base": {
+      "daily": [
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-05",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        },
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-06",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        },
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-09",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        }
+      ],
+      "decisions": [],
+      "journal": [],
+      "summary": {
+        "annualized_scenario_return": 0.0,
+        "cash_limited_orders": 0,
+        "commissions": "0",
+        "ending_cash": "100000",
+        "ending_equity": "100000",
+        "ending_holdings": {},
+        "excluded_orders": 0,
+        "execution_delay_sessions": 1,
+        "initial_cash": "100000",
+        "max_close_drawdown": 0.0,
+        "pending_target_batches_at_end": 0,
+        "scenario": "base",
+        "sell_tax": "0",
+        "slippage_cost": "0",
+        "strategy": "cash",
+        "terminal_liquidation_included": false,
+        "total_return": 0.0,
+        "trades": 0
+      }
+    },
+    "cash_high": {
+      "daily": [
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-05",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        },
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-06",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        },
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-09",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        }
+      ],
+      "decisions": [],
+      "journal": [],
+      "summary": {
+        "annualized_scenario_return": 0.0,
+        "cash_limited_orders": 0,
+        "commissions": "0",
+        "ending_cash": "100000",
+        "ending_equity": "100000",
+        "ending_holdings": {},
+        "excluded_orders": 0,
+        "execution_delay_sessions": 1,
+        "initial_cash": "100000",
+        "max_close_drawdown": 0.0,
+        "pending_target_batches_at_end": 0,
+        "scenario": "high",
+        "sell_tax": "0",
+        "slippage_cost": "0",
+        "strategy": "cash",
+        "terminal_liquidation_included": false,
+        "total_return": 0.0,
+        "trades": 0
+      }
+    },
+    "equity_hold_low": {
+      "daily": [
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-05",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        },
+        {
+          "available_cash": "2077.010",
+          "cash": "2077.010",
+          "date": "2026-11-06",
+          "equity": "100228.210",
+          "receivables": "0",
+          "units_510300": 23800,
+          "units_511010": 0
+        },
+        {
+          "available_cash": "2077.010",
+          "cash": "2077.010",
+          "date": "2026-11-09",
+          "equity": "100371.010",
+          "receivables": "0",
+          "units_510300": 23800,
+          "units_511010": 0
+        }
+      ],
+      "decisions": [
+        {
+          "day": "2026-11-06",
+          "filled_units": 23800,
+          "reason": "filled",
+          "requested_units": 23800,
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "510300",
+          "target_units": 23800
+        }
+      ],
+      "journal": [
+        {
+          "commission": "9.79",
+          "day": "2026-11-06",
+          "fill_price": "4.114",
+          "kind": "trade",
+          "notional": "97913.200",
+          "raw_price": "4.113",
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "510300",
+          "tax": "0",
+          "units": 23800
+        }
+      ],
+      "summary": {
+        "annualized_scenario_return": 0.40235309142380565,
+        "cash_limited_orders": 0,
+        "commissions": "9.79",
+        "ending_cash": "2077.010",
+        "ending_equity": "100371.010",
+        "ending_holdings": {
+          "510300": 23800
+        },
+        "excluded_orders": 0,
+        "execution_delay_sessions": 1,
+        "initial_cash": "100000",
+        "max_close_drawdown": 0.0,
+        "pending_target_batches_at_end": 0,
+        "scenario": "low",
+        "sell_tax": "0",
+        "slippage_cost": "23.800",
+        "strategy": "equity_hold",
+        "terminal_liquidation_included": false,
+        "total_return": 0.0037101,
+        "trades": 1
+      }
+    },
+    "equity_hold_base": {
+      "daily": [
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-05",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        },
+        {
+          "available_cash": "2009.810",
+          "cash": "2009.810",
+          "date": "2026-11-06",
+          "equity": "100161.010",
+          "receivables": "0",
+          "units_510300": 23800,
+          "units_511010": 0
+        },
+        {
+          "available_cash": "2009.810",
+          "cash": "2009.810",
+          "date": "2026-11-09",
+          "equity": "100303.810",
+          "receivables": "0",
+          "units_510300": 23800,
+          "units_511010": 0
+        }
+      ],
+      "decisions": [
+        {
+          "day": "2026-11-06",
+          "filled_units": 23800,
+          "reason": "filled",
+          "requested_units": 23800,
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "510300",
+          "target_units": 23800
+        }
+      ],
+      "journal": [
+        {
+          "commission": "29.39",
+          "day": "2026-11-06",
+          "fill_price": "4.116",
+          "kind": "trade",
+          "notional": "97960.800",
+          "raw_price": "4.113",
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "510300",
+          "tax": "0",
+          "units": 23800
+        }
+      ],
+      "summary": {
+        "annualized_scenario_return": 0.31916102616485087,
+        "cash_limited_orders": 0,
+        "commissions": "29.39",
+        "ending_cash": "2009.810",
+        "ending_equity": "100303.810",
+        "ending_holdings": {
+          "510300": 23800
+        },
+        "excluded_orders": 0,
+        "execution_delay_sessions": 1,
+        "initial_cash": "100000",
+        "max_close_drawdown": 0.0,
+        "pending_target_batches_at_end": 0,
+        "scenario": "base",
+        "sell_tax": "0",
+        "slippage_cost": "71.400",
+        "strategy": "equity_hold",
+        "terminal_liquidation_included": false,
+        "total_return": 0.0030381,
+        "trades": 1
+      }
+    },
+    "equity_hold_high": {
+      "daily": [
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-05",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        },
+        {
+          "available_cash": "1893.590",
+          "cash": "1893.590",
+          "date": "2026-11-06",
+          "equity": "100044.790",
+          "receivables": "0",
+          "units_510300": 23800,
+          "units_511010": 0
+        },
+        {
+          "available_cash": "1893.590",
+          "cash": "1893.590",
+          "date": "2026-11-09",
+          "equity": "100187.590",
+          "receivables": "0",
+          "units_510300": 23800,
+          "units_511010": 0
+        }
+      ],
+      "decisions": [
+        {
+          "day": "2026-11-06",
+          "filled_units": 23800,
+          "reason": "filled",
+          "requested_units": 23800,
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "510300",
+          "target_units": 23800
+        }
+      ],
+      "journal": [
+        {
+          "commission": "98.01",
+          "day": "2026-11-06",
+          "fill_price": "4.118",
+          "kind": "trade",
+          "notional": "98008.400",
+          "raw_price": "4.113",
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "510300",
+          "tax": "0",
+          "units": 23800
+        }
+      ],
+      "summary": {
+        "annualized_scenario_return": 0.1866481534084985,
+        "cash_limited_orders": 0,
+        "commissions": "98.01",
+        "ending_cash": "1893.590",
+        "ending_equity": "100187.590",
+        "ending_holdings": {
+          "510300": 23800
+        },
+        "excluded_orders": 0,
+        "execution_delay_sessions": 1,
+        "initial_cash": "100000",
+        "max_close_drawdown": 0.0,
+        "pending_target_batches_at_end": 0,
+        "scenario": "high",
+        "sell_tax": "0",
+        "slippage_cost": "119.000",
+        "strategy": "equity_hold",
+        "terminal_liquidation_included": false,
+        "total_return": 0.0018759,
+        "trades": 1
+      }
+    },
+    "bond_hold_low": {
+      "daily": [
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-05",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        },
+        {
+          "available_cash": "1014.300",
+          "cash": "1014.300",
+          "date": "2026-11-06",
+          "equity": "100028.600",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 700
+        },
+        {
+          "available_cash": "1014.300",
+          "cash": "1014.300",
+          "date": "2026-11-09",
+          "equity": "100034.900",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 700
+        }
+      ],
+      "decisions": [
+        {
+          "day": "2026-11-06",
+          "filled_units": 700,
+          "reason": "filled",
+          "requested_units": 700,
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "511010",
+          "target_units": 700
+        }
+      ],
+      "journal": [
+        {
+          "commission": "9.90",
+          "day": "2026-11-06",
+          "fill_price": "141.394",
+          "kind": "trade",
+          "notional": "98975.800",
+          "raw_price": "141.379",
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "511010",
+          "tax": "0",
+          "units": 700
+        }
+      ],
+      "summary": {
+        "annualized_scenario_return": 0.03237554681600706,
+        "cash_limited_orders": 0,
+        "commissions": "9.90",
+        "ending_cash": "1014.300",
+        "ending_equity": "100034.900",
+        "ending_holdings": {
+          "511010": 700
+        },
+        "excluded_orders": 0,
+        "execution_delay_sessions": 1,
+        "initial_cash": "100000",
+        "max_close_drawdown": 0.0,
+        "pending_target_batches_at_end": 0,
+        "scenario": "low",
+        "sell_tax": "0",
+        "slippage_cost": "10.500",
+        "strategy": "bond_hold",
+        "terminal_liquidation_included": false,
+        "total_return": 0.000349,
+        "trades": 1
+      }
+    },
+    "bond_hold_base": {
+      "daily": [
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-05",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        },
+        {
+          "available_cash": "955.300",
+          "cash": "955.300",
+          "date": "2026-11-06",
+          "equity": "99969.600",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 700
+        },
+        {
+          "available_cash": "955.300",
+          "cash": "955.300",
+          "date": "2026-11-09",
+          "equity": "99975.900",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 700
+        }
+      ],
+      "decisions": [
+        {
+          "day": "2026-11-06",
+          "filled_units": 700,
+          "reason": "filled",
+          "requested_units": 700,
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "511010",
+          "target_units": 700
+        }
+      ],
+      "journal": [
+        {
+          "commission": "29.70",
+          "day": "2026-11-06",
+          "fill_price": "141.450",
+          "kind": "trade",
+          "notional": "99015.000",
+          "raw_price": "141.379",
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "511010",
+          "tax": "0",
+          "units": 700
+        }
+      ],
+      "summary": {
+        "annualized_scenario_return": -0.02176853452678722,
+        "cash_limited_orders": 0,
+        "commissions": "29.70",
+        "ending_cash": "955.300",
+        "ending_equity": "99975.900",
+        "ending_holdings": {
+          "511010": 700
+        },
+        "excluded_orders": 0,
+        "execution_delay_sessions": 1,
+        "initial_cash": "100000",
+        "max_close_drawdown": -0.000304,
+        "pending_target_batches_at_end": 0,
+        "scenario": "base",
+        "sell_tax": "0",
+        "slippage_cost": "49.700",
+        "strategy": "bond_hold",
+        "terminal_liquidation_included": false,
+        "total_return": -0.000241,
+        "trades": 1
+      }
+    },
+    "bond_hold_high": {
+      "daily": [
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-05",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        },
+        {
+          "available_cash": "836.240",
+          "cash": "836.240",
+          "date": "2026-11-06",
+          "equity": "99850.540",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 700
+        },
+        {
+          "available_cash": "836.240",
+          "cash": "836.240",
+          "date": "2026-11-09",
+          "equity": "99856.840",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 700
+        }
+      ],
+      "decisions": [
+        {
+          "day": "2026-11-06",
+          "filled_units": 700,
+          "reason": "filled",
+          "requested_units": 700,
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "511010",
+          "target_units": 700
+        }
+      ],
+      "journal": [
+        {
+          "commission": "99.06",
+          "day": "2026-11-06",
+          "fill_price": "141.521",
+          "kind": "trade",
+          "notional": "99064.700",
+          "raw_price": "141.379",
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "511010",
+          "tax": "0",
+          "units": 700
+        }
+      ],
+      "summary": {
+        "annualized_scenario_return": -0.12262136061866191,
+        "cash_limited_orders": 0,
+        "commissions": "99.06",
+        "ending_cash": "836.240",
+        "ending_equity": "99856.840",
+        "ending_holdings": {
+          "511010": 700
+        },
+        "excluded_orders": 0,
+        "execution_delay_sessions": 1,
+        "initial_cash": "100000",
+        "max_close_drawdown": -0.0014946,
+        "pending_target_batches_at_end": 0,
+        "scenario": "high",
+        "sell_tax": "0",
+        "slippage_cost": "99.400",
+        "strategy": "bond_hold",
+        "terminal_liquidation_included": false,
+        "total_return": -0.0014316,
+        "trades": 1
+      }
+    },
+    "monthly_20_80_low": {
+      "daily": [
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-05",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        },
+        {
+          "available_cash": "9955.130",
+          "cash": "9955.130",
+          "date": "2026-11-06",
+          "equity": "100062.430",
+          "receivables": "0",
+          "units_510300": 4700,
+          "units_511010": 500
+        },
+        {
+          "available_cash": "9955.130",
+          "cash": "9955.130",
+          "date": "2026-11-09",
+          "equity": "100095.130",
+          "receivables": "0",
+          "units_510300": 4700,
+          "units_511010": 500
+        }
+      ],
+      "decisions": [
+        {
+          "day": "2026-11-06",
+          "filled_units": 4700,
+          "reason": "filled",
+          "requested_units": 4700,
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "510300",
+          "target_units": 4700
+        },
+        {
+          "day": "2026-11-06",
+          "filled_units": 500,
+          "reason": "filled",
+          "requested_units": 500,
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "511010",
+          "target_units": 500
+        }
+      ],
+      "journal": [
+        {
+          "commission": "5.00",
+          "day": "2026-11-06",
+          "fill_price": "4.114",
+          "kind": "trade",
+          "notional": "19335.800",
+          "raw_price": "4.113",
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "510300",
+          "tax": "0",
+          "units": 4700
+        },
+        {
+          "commission": "7.07",
+          "day": "2026-11-06",
+          "fill_price": "141.394",
+          "kind": "trade",
+          "notional": "70697.000",
+          "raw_price": "141.379",
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "511010",
+          "tax": "0",
+          "units": 500
+        }
+      ],
+      "summary": {
+        "annualized_scenario_return": 0.09070501490688454,
+        "cash_limited_orders": 0,
+        "commissions": "12.07",
+        "ending_cash": "9955.130",
+        "ending_equity": "100095.130",
+        "ending_holdings": {
+          "510300": 4700,
+          "511010": 500
+        },
+        "excluded_orders": 0,
+        "execution_delay_sessions": 1,
+        "initial_cash": "100000",
+        "max_close_drawdown": 0.0,
+        "pending_target_batches_at_end": 0,
+        "scenario": "low",
+        "sell_tax": "0",
+        "slippage_cost": "12.200",
+        "strategy": "monthly_20_80",
+        "terminal_liquidation_included": false,
+        "total_return": 0.0009513,
+        "trades": 2
+      }
+    },
+    "monthly_20_80_base": {
+      "daily": [
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-05",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        },
+        {
+          "available_cash": "9902.780",
+          "cash": "9902.780",
+          "date": "2026-11-06",
+          "equity": "100010.080",
+          "receivables": "0",
+          "units_510300": 4700,
+          "units_511010": 500
+        },
+        {
+          "available_cash": "9902.780",
+          "cash": "9902.780",
+          "date": "2026-11-09",
+          "equity": "100042.780",
+          "receivables": "0",
+          "units_510300": 4700,
+          "units_511010": 500
+        }
+      ],
+      "decisions": [
+        {
+          "day": "2026-11-06",
+          "filled_units": 4700,
+          "reason": "filled",
+          "requested_units": 4700,
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "510300",
+          "target_units": 4700
+        },
+        {
+          "day": "2026-11-06",
+          "filled_units": 500,
+          "reason": "filled",
+          "requested_units": 500,
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "511010",
+          "target_units": 500
+        }
+      ],
+      "journal": [
+        {
+          "commission": "5.80",
+          "day": "2026-11-06",
+          "fill_price": "4.116",
+          "kind": "trade",
+          "notional": "19345.200",
+          "raw_price": "4.113",
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "510300",
+          "tax": "0",
+          "units": 4700
+        },
+        {
+          "commission": "21.22",
+          "day": "2026-11-06",
+          "fill_price": "141.450",
+          "kind": "trade",
+          "notional": "70725.000",
+          "raw_price": "141.379",
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "511010",
+          "tax": "0",
+          "units": 500
+        }
+      ],
+      "summary": {
+        "annualized_scenario_return": 0.03982781214671423,
+        "cash_limited_orders": 0,
+        "commissions": "27.02",
+        "ending_cash": "9902.780",
+        "ending_equity": "100042.780",
+        "ending_holdings": {
+          "510300": 4700,
+          "511010": 500
+        },
+        "excluded_orders": 0,
+        "execution_delay_sessions": 1,
+        "initial_cash": "100000",
+        "max_close_drawdown": 0.0,
+        "pending_target_batches_at_end": 0,
+        "scenario": "base",
+        "sell_tax": "0",
+        "slippage_cost": "49.600",
+        "strategy": "monthly_20_80",
+        "terminal_liquidation_included": false,
+        "total_return": 0.0004278,
+        "trades": 2
+      }
+    },
+    "monthly_20_80_high": {
+      "daily": [
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-05",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        },
+        {
+          "available_cash": "9794.790",
+          "cash": "9794.790",
+          "date": "2026-11-06",
+          "equity": "99902.090",
+          "receivables": "0",
+          "units_510300": 4700,
+          "units_511010": 500
+        },
+        {
+          "available_cash": "9794.790",
+          "cash": "9794.790",
+          "date": "2026-11-09",
+          "equity": "99934.790",
+          "receivables": "0",
+          "units_510300": 4700,
+          "units_511010": 500
+        }
+      ],
+      "decisions": [
+        {
+          "day": "2026-11-06",
+          "filled_units": 4700,
+          "reason": "filled",
+          "requested_units": 4700,
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "510300",
+          "target_units": 4700
+        },
+        {
+          "day": "2026-11-06",
+          "filled_units": 500,
+          "reason": "filled",
+          "requested_units": 500,
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "511010",
+          "target_units": 500
+        }
+      ],
+      "journal": [
+        {
+          "commission": "19.35",
+          "day": "2026-11-06",
+          "fill_price": "4.118",
+          "kind": "trade",
+          "notional": "19354.600",
+          "raw_price": "4.113",
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "510300",
+          "tax": "0",
+          "units": 4700
+        },
+        {
+          "commission": "70.76",
+          "day": "2026-11-06",
+          "fill_price": "141.521",
+          "kind": "trade",
+          "notional": "70760.500",
+          "raw_price": "141.379",
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "511010",
+          "tax": "0",
+          "units": 500
+        }
+      ],
+      "summary": {
+        "annualized_scenario_return": -0.05782505425981707,
+        "cash_limited_orders": 0,
+        "commissions": "90.11",
+        "ending_cash": "9794.790",
+        "ending_equity": "99934.790",
+        "ending_holdings": {
+          "510300": 4700,
+          "511010": 500
+        },
+        "excluded_orders": 0,
+        "execution_delay_sessions": 1,
+        "initial_cash": "100000",
+        "max_close_drawdown": -0.0009791,
+        "pending_target_batches_at_end": 0,
+        "scenario": "high",
+        "sell_tax": "0",
+        "slippage_cost": "94.500",
+        "strategy": "monthly_20_80",
+        "terminal_liquidation_included": false,
+        "total_return": -0.0006521,
+        "trades": 2
+      }
+    },
+    "monthly_50_50_low": {
+      "daily": [
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-05",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        },
+        {
+          "available_cash": "8615.200",
+          "cash": "8615.200",
+          "date": "2026-11-06",
+          "equity": "100125.500",
+          "receivables": "0",
+          "units_510300": 11900,
+          "units_511010": 300
+        },
+        {
+          "available_cash": "8615.200",
+          "cash": "8615.200",
+          "date": "2026-11-09",
+          "equity": "100199.600",
+          "receivables": "0",
+          "units_510300": 11900,
+          "units_511010": 300
+        }
+      ],
+      "decisions": [
+        {
+          "day": "2026-11-06",
+          "filled_units": 11900,
+          "reason": "filled",
+          "requested_units": 11900,
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "510300",
+          "target_units": 11900
+        },
+        {
+          "day": "2026-11-06",
+          "filled_units": 300,
+          "reason": "filled",
+          "requested_units": 300,
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "511010",
+          "target_units": 300
+        }
+      ],
+      "journal": [
+        {
+          "commission": "5.00",
+          "day": "2026-11-06",
+          "fill_price": "4.114",
+          "kind": "trade",
+          "notional": "48956.600",
+          "raw_price": "4.113",
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "510300",
+          "tax": "0",
+          "units": 11900
+        },
+        {
+          "commission": "5.00",
+          "day": "2026-11-06",
+          "fill_price": "141.394",
+          "kind": "trade",
+          "notional": "42418.200",
+          "raw_price": "141.379",
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "511010",
+          "tax": "0",
+          "units": 300
+        }
+      ],
+      "summary": {
+        "annualized_scenario_return": 0.19970788314772514,
+        "cash_limited_orders": 0,
+        "commissions": "10.00",
+        "ending_cash": "8615.200",
+        "ending_equity": "100199.600",
+        "ending_holdings": {
+          "510300": 11900,
+          "511010": 300
+        },
+        "excluded_orders": 0,
+        "execution_delay_sessions": 1,
+        "initial_cash": "100000",
+        "max_close_drawdown": 0.0,
+        "pending_target_batches_at_end": 0,
+        "scenario": "low",
+        "sell_tax": "0",
+        "slippage_cost": "16.400",
+        "strategy": "monthly_50_50",
+        "terminal_liquidation_included": false,
+        "total_return": 0.001996,
+        "trades": 2
+      }
+    },
+    "monthly_50_50_base": {
+      "daily": [
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-05",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        },
+        {
+          "available_cash": "8557.180",
+          "cash": "8557.180",
+          "date": "2026-11-06",
+          "equity": "100067.480",
+          "receivables": "0",
+          "units_510300": 11900,
+          "units_511010": 300
+        },
+        {
+          "available_cash": "8557.180",
+          "cash": "8557.180",
+          "date": "2026-11-09",
+          "equity": "100141.580",
+          "receivables": "0",
+          "units_510300": 11900,
+          "units_511010": 300
+        }
+      ],
+      "decisions": [
+        {
+          "day": "2026-11-06",
+          "filled_units": 11900,
+          "reason": "filled",
+          "requested_units": 11900,
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "510300",
+          "target_units": 11900
+        },
+        {
+          "day": "2026-11-06",
+          "filled_units": 300,
+          "reason": "filled",
+          "requested_units": 300,
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "511010",
+          "target_units": 300
+        }
+      ],
+      "journal": [
+        {
+          "commission": "14.69",
+          "day": "2026-11-06",
+          "fill_price": "4.116",
+          "kind": "trade",
+          "notional": "48980.400",
+          "raw_price": "4.113",
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "510300",
+          "tax": "0",
+          "units": 11900
+        },
+        {
+          "commission": "12.73",
+          "day": "2026-11-06",
+          "fill_price": "141.450",
+          "kind": "trade",
+          "notional": "42435.000",
+          "raw_price": "141.379",
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "511010",
+          "tax": "0",
+          "units": 300
+        }
+      ],
+      "summary": {
+        "annualized_scenario_return": 0.13790494751771698,
+        "cash_limited_orders": 0,
+        "commissions": "27.42",
+        "ending_cash": "8557.180",
+        "ending_equity": "100141.580",
+        "ending_holdings": {
+          "510300": 11900,
+          "511010": 300
+        },
+        "excluded_orders": 0,
+        "execution_delay_sessions": 1,
+        "initial_cash": "100000",
+        "max_close_drawdown": 0.0,
+        "pending_target_batches_at_end": 0,
+        "scenario": "base",
+        "sell_tax": "0",
+        "slippage_cost": "57.000",
+        "strategy": "monthly_50_50",
+        "terminal_liquidation_included": false,
+        "total_return": 0.0014158,
+        "trades": 2
+      }
+    },
+    "monthly_50_50_high": {
+      "daily": [
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-05",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        },
+        {
+          "available_cash": "8448.040",
+          "cash": "8448.040",
+          "date": "2026-11-06",
+          "equity": "99958.340",
+          "receivables": "0",
+          "units_510300": 11900,
+          "units_511010": 300
+        },
+        {
+          "available_cash": "8448.040",
+          "cash": "8448.040",
+          "date": "2026-11-09",
+          "equity": "100032.440",
+          "receivables": "0",
+          "units_510300": 11900,
+          "units_511010": 300
+        }
+      ],
+      "decisions": [
+        {
+          "day": "2026-11-06",
+          "filled_units": 11900,
+          "reason": "filled",
+          "requested_units": 11900,
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "510300",
+          "target_units": 11900
+        },
+        {
+          "day": "2026-11-06",
+          "filled_units": 300,
+          "reason": "filled",
+          "requested_units": 300,
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "511010",
+          "target_units": 300
+        }
+      ],
+      "journal": [
+        {
+          "commission": "49.00",
+          "day": "2026-11-06",
+          "fill_price": "4.118",
+          "kind": "trade",
+          "notional": "49004.200",
+          "raw_price": "4.113",
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "510300",
+          "tax": "0",
+          "units": 11900
+        },
+        {
+          "commission": "42.46",
+          "day": "2026-11-06",
+          "fill_price": "141.521",
+          "kind": "trade",
+          "notional": "42456.300",
+          "raw_price": "141.379",
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "511010",
+          "tax": "0",
+          "units": 300
+        }
+      ],
+      "summary": {
+        "annualized_scenario_return": 0.03005991596235869,
+        "cash_limited_orders": 0,
+        "commissions": "91.46",
+        "ending_cash": "8448.040",
+        "ending_equity": "100032.440",
+        "ending_holdings": {
+          "510300": 11900,
+          "511010": 300
+        },
+        "excluded_orders": 0,
+        "execution_delay_sessions": 1,
+        "initial_cash": "100000",
+        "max_close_drawdown": -0.0004166,
+        "pending_target_batches_at_end": 0,
+        "scenario": "high",
+        "sell_tax": "0",
+        "slippage_cost": "102.100",
+        "strategy": "monthly_50_50",
+        "terminal_liquidation_included": false,
+        "total_return": 0.0003244,
+        "trades": 2
+      }
+    },
+    "trend_120_low": {
+      "daily": [
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-05",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        },
+        {
+          "available_cash": "1014.300",
+          "cash": "1014.300",
+          "date": "2026-11-06",
+          "equity": "100028.600",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 700
+        },
+        {
+          "available_cash": "1014.300",
+          "cash": "1014.300",
+          "date": "2026-11-09",
+          "equity": "100034.900",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 700
+        }
+      ],
+      "decisions": [
+        {
+          "day": "2026-11-06",
+          "filled_units": 700,
+          "reason": "filled",
+          "requested_units": 700,
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "511010",
+          "target_units": 700
+        }
+      ],
+      "journal": [
+        {
+          "commission": "9.90",
+          "day": "2026-11-06",
+          "fill_price": "141.394",
+          "kind": "trade",
+          "notional": "98975.800",
+          "raw_price": "141.379",
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "511010",
+          "tax": "0",
+          "units": 700
+        }
+      ],
+      "summary": {
+        "annualized_scenario_return": 0.03237554681600706,
+        "cash_limited_orders": 0,
+        "commissions": "9.90",
+        "ending_cash": "1014.300",
+        "ending_equity": "100034.900",
+        "ending_holdings": {
+          "511010": 700
+        },
+        "excluded_orders": 0,
+        "execution_delay_sessions": 1,
+        "initial_cash": "100000",
+        "max_close_drawdown": 0.0,
+        "pending_target_batches_at_end": 0,
+        "scenario": "low",
+        "sell_tax": "0",
+        "slippage_cost": "10.500",
+        "strategy": "trend_120",
+        "terminal_liquidation_included": false,
+        "total_return": 0.000349,
+        "trades": 1
+      }
+    },
+    "trend_120_base": {
+      "daily": [
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-05",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        },
+        {
+          "available_cash": "955.300",
+          "cash": "955.300",
+          "date": "2026-11-06",
+          "equity": "99969.600",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 700
+        },
+        {
+          "available_cash": "955.300",
+          "cash": "955.300",
+          "date": "2026-11-09",
+          "equity": "99975.900",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 700
+        }
+      ],
+      "decisions": [
+        {
+          "day": "2026-11-06",
+          "filled_units": 700,
+          "reason": "filled",
+          "requested_units": 700,
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "511010",
+          "target_units": 700
+        }
+      ],
+      "journal": [
+        {
+          "commission": "29.70",
+          "day": "2026-11-06",
+          "fill_price": "141.450",
+          "kind": "trade",
+          "notional": "99015.000",
+          "raw_price": "141.379",
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "511010",
+          "tax": "0",
+          "units": 700
+        }
+      ],
+      "summary": {
+        "annualized_scenario_return": -0.02176853452678722,
+        "cash_limited_orders": 0,
+        "commissions": "29.70",
+        "ending_cash": "955.300",
+        "ending_equity": "99975.900",
+        "ending_holdings": {
+          "511010": 700
+        },
+        "excluded_orders": 0,
+        "execution_delay_sessions": 1,
+        "initial_cash": "100000",
+        "max_close_drawdown": -0.000304,
+        "pending_target_batches_at_end": 0,
+        "scenario": "base",
+        "sell_tax": "0",
+        "slippage_cost": "49.700",
+        "strategy": "trend_120",
+        "terminal_liquidation_included": false,
+        "total_return": -0.000241,
+        "trades": 1
+      }
+    },
+    "trend_120_high": {
+      "daily": [
+        {
+          "available_cash": "100000",
+          "cash": "100000",
+          "date": "2026-11-05",
+          "equity": "100000",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 0
+        },
+        {
+          "available_cash": "836.240",
+          "cash": "836.240",
+          "date": "2026-11-06",
+          "equity": "99850.540",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 700
+        },
+        {
+          "available_cash": "836.240",
+          "cash": "836.240",
+          "date": "2026-11-09",
+          "equity": "99856.840",
+          "receivables": "0",
+          "units_510300": 0,
+          "units_511010": 700
+        }
+      ],
+      "decisions": [
+        {
+          "day": "2026-11-06",
+          "filled_units": 700,
+          "reason": "filled",
+          "requested_units": 700,
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "511010",
+          "target_units": 700
+        }
+      ],
+      "journal": [
+        {
+          "commission": "99.06",
+          "day": "2026-11-06",
+          "fill_price": "141.521",
+          "kind": "trade",
+          "notional": "99064.700",
+          "raw_price": "141.379",
+          "side": "buy",
+          "signal_date": "2026-11-05",
+          "symbol": "511010",
+          "tax": "0",
+          "units": 700
+        }
+      ],
+      "summary": {
+        "annualized_scenario_return": -0.12262136061866191,
+        "cash_limited_orders": 0,
+        "commissions": "99.06",
+        "ending_cash": "836.240",
+        "ending_equity": "99856.840",
+        "ending_holdings": {
+          "511010": 700
+        },
+        "excluded_orders": 0,
+        "execution_delay_sessions": 1,
+        "initial_cash": "100000",
+        "max_close_drawdown": -0.0014946,
+        "pending_target_batches_at_end": 0,
+        "scenario": "high",
+        "sell_tax": "0",
+        "slippage_cost": "99.400",
+        "strategy": "trend_120",
+        "terminal_liquidation_included": false,
+        "total_return": -0.0014316,
+        "trades": 1
+      }
+    }
+  },
+  "real_money": false,
+  "checkpoint_sha256": "4c7385aac941ae94c962f579c4135041d72605a1a86984e2a3527c85c88e26c1"
+}

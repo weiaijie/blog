@@ -1,0 +1,3 @@
+Risk monitor: 18 historical + 18 forward portfolios; 54 independent metrics matched
+Extended risk: 18 historical, 18 forward portfolios; disclosed holdings are dated proxies
+{"status": "published", "bundle": "reports/daily/20261109T171001-d2a48b21", "as_of": "2026-11-09", "forward_sessions": 3}
