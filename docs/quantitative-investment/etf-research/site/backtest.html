@@ -11,7 +11,7 @@
 <main class="shell">
 <div class="intro"><div><h1>历史回测</h1><p>设置本金、日期和 ETF 配比，查看模拟账户的收益、回撤和恢复时间。</p></div></div>
 <section id="workbench" class="panel bt-content" aria-labelledby="work-title">
-<h2 id="work-title">自己运行回测</h2><a href="#replay">进入逐日模型回放 ↓</a>　<a href="#method-windows">三种投资方式逐日起点比较 ↓</a>
+<h2 id="work-title">自己运行回测</h2><a href="#replay">进入逐日模型回放 ↓</a>　<a href="#method-windows">四种投资方式逐日起点比较 ↓</a>
 <form id="work-form">
 <div class="work-fields"><label>开始日期<input name="start" type="date" required></label><label>结束日期<input name="end" type="date" required></label>
 <label>本金（元）<input name="capital" type="number" min="1" max="1000000000" step=".01" required></label>
@@ -24,7 +24,7 @@
 <div class="work-actions"><button type="button" id="add-portfolio" disabled>添加对比组合</button><button type="button" id="remove-portfolio" hidden>移除最后一组</button></div>
 <p class="muted" id="work-limits"></p><a class="coverage-link" href="market.html#coverage">查看每只 ETF 的行情与回测覆盖</a><div class="work-actions"><button disabled id="work-run" type="submit">运行回测</button><button disabled id="work-windows" type="submit">逐日起点 · 测 1 年和 2 年</button><button type="submit" id="work-compare" hidden disabled>并排比较 · 测 1 年和 2 年</button><button type="button" id="work-all-dates">用最长连续区间</button><button type="button" id="work-pre-split" hidden>用标普拆分前区间</button><a href="api/v1/backtest/options">Agent 接口参数 ↗</a></div>
 </form><section id="replay" aria-labelledby="replay-heading">
-<h3 id="replay-heading">逐日模型回放</h3><a href="#method-windows">比较三种方式持有一年、两年的结果 ↓</a>　<a href="#method-gap-case">查看三批建仓差额案例 ↓</a>
+<h3 id="replay-heading">逐日模型回放</h3><a href="#method-windows">比较四种方式持有一年、两年的结果 ↓</a>　<a href="#method-gap-case">查看三批建仓差额案例 ↓</a>
 <div id="strategy-controls"></div>
 <div class="replay-controls">
 <label>回放区间<select id="replay-range"><option value="custom">上方填写的日期</option></select></label>
@@ -38,7 +38,7 @@
 <h4>收盘后模型决定</h4><p id="replay-plan"></p>
 <section id="replay-factors" hidden aria-labelledby="replay-votes"><h4 id="replay-votes"></h4><ul id="replay-ballots"></ul>
 <details><summary>查看截至当日的信号与模拟成交</summary><ol id="replay-signals"></ol></details></section>
-</div></section><section id="method-windows" aria-labelledby="method-title"><h3 id="method-title">三种投资方式 · 逐日起点比较</h3><div id="method-app"></div></section><p id="work-status" role="status" aria-live="polite"></p>
+</div></section><section id="method-windows" aria-labelledby="method-title"><h3 id="method-title">四种投资方式 · 逐日起点比较</h3><div id="method-app"></div></section><p id="work-status" role="status" aria-live="polite"></p>
 <section id="work-cohorts" hidden aria-labelledby="cohort-title"><h3 id="cohort-title">逐日起点结果</h3><a href="#method-windows">切换到投资方式并排比较</a>
 <p id="cohort-range"></p><div class="table-wrap" tabindex="0" aria-label="自定义配比逐日起点结果"><table><thead><tr><th>持有期</th><th>满期次数</th><th>赚钱次数</th><th>年化 ≥ 4%</th><th>最差到期盈亏</th><th>最差一期</th></tr></thead><tbody id="cohort-rows"></tbody></table></div>
 <p class="muted">每个起点从所填本金重新建仓，周年休市顺延，只统计在所选区间内到期的窗口。相邻起点共享行情。最差按到期盈亏排序，并列时打开最早一期。</p>

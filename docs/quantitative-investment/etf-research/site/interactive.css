@@ -28,8 +28,10 @@
 #method-windows .method-log{min-width:680px;table-layout:fixed}
 #method-windows .method-log th:first-child{width:100px}
 #method-windows .method-log p{margin:4px 0}
+#method-windows .method-log td strong{display:block}
 @media(max-width:600px){
   #method-windows table,#method-windows tbody,#method-windows tr{display:block;min-width:0}
+  #method-windows .method-log{min-width:0}
   #method-windows thead{position:absolute;clip-path:inset(50%);width:1px;height:1px;overflow:hidden}
   #method-windows tbody tr{border-top:1px solid var(--line);padding:8px 0}
   #method-windows tbody th{display:block;width:auto;border:0;padding:4px 0}

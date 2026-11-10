@@ -1,4 +1,4 @@
-"""Common-start, common-capital comparisons of the three domestic ETF methods."""
+"""Common-start, common-capital comparisons of the four domestic ETF methods."""
 import argparse
 import csv
 from dataclasses import replace
@@ -14,11 +14,12 @@ from build_entry_windows import entry_schedule, measure_outcome, summarize
 from etf_research.baselines import run
 from installment_strategy import installment_schedule
 from model_replay import replay
+from multifactor_strategy import MODEL as FACTOR_MODEL, factor_schedule
 
-MODELS = ('allocation', 'installments', 'trend_120')
+MODELS = ('allocation', 'installments', 'trend_120', FACTOR_MODEL)
 DEFAULTS = dict(start=work.OPTIONS['trendFirst'], end=work.DEFAULTS['end'], capital='100000',
                 fees='base', installments='3', rebalance='hold')
-ARCHIVE = Path(__file__).resolve().parents[1]/'reports/2026-11-10-method-windows/entries.csv'
+ARCHIVE = Path(__file__).resolve().parents[1]/'reports/2026-11-10-multifactor-windows/entries.csv'
 
 
 def prepare(params):
@@ -27,7 +28,7 @@ def prepare(params):
     config = dict(params, weights='1,0,0,1')
     days, capital, simulate = work.configured_replay(config)
     if days[0] < work.inputs()[0].sessions[120]:
-        raise work.InputError('三种方式共用的最早起点为 '+DEFAULTS['start']+'，此前行情供趋势预热。')
+        raise work.InputError('四种方式共用的最早起点为 '+DEFAULTS['start']+'，此前行情供趋势预热。')
     return config, days, capital, simulate
 
 
@@ -35,6 +36,14 @@ def allocation_ledgers(config, sessions, bars, simulate):
     schedule = installment_schedule(sessions, sessions, bars['510300'], int(config['installments']),
                                     config['rebalance'], simulate.keywords['denominators'])
     return dict(allocation=simulate(sessions), installments=simulate(sessions, schedule=schedule))
+
+
+def factor_ledger(sessions, base, bars, simulate):
+    first = base.sessions.index(sessions[0])
+    warmup = base.sessions[first-120:first]
+    _, schedule = factor_schedule(warmup, sessions, sessions, bars, base.dividends)
+    daily, _ = simulate(sessions, schedule=schedule)
+    return daily
 
 
 def calculate_entries(params):
@@ -50,15 +59,17 @@ def calculate_entries(params):
         end_index = base.sessions.index(sessions[-1])
         prefix = replace(base, sessions=base.sessions[:end_index+1])
         trend = run(prefix,'trend_120',config['fees'],capital,account_start=start)['daily']
+        factor = factor_ledger(sessions,base,bars,simulate)
         for years, i in endpoints.items():
             yield dict(start=str(start),end=str(sessions[i]),years=years,
-                       allocation=fixed[i]['equity'],installments=staged[i]['equity'],trend_120=trend[i]['equity'])
+                       allocation=fixed[i]['equity'],installments=staged[i]['equity'],trend_120=trend[i]['equity'],
+                       multifactor_v1=factor[i]['equity'])
 
 
 @lru_cache(maxsize=1)
 def archived_entries():
     text = ARCHIVE.read_text(encoding='utf-8')
-    if hashlib.sha256(text.encode()).hexdigest() != '73be02f8a5c1b183ad7d5fcd33f3aeafb2fa812cd8c8ee32d704e4f230d14ecb':
+    if hashlib.sha256(text.encode()).hexdigest() != 'd634f08a2ba0e06a2a6ba86c629e7761ea4bed5e2c000cdc864d857ad6d8c3bc':
         raise ValueError('Published method outcomes changed; verify the export')
     return {(row['start'],int(row['years'])):row for row in csv.DictReader(text.splitlines())}
 
@@ -108,11 +119,24 @@ def detail(params):
             settings.pop('installments')
         if model=='trend_120':
             settings['rebalance']='monthly'
+        if model == FACTOR_MODEL:
+            settings['rebalance']='signal'
         frames = replay(settings)['frames']
         events = []
-        for prev,row in zip(frames,frames[1:]):
-            if prev['nextPlan']:
-                events.append(dict(day=row['date'],plan=prev['nextPlan'],orders=row['orders']))
+        for i, row in enumerate(frames[1:]):
+            signal = frames[i]
+            if not signal['nextPlan']:
+                continue
+            event = dict(day=row['date'], plan=signal['nextPlan'], orders=row['orders'])
+            if model == FACTOR_MODEL:
+                decision = signal['decision']
+                previous = frames[i-1]['decision'] if i else None
+                event['decision'] = decision
+                event['previousVotes'] = previous['votes'] if previous else None
+                event['changedFactors'] = [current['key'] for current, prior in
+                    zip(decision['factors'], previous['factors'], strict=True)
+                    if current['passed'] != prior['passed']] if previous else []
+            events.append(event)
         result[model] = dict(pnl=frames[-1]['equity']-initial, events=events,
                              curve=[dict(date=r['date'],equity=r['equity'],drawdown=r['drawdown']) for r in frames])
     return dict(parameters=params,start=days[0],end=days[-1],models=result)
