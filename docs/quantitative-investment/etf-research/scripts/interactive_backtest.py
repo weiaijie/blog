@@ -8,6 +8,7 @@ from fractions import Fraction
 from functools import lru_cache, partial
 from urllib.parse import parse_qsl
 
+import multifactor_strategy as multi
 from compare_three_markets import CODES, SCENARIOS, metrics, simulate
 from build_entry_windows import entry_schedule, measure_entry, summarize
 from overlay_attribution import attribution, cumulative_ledger
@@ -18,7 +19,10 @@ from market_evidence import END, EXTENDED_START, evidence, verified_inputs
 DEFAULTS = dict(start=str(RESUMED), end=str(END), capital='100000',
                 weights='1,1,1,3', rebalance='monthly', fees='base')
 OPTIONS = dict(version=1, method='GET', endpoint='/api/v1/backtest',
-               replayEndpoint='/api/v1/backtest/replay', replayModels=['allocation','installments','trend_120'], replayInstallments=dict(min=2,max=12,default=3), replayStep='1..totalSessions or all',
+               replayEndpoint='/api/v1/backtest/replay', replayModels=['allocation','installments','trend_120',multi.MODEL],
+               multifactorV1=dict(model=multi.MODEL, weights='1,0,0,1', rebalance='signal', requiredVotes=2,
+                                  factors=multi.FACTORS, frequency='daily close; execute next open on initial or switch'),
+               replayInstallments=dict(min=2,max=12,default=3), replayStep='1..totalSessions or all',
                windowsEndpoint='/api/v1/backtest/windows', compareEndpoint='/api/v1/backtest/compare',
                overlayEndpoint='/api/v1/backtest/overlay',
                compareWeightsFormat='2 or 3 four-ETF relative weight vectors, in input order, separated by |', horizons=[1, 2], annualTarget='0.04',

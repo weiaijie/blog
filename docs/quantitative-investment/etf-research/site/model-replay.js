@@ -13,7 +13,7 @@ function setupModelReplay(parameters, coverage) {
     const opts=coverage();
     if (!opts) return;
     const params=parameters(), weights=params.get('weights').split(',').map(Number);
-    const trend=strategy.model==='trend_120';
+    const trend=['trend_120','multifactor_v1'].includes(strategy.model);
     const split=!trend && weights[1]>0;
     const first=trend ? opts.trendFirst : split ? opts.first : weights[2]>0 ? opts.overseasFirst : opts.domesticFirst;
     const menu=el('range');
@@ -64,9 +64,31 @@ function setupModelReplay(parameters, coverage) {
     return Object.entries(units).map(([s,n])=>names[s]+' '+n+' 份').join('、');
   }
   function trigger(plan) {
+    if (plan.reason==='factor_balanced' || plan.reason==='factor_bonds') return plan.votes+' / 3 项满足，目标'+(plan.reason==='factor_balanced'?'股债各半':'全债');
     if (plan.reason==='installment') return '第 '+plan.batch+' / '+plan.installments+' 批，目标投入总资产的 '+(100*plan.batch/plan.installments).toFixed(1)+'%';
     if (plan.trendSpread != null) return reasons[plan.reason]+'（窗口首日指数为1，指数减均线 '+Number(plan.trendSpread).toFixed(5)+'）';
     return reasons[plan.reason];
+  }
+  function showFactors(row) {
+    const d=row.decision;
+    el('factors').hidden=!d;
+    if (!d) return;
+    const target=d.regime==='balanced'?'股债各半':'全债';
+    const change={initial:'首次确定目标',switch:'目标切换',hold:'沿用目标'};
+    el('votes').textContent=d.asOf+' 收盘 · '+d.votes+' / 3 项满足 · '+change[d.transition]+'为'+target;
+    el('ballots').replaceChildren(...d.factors.map(f=>{
+      const item=document.createElement('li');
+      const unit=f.key==='relative60'?' 个百分点':'%';
+      item.textContent=(f.passed?'满足':'未满足')+' · '+f.label+'：'+f.rule+'，当日读数 '+(100*Number(f.value)).toFixed(3)+unit+'。';
+      return item;
+    }));
+  }
+  function addSignal(frame, previous) {
+    if (!frame.decision || !previous?.nextPlan) return;
+    const line=document.createElement('li');
+    const executed=frame.orders.map(o=>names[o.symbol]+(o.side==='buy'?'买':'卖')+' '+o.filled+' / '+o.requested+' 份（'+(fills[o.reason]||o.reason)+'）');
+    line.textContent=previous.date+' 收盘 '+trigger(previous.nextPlan)+' → '+frame.date+' 开盘 '+(executed.join('、')||'已达整手目标，无需成交');
+    el('signals').prepend(line);
   }
   let markers, trades=[];
   function paintTrades() {
@@ -87,11 +109,12 @@ function setupModelReplay(parameters, coverage) {
       series = chart.addSeries(LightweightCharts.CandlestickSeries,{upColor:'#b34836',downColor:'#19735d',
         wickUpColor:'#b34836',wickDownColor:'#19735d',borderVisible:false,priceFormat:{type:'price',precision:3,minMove:.001}});
     }
-    if (!shown) {trades=[];markers=LightweightCharts.createSeriesMarkers(series,[]);}
+    if (!shown) {el('signals').replaceChildren();trades=[];markers=LightweightCharts.createSeriesMarkers(series,[]);}
     let newTrades=false;
     for (let i=shown;i<step;i++) {
       const frame=frames[i];
       series.update(candle(frame));
+      addSignal(frame,frames[i-1]);
       for (const o of frame.orders) if (o.filled>0) {trades.push({...o,day:frame.date});newTrades=true;}
     }
     if (newTrades) paintTrades();
@@ -113,6 +136,7 @@ function setupModelReplay(parameters, coverage) {
     }));
     el('plan').textContent = row.nextPlan ? trigger(row.nextPlan)+'。'+row.nextPlan.execution+' 开盘目标持仓：'+describe(row.nextPlan.target)+'。'+Object.entries(row.nextPlan.change).filter(([,n])=>n!==0).map(([s,n])=>names[s]+(n>0?'计划买入':'计划卖出')+Math.abs(n)+' 份').join('、') :
       (shown===total?'已到所选区间末日。':'下一交易日维持现有持仓。');
+    showFactors(row);
     el('json').href = endpoint(shown);
     el('start').textContent = '从头回放';
     el('status').textContent = shown===total ? '回放完成。' : '';
@@ -147,6 +171,7 @@ function setupModelReplay(parameters, coverage) {
       query.set('start',start); query.set('end',end);
     }
     if (strategy.model === 'trend_120') {query.set('weights','1,0,0,1');query.set('rebalance','monthly');}
+    if (strategy.model === 'multifactor_v1') {query.set('weights','1,0,0,1');query.set('rebalance','signal');}
     if (await load(1)) display(1);
   };
   el('step').onclick = async ()=>{

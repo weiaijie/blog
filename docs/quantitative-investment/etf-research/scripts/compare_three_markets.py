@@ -41,6 +41,8 @@ def simulate(days, bars, events, halts, denominators, *, initial=D(100000), cost
             prev = days[i-1]
             planned_mix = denominators if schedule is None else schedule[day]['denominators']
             targets = allocation_targets(planned_mix, daily[-1]['equity'], {s: bars[s][prev].close for s in denominators})
+            # A signal may explicitly leave one of the tradable assets at zero weight.
+            targets = {s: targets.get(s, 0) for s in denominators}
             for side in ('sell', 'buy'):
                 for s in denominators:
                     delta = targets[s] - ledger.holdings.get(s, 0)

@@ -5,6 +5,7 @@ from decimal import Decimal as D
 import re
 
 import interactive_backtest as work
+import multifactor_strategy as multi
 from compare_three_markets import allocation_targets
 from etf_research.baselines import run, targets, trend_weights
 from etf_research.signal_audit import signal_weights
@@ -20,11 +21,16 @@ def replay(params):
         config['installments'] = installments
     elif 'installments' in params:
         raise work.InputError('只有分批建仓可以设置期数。')
-    if model not in ('allocation', 'trend_120', 'installments'):
-        raise work.InputError('请选择固定配比、分批建仓或 120 日趋势模型。')
+    if model not in ('allocation', 'trend_120', 'installments', multi.MODEL):
+        raise work.InputError('请选择已登记的回放模型。')
     if model == 'trend_120' and (config['weights'] != '1,0,0,1' or config['rebalance'] != 'monthly'):
         raise work.InputError('冻结趋势模型使用月度调仓，配比参数须为 1,0,0,1。')
-    days, capital, simulate = work.configured_replay(config)
+    if model == multi.MODEL:
+        if config['weights'] != '1,0,0,1' or config['rebalance'] != 'signal':
+            raise work.InputError('多因子 v1 使用境内股债配比 1,0,0,1，调仓方式为 signal。')
+        days, capital, simulate = work.configured_replay(dict(config, rebalance='hold'))
+    else:
+        days, capital, simulate = work.configured_replay(config)
     if step != 'all' and (not re.fullmatch('[1-9][0-9]{0,3}', step) or int(step) > len(days)):
         raise work.InputError(f'回放步数应为 1 至 {len(days)} 或 all。')
     visible = days if step == 'all' else days[:int(step)]
@@ -32,6 +38,7 @@ def replay(params):
     symbols = list(simulate.keywords['denominators'])
     orders = defaultdict(list)
     schedule = None
+    decisions = {}
     if model == 'trend_120':
         if base.sessions.index(days[0]) < 120:
             raise work.InputError(f'趋势模型需要起点前已有 120 个收盘，最早起点为 {base.sessions[120]}。')
@@ -57,6 +64,15 @@ def replay(params):
             from installment_strategy import installment_schedule
             schedule = installment_schedule(days, visible, available[symbols[0]], int(installments),
                                             config['rebalance'], simulate.keywords['denominators'])
+        if model == multi.MODEL:
+            start_index = base.sessions.index(days[0])
+            if start_index < 120:
+                raise work.InputError(f'多因子模型需要起点前 120 个收盘，最早起点为 {base.sessions[120]}。')
+            warmup = base.sessions[start_index-120:start_index]
+            observed = {s: {**{d: bars[s][d] for d in warmup}, **available[s]} for s in symbols}
+            known_events = [e for e in base.dividends if e.announcement_date <= visible[-1]]
+            decisions, schedule = multi.factor_schedule(warmup, visible, days[:len(visible)+1],
+                                                        observed, known_events)
         daily, executions = simulate(visible, bars=available, schedule=schedule,
             events=tuple(e for e in base.dividends if e.announcement_date <= visible[-1]))
         for order in executions:
@@ -83,7 +99,8 @@ def replay(params):
                 reason = 'trend_on' if weights['510300'] else 'trend_off'
             elif schedule is not None:
                 entry = schedule[next_day]
-                units = allocation_targets(entry['denominators'], equity, marks)
+                units = dict.fromkeys(symbols, 0)
+                units.update(allocation_targets(entry['denominators'], equity, marks))
                 reason = entry['reason']
             else:
                 units = allocation_targets(simulate.keywords['denominators'], equity, marks)
@@ -92,12 +109,16 @@ def replay(params):
                         change={s:n-row['units_'+s] for s,n in units.items()})
             if model == 'trend_120':
                 plan['trendSpread'] = spread
-            if schedule is not None:
+            if model == multi.MODEL:
+                plan['votes'] = decisions[day]['votes']
+            if model == 'installments':
                 plan.update(batch=entry['batch'], installments=entry['installments'])
         peak = max(peak, equity)
         frames.append(dict(date=day, bars=quotes, holdings={s:row['units_'+s] for s in symbols},
             equity=equity, cash=row['cash'], availableCash=row['available_cash'], receivables=row['receivables'],
             dayPnl=equity-previous, pnl=equity-capital, drawdown=equity/peak-1,
             orders=orders[day], nextPlan=plan))
+        if model == multi.MODEL:
+            frames[-1]['decision'] = decisions[day]
         previous=equity
     return dict(model=model, parameters=config, totalSessions=len(days), step=len(frames), frames=frames)

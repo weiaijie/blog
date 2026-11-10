@@ -14,11 +14,12 @@ from model_replay import replay
 class ModelReplayTests(unittest.TestCase):
     def config(self, model):
         return dict(work.DEFAULTS, start='2024-10-30', end='2025-02-13', model=model,
-                    weights='1,0,0,1' if model=='trend_120' else '1,1,1,3', step='all')
+                    weights='1,0,0,1' if model in ('trend_120','multifactor_v1') else '1,1,1,3',
+                    rebalance='signal' if model=='multifactor_v1' else 'monthly', step='all')
 
     def test_prefix_with_future_records_removed(self):
         base, calendar, bars, halts = work.inputs()
-        for model in ('allocation','installments','trend_120'):
+        for model in ('allocation','installments','trend_120','multifactor_v1'):
             params = self.config(model)
             full = replay(params)['frames']
             for count in (1,2,3,8,24,46,len(full)-1):

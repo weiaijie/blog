@@ -1,0 +1,200 @@
+{
+  "2021-10-29/2022-10-31": {
+    "multifactor_v1": {
+      "sessions": 244,
+      "plans": 10,
+      "filled": 20,
+      "unfilled_or_partial": 0,
+      "commissions": "295.80",
+      "endEquity": "100262.3000",
+      "pnl": "262.3000",
+      "maxDrawdown": "-0.0422118021675628922590117612",
+      "firstSwitch": {
+        "signal": {
+          "asOf": "2021-11-03",
+          "factors": [
+            {
+              "key": "trend120",
+              "label": "长期趋势",
+              "rule": "沪深300含分红指数高于120日均线",
+              "threshold": "0",
+              "comparison": ">",
+              "value": "-0.0347351341221031450511187944",
+              "passed": false
+            },
+            {
+              "key": "relative60",
+              "label": "股债相对强弱",
+              "rule": "近60个交易日沪深300收益高于国债",
+              "threshold": "0",
+              "comparison": ">",
+              "value": "-0.0184781471082764252153222203",
+              "passed": false
+            },
+            {
+              "key": "vol20",
+              "label": "短期波动",
+              "rule": "沪深300近20个日收益的年化波动低于25%",
+              "threshold": "0.25",
+              "comparison": "<",
+              "value": "0.1255202634580311936314057317",
+              "passed": true
+            }
+          ],
+          "votes": 1,
+          "required": 2,
+          "regime": "bonds",
+          "transition": "switch"
+        },
+        "plan": {
+          "signal": "2021-11-03",
+          "execution": "2021-11-04",
+          "reason": "factor_bonds",
+          "target": {
+            "510300": 0,
+            "511010": 700
+          },
+          "change": {
+            "510300": -10000,
+            "511010": 300
+          },
+          "votes": 1
+        },
+        "execution": "2021-11-04",
+        "orders": [
+          {
+            "signal": "2021-11-03",
+            "symbol": "510300",
+            "side": "sell",
+            "requested": 10000,
+            "filled": 10000,
+            "target": 0,
+            "price": "4.910",
+            "fee": "14.73",
+            "reason": "filled"
+          },
+          {
+            "signal": "2021-11-03",
+            "symbol": "511010",
+            "side": "buy",
+            "requested": 300,
+            "filled": 300,
+            "target": 700,
+            "price": "125.039",
+            "fee": "11.25",
+            "reason": "filled"
+          }
+        ]
+      }
+    },
+    "allocation": {
+      "sessions": 244,
+      "plans": 1,
+      "filled": 2,
+      "unfilled_or_partial": 0,
+      "commissions": "29.85",
+      "endEquity": "88740.1500",
+      "pnl": "-11259.8500",
+      "maxDrawdown": "-0.1319299851947064839555518383"
+    }
+  },
+  "2019-03-20/2026-10-30": {
+    "multifactor_v1": {
+      "sessions": 1847,
+      "plans": 80,
+      "filled": 160,
+      "unfilled_or_partial": 1,
+      "commissions": "2412.92",
+      "endEquity": "112018.9300",
+      "pnl": "12018.9300",
+      "maxDrawdown": "-0.1425839924533778390537696829",
+      "firstSwitch": {
+        "signal": {
+          "asOf": "2019-05-24",
+          "factors": [
+            {
+              "key": "trend120",
+              "label": "长期趋势",
+              "rule": "沪深300含分红指数高于120日均线",
+              "threshold": "0",
+              "comparison": ">",
+              "value": "0.025961026368126724245111514",
+              "passed": true
+            },
+            {
+              "key": "relative60",
+              "label": "股债相对强弱",
+              "rule": "近60个交易日沪深300收益高于国债",
+              "threshold": "0",
+              "comparison": ">",
+              "value": "-0.0498731290368033744380860618",
+              "passed": false
+            },
+            {
+              "key": "vol20",
+              "label": "短期波动",
+              "rule": "沪深300近20个日收益的年化波动低于25%",
+              "threshold": "0.25",
+              "comparison": "<",
+              "value": "0.2972633180220334524178615158",
+              "passed": false
+            }
+          ],
+          "votes": 1,
+          "required": 2,
+          "regime": "bonds",
+          "transition": "switch"
+        },
+        "plan": {
+          "signal": "2019-05-24",
+          "execution": "2019-05-27",
+          "reason": "factor_bonds",
+          "target": {
+            "510300": 0,
+            "511010": 800
+          },
+          "change": {
+            "510300": -13000,
+            "511010": 400
+          },
+          "votes": 1
+        },
+        "execution": "2019-05-27",
+        "orders": [
+          {
+            "signal": "2019-05-24",
+            "symbol": "510300",
+            "side": "sell",
+            "requested": 13000,
+            "filled": 13000,
+            "target": 0,
+            "price": "3.589",
+            "fee": "14.00",
+            "reason": "filled"
+          },
+          {
+            "signal": "2019-05-24",
+            "symbol": "511010",
+            "side": "buy",
+            "requested": 400,
+            "filled": 400,
+            "target": 800,
+            "price": "116.629",
+            "fee": "14.00",
+            "reason": "filled"
+          }
+        ]
+      }
+    },
+    "allocation": {
+      "sessions": 1847,
+      "plans": 1,
+      "filled": 2,
+      "unfilled_or_partial": 0,
+      "commissions": "28.91",
+      "endEquity": "121750.4900",
+      "pnl": "21750.4900",
+      "maxDrawdown": "-0.2032022097226343529083842562"
+    }
+  }
+}
