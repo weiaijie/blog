@@ -6,6 +6,9 @@ import re
 
 import interactive_backtest as work
 import multifactor_strategy as multi
+import technical_factors as technical
+
+FACTOR_MODELS = (multi.MODEL, *technical.MODELS)
 from compare_three_markets import allocation_targets
 from etf_research.baselines import run, targets, trend_weights
 from etf_research.signal_audit import signal_weights
@@ -21,13 +24,13 @@ def replay(params):
         config['installments'] = installments
     elif 'installments' in params:
         raise work.InputError('只有分批建仓可以设置期数。')
-    if model not in ('allocation', 'trend_120', 'installments', multi.MODEL):
+    if model not in ('allocation', 'trend_120', 'installments', *FACTOR_MODELS):
         raise work.InputError('请选择已登记的回放模型。')
     if model == 'trend_120' and (config['weights'] != '1,0,0,1' or config['rebalance'] != 'monthly'):
         raise work.InputError('冻结趋势模型使用月度调仓，配比参数须为 1,0,0,1。')
-    if model == multi.MODEL:
+    if model in FACTOR_MODELS:
         if config['weights'] != '1,0,0,1' or config['rebalance'] != 'signal':
-            raise work.InputError('多因子 v1 使用境内股债配比 1,0,0,1，调仓方式为 signal。')
+            raise work.InputError('多因子研究模型使用境内股债配比 1,0,0,1，调仓方式为 signal。')
         days, capital, simulate = work.configured_replay(dict(config, rebalance='hold'))
     else:
         days, capital, simulate = work.configured_replay(config)
@@ -64,15 +67,17 @@ def replay(params):
             from installment_strategy import installment_schedule
             schedule = installment_schedule(days, visible, available[symbols[0]], int(installments),
                                             config['rebalance'], simulate.keywords['denominators'])
-        if model == multi.MODEL:
+        if model in FACTOR_MODELS:
             start_index = base.sessions.index(days[0])
             if start_index < 120:
                 raise work.InputError(f'多因子模型需要起点前 120 个收盘，最早起点为 {base.sessions[120]}。')
-            warmup = base.sessions[start_index-120:start_index]
+            warmup = base.sessions[start_index-120:start_index] if model == multi.MODEL else base.sessions[:start_index]
             observed = {s: {**{d: bars[s][d] for d in warmup}, **available[s]} for s in symbols}
             known_events = [e for e in base.dividends if e.announcement_date <= visible[-1]]
-            decisions, schedule = multi.factor_schedule(warmup, visible, days[:len(visible)+1],
-                                                        observed, known_events)
+            if model == multi.MODEL:
+                decisions, schedule = multi.factor_schedule(warmup, visible, days[:len(visible)+1], observed, known_events)
+            else:
+                decisions, schedule = technical.technical_schedule(warmup, visible, days[:len(visible)+1], observed, known_events, model)
         daily, executions = simulate(visible, bars=available, schedule=schedule,
             events=tuple(e for e in base.dividends if e.announcement_date <= visible[-1]))
         for order in executions:
@@ -109,8 +114,10 @@ def replay(params):
                         change={s:n-row['units_'+s] for s,n in units.items()})
             if model == 'trend_120':
                 plan['trendSpread'] = spread
-            if model == multi.MODEL:
+            if model in FACTOR_MODELS:
                 plan['votes'] = decisions[day]['votes']
+                if model in technical.MODELS:
+                    plan['gate'] = decisions[day]['gate']
             if model == 'installments':
                 plan.update(batch=entry['batch'], installments=entry['installments'])
         peak = max(peak, equity)
@@ -118,7 +125,7 @@ def replay(params):
             equity=equity, cash=row['cash'], availableCash=row['available_cash'], receivables=row['receivables'],
             dayPnl=equity-previous, pnl=equity-capital, drawdown=equity/peak-1,
             orders=orders[day], nextPlan=plan))
-        if model == multi.MODEL:
+        if model in FACTOR_MODELS:
             frames[-1]['decision'] = decisions[day]
         previous=equity
     return dict(model=model, parameters=config, totalSessions=len(days), step=len(frames), frames=frames)

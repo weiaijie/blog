@@ -18,6 +18,7 @@ import interactive_backtest as interactive
 import model_replay
 import method_windows
 import method_gap
+import factor_lab
 from market_evidence import SNAPS
 from cross_market_quotes import THROUGH, cross_quotes
 
@@ -29,6 +30,7 @@ ASSETS = {'/': ('market.html','text/html'), '/market.html': ('market.html','text
           '/backtest.js': ('backtest.js','text/javascript'), '/backtest-data.json': ('backtest-data.json','application/json'),
           '/vendor-vue/vue-3.5.22.runtime.global.prod.js': ('vendor-vue/vue-3.5.22.runtime.global.prod.js','text/javascript'),
           '/vendor-vue/LICENSE': ('vendor-vue/LICENSE','text/plain'),
+          '/factor-lab.js': ('factor-lab.js','text/javascript'),
           '/factor-shortfall.js': ('factor-shortfall.js','text/javascript'),
           '/method-gap.js': ('method-gap.js','text/javascript'),
           '/method-windows.js': ('method-windows.js','text/javascript'),
@@ -109,7 +111,9 @@ def latest():
         return payload((ROOT/'config/active_run.json').read_bytes())
 
 
-CALCULATIONS = {'/api/v1/backtest/method-gap': method_gap.gap_detail,
+CALCULATIONS = {'/api/v1/backtest/technical-factors': factor_lab.compare,
+                '/api/v1/backtest/technical-detail': factor_lab.detail,
+                '/api/v1/backtest/method-gap': method_gap.gap_detail,
                 '/api/v1/backtest/method-windows': method_windows.compare,
                 '/api/v1/backtest/method-detail': method_windows.detail,
                 '/api/v1/backtest/replay': model_replay.replay,
@@ -132,6 +136,7 @@ class Handler(BaseHTTPRequestHandler):
         status = 200
         if path == '/api/v1/backtest/options':
             body, kind = interactive.encode(dict(interactive.OPTIONS, methodWindowsDefaults=method_windows.DEFAULTS,
+                technicalFactorsDefaults=factor_lab.DEFAULTS, technicalFactorsEndpoint='/api/v1/backtest/technical-factors',
                 factorShortfallEndpoint='/api/v1/backtest/factor-shortfall',
                 methodGapEndpoint='/api/v1/backtest/method-gap', methodGapCase=method_gap.CASE,
                 methodWindowsEndpoint='/api/v1/backtest/method-windows', methodDetailEndpoint='/api/v1/backtest/method-detail')), 'application/json'
@@ -142,6 +147,8 @@ class Handler(BaseHTTPRequestHandler):
                 keys, optional = interactive.DEFAULTS, ()
                 if calculate in (method_windows.compare, method_windows.detail, method_gap.gap_detail):
                     keys = method_windows.DEFAULTS
+                elif calculate in (factor_lab.compare, factor_lab.detail):
+                    keys = factor_lab.DEFAULTS
                 elif calculate is model_replay.replay:
                     keys, optional = (*interactive.DEFAULTS, 'model', 'step'), ('installments',)
                 body = interactive.encode(calculate(interactive.request_params(url.query, keys, optional)))

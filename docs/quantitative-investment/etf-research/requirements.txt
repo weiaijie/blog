@@ -3,3 +3,4 @@ backtrader==1.9.78.123
 pandas==2.2.3
 numpy==2.3.5
 matplotlib==3.10.8
+TA-Lib==0.6.8

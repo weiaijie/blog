@@ -13,7 +13,7 @@ function setupModelReplay(parameters, coverage) {
     const opts=coverage();
     if (!opts) return;
     const params=parameters(), weights=params.get('weights').split(',').map(Number);
-    const trend=['trend_120','multifactor_v1'].includes(strategy.model);
+    const trend=(strategy.model==='trend_120'||strategy.model.startsWith('multifactor_'));
     const split=!trend && weights[1]>0;
     const first=trend ? opts.trendFirst : split ? opts.first : weights[2]>0 ? opts.overseasFirst : opts.domesticFirst;
     const menu=el('range');
@@ -64,7 +64,7 @@ function setupModelReplay(parameters, coverage) {
     return Object.entries(units).map(([s,n])=>names[s]+' '+n+' 份').join('、');
   }
   function trigger(plan) {
-    if (plan.reason==='factor_balanced' || plan.reason==='factor_bonds') return plan.votes+' / 3 项满足，目标'+(plan.reason==='factor_balanced'?'股债各半':'全债');
+    if (plan.reason==='factor_balanced' || plan.reason==='factor_bonds') return plan.votes+' / 3 基础项满足'+(plan.gate?'，新增条件'+(plan.gate.passed?'满足':'未满足'):'')+'，目标'+(plan.reason==='factor_balanced'?'股债各半':'全债');
     if (plan.reason==='installment') return '第 '+plan.batch+' / '+plan.installments+' 批，目标投入总资产的 '+(100*plan.batch/plan.installments).toFixed(1)+'%';
     if (plan.trendSpread != null) return reasons[plan.reason]+'（窗口首日指数为1，指数减均线 '+Number(plan.trendSpread).toFixed(5)+'）';
     return reasons[plan.reason];
@@ -75,11 +75,11 @@ function setupModelReplay(parameters, coverage) {
     if (!d) return;
     const target=d.regime==='balanced'?'股债各半':'全债';
     const change={initial:'首次确定目标',switch:'目标切换',hold:'沿用目标'};
-    el('votes').textContent=d.asOf+' 收盘 · '+d.votes+' / 3 项满足 · '+change[d.transition]+'为'+target;
+    el('votes').textContent=d.asOf+' 收盘 · '+d.votes+' / 3 基础项满足'+(d.gate?' · 新增条件'+(d.gate.passed?'满足':'未满足'):'')+' · '+change[d.transition]+'为'+target;
     el('ballots').replaceChildren(...d.factors.map(f=>{
       const item=document.createElement('li');
-      const unit=f.key==='relative60'?' 个百分点':'%';
-      item.textContent=(f.passed?'满足':'未满足')+' · '+f.label+'：'+f.rule+'，当日读数 '+(100*Number(f.value)).toFixed(3)+unit+'。';
+      const unit=f.unit==='raw'?'':f.key==='relative60'?' 个百分点':'%';
+      item.textContent=(f.passed?'满足':'未满足')+' · '+f.label+'：'+f.rule+'，当日读数 '+((f.unit==='raw'?1:100)*Number(f.value)).toFixed(3)+unit+'。'+(f.metrics?' K '+f.metrics.k.toFixed(2)+' / D '+f.metrics.d.toFixed(2)+' / J '+f.metrics.j.toFixed(2)+'；ADX '+f.metrics.adx.toFixed(2)+'；+DI '+f.metrics.plusDI.toFixed(2)+' / −DI '+f.metrics.minusDI.toFixed(2)+'；量比 '+f.metrics.volumeRatio.toFixed(2)+'；当日收益 '+(100*f.metrics.return).toFixed(2)+'%。':'');
       return item;
     }));
   }
@@ -171,7 +171,7 @@ function setupModelReplay(parameters, coverage) {
       query.set('start',start); query.set('end',end);
     }
     if (strategy.model === 'trend_120') {query.set('weights','1,0,0,1');query.set('rebalance','monthly');}
-    if (strategy.model === 'multifactor_v1') {query.set('weights','1,0,0,1');query.set('rebalance','signal');}
+    if (strategy.model.startsWith('multifactor_')) {query.set('weights','1,0,0,1');query.set('rebalance','signal');}
     if (await load(1)) display(1);
   };
   el('step').onclick = async ()=>{

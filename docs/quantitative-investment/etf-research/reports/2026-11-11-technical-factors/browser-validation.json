@@ -1,0 +1,25 @@
+[
+  {
+    "width": 1320,
+    "summary": true,
+    "worstADX2y": true,
+    "KDJdateSelection": true,
+    "agentLinks": true,
+    "noPageErrors": true,
+    "noHorizontalOverflow": true
+  },
+  {
+    "width": 390,
+    "summary": true,
+    "worstADX2y": true,
+    "KDJdateSelection": true,
+    "agentLinks": true,
+    "noPageErrors": true,
+    "noHorizontalOverflow": true
+  },
+  {
+    "directKDJreplay": true,
+    "step": true,
+    "noPageErrors": true
+  }
+]

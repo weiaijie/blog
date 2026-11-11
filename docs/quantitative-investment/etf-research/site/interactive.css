@@ -108,3 +108,23 @@
 @media(max-width:700px){#overlay-chart{height:480px}#overlay table{min-width:640px}}
 .work-toggle{width:fit-content;margin:6px 0}
 @media(max-width:550px){.work-fields,.work-fields.weights{grid-template-columns:repeat(2,minmax(0,1fr))}#work-chart{height:215px}}
+
+#factor-lab{padding:20px 0;border-top:1px solid var(--line);scroll-margin-top:12px;min-width:0}
+#factor-lab h4{margin:20px 0 8px}
+#factor-lab .factor-table{overflow-x:auto;max-width:100%}
+#factor-lab table{width:100%;min-width:640px;border-collapse:collapse}
+#factor-lab td,#factor-lab th{padding:9px;text-align:left;white-space:normal;border-bottom:1px solid var(--line)}
+#factor-lab button{border:1px solid #92afa3;padding:8px 12px;border-radius:5px;color:#185948}
+#factor-lab button:disabled{opacity:.5}
+#factor-lab form button{background:#185948;color:white}
+#factor-lab .factor-chart{height:240px;margin:12px 0;max-width:100%}
+#factor-drill{scroll-margin-top:12px;min-width:0}
+.playing-model #factor-lab:not(:target):not(:has(#factor-drill:target)){display:none}
+@media(max-width:600px){
+ #factor-lab table,#factor-lab tbody,#factor-lab tr{display:block;min-width:0}
+ #factor-lab thead{position:absolute;clip-path:inset(50%);width:1px;height:1px;overflow:hidden}
+ #factor-lab tbody th{display:block;padding:8px 0;border:0}
+ #factor-lab tbody td{display:grid;grid-template-columns:10em 1fr;padding:4px 0;border:0;gap:4px}
+ #factor-lab tbody td:before{content:attr(data-label);color:var(--muted)}
+ #factor-lab tbody tr{padding-bottom:12px;border-bottom:1px solid var(--line)}
+}

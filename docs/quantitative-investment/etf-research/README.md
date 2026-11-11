@@ -1,5 +1,7 @@
 # 个人量化投资研究系统
 
+[成交量、KDJ、ADX独立研究](reports/2026-11-11-technical-factors/README.md)已接入同参数一年/两年逐日起点比较、最差期四户叠图和逐日信号。量价/KDJ门槛的换仓成本明显增加；ADX样本结果较好但未获样本外验证，原模型及前瞻账户不变。
+
 [2019～2021 年跨境历史准入](reports/2026-11-10-earlier-history/README.md)新增 730 个交易日。恒生配比可从 2019-01-02 连续运行；含标普的组合保留拆分前后两段独立账户。
 
 [多因子 514 个两年低收益窗口](reports/2026-11-10-multifactor-shortfall/README.md)按相同起点对照一次建仓，核对退出股票、费用和滑点的贡献，并回放最大差距期间的翻票。
@@ -95,6 +97,6 @@ python scripts/check_health.py
 python scripts/reproduce.py
 ```
 
-可选框架对照另装requirements-backtrader.txt。历史报告和原始快照不覆盖；最新静态清单见reports/2026-11-10-multifactor-shortfall/manifest.json，动态状态另对照封存记录。旧阶段清单应在相应Git提交验证。历史建设记录见[历史计划](docs/history/PROJECT_PLAN-before-closure-20261106.md)。
+可选框架对照另装requirements-backtrader.txt。历史报告和原始快照不覆盖；最新静态清单见reports/2026-11-11-technical-factors/manifest.json，动态状态另对照封存记录。旧阶段清单应在相应Git提交验证。历史建设记录见[历史计划](docs/history/PROJECT_PLAN-before-closure-20261106.md)。
 
 最新研究证据审计见[报告](reports/2026-11-06-research-audit/PROGRESS.md)与[离线页面](site/research-audit.html)：57,726个一年/两年连续窗口、255个现金新账户；历史50/50两年窗口中位年化约3.71%，不支持稳定达标结论。完整中期股票339项及债券跨市场代码归并已核对，当前实时全持仓仍未知。新增复现：`python scripts/reproduce_research_audit.py`。

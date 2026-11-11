@@ -1,6 +1,8 @@
 # 自主接续入口
 
-更新于 2026-11-10 收盘前，北京时间。每次接手先核实 GitHub redesign-pc 分支、Ubuntu 活动检查点和最近一次已封存操作。
+[成交量、KDJ、ADX独立研究](reports/2026-11-11-technical-factors/README.md)已接入同参数一年/两年逐日起点比较、最差期四户叠图和逐日信号。量价/KDJ门槛的换仓成本明显增加；ADX样本结果较好但未获样本外验证，原模型及前瞻账户不变。
+
+更新于 2026-11-11，北京时间。下方旧账户表为已提交归档口径；本轮只读检查的 Ubuntu 活动账户已到11月11日，运行状态成功，未在本轮覆盖或回退活动指针。每次接手先核实 GitHub redesign-pc 分支、Ubuntu 活动检查点和最近一次已封存操作。
 
 ## 当前进度
 
@@ -27,9 +29,13 @@
 
 范围为研究模拟，不使用真实资金。用 1～2 年评估长期年化净收益 4%～5% 的可行性，不为达到目标调参。保留冻结协议、旧目标和原始证据。1,967 日历史样本、162 个固定场景及旧 640/1,167 日结果分别可查。前瞻从真实观察日起算。11 月 6 日目标生成于 09:15；模拟成交与实际成交证据分开记录。
 
+## 因子研究下一步
+
+固定本轮版本，先做同期纯债窗口、分时期/非重叠样本及成本与持股差异核对，再另立版本研究确认天数和分档仓位。技术因子不是越多越好，不按4%目标挑参数。
+
 ## 下一步顺序
 
-1. 先读 AGENTS、README、PROJECT_PLAN、DATA_SOURCES、[原规划对照](docs/PLAN_ALIGNMENT.md)、PROTOCOL_V1 及研究、风险扩展配置。检查远端最新提交，执行 `python verify_snapshot.py` 和 `python scripts/verify_project.py`。最新静态清单在 `reports/2026-11-10-multifactor-shortfall/manifest.json`，旧清单在相应提交核验。
+1. 先读 AGENTS、README、PROJECT_PLAN、DATA_SOURCES、[原规划对照](docs/PLAN_ALIGNMENT.md)、PROTOCOL_V1 及研究、风险扩展配置。检查远端最新提交，执行 `python verify_snapshot.py` 和 `python scripts/verify_project.py`。最新静态清单在 `reports/2026-11-11-technical-factors/manifest.json`，旧清单在相应提交核验。
 2. 依据活动检查点、独立日历和北京时间确定下一完整交易日。11 月 9 日的定时接续已验收，前六次日期不齐的尝试均留证，17:10 的新快照通过。后续交易日 16:00 后核验多源行情、日历、分红和公告。按实际日期运行 `python scripts/check_session_transition.py --day YYYY-MM-DD --require-timer`，核对运行来源、旧前缀、18 户权益及新增交易。
 3. 推进跨境收益回测前先补齐相应日期的公告与执行约束。继续寻 13 次分红的正式逐日除息参考价、独立盘中停复牌与有披露日期的持仓证据，缺项保留未知。外部提醒、ETF 估值因子及 2027 年正式交易日历仍待完成。
 4. 按 6、12、24 个月观察点累计前瞻结果（最早 2027-05-05、2027-11-05、2028-11-05）。风险阈值仅用于报告。Backtrader 对照覆盖 162 场景，精确现金边界仍有差异，继续保留冻结引擎。
