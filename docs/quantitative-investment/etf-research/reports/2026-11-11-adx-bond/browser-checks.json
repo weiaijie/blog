@@ -1,0 +1,24 @@
+[
+  {
+    "width": 1320,
+    "rollingStats": true,
+    "worstGap": true,
+    "dailyDetail": true,
+    "continuousYear": true,
+    "nonOverlappingOffset": true,
+    "agent": true,
+    "noPageErrors": true,
+    "noHorizontalOverflow": true
+  },
+  {
+    "width": 390,
+    "rollingStats": true,
+    "worstGap": true,
+    "dailyDetail": true,
+    "continuousYear": true,
+    "nonOverlappingOffset": true,
+    "agent": true,
+    "noPageErrors": true,
+    "noHorizontalOverflow": true
+  }
+]

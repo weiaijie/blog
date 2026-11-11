@@ -4,7 +4,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>历史回测 · ETF 研究手记</title>
 <link rel="stylesheet" href="market.css"><link rel="stylesheet" href="backtest.css">
-<script defer src="vendor-charts/lightweight-charts-5.0.9.js"></script><script defer src="backtest.js"></script><script defer src="overlay.js"></script><script defer src="vendor-vue/vue-3.5.22.runtime.global.prod.js"></script><script defer src="method-gap.js"></script><script defer src="factor-shortfall.js"></script><script defer src="method-windows.js"></script><script defer src="factor-lab.js"></script><script defer src="strategy-controls.js"></script><script defer src="model-replay.js"></script><script defer src="interactive.js"></script><link rel="stylesheet" href="interactive.css">
+<script defer src="vendor-charts/lightweight-charts-5.0.9.js"></script><script defer src="backtest.js"></script><script defer src="overlay.js"></script><script defer src="vendor-vue/vue-3.5.22.runtime.global.prod.js"></script><script defer src="method-gap.js"></script><script defer src="factor-shortfall.js"></script><script defer src="method-windows.js"></script><script defer src="adx-bond.js"></script><script defer src="factor-lab.js"></script><script defer src="strategy-controls.js"></script><script defer src="model-replay.js"></script><script defer src="interactive.js"></script><link rel="stylesheet" href="interactive.css">
 </head>
 <body>
 <header><div class="shell mast"><div class="brand">ETF 研究手记</div><a href="market.html">返回行情与 K 线 ↗</a></div></header>
@@ -24,7 +24,7 @@
 <div class="work-actions"><button type="button" id="add-portfolio" disabled>添加对比组合</button><button type="button" id="remove-portfolio" hidden>移除最后一组</button></div>
 <p class="muted" id="work-limits"></p><a class="coverage-link" href="market.html#coverage">查看每只 ETF 的行情与回测覆盖</a><div class="work-actions"><button disabled id="work-run" type="submit">运行回测</button><button disabled id="work-windows" type="submit">逐日起点 · 测 1 年和 2 年</button><button type="submit" id="work-compare" hidden disabled>并排比较 · 测 1 年和 2 年</button><button type="button" id="work-all-dates">用最长连续区间</button><button type="button" id="work-pre-split" hidden>用标普拆分前区间</button><a href="api/v1/backtest/options">Agent 接口参数 ↗</a></div>
 </form><section id="replay" aria-labelledby="replay-heading">
-<h3 id="replay-heading">逐日模型回放</h3><a href="#factor-lab">成交量、KDJ、ADX 独立对照 ↓</a>　<a href="#method-windows">比较四种方式持有一年、两年的结果 ↓</a>　<a href="#method-gap-case">查看三批建仓差额案例 ↓</a>　<a href="#factor-shortfall">多因子两年未达标归因 ↓</a>
+<h3 id="replay-heading">逐日模型回放</h3><a href="#adx-bond">ADX 是否胜过纯国债 ↓</a>　<a href="#factor-lab">成交量、KDJ、ADX 独立对照 ↓</a>　<a href="#method-windows">比较四种方式持有一年、两年的结果 ↓</a>　<a href="#method-gap-case">查看三批建仓差额案例 ↓</a>　<a href="#factor-shortfall">多因子两年未达标归因 ↓</a>
 <div id="strategy-controls"></div>
 <div class="replay-controls">
 <label>回放区间<select id="replay-range"><option value="custom">上方填写的日期</option></select></label>
@@ -38,7 +38,7 @@
 <h4>收盘后模型决定</h4><p id="replay-plan"></p>
 <section id="replay-factors" hidden aria-labelledby="replay-votes"><h4 id="replay-votes"></h4><ul id="replay-ballots"></ul>
 <details><summary>查看截至当日的信号与模拟成交</summary><ol id="replay-signals"></ol></details></section>
-</div></section><section id="factor-lab" aria-label="新增因子独立对照"><div id="factor-lab-app"></div></section><section id="method-windows" aria-labelledby="method-title"><h3 id="method-title">四种投资方式 · 逐日起点比较</h3><div id="method-app"></div></section><p id="work-status" role="status" aria-live="polite"></p>
+</div></section><section id="adx-bond" aria-label="ADX与纯国债对照"><div id="adx-bond-app"></div></section><section id="factor-lab" aria-label="新增因子独立对照"><div id="factor-lab-app"></div></section><section id="method-windows" aria-labelledby="method-title"><h3 id="method-title">四种投资方式 · 逐日起点比较</h3><div id="method-app"></div></section><p id="work-status" role="status" aria-live="polite"></p>
 <section id="work-cohorts" hidden aria-labelledby="cohort-title"><h3 id="cohort-title">逐日起点结果</h3><a href="#method-windows">切换到投资方式并排比较</a>
 <p id="cohort-range"></p><div class="table-wrap" tabindex="0" aria-label="自定义配比逐日起点结果"><table><thead><tr><th>持有期</th><th>满期次数</th><th>赚钱次数</th><th>年化 ≥ 4%</th><th>最差到期盈亏</th><th>最差一期</th></tr></thead><tbody id="cohort-rows"></tbody></table></div>
 <p class="muted">每个起点从所填本金重新建仓，周年休市顺延，只统计在所选区间内到期的窗口。相邻起点共享行情。最差按到期盈亏排序，并列时打开最早一期。</p>

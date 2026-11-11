@@ -19,6 +19,7 @@ import model_replay
 import method_windows
 import method_gap
 import factor_lab
+import adx_bond
 from market_evidence import SNAPS
 from cross_market_quotes import THROUGH, cross_quotes
 
@@ -30,6 +31,7 @@ ASSETS = {'/': ('market.html','text/html'), '/market.html': ('market.html','text
           '/backtest.js': ('backtest.js','text/javascript'), '/backtest-data.json': ('backtest-data.json','application/json'),
           '/vendor-vue/vue-3.5.22.runtime.global.prod.js': ('vendor-vue/vue-3.5.22.runtime.global.prod.js','text/javascript'),
           '/vendor-vue/LICENSE': ('vendor-vue/LICENSE','text/plain'),
+          '/adx-bond.js': ('adx-bond.js','text/javascript'),
           '/factor-lab.js': ('factor-lab.js','text/javascript'),
           '/factor-shortfall.js': ('factor-shortfall.js','text/javascript'),
           '/method-gap.js': ('method-gap.js','text/javascript'),
@@ -111,7 +113,9 @@ def latest():
         return payload((ROOT/'config/active_run.json').read_bytes())
 
 
-CALCULATIONS = {'/api/v1/backtest/technical-factors': factor_lab.compare,
+CALCULATIONS = {'/api/v1/backtest/adx-bond': adx_bond.compare,
+                '/api/v1/backtest/adx-bond-detail': adx_bond.detail,
+                '/api/v1/backtest/technical-factors': factor_lab.compare,
                 '/api/v1/backtest/technical-detail': factor_lab.detail,
                 '/api/v1/backtest/method-gap': method_gap.gap_detail,
                 '/api/v1/backtest/method-windows': method_windows.compare,
@@ -136,6 +140,7 @@ class Handler(BaseHTTPRequestHandler):
         status = 200
         if path == '/api/v1/backtest/options':
             body, kind = interactive.encode(dict(interactive.OPTIONS, methodWindowsDefaults=method_windows.DEFAULTS,
+                adxBondDefaults=adx_bond.DEFAULTS, adxBondEndpoint='/api/v1/backtest/adx-bond',
                 technicalFactorsDefaults=factor_lab.DEFAULTS, technicalFactorsEndpoint='/api/v1/backtest/technical-factors',
                 factorShortfallEndpoint='/api/v1/backtest/factor-shortfall',
                 methodGapEndpoint='/api/v1/backtest/method-gap', methodGapCase=method_gap.CASE,
@@ -147,7 +152,9 @@ class Handler(BaseHTTPRequestHandler):
                 keys, optional = interactive.DEFAULTS, ()
                 if calculate in (method_windows.compare, method_windows.detail, method_gap.gap_detail):
                     keys = method_windows.DEFAULTS
-                elif calculate in (factor_lab.compare, factor_lab.detail):
+                elif calculate is adx_bond.detail:
+                    keys, optional = adx_bond.DEFAULTS, ('year',)
+                elif calculate in (factor_lab.compare, factor_lab.detail, adx_bond.compare):
                     keys = factor_lab.DEFAULTS
                 elif calculate is model_replay.replay:
                     keys, optional = (*interactive.DEFAULTS, 'model', 'step'), ('installments',)
