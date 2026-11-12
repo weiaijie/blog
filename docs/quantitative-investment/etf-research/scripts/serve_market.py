@@ -21,6 +21,7 @@ import method_gap
 import factor_lab
 import adx_bond
 import adx_trades
+import adx_shortfall
 from market_evidence import SNAPS
 from cross_market_quotes import THROUGH, cross_quotes
 
@@ -34,6 +35,7 @@ ASSETS = {'/': ('market.html','text/html'), '/market.html': ('market.html','text
           '/vendor-vue/LICENSE': ('vendor-vue/LICENSE','text/plain'),
           '/adx-bond.js': ('adx-bond.js','text/javascript'),
           '/adx-trades.js': ('adx-trades.js','text/javascript'),
+          '/adx-shortfall.js': ('adx-shortfall.js','text/javascript'),
           '/factor-lab.js': ('factor-lab.js','text/javascript'),
           '/factor-shortfall.js': ('factor-shortfall.js','text/javascript'),
           '/method-gap.js': ('method-gap.js','text/javascript'),
@@ -115,7 +117,9 @@ def latest():
         return payload((ROOT/'config/active_run.json').read_bytes())
 
 
-CALCULATIONS = {'/api/v1/backtest/adx-trades': adx_trades.compare,
+CALCULATIONS = {'/api/v1/backtest/adx-shortfall': adx_shortfall.compare,
+                '/api/v1/backtest/adx-shortfall-detail': adx_shortfall.detail,
+                '/api/v1/backtest/adx-trades': adx_trades.compare,
                 '/api/v1/backtest/adx-trade-detail': adx_trades.detail,
                 '/api/v1/backtest/adx-bond': adx_bond.compare,
                 '/api/v1/backtest/adx-bond-detail': adx_bond.detail,
@@ -146,6 +150,7 @@ class Handler(BaseHTTPRequestHandler):
             body, kind = interactive.encode(dict(interactive.OPTIONS, methodWindowsDefaults=method_windows.DEFAULTS,
                 adxBondDefaults=adx_bond.DEFAULTS, adxBondEndpoint='/api/v1/backtest/adx-bond',
                 adxTradesDefaults=adx_trades.DEFAULTS, adxTradesEndpoint='/api/v1/backtest/adx-trades',
+                adxShortfallEndpoint='/api/v1/backtest/adx-shortfall',
                 technicalFactorsDefaults=factor_lab.DEFAULTS, technicalFactorsEndpoint='/api/v1/backtest/technical-factors',
                 factorShortfallEndpoint='/api/v1/backtest/factor-shortfall',
                 methodGapEndpoint='/api/v1/backtest/method-gap', methodGapCase=method_gap.CASE,
@@ -155,7 +160,11 @@ class Handler(BaseHTTPRequestHandler):
             try:
                 calculate = CALCULATIONS[path]
                 keys, optional = interactive.DEFAULTS, ()
-                if calculate is adx_trades.compare:
+                if calculate is adx_shortfall.compare:
+                    keys = ()
+                elif calculate is adx_shortfall.detail:
+                    keys = ('start',)
+                elif calculate is adx_trades.compare:
                     keys = adx_trades.DEFAULTS
                 elif calculate is adx_trades.detail:
                     keys, optional = (*adx_trades.DEFAULTS, 'fees'), ('episode',)

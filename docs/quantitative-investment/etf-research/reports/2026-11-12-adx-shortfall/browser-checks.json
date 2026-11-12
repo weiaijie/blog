@@ -1,0 +1,26 @@
+[
+  {
+    "width": 1320,
+    "topFive": true,
+    "threeViews": true,
+    "signalOrders": true,
+    "agent": true,
+    "alternativeCase": true,
+    "noShortGapCase": true,
+    "yearFilter": true,
+    "noPageErrors": true,
+    "noOverflow": true
+  },
+  {
+    "width": 390,
+    "topFive": true,
+    "threeViews": true,
+    "signalOrders": true,
+    "agent": true,
+    "alternativeCase": true,
+    "noShortGapCase": true,
+    "yearFilter": true,
+    "noPageErrors": true,
+    "noOverflow": true
+  }
+]

@@ -1,4 +1,5 @@
 # Preserve original response and manifest bytes across Windows/Linux checkouts.
+reports/2026-11-12-adx-shortfall/** -text whitespace=cr-at-eol
 reports/2026-11-12-adx-trades/** -text whitespace=cr-at-eol
 site/vendor-charts/** -text -diff -whitespace
 site/market-data.json -text
