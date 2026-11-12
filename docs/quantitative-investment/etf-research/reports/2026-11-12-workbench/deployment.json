@@ -1,0 +1,21 @@
+{
+  "phase": "assets_and_pointers_verified_before_timer_resume",
+  "verifiedAt": "2026-11-12T21:19:13.445741+08:00",
+  "maintenanceStartedAt": "2026-11-12T21:14:07.923978+08:00",
+  "http": {
+    "/": 200,
+    "/workbench/": 200,
+    "/market.html": 200,
+    "/backtest.html": 200,
+    "/api/v1/backtest/options": 200
+  },
+  "pointersUnchanged": true,
+  "pointerHashes": {
+    "config/active_run.json": "6e90d34fe5cc72b3058af42386506245360ba5e7ffc7e26b670747bb7bf223f8",
+    "site/operation_status.json": "a20a1d446ea34233dbe53b4f07ea7cb03d477cdb6562fe1a04824ec6d7aa7478",
+    "site/health_status.json": "7d57ed596e530584a7737fb36d0b405b796ad8b7aa285cfc798a7edcd473fa26"
+  },
+  "accountAsOf": "2026-11-12",
+  "dashboard": "active",
+  "staticManifestEntriesAtCheck": 6249
+}

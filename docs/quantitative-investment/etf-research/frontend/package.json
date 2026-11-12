@@ -1,0 +1,10 @@
+{
+  "name": "etf-research-workbench",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {"dev": "vite --host 127.0.0.1", "build": "vue-tsc --noEmit && vite build", "test": "node --experimental-strip-types --test tests/*.test.ts"},
+  "dependencies": {"vue": "3.5.45", "vue-router": "4.6.3", "element-plus": "2.14.8", "lightweight-charts": "5.0.9"},
+  "devDependencies": {"@vitejs/plugin-vue": "6.0.11", "vite": "8.3.8", "typescript": "5.9.3", "vue-tsc": "3.3.14"},
+  "engines": {"node": ">=22.12.0"}
+}

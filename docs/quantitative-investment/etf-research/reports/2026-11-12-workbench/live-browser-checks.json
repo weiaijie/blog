@@ -1,0 +1,30 @@
+[
+  {
+    "width": 1440,
+    "firstStepNoFuture": true,
+    "fullReplayExactBaseline": true,
+    "comparisonCountsExact": true,
+    "overlayExactBaseline": true,
+    "savedPlanRestored": true,
+    "agentExport": true,
+    "attributionAndTradingDrawer": true,
+    "modelWorstFactors": true,
+    "noOverflow": true,
+    "noPageErrors": true,
+    "optionsRequests": 1
+  },
+  {
+    "width": 390,
+    "firstStepNoFuture": true,
+    "fullReplayExactBaseline": true,
+    "comparisonCountsExact": true,
+    "overlayExactBaseline": true,
+    "savedPlanRestored": true,
+    "agentExport": true,
+    "attributionAndTradingDrawer": true,
+    "modelWorstFactors": true,
+    "noOverflow": true,
+    "noPageErrors": true,
+    "optionsRequests": 1
+  }
+]

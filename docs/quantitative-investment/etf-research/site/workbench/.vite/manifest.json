@@ -1,0 +1,83 @@
+{
+  "_Chart-DAPPLOCt.js": {
+    "file": "assets/Chart-DAPPLOCt.js",
+    "name": "Chart",
+    "imports": [
+      "index.html"
+    ]
+  },
+  "_DayDetail-CtA0rCmS.js": {
+    "file": "assets/DayDetail-CtA0rCmS.js",
+    "name": "DayDetail",
+    "imports": [
+      "index.html"
+    ]
+  },
+  "index.html": {
+    "file": "assets/index-Cy1M2nwr.js",
+    "name": "index",
+    "src": "index.html",
+    "isEntry": true,
+    "dynamicImports": [
+      "src/views/Overview.vue",
+      "src/views/Market.vue",
+      "src/views/Research.vue",
+      "src/views/Compare.vue",
+      "src/views/Reports.vue"
+    ],
+    "css": [
+      "assets/index-C2tJo7GT.css"
+    ]
+  },
+  "src/views/Compare.vue": {
+    "file": "assets/Compare-DpQlPMxl.js",
+    "name": "Compare",
+    "src": "src/views/Compare.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html",
+      "_Chart-DAPPLOCt.js",
+      "_DayDetail-CtA0rCmS.js"
+    ]
+  },
+  "src/views/Market.vue": {
+    "file": "assets/Market-LjRyEVdY.js",
+    "name": "Market",
+    "src": "src/views/Market.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html",
+      "_Chart-DAPPLOCt.js"
+    ]
+  },
+  "src/views/Overview.vue": {
+    "file": "assets/Overview-sVKMiHu_.js",
+    "name": "Overview",
+    "src": "src/views/Overview.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html",
+      "_Chart-DAPPLOCt.js"
+    ]
+  },
+  "src/views/Reports.vue": {
+    "file": "assets/Reports-SvlT5zHL.js",
+    "name": "Reports",
+    "src": "src/views/Reports.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html"
+    ]
+  },
+  "src/views/Research.vue": {
+    "file": "assets/Research-C05ky8nl.js",
+    "name": "Research",
+    "src": "src/views/Research.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html",
+      "_Chart-DAPPLOCt.js",
+      "_DayDetail-CtA0rCmS.js"
+    ]
+  }
+}

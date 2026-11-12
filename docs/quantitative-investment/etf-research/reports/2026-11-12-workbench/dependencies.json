@@ -1,0 +1,5 @@
+{
+  "source": "https://registry.npmjs.org",
+  "lockedPackagesVerified": 107,
+  "checks": "resolved URL and integrity matched version metadata; npm aliases resolved by declared package name; all optional platform dependencies included"
+}

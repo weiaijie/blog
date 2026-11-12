@@ -49,6 +49,33 @@ ASSETS = {'/': ('market.html','text/html'), '/market.html': ('market.html','text
 guard = Lock()
 
 
+def workbench_assets(site):
+    """Expose only files in the Vite build manifest, never arbitrary site paths."""
+    folder = site/'workbench'
+    manifest = folder/'.vite/manifest.json'
+    if not manifest.exists():
+        return {}
+    paths = {'index.html'}
+    for entry in read(manifest).values():
+        paths.add(entry['file'])
+        paths.update(entry.get('css', []))
+        paths.update(entry.get('assets', []))
+    types = {'.html':'text/html', '.js':'text/javascript', '.css':'text/css',
+             '.woff2':'font/woff2', '.svg':'image/svg+xml'}
+    registered = {}
+    for name in paths:
+        path = inside(folder, name)
+        if not path.is_file() or path.suffix not in types:
+            raise ValueError('Invalid workbench asset: '+name)
+        registered['/workbench/'+name] = ('workbench/'+name, types[path.suffix])
+    for route in ('/', '/workbench', '/workbench/'):
+        registered[route] = ('workbench/index.html', 'text/html')
+    return registered
+
+
+ASSETS.update(workbench_assets(SITE))
+
+
 @lru_cache(maxsize=1)
 def history():
     _, _, bars, _ = interactive.inputs()
