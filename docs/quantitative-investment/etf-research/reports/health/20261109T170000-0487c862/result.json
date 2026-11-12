@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-11-09T17:00:00.652855+08:00",
+  "account_through": "2026-11-06",
+  "scheduler": {
+    "timer_enabled": "enabled",
+    "timer_active": "active",
+    "linger": "yes"
+  },
+  "issues": [
+    "run_failed",
+    "account_stale"
+  ],
+  "review_queue": [],
+  "report_only": true,
+  "expected_through": "2026-11-09",
+  "state": "run_failed",
+  "actionable": true,
+  "operation": "reports/operations/20261109T084408Z-5a31271f",
+  "last_archive": {
+    "snapshot": "635944a8021f3cede8cf57caa2bd73cb111af91e50922410fdc6bd8decb81de9",
+    "files": 3567,
+    "new_objects": 24,
+    "new_bytes": 808148,
+    "finished_at_utc": "2026-11-08T14:43:41.755891+00:00"
+  },
+  "archive_scheduler": {
+    "ActiveState": "active",
+    "UnitFileState": "enabled",
+    "Result": "success"
+  },
+  "observation": "reports/health/20261109T170000-0487c862"
+}

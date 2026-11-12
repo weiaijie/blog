@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "name": "ETF 50/50 月度再平衡总收益代理",
+  "weights": {
+    "510300": "0.5",
+    "511010": "0.5"
+  },
+  "rebalance": "month_boundary_prior_close",
+  "dividend": "verified_cash_reinvest_at_ex_close",
+  "costs": "zero_fractional_units",
+  "annualization_sessions": 252,
+  "tracking_error_min_month_returns": 10,
+  "scope": "report_only"
+}

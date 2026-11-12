@@ -1,0 +1,7 @@
+{
+  "created_at_shanghai": "2026-11-11T16:44:08.390561+08:00",
+  "through": "2026-11-11",
+  "previous_checkpoint": "reports/daily/20261110T171001-50e81e70/forward_checkpoint.json",
+  "retry_of": null,
+  "offline_replay": false
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "mode": "report_only",
+  "lookback_returns": 252,
+  "holdings_reference": "data/reference/holdings_2026q3.json",
+  "forward_price_snapshot": "20261111T171001-5e7c9bcb-prices",
+  "published_report": "reports/daily/20261111T171001-5e7c9bcb/risk_extensions.json",
+  "stress_scenarios": [
+    {
+      "name": "股票ETF下跌10%",
+      "510300": -0.1,
+      "511010": 0.0
+    },
+    {
+      "name": "股票ETF下跌20%",
+      "510300": -0.2,
+      "511010": 0.0
+    },
+    {
+      "name": "债券ETF下跌3%",
+      "510300": 0.0,
+      "511010": -0.03
+    },
+    {
+      "name": "股债同时下跌20%和5%",
+      "510300": -0.2,
+      "511010": -0.05
+    }
+  ],
+  "stress_scope": "Fixed hypothetical one-step ETF price shocks; no probability, liquidation, rebalancing, liquidity or convexity model. Chosen before computing outputs, not optimized.",
+  "bond_identity_snapshot": "data/snapshots/2026-11-07-bond-identities-000043"
+}

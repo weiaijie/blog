@@ -1,0 +1,196 @@
+"""Serve the read-only research dashboard, or export its verified data for static viewing."""
+import argparse
+from datetime import date, timedelta
+from functools import lru_cache
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+import json
+from pathlib import Path
+import sys
+from threading import Lock
+from urllib.parse import urlsplit
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT/'src'))
+from etf_research.admission import load_incremental, sessions_between
+from etf_research.forward import digest, prefix_digest
+from etf_research.publication import inside, read, sha, verify_bundle
+import interactive_backtest as interactive
+import model_replay
+import method_windows
+import method_gap
+from market_evidence import SNAPS
+from cross_market_quotes import THROUGH, cross_quotes
+
+SITE = ROOT/'site'
+ASSETS = {'/': ('market.html','text/html'), '/market.html': ('market.html','text/html'),
+          '/market.css': ('market.css','text/css'), '/market.js': ('market.js','text/javascript'),
+          '/vendor-charts/lightweight-charts-5.0.9.js': ('vendor-charts/lightweight-charts-5.0.9.js','text/javascript'),
+          '/backtest.html': ('backtest.html','text/html'), '/backtest.css': ('backtest.css','text/css'),
+          '/backtest.js': ('backtest.js','text/javascript'), '/backtest-data.json': ('backtest-data.json','application/json'),
+          '/vendor-vue/vue-3.5.22.runtime.global.prod.js': ('vendor-vue/vue-3.5.22.runtime.global.prod.js','text/javascript'),
+          '/vendor-vue/LICENSE': ('vendor-vue/LICENSE','text/plain'),
+          '/factor-shortfall.js': ('factor-shortfall.js','text/javascript'),
+          '/method-gap.js': ('method-gap.js','text/javascript'),
+          '/method-windows.js': ('method-windows.js','text/javascript'),
+          '/strategy-controls.js': ('strategy-controls.js','text/javascript'),
+          '/model-replay.js': ('model-replay.js','text/javascript'),
+          '/interactive.js': ('interactive.js','text/javascript'), '/interactive.css': ('interactive.css','text/css'),
+          '/overlay.js': ('overlay.js','text/javascript'),
+          '/entry-windows.json': ('entry-windows.json','application/json'),
+          '/vendor-charts/LICENSE.txt': ('vendor-charts/LICENSE.txt','text/plain')}
+guard = Lock()
+
+
+@lru_cache(maxsize=1)
+def history():
+    _, _, bars, _ = interactive.inputs()
+    return bars
+
+
+@lru_cache(maxsize=1)
+def payload(pointer_bytes):
+    pointer = json.loads(pointer_bytes)
+    folder = inside(ROOT,pointer['bundle'])
+    verify_bundle(folder)
+    if sha(folder/'manifest.json') != pointer['bundle_manifest_sha256']:
+        raise ValueError('Bundle digest mismatch')
+    checkpoint = folder/'forward_checkpoint.json'
+    if inside(ROOT,pointer['checkpoint']) != checkpoint:
+        raise ValueError('Checkpoint outside active bundle')
+    state = read(checkpoint)
+    checksum = digest({k:v for k,v in state.items() if k!='checkpoint_sha256'})
+    if (state['real_money'] is not False or checksum != state['checkpoint_sha256'] or
+            checksum != pointer['checkpoint_sha256'] or state['as_of']!=pointer['as_of']):
+        raise ValueError('Checkpoint identity mismatch')
+    audit = read(folder/'admission.json')
+    data, rebuilt = load_incremental(SNAPS, audit['snapshot'])
+    as_of = date.fromisoformat(state['as_of'])
+    if rebuilt!=audit or data.sessions[-1]!=as_of or prefix_digest(data,as_of)!=state['admitted_prefix_sha256']:
+        raise ValueError('Account and market data differ')
+    calendar=read(SNAPS/'2026-11-04-calendar-08/calendar.json')['holiday_ranges']
+    historical = history()
+    extra = cross_quotes(historical, calendar) if as_of >= THROUGH else {}
+    candles = {}
+    for symbol,old in historical.items():
+        prices = dict(old)
+        prices.update(extra.get(symbol, {}))
+        if symbol in data.bars:
+            current = data.bars[symbol]
+            if any(prices[d]!=current[d] for d in prices.keys() & current.keys()):
+                raise ValueError('Revised OHLC on overlap: '+symbol)
+            cutoff = max(old)
+            prices.update({d:v for d,v in current.items() if d>cutoff})
+        candles[symbol] = [[d.isoformat(),float(b.open),float(b.high),float(b.low),float(b.close)]
+                           for d,b in sorted(prices.items())]
+    portfolio=state['portfolios']['monthly_50_50_base']
+    curve=[[r['date'],float(r['equity'])] for r in portfolio['daily']]
+    if len(curve)!=state['forward_sessions'] or curve[-1][0]!=state['as_of']:
+        raise ValueError('Forward observations incomplete')
+    end=date(as_of.year,12,31)
+    following=sessions_between(calendar,as_of+timedelta(days=1),end) if as_of<end else []
+    view=dict(asOf=state['as_of'],start=state['forward_start'],sessions=state['forward_sessions'],
+              initial=float(portfolio['summary']['initial_cash']),curve=curve,candles=candles,
+              nextSession=str(following[0]) if following else None)
+    options = interactive.OPTIONS
+    coverage = {}
+    for symbol,rows in candles.items():
+        first = options['domesticFirst'] if symbol in ('510300','511010') else options['overseasFirst']
+        windows = [[first,options['last']]]
+        if symbol == '513500':
+            windows = [[first,options['preSplitLast']],[options['first'],options['last']]]
+        coverage[symbol] = dict(quoteStart=rows[0][0], quoteThrough=rows[-1][0], quotes=len(rows),
+                                backtestWindows=windows)
+    view['coverage'] = coverage
+    return json.dumps(view,ensure_ascii=False,separators=(',',':')).encode()
+
+
+def latest():
+    with guard:
+        return payload((ROOT/'config/active_run.json').read_bytes())
+
+
+CALCULATIONS = {'/api/v1/backtest/method-gap': method_gap.gap_detail,
+                '/api/v1/backtest/method-windows': method_windows.compare,
+                '/api/v1/backtest/method-detail': method_windows.detail,
+                '/api/v1/backtest/replay': model_replay.replay,
+                '/api/v1/backtest': interactive.backtest,
+                '/api/v1/backtest/windows': interactive.entry_windows,
+                '/api/v1/backtest/compare': interactive.compare_windows,
+                '/api/v1/backtest/overlay': interactive.same_window}
+
+
+class Handler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.reply(True)
+
+    def do_HEAD(self):
+        self.reply(False)
+
+    def reply(self, send_body):
+        url = urlsplit(self.path)
+        path = url.path
+        status = 200
+        if path == '/api/v1/backtest/options':
+            body, kind = interactive.encode(dict(interactive.OPTIONS, methodWindowsDefaults=method_windows.DEFAULTS,
+                factorShortfallEndpoint='/api/v1/backtest/factor-shortfall',
+                methodGapEndpoint='/api/v1/backtest/method-gap', methodGapCase=method_gap.CASE,
+                methodWindowsEndpoint='/api/v1/backtest/method-windows', methodDetailEndpoint='/api/v1/backtest/method-detail')), 'application/json'
+        elif path in CALCULATIONS:
+            kind = 'application/json'
+            try:
+                calculate = CALCULATIONS[path]
+                keys, optional = interactive.DEFAULTS, ()
+                if calculate in (method_windows.compare, method_windows.detail, method_gap.gap_detail):
+                    keys = method_windows.DEFAULTS
+                elif calculate is model_replay.replay:
+                    keys, optional = (*interactive.DEFAULTS, 'model', 'step'), ('installments',)
+                body = interactive.encode(calculate(interactive.request_params(url.query, keys, optional)))
+            except interactive.InputError as exc:
+                status, body = 400, interactive.encode({'error': str(exc)})
+            except (OSError, ValueError, KeyError, IndexError, ImportError) as exc:
+                self.log_error('Historical replay unavailable: %s', exc)
+                status, body = 503, interactive.encode({'error': '已核验的历史数据暂时不可用。'})
+        elif path=='/api/v1/backtest/factor-shortfall':
+            if url.query:
+                status,body = 400,interactive.encode({'error':'本报告使用已归档的固定样本和基准费用。'})
+            else:
+                try:
+                    body=(ROOT/'reports/2026-11-10-multifactor-shortfall/cohort.json').read_bytes()
+                except OSError:
+                    self.send_error(503,'Archived cohort unavailable')
+                    return
+            kind='application/json'
+        elif path=='/market-data.json':
+            try:
+                body,kind=latest(),'application/json'
+            except (OSError,ValueError,KeyError,IndexError) as exc:
+                self.log_error('Research verification failed: %s', exc)
+                self.send_error(503,'Verified research unavailable')
+                return
+        elif path in ASSETS:
+            name,kind=ASSETS[path]
+            body=(SITE/name).read_bytes()
+        else:
+            self.send_error(404)
+            return
+        self.send_response(status)
+        self.send_header('Content-Type',kind+'; charset=utf-8')
+        self.send_header('Cache-Control','no-store')
+        self.send_header('X-Content-Type-Options','nosniff')
+        self.send_header('Content-Length',str(len(body)))
+        self.end_headers()
+        if send_body:
+            self.wfile.write(body)
+
+
+if __name__=='__main__':
+    parser=argparse.ArgumentParser()
+    parser.add_argument('--bind',default='127.0.0.1')
+    parser.add_argument('--port',type=int,default=18766)
+    parser.add_argument('--export',type=Path)
+    args=parser.parse_args()
+    if args.export:
+        args.export.write_bytes(latest())
+    else:
+        latest()
+        ThreadingHTTPServer((args.bind,args.port),Handler).serve_forever()

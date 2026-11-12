@@ -1,0 +1,22 @@
+[
+  {
+    "width": 1320,
+    "episodes": true,
+    "costScenarios": true,
+    "nonoverlap": true,
+    "agent": true,
+    "charts": true,
+    "noPageErrors": true,
+    "noHorizontalOverflow": true
+  },
+  {
+    "width": 390,
+    "episodes": true,
+    "costScenarios": true,
+    "nonoverlap": true,
+    "agent": true,
+    "charts": true,
+    "noPageErrors": true,
+    "noHorizontalOverflow": true
+  }
+]

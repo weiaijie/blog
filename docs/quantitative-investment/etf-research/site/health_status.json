@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-11-09T23:45:00.655855+08:00",
-  "account_through": "2026-11-09",
+  "checked_at": "2026-11-12T18:00:00.666858+08:00",
+  "account_through": "2026-11-12",
   "scheduler": {
     "timer_enabled": "enabled",
     "timer_active": "active",
@@ -10,21 +10,21 @@
   "issues": [],
   "review_queue": [],
   "report_only": true,
-  "expected_through": "2026-11-09",
+  "expected_through": "2026-11-12",
   "state": "current",
   "actionable": false,
-  "operation": "reports/operations/20261109T091000Z-1e64c9a0",
+  "operation": "reports/operations/20261112T091000Z-8bb17886",
   "last_archive": {
-    "snapshot": "81e3990922404439de319f035e8a16205511be9b9e4c0a7d7bcd0fd44839cfeb",
-    "files": 4139,
-    "new_objects": 274,
-    "new_bytes": 3845871,
-    "finished_at_utc": "2026-11-09T09:45:09.098415+00:00"
+    "snapshot": "c7d0be3957c2a4f5d2f1943adadb41c9b3cb7243c7497967c7a91aba716996d1",
+    "files": 6128,
+    "new_objects": 332,
+    "new_bytes": 9589298,
+    "finished_at_utc": "2026-11-12T09:45:13.170894+00:00"
   },
   "archive_scheduler": {
     "ActiveState": "active",
     "UnitFileState": "enabled",
     "Result": "success"
   },
-  "observation": "reports/health/20261109T234500-3e056e61"
+  "observation": "reports/health/20261112T180000-eee6196b"
 }
