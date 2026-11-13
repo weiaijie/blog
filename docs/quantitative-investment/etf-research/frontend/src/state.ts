@@ -13,7 +13,7 @@ export async function getJson<T>(url:string,signal?:AbortSignal):Promise<T>{
 }
 let bootstrap:Promise<void>|undefined;
 export function loadBase(force=false){if(force)bootstrap=undefined;return bootstrap??=(async()=>{
-  const results=await Promise.allSettled([getJson<Market>('/market-data.json'),getJson<Options>('/api/v1/backtest/options')]);
+  const results=await Promise.allSettled([getJson<Market>('/api/v2/market-data'),getJson<Options>('/api/v2/backtest/options')]);
   if(results[0].status==='fulfilled')market.value=results[0].value;
   if(results[1].status==='fulfilled')options.value=results[1].value;
   const failures=results.filter(r=>r.status==='rejected');

@@ -3,6 +3,7 @@ from collections import defaultdict
 from datetime import date
 from decimal import Decimal as D
 from functools import lru_cache
+from research_profile import current, FROZEN, profile_cache
 from pathlib import Path
 import hashlib
 import json
@@ -56,8 +57,11 @@ def admit_volume(sessions, bars, official, sina):
     return result, audit
 
 
-@lru_cache(maxsize=1)
+@profile_cache(maxsize=2)
 def volume_inputs():
+    if current.get() != FROZEN:
+        from recent_market_data import volumes
+        return volumes()
     from interactive_backtest import inputs
     base, _, bars, _ = inputs()
     snaps = ROOT/'data/snapshots'

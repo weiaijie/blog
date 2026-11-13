@@ -1,0 +1,24 @@
+[
+  {
+    "width": 1440,
+    "recentPlanRestored": true,
+    "agentVersionPreserved": true,
+    "openingHaltUnfilled": true,
+    "windowsCountsExact": true,
+    "worstOverlayAttribution": true,
+    "methodAndTechnicalFactors": true,
+    "noOverflow": true,
+    "noPageErrors": true
+  },
+  {
+    "width": 390,
+    "recentPlanRestored": true,
+    "agentVersionPreserved": true,
+    "openingHaltUnfilled": true,
+    "windowsCountsExact": true,
+    "worstOverlayAttribution": true,
+    "methodAndTechnicalFactors": true,
+    "noOverflow": true,
+    "noPageErrors": true
+  }
+]

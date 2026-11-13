@@ -3,14 +3,18 @@ export const names:Record<string,string>={'510300':'沪深300','513500':'标普5
 export const models:Record<string,string>={allocation:'固定配比',installments:'按月分批',trend_120:'120日趋势',multifactor_v1:'三因子投票',multifactor_volume_v1:'三因子＋量价',multifactor_kdj_v1:'三因子＋KDJ',multifactor_adx_v1:'三因子＋ADX'};
 export type Params=Record<string,string>;
 export type Decimal=string|number;
-export interface Plan {version:1;name:string;start:string;end:string;capital:string;fees:string;rebalance:string;model:string;installments:string;portfolios:string[]}
-export const defaultPlan:Plan={version:1,name:'沪深300与国债研究',start:'2019-03-20',end:'2026-10-30',capital:'100000',fees:'base',rebalance:'hold',model:'allocation',installments:'3',portfolios:['1,0,0,1','0,0,0,1']};
+export type Dataset='frozen-2026-10-30'|'verified-2026-11-12';
+export interface Plan {version:2;dataset:Dataset;name:string;start:string;end:string;capital:string;fees:string;rebalance:string;model:string;installments:string;portfolios:string[]}
+export const defaultPlan:Plan={version:2,dataset:'verified-2026-11-12',name:'沪深300与国债研究',start:'2019-03-20',end:'2026-11-12',capital:'100000',fees:'base',rebalance:'hold',model:'allocation',installments:'3',portfolios:['1,0,0,1','0,0,0,1']};
 export function parsePlan(input:unknown):Plan {
   if(!input||typeof input!=='object'||Array.isArray(input)) throw Error('方案须为JSON对象。');
-  const d=input as Record<string,unknown>;
+  const original=input as Record<string,unknown>;
+  // Version-1 plans retain their original frozen dataset when restored or shared.
+  const d=original.version===1&&!Object.hasOwn(original,'dataset')?{...original,version:2,dataset:'frozen-2026-10-30'}:original;
   if(Object.keys(d).some(k=>!Object.hasOwn(defaultPlan,k))||Object.keys(defaultPlan).some(k=>!Object.hasOwn(d,k)))throw Error('方案字段不完整，或含未知字段。');
-  if(d.version!==1)throw Error('不支持的方案版本。');
+  if(d.version!==2)throw Error('不支持的方案版本。');
   for(const k of ['name','start','end','capital','fees','rebalance','model','installments'])if(typeof d[k]!=='string')throw Error('方案字段类型不正确：'+k);
+  if(typeof d.dataset!=='string'||!['frozen-2026-10-30','verified-2026-11-12'].includes(d.dataset))throw Error('未知数据版本。');
   const p=d as unknown as Plan;
   if(!p.name.trim()||p.name.length>80)throw Error('方案名须为1至80个字符。');
   for(const x of [p.start,p.end])if(!/^\d{4}-\d{2}-\d{2}$/.test(x)||!Number.isFinite(Date.parse(x))||new Date(x).toISOString().slice(0,10)!==x)throw Error('日期无效。');
@@ -36,16 +40,17 @@ export function comparisonParams(p:Plan,kind:string):Params{
   return {...common(p),installments:p.installments,rebalance:p.rebalance};
 }
 export function apiUrl(path:string,params:Params={}):string {const q=new URLSearchParams(params).toString();return path+(q?'?'+q:'');}
+export function endpoint(p:Plan,suffix=''){return (p.dataset==='frozen-2026-10-30'?'/api/v1/backtest':'/api/v2/backtest')+suffix;}
 export function agentManifest(p:Plan){
   p=parsePlan(p);
-  return {schemaVersion:1,plan:p,method:'GET',requests:{
-    replay:apiUrl('/api/v1/backtest/replay',replayParams(p,'1')),
-    replayAll:apiUrl('/api/v1/backtest/replay',replayParams(p,'all')),
-    allocation:apiUrl('/api/v1/backtest',allocationParams(p)),
-    windows:apiUrl('/api/v1/backtest/windows',allocationParams(p)),
-    ...(p.portfolios.length>1?{compare:apiUrl('/api/v1/backtest/compare',comparisonParams(p,'weights'))}:{}),
-    methods:apiUrl('/api/v1/backtest/method-windows',comparisonParams(p,'methods')),
-    technical:apiUrl('/api/v1/backtest/technical-factors',comparisonParams(p,'technical')),
+  return {schemaVersion:2,dataVersion:p.dataset,plan:p,method:'GET',requests:{
+    replay:apiUrl(endpoint(p,'/replay'),replayParams(p,'1')),
+    replayAll:apiUrl(endpoint(p,'/replay'),replayParams(p,'all')),
+    allocation:apiUrl(endpoint(p,''),allocationParams(p)),
+    windows:apiUrl(endpoint(p,'/windows'),allocationParams(p)),
+    ...(p.portfolios.length>1?{compare:apiUrl(endpoint(p,'/compare'),comparisonParams(p,'weights'))}:{}),
+    methods:apiUrl(endpoint(p,'/method-windows'),comparisonParams(p,'methods')),
+    technical:apiUrl(endpoint(p,'/technical-factors'),comparisonParams(p,'technical')),
   },scope:'allocation/windows/compare use configured weights; methods/technical use fixed domestic models. Replay uses the selected model; trend/factor weights and rebalance are fixed. API validates admitted coverage; a request is not a guarantee of valid coverage.'};
 }
 export const money=(x:Decimal|null|undefined)=>x==null?'—':Number(x).toLocaleString('zh-CN',{minimumFractionDigits:2,maximumFractionDigits:2});
@@ -70,4 +75,4 @@ export interface IntervalAttribution{start:string;end:string;accounts:Record<str
 export interface Overlay{parameters:Params;portfolios:Array<{id:string;summary:Summary;daily:Point[]}>;attribution:{holding:IntervalAttribution;peakToTrough:Record<string,IntervalAttribution>;dailyGaps:Record<string,Gap>}}
 export interface ModelDetail{parameters:Params;models:Record<string,{pnl:Decimal;curve:Point[];events:unknown[]}>}
 export interface Market{asOf:string;start:string;sessions:number;initial:number;curve:[string,number][];candles:Record<string,[string,number,number,number,number][]>;coverage:Record<string,{quoteStart:string;quoteThrough:string;quotes:number;backtestWindows:string[][]}>}
-export interface Options{last:string;domesticFirst:string;overseasFirst:string;trendFirst:string;first:string;preSplitLast:string;splitDay:string}
+export interface Options{last:string;dataVersion?:string;evidence?:{through:string;openingHalts:string[];unknown:string[]};domesticFirst:string;overseasFirst:string;trendFirst:string;first:string;preSplitLast:string;splitDay:string}

@@ -44,3 +44,7 @@ Agent请求清单包含方案和与界面相同的GET URL：配比回测、逐�
 浏览器验收：使用安装了Playwright及Chromium的Python执行 `frontend/tests/browser_checks.py --base <隔离地址> --baseline <旧API地址> --output <新报告目录>`。基准接口必须来自本次未修改的计算层，不能用模拟响应替代。
 
 技术来源：[Vue/Vite](https://vuejs.org/guide/scaling-up/tooling.html)、[Vue Router](https://router.vuejs.org/introduction.html)、[Element Plus](https://element-plus.org/en-US/)、[Lightweight Charts](https://tradingview.github.io/lightweight-charts/)。
+
+## 2026-11-13 版本补充
+
+近期版verified-2026-11-12与原冻结样本并存。方案schema version=2携带dataset，恢复旧version=1方案自动绑定frozen-2026-10-30。近期版走/api/v2/backtest与同实现Agent CLI，原/api/v1保持10-30边界；缓存含数据版本并以请求上下文隔离。行情总览展示新版核验范围，固定研究报告保留各自截止日。近期停牌日不模拟10:30补单，剩余未知直接展示。操作证据见[本轮报告](../reports/2026-11-13-recent-data/README.md)。

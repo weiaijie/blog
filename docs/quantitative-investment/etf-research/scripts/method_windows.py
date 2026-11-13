@@ -6,6 +6,7 @@ from datetime import date
 from decimal import Decimal as D
 import hashlib
 from functools import lru_cache
+from research_profile import profile_cache
 from pathlib import Path
 import re
 
@@ -76,7 +77,7 @@ def archived_entries():
 
 def selected_entries(params, days):
     archive_settings = ('fees','installments','rebalance')
-    if (D(params['capital'])==D(DEFAULTS['capital']) and
+    if (params['end'] <= DEFAULTS['end'] and D(params['capital'])==D(DEFAULTS['capital']) and
             all(params[k]==DEFAULTS[k] for k in archive_settings)):
         archive = archived_entries()
         for sessions, endpoints in entry_schedule(days):
@@ -93,7 +94,7 @@ def compare(params):
     return _compare(**params)
 
 
-@lru_cache(maxsize=8)
+@profile_cache(maxsize=16)
 def _compare(start, end, capital, fees, installments, rebalance):
     params = dict(start=start,end=end,capital=capital,fees=fees,installments=installments,rebalance=rebalance)
     _, days, initial, _ = prepare(params)

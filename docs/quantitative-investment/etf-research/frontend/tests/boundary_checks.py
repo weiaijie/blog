@@ -20,7 +20,7 @@ with sync_playwright() as pw:
  changed=dict(plan,name='已导入',capital='25000')
  page.get_by_label('导入方案JSON').set_input_files({'name':'valid.json','mimeType':'application/json','buffer':json.dumps(changed).encode()})
  expect(page.get_by_label('本金（元）',exact=True)).to_have_value('25000')
- page.get_by_role('button',name='生成复现链接').click();link=page.get_by_label('复现链接（含方案参数）').input_value();assert json.loads(__import__('urllib.parse').parse.parse_qs(link.split('?',1)[1])['plan'][0])==changed
+ page.get_by_role('button',name='生成复现链接').click();link=page.get_by_label('复现链接（含方案参数）').input_value();assert json.loads(__import__('urllib.parse').parse.parse_qs(link.split('?',1)[1])['plan'][0])==dict(changed,version=2,dataset='frozen-2026-10-30')
  page.get_by_role('button',name='应用设置',exact=True).click();assert page.locator('.comparison-block').count()==0
  split=dict(plan,start='2021-10-29',end='2023-10-31',portfolios=['0,1,0,1'])
  open_plan(split,'research');page.get_by_role('button',name='计算完整区间',exact=True).click();expect(page.locator('.el-alert')).to_be_visible(timeout=120000);assert not page.get_by_role('link',name='Agent：当前请求JSON').count()

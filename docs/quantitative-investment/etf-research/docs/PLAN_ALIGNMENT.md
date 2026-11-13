@@ -1,5 +1,7 @@
 # 原计划与当前 ETF 系统对照
 
+2026-11-13新增[近期数据版本及完整操作验收](../reports/2026-11-13-recent-data/README.md)：四ETF核验至11-12、已知停牌限制接入，方案/API保存版本。数据工程与界面已交付部分前进；独立停复牌完整性、正式除息参考价及长期前瞻等缺项不据此改成完成。
+
 当前统一状态见 [CURRENT_STATUS](CURRENT_STATUS.md)。2026-11-12新增 [量化工作台](WORKBENCH_PLAN.md)，提供Vue/TypeScript组件化界面与人工/Agent共用参数；这是交互工程交付，不改变下列研究缺口。历史阶段更新按各自日期阅读。
 
 对照依据：现有 blog 仓库提交 `12b284882f67c6a3f6138954e7319f03e81a6fa2` 中的13份上层文档，原文已保存于 [original-plan](original-plan/sources.json)，逐文件记录Git blob及SHA256。本表是2026-11-06的执行纠偏，不把后补功能冒称原来已完成。

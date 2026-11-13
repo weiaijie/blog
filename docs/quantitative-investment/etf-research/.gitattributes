@@ -49,3 +49,7 @@ data/snapshots/2026-11-08-nav-fx*/*_rule_*.body -diff
 data/snapshots/2026-11-08-markets-051007*/q3_*.body -diff
 data/snapshots/2026-11-08-markets-051007*/h1_*.body -diff
 data/snapshots/2026-11-08-markets-051007*/halt_*.body -diff
+
+# Versioned recent-data reports and official PDF captures retain exact evidence bytes.
+reports/2026-11-13-recent-data/** -text whitespace=cr-at-eol
+data/snapshots/*-recent-*/*notice_*.body -diff

@@ -1,0 +1,26 @@
+[
+  {
+    "name": "notice_159920_00",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-11-02/1225648399.PDF",
+    "referer": "https://www.cninfo.com.cn/",
+    "requested_at_utc": "2026-11-13T03:35:29.996839+00:00",
+    "status": 200,
+    "effective_url": "https://static.cninfo.com.cn/finalpage/2026-11-02/1225648399.PDF",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 102030,
+    "sha256": "2de39479b5f145d25d34f5325beb900c69a425390398de4a346a64af9a0f2ae8"
+  },
+  {
+    "name": "notice_159920_01",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-10-27/1225624605.PDF",
+    "referer": "https://www.cninfo.com.cn/",
+    "requested_at_utc": "2026-11-13T03:35:29.997239+00:00",
+    "status": 200,
+    "effective_url": "https://static.cninfo.com.cn/finalpage/2026-10-27/1225624605.PDF",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 386175,
+    "sha256": "7953e773c3bf1dbbb47e865c867a894d9f4691b0117237569a20dff453cebfc5"
+  }
+]

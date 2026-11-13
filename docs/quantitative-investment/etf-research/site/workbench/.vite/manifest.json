@@ -1,20 +1,20 @@
 {
-  "_Chart-DAPPLOCt.js": {
-    "file": "assets/Chart-DAPPLOCt.js",
+  "_Chart-DRiHx-Mo.js": {
+    "file": "assets/Chart-DRiHx-Mo.js",
     "name": "Chart",
     "imports": [
       "index.html"
     ]
   },
-  "_DayDetail-CtA0rCmS.js": {
-    "file": "assets/DayDetail-CtA0rCmS.js",
+  "_DayDetail-Bc2jRb9p.js": {
+    "file": "assets/DayDetail-Bc2jRb9p.js",
     "name": "DayDetail",
     "imports": [
       "index.html"
     ]
   },
   "index.html": {
-    "file": "assets/index-Cy1M2nwr.js",
+    "file": "assets/index-B0_imLI6.js",
     "name": "index",
     "src": "index.html",
     "isEntry": true,
@@ -30,38 +30,38 @@
     ]
   },
   "src/views/Compare.vue": {
-    "file": "assets/Compare-DpQlPMxl.js",
+    "file": "assets/Compare-BFE-_hQh.js",
     "name": "Compare",
     "src": "src/views/Compare.vue",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_Chart-DAPPLOCt.js",
-      "_DayDetail-CtA0rCmS.js"
+      "_Chart-DRiHx-Mo.js",
+      "_DayDetail-Bc2jRb9p.js"
     ]
   },
   "src/views/Market.vue": {
-    "file": "assets/Market-LjRyEVdY.js",
+    "file": "assets/Market-D0bVoof-.js",
     "name": "Market",
     "src": "src/views/Market.vue",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_Chart-DAPPLOCt.js"
+      "_Chart-DRiHx-Mo.js"
     ]
   },
   "src/views/Overview.vue": {
-    "file": "assets/Overview-sVKMiHu_.js",
+    "file": "assets/Overview-RNCBEYmP.js",
     "name": "Overview",
     "src": "src/views/Overview.vue",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_Chart-DAPPLOCt.js"
+      "_Chart-DRiHx-Mo.js"
     ]
   },
   "src/views/Reports.vue": {
-    "file": "assets/Reports-SvlT5zHL.js",
+    "file": "assets/Reports-BZanGAME.js",
     "name": "Reports",
     "src": "src/views/Reports.vue",
     "isDynamicEntry": true,
@@ -70,14 +70,14 @@
     ]
   },
   "src/views/Research.vue": {
-    "file": "assets/Research-C05ky8nl.js",
+    "file": "assets/Research-wPHHpGbj.js",
     "name": "Research",
     "src": "src/views/Research.vue",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_Chart-DAPPLOCt.js",
-      "_DayDetail-CtA0rCmS.js"
+      "_Chart-DRiHx-Mo.js",
+      "_DayDetail-Bc2jRb9p.js"
     ]
   }
 }

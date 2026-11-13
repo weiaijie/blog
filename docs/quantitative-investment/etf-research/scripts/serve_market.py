@@ -15,6 +15,7 @@ from etf_research.admission import load_incremental, sessions_between
 from etf_research.forward import digest, prefix_digest
 from etf_research.publication import inside, read, sha, verify_bundle
 import interactive_backtest as interactive
+import recent_backtest
 import model_replay
 import method_windows
 import method_gap
@@ -173,7 +174,48 @@ class Handler(BaseHTTPRequestHandler):
         url = urlsplit(self.path)
         path = url.path
         status = 200
-        if path == '/api/v1/backtest/options':
+        if path.startswith('/api/v2/backtest'):
+            kind = 'application/json'
+            operation = path.removeprefix('/api/v2/backtest').removeprefix('/') or 'account'
+            try:
+                if operation in ('options','evidence'):
+                    if url.query:
+                        raise interactive.InputError('数据版本与证据入口不接受额外参数。')
+                    result = recent_backtest.options()
+                    body = interactive.encode(result if operation=='options' else result['evidence'])
+                elif operation in recent_backtest.OPERATIONS:
+                    body = interactive.encode(recent_backtest.calculate(operation,recent_backtest.parameters(operation,url.query)))
+                else:
+                    self.send_error(404)
+                    return
+            except interactive.InputError as exc:
+                status,body = 400,interactive.encode({'error':str(exc)})
+            except (OSError,ValueError,KeyError,IndexError,ImportError) as exc:
+                self.log_error('Recent research unavailable: %s',exc)
+                status,body = 503,interactive.encode({'error':'近期数据证据核验未通过，未继续计算。'})
+        elif path == '/api/v2/market-data':
+            kind = 'application/json'
+            try:
+                from recent_market_data import inputs, THROUGH
+                view = json.loads(latest())
+                _,_,bars,_ = inputs()
+                for symbol,values in bars.items():
+                    existing = {row[0]:row for row in view['candles'][symbol]}
+                    recent = {str(d):[str(d),float(b.open),float(b.high),float(b.low),float(b.close)] for d,b in values.items()}
+                    if any(existing[d] != recent[d] for d in existing.keys() & recent.keys()):
+                        raise ValueError('Live and versioned quote histories disagree: '+symbol)
+                    existing.update(recent)
+                    rows = [existing[d] for d in sorted(existing)]
+                    view['candles'][symbol] = rows
+                    coverage = view['coverage'][symbol]
+                    coverage.update(quoteThrough=rows[-1][0],quotes=len(rows))
+                    coverage['backtestWindows'][-1][1] = str(THROUGH)
+                view['researchDataVersion'] = recent_backtest.RECENT
+                body = interactive.encode(view)
+            except (OSError,ValueError,KeyError,IndexError) as exc:
+                self.log_error('Recent market data unavailable: %s',exc)
+                status,body = 503,interactive.encode({'error':'近期行情核验暂不可用。'})
+        elif path == '/api/v1/backtest/options':
             body, kind = interactive.encode(dict(interactive.OPTIONS, methodWindowsDefaults=method_windows.DEFAULTS,
                 adxBondDefaults=adx_bond.DEFAULTS, adxBondEndpoint='/api/v1/backtest/adx-bond',
                 adxTradesDefaults=adx_trades.DEFAULTS, adxTradesEndpoint='/api/v1/backtest/adx-trades',

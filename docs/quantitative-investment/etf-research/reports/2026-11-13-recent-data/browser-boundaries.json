@@ -1,0 +1,10 @@
+{
+  "shareReload": true,
+  "singlePortfolioNoMatureWindows": true,
+  "invalidImportPreservesPlan": true,
+  "validImportAndShare": true,
+  "parameterChangeClearsResults": true,
+  "splitGapFailsClosed": true,
+  "technicalWindowsAndFourFactors": true,
+  "noPageErrors": true
+}

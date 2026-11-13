@@ -19,7 +19,7 @@ init();
     <div class="sidebar-note">研究与模拟账户<br>人民币 · 含分红口径<br><a href="/backtest.html#replay">旧版完整研究页 ↗</a></div>
   </aside>
   <div class="workspace"><header class="topbar"><div><span class="eyebrow">{{route.meta.title}}</span><strong>{{plan.name}}</strong></div><el-button type="primary" @click="settings=true">研究设置与保存</el-button></header>
-    <div class="context-bar"><span>{{plan.start}} — {{plan.end}}</span><span>每户 {{money(plan.capital)}} 元</span><span>{{{low:'低费用',base:'基准费用',high:'高费用'}[plan.fees]}}</span><span>回放：{{models[plan.model]}}</span></div>
+    <div class="context-bar"><span>{{plan.dataset==='frozen-2026-10-30'?'原冻结样本':'近期核验版 · 11-12'}}</span><span>{{plan.start}} — {{plan.end}}</span><span>每户 {{money(plan.capital)}} 元</span><span>{{{low:'低费用',base:'基准费用',high:'高费用'}[plan.fees]}}</span><span>回放：{{models[plan.model]}}</span></div>
     <main id="main" tabindex="-1"><el-alert v-if="error" type="error" :title="error" :closable="false"/><el-button v-if="error" @click="init">重试状态加载</el-button><p v-if="notice" class="notice" role="status">{{notice}}</p><RouterView/></main>
     <footer>仅研究模拟。历史回测与前瞻账户独立；方案保存不会改变18个前瞻账户。行情合格后才能用于计算。</footer>
   </div>

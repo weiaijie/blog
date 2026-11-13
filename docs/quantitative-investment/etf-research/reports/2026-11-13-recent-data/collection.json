@@ -1,0 +1,15 @@
+{
+  "selectedRequests": 51,
+  "actualRequests": 52,
+  "selectedHttp200": 51,
+  "sourceFiles": 75,
+  "requestedAtFirst": "2026-11-13T03:33:50.254465+00:00",
+  "requestedAtLast": "2026-11-13T03:35:29.997239+00:00",
+  "retainedFailedAttempts": [
+    {
+      "name": "sohu_513500_attempt_01",
+      "status": 503,
+      "error": "HTTP 503"
+    }
+  ]
+}

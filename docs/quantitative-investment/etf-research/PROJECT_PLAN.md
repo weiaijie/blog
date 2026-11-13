@@ -2,9 +2,12 @@
 
 当前状态统一维护于 [CURRENT_STATUS](docs/CURRENT_STATUS.md)。本页列工作顺序，旧进度不再反复插入顶部。
 
-## 当前交付：统一量化工作台
+## 当前交付：近期证据准入与新版全流程
 
-目标、实施范围和验收见 [WORKBENCH_PLAN](docs/WORKBENCH_PLAN.md)，结果见 [本轮报告](reports/2026-11-12-workbench/README.md)。
+工作台初版范围见[WORKBENCH_PLAN](docs/WORKBENCH_PLAN.md)；本轮结果见[近期数据与操作验收](reports/2026-11-13-recent-data/README.md)。
+
+- 四只ETF新增9日三源核对，33份公告、6条标普开盘停牌登记核对；新增5天开盘成交限制，未知保留。
+- 独立近期数据版本与v2接口，旧方案仍使用原版样本；桌面/手机与Agent同参数验收通过。
 
 - 五个独立页面，参数共享；保存恢复、导入导出、复现链接及Agent请求。
 - 原接口驱动逐日回放、投资方式及配比窗口比较、最差期交易因子和配比盈亏归因。

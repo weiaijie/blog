@@ -8,6 +8,7 @@ from fractions import Fraction
 from functools import lru_cache, partial
 from urllib.parse import parse_qsl
 
+from research_profile import current, FROZEN
 import multifactor_strategy as multi
 from technical_factors import MODELS as TECHNICAL_MODELS
 from compare_three_markets import CODES, SCENARIOS, metrics, simulate
@@ -50,8 +51,22 @@ def request_params(query, keys=DEFAULTS, optional=()):
 
 
 @lru_cache(maxsize=1)
-def inputs():
+def frozen_inputs():
     return verified_inputs(evidence(), extended=True)
+
+
+def inputs():
+    if current.get() == FROZEN:
+        return frozen_inputs()
+    from recent_market_data import inputs as recent_inputs
+    return recent_inputs()
+
+
+def data_end():
+    if current.get() == FROZEN:
+        return END
+    from recent_market_data import THROUGH
+    return THROUGH
 
 
 def configured_replay(params):
@@ -81,8 +96,9 @@ def configured_replay(params):
 
     domestic_only = not (shares[1] or shares[2])
     first = DOMESTIC_START if domestic_only else EXTENDED_START
-    if not first <= start < end <= END:
-        raise InputError(f'按所选配比，可用区间为 {first} 至 {END}，起始日期须早于结束日期。')
+    last = data_end()
+    if not first <= start < end <= last:
+        raise InputError(f'按所选配比，可用区间为 {first} 至 {last}，起始日期须早于结束日期。')
     if shares[1] and start <= SPLIT_DAY <= end:
         raise InputError('标普 ETF 于 2022-03-29 拆分停牌，无场内收盘价。请选择截至 2022-03-28 或自 2022-03-30 起的区间。')
     base, common_calendar, bars, halts = inputs()

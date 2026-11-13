@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {ref,computed,watch,onBeforeUnmount} from 'vue';
 import {plan,getJson,download} from '../state';
-import {apiUrl,parsePlan,comparisonParams,replayParams,models,money,pct,type Plan,type Params,type CompareResult,type Period,type Overlay,type ModelDetail,type Replay,type Backtest,type Windows} from '../domain';
+import {endpoint as dataEndpoint,apiUrl,parsePlan,comparisonParams,replayParams,models,money,pct,type Plan,type Params,type CompareResult,type Period,type Overlay,type ModelDetail,type Replay,type Backtest,type Windows} from '../domain';
 import Chart from '../components/Chart.vue';import AttributionTable from '../components/AttributionTable.vue';import DayDetail from '../components/DayDetail.vue';
 const kind=ref('weights'),busy=ref(false),error=ref(''),result=ref<CompareResult>(),pinned=ref<Plan>(),requestUrl=ref(''),detailUrl=ref('');
 const overlay=ref<Overlay>(),modelDetail=ref<ModelDetail>(),single=ref<Backtest>(),anchor=ref('A'),pair=ref('B-A'),interval=ref('holding'),day=ref(''),model=ref('allocation'),replay=ref<Replay>(),drawer=ref(false);
@@ -10,15 +10,15 @@ function clearDetail(){overlay.value=undefined;modelDetail.value=undefined;singl
 function clear(){generation++;controller?.abort();busy.value=false;result.value=undefined;clearDetail();error.value='';requestUrl.value='';}
 watch(plan,clear,{deep:true});watch(kind,clear);onBeforeUnmount(clear);
 async function request<T>(url:string,consume:(data:T)=>void){const run=++generation;controller?.abort();controller=new AbortController();busy.value=true;error.value='';try{const data=await getJson<T>(url,controller.signal);if(run===generation)consume(data);}catch(e){if(run===generation)error.value=(e as Error).message;}finally{if(run===generation)busy.value=false;}}
-function run(){clear();try{const p=parsePlan(plan);pinned.value=p;const endpoint=kind.value==='weights'?(p.portfolios.length===1?'windows':'compare'):kind.value==='methods'?'method-windows':'technical-factors';const params=comparisonParams(p,kind.value);requestUrl.value=apiUrl('/api/v1/backtest/'+endpoint,params);if(endpoint==='windows')request<Windows>(requestUrl.value,d=>result.value={parameters:d.parameters,portfolios:[{...d,id:'A'}]});else request<CompareResult>(requestUrl.value,d=>result.value=d);}catch(e){error.value=(e as Error).message;}}
+function run(){clear();try{const p=parsePlan(plan);pinned.value=p;const endpoint=kind.value==='weights'?(p.portfolios.length===1?'windows':'compare'):kind.value==='methods'?'method-windows':'technical-factors';const params=comparisonParams(p,kind.value);requestUrl.value=apiUrl(dataEndpoint(p,'/'+endpoint),params);if(endpoint==='windows')request<Windows>(requestUrl.value,d=>result.value={parameters:d.parameters,portfolios:[{...d,id:'A'}]});else request<CompareResult>(requestUrl.value,d=>result.value=d);}catch(e){error.value=(e as Error).message;}}
 function rows(year:string):{id:string;label:string;period:Period}[]{const r=result.value;if(!r)return [];return r.portfolios?r.portfolios.map(p=>({id:p.id,label:'组合 '+p.id,period:p.periods[year]!})):Object.entries(r.periods?.[year]||{}).map(([id,period])=>({id,label:models[id]||id,period}));}
 function openWorst(id:string,p:Period){
   if(!p.worstStart||!p.worstEnd||!pinned.value||!result.value)return;clearDetail();anchor.value=id;interval.value='holding';
   const params={...result.value.parameters,start:p.worstStart,end:p.worstEnd};
   if(kind.value==='weights'){
-    if(pinned.value.portfolios.length===1){detailUrl.value=apiUrl('/api/v1/backtest',params);request<Backtest>(detailUrl.value,d=>{single.value=d;day.value=d.daily.at(-1)!.date;model.value='allocation';});}
-    else{detailUrl.value=apiUrl('/api/v1/backtest/overlay',params);request<Overlay>(detailUrl.value,d=>{overlay.value=d;pair.value=(id==='A'?'B':'A')+'-'+id;day.value=d.portfolios[0]!.daily.at(-1)!.date;model.value='allocation';});}
-  }else{detailUrl.value=apiUrl('/api/v1/backtest/'+(kind.value==='methods'?'method-detail':'technical-detail'),params);request<ModelDetail>(detailUrl.value,d=>{modelDetail.value=d;model.value=id;day.value=d.models[id]!.curve.at(-1)!.date;});}
+    if(pinned.value.portfolios.length===1){detailUrl.value=apiUrl(dataEndpoint(pinned.value),params);request<Backtest>(detailUrl.value,d=>{single.value=d;day.value=d.daily.at(-1)!.date;model.value='allocation';});}
+    else{detailUrl.value=apiUrl(dataEndpoint(pinned.value,'/overlay'),params);request<Overlay>(detailUrl.value,d=>{overlay.value=d;pair.value=(id==='A'?'B':'A')+'-'+id;day.value=d.portfolios[0]!.daily.at(-1)!.date;model.value='allocation';});}
+  }else{detailUrl.value=apiUrl(dataEndpoint(pinned.value,'/'+(kind.value==='methods'?'method-detail':'technical-detail')),params);request<ModelDetail>(detailUrl.value,d=>{modelDetail.value=d;model.value=id;day.value=d.models[id]!.curve.at(-1)!.date;});}
 }
 const palettes=['#237764','#b66632','#4a64aa','#80649d'];
 const curves=computed(()=>overlay.value?.portfolios.map(p=>({id:p.id,points:p.daily}))|| (single.value?[{id:'A',points:single.value.daily}]:Object.entries(modelDetail.value?.models||{}).map(([id,m])=>({id,points:m.curve}))));
@@ -36,7 +36,7 @@ function showTrading(){
  const params=detailParams.value,p=pinned.value;if(!params||!p)return;
  const selectedModel=kind.value==='weights'?'allocation':model.value;
  const config:Plan={...p,start:params.start!,end:params.end!,model:selectedModel,portfolios:kind.value==='weights'?[p.portfolios['ABC'.indexOf(anchor.value)]!]:['1,0,0,1']};
- request<Replay>(apiUrl('/api/v1/backtest/replay',replayParams(config,'all')),d=>{replay.value=d;drawer.value=true;});
+ request<Replay>(apiUrl(dataEndpoint(config,'/replay'),replayParams(config,'all')),d=>{replay.value=d;drawer.value=true;});
 }
 </script>
 <template><div class="page-title"><div><h1>同样条件，比较不同选择</h1><p>每个交易日独立建仓，统计满一年、两年的结果；最差一期再用同一段行情对照。</p></div></div>

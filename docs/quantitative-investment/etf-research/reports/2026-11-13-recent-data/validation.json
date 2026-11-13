@@ -1,0 +1,36 @@
+{
+  "baseCommit": "4d3782d0c3f084fcf436bb8c7217a8912a28c639",
+  "python": "3.12.16",
+  "dataThrough": "2026-11-12",
+  "snapshotManifests": 141,
+  "sourceFiles": 2469,
+  "pythonTests": {
+    "passed": 331,
+    "seconds": 51.742,
+    "newTests": 10
+  },
+  "frontendTests": 6,
+  "typescript": true,
+  "vite": true,
+  "legacyReproductionByteIdentical": true,
+  "frozenEngineAndProtocolChanged": false,
+  "defaultMethodWindows": {
+    "oneYear": 1614,
+    "twoYear": 1371
+  },
+  "browserEvidence": [
+    "browser-frozen/browser-checks.json",
+    "browser-boundaries.json",
+    "browser-recent/checks.json",
+    "browser-final/checks.json"
+  ],
+  "cliHttpExact": true,
+  "defaultResponseHashVerified": true,
+  "limitations": [
+    "Full independent suspension completeness remains unknown",
+    "New data are retrospective, not forward observations",
+    "No new data for incomplete November 13 admitted"
+  ],
+  "liveBrowser": "live-browser.json",
+  "liveDeployment": "deployment.json"
+}

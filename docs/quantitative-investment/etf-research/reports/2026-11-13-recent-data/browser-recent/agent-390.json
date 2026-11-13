@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 2,
+  "dataVersion": "verified-2026-11-12",
+  "plan": {
+    "version": 2,
+    "dataset": "verified-2026-11-12",
+    "name": "近期跨境核验",
+    "start": "2026-11-02",
+    "end": "2026-11-12",
+    "capital": "100000",
+    "fees": "base",
+    "rebalance": "hold",
+    "model": "allocation",
+    "installments": "3",
+    "portfolios": [
+      "0,1,0,1",
+      "0,0,1,1",
+      "1,0,0,1"
+    ]
+  },
+  "method": "GET",
+  "requests": {
+    "replay": "/api/v2/backtest/replay?start=2026-11-02&end=2026-11-12&capital=100000&fees=base&weights=0%2C1%2C0%2C1&rebalance=hold&model=allocation&step=1",
+    "replayAll": "/api/v2/backtest/replay?start=2026-11-02&end=2026-11-12&capital=100000&fees=base&weights=0%2C1%2C0%2C1&rebalance=hold&model=allocation&step=all",
+    "allocation": "/api/v2/backtest?start=2026-11-02&end=2026-11-12&capital=100000&fees=base&weights=0%2C1%2C0%2C1&rebalance=hold",
+    "windows": "/api/v2/backtest/windows?start=2026-11-02&end=2026-11-12&capital=100000&fees=base&weights=0%2C1%2C0%2C1&rebalance=hold",
+    "compare": "/api/v2/backtest/compare?start=2026-11-02&end=2026-11-12&capital=100000&fees=base&weights=0%2C1%2C0%2C1%7C0%2C0%2C1%2C1%7C1%2C0%2C0%2C1&rebalance=hold",
+    "methods": "/api/v2/backtest/method-windows?start=2026-11-02&end=2026-11-12&capital=100000&fees=base&installments=3&rebalance=hold",
+    "technical": "/api/v2/backtest/technical-factors?start=2026-11-02&end=2026-11-12&capital=100000&fees=base"
+  },
+  "scope": "allocation/windows/compare use configured weights; methods/technical use fixed domestic models. Replay uses the selected model; trend/factor weights and rebalance are fixed. API validates admitted coverage; a request is not a guarantee of valid coverage."
+}

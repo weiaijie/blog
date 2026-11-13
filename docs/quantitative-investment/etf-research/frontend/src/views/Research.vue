@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {ref,computed,watch,onBeforeUnmount} from 'vue';
 import {plan,getJson,download} from '../state';
-import {parsePlan,replayParams,apiUrl,money,pct,names,models,type Replay,type Frame} from '../domain';
+import {parsePlan,replayParams,endpoint,apiUrl,money,pct,names,models,type Replay,type Frame} from '../domain';
 import Chart from '../components/Chart.vue';import DayDetail from '../components/DayDetail.vue';
 const data=ref<Replay>(),shown=ref(0),selected=ref(''),symbol=ref('510300'),error=ref(''),busy=ref(false),auto=ref(false),url=ref('');let controller:AbortController|undefined;let generation=0;
 const visible=computed(()=>data.value?.frames.slice(0,shown.value)||[]);
@@ -15,7 +15,7 @@ function clear(){generation++;controller?.abort();auto.value=false;busy.value=fa
 watch(plan,clear,{deep:true});onBeforeUnmount(clear);
 async function load(step:string){
   auto.value=auto.value&&step!=='all';const run=++generation;controller?.abort();controller=new AbortController();busy.value=true;error.value='';
-  try{const p=parsePlan(plan),request=apiUrl('/api/v1/backtest/replay',replayParams(p,step));const result=await getJson<Replay>(request,controller.signal);if(run!==generation)return false;data.value=result;shown.value=result.step;url.value=request;selected.value=result.frames.at(-1)!.date;if(!result.frames[0]!.bars[symbol.value])symbol.value=Object.keys(result.frames[0]!.bars)[0]!;return true;}
+  try{const p=parsePlan(plan),request=apiUrl(endpoint(p,'/replay'),replayParams(p,step));const result=await getJson<Replay>(request,controller.signal);if(run!==generation)return false;data.value=result;shown.value=result.step;url.value=request;selected.value=result.frames.at(-1)!.date;if(!result.frames[0]!.bars[symbol.value])symbol.value=Object.keys(result.frames[0]!.bars)[0]!;return true;}
   catch(e){if(run===generation){error.value=(e as Error).message;auto.value=false;}return false;}
   finally{if(run===generation)busy.value=false;}
 }

@@ -58,7 +58,7 @@ with sync_playwright() as pw:
         expect(page.get_by_label('本金（元）',exact=True)).to_have_value('100000')
         with page.expect_download() as dl:
             page.get_by_role('button',name='导出Agent请求清单',exact=True).click()
-        exported=json.loads(Path(dl.value.path()).read_text())
+        exported=json.loads(Path(dl.value.path()).read_text(encoding='utf-8'))
         assert exported['plan']['name']=='验收保存'
         assert 'rebalance=signal' in exported['requests']['replay']
         page.get_by_role('button',name='删除所选方案',exact=True).click()
@@ -114,7 +114,7 @@ with sync_playwright() as pw:
         assert page.locator('tbody tr').count()==4
         assert not errors,errors
         # Only one options request throughout all page transitions.
-        assert sum('/api/v1/backtest/options' in u for u in requests)==1
+        assert sum('/api/v2/backtest/options' in u for u in requests)==1
         checks.append(dict(width=width,firstStepNoFuture=True,fullReplayExactBaseline=True,comparisonCountsExact=True,overlayExactBaseline=True,savedPlanRestored=True,agentExport=True,attributionAndTradingDrawer=True,modelWorstFactors=True,noOverflow=True,noPageErrors=True,optionsRequests=1))
         context.close()
     browser.close()

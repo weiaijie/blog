@@ -1,0 +1,18 @@
+test_extended_maturities_are_recomputed_not_served_from_old_archive (test_recent_market.RecentMarketTests.test_extended_maturities_are_recomputed_not_served_from_old_archive) ... /home/ubuntu/projects/etf-research-py312/lib/python3.12/site-packages/backtrader/cerebro.py:1543: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  qstart = datetime.datetime.utcnow()
+/home/ubuntu/projects/etf-research-py312/lib/python3.12/site-packages/backtrader/cerebro.py:1545: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  qlapse = datetime.datetime.utcnow() - qstart
+ok
+test_frozen_results_identical_through_original_end (test_recent_market.RecentMarketTests.test_frozen_results_identical_through_original_end) ... ok
+test_opening_halt_does_not_fill_or_synthesize_catchup (test_recent_market.RecentMarketTests.test_opening_halt_does_not_fill_or_synthesize_catchup) ... ok
+test_profile_and_cache_are_thread_local_and_reset_on_failure (test_recent_market.RecentMarketTests.test_profile_and_cache_are_thread_local_and_reset_on_failure) ... ok
+test_recent_quotes_and_halts_reconcile (test_recent_market.RecentMarketTests.test_recent_quotes_and_halts_reconcile) ... ok
+test_replay_prefix_is_identical_for_all_seven_models (test_recent_market.RecentMarketTests.test_replay_prefix_is_identical_for_all_seven_models) ... ok
+test_seal_change_blocks_evidence (test_recent_market.RecentMarketTests.test_seal_change_blocks_evidence) ... ok
+test_v1_rejects_extension_and_v2_rejects_unadmitted_date (test_recent_market.RecentMarketTests.test_v1_rejects_extension_and_v2_rejects_unadmitted_date) ... ok
+test_volume_extension_preserves_old_values (test_recent_market.RecentMarketTests.test_volume_extension_preserves_old_values) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 5.846s
+
+OK

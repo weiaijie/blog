@@ -1,0 +1,1 @@
+{"httpCliExact": true, "parameters": {"start": "2026-11-02", "end": "2026-11-12", "capital": "100000", "weights": "0,1,0,1", "rebalance": "hold", "fees": "base", "model": "allocation", "step": "all"}, "dataVersion": "verified-2026-11-12", "frames": 9}

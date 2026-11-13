@@ -2,6 +2,7 @@
 import argparse
 from decimal import Decimal as D
 from functools import lru_cache
+from research_profile import profile_cache
 import json
 import hashlib
 from pathlib import Path
@@ -98,7 +99,7 @@ def calculate(params):
                 caveat='Overlapping retrospective windows, not independent probabilities or out-of-sample evidence.')
 
 
-@lru_cache(maxsize=8)
+@profile_cache(maxsize=16)
 def _compare(start,end,capital,fees):
     params = dict(start=start,end=end,capital=capital,fees=fees)
     prepare(parameters(params))
