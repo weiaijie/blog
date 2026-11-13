@@ -11,10 +11,12 @@
 
 2026-11-13：[近期版准入报告](reports/2026-11-13-recent-data/README.md)固定数据版本verified-2026-11-12，v2 API与v1隔离，旧方案迁移保持冻结数据。后续扩展须新增证据版本、保留旧快照与接口复现边界；不原地改动此版日期或默默切换已保存方案。
 
+2026-11-13补充：[新增9天的版本对比](reports/2026-11-13-data-change/README.md)已在/workbench/#/changes上线。七种境内模型与四组跨市场基准各增9个一年/两年窗口；旧到期结果与最差盈亏不变，新增停牌对这些满期统计影响0。另列短期拦单对照，严禁将其计入满期成绩或当作现实可成交收益。
+
 ## 接手顺序
 
 1. 读取AGENTS、README、PROJECT_PLAN、DATA_SOURCES、docs/PLAN_ALIGNMENT、config/research.json、PROTOCOL_V1。核对远端和当前北京时间。
-2. 执行verify_snapshot.py与scripts/verify_project.py。最新静态清单为reports/2026-11-13-recent-data/manifest.json；旧清单在相应提交验证。
+2. 执行verify_snapshot.py与scripts/verify_project.py。最新静态清单为reports/2026-11-13-data-change/manifest.json；旧清单在相应提交验证。
 3. 核实三个用户定时器与site/health_status.json。静态Git文档不代表主机当前状态；未满252收益的风险指标留空，前瞻不借历史补齐。
 4. 前端改动先在隔离目录/端口验证，npm ci、npm test、npm run build；维护frontend源码与site/workbench构建产物、归档清单和静态清单。只构建不运行测试不能称验收完成。
 5. 研究下一步按PROJECT_PLAN执行：少量新规则先立协议、保留原版与失败区间。已观察历史不能重新标记成未见样本。

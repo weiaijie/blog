@@ -40,6 +40,7 @@ function showTrading(){
 }
 </script>
 <template><div class="page-title"><div><h1>同样条件，比较不同选择</h1><p>每个交易日独立建仓，统计满一年、两年的结果；最差一期再用同一段行情对照。</p></div></div>
+  <p><RouterLink to="/changes">查看新增9天前后，赚钱次数、4%达标与最差盈亏的变化 →</RouterLink></p>
   <section class="panel"><div class="actions"><label>比较内容<select v-model="kind"><option value="weights">自定义配比（当前1至3套）</option><option value="methods">四种投资方式（境内股债）</option><option value="technical">量价 / KDJ / ADX（境内股债）</option></select></label><el-button type="primary" :loading="busy" @click="run">运行比较</el-button><el-button v-if="result" @click="download('etf-comparison.json',result)">导出结果</el-button></div>
     <p v-if="kind==='weights'" class="muted">固定配比 {{plan.rebalance==='hold'?'建仓后持有':'按月再平衡'}}；这里不使用“回放模型”选择。<span v-for="(w,i) in plan.portfolios" :key="i">{{'ABC'[i]}}：{{w}}　</span>顺序：沪深300、标普500、恒生、国债。</p>
     <p v-else class="muted">{{kind==='methods'?'固定配比、分批、120日趋势、三因子':'三因子基线与量价、KDJ、ADX确认'}}均使用沪深300与国债，忽略自定义配比和回放模型选择。共用日期、本金及费用；趋势/因子按各自固定规则调仓。</p>

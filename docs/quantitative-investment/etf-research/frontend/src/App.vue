@@ -5,7 +5,7 @@ import {plan,notice,loadBase,applyPlan} from './state';
 import {models,money} from './domain';
 import PlanEditor from './components/PlanEditor.vue';
 const route=useRoute(),settings=ref(false),error=ref('');
-const links=[['/','研究总览'],['/market','行情与数据'],['/research','模型回测'],['/compare','组合比较'],['/reports','研究报告']];
+const links=[['/','研究总览'],['/market','行情与数据'],['/research','模型回测'],['/compare','组合比较'],['/changes','数据更新对比'],['/reports','研究报告']];
 async function init(){error.value='';try{await loadBase();}catch(e){error.value=String((e as Error).message);}}
 watch(()=>route.query.plan,raw=>{if(typeof raw==='string'){try{applyPlan(JSON.parse(raw));notice.value='已从链接恢复方案，请运行取得结果。';}catch(e){error.value=(e as Error).message;}}},{immediate:true});
 watch(()=>route.meta.title,t=>{document.title=String(t||'量化研究')+' · ETF工作台';},{immediate:true});

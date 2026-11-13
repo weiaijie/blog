@@ -53,3 +53,6 @@ data/snapshots/2026-11-08-markets-051007*/halt_*.body -diff
 # Versioned recent-data reports and official PDF captures retain exact evidence bytes.
 reports/2026-11-13-recent-data/** -text whitespace=cr-at-eol
 data/snapshots/*-recent-*/*notice_*.body -diff
+
+# Version-comparison outputs preserve exact audited bytes.
+reports/2026-11-13-data-change/** -text whitespace=cr-at-eol

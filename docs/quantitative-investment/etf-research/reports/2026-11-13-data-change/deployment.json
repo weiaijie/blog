@@ -1,0 +1,72 @@
+{
+  "started": "2026-11-13T06:19:34.127882+00:00",
+  "timersBefore": {
+    "daily": {
+      "active": "active",
+      "enabled": "enabled"
+    },
+    "health": {
+      "active": "active",
+      "enabled": "enabled"
+    },
+    "archive": {
+      "active": "active",
+      "enabled": "enabled"
+    }
+  },
+  "servicesIdle": {
+    "daily": "inactive",
+    "health": "inactive",
+    "archive": "inactive"
+  },
+  "pointersBefore": {
+    "config/active_run.json": "6e90d34fe5cc72b3058af42386506245360ba5e7ffc7e26b670747bb7bf223f8",
+    "site/operation_status.json": "1d0c23903bd7a62c48f7e0bd90f870715a44f9a74fa9b4ec101721e6bdffbded",
+    "site/health_status.json": "7690603f8008022bf99366897f98071cbce1c41bb1da982269e3dd5f47e75115"
+  },
+  "integrity": "PASS integrity: 141 source manifests / 2469 source files; 6573 immutable entries; account 2026-11-12 operation phase success",
+  "pointersAfterDeployment": {
+    "config/active_run.json": "6e90d34fe5cc72b3058af42386506245360ba5e7ffc7e26b670747bb7bf223f8",
+    "site/operation_status.json": "1d0c23903bd7a62c48f7e0bd90f870715a44f9a74fa9b4ec101721e6bdffbded",
+    "site/health_status.json": "7690603f8008022bf99366897f98071cbce1c41bb1da982269e3dd5f47e75115"
+  },
+  "http": {
+    "/workbench/": 200,
+    "/backtest.html": 200,
+    "/api/v1/backtest/options": 200,
+    "/api/v2/backtest/options": 200
+  },
+  "reportSha256": "372774685b1236fbbf413509134faf316b9900d5af68292b722852dc2d89e0f4",
+  "scenarios": 11,
+  "controlEffect": "108.9700",
+  "passed": true,
+  "timersAfter": {
+    "daily": {
+      "active": "active",
+      "enabled": "enabled"
+    },
+    "health": {
+      "active": "active",
+      "enabled": "enabled"
+    },
+    "archive": {
+      "active": "active",
+      "enabled": "enabled"
+    }
+  },
+  "completed": "2026-11-13T06:22:50.683471+00:00",
+  "postRestartHealth": {
+    "checked_at": "2026-11-13T14:23:48.005789+08:00",
+    "state": "before_collection_window",
+    "issues": [],
+    "review_queue": [],
+    "account_through": "2026-11-12",
+    "observation": "reports/health/20261113T142348-bb4ebfb4"
+  },
+  "postRestartOperation": {
+    "phase": "success",
+    "account_changed": false,
+    "account_through": "2026-11-12",
+    "operation": "reports/operations/20261113T062320Z-f4bea0b9"
+  }
+}

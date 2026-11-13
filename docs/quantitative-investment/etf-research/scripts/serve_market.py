@@ -178,7 +178,15 @@ class Handler(BaseHTTPRequestHandler):
             kind = 'application/json'
             operation = path.removeprefix('/api/v2/backtest').removeprefix('/') or 'account'
             try:
-                if operation in ('options','evidence'):
+                if operation in ('data-change','data-change-detail'):
+                    import data_change_report
+                    if operation=='data-change':
+                        interactive.request_params(url.query,())
+                        result=data_change_report.report()
+                    else:
+                        result=data_change_report.detail(interactive.request_params(url.query,('case',)))
+                    body=interactive.encode(result)
+                elif operation in ('options','evidence'):
                     if url.query:
                         raise interactive.InputError('数据版本与证据入口不接受额外参数。')
                     result = recent_backtest.options()

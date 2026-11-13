@@ -1,0 +1,26 @@
+[
+  {
+    "width": 1440,
+    "all22StatsRowsExact": true,
+    "newWindowsNineEach": true,
+    "oldWorstVersion": true,
+    "haltPositiveControl": true,
+    "dailyAttribution": true,
+    "adxFactors": true,
+    "exportExact": true,
+    "noOverflow": true,
+    "noPageErrors": true
+  },
+  {
+    "width": 390,
+    "all22StatsRowsExact": true,
+    "newWindowsNineEach": true,
+    "oldWorstVersion": true,
+    "haltPositiveControl": true,
+    "dailyAttribution": true,
+    "adxFactors": true,
+    "exportExact": true,
+    "noOverflow": true,
+    "noPageErrors": true
+  }
+]

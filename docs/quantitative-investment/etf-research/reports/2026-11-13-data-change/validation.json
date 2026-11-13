@@ -1,0 +1,31 @@
+{
+  "baseCommit": "cac9b01b3f03a306d72681cdfa2e244de677c812",
+  "python": "3.12.16",
+  "pythonTests": 338,
+  "newTests": 7,
+  "pythonSeconds": 51.047,
+  "frontendTests": 6,
+  "typescript": true,
+  "vite": true,
+  "scenarios": 11,
+  "horizons": [
+    1,
+    2
+  ],
+  "newMaturityRows": 198,
+  "oldEndpointIdentityVerified": true,
+  "domesticFullRecomputationChecks": 14,
+  "allWorstPnlDeltasZero": true,
+  "allMatureCohortHaltEffectsZero": true,
+  "positiveControlEffect": "108.9700",
+  "positiveControlExcludedFromMatureStatistics": true,
+  "reproductionByteIdentical": true,
+  "reportSha256": "372774685b1236fbbf413509134faf316b9900d5af68292b722852dc2d89e0f4",
+  "cliHttpExact": true,
+  "browser": "browser/checks.json",
+  "changesFrozenEngine": false,
+  "changesForwardAccount": false,
+  "browserFinal": "browser-final/checks.json",
+  "liveBrowser": "browser-live/checks.json",
+  "deployment": "deployment.json"
+}
