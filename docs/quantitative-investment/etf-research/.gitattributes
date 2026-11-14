@@ -56,3 +56,6 @@ data/snapshots/*-recent-*/*notice_*.body -diff
 
 # Version-comparison outputs preserve exact audited bytes.
 reports/2026-11-13-data-change/** -text whitespace=cr-at-eol
+
+# New paired-window evidence keeps exact bytes.
+reports/2026-11-14-new-window-attribution/** -text whitespace=cr-at-eol

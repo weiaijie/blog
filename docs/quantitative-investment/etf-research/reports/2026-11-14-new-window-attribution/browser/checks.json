@@ -1,0 +1,26 @@
+[
+  {
+    "width": 1440,
+    "nineRowsExact": true,
+    "nineDetailsExact": true,
+    "targetGapsExact": true,
+    "costBorderline": true,
+    "sellDayAndThreeFactors": true,
+    "exportExact": true,
+    "invalidQueriesRejected": true,
+    "noOverflow": true,
+    "noPageErrors": true
+  },
+  {
+    "width": 390,
+    "nineRowsExact": true,
+    "nineDetailsExact": true,
+    "targetGapsExact": true,
+    "costBorderline": true,
+    "sellDayAndThreeFactors": true,
+    "exportExact": true,
+    "invalidQueriesRejected": true,
+    "noOverflow": true,
+    "noPageErrors": true
+  }
+]

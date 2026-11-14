@@ -178,7 +178,15 @@ class Handler(BaseHTTPRequestHandler):
             kind = 'application/json'
             operation = path.removeprefix('/api/v2/backtest').removeprefix('/') or 'account'
             try:
-                if operation in ('data-change','data-change-detail'):
+                if operation in ('new-window-attribution','new-window-attribution-detail'):
+                    import new_window_attribution
+                    if operation=='new-window-attribution':
+                        interactive.request_params(url.query,())
+                        result=new_window_attribution.report()
+                    else:
+                        result=new_window_attribution.detail(interactive.request_params(url.query,('case',)))
+                    body=interactive.encode(result)
+                elif operation in ('data-change','data-change-detail'):
                     import data_change_report
                     if operation=='data-change':
                         interactive.request_params(url.query,())

@@ -4,7 +4,7 @@
 
 ## 当前事实
 
-- [当前进度](docs/CURRENT_STATUS.md)集中维护完成与缺口；前瞻已至2026-11-12、18户6日，原版回测截至10-30，独立近期版及四只ETF报价截至11-12。
+- [当前进度](docs/CURRENT_STATUS.md)集中维护完成与缺口；前瞻已至2026-11-13、18户7日，原版回测截至10-30，独立近期版及四只ETF报价截至11-12。
 - [新版工作台](docs/WORKBENCH_PLAN.md)使用Vue/TypeScript/Vite，人工和Agent共用参数。服务根路径及/workbench/为新版，/market.html与/backtest.html保留旧入口。内网地址http://10.1.1.120:18766，未确认公网部署。
 - [321个ADX落后窗口](reports/2026-11-12-adx-shortfall/README.md)已逐窗对账。270个短空档窗口只覆盖两次实际事件；事后取消诊断不能作为可执行规则。
 - 多源行情、公告、日历、分红核验继续阻断不合格更新，不覆盖旧快照，不使用真实资金。
@@ -13,10 +13,12 @@
 
 2026-11-13补充：[新增9天的版本对比](reports/2026-11-13-data-change/README.md)已在/workbench/#/changes上线。七种境内模型与四组跨市场基准各增9个一年/两年窗口；旧到期结果与最差盈亏不变，新增停牌对这些满期统计影响0。另列短期拦单对照，严禁将其计入满期成绩或当作现实可成交收益。
 
+2026-11-14补充：[新增9个两年窗口归因](reports/2026-11-14-new-window-attribution/README.md)固定上轮9个新增两年窗口，多因子3期达标、一次建仓0期；加回原成交成本为6期/0期。按ETF、全债状态和逐日账户拆分，看板/workbench/#/changes/attribution与Agent同源。前瞻已自动接续至11-13，不混入本次11-12版本分析。
+
 ## 接手顺序
 
 1. 读取AGENTS、README、PROJECT_PLAN、DATA_SOURCES、docs/PLAN_ALIGNMENT、config/research.json、PROTOCOL_V1。核对远端和当前北京时间。
-2. 执行verify_snapshot.py与scripts/verify_project.py。最新静态清单为reports/2026-11-13-data-change/manifest.json；旧清单在相应提交验证。
+2. 执行verify_snapshot.py与scripts/verify_project.py。最新静态清单为reports/2026-11-14-new-window-attribution/manifest.json；旧清单在相应提交验证。
 3. 核实三个用户定时器与site/health_status.json。静态Git文档不代表主机当前状态；未满252收益的风险指标留空，前瞻不借历史补齐。
 4. 前端改动先在隔离目录/端口验证，npm ci、npm test、npm run build；维护frontend源码与site/workbench构建产物、归档清单和静态清单。只构建不运行测试不能称验收完成。
 5. 研究下一步按PROJECT_PLAN执行：少量新规则先立协议、保留原版与失败区间。已观察历史不能重新标记成未见样本。

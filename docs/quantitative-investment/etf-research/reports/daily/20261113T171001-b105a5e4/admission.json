@@ -1,0 +1,43 @@
+{
+  "admitted": true,
+  "snapshot": "20261113T171001-b105a5e4-prices",
+  "through": "2026-11-13",
+  "added_sessions": [
+    "2026-11-02",
+    "2026-11-03",
+    "2026-11-04",
+    "2026-11-05",
+    "2026-11-06",
+    "2026-11-09",
+    "2026-11-10",
+    "2026-11-11",
+    "2026-11-12",
+    "2026-11-13"
+  ],
+  "total_sessions": 1177,
+  "source_checks": {
+    "510300": {
+      "unchanged_overlap_days": {
+        "sina": 1167,
+        "sohu": 198
+      },
+      "new_days": 10,
+      "exact_ohlc_fields": 40
+    },
+    "511010": {
+      "unchanged_overlap_days": {
+        "sina": 1167,
+        "sohu": 198
+      },
+      "new_days": 10,
+      "exact_ohlc_fields": 40
+    }
+  },
+  "official_catalog_counts": {
+    "510300": 259,
+    "511010": 230
+  },
+  "new_or_changed_notices": 0,
+  "new_events_automatically_created": false,
+  "scope_limit": "Catalog equality is not proof of upstream completeness; any notice change requires manual event/suspension review. Current sources are not proven operationally independent."
+}

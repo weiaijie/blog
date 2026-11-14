@@ -19,6 +19,7 @@ const router = createRouter({history:createWebHashHistory(), routes:[
   {path:'/research',component:()=>import('./views/Research.vue'),meta:{title:'模型回测'}},
   {path:'/compare',component:()=>import('./views/Compare.vue'),meta:{title:'组合比较'}},
   {path:'/changes',component:()=>import('./views/DataChanges.vue'),meta:{title:'数据更新对比'}},
+  {path:'/changes/attribution',component:()=>import('./views/NewWindows.vue'),meta:{title:'新增两年窗口归因'}},
   {path:'/reports',component:()=>import('./views/Reports.vue'),meta:{title:'研究报告'}},
   {path:'/:pathMatch(.*)*',redirect:'/'},
 ], scrollBehavior:()=>({top:0})});

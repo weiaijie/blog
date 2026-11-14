@@ -29,6 +29,7 @@ def options():
     _, audit = admitted()
     result = dict(work.OPTIONS, last=str(THROUGH), dataVersion=RECENT,
                   defaults=dict(work.DEFAULTS,end=str(THROUGH)), evidence=audit,
+                  newWindowAttributionEndpoint='/api/v2/backtest/new-window-attribution', newWindowAttributionDetailEndpoint='/api/v2/backtest/new-window-attribution-detail',
                   dataChangeEndpoint='/api/v2/backtest/data-change', dataChangeDetailEndpoint='/api/v2/backtest/data-change-detail',
                   methodWindowsDefaults=dict(method_windows.DEFAULTS,end=str(THROUGH)),
                   technicalFactorsDefaults=dict(factor_lab.DEFAULTS,end=str(THROUGH)))

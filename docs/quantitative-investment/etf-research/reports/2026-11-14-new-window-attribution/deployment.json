@@ -1,0 +1,25 @@
+{
+  "livePointersBefore": {
+    "config/active_run.json": "18f82d20c3e9e96f7df94ee4e51af2fdcc26826f4ddcc5f103e45defeb3e037d",
+    "site/operation_status.json": "cf6090f6f7e0cde85ba31ddd41b8cf7a2903b1cfbd9bb4abddb378c179e47f37",
+    "site/health_status.json": "9a73bd11d5729e274a7c818597526ba56de3efe5f6f17e58cc9eb9026f935a5b"
+  },
+  "livePointersAfter": {
+    "config/active_run.json": "18f82d20c3e9e96f7df94ee4e51af2fdcc26826f4ddcc5f103e45defeb3e037d",
+    "site/operation_status.json": "cf6090f6f7e0cde85ba31ddd41b8cf7a2903b1cfbd9bb4abddb378c179e47f37",
+    "site/health_status.json": "9a73bd11d5729e274a7c818597526ba56de3efe5f6f17e58cc9eb9026f935a5b"
+  },
+  "pointersUnchanged": true,
+  "integrity": "PASS integrity: 155 source manifests / 2679 source files; 7331 immutable entries; account 2026-11-13 operation phase success",
+  "timersActive": [
+    "active",
+    "active",
+    "active"
+  ],
+  "timersEnabled": [
+    "enabled",
+    "enabled",
+    "enabled"
+  ],
+  "onlyStagedPublicPathsDeployed": true
+}

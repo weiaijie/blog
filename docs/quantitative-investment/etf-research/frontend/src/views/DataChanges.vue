@@ -33,6 +33,7 @@ const countDelta=(x:number)=>x>0?'+'+x:String(x);
  <div class="page-title"><div><h1>新增9天，结果改变了什么</h1><p>10月30日原样本 → 11月12日近期样本。固定10万元、基准费用；本页不受右上角草稿方案控制。</p></div><el-button v-if="report" @click="download('etf-data-version-comparison.json',report)">导出对比</el-button></div>
  <el-alert v-if="error" :title="error" type="error" :closable="false"/><p v-if="busy" role="status">正在核对账目与交易记录…</p><el-button v-if="!report&&!busy" @click="load">重新加载</el-button>
  <template v-if="report">
+ <section class="panel"><h2>为什么多因子新增3次达标，一次建仓没有？</h2><p>把9个新增两年窗口逐一配对，核对股票、国债、分红及交易成本。</p><RouterLink to="/changes/attribution">打开9个两年窗口归因 →</RouterLink></section>
  <section class="panel"><h2>先分清两种变化</h2><p>旧窗口的到期日与结果保持不变。每种模型各新增9个一年窗口、9个两年窗口；总次数增加不等于胜率提高。</p><p>七个境内模型不持有标普。四组跨市场基准在新增5个停牌日没有计划开盘交易，因此这些满期统计的停牌规则影响为0。下方提供未满一年的对照案例，核验停牌拦单确实生效。</p><a :href="endpoint" target="_blank" rel="noopener">Agent：版本对比JSON</a></section>
  <section class="panel"><div class="actions"><label>比较范围<select v-model="group"><option value="domestic">七种境内模型 · 2019-03-20起</option><option value="markets">四组跨市场基准 · 2022-03-30起</option></select></label><label>持有期限<select v-model="year"><option value="1">1年</option><option value="2">2年</option></select></label></div>
  <p class="muted">{{group==='domestic'?'沪深300与国债：一次建仓、分三批建仓后持有；趋势/因子按原规则交易。':'四组均股债50/50，按月再平衡；三市场组将股票仓位等分。为避开标普拆分断点，起点为2022-03-30。'}} 两个范围的起点不同，不直接比较总次数。</p>
