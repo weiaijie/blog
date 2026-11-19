@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/home/ubuntu/projects/etf-research-git-snapshot/docs/quantitative-investment/etf-research/scripts/run_daily.py", line 157, in <module>
+    print(json.dumps(run(a),ensure_ascii=False))
+                     ^^^^^^
+  File "/home/ubuntu/projects/etf-research-git-snapshot/docs/quantitative-investment/etf-research/scripts/run_daily.py", line 102, in run
+    data,admission=load_incremental(ROOT/'data/snapshots',candidate)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/projects/etf-research-git-snapshot/docs/quantitative-investment/etf-research/src/etf_research/admission.py", line 112, in load_incremental
+    if set(d for d in prices[provider] if d>base.sessions[-1])!=set(added):raise ValueError('New source has missing/extra exchange dates')
+                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: New source has missing/extra exchange dates

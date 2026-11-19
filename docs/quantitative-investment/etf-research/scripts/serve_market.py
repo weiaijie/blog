@@ -74,6 +74,7 @@ def workbench_assets(site):
     return registered
 
 
+ASSETS['/strategy-catalog.json'] = ('strategy-catalog.json', 'application/json')
 ASSETS.update(workbench_assets(SITE))
 
 

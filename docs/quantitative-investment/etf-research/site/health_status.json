@@ -1,30 +1,33 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-11-14T23:45:00.652410+08:00",
-  "account_through": "2026-11-13",
+  "checked_at": "2026-11-19T17:00:00.650110+08:00",
+  "account_through": "2026-11-18",
   "scheduler": {
     "timer_enabled": "enabled",
     "timer_active": "active",
     "linger": "yes"
   },
-  "issues": [],
+  "issues": [
+    "run_failed",
+    "account_stale"
+  ],
   "review_queue": [],
   "report_only": true,
-  "expected_through": "2026-11-13",
-  "state": "market_closed",
-  "actionable": false,
-  "operation": "reports/operations/20261114T154409Z-0916557b",
+  "expected_through": "2026-11-19",
+  "state": "run_failed",
+  "actionable": true,
+  "operation": "reports/operations/20261119T084408Z-db5a1471",
   "last_archive": {
-    "snapshot": "52eeb7e0648d9f2d644e492614f157a36a73991cb4b40cb9f5b8593fafb040cc",
-    "files": 7301,
-    "new_objects": 52,
-    "new_bytes": 25403,
-    "finished_at_utc": "2026-11-14T15:44:55.422689+00:00"
+    "snapshot": "510e2ad21ee778752d54bf12c43c88a01c73b97d081725e982b52a419d2a6560",
+    "files": 9369,
+    "new_objects": 291,
+    "new_bytes": 2810378,
+    "finished_at_utc": "2026-11-18T09:45:20.242679+00:00"
   },
   "archive_scheduler": {
     "ActiveState": "active",
     "UnitFileState": "enabled",
     "Result": "success"
   },
-  "observation": "reports/health/20261114T234500-798aea3a"
+  "observation": "reports/health/20261119T170000-5ba27500"
 }

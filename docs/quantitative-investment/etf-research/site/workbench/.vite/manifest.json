@@ -1,33 +1,34 @@
 {
-  "_AttributionTable-of7JKu5M.js": {
-    "file": "assets/AttributionTable-of7JKu5M.js",
+  "_AttributionTable-xt6j17Lh.js": {
+    "file": "assets/AttributionTable-xt6j17Lh.js",
     "name": "AttributionTable",
     "imports": [
       "index.html"
     ]
   },
-  "_Chart-BFWwe1n2.js": {
-    "file": "assets/Chart-BFWwe1n2.js",
+  "_Chart-DVcEyjBW.js": {
+    "file": "assets/Chart-DVcEyjBW.js",
     "name": "Chart",
     "imports": [
       "index.html"
     ]
   },
-  "_DayDetail-WaUYHzln.js": {
-    "file": "assets/DayDetail-WaUYHzln.js",
+  "_DayDetail-CkTg0uJZ.js": {
+    "file": "assets/DayDetail-CkTg0uJZ.js",
     "name": "DayDetail",
     "imports": [
       "index.html"
     ]
   },
   "index.html": {
-    "file": "assets/index-e_7S7Kgn.js",
+    "file": "assets/index-DQMbODm3.js",
     "name": "index",
     "src": "index.html",
     "isEntry": true,
     "dynamicImports": [
       "src/views/Overview.vue",
       "src/views/Market.vue",
+      "src/views/Catalog.vue",
       "src/views/Research.vue",
       "src/views/Compare.vue",
       "src/views/DataChanges.vue",
@@ -38,64 +39,76 @@
       "assets/index-C2tJo7GT.css"
     ]
   },
+  "src/views/Catalog.vue": {
+    "file": "assets/Catalog-Q3nZ8ADP.js",
+    "name": "Catalog",
+    "src": "src/views/Catalog.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html"
+    ],
+    "css": [
+      "assets/Catalog-cQ9gpGF1.css"
+    ]
+  },
   "src/views/Compare.vue": {
-    "file": "assets/Compare-skJWw4pf.js",
+    "file": "assets/Compare-B_RPMvbP.js",
     "name": "Compare",
     "src": "src/views/Compare.vue",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_Chart-BFWwe1n2.js",
-      "_AttributionTable-of7JKu5M.js",
-      "_DayDetail-WaUYHzln.js"
+      "_Chart-DVcEyjBW.js",
+      "_AttributionTable-xt6j17Lh.js",
+      "_DayDetail-CkTg0uJZ.js"
     ]
   },
   "src/views/DataChanges.vue": {
-    "file": "assets/DataChanges-DYWzrc6H.js",
+    "file": "assets/DataChanges-Bm95_-YJ.js",
     "name": "DataChanges",
     "src": "src/views/DataChanges.vue",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_Chart-BFWwe1n2.js",
-      "_DayDetail-WaUYHzln.js",
-      "_AttributionTable-of7JKu5M.js"
+      "_Chart-DVcEyjBW.js",
+      "_DayDetail-CkTg0uJZ.js",
+      "_AttributionTable-xt6j17Lh.js"
     ]
   },
   "src/views/Market.vue": {
-    "file": "assets/Market-Dxv_xT_8.js",
+    "file": "assets/Market-BInMHKWR.js",
     "name": "Market",
     "src": "src/views/Market.vue",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_Chart-BFWwe1n2.js"
+      "_Chart-DVcEyjBW.js"
     ]
   },
   "src/views/NewWindows.vue": {
-    "file": "assets/NewWindows-B12QQl2V.js",
+    "file": "assets/NewWindows-C7QUfy2W.js",
     "name": "NewWindows",
     "src": "src/views/NewWindows.vue",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_Chart-BFWwe1n2.js",
-      "_DayDetail-WaUYHzln.js",
-      "_AttributionTable-of7JKu5M.js"
+      "_Chart-DVcEyjBW.js",
+      "_DayDetail-CkTg0uJZ.js",
+      "_AttributionTable-xt6j17Lh.js"
     ]
   },
   "src/views/Overview.vue": {
-    "file": "assets/Overview-BeuzzRNs.js",
+    "file": "assets/Overview-0SLX1c22.js",
     "name": "Overview",
     "src": "src/views/Overview.vue",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_Chart-BFWwe1n2.js"
+      "_Chart-DVcEyjBW.js"
     ]
   },
   "src/views/Reports.vue": {
-    "file": "assets/Reports-B1IYW-ne.js",
+    "file": "assets/Reports-BOsfXMSb.js",
     "name": "Reports",
     "src": "src/views/Reports.vue",
     "isDynamicEntry": true,
@@ -104,14 +117,14 @@
     ]
   },
   "src/views/Research.vue": {
-    "file": "assets/Research-DeGUcM6s.js",
+    "file": "assets/Research-DgsCGs5j.js",
     "name": "Research",
     "src": "src/views/Research.vue",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_Chart-BFWwe1n2.js",
-      "_DayDetail-WaUYHzln.js"
+      "_Chart-DVcEyjBW.js",
+      "_DayDetail-CkTg0uJZ.js"
     ]
   }
 }

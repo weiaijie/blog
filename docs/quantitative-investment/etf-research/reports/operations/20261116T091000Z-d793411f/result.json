@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "started_at_utc": "2026-11-16T09:10:00.640656+00:00",
+  "mode": "scheduled",
+  "operation": "reports/operations/20261116T091000Z-d793411f",
+  "unfinished_prior_operations": [],
+  "finished_at_utc": "2026-11-16T09:10:11.096487+00:00",
+  "phase": "success",
+  "exit_code": 0,
+  "result": {
+    "status": "published",
+    "bundle": "reports/daily/20261116T171001-12ba1bfd",
+    "as_of": "2026-11-16",
+    "forward_sessions": 8
+  },
+  "error": null,
+  "account_through": "2026-11-16",
+  "checkpoint_sha256": "03cc11ff8914f175c88f747922296463b68a57e8a6ef2f71b72d8404ca9a6906",
+  "account_changed": true,
+  "transport_version": "curl 8.18.0 (x86_64-pc-linux-gnu) libcurl/8.18.0 OpenSSL/3.5.5 zlib/1.3.1 brotli/1.2.0 zstd/1.5.7 libidn2/2.3.8 libpsl/0.21.2 libssh2/1.11.1 nghttp2/1.68.0 librtmp/2.3 mit-krb5/1.22.1 OpenLDAP/2.6.10",
+  "scheduler": {
+    "timer_enabled": "enabled",
+    "timer_active": "active",
+    "linger": "yes"
+  },
+  "last_success": {
+    "finished_at_utc": "2026-11-16T09:10:11.096487+00:00",
+    "operation": "reports/operations/20261116T091000Z-d793411f",
+    "mode": "scheduled"
+  },
+  "systemd_trigger": {
+    "daily_timer": true,
+    "invocation_id": "ec4d5248937845feaf578ae2a5de762d",
+    "trigger_unix_usec": 1794523444716091
+  },
+  "account_before": {
+    "schema_version": 1,
+    "as_of": "2026-11-13",
+    "checkpoint": "reports/daily/20261113T171001-b105a5e4/forward_checkpoint.json",
+    "checkpoint_sha256": "58db82460bcdc1e96e5ca8ea7d55e37abbb40a6d7918006053edadbff2d3e406",
+    "bundle": "reports/daily/20261113T171001-b105a5e4",
+    "dashboard": "reports/daily/20261113T171001-b105a5e4/site/index.html",
+    "research_config": "reports/daily/20261113T171001-b105a5e4/research.json",
+    "extensions_config": "reports/daily/20261113T171001-b105a5e4/risk_extensions_config.json",
+    "bundle_manifest_sha256": "a567ed48e2b0ab6bc2f63b2daee349acd9bf9ea282bc174f579fa998fa06db04"
+  },
+  "account_after": {
+    "schema_version": 1,
+    "as_of": "2026-11-16",
+    "checkpoint": "reports/daily/20261116T171001-12ba1bfd/forward_checkpoint.json",
+    "checkpoint_sha256": "03cc11ff8914f175c88f747922296463b68a57e8a6ef2f71b72d8404ca9a6906",
+    "bundle": "reports/daily/20261116T171001-12ba1bfd",
+    "dashboard": "reports/daily/20261116T171001-12ba1bfd/site/index.html",
+    "research_config": "reports/daily/20261116T171001-12ba1bfd/research.json",
+    "extensions_config": "reports/daily/20261116T171001-12ba1bfd/risk_extensions_config.json",
+    "bundle_manifest_sha256": "1213063109cfc6950120df9261e482363b2913ba7755179fe81ad27a0ffcb7d1"
+  }
+}

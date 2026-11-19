@@ -16,6 +16,7 @@ import App from './App.vue';
 const router = createRouter({history:createWebHashHistory(), routes:[
   {path:'/',component:()=>import('./views/Overview.vue'),meta:{title:'研究总览'}},
   {path:'/market',component:()=>import('./views/Market.vue'),meta:{title:'行情与数据'}},
+  {path:'/catalog',component:()=>import('./views/Catalog.vue'),meta:{title:'策略中心'}},
   {path:'/research',component:()=>import('./views/Research.vue'),meta:{title:'模型回测'}},
   {path:'/compare',component:()=>import('./views/Compare.vue'),meta:{title:'组合比较'}},
   {path:'/changes',component:()=>import('./views/DataChanges.vue'),meta:{title:'数据更新对比'}},
