@@ -1,33 +1,30 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-11-19T17:00:00.650110+08:00",
-  "account_through": "2026-11-18",
+  "checked_at": "2026-11-19T17:30:00.663155+08:00",
+  "account_through": "2026-11-19",
   "scheduler": {
     "timer_enabled": "enabled",
     "timer_active": "active",
     "linger": "yes"
   },
-  "issues": [
-    "run_failed",
-    "account_stale"
-  ],
+  "issues": [],
   "review_queue": [],
   "report_only": true,
   "expected_through": "2026-11-19",
-  "state": "run_failed",
-  "actionable": true,
-  "operation": "reports/operations/20261119T084408Z-db5a1471",
+  "state": "current",
+  "actionable": false,
+  "operation": "reports/operations/20261119T091241Z-29110416",
   "last_archive": {
-    "snapshot": "510e2ad21ee778752d54bf12c43c88a01c73b97d081725e982b52a419d2a6560",
-    "files": 9369,
-    "new_objects": 291,
-    "new_bytes": 2810378,
-    "finished_at_utc": "2026-11-18T09:45:20.242679+00:00"
+    "snapshot": "c6299f46e86b960bc69cb639be8c336a62cf2e607069d2beb5475a25b5ef27b9",
+    "files": 10003,
+    "new_objects": 322,
+    "new_bytes": 5515828,
+    "finished_at_utc": "2026-11-19T09:13:30.155254+00:00"
   },
   "archive_scheduler": {
     "ActiveState": "active",
     "UnitFileState": "enabled",
     "Result": "success"
   },
-  "observation": "reports/health/20261119T170000-5ba27500"
+  "observation": "reports/health/20261119T173000-0693e868"
 }

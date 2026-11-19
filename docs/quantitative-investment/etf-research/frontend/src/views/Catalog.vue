@@ -40,6 +40,7 @@ onMounted(load);
   <el-button v-if="failure" @click="load">重新加载台账</el-button>
   <p v-else-if="!loaded" role="status">正在读取策略台账…</p>
   <template v-if="loaded">
+    <nav class="actions" aria-label="策略中心视图"><strong>策略台账</strong><RouterLink to="/catalog/graph">打开二维关系图</RouterLink></nav>
     <section class="panel">
       <div class="actions"><label>搜索模型、因子或报告<input v-model="query" type="search" placeholder="例如 ADX、国债"></label>
         <label>类别<select v-model="group"><option value="">全部类别</option><option v-for="g in groups" :key="g">{{g}}</option></select></label></div>

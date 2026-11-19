@@ -1,6 +1,6 @@
 # 项目计划与当前状态
 
-2026-11-19：新增[策略中心](reports/2026-11-19-strategy-catalog/README.md)，7 个模型与 4 个市场基准可搜索并按报告参数回放。下一项为二维关系图。
+2026-11-19：新增[策略中心](reports/2026-11-19-strategy-catalog/README.md)，7 个模型与 4 个市场基准可搜索并按报告参数回放。[二维关系图](reports/2026-11-19-strategy-graph/README.md)现已接入，可按因子、模型和实验逐层查看并直接回放。
 
 当前状态统一维护于 [CURRENT_STATUS](docs/CURRENT_STATUS.md)。本页列工作顺序，旧进度不再反复插入顶部。
 

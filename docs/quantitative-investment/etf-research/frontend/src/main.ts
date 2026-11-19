@@ -17,13 +17,14 @@ const router = createRouter({history:createWebHashHistory(), routes:[
   {path:'/',component:()=>import('./views/Overview.vue'),meta:{title:'研究总览'}},
   {path:'/market',component:()=>import('./views/Market.vue'),meta:{title:'行情与数据'}},
   {path:'/catalog',component:()=>import('./views/Catalog.vue'),meta:{title:'策略中心'}},
+  {path:'/catalog/graph',component:()=>import('./views/StrategyGraph.vue'),meta:{title:'策略关系图'}},
   {path:'/research',component:()=>import('./views/Research.vue'),meta:{title:'模型回测'}},
   {path:'/compare',component:()=>import('./views/Compare.vue'),meta:{title:'组合比较'}},
   {path:'/changes',component:()=>import('./views/DataChanges.vue'),meta:{title:'数据更新对比'}},
   {path:'/changes/attribution',component:()=>import('./views/NewWindows.vue'),meta:{title:'新增两年窗口归因'}},
   {path:'/reports',component:()=>import('./views/Reports.vue'),meta:{title:'研究报告'}},
   {path:'/:pathMatch(.*)*',redirect:'/'},
-], scrollBehavior:()=>({top:0})});
+], scrollBehavior:(to,from)=>to.path==='/catalog/graph' && from.path===to.path ? false : {top:0}});
 const app=createApp(App);
 for(const c of [ElButton,ElInput,ElInputNumber,ElSelect,ElOption,ElDrawer,ElAlert]) app.component(c.name!,c);
 app.use(router).mount('#app');

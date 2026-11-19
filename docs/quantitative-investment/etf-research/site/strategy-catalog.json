@@ -21,6 +21,10 @@
         {
           "title": "新增9个两年窗口：多因子与一次建仓逐日归因",
           "url": "https://github.com/weiaijie/blog/blob/adcf35b37942e5a994c69721df43cf85ce20ce97/docs/quantitative-investment/etf-research/reports/2026-11-14-new-window-attribution/README.md"
+        },
+        {
+          "title": "多因子盈利但年化未达 4% 的两年窗口",
+          "url": "https://github.com/weiaijie/blog/blob/adcf35b37942e5a994c69721df43cf85ce20ce97/docs/quantitative-investment/etf-research/reports/2026-11-10-multifactor-shortfall/README.md"
         }
       ],
       "plan": {
@@ -213,6 +217,10 @@
         {
           "title": "新增9个两年窗口：多因子与一次建仓逐日归因",
           "url": "https://github.com/weiaijie/blog/blob/adcf35b37942e5a994c69721df43cf85ce20ce97/docs/quantitative-investment/etf-research/reports/2026-11-14-new-window-attribution/README.md"
+        },
+        {
+          "title": "成交量、KDJ、ADX 独立对照",
+          "url": "https://github.com/weiaijie/blog/blob/adcf35b37942e5a994c69721df43cf85ce20ce97/docs/quantitative-investment/etf-research/reports/2026-11-11-technical-factors/README.md"
         }
       ],
       "plan": {
@@ -409,6 +417,10 @@
         {
           "title": "ADX 与同日起点纯国债核对",
           "url": "https://github.com/weiaijie/blog/blob/adcf35b37942e5a994c69721df43cf85ce20ce97/docs/quantitative-investment/etf-research/reports/2026-11-11-adx-bond/README.md"
+        },
+        {
+          "title": "ADX 交易体检、费用对比与11月12日数据接续",
+          "url": "https://github.com/weiaijie/blog/blob/adcf35b37942e5a994c69721df43cf85ce20ce97/docs/quantitative-investment/etf-research/reports/2026-11-12-adx-trades/README.md"
         },
         {
           "title": "成交量、KDJ、ADX 独立对照",
@@ -703,5 +715,367 @@
         }
       }
     }
-  ]
+  ],
+  "graph": {
+    "version": 1,
+    "nodes": [
+      {
+        "id": "factor:trend120",
+        "kind": "factor",
+        "label": "长期趋势",
+        "description": "沪深300含分红指数高于120日均线"
+      },
+      {
+        "id": "factor:relative60",
+        "kind": "factor",
+        "label": "股债相对强弱",
+        "description": "近60个交易日沪深300收益高于国债"
+      },
+      {
+        "id": "factor:vol20",
+        "kind": "factor",
+        "label": "短期波动",
+        "description": "沪深300近20个日收益的年化波动低于25%"
+      },
+      {
+        "id": "factor:volume",
+        "kind": "factor",
+        "label": "量价确认",
+        "description": "当日量超过此前20日均量且含分红日收益为正"
+      },
+      {
+        "id": "factor:kdj",
+        "kind": "factor",
+        "label": "KDJ",
+        "description": "KDJ(9,3,3) 的 K 高于 D"
+      },
+      {
+        "id": "factor:adx",
+        "kind": "factor",
+        "label": "ADX",
+        "description": "ADX(14) ≥ 25 且 +DI > −DI"
+      },
+      {
+        "id": "domestic-allocation",
+        "kind": "entry",
+        "label": "一次建仓"
+      },
+      {
+        "id": "domestic-installments",
+        "kind": "entry",
+        "label": "按月分三批"
+      },
+      {
+        "id": "domestic-trend_120",
+        "kind": "entry",
+        "label": "120日趋势"
+      },
+      {
+        "id": "domestic-multifactor_v1",
+        "kind": "entry",
+        "label": "三因子"
+      },
+      {
+        "id": "domestic-multifactor_volume_v1",
+        "kind": "entry",
+        "label": "三因子＋量价"
+      },
+      {
+        "id": "domestic-multifactor_kdj_v1",
+        "kind": "entry",
+        "label": "三因子＋KDJ"
+      },
+      {
+        "id": "domestic-multifactor_adx_v1",
+        "kind": "entry",
+        "label": "三因子＋ADX"
+      },
+      {
+        "id": "market-csi300",
+        "kind": "entry",
+        "label": "沪深300 / 国债"
+      },
+      {
+        "id": "market-sp500",
+        "kind": "entry",
+        "label": "标普500 / 国债"
+      },
+      {
+        "id": "market-hangseng",
+        "kind": "entry",
+        "label": "恒生 / 国债"
+      },
+      {
+        "id": "market-equal",
+        "kind": "entry",
+        "label": "三市场平分股票仓位 / 国债"
+      },
+      {
+        "id": "experiment:2026-11-13-data-change",
+        "kind": "experiment",
+        "label": "新旧数据窗口",
+        "description": "新增9天前后：满期窗口变化与停牌条件对照",
+        "url": "https://github.com/weiaijie/blog/blob/adcf35b37942e5a994c69721df43cf85ce20ce97/docs/quantitative-investment/etf-research/reports/2026-11-13-data-change/README.md",
+        "view": "/workbench/#/changes"
+      },
+      {
+        "id": "experiment:2026-11-10-method-gap",
+        "kind": "experiment",
+        "label": "分批与一次建仓",
+        "description": "分三批为什么多亏 821.26 元",
+        "url": "https://github.com/weiaijie/blog/blob/adcf35b37942e5a994c69721df43cf85ce20ce97/docs/quantitative-investment/etf-research/reports/2026-11-10-method-gap/README.md",
+        "view": "/backtest.html#method-gap-case"
+      },
+      {
+        "id": "experiment:2026-11-14-new-window-attribution",
+        "kind": "experiment",
+        "label": "新增两年窗口归因",
+        "description": "新增9个两年窗口：多因子与一次建仓逐日归因",
+        "url": "https://github.com/weiaijie/blog/blob/adcf35b37942e5a994c69721df43cf85ce20ce97/docs/quantitative-investment/etf-research/reports/2026-11-14-new-window-attribution/README.md",
+        "view": "/workbench/#/changes/attribution"
+      },
+      {
+        "id": "experiment:2026-11-10-multifactor-shortfall",
+        "kind": "experiment",
+        "label": "514个低收益窗口",
+        "description": "多因子盈利但年化未达 4% 的两年窗口",
+        "url": "https://github.com/weiaijie/blog/blob/adcf35b37942e5a994c69721df43cf85ce20ce97/docs/quantitative-investment/etf-research/reports/2026-11-10-multifactor-shortfall/README.md",
+        "view": "/backtest.html#factor-shortfall"
+      },
+      {
+        "id": "experiment:2026-11-11-technical-factors",
+        "kind": "experiment",
+        "label": "技术因子对照",
+        "description": "成交量、KDJ、ADX 独立对照",
+        "url": "https://github.com/weiaijie/blog/blob/adcf35b37942e5a994c69721df43cf85ce20ce97/docs/quantitative-investment/etf-research/reports/2026-11-11-technical-factors/README.md",
+        "view": "/backtest.html#factor-lab"
+      },
+      {
+        "id": "experiment:2026-11-12-adx-shortfall",
+        "kind": "experiment",
+        "label": "321个落后窗口",
+        "description": "321个加回费用后仍落后纯债的两年窗口",
+        "url": "https://github.com/weiaijie/blog/blob/adcf35b37942e5a994c69721df43cf85ce20ce97/docs/quantitative-investment/etf-research/reports/2026-11-12-adx-shortfall/README.md",
+        "view": "/backtest.html#adx-shortfall"
+      },
+      {
+        "id": "experiment:2026-11-11-adx-bond",
+        "kind": "experiment",
+        "label": "ADX与纯国债",
+        "description": "ADX 与同日起点纯国债核对",
+        "url": "https://github.com/weiaijie/blog/blob/adcf35b37942e5a994c69721df43cf85ce20ce97/docs/quantitative-investment/etf-research/reports/2026-11-11-adx-bond/README.md",
+        "view": "/backtest.html#adx-bond"
+      },
+      {
+        "id": "experiment:2026-11-12-adx-trades",
+        "kind": "experiment",
+        "label": "ADX交易与费用",
+        "description": "ADX 交易体检、费用对比与11月12日数据接续",
+        "url": "https://github.com/weiaijie/blog/blob/adcf35b37942e5a994c69721df43cf85ce20ce97/docs/quantitative-investment/etf-research/reports/2026-11-12-adx-trades/README.md",
+        "view": "/backtest.html#adx-trades"
+      }
+    ],
+    "edges": [
+      {
+        "source": "domestic-allocation",
+        "target": "experiment:2026-11-13-data-change",
+        "role": "对照实验"
+      },
+      {
+        "source": "domestic-allocation",
+        "target": "experiment:2026-11-10-method-gap",
+        "role": "对照实验"
+      },
+      {
+        "source": "domestic-allocation",
+        "target": "experiment:2026-11-14-new-window-attribution",
+        "role": "对照实验"
+      },
+      {
+        "source": "domestic-allocation",
+        "target": "experiment:2026-11-10-multifactor-shortfall",
+        "role": "对照实验"
+      },
+      {
+        "source": "domestic-installments",
+        "target": "experiment:2026-11-13-data-change",
+        "role": "对照实验"
+      },
+      {
+        "source": "domestic-installments",
+        "target": "experiment:2026-11-10-method-gap",
+        "role": "对照实验"
+      },
+      {
+        "source": "factor:trend120",
+        "target": "domestic-trend_120",
+        "role": "月度择时"
+      },
+      {
+        "source": "domestic-trend_120",
+        "target": "experiment:2026-11-13-data-change",
+        "role": "对照实验"
+      },
+      {
+        "source": "factor:trend120",
+        "target": "domestic-multifactor_v1",
+        "role": "三票取二"
+      },
+      {
+        "source": "factor:relative60",
+        "target": "domestic-multifactor_v1",
+        "role": "三票取二"
+      },
+      {
+        "source": "factor:vol20",
+        "target": "domestic-multifactor_v1",
+        "role": "三票取二"
+      },
+      {
+        "source": "domestic-multifactor_v1",
+        "target": "experiment:2026-11-13-data-change",
+        "role": "对照实验"
+      },
+      {
+        "source": "domestic-multifactor_v1",
+        "target": "experiment:2026-11-10-multifactor-shortfall",
+        "role": "对照实验"
+      },
+      {
+        "source": "domestic-multifactor_v1",
+        "target": "experiment:2026-11-14-new-window-attribution",
+        "role": "对照实验"
+      },
+      {
+        "source": "domestic-multifactor_v1",
+        "target": "experiment:2026-11-11-technical-factors",
+        "role": "对照实验"
+      },
+      {
+        "source": "factor:trend120",
+        "target": "domestic-multifactor_volume_v1",
+        "role": "三票取二"
+      },
+      {
+        "source": "factor:relative60",
+        "target": "domestic-multifactor_volume_v1",
+        "role": "三票取二"
+      },
+      {
+        "source": "factor:vol20",
+        "target": "domestic-multifactor_volume_v1",
+        "role": "三票取二"
+      },
+      {
+        "source": "factor:volume",
+        "target": "domestic-multifactor_volume_v1",
+        "role": "额外确认"
+      },
+      {
+        "source": "domestic-multifactor_volume_v1",
+        "target": "experiment:2026-11-13-data-change",
+        "role": "对照实验"
+      },
+      {
+        "source": "domestic-multifactor_volume_v1",
+        "target": "experiment:2026-11-11-technical-factors",
+        "role": "对照实验"
+      },
+      {
+        "source": "factor:trend120",
+        "target": "domestic-multifactor_kdj_v1",
+        "role": "三票取二"
+      },
+      {
+        "source": "factor:relative60",
+        "target": "domestic-multifactor_kdj_v1",
+        "role": "三票取二"
+      },
+      {
+        "source": "factor:vol20",
+        "target": "domestic-multifactor_kdj_v1",
+        "role": "三票取二"
+      },
+      {
+        "source": "factor:kdj",
+        "target": "domestic-multifactor_kdj_v1",
+        "role": "额外确认"
+      },
+      {
+        "source": "domestic-multifactor_kdj_v1",
+        "target": "experiment:2026-11-13-data-change",
+        "role": "对照实验"
+      },
+      {
+        "source": "domestic-multifactor_kdj_v1",
+        "target": "experiment:2026-11-11-technical-factors",
+        "role": "对照实验"
+      },
+      {
+        "source": "factor:trend120",
+        "target": "domestic-multifactor_adx_v1",
+        "role": "三票取二"
+      },
+      {
+        "source": "factor:relative60",
+        "target": "domestic-multifactor_adx_v1",
+        "role": "三票取二"
+      },
+      {
+        "source": "factor:vol20",
+        "target": "domestic-multifactor_adx_v1",
+        "role": "三票取二"
+      },
+      {
+        "source": "factor:adx",
+        "target": "domestic-multifactor_adx_v1",
+        "role": "额外确认"
+      },
+      {
+        "source": "domestic-multifactor_adx_v1",
+        "target": "experiment:2026-11-13-data-change",
+        "role": "对照实验"
+      },
+      {
+        "source": "domestic-multifactor_adx_v1",
+        "target": "experiment:2026-11-12-adx-shortfall",
+        "role": "对照实验"
+      },
+      {
+        "source": "domestic-multifactor_adx_v1",
+        "target": "experiment:2026-11-11-adx-bond",
+        "role": "对照实验"
+      },
+      {
+        "source": "domestic-multifactor_adx_v1",
+        "target": "experiment:2026-11-12-adx-trades",
+        "role": "对照实验"
+      },
+      {
+        "source": "domestic-multifactor_adx_v1",
+        "target": "experiment:2026-11-11-technical-factors",
+        "role": "对照实验"
+      },
+      {
+        "source": "market-csi300",
+        "target": "experiment:2026-11-13-data-change",
+        "role": "对照实验"
+      },
+      {
+        "source": "market-sp500",
+        "target": "experiment:2026-11-13-data-change",
+        "role": "对照实验"
+      },
+      {
+        "source": "market-hangseng",
+        "target": "experiment:2026-11-13-data-change",
+        "role": "对照实验"
+      },
+      {
+        "source": "market-equal",
+        "target": "experiment:2026-11-13-data-change",
+        "role": "对照实验"
+      }
+    ]
+  }
 }
