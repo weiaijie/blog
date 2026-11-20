@@ -1,5 +1,7 @@
 # 自主接续入口
 
+2026-11-20 上午：[四只 ETF 收盘行情](reports/2026-11-20-quote-refresh/README.md)已三源核对至 11-19，固定回测仍至 11-12；后续补公告、停复牌、分红折算与成交量证据。
+
 2026-11-19：新增[策略中心](reports/2026-11-19-strategy-catalog/README.md)，7 个模型与 4 个市场基准可搜索并按报告参数回放。[二维关系图](reports/2026-11-19-strategy-graph/README.md)现已接入，可按因子、模型和实验逐层查看并直接回放。
 
 先核对GitHub redesign-pc最新提交、Ubuntu活动指针及封存记录，不依赖旧聊天。仓库项目目录为docs/quantitative-investment/etf-research，独立Ubuntu运行副本为/home/ubuntu/projects/etf-research-git-snapshot/docs/quantitative-investment/etf-research。
@@ -20,7 +22,7 @@
 ## 接手顺序
 
 1. 读取AGENTS、README、PROJECT_PLAN、DATA_SOURCES、docs/PLAN_ALIGNMENT、config/research.json、PROTOCOL_V1。核对远端和当前北京时间。
-2. 执行verify_snapshot.py与scripts/verify_project.py。最新静态清单为reports/2026-11-19-strategy-graph/manifest.json；旧清单在相应提交验证。
+2. 执行verify_snapshot.py与scripts/verify_project.py。最新静态清单为reports/2026-11-20-quote-refresh/manifest.json；旧清单在相应提交验证。
 3. 核实三个用户定时器与site/health_status.json。静态Git文档不代表主机当前状态；未满252收益的风险指标留空，前瞻不借历史补齐。
 4. 前端改动先在隔离目录/端口验证，npm ci、npm test、npm run build；维护frontend源码与site/workbench构建产物、归档清单和静态清单。只构建不运行测试不能称验收完成。
 5. 研究下一步按PROJECT_PLAN执行：少量新规则先立协议、保留原版与失败区间。已观察历史不能重新标记成未见样本。

@@ -1,5 +1,7 @@
 # 当前进度：2026-11-14
 
+2026-11-20 上午：[四只 ETF 收盘行情](../reports/2026-11-20-quote-refresh/README.md)已三源核对至 11-19，固定回测仍至 11-12；后续补公告、停复牌、分红折算与成交量证据。
+
 2026-11-19：新增[策略中心](../reports/2026-11-19-strategy-catalog/README.md)，7 个模型与 4 个市场基准可搜索并按报告参数回放。[二维关系图](../reports/2026-11-19-strategy-graph/README.md)现已接入，可按因子、模型和实验逐层查看并直接回放。
 
 2026-11-14新增[9个两年窗口归因](../reports/2026-11-14-new-window-attribution/README.md)：按相同起止配对多因子与一次建仓，逐日账户/ETF/分红/费用对账，全债阶段另列，4%门槛及固定成交成本加回诊断可查。新版路径/workbench/#/changes/attribution，Agent使用同一JSON；不修改策略，不把重叠窗口当独立成功概率。
