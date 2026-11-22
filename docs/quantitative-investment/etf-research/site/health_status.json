@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-11-20T10:30:00.675004+08:00",
-  "account_through": "2026-11-19",
+  "checked_at": "2026-11-22T21:45:00.652827+08:00",
+  "account_through": "2026-11-20",
   "scheduler": {
     "timer_enabled": "enabled",
     "timer_active": "active",
@@ -10,21 +10,21 @@
   "issues": [],
   "review_queue": [],
   "report_only": true,
-  "expected_through": "2026-11-19",
-  "state": "before_collection_window",
+  "expected_through": "2026-11-20",
+  "state": "market_closed",
   "actionable": false,
-  "operation": "reports/operations/20261119T093718Z-0faa1a9f",
+  "operation": "reports/operations/20261120T091000Z-e7e8de93",
   "last_archive": {
-    "snapshot": "dc73fa994d46c08229f36817f78ea8aa3eb0f9c4cf70cbcbbc693e392124244b",
-    "files": 10023,
-    "new_objects": 0,
-    "new_bytes": 0,
-    "finished_at_utc": "2026-11-19T09:45:16.003218+00:00"
+    "snapshot": "25093c7d20c09ab77e2c0efcb86737b1c3ee021e18e88ef9a31c1db9a807e227",
+    "files": 11067,
+    "new_objects": 190,
+    "new_bytes": 87970,
+    "finished_at_utc": "2026-11-22T09:45:18.523596+00:00"
   },
   "archive_scheduler": {
     "ActiveState": "active",
     "UnitFileState": "enabled",
     "Result": "success"
   },
-  "observation": "reports/health/20261120T103000-7d959ea4"
+  "observation": "reports/health/20261122T214500-2afcaf66"
 }

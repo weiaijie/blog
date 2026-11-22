@@ -8,7 +8,7 @@ from fractions import Fraction
 from functools import lru_cache, partial
 from urllib.parse import parse_qsl
 
-from research_profile import current, FROZEN
+from research_profile import current, FROZEN, LATEST
 import multifactor_strategy as multi
 from technical_factors import MODELS as TECHNICAL_MODELS
 from compare_three_markets import CODES, SCENARIOS, metrics, simulate
@@ -58,6 +58,9 @@ def frozen_inputs():
 def inputs():
     if current.get() == FROZEN:
         return frozen_inputs()
+    if current.get() == LATEST:
+        from november_market_data import admitted
+        return admitted()[0]
     from recent_market_data import inputs as recent_inputs
     return recent_inputs()
 
@@ -65,6 +68,9 @@ def inputs():
 def data_end():
     if current.get() == FROZEN:
         return END
+    if current.get() == LATEST:
+        from november_market_data import THROUGH
+        return THROUGH
     from recent_market_data import THROUGH
     return THROUGH
 

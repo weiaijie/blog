@@ -3,9 +3,9 @@ export const names:Record<string,string>={'510300':'沪深300','513500':'标普5
 export const models:Record<string,string>={allocation:'固定配比',installments:'按月分批',trend_120:'120日趋势',multifactor_v1:'三因子投票',multifactor_volume_v1:'三因子＋量价',multifactor_kdj_v1:'三因子＋KDJ',multifactor_adx_v1:'三因子＋ADX'};
 export type Params=Record<string,string>;
 export type Decimal=string|number;
-export type Dataset='frozen-2026-10-30'|'verified-2026-11-12';
+export type Dataset='frozen-2026-10-30'|'verified-2026-11-12'|'verified-2026-11-20';
 export interface Plan {version:2;dataset:Dataset;name:string;start:string;end:string;capital:string;fees:string;rebalance:string;model:string;installments:string;portfolios:string[]}
-export const defaultPlan:Plan={version:2,dataset:'verified-2026-11-12',name:'沪深300与国债研究',start:'2019-03-20',end:'2026-11-12',capital:'100000',fees:'base',rebalance:'hold',model:'allocation',installments:'3',portfolios:['1,0,0,1','0,0,0,1']};
+export const defaultPlan:Plan={version:2,dataset:'verified-2026-11-20',name:'沪深300与国债研究',start:'2019-03-20',end:'2026-11-20',capital:'100000',fees:'base',rebalance:'hold',model:'allocation',installments:'3',portfolios:['1,0,0,1','0,0,0,1']};
 export function parsePlan(input:unknown):Plan {
   if(!input||typeof input!=='object'||Array.isArray(input)) throw Error('方案须为JSON对象。');
   const original=input as Record<string,unknown>;
@@ -14,7 +14,7 @@ export function parsePlan(input:unknown):Plan {
   if(Object.keys(d).some(k=>!Object.hasOwn(defaultPlan,k))||Object.keys(defaultPlan).some(k=>!Object.hasOwn(d,k)))throw Error('方案字段不完整，或含未知字段。');
   if(d.version!==2)throw Error('不支持的方案版本。');
   for(const k of ['name','start','end','capital','fees','rebalance','model','installments'])if(typeof d[k]!=='string')throw Error('方案字段类型不正确：'+k);
-  if(typeof d.dataset!=='string'||!['frozen-2026-10-30','verified-2026-11-12'].includes(d.dataset))throw Error('未知数据版本。');
+  if(typeof d.dataset!=='string'||!['frozen-2026-10-30','verified-2026-11-12','verified-2026-11-20'].includes(d.dataset))throw Error('未知数据版本。');
   const p=d as unknown as Plan;
   if(!p.name.trim()||p.name.length>80)throw Error('方案名须为1至80个字符。');
   for(const x of [p.start,p.end])if(!/^\d{4}-\d{2}-\d{2}$/.test(x)||!Number.isFinite(Date.parse(x))||new Date(x).toISOString().slice(0,10)!==x)throw Error('日期无效。');
@@ -40,7 +40,7 @@ export function comparisonParams(p:Plan,kind:string):Params{
   return {...common(p),installments:p.installments,rebalance:p.rebalance};
 }
 export function apiUrl(path:string,params:Params={}):string {const q=new URLSearchParams(params).toString();return path+(q?'?'+q:'');}
-export function endpoint(p:Plan,suffix=''){return (p.dataset==='frozen-2026-10-30'?'/api/v1/backtest':'/api/v2/backtest')+suffix;}
+export function endpoint(p:Plan,suffix=''){return (p.dataset==='frozen-2026-10-30'?'/api/v1/backtest':p.dataset==='verified-2026-11-20'?'/api/v3/backtest':'/api/v2/backtest')+suffix;}
 export function agentManifest(p:Plan){
   p=parsePlan(p);
   return {schemaVersion:2,dataVersion:p.dataset,plan:p,method:'GET',requests:{

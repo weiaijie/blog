@@ -5,12 +5,13 @@ from functools import lru_cache, wraps
 
 FROZEN = 'frozen-2026-10-30'
 RECENT = 'verified-2026-11-12'
+LATEST = 'verified-2026-11-20'
 current = ContextVar('research_profile', default=FROZEN)
 
 
 @contextmanager
 def using(profile):
-    if profile not in (FROZEN, RECENT):
+    if profile not in (FROZEN, RECENT, LATEST):
         raise ValueError('Unknown research data version')
     token = current.set(profile)
     try:

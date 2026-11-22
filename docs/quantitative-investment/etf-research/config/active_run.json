@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "as_of": "2026-11-19",
-  "checkpoint": "reports/daily/20261119T171001-e1c0de3e/forward_checkpoint.json",
-  "checkpoint_sha256": "d3aaad7a83a6cba65b1f6c150e0faec534c856213b6240302e399dd4b02767b0",
-  "bundle": "reports/daily/20261119T171001-e1c0de3e",
-  "dashboard": "reports/daily/20261119T171001-e1c0de3e/site/index.html",
-  "research_config": "reports/daily/20261119T171001-e1c0de3e/research.json",
-  "extensions_config": "reports/daily/20261119T171001-e1c0de3e/risk_extensions_config.json",
-  "bundle_manifest_sha256": "bf747f88d9fb2a285d3c5a98ef17511f061d9c42c2afb6187e368754bea64321"
+  "as_of": "2026-11-20",
+  "checkpoint": "reports/daily/20261120T171001-76e9c947/forward_checkpoint.json",
+  "checkpoint_sha256": "a08fa4732127acad4b532108bfa9f7a48bdb24a3db8d73ebaaacbad8d2be6854",
+  "bundle": "reports/daily/20261120T171001-76e9c947",
+  "dashboard": "reports/daily/20261120T171001-76e9c947/site/index.html",
+  "research_config": "reports/daily/20261120T171001-76e9c947/research.json",
+  "extensions_config": "reports/daily/20261120T171001-76e9c947/risk_extensions_config.json",
+  "bundle_manifest_sha256": "4ead60ad4cb3170a5508974fbb8269b0ec90e5b7c58486285af9dbb704f6dabe"
 }

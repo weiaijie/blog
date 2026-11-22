@@ -10,7 +10,9 @@ test('factor replay uses explicit frozen domestic constraints, not the draft wei
  const p=parsePlan({...defaultPlan,model:'multifactor_adx_v1',rebalance:'monthly',portfolios:['1,1,1,3']});
  const q=replayParams(p,'1');assert.equal(q.weights,'1,0,0,1');assert.equal(q.rebalance,'signal');assert.equal(q.step,'1');assert.ok(!('installments' in q));
  assert.equal(p.portfolios[0],'1,1,1,3');assert.equal(comparisonParams(p,'technical').capital,p.capital);
- assert.equal(agentManifest(p).requests.replay,apiUrl('/api/v2/backtest/replay',q));
+ assert.equal(agentManifest(p).requests.replay,apiUrl('/api/v3/backtest/replay',q));
+ const previous=parsePlan({...p,dataset:'verified-2026-11-12',end:'2026-11-12'});
+ assert.equal(agentManifest(previous).requests.replay,apiUrl('/api/v2/backtest/replay',replayParams(previous,'1')));
 });
 test('batches are sent only for installment models and method comparison',()=>{
  const p=parsePlan({...defaultPlan,model:'installments',installments:'5'});

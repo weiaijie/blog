@@ -175,11 +175,13 @@ class Handler(BaseHTTPRequestHandler):
         url = urlsplit(self.path)
         path = url.path
         status = 200
-        if path.startswith('/api/v2/backtest'):
+        prefix = '/api/v3/backtest' if path.startswith('/api/v3/') else '/api/v2/backtest'
+        profile = recent_backtest.LATEST if prefix == '/api/v3/backtest' else recent_backtest.RECENT
+        if path == prefix or path.startswith(prefix+'/'):
             kind = 'application/json'
-            operation = path.removeprefix('/api/v2/backtest').removeprefix('/') or 'account'
+            operation = path.removeprefix(prefix).removeprefix('/') or 'account'
             try:
-                if operation in ('new-window-attribution','new-window-attribution-detail'):
+                if profile == recent_backtest.RECENT and operation in ('new-window-attribution','new-window-attribution-detail'):
                     import new_window_attribution
                     if operation=='new-window-attribution':
                         interactive.request_params(url.query,())
@@ -187,7 +189,7 @@ class Handler(BaseHTTPRequestHandler):
                     else:
                         result=new_window_attribution.detail(interactive.request_params(url.query,('case',)))
                     body=interactive.encode(result)
-                elif operation in ('data-change','data-change-detail'):
+                elif profile == recent_backtest.RECENT and operation in ('data-change','data-change-detail'):
                     import data_change_report
                     if operation=='data-change':
                         interactive.request_params(url.query,())
@@ -198,10 +200,10 @@ class Handler(BaseHTTPRequestHandler):
                 elif operation in ('options','evidence'):
                     if url.query:
                         raise interactive.InputError('数据版本与证据入口不接受额外参数。')
-                    result = recent_backtest.options()
+                    result = recent_backtest.options(profile)
                     body = interactive.encode(result if operation=='options' else result['evidence'])
                 elif operation in recent_backtest.OPERATIONS:
-                    body = interactive.encode(recent_backtest.calculate(operation,recent_backtest.parameters(operation,url.query)))
+                    body = interactive.encode(recent_backtest.calculate(operation,recent_backtest.parameters(operation,url.query),profile))
                 else:
                     self.send_error(404)
                     return
@@ -210,12 +212,16 @@ class Handler(BaseHTTPRequestHandler):
             except (OSError,ValueError,KeyError,IndexError,ImportError) as exc:
                 self.log_error('Recent research unavailable: %s',exc)
                 status,body = 503,interactive.encode({'error':'近期数据证据核验未通过，未继续计算。'})
-        elif path == '/api/v2/market-data':
+        elif path in ('/api/v2/market-data','/api/v3/market-data'):
             kind = 'application/json'
             try:
                 from recent_market_data import inputs, THROUGH
                 view = json.loads(latest())
-                _,_,bars,_ = inputs()
+                if profile == recent_backtest.LATEST:
+                    from november_market_data import admitted, THROUGH
+                    _,_,bars,_ = admitted()[0]
+                else:
+                    _,_,bars,_ = inputs()
                 for symbol,values in bars.items():
                     existing = {row[0]:row for row in view['candles'][symbol]}
                     recent = {str(d):[str(d),float(b.open),float(b.high),float(b.low),float(b.close)] for d,b in values.items()}
@@ -227,7 +233,7 @@ class Handler(BaseHTTPRequestHandler):
                     coverage = view['coverage'][symbol]
                     coverage.update(quoteThrough=rows[-1][0],quotes=len(rows))
                     coverage['backtestWindows'][-1][1] = str(THROUGH)
-                view['researchDataVersion'] = recent_backtest.RECENT
+                view['researchDataVersion'] = profile
                 body = interactive.encode(view)
             except (OSError,ValueError,KeyError,IndexError) as exc:
                 self.log_error('Recent market data unavailable: %s',exc)

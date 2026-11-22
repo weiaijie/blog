@@ -48,7 +48,7 @@ def checked_sources():
     return records
 
 
-def review_notices(records):
+def review_notices(records, start=date(2026, 10, 26), through=THROUGH):
     def document(key, url):
         path, row = records[key]
         if row['url'] != url:
@@ -57,17 +57,19 @@ def review_notices(records):
 
     source, meta = records['catalog_513500']
     query = parse_qs(urlsplit(meta['url']).query)
-    if (query.get('SECURITY_CODE') != ['513500'] or query.get('START_DATE') != ['2026-10-26']
-            or query.get('END_DATE') != [str(THROUGH)]):
+    if (query.get('SECURITY_CODE') != ['513500'] or query.get('START_DATE') != [str(start)]
+            or query.get('END_DATE') != [str(through)]):
         raise ValueError('Wrong recent SSE catalog scope')
     payload = json.loads(source.read_bytes())
     catalog_rows(payload, '513500')
     source, meta = records['cninfo_159920']
     query = parse_qs(meta['post'])
     cn = json.loads(source.read_bytes())
+    if cn['announcements'] is None and cn['totalAnnouncement'] == 0:
+        cn['announcements'] = []
     if (meta['url'] != 'https://www.cninfo.com.cn/new/hisAnnouncement/query'
             or query.get('stock') != ['159920,jjjl0000031']
-            or query.get('seDate') != ['2026-10-26~2026-11-12'] or query.get('pageNum') != ['1']
+            or query.get('seDate') != [f'{start}~{through}'] or query.get('pageNum') != ['1']
             or cn['hasMore'] or len(cn['announcements']) != cn['totalAnnouncement']
             or len({r['announcementId'] for r in cn['announcements']}) != cn['totalAnnouncement']):
         raise ValueError('Incomplete CNINFO scope/pagination')
@@ -76,7 +78,7 @@ def review_notices(records):
         title, day = row['TITLE'], date.fromisoformat(row['SSEDATE'])
         key = f'notice_513500_{i:02}'
         text = document(key, 'https://www.sse.com.cn'+row['URL'])
-        if '513500' not in text or not date(2026,10,26) <= day <= THROUGH:
+        if '513500' not in text or not start <= day <= through:
             raise ValueError('Announcement identity/date conflict')
         if re.search('分红|收益分配|折算|分拆|拆分|份额合并|拆细|份额调整', title):
             raise ValueError('Unreviewed distribution or conversion')
@@ -97,7 +99,7 @@ def review_notices(records):
             kind = 'premium_warning'
         elif '第3季度报告' in title:
             kind = 'quarterly_report'
-        elif '新增华西证券为申购、赎回代办券商' in title:
+        elif any('新增'+broker+'为申购、赎回代办券商' in title and broker in text for broker in ('华西证券','华源证券')):
             kind = 'authorized_participant_added'
         if kind is None:
             raise ValueError('Unclassified official notice: '+title)
@@ -130,6 +132,8 @@ def review_notices(records):
     selected, _ = validate(meta, path.read_bytes())
     if selected != [r for r in all_rows if r['secCode'] == '513500']:
         raise ValueError('All-security and targeted suspension query differ')
+    selected = [r for r in selected if r['startStopDate'] >= start.strftime('%Y%m%d') or
+                not r['endStopDate'] or r['endStopDate'] >= start.strftime('%Y%m%d')]
     expected = {(date.fromisoformat(r['startStopDate'][:4]+'-'+r['startStopDate'][4:6]+'-'+r['startStopDate'][6:]),'513500') for r in selected}
     if (expected != halts or len(selected) != len(halts)
             or any(r['startStopDate'] != r['endStopDate'] or r['startStopType'] != 'LSTP' or r['stopTime'] != '915' for r in selected)
