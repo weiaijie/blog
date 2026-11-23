@@ -86,12 +86,12 @@ def new_maturities(days):
     return [(s[0],s[i],years) for s,ends in entry_schedule(days) for years,i in ends.items() if s[i]>work.END]
 
 
-def cross_book(scenario, start, end, relaxed=False):
+def cross_book(scenario, start, end, relaxed=False, *, prior_end=work.END, through=THROUGH):
     days,_,simulate=work.configured_replay(params(scenario,start,end))
     halts=simulate.keywords['halts']
     if relaxed:
         # Diagnostic only: all historical halts and every other constraint remain.
-        halts={x for x in halts if not (x[1]=='513500' and work.END<x[0]<=THROUGH)}
+        halts={x for x in halts if not (x[1]=='513500' and prior_end<x[0]<=through)}
     return simulate(days,halts=halts)
 
 
@@ -211,7 +211,10 @@ def report():
 
 
 def detail(query):
-    data=report()
+    return case_detail(query, report(), work.END, THROUGH)
+
+
+def case_detail(query, data, prior_end, through):
     if query['case'] not in data['cases']:raise work.InputError('未知的版本比较区间。')
     case=data['cases'][query['case']]
     scenario=CONTROL if case['scenario']==CONTROL['id'] else SCENARIOS[case['scenario']]
@@ -222,7 +225,7 @@ def detail(query):
         if scenario['group']!='domestic':
             base,_,bars,_=work.inputs()
             ledger,orders=cross_book(scenario,start,end)
-            relaxed,trades=cross_book(scenario,start,end,True)
+            relaxed,trades=cross_book(scenario,start,end,True,prior_end=prior_end,through=through)
             if ledger[-1]['equity']!=actual['frames'][-1]['equity']:raise ValueError('Replay and accounting differ')
             a=cumulative_ledger(ledger,orders,bars,base.dividends)
             b=cumulative_ledger(relaxed,trades,bars,base.dividends)

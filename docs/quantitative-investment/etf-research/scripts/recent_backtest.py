@@ -48,8 +48,10 @@ def options(profile=RECENT):
                   methodWindowsDefaults=dict(method_windows.DEFAULTS,end=str(end)),
                   technicalFactorsDefaults=dict(factor_lab.DEFAULTS,end=str(end)))
     if profile == LATEST:
-        for key in ('newWindowAttributionEndpoint','newWindowAttributionDetailEndpoint','dataChangeEndpoint','dataChangeDetailEndpoint'):
+        for key in ('newWindowAttributionEndpoint','newWindowAttributionDetailEndpoint'):
             result.pop(key)
+        result.update(dataChangeEndpoint="/api/v3/backtest/data-change",
+                      dataChangeDetailEndpoint="/api/v3/backtest/data-change-detail")
     for key, value in list(result.items()):
         if isinstance(value,str) and value.startswith('/api/v1/'):
             result[key] = value.replace('/api/v1/','/api/v3/' if profile == LATEST else '/api/v2/',1)

@@ -189,13 +189,16 @@ class Handler(BaseHTTPRequestHandler):
                     else:
                         result=new_window_attribution.detail(interactive.request_params(url.query,('case',)))
                     body=interactive.encode(result)
-                elif profile == recent_backtest.RECENT and operation in ('data-change','data-change-detail'):
-                    import data_change_report
+                elif operation in ('data-change','data-change-detail'):
+                    if profile == recent_backtest.LATEST:
+                        import november_change as comparison
+                    else:
+                        import data_change_report as comparison
                     if operation=='data-change':
                         interactive.request_params(url.query,())
-                        result=data_change_report.report()
+                        result=comparison.report()
                     else:
-                        result=data_change_report.detail(interactive.request_params(url.query,('case',)))
+                        result=comparison.detail(interactive.request_params(url.query,('case',)))
                     body=interactive.encode(result)
                 elif operation in ('options','evidence'):
                     if url.query:
