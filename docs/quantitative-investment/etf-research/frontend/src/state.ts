@@ -1,5 +1,5 @@
 import {reactive,ref} from 'vue';
-import {defaultPlan,parsePlan,type Plan,type Market,type Options} from './domain.ts';
+import {defaultPlan,latestApi,parsePlan,type Plan,type Market,type Options} from './domain.ts';
 export const plan=reactive<Plan>(parsePlan(defaultPlan));
 export const notice=ref('');
 export const market=ref<Market>();
@@ -13,7 +13,7 @@ export async function getJson<T>(url:string,signal?:AbortSignal):Promise<T>{
 }
 let bootstrap:Promise<void>|undefined;
 export function loadBase(force=false){if(force)bootstrap=undefined;return bootstrap??=(async()=>{
-  const results=await Promise.allSettled([getJson<Market>('/api/v3/market-data'),getJson<Options>('/api/v3/backtest/options')]);
+  const results=await Promise.allSettled([getJson<Market>(latestApi+'/market-data'),getJson<Options>(latestApi+'/backtest/options')]);
   if(results[0].status==='fulfilled')market.value=results[0].value;
   if(results[1].status==='fulfilled')options.value=results[1].value;
   const failures=results.filter(r=>r.status==='rejected');

@@ -1,5 +1,7 @@
 # 统一量化工作台
 
+2026-11-24 起，新建方案使用 11-23 核验版。数据版本选择、旧方案恢复和 Agent 接口详见[新版本验收记录](../reports/2026-11-24-admission/README.md)。
+
 2026-11-14新增[9个两年窗口归因](../reports/2026-11-14-new-window-attribution/README.md)：按相同起止配对多因子与一次建仓，逐日账户/ETF/分红/费用对账，全债阶段另列，4%门槛及固定成交成本加回诊断可查。新版路径/workbench/#/changes/attribution，Agent使用同一JSON；不修改策略，不把重叠窗口当独立成功概率。
 
 ## 目标与范围

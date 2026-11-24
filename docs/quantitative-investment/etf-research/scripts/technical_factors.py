@@ -3,7 +3,7 @@ from collections import defaultdict
 from datetime import date
 from decimal import Decimal as D
 from functools import lru_cache
-from research_profile import current, FROZEN, LATEST, profile_cache
+from research_profile import current, FROZEN, RECENT, data_module, profile_cache
 from pathlib import Path
 import hashlib
 import json
@@ -59,12 +59,11 @@ def admit_volume(sessions, bars, official, sina):
 
 @profile_cache(maxsize=2)
 def volume_inputs():
-    if current.get() == LATEST:
-        from november_market_data import admitted
-        return admitted()[2]
-    if current.get() != FROZEN:
+    if current.get() == RECENT:
         from recent_market_data import volumes
         return volumes()
+    if current.get() != FROZEN:
+        return data_module(current.get()).admitted()[2]
     from interactive_backtest import inputs
     base, _, bars, _ = inputs()
     snaps = ROOT/'data/snapshots'

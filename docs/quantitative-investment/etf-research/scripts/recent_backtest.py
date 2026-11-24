@@ -8,8 +8,7 @@ import interactive_backtest as work
 import model_replay
 import method_windows
 import factor_lab
-from research_profile import RECENT, LATEST, using
-from recent_market_data import THROUGH, admitted
+from research_profile import RECENT, LATEST, NOV23, API_VERSIONS, data_module, using
 
 REPORT = Path(__file__).resolve().parents[1]/'reports/2026-11-13-recent-data'
 DEFAULT_ARCHIVES = {
@@ -31,30 +30,30 @@ LATEST_ARCHIVES = {
 }
 
 
+NOV23_REPORT = REPORT.parent/'2026-11-24-admission'
+NOV23_ARCHIVES = {
+    'method-windows': ('default-methods.json', 'c2eeb580fdc045cea91096fd17d1322703b96d6b70553b608aaa54fbb94f3893'),
+    'technical-factors': ('default-technical.json', '31a73e50960ca989562ad5c58a9af291b7858e088635ef4745a84a0c73d77e6e'),
+}
+
+
 def options(profile=RECENT):
-    # Eager verification: a date picker must not advertise data that fails admission.
-    end = THROUGH
-    if profile == LATEST:
-        from november_market_data import admitted as latest, THROUGH as end
-        _, audit, _ = latest()
-    elif profile == RECENT:
-        _, audit = admitted()
-    else:
-        raise ValueError('Unknown data version')
-    result = dict(work.OPTIONS, last=str(end), dataVersion=profile,
-                  defaults=dict(work.DEFAULTS,end=str(end)), evidence=audit,
-                  newWindowAttributionEndpoint='/api/v2/backtest/new-window-attribution', newWindowAttributionDetailEndpoint='/api/v2/backtest/new-window-attribution-detail',
-                  dataChangeEndpoint='/api/v2/backtest/data-change', dataChangeDetailEndpoint='/api/v2/backtest/data-change-detail',
-                  methodWindowsDefaults=dict(method_windows.DEFAULTS,end=str(end)),
-                  technicalFactorsDefaults=dict(factor_lab.DEFAULTS,end=str(end)))
-    if profile == LATEST:
-        for key in ('newWindowAttributionEndpoint','newWindowAttributionDetailEndpoint'):
-            result.pop(key)
-        result.update(dataChangeEndpoint="/api/v3/backtest/data-change",
-                      dataChangeDetailEndpoint="/api/v3/backtest/data-change-detail")
+    provider = data_module(profile)
+    end = str(provider.THROUGH)
+    # Eager verification: the UI should only offer approved sessions.
+    result = dict(work.OPTIONS, last=end, dataVersion=profile, evidence=provider.admitted()[1],
+                  defaults=dict(work.DEFAULTS,end=end),
+                  methodWindowsDefaults=dict(method_windows.DEFAULTS,end=end),
+                  technicalFactorsDefaults=dict(factor_lab.DEFAULTS,end=end))
+    prefix = '/api/'+API_VERSIONS[profile]+'/backtest'
     for key, value in list(result.items()):
-        if isinstance(value,str) and value.startswith('/api/v1/'):
-            result[key] = value.replace('/api/v1/','/api/v3/' if profile == LATEST else '/api/v2/',1)
+        if isinstance(value,str) and value.startswith('/api/v1/backtest'):
+            result[key] = value.replace('/api/v1/backtest',prefix,1)
+    if profile in (RECENT, LATEST):
+        result.update(dataChangeEndpoint=prefix+'/data-change',dataChangeDetailEndpoint=prefix+'/data-change-detail')
+    if profile == RECENT:
+        result.update(newWindowAttributionEndpoint=prefix+'/new-window-attribution',
+                      newWindowAttributionDetailEndpoint=prefix+'/new-window-attribution-detail')
     return result
 
 
@@ -70,21 +69,22 @@ def parameters(operation, query):
 
 
 def calculate(operation, params, profile=RECENT):
-    archive, folder, end = DEFAULT_ARCHIVES, REPORT, THROUGH
-    if profile == LATEST:
-        from november_market_data import THROUGH as end, admitted as latest
-        latest()
-        archive, folder = LATEST_ARCHIVES, LATEST_REPORT
-    elif profile != RECENT:
-        raise ValueError('Unknown data version')
+    provider = data_module(profile)
+    end = provider.THROUGH
+    archive, folder = {
+        RECENT: (DEFAULT_ARCHIVES, REPORT),
+        LATEST: (LATEST_ARCHIVES, LATEST_REPORT),
+        NOV23: (NOV23_ARCHIVES, NOV23_REPORT),
+    }[profile]
+    if profile != RECENT:
+        provider.admitted()
     if operation not in OPERATIONS:
         raise work.InputError('不支持的研究操作。')
     defaults = {'method-windows':method_windows.DEFAULTS,'technical-factors':factor_lab.DEFAULTS}.get(operation)
     if operation in archive and defaults is not None and params == dict(defaults,end=str(end)):
-        from recent_market_data import volumes
         if profile == RECENT:
-            admitted()
-            volumes()
+            provider.admitted()
+            provider.volumes()
         name, expected = archive[operation]
         body = (folder/name).read_bytes()
         if hashlib.sha256(body).hexdigest() != expected:
@@ -103,7 +103,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--operation',required=True,choices=OPERATIONS)
     parser.add_argument('--params',required=True,help='JSON object; same string parameters as HTTP')
-    parser.add_argument('--profile',choices=(RECENT,LATEST),default=RECENT)
+    parser.add_argument('--profile',choices=API_VERSIONS,default=RECENT)
     args = parser.parse_args()
     params = json.loads(args.params)
     if not isinstance(params,dict) or any(not isinstance(v,str) for v in params.values()):

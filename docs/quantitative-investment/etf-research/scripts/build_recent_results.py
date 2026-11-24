@@ -7,15 +7,16 @@ import recent_backtest as api
 import method_windows
 import factor_lab
 from interactive_backtest import encode
-from research_profile import RECENT, LATEST, using
+from research_profile import RECENT, API_VERSIONS, data_module, using
 from recent_market_data import THROUGH, admitted, volumes
 
 
 def build(out, profile=RECENT):
     out.mkdir(parents=True,exist_ok=False)
-    if profile == LATEST:
-        from november_market_data import admitted as latest, THROUGH as end
-        _, audit, (_, volume_audit) = latest()
+    if profile != RECENT:
+        provider = data_module(profile)
+        end = provider.THROUGH
+        _, audit, (_, volume_audit) = provider.admitted()
     else:
         end, audit, volume_audit = THROUGH, admitted()[1], volumes()[1]
     (out/'admission.json').write_bytes(encode(audit))
@@ -38,6 +39,6 @@ def build(out, profile=RECENT):
 if __name__=='__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output',type=Path,required=True)
-    parser.add_argument('--profile',choices=[RECENT,LATEST],default=RECENT)
+    parser.add_argument('--profile',choices=API_VERSIONS,default=RECENT)
     args = parser.parse_args()
     build(args.output,args.profile)

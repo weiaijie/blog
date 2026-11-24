@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {ref} from 'vue';
-import {plan,savePlan,storedPlans,applyPlan,download,notice,options} from '../state';
-import {parsePlan,agentManifest,symbols,names,models,type Plan} from '../domain';
+import {plan,savePlan,storedPlans,applyPlan,download,notice} from '../state';
+import {parsePlan,agentManifest,datasets,symbols,names,models,type Plan} from '../domain';
 const emit=defineEmits<{done:[]}>();
 const error=ref(''),saved=ref<Plan[]>([]),selected=ref(''),link=ref('');
 function refresh(){try{saved.value=storedPlans();}catch(e){error.value=(e as Error).message;}}
@@ -27,10 +27,10 @@ function done(){attempt(()=>{parsePlan(plan);notice.value='研究设置已应用
   <p class="muted">本金、日期和费用由回测与比较共用。数据和模型约束仍由服务端核验。</p>
   <el-alert v-if="error" :title="error" type="error" :closable="false"/>
   <form class="settings-form" @submit.prevent="done">
-    <label>数据版本<select :value="plan.dataset" @change="changeDataset" name="dataset"><option value="verified-2026-11-20">近期核验版 · 截至2026-11-20</option><option value="verified-2026-11-12">历史核验版 · 截至2026-11-12</option><option value="frozen-2026-10-30">原冻结样本 · 截至2026-10-30</option></select></label>
+    <label>数据版本<select :value="plan.dataset" @change="changeDataset" name="dataset"><option v-for="(meta,key) in datasets" :key="key" :value="key">{{meta.label}} · 截至{{key.slice(-10)}}</option></select></label>
     <p class="muted">旧方案恢复时保留原样本。近期版按公告阻止停牌日开盘成交，不假设10:30补单；原历史报告与前瞻账户独立保留。</p>
     <label>方案名称<input v-model="plan.name" maxlength="80" name="plan-name" autocomplete="off"></label>
-    <div class="two-col"><label>开始日期<input v-model="plan.start" type="date" name="start"></label><label>结束日期<input v-model="plan.end" type="date" name="end" :max="plan.dataset==='frozen-2026-10-30'?'2026-10-30':plan.dataset==='verified-2026-11-12'?'2026-11-12':options?.last" ></label></div>
+    <div class="two-col"><label>开始日期<input v-model="plan.start" type="date" name="start"></label><label>结束日期<input v-model="plan.end" type="date" name="end" :max="plan.dataset.slice(-10)" ></label></div>
     <div class="two-col"><label>本金（元）<input v-model="plan.capital" type="number" min="1" max="1000000000" step="0.01" name="capital"></label><label>费用与滑点<select v-model="plan.fees" name="fees"><option value="low">低：万一 / 1bp</option><option value="base">基准：万三 / 5bp</option><option value="high">高：千一 / 10bp</option></select></label></div>
     <p class="muted">单边佣金最低5元；滑点单边计入，完整口径与旧版相同。</p>
     <label>固定配比与分批建仓后的调仓<select v-model="plan.rebalance" name="rebalance"><option value="hold">建仓后持有</option><option value="monthly">每月调回目标配比</option></select></label>

@@ -1,5 +1,7 @@
 # 自主接续入口
 
+11 月 23 日的四只 ETF 已准入独立回测版本，18 个前瞻账户完成第 13 个交易日。[11 月 24 日核验报告](reports/2026-11-24-admission/README.md)
+
 2026-11-23：[11月12日与20日版结果对比](reports/2026-11-23-six-session-change/README.md)覆盖七个模型、四组基准与132个新增到期结果。三次标普开盘停牌对满期结果影响为零，六笔未满期建仓拦单另列。看板入口为 `/workbench/#/changes/nov20`，Agent 使用 v3 对比接口。
 
 2026-11-22：[六日回测准入](reports/2026-11-22-admission/README.md)已将四只 ETF 的独立数据版本及 K 线延至 11-20；11-12、10-30 版可复现。前瞻至 11-20，18 户共 12 个交易日。
@@ -12,7 +14,7 @@
 
 ## 当前事实
 
-- [当前进度](docs/CURRENT_STATUS.md)集中维护完成与缺口；前瞻已至2026-11-20、18户12日；三个回测版本分别截至10-30、11-12和11-20。
+- [当前进度](docs/CURRENT_STATUS.md)集中维护完成与缺口；前瞻已至2026-11-23、18户13日；四个回测版本分别截至10-30、11-12、11-20和11-23。
 - [新版工作台](docs/WORKBENCH_PLAN.md)使用Vue/TypeScript/Vite，人工和Agent共用参数。服务根路径及/workbench/为新版，/market.html与/backtest.html保留旧入口。内网地址http://10.1.1.120:18766，未确认公网部署。
 - [321个ADX落后窗口](reports/2026-11-12-adx-shortfall/README.md)已逐窗对账。270个短空档窗口只覆盖两次实际事件；事后取消诊断不能作为可执行规则。
 - 多源行情、公告、日历、分红核验继续阻断不合格更新，不覆盖旧快照，不使用真实资金。
@@ -26,7 +28,7 @@
 ## 接手顺序
 
 1. 读取AGENTS、README、PROJECT_PLAN、DATA_SOURCES、docs/PLAN_ALIGNMENT、config/research.json、PROTOCOL_V1。核对远端和当前北京时间。
-2. 执行verify_snapshot.py与scripts/verify_project.py。最新静态清单为reports/2026-11-23-six-session-change/manifest.json；旧清单在相应提交验证。
+2. 执行verify_snapshot.py与scripts/verify_project.py。最新静态清单为reports/2026-11-24-admission/manifest.json；旧清单在相应提交验证。
 3. 核实三个用户定时器与site/health_status.json。静态Git文档不代表主机当前状态；未满252收益的风险指标留空，前瞻不借历史补齐。
 4. 前端改动先在隔离目录/端口验证，npm ci、npm test、npm run build；维护frontend源码与site/workbench构建产物、归档清单和静态清单。只构建不运行测试不能称验收完成。
 5. 研究下一步按PROJECT_PLAN执行：少量新规则先立协议、保留原版与失败区间。已观察历史不能重新标记成未见样本。

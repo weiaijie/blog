@@ -146,6 +146,9 @@ def latest():
         return payload((ROOT/'config/active_run.json').read_bytes())
 
 
+PROFILE_PATHS = {'/api/'+version: profile for profile,version in recent_backtest.API_VERSIONS.items()}
+
+
 CALCULATIONS = {'/api/v1/backtest/adx-shortfall': adx_shortfall.compare,
                 '/api/v1/backtest/adx-shortfall-detail': adx_shortfall.detail,
                 '/api/v1/backtest/adx-trades': adx_trades.compare,
@@ -175,9 +178,10 @@ class Handler(BaseHTTPRequestHandler):
         url = urlsplit(self.path)
         path = url.path
         status = 200
-        prefix = '/api/v3/backtest' if path.startswith('/api/v3/') else '/api/v2/backtest'
-        profile = recent_backtest.LATEST if prefix == '/api/v3/backtest' else recent_backtest.RECENT
-        if path == prefix or path.startswith(prefix+'/'):
+        namespace = '/'.join(path.split('/')[:3])
+        profile = PROFILE_PATHS.get(namespace)
+        prefix = namespace+'/backtest'
+        if profile and (path == prefix or path.startswith(prefix+'/')):
             kind = 'application/json'
             operation = path.removeprefix(prefix).removeprefix('/') or 'account'
             try:
@@ -189,7 +193,7 @@ class Handler(BaseHTTPRequestHandler):
                     else:
                         result=new_window_attribution.detail(interactive.request_params(url.query,('case',)))
                     body=interactive.encode(result)
-                elif operation in ('data-change','data-change-detail'):
+                elif profile in (recent_backtest.RECENT, recent_backtest.LATEST) and operation in ('data-change','data-change-detail'):
                     if profile == recent_backtest.LATEST:
                         import november_change as comparison
                     else:
@@ -215,16 +219,12 @@ class Handler(BaseHTTPRequestHandler):
             except (OSError,ValueError,KeyError,IndexError,ImportError) as exc:
                 self.log_error('Recent research unavailable: %s',exc)
                 status,body = 503,interactive.encode({'error':'近期数据证据核验未通过，未继续计算。'})
-        elif path in ('/api/v2/market-data','/api/v3/market-data'):
+        elif profile and path == namespace+'/market-data':
             kind = 'application/json'
             try:
-                from recent_market_data import inputs, THROUGH
+                provider = recent_backtest.data_module(profile)
                 view = json.loads(latest())
-                if profile == recent_backtest.LATEST:
-                    from november_market_data import admitted, THROUGH
-                    _,_,bars,_ = admitted()[0]
-                else:
-                    _,_,bars,_ = inputs()
+                _,_,bars,_ = provider.admitted()[0]
                 for symbol,values in bars.items():
                     existing = {row[0]:row for row in view['candles'][symbol]}
                     recent = {str(d):[str(d),float(b.open),float(b.high),float(b.low),float(b.close)] for d,b in values.items()}
@@ -235,7 +235,7 @@ class Handler(BaseHTTPRequestHandler):
                     view['candles'][symbol] = rows
                     coverage = view['coverage'][symbol]
                     coverage.update(quoteThrough=rows[-1][0],quotes=len(rows))
-                    coverage['backtestWindows'][-1][1] = str(THROUGH)
+                    coverage['backtestWindows'][-1][1] = str(provider.THROUGH)
                 view['researchDataVersion'] = profile
                 body = interactive.encode(view)
             except (OSError,ValueError,KeyError,IndexError) as exc:

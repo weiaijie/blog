@@ -1,5 +1,7 @@
 # 原计划与当前 ETF 系统对照
 
+11 月 23 日的四只 ETF 已准入独立回测版本，18 个前瞻账户完成第 13 个交易日。[11 月 24 日核验报告](../reports/2026-11-24-admission/README.md)
+
 2026-11-23：[11月12日与20日版结果对比](../reports/2026-11-23-six-session-change/README.md)覆盖七个模型、四组基准与132个新增到期结果。三次标普开盘停牌对满期结果影响为零，六笔未满期建仓拦单另列。看板入口为 `/workbench/#/changes/nov20`，Agent 使用 v3 对比接口。
 
 2026-11-14新增[9个两年窗口归因](../reports/2026-11-14-new-window-attribution/README.md)：按相同起止配对多因子与一次建仓，逐日账户/ETF/分红/费用对账，全债阶段另列，4%门槛及固定成交成本加回诊断可查。新版路径/workbench/#/changes/attribution，Agent使用同一JSON；不修改策略，不把重叠窗口当独立成功概率。
