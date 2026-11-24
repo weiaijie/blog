@@ -1,0 +1,38 @@
+{
+  "source_manifest_sha256": "b98bd3460cd92184ed2e789a35d7e145c0271cab66c9cf903c05ae37f29dcd73",
+  "symbols": {
+    "510300": {
+      "compared_days": 63,
+      "today": {
+        "open": "3.9970",
+        "high": "4.0450",
+        "low": "3.9760",
+        "close": "4.0230"
+      },
+      "source_snapshot_date": 20261123,
+      "source_snapshot_time": 162901,
+      "reported_phase": "E110    ",
+      "prev_close": "4.0180",
+      "up_limit": "4.4200",
+      "down_limit": "3.6160",
+      "ohlc_matches_admitted_sina_and_sohu": true
+    },
+    "511010": {
+      "compared_days": 63,
+      "today": {
+        "open": "141.3800",
+        "high": "141.4050",
+        "low": "141.3540",
+        "close": "141.4010"
+      },
+      "source_snapshot_date": 20261123,
+      "source_snapshot_time": 162901,
+      "reported_phase": "E110    ",
+      "prev_close": "141.4110",
+      "up_limit": "155.5520",
+      "down_limit": "127.2700",
+      "ohlc_matches_admitted_sina_and_sohu": true
+    }
+  },
+  "scope": "Third-source check of observed closing quotes; not proof of every intraday fill or historical ex-reference price."
+}
