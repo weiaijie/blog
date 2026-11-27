@@ -18,6 +18,7 @@ from seal_observation_decision import first_archive
 from etf_research.admission import completed_date, sessions_between
 from etf_research.evidence_archive import object_path
 from etf_research.exchange_calendar import calendar_at
+from etf_research.observation_slots import scheduled_slot, trigger_instant
 from etf_research.policy_events import TZ, instant
 from etf_research.publication import read
 
@@ -100,6 +101,26 @@ def source_fields(coverage, archived_at):
                         issues=market.get('issues',{}))))
 
 
+def attempt_evidence(record, sources):
+    trigger = record['trigger']
+    manager = trigger.get('managerTimer') if trigger else None
+    actual = trigger_instant(manager.get('lastTriggerUsec')) if manager else None
+    slot = scheduled_slot(record) if manager else None
+    state = ('manual' if trigger is None else 'manager_clock_unavailable' if manager is None else
+             'scheduled_slot_verified' if slot is not None else 'scheduled_slot_unverified')
+    gaps = None
+    if sources is not None:
+        required = [
+            ('policy',sources['policy'],'archived'),
+            *((symbol,fund,'verified_estimate') for symbol,fund in sources['etf'].items()),
+            *((name,value,'verified') for name,value in sources['market'].items()),
+        ]
+        gaps = [name for name,item,wanted in required if item['status']!=wanted]
+    return dict(timer=dict(state=state,plannedAt=slot.isoformat() if slot else None,
+                           recordedTriggerAt=actual.astimezone(TZ).isoformat() if actual else None),
+                missingSources=gaps)
+
+
 def view_attempt(receipt, record):
     view = dict(id=Path(receipt['attempt']).name,phase=receipt['phase'],
                 scheduled=receipt['trigger'] is not None,startedAt=record['startedAt'],
@@ -108,6 +129,7 @@ def view_attempt(receipt, record):
                 resultSha256=receipt['resultSha256'],
                 sources=source_fields(record['coverage'],receipt['archiveVerifiedAt']),
                 failedSources=sorted(record['errors']))
+    view['qualificationEvidence'] = attempt_evidence(record,view['sources'])
     if view['phase']=='complete' and view['scheduled'] and not view['qualified']:
         view['qualificationReason'] = 'scheduled_archive_not_eligible'
     return view

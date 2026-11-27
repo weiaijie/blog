@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-28T03:25:22.843168+08:00",
+  "asOf": "2026-11-27T18:56:15.760359+00:00",
+  "day": "2026-11-27",
+  "archivedAttempts": 12,
+  "latestManual": {
+    "id": "20261127T185612Z-23c82eeb",
+    "phase": "partial",
+    "archivedAt": "2026-11-27T18:56:15.760359+00:00",
+    "qualified": false,
+    "archiveSha256": "d10bc860babb7b106c346d2bdf3647499c4fcf152fce942a232d935597576d55",
+    "qualificationEvidence": {
+      "timer": {
+        "state": "manual",
+        "plannedAt": null,
+        "recordedTriggerAt": null
+      },
+      "missingSources": [
+        "margin"
+      ]
+    }
+  },
+  "latestScheduled": {
+    "id": "20261127T115450Z-c4c154d1",
+    "phase": "partial",
+    "archivedAt": "2026-11-27T11:54:54.077784+00:00",
+    "qualified": false,
+    "archiveSha256": "f1720ee003dbe33d7b6286245e5c0ecac3bd442eef31c946b9fca23660c6b746",
+    "qualificationEvidence": {
+      "timer": {
+        "state": "manager_clock_unavailable",
+        "plannedAt": null,
+        "recordedTriggerAt": null
+      },
+      "missingSources": [
+        "510300",
+        "511010",
+        "margin"
+      ]
+    }
+  },
+  "offlineReplayMatchesProduction": true,
+  "publicManifestDate": "2026-11-27T18:56:15.760359+00:00"
+}

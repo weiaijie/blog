@@ -17,6 +17,10 @@ type Attempt = {
   id:string; phase:string; scheduled:boolean; startedAt:string; archivedAt:string;
   archiveSha256:string; qualified:boolean; sources:Sources|null; failedSources:string[];
   qualificationReason?:'scheduled_archive_not_eligible';
+  qualificationEvidence?:{
+    timer:{state:string;plannedAt:string|null;recordedTriggerAt:string|null};
+    missingSources:string[]|null;
+  };
 };
 type DecisionClock = {scheduledAt:string|null; deadline:string|null};
 type TransportRecovery = {usedAttempt:string; retryAttempt:string; failedRequests:string[]; dependencyReadyAt:string[]};
@@ -212,6 +216,13 @@ const reason = (key:string) => {
   if (key.startsWith('nav_')) return '单位净值';
   if (key.startsWith('catalog_')) return '折算或币种口径';
   return ({margin:'相邻交易日两融汇总未齐',gov_list:'中国政府网索引',csrc_home:'证监会索引'} as Record<string,string>)[key];
+};
+const attemptTimerLabels:Record<string,string> = {
+  manager_clock_unavailable:'定时器时钟证据未取得',
+  scheduled_slot_unverified:'定时计划或启动时点未通过核验',
+};
+const attemptSourceLabels:Record<string,string> = {
+  policy:'政策原文','510300':'510300 份额净值','511010':'511010 份额净值',turnover:'沪市成交',margin:'沪市两融',
 };
 const missing = (source?:Source) => [...new Set(Object.entries(source?.issues ?? {})
   .map(([key,message])=>reason(key) ?? message))].join('、');
@@ -611,6 +622,15 @@ onBeforeUnmount(()=>{lifecycle.abort();detailRequest?.abort();});
               <span v-else-if="attempt.qualificationReason">未通过定时归档准入</span>
             </p>
             <p class="muted">开始 {{time(attempt.startedAt)}} · 归档 {{time(attempt.archivedAt)}}</p>
+            <p v-if="attempt.qualificationEvidence && (attempt.scheduled || attempt.qualificationEvidence.missingSources?.length)" class="muted">
+              <span v-if="attempt.qualificationEvidence.timer.plannedAt">已核验定时时点 {{time(attempt.qualificationEvidence.timer.plannedAt)}}</span>
+              <span v-else-if="attempt.scheduled">{{attemptTimerLabels[attempt.qualificationEvidence.timer.state]}}</span>
+              <span v-if="attempt.qualificationEvidence.timer.recordedTriggerAt && !attempt.qualificationEvidence.timer.plannedAt">
+                · 系统记录触发 {{time(attempt.qualificationEvidence.timer.recordedTriggerAt)}}</span>
+              <span v-if="attempt.scheduled && attempt.qualificationEvidence.missingSources?.length"> · </span>
+              <span v-if="attempt.qualificationEvidence.missingSources?.length">缺证来源
+                {{attempt.qualificationEvidence.missingSources.map(key=>attemptSourceLabels[key] ?? key).join('、')}}</span>
+            </p>
             <dl v-if="attempt.sources" class="attempt-sources">
               <div><dt>政策原文</dt><dd>{{label(attempt.sources.policy)}} · 候选 {{attempt.sources.policy.candidateCount ?? '未知'}} 条</dd></div>
               <div v-for="(fund,symbol) in attempt.sources.etf" :key="symbol"><dt>{{symbol}} 份额净值</dt>

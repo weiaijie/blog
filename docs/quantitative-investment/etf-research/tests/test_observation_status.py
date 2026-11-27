@@ -7,8 +7,9 @@ from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts'))
-from observation_status import report
+from observation_status import attempt_evidence, report
 from etf_research.evidence_archive import object_path
+from etf_research.observation_slots import CALENDAR, TIMER
 from etf_research.publication import read
 from pack_observation_evidence import restore_ledger
 
@@ -38,6 +39,31 @@ class ObservationStatusTests(unittest.TestCase):
         self.assertEqual(fields['market']['turnover']['cny'],'930379000000.00')
         self.assertEqual(fields['market']['margin']['status'],'unknown')
         self.assertIsNone(fields['etf']['511010']['featureReadyAt'])
+        evidence=detail['latest']['qualificationEvidence']
+        self.assertEqual(evidence['timer']['state'],'manager_clock_unavailable')
+        self.assertIn('margin',evidence['missingSources'])
+        self.assertIn('511010',evidence['missingSources'])
+
+    def test_verified_clock_and_data_gaps_are_independent(self):
+        planned=datetime.fromisoformat('2026-11-28T08:34:00+08:00')
+        trigger=dict(unit=TIMER,invocationId='a'*32,
+                     managerTimer=dict(calendar=sorted(CALENDAR),lastTriggerUsec=int(planned.timestamp()*1_000_000)),
+                     managerTimerCheckedAt=planned.isoformat(),managerTimerError=None)
+        result=dict(startedAt=(planned+timedelta(seconds=1)).isoformat(),trigger=trigger)
+        streams=dict(policy={'status':'archived'},etf={'510300':{'status':'verified_estimate'},
+                     '511010':{'status':'verified_estimate'}},
+                     market={'turnover':{'status':'verified'},'margin':{'status':'unknown'}})
+        verified=attempt_evidence(result,streams)
+        self.assertEqual(verified['timer']['state'],'scheduled_slot_verified')
+        self.assertEqual(verified['timer']['plannedAt'],planned.isoformat())
+        self.assertEqual(verified['missingSources'],['margin'])
+        late=attempt_evidence(dict(result,startedAt=(planned+timedelta(minutes=1)).isoformat()),streams)
+        self.assertEqual(late['timer']['state'],'scheduled_slot_unverified')
+        self.assertIsNone(late['timer']['plannedAt'])
+        self.assertEqual(late['timer']['recordedTriggerAt'],planned.isoformat())
+        manual=attempt_evidence(dict(result,trigger=None),None)
+        self.assertEqual(manual['timer']['state'],'manual')
+        self.assertIsNone(manual['missingSources'])
 
     def test_source_gaps_are_classified_from_archived_objects(self):
         day = '2026-11-27'
@@ -113,7 +139,7 @@ class ObservationStatusTests(unittest.TestCase):
         rec = dict(id='first',forwardEligible=True,session='2026-11-27',
                    archiveVerifiedAt=stamp,archive='a'*64,phase='complete',
                    trigger=None,attempt='x/first',resultSha256='b'*64)
-        body = dict(startedAt=stamp,finishedAt=stamp,coverage=None,errors={})
+        body = dict(startedAt=stamp,finishedAt=stamp,coverage=None,errors={},trigger=None)
         origin = dict(date='2026-12-01',archiveVerifiedAt=stamp,
                       receiptPath='reports/research-observation/archives/2026-11-27/first.json',
                       archiveSha256=rec['archive'])
