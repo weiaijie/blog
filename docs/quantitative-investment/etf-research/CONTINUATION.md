@@ -1,6 +1,6 @@
 # 自主接续入口
 
-当前长期任务见[12 个月前瞻计划](docs/LONG_TERM_RESEARCH.md)。继续接入政策和两只 ETF 的日级取证，使其与已试跑的沪市融资和成交共用准入记录。试跑期间的样本不作为前瞻起点。
+当前长期任务见[12 个月前瞻计划](docs/LONG_TERM_RESEARCH.md)。[政策、两只 ETF 与沪市同日覆盖](reports/2026-11-27-research-day-coverage/README.md)已完成实测和离线核验。接着建设独立调度、缺日补采和归档，并验实际触发。试跑样本不计入正式起算。
 
 工作台 `/workbench/#/policy` 和 Agent `/api/v1/research/policy-pilot` 可核对政策事件与首批官方市场样本。两事件缺历史收报及处理时间，历史时点查询保留空结果。[首期验收、口径与后续](reports/2026-11-27-policy-pilot/README.md)
 
@@ -36,7 +36,7 @@
 ## 接手顺序
 
 1. 读取AGENTS、README、PROJECT_PLAN、DATA_SOURCES、docs/PLAN_ALIGNMENT、config/research.json、PROTOCOL_V1。核对远端和当前北京时间。
-2. 执行verify_snapshot.py与scripts/verify_project.py。最新静态清单为reports/2026-11-27-long-study-start/manifest.json；旧清单在相应提交验证。
+2. 执行verify_snapshot.py与scripts/verify_project.py。最新静态清单为reports/2026-11-27-research-day-coverage/manifest.json；旧清单在相应提交验证。
 3. 核实三个用户定时器与site/health_status.json。静态Git文档不代表主机当前状态；未满252收益的风险指标留空，前瞻不借历史补齐。
 4. 前端改动先在隔离目录/端口验证，npm ci、npm test、npm run build；维护frontend源码与site/workbench构建产物、归档清单和静态清单。只构建不运行测试不能称验收完成。
 5. 研究下一步按PROJECT_PLAN执行：少量新规则先立协议、保留原版与失败区间。已观察历史不能重新标记成未见样本。

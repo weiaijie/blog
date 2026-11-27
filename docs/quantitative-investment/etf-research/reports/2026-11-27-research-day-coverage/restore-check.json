@@ -1,0 +1,17 @@
+{
+  "scope": "two-day source evidence and reproduction code",
+  "snapshot": "9dcc38c653aa2df4294045eefd7b480c03abe406032f948d4fb2c248c8f2a0dc",
+  "files": 210,
+  "restoredInNewDirectory": true,
+  "servicesActivated": false,
+  "outputs": [
+    {
+      "path": "reports/2026-11-27-research-day-coverage/2026-11-26.json",
+      "sha256": "3758796f94370e02366a6e9f3c8e81b5684f1b0657e71ddcfc0fdeef2bdecf7b"
+    },
+    {
+      "path": "reports/2026-11-27-research-day-coverage/2026-11-27.json",
+      "sha256": "f2b79c6b31e7d5f18b78dec25be17987fec25258d710aed8d6f814500482f24f"
+    }
+  ]
+}

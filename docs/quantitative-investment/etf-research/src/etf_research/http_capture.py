@@ -71,10 +71,10 @@ def capture_attempt(folder,name,url,policy):
     row.update(bytes=body.stat().st_size,sha256=hashlib.sha256(body.read_bytes()).hexdigest(),elapsed_seconds=round(time.monotonic()-started,3))
     return row
 
-def fetch(folder,name,url,policy=None,*,attempt_fn=capture_attempt,sleep=time.sleep):
+def fetch(folder,name,url,policy=None,*,attempt_fn=capture_attempt,sleep=time.sleep,additional_hosts=()):
     folder=Path(folder);policy=policy or load_policy();u=urlparse(url)
     if not re.fullmatch(r'[a-z0-9_]+',name):raise ValueError('Unsafe request name')
-    if u.scheme!='https' or u.hostname not in HOSTS or u.username or u.password:raise ValueError('Unsupported public-source URL')
+    if u.scheme!='https' or (u.hostname not in HOSTS and u.hostname not in additional_hosts) or u.username or u.password:raise ValueError('Unsupported public-source URL')
     # Reserve the canonical output before any request; never overwrite earlier evidence.
     with (folder/(name+'.body')).open('xb') as selected:
         attempts=[]

@@ -27,8 +27,8 @@ SHARES_QUERY = 'COMMON_SSE_ZQPZ_ETFZL_XXPL_ETFGM_SEARCH_L'
 D = Decimal
 
 
-def body(key):
-    return (SNAP/(key+'.body')).read_bytes()
+def body(key, snapshot=SNAP):
+    return (snapshot/(key+'.body')).read_bytes()
 
 
 def read_sources():
@@ -49,12 +49,12 @@ def read_sources():
     return sources
 
 
-def shares_for(day, sources):
+def shares_for(day, sources, snapshot=SNAP):
     key = 'shares_'+day.strftime('%Y%m%d')
     u = urlsplit(sources[key]['url'])
     if u.netloc != 'query.sse.com.cn' or parse_qs(u.query).get('STAT_DATE') != [str(day)]:
         raise ValueError('Wrong Shanghai clearing date')
-    data = json.loads(body(key))
+    data = json.loads(body(key, snapshot))
     p, rows = data['pageHelp'], data['result']
     if (data['sqlId'] != SHARES_QUERY or data.get('actionErrors') or data.get('fieldErrors')
             or p['pageNo'] != 1 or p['pageCount'] != int(bool(rows)) or p['data'] != rows
@@ -71,46 +71,55 @@ def shares_for(day, sources):
     return key, result, len(rows)
 
 
-def manager_nav(sessions, sources):
-    nav = {code:{} for code in SYMBOLS}
+def huatai_nav(sessions, sources, snapshot=SNAP):
+    nav = {}
     hkey = 'nav_510300'
     u = urlsplit(sources[hkey]['url'])
     if (u.netloc != 'www.huatai-pb.com' or parse_qs(u.query).get('fundcode') != ['510300']
             or not u.path.endswith('/getFundNetTableJson')):
         raise ValueError('Wrong manager or series')
-    data = json.loads(body(hkey)); rows = data['dataList']
+    data = json.loads(body(hkey, snapshot)); rows = data['dataList']
     if data['totalPage'] != 1 or data['totalCount'] != len(rows) or data['currentPage'] != 1:
         raise ValueError('Incomplete Huatai NAV history')
     for r in rows:
         d, v = date.fromisoformat(r['date']), D(r['netvalue'])
-        if (d not in sessions or d in nav['510300'] or r['fundcode'] != '510300'
+        if (d not in sessions or d in nav or r['fundcode'] != '510300'
                 or r['netprecision'] != 4 or not v.is_finite() or v <= 0):
             raise ValueError('Wrong Huatai valuation identity')
-        nav['510300'][d] = (v, hkey)
-    for prev, effective in zip(sessions, sessions[1:]):
-        stamp=effective.strftime('%Y%m%d')
-        key='nav_511010_'+stamp
-        xml=ET.fromstring(body(key))
-        if (sources[key]['url']!='https://m.gtfund.com/cochin/etf/download/511010/'+stamp
-                or xml.findtext('FundInstrumentID')!='511010' or xml.findtext('TradingDay')!=stamp
-                or xml.findtext('PreTradingDay')!=prev.strftime('%Y%m%d')):
-            raise ValueError('Guotai PCF valuation date or identity mismatch')
-        v=D(xml.findtext('NAV'))
-        basket=D(xml.findtext('NAVperCU')) / D(xml.findtext('CreationRedemptionUnit'))
-        if not v.is_finite() or v <= 0 or abs(basket-v)>D('.0005'):
-            raise ValueError('Guotai per-unit NAV differs from the creation basket')
-        nav['511010'][prev]=(v,key)
+        nav[d] = (v, hkey)
     return nav
 
 
-def conversion_basis(code, first, last, sources):
+def guotai_nav(previous, effective, sources, snapshot=SNAP):
+    stamp = effective.strftime('%Y%m%d')
+    key = 'nav_511010_' + stamp
+    xml = ET.fromstring(body(key, snapshot))
+    if (sources[key]['url'] != 'https://m.gtfund.com/cochin/etf/download/511010/' + stamp
+            or xml.findtext('FundInstrumentID') != '511010' or xml.findtext('TradingDay') != stamp
+            or xml.findtext('PreTradingDay') != previous.strftime('%Y%m%d')):
+        raise ValueError('Guotai PCF valuation date or identity mismatch')
+    v = D(xml.findtext('NAV'))
+    basket = D(xml.findtext('NAVperCU')) / D(xml.findtext('CreationRedemptionUnit'))
+    if not v.is_finite() or v <= 0 or abs(basket-v)>D('.0005'):
+        raise ValueError('Guotai per-unit NAV differs from the creation basket')
+    return v, key
+
+
+def manager_nav(sessions, sources):
+    return {
+        '510300': huatai_nav(sessions, sources),
+        '511010': {prev:guotai_nav(prev, effective, sources) for prev, effective in zip(sessions, sessions[1:])},
+    }
+
+
+def conversion_basis(code, first, last, sources, snapshot=SNAP, documents=SNAP):
     key='catalog_'+code
     url=urlsplit(sources[key]['url'])
     q=parse_qs(url.query)
     if (url.netloc!='query.sse.com.cn' or q.get('SECURITY_CODE') != [code]
             or q.get('START_DATE') != ['2012-01-01'] or q.get('END_DATE') != [str(last)]):
         raise ValueError('Incomplete corporate action scope')
-    notices=catalog_rows(json.loads(body(key)),code)
+    notices=catalog_rows(json.loads(body(key, snapshot)),code)
     effective=CONVERSION_DATES[code]
     matches=[(u,r) for u,r in notices.items() if CONVERSION_TITLES.search(r['TITLE'])]
     known = {'510300':{'2012-05-15'}, '511010':{'2013-02-27','2013-03-07'}}[code]
@@ -120,7 +129,7 @@ def conversion_basis(code, first, last, sources):
         path=urlsplit(sources[name]['url']).path
         if path not in notices or notices[path]['SECURITY_CODE'] != code:
             raise ValueError('Unlinked corporate action or currency document')
-        doc=PdfReader(SNAP/(name+'.body'))
+        doc=PdfReader(documents/(name+'.body'))
         text=''.join(''.join(p.extract_text() or '' for p in doc.pages).split())
         if literal not in text or (name.startswith('conversion_') and '折算' not in text):
             raise ValueError('Corporate action or currency not confirmed')
