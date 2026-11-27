@@ -1,0 +1,13 @@
+[Unit]
+Description=Seal an incremental package of independent ETF evidence
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/projects/etf-research-observation
+ExecStart=%h/projects/etf-research-py312/bin/python scripts/run_observation_export.py --run --archive-store %h/projects/etf-research-observation-archive --seed %h/projects/etf-research-git-snapshot/docs/quantitative-investment/etf-research/reports/2026-11-27-portable-observation/pack --seed-manifest-sha256 a9a3076a7140b7b67bd1d0bf0a22f654cd27924b13d557b7d716cfeb42beb22d --spool %h/projects/etf-research-observation-exports
+Environment=PYTHONPATH=src
+Environment=PYTHONDONTWRITEBYTECODE=1
+TimeoutStartSec=15min
+NoNewPrivileges=yes
+PrivateTmp=yes
+UMask=0022

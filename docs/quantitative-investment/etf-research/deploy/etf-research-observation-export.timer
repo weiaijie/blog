@@ -1,0 +1,11 @@
+[Unit]
+Description=Export immutable proof for the independent ETF study
+
+[Timer]
+OnCalendar=*-*-* 22:20:00 Asia/Shanghai
+Persistent=true
+AccuracySec=1s
+Unit=etf-research-observation-export.service
+
+[Install]
+WantedBy=timers.target
