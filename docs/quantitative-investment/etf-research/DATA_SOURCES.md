@@ -1,5 +1,7 @@
 # 数据源与证据
 
+[23:06 上交所两融复查](reports/2026-11-27-retry-evidence/README.md)保存两页明细与联查汇总。11 月 27 日仍缺。
+
 [22:57 上交所两融再查](reports/2026-11-27-forward-publication/README.md)保存当日两页空明细和仅返回 11 月 26 日的汇总，时间与原报文已封存。
 
 [22:41 上交所两融再查](reports/2026-11-27-observation-origin/README.md)只返回 11 月 26 日汇总和 11 月 27 日空明细。原始响应与校验值留存。

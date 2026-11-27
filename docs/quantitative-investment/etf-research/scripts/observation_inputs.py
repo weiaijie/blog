@@ -154,10 +154,15 @@ def assemble(project, observations, store, entry, observed, *, computed=None):
     for cell in cells.values():
         if cell is not None:
             cell['readyAt'] = complete.isoformat()
-    return dict(schemaVersion=1,runKind='validation',inputSealedForForecast=False,
-                entryDay=str(entry),anchorDay=str(anchor),observedAt=observed.isoformat(),
-                computedAt=complete.isoformat(),deadline=deadline.isoformat(),evidenceCutoff=ceiling.isoformat(),
-                lookbackSessions=list(map(str,dates)),cells=cells,gaps=gaps)
+    inputs = dict(schemaVersion=1,runKind='validation',inputSealedForForecast=False,
+                  entryDay=str(entry),anchorDay=str(anchor),observedAt=observed.isoformat(),
+                  computedAt=complete.isoformat(),deadline=deadline.isoformat(),evidenceCutoff=ceiling.isoformat(),
+                  lookbackSessions=list(map(str,dates)),cells=cells,gaps=gaps)
+    ignored = {str(day):attempt['ignoredEmptyAttempts'] for day,attempt in selected.items()
+               if 'ignoredEmptyAttempts' in attempt}
+    if ignored:
+        inputs['ignoredEmptyAttempts'] = ignored
+    return inputs
 
 
 if __name__=='__main__':

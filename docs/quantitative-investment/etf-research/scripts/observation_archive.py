@@ -15,13 +15,25 @@ def archive_for_day(root, store, day, ceiling, config):
         if when>ceiling:
             late += 1
             continue
-        timely.append((when,receipt_file))
+        timely.append((when,receipt_file,raw))
     if not timely:
         return None,'archive_not_ready' if late else 'archive_missing'
-    _, receipt_file = max(timely)
-    folder = source/'runs'/str(day)/receipt_file.stem
-    attempt = open_attempt(root,store,folder,config)
-    return (attempt,None) if attempt is not None else (None,'attempt_not_verified')
+    ignored = []
+    for when, receipt_file, receipt in sorted(timely,reverse=True):
+        folder = source/'runs'/str(day)/receipt_file.stem
+        attempt = open_attempt(root,store,folder,config)
+        if attempt is not None:
+            if ignored:
+                attempt['ignoredEmptyAttempts'] = ignored
+            return attempt,None
+        # The sealed inventory proves that this attempt carried no new source evidence.
+        if (receipt['phase'] not in ('failed','interrupted')
+                or set(read(folder/'manifest.json'))!={'started.json','result.json'}):
+            break
+        ignored.append(dict(attempt=receipt['attempt'],phase=receipt['phase'],
+                            archiveVerifiedAt=when.isoformat(),archiveSha256=receipt['archive'],
+                            receiptSha256=sha(receipt_file)))
+    return None,'attempt_not_verified'
 
 
 def open_attempt(root, store, folder, config):

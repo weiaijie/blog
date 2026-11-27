@@ -1,16 +1,19 @@
-from datetime import date
+from datetime import date, timedelta
 from pathlib import Path
+import shutil
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts'))
 
+import run_research_observation as observation
 from observation_inputs import archive_for_day, assemble
 from etf_research.observation_experiment import BASE, Window, availability
 from etf_research.policy_events import instant
-from etf_research.publication import read
+from etf_research.publication import create, read, seal, sha
 
 PROOF = ROOT/'reports/2026-11-27-observation-inputs'
 STORE = PROOF/'archive-proofs'
@@ -67,3 +70,60 @@ class ObservationInputTests(unittest.TestCase):
         self.assertIsNone(actual['cells']['turnover20'])
         self.assertEqual(actual['gaps']['stockShareFlow'],'archive_proof_invalid')
         self.assertIsNone(actual['cells']['policyActiveCount'])
+
+
+    def test_only_empty_failed_attempt_preserves_earlier_verified_inputs(self):
+        day = date(2026,11,26)
+        before = instant('2026-11-27T17:41:00+08:00')
+        later = before+timedelta(minutes=1)
+        with tempfile.TemporaryDirectory() as directory:
+            base = Path(directory)
+            root,store = base/'observations',base/'archive'
+            ledger = root/'reports/research-observation'
+            origin = ROOT/'reports/research-observation'
+            for branch in ('runs','archives'):
+                shutil.copytree(origin/branch/str(day),ledger/branch/str(day))
+            shutil.copytree(STORE/'snapshots',store/'snapshots')
+            config = read(ROOT/'config/research_observation.json')
+            create(root/'config/research_observation.json',config)
+
+            def add_failure(key, ready, *, raw=False, phase='failed'):
+                folder = ledger/'runs'/str(day)/key
+                record = dict(schemaVersion=1,date=str(day),startedAt=(ready-timedelta(seconds=2)).isoformat(),
+                              trigger=None)
+                create(folder/'started.json',record)
+                create(folder/'result.json',dict(record,phase=phase,errors={'collect':'interrupted'},
+                                                 finishedAt=(ready-timedelta(seconds=1)).isoformat(),coverage=None))
+                if raw:
+                    (folder/'source.body').write_bytes(b'partial official response')
+                seal(folder)
+
+                def files(path):
+                    return [child.relative_to(root).as_posix() for child in path.iterdir()]
+
+                with (patch.multiple(observation,ROOT=root,LOG=ledger,required_files=files),
+                      patch.object(observation,'now',return_value=ready),
+                      patch('etf_research.evidence_archive.datetime') as archive_clock):
+                    archive_clock.now.return_value = ready
+                    receipt = observation.archive_run(folder,store,config)
+                    return receipt,observation.receipt_path(folder),folder
+
+            original, issue = archive_for_day(root,store,day,before,config)
+            self.assertIsNone(issue)
+            receipt,path,folder = add_failure('empty-retry',later,phase='interrupted')
+            after, issue = archive_for_day(root,store,day,later,config)
+            self.assertIsNone(issue)
+            ignored = after.pop('ignoredEmptyAttempts')
+            self.assertEqual(after,original)
+            self.assertEqual(ignored,[dict(attempt=receipt['attempt'],phase='interrupted',
+                                            archiveVerifiedAt=later.isoformat(),archiveSha256=receipt['archive'],
+                                            receiptSha256=sha(path))])
+            inputs = assemble(ROOT,root,store,date(2026,11,30),later,computed=later)
+            self.assertEqual(inputs['ignoredEmptyAttempts'],{str(day):ignored})
+
+            with_response = later+timedelta(minutes=1)
+            add_failure('retry-with-response',with_response,raw=True)
+            self.assertEqual(archive_for_day(root,store,day,with_response,config),(None,'attempt_not_verified'))
+            (folder/'result.json').write_text('{}',encoding='utf-8')
+            with self.assertRaisesRegex(ValueError,'Archive receipt does not match'):
+                archive_for_day(root,store,day,later,config)
