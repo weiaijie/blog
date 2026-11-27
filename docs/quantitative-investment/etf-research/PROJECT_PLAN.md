@@ -1,6 +1,6 @@
 # 项目计划与当前状态
 
-[12 个月前瞻研究目标](docs/LONG_TERM_RESEARCH.md)的[独立定时采集](reports/2026-11-27-observation-launch/README.md)已实际触发和补采，覆盖看板与 Agent 待接入。首个合格归档日仍待形成。
+[12 个月前瞻研究](docs/LONG_TERM_RESEARCH.md)已接入独立采集、[覆盖看板和 Agent](reports/2026-11-27-observation-coverage-api/README.md)。下一步固化实验预登记并观察每日真实证据和首个合格归档。
 
 第 35–39、41 项已完成首批样本验证，详见[政策与市场数据首期验收](reports/2026-11-27-policy-pilot/README.md)。两条官方政策事件可做按时点准入核对，ETF 份额净值和沪市融资成交已有首批只读样本。接下来补连续取证、历史可用时间和市场广度，达到可比条件再验证第 40 项。第 42 项单独评估。
 

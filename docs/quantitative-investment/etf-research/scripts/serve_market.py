@@ -181,7 +181,25 @@ class Handler(BaseHTTPRequestHandler):
         namespace = '/'.join(path.split('/')[:3])
         profile = PROFILE_PATHS.get(namespace)
         prefix = namespace+'/backtest'
-        if path in ('/api/v1/research/policy-pilot','/api/v1/research/policy-pilot/as-of'):
+        if path == '/api/v1/research/observation':
+            kind = 'application/json'
+            try:
+                import observation_status
+                params = interactive.request_params(url.query, (), ('day', 'before'))
+                if len(params) > 1:
+                    raise interactive.InputError('请选择交易日查询或向前翻页。')
+                try:
+                    for value in params.values():
+                        observation_status.parse_day(value)
+                except ValueError as exc:
+                    raise interactive.InputError(str(exc)) from exc
+                body = interactive.encode(observation_status.report(*observation_status.production_paths(), **params))
+            except interactive.InputError as exc:
+                status,body = 400,interactive.encode({'error':str(exc)})
+            except (OSError,ValueError,KeyError,TypeError,ImportError) as exc:
+                self.log_error('Observation status unavailable: %s',exc)
+                status,body = 503,interactive.encode({'error':'独立采集状态暂无法核验。'})
+        elif path in ('/api/v1/research/policy-pilot','/api/v1/research/policy-pilot/as-of'):
             kind = 'application/json'
             try:
                 import policy_pilot

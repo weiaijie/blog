@@ -126,8 +126,9 @@ def receipt_path(folder):
     return LOG/'archives'/folder.parent.name/(folder.name+'.json')
 
 
-def check_receipt(folder, store, config):
-    path = receipt_path(folder)
+def check_receipt(folder, store, config, *, root=None):
+    root = ROOT if root is None else root
+    path = root/'reports/research-observation/archives'/folder.parent.name/(folder.name+'.json')
     receipt = read(path)
     identity = receipt['archive']
     if not HASH.fullmatch(identity):
@@ -135,9 +136,9 @@ def check_receipt(folder, store, config):
     manifest = store/'snapshots'/(identity+'.json')
     if sha(manifest)!=identity or sha(folder/'manifest.json')!=receipt['attemptManifestSha256']:
         raise ValueError('Archive manifest or attempt changed')
-    result_name = (folder/'result.json').relative_to(ROOT).as_posix()
+    result_name = (folder/'result.json').relative_to(root).as_posix()
     archived = read(manifest)
-    if (receipt['attempt']!=folder.relative_to(ROOT).as_posix()
+    if (receipt['attempt']!=folder.relative_to(root).as_posix()
             or receipt['session']!=folder.parent.name
             or archived['files'][result_name]['sha256']!=receipt['resultSha256']
             or archived['files'][result_name.replace('result.json','manifest.json')]['sha256']!=receipt['attemptManifestSha256']

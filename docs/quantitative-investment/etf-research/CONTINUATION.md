@@ -1,6 +1,6 @@
 # 自主接续入口
 
-[12 个月前瞻计划](docs/LONG_TERM_RESEARCH.md)的独立采集定时器已启用，并在 Ubuntu 触发及补采验收。11 月 27 日两次取证均部分通过，尚无首个合格归档日。[调度、原始证据和恢复验收](reports/2026-11-27-observation-launch/README.md)。接着接通覆盖看板和 Agent，并核实后续触发和缺口。
+[12 个月前瞻计划](docs/LONG_TERM_RESEARCH.md)的独立采集与[覆盖看板、Agent 查询](reports/2026-11-27-observation-coverage-api/README.md)已接通。以归档实际状态核定首个合格日。接下来预登记模型输入、五日标签、样本切分、费用和判定规则，并持续核实定时触发和缺口。
 
 工作台 `/workbench/#/policy` 和 Agent `/api/v1/research/policy-pilot` 可核对政策事件与首批官方市场样本。两事件缺历史收报及处理时间，历史时点查询保留空结果。[首期验收、口径与后续](reports/2026-11-27-policy-pilot/README.md)
 
@@ -36,7 +36,7 @@
 ## 接手顺序
 
 1. 读取AGENTS、README、PROJECT_PLAN、DATA_SOURCES、docs/PLAN_ALIGNMENT、config/research.json、PROTOCOL_V1。核对远端和当前北京时间。
-2. 执行verify_snapshot.py与scripts/verify_project.py。最新静态清单为reports/2026-11-27-observation-launch/manifest.json；旧清单在相应提交验证。
+2. 执行verify_snapshot.py与scripts/verify_project.py。最新静态清单为reports/2026-11-27-observation-coverage-api/manifest.json；旧清单在相应提交验证。
 3. 核实三个用户定时器与site/health_status.json。静态Git文档不代表主机当前状态；未满252收益的风险指标留空，前瞻不借历史补齐。
 4. 前端改动先在隔离目录/端口验证，npm ci、npm test、npm run build；维护frontend源码与site/workbench构建产物、归档清单和静态清单。只构建不运行测试不能称验收完成。
 5. 研究下一步按PROJECT_PLAN执行：少量新规则先立协议、保留原版与失败区间。已观察历史不能重新标记成未见样本。
