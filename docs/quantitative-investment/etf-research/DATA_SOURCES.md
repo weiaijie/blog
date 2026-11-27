@@ -1,5 +1,7 @@
 # 数据源与证据
 
+[22:23 清算份额补齐与两融下载对照](reports/2026-11-27-cleared-shares/README.md)已封存。11 月 27 日份额与单位净值可核验，两融继续保留未知。
+
 [两融报送截止前后取证](reports/2026-11-27-after-filing/README.md)记录国债 ETF 单位净值首次有效收报、官方申赎清单对照与按时点回看。
 
 [政策待审队列](reports/2026-11-27-policy-queue/README.md)按官方 URL 和原文 SHA256 识别重复与修订，保留审核前后的真实时点。

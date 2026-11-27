@@ -1,0 +1,30 @@
+{
+  "archiveSha256": "ad2e807dd76ea96dc62364198051b0d970537db0f3926c144ef3219953c1e02d",
+  "valuationOn": "2026-11-27",
+  "previousDate": "2026-11-26",
+  "archiveVerifiedAt": "2026-11-27T14:23:51.063656+00:00",
+  "manualProbe": true,
+  "qualified": false,
+  "funds": [
+    {
+      "symbol": "510300",
+      "previousShares": "56102887700.00",
+      "totalShares": "57637387700.00",
+      "changeShares": "1534500000.00",
+      "previousUnitNav": "3.9741",
+      "unitNav": "4.1397",
+      "estimatedNetSubscriptionCny": "6352369650.000000",
+      "featureReadyAt": "2026-11-27T14:23:48.890703+00:00"
+    },
+    {
+      "symbol": "511010",
+      "previousShares": "71966300.00",
+      "totalShares": "71786300.00",
+      "changeShares": "-180000.00",
+      "previousUnitNav": "141.371",
+      "unitNav": "141.339",
+      "estimatedNetSubscriptionCny": "-25441020.00000",
+      "featureReadyAt": "2026-11-27T14:23:48.890703+00:00"
+    }
+  ]
+}

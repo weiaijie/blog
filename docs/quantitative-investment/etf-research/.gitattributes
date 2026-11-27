@@ -81,3 +81,6 @@ reports/*-portable-observation/pack/archive/objects/** -diff
 
 reports/2026-11-27-after-filing/pack/** -text -whitespace
 reports/2026-11-27-after-filing/pack/archive/objects/** -diff
+
+reports/2026-11-27-cleared-shares/pack/** -text -whitespace
+reports/2026-11-27-cleared-shares/pack/archive/objects/** -diff

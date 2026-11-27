@@ -1,0 +1,114 @@
+[
+  {
+    "name": "margin_overview_20261126",
+    "url": "https://www.sse.com.cn/market/dealingdata/overview/margin/a/rzrqjygk20261126.xls",
+    "requested_at_utc": "2026-11-27T14:25:33.444713+00:00",
+    "status": 200,
+    "curl_exit": 0,
+    "final_url": "https://www.sse.com.cn/market/dealingdata/overview/margin/a/rzrqjygk20261126.xls",
+    "content_type": "application/vnd.ms-excel",
+    "address_family": "ipv4",
+    "certificate_verification_enabled": true,
+    "client_version": "curl 8.18.0 (x86_64-pc-linux-gnu) libcurl/8.18.0 OpenSSL/3.5.5 zlib/1.3.1 brotli/1.2.0 zstd/1.5.7 libidn2/2.3.8 libpsl/0.21.2 libssh2/1.11.1 nghttp2/1.68.0 librtmp/2.3 mit-krb5/1.22.1 OpenLDAP/2.6.10",
+    "metrics": {
+      "remote_ip": "202.122.113.73",
+      "http_version": "1.1",
+      "ssl_verify_result": 0,
+      "time_connect": 0.010774,
+      "time_appconnect": 0.02635,
+      "time_starttransfer": 0.256102,
+      "time_total": 0.280417
+    },
+    "bytes": 483840,
+    "sha256": "26573d1ed31921e675350e6e663259035ac5a72ad98e177bf6378e28ef4e1c5c",
+    "elapsed_seconds": 0.294,
+    "retry_delay_seconds": null,
+    "selected_attempt": "margin_overview_20261126_attempt_01",
+    "attempts": [
+      {
+        "name": "margin_overview_20261126_attempt_01",
+        "url": "https://www.sse.com.cn/market/dealingdata/overview/margin/a/rzrqjygk20261126.xls",
+        "requested_at_utc": "2026-11-27T14:25:33.444713+00:00",
+        "status": 200,
+        "curl_exit": 0,
+        "final_url": "https://www.sse.com.cn/market/dealingdata/overview/margin/a/rzrqjygk20261126.xls",
+        "content_type": "application/vnd.ms-excel",
+        "address_family": "ipv4",
+        "certificate_verification_enabled": true,
+        "client_version": "curl 8.18.0 (x86_64-pc-linux-gnu) libcurl/8.18.0 OpenSSL/3.5.5 zlib/1.3.1 brotli/1.2.0 zstd/1.5.7 libidn2/2.3.8 libpsl/0.21.2 libssh2/1.11.1 nghttp2/1.68.0 librtmp/2.3 mit-krb5/1.22.1 OpenLDAP/2.6.10",
+        "metrics": {
+          "remote_ip": "202.122.113.73",
+          "http_version": "1.1",
+          "ssl_verify_result": 0,
+          "time_connect": 0.010774,
+          "time_appconnect": 0.02635,
+          "time_starttransfer": 0.256102,
+          "time_total": 0.280417
+        },
+        "bytes": 483840,
+        "sha256": "26573d1ed31921e675350e6e663259035ac5a72ad98e177bf6378e28ef4e1c5c",
+        "elapsed_seconds": 0.294,
+        "retry_delay_seconds": null
+      }
+    ],
+    "actual_requests": 1,
+    "receivedAt": "2026-11-27T14:25:33.738716+00:00"
+  },
+  {
+    "name": "margin_overview_20261127",
+    "url": "https://www.sse.com.cn/market/dealingdata/overview/margin/a/rzrqjygk20261127.xls",
+    "requested_at_utc": "2026-11-27T14:25:33.444503+00:00",
+    "status": 404,
+    "curl_exit": 0,
+    "final_url": "https://www.sse.com.cn/market/dealingdata/overview/margin/a/rzrqjygk20261127.xls",
+    "content_type": "text/html",
+    "address_family": "ipv4",
+    "certificate_verification_enabled": true,
+    "client_version": "curl 8.18.0 (x86_64-pc-linux-gnu) libcurl/8.18.0 OpenSSL/3.5.5 zlib/1.3.1 brotli/1.2.0 zstd/1.5.7 libidn2/2.3.8 libpsl/0.21.2 libssh2/1.11.1 nghttp2/1.68.0 librtmp/2.3 mit-krb5/1.22.1 OpenLDAP/2.6.10",
+    "metrics": {
+      "remote_ip": "202.122.113.73",
+      "http_version": "1.1",
+      "ssl_verify_result": 0,
+      "time_connect": 0.010815,
+      "time_appconnect": 0.02703,
+      "time_starttransfer": 0.246196,
+      "time_total": 0.246331
+    },
+    "error": "HTTP 404",
+    "bytes": 150,
+    "sha256": "d03c9c9c5fef19b7e84125dd79b77167d00e1df5f56da4818992e23e67360bbb",
+    "elapsed_seconds": 0.258,
+    "retry_delay_seconds": null,
+    "selected_attempt": "margin_overview_20261127_attempt_01",
+    "attempts": [
+      {
+        "name": "margin_overview_20261127_attempt_01",
+        "url": "https://www.sse.com.cn/market/dealingdata/overview/margin/a/rzrqjygk20261127.xls",
+        "requested_at_utc": "2026-11-27T14:25:33.444503+00:00",
+        "status": 404,
+        "curl_exit": 0,
+        "final_url": "https://www.sse.com.cn/market/dealingdata/overview/margin/a/rzrqjygk20261127.xls",
+        "content_type": "text/html",
+        "address_family": "ipv4",
+        "certificate_verification_enabled": true,
+        "client_version": "curl 8.18.0 (x86_64-pc-linux-gnu) libcurl/8.18.0 OpenSSL/3.5.5 zlib/1.3.1 brotli/1.2.0 zstd/1.5.7 libidn2/2.3.8 libpsl/0.21.2 libssh2/1.11.1 nghttp2/1.68.0 librtmp/2.3 mit-krb5/1.22.1 OpenLDAP/2.6.10",
+        "metrics": {
+          "remote_ip": "202.122.113.73",
+          "http_version": "1.1",
+          "ssl_verify_result": 0,
+          "time_connect": 0.010815,
+          "time_appconnect": 0.02703,
+          "time_starttransfer": 0.246196,
+          "time_total": 0.246331
+        },
+        "error": "HTTP 404",
+        "bytes": 150,
+        "sha256": "d03c9c9c5fef19b7e84125dd79b77167d00e1df5f56da4818992e23e67360bbb",
+        "elapsed_seconds": 0.258,
+        "retry_delay_seconds": null
+      }
+    ],
+    "actual_requests": 1,
+    "receivedAt": "2026-11-27T14:25:33.702586+00:00"
+  }
+]

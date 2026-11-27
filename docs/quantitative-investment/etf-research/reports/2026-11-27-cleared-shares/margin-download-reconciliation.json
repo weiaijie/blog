@@ -1,0 +1,12 @@
+{
+  "date": "2026-11-26",
+  "jsonArchiveSha256": "087b1492e77ab8721b55bfbda631293729ca09b4595ef3a5c9c3a77bf8052936",
+  "workbookSha256": "26573d1ed31921e675350e6e663259035ac5a72ad98e177bf6378e28ef4e1c5c",
+  "workbookReceivedAt": "2026-11-27T14:25:33.738716+00:00",
+  "securityRows": 2019,
+  "matchingSummaryFields": 6,
+  "matchingDetailFields": 12114,
+  "detailRepaymentCny": 61675320065,
+  "marketRepaymentCny": 61724016978,
+  "detailMinusMarketRepaymentCny": -48696913
+}
