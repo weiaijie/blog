@@ -16,7 +16,7 @@ from etf_research.admission import completed_date, sessions_between
 from etf_research.evidence_archive import capture, verify as verify_archive
 from etf_research.exchange_calendar import calendar_at
 from etf_research.observation_slots import (
-    OBSERVATION_LOG, ORIGIN_RECEIPT, TIMER, origin_source, scheduled_slot, with_manager_clock,
+    OBSERVATION_LOG, ORIGIN_RECEIPT, RETRY_TIME, TIMER, origin_source, scheduled_slot, with_manager_clock,
 )
 from etf_research.policy_events import TZ, instant
 from etf_research.publication import atomic, create, encoded, inside, lock, read, seal, sha, verify_bundle
@@ -45,11 +45,13 @@ def systemd_trigger(env):
                 timerRealtimeUsec=int(triggered_at) if triggered_at.isdecimal() else None)
 
 
-def plan_days(expected, counts, qualified, recovery_limit):
+def plan_days(expected, counts, qualified, recovery_limit, *, retry_only=False):
     if not expected:
         return ()
     # Each timer invocation also polls policy sources after the session qualifies.
     newest = expected[-1]
+    if retry_only:
+        return () if newest in qualified else (newest,)
     pending = (day for day in expected[:-1] if day not in qualified)
     repairs = sorted(pending, key=lambda day: (counts[day], day))[:recovery_limit]
     return (newest,*repairs)
@@ -281,6 +283,7 @@ def run(store, config, explicit_day):
         raise ValueError('Scheduled acquisition requires the independent systemd timer trigger')
     if trigger is not None:
         trigger = with_manager_clock(trigger)
+    retry_only = now().astimezone(TZ).time().replace(second=0,microsecond=0)==RETRY_TIME
     with lock(ROOT/'.runtime/research-observation.lock'):
         receipts,_ = ledger(store,config,repair=True)
         if explicit_day is not None:
@@ -290,7 +293,7 @@ def run(store, config, explicit_day):
             expected = schedule(date.fromisoformat(config['observationEarliestDate']),completed_date(now()))
             counts = Counter(date.fromisoformat(r['session']) for r in receipts if r['trigger'])
             qualified = {date.fromisoformat(r['session']) for r in receipts if r['forwardEligible']}
-            days = plan_days(expected,counts,qualified,config['maxRecoveriesPerTrigger'])
+            days = plan_days(expected,counts,qualified,config['maxRecoveriesPerTrigger'],retry_only=retry_only)
         outcomes = [archive_run(attempt(day,trigger),store,config) for day in days]
         pin_origin(store,config)
         return dict(trigger=trigger,attempts=outcomes,progress=progress(store,config))

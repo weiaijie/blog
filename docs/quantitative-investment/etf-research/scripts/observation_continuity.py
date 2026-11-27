@@ -9,7 +9,7 @@ from observation_policy_inputs import expected_slots
 from observation_status import archive_index, expected_days, parse_day, production_paths, view_attempt
 from etf_research.admission import completed_date
 from etf_research.observation_decision_receipt import deadline
-from etf_research.observation_slots import POLL_TIMES, scheduled_slot
+from etf_research.observation_slots import POLL_TIMES, RETRY_TIME, scheduled_slot
 from etf_research.policy_events import TZ, instant
 from etf_research.publication import read
 
@@ -50,7 +50,9 @@ def session_row(day, next_day, records, issues, observed):
     cutoff=deadline(next_day) if next_day is not None else None
     first_poll=datetime.combine(day,POLL_TIMES[-1],TZ)
     expected=expected_slots(datetime.combine(day,time(16),TZ),cutoff) if cutoff else [first_poll]
-    slots=[slot_status(slot,records,observed) for slot in expected]
+    optional = {when for _,record in records if (when := scheduled_slot(record)) is not None
+                and when.time()==RETRY_TIME and first_poll<=when<=min(cutoff or observed,observed)}
+    slots=[slot_status(slot,records,observed) for slot in sorted([*expected,*optional])]
     attempts=[view_attempt(receipt,record) for receipt,record in records if receipt['trigger'] is not None]
     manual_count=len(records)-len(attempts)
     qualified=[attempt for attempt in attempts if attempt['qualified']]

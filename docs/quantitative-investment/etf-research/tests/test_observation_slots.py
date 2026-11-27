@@ -3,7 +3,7 @@ from pathlib import Path
 import unittest
 from unittest.mock import patch
 
-from etf_research.observation_slots import CALENDAR, TIMER, manager_clock, scheduled_slot, with_manager_clock
+from etf_research.observation_slots import CALENDAR, POLL_TIMES, TIMER, manager_clock, scheduled_slot, with_manager_clock
 from etf_research.policy_events import instant
 
 SLOT = instant('2026-11-27T19:40:00+08:00')
@@ -33,10 +33,11 @@ class ObservationSlotTests(unittest.TestCase):
                                  managerTimer=None,managerTimerError='ValueError')
         self.assertIsNone(scheduled_slot(dict(attempt,trigger=no_current_proof)))
 
-    def test_manager_requires_pure_calendar_schedule_and_records_both_slots(self):
+    def test_manager_requires_pure_calendar_schedule_and_records_each_slot(self):
         properties = {
             'TimersMonotonic':['a(stt)','0'],
-            'TimersCalendar':['a(sst)','2','OnCalendar',CALENDAR[1],'1','OnCalendar',CALENDAR[0],'2'],
+            'TimersCalendar':['a(sst)',str(len(CALENDAR)),
+                              *(item for slot in reversed(CALENDAR) for item in ('OnCalendar',slot,'1'))],
             'LastTriggerUSec':['t','1795779600000000'],
         }
 
@@ -51,6 +52,24 @@ class ObservationSlotTests(unittest.TestCase):
         properties['TimersMonotonic'] = ['a(stt)','1','OnActiveUSec','45000000','10']
         with self.assertRaisesRegex(ValueError,'exclusively calendar'):
             manager_clock(TIMER,run_query=reply)
+
+    def test_optional_retry_requires_the_new_systemd_calendar_and_preserves_old_slots(self):
+        old = sorted(f'*-*-* {clock.isoformat()} Asia/Shanghai' for clock in POLL_TIMES)
+
+        def attempt(at, calendar):
+            clock = instant(at)
+            trigger = dict(unit=TIMER,invocationId='a'*32,
+                           managerTimer=dict(calendar=calendar,lastTriggerUsec=int(clock.timestamp()*1_000_000)),
+                           managerTimerError=None,managerTimerCheckedAt=clock.isoformat())
+            return dict(startedAt=(clock+timedelta(seconds=1)).isoformat(),trigger=trigger)
+
+        original='2026-11-27T08:25:00+08:00'
+        self.assertEqual(scheduled_slot(attempt(original,old)),instant(original))
+        retry='2026-11-28T08:34:00+08:00'
+        self.assertIsNone(scheduled_slot(attempt(retry,old)))
+        self.assertEqual(scheduled_slot(attempt(retry,sorted(CALENDAR))),instant(retry))
+        late=attempt('2026-11-28T08:35:00+08:00',sorted(CALENDAR))
+        self.assertIsNone(scheduled_slot(late))
 
     def test_released_timer_has_no_startup_relative_trigger(self):
         source = Path(__file__).resolve().parents[1]/'deploy'/TIMER

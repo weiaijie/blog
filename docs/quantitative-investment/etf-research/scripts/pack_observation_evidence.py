@@ -162,6 +162,7 @@ def export(root, store, pack, cutoff, after=None):
 
 
 def verify(pack):
+    pack = Path(pack).resolve()
     verify_bundle(pack)
     index=read(pack/'index.json')
     if index['schemaVersion']!=1:

@@ -11,8 +11,11 @@ ORIGIN_RECEIPT = OBSERVATION_LOG+'/origin.json'
 TIMER = 'etf-research-observation.timer'
 
 
+# Required policy polls remain stable. The added slot is an optional recovery.
 POLL_TIMES = (time(8,25),time(19,40))
-CALENDAR = tuple(f'*-*-* {clock.isoformat()} Asia/Shanghai' for clock in POLL_TIMES)
+RETRY_TIME = time(8,34)
+TIMER_TIMES = (POLL_TIMES[0],RETRY_TIME,POLL_TIMES[1])
+CALENDAR = tuple(f'*-*-* {clock.isoformat()} Asia/Shanghai' for clock in TIMER_TIMES)
 BUS = 'org.freedesktop.systemd1'
 MANAGER = '/org/freedesktop/systemd1'
 TIMER_INTERFACE = BUS+'.Timer'
@@ -91,12 +94,15 @@ def scheduled_slot(attempt):
     if not trigger or trigger['unit']!=TIMER:
         return None
     started = instant(attempt['startedAt'])
-    activated = (manager_activation(trigger,TIMER,POLL_TIMES,started) if 'managerTimer' in trigger
-                 else trigger_instant(trigger.get('timerRealtimeUsec')))
-    if activated is None:
-        return None
-    local = activated.astimezone(TZ)
-    planned = local.replace(second=0,microsecond=0)
-    if planned.time() in POLL_TIMES and planned<=local<=started<planned+timedelta(minutes=1):
-        return planned
+    if 'managerTimer' not in trigger:
+        schedules = [(POLL_TIMES,trigger_instant(trigger.get('timerRealtimeUsec')))]
+    else:
+        schedules = [(slots,manager_activation(trigger,TIMER,slots,started)) for slots in (TIMER_TIMES,POLL_TIMES)]
+    for slots,activated in schedules:
+        if activated is None:
+            continue
+        local = activated.astimezone(TZ)
+        planned = local.replace(second=0,microsecond=0)
+        if planned.time() in slots and planned<=local<=started<planned+timedelta(minutes=1):
+            return planned
     return None

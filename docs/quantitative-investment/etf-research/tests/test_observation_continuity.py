@@ -77,6 +77,17 @@ class ObservationContinuityTests(unittest.TestCase):
         self.assertEqual(len(row['slots']),6)
         self.assertEqual(row['slots'][1]['state'],'verified')
 
+    def test_optional_retry_is_only_listed_when_an_archive_proves_it(self):
+        early=receipt('2026-11-28T08:25:05',('policy','510300','market'),slot=True)
+        retry=receipt('2026-11-28T08:34:05',FULL,slot=True)
+        observed=when('2026-11-28T08:50:00')
+        without=session_row(DAY,NEXT,[early],[],observed)
+        self.assertFalse(any('08:34' in row['at'] for row in without['slots']))
+        accepted=session_row(DAY,NEXT,[early,retry],[],observed)
+        proof=next(row for row in accepted['slots'] if '08:34' in row['at'])
+        self.assertEqual(proof['state'],'verified')
+        self.assertEqual(accepted['qualification'],'on_time')
+
     def test_waiting_and_no_scheduled_archive_are_separate(self):
         pending=session_row(DAY,NEXT,[],[dict(id='pending',status='pending_archive')],when('2026-11-27T19:45:00'))
         self.assertEqual(pending['qualification'],'awaiting_cutoff')

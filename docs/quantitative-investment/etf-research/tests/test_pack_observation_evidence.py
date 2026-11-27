@@ -1,4 +1,5 @@
 from datetime import datetime
+from os.path import relpath
 from pathlib import Path
 import shutil
 import sys
@@ -21,6 +22,9 @@ EVAL='reports/research-evaluation/2026-11-27/50942c432a3e424ba41cc7719cb95583/re
 
 
 class PortableObservationTests(unittest.TestCase):
+    def test_documented_relative_pack_path_can_be_verified(self):
+        self.assertEqual(verify(Path(relpath(PACK))),verify(PACK))
+
     def test_offline_ledger_and_evaluation_replay(self):
         expected=verify(PACK)
         self.assertEqual(expected['receipts'],{'observation':10,'policy_review':2,'evaluation':1})

@@ -26,6 +26,9 @@ class ResearchObservationTests(unittest.TestCase):
         self.assertEqual(obs.plan_days(days,counts,{days[1],days[4]},2),(days[4],days[3],days[2]))
         self.assertEqual(obs.plan_days(days,counts,set(days),2),(days[4],))
         self.assertEqual(obs.plan_days((),counts,set(),2),())
+        self.assertEqual(obs.plan_days(days,counts,{days[1]},2,retry_only=True),(days[4],))
+        self.assertEqual(obs.plan_days(days,counts,{days[4]},2,retry_only=True),())
+        self.assertEqual(obs.plan_days((),counts,set(),2,retry_only=True),())
 
     def test_timer_provenance(self):
         self.assertIsNone(obs.systemd_trigger({'TRIGGER_UNIT':'etf-research-daily.timer',

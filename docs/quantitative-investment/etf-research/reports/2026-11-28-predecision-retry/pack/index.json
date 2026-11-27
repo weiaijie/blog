@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "asOf": "2026-11-27T18:56:15.760359+00:00",
+  "after": "2026-11-27T22:24:05+08:00",
+  "receipts": [
+    {
+      "receipt": "reports/research-observation/archives/2026-11-27/20261127T185612Z-23c82eeb.json",
+      "kind": "observation",
+      "sha256": "c2a3749b512675e6dd82a33efc8877ad4d393746365270ff707a51f417899a39",
+      "verifiedAt": "2026-11-27T18:56:15.760359+00:00",
+      "archive": "d10bc860babb7b106c346d2bdf3647499c4fcf152fce942a232d935597576d55"
+    }
+  ]
+}

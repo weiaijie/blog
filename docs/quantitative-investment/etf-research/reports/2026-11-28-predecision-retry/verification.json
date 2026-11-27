@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-28T02:59:37.528588+08:00",
+  "manualProbe": {
+    "receipt": "reports/research-observation/archives/2026-11-27/20261127T185612Z-23c82eeb.json",
+    "receiptSha256": "c2a3749b512675e6dd82a33efc8877ad4d393746365270ff707a51f417899a39",
+    "archive": "d10bc860babb7b106c346d2bdf3647499c4fcf152fce942a232d935597576d55",
+    "archivedAt": "2026-11-27T18:56:15.760359+00:00",
+    "qualified": false,
+    "marginRequests": [
+      {
+        "source": "margin",
+        "request": "margin",
+        "expectedDates": [
+          "2026-11-26",
+          "2026-11-27"
+        ],
+        "returnedDates": [
+          "2026-11-26"
+        ],
+        "rowCount": 1,
+        "receivedAt": "2026-11-27T18:56:14.406275+00:00",
+        "url": "https://query.sse.com.cn/commonSoaQuery.do?sqlId=RZRQ_HZ_INFO&beginDate=20261126&endDate=20261127&isPagination=true&pageHelp.pageSize=100&pageHelp.pageNo=1",
+        "sha256": "1d3752234778f91dc0e5865d08d25c36068c909f3fbd6c76ca16f6aa7017ed05",
+        "httpStatus": 200,
+        "state": "date_mismatch"
+      },
+      {
+        "source": "margin_detail",
+        "request": "detail_20261127_1",
+        "expectedDates": [
+          "2026-11-27"
+        ],
+        "returnedDates": [],
+        "rowCount": 0,
+        "receivedAt": "2026-11-27T18:56:14.611880+00:00",
+        "url": "https://query.sse.com.cn/commonSoaQuery.do?sqlId=RZRQ_MX_INFO&beginDate=20261127&endDate=20261127&isPagination=true&pageHelp.pageSize=1500&pageHelp.pageNo=1",
+        "sha256": "3258a392459610b62707df027800a1a5e233387af4937f42c7e4ec9712279036",
+        "httpStatus": 200,
+        "state": "empty_response"
+      }
+    ]
+  },
+  "installedBefore": [
+    "*-*-* 08:25:00 Asia/Shanghai",
+    "*-*-* 19:40:00 Asia/Shanghai"
+  ],
+  "releasedCalendar": [
+    "*-*-* 08:25:00 Asia/Shanghai",
+    "*-*-* 08:34:00 Asia/Shanghai",
+    "*-*-* 19:40:00 Asia/Shanghai"
+  ],
+  "requiredPolicyPolls": [
+    "08:25:00",
+    "19:40:00"
+  ],
+  "retry": "08:34:00",
+  "decisionAssembly": "08:52:00",
+  "decisionDeadline": "08:55:00"
+}

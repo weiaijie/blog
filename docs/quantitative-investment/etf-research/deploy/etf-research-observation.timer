@@ -3,6 +3,7 @@ Description=Observe completed exchange sessions and retry late public inputs
 
 [Timer]
 OnCalendar=*-*-* 08:25:00 Asia/Shanghai
+OnCalendar=*-*-* 08:34:00 Asia/Shanghai
 OnCalendar=*-*-* 19:40:00 Asia/Shanghai
 Persistent=true
 AccuracySec=1s

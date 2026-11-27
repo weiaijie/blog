@@ -1,5 +1,7 @@
 # 项目计划与当前状态
 
+[盘前 08:34 补采](reports/2026-11-28-predecision-retry/README.md)增加一次仅针对最新未合格日的取证。11 月 28 日 02:56 的人工原始归档仍缺 11 月 27 日两融。
+
 [公开证据结题入口](reports/2026-11-28-observation-closeout/README.md)已可从 GitHub 恢复独立评估并按原时点复算，接上同期的原 18 户实际发布。正式结题随完整观察期推进。
 
 [独立研究中期复盘](reports/2026-11-28-midterm-review/README.md)已接入例行评估归档。满六个月后以周年日北京时间 00:00 为证据截止，工作台和 Agent 同查。
