@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "report": {
+    "schemaVersion": 1,
+    "asOf": "2026-11-27T12:45:00.874521+00:00",
+    "studyOrigin": null,
+    "thresholds": {
+      "pairs": 120,
+      "folds": 2,
+      "policyEvents": 20
+    },
+    "status": "observation_origin_pending",
+    "comparisons": {},
+    "folds": []
+  },
+  "invocation": "50942c432a3e424ba41cc7719cb95583",
+  "timer": "etf-research-evaluation.timer",
+  "computedAt": "2026-11-27T12:45:00.878415+00:00",
+  "codeSha256": {
+    "src/etf_research/exchange_calendar.py": "a35e8d583a8c8985abd9d3d9b518eaccf5f3c941b6ee73a7fa481acd28e1de7f",
+    "PROTOCOL_OBSERVATION_V1.md": "4ba1c8416a51e8b769d336dc86e4f42c034e52b7da744cde0001a319eefcc045",
+    "data/snapshots/2026-11-04-calendar-08/calendar.json": "950a3bfe2bab7ad484abc03aa27207bc70a49a4a144f495899cf1bd2aa10c8c6",
+    "config/research_observation.json": "c1784343ca447dff3e482656924d5bf8329e40d483b14d4709ec09a9182b8f6d",
+    "deploy/etf-research-evaluation.service": "19afb955fa30101d08872cb0d07294b74a77c4614a79094719110f80b3e40f28",
+    "deploy/etf-research-evaluation.timer": "984ad20d63e6a17e644f618ef9345cbf3dbef90314173518f72822caa993fafa",
+    "scripts/seal_observation_evaluation.py": "b9978c8b2cf1e558b45282b6807313f663957229d4558700495e75aefd9e6a66",
+    "scripts/observation_out_of_sample.py": "7c11110885afffcfcad66f1ec55aeeef04a45073b4c52d592d58aba92cde76ab",
+    "scripts/observation_status.py": "479b3101955b67ebbcfbe526ef19cbe8dc7e48e65dc96c1d80e110065a9fd8a6",
+    "scripts/observation_decision_status.py": "af613378b91ddd29b0bfc30266650d3b9db0730d8fbd143521409da0f70d9eba",
+    "scripts/observation_forecast_status.py": "2009e72ac49a01157f5407f1aabcf99f7d83f8d27bceeded08688f773345b8a5",
+    "scripts/observation_label_status.py": "3dd543a3fe7daadcb58b8cc62a71190649f1351b6384dd9ba1fee168e9530ed2",
+    "scripts/seal_observation_forecasts.py": "34ba8446ea46e84c9bec27092add83e7350dcb01d80e11fac72be22fcdc48e6d",
+    "scripts/seal_observation_labels.py": "2a9a55eb44bb0ea218b54a2fa974fb16ece147fcaf4b6b79fb03ee5d4380506b",
+    "scripts/train_observation_models.py": "69d1e75d2d15a2afe943a7e405f900023b5bf0a6958cee6c08939555c6bc3b4d",
+    "scripts/observation_labels.py": "17cb7e1a73fd50a7eedd40618d003426652f093589ece1af9c7a99c4eeef90a0",
+    "src/etf_research/observation_experiment.py": "7bc47907d78ed9700691f7f4334803993d2740856793ae185abc773210d951f7",
+    "src/etf_research/evidence_archive.py": "9fd525f18963d3344f97676182206ba666c2897b98e807f669493cab3e66812e"
+  }
+}

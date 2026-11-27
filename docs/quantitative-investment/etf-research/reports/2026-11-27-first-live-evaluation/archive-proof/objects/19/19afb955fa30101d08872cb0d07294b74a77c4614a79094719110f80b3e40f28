@@ -1,0 +1,13 @@
+[Unit]
+Description=Verify and archive the independent ETF evaluation report
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/projects/etf-research-observation
+ExecStart=%h/projects/etf-research-py312/bin/python scripts/seal_observation_evaluation.py --run --archive-store %h/projects/etf-research-observation-archive
+Environment=PYTHONPATH=src
+Environment=PYTHONDONTWRITEBYTECODE=1
+TimeoutStartSec=12min
+NoNewPrivileges=yes
+PrivateTmp=yes
+UMask=0022

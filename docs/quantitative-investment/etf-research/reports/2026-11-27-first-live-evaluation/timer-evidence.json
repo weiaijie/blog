@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "systemdUnit": "etf-research-evaluation.service",
+  "invocationId": "50942c432a3e424ba41cc7719cb95583",
+  "journalUsec": 1795783500997737,
+  "reportAsOf": "2026-11-27T12:45:00.874521+00:00",
+  "verifiedAt": "2026-11-27T12:45:00.982512+00:00",
+  "archiveSha256": "dd8d234fc694bdc5e00ee20aa6b0c45ea46df75b650dbb381b94e986413d2c05",
+  "schedulerReceipt": {
+    "path": "reports/research-evaluation/2026-11-27/50942c432a3e424ba41cc7719cb95583",
+    "archiveSha256": "dd8d234fc694bdc5e00ee20aa6b0c45ea46df75b650dbb381b94e986413d2c05",
+    "manifestSha256": "1bc727686a099d91c06b0744a8c07bc99b858452ed3905d0282f40506386676b",
+    "archiveVerifiedAt": "2026-11-27T12:45:00.982512+00:00",
+    "status": "observation_origin_pending"
+  },
+  "archivedOperationReplayed": true,
+  "archiveRestore": {
+    "snapshot": "dd8d234fc694bdc5e00ee20aa6b0c45ea46df75b650dbb381b94e986413d2c05",
+    "verified_files": 20,
+    "destination_was_new": true,
+    "activates_services": false
+  },
+  "checkedAt": "2026-11-27T12:45:28.991057+00:00",
+  "qualificationReceipts": [
+    {
+      "session": "2026-11-26",
+      "attempt": "reports/research-observation/runs/2026-11-26/20261127T090225Z-a951fbbd",
+      "phase": "complete",
+      "archiveVerifiedAt": "2026-11-27T09:02:29.654016+00:00",
+      "archive": "087b1492e77ab8721b55bfbda631293729ca09b4595ef3a5c9c3a77bf8052936",
+      "forwardEligible": false
+    },
+    {
+      "session": "2026-11-27",
+      "attempt": "reports/research-observation/runs/2026-11-27/20261127T090329Z-f6cbc152",
+      "phase": "partial",
+      "archiveVerifiedAt": "2026-11-27T09:03:33.003911+00:00",
+      "archive": "b7ba94df2e50df7348874b44bbb2b44cbb14a40a9584900a86a5a1cc90c0a18a",
+      "forwardEligible": false
+    },
+    {
+      "session": "2026-11-27",
+      "attempt": "reports/research-observation/runs/2026-11-27/20261127T090437Z-549300f6",
+      "phase": "partial",
+      "archiveVerifiedAt": "2026-11-27T09:04:40.809820+00:00",
+      "archive": "753df205e22f425adf24b9ee58986432121500b46e8da72b14e6a69bfbff7afe",
+      "forwardEligible": false
+    },
+    {
+      "session": "2026-11-27",
+      "attempt": "reports/research-observation/runs/2026-11-27/20261127T092054Z-465a8da5",
+      "phase": "partial",
+      "archiveVerifiedAt": "2026-11-27T09:20:59.334219+00:00",
+      "archive": "edfe0c5bcded6feefe0cb2b14b8907eec2ebba7e6929582cc1546e2e5963e495",
+      "forwardEligible": false
+    },
+    {
+      "session": "2026-11-27",
+      "attempt": "reports/research-observation/runs/2026-11-27/20261127T101550Z-256804c5",
+      "phase": "partial",
+      "archiveVerifiedAt": "2026-11-27T10:15:57.390969+00:00",
+      "archive": "017e0acc24e5fd79e9a99656f8c8d5c7625cac9aa9bfab2ae9982a033f915455",
+      "forwardEligible": false
+    },
+    {
+      "session": "2026-11-27",
+      "attempt": "reports/research-observation/runs/2026-11-27/20261127T104227Z-9666b266",
+      "phase": "partial",
+      "archiveVerifiedAt": "2026-11-27T10:42:31.751817+00:00",
+      "archive": "23675205778886ec1f1634e3fcfe6c853e989bb85dd7287b2e84b51efe6ed50d",
+      "forwardEligible": false
+    },
+    {
+      "session": "2026-11-27",
+      "attempt": "reports/research-observation/runs/2026-11-27/20261127T110404Z-2db2bafa",
+      "phase": "partial",
+      "archiveVerifiedAt": "2026-11-27T11:04:07.990746+00:00",
+      "archive": "ddeb5c617ef5e7307030c19b77f66afd51dc300d2b435e66b75c5e476d6a9db5",
+      "forwardEligible": false
+    },
+    {
+      "session": "2026-11-27",
+      "attempt": "reports/research-observation/runs/2026-11-27/20261127T112424Z-6c1c8aab",
+      "phase": "partial",
+      "archiveVerifiedAt": "2026-11-27T11:24:29.341397+00:00",
+      "archive": "0ae51d184a37aa56a590bbfa759e33d3b46d185f81ca30e3f121c21964045a84",
+      "forwardEligible": false
+    },
+    {
+      "session": "2026-11-27",
+      "attempt": "reports/research-observation/runs/2026-11-27/20261127T114000Z-18f4f01f",
+      "phase": "partial",
+      "archiveVerifiedAt": "2026-11-27T11:40:04.205928+00:00",
+      "archive": "5576362cd470d4c6f473ab2bd6270a551a529670d5994e29b7931f9284cb761b",
+      "forwardEligible": false
+    },
+    {
+      "session": "2026-11-27",
+      "attempt": "reports/research-observation/runs/2026-11-27/20261127T115450Z-c4c154d1",
+      "phase": "partial",
+      "archiveVerifiedAt": "2026-11-27T11:54:54.077784+00:00",
+      "archive": "f1720ee003dbe33d7b6286245e5c0ecac3bd442eef31c946b9fca23660c6b746",
+      "forwardEligible": false
+    }
+  ]
+}
