@@ -7,7 +7,7 @@ import re
 
 from observation_archive import open_attempt
 from etf_research.policy_events import append_source_version, instant, select_as_of
-from etf_research.publication import create, inside, read, seal, sha, verify_bundle
+from etf_research.publication import create, inside, lock, read, seal, sha, verify_bundle
 
 STAGES = {'deployment','details','implementation','progress','adjustment'}
 ROLES = {'original','government_reprint'}
@@ -123,38 +123,52 @@ def reviews_as_of(root,store,ceiling):
 
 
 def seal_review(root, store, requested, folder):
-    result = build_review(root,store,requested)
-    audit_clock = datetime.now(timezone.utc)
-    history = [prior for _,prior in reviews_as_of(root,store,audit_clock)]
-    event_ledger([*history,dict(result,sealedAt=audit_clock.isoformat())])
-    folder.mkdir(parents=True,exist_ok=False)
-    records = folder/'records'
-    create(records/'review.json',result)
-    seal(records)
-    create(folder/'receipt.json',dict(schemaVersion=1,sealedAt=datetime.now(timezone.utc).isoformat(),
-                                      manifestSha256=sha(records/'manifest.json')))
-    return verify_review(root,store,folder)
+    with lock(root/'.runtime/research-policy-review.lock'):
+        result = build_review(root,store,requested)
+        audit_clock = datetime.now(timezone.utc)
+        history = [prior for _,prior in reviews_as_of(root,store,audit_clock)]
+        event_ledger([*history,dict(result,sealedAt=audit_clock.isoformat())])
+        folder.mkdir(parents=True,exist_ok=False)
+        records = folder/'records'
+        create(records/'review.json',result)
+        seal(records)
+        create(folder/'receipt.json',dict(schemaVersion=1,sealedAt=datetime.now(timezone.utc).isoformat(),
+                                          manifestSha256=sha(records/'manifest.json')))
+        return verify_review(root,store,folder)
 
 
 def event_ledger(reviews):
     events, dispositions, followups = {},{},{}
+    url_owners, body_owners, definitions = {},{},{}
     for review in sorted(reviews,key=lambda record: instant(record['sealedAt'])):
         grouped, related = {},[]
         for item in review['entries']:
             decision = item['decision']
             key = decision['revisionKey']
-            identity = (decision['disposition'],decision.get('eventId'),decision.get('parentEventId'))
+            state = decision['disposition']
+            identity = tuple(decision.get(field) for field in (
+                'disposition','eventId','parentEventId','themeId','stage','role',
+            ))
             if dispositions.setdefault(key,identity)!=identity:
                 raise ValueError('One source revision received conflicting classifications')
-            if decision['disposition']=='event':
-                grouped.setdefault(decision['eventId'],[]).append(item)
-            elif decision['disposition']=='related_followup':
+            source = item['source']
+            family = decision.get('eventId') if state=='event' else decision.get('parentEventId')
+            if state in ('event','related_followup'):
+                if (url_owners.setdefault(source['url'],family)!=family
+                        or body_owners.setdefault(source['sha256'],family)!=family):
+                    raise ValueError('One official document or URL was assigned to multiple policy events')
+            elif source['url'] in url_owners or source['sha256'] in body_owners:
+                raise ValueError('An already classified policy source changed its disposition')
+            if state=='event':
+                definition = (decision['themeId'],decision['stage'])
+                if definitions.setdefault(family,definition)!=definition:
+                    raise ValueError('Policy event theme or stage changed across reviews')
+                grouped.setdefault(family,[]).append(item)
+            elif state=='related_followup':
                 related.append(item)
         for key, group in grouped.items():
             head = group[0]['decision']
             event = events.setdefault(key,dict(event_id=key,theme_id=head['themeId'],sources=[],versions=[]))
-            if event['theme_id']!=head['themeId']:
-                raise ValueError('Policy event theme changed across reviews')
             previous = event['versions'][-1] if event['versions'] else None
             refs = set(previous['source_version_ids']) if previous else set()
             by_url = {source['url']:source['source_version_id'] for source in event['sources']
@@ -163,7 +177,8 @@ def event_ledger(reviews):
                 c,d = item['source'],item['decision']
                 source = dict(event_id=key,url=c['url'],sha256=c['sha256'],captured_at=c['receivedAt'],
                               published_at=c['published_at'],published_at_precision=c['published_at_precision'],
-                              timezone=c['timezone'],role=d['role'],evidence=item['evidencePath'])
+                              timezone=c['timezone'],role=d['role'],evidence=item['evidencePath'],
+                              title=c.get('title'))
                 last = next((v for v in reversed(event['sources']) if v['url']==c['url']),None)
                 if last is None or instant(source['captured_at'])>=instant(last['captured_at']):
                     by_url[c['url']] = append_source_version(event,source)
@@ -194,8 +209,15 @@ def summarize_reviews(reviews,observed):
     ledger = event_ledger(reviews)
     dispositions = {row['decision']['revisionKey']:row['decision']['disposition']
                     for review in reviews for row in review['entries']}
+    selected = sorted(select_as_of(ledger,observed.isoformat()),key=lambda entry:entry['event_id'])
+    observed_events = [dict(eventId=entry['event_id'],themeId=entry['theme_id'],stage=entry['fields']['stage'],
+                            revision=entry['revision'],reviewedAt=entry['feature_ready_at'],
+                            sources=[dict(url=row['url'],sha256=row['sha256'],role=row['role'],title=row['title'],
+                                          capturedAt=row['captured_at'],evidencePath=row['evidence'])
+                                     for row in entry['sources']]) for entry in selected]
     return dict(schemaVersion=1,asOf=observed.isoformat(),reviewedRevisions=len(dispositions),
-                independentEventIds=sorted(policy_ids(ledger,observed)),followups=ledger['followups'],
+                independentEventIds=[event['eventId'] for event in observed_events],
+                independentEvents=observed_events,followups=ledger['followups'],
                 lastReviewAt=max((review['sealedAt'] for review in reviews),key=instant,default=None))
 
 

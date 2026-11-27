@@ -76,7 +76,8 @@ class PolicyQueueTests(unittest.TestCase):
                   trigger={'unit':'unit'}),{'index':i}) for i in range(3)
         ]
         review=dict(attempt='capture/0',sealedAt=at('19:50').isoformat(),
-                    entries=[dict(decision=dict(revisionKey=old['revisionKey'],disposition='outside_scope'))])
+                    entries=[dict(source=old,
+                                  decision=dict(revisionKey=old['revisionKey'],disposition='outside_scope'))])
         with (
             patch('observation_policy_queue.archive_index',return_value=({'2026-11-27':records},{})),
             patch('observation_policy_queue.reviews_as_of',return_value=[(None,review)]),

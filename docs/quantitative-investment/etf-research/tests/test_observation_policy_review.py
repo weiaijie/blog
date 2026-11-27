@@ -15,7 +15,7 @@ sys.path.insert(0, str(ROOT/'scripts'))
 
 from observation_archive import open_attempt
 from observation_policy_inputs import assess, expected_slots, scheduled_slot
-from review_policy_observations import build_review, event_ledger, policy_ids, seal_review, verify_review
+from review_policy_observations import build_review, event_ledger, policy_ids, seal_review, summarize_reviews, verify_review
 from observation_inputs import assemble
 from pack_observation_evidence import restore_ledger
 
@@ -137,3 +137,35 @@ class ObservationPolicyReviewTests(unittest.TestCase):
         self.assertIsNone(assess(cutoffs, polls, [late_review, *reviews[1:]], end)['count'])
         nonscheduled = dict(polls[0], startedAt=(slots[0]+timedelta(minutes=1)).isoformat())
         self.assertIsNone(assess(cutoffs, [nonscheduled, *polls[1:]], reviews, end)['count'])
+
+
+    def test_same_source_cannot_create_a_second_event_or_change_its_classification(self):
+        original=verify_review(ROOT,STORE,REVIEW)
+        later=instant(original['sealedAt'])+timedelta(minutes=12)
+        first=next(item for item in original['entries'] if item['decision']['disposition']=='event')
+        c,d=first['source'],first['decision']
+
+        def update(source,decision):
+            return dict(archiveVerifiedAt=later.isoformat(),sealedAt=later.isoformat(),
+                        entries=[dict(first,source=source,decision=decision)])
+
+        revised=dict(c,sha256='1'*64,receivedAt=later.isoformat())
+        same_identity=update(revised,dict(d,revisionKey='2'*64))
+        observed=summarize_reviews([original,same_identity],later)
+        earlier=summarize_reviews([original,same_identity],later-timedelta(microseconds=1))
+        self.assertEqual(observed['independentEventIds'],[EVENT])
+        self.assertEqual(len(observed['independentEvents'][0]['sources']),2)
+        self.assertEqual(observed['independentEvents'][0]['revision'],2)
+        self.assertEqual(earlier['independentEvents'][0]['revision'],1)
+        self.assertNotIn(revised['sha256'],{row['sha256'] for row in earlier['independentEvents'][0]['sources']})
+
+        new_id=dict(d,revisionKey='3'*64,eventId='duplicate-event')
+        with self.assertRaisesRegex(ValueError,'multiple policy events'):
+            event_ledger([original,update(revised,new_id)])
+        duplicate=dict(c,url='https://www.csrc.gov.cn/csrc/c100028/another-print/content.shtml')
+        with self.assertRaisesRegex(ValueError,'multiple policy events'):
+            event_ledger([original,update(duplicate,new_id)])
+        with self.assertRaisesRegex(ValueError,'conflicting classifications'):
+            event_ledger([original,update(c,dict(d,role='original'))])
+        with self.assertRaisesRegex(ValueError,'theme or stage changed'):
+            event_ledger([original,update(revised,dict(d,revisionKey='2'*64,stage='details'))])

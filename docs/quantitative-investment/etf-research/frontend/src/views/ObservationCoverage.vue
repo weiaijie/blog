@@ -80,9 +80,16 @@ type PolicyQueue = {
 const policyQueue = ref<PolicyQueue>();
 type PolicyReview = {
   reviewedRevisions:number; independentEventIds:string[]; lastReviewAt:string|null;
+  independentEvents?:{
+    eventId:string;stage:string;revision:number;reviewedAt:string;
+    sources:{url:string;title:string|null;sha256:string;capturedAt:string;role:string}[];
+  }[];
   followups:{parentEventId:string;url:string;publishedAt:string;sha256:string;reviewedAt:string}[];
 };
 const policyReview = ref<PolicyReview>();
+const policyStages:Record<string,string> = {
+  deployment:'部署',details:'细则',implementation:'实施',progress:'进展',adjustment:'调整',
+};
 const policyReviewBusy = ref(false);
 const policyReviewError = ref('');
 
@@ -389,6 +396,23 @@ onBeforeUnmount(()=>{lifecycle.abort();detailRequest?.abort();});
         <p v-if="policyReview">已审核 {{policyReview.reviewedRevisions}} 个版本 ·
           {{policyReview.independentEventIds.length}} 个独立事件 · {{policyReview.followups.length}} 条关联公告</p>
         <p v-if="policyReview?.lastReviewAt" class="muted">最近审核 {{time(policyReview.lastReviewAt)}}</p>
+        <details v-if="policyReview?.independentEvents?.length" class="receipt">
+          <summary>独立事件的原文依据</summary>
+          <ul class="decision-gaps">
+            <li v-for="event in policyReview.independentEvents" :key="event.eventId">
+              <strong>{{event.sources[0]?.title || event.eventId}}</strong>
+              <p>{{policyStages[event.stage] ?? event.stage}} · 第 {{event.revision}} 版
+                · 审核 {{time(event.reviewedAt)}}</p>
+              <ul>
+                <li v-for="source in event.sources" :key="source.url+'#'+source.sha256">
+                  <a :href="source.url" target="_blank" rel="noopener">官方原文 ↗</a>
+                  · {{source.role==='government_reprint' ? '官方转载' : '原发'}}
+                  · 收报 {{time(source.capturedAt)}}
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </details>
         <ul v-if="policyReview?.followups.length" class="decision-gaps">
           <li v-for="item in policyReview.followups" :key="item.sha256">
             关联 {{item.parentEventId}} · 发布 {{time(item.publishedAt)}}

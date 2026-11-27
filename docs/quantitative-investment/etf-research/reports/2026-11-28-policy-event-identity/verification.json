@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-28T01:40:02.429788+08:00",
+  "beforeLastReview": {
+    "asOf": "2026-11-27T12:25:15.443386+00:00",
+    "independentEvents": 1,
+    "followups": 0,
+    "reviewedRevisions": 10
+  },
+  "current": {
+    "schemaVersion": 1,
+    "asOf": "2026-11-27T17:40:02.429788+00:00",
+    "reviewedRevisions": 11,
+    "independentEventIds": [
+      "state-council-2026-11-27-stabilization"
+    ],
+    "independentEvents": [
+      {
+        "eventId": "state-council-2026-11-27-stabilization",
+        "themeId": "capital-market-stabilization",
+        "stage": "deployment",
+        "revision": 1,
+        "reviewedAt": "2026-11-27T09:54:55.276535+00:00",
+        "sources": [
+          {
+            "url": "https://www.gov.cn/yaowen/liebiao/202611/content_7087445.htm",
+            "sha256": "4727bc0fc75697e9a47b7a3f040a8cde095d798fc69956d851b7fd3fa73d9ef4",
+            "role": "government_reprint",
+            "title": "李强主持召开国务院常务会议 听取推动高质量发展综合督查情况汇报等",
+            "capturedAt": "2026-11-27T09:20:55.448229+00:00",
+            "evidencePath": "reports/research-observation/runs/2026-11-27/20261127T092054Z-465a8da5/inputs/20261127T092054Z-2aa2539c-policy-etf-day/policy_23de8e25a8bddb15adf5.body"
+          },
+          {
+            "url": "https://www.csrc.gov.cn/csrc/c100028/c7673432/content.shtml",
+            "sha256": "7532dba3a9b6deaf4c61221f3b47c155015cd96b88555999493b3f934ee9972f",
+            "role": "government_reprint",
+            "title": "国务院常务会议：促进资本市场平稳健康发展",
+            "capturedAt": "2026-11-27T09:20:55.486213+00:00",
+            "evidencePath": "reports/research-observation/runs/2026-11-27/20261127T092054Z-465a8da5/inputs/20261127T092054Z-2aa2539c-policy-etf-day/policy_4869f30d88225000de28.body"
+          }
+        ]
+      }
+    ],
+    "followups": [
+      {
+        "parentEventId": "state-council-2026-11-27-stabilization",
+        "url": "https://www.csrc.gov.cn/csrc/c100028/c7673674/content.shtml",
+        "publishedAt": "2026-11-27T19:10:03+08:00",
+        "sha256": "6fdb865ccdbd2037c13d0bd0d5b6907db54f9c7a1ded75e1280712c5bede65f1",
+        "reviewedAt": "2026-11-27T12:25:15.443387+00:00",
+        "evidencePath": "reports/research-observation/runs/2026-11-27/20261127T115450Z-c4c154d1/inputs/20261127T115450Z-562e98af-policy-etf-day/policy_054d847ad3b60d82979c.body"
+      }
+    ],
+    "lastReviewAt": "2026-11-27T12:25:15.443387+00:00"
+  },
+  "feature": {
+    "count": null,
+    "coveredIntervals": 0,
+    "expectedIntervals": 5
+  }
+}
