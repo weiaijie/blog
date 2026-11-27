@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-27",
+  "previousDate": "2026-11-26",
+  "scope": "SSE A-share and STAR turnover, SSE exchange-wide margin",
+  "status": "partial_capture",
+  "historicalPointInTime": false,
+  "researchOnly": true,
+  "receivedAt": "2026-11-27T14:05:03.729065+00:00",
+  "featureReadyAt": "2026-11-27T14:05:03.733884+00:00",
+  "checkedAt": "2026-11-27T14:05:03.733884+00:00",
+  "publishedAt": null,
+  "turnoverCny": "930379000000.00",
+  "margin": null,
+  "relativeTurnover20": null,
+  "breadth": null,
+  "issues": {
+    "margin": "Incomplete or inconsistent adjacent-session financing summary"
+  }
+}

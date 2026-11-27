@@ -1,6 +1,6 @@
 # 项目计划与当前状态
 
-[证据增量定时导出](reports/2026-11-27-observation-export/README.md)以已验的 GitHub 证据包为起点，逐次封存真实水位与新增回执。
+[证据增量定时导出](reports/2026-11-27-observation-export/README.md)以已验的 GitHub 证据包为起点，逐次封存真实水位与新增回执。[首次自动执行](reports/2026-11-27-automatic-portable-observation/README.md)已在 22:20 产生生产证据包。
 
 [两融报送截止前后取证](reports/2026-11-27-after-filing/README.md)记录国债 ETF 单位净值首次有效收报、官方申赎清单对照与按时点回看。
 

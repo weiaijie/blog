@@ -1,0 +1,45 @@
+{
+  "timer": "etf-research-observation-export.timer",
+  "service": "etf-research-observation-export.service",
+  "timerState": {
+    "ActiveState": "active",
+    "UnitFileState": "enabled",
+    "NextElapseUSecRealtime": "Sat 2026-11-28 22:20:00 CST",
+    "LastTriggerUSec": "Fri 2026-11-27 22:20:00 CST"
+  },
+  "serviceState": {
+    "Result": "success",
+    "ExecMainStartTimestamp": "Fri 2026-11-27 22:20:00 CST",
+    "ExecMainExitTimestamp": "Fri 2026-11-27 22:20:04 CST",
+    "ExecMainStatus": "0"
+  },
+  "journalInvocation": "2349c65721304f26b75948c2e24902b8",
+  "production": {
+    "status": "sealed",
+    "schemaVersion": 1,
+    "seedAsOf": "2026-11-27T21:10:38+08:00",
+    "seedManifestSha256": "a9a3076a7140b7b67bd1d0bf0a22f654cd27924b13d557b7d716cfeb42beb22d",
+    "batchCount": 1,
+    "through": "2026-11-27T14:20:00.647868+00:00",
+    "manifestSha256": "ee10d5ab24523de5cf91380566b9ab431816c516fa1bc32ac606836b8ef27e33",
+    "latest": {
+      "schemaVersion": 1,
+      "batchId": "20261127T142000647868Z-2349c657",
+      "after": "2026-11-27T21:10:38+08:00",
+      "asOf": "2026-11-27T14:20:00.647868+00:00",
+      "sealedAt": "2026-11-27T14:20:02.530925+00:00",
+      "trigger": {
+        "unit": "etf-research-observation-export.timer",
+        "invocationId": "2349c65721304f26b75948c2e24902b8",
+        "timerRealtimeUsec": 1795789200573471
+      },
+      "previousManifestSha256": "a9a3076a7140b7b67bd1d0bf0a22f654cd27924b13d557b7d716cfeb42beb22d",
+      "packManifestSha256": "ee10d5ab24523de5cf91380566b9ab431816c516fa1bc32ac606836b8ef27e33",
+      "receipts": {
+        "observation": 1
+      },
+      "archives": 1
+    },
+    "stagedAttempts": 0
+  }
+}
