@@ -63,6 +63,7 @@ def first_archive(root, store, observed):
     if not candidates:
         return None
     verified, path, receipt = min(candidates,key=lambda row:(row[0],row[1]))
+    verify_archive(store,receipt['archive'])
     return dict(date=verified.astimezone(TZ).date().isoformat(),archiveVerifiedAt=receipt['archiveVerifiedAt'],
                 receiptPath=path.relative_to(root).as_posix(),receiptSha256=sha(path),
                 archiveSha256=receipt['archive'])

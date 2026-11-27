@@ -15,6 +15,7 @@ type Sources = {
 type Attempt = {
   id:string; phase:string; scheduled:boolean; startedAt:string; archivedAt:string;
   archiveSha256:string; qualified:boolean; sources:Sources|null; failedSources:string[];
+  qualificationReason?:'scheduled_archive_not_eligible';
 };
 type DecisionClock = {scheduledAt:string|null; deadline:string|null};
 type DecisionAttempt = {
@@ -538,6 +539,7 @@ onBeforeUnmount(()=>{lifecycle.abort();detailRequest?.abort();});
             <p class="attempt-title"><strong>{{phases[attempt.phase] ?? attempt.phase}}</strong>
               <span>{{attempt.scheduled ? '定时采集' : '手工复查'}}</span>
               <span v-if="attempt.qualified">计入合格归档</span>
+              <span v-else-if="attempt.qualificationReason">未通过定时归档准入</span>
             </p>
             <p class="muted">开始 {{time(attempt.startedAt)}} · 归档 {{time(attempt.archivedAt)}}</p>
             <dl v-if="attempt.sources" class="attempt-sources">

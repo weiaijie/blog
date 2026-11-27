@@ -101,13 +101,16 @@ def source_fields(coverage, archived_at):
 
 
 def view_attempt(receipt, record):
-    return dict(id=Path(receipt['attempt']).name,phase=receipt['phase'],
+    view = dict(id=Path(receipt['attempt']).name,phase=receipt['phase'],
                 scheduled=receipt['trigger'] is not None,startedAt=record['startedAt'],
                 finishedAt=record['finishedAt'],archivedAt=receipt['archiveVerifiedAt'],
                 qualified=receipt['forwardEligible'],archiveSha256=receipt['archive'],
                 resultSha256=receipt['resultSha256'],
                 sources=source_fields(record['coverage'],receipt['archiveVerifiedAt']),
                 failedSources=sorted(record['errors']))
+    if view['phase']=='complete' and view['scheduled'] and not view['qualified']:
+        view['qualificationReason'] = 'scheduled_archive_not_eligible'
+    return view
 
 
 def archived_bytes(store, entry):
@@ -273,13 +276,12 @@ def report(root, store, *, day=None, before=None, observed=None):
 
     entries,errors = archive_index(root,store,config,observed)
     qualified = [r for d in expected for r,_ in entries.get(d,()) if r['forwardEligible']]
-    first = min(qualified,key=lambda row:instant(row['archiveVerifiedAt']),default=None)
     milestone = None
-    if first is not None:
-        first_day = instant(first['archiveVerifiedAt']).astimezone(TZ).date()
-        milestone = dict(session=first['session'],date=str(first_day),at=first['archiveVerifiedAt'],
-                         midtermOn=str(add_months(first_day,6)),finalOn=str(add_months(first_day,12)),
-                         archiveSha256=first['archive'])
+    if origin is not None:
+        first_day = date.fromisoformat(origin['date'])
+        milestone = dict(session=Path(origin['receiptPath']).parent.name,date=str(first_day),
+                         at=origin['archiveVerifiedAt'],midtermOn=str(add_months(first_day,6)),
+                         finalOn=str(add_months(first_day,12)),archiveSha256=origin['archiveSha256'])
     if day is not None:
         session = parse_day(day)
         row = day_row(day,day in expected,entries,errors)

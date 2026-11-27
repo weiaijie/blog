@@ -114,10 +114,15 @@ class ObservationStatusTests(unittest.TestCase):
                    archiveVerifiedAt=stamp,archive='a'*64,phase='complete',
                    trigger=None,attempt='x/first',resultSha256='b'*64)
         body = dict(startedAt=stamp,finishedAt=stamp,coverage=None,errors={})
-        with patch('observation_status.archive_index',return_value=({'2026-11-27':[(rec,body)]},{})):
+        origin = dict(date='2026-12-01',archiveVerifiedAt=stamp,
+                      receiptPath='reports/research-observation/archives/2026-11-27/first.json',
+                      archiveSha256=rec['archive'])
+        with patch('observation_status.archive_index',return_value=({'2026-11-27':[(rec,body)]},{})), \
+             patch('observation_status.first_archive',return_value=origin):
             result = report(ROOT,self.store,observed=datetime.fromisoformat('2026-12-01T17:00:00+08:00'))
         self.assertEqual(result['counts']['qualified'],1)
         self.assertEqual(result['firstQualifiedArchive']['date'],'2026-12-01')
+        self.assertEqual(result['firstQualifiedArchive']['session'],'2026-11-27')
         self.assertEqual(result['firstQualifiedArchive']['midtermOn'],'2027-06-01')
         self.assertEqual(result['firstQualifiedArchive']['finalOn'],'2027-12-01')
 

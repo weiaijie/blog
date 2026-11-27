@@ -15,7 +15,7 @@ from research_day_coverage import cover
 from etf_research.admission import completed_date, sessions_between
 from etf_research.evidence_archive import capture, verify as verify_archive
 from etf_research.exchange_calendar import calendar_at
-from etf_research.observation_slots import TIMER, with_manager_clock
+from etf_research.observation_slots import TIMER, scheduled_slot, with_manager_clock
 from etf_research.policy_events import instant
 from etf_research.publication import create, inside, lock, read, seal, sha, verify_bundle
 
@@ -58,6 +58,15 @@ def complete(coverage):
             and set(coverage['etf'])==set(policy_etf.SYMBOLS)
             and all(row['status']=='verified_estimate' for row in coverage['etf'].values())
             and coverage['market']['status']=='full_capture')
+
+
+def qualifies(result, config):
+    trigger = result['trigger']
+    return (result['phase']=='complete'
+            and result['date']>=config['observationEarliestDate']
+            and trigger is not None and trigger.get('managerTimer') is not None
+            and scheduled_slot(result) is not None
+            and result['coverage'] is not None and complete(result['coverage']))
 
 
 def attempt(day, trigger):
@@ -117,9 +126,7 @@ def archive_run(folder, store, config):
     summary_hash = sha(folder/'result.json')
     if snapshot['files'][relative+'/result.json']['sha256']!=summary_hash:
         raise ValueError('Archive attempt digest mismatch')
-    # Only scheduled acquisition during the registered window can start the clock.
-    eligible = (result['phase']=='complete' and result['trigger'] is not None
-                and result['date']>=config['observationEarliestDate'])
+    eligible = qualifies(result,config)
     receipt = dict(schemaVersion=1,session=result['date'],attempt=relative,phase=result['phase'],
                    resultSha256=summary_hash,attemptManifestSha256=sha(folder/'manifest.json'),
                    trigger=result['trigger'],archive=archived['snapshot'],
@@ -153,8 +160,7 @@ def check_receipt(folder, store, config, *, root=None):
             or sha(folder/'result.json')!=receipt['resultSha256']):
         raise ValueError('Archive receipt does not match the sealed attempt')
     result = read(folder/'result.json')
-    eligible = (result['phase']=='complete' and result['trigger'] is not None
-                and result['date']>=config['observationEarliestDate'])
+    eligible = qualifies(result,config)
     if (not instant(result['finishedAt']) <= instant(receipt['archiveCreatedAt']) <= instant(receipt['archiveVerifiedAt'])
             or result['date']!=receipt['session'] or result['phase']!=receipt['phase']
             or result['trigger']!=receipt['trigger'] or receipt['forwardEligible'] is not eligible):
@@ -188,7 +194,9 @@ def schedule(start, end, observed=None):
 def progress(store, config):
     receipts,issues = ledger(store,config)
     qualified = [row for row in receipts if row['forwardEligible']]
-    first = min(qualified,key=lambda row:instant(row['archiveVerifiedAt']),default=None)
+    first = min(qualified,key=lambda row:(instant(row['archiveVerifiedAt']),row['attempt']),default=None)
+    if first is not None:
+        verify_archive(store,first['archive'])
     current = now()
     try:
         expected = schedule(date.fromisoformat(config['observationEarliestDate']),completed_date(current))

@@ -19,7 +19,9 @@ sys.path.insert(0,str(ROOT/'scripts'))
 import train_observation_models as trainer
 from observation_labels import label_window
 
-ORIGIN=dict(date='2026-08-01',archiveVerifiedAt='2026-08-01T19:40:40+08:00')
+ORIGIN=dict(date='2026-08-01',archiveVerifiedAt='2026-08-01T19:40:40+08:00',
+            receiptPath='reports/research-observation/archives/2026-07-31/test.json',
+            receiptSha256='1'*64,archiveSha256='2'*64)
 START,END=date(2026,11,1),date(2027,2,1)
 CUTOFF=trainer.fold_cutoff(START)
 FIT_TIME=instant('2026-11-01T07:45:00+08:00')

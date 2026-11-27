@@ -1,5 +1,7 @@
 # 项目计划与当前状态
 
+[前瞻起算定时归档核验](reports/2026-11-27-observation-origin/README.md)已接入。资料完整、systemd 计划时点及归档对象均须通过核对后，才以实际归档日作为观察起点。
+
 [22:23 清算份额补齐与两融下载对照](reports/2026-11-27-cleared-shares/README.md)已封存。11 月 27 日份额与单位净值可核验，两融继续保留未知。
 
 [证据增量定时导出](reports/2026-11-27-observation-export/README.md)以已验的 GitHub 证据包为起点，逐次封存真实水位与新增回执。[首次自动执行](reports/2026-11-27-automatic-portable-observation/README.md)已在 22:20 产生生产证据包。
