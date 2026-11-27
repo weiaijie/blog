@@ -37,6 +37,7 @@ class DecisionStatusTests(unittest.TestCase):
     def test_calendar_starts_on_first_enabled_trading_day(self):
         opened = self.status('2026-11-27T18:20:00+08:00')
         self.assertEqual(opened['decisionCounts']['expected'],0)
+        self.assertEqual(opened['labelCounts'],dict(due=0,ready=0,gaps=0,holding=0,unknownCalendar=0))
         self.assertEqual(opened['nextDecision']['scheduledAt'],'2026-11-30T08:52:00+08:00')
         earlier = self.status('2026-11-27T18:20:00+08:00','2026-11-27')['session']
         self.assertEqual(earlier['decision']['status'],'prelaunch')
@@ -85,7 +86,12 @@ class DecisionStatusTests(unittest.TestCase):
         with patch.object(seal,'now',return_value=instant(now)):
             overview = self.status(now)
             summary = overview['sessions'][0]['decision']
-            detail = self.status(now,str(DAY))['session']['decision']
+            session = self.status(now,str(DAY))['session']
+            detail = session['decision']
+            self.assertEqual(session['label']['status'],'holding_period_incomplete')
+            self.assertEqual(session['label']['notBefore'],'2026-12-04T16:00:00+08:00')
+            self.assertEqual(overview['labelCounts']['holding'],1)
+            self.assertEqual(overview['labelCounts']['due'],0)
             self.assertEqual(overview['decisionCounts'],dict(expected=1,sealedOnTime=1,eligibleInputDays=1,gaps=0))
             self.assertEqual(summary['latest'],detail['attempts'][0])
             self.assertEqual(summary['status'],'eligible_inputs')

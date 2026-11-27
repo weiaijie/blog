@@ -20,9 +20,15 @@ type DecisionAttempt = {
   availableVariants?:Record<string,boolean>; featureGaps?:Record<string,string|null>; forecastProduced?:boolean;
 };
 type Decision = DecisionClock & {status:string; latest?:DecisionAttempt|null; attempts?:DecisionAttempt[]};
+type LabelMetrics = {terminalReturn:string; maxDrawdown:string};
+type LabelAttempt = {
+  id:string; status:string; archivedAt?:string; readyAt?:string|null; archiveSha256?:string;
+  gaps?:Record<string,string|{reason:string}>; results?:Record<string,Record<string,LabelMetrics>>|null;
+};
+type OutcomeLabel = {status:string; sessions:string[]; notBefore:string|null; readyAt:string|null; attempts?:LabelAttempt[]};
 type Day = {
   day:string; expected:boolean; status:string; archivedAttempts:number; latest:Attempt|null;
-  issues:{id:string; status:string}[]; decision:Decision;
+  issues:{id:string; status:string}[]; decision:Decision; label:OutcomeLabel;
 };
 type Overview = {
   reportedAt:string; calendarUnknownYear:number|null; nextBefore:string|null;
@@ -30,6 +36,7 @@ type Overview = {
   firstQualifiedArchive:{session:string; date:string; midtermOn:string; finalOn:string}|null;
   sessions:Day[]; nextDecision:DecisionClock|null;
   decisionCounts:{expected:number; sealedOnTime:number; eligibleInputDays:number; gaps:number};
+  labelCounts:{due:number; ready:number; gaps:number; holding:number; unknownCalendar:number};
 };
 const endpoint = '/api/v1/research/observation';
 const overview = ref<Overview>();
@@ -54,6 +61,26 @@ const decisionStates:Record<string,string> = {
   missing_inputs:'基线缺输入', study_origin_pending:'已按时封存，待观察起点',
   eligible_inputs:'已按时封存，可入样候选',
 };
+const labelStates:Record<string,string> = {
+  decision_ineligible:'暂无合格决策', calendar_unverified:'持有日历待核验',
+  holding_period_incomplete:'持有期未满', mature_unsealed:'到期，待封存',
+  pending_archive:'等待归档', unverified:'标签校验失败',
+  evidence_missing:'证据缺失', evidence_complete:'标签已就绪',
+};
+const labelGaps:Record<string,string> = {
+  opening_evidence_missing:'缺少开盘证据', opening_sources_conflict:'开盘证据冲突',
+  opening_quote_differs_from_admitted_ohlc:'开盘快照与三源行情冲突',
+  ex_dividend_timing_unverified:'除息时点待核验', opening_reference_change_unexplained:'开盘参考价变化待核验',
+  price_evidence_invalid:'行情证据校验失败', price_evidence_not_ready:'行情证据未就绪',
+  anchor_price_version_differs_from_sealed_decision:'前收盘版本与封存决策不一致',
+  published_price_revision_or_missing_day:'已发布行情缺日或发生修订',
+  published_dividend_version_conflict:'分红证据版本冲突',
+};
+const labelGap = (code:string|{reason:string}) => {
+  const key=typeof code==='string' ? code : code.reason;
+  return labelGaps[key] ?? key;
+};
+const percent = (value:string) => Number(value).toLocaleString('zh-CN',{style:'percent',maximumFractionDigits:3});
 const variants:Record<string,string> = {
   baseline:'量价基线', policy:'加入政策', etf:'加入 ETF 份额净值', margin:'加入两融', combined:'全量增量',
 };
@@ -173,11 +200,21 @@ onBeforeUnmount(()=>{lifecycle.abort();detailRequest?.abort();});
         </dl>
         <p class="muted">可入样候选需等待五交易日收益与回撤标签核验。</p>
       </section>
+      <section class="decision-summary" aria-labelledby="label-title">
+        <h3 id="label-title">五交易日标签</h3>
+        <dl class="coverage-counts">
+          <div><dt>持有期未满</dt><dd>{{overview.labelCounts.holding}}</dd></div>
+          <div><dt>到期窗口</dt><dd>{{overview.labelCounts.due}}</dd></div>
+          <div><dt>标签已就绪</dt><dd>{{overview.labelCounts.ready}}</dd></div>
+          <div><dt>到期缺口</dt><dd>{{overview.labelCounts.gaps}}</dd></div>
+        </dl>
+        <p v-if="overview.labelCounts.unknownCalendar" class="muted">另有 {{overview.labelCounts.unknownCalendar}} 个候选窗口待核验交易日历。</p>
+      </section>
       <el-alert v-if="overview.calendarUnknownYear" type="warning" :closable="false"
         :title="overview.calendarUnknownYear+' 年交易日历待核验'"/>
       <div v-if="overview.sessions.length" class="table-scroll" tabindex="0" aria-label="按交易日核对采集来源">
         <table class="coverage-table">
-          <thead><tr><th scope="col">交易日</th><th scope="col">归档状态</th><th scope="col">决策封存</th>
+          <thead><tr><th scope="col">交易日</th><th scope="col">归档状态</th><th scope="col">决策封存</th><th scope="col">五日标签</th>
             <th scope="col">政策</th><th scope="col">510300</th><th scope="col">511010</th>
             <th scope="col">沪市成交</th><th scope="col">沪市两融</th><th scope="col">归档次数</th></tr></thead>
           <tbody>
@@ -186,6 +223,7 @@ onBeforeUnmount(()=>{lifecycle.abort();detailRequest?.abort();});
                 @click="openDay(row.day)">{{row.day}}</button></th>
               <td><strong>{{phases[row.status] ?? row.status}}</strong></td>
               <td>{{decisionStates[row.decision.status] ?? row.decision.status}}</td>
+              <td>{{labelStates[row.label.status] ?? row.label.status}}</td>
               <td>{{label(row.latest?.sources?.policy)}}</td>
               <td>{{label(row.latest?.sources?.etf['510300'])}}</td>
               <td>{{label(row.latest?.sources?.etf['511010'])}}</td>
@@ -229,6 +267,28 @@ onBeforeUnmount(()=>{lifecycle.abort();detailRequest?.abort();});
             </li>
           </ol>
         </section>
+        <section class="decision-detail" aria-label="当日五交易日标签">
+          <p><strong>五交易日标签 · {{labelStates[detail.label.status] ?? detail.label.status}}</strong>
+            <span v-if="detail.label.readyAt" class="muted">实际就绪 {{time(detail.label.readyAt)}}</span>
+            <span v-else-if="detail.label.notBefore" class="muted">到期 {{time(detail.label.notBefore)}}</span>
+          </p>
+          <p v-if="detail.label.sessions.length" class="muted">持有日 {{detail.label.sessions.join('、')}}</p>
+          <ol v-if="detail.label.attempts?.length" class="attempts">
+            <li v-for="attempt in detail.label.attempts" :key="attempt.id">
+              <p class="attempt-title"><strong>{{labelStates[attempt.status] ?? attempt.status}}</strong>
+                <span v-if="attempt.archivedAt">归档 {{time(attempt.archivedAt)}}</span></p>
+              <dl v-if="attempt.results?.stock_bond_50_50?.base" class="attempt-sources" aria-label="股债各半基准费用">
+                <div><dt>五日净收益</dt><dd>{{percent(attempt.results.stock_bond_50_50.base.terminalReturn)}}</dd></div>
+                <div><dt>最大收盘回撤</dt><dd>{{percent(attempt.results.stock_bond_50_50.base.maxDrawdown)}}</dd></div>
+              </dl>
+              <ul v-if="attempt.gaps && Object.keys(attempt.gaps).length" class="decision-gaps">
+                <li v-for="(gap,name) in attempt.gaps" :key="name">{{name}} · {{labelGap(gap)}}</li>
+              </ul>
+              <details v-if="attempt.archiveSha256" class="receipt"><summary>标签归档校验值</summary>
+                <code>{{attempt.archiveSha256}}</code></details>
+            </li>
+          </ol>
+        </section>
         <p v-for="issue in detail.issues" :key="issue.id">{{phases[issue.status] ?? issue.status}} · {{issue.id}}</p>
         <p v-if="!detail.attempts.length">这一天没有通过哈希核验的归档。</p>
         <ol v-else class="attempts">
@@ -267,6 +327,7 @@ onBeforeUnmount(()=>{lifecycle.abort();detailRequest?.abort();});
 .coverage-head p{margin:6px 0 0}
 .coverage-actions{display:flex;align-items:center;flex-wrap:wrap;gap:12px}
 .milestone{padding:12px 14px;background:#edf5f4;border-left:3px solid #35776c;margin:14px 0}
+.decision-summary h3{margin:0}
 .decision-summary,.decision-detail{border-top:1px solid #d8e2e8;padding-top:12px;margin:14px 0}
 .decision-detail span{margin-inline-start:10px}
 .decision-gaps{padding-inline-start:18px;margin:8px 0}

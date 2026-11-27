@@ -40,7 +40,8 @@ def live_identity(env):
     return invocation
 
 
-def check_label(root, store, folder):
+def verified_label(root, store, folder, *, observed=None):
+    observed = now() if observed is None else observed
     folder=folder.resolve()
     records=folder/'records'
     verify_bundle(records)
@@ -61,11 +62,16 @@ def check_label(root, store, folder):
             or receipt['status']!=payload['status']
             or receipt['labelReadyAt']!=(receipt['archiveVerifiedAt'] if payload['labels'] is not None else None)
             or not instant(payload['notBefore'])<=instant(payload['observedAt'])<=instant(packet['computedAt'])
-                <=instant(archived['created_at_utc'])<=ready<=now()
+                <=instant(archived['created_at_utc'])<=ready<=observed
             or set(archived['files'])!=set(hashes)
             or any(archived['files'][name]['sha256']!=digest for name,digest in hashes.items())):
         raise ValueError('Label receipt or archived record does not match')
-    return dict(receipt,entryDay=payload['entryDay'],gaps=payload['gaps'])
+    return dict(receipt,entryDay=payload['entryDay'],gaps=payload['gaps']),payload
+
+
+def check_label(root, store, folder):
+    receipt,_ = verified_label(root,store,folder)
+    return receipt
 
 
 def archive_label(root, store, invocation, payload):

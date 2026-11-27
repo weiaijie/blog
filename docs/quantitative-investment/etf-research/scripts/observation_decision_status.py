@@ -40,6 +40,7 @@ def decision_row(root, store, day, observed, *, planned, calendar_unknown=False)
             reasons = {key: value.get('reason') if isinstance(value,dict) else value for key,value in gaps.items()}
             attempts.append(dict(id=folder.name,status=verified['status'],startedAt=record['startedAt'],
                 archivedAt=verified['archiveVerifiedAt'],archiveSha256=verified['archiveSha256'],
+                receiptSha256=sha(receipt),
                 availableVariants=verified['availableVariants'],featureGaps=reasons,
                 forecastProduced=verified['forecastProduced']))
         except (OSError, ValueError, KeyError, TypeError, ArithmeticError):

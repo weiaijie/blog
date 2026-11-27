@@ -10,6 +10,7 @@ import re
 from run_research_observation import check_receipt
 from collect_sse_research_day import CALENDAR_SHA
 from observation_decision_status import FIRST_DECISION, decision_counts, decision_row, schedule
+from observation_label_status import label_counts, label_row
 from etf_research.admission import completed_date, sessions_between
 from etf_research.policy_events import TZ, instant
 from etf_research.publication import read, sha
@@ -132,8 +133,12 @@ def report(root, store, *, day=None, before=None, observed=None):
     sessions, unknown_year = expected_days(root,start,end)
     expected = {str(d) for d in sessions}
     today = observed.astimezone(TZ).date()
+    requested_day = day
     planned, decision_unknown_year = expected_days(root,FIRST_DECISION,today)
-    decisions = {day.isoformat(): decision_row(root,store,day,observed,planned=True) for day in planned}
+    decisions = {day.isoformat(): decision_row(root,store,day,observed,planned=True)
+                 for day in planned if day.isoformat()==requested_day or requested_day is None}
+    labels = {key: label_row(root,store,date.fromisoformat(key),observed,decision,details=key==requested_day)
+              for key,decision in decisions.items() if decision['status']=='eligible_inputs'}
     upcoming, _ = expected_days(root,max(today,FIRST_DECISION),today+timedelta(days=30))
     next_decision = next((row for day in upcoming if instant((row := schedule(day))['deadline'])>observed),None)
 
@@ -146,9 +151,12 @@ def report(root, store, *, day=None, before=None, observed=None):
         if day==today and decision['scheduledAt'] and row['status']=='not_scheduled':
             row['status'] = 'awaiting_market_close'
         row['decision'] = decision if row['day']==requested_day else {k:v for k,v in decision.items() if k!='attempts'}
+        label = labels.get(row['day'])
+        if label is None:
+            label = label_row(root,store,day,observed,decision,details=row['day']==requested_day)
+        row['label'] = label if row['day']==requested_day else {k:v for k,v in label.items() if k!='attempts'}
         return row
 
-    requested_day = day
     entries,errors = archive_index(root,store,config,observed)
     qualified = [r for d in expected for r,_ in entries.get(d,()) if r['forwardEligible']]
     first = min(qualified,key=lambda row:instant(row['archiveVerifiedAt']),default=None)
@@ -172,6 +180,7 @@ def report(root, store, *, day=None, before=None, observed=None):
     return dict(schemaVersion=1,reportedAt=observed.isoformat(),calendarThrough=str(sessions[-1]) if sessions else None,
                 calendarUnknownYear=unknown_year or decision_unknown_year,firstQualifiedArchive=milestone,
                 decisionCounts=decision_counts(decisions.values(),observed),
+                labelCounts=label_counts(labels.values(),observed),
                 nextDecision=next_decision,
                 counts=dict(expected=len(expected),archived=sum(d in entries for d in expected),
                             qualified=len({row['session'] for row in qualified}),
