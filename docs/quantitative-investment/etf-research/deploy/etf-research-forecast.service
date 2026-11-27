@@ -1,0 +1,13 @@
+[Unit]
+Description=Seal independent ETF forecasts before 08:55 Beijing time
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/projects/etf-research-observation
+ExecStart=%h/projects/etf-research-py312/bin/python scripts/seal_observation_forecasts.py --run --archive-store %h/projects/etf-research-observation-archive
+Environment=PYTHONPATH=src
+Environment=PYTHONDONTWRITEBYTECODE=1
+TimeoutStartSec=4min
+NoNewPrivileges=yes
+PrivateTmp=yes
+UMask=0022

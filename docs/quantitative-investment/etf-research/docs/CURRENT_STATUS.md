@@ -1,6 +1,6 @@
 # 当前进度（2026-11-27）
 
-[真实归档特征试算](../reports/2026-11-27-observation-inputs/README.md)已复算 7 个量价输入。[首批政策审核](../reports/2026-11-27-policy-review/README.md)核对 10 份候选文章，归并出 1 个独立事件。决策所需 5 个区间覆盖不足，政策特征为空；ETF 份额净值和沪市两融仍待同日证据。[独立决策封存](../reports/2026-11-27-decision-seal/README.md)完成提前验证和迟到回放，恢复复验通过。[看板和 Agent](../reports/2026-11-27-decision-coverage/README.md)已同查决策封存与输入缺口。[五日标签](../reports/2026-11-27-five-session-labels/README.md)历史验证核对六个日线日期，缺开盘证据的标签留空。[标签覆盖看板](../reports/2026-11-27-label-coverage/README.md)同时展示持有期未满、到期、实际就绪及缺口。独立研究累计 0 个合格归档交易日。
+[真实归档特征试算](../reports/2026-11-27-observation-inputs/README.md)已复算 7 个量价输入。[首批政策审核](../reports/2026-11-27-policy-review/README.md)核对 10 份候选文章，归并出 1 个独立事件。决策所需 5 个区间覆盖不足，政策特征为空；ETF 份额净值和沪市两融仍待同日证据。[独立决策封存](../reports/2026-11-27-decision-seal/README.md)完成提前验证和迟到回放，恢复复验通过。[看板和 Agent](../reports/2026-11-27-decision-coverage/README.md)已同查决策封存与输入缺口。[五日标签](../reports/2026-11-27-five-session-labels/README.md)历史验证核对六个日线日期，缺开盘证据的标签留空。[标签覆盖看板](../reports/2026-11-27-label-coverage/README.md)同时展示持有期未满、到期、实际就绪及缺口。[训练与预测封存](../reports/2026-11-27-model-forecast/README.md)完成隔离验证。独立研究累计 0 个合格归档交易日。
 
 34 项功能验收之后，[政策与市场研究页](../reports/2026-11-27-policy-pilot/README.md)已接入两次国常会、两只 ETF 份额净值、沪市融资成交的首批官方样本。看板和 Agent 同源。连续取证、市场广度及信号验证仍待完成。
 

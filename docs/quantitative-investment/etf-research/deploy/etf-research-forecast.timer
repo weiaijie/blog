@@ -1,0 +1,11 @@
+[Unit]
+Description=Run independent ETF forecasts after the decision input job
+
+[Timer]
+OnCalendar=*-*-* 08:53:00 Asia/Shanghai
+Persistent=false
+AccuracySec=1s
+Unit=etf-research-forecast.service
+
+[Install]
+WantedBy=timers.target

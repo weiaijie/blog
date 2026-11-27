@@ -1,0 +1,11 @@
+[Unit]
+Description=Check registered ETF model folds before the research decision window
+
+[Timer]
+OnCalendar=*-*-* 07:45:00 Asia/Shanghai
+Persistent=true
+AccuracySec=1s
+Unit=etf-research-model.service
+
+[Install]
+WantedBy=timers.target
