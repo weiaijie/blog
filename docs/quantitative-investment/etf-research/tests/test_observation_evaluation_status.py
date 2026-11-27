@@ -26,10 +26,12 @@ class EvaluationStatusTests(unittest.TestCase):
         calendar.parent.mkdir(parents=True)
         calendar.write_bytes((ROOT/BASE_PATH).read_bytes())
 
-    def publish(self, stamp, invocation, *, started):
+    def publish(self, stamp, invocation, *, started, economic_issue=False):
         scored=dict(score=dict(status='observation_in_progress',completedPairs=34,quarters=1,independentEvents=4),
                     shortfall=dict(pairs=86,folds=1,policyEvents=16),foldCoverage={},
                     economics=dict(selectedWindows=10,matchedWindows=7,gaps={}),coverage=[])
+        if economic_issue:
+            scored['economics']['status']='economic_evidence_unverified'
         report=dict(schemaVersion=1,asOf=stamp,status='observation_in_progress' if started else 'observation_origin_pending',
                     studyOrigin=ORIGIN if started else None,thresholds=dict(pairs=120,folds=2,policyEvents=20),
                     comparisons={'combined':scored} if started else {},folds=[])
@@ -57,7 +59,7 @@ class EvaluationStatusTests(unittest.TestCase):
         early='2026-11-26T20:45:00+08:00'
         newer='2026-11-27T20:45:00+08:00'
         a,first=self.publish(early,'a'*32,started=False)
-        b,second=self.publish(newer,'b'*32,started=True)
+        b,second=self.publish(newer,'b'*32,started=True,economic_issue=True)
         before=instant('2026-11-27T20:44:00+08:00')
         old=evaluation_view(self.root,self.store,before,ORIGIN,details=True)
         self.assertEqual(old['report'],first)
@@ -69,6 +71,7 @@ class EvaluationStatusTests(unittest.TestCase):
         self.assertEqual(pinned['report'],second)
         self.assertEqual(latest['comparisons'],pinned['comparisons'])
         self.assertEqual(pinned['comparisons']['combined']['shortfall'],dict(pairs=86,folds=1,policyEvents=16))
+        self.assertEqual(pinned['comparisons']['combined']['economicStatus'],'economic_evidence_unverified')
         self.assertNotIn('report',latest)
         (self.root/b['path']/'records/evaluation.json').write_bytes(b'{}')
         fallback=evaluation_view(self.root,self.store,after,ORIGIN,details=True)

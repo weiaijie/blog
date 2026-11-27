@@ -1,5 +1,7 @@
 # 项目计划与当前状态
 
+[结题证据分流](reports/2026-11-27-final-evidence-gate/README.md)已接入工作台与 Agent，区分未就绪、校验失败与已核验的样本不足。
+
 [月结并入夜间归档](reports/2026-11-27-monthly-export/README.md)已完成隔离验收，首份生产月报及对应增量仍待按日历触发。
 
 [空重试与盘前已有证据](reports/2026-11-27-retry-evidence/README.md)已验证。只有无新增取证的失败回执允许继续取用同日先前核验资料。

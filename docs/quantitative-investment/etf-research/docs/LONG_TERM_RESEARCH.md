@@ -20,6 +20,8 @@
 
 ## 当前接续
 
+[结题证据分流](../reports/2026-11-27-final-evidence-gate/README.md)已区分评估证据异常、等待五日标签、样本不足与经济对照单项异常。
+
 [月度覆盖的夜间导出与恢复](../reports/2026-11-27-monthly-export/README.md)已完成隔离验收，生产月结与夜间导出按实际定时回执核查。
 
 [11 月 27 日前瞻检查点](../reports/2026-11-27-forward-publication/README.md)已对齐公开仓库默认版本，确认 18 户实际发布时点及该时点之后可复现的收盘输入。

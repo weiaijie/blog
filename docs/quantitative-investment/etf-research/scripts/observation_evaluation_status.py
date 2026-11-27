@@ -69,6 +69,8 @@ def evaluation_view(root,store,observed,origin,*,details=False,archive=None):
                 folds=scoring['quarters'],policyEvents=scoring['independentEvents'] if policy else None,
                 shortfall=comparison['shortfall'],selectedWindows=economic['selectedWindows'],
                 matchedWindows=economic['matchedWindows'])
+            if 'status' in economic:
+                summary[variant]['economicStatus']=economic['status']
         else:
             zero=0 if state=='observation_origin_pending' else None
             shortfall=dict(pairs=MIN_TEST,folds=MIN_QUARTERS,policyEvents=MIN_EVENTS if policy else 0) if zero==0 else None

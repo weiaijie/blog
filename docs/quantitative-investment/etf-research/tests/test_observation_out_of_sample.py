@@ -117,6 +117,8 @@ class ObservationEvaluationTests(unittest.TestCase):
         self.assertEqual(group['score']['status'],'insufficient_samples')
         self.assertEqual(group['shortfall'],dict(pairs=0,folds=0,policyEvents=1))
         self.assertEqual(group['economics']['gaps'][str(first)],'economic_outcome_unverified')
+        self.assertEqual(group['economics']['status'],'economic_evidence_unverified')
+        self.assertNotIn('averages',group['economics'])
         self.assertEqual(report['comparisons']['etf']['score']['status'],'exploratory')
 
     def test_pending_label_and_policy_repeat_do_not_disappear(self):
@@ -133,6 +135,49 @@ class ObservationEvaluationTests(unittest.TestCase):
         self.assertEqual(report['status'],'final_labels_pending')
         self.assertTrue(any(row['entryDay']==str(other) and row['reason']=='policy_event_previously_seen'
                             for row in combined['coverage']))
+
+    def test_corrupted_evidence_holds_results_even_when_verified_pairs_exceed_threshold(self):
+        data=observations(FINAL)
+        days=sorted(data)[:6]
+        damaged_forecast,damaged_label,damaged_decision,damaged_metric,waiting_label,broken_source=days
+        data[damaged_forecast]['forecast']=dict(status='incomplete',latest=None,sealedVariants=[],
+                                                attempts=[dict(status='unverified'),dict(status='incomplete')])
+        data[damaged_label]['label']=dict(status='evidence_missing',latest=dict(archiveSha256='4'*64),
+                                          readyAt=None,attempts=[dict(status='evidence_missing'),dict(status='unverified')])
+        data[damaged_decision]['forecast']=dict(status='missing',latest=None,sealedVariants=[])
+        data[damaged_decision]['decision']=dict(status='unverified',latest=None)
+        data[damaged_metric]['label']['latest']['results']['stock_bond_50_50']['base']['terminalReturn']='0.02'
+        data[waiting_label]['label']=dict(status='evidence_missing',latest=dict(archiveSha256='5'*64),
+                                          readyAt=None,attempts=[dict(status='evidence_missing'),dict(status='pending_archive')])
+        data[broken_source]['forecast']=dict(status='no_prediction',sealedVariants=[],
+                                             latest=dict(reason='evidence_unavailable'))
+        with (patch.object(evaluation,'first_archive',return_value=ORIGIN),
+              patch.object(evaluation,'observed_days',return_value=data)):
+            report=evaluation.evaluate(ROOT,ROOT,FINAL)
+        group=report['comparisons']['combined']
+        self.assertEqual(report['status'],'final_evidence_unverified')
+        self.assertEqual(group['score']['status'],'final_evidence_unverified')
+        self.assertGreaterEqual(group['score']['completedPairs'],120)
+        self.assertNotIn('pairedImprovementInterval',group['score'])
+        self.assertNotIn('averages',group['economics'])
+        reasons={row['entryDay']:row['reason'] for row in group['coverage']}
+        self.assertEqual([reasons[str(day)] for day in days],
+                         ['forecast_unverified','label_unverified','decision_unverified',
+                          'label_outcome_unverified','label_pending_archive','forecast_unverified'])
+
+    def test_verified_missing_label_has_evidence_and_counts_toward_shortfall(self):
+        data=dict(list(observations(FINAL).items())[:25])
+        day=min(data)
+        data[day]['label']=dict(status='evidence_missing',latest=dict(archiveSha256='6'*64),readyAt=None)
+        with (patch.object(evaluation,'first_archive',return_value=ORIGIN),
+              patch.object(evaluation,'observed_days',return_value=data)):
+            group=evaluation.evaluate(ROOT,ROOT,FINAL)['comparisons']['combined']
+        self.assertEqual(group['score']['status'],'insufficient_samples')
+        self.assertEqual(group['score']['completedPairs'],24)
+        self.assertEqual(group['shortfall']['pairs'],96)
+        gap=next(row for row in group['coverage'] if row['entryDay']==str(day))
+        self.assertEqual(gap['reason'],'label_evidence_missing')
+        self.assertEqual(gap['labelArchiveSha256'],'6'*64)
 
     def test_live_no_origin_and_immutable_report_restore(self):
         with tempfile.TemporaryDirectory() as folder:

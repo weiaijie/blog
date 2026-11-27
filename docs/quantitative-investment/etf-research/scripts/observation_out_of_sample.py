@@ -24,6 +24,11 @@ ROOT=Path(__file__).resolve().parents[1]
 ALLOCATION={'stock_bond_50_50':Decimal('.5'),'bond_100':Decimal(0)}
 METRICS=('terminalReturn','maxDrawdown','commission','slippage','endingCash','availableCash','dividendReceivable')
 VARIANT_NAMES=tuple(name for name in VARIANTS if name!='baseline')
+UNVERIFIED_EVIDENCE={
+    'decision_unverified','forecast_unverified','forecast_calendar_unverified',
+    'label_unverified','label_calendar_unverified','label_outcome_unverified',
+}
+WAITING_LABELS={'label_holding_period_incomplete','label_mature_unsealed','label_pending_archive'}
 
 
 def calendar_plan(root, started, observed=None):
@@ -67,6 +72,19 @@ def observed_days(root,store,origin,schedules,as_of):
     return chosen
 
 
+def has_unverified(row):
+    return row.get('status')=='unverified' or any(
+        attempt['status']=='unverified' for attempt in row.get('attempts',()))
+
+
+def label_gap(label):
+    if has_unverified(label):
+        return 'label_unverified'
+    if any(attempt['status']=='pending_archive' for attempt in label.get('attempts',())):
+        return 'label_pending_archive'
+    return 'label_'+label['status']
+
+
 def comparison_rows(observations,variant):
     paired,staged,days=[],{},[]
     previous_events=set()
@@ -85,8 +103,13 @@ def comparison_rows(observations,variant):
                     forecastStatus=forecast['status'],labelStatus=label['status'],reason=None,
                     nonoverlapSelected=state['economic'])
         if forecast['status']!='sealed_predictions' or variant not in forecast['sealedVariants']:
-            record['reason']=(info.get('status') if info.get('status')!='predicted' else None) or (
-                last.get('reason') or 'forecast_'+forecast['status'])
+            if has_unverified(forecast) or last.get('reason')=='evidence_unavailable':
+                record['reason']='forecast_unverified'
+            elif has_unverified(state['decision']):
+                record['reason']='decision_unverified'
+            else:
+                record['reason']=(info.get('status') if info.get('status')!='predicted' else None) or (
+                    last.get('reason') or 'forecast_'+forecast['status'])
         else:
             events=tuple(sorted(set(info['eventIds'])))
             if previous_events.intersection(events):
@@ -105,7 +128,10 @@ def comparison_rows(observations,variant):
                     else:
                         staged[day]=dict(value=actual,readyAt=archived['readyAt'])
                 else:
-                    record['reason']='label_'+label['status']
+                    record['reason']=label_gap(label)
+                    missing_proof=label.get('latest') or {}
+                    if label['status']=='evidence_missing' and missing_proof.get('archiveSha256'):
+                        record['labelArchiveSha256']=missing_proof['archiveSha256']
                 paired.append(dict(window=window,fold=fold,inputsSealedAt=state['decision']['latest']['archivedAt'],
                                    forecastSealedAt=forecast['readyAt'],eventIds=events,
                                    baseline=info['baseline'],expanded=info['expanded']))
@@ -161,7 +187,7 @@ def economic_report(selected, predictions, observations, *, publish):
             continue
         label=label_projection(observations[day]['label'])
         if label is None:
-            unresolved[str(day)]='label_'+observations[day]['label']['status']
+            unresolved[str(day)]=label_gap(observations[day]['label'])
             continue
         choices=dict(fixed_50_50='stock_bond_50_50',bond_only='bond_100')
         for name in ('baseline','expanded'):
@@ -176,7 +202,9 @@ def economic_report(selected, predictions, observations, *, publish):
         accepted.append(dict(entryDay=str(day),lastSession=str(item['window'].last),choices=choices,
                              labelArchiveSha256=label['archiveSha256'],outcomes=values))
     result=dict(selectedWindows=len(selected),matchedWindows=len(accepted),gaps=unresolved)
-    if publish and accepted:
+    if publish and 'economic_outcome_unverified' in unresolved.values():
+        result['status']='economic_evidence_unverified'
+    elif publish and accepted:
         result['windows']=accepted
         result['averages']={}
         for book in accepted[0]['outcomes']:
@@ -217,9 +245,14 @@ def evaluate(root,store,observed):
         known=[p for p in predictions if p['window'].entry in labels]
         events={event for p in known for event in p['eventIds']}
         periods={p['fold'] for p in known}
-        unresolved={row['reason'] for row in days if row['reason']} & {
-            'label_holding_period_incomplete','label_mature_unsealed','label_pending_archive'}
-        publish=status=='evaluation_available' and not unresolved
+        reasons={row['reason'] for row in days}
+        group_status=status
+        if status=='evaluation_available':
+            if reasons & UNVERIFIED_EVIDENCE:
+                group_status='final_evidence_unverified'
+            elif reasons & WAITING_LABELS:
+                group_status='final_labels_pending'
+        publish=group_status=='evaluation_available'
         counts=dict(completedPairs=len(known),quarters=len(periods),independentEvents=len(events))
         missing=dict(pairs=max(0,MIN_TEST-len(known)),folds=max(0,MIN_QUARTERS-len(periods)),
                      policyEvents=max(0,MIN_EVENTS-len(events)) if 'policyActiveCount' in VARIANTS[variant] else 0)
@@ -227,7 +260,7 @@ def evaluate(root,store,observed):
             scores=paired_report(predictions,labels,{key:value['calendar'] for key,value in phase.items()},
                                  started_at=origin['archiveVerifiedAt'],observed=observed,variant=variant)
         else:
-            scores=dict(**counts,status='final_labels_pending' if status=='evaluation_available' else status)
+            scores=dict(**counts,status=group_status)
         fold_counts={str(fold):dict(sealedPairs=sum(item['fold']==fold for item in predictions),
                                     completedPairs=sum(item['fold']==fold for item in known),
                                     independentEvents=len({event for item in known if item['fold']==fold
@@ -235,9 +268,10 @@ def evaluate(root,store,observed):
                      for fold in phase}
         comparisons[variant]=dict(score=scores,shortfall=missing,coverage=days,foldCoverage=fold_counts,
                                   economics=economic_report(selected,predictions,observations,publish=publish))
-    if status=='evaluation_available' and any(
-            group['score']['status']=='final_labels_pending' for group in comparisons.values()):
-        status='final_labels_pending'
+    if status=='evaluation_available':
+        states={group['score']['status'] for group in comparisons.values()}
+        status=next((blocker for blocker in ('final_evidence_unverified','final_labels_pending')
+                     if blocker in states),status)
     folds=[dict(start=str(key),end=str(value['end']),eligibleCalendarDays=len(value['windows']),
                 observedDecisionDays=sum(item['fold']==key for item in observations.values()),
                 missingCalendarYear=value['unknownYear']) for key,value in phase.items()]

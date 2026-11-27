@@ -47,7 +47,7 @@ type Day = {
 };
 type EvidenceGate = {pairs:number; folds:number;policyEvents:number};
 type AssessmentGroup = {status:string; completedPairs:number|null; folds:number|null; policyEvents:number|null;
-  shortfall:EvidenceGate|null; selectedWindows:number|null;matchedWindows:number|null};
+  shortfall:EvidenceGate|null; selectedWindows:number|null;matchedWindows:number|null; economicStatus?:string};
 type EvaluationProgress = {
   status:string; archiveState:string; assessedAt:string|null; verifiedAt:string|null; archiveSha256:string|null;
   archiveIssues:{unverified:number;pending:number}; originSinceArchive:boolean;
@@ -147,7 +147,8 @@ const forecastStates:Record<string,string> = {
 const evaluationStates:Record<string,string> = {
   observation_origin_pending:'等待首个合格归档', awaiting_evaluation:'等待评估任务封存',
   observation_in_progress:'观察期间，累计覆盖证据', evaluation_available:'已至评估阶段',
-  final_labels_pending:'等待最后一段标签', calendar_unverified:'交易日历待核验',
+  final_labels_pending:'等待五日标签', final_evidence_unverified:'评估证据待核验',
+  economic_evidence_unverified:'经济对照证据待核验', calendar_unverified:'交易日历待核验',
   insufficient_samples:'样本不足', improved:'达到主要检验的改善标准', not_established:'尚未达到改善标准',
   uncertain:'区间无法确定', exploratory:'探索性结果',
 };
@@ -365,7 +366,9 @@ onBeforeUnmount(()=>{lifecycle.abort();detailRequest?.abort();});
                 <td>{{name==='policy' || name==='combined' ? metricProgress(group.policyEvents,overview.evaluation.thresholds.policyEvents) : '—'}}
                   <small v-if="group.shortfall?.policyEvents">还差 {{group.shortfall.policyEvents}} 个</small>
                 </td>
-                <td>{{group.selectedWindows===null ? '待核验' : metricProgress(group.matchedWindows,group.selectedWindows)}}</td>
+                <td>{{group.selectedWindows===null ? '待核验' : metricProgress(group.matchedWindows,group.selectedWindows)}}
+                  <small v-if="group.economicStatus">{{evaluationStates[group.economicStatus] ?? group.economicStatus}}</small>
+                </td>
               </tr>
             </tbody>
           </table>
