@@ -2,6 +2,7 @@
 import { onBeforeUnmount, onMounted, ref } from 'vue';
 import { apiUrl } from '../domain';
 import { getJson } from '../state';
+import ObservationCalendar from './ObservationCalendar.vue';
 import ObservationMonthly from './ObservationMonthly.vue';
 import ObservationContinuity from './ObservationContinuity.vue';
 
@@ -417,8 +418,7 @@ onBeforeUnmount(()=>{lifecycle.abort();detailRequest?.abort();});
       </details>
       <ObservationContinuity />
       <ObservationMonthly />
-      <el-alert v-if="overview.calendarUnknownYear" type="warning" :closable="false"
-        :title="overview.calendarUnknownYear+' 年交易日历待核验'"/>
+      <ObservationCalendar />
       <div v-if="overview.sessions.length" class="table-scroll" tabindex="0" aria-label="按交易日核对采集来源">
         <table class="coverage-table">
           <thead><tr><th scope="col">交易日</th><th scope="col">归档状态</th><th scope="col">决策封存</th><th scope="col">五日标签</th><th scope="col">预测</th>

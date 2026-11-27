@@ -9,11 +9,12 @@ from unittest.mock import patch
 
 from etf_research.exchange_calendar import calendar_at
 from etf_research.policy_events import instant
-from etf_research.publication import read, sha
+from etf_research.publication import atomic, read, seal, sha
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts'))
 import discover_exchange_calendar as discovery
+from observation_calendar_status import calendar_report
 from pack_observation_evidence import export, restore_receipt
 
 BASE=ROOT/'data/snapshots'
@@ -62,9 +63,13 @@ class ExchangeCalendarDiscoveryTests(unittest.TestCase):
                 target.parent.mkdir(parents=True,exist_ok=True)
                 shutil.copyfile(ROOT/name,target)
 
-            def capture(folder,year):
+            def capture(folder,year,*,trigger):
                 self.assertEqual(year,2027)
                 shutil.copytree(WAITING,folder)
+                (folder/'manifest.json').unlink()
+                started=read(folder/'started.json')
+                atomic(folder/'started.json',dict(started,trigger=trigger))
+                seal(folder)
                 return discovery.verify(folder)
 
             with (patch.object(discovery,'collect',side_effect=capture),
@@ -82,3 +87,21 @@ class ExchangeCalendarDiscoveryTests(unittest.TestCase):
             restore_receipt(pack,receipt['path']+'/receipt.json',restored)
             self.assertEqual(read(restored/receipt['path']/'receipt.json'),receipt)
             self.assertEqual(discovery.verify(restored/receipt['path']/'records'),discovery.verify(WAITING))
+
+            earliest=instant('2026-11-28T01:07:50+08:00')
+            self.assertIsNone(calendar_report(ROOT,root,store,earliest,year=2027)['latestManual'])
+            pending=calendar_report(ROOT,root,store,tick-timedelta(microseconds=1),year=2027)
+            self.assertIsNone(pending['latestScheduled'])
+            self.assertEqual(pending['latestManual']['status'],'waiting_for_both_exchanges')
+            self.assertEqual(pending['scheduledIssues'][0]['state'],'pending_archive')
+            visible=calendar_report(ROOT,restored,pack/'archive',tick,year=2027)
+            self.assertEqual(visible['admissionState'],'awaiting_exchange_evidence')
+            self.assertEqual(visible['verifiedScheduledChecks'],1)
+            self.assertEqual(visible['latestScheduled']['archiveSha256'],receipt['archiveSha256'])
+
+            path=restored/receipt['path']/'receipt.json'
+            atomic(path,dict(receipt,trigger=dict(trigger,invocationId='b'*32)))
+            damaged=calendar_report(ROOT,restored,pack/'archive',tick,year=2027)
+            self.assertEqual(damaged['scheduledIssues'][0]['state'],'unverified')
+            self.assertIsNone(damaged['latestScheduled'])
+            self.assertIsNotNone(damaged['latestManual'])

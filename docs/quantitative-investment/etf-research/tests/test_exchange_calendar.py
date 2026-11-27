@@ -12,6 +12,7 @@ sys.path.insert(0,str(ROOT/'scripts'))
 from capture_exchange_calendar import register
 from collect_policy_etf_day import following_session
 from collect_sse_research_day import previous_session
+from observation_calendar_status import calendar_report
 from observation_inputs import date_context
 from observation_labels import label_window
 from observation_status import expected_days
@@ -88,6 +89,13 @@ class ExchangeCalendarTests(unittest.TestCase):
         self.assertNotEqual(after.digest,BASE_SHA)
         self.assertEqual(sha(folder/'manifest.json'),marker['manifestSha256'])
         self.assertIn(REGISTRY+'/2027.json',after.extensions)
+        historical=calendar_report(ROOT,self.root,self.root/'archive',before,year=2027)
+        current=calendar_report(ROOT,self.root,self.root/'archive',AVAILABLE,year=2027)
+        self.assertEqual(historical['admissionState'],'awaiting_exchange_evidence')
+        self.assertIsNone(historical['admission'])
+        self.assertEqual(current['admissionState'],'admitted')
+        self.assertEqual(current['admission']['admittedAt'],marker['admittedAt'])
+        self.assertEqual(current['admission']['registrySha256'],sha(self.root/REGISTRY/'2027.json'))
         self.assertEqual(calendar_at(self.root,AVAILABLE,pinned=BASE_SHA).digest,BASE_SHA)
         self.assertNotIn('2027',calendar_at(self.root,AVAILABLE,pinned=BASE_SHA).ranges)
         self.assertEqual(calendar_at(self.root,AVAILABLE,pinned=after.digest),after)

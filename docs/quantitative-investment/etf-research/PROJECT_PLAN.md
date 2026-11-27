@@ -1,5 +1,7 @@
 # 项目计划与当前状态
 
+[工作台与 Agent 的跨年日历证据](reports/2026-11-28-exchange-calendar-evidence-view/README.md)展示定时归档、手工复核和正式登记状态。2027 年仍待两家交易所原文。
+
 [年度休市公告自动发现](reports/2026-11-28-exchange-calendar-discovery/README.md)接上沪深交易所两条正式渠道。2026 正对照复算一致，2027 保留待核验状态。
 
 [五日标签统一绑定盘前决策](reports/2026-11-28-observation-label-decision-binding/README.md)按实际封存时间同步标签调度、覆盖接口和工作台。错版标签保留并等待正确的核验结果。

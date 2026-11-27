@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-28T01:19:54.521761+08:00",
+  "timer": {
+    "ActiveState": "active",
+    "UnitFileState": "enabled",
+    "NextElapseUSecRealtime": "Sat 2026-11-28 08:05:00 CST",
+    "LastTriggerUSec": ""
+  },
+  "before": {
+    "asOf": "2026-11-28T01:07:50+08:00",
+    "latestManual": null,
+    "admission": "awaiting_exchange_evidence"
+  },
+  "after": {
+    "asOf": "2026-11-28T01:08:00+08:00",
+    "latestManual": "2026-11-27T17:07:51.574581+00:00",
+    "sourceStatuses": {
+      "sse": "not_listed",
+      "szse": "not_listed"
+    },
+    "admission": "awaiting_exchange_evidence"
+  },
+  "scheduledVerified": 0
+}

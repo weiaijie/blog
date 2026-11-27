@@ -234,6 +234,27 @@ class Handler(BaseHTTPRequestHandler):
             except (OSError,ValueError,KeyError,TypeError,ArithmeticError,ImportError) as exc:
                 self.log_error('Forward milestone report unavailable: %s',exc)
                 status,body = 503,interactive.encode({'error':'前瞻模拟账户的检查点暂无法核验。'})
+        elif path == '/api/v1/research/observation/calendar-watch':
+            kind = 'application/json'
+            try:
+                from observation_calendar_status import calendar_report, parse_year
+                from observation_status import production_paths
+                from etf_research.policy_events import instant
+                params = interactive.request_params(url.query, (), ('year','asOf'))
+                now = datetime.now(timezone.utc)
+                try:
+                    year = parse_year(params['year']) if 'year' in params else None
+                    observed = instant(params['asOf']) if 'asOf' in params else now
+                    if observed>now:
+                        raise ValueError('核查时点须早于或等于当前时间。')
+                except ValueError as exc:
+                    raise interactive.InputError(str(exc)) from exc
+                body = interactive.encode(calendar_report(ROOT,*production_paths(),observed,year=year))
+            except interactive.InputError as exc:
+                status,body = 400,interactive.encode({'error':str(exc)})
+            except (OSError,ValueError,KeyError,TypeError,ImportError) as exc:
+                self.log_error('Calendar evidence unavailable: %s',exc)
+                status,body = 503,interactive.encode({'error':'年度交易日历证据暂无法核验。'})
         elif path == '/api/v1/research/observation/runtime-health':
             kind = 'application/json'
             try:

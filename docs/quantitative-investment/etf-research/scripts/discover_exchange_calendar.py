@@ -144,11 +144,14 @@ def inspect(folder,year,checked):
                 status=status,sources=sources,annualManifestSha256=verified)
 
 
-def collect(folder,year):
+def collect(folder,year,*,trigger=None):
     folder.mkdir(parents=True,exist_ok=False)
     policy = load_policy()
     save_transport(folder,policy)
-    create(folder/'started.json',dict(year=year,startedAt=now().isoformat()))
+    begin = dict(year=year,startedAt=now().isoformat())
+    if trigger is not None:
+        begin['trigger'] = trigger
+    create(folder/'started.json',begin)
     sse = fetch(folder,'sse',SSE,policy)
     sse['receivedAt'] = now().isoformat()
     szse = fetch(folder,'szse',SZSE,policy,additional_hosts=(SOURCES['szse'],),
@@ -176,17 +179,21 @@ def verify(folder):
     return outcome
 
 
+def target_year(calendar,observed):
+    local = observed.astimezone(TZ)
+    return local.year+1 if str(local.year) in calendar.ranges and local.month>=11 else local.year
+
+
 def watch(root,store,trigger,started):
-    local = started.astimezone(TZ)
-    ranges = calendar_at(root,started).ranges
-    year = local.year if str(local.year) not in ranges else local.year+1
-    if str(year) in ranges or (year>local.year and local.month<11):
+    calendar = calendar_at(root,started)
+    year = target_year(calendar,started)
+    if str(year) in calendar.ranges:
         return dict(year=year,status='no_pending_calendar_in_scope')
     with lock(root/'.runtime/calendar-watch.lock'):
         stamp = started.strftime('%Y%m%dT%H%M%SZ')+'-'+uuid4().hex[:8]
         folder = root/LOG/str(year)/stamp
         records = folder/'records'
-        outcome = collect(records,year)
+        outcome = collect(records,year,trigger=trigger)
         bounds = [p.relative_to(root).as_posix() for p in records.rglob('*') if p.is_file()]
         captured = archive(root,store,[*bounds,*BINDINGS])
         safe = verify_archive(store,captured['snapshot'])
