@@ -1,5 +1,7 @@
 # ETF 前瞻研究长期目标
 
+[GitHub 批次发布准备](../reports/2026-11-28-publication-preparation/README.md)已接到独立夜间证据链，按真实回执生成缺少的增量和公开目录，已用首份生产批次完成读回复算。
+
 [盘前 08:34 补采](../reports/2026-11-28-predecision-retry/README.md)增加一次仅针对最新未合格日的取证。11 月 28 日 02:56 的人工原始归档仍缺 11 月 27 日两融。
 
 [公开证据结题入口](../reports/2026-11-28-observation-closeout/README.md)已可从 GitHub 恢复独立评估并按原时点复算，接上同期的原 18 户实际发布。正式结题随完整观察期推进。

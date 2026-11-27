@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-28T03:19:17.765420+08:00",
+  "realCurrent": {
+    "schemaVersion": 1,
+    "baseCatalogSha256": "3b8332f674325f482ee690a58b2eedeb15999527e5f29b91c786db75d3119662",
+    "unpublishedBatchIds": [],
+    "currentlyPublishedThrough": "2026-11-27T14:20:00.647868+00:00",
+    "status": "up_to_date"
+  },
+  "firstActualBatchPrepared": {
+    "schemaVersion": 1,
+    "baseCatalogSha256": "cc99c92c891e8b8f16f55a34820f80dc7739d99300eadf3170c192b9f3fda4e2",
+    "unpublishedBatchIds": [
+      "20261127T142000647868Z-2349c657"
+    ],
+    "currentlyPublishedThrough": "2026-11-27T21:10:38+08:00",
+    "status": "prepared",
+    "preparedCatalogSha256": "509c02f66187e2d236061c67db47c733912b3705da3b70d8a2f00d4d058559a1",
+    "preparedThrough": "2026-11-27T14:20:00.647868+00:00",
+    "preparedManifestSha256": "ee10d5ab24523de5cf91380566b9ab431816c516fa1bc32ac606836b8ef27e33"
+  },
+  "samePublishedReceipt": true,
+  "samePublishedPackManifest": true,
+  "stageRecovery": {
+    "asOf": "2026-11-27T14:20:00.647868+00:00",
+    "after": null,
+    "receipts": {
+      "evaluation": 1,
+      "observation": 11,
+      "policy_review": 2
+    },
+    "archives": 12,
+    "files": 273,
+    "restoredArchiveFiles": 683,
+    "activates_services": false
+  },
+  "asOfReplayMatches": true
+}
