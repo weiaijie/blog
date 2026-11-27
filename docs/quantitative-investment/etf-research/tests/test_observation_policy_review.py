@@ -1,8 +1,11 @@
 from collections import Counter
+from copy import deepcopy
 from datetime import datetime, timedelta
 from pathlib import Path
 import sys
+from tempfile import TemporaryDirectory
 import unittest
+from unittest.mock import patch
 
 from etf_research.policy_events import TZ, instant
 from etf_research.publication import read
@@ -10,9 +13,11 @@ from etf_research.publication import read
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT/'scripts'))
 
+from observation_archive import open_attempt
 from observation_policy_inputs import assess, expected_slots, scheduled_slot
-from review_policy_observations import build_review, event_ledger, policy_ids, verify_review
+from review_policy_observations import build_review, event_ledger, policy_ids, seal_review, verify_review
 from observation_inputs import assemble
+from pack_observation_evidence import restore_ledger
 
 REPORT = ROOT/'reports/2026-11-27-policy-review'
 REVIEW = ROOT/'reports/research-policy-reviews/2026-11-27-capture-092054'
@@ -59,6 +64,37 @@ class ObservationPolicyReviewTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'candidate body'):
             build_review(ROOT, STORE, request)
 
+    def test_incomplete_capture_review_seals_only_verified_official_articles(self):
+        requested=read(REPORT/'decisions.json')
+        pack=ROOT/'reports/2026-11-27-portable-observation/pack'
+        store=pack/'archive'
+        with TemporaryDirectory() as work:
+            root=Path(work)/'ledger'
+            restore_ledger(pack,root)
+            config=read(root/'config/research_observation.json')
+            captured=open_attempt(root,store,root/requested['attempt'],config)
+            incomplete=deepcopy(captured)
+            policy=incomplete['policyEtf']['policy']
+            policy.update(status='coverage_incomplete',issues={'csrc_home':'simulated failure'})
+            partial_path='reports/research-observation/runs/2026-11-27/isolated-partial-capture'
+            incomplete['id']=partial_path
+            request=dict(requested,attempt=partial_path)
+
+            def open_source(project,archive,folder,settings):
+                if folder==project/partial_path:
+                    return incomplete
+                return open_attempt(project,archive,folder,settings)
+
+            folder=Path(work)/'review'
+            with patch('review_policy_observations.open_attempt',side_effect=open_source):
+                result=seal_review(root,store,request,folder)
+                self.assertEqual(result['scope'],'verified_candidates_from_incomplete_capture')
+                self.assertEqual(verify_review(root,store,folder),result)
+                self.assertEqual(len(result['entries']),len(captured['policyEtf']['policy']['candidates']))
+                policy['candidates']=[]
+                with self.assertRaisesRegex(ValueError,'No verified policy candidates'):
+                    build_review(root,store,dict(request,decisions=[]))
+
     def test_production_probe_preserves_unavailable_policy_feature(self):
         saved = read(REPORT/'coverage-probe.json')
         actual = assemble(ROOT, ROOT, STORE, instant(saved['deadline']).date(),
@@ -91,6 +127,11 @@ class ObservationPolicyReviewTests(unittest.TestCase):
         self.assertEqual(assess(cutoffs, polls, reviews, end)['coveredIntervals'], 5)
         self.assertEqual(assess(cutoffs, polls, reviews, end)['count'], 0)
         self.assertIsNone(assess(cutoffs, polls[1:], reviews, end)['count'])
+        incomplete=deepcopy(polls[0])
+        incomplete['policyEtf']['policy']['status']='coverage_incomplete'
+        scope=assess(cutoffs,[incomplete,*polls[1:]],reviews,end)
+        self.assertIsNone(scope['count'])
+        self.assertIn(slots[0].isoformat(),scope['intervals'][0]['missingPolls'])
         self.assertIsNone(assess(cutoffs, polls, reviews[1:], end)['count'])
         late_review = dict(reviews[0], sealedAt=(cutoffs[1]+timedelta(seconds=1)).isoformat())
         self.assertIsNone(assess(cutoffs, polls, [late_review, *reviews[1:]], end)['count'])

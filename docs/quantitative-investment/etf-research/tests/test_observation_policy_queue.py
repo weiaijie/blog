@@ -87,3 +87,22 @@ class PolicyQueueTests(unittest.TestCase):
         self.assertEqual([row['revisionKey'] for row in pending],[changed['revisionKey']])
         self.assertEqual(pending[0]['previousVersions'],[old['revisionKey']])
         self.assertEqual(pending[0]['firstSeen']['attempt'],'capture/1')
+
+
+    def test_partial_policy_capture_still_queues_verifiable_articles(self):
+        def incomplete_capture(store,receipt,record):
+            captured=policy_inventory(store,receipt,record)
+            if receipt['attempt']==EARLY:
+                return dict(captured,status='coverage_incomplete',issues={'gov_list':'simulated failure'})
+            return captured
+        with patch('observation_policy_queue.policy_inventory',side_effect=incomplete_capture):
+            view=queue(self.ledger,self.store,at('19:45'),draft=EARLY)
+        self.assertEqual(view['completeCaptures'],8)
+        self.assertEqual(view['observedRevisions'],11)
+        self.assertEqual(view['emptyPending'],[])
+        self.assertEqual(len(view['incompleteCaptures']),1)
+        self.assertEqual(view['incompleteCaptures'][0]['attempt'],EARLY)
+        self.assertEqual(view['draft']['captureStatus'],'coverage_incomplete')
+        self.assertEqual(view['pending'][0]['revisionKey'],FOLLOWUP)
+        self.assertEqual(view['pending'][0]['firstSeen']['captureStatus'],'coverage_incomplete')
+        self.assertEqual(view['draft']['requiresReview'],view['pending'])

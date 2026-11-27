@@ -70,7 +70,8 @@ const policyReviewEndpoint = endpoint+'/policy-review';
 const policyQueueEndpoint = endpoint+'/policy-queue';
 type PolicyQueue = {
   asOf:string; completeCaptures:number; reviewSummary:PolicyReview;
-  pending:{revisionKey:string;title:string;url:string;receivedAt:string;appearances:number;previousVersions:string[]}[];
+  pending:{revisionKey:string;title:string;url:string;receivedAt:string;appearances:number;previousVersions:string[];
+    firstSeen:{captureStatus?:string}}[];
   emptyPending:unknown[]; incompleteCaptures:unknown[]; archiveIssues:unknown[];
 };
 const policyQueue = ref<PolicyQueue>();
@@ -393,6 +394,7 @@ onBeforeUnmount(()=>{lifecycle.abort();detailRequest?.abort();});
             <li v-for="item in policyQueue.pending" :key="item.revisionKey">
               <a :href="item.url" target="_blank" rel="noopener">{{item.title}} ↗</a>
               <span v-if="item.previousVersions.length"> · 同网址出现新版本</span>
+              <span v-if="item.firstSeen.captureStatus==='coverage_incomplete'"> · 原文已核验，该批覆盖不完整</span>
               <small class="queue-capture">首次取回 {{time(item.receivedAt)}} · 见于 {{item.appearances}} 份采集</small>
             </li>
           </ul>

@@ -1,5 +1,7 @@
 # 项目计划与当前状态
 
+[政策部分缺证时的原文待审](reports/2026-11-27-policy-partial-review/README.md)已接入，保留已核验候选、未完成来源及原五区间入样门。
+
 [独立研究运行健康](reports/2026-11-27-independent-runtime-health/README.md)已接入九个定时服务的触发及退出记录，工作台和 Agent 同查。
 
 [18 户按真实发布时点回看](reports/2026-11-27-forward-asof/README.md)已接入工作台和 Agent。晚到补发按原发布时间进入历史查询。

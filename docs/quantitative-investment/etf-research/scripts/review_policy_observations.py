@@ -40,6 +40,11 @@ def compact(text):
     return ''.join(text.split())
 
 
+def reviewable_capture(capture):
+    return capture['status']=='archived' or (
+        capture['status']=='coverage_incomplete' and bool(capture['candidates']))
+
+
 def build_review(root, store, requested, *, completed_at=None):
     config = read(root/'config/research_observation.json')
     folder = inside(root,requested['attempt'])
@@ -50,8 +55,8 @@ def build_review(root, store, requested, *, completed_at=None):
     if attempt is None:
         raise ValueError('Policy capture unavailable')
     capture = attempt['policyEtf']['policy']
-    if capture['status']!='archived':
-        raise ValueError('Policy catalogue or candidate capture is incomplete')
+    if not reviewable_capture(capture):
+        raise ValueError('No verified policy candidates in the incomplete capture')
     candidates = {c['revisionKey']:c for c in capture['candidates']}
     decisions = {d['revisionKey']:d for d in requested['decisions']}
     if (len(candidates)!=len(capture['candidates']) or len(decisions)!=len(requested['decisions'])
@@ -90,9 +95,11 @@ def build_review(root, store, requested, *, completed_at=None):
     completed = now if completed_at is None else instant(completed_at)
     if not instant(attempt['readyAt']) <= completed <= now:
         raise ValueError('Review time precedes source archive or is in the future')
+    scope = ('candidate_inventory_only' if capture['status']=='archived'
+             else 'verified_candidates_from_incomplete_capture')
     return dict(schemaVersion=1,completedAt=completed.isoformat(),attempt=attempt['id'],
                 archiveVerifiedAt=attempt['readyAt'],attemptEvidence=attempt['refs'],
-                scope='candidate_inventory_only',entries=entries)
+                scope=scope,entries=entries)
 
 
 def verify_review(root, store, folder):

@@ -7,7 +7,7 @@ from pathlib import Path
 
 from observation_status import archive_index, archived_bytes, production_paths
 from policy_source_watch import article_url
-from review_policy_observations import reviews_as_of, summarize_reviews
+from review_policy_observations import reviewable_capture, reviews_as_of, summarize_reviews
 from etf_research.evidence_archive import safe_path
 from etf_research.policy_events import instant
 from etf_research.publication import read
@@ -80,12 +80,15 @@ def queue(root, store, observed, *, draft=None):
         if policy is None or policy['status']!='archived':
             incomplete.append(dict(**detail,state='capture_incomplete',
                                    issues=policy['issues'] if policy else record['errors']))
-            continue
-        complete_count+=1
+            if policy is None or not reviewable_capture(policy):
+                continue
+            detail['captureStatus']='coverage_incomplete'
+        else:
+            complete_count+=1
         if not policy['candidates'] and attempt not in checked_attempts:
             empty.append(detail)
         if draft==attempt:
-            draft_rows=policy['candidates']
+            draft_rows=policy
         for item in policy['candidates']:
             key=item['revisionKey']
             prior=by_url.setdefault(item['url'],set())
@@ -104,12 +107,14 @@ def queue(root, store, observed, *, draft=None):
                                for row in issues])
     if draft is not None:
         if draft_rows is None:
-            raise ValueError('Choose a completed policy capture visible at that cutoff')
-        keys=[row['revisionKey'] for row in draft_rows]
+            raise ValueError('Choose an archived capture with verifiable policy evidence visible at that cutoff')
+        keys=[row['revisionKey'] for row in draft_rows['candidates']]
         if len(set(keys))!=len(keys):
             raise ValueError('Duplicate policy revision in requested capture')
         result['draft']=dict(attempt=draft,reusedDecisions=[reviewed[key] for key in keys if key in reviewed],
                              requiresReview=[seen[key] for key in keys if key not in reviewed])
+        if draft_rows['status']=='coverage_incomplete':
+            result['draft']['captureStatus']='coverage_incomplete'
     return result
 
 
