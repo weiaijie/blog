@@ -1,5 +1,7 @@
 # 项目计划与当前状态
 
+[政策待审队列](reports/2026-11-27-policy-queue/README.md)按官方 URL 和原文 SHA256 识别重复与修订，保留审核前后的真实时点。
+
 [首 20 个应采交易日连续性](reports/2026-11-27-observation-continuity/README.md)已接入。区分实际归档、已核验定时时点和截止前完整数据。当前开始跟踪 1 日，首个截止待 11 月 30 日 08:55。
 
 [18 户前瞻复盘](reports/2026-11-27-forward-milestones/README.md)已按同一检查点接入工作台和 Agent。当前显示 17 个估值日、16 个收益区间以及 6、12、24 个月的到期进度。

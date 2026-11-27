@@ -183,14 +183,18 @@ def policy_ids(ledger, cutoff):
     return {e['event_id'] for e in select_as_of(ledger,cutoff.isoformat())}
 
 
-def review_progress(root,store,observed):
-    reviews = [review for _,review in reviews_as_of(root,store,observed)]
+def summarize_reviews(reviews,observed):
     ledger = event_ledger(reviews)
     dispositions = {row['decision']['revisionKey']:row['decision']['disposition']
                     for review in reviews for row in review['entries']}
     return dict(schemaVersion=1,asOf=observed.isoformat(),reviewedRevisions=len(dispositions),
                 independentEventIds=sorted(policy_ids(ledger,observed)),followups=ledger['followups'],
                 lastReviewAt=max((review['sealedAt'] for review in reviews),key=instant,default=None))
+
+
+def review_progress(root,store,observed):
+    reviews = [review for _,review in reviews_as_of(root,store,observed)]
+    return summarize_reviews(reviews,observed)
 
 
 if __name__=='__main__':

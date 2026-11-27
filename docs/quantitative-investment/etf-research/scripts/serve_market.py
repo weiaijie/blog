@@ -233,11 +233,10 @@ class Handler(BaseHTTPRequestHandler):
             except (OSError,ValueError,KeyError,TypeError,ImportError) as exc:
                 self.log_error('Independent continuity audit unavailable: %s',exc)
                 status,body = 503,interactive.encode({'error':'独立采集连续性暂无法核验。'})
-        elif path == '/api/v1/research/observation/policy-review':
+        elif path in ('/api/v1/research/observation/policy-review','/api/v1/research/observation/policy-queue'):
             kind = 'application/json'
             try:
                 from observation_status import production_paths
-                from review_policy_observations import review_progress
                 from etf_research.policy_events import instant
                 params = interactive.request_params(url.query, (), ('asOf',))
                 now = datetime.now(timezone.utc)
@@ -250,7 +249,12 @@ class Handler(BaseHTTPRequestHandler):
                 root,store = (path.resolve() for path in production_paths())
                 if not (root/'reports/research-observation').is_dir() or not (store/'snapshots').is_dir():
                     raise FileNotFoundError('Observation review archive unavailable')
-                body = interactive.encode(review_progress(root,store,observed))
+                if path.endswith('/policy-queue'):
+                    from observation_policy_queue import queue
+                    body = interactive.encode(queue(root,store,observed))
+                else:
+                    from review_policy_observations import review_progress
+                    body = interactive.encode(review_progress(root,store,observed))
             except interactive.InputError as exc:
                 status,body = 400,interactive.encode({'error':str(exc)})
             except (OSError,ValueError,KeyError,TypeError,ImportError) as exc:

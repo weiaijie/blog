@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "asOf": "2026-11-27T21:38:00+08:00",
+  "completeCaptures": 10,
+  "observedRevisions": 11,
+  "reviewedRevisions": 11,
+  "pending": [],
+  "emptyPending": [],
+  "incompleteCaptures": [],
+  "reviewSummary": {
+    "schemaVersion": 1,
+    "asOf": "2026-11-27T21:38:00+08:00",
+    "reviewedRevisions": 11,
+    "independentEventIds": [
+      "state-council-2026-11-27-stabilization"
+    ],
+    "followups": [
+      {
+        "parentEventId": "state-council-2026-11-27-stabilization",
+        "url": "https://www.csrc.gov.cn/csrc/c100028/c7673674/content.shtml",
+        "publishedAt": "2026-11-27T19:10:03+08:00",
+        "sha256": "6fdb865ccdbd2037c13d0bd0d5b6907db54f9c7a1ded75e1280712c5bede65f1",
+        "reviewedAt": "2026-11-27T12:25:15.443387+00:00",
+        "evidencePath": "reports/research-observation/runs/2026-11-27/20261127T115450Z-c4c154d1/inputs/20261127T115450Z-562e98af-policy-etf-day/policy_054d847ad3b60d82979c.body"
+      }
+    ],
+    "lastReviewAt": "2026-11-27T12:25:15.443387+00:00"
+  },
+  "archiveIssues": []
+}

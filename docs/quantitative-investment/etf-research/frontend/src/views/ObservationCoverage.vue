@@ -66,6 +66,13 @@ type Overview = {
 const endpoint = '/api/v1/research/observation';
 const evaluationEndpoint = endpoint+'/evaluation';
 const policyReviewEndpoint = endpoint+'/policy-review';
+const policyQueueEndpoint = endpoint+'/policy-queue';
+type PolicyQueue = {
+  asOf:string; completeCaptures:number; reviewSummary:PolicyReview;
+  pending:{revisionKey:string;title:string;url:string;receivedAt:string;appearances:number;previousVersions:string[]}[];
+  emptyPending:unknown[]; incompleteCaptures:unknown[]; archiveIssues:unknown[];
+};
+const policyQueue = ref<PolicyQueue>();
 type PolicyReview = {
   reviewedRevisions:number; independentEventIds:string[]; lastReviewAt:string|null;
   followups:{parentEventId:string;url:string;publishedAt:string;sha256:string;reviewedAt:string}[];
@@ -187,17 +194,23 @@ const turnover = (value:string|null) => value===null ? '' : (Number(value)/1e8).
   maximumFractionDigits:2,
 })+' 亿元';
 
-async function loadPolicyReview(event: Event) {
-  if (!(event.currentTarget as HTMLDetailsElement).open || policyReview.value || policyReviewBusy.value) return;
+async function refreshPolicyReview() {
+  if (policyReviewBusy.value) return;
   policyReviewBusy.value = true;
   policyReviewError.value = '';
   try {
-    policyReview.value = await getJson<PolicyReview>(policyReviewEndpoint,lifecycle.signal);
+    const pending = await getJson<PolicyQueue>(policyQueueEndpoint,lifecycle.signal);
+    policyQueue.value = pending;
+    policyReview.value = pending.reviewSummary;
   } catch (error) {
     if (!lifecycle.signal.aborted) policyReviewError.value = (error as Error).message;
   } finally {
     policyReviewBusy.value = false;
   }
+}
+
+function loadPolicyReview(event: Event) {
+  if ((event.currentTarget as HTMLDetailsElement).open) void refreshPolicyReview();
 }
 
 async function load(before?:string) {
@@ -370,7 +383,25 @@ onBeforeUnmount(()=>{lifecycle.abort();detailRequest?.abort();});
             <a :href="item.url" target="_blank" rel="noopener">公告原文 ↗</a>
           </li>
         </ul>
-        <a :href="policyReviewEndpoint" target="_blank" rel="noopener">查看政策审核 JSON ↗</a>
+        <div v-if="policyQueue">
+          <p>待审 {{policyQueue.pending.length}} 个版本 · {{policyQueue.completeCaptures}} 份完整政策采集</p>
+          <ul v-if="policyQueue.pending.length" class="decision-gaps">
+            <li v-for="item in policyQueue.pending" :key="item.revisionKey">
+              <a :href="item.url" target="_blank" rel="noopener">{{item.title}} ↗</a>
+              <span v-if="item.previousVersions.length"> · 同网址出现新版本</span>
+              <small class="queue-capture">首次取回 {{time(item.receivedAt)}} · 见于 {{item.appearances}} 份采集</small>
+            </li>
+          </ul>
+          <p v-if="policyQueue.emptyPending.length || policyQueue.incompleteCaptures.length || policyQueue.archiveIssues.length" class="muted">
+            空结果待确认 {{policyQueue.emptyPending.length}} 份 · 不完整取证 {{policyQueue.incompleteCaptures.length}} 份
+            · 归档异常或待确认 {{policyQueue.archiveIssues.length}} 份
+          </p>
+        </div>
+        <div class="policy-review-links">
+          <button type="button" :disabled="policyReviewBusy" @click="refreshPolicyReview">刷新审核</button>
+          <a :href="policyQueueEndpoint" target="_blank" rel="noopener">待审队列 JSON ↗</a>
+          <a :href="policyReviewEndpoint" target="_blank" rel="noopener">审核结果 JSON ↗</a>
+        </div>
       </details>
       <ObservationContinuity />
       <ObservationMonthly />
@@ -538,6 +569,8 @@ onBeforeUnmount(()=>{lifecycle.abort();detailRequest?.abort();});
 .coverage-head p{margin:6px 0 0}
 .policy-review summary{cursor:pointer;font-weight:600}
 .policy-review li{overflow-wrap:anywhere}
+.policy-review-links{display:flex;gap:8px 16px;align-items:center;flex-wrap:wrap}
+.queue-capture{display:block;color:#526b7b}
 .coverage-actions{display:flex;align-items:center;flex-wrap:wrap;gap:12px}
 .milestone{padding:12px 14px;background:#edf5f4;border-left:3px solid #35776c;margin:14px 0}
 .decision-summary h3{margin:0}

@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "asOf": "2026-11-27T19:45:00+08:00",
+  "completeCaptures": 9,
+  "observedRevisions": 11,
+  "reviewedRevisions": 10,
+  "pending": [
+    {
+      "revisionKey": "8c7f46c8042cb2bcef4c8eb556d64d9efe0ab65bdf45b92c54ae8fea14febd3f",
+      "title": "中国证监会传达学习贯彻国务院常务会议精神",
+      "url": "https://www.csrc.gov.cn/csrc/c100028/c7673674/content.shtml",
+      "sha256": "6fdb865ccdbd2037c13d0bd0d5b6907db54f9c7a1ded75e1280712c5bede65f1",
+      "publishedAt": "2026-11-27T19:10:03+08:00",
+      "receivedAt": "2026-11-27T11:24:26.257757+00:00",
+      "firstSeen": {
+        "attempt": "reports/research-observation/runs/2026-11-27/20261127T112424Z-6c1c8aab",
+        "archiveSha256": "0ae51d184a37aa56a590bbfa759e33d3b46d185f81ca30e3f121c21964045a84",
+        "scheduled": true,
+        "archivedAt": "2026-11-27T11:24:29.341397+00:00"
+      },
+      "previousVersions": [],
+      "appearances": 2,
+      "lastSeen": {
+        "attempt": "reports/research-observation/runs/2026-11-27/20261127T114000Z-18f4f01f",
+        "archiveSha256": "5576362cd470d4c6f473ab2bd6270a551a529670d5994e29b7931f9284cb761b",
+        "scheduled": true,
+        "archivedAt": "2026-11-27T11:40:04.205928+00:00"
+      }
+    }
+  ],
+  "emptyPending": [],
+  "incompleteCaptures": [],
+  "reviewSummary": {
+    "schemaVersion": 1,
+    "asOf": "2026-11-27T19:45:00+08:00",
+    "reviewedRevisions": 10,
+    "independentEventIds": [
+      "state-council-2026-11-27-stabilization"
+    ],
+    "followups": [],
+    "lastReviewAt": "2026-11-27T09:54:55.276535+00:00"
+  },
+  "archiveIssues": []
+}
