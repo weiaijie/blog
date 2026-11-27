@@ -79,14 +79,14 @@ def equation(current, previous):
                 expectedBalanceCny=str(expected),residualCny=str(residual))
 
 
-def financing_detail(snapshot,key):
+def financing_detail(snapshot,key,page_count=2):
     rows=[]
     total=None
-    for page in (1,2):
+    for page in range(1,page_count+1):
         r=result(snapshot,f'detail_{key}_{page}','RZRQ_MX_INFO')
         pg=r['pageHelp']
-        if (pg['pageNo']!=page or pg['pageCount']!=2 or pg['pageSize']!=PAGE_SIZE
-                or pg['data']!=r['result'] or (page==1 and len(r['result'])!=PAGE_SIZE)
+        if (pg['pageNo']!=page or pg['pageCount']!=page_count or pg['pageSize']!=PAGE_SIZE
+                or pg['data']!=r['result'] or (page<page_count and len(r['result'])!=PAGE_SIZE)
                 or (total is not None and pg['total']!=total)):
             raise ValueError('Incomplete margin detail page '+key)
         rows.extend(r['result'])

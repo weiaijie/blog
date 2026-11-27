@@ -1,5 +1,7 @@
 # 项目计划与当前状态
 
+[沪市两融明细按实际分页采集](reports/2026-11-28-sse-margin-pagination/README.md)保留所有必需明细页及失败响应。11 月 28 日 00:16 复核，11 月 27 日两融仍缺，11 月 26 日完成两页及汇总核验。
+
 [首个合格归档的起算登记](reports/2026-11-28-observation-origin-pin/README.md)保存首份回执的原始字节，并纳入夜间证据包。回执缺失或变化须先恢复原证据。
 
 [政策部分缺证时的原文待审](reports/2026-11-27-policy-partial-review/README.md)已接入，保留已核验候选、未完成来源及原五区间入样门。

@@ -194,8 +194,12 @@ def latest_source_evidence(store, receipt):
                 checks = [('shares','shares_'+key,[day]),('huatai','nav_510300',[prior,day]),
                           ('guotai',pcf,[day])]
             else:
-                checks = [('margin','margin',[prior,day]),('margin_detail','detail_'+key+'_1',[day]),
-                          ('margin_detail','detail_'+key+'_2',[day])]
+                if run.get('schemaVersion',1) == 2:
+                    details = [name for name in records if re.fullmatch(r'detail_'+key+r'_[1-9][0-9]*',name)]
+                else:
+                    details = [f'detail_{key}_{page}' for page in (1,2)]
+                checks = [('margin','margin',[prior,day])]
+                checks.extend(('margin_detail',name,[day]) for name in details)
             rows.extend(request_evidence(store,files,prefix,records.get(name,{}),source,name,dates)
                         for source,name,dates in checks)
         return dict(archiveSha256=identity,state='available' if rows else 'no_responses',requests=rows)
