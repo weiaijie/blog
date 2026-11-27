@@ -43,11 +43,12 @@ def systemd_trigger(env):
 
 
 def plan_days(expected, counts, qualified, recovery_limit):
-    pending = [d for d in expected if d not in qualified]
-    if not pending:
+    if not expected:
         return ()
-    newest = pending[-1]
-    repairs = sorted(pending[:-1], key=lambda d: (counts[d], d))[:recovery_limit]
+    # Each timer invocation also polls policy sources after the session qualifies.
+    newest = expected[-1]
+    pending = (day for day in expected[:-1] if day not in qualified)
+    repairs = sorted(pending, key=lambda day: (counts[day], day))[:recovery_limit]
     return (newest,*repairs)
 
 

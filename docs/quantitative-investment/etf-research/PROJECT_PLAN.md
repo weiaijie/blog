@@ -1,6 +1,6 @@
 # 项目计划与当前状态
 
-[12 个月模型研究](docs/LONG_TERM_RESEARCH.md)已用[真实归档复算特征](reports/2026-11-27-observation-inputs/README.md)，并验证原始证据、时点和空值。下一步接上政策完整审阅与 08:55 前实际封存，保留独立研究的归档和覆盖观察。
+[12 个月模型研究](docs/LONG_TERM_RESEARCH.md)已完成[真实归档特征回算](reports/2026-11-27-observation-inputs/README.md)和[首批政策审核及覆盖判定](reports/2026-11-27-policy-review/README.md)。下一步接通 08:55 前实际封存并核实连续运行。正式观察起点等首个独立生产合格归档。
 
 第 35–39、41 项已完成首批样本验证，详见[政策与市场数据首期验收](reports/2026-11-27-policy-pilot/README.md)。两条官方政策事件可做按时点准入核对，ETF 份额净值和沪市融资成交已有首批只读样本。接下来补连续取证、历史可用时间和市场广度，达到可比条件再验证第 40 项。第 42 项单独评估。
 

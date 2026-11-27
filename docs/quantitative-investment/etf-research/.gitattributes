@@ -63,3 +63,6 @@ reports/2026-11-14-new-window-attribution/** -text whitespace=cr-at-eol
 # Scheduled observation evidence keeps exact archived response bytes.
 reports/research-observation/** -text whitespace=cr-at-eol
 reports/research-observation/**/*.body -whitespace
+
+# Reviewed candidate bundles preserve the bytes sealed on Ubuntu.
+reports/research-policy-reviews/** -text

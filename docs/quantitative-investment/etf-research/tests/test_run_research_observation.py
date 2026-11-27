@@ -19,7 +19,9 @@ class ResearchObservationTests(unittest.TestCase):
         days = tuple(date(2026,11,d) for d in (23,24,25,26,27))
         counts = Counter({days[0]:5,days[2]:1})
         self.assertEqual(obs.plan_days(days,counts,{days[1]},2),(days[4],days[3],days[2]))
-        self.assertEqual(obs.plan_days(days,counts,set(days),2),())
+        self.assertEqual(obs.plan_days(days,counts,{days[1],days[4]},2),(days[4],days[3],days[2]))
+        self.assertEqual(obs.plan_days(days,counts,set(days),2),(days[4],))
+        self.assertEqual(obs.plan_days((),counts,set(),2),())
 
     def test_timer_provenance(self):
         self.assertIsNone(obs.systemd_trigger({'TRIGGER_UNIT':'etf-research-daily.timer',

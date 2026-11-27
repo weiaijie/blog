@@ -3,15 +3,15 @@ import argparse
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
-import collect_policy_etf_day as etf
 import collect_sse_research_day as sse
 import market_state_pilot as pilot
 from observation_price_inputs import establish_price_source
-from run_research_observation import check_receipt
+from observation_archive import archive_for_day
+from observation_policy_inputs import load_policy_context
 from etf_research.admission import sessions_between
 from etf_research.observation_experiment import BASE, GROUPS, DECISION_TIME, relative_turnover
 from etf_research.policy_events import TZ, instant
-from etf_research.publication import create, inside, read, sha, verify_bundle
+from etf_research.publication import create, read, sha
 
 ROOT = sse.ROOT
 FEATURES = BASE + tuple(name for names in GROUPS.values() for name in names)
@@ -29,39 +29,6 @@ def date_context(project, entry):
     return rows[-22:-1]
 
 
-def archive_for_day(root, store, day, ceiling, config):
-    source = root/'reports/research-observation'
-    timely, late = [], 0
-    for receipt_file in (source/'archives'/str(day)).glob('*.json'):
-        raw = read(receipt_file)
-        when = instant(raw['archiveVerifiedAt'])
-        if when>ceiling:
-            late += 1
-            continue
-        timely.append((when,receipt_file))
-    if not timely:
-        return None,'archive_not_ready' if late else 'archive_missing'
-    _, receipt_file = max(timely)
-    folder = source/'runs'/str(day)/receipt_file.stem
-    receipt = check_receipt(folder,store,config,root=root)
-    verify_bundle(folder)
-    record = read(folder/'result.json')
-    if record['coverage'] is None:
-        return None,'attempt_not_verified'
-    captures = {}
-    for label, verifier in (('policyEtf',etf.verify),('sse',sse.verify)):
-        proof = record['coverage']['evidence'][label]
-        path = inside(root,proof['path'])
-        if not path.is_relative_to(folder/'inputs') or sha(path/'manifest.json')!=proof['manifestSha256']:
-            raise ValueError('Unbound observation snapshot')
-        captures[label] = verifier(path)
-        if captures[label]['date']!=str(day) or not instant(captures[label]['checkedAt'])<=instant(receipt['archiveVerifiedAt']):
-            raise ValueError('Snapshot date or readiness differs from archived attempt')
-    identity = receipt['archive']
-    refs = [dict(root='observations',path=(folder/'manifest.json').relative_to(root).as_posix(),
-                 sha256=receipt['attemptManifestSha256']),
-            dict(root='archive',path='snapshots/'+identity+'.json',sha256=identity)]
-    return dict(**captures,readyAt=receipt['archiveVerifiedAt'],refs=refs),None
 
 
 def turnover_warmup(project, ceiling):
@@ -169,6 +136,20 @@ def assemble(project, observations, store, entry, observed, *, computed=None):
     gaps['policyActiveCount'] = dict(reason='five_decision_intervals_without_certified_review',
                                     capturedCandidateCount=candidate_count,
                                     evidence=current['refs'] if current else [])
+    policy = None
+    try:
+        policy = load_policy_context(observations,store,dates,entry,ceiling)
+    except EVIDENCE_ERRORS:
+        gaps['policyActiveCount']['reason'] = 'policy_review_proof_invalid'
+    if policy is not None:
+        if policy['count'] is None:
+            gaps['policyActiveCount']['reviewedScope'] = policy
+        else:
+            references = {tuple(ref.items()):ref for ref in [*policy['reviewEvidence'],*policy['pollEvidence']]}
+            cells['policyActiveCount'] = feature(anchor,policy['count'],policy['reviewReadyAt'],
+                                                  policy['dependencyReadyAt'],list(references.values()))
+            cells['policyActiveCount']['eventIds'] = policy['eventIds']
+            del gaps['policyActiveCount']
     complete = datetime.now(timezone.utc) if computed is None else computed
     if observed>complete:
         raise ValueError('Calculation time precedes observation start')
