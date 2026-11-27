@@ -6,7 +6,7 @@ No extraction of tar paths, symlinks, credentials or live destination overwrite.
 from contextlib import ExitStack
 from datetime import datetime, timezone
 from pathlib import Path, PurePosixPath
-import hashlib, os, re, shutil, tempfile
+import gzip, hashlib, json, os, re, shutil, tempfile, zlib
 from .publication import read, encoded, create, lock, sha, sync_dir, atomic
 
 DYNAMIC = ('data/snapshots', 'reports/daily', 'reports/operations', 'reports/health',
@@ -55,7 +55,24 @@ def object_path(store, value):
     if not re.fullmatch('[a-f0-9]{64}', value): raise ValueError('Invalid content digest')
     return safe_path(store, 'objects/' + value[:2] + '/' + value)
 
-def capture(root, store, names=None):
+def write_compressed_manifest(store, identity, body):
+    path = safe_path(store, f'snapshots/{identity}.json.gz')
+    path.parent.mkdir(parents=True,exist_ok=True)
+    body = gzip.compress(body,compresslevel=6,mtime=0)
+    # Commit the filename only after all bytes have reached the filesystem.
+    fd, temporary = tempfile.mkstemp(prefix='.manifest-',dir=path.parent)
+    try:
+        with os.fdopen(fd,'wb') as stream:
+            stream.write(body)
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.link(temporary,path)
+    finally:
+        os.unlink(temporary)
+    sync_dir(path.parent)
+
+
+def capture(root, store, names=None, *, compress_manifest=False):
     root, store = Path(root).resolve(), Path(store).resolve()
     if store.is_relative_to(root) or root.is_relative_to(store): raise ValueError('Archive store must be separate from project')
     store.mkdir(parents=True, exist_ok=True)
@@ -87,17 +104,32 @@ def capture(root, store, names=None):
         if automatic_inventory and names != inventory(root): raise ValueError('Inventory changed')
         snapshot = dict(schema_version=1, created_at_utc=datetime.now(timezone.utc).isoformat(), files=entries,
                         new_objects=new_objects, new_bytes=new_bytes, restores_only_to_new_directory=True)
-        identity = hashlib.sha256(encoded(snapshot)).hexdigest()
-        path = safe_path(store, 'snapshots/' + identity + '.json'); create(path, snapshot); sync_dir(path.parent)
+        manifest = encoded(snapshot)
+        identity = hashlib.sha256(manifest).hexdigest()
+        if compress_manifest:
+            write_compressed_manifest(store,identity,manifest)
+        else:
+            path = safe_path(store, f'snapshots/{identity}.json')
+            create(path,snapshot)
+            sync_dir(path.parent)
         result=dict(snapshot=identity, files=len(entries), new_objects=new_objects, new_bytes=new_bytes)
         atomic(root/'.runtime/archive_status.json',dict(result,finished_at_utc=datetime.now(timezone.utc).isoformat()))
         return result
 
 def verify(store, identity):
     if not re.fullmatch('[a-f0-9]{64}', identity): raise ValueError('Invalid snapshot identity')
-    path = safe_path(store, 'snapshots/' + identity + '.json')
-    if sha(path) != identity: raise ValueError('Archive manifest changed')
-    snapshot = read(path)
+    path = safe_path(store, f'snapshots/{identity}.json')
+    if path.exists():
+        body = path.read_bytes()
+    else:
+        compressed = safe_path(store, f'snapshots/{identity}.json.gz')
+        raw = compressed.read_bytes()
+        try:
+            body = gzip.decompress(raw)
+        except (OSError,EOFError,zlib.error) as error:
+            raise ValueError('Compressed archive manifest is unreadable') from error
+    if hashlib.sha256(body).hexdigest() != identity: raise ValueError('Archive manifest changed')
+    snapshot = json.loads(body)
     if snapshot.get('schema_version') != 1 or not snapshot.get('files'): raise ValueError('Invalid archive format')
     for name,e in snapshot['files'].items():
         safe_path(Path(store) / 'validation-root', name)

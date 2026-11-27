@@ -22,6 +22,8 @@ systemctl --user status etf-research-health.timer etf-research-health.service
 
 默认存储为独立Ubuntu的/home/ubuntu/projects/etf-research-evidence-archive；与运行项目分开。每日17:45定时归档，激活后60秒补一次，失败120秒重试、20分钟最多3次。正常休市仍归档健康记录。对象按SHA256去重，每份快照包含完整文件清单，不依赖前一份清单；需要保留它引用的所有objects。不会删除旧对象或做保留期清理。
 
+定时整库归档用 `--compress-manifest` 把新清单保存为 `<ID>.json.gz`，历史 `<ID>.json` 仍可直接读取。验证、恢复和比对命令按解压后原始字节核对 SHA256。跨主机复制保留原文件名和字节。
+
 ```sh
 python scripts/archive_evidence.py capture --store /home/ubuntu/projects/etf-research-evidence-archive
 python scripts/archive_evidence.py verify --store /home/ubuntu/projects/etf-research-evidence-archive --snapshot <64位快照ID>

@@ -1,5 +1,5 @@
 from pathlib import Path
-import hashlib, sys, tempfile, unittest
+import gzip, hashlib, sys, tempfile, unittest
 from unittest.mock import patch
 from etf_research.evidence_archive import capture, verify, restore, compare, object_path, safe_path, inventory
 from etf_research.publication import create, read, encoded
@@ -27,6 +27,34 @@ class ArchiveTests(unittest.TestCase):
     def test_changed_snapshot_manifest_rejected(self):
         identity=self.snapshot();(self.store/'snapshots'/f'{identity}.json').write_text('{}')
         with self.assertRaises(ValueError):verify(self.store,identity)
+    def test_compressed_manifest_preserves_identity_and_restores_alongside_legacy(self):
+        old = self.snapshot()
+        result = capture(self.root,self.store,['evidence.json'],compress_manifest=True)
+        identity = result['snapshot']
+        manifest = self.store/'snapshots'/f'{identity}.json.gz'
+        self.assertEqual(hashlib.sha256(gzip.decompress(manifest.read_bytes())).hexdigest(),identity)
+        self.assertFalse(manifest.with_suffix('').exists())
+        self.assertEqual(result['new_objects'],0)
+        self.assertEqual(verify(self.store,old)['files'],verify(self.store,identity)['files'])
+        restore(self.store,identity,self.base/'compressed-recovery')
+        self.assertEqual((self.base/'compressed-recovery/evidence.json').read_bytes(),
+                         (self.root/'evidence.json').read_bytes())
+        manifest.write_bytes(gzip.compress(b'{}'))
+        with self.assertRaisesRegex(ValueError,'Archive manifest changed'):
+            verify(self.store,identity)
+        manifest.write_bytes(b'interrupted gzip')
+        with self.assertRaisesRegex(ValueError,'manifest is unreadable'):
+            verify(self.store,identity)
+
+    def test_compressed_manifest_is_not_published_when_commit_is_interrupted(self):
+        previous = self.snapshot()
+        with patch('etf_research.evidence_archive.os.link',side_effect=InterruptedError('before manifest commit')):
+            with self.assertRaises(InterruptedError):
+                capture(self.root,self.store,['evidence.json'],compress_manifest=True)
+        self.assertEqual([path.name for path in (self.store/'snapshots').iterdir()],[previous+'.json'])
+        self.assertEqual(read(self.root/'.runtime/archive_status.json')['snapshot'],previous)
+        verify(self.store,previous)
+
     def test_new_snapshot_formats_require_review_and_seal(self):
         directory = self.root/'data/snapshots/public'
         directory.mkdir(parents=True)

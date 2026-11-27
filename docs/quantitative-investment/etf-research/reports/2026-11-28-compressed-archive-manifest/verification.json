@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-28T02:27:02.587648+08:00",
+  "archiveSnapshot": "be2cccb310cdd2e96c588b4efb46279bc1611e99d7054f31ac92d37e8364a0f9",
+  "manifestFiles": 16883,
+  "legacyBytes": 3162555,
+  "gzipBytes": 619536,
+  "savedBytes": 2543019,
+  "savedPct": 80.41,
+  "compressionAndWriteSeconds": 0.085,
+  "availableBytes": 19908780032,
+  "originalStillIdentical": true,
+  "compressedVerificationMatches": true
+}

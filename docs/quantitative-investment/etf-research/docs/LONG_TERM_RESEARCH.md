@@ -1,5 +1,7 @@
 # ETF 前瞻研究长期目标
 
+[整库归档清单压缩](../reports/2026-11-28-compressed-archive-manifest/README.md)已用 16,883 项的生产快照验证两种格式与相同快照 ID。新清单压缩约 80%，归档文件可按原命令核验与恢复。
+
 [原 18 户凌晨归档恢复](../reports/2026-11-28-forward-archive-readback/README.md)已实际恢复 11 月 28 日 01:16 生产快照，检查点与 Ubuntu 和 GitHub 一致。
 
 [盘前封存特征复算](../reports/2026-11-28-decision-replay/README.md)补齐了按原始截止和计算时间核对输入、证据与各版准入状态的入口。已用生产隔离副本和公开证据分别复算 9 个已就绪字段。

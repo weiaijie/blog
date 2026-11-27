@@ -6,7 +6,7 @@ StartLimitBurst=3
 [Service]
 Type=oneshot
 WorkingDirectory=%h/projects/etf-research-git-snapshot/docs/quantitative-investment/etf-research
-ExecStart=%h/projects/etf-research-py312/bin/python scripts/archive_evidence.py capture --store %h/projects/etf-research-evidence-archive
+ExecStart=%h/projects/etf-research-py312/bin/python scripts/archive_evidence.py capture --compress-manifest --store %h/projects/etf-research-evidence-archive
 Environment=PYTHONUTF8=1
 Environment=PYTHONDONTWRITEBYTECODE=1
 TimeoutStartSec=5min
