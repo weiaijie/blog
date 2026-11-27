@@ -1,5 +1,7 @@
 # 项目计划与当前状态
 
+[月结并入夜间归档](reports/2026-11-27-monthly-export/README.md)已完成隔离验收，首份生产月报及对应增量仍待按日历触发。
+
 [空重试与盘前已有证据](reports/2026-11-27-retry-evidence/README.md)已验证。只有无新增取证的失败回执允许继续取用同日先前核验资料。
 
 [11 月 27 日前瞻检查点与收盘输入复验](reports/2026-11-27-forward-publication/README.md)对齐了公开仓库的默认检查点，保留发布时点与 18 户逐日复算证据。

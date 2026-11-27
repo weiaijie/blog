@@ -7040,6 +7040,8 @@
     "reports/2026-11-27-monthly-coverage/README.md",
     "reports/2026-11-27-monthly-coverage/live-preview.json",
     "reports/2026-11-27-monthly-coverage/manifest.json",
+    "reports/2026-11-27-monthly-export/README.md",
+    "reports/2026-11-27-monthly-export/manifest.json",
     "reports/2026-11-27-morning-clock/README.md",
     "reports/2026-11-27-morning-clock/manifest.json",
     "reports/2026-11-27-morning-clock/systemd-two-slots.json",

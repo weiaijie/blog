@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 import shutil
 import sys
@@ -9,7 +9,9 @@ from unittest.mock import patch
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts'))
 from observation_monthly import LOG, month_report
-from seal_observation_monthly import CODE, archive_month, month_view, run
+from seal_observation_monthly import CODE, archive_month, month_view, run, verify_month
+from pack_observation_evidence import export, merge_packs, restore_ledger, restore_receipt, verify
+from run_observation_export import TIMER as EXPORT_TIMER, seal_export
 from etf_research.evidence_archive import capture, restore
 from etf_research.publication import create, read, seal, sha
 
@@ -122,3 +124,41 @@ class ObservationMonthlyTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,'requires its systemd timer'):
                 run(self.root,self.store)
         self.assertFalse((self.root/LOG).exists())
+
+
+    def test_monthly_seal_survives_scheduled_incremental_export_and_restore(self):
+        self.attempt(A,A+'T19:40:04+08:00',('policy','turnover'))
+        self.attempt(B,B+'T19:40:04+08:00',('policy','510300'))
+        boundary = datetime.fromisoformat('2026-12-01T08:54:59+08:00')
+        seed = self.base/'seed'
+        seed_export = export(self.root,self.store,seed,boundary)
+        self.assertEqual(seed_export['receipts'],{'observation':2})
+        report = month_report(self.root,self.store,'2026-11',OBSERVED)
+        with (patch('seal_observation_monthly.now',return_value=OBSERVED),
+              patch('etf_research.evidence_archive.datetime') as clock):
+            clock.now.return_value = OBSERVED
+            receipt = archive_month(self.root,self.store,report,'a'*32)
+        cutoff = OBSERVED+timedelta(hours=1,minutes=15)
+        spool = self.base/'spool'
+        trigger = dict(unit=EXPORT_TIMER,invocationId='c'*32,timerRealtimeUsec=None)
+        with patch('run_observation_export.datetime') as clock:
+            clock.now.return_value = cutoff
+            batch = seal_export(self.root,self.store,seed,sha(seed/'manifest.json'),spool,cutoff,trigger)
+        increment = spool/'batches'/batch['latest']['batchId']/'pack'
+        self.assertEqual(verify(increment)['receipts'],{'monthly':1})
+        self.assertEqual(verify(increment)['archives'],1)
+        name = receipt['path']+'/receipt.json'
+        self.assertEqual(read(increment/'index.json')['receipts'][0]['receipt'],name)
+
+        standalone = self.base/'standalone-month'
+        restore_receipt(increment,name,standalone)
+        self.assertEqual(verify_month(standalone,increment/'archive',(standalone/name).parent,cutoff),
+                         (receipt,report))
+        self.assertTrue((standalone/'reports/research-observation/archives'/A/'00000000000000000000000000000001.json').is_file())
+
+        merged,ledger = self.base/'merged',self.base/'restored-ledger'
+        self.assertEqual(merge_packs([seed,increment],merged)['receipts'],{'monthly':1,'observation':2})
+        restore_ledger(merged,ledger)
+        self.assertEqual(month_view(ledger,merged/'archive','2026-11',cutoff),
+                         month_view(self.root,self.store,'2026-11',cutoff))
+        self.assertEqual(month_report(ledger,merged/'archive','2026-11',OBSERVED),report)

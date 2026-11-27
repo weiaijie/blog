@@ -14,8 +14,9 @@ from etf_research.publication import create, read, seal, sha, verify_bundle
 
 OBSERVATION = 'reports/research-observation'
 REVIEW = 'reports/research-policy-reviews'
-STAGES = ('decisions', 'opening', 'labels', 'models', 'forecasts', 'evaluation', 'monthly')
+STAGES = ('decisions', 'opening', 'labels', 'models', 'forecasts', 'evaluation')
 STAGE_PATHS = {f'reports/research-{stage}': stage for stage in STAGES}
+STAGE_PATHS['reports/research-monthly-coverage'] = 'monthly'
 OBSERVATION_RECEIPT = re.compile(fr'{OBSERVATION}/archives/(\d{{4}}-\d{{2}}-\d{{2}})/([a-zA-Z0-9-]+)\.json')
 DYNAMIC = (OBSERVATION+'/runs/', *(name+'/' for name in STAGE_PATHS))
 PUBLIC_FILES = {
@@ -39,7 +40,7 @@ def public_path(name):
     parts = Path(name).parts
     if any(part.startswith('.') for part in parts) or '__pycache__' in parts:
         raise ValueError('Private path in research evidence: '+name)
-    if (name in PUBLIC_FILES or name.startswith((REGISTRY+'/',
+    if (name in PUBLIC_FILES or OBSERVATION_RECEIPT.fullmatch(name) or name.startswith((REGISTRY+'/',
             'data/snapshots/20261127T1605-official-etf-flow/', *DYNAMIC))
             and Path(name).suffix in ('.json', '.body', '.py', '.txt', '.headers', '.pdf', '.xml')):
         return
