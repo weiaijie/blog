@@ -6,10 +6,11 @@ import os
 from pathlib import Path
 import re
 
+from observation_decision_status import decision_row
 from observation_labels import EVIDENCE_ERRORS, assemble_label, label_window
 from etf_research.exchange_calendar import LOADER, calendar_at
 from etf_research.evidence_archive import capture, verify as verify_archive
-from etf_research.observation_decision_receipt import DECISIONS, verify_decision
+from etf_research.observation_decision_receipt import DECISIONS
 from etf_research.observation_experiment import label_floor
 from etf_research.policy_events import instant
 from etf_research.publication import create, lock, read, seal, sha, sync_dir, verify_bundle
@@ -22,6 +23,7 @@ BINDINGS = (
     LOADER,
     'PROTOCOL_OBSERVATION_V1.md', 'scripts/seal_observation_labels.py', 'scripts/observation_labels.py',
     'scripts/observe_opening_quotes.py','scripts/observation_price_inputs.py',
+    'scripts/observation_decision_status.py',
     'deploy/etf-research-label.timer', 'deploy/etf-research-label.service',
     'scripts/audit_official_close.py','src/etf_research/observation_experiment.py',
     'src/etf_research/observation_decision_receipt.py','src/etf_research/admission.py',
@@ -98,27 +100,46 @@ def archive_label(root, store, invocation, payload):
     return check_label(root,store,folder)
 
 
+def check_label_binding(payload, window, decision):
+    binding = payload['decision']
+    expected = f"{DECISIONS}/{window.entry}/{decision['id']}"
+    if (binding['path']!=expected or binding['archiveSha256']!=decision['archiveSha256']
+            or binding['receiptSha256']!=decision['receiptSha256']
+            or payload['sessions']!=[str(day) for day in window.sessions]
+            or payload['anchorDay']!=str(window.anchor) or payload['lastSession']!=str(window.last)
+            or instant(payload['notBefore'])!=label_floor(window)):
+        raise ValueError('Label belongs to a different decision or trading window')
+
+
 def pending_windows(root, prices, store, checked_at):
     waiting, issues = [], []
     for folder in sorted((root/DECISIONS).glob('*')):
         try:
             entry=date.fromisoformat(folder.name)
-            ready = label_floor(label_window(prices,entry,checked_at))
-            if checked_at<ready:
+            window = label_window(prices,entry,checked_at)
+            if checked_at<label_floor(window):
                 continue
-            decision=None
-            for path in sorted(folder.glob('*/receipt.json')):
-                verified=verify_decision(root,store,path.parent,observed=checked_at)
-                if verified['status']=='eligible_inputs':
-                    decision=path.parent
-                    break
-            if decision is None:
+            day = decision_row(root,store,entry,checked_at,planned=True)
+            for attempt in day['attempts']:
+                if attempt['status']=='unverified':
+                    issues.append(dict(entryDay=str(entry),decisionAttempt=attempt['id'],
+                                       reason='Decision archive did not verify'))
+            if day['status']!='eligible_inputs':
                 continue
-            previous=(root/LOG/folder.name)
-            attempts=sorted(previous.glob('*/receipt.json'))
-            if any(check_label(root,store,path.parent)['status']=='evidence_complete' for path in attempts):
-                continue
-            waiting.append((len(attempts),entry,decision))
+            selected = day['latest']
+            complete, checked = False,0
+            for path in sorted((root/LOG/str(entry)).glob('*/receipt.json')):
+                try:
+                    if instant(read(path)['archiveVerifiedAt'])>checked_at:
+                        continue
+                    checked += 1
+                    receipt,payload = verified_label(root,store,path.parent,observed=checked_at)
+                    check_label_binding(payload,window,selected)
+                    complete |= receipt['status']=='evidence_complete'
+                except EVIDENCE_ERRORS as error:
+                    issues.append(dict(entryDay=str(entry),labelAttempt=path.parent.name,reason=str(error)[:350]))
+            if not complete:
+                waiting.append((checked,entry,folder/selected['id']))
         except EVIDENCE_ERRORS as error:
             issues.append(dict(entryDay=folder.name,reason=str(error)[:350]))
     return sorted(waiting),issues

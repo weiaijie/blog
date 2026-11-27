@@ -1,7 +1,6 @@
 """Share verified five-session label coverage with the workbench and Agent."""
 from observation_labels import EVIDENCE_ERRORS, label_window
-from seal_observation_labels import LOG, verified_label
-from etf_research.observation_decision_receipt import DECISIONS
+from seal_observation_labels import LOG, check_label_binding, verified_label
 from etf_research.observation_experiment import label_floor
 from etf_research.policy_events import instant
 from etf_research.publication import read
@@ -32,17 +31,14 @@ def label_row(root, store, entry, observed, decision, *, details=False):
             if instant(read(path)['archiveVerifiedAt'])>observed:
                 continue
             receipt,payload = verified_label(root,store,folder,observed=observed)
-            binding = payload['decision']
-            expected = f'{DECISIONS}/{entry}/{decision_attempt["id"]}'
-            if (binding['path']!=expected or binding['archiveSha256']!=decision_attempt['archiveSha256']
-                    or binding['receiptSha256']!=decision_attempt['receiptSha256']
-                    or payload['sessions']!=shape['sessions'] or payload['anchorDay']!=str(window.anchor)
-                    or payload['lastSession']!=str(window.last) or instant(payload['notBefore'])!=floor):
-                raise ValueError('Label belongs to a different decision or trading window')
+            check_label_binding(payload,window,decision_attempt)
             record = dict(id=folder.name,status=receipt['status'],archiveSha256=receipt['archiveSha256'],
                           archivedAt=receipt['archiveVerifiedAt'],readyAt=receipt['labelReadyAt'])
             if details:
-                record.update(gaps=payload['gaps'],results=payload['labels'],opening=payload['opening'])
+                record.update(gaps=payload['gaps'],results=payload['labels'],opening=payload['opening'],
+                              evidence=dict(decision=payload['decision'],prices=payload.get('prices',{}),
+                                            openingReceipts=payload.get('openingEvidence',[]),
+                                            openingIssues=payload.get('openingIssues',[])))
             attempts.append(record)
         except EVIDENCE_ERRORS:
             attempts.append(dict(id=folder.name,status='unverified'))

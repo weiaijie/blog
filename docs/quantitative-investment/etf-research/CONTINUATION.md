@@ -1,5 +1,7 @@
 # 自主接续入口
 
+[五日标签统一绑定盘前决策](reports/2026-11-28-observation-label-decision-binding/README.md)按实际封存时间同步标签调度、覆盖接口和工作台。错版标签保留并等待正确的核验结果。
+
 [盘前输入对无响应重试的处理](reports/2026-11-28-observation-transport-recovery/README.md)按两次归档校验依据，展示可安全沿用的单项和失败来源。真实盘前探查当前有 9 项可核验。
 
 [夜间导出水位保护](reports/2026-11-28-observation-export-watermark/README.md)可识别最新批次目录整批丢失。已用首批生产数据和 GitHub 原件验证按原水位恢复。

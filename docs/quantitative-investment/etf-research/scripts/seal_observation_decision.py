@@ -7,6 +7,7 @@ from pathlib import Path
 import os
 from uuid import uuid4
 
+from observation_decision_status import SEALED_INPUT, decision_row
 from observation_inputs import FEATURES, assemble
 from run_research_observation import first_archive
 from etf_research.admission import sessions_between
@@ -25,7 +26,8 @@ CODE = (
     LOADER, 'src/etf_research/observation_slots.py',
     'PROTOCOL_OBSERVATION_V1.md', 'config/research_observation.json', CALENDAR,
     'deploy/etf-research-decision.service', 'deploy/etf-research-decision.timer',
-    'scripts/seal_observation_decision.py', 'scripts/observation_inputs.py',
+    'scripts/seal_observation_decision.py', 'scripts/observation_decision_status.py',
+    'scripts/observation_inputs.py',
     'scripts/observation_archive.py', 'scripts/observation_policy_inputs.py',
     'scripts/observation_price_inputs.py', 'scripts/review_policy_observations.py',
     'scripts/run_research_observation.py', 'scripts/audit_official_close.py',
@@ -88,10 +90,10 @@ def run(root, prices, store, *, probe=None):
     roots = dict(prices=prices,observations=root,archive=store)
     with lock(root/'.runtime/research-decision.lock'):
         if probe is None:
-            for receipt in sorted(log.glob('*/receipt.json')):
-                prior = verify_decision(root,store,receipt.parent,observed=now())
-                if prior['status'] in ('eligible_inputs','missing_inputs','study_origin_pending'):
-                    return prior
+            observed = now()
+            prior = decision_row(root,store,day,observed,planned=True)
+            if prior['status'] in SEALED_INPUT:
+                return verify_decision(root,store,log/prior['latest']['id'],observed=observed)
         attempt = log/((started.strftime('%Y%m%dT%H%M%SZ')+'-'+uuid4().hex[:8]) if probe else trigger['invocationId'])
         records = attempt/'records'
         records.mkdir(parents=True,exist_ok=False)

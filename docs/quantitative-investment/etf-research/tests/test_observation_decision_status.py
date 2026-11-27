@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT/'scripts'))
 import seal_observation_decision as seal
 from observation_status import report
+from seal_observation_labels import pending_windows
 
 DAY = date(2026,11,30)
 
@@ -90,6 +91,23 @@ class DecisionStatusTests(unittest.TestCase):
               patch.dict(seal.os.environ,environment,clear=True)):
             archive_clock.now.return_value = start
             result = seal.run(self.root,self.root,self.store)
+        later = start+timedelta(minutes=1)
+        with (patch.object(seal,'CODE',(seal.CALENDAR,)), patch.object(seal,'now',return_value=later),
+              patch.object(seal,'assemble',return_value=payload),patch.object(seal,'first_archive',return_value=origin),
+              patch.object(seal,'with_manager_clock',side_effect=lambda trigger:dict(trigger,managerTimer=source,
+                        managerTimerCheckedAt=later.isoformat(),managerTimerError=None)),
+              patch('etf_research.evidence_archive.datetime') as archive_clock,
+              patch.dict(seal.os.environ,dict(environment,INVOCATION_ID='1'*32),clear=True)):
+            archive_clock.now.return_value = later
+            # Simulate a second valid receipt created by an earlier runner.
+            with patch.object(seal,'decision_row',return_value={'status':'missing'}):
+                duplicate = seal.run(self.root,self.root,self.store)
+            self.assertEqual(seal.run(self.root,self.root,self.store),result)
+        self.assertLess(duplicate['decisionPath'],result['decisionPath'])
+        due = instant('2026-12-04T20:15:00+08:00')
+        waiting,issues = pending_windows(self.root,self.root,self.store,due)
+        self.assertEqual(issues,[])
+        self.assertEqual(waiting,[(0,DAY,self.root/result['decisionPath'])])
         now = '2026-11-30T09:00:00+08:00'
         with patch.object(seal,'now',return_value=instant(now)):
             overview = self.status(now)
@@ -101,10 +119,12 @@ class DecisionStatusTests(unittest.TestCase):
             self.assertEqual(overview['labelCounts']['holding'],1)
             self.assertEqual(overview['labelCounts']['due'],0)
             self.assertEqual(overview['decisionCounts'],dict(expected=1,sealedOnTime=1,eligibleInputDays=1,gaps=0))
-            self.assertEqual(summary['latest'],detail['attempts'][0])
+            self.assertEqual(summary['latest'],detail['attempts'][1])
+            self.assertEqual(summary['latest']['archiveSha256'],result['archiveSha256'])
             self.assertEqual(summary['latest']['transportRecoveries'],recovered)
             self.assertEqual(summary['status'],'eligible_inputs')
             self.assertEqual(summary['latest']['featureGaps'],{'stockFinancingBuyShare':'matched_margin_basis_missing'})
             (self.root/result['decisionPath']/'records/inputs.json').write_bytes(b'{}')
-            self.assertEqual(self.status(now,str(DAY))['session']['decision']['status'],'unverified')
-            self.assertEqual(self.status(now)['decisionCounts']['eligibleInputDays'],0)
+            rechecked = self.status(now,str(DAY))['session']['decision']
+            self.assertEqual(rechecked['attempts'][1]['status'],'unverified')
+            self.assertEqual(rechecked['latest']['archiveSha256'],duplicate['archiveSha256'])

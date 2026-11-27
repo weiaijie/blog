@@ -76,8 +76,33 @@ class LabelCoverageTests(unittest.TestCase):
         self.assertEqual(full['latest']['archiveSha256'],valid['archiveSha256'])
         self.assertEqual(full['latest']['results']['stock_bond_50_50']['base']['terminalReturn'],'0.01')
         self.assertNotIn('results',brief['latest'])
+        self.assertNotIn('evidence',brief['latest'])
+        binding = full['latest']['evidence']['decision']
+        self.assertEqual(binding['receiptSha256'],self.decision['latest']['receiptSha256'])
+        self.assertEqual(binding['path'],f"{DECISIONS}/{DAY}/{self.decision['latest']['id']}")
         self.assertEqual(label_counts([brief],instant(now))['ready'],1)
         self.decision['latest']['receiptSha256']='d'*64
         rejected=self.row(now)
         self.assertEqual(rejected['status'],'unverified')
         self.assertIsNone(rejected['readyAt'])
+
+
+    def test_pending_retries_bind_to_the_selected_decision_and_visible_labels(self):
+        original = self.root/DECISIONS/str(DAY)/self.decision['latest']['id']
+        original.mkdir(parents=True)
+        attempted = self.build('2026-12-04T20:15:00+08:00','3'*32,complete=True,
+                               binding=dict(path=f'{DECISIONS}/{DAY}/'+'0'*32,
+                                            archiveSha256='0'*64,receiptSha256='1'*64))
+        self.build('2026-12-07T20:15:00+08:00','2'*32,complete=True)
+        before = instant('2026-12-05T09:00:00+08:00')
+        after = instant('2026-12-08T09:00:00+08:00')
+        with patch.object(sealer,'decision_row',return_value={**self.decision,'attempts':[]}):
+            waiting,issues = sealer.pending_windows(self.root,self.root,self.store,before)
+            self.assertEqual(waiting,[(1,DAY,original)])
+            self.assertEqual(issues,[dict(entryDay=str(DAY),labelAttempt='3'*32,
+                                         reason='Label belongs to a different decision or trading window')])
+            self.assertIsNone(self.row(before.isoformat())['readyAt'])
+            due,issues = sealer.pending_windows(self.root,self.root,self.store,after)
+            self.assertEqual(due,[])
+            self.assertEqual(self.row(after.isoformat())['readyAt'],'2026-12-07T20:15:00+08:00')
+            self.assertEqual(issues[0]['labelAttempt'],attempted['path'].split('/')[-1])
