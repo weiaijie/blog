@@ -6,7 +6,7 @@ type Job = {state:string;lastTriggerAt:string|null;finishedAt:string|null;nextAt
 type RuntimeHealth = {state:string;checkedAt:string|null;issues:string[];jobs:Record<string,Job>};
 const endpoint='/api/v1/research/observation/runtime-health';
 const names:Record<string,string>={
-  observation:'来源采集',model:'分折训练',decision:'盘前封存',forecast:'预测封存',opening:'开盘取证',
+  'calendar-watch':'交易日历巡检',observation:'来源采集',model:'分折训练',decision:'盘前封存',forecast:'预测封存',opening:'开盘取证',
   label:'五日标签',evaluation:'样本外评估','monthly-coverage':'月度覆盖','observation-export':'夜间证据导出',
 };
 const states:Record<string,string>={

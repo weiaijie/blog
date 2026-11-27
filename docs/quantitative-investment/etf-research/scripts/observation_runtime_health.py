@@ -6,7 +6,7 @@ import subprocess
 from etf_research.policy_events import TZ, instant
 from etf_research.publication import inside, read, verify_bundle
 
-JOBS = ('observation','model','decision','forecast','opening','label','evaluation',
+JOBS = ('calendar-watch','observation','model','decision','forecast','opening','label','evaluation',
         'monthly-coverage','observation-export')
 FIELDS = ('Id','LoadState','ActiveState','UnitFileState','ActiveEnterTimestamp','TimersCalendar',
           'TimersMonotonic','Persistent','LastTriggerUSec','NextElapseUSecRealtime','Result',

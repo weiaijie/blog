@@ -68,6 +68,32 @@ class ObservationRuntimeHealthTests(unittest.TestCase):
         self.assertEqual(report['jobs']['model']['state'],'unit_unavailable')
         self.assertIn('model',report['issues'])
 
+    def test_calendar_watch_reports_waiting_missing_and_failed_from_its_own_slots(self):
+        unit = 'etf-research-calendar-watch'
+        calendar, *_ = configuration(ROOT, unit)
+        timer = dict(self.timer, calendar=calendar, LastTriggerUSec='',
+                     ActiveEnterTimestamp=clock('2026-11-28T08:00:00'),
+                     NextElapseUSecRealtime=clock('2026-11-28T08:05:00'))
+        service = dict(self.service, ExecMainStartTimestamp='', ExecMainExitTimestamp='')
+        units = {unit+'.timer':timer, unit+'.service':service}
+
+        before = observe(ROOT, NOW.replace(hour=8, minute=4), query=lambda:units)
+        self.assertEqual(before['jobs']['calendar-watch']['state'], 'waiting')
+        self.assertEqual(before['jobs']['calendar-watch']['nextAt'], '2026-11-28T08:05:00+08:00')
+        missed = observe(ROOT, NOW.replace(hour=8, minute=7), query=lambda:units)
+        self.assertEqual(missed['jobs']['calendar-watch']['state'], 'missed_schedule')
+        self.assertIn('calendar-watch', missed['issues'])
+
+        timer.update(LastTriggerUSec=clock('2026-11-28T08:05:00'),
+                     NextElapseUSecRealtime=clock('2026-11-28T21:35:00'))
+        service.update(ExecMainStartTimestamp=clock('2026-11-28T08:05:00'),
+                       ExecMainExitTimestamp=clock('2026-11-28T08:05:18'),
+                       Result='exit-code', ExecMainStatus='1')
+        failed = observe(ROOT, NOW, query=lambda:units)
+        self.assertEqual(failed['jobs']['calendar-watch']['state'], 'failed')
+        self.assertEqual(failed['jobs']['calendar-watch']['nextAt'], '2026-11-28T21:35:00+08:00')
+        self.assertIn('calendar-watch', failed['issues'])
+
     def test_agent_reads_exact_sealed_snapshot_and_marks_it_stale(self):
         with tempfile.TemporaryDirectory() as work:
             root=Path(work)
