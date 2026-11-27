@@ -15,6 +15,7 @@ import './style.css';
 import App from './App.vue';
 const router = createRouter({history:createWebHashHistory(), routes:[
   {path:'/',component:()=>import('./views/Overview.vue'),meta:{title:'研究总览'}},
+  {path:'/policy',component:()=>import('./views/PolicyResearch.vue'),meta:{title:'政策与市场研究'}},
   {path:'/market',component:()=>import('./views/Market.vue'),meta:{title:'行情与数据'}},
   {path:'/catalog',component:()=>import('./views/Catalog.vue'),meta:{title:'策略中心'}},
   {path:'/catalog/graph',component:()=>import('./views/StrategyGraph.vue'),meta:{title:'策略关系图'}},

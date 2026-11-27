@@ -1,0 +1,268 @@
+
+/**
+ * 市场概貌-start
+ */
+
+var marketGeneralPicture = {
+  activityStarUrl: sseQueryURL + 'commonQuery.do',
+  activityStarParams: {
+    isPagination: false,
+    sqlId: "COMMON_SSE_SJ_SCGM_C",//官网-数据-市场概貌
+    TRADE_DATE: '',//查询日期
+  },
+  init: function () {
+    var _this = this;
+    _this.loadEvents();
+    _this.getactivityStarList();
+  },
+  loadEvents: function () {
+    var _this = this;
+    var min_y = 2022 + '-09-05';
+    laydate({
+      elem: ".js_date input",
+      theme: "#b50005",
+      format: "yyyy-MM-dd",
+      isInitValue: false,
+      min: min_y,
+      trigger: "click",
+      btns: ["confirm"],
+      done: function (value, date, endDate) {
+        //选择时间触发查询
+        setTimeout(function () {
+          _this.setactivityStarParams();
+        }, 500);
+      },
+    });
+  },
+  setactivityStarParams: function () {
+    var _this = marketGeneralPicture;
+    _this.activityStarParams.TRADE_DATE = $(".js_date input").val();
+    _this.getactivityStarList();
+  },
+  getactivityStarList: function (funcname) {
+    var _this = marketGeneralPicture;
+    var emptyTr = '<tr><td colspan="5">暂无数据</td></tr>';
+    var activityStarHtml = "<thead><tr>";
+    activityStarHtml += '<th >分类</th>';
+    activityStarHtml += '<th class="text-right">数量(只)</th>';
+    activityStarHtml += '<th class="text-right">总市值(亿元)</th>';
+    activityStarHtml += '<th class="text-right">流通市值(亿元)</th>';
+    activityStarHtml += '<th class="text-right">成交额(亿元)</th>';
+    activityStarHtml += "</tr></thead><tbody>";
+    var downUrl = sseQueryURL + "commonExcelDd.do?sqlId=COMMON_SSE_SJ_SCGM_C&isPagination=false" + "&TRADE_DATE=" + _this.activityStarParams.TRADE_DATE;
+    var downHtm = '<a class="tableDownload js_download_market" href="' + downUrl + '">' + "下载</a>";
+    if ($('.js_download_market').length > 0) {
+      $('.js_download_market').attr('href', downUrl);
+    } else {
+      $(".title_lev2 .new_date").after(downHtm);
+    }
+    getJSONP({
+      type: "post",
+      dataType: "jsonp",
+      url: _this.activityStarUrl,
+      data: _this.activityStarParams,
+      successCallback: function (data) {
+        if (data && data.result && data.result.length > 0) {
+          $(".js_marketGeneralPicture .new_date").html(
+            "数据日期：" + turnDateAddLine(data.result[0].TRADE_DATE)
+          );
+          if (!isNull($(".js_date input").val())) {
+            $(".js_date input").val(turnDateAddLine(data.result[0].TRADE_DATE));
+          }
+          _this.tableContenHtml(data.result);
+        } else {
+          if (isNull($(".js_date input").val())) {
+            $(".js_marketGeneralPicture .new_date").html(
+              "数据日期：" + $(".js_date input").val()
+            );
+          } else {
+            $(".js_marketGeneralPicture .new_date").html('');
+          }
+          $(".js_marketGeneralPicture .table").html(activityStarHtml + emptyTr);
+        }
+      },
+      errCallback: function () {
+        if (isNull($(".js_date input").val())) {
+          $(".js_marketGeneralPicture .new_date").html(
+            "数据日期：" + $(".js_date input").val()
+          );
+        } else {
+          $(".js_marketGeneralPicture .new_date").html('');
+        }
+        $(".js_marketGeneralPicture .table").html(activityStarHtml + emptyTr);
+      },
+    });
+  },
+  /**
+   * 可以操作数据更简便些
+   * -----*_*  *_*
+   * @param {*} data 
+   */
+  tableContenHtml(data) {
+    var _this = marketGeneralPicture;
+    var tdTitle_style = "style='white-space: nowrap;'"
+    var emptyTr = '';
+    var activityStarHtml = "<thead><tr>";
+    activityStarHtml += '<th >分类</th>';
+    activityStarHtml += '<th class="text-right">数量(只)</th>';
+    activityStarHtml += '<th class="text-right">总市值(亿元)</th>';
+    activityStarHtml += '<th class="text-right">流通市值(亿元)</th>';
+    activityStarHtml += '<th class="text-right">成交额(亿元)</th>';
+    activityStarHtml += "</tr></thead><tbody>";
+    for (var i = 0; i < 15; i++) {
+      var table = 'table' + i;
+      window[table] = '';
+    }
+    for (var j = 0; j < 4; j++) {
+      emptyTr += '<td class="text-right">-</td>';
+    }
+    if (isNull(data)) {
+      for (var k = 0; k < data.length; k++) {
+        if (data[k].PRODUCT_NAME == '股票') {
+          table0 += '<td class="text-right">' + data[k].SECURITY_NUM + '</td>';
+          table0 += '<td class="text-right">' + _this.numberDispose(data[k].TOTAL_VALUE) + '</td>';
+          table0 += '<td class="text-right">' + _this.numberDispose(data[k].NEGO_VALUE) + '</td>';
+          table0 += '<td class="text-right">' + _this.numberDispose(data[k].TOTAL_TRADE_AMT) + '</td>';
+        } else if (data[k].PRODUCT_NAME == '主板A') {
+          table1 += '<td class="text-right">' + data[k].SECURITY_NUM + '</td>';
+          table1 += '<td class="text-right">' + _this.numberDispose(data[k].TOTAL_VALUE) + '</td>';
+          table1 += '<td class="text-right">' + _this.numberDispose(data[k].NEGO_VALUE) + '</td>';
+          table1 += '<td class="text-right">' + _this.numberDispose(data[k].TOTAL_TRADE_AMT) + '</td>';
+        } else if (data[k].PRODUCT_NAME == '主板B') {
+          table2 += '<td class="text-right">' + data[k].SECURITY_NUM + '</td>';
+          table2 += '<td class="text-right">' + _this.numberDispose(data[k].TOTAL_VALUE) + '</td>';
+          table2 += '<td class="text-right">' + _this.numberDispose(data[k].NEGO_VALUE) + '</td>';
+          table2 += '<td class="text-right">' + _this.numberDispose(data[k].TOTAL_TRADE_AMT) + '</td>';
+        } else if (data[k].PRODUCT_NAME == '科创板') {
+          table3 += '<td class="text-right">' + data[k].SECURITY_NUM + '</td>';
+          table3 += '<td class="text-right">' + _this.numberDispose(data[k].TOTAL_VALUE) + '</td>';
+          table3 += '<td class="text-right">' + _this.numberDispose(data[k].NEGO_VALUE) + '</td>';
+          table3 += '<td class="text-right">' + _this.numberDispose(data[k].TOTAL_TRADE_AMT) + '</td>';
+        } else if (data[k].PRODUCT_NAME == '优先股') {
+          table4 += '<td class="text-right">' + data[k].SECURITY_NUM + '</td>';
+          table4 += '<td class="text-right">' + _this.numberDispose(data[k].TOTAL_VALUE) + '</td>';
+          table4 += '<td class="text-right">' + _this.numberDispose(data[k].NEGO_VALUE) + '</td>';
+          table4 += '<td class="text-right">' + _this.numberDispose(data[k].TOTAL_TRADE_AMT) + '</td>';
+        } else if (data[k].PRODUCT_NAME == '债券') {
+          table5 += '<td class="text-right">' + data[k].SECURITY_NUM + '</td>';
+          table5 += '<td class="text-right">' + _this.numberDispose(data[k].TOTAL_VALUE) + '</td>';
+          table5 += '<td class="text-right">' + _this.numberDispose(data[k].NEGO_VALUE) + '</td>';
+          table5 += '<td class="text-right">' + _this.numberDispose(data[k].TOTAL_TRADE_AMT) + '</td>';
+        } else if (data[k].PRODUCT_NAME == '政府债') {
+          table6 += '<td class="text-right">' + data[k].SECURITY_NUM + '</td>';
+          table6 += '<td class="text-right">' + _this.numberDispose(data[k].TOTAL_VALUE) + '</td>';
+          table6 += '<td class="text-right">' + _this.numberDispose(data[k].NEGO_VALUE) + '</td>';
+          table6 += '<td class="text-right">' + _this.numberDispose(data[k].TOTAL_TRADE_AMT) + '</td>';
+        } else if (data[k].PRODUCT_NAME == '信用债') {
+          table7 += '<td class="text-right">' + data[k].SECURITY_NUM + '</td>';
+          table7 += '<td class="text-right">' + _this.numberDispose(data[k].TOTAL_VALUE) + '</td>';
+          table7 += '<td class="text-right">' + _this.numberDispose(data[k].NEGO_VALUE) + '</td>';
+          table7 += '<td class="text-right">' + _this.numberDispose(data[k].TOTAL_TRADE_AMT) + '</td>';
+        } else if (data[k].PRODUCT_NAME == '基金') {
+          table8 += '<td class="text-right">' + data[k].SECURITY_NUM + '</td>';
+          table8 += '<td class="text-right">' + _this.numberDispose(data[k].TOTAL_VALUE) + '</td>';
+          table8 += '<td class="text-right">' + _this.numberDispose(data[k].NEGO_VALUE) + '</td>';
+          table8 += '<td class="text-right">' + _this.numberDispose(data[k].TOTAL_TRADE_AMT) + '</td>';
+        } else if (data[k].PRODUCT_NAME == 'ETF') {
+          table9 += '<td class="text-right">' + data[k].SECURITY_NUM + '</td>';
+          table9 += '<td class="text-right">' + _this.numberDispose(data[k].TOTAL_VALUE) + '</td>';
+          table9 += '<td class="text-right">' + _this.numberDispose(data[k].NEGO_VALUE) + '</td>';
+          table9 += '<td class="text-right">' + _this.numberDispose(data[k].TOTAL_TRADE_AMT) + '</td>';
+        } else if (data[k].PRODUCT_NAME == 'LOF') {
+          table10 += '<td class="text-right">' + data[k].SECURITY_NUM + '</td>';
+          table10 += '<td class="text-right">' + _this.numberDispose(data[k].TOTAL_VALUE) + '</td>';
+          table10 += '<td class="text-right">' + _this.numberDispose(data[k].NEGO_VALUE) + '</td>';
+          table10 += '<td class="text-right">' + _this.numberDispose(data[k].TOTAL_TRADE_AMT) + '</td>';
+        } else if (data[k].PRODUCT_NAME == '公募REITs') {
+          table11 += '<td class="text-right">' + data[k].SECURITY_NUM + '</td>';
+          table11 += '<td class="text-right">' + _this.numberDispose(data[k].TOTAL_VALUE) + '</td>';
+          table11 += '<td class="text-right">' + _this.numberDispose(data[k].NEGO_VALUE) + '</td>';
+          table11 += '<td class="text-right">' + _this.numberDispose(data[k].TOTAL_TRADE_AMT) + '</td>';
+        } else if (data[k].PRODUCT_NAME == '期权') {
+          table12 += '<td class="text-right">' + data[k].SECURITY_NUM + '</td>';
+          table12 += '<td class="text-right">' + _this.numberDispose(data[k].TOTAL_VALUE) + '</td>';
+          table12 += '<td class="text-right">' + _this.numberDispose(data[k].NEGO_VALUE) + '</td>';
+          table12 += '<td class="text-right">' + _this.numberDispose(data[k].TOTAL_TRADE_AMT) + '</td>';
+        } else if (data[k].PRODUCT_NAME == '回购') {
+          table13 += '<td class="text-right">' + data[k].SECURITY_NUM + '</td>';
+          table13 += '<td class="text-right">' + _this.numberDispose(data[k].TOTAL_VALUE) + '</td>';
+          table13 += '<td class="text-right">' + _this.numberDispose(data[k].NEGO_VALUE) + '</td>';
+          table13 += '<td class="text-right">' + _this.numberDispose(data[k].TOTAL_TRADE_AMT) + '</td>';
+        } else if (data[k].PRODUCT_NAME == '其他') {
+          table14 += '<td class="text-right">' + data[k].SECURITY_NUM + '</td>';
+          table14 += '<td class="text-right">' + _this.numberDispose(data[k].TOTAL_VALUE) + '</td>';
+          table14 += '<td class="text-right">' + _this.numberDispose(data[k].NEGO_VALUE) + '</td>';
+          table14 += '<td class="text-right">' + _this.numberDispose(data[k].TOTAL_TRADE_AMT) + '</td>';
+        }
+      }
+    }
+    activityStarHtml += '<tr><td>股票</td>';
+    activityStarHtml += (table0 == '' ? emptyTr : table0);
+    activityStarHtml += '<tr><td ' + tdTitle_style + '>&emsp;&emsp;主板A</td>';
+    activityStarHtml += (table1 == '' ? emptyTr : table1);
+    activityStarHtml += '<tr><td ' + tdTitle_style + '>&emsp;&emsp;主板B</td>';
+    activityStarHtml += (table2 == '' ? emptyTr : table2);
+    activityStarHtml += '<tr><td ' + tdTitle_style + '>&emsp;&emsp;科创板</td>';
+    activityStarHtml += (table3 == '' ? emptyTr : table3);
+    activityStarHtml += '<tr><td>优先股</td>';
+    activityStarHtml += (table4 == '' ? emptyTr : table4);
+    activityStarHtml += '<tr><td>债券</td>';
+    activityStarHtml += (table5 == '' ? emptyTr : table5);
+    activityStarHtml += '<tr><td ' + tdTitle_style + '>&emsp;&emsp;政府债</td>';
+    activityStarHtml += (table6 == '' ? emptyTr : table6);
+    activityStarHtml += '<tr><td ' + tdTitle_style + '>&emsp;&emsp;信用债</td>';
+    activityStarHtml += (table7 == '' ? emptyTr : table7);
+    activityStarHtml += '<tr><td>基金</td>';
+    activityStarHtml += (table8 == '' ? emptyTr : table8);
+    activityStarHtml += '<tr><td ' + tdTitle_style + '>&emsp;&emsp;ETF</td>';
+    activityStarHtml += (table9 == '' ? emptyTr : table9);
+    activityStarHtml += '<tr><td ' + tdTitle_style + '>&emsp;&emsp;LOF</td>';
+    activityStarHtml += (table10 == '' ? emptyTr : table10);
+    activityStarHtml += '<tr><td ' + tdTitle_style + '>&emsp;&emsp;公募REITs</td>';
+    activityStarHtml += (table11 == '' ? emptyTr : table11);
+    activityStarHtml += '<tr><td>期权</td>';
+    activityStarHtml += (table12 == '' ? emptyTr : table12);
+    activityStarHtml += '<tr><td>回购</td>';
+    activityStarHtml += (table13 == '' ? emptyTr : table13);
+    // 11-27 之前无其他
+    if(data[0].TRADE_DATE && (new Date(turnDateAddLine(data[0].TRADE_DATE))  > new Date('2023-11-26'))){
+      activityStarHtml += '<tr><td>其他</td>';
+      activityStarHtml += (table14 == '' ? emptyTr : table14);
+    }
+    activityStarHtml += "</tbody>";
+    $(".js_marketGeneralPicture .table").html(activityStarHtml);
+  },
+  /**
+   * 数值处理方法 保留两位小数
+   * @param {*} num 需要处理的数据
+   * @returns 
+   */
+  numberDispose(num) {
+    num = String(num);
+    if (num == "-" || num == null || num == "undefined" || num == "") {
+      num = "-";
+      return num;
+    } else if (num == 0) {
+      return num;
+    }
+    // 如果没有找到匹配的字符串则返回 -1。
+    if (num.indexOf(".") != -1) {
+      var newArray1 = num.split(".");
+      if (newArray1[1].length < 2) {
+        return num += '0';
+      } else {
+        return num;
+      }
+    } else {
+      return num += '.00';
+    }
+  }
+}
+
+if ($(".js_marketGeneralPicture").length > 0) {
+  marketGeneralPicture.init();
+}
+
+/**
+ * 市场概貌-end
+ */

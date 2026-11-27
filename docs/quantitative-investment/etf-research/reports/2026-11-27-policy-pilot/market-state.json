@@ -1,0 +1,1220 @@
+{
+  "schemaVersion": 1,
+  "through": "2026-11-26",
+  "snapshot": "data/snapshots/20261127T080707Z-sse-market-state",
+  "snapshotSha256": "6d495446303a0eb9eb71c9e86b76c840747d6de3f874e15a3583f07ca5d19c8c",
+  "receivedAt": "2026-11-27T08:07:20.475827+00:00",
+  "featureReadyAt": "2026-11-27T08:09:50.595717+00:00",
+  "publishedAt": null,
+  "historicalPointInTime": false,
+  "researchOnly": true,
+  "rows": [
+    {
+      "date": "2026-10-20",
+      "financingBalanceCny": "1257978189862",
+      "financingBuyCny": "68478089904",
+      "financingRepaymentCny": "69547934819",
+      "financingNetCny": "-1069844915",
+      "financingBalanceChangeCny": null,
+      "balanceIdentity": {
+        "status": "missing_previous",
+        "expectedBalanceCny": null,
+        "residualCny": null
+      },
+      "combinedMarginBalanceCny": "1276629438429",
+      "securitiesLendingBalanceCny": "18651248567",
+      "combinedBalanceMatched": true,
+      "reconciledFinancingNetCny": null,
+      "stockFinancingBuyCny": "48622212891",
+      "turnoverCny": "701032000000.00",
+      "financingBuyShare": "0.06935805054690798708190211003",
+      "relativeTurnover20": null,
+      "priorTurnoverSessions": 0,
+      "priorTurnoverMeanCny": null,
+      "breadth": null,
+      "detailRows": 2017,
+      "stockMarginDetailRows": 1679,
+      "sample510300": {
+        "financingBalanceCny": "3495371318",
+        "financingBuyCny": "476095588",
+        "financingRepaymentCny": "481362760",
+        "balanceIdentity": {
+          "status": "missing_previous",
+          "expectedBalanceCny": null,
+          "residualCny": null
+        }
+      },
+      "evidence": [
+        "market_20261020",
+        "margin",
+        "detail_20261020_1",
+        "detail_20261020_2"
+      ]
+    },
+    {
+      "date": "2026-10-21",
+      "financingBalanceCny": "1257321101396",
+      "financingBuyCny": "60713576147",
+      "financingRepaymentCny": "61370664615",
+      "financingNetCny": "-657088468",
+      "financingBalanceChangeCny": "-657088466",
+      "balanceIdentity": {
+        "status": "mismatch",
+        "expectedBalanceCny": "1257321101394",
+        "residualCny": "2"
+      },
+      "combinedMarginBalanceCny": "1275800539216",
+      "securitiesLendingBalanceCny": "18479437820",
+      "combinedBalanceMatched": true,
+      "reconciledFinancingNetCny": null,
+      "stockFinancingBuyCny": "44657731767",
+      "turnoverCny": "644010000000.0",
+      "financingBuyShare": "0.06934322722783807704849303582",
+      "relativeTurnover20": null,
+      "priorTurnoverSessions": 1,
+      "priorTurnoverMeanCny": null,
+      "breadth": null,
+      "detailRows": 2017,
+      "stockMarginDetailRows": 1679,
+      "sample510300": {
+        "financingBalanceCny": "3434367508",
+        "financingBuyCny": "405475044",
+        "financingRepaymentCny": "466478855",
+        "balanceIdentity": {
+          "status": "mismatch",
+          "expectedBalanceCny": "3434367507",
+          "residualCny": "1"
+        }
+      },
+      "evidence": [
+        "market_20261021",
+        "margin",
+        "detail_20261021_1",
+        "detail_20261021_2"
+      ]
+    },
+    {
+      "date": "2026-10-22",
+      "financingBalanceCny": "1246938460574",
+      "financingBuyCny": "64373021968",
+      "financingRepaymentCny": "74755662819",
+      "financingNetCny": "-10382640851",
+      "financingBalanceChangeCny": "-10382640822",
+      "balanceIdentity": {
+        "status": "mismatch",
+        "expectedBalanceCny": "1246938460545",
+        "residualCny": "29"
+      },
+      "combinedMarginBalanceCny": "1265437297017",
+      "securitiesLendingBalanceCny": "18498836443",
+      "combinedBalanceMatched": true,
+      "reconciledFinancingNetCny": null,
+      "stockFinancingBuyCny": "43248090908",
+      "turnoverCny": "706689000000.00",
+      "financingBuyShare": "0.06119819454951187863402430206",
+      "relativeTurnover20": null,
+      "priorTurnoverSessions": 2,
+      "priorTurnoverMeanCny": null,
+      "breadth": null,
+      "detailRows": 2017,
+      "stockMarginDetailRows": 1679,
+      "sample510300": {
+        "financingBalanceCny": "3557006153",
+        "financingBuyCny": "696394671",
+        "financingRepaymentCny": "573756024",
+        "balanceIdentity": {
+          "status": "mismatch",
+          "expectedBalanceCny": "3557006155",
+          "residualCny": "-2"
+        }
+      },
+      "evidence": [
+        "market_20261022",
+        "margin",
+        "detail_20261022_1",
+        "detail_20261022_2"
+      ]
+    },
+    {
+      "date": "2026-10-23",
+      "financingBalanceCny": "1237350994945",
+      "financingBuyCny": "82990125309",
+      "financingRepaymentCny": "92577590872",
+      "financingNetCny": "-9587465563",
+      "financingBalanceChangeCny": "-9587465629",
+      "balanceIdentity": {
+        "status": "mismatch",
+        "expectedBalanceCny": "1237350995011",
+        "residualCny": "-66"
+      },
+      "combinedMarginBalanceCny": "1255920115588",
+      "securitiesLendingBalanceCny": "18569120643",
+      "combinedBalanceMatched": true,
+      "reconciledFinancingNetCny": null,
+      "stockFinancingBuyCny": "58506623185",
+      "turnoverCny": "899531000000.00",
+      "financingBuyShare": "0.06504125281396638915168015332",
+      "relativeTurnover20": null,
+      "priorTurnoverSessions": 3,
+      "priorTurnoverMeanCny": null,
+      "breadth": null,
+      "detailRows": 2017,
+      "stockMarginDetailRows": 1679,
+      "sample510300": {
+        "financingBalanceCny": "3525539080",
+        "financingBuyCny": "670225037",
+        "financingRepaymentCny": "701692109",
+        "balanceIdentity": {
+          "status": "mismatch",
+          "expectedBalanceCny": "3525539081",
+          "residualCny": "-1"
+        }
+      },
+      "evidence": [
+        "market_20261023",
+        "margin",
+        "detail_20261023_1",
+        "detail_20261023_2"
+      ]
+    },
+    {
+      "date": "2026-10-26",
+      "financingBalanceCny": "1234697347423",
+      "financingBuyCny": "66750507074",
+      "financingRepaymentCny": "69404154652",
+      "financingNetCny": "-2653647578",
+      "financingBalanceChangeCny": "-2653647522",
+      "balanceIdentity": {
+        "status": "mismatch",
+        "expectedBalanceCny": "1234697347367",
+        "residualCny": "56"
+      },
+      "combinedMarginBalanceCny": "1253341836748",
+      "securitiesLendingBalanceCny": "18644489325",
+      "combinedBalanceMatched": true,
+      "reconciledFinancingNetCny": null,
+      "stockFinancingBuyCny": "51512285746",
+      "turnoverCny": "747001000000.00",
+      "financingBuyShare": "0.06895879087979801901202274160",
+      "relativeTurnover20": null,
+      "priorTurnoverSessions": 4,
+      "priorTurnoverMeanCny": null,
+      "breadth": null,
+      "detailRows": 2017,
+      "stockMarginDetailRows": 1679,
+      "sample510300": {
+        "financingBalanceCny": "3392895561",
+        "financingBuyCny": "225012463",
+        "financingRepaymentCny": "357655980",
+        "balanceIdentity": {
+          "status": "mismatch",
+          "expectedBalanceCny": "3392895563",
+          "residualCny": "-2"
+        }
+      },
+      "evidence": [
+        "market_20261026",
+        "margin",
+        "detail_20261026_1",
+        "detail_20261026_2"
+      ]
+    },
+    {
+      "date": "2026-10-27",
+      "financingBalanceCny": "1227269129148",
+      "financingBuyCny": "60535715866",
+      "financingRepaymentCny": "67963934054",
+      "financingNetCny": "-7428218188",
+      "financingBalanceChangeCny": "-7428218275",
+      "balanceIdentity": {
+        "status": "mismatch",
+        "expectedBalanceCny": "1227269129235",
+        "residualCny": "-87"
+      },
+      "combinedMarginBalanceCny": "1245746294388",
+      "securitiesLendingBalanceCny": "18477165240",
+      "combinedBalanceMatched": true,
+      "reconciledFinancingNetCny": null,
+      "stockFinancingBuyCny": "43882477044",
+      "turnoverCny": "673045000000.00",
+      "financingBuyShare": "0.06519991537564353052173331649",
+      "relativeTurnover20": null,
+      "priorTurnoverSessions": 5,
+      "priorTurnoverMeanCny": null,
+      "breadth": null,
+      "detailRows": 2017,
+      "stockMarginDetailRows": 1679,
+      "sample510300": {
+        "financingBalanceCny": "3520752858",
+        "financingBuyCny": "369186690",
+        "financingRepaymentCny": "241329395",
+        "balanceIdentity": {
+          "status": "mismatch",
+          "expectedBalanceCny": "3520752856",
+          "residualCny": "2"
+        }
+      },
+      "evidence": [
+        "market_20261027",
+        "margin",
+        "detail_20261027_1",
+        "detail_20261027_2"
+      ]
+    },
+    {
+      "date": "2026-10-28",
+      "financingBalanceCny": "1230308094566",
+      "financingBuyCny": "76424250285",
+      "financingRepaymentCny": "73385284880",
+      "financingNetCny": "3038965405",
+      "financingBalanceChangeCny": "3038965418",
+      "balanceIdentity": {
+        "status": "mismatch",
+        "expectedBalanceCny": "1230308094553",
+        "residualCny": "13"
+      },
+      "combinedMarginBalanceCny": "1248864418075",
+      "securitiesLendingBalanceCny": "18556323509",
+      "combinedBalanceMatched": true,
+      "reconciledFinancingNetCny": null,
+      "stockFinancingBuyCny": "56024993935",
+      "turnoverCny": "751629000000.00",
+      "financingBuyShare": "0.07453809517062274074044508661",
+      "relativeTurnover20": null,
+      "priorTurnoverSessions": 6,
+      "priorTurnoverMeanCny": null,
+      "breadth": null,
+      "detailRows": 2017,
+      "stockMarginDetailRows": 1679,
+      "sample510300": {
+        "financingBalanceCny": "3467519095",
+        "financingBuyCny": "177204102",
+        "financingRepaymentCny": "230437864",
+        "balanceIdentity": {
+          "status": "mismatch",
+          "expectedBalanceCny": "3467519096",
+          "residualCny": "-1"
+        }
+      },
+      "evidence": [
+        "market_20261028",
+        "margin",
+        "detail_20261028_1",
+        "detail_20261028_2"
+      ]
+    },
+    {
+      "date": "2026-10-29",
+      "financingBalanceCny": "1218188975869",
+      "financingBuyCny": "64500582578",
+      "financingRepaymentCny": "76619701296",
+      "financingNetCny": "-12119118718",
+      "financingBalanceChangeCny": "-12119118697",
+      "balanceIdentity": {
+        "status": "mismatch",
+        "expectedBalanceCny": "1218188975848",
+        "residualCny": "21"
+      },
+      "combinedMarginBalanceCny": "1236396519294",
+      "securitiesLendingBalanceCny": "18207543425",
+      "combinedBalanceMatched": true,
+      "reconciledFinancingNetCny": null,
+      "stockFinancingBuyCny": "46291431459",
+      "turnoverCny": "716079000000.00",
+      "financingBuyShare": "0.06464570453678993518871521159",
+      "relativeTurnover20": null,
+      "priorTurnoverSessions": 7,
+      "priorTurnoverMeanCny": null,
+      "breadth": null,
+      "detailRows": 2017,
+      "stockMarginDetailRows": 1679,
+      "sample510300": {
+        "financingBalanceCny": "3454837530",
+        "financingBuyCny": "178148636",
+        "financingRepaymentCny": "190830202",
+        "balanceIdentity": {
+          "status": "mismatch",
+          "expectedBalanceCny": "3454837529",
+          "residualCny": "1"
+        }
+      },
+      "evidence": [
+        "market_20261029",
+        "margin",
+        "detail_20261029_1",
+        "detail_20261029_2"
+      ]
+    },
+    {
+      "date": "2026-10-30",
+      "financingBalanceCny": "1198901601739",
+      "financingBuyCny": "68982976464",
+      "financingRepaymentCny": "88255683881",
+      "financingNetCny": "-19272707417",
+      "financingBalanceChangeCny": "-19287374130",
+      "balanceIdentity": {
+        "status": "mismatch",
+        "expectedBalanceCny": "1198916268452",
+        "residualCny": "-14666713"
+      },
+      "combinedMarginBalanceCny": "1216866940862",
+      "securitiesLendingBalanceCny": "17965339123",
+      "combinedBalanceMatched": true,
+      "reconciledFinancingNetCny": null,
+      "stockFinancingBuyCny": "47665224922",
+      "turnoverCny": "765534000000.00",
+      "financingBuyShare": "0.06226402082990435434611656700",
+      "relativeTurnover20": null,
+      "priorTurnoverSessions": 8,
+      "priorTurnoverMeanCny": null,
+      "breadth": null,
+      "detailRows": 2017,
+      "stockMarginDetailRows": 1679,
+      "sample510300": {
+        "financingBalanceCny": "3417784742",
+        "financingBuyCny": "188562210",
+        "financingRepaymentCny": "225615000",
+        "balanceIdentity": {
+          "status": "mismatch",
+          "expectedBalanceCny": "3417784740",
+          "residualCny": "2"
+        }
+      },
+      "evidence": [
+        "market_20261030",
+        "margin",
+        "detail_20261030_1",
+        "detail_20261030_2"
+      ]
+    },
+    {
+      "date": "2026-11-02",
+      "financingBalanceCny": "1192247511122",
+      "financingBuyCny": "72503743007",
+      "financingRepaymentCny": "79157833574",
+      "financingNetCny": "-6654090567",
+      "financingBalanceChangeCny": "-6654090617",
+      "balanceIdentity": {
+        "status": "mismatch",
+        "expectedBalanceCny": "1192247511172",
+        "residualCny": "-50"
+      },
+      "combinedMarginBalanceCny": "1210397716482",
+      "securitiesLendingBalanceCny": "18150205360",
+      "combinedBalanceMatched": true,
+      "reconciledFinancingNetCny": null,
+      "stockFinancingBuyCny": "54054978989",
+      "turnoverCny": "848175000000.00",
+      "financingBuyShare": "0.06373092697733368703392578183",
+      "relativeTurnover20": null,
+      "priorTurnoverSessions": 9,
+      "priorTurnoverMeanCny": null,
+      "breadth": null,
+      "detailRows": 2017,
+      "stockMarginDetailRows": 1679,
+      "sample510300": {
+        "financingBalanceCny": "3489082580",
+        "financingBuyCny": "376614552",
+        "financingRepaymentCny": "305316714",
+        "balanceIdentity": {
+          "status": "matched",
+          "expectedBalanceCny": "3489082580",
+          "residualCny": "0"
+        }
+      },
+      "evidence": [
+        "market_20261102",
+        "margin",
+        "detail_20261102_1",
+        "detail_20261102_2"
+      ]
+    },
+    {
+      "date": "2026-11-03",
+      "financingBalanceCny": "1176621851728",
+      "financingBuyCny": "65078383144",
+      "financingRepaymentCny": "80702959391",
+      "financingNetCny": "-15624576247",
+      "financingBalanceChangeCny": "-15625659394",
+      "balanceIdentity": {
+        "status": "mismatch",
+        "expectedBalanceCny": "1176622934875",
+        "residualCny": "-1083147"
+      },
+      "combinedMarginBalanceCny": "1194956001311",
+      "securitiesLendingBalanceCny": "18334149583",
+      "combinedBalanceMatched": true,
+      "reconciledFinancingNetCny": null,
+      "stockFinancingBuyCny": "48368903274",
+      "turnoverCny": "811799000000.00",
+      "financingBuyShare": "0.05958236370579416826086260269",
+      "relativeTurnover20": null,
+      "priorTurnoverSessions": 10,
+      "priorTurnoverMeanCny": null,
+      "breadth": null,
+      "detailRows": 2017,
+      "stockMarginDetailRows": 1679,
+      "sample510300": {
+        "financingBalanceCny": "3419343188",
+        "financingBuyCny": "424952954",
+        "financingRepaymentCny": "494692347",
+        "balanceIdentity": {
+          "status": "mismatch",
+          "expectedBalanceCny": "3419343187",
+          "residualCny": "1"
+        }
+      },
+      "evidence": [
+        "market_20261103",
+        "margin",
+        "detail_20261103_1",
+        "detail_20261103_2"
+      ]
+    },
+    {
+      "date": "2026-11-04",
+      "financingBalanceCny": "1177606581980",
+      "financingBuyCny": "90266502540",
+      "financingRepaymentCny": "89281772236",
+      "financingNetCny": "984730304",
+      "financingBalanceChangeCny": "984730252",
+      "balanceIdentity": {
+        "status": "mismatch",
+        "expectedBalanceCny": "1177606582032",
+        "residualCny": "-52"
+      },
+      "combinedMarginBalanceCny": "1196014267735",
+      "securitiesLendingBalanceCny": "18407685755",
+      "combinedBalanceMatched": true,
+      "reconciledFinancingNetCny": null,
+      "stockFinancingBuyCny": "64688167160",
+      "turnoverCny": "954216000000.00",
+      "financingBuyShare": "0.06779195398106927571954358342",
+      "relativeTurnover20": null,
+      "priorTurnoverSessions": 11,
+      "priorTurnoverMeanCny": null,
+      "breadth": null,
+      "detailRows": 2017,
+      "stockMarginDetailRows": 1679,
+      "sample510300": {
+        "financingBalanceCny": "3502588527",
+        "financingBuyCny": "802508687",
+        "financingRepaymentCny": "719263348",
+        "balanceIdentity": {
+          "status": "matched",
+          "expectedBalanceCny": "3502588527",
+          "residualCny": "0"
+        }
+      },
+      "evidence": [
+        "market_20261104",
+        "margin",
+        "detail_20261104_1",
+        "detail_20261104_2"
+      ]
+    },
+    {
+      "date": "2026-11-05",
+      "financingBalanceCny": "1180797811849",
+      "financingBuyCny": "97541355443",
+      "financingRepaymentCny": "94350125576",
+      "financingNetCny": "3191229867",
+      "financingBalanceChangeCny": "3191229869",
+      "balanceIdentity": {
+        "status": "mismatch",
+        "expectedBalanceCny": "1180797811847",
+        "residualCny": "2"
+      },
+      "combinedMarginBalanceCny": "1199243668757",
+      "securitiesLendingBalanceCny": "18445856908",
+      "combinedBalanceMatched": true,
+      "reconciledFinancingNetCny": null,
+      "stockFinancingBuyCny": "74258958926",
+      "turnoverCny": "981100000000.00",
+      "financingBuyShare": "0.07568949029252879421057996127",
+      "relativeTurnover20": null,
+      "priorTurnoverSessions": 12,
+      "priorTurnoverMeanCny": null,
+      "breadth": null,
+      "detailRows": 2017,
+      "stockMarginDetailRows": 1679,
+      "sample510300": {
+        "financingBalanceCny": "3306152510",
+        "financingBuyCny": "376446501",
+        "financingRepaymentCny": "572882520",
+        "balanceIdentity": {
+          "status": "mismatch",
+          "expectedBalanceCny": "3306152508",
+          "residualCny": "2"
+        }
+      },
+      "evidence": [
+        "market_20261105",
+        "margin",
+        "detail_20261105_1",
+        "detail_20261105_2"
+      ]
+    },
+    {
+      "date": "2026-11-06",
+      "financingBalanceCny": "1168836509671",
+      "financingBuyCny": "66558512113",
+      "financingRepaymentCny": "78519814310",
+      "financingNetCny": "-11961302197",
+      "financingBalanceChangeCny": "-11961302178",
+      "balanceIdentity": {
+        "status": "mismatch",
+        "expectedBalanceCny": "1168836509652",
+        "residualCny": "19"
+      },
+      "combinedMarginBalanceCny": "1187089325063",
+      "securitiesLendingBalanceCny": "18252815392",
+      "combinedBalanceMatched": true,
+      "reconciledFinancingNetCny": null,
+      "stockFinancingBuyCny": "50634541754",
+      "turnoverCny": "773134000000.00",
+      "financingBuyShare": "0.06549258182152123693952148011",
+      "relativeTurnover20": null,
+      "priorTurnoverSessions": 13,
+      "priorTurnoverMeanCny": null,
+      "breadth": null,
+      "detailRows": 2017,
+      "stockMarginDetailRows": 1679,
+      "sample510300": {
+        "financingBalanceCny": "3402272041",
+        "financingBuyCny": "443285573",
+        "financingRepaymentCny": "347166041",
+        "balanceIdentity": {
+          "status": "mismatch",
+          "expectedBalanceCny": "3402272042",
+          "residualCny": "-1"
+        }
+      },
+      "evidence": [
+        "market_20261106",
+        "margin",
+        "detail_20261106_1",
+        "detail_20261106_2"
+      ]
+    },
+    {
+      "date": "2026-11-09",
+      "financingBalanceCny": "1178190259948",
+      "financingBuyCny": "61967884388",
+      "financingRepaymentCny": "59199138223",
+      "financingNetCny": "2768746165",
+      "financingBalanceChangeCny": "9353750277",
+      "balanceIdentity": {
+        "status": "mismatch",
+        "expectedBalanceCny": "1171605255836",
+        "residualCny": "6585004112"
+      },
+      "combinedMarginBalanceCny": "1196743583750",
+      "securitiesLendingBalanceCny": "18553323802",
+      "combinedBalanceMatched": true,
+      "reconciledFinancingNetCny": null,
+      "stockFinancingBuyCny": "49020208336",
+      "turnoverCny": "683171000000.00",
+      "financingBuyShare": "0.07175393618288832517773734541",
+      "relativeTurnover20": null,
+      "priorTurnoverSessions": 14,
+      "priorTurnoverMeanCny": null,
+      "breadth": null,
+      "detailRows": 2017,
+      "stockMarginDetailRows": 1679,
+      "sample510300": {
+        "financingBalanceCny": "3388993921",
+        "financingBuyCny": "219419351",
+        "financingRepaymentCny": "285905501",
+        "balanceIdentity": {
+          "status": "mismatch",
+          "expectedBalanceCny": "3335785891",
+          "residualCny": "53208030"
+        }
+      },
+      "evidence": [
+        "market_20261109",
+        "margin",
+        "detail_20261109_1",
+        "detail_20261109_2"
+      ]
+    },
+    {
+      "date": "2026-11-10",
+      "financingBalanceCny": "1174394760591",
+      "financingBuyCny": "67333328834",
+      "financingRepaymentCny": "64543824100",
+      "financingNetCny": "2789504734",
+      "financingBalanceChangeCny": "-3795499357",
+      "balanceIdentity": {
+        "status": "mismatch",
+        "expectedBalanceCny": "1180979764682",
+        "residualCny": "-6585004091"
+      },
+      "combinedMarginBalanceCny": "1193011969248",
+      "securitiesLendingBalanceCny": "18617208657",
+      "combinedBalanceMatched": true,
+      "reconciledFinancingNetCny": null,
+      "stockFinancingBuyCny": "51995814626",
+      "turnoverCny": "674484000000.00",
+      "financingBuyShare": "0.07708976732731984746858339116",
+      "relativeTurnover20": null,
+      "priorTurnoverSessions": 15,
+      "priorTurnoverMeanCny": null,
+      "breadth": null,
+      "detailRows": 2018,
+      "stockMarginDetailRows": 1680,
+      "sample510300": {
+        "financingBalanceCny": "3368332271",
+        "financingBuyCny": "327017995",
+        "financingRepaymentCny": "294471616",
+        "balanceIdentity": {
+          "status": "mismatch",
+          "expectedBalanceCny": "3421540300",
+          "residualCny": "-53208029"
+        }
+      },
+      "evidence": [
+        "market_20261110",
+        "margin",
+        "detail_20261110_1",
+        "detail_20261110_2"
+      ]
+    },
+    {
+      "date": "2026-11-11",
+      "financingBalanceCny": "1176749979321",
+      "financingBuyCny": "75642760774",
+      "financingRepaymentCny": "73287542027",
+      "financingNetCny": "2355218747",
+      "financingBalanceChangeCny": "2355218730",
+      "balanceIdentity": {
+        "status": "mismatch",
+        "expectedBalanceCny": "1176749979338",
+        "residualCny": "-17"
+      },
+      "combinedMarginBalanceCny": "1195572928241",
+      "securitiesLendingBalanceCny": "18822948920",
+      "combinedBalanceMatched": true,
+      "reconciledFinancingNetCny": null,
+      "stockFinancingBuyCny": "56394939117",
+      "turnoverCny": "737474000000.00",
+      "financingBuyShare": "0.07647040996292750659684273615",
+      "relativeTurnover20": null,
+      "priorTurnoverSessions": 16,
+      "priorTurnoverMeanCny": null,
+      "breadth": null,
+      "detailRows": 2019,
+      "stockMarginDetailRows": 1681,
+      "sample510300": {
+        "financingBalanceCny": "3334857838",
+        "financingBuyCny": "309818790",
+        "financingRepaymentCny": "343293221",
+        "balanceIdentity": {
+          "status": "mismatch",
+          "expectedBalanceCny": "3334857840",
+          "residualCny": "-2"
+        }
+      },
+      "evidence": [
+        "market_20261111",
+        "margin",
+        "detail_20261111_1",
+        "detail_20261111_2"
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "financingBalanceCny": "1177935693951",
+      "financingBuyCny": "90323568835",
+      "financingRepaymentCny": "89137854224",
+      "financingNetCny": "1185714611",
+      "financingBalanceChangeCny": "1185714630",
+      "balanceIdentity": {
+        "status": "mismatch",
+        "expectedBalanceCny": "1177935693932",
+        "residualCny": "19"
+      },
+      "combinedMarginBalanceCny": "1196678971772",
+      "securitiesLendingBalanceCny": "18743277821",
+      "combinedBalanceMatched": true,
+      "reconciledFinancingNetCny": null,
+      "stockFinancingBuyCny": "66852288464",
+      "turnoverCny": "880298000000.00",
+      "financingBuyShare": "0.07594279262704220616200423039",
+      "relativeTurnover20": null,
+      "priorTurnoverSessions": 17,
+      "priorTurnoverMeanCny": null,
+      "breadth": null,
+      "detailRows": 2019,
+      "stockMarginDetailRows": 1681,
+      "sample510300": {
+        "financingBalanceCny": "3247101032",
+        "financingBuyCny": "291686669",
+        "financingRepaymentCny": "379443474",
+        "balanceIdentity": {
+          "status": "mismatch",
+          "expectedBalanceCny": "3247101033",
+          "residualCny": "-1"
+        }
+      },
+      "evidence": [
+        "market_20261112",
+        "margin",
+        "detail_20261112_1",
+        "detail_20261112_2"
+      ]
+    },
+    {
+      "date": "2026-11-13",
+      "financingBalanceCny": "1169263907994",
+      "financingBuyCny": "73820243959",
+      "financingRepaymentCny": "82492029965",
+      "financingNetCny": "-8671786006",
+      "financingBalanceChangeCny": "-8671785957",
+      "balanceIdentity": {
+        "status": "mismatch",
+        "expectedBalanceCny": "1169263907945",
+        "residualCny": "49"
+      },
+      "combinedMarginBalanceCny": "1188220392174",
+      "securitiesLendingBalanceCny": "18956484180",
+      "combinedBalanceMatched": true,
+      "reconciledFinancingNetCny": null,
+      "stockFinancingBuyCny": "53696564467",
+      "turnoverCny": "771049000000.00",
+      "financingBuyShare": "0.06964092355609046895852273980",
+      "relativeTurnover20": null,
+      "priorTurnoverSessions": 18,
+      "priorTurnoverMeanCny": null,
+      "breadth": null,
+      "detailRows": 2019,
+      "stockMarginDetailRows": 1681,
+      "sample510300": {
+        "financingBalanceCny": "3212685693",
+        "financingBuyCny": "131253661",
+        "financingRepaymentCny": "165669000",
+        "balanceIdentity": {
+          "status": "matched",
+          "expectedBalanceCny": "3212685693",
+          "residualCny": "0"
+        }
+      },
+      "evidence": [
+        "market_20261113",
+        "margin",
+        "detail_20261113_1",
+        "detail_20261113_2"
+      ]
+    },
+    {
+      "date": "2026-11-16",
+      "financingBalanceCny": "1159812862911",
+      "financingBuyCny": "63500430796",
+      "financingRepaymentCny": "72951475863",
+      "financingNetCny": "-9451045067",
+      "financingBalanceChangeCny": "-9451045083",
+      "balanceIdentity": {
+        "status": "mismatch",
+        "expectedBalanceCny": "1159812862927",
+        "residualCny": "-16"
+      },
+      "combinedMarginBalanceCny": "1178660245926",
+      "securitiesLendingBalanceCny": "18847383015",
+      "combinedBalanceMatched": true,
+      "reconciledFinancingNetCny": null,
+      "stockFinancingBuyCny": "43411254735",
+      "turnoverCny": "706552000000.00",
+      "financingBuyShare": "0.06144099052157519899455383326",
+      "relativeTurnover20": null,
+      "priorTurnoverSessions": 19,
+      "priorTurnoverMeanCny": null,
+      "breadth": null,
+      "detailRows": 2019,
+      "stockMarginDetailRows": 1681,
+      "sample510300": {
+        "financingBalanceCny": "3232477385",
+        "financingBuyCny": "165587871",
+        "financingRepaymentCny": "145796178",
+        "balanceIdentity": {
+          "status": "mismatch",
+          "expectedBalanceCny": "3232477386",
+          "residualCny": "-1"
+        }
+      },
+      "evidence": [
+        "market_20261116",
+        "margin",
+        "detail_20261116_1",
+        "detail_20261116_2"
+      ]
+    },
+    {
+      "date": "2026-11-17",
+      "financingBalanceCny": "1151988956740",
+      "financingBuyCny": "62851354600",
+      "financingRepaymentCny": "70675260761",
+      "financingNetCny": "-7823906161",
+      "financingBalanceChangeCny": "-7823906171",
+      "balanceIdentity": {
+        "status": "mismatch",
+        "expectedBalanceCny": "1151988956750",
+        "residualCny": "-10"
+      },
+      "combinedMarginBalanceCny": "1170931366416",
+      "securitiesLendingBalanceCny": "18942409676",
+      "combinedBalanceMatched": true,
+      "reconciledFinancingNetCny": null,
+      "stockFinancingBuyCny": "44449218579",
+      "turnoverCny": "691117000000.00",
+      "financingBuyShare": "0.06431504156170373467878810679",
+      "relativeTurnover20": "0.8960416315257835439150079197",
+      "priorTurnoverSessions": 20,
+      "priorTurnoverMeanCny": "771300100000.00",
+      "breadth": null,
+      "detailRows": 2019,
+      "stockMarginDetailRows": 1681,
+      "sample510300": {
+        "financingBalanceCny": "3255203217",
+        "financingBuyCny": "195619112",
+        "financingRepaymentCny": "172893280",
+        "balanceIdentity": {
+          "status": "matched",
+          "expectedBalanceCny": "3255203217",
+          "residualCny": "0"
+        }
+      },
+      "evidence": [
+        "market_20261117",
+        "margin",
+        "detail_20261117_1",
+        "detail_20261117_2"
+      ]
+    },
+    {
+      "date": "2026-11-18",
+      "financingBalanceCny": "1148698155776",
+      "financingBuyCny": "60251251718",
+      "financingRepaymentCny": "63542052660",
+      "financingNetCny": "-3290800942",
+      "financingBalanceChangeCny": "-3290800964",
+      "balanceIdentity": {
+        "status": "mismatch",
+        "expectedBalanceCny": "1148698155798",
+        "residualCny": "-22"
+      },
+      "combinedMarginBalanceCny": "1167641256315",
+      "securitiesLendingBalanceCny": "18943100539",
+      "combinedBalanceMatched": true,
+      "reconciledFinancingNetCny": null,
+      "stockFinancingBuyCny": "42935071067",
+      "turnoverCny": "651256000000.00",
+      "financingBuyShare": "0.06592656507886299703956662203",
+      "relativeTurnover20": "0.8449044170547299064931327904",
+      "priorTurnoverSessions": 20,
+      "priorTurnoverMeanCny": "770804350000.00",
+      "breadth": null,
+      "detailRows": 2019,
+      "stockMarginDetailRows": 1681,
+      "sample510300": {
+        "financingBalanceCny": "3221942034",
+        "financingBuyCny": "142385696",
+        "financingRepaymentCny": "175646880",
+        "balanceIdentity": {
+          "status": "mismatch",
+          "expectedBalanceCny": "3221942033",
+          "residualCny": "1"
+        }
+      },
+      "evidence": [
+        "market_20261118",
+        "margin",
+        "detail_20261118_1",
+        "detail_20261118_2"
+      ]
+    },
+    {
+      "date": "2026-11-19",
+      "financingBalanceCny": "1141377708663",
+      "financingBuyCny": "57099268021",
+      "financingRepaymentCny": "64419715130",
+      "financingNetCny": "-7320447109",
+      "financingBalanceChangeCny": "-7320447113",
+      "balanceIdentity": {
+        "status": "mismatch",
+        "expectedBalanceCny": "1141377708667",
+        "residualCny": "-4"
+      },
+      "combinedMarginBalanceCny": "1160288555982",
+      "securitiesLendingBalanceCny": "18910847319",
+      "combinedBalanceMatched": true,
+      "reconciledFinancingNetCny": null,
+      "stockFinancingBuyCny": "38961547193",
+      "turnoverCny": "637367000000.00",
+      "financingBuyShare": "0.06112890562737010231154107445",
+      "relativeTurnover20": "0.8264971002052539486763334488",
+      "priorTurnoverSessions": 20,
+      "priorTurnoverMeanCny": "771166650000.00",
+      "breadth": null,
+      "detailRows": 2019,
+      "stockMarginDetailRows": 1681,
+      "sample510300": {
+        "financingBalanceCny": "3222725841",
+        "financingBuyCny": "236891530",
+        "financingRepaymentCny": "236107722",
+        "balanceIdentity": {
+          "status": "mismatch",
+          "expectedBalanceCny": "3222725842",
+          "residualCny": "-1"
+        }
+      },
+      "evidence": [
+        "market_20261119",
+        "margin",
+        "detail_20261119_1",
+        "detail_20261119_2"
+      ]
+    },
+    {
+      "date": "2026-11-20",
+      "financingBalanceCny": "1120768038403",
+      "financingBuyCny": "56307520901",
+      "financingRepaymentCny": "76917191147",
+      "financingNetCny": "-20609670246",
+      "financingBalanceChangeCny": "-20609670260",
+      "balanceIdentity": {
+        "status": "mismatch",
+        "expectedBalanceCny": "1120768038417",
+        "residualCny": "-14"
+      },
+      "combinedMarginBalanceCny": "1139447767407",
+      "securitiesLendingBalanceCny": "18679729004",
+      "combinedBalanceMatched": true,
+      "reconciledFinancingNetCny": null,
+      "stockFinancingBuyCny": "38673169876",
+      "turnoverCny": "703012000000.00",
+      "financingBuyShare": "0.05501068242931841846227375920",
+      "relativeTurnover20": "0.9157372624000334505426627609",
+      "priorTurnoverSessions": 20,
+      "priorTurnoverMeanCny": "767700550000.00",
+      "breadth": null,
+      "detailRows": 2019,
+      "stockMarginDetailRows": 1681,
+      "sample510300": {
+        "financingBalanceCny": "3271519241",
+        "financingBuyCny": "330355443",
+        "financingRepaymentCny": "281562045",
+        "balanceIdentity": {
+          "status": "mismatch",
+          "expectedBalanceCny": "3271519239",
+          "residualCny": "2"
+        }
+      },
+      "evidence": [
+        "market_20261120",
+        "margin",
+        "detail_20261120_1",
+        "detail_20261120_2"
+      ]
+    },
+    {
+      "date": "2026-11-23",
+      "financingBalanceCny": "1118933062961",
+      "financingBuyCny": "67880635241",
+      "financingRepaymentCny": "69715610714",
+      "financingNetCny": "-1834975473",
+      "financingBalanceChangeCny": "-1834975442",
+      "balanceIdentity": {
+        "status": "mismatch",
+        "expectedBalanceCny": "1118933062930",
+        "residualCny": "31"
+      },
+      "combinedMarginBalanceCny": "1137677031394",
+      "securitiesLendingBalanceCny": "18743968433",
+      "combinedBalanceMatched": true,
+      "reconciledFinancingNetCny": null,
+      "stockFinancingBuyCny": "48273119732",
+      "turnoverCny": "739506000000.00",
+      "financingBuyShare": "0.06527752274085673409005471220",
+      "relativeTurnover20": "0.9757630088143869711427193892",
+      "priorTurnoverSessions": 20,
+      "priorTurnoverMeanCny": "757874600000.00",
+      "breadth": null,
+      "detailRows": 2019,
+      "stockMarginDetailRows": 1681,
+      "sample510300": {
+        "financingBalanceCny": "3453869203",
+        "financingBuyCny": "582223280",
+        "financingRepaymentCny": "399873317",
+        "balanceIdentity": {
+          "status": "mismatch",
+          "expectedBalanceCny": "3453869204",
+          "residualCny": "-1"
+        }
+      },
+      "evidence": [
+        "market_20261123",
+        "margin",
+        "detail_20261123_1",
+        "detail_20261123_2"
+      ]
+    },
+    {
+      "date": "2026-11-24",
+      "financingBalanceCny": "1119532603899",
+      "financingBuyCny": "73840233469",
+      "financingRepaymentCny": "73240692551",
+      "financingNetCny": "599540918",
+      "financingBalanceChangeCny": "599540938",
+      "balanceIdentity": {
+        "status": "mismatch",
+        "expectedBalanceCny": "1119532603879",
+        "residualCny": "20"
+      },
+      "combinedMarginBalanceCny": "1138562931131",
+      "securitiesLendingBalanceCny": "19030327232",
+      "combinedBalanceMatched": true,
+      "reconciledFinancingNetCny": null,
+      "stockFinancingBuyCny": "57518355619",
+      "turnoverCny": "774358000000.00",
+      "financingBuyShare": "0.07427876462695549087114745376",
+      "relativeTurnover20": "1.022254987905278133058376183",
+      "priorTurnoverSessions": 20,
+      "priorTurnoverMeanCny": "757499850000.00",
+      "breadth": null,
+      "detailRows": 2019,
+      "stockMarginDetailRows": 1681,
+      "sample510300": {
+        "financingBalanceCny": "3223739965",
+        "financingBuyCny": "153115629",
+        "financingRepaymentCny": "383244866",
+        "balanceIdentity": {
+          "status": "mismatch",
+          "expectedBalanceCny": "3223739966",
+          "residualCny": "-1"
+        }
+      },
+      "evidence": [
+        "market_20261124",
+        "margin",
+        "detail_20261124_1",
+        "detail_20261124_2"
+      ]
+    },
+    {
+      "date": "2026-11-25",
+      "financingBalanceCny": "1109013697095",
+      "financingBuyCny": "56370009904",
+      "financingRepaymentCny": "66888916675",
+      "financingNetCny": "-10518906771",
+      "financingBalanceChangeCny": "-10518906804",
+      "balanceIdentity": {
+        "status": "mismatch",
+        "expectedBalanceCny": "1109013697128",
+        "residualCny": "-33"
+      },
+      "combinedMarginBalanceCny": "1127703771300",
+      "securitiesLendingBalanceCny": "18690074205",
+      "combinedBalanceMatched": true,
+      "reconciledFinancingNetCny": null,
+      "stockFinancingBuyCny": "40337751709",
+      "turnoverCny": "653797000000.00",
+      "financingBuyShare": "0.06169767023862146813154541853",
+      "relativeTurnover20": "0.8573650394621839042023275378",
+      "priorTurnoverSessions": 20,
+      "priorTurnoverMeanCny": "762565500000.00",
+      "breadth": null,
+      "detailRows": 2019,
+      "stockMarginDetailRows": 1681,
+      "sample510300": {
+        "financingBalanceCny": "3307596162",
+        "financingBuyCny": "273398673",
+        "financingRepaymentCny": "189542474",
+        "balanceIdentity": {
+          "status": "mismatch",
+          "expectedBalanceCny": "3307596164",
+          "residualCny": "-2"
+        }
+      },
+      "evidence": [
+        "market_20261125",
+        "margin",
+        "detail_20261125_1",
+        "detail_20261125_2"
+      ]
+    },
+    {
+      "date": "2026-11-26",
+      "financingBalanceCny": "1101070420322",
+      "financingBuyCny": "53780740162",
+      "financingRepaymentCny": "61724016978",
+      "financingNetCny": "-7943276816",
+      "financingBalanceChangeCny": "-7943276773",
+      "balanceIdentity": {
+        "status": "mismatch",
+        "expectedBalanceCny": "1101070420279",
+        "residualCny": "43"
+      },
+      "combinedMarginBalanceCny": "1119731973861",
+      "securitiesLendingBalanceCny": "18661553539",
+      "combinedBalanceMatched": true,
+      "reconciledFinancingNetCny": null,
+      "stockFinancingBuyCny": "39181758291",
+      "turnoverCny": "613650000000.00",
+      "financingBuyShare": "0.06385033535565876313859692007",
+      "relativeTurnover20": "0.8099130773806514913605972174",
+      "priorTurnoverSessions": 20,
+      "priorTurnoverMeanCny": "757673900000.00",
+      "breadth": null,
+      "detailRows": 2019,
+      "stockMarginDetailRows": 1681,
+      "sample510300": {
+        "financingBalanceCny": "3318881755",
+        "financingBuyCny": "161349915",
+        "financingRepaymentCny": "150064321",
+        "balanceIdentity": {
+          "status": "mismatch",
+          "expectedBalanceCny": "3318881756",
+          "residualCny": "-1"
+        }
+      },
+      "evidence": [
+        "market_20261126",
+        "margin",
+        "detail_20261126_1",
+        "detail_20261126_2"
+      ]
+    }
+  ],
+  "scope": {
+    "financing": "沪市全体融资融券汇总，含调出标的存量。",
+    "turnover": "沪市主板A及科创板（含存托凭证）成交额。沪市B股、基金、债券、期权、回购均不计入。",
+    "financingBuyShare": "分子为当日沪市信用交易明细中600/601/603/605/688/689证券融资买入额，分母为相同日期主板A与科创板成交额。",
+    "relativeTurnover20": "当日同范围成交额除以前20个完整交易日的算术平均值。"
+  },
+  "units": {
+    "money": "人民币元",
+    "turnoverSource": "亿元，各板块原值精度为0.01亿元",
+    "ratio": "1 表示 100%"
+  },
+  "balanceCounts": {
+    "missing_previous": 1,
+    "mismatch": 27
+  },
+  "latestProbe": {
+    "date": "2026-11-27",
+    "marginRows": 0,
+    "source": "next_margin_probe"
+  },
+  "sourcePages": {
+    "margin": "https://www.sse.com.cn/market/othersdata/margin/sum/",
+    "turnover": "https://www.sse.com.cn/market/view/",
+    "codeAllocation": "https://www.sse.com.cn/lawandrules/guide/stock/jyglywznylc/zn/c/10830435/files/efee43e6d2444a27b4e202c4ecb7c0ee.docx"
+  },
+  "limitations": [
+    "历史披露时刻未知。收到与审核时间记录本次补抓，所有字段只能在本次审核后用于资料查询。",
+    "融资净额按买入减偿还列示，余额恒等式残差为公布余额减公式期望值。残差不为零时，仅保留观察值，未核明原因。",
+    "沪市成交额使用交易所各板块已舍入至亿元小数两位的金额，融资买入占比为按这些公布值计算的估算。",
+    "未取得逐日成分、停牌、无前收及新股一致口径的市场广度，下列广度均为空。"
+  ]
+}

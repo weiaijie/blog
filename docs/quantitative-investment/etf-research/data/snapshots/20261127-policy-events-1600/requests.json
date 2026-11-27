@@ -1,0 +1,46 @@
+[
+  {
+    "name": "xinhua_1106",
+    "url": "https://www.news.cn/20261106/84f141de4c884bf6b250edcbb5b32952/c.html",
+    "final_url": "https://www.news.cn/20261106/84f141de4c884bf6b250edcbb5b32952/c.html",
+    "status": 200,
+    "curl_exit": 0,
+    "error": null,
+    "requested_at_utc": "2026-11-27T08:01:58.749070+00:00",
+    "completed_at_utc": "2026-11-27T08:01:59.121738+00:00",
+    "sha256": "97201bb8dc02357620ecccf3bd9c73db34977080e6dea41279e050b0960ae9c5"
+  },
+  {
+    "name": "mofcom_1107",
+    "url": "https://www.mofcom.gov.cn/syxwfb/art/2026/art_12d65a0ba98a436b8c6b046863e591e7.html",
+    "final_url": "https://www.mofcom.gov.cn/syxwfb/art/2026/art_12d65a0ba98a436b8c6b046863e591e7.html",
+    "status": 200,
+    "curl_exit": 0,
+    "error": null,
+    "requested_at_utc": "2026-11-27T08:01:59.121883+00:00",
+    "completed_at_utc": "2026-11-27T08:01:59.300200+00:00",
+    "sha256": "8bde2b93a1a0d030f15ebff836155a7dc2f4820203aa0cbb884370a488a96601"
+  },
+  {
+    "name": "xinhua_1127",
+    "url": "https://www.news.cn/politics/leaders/20261127/a7c52bc55082444da343d42d738f28b8/c.html",
+    "final_url": "https://www.news.cn/politics/leaders/20261127/a7c52bc55082444da343d42d738f28b8/c.html",
+    "status": 200,
+    "curl_exit": 0,
+    "error": null,
+    "requested_at_utc": "2026-11-27T08:01:59.300307+00:00",
+    "completed_at_utc": "2026-11-27T08:01:59.483311+00:00",
+    "sha256": "780bc5efd99cc7a3c1fdb193518bf81b004fdd43b7fb2779e6b52e9a376de42f"
+  },
+  {
+    "name": "csrc_1127",
+    "url": "https://www.csrc.gov.cn/csrc/c100028/c7673432/content.shtml",
+    "final_url": "https://www.csrc.gov.cn/csrc/c100028/c7673432/content.shtml",
+    "status": 200,
+    "curl_exit": 0,
+    "error": null,
+    "requested_at_utc": "2026-11-27T08:01:59.483433+00:00",
+    "completed_at_utc": "2026-11-27T08:01:59.562452+00:00",
+    "sha256": "7532dba3a9b6deaf4c61221f3b47c155015cd96b88555999493b3f934ee9972f"
+  }
+]

@@ -181,7 +181,27 @@ class Handler(BaseHTTPRequestHandler):
         namespace = '/'.join(path.split('/')[:3])
         profile = PROFILE_PATHS.get(namespace)
         prefix = namespace+'/backtest'
-        if profile and (path == prefix or path.startswith(prefix+'/')):
+        if path in ('/api/v1/research/policy-pilot','/api/v1/research/policy-pilot/as-of'):
+            kind = 'application/json'
+            try:
+                import policy_pilot
+                if path.endswith('/as-of'):
+                    params = interactive.request_params(url.query,('decision_at',))
+                    try:
+                        cutoff = policy_pilot.decision_time(params['decision_at'])
+                    except ValueError as exc:
+                        raise interactive.InputError(str(exc)) from exc
+                    result = policy_pilot.as_of(cutoff)
+                else:
+                    interactive.request_params(url.query,())
+                    result = policy_pilot.report()
+                body = interactive.encode(result)
+            except interactive.InputError as exc:
+                status,body = 400,interactive.encode({'error':str(exc)})
+            except (OSError,ValueError,KeyError,ImportError) as exc:
+                self.log_error('Policy research unavailable: %s',exc)
+                status,body = 503,interactive.encode({'error':'政策研究证据未通过核验。'})
+        elif profile and (path == prefix or path.startswith(prefix+'/')):
             kind = 'application/json'
             operation = path.removeprefix(prefix).removeprefix('/') or 'account'
             try:
