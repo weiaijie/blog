@@ -66,4 +66,10 @@ python scripts/run_scheduled.py --through 2026-11-24 \
 
 更新前暂停本项目daily/health/archive三个timer，等待对应服务结束；先取回新增证据及三个状态指针。核验后仅部署本轮变更，不能用旧Git归档覆盖运行数据；更新清单，执行完整性和必要测试，daemon-reload并恢复三个timer。不要动其他用户服务。恢复生产状态后检查enabled/active、linger以及各服务退出结果。
 
+### 独立研究运行目录
+
+独立研究服务及原 18 户的看板使用各自的运行目录。更新共享 Python 模块或配置时，根据 `systemctl --user cat` 的 `WorkingDirectory`、`ExecStart` 和覆盖配置，核对每个受影响的副本。将待部署提交的 Git 文件对象 ID 与运行文件的 `git hash-object` 逐个比对，并记录差异、部署提交和读回结果。
+
+选择相关服务两次执行之间的维护窗口，确认服务已经退出。只同步核对过的代码和配置，保留独立归档、运行回执和公开证据导出目录。更新 unit 后用 `systemctl --user daemon-reload` 重新加载。检查 `FragmentPath`、`DropInPaths` 和下一次触发时间，随后按真实回执验收。归档读写模块变更后，使用实际运行目录的模块逐份核验已有归档清单和引用的对象。
+
 技术参考：[systemd定时器](https://www.freedesktop.org/software/systemd/man/latest/systemd.timer.html)、[Python路径处理](https://docs.python.org/3.12/library/pathlib.html)。本轮以实际主机systemd-analyze和触发记录验收，不以配置文件存在冒称已运行。

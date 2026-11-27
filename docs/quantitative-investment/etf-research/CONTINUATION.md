@@ -87,6 +87,7 @@
 - 独立Ubuntu，禁止回退WSL。运行Python为/home/ubuntu/projects/etf-research-py312/bin/python。
 - 部署前按[运行闭环手册](docs/OPERATIONS_CLOSURE.md)暂停daily/health/archive三个timer，等服务结束，先取回新增公开证据。只部署本轮文件；config/active_run.json、site/operation_status.json、site/health_status.json不能用旧Git副本覆盖。
 - 验证后重启本项目dashboard服务、恢复三个timer，检查enabled/active、页面/API和活动账户哈希。不得动其他服务。
+- 独立研究服务有单独的运行目录。更新共享模块时，按[独立研究运行目录](docs/OPERATIONS_CLOSURE.md#独立研究运行目录)核对实际加载路径和 Git 文件对象 ID，并读回定时运行回执。
 - config/research.json控制固定监控输入，不是冻结策略总开关。新前瞻报告必须显式使用新检查点。
 - 完成后中文提交到原分支、推送、远端读回核验。交付使用GitHub链接，不提供本地备份路径；不提交凭据和私人资料。
 
