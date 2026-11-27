@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-27",
+  "startedAt": "2026-11-27T09:04:37.883035+00:00",
+  "trigger": {
+    "unit": "etf-research-observation.timer",
+    "invocationId": "fbe40c6ad91b4cccbc7e1b4bd74e7565",
+    "timerRealtimeUsec": 1795770209715549
+  },
+  "finishedAt": "2026-11-27T09:04:40.478056+00:00",
+  "phase": "partial",
+  "errors": {},
+  "coverage": {
+    "schemaVersion": 1,
+    "date": "2026-11-27",
+    "decisionAt": "2026-11-27T09:04:39.970645+00:00",
+    "runKind": "validation",
+    "researchOnly": true,
+    "forwardEligible": false,
+    "policy": {
+      "status": "archived",
+      "candidateCount": 10,
+      "uniqueRevisionKeys": [
+        "0a82550147de886734dd1bd3353d21afd53fa39885ccbfc3e66257e66bafd675",
+        "2631ff8dd8e9ab43751c1597783a304524e27b1fe1e92360f225c8ea2745b9aa",
+        "2f40401cbd0cd4b8ef3318b91e2f92e2c83a433a3ed13c32eb195d092ccfc978",
+        "39bf642c38907031839b80ce0426fa2d267b77a91c72b48a1a3af17bc6555f9a",
+        "7dcd6194fc8bc0ae5505b1f7a19ffa30b96feaf72ea19c03fd842fa52d5ebc8f",
+        "8dd8a976175c15d0e0512e6486c59928aa7592ea6ca0c1859b0776e5ef8cdf5e",
+        "986a5f3621a19b3bde44367ed8bbf7567c2f0bdbdeb951e2af21b77f73e58b53",
+        "b9c825722eff1ee5d1c5e3663d8a0d814833b7201633affb4cb49412184dee04",
+        "da58f9a8c4ba90d83c7439efee4734cbd31c3d306b30fde1dbe9fd14db3d7baa",
+        "fc55e371391118189f9f9d5dc6b6379530609624ddca9aa0cc4a954fc85c26fa"
+      ],
+      "signalEligibleCount": 0,
+      "issues": {}
+    },
+    "etf": {
+      "510300": {
+        "status": "unknown",
+        "issues": {
+          "shares_20261127": "Cleared units absent or incomplete",
+          "nav_2026-11-27": "Same-valuation-date manager NAV is absent or unverified"
+        },
+        "estimatedNetSubscriptionCny": null,
+        "featureReadyAt": null
+      },
+      "511010": {
+        "status": "unknown",
+        "issues": {
+          "shares_20261127": "Cleared units absent or incomplete",
+          "nav_2026-11-27": "Same-valuation-date manager NAV is absent or unverified"
+        },
+        "estimatedNetSubscriptionCny": null,
+        "featureReadyAt": null
+      }
+    },
+    "market": {
+      "status": "partial_capture",
+      "turnoverCny": "930379000000.00",
+      "margin": null,
+      "featureReadyAt": "2026-11-27T09:04:39.910809+00:00",
+      "issues": {
+        "margin": "Incomplete or inconsistent adjacent-session financing summary"
+      }
+    },
+    "evidence": {
+      "policyEtf": {
+        "path": "reports/research-observation/runs/2026-11-27/20261127T090437Z-549300f6/inputs/20261127T090437Z-abca0cdd-policy-etf-day",
+        "manifestSha256": "d6536f51707074ed04401622a12965f33b1e1f8695da7d422e4fdd82097c51db"
+      },
+      "sse": {
+        "path": "reports/research-observation/runs/2026-11-27/20261127T090437Z-549300f6/inputs/20261127T090439Z-ecb839b1-sse-research-day",
+        "manifestSha256": "d13143c60d7c888c820d02ff6743034c3729517ae70ed27b7599b2c3fb055dc1"
+      }
+    }
+  }
+}

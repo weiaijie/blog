@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-26",
+  "startedAt": "2026-11-27T09:02:25.396276+00:00",
+  "trigger": null,
+  "finishedAt": "2026-11-27T09:02:28.865116+00:00",
+  "phase": "complete",
+  "errors": {},
+  "coverage": {
+    "schemaVersion": 1,
+    "date": "2026-11-26",
+    "decisionAt": "2026-11-27T09:02:28.387260+00:00",
+    "runKind": "validation",
+    "researchOnly": true,
+    "forwardEligible": false,
+    "policy": {
+      "status": "archived",
+      "candidateCount": 10,
+      "uniqueRevisionKeys": [
+        "0a82550147de886734dd1bd3353d21afd53fa39885ccbfc3e66257e66bafd675",
+        "2631ff8dd8e9ab43751c1597783a304524e27b1fe1e92360f225c8ea2745b9aa",
+        "2f40401cbd0cd4b8ef3318b91e2f92e2c83a433a3ed13c32eb195d092ccfc978",
+        "39bf642c38907031839b80ce0426fa2d267b77a91c72b48a1a3af17bc6555f9a",
+        "7dcd6194fc8bc0ae5505b1f7a19ffa30b96feaf72ea19c03fd842fa52d5ebc8f",
+        "8dd8a976175c15d0e0512e6486c59928aa7592ea6ca0c1859b0776e5ef8cdf5e",
+        "986a5f3621a19b3bde44367ed8bbf7567c2f0bdbdeb951e2af21b77f73e58b53",
+        "b9c825722eff1ee5d1c5e3663d8a0d814833b7201633affb4cb49412184dee04",
+        "da58f9a8c4ba90d83c7439efee4734cbd31c3d306b30fde1dbe9fd14db3d7baa",
+        "fc55e371391118189f9f9d5dc6b6379530609624ddca9aa0cc4a954fc85c26fa"
+      ],
+      "signalEligibleCount": 0,
+      "issues": {}
+    },
+    "etf": {
+      "510300": {
+        "status": "verified_estimate",
+        "issues": {},
+        "estimatedNetSubscriptionCny": "708184620.000000",
+        "featureReadyAt": "2026-11-27T09:02:26.291056+00:00"
+      },
+      "511010": {
+        "status": "verified_estimate",
+        "issues": {},
+        "estimatedNetSubscriptionCny": "46652430.00000",
+        "featureReadyAt": "2026-11-27T09:02:26.291056+00:00"
+      }
+    },
+    "market": {
+      "status": "full_capture",
+      "turnoverCny": "613650000000.00",
+      "margin": {
+        "financingBalanceCny": 1101070420322,
+        "financingBuyCny": 53780740162,
+        "financingRepaymentCny": 61724016978,
+        "balanceIdentity": {
+          "status": "mismatch",
+          "expectedBalanceCny": "1101070420279",
+          "residualCny": "43"
+        },
+        "reconciledFinancingNetCny": null,
+        "stockFinancingBuyCny": 39181758291,
+        "financingBuyShare": "0.06385033535565876313859692007"
+      },
+      "featureReadyAt": "2026-11-27T09:02:28.225331+00:00",
+      "issues": {}
+    },
+    "evidence": {
+      "policyEtf": {
+        "path": "reports/research-observation/runs/2026-11-26/20261127T090225Z-a951fbbd/inputs/20261127T090225Z-93920ee5-policy-etf-day",
+        "manifestSha256": "3658bf691682c2b87992a118f730cb22d31c6f2ba5f04bd6a2675fcc2f0cf1ab"
+      },
+      "sse": {
+        "path": "reports/research-observation/runs/2026-11-26/20261127T090225Z-a951fbbd/inputs/20261127T090227Z-8e2727e8-sse-research-day",
+        "manifestSha256": "3a4bcfe8bd4908a5101b4744a0b063e4aaeb1981d2dacec0fc26206da29f00e0"
+      }
+    }
+  }
+}

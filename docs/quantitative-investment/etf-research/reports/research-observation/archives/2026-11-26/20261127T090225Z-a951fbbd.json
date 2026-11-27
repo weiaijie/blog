@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "session": "2026-11-26",
+  "attempt": "reports/research-observation/runs/2026-11-26/20261127T090225Z-a951fbbd",
+  "phase": "complete",
+  "resultSha256": "34cd3d65f240b6db9ad139f2430778724133b428912dc5b65143d513a0d2ed77",
+  "attemptManifestSha256": "2630e7163904f105d7011bbdd01539b96e82687d377c94e6f38e23af10a61356",
+  "trigger": null,
+  "archive": "087b1492e77ab8721b55bfbda631293729ca09b4595ef3a5c9c3a77bf8052936",
+  "archiveCreatedAt": "2026-11-27T09:02:29.572802+00:00",
+  "archiveVerifiedAt": "2026-11-27T09:02:29.654016+00:00",
+  "files": 134,
+  "forwardEligible": false
+}

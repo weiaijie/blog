@@ -1,0 +1,9 @@
+{
+  "snapshot": "b7ba94df2e50df7348874b44bbb2b44cbb14a40a9584900a86a5a1cc90c0a18a",
+  "attempt": "reports/research-observation/runs/2026-11-27/20261127T090329Z-f6cbc152",
+  "archiveRestoredFiles": 134,
+  "resultSha256": "1bc1a6c48e7fa0fba711595b289a8b2d2d84d9c5cf43aac8e68a7e17bc9a8e06",
+  "reconstruction": "PASS exact coverage reconstruction",
+  "servicesActivated": false,
+  "checkedAt": "2026-11-27T09:04:15.248017+00:00"
+}

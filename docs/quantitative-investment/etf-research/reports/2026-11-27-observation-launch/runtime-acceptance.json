@@ -1,0 +1,115 @@
+{
+  "checkAt": "2026-11-27T09:05:18.434572+00:00",
+  "timer": {
+    "ActiveState": "active",
+    "UnitFileState": "enabled",
+    "NextElapseUSecRealtime": "Fri 2026-11-27 19:40:00 CST",
+    "LastTriggerUSec": "Fri 2026-11-27 17:04:37 CST"
+  },
+  "service": {
+    "ActiveState": "inactive",
+    "Result": "success",
+    "ExecMainStatus": "0"
+  },
+  "existingUnits": {
+    "etf-research-daily.timer": {
+      "ActiveState": "active",
+      "UnitFileState": "enabled"
+    },
+    "etf-research-health.timer": {
+      "ActiveState": "active",
+      "UnitFileState": "enabled"
+    },
+    "etf-research-archive.timer": {
+      "ActiveState": "active",
+      "UnitFileState": "enabled"
+    },
+    "etf-research-dashboard.service": {
+      "ActiveState": "active",
+      "UnitFileState": "enabled"
+    }
+  },
+  "verifiedJournalInvocationIds": [
+    "83793edf0d5d419197289b5b2e52b0ab",
+    "fbe40c6ad91b4cccbc7e1b4bd74e7565"
+  ],
+  "runs": [
+    {
+      "receipt": {
+        "schemaVersion": 1,
+        "session": "2026-11-26",
+        "attempt": "reports/research-observation/runs/2026-11-26/20261127T090225Z-a951fbbd",
+        "phase": "complete",
+        "resultSha256": "34cd3d65f240b6db9ad139f2430778724133b428912dc5b65143d513a0d2ed77",
+        "attemptManifestSha256": "2630e7163904f105d7011bbdd01539b96e82687d377c94e6f38e23af10a61356",
+        "trigger": null,
+        "archive": "087b1492e77ab8721b55bfbda631293729ca09b4595ef3a5c9c3a77bf8052936",
+        "archiveCreatedAt": "2026-11-27T09:02:29.572802+00:00",
+        "archiveVerifiedAt": "2026-11-27T09:02:29.654016+00:00",
+        "files": 134,
+        "forwardEligible": false
+      },
+      "policy": "archived",
+      "candidates": 10,
+      "market": "full_capture",
+      "etf": {
+        "510300": "verified_estimate",
+        "511010": "verified_estimate"
+      }
+    },
+    {
+      "receipt": {
+        "schemaVersion": 1,
+        "session": "2026-11-27",
+        "attempt": "reports/research-observation/runs/2026-11-27/20261127T090329Z-f6cbc152",
+        "phase": "partial",
+        "resultSha256": "1bc1a6c48e7fa0fba711595b289a8b2d2d84d9c5cf43aac8e68a7e17bc9a8e06",
+        "attemptManifestSha256": "f5f2048aab704ba44a820b3715189cf86b42d2e6c17ab491c994ecce4e588e0b",
+        "trigger": {
+          "unit": "etf-research-observation.timer",
+          "invocationId": "83793edf0d5d419197289b5b2e52b0ab",
+          "timerRealtimeUsec": 1795770209715549
+        },
+        "archive": "b7ba94df2e50df7348874b44bbb2b44cbb14a40a9584900a86a5a1cc90c0a18a",
+        "archiveCreatedAt": "2026-11-27T09:03:32.933073+00:00",
+        "archiveVerifiedAt": "2026-11-27T09:03:33.003911+00:00",
+        "files": 134,
+        "forwardEligible": false
+      },
+      "policy": "archived",
+      "candidates": 10,
+      "market": "partial_capture",
+      "etf": {
+        "510300": "unknown",
+        "511010": "unknown"
+      }
+    },
+    {
+      "receipt": {
+        "schemaVersion": 1,
+        "session": "2026-11-27",
+        "attempt": "reports/research-observation/runs/2026-11-27/20261127T090437Z-549300f6",
+        "phase": "partial",
+        "resultSha256": "af4e9c59c673fb51896e114e04e429e35e6ce8f037daac9bf3ea2b860655007e",
+        "attemptManifestSha256": "7fe5a8467ab4c26b299753be823828cd1a441a79e7effefd8674d66f8c538dd8",
+        "trigger": {
+          "unit": "etf-research-observation.timer",
+          "invocationId": "fbe40c6ad91b4cccbc7e1b4bd74e7565",
+          "timerRealtimeUsec": 1795770209715549
+        },
+        "archive": "753df205e22f425adf24b9ee58986432121500b46e8da72b14e6a69bfbff7afe",
+        "archiveCreatedAt": "2026-11-27T09:04:40.730789+00:00",
+        "archiveVerifiedAt": "2026-11-27T09:04:40.809820+00:00",
+        "files": 134,
+        "forwardEligible": false
+      },
+      "policy": "archived",
+      "candidates": 10,
+      "market": "partial_capture",
+      "etf": {
+        "510300": "unknown",
+        "511010": "unknown"
+      }
+    }
+  ]
+}
