@@ -86,9 +86,9 @@ def month_report(root, store, month, observed):
     coverage_start = max(month_start,parse_day(config['observationEarliestDate']))
     through = min(completed_date(observed),month_end)
     today = observed.astimezone(TZ).date()
-    planned,unknown = expected_days(root,coverage_start,month_end)
+    planned,unknown = expected_days(root,coverage_start,month_end,observed=observed)
     sessions = tuple(day for day in planned if day<=through)
-    after,cutoff_unknown = expected_days(root,month_end+timedelta(days=1),month_end+timedelta(days=31))
+    after,cutoff_unknown = expected_days(root,month_end+timedelta(days=1),month_end+timedelta(days=31),observed=observed)
     next_sessions = (*planned[1:],*after[:1])
     cutoffs = {day:deadline(next_day) for day,next_day in zip(planned,next_sessions)}
     close_after = cutoffs.get(planned[-1]) if planned else None

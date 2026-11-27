@@ -9,6 +9,7 @@ import re
 from observation_labels import CALENDAR, EVIDENCE_ERRORS
 from observation_monthly import LOG, month_report, parse_month
 from observation_status import add_months
+from etf_research.exchange_calendar import LOADER, calendar_at
 from etf_research.evidence_archive import capture, safe_path, verify as verify_archive
 from etf_research.policy_events import TZ, instant
 from etf_research.publication import create, lock, read, seal, sha, sync_dir, verify_bundle
@@ -17,6 +18,7 @@ ROOT = Path(__file__).resolve().parents[1]
 TIMER = 'etf-research-monthly-coverage.timer'
 INVOCATION = re.compile(r'[a-f0-9]{32}')
 CODE = (
+    LOADER,
     'PROTOCOL_OBSERVATION_V1.md',CALENDAR,'config/research_observation.json',
     'deploy/etf-research-monthly-coverage.service','deploy/etf-research-monthly-coverage.timer',
     'scripts/observation_monthly.py','scripts/seal_observation_monthly.py',
@@ -84,7 +86,8 @@ def month_view(root,store,month,observed):
 
 
 def input_hashes(root,store,report):
-    hashes = {name:sha(root/name) for name in CODE}
+    calendar = calendar_at(root,instant(report['asOf']))
+    hashes = {name:sha(root/name) for name in (*CODE,*calendar.extensions)}
     log = 'reports/research-observation'
     for day in report['days']:
         for item in (*day['attempts'],*day['manualAttempts']):

@@ -4,25 +4,21 @@ from datetime import date, datetime, timedelta, timezone
 from decimal import Decimal
 from pathlib import Path
 
-from collect_sse_research_day import CALENDAR_SHA
 from observation_price_inputs import admitted_prices
 from observe_opening_quotes import LOG as OPENING_LOG, verify_opening
 from etf_research.admission import sessions_between
 from etf_research.baselines import SCENARIOS, SYMBOLS
+from etf_research.exchange_calendar import BASE_PATH as CALENDAR, calendar_at
 from etf_research.observation_decision_receipt import DECISIONS, deadline, verify_decision
 from etf_research.observation_experiment import HORIZON, Window, five_day_label, label_floor
 from etf_research.policy_events import instant
 from etf_research.publication import create, read, sha
 
-CALENDAR = 'data/snapshots/2026-11-04-calendar-08/calendar.json'
 EVIDENCE_ERRORS = (OSError, ValueError, KeyError, TypeError, ArithmeticError)
 
 
-def label_window(project, entry):
-    calendar = project/CALENDAR
-    if sha(calendar)!=CALENDAR_SHA:
-        raise ValueError('Independent label calendar digest mismatch')
-    ranges = read(calendar)['holiday_ranges']
+def label_window(project, entry, observed=None):
+    ranges = calendar_at(project,observed if observed is not None else datetime.now(timezone.utc)).ranges
     previous = sessions_between(ranges,entry-timedelta(days=31),entry-timedelta(days=1))
     if not previous or not sessions_between(ranges,entry,entry):
         raise ValueError('Decision entry is not a verified exchange session')
@@ -110,7 +106,7 @@ def serial_results(data, window, opening):
 
 
 def assemble_label(project, observations, store, entry, observed, *, decision_folder=None):
-    window = label_window(project,entry)
+    window = label_window(project,entry,observed)
     base = dict(schemaVersion=1,mode='scheduled_candidate' if decision_folder else 'validation',
                 entryDay=str(entry),anchorDay=str(window.anchor),
                 sessions=[str(day) for day in window.sessions],lastSession=str(window.last),

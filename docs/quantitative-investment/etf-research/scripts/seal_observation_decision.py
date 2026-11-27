@@ -8,10 +8,10 @@ import os
 import re
 from uuid import uuid4
 
-from collect_sse_research_day import CALENDAR_SHA
 from observation_inputs import FEATURES, assemble
 from run_research_observation import check_receipt
 from etf_research.admission import sessions_between
+from etf_research.exchange_calendar import BASE_PATH as CALENDAR, LOADER, calendar_at
 from etf_research.evidence_archive import capture, verify as verify_archive
 from etf_research.observation_experiment import VARIANTS
 from etf_research.observation_decision_receipt import (
@@ -21,8 +21,8 @@ from etf_research.policy_events import TZ, instant
 from etf_research.publication import create, inside, lock, read, seal, sha, sync_dir
 
 ROOT = Path(__file__).resolve().parents[1]
-CALENDAR = 'data/snapshots/2026-11-04-calendar-08/calendar.json'
 CODE = (
+    LOADER,
     'PROTOCOL_OBSERVATION_V1.md', 'config/research_observation.json', CALENDAR,
     'deploy/etf-research-decision.service', 'deploy/etf-research-decision.timer',
     'scripts/seal_observation_decision.py', 'scripts/observation_inputs.py',
@@ -102,10 +102,8 @@ def run(root, prices, store, *, probe=None):
     if probe is None and trigger is None:
         raise ValueError('The production decision needs its scheduled systemd timer provenance')
     day = probe or started.astimezone(TZ).date()
-    calendar = root/CALENDAR
-    if sha(calendar)!=CALENDAR_SHA:
-        raise ValueError('Observation calendar digest mismatch')
-    if not sessions_between(read(calendar)['holiday_ranges'],day,day):
+    calendar = calendar_at(root,started)
+    if not sessions_between(calendar.ranges,day,day):
         return dict(status='not_scheduled',entryDay=str(day))
     log = root/(PROBES if probe else DECISIONS)/day.isoformat()
     roots = dict(prices=prices,observations=root,archive=store)
@@ -121,7 +119,7 @@ def run(root, prices, store, *, probe=None):
         input_file = records/'inputs.json'
         origin, failure = None, None
         available = dict.fromkeys(VARIANTS,False)
-        code = {path:sha(root/path) for path in CODE}
+        code = {path:sha(root/path) for path in (*CODE,*calendar.extensions)}
         if probe or current_slot(trigger,day,started):
             try:
                 origin = first_archive(root,store,started)

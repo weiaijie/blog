@@ -7,6 +7,7 @@ from pathlib import Path
 import re
 
 from observation_labels import CALENDAR
+from etf_research.exchange_calendar import LOADER, calendar_at
 from etf_research.evidence_archive import capture, verify as verify_archive
 from etf_research.policy_events import TZ, instant
 from etf_research.publication import create, lock, read, seal, sha, sync_dir, verify_bundle
@@ -15,6 +16,7 @@ ROOT=Path(__file__).resolve().parents[1]
 LOG='reports/research-evaluation'
 TIMER='etf-research-evaluation.timer'
 CODE=(
+    LOADER,
     'PROTOCOL_OBSERVATION_V1.md', CALENDAR, 'config/research_observation.json',
     'deploy/etf-research-evaluation.service','deploy/etf-research-evaluation.timer',
     'scripts/seal_observation_evaluation.py','scripts/observation_out_of_sample.py',
@@ -59,7 +61,8 @@ def archive_evaluation(root,store,report,invocation):
     folder=root/LOG/str(day)/invocation
     records=folder/'records'
     records.mkdir(parents=True,exist_ok=False)
-    bindings={name:sha(root/name) for name in CODE}
+    calendar = calendar_at(root,instant(report['asOf']))
+    bindings={name:sha(root/name) for name in (*CODE,*calendar.extensions)}
     create(records/'evaluation.json',dict(schemaVersion=1,report=report,invocation=invocation,timer=TIMER,
                                          computedAt=now().isoformat(),codeSha256=bindings))
     seal(records)

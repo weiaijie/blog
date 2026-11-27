@@ -1,20 +1,21 @@
 """Generate immutable history and prospective reports alongside the daily accounts."""
 import csv, html, json, sys
 from pathlib import Path
-from datetime import date
+from datetime import date, datetime, timezone
 from decimal import Decimal as D
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT/'src'))
+from etf_research.exchange_calendar import calendar_at
 from etf_research.monthly import index_levels, compare
 from etf_research.publication import read, create, sha
 from etf_research.long_history import load_long_history
 
 
-def build(folder, current, state, history_results):
+def build(folder, current, state, history_results, *, observed=None):
     policy_path = ROOT/'config/monthly_benchmark.json'
     cfg = read(policy_path)
     create(folder/'monthly_policy.json', cfg)
-    calendar = read(ROOT/'data/snapshots/2026-11-04-calendar-08/calendar.json')['holiday_ranges']
+    calendar = calendar_at(ROOT,observed if observed is not None else datetime.now(timezone.utc)).ranges
     historic = load_long_history(ROOT/'data/snapshots')
     sources = list(read(history_results)['results'])
     history = {}

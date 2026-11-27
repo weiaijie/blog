@@ -7,6 +7,7 @@ import unittest
 from unittest.mock import patch
 
 from etf_research.evidence_archive import restore
+from etf_research.exchange_calendar import BASE_PATH
 from etf_research.observation_experiment import label_floor, nonoverlap
 from etf_research.policy_events import instant
 from etf_research.publication import read
@@ -138,6 +139,9 @@ class ObservationEvaluationTests(unittest.TestCase):
             base=Path(folder)
             root,store=base/'observations',base/'archive'
             root.mkdir()
+            calendar=root/BASE_PATH
+            calendar.parent.mkdir(parents=True)
+            calendar.write_bytes((ROOT/BASE_PATH).read_bytes())
             with patch.object(evaluation,'first_archive',return_value=None):
                 report=evaluation.evaluate(root,store,FINAL)
             self.assertEqual(report['status'],'observation_origin_pending')

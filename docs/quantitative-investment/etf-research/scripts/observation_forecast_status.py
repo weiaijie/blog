@@ -40,7 +40,7 @@ def forecast_row(root,store,day,observed,origin,decision,*,details=False,models=
         return dict(shape,status=plan['status'])
     shape.update(fold=plan['fold'])
     try:
-        window=label_window(root,day)
+        window=label_window(root,day,min(observed,cutoff))
     except EVIDENCE_ERRORS:
         return dict(shape,status='calendar_unverified')
     shape['sessions']=[str(d) for d in window.sessions]

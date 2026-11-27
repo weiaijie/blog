@@ -12,6 +12,8 @@ from zoneinfo import ZoneInfo
 import hashlib,json,re
 from .data import load_dataset,verify_manifest,RawBar,SYMBOLS
 from .catalog_changes import diff_catalogs,CatalogChanged
+from .exchange_calendar import base_ranges, calendar_at
+from .policy_events import instant
 TZ=ZoneInfo('Asia/Shanghai')
 
 def completed_date(timestamp):
@@ -70,7 +72,7 @@ def load_incremental(root,snapshot,*,now=None):
  if not folder.resolve().is_relative_to(root.resolve()):raise ValueError('Unsafe snapshot path')
  verify_manifest(folder);base=load_dataset(root,extended=True)
  cfg=json.loads((folder/'config.json').read_text());through=date.fromisoformat(cfg['through'])
- if cfg['format']!=1 or cfg['calendar_snapshot']!='2026-11-04-calendar-08':raise ValueError('Unsupported admission configuration')
+ if cfg['format'] not in (1,2) or cfg['calendar_snapshot']!='2026-11-04-calendar-08':raise ValueError('Unsupported admission configuration')
  if through<=base.sessions[-1]:raise ValueError('Incremental horizon must advance the base sample')
  now=now or datetime.now(TZ)
  if through>completed_date(now):raise ValueError('Requested day is not complete in Shanghai')
@@ -85,8 +87,18 @@ def load_incremental(root,snapshot,*,now=None):
   capture=datetime.fromisoformat(r['requested_at_utc'])
   if through>completed_date(capture):raise ValueError('Snapshot was collected before requested day completed')
   return b,r
- calendar=json.loads((root/cfg['calendar_snapshot']/'calendar.json').read_text())
- added=sessions_between(calendar['holiday_ranges'],base.sessions[-1]+timedelta(days=1),through)
+ project=root.parent.parent
+ if cfg['format']==1:
+  ranges=base_ranges(root/cfg['calendar_snapshot']/'calendar.json')
+ else:
+  calendar_clock=instant(cfg['calendarAsOf'])
+  if (calendar_clock>now or any(calendar_clock>instant(r['requested_at_utc']) for r in requests)):
+   raise ValueError('Candidate calendar was established after collection began')
+  calendar=calendar_at(project,calendar_clock,pinned=cfg['calendarSha256'])
+  if not calendar.extensions:
+   raise ValueError('Extended candidate requires a registered annual calendar')
+  ranges=calendar.ranges
+ added=sessions_between(ranges,base.sessions[-1]+timedelta(days=1),through)
  if not added or added[-1]!=through:raise ValueError('Requested endpoint must be an exchange session')
  newbars={s:dict(v) for s,v in base.bars.items()};source_checks={};catalog_counts={};reviewed_ids=[]
  for symbol in SYMBOLS:
@@ -127,4 +139,6 @@ def load_incremental(root,snapshot,*,now=None):
   audit.update(new_or_changed_notices=len(reviewed_ids),reviewed_notice_ids=sorted(reviewed_ids),
                scope_limit='Exact catalog additions were matched to sealed full-text decisions; unknown changes still block. No event is inferred from a review; all price checks still apply.')
  provenance=dict(base.provenance);provenance.update(end=str(through),session_count=len(base.sessions)+len(added),incremental_admission=audit,incremental_manifest_sha256=hashlib.sha256((folder/'manifest.json').read_bytes()).hexdigest())
+ if cfg['format']==2:
+  audit['calendar']={'asOf':cfg['calendarAsOf'],'sha256':calendar.digest,'bindings':list(calendar.extensions)}
  return replace(base,sessions=base.sessions+added,bars=newbars,provenance=provenance),audit

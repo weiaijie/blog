@@ -7,6 +7,7 @@ import unittest
 from unittest.mock import patch
 
 from etf_research.admission import sessions_between
+from etf_research.exchange_calendar import BASE_PATH
 from etf_research.observation_decision_receipt import DECISIONS
 from etf_research.observation_experiment import BASE, VARIANTS
 from etf_research.policy_events import TZ, instant
@@ -105,6 +106,9 @@ class TrainObservationModelsTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder:
             root,store=Path(folder)/'root',Path(folder)/'archive'
             root.mkdir()
+            calendar=root/BASE_PATH
+            calendar.parent.mkdir(parents=True)
+            calendar.write_bytes((ROOT/BASE_PATH).read_bytes())
             with (patch.object(trainer,'now',return_value=FIT_TIME),patch.object(trainer,'CODE',()),
                   patch('etf_research.evidence_archive.datetime') as clock):
                 clock.now.return_value=FIT_TIME

@@ -5,6 +5,7 @@ import unittest
 from unittest.mock import patch
 
 from etf_research.policy_events import instant
+from etf_research.exchange_calendar import BASE_PATH
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts'))
@@ -21,6 +22,9 @@ class EvaluationStatusTests(unittest.TestCase):
         base=Path(directory.name)
         self.root,self.store=base/'observation',base/'archive'
         self.root.mkdir()
+        calendar=self.root/BASE_PATH
+        calendar.parent.mkdir(parents=True)
+        calendar.write_bytes((ROOT/BASE_PATH).read_bytes())
 
     def publish(self, stamp, invocation, *, started):
         scored=dict(score=dict(status='observation_in_progress',completedPairs=34,quarters=1,independentEvents=4),

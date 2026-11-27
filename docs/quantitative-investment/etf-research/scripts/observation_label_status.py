@@ -12,7 +12,7 @@ def label_row(root, store, entry, observed, decision, *, details=False):
     if decision['status']!='eligible_inputs':
         return dict(waiting,status='decision_ineligible')
     try:
-        window = label_window(root,entry)
+        window = label_window(root,entry,observed)
     except EVIDENCE_ERRORS:
         return dict(waiting,status='calendar_unverified')
     floor = label_floor(window)

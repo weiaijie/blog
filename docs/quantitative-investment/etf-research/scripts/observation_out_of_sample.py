@@ -7,17 +7,18 @@ from pathlib import Path
 from observation_decision_status import decision_row
 from observation_forecast_status import forecast_row
 from observation_label_status import label_row
-from observation_labels import CALENDAR, CALENDAR_SHA, EVIDENCE_ERRORS
+from observation_labels import EVIDENCE_ERRORS
 from observation_status import expected_days
 from seal_observation_decision import first_archive
 from etf_research.admission import sessions_between
 from etf_research.baselines import SCENARIOS
+from etf_research.exchange_calendar import calendar_at
 from etf_research.observation_experiment import (
     CAPITAL, HORIZON, MIN_EVENTS, MIN_QUARTERS, MIN_TEST, VARIANTS, holdouts, label_floor,
     nonoverlap, paired_report, shadow_weight, shifted_month, windows,
 )
 from etf_research.policy_events import TZ, instant
-from etf_research.publication import create, read, sha
+from etf_research.publication import create, read
 
 ROOT=Path(__file__).resolve().parents[1]
 ALLOCATION={'stock_bond_50_50':Decimal('.5'),'bond_100':Decimal(0)}
@@ -25,14 +26,12 @@ METRICS=('terminalReturn','maxDrawdown','commission','slippage','endingCash','av
 VARIANT_NAMES=tuple(name for name in VARIANTS if name!='baseline')
 
 
-def calendar_plan(root, started):
-    calendar=root/CALENDAR
-    if sha(calendar)!=CALENDAR_SHA:
-        raise ValueError('Evaluation calendar differs from verified source')
-    ranges=read(calendar)['holiday_ranges']
+def calendar_plan(root, started, observed=None):
+    observed = observed if observed is not None else datetime.now(timezone.utc)
+    ranges=calendar_at(root,observed).ranges
     schedules={}
     for start,end in holdouts(started):
-        days,unknown=expected_days(root,start,end-timedelta(days=1))
+        days,unknown=expected_days(root,start,end-timedelta(days=1),observed=observed)
         before=()
         if days:
             try:
@@ -203,7 +202,7 @@ def evaluate(root,store,observed):
         return dict(stamp,status='observation_origin_pending',comparisons={},folds=[])
     start=date.fromisoformat(origin['date'])
     end=shifted_month(start,12)
-    phase=calendar_plan(root,start)
+    phase=calendar_plan(root,start,observed)
     observations=observed_days(root,store,origin,phase,observed)
     today=observed.astimezone(TZ).date()
     data_complete=all(row['unknownYear'] is None for row in phase.values())

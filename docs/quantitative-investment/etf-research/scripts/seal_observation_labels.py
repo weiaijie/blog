@@ -7,6 +7,7 @@ from pathlib import Path
 import re
 
 from observation_labels import EVIDENCE_ERRORS, assemble_label, label_window
+from etf_research.exchange_calendar import LOADER, calendar_at
 from etf_research.evidence_archive import capture, verify as verify_archive
 from etf_research.observation_decision_receipt import DECISIONS, verify_decision
 from etf_research.observation_experiment import label_floor
@@ -18,6 +19,7 @@ LOG = 'reports/research-labels'
 TIMER = 'etf-research-label.timer'
 MAX_PER_RUN = 5
 BINDINGS = (
+    LOADER,
     'PROTOCOL_OBSERVATION_V1.md', 'scripts/seal_observation_labels.py', 'scripts/observation_labels.py',
     'scripts/observe_opening_quotes.py','scripts/observation_price_inputs.py',
     'deploy/etf-research-label.timer', 'deploy/etf-research-label.service',
@@ -78,7 +80,8 @@ def archive_label(root, store, invocation, payload):
     folder=root/LOG/payload['entryDay']/invocation
     records=folder/'records'
     records.mkdir(parents=True,exist_ok=False)
-    bindings={name:sha(root/name) for name in BINDINGS}
+    available = calendar_at(root,instant(payload['observedAt']))
+    bindings={name:sha(root/name) for name in (*BINDINGS,*available.extensions)}
     create(records/'label.json',dict(schemaVersion=1,invocation=invocation,timer=TIMER,
                                     computedAt=now().isoformat(),codeSha256=bindings,payload=payload))
     seal(records)
@@ -100,7 +103,7 @@ def pending_windows(root, prices, store, checked_at):
     for folder in sorted((root/DECISIONS).glob('*')):
         try:
             entry=date.fromisoformat(folder.name)
-            ready = label_floor(label_window(prices,entry))
+            ready = label_floor(label_window(prices,entry,checked_at))
             if checked_at<ready:
                 continue
             decision=None

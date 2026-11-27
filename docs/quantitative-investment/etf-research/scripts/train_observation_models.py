@@ -10,9 +10,10 @@ import re
 
 from observation_decision_status import decision_row
 from observation_label_status import label_row
-from observation_labels import CALENDAR, CALENDAR_SHA, label_window
+from observation_labels import CALENDAR, label_window
 from seal_observation_decision import first_archive
 from etf_research.admission import sessions_between
+from etf_research.exchange_calendar import LOADER, calendar_at
 from etf_research.evidence_archive import capture, verify as verify_archive
 from etf_research.observation_decision_receipt import DECISIONS
 from etf_research.observation_experiment import (
@@ -25,6 +26,7 @@ ROOT = Path(__file__).resolve().parents[1]
 LOG = 'reports/research-models'
 TIMER = 'etf-research-model.timer'
 CODE = (
+    LOADER,
     'PROTOCOL_OBSERVATION_V1.md', CALENDAR, 'config/research_observation.json',
     'deploy/etf-research-model.service', 'deploy/etf-research-model.timer',
     'scripts/train_observation_models.py', 'scripts/observation_decision_status.py',
@@ -105,14 +107,11 @@ def build_cohort(root, store, origin, start, end, observed):
     cutoff = fold_cutoff(start)
     if observed<cutoff or (start,end) not in holdouts(date.fromisoformat(origin['date'])):
         raise ValueError('Model fit requires a registered fold and its elapsed training cutoff')
-    calendar = root/CALENDAR
-    if sha(calendar)!=CALENDAR_SHA:
-        raise ValueError('Training calendar differs from verified exchange calendar')
-    ranges = read(calendar)['holiday_ranges']
+    ranges = calendar_at(root,cutoff).ranges
     scheduled = sessions_between(ranges,date.fromisoformat(origin['date']),start-timedelta(days=1))
     rows, exclusions = [], {}
     for entry in scheduled:
-        window = label_window(root,entry)
+        window = label_window(root,entry,cutoff)
         if window.last>=start:
             exclusions[str(entry)] = dict(reason='holding_window_crosses_fold',lastSession=str(window.last))
             continue
@@ -205,7 +204,8 @@ def archive_model(root, store, invocation, cohort):
     folder=root/LOG/cohort['fold']['start']/invocation
     records=folder/'records'
     records.mkdir(parents=True,exist_ok=False)
-    bindings={name:sha(root/name) for name in CODE}
+    calendar = calendar_at(root,instant(cohort['trainingCutoff']))
+    bindings={name:sha(root/name) for name in (*CODE,*calendar.extensions)}
     comparisons=fit_comparisons(cohort)
     create(records/'training.json',dict(schemaVersion=1,unit=TIMER,invocation=invocation,
                     cohort=cohort,comparisons=comparisons,computedAt=now().isoformat(),codeSha256=bindings))

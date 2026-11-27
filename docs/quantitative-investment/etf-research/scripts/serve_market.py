@@ -104,7 +104,8 @@ def payload(pointer_bytes):
     as_of = date.fromisoformat(state['as_of'])
     if rebuilt!=audit or data.sessions[-1]!=as_of or prefix_digest(data,as_of)!=state['admitted_prefix_sha256']:
         raise ValueError('Account and market data differ')
-    calendar=read(SNAPS/'2026-11-04-calendar-08/calendar.json')['holiday_ranges']
+    from etf_research.exchange_calendar import calendar_at
+    calendar=calendar_at(ROOT,datetime.now(timezone.utc)).ranges
     historical = history()
     extra = cross_quotes(historical, calendar) if as_of >= THROUGH else {}
     candles = {}
@@ -123,8 +124,10 @@ def payload(pointer_bytes):
     curve=[[r['date'],float(r['equity'])] for r in portfolio['daily']]
     if len(curve)!=state['forward_sessions'] or curve[-1][0]!=state['as_of']:
         raise ValueError('Forward observations incomplete')
-    end=date(as_of.year,12,31)
-    following=sessions_between(calendar,as_of+timedelta(days=1),end) if as_of<end else []
+    end=as_of+timedelta(days=31)
+    if str(end.year) not in calendar:
+        end=date(as_of.year,12,31)
+    following=sessions_between(calendar,as_of+timedelta(days=1),end)
     view=dict(asOf=state['as_of'],start=state['forward_start'],sessions=state['forward_sessions'],
               initial=float(portfolio['summary']['initial_cash']),curve=curve,candles=candles,
               nextSession=str(following[0]) if following else None)

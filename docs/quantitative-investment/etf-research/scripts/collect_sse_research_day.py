@@ -10,19 +10,16 @@ from uuid import uuid4
 from collect_market_state_pilot import ROOT, CALENDAR, HOST, query
 from market_state_pilot import CODES, amount, equation, financing_detail, result, turnover
 from etf_research.admission import completed_date, sessions_between
+from etf_research.exchange_calendar import BASE_SHA as CALENDAR_SHA, calendar_at
 from etf_research.http_capture import fetch, load_policy, save_transport
 from etf_research.policy_events import instant
 from etf_research.publication import create, read, seal, sha, verify_bundle
 
-CALENDAR_SHA = '950a3bfe2bab7ad484abc03aa27207bc70a49a4a144f495899cf1bd2aa10c8c6'
 
-
-def previous_session(day, observed):
+def previous_session(day, observed, calendar=None):
     if day > completed_date(observed):
         raise ValueError('Trading day is not complete')
-    if sha(CALENDAR) != CALENDAR_SHA:
-        raise ValueError('Calendar evidence changed')
-    calendar = read(CALENDAR)['holiday_ranges']
+    calendar = (calendar if calendar is not None else calendar_at(ROOT,observed)).ranges
     if sessions_between(calendar, day, day) != (day,):
         raise ValueError('Not an exchange session')
     days = sessions_between(calendar, day - timedelta(days=31), day - timedelta(days=1))
@@ -78,8 +75,9 @@ def inspect(folder, ready):
     run = read(folder / 'run.json')
     day = date.fromisoformat(run['date'])
     started = instant(run['startedAt'])
-    prior = previous_session(day, started)
-    if not started <= ready or run['previousDate'] != prior.isoformat() or run['calendarSha256'] != CALENDAR_SHA:
+    calendar = calendar_at(ROOT,started,pinned=run['calendarSha256'])
+    prior = previous_session(day,started,calendar)
+    if not started <= ready or run['previousDate'] != prior.isoformat():
         raise ValueError('Invalid run time or calendar binding')
     expected = requests(day, prior)
     rows = read(folder / 'requests.json')
@@ -122,13 +120,14 @@ def inspect(folder, ready):
 
 def collect(day, parent):
     started = datetime.now(timezone.utc)
-    prior = previous_session(day, started)
+    calendar = calendar_at(ROOT,started)
+    prior = previous_session(day,started,calendar)
     folder = parent / (started.strftime('%Y%m%dT%H%M%SZ') + '-' + uuid4().hex[:8] + '-sse-research-day')
     folder.mkdir(parents=True, exist_ok=False)
     policy = load_policy()
     save_transport(folder, policy)
     create(folder / 'run.json', dict(date=str(day), previousDate=str(prior), startedAt=started.isoformat(),
-                                     calendarSha256=CALENDAR_SHA))
+                                     calendarSha256=calendar.digest))
     rows = []
     for name, url in requests(day, prior).items():
         response = fetch(folder, name, url, policy)

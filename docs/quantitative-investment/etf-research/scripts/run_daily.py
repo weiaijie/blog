@@ -11,6 +11,7 @@ import argparse,html,json,os,re,shutil,subprocess,sys,uuid
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'src'))
 from etf_research.publication import read,sha,inside,create,lock,seal,promote,verify_bundle
 from etf_research.admission import load_incremental,completed_date,sessions_between
+from etf_research.exchange_calendar import calendar_at
 from etf_research.forward import advance,digest,engine_digest
 from etf_research.first_session_plan import check_execution
 from etf_research.catalog_changes import CatalogChanged
@@ -57,6 +58,7 @@ def reconcile(data,previous,state):
 def dependencies(pointer, admission):
     names=[ROOT/'config/research.json',ROOT/'config/risk_extensions.json',inside(ROOT,pointer['checkpoint']),ROOT/'PROTOCOL_V1.md',ROOT/'requirements-lock.txt',ROOT/'config/collection.json']
     names.append(ROOT/'config/monthly_benchmark.json')
+    names.extend(inside(ROOT,path) for path in admission.get('calendar',{}).get('bindings',[]))
     if admission.get('reviewed_notice_ids'):
         names.extend(reviewed_catalog_proof(ROOT))
     names+=list((ROOT/'src/etf_research').glob('*.py'))+list((ROOT/'scripts').glob('*.py'))
@@ -80,8 +82,8 @@ def run(args):
             bundle=inside(ROOT,current['bundle']);verify_bundle(bundle)
             if sha(bundle/'manifest.json')!=current['bundle_manifest_sha256']:raise ValueError('Active bundle manifest changed')
         now=datetime.now(ZoneInfo('Asia/Shanghai'));cutoff=completed_date(now)
-        calendar=read(ROOT/'data/snapshots/2026-11-04-calendar-08/calendar.json')
-        days=sessions_between(calendar['holiday_ranges'],date(2026,11,5),cutoff)
+        calendar=calendar_at(ROOT,now)
+        days=sessions_between(calendar.ranges,date(2026,11,5),cutoff)
         through=args.through or (days[-1] if days else None)
         if through not in days:raise ValueError('Target is not a completed verified exchange session')
         if str(through)<current['as_of']:raise ValueError('Refuse backward target')
@@ -127,7 +129,7 @@ def run(args):
                 text=text.replace('href="../../../../config/research.json"','href="../research.json"').replace('href="../../../../reports/2026-11-06-close/risk.json"','href="../risk.json"').replace('href="../../../../reports/2026-11-06-close/PROGRESS.md"','href="index.html"')
                 p.write_text(text,encoding='utf-8')
             shutil.copyfile(ROOT/'site/style.css',pages/'style.css')
-            monthly_build(folder, data, state, ROOT/config['history_results'])
+            monthly_build(folder, data, state, ROOT/config['history_results'],observed=now)
             main=state['portfolios']['monthly_50_50_base']['daily'][-1]
             text='<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>每日研究检查点</title><link rel="stylesheet" href="style.css"><main><h1>每日研究检查点 · '+state['as_of']+'</h1><p>前瞻 '+str(state['forward_sessions'])+' 个观察日；仅研究模拟。样本不足时年化和窗口风险为空。目标、模型成交、实际成交证据分别处理。</p><section><h2>50/50基准费用观察组合</h2><p>收盘净值 '+html.escape(main['equity'])+' 元；现金 '+html.escape(main['cash'])+' 元。完整对账见报告，不代表实际成交或未来收益。</p></section><nav><a href="risk.html">风险监控</a><a href="exposure.html">Beta与披露穿透</a><a href="../../../../site/index.html">独立历史研究</a><a href="../reconciliation.json">逐日会计核对</a><a href="../intent_check.json">11月6日冻结目标对账</a><a href="../admission.json">数据准入</a><a href="../official_close.json">官方价格复核</a><a href="../forward_checkpoint.json">检查点</a><a href="../manifest.json">完整性清单</a></nav><p>日报未接实盘；模拟成交价可能超出日线范围。公告变化会阻断更新，完整停复牌及实际成交证据仍有限。</p></main></html>'
             text=text.replace('<nav>', '<nav><a href="monthly.html">股债基准与月报</a>').replace('Beta与披露穿透', 'Beta、国债期次与披露穿透')

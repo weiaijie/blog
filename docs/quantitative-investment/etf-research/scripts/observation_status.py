@@ -8,15 +8,15 @@ from pathlib import Path
 import re
 
 from run_research_observation import check_receipt
-from collect_sse_research_day import CALENDAR_SHA
 from observation_decision_status import FIRST_DECISION, decision_counts, decision_row, schedule
 from observation_label_status import label_counts, label_row
 from observation_forecast_status import forecast_counts, forecast_row, model_progress
 from observation_evaluation_status import evaluation_view
 from seal_observation_decision import first_archive
 from etf_research.admission import completed_date, sessions_between
+from etf_research.exchange_calendar import calendar_at
 from etf_research.policy_events import TZ, instant
-from etf_research.publication import read, sha
+from etf_research.publication import read
 
 DATE = re.compile(r'\d{4}-\d{2}-\d{2}')
 SYMBOLS = ('510300','511010')
@@ -38,11 +38,8 @@ def production_paths():
             Path(os.environ.get('ETF_OBSERVATION_ARCHIVE', projects/'etf-research-observation-archive')))
 
 
-def expected_days(root, start, end):
-    calendar = root/'data/snapshots/2026-11-04-calendar-08/calendar.json'
-    if sha(calendar)!=CALENDAR_SHA:
-        raise ValueError('Observation calendar digest mismatch')
-    ranges = read(calendar)['holiday_ranges']
+def expected_days(root, start, end, *, observed=None):
+    ranges = calendar_at(root,observed if observed is not None else datetime.now(timezone.utc)).ranges
     for year in range(start.year,end.year+1):
         if str(year) not in ranges:
             boundary = date(year-1,12,31)
@@ -142,12 +139,12 @@ def report(root, store, *, day=None, before=None, observed=None):
     start = parse_day(config['observationEarliestDate'])
     observed = datetime.now(timezone.utc) if observed is None else observed
     end = completed_date(observed)
-    sessions, unknown_year = expected_days(root,start,end)
+    sessions, unknown_year = expected_days(root,start,end,observed=observed)
     expected = {str(d) for d in sessions}
     today = observed.astimezone(TZ).date()
     origin = first_archive(root,store,observed)
     requested_day = day
-    planned, decision_unknown_year = expected_days(root,FIRST_DECISION,today)
+    planned, decision_unknown_year = expected_days(root,FIRST_DECISION,today,observed=observed)
     decisions = {day.isoformat(): decision_row(root,store,day,observed,planned=True)
                  for day in planned if day.isoformat()==requested_day or requested_day is None}
     labels = {key: label_row(root,store,date.fromisoformat(key),observed,decision,details=key==requested_day)
@@ -156,14 +153,14 @@ def report(root, store, *, day=None, before=None, observed=None):
     forecasts = {key: forecast_row(root,store,date.fromisoformat(key),observed,origin,decision,
                                    details=key==requested_day,models=model_cache)
                  for key,decision in decisions.items()} if origin is not None else {}
-    upcoming, _ = expected_days(root,max(today,FIRST_DECISION),today+timedelta(days=30))
+    upcoming, _ = expected_days(root,max(today,FIRST_DECISION),today+timedelta(days=30),observed=observed)
     next_decision = next((row for day in upcoming if instant((row := schedule(day))['deadline'])>observed),None)
 
     def with_decision(row):
         day = date.fromisoformat(row['day'])
         decision = decisions.get(row['day'])
         if decision is None:
-            forecast_calendar, unknown = expected_days(root,max(FIRST_DECISION,day),day)
+            forecast_calendar, unknown = expected_days(root,max(FIRST_DECISION,day),day,observed=observed)
             decision = decision_row(root,store,day,observed,planned=bool(forecast_calendar),calendar_unknown=bool(unknown))
         if day==today and decision['scheduledAt'] and row['status']=='not_scheduled':
             row['status'] = 'awaiting_market_close'

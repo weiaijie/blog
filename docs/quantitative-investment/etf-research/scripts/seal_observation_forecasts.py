@@ -8,9 +8,10 @@ import re
 from time import sleep
 
 from observation_decision_status import decision_row
-from observation_labels import CALENDAR, CALENDAR_SHA, EVIDENCE_ERRORS, label_window
+from observation_labels import CALENDAR, EVIDENCE_ERRORS, label_window
 from train_observation_models import status as model_status, verify_model
 from etf_research.admission import sessions_between
+from etf_research.exchange_calendar import LOADER, calendar_at
 from etf_research.evidence_archive import capture, verify as verify_archive
 from etf_research.observation_decision_receipt import DECISIONS, deadline, verify_decision
 from etf_research.observation_experiment import BASE, VARIANTS, feature_vector, ridge_predict
@@ -23,6 +24,7 @@ TIMER='etf-research-forecast.timer'
 START=time(8,53)
 POLL_UNTIL=time(8,54,20)
 CODE=(
+    LOADER,
     'PROTOCOL_OBSERVATION_V1.md', CALENDAR, 'deploy/etf-research-forecast.timer',
     'deploy/etf-research-forecast.service','scripts/seal_observation_forecasts.py',
     'scripts/train_observation_models.py','scripts/observation_decision_status.py',
@@ -141,7 +143,8 @@ def archive_forecast(root,store,packet):
     folder=root/LOG/packet['entryDay']/packet['trigger']['id']
     records=folder/'records'
     records.mkdir(parents=True,exist_ok=False)
-    bindings={relative:sha(root/relative) for relative in CODE}
+    calendar = calendar_at(root,instant(packet['startedAt']))
+    bindings={relative:sha(root/relative) for relative in (*CODE,*calendar.extensions)}
     create(records/'forecast.json',dict(packet,codeSha256=bindings))
     seal(records)
     stored=capture(root,store,[p.relative_to(root).as_posix() for p in records.iterdir()]+list(bindings))
@@ -173,10 +176,8 @@ def run(root,store):
     plan=model_status(root,store,started)
     if not plan['fold']:
         return dict(status=plan['status'],entryDay=str(day))
-    calendar=root/CALENDAR
-    if sha(calendar)!=CALENDAR_SHA:
-        raise ValueError('Forecast calendar digest mismatch')
-    if not sessions_between(read(calendar)['holiday_ranges'],day,day):
+    calendar=calendar_at(root,started)
+    if not sessions_between(calendar.ranges,day,day):
         return dict(status='not_scheduled',entryDay=str(day))
     with lock(root/'.runtime/research-forecast.lock'):
         folder=root/LOG/str(day)
@@ -191,7 +192,7 @@ def run(root,store):
             packet['reason']='outside_scheduled_cutoff'
         else:
             try:
-                window=label_window(root,day)
+                window=label_window(root,day,started)
                 if window.last>=date.fromisoformat(plan['fold']['end']):
                     packet['reason']='holding_window_crosses_fold'
                 elif 'modelReceipt' not in plan:
@@ -233,7 +234,7 @@ def reproduce_forecast(root,store,folder):
     decision_folder=inside(root,decision['path'])
     actual=verify_decision(root,store,decision_folder,observed=used_at)
     model_receipt,bundle=verify_model(root,store,inside(root,model['path']),observed=used_at)
-    window=label_window(root,entry)
+    window=label_window(root,entry,instant(packet['startedAt']))
     if (actual['status']!='eligible_inputs' or actual['entryDay']!=str(entry)
             or sha(decision_folder/'receipt.json')!=decision['receiptSha256']
             or actual['archiveSha256']!=decision['archiveSha256'] or actual['archiveVerifiedAt']!=decision['sealedAt']

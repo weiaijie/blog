@@ -7,6 +7,7 @@ import unittest
 from unittest.mock import patch
 
 from etf_research.policy_events import instant
+from etf_research.exchange_calendar import BASE_PATH
 from etf_research.publication import create, read, sha
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -97,6 +98,9 @@ class OpeningAndLabelTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root,store=Path(directory)/'research',Path(directory)/'store'
             root.mkdir()
+            calendar=root/BASE_PATH
+            calendar.parent.mkdir(parents=True)
+            calendar.write_bytes((ROOT/BASE_PATH).read_bytes())
             stamp=instant(read(PROOF)['observedAt'])
             good=dict(mode='scheduled_candidate',entryDay=str(DAY),status='evidence_complete',
                       notBefore='2026-11-27T16:00:00+08:00',observedAt=stamp.isoformat(),

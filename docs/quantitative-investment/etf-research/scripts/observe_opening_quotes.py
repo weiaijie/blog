@@ -9,9 +9,9 @@ from pathlib import Path
 import re
 from uuid import uuid4
 
-from collect_sse_research_day import CALENDAR_SHA
 from etf_research.admission import sessions_between
 from etf_research.baselines import SYMBOLS
+from etf_research.exchange_calendar import BASE_PATH as CALENDAR, LOADER, calendar_at
 from etf_research.evidence_archive import capture, verify as verify_archive
 from etf_research.http_capture import fetch, load_policy, save_transport
 from etf_research.policy_events import TZ, instant
@@ -21,7 +21,6 @@ ROOT = Path(__file__).resolve().parents[1]
 TIMER = 'etf-research-opening.timer'
 LOG = 'reports/research-opening'
 PROBES = 'reports/research-opening-probes'
-CALENDAR = 'data/snapshots/2026-11-04-calendar-08/calendar.json'
 QUOTE = 'https://yunhq.sse.com.cn:32042/v1/sh1/snap/'
 FIELDS = '?select=name,prev_close,open,high,low,last,up_limit,down_limit,tradephase,hlt_tag'
 FIRST, END = time(9,25), time(9,30)
@@ -138,10 +137,8 @@ def collect(root, store, *, probe):
     trigger=None if probe else trigger_event(os.environ)
     if not probe and trigger is None:
         raise ValueError('Opening collection requires scheduled provenance')
-    calendar=root/CALENDAR
-    if sha(calendar)!=CALENDAR_SHA:
-        raise ValueError('Opening calendar digest mismatch')
-    if not sessions_between(read(calendar)['holiday_ranges'],day,day):
+    calendar=calendar_at(root,started)
+    if not sessions_between(calendar.ranges,day,day):
         return dict(status='not_scheduled',day=str(day))
     if not probe and not scheduled_opening(trigger,started):
         return dict(status='missed_opening_slot',day=str(day),startedAt=started.isoformat())
@@ -163,7 +160,7 @@ def collect(root, store, *, probe):
                                            trigger=trigger,quotes=quotes))
         seal(records)
         names=[p.relative_to(root).as_posix() for p in records.iterdir()]
-        names.extend(('scripts/observe_opening_quotes.py',CALENDAR,'config/collection.json'))
+        names.extend(('scripts/observe_opening_quotes.py',CALENDAR,LOADER,'config/collection.json',*calendar.extensions))
         archive=capture(root,store,names)
         verify_archive(store,archive['snapshot'])
         receipt=dict(path=attempt.relative_to(root).as_posix(),archiveSha256=archive['snapshot'],

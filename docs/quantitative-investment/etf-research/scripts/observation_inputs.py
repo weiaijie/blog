@@ -9,6 +9,7 @@ from observation_price_inputs import establish_price_source
 from observation_archive import archive_for_day
 from observation_policy_inputs import load_policy_context
 from etf_research.admission import sessions_between
+from etf_research.exchange_calendar import calendar_at
 from etf_research.observation_experiment import BASE, GROUPS, DECISION_TIME, relative_turnover
 from etf_research.policy_events import TZ, instant
 from etf_research.publication import create, read, sha
@@ -18,11 +19,8 @@ FEATURES = BASE + tuple(name for names in GROUPS.values() for name in names)
 EVIDENCE_ERRORS = (OSError, ValueError, KeyError, TypeError, ArithmeticError)
 
 
-def date_context(project, entry):
-    path = project/'data/snapshots/2026-11-04-calendar-08/calendar.json'
-    if sha(path)!=sse.CALENDAR_SHA:
-        raise ValueError('Observation calendar digest mismatch')
-    ranges = read(path)['holiday_ranges']
+def date_context(project, entry, observed):
+    ranges = calendar_at(project,observed).ranges
     rows = sessions_between(ranges,entry-timedelta(days=60),entry)
     if len(rows)<22 or rows[-1]!=entry:
         raise ValueError('Decision not on a verified trading session or insufficient calendar lookback')
@@ -54,10 +52,10 @@ def feature(anchor, value, received, dependencies, proofs):
 
 def assemble(project, observations, store, entry, observed, *, computed=None):
     project,observations,store = (path.resolve() for path in (project,observations,store))
-    dates = date_context(project,entry)
-    anchor = dates[-1]
     deadline = datetime.combine(entry,DECISION_TIME,TZ)
     ceiling = min(deadline,observed)
+    dates = date_context(project,entry,ceiling)
+    anchor = dates[-1]
     cells = dict.fromkeys(FEATURES)
     gaps = {}
     price_gap = 'price_publication_or_matching_closes_not_ready'

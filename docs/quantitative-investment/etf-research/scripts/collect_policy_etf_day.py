@@ -9,11 +9,12 @@ from urllib.parse import urlencode
 from uuid import uuid4
 from xml.etree.ElementTree import ParseError
 
-from collect_sse_research_day import CALENDAR, CALENDAR_SHA, ROOT, previous_session
+from collect_sse_research_day import ROOT, previous_session
 from etf_share_flow import SEAL, SHARES_QUERY, SYMBOLS, conversion_basis, estimate, guotai_nav, huatai_nav
 from etf_share_flow import number, read_sources, shares_for
 from policy_source_watch import INDEXES, candidate, index_candidates
 from etf_research.admission import sessions_between
+from etf_research.exchange_calendar import calendar_at
 from etf_research.http_capture import fetch, load_policy, save_transport
 from etf_research.policy_events import TZ, instant
 from etf_research.publication import create, read, seal, sha, verify_bundle
@@ -26,8 +27,8 @@ POLICY_CAP = 16
 MALFORMED = (ValueError, TypeError, KeyError, IndexError, DecimalException, ParseError)
 
 
-def following_session(day):
-    holidays = read(CALENDAR)['holiday_ranges']
+def following_session(day, calendar):
+    holidays = calendar.ranges
     for delta in range(1, 32):
         possible = day + timedelta(days=delta)
         if str(possible.year) not in holidays:
@@ -135,10 +136,11 @@ def inspect(folder, ready):
     run = read(folder/'run.json')
     started = instant(run['startedAt'])
     day = date.fromisoformat(run['date'])
-    prior = previous_session(day, started)
-    following = following_session(day)
+    calendar = calendar_at(ROOT,started,pinned=run['calendarSha256'])
+    prior = previous_session(day,started,calendar)
+    following = following_session(day,calendar)
     if (run['previousDate']!=str(prior) or run['followingDate']!=(str(following) if following else None)
-            or run['calendarSha256']!=CALENDAR_SHA or run['fundBasisSha256']!=SEAL
+            or run['fundBasisSha256']!=SEAL
             or not started <= ready <= datetime.now(timezone.utc)):
         raise ValueError('Invalid capture calendar or timestamps')
     expected = planned(day, prior, following)
@@ -180,14 +182,15 @@ def inspect(folder, ready):
 
 def collect(day, parent):
     started = datetime.now(timezone.utc)
-    prior, following = previous_session(day,started), following_session(day)
+    calendar = calendar_at(ROOT,started)
+    prior, following = previous_session(day,started,calendar), following_session(day,calendar)
     folder = parent/(started.strftime('%Y%m%dT%H%M%SZ')+'-'+uuid4().hex[:8]+'-policy-etf-day')
     folder.mkdir(parents=True,exist_ok=False)
     policy = load_policy()
     save_transport(folder,policy)
     create(folder/'run.json',dict(date=str(day),previousDate=str(prior),
                                  followingDate=str(following) if following else None,
-                                 calendarSha256=CALENDAR_SHA,fundBasisSha256=SEAL,startedAt=started.isoformat()))
+                                 calendarSha256=calendar.digest,fundBasisSha256=SEAL,startedAt=started.isoformat()))
 
     def grab(job):
         name,url = job

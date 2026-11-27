@@ -14,6 +14,7 @@ import collect_sse_research_day as sse
 from research_day_coverage import cover
 from etf_research.admission import completed_date, sessions_between
 from etf_research.evidence_archive import capture, verify as verify_archive
+from etf_research.exchange_calendar import calendar_at
 from etf_research.policy_events import instant
 from etf_research.publication import create, inside, lock, read, seal, sha, verify_bundle
 
@@ -91,6 +92,11 @@ def attempt(day, trigger):
 def required_files(folder):
     from etf_share_flow import SNAP
     files = set(BASE)
+    for config_path in (folder/'inputs').glob('*/run.json'):
+        run = read(config_path)
+        clock = instant(run['startedAt'])
+        calendar = calendar_at(ROOT,clock,pinned=run['calendarSha256'])
+        files.update(ROOT/name for name in calendar.extensions)
     files.update((ROOT/'src/etf_research').glob('*.py'))
     files.update(ROOT/'scripts'/(name+'.py') for name in SCRIPTS)
     files.update((ROOT/'deploy').glob('etf-research-observation.*'))
@@ -174,10 +180,9 @@ def ledger(store, config, repair=False):
     return receipts,issues
 
 
-def schedule(start, end):
-    if sha(sse.CALENDAR)!=sse.CALENDAR_SHA:
-        raise ValueError('Calendar evidence changed')
-    return sessions_between(read(sse.CALENDAR)['holiday_ranges'],start,end)
+def schedule(start, end, observed=None):
+    ranges = calendar_at(ROOT,observed if observed is not None else now()).ranges
+    return sessions_between(ranges,start,end)
 
 
 def progress(store, config):

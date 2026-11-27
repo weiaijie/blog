@@ -7,12 +7,13 @@ import argparse,hashlib,json,concurrent.futures,sys
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'src'))
 from etf_research.http_capture import fetch as fetch_public,load_policy,save_transport
 from etf_research.admission import completed_date,sessions_between
+from etf_research.exchange_calendar import calendar_at
 ROOT=Path(__file__).resolve().parents[1]
 def main():
  p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True);p.add_argument('--through',type=date.fromisoformat);a=p.parse_args()
  now=datetime.now(ZoneInfo('Asia/Shanghai'));cutoff=completed_date(now)
- calendar=json.loads((ROOT/'data/snapshots/2026-11-04-calendar-08/calendar.json').read_text())
- candidates=sessions_between(calendar['holiday_ranges'],date(2026,10,31),cutoff)
+ calendar=calendar_at(ROOT,now)
+ candidates=sessions_between(calendar.ranges,date(2026,10,31),cutoff)
  if not candidates:raise ValueError('No completed new exchange session')
  through=a.through or candidates[-1]
  if through not in candidates:raise ValueError('Requested end is uncompleted or outside verified calendar')
@@ -30,7 +31,10 @@ def main():
   if next(r for r in records if r['name']=='sohu_'+s).get('status')!=200:
    name='sohu_retry_'+s;records.append(fetch((name,f'https://q.stock.sohu.com/hisHq?code=cn_{s}&start=20240101&end={through:%Y%m%d}&stat=1&order=D&period=d&rt=json')));selected[s]['sohu']=name
  (a.output/'requests.json').write_text(json.dumps(records,ensure_ascii=False,indent=2)+'\n')
- (a.output/'config.json').write_text(json.dumps({'format':1,'through':str(through),'calendar_snapshot':'2026-11-04-calendar-08','prices':selected},indent=2)+'\n')
+ cfg={'format':1,'through':str(through),'calendar_snapshot':'2026-11-04-calendar-08','prices':selected}
+ if through.year>2026:
+  cfg.update(format=2,calendarAsOf=now.isoformat(),calendarSha256=calendar.digest)
+ (a.output/'config.json').write_text(json.dumps(cfg,indent=2)+'\n')
  (a.output/'collector.py').write_bytes(Path(__file__).read_bytes())
  manifest={f.name:hashlib.sha256(f.read_bytes()).hexdigest() for f in sorted(a.output.iterdir()) if f.is_file()}
  (a.output/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')

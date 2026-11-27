@@ -7,6 +7,7 @@ sys.path.insert(0, str(ROOT / 'src'))
 from etf_research.health import evaluate
 from etf_research.admission import TZ
 from etf_research.data import verify_manifest
+from etf_research.exchange_calendar import calendar_at
 from etf_research.forward import digest, engine_digest
 from etf_research.publication import read, sha, inside, verify_bundle, lock, create, seal, atomic
 from etf_research.notice_workflow import review_queue
@@ -35,7 +36,7 @@ def inspect(root=ROOT, now=None, scheduler=None):
             else:
                 verify_bundle(folder)
                 if read(folder / 'result.json') != operation: raise ValueError('Operation status mismatch')
-        result = evaluate(now, read(calendar / 'calendar.json')['holiday_ranges'], active, operation,
+        result = evaluate(now, calendar_at(root,now).ranges, active, operation,
                           scheduler if scheduler is not None else scheduler_state(), review_queue(root))
         archive_file=root/'.runtime/archive_status.json'
         receipt=read(archive_file) if archive_file.exists() else None
