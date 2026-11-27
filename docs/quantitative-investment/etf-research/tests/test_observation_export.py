@@ -75,3 +75,39 @@ class ObservationExportTests(unittest.TestCase):
                 chain(SEED,self.seed_sha,spool)
             with self.assertRaisesRegex(ValueError,'Pinned seed'):
                 chain(SEED,'0'*64,spool)
+
+    def test_older_content_damage_blocks_export_until_exact_recovery(self):
+        with TemporaryDirectory() as temporary:
+            spool=Path(temporary)/'export'
+            first=self.publish(spool)
+            next_trigger=dict(TRIGGER,invocationId='f'*32)
+            second_cutoff=CUTOFF+timedelta(seconds=2)
+            second=seal_export(self.ledger,self.store,SEED,self.seed_sha,spool,second_cutoff,next_trigger)
+            self.assertEqual(second['verifiedBatchCount'],2)
+            self.assertEqual(chain(SEED,self.seed_sha,spool)['verifiedBatchCount'],1)
+            self.assertEqual(chain(SEED,self.seed_sha,spool,full=True)['verifiedBatchCount'],2)
+
+            old_pack=spool/'batches'/first['latest']['batchId']/'pack'
+            obj=next((old_pack/'archive/objects').glob('*/*'))
+            reference=DELTA/obj.relative_to(old_pack)
+            self.assertEqual(sha(reference),sha(obj))
+            obj.write_bytes(b'corrupt older content')
+            fast=chain(SEED,self.seed_sha,spool)
+            self.assertEqual(fast['manifestSha256'],second['manifestSha256'])
+            with self.assertRaisesRegex(ValueError,first['latest']['batchId']):
+                chain(SEED,self.seed_sha,spool,full=True)
+
+            third_cutoff=CUTOFF+timedelta(seconds=4)
+            third_trigger=dict(TRIGGER,invocationId='a'*32)
+            with self.assertRaisesRegex(ValueError,first['latest']['batchId']):
+                seal_export(self.ledger,self.store,SEED,self.seed_sha,spool,third_cutoff,third_trigger)
+            self.assertEqual(chain(SEED,self.seed_sha,spool),fast)
+            [failure]=(spool/'audit-failures').glob('*.json')
+            self.assertIn(first['latest']['batchId'],read(failure)['error'])
+            self.assertEqual(read(failure)['trigger'],third_trigger)
+
+            obj.write_bytes(reference.read_bytes())
+            repaired=seal_export(self.ledger,self.store,SEED,self.seed_sha,spool,third_cutoff,third_trigger)
+            self.assertEqual(repaired['verifiedBatchCount'],3)
+            self.assertEqual(repaired['latest']['after'],second['through'])
+            self.assertTrue(failure.is_file())

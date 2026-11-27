@@ -15,6 +15,7 @@ from etf_research.publication import create, lock, read, sha, sync_dir
 ROOT=Path(__file__).resolve().parents[1]
 TIMER='etf-research-observation-export.timer'
 BATCH=re.compile(r'\d{8}T\d{12}Z-[0-9a-f]{8}')
+EVIDENCE_ERRORS = (OSError,ValueError,KeyError,TypeError)
 
 
 def check_spool(root,store,seed,spool):
@@ -23,7 +24,17 @@ def check_spool(root,store,seed,spool):
             raise ValueError('Export spool must be separate from the study, seed and archive')
 
 
-def chain(seed, seed_sha, spool):
+def verify_batch(pack, receipt):
+    batch = receipt['batchId']
+    try:
+        summary = verify(pack)
+        if summary['receipts'] != receipt['receipts'] or summary['archives'] != receipt['archives']:
+            raise ValueError('Pack does not match its export receipt')
+    except EVIDENCE_ERRORS as error:
+        raise ValueError(f'Exported batch {batch} failed verification: {error}') from error
+
+
+def chain(seed, seed_sha, spool, *, full=False):
     if sha(seed/'manifest.json')!=seed_sha:
         raise ValueError('Pinned seed archive manifest changed')
     base=verify(seed)
@@ -53,14 +64,15 @@ def chain(seed, seed_sha, spool):
                 or batch.name!=identifier(cutoff,trigger)
                 or started!={key:receipt[key] for key in ('asOf','after','trigger')}):
             raise ValueError('Broken export chain: '+batch.name)
+        if full:
+            verify_batch(pack,receipt)
         previous,ceiling,latest=packed,cutoff,receipt
         count+=1
-    if latest is not None:
-        summary=verify(spool/'batches'/latest['batchId']/'pack')
-        if summary['receipts']!=latest['receipts'] or summary['archives']!=latest['archives']:
-            raise ValueError('Latest pack does not match its export receipt')
+    if latest is not None and not full:
+        verify_batch(spool/'batches'/latest['batchId']/'pack',latest)
     return dict(schemaVersion=1,seedAsOf=base['asOf'],seedManifestSha256=seed_sha,
-                batchCount=count,through=ceiling.isoformat(),manifestSha256=previous,latest=latest,
+                batchCount=count,verifiedBatchCount=count if full else min(count,1),
+                through=ceiling.isoformat(),manifestSha256=previous,latest=latest,
                 stagedAttempts=sum(1 for _ in (spool/'staging').glob('*')))
 
 
@@ -73,14 +85,24 @@ def seal_export(root, store, seed, seed_sha, spool, cutoff, trigger):
     if trigger['unit']!=TIMER or not re.fullmatch('[a-f0-9]{32}',trigger['invocationId']):
         raise ValueError('Unverified export service invocation')
     check_spool(root,store,seed,spool)
+    batch=identifier(cutoff,trigger)
     with lock(spool/'export.lock'):
-        status=chain(seed,seed_sha,spool)
+        try:
+            status=chain(seed,seed_sha,spool,full=True)
+        except EVIDENCE_ERRORS as error:
+            failure=spool/'audit-failures'/(batch+'.json')
+            if not failure.exists():
+                create(failure,dict(schemaVersion=1,asOf=cutoff.isoformat(),trigger=trigger,
+                                    checkedAt=datetime.now(timezone.utc).isoformat(),
+                                    errorType=type(error).__name__,error=str(error)[:1200]))
+                sync_dir(failure.parent)
+                sync_dir(spool)
+            raise
         after=instant(status['through'])
         if cutoff<=after:
             return dict(status='already_covered',**status)
         if status['latest'] is not None and status['latest']['trigger']['invocationId']==trigger['invocationId']:
             return dict(status='already_sealed',**status)
-        batch=identifier(cutoff,trigger)
         staging=spool/'staging'
         batches=spool/'batches'
         staging.mkdir(exist_ok=True)
@@ -102,14 +124,18 @@ def seal_export(root, store, seed, seed_sha, spool, cutoff, trigger):
         sync_dir(staging)
         sync_dir(batches)
         sync_dir(spool)
-        return dict(status='sealed',**chain(seed,seed_sha,spool))
+        # Prior batches were checked under the same lock. Recheck the newly published batch.
+        published=chain(seed,seed_sha,spool)
+        published['verifiedBatchCount']+=status['verifiedBatchCount']
+        return dict(status='sealed',**published)
 
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     action=parser.add_mutually_exclusive_group(required=True)
     action.add_argument('--run',action='store_true')
-    action.add_argument('--status',action='store_true')
+    action.add_argument('--status',action='store_true',help='Check the chain and latest package')
+    action.add_argument('--audit',action='store_true',help='Read and verify every package')
     parser.add_argument('--archive-store',required=True,type=Path)
     parser.add_argument('--seed',required=True,type=Path)
     parser.add_argument('--seed-manifest-sha256',required=True)
@@ -126,7 +152,7 @@ def main():
             parser.error('Scheduled export requires its own systemd timer')
         result=seal_export(ROOT,store,seed,args.seed_manifest_sha256,spool,cutoff,trigger)
     else:
-        result=chain(seed,args.seed_manifest_sha256,spool)
+        result=chain(seed,args.seed_manifest_sha256,spool,full=args.audit)
     print(json.dumps(result,ensure_ascii=False,allow_nan=False))
 
 
