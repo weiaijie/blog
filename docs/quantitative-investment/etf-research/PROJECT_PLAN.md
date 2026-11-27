@@ -1,6 +1,6 @@
 # 项目计划与当前状态
 
-[12 个月模型研究](docs/LONG_TERM_RESEARCH.md)已完成[真实归档特征回算](reports/2026-11-27-observation-inputs/README.md)和[首批政策审核及覆盖判定](reports/2026-11-27-policy-review/README.md)。[08:55 前自动封存](reports/2026-11-27-decision-seal/README.md)已通过真实证据的试跑和恢复。[看板和 Agent 同查决策进度](reports/2026-11-27-decision-coverage/README.md)。[开盘取证与五交易日标签](reports/2026-11-27-five-session-labels/README.md)已实测真实行情缺口和会计复算。[标签进度](reports/2026-11-27-label-coverage/README.md)已接到看板和 Agent。[训练与预测封存](reports/2026-11-27-model-forecast/README.md)已验证可按原时点重放。[训练和预测进度](reports/2026-11-27-forecast-coverage/README.md)已接到看板和 Agent。下一步核实例行封存，接通样本外误差统计和经济对照。正式观察起点等首个独立生产合格归档。
+[12 个月模型研究](docs/LONG_TERM_RESEARCH.md)已完成[真实归档特征回算](reports/2026-11-27-observation-inputs/README.md)和[首批政策审核及覆盖判定](reports/2026-11-27-policy-review/README.md)。[08:55 前自动封存](reports/2026-11-27-decision-seal/README.md)已通过真实证据的试跑和恢复。[看板和 Agent 同查决策进度](reports/2026-11-27-decision-coverage/README.md)。[开盘取证与五交易日标签](reports/2026-11-27-five-session-labels/README.md)已实测真实行情缺口和会计复算。[标签进度](reports/2026-11-27-label-coverage/README.md)已接到看板和 Agent。[训练与预测封存](reports/2026-11-27-model-forecast/README.md)已验证可按原时点重放。[训练和预测进度](reports/2026-11-27-forecast-coverage/README.md)已接到看板和 Agent。[样本外误差统计和经济对照](reports/2026-11-27-oos-evaluation/README.md)已核对时间和样本门槛。下一步核实例行封存并接通评估覆盖。正式观察起点等首个独立生产合格归档。
 
 第 35–39、41 项已完成首批样本验证，详见[政策与市场数据首期验收](reports/2026-11-27-policy-pilot/README.md)。两条官方政策事件可做按时点准入核对，ETF 份额净值和沪市融资成交已有首批只读样本。接下来补连续取证、历史可用时间和市场广度，达到可比条件再验证第 40 项。第 42 项单独评估。
 

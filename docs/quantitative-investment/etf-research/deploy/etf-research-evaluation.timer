@@ -1,0 +1,11 @@
+[Unit]
+Description=Archive the independent ETF evaluation after the label job
+
+[Timer]
+OnCalendar=*-*-* 20:45:00 Asia/Shanghai
+Persistent=true
+AccuracySec=1s
+Unit=etf-research-evaluation.service
+
+[Install]
+WantedBy=timers.target

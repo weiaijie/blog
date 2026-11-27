@@ -86,6 +86,9 @@ class OpeningAndLabelTests(unittest.TestCase):
         marks=[D('100000'),*(cash+sum(D(units)*data.bars[symbol][day].close
                     for symbol,units in positions.items()) for day in window.sessions)]
         self.assertEqual(list(map(D,base['marks'])),marks)
+        self.assertEqual(D(base['endingCash']),cash)
+        self.assertEqual(D(base['availableCash']),cash)
+        self.assertEqual(D(base['dividendReceivable']),0)
         self.assertEqual(D(base['terminalReturn']),marks[-1]/marks[0]-1)
         self.assertEqual(D(base['maxDrawdown']),max(1-mark/max(marks[:i+1]) for i,mark in enumerate(marks)))
         self.assertTrue(all(set(variants)=={'low','base','high'} for variants in curves.values()))

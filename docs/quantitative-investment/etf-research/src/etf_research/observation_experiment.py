@@ -177,6 +177,8 @@ def five_day_label(data, window, opening, *, weight=D('.5'), scenario='base'):
         drawdown = max(drawdown,1-mark/high)
     trades = [row for row in ledger.journal if row['kind']=='trade']
     return dict(terminalReturn=path[-1]/CAPITAL-1,maxDrawdown=drawdown,marks=path,
+                endingCash=ledger.cash,availableCash=ledger.available_cash,
+                dividendReceivable=sum(ledger.receivables.values(),D(0)),
                 commission=sum((t['commission'] for t in trades),D(0)),
                 slippage=sum(((t['fill_price']-t['raw_price'])*t['units'] for t in trades),D(0)),
                 orders=decisions)

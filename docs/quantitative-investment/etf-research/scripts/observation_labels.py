@@ -103,7 +103,9 @@ def serial_results(data, window, opening):
             comparisons[allocation][scenario] = dict(
                 terminalReturn=str(raw['terminalReturn']),maxDrawdown=str(raw['maxDrawdown']),
                 marks=[str(value) for value in raw['marks']],commission=str(raw['commission']),
-                slippage=str(raw['slippage']),orders=raw['orders'])
+                slippage=str(raw['slippage']),orders=raw['orders'],
+                endingCash=str(raw['endingCash']),availableCash=str(raw['availableCash']),
+                dividendReceivable=str(raw['dividendReceivable']))
     return comparisons
 
 
