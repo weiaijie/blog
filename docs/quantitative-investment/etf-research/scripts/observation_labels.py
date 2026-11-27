@@ -42,7 +42,7 @@ def check_opens(root, store, entry, observed):
             if instant(read(path)['archiveVerifiedAt'])>observed:
                 continue
             row = verify_opening(root,store,folder)
-            if not row['scheduled']:
+            if not row['scheduled'] and row.get('status')!='missed_opening_slot':
                 raise ValueError('Opening quote was not captured in a scheduled live slot')
             for symbol, quote in row['quotes'].items():
                 if quote['status'] in ('tradable','blocked'):

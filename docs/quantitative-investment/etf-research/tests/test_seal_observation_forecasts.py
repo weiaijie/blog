@@ -27,6 +27,12 @@ def env_for(unit,invocation,stamp):
                 TRIGGER_TIMER_REALTIME_USEC=str(int(stamp.timestamp()*1_000_000)))
 
 
+def source_clock(trigger, start, calendar):
+    return dict(trigger,managerTimer=dict(lastTriggerUsec=int(start.timestamp()*1_000_000),
+                                          calendar=[f'*-*-* {calendar} Asia/Shanghai']),
+                managerTimerCheckedAt=start.isoformat(),managerTimerError=None)
+
+
 class SealObservationForecastsTests(unittest.TestCase):
     def test_deadline_applies_to_archived_clock_and_not_only_calculation(self):
         begin=instant('2026-11-02T08:53:02+08:00')
@@ -62,8 +68,9 @@ class SealObservationForecastsTests(unittest.TestCase):
             with (patch.object(decision,'now',return_value=before),patch.object(decision,'CODE',()),
                   patch.object(decision,'first_archive',return_value=ORIGIN),
                   patch.object(decision,'assemble',return_value=probe),
+                  patch.object(decision,'with_manager_clock',side_effect=lambda trigger:source_clock(trigger,before,'08:52:00')),
                   patch('etf_research.evidence_archive.datetime') as archive,
-                  patch.dict(decision.os.environ,env_for(decision.TIMER,'c'*32,before),clear=True)):
+                  patch.dict(decision.os.environ,env_for(decision.TIMER,'c'*32,before-timedelta(days=1)),clear=True)):
                 archive.now.return_value=before
                 verified=decision.run(root,root,store)
             self.assertEqual(verified['status'],'eligible_inputs')
@@ -71,8 +78,9 @@ class SealObservationForecastsTests(unittest.TestCase):
             at=instant('2026-11-02T08:53:03+08:00')
             with (patch.object(forecast,'now',return_value=at),patch.object(forecast,'CODE',()),
                   patch.object(trainer,'first_archive',return_value=ORIGIN),
+                  patch.object(forecast,'with_manager_clock',side_effect=lambda trigger:source_clock(trigger,at,'08:53:00')),
                   patch('etf_research.evidence_archive.datetime') as archive,
-                  patch.dict(forecast.os.environ,env_for(forecast.TIMER,'d'*32,at),clear=True)):
+                  patch.dict(forecast.os.environ,env_for(forecast.TIMER,'d'*32,at-timedelta(days=1)),clear=True)):
                 archive.now.return_value=at
                 result=forecast.run(root,store)
             self.assertEqual(result['status'],'sealed_predictions')

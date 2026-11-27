@@ -5,7 +5,6 @@ from math import isfinite
 import json
 from pathlib import Path
 import os
-import re
 from uuid import uuid4
 
 from observation_inputs import FEATURES, assemble
@@ -17,6 +16,7 @@ from etf_research.observation_experiment import VARIANTS
 from etf_research.observation_decision_receipt import (
     TIMER, DECISIONS, PROBES, current_slot, deadline, decision_status, verify_decision,
 )
+from etf_research.observation_slots import timer_identity, with_manager_clock
 from etf_research.policy_events import TZ, instant
 from etf_research.publication import create, inside, lock, read, seal, sha, sync_dir
 
@@ -47,12 +47,7 @@ def now():
 
 
 def trigger_from(env):
-    unit = env.get('TRIGGER_UNIT')
-    invocation = env.get('INVOCATION_ID','')
-    raw = env.get('TRIGGER_TIMER_REALTIME_USEC','')
-    if unit != TIMER or not re.fullmatch('[a-f0-9]{32}',invocation) or not raw.isdecimal():
-        return None
-    return dict(unit=unit,invocationId=invocation,timerRealtimeUsec=int(raw))
+    return timer_identity(env,TIMER)
 
 
 def first_archive(root, store, observed):
@@ -97,14 +92,16 @@ def feature_state(inputs, roots):
 
 
 def run(root, prices, store, *, probe=None):
-    started = now()
     trigger = None if probe else trigger_from(os.environ)
     if probe is None and trigger is None:
         raise ValueError('The production decision needs its scheduled systemd timer provenance')
+    if trigger is not None:
+        trigger = with_manager_clock(trigger)
+    started = now()
     day = probe or started.astimezone(TZ).date()
     calendar = calendar_at(root,started)
     if not sessions_between(calendar.ranges,day,day):
-        return dict(status='not_scheduled',entryDay=str(day))
+        return dict(status='not_scheduled',entryDay=str(day),startedAt=started.isoformat(),trigger=trigger)
     log = root/(PROBES if probe else DECISIONS)/day.isoformat()
     roots = dict(prices=prices,observations=root,archive=store)
     with lock(root/'.runtime/research-decision.lock'):
@@ -129,6 +126,8 @@ def run(root, prices, store, *, probe=None):
             except (OSError,ValueError,KeyError,TypeError,ArithmeticError) as error:
                 failure = dict(type=type(error).__name__,message=str(error)[:700])
                 available = dict.fromkeys(VARIANTS,False)
+        else:
+            failure = dict(type='timer_provenance',message='Verified calendar timer did not activate within decision window')
         result = dict(schemaVersion=1,mode='probe' if probe else 'scheduled',entryDay=str(day),
                       startedAt=started.isoformat(),deadline=deadline(day).isoformat(),
                       finishedAt=now().isoformat(),trigger=trigger,studyOrigin=origin,

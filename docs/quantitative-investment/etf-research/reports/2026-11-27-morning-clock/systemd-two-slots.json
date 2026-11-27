@@ -1,0 +1,40 @@
+{
+  "isolated": true,
+  "service": "etf-morning-clock-audit-1127.service",
+  "records": [
+    {
+      "invocationId": "5237212ab4134ad1b40daae9d407e468",
+      "journalUsec": 1795782888650433,
+      "message": {
+        "unit": "etf-morning-clock-audit-1127.timer",
+        "invocation": "5237212ab4134ad1b40daae9d407e468",
+        "envTriggerUsec": "1795782888573364",
+        "clock": {
+          "lastTriggerUsec": 1795782888573364,
+          "calendar": [
+            "2026-11-27 20:34:48 Asia/Shanghai",
+            "2026-11-27 20:35:15 Asia/Shanghai"
+          ]
+        },
+        "checkedUsec": 1795782888650340
+      }
+    },
+    {
+      "invocationId": "99ceadcc458c421388ff8a764d2f7492",
+      "journalUsec": 1795782915636888,
+      "message": {
+        "unit": "etf-morning-clock-audit-1127.timer",
+        "invocation": "99ceadcc458c421388ff8a764d2f7492",
+        "envTriggerUsec": "1795782888573364",
+        "clock": {
+          "lastTriggerUsec": 1795782915573617,
+          "calendar": [
+            "2026-11-27 20:34:48 Asia/Shanghai",
+            "2026-11-27 20:35:15 Asia/Shanghai"
+          ]
+        },
+        "checkedUsec": 1795782915636802
+      }
+    }
+  ]
+}

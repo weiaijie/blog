@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, timedelta
 from decimal import Decimal as D
 from pathlib import Path
 import sys
@@ -12,7 +12,7 @@ from etf_research.publication import create, read, sha
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts'))
-from observation_labels import assemble_label, label_window, match_opening, serial_results
+from observation_labels import assemble_label, check_opens, label_window, match_opening, serial_results
 from observation_price_inputs import admitted_prices
 import observe_opening_quotes as opening
 import seal_observation_labels as sealer
@@ -22,6 +22,47 @@ PROOF=ROOT/'reports/2026-11-27-five-session-labels/label-validation.json'
 
 
 class OpeningAndLabelTests(unittest.TestCase):
+    def test_manager_slot_and_missed_opening_leave_verified_no_request_evidence(self):
+        friday = date(2026,11,27)
+        started = instant('2026-11-27T09:26:02+08:00')
+        actual = started-timedelta(seconds=2)
+        stale = actual-timedelta(days=1)
+        environment = dict(TRIGGER_UNIT=opening.TIMER,INVOCATION_ID='f'*32,
+                           TRIGGER_TIMER_REALTIME_USEC=str(int(stale.timestamp()*1_000_000)))
+        identity = opening.trigger_event(environment)
+        calendar = ['*-*-* 09:26:00 Asia/Shanghai','*-*-* 09:28:00 Asia/Shanghai']
+        clock = dict(identity,managerTimer=dict(lastTriggerUsec=int(actual.timestamp()*1_000_000),calendar=calendar),
+                     managerTimerCheckedAt=started.isoformat(),managerTimerError=None)
+        self.assertFalse(opening.scheduled_opening(identity,started))
+        self.assertTrue(opening.scheduled_opening(clock,started))
+        self.assertFalse(opening.scheduled_opening(clock,actual+timedelta(minutes=1)))
+        missing = dict(identity,realtimeUsec=int(actual.timestamp()*1_000_000),managerTimer=None,
+                       managerTimerCheckedAt=started.isoformat(),managerTimerError='TimeoutExpired')
+        self.assertFalse(opening.scheduled_opening(missing,started))
+
+        with tempfile.TemporaryDirectory() as directory:
+            root,store = Path(directory)/'project',Path(directory)/'store'
+            for name in ('scripts/observe_opening_quotes.py',opening.CALENDAR,opening.LOADER,
+                         'src/etf_research/observation_slots.py','config/collection.json'):
+                local = root/name
+                local.parent.mkdir(parents=True,exist_ok=True)
+                local.write_bytes((ROOT/name).read_bytes())
+            with (patch.dict(opening.os.environ,environment,clear=True),
+                  patch.object(opening,'now',return_value=started),
+                  patch.object(opening,'with_manager_clock',return_value=missing),
+                  patch.object(opening,'fetch') as fetch,
+                  patch('etf_research.evidence_archive.datetime') as archive_clock):
+                archive_clock.now.return_value=started
+                result = opening.collect(root,store,probe=False)
+                self.assertEqual(result['status'],'missed_opening_slot')
+                self.assertFalse(result['scheduled'])
+                self.assertEqual(read(root/result['path']/'records/requests.json'),[])
+                fetch.assert_not_called()
+                quotes,evidence,issues = check_opens(root,store,friday,started)
+                self.assertTrue(all(not rows for rows in quotes.values()))
+                self.assertEqual(evidence[0]['archiveSha256'],result['archiveSha256'])
+                self.assertEqual(len(issues),2)
+
     def test_open_is_supported_only_by_timed_auction_or_explicit_halt(self):
         day=date(2026,11,27)
         start=instant('2026-11-27T09:26:00+08:00')

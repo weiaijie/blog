@@ -3,6 +3,7 @@ from datetime import date, datetime, time, timezone
 
 from .evidence_archive import verify as verify_archive
 from .observation_experiment import DECISION_TIME
+from .observation_slots import manager_activation, trigger_instant
 from .policy_events import TZ, instant
 from .publication import read, sha, verify_bundle
 
@@ -19,8 +20,9 @@ def deadline(day):
 def current_slot(trigger, day, started):
     if not trigger or trigger['unit']!=TIMER:
         return False
-    activated = datetime.fromtimestamp(trigger['timerRealtimeUsec']/1_000_000,TZ)
-    return datetime.combine(day,START,TZ) <= activated <= started <= deadline(day)
+    activated = (manager_activation(trigger,TIMER,(START,),started) if 'managerTimer' in trigger
+                 else trigger_instant(trigger.get('timerRealtimeUsec')))
+    return activated is not None and datetime.combine(day,START,TZ)<=activated<=started<=deadline(day)
 
 
 def decision_status(record, ready_at):

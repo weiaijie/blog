@@ -15,6 +15,7 @@ from etf_research.exchange_calendar import LOADER, calendar_at
 from etf_research.evidence_archive import capture, verify as verify_archive
 from etf_research.observation_decision_receipt import DECISIONS, deadline, verify_decision
 from etf_research.observation_experiment import BASE, VARIANTS, feature_vector, ridge_predict
+from etf_research.observation_slots import manager_activation, timer_identity, trigger_instant, with_manager_clock
 from etf_research.policy_events import TZ, instant
 from etf_research.publication import create, inside, lock, read, seal, sha, sync_dir, verify_bundle
 
@@ -24,7 +25,7 @@ TIMER='etf-research-forecast.timer'
 START=time(8,53)
 POLL_UNTIL=time(8,54,20)
 CODE=(
-    LOADER,
+    LOADER, 'src/etf_research/observation_slots.py',
     'PROTOCOL_OBSERVATION_V1.md', CALENDAR, 'deploy/etf-research-forecast.timer',
     'deploy/etf-research-forecast.service','scripts/seal_observation_forecasts.py',
     'scripts/train_observation_models.py','scripts/observation_decision_status.py',
@@ -38,20 +39,28 @@ def now():
 
 
 def trigger_from(env):
-    name=env.get('TRIGGER_UNIT')
-    invocation=env.get('INVOCATION_ID','')
-    micros=env.get('TRIGGER_TIMER_REALTIME_USEC','')
-    if name!=TIMER or not re.fullmatch('[a-f0-9]{32}',invocation) or not micros.isdecimal():
+    identity = timer_identity(env,TIMER)
+    if identity is None:
         raise ValueError('Forecast production requires its scheduled timer')
-    return dict(unit=name,id=invocation,triggeredAt=datetime.fromtimestamp(int(micros)/1_000_000,timezone.utc).isoformat())
+    raw = trigger_instant(identity['timerRealtimeUsec'])
+    return dict(unit=TIMER,id=identity['invocationId'],timerRealtimeUsec=identity['timerRealtimeUsec'],
+                triggeredAt=raw.isoformat() if raw is not None else None)
+
+
+def current_slot(trigger,day,started):
+    if trigger['unit']!=TIMER:
+        return False
+    if 'managerTimer' in trigger:
+        activated = manager_activation(trigger,TIMER,(START,),started)
+    else:
+        activated = instant(trigger['triggeredAt']) if trigger.get('triggeredAt') else None
+    return activated is not None and datetime.combine(day,START,TZ)<=activated<=started<=deadline(day)
 
 
 def forecast_outcome(packet, ready_at):
     day=date.fromisoformat(packet['entryDay'])
     started,finished=map(instant,(packet['startedAt'],packet['computedAt']))
-    trigger=packet['trigger']
-    activated=instant(trigger['triggeredAt'])
-    if not datetime.combine(day,START,TZ)<=activated<=started<=finished<=ready_at<=deadline(day):
+    if not current_slot(packet['trigger'],day,started) or not started<=finished<=ready_at<=deadline(day):
         return 'missed_deadline'
     return 'sealed_predictions' if any(row['status']=='predicted' for row in packet['comparisons'].values()) else 'no_prediction'
 
@@ -170,15 +179,16 @@ def wait_for_decision(root,store,day):
 
 
 def run(root,store):
-    trigger=trigger_from(os.environ)
+    trigger=with_manager_clock(trigger_from(os.environ))
     started=now()
     day=started.astimezone(TZ).date()
+    calendar=calendar_at(root,started)
+    summary=dict(entryDay=str(day),startedAt=started.isoformat(),trigger=trigger)
+    if not sessions_between(calendar.ranges,day,day):
+        return dict(summary,status='not_scheduled')
     plan=model_status(root,store,started)
     if not plan['fold']:
-        return dict(status=plan['status'],entryDay=str(day))
-    calendar=calendar_at(root,started)
-    if not sessions_between(calendar.ranges,day,day):
-        return dict(status='not_scheduled',entryDay=str(day))
+        return dict(summary,status=plan['status'])
     with lock(root/'.runtime/research-forecast.lock'):
         folder=root/LOG/str(day)
         for path in sorted(folder.glob('*/receipt.json')):
@@ -188,7 +198,7 @@ def run(root,store):
         packet=dict(schemaVersion=1,entryDay=str(day),trigger=trigger,startedAt=started.isoformat(),
                     studyOrigin=plan['studyOrigin'],fold=plan['fold'],decision=None,model=None,
                     comparisons={},sessions=[],reason=None)
-        if not datetime.combine(day,START,TZ)<=instant(trigger['triggeredAt'])<=started<=deadline(day):
+        if not current_slot(trigger,day,started):
             packet['reason']='outside_scheduled_cutoff'
         else:
             try:

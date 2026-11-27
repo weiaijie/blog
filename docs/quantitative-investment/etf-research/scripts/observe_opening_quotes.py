@@ -6,7 +6,6 @@ from decimal import Decimal
 import json
 import os
 from pathlib import Path
-import re
 from uuid import uuid4
 
 from etf_research.admission import sessions_between
@@ -14,6 +13,7 @@ from etf_research.baselines import SYMBOLS
 from etf_research.exchange_calendar import BASE_PATH as CALENDAR, LOADER, calendar_at
 from etf_research.evidence_archive import capture, verify as verify_archive
 from etf_research.http_capture import fetch, load_policy, save_transport
+from etf_research.observation_slots import manager_activation, timer_identity, trigger_instant, with_manager_clock
 from etf_research.policy_events import TZ, instant
 from etf_research.publication import create, lock, read, seal, sha, sync_dir, verify_bundle
 
@@ -37,20 +37,26 @@ def request_url(symbol):
 
 
 def trigger_event(env):
-    invocation = env.get('INVOCATION_ID','')
-    stamp = env.get('TRIGGER_TIMER_REALTIME_USEC','')
-    if env.get('TRIGGER_UNIT')==TIMER and re.fullmatch('[a-f0-9]{32}',invocation) and stamp.isdecimal():
-        return dict(unit=TIMER,id=invocation,realtimeUsec=int(stamp))
-    return None
+    identity = timer_identity(env,TIMER)
+    if identity is None:
+        return None
+    return dict(unit=TIMER,id=identity['invocationId'],realtimeUsec=identity['timerRealtimeUsec'])
 
 
 def scheduled_opening(trigger, started):
     if not trigger or trigger['unit']!=TIMER:
         return False
-    local = started.astimezone(TZ)
-    stamp = datetime.fromtimestamp(trigger['realtimeUsec']/1_000_000,TZ)
-    clock = stamp.replace(second=0,microsecond=0)
-    return clock.time() in SLOTS and clock<=stamp<=local<clock+timedelta(minutes=1)
+    activated = (manager_activation(trigger,TIMER,SLOTS,started) if 'managerTimer' in trigger
+                 else trigger_instant(trigger.get('realtimeUsec')))
+    if activated is None:
+        return False
+    stamp = activated.astimezone(TZ)
+    slot = stamp.replace(second=0,microsecond=0)
+    return slot.time() in SLOTS and slot<=stamp<=started<slot+timedelta(minutes=1)
+
+
+def missed_quotes():
+    return {symbol:dict(status='unknown',reason='Opening timer proof is missing or late') for symbol in SYMBOLS}
 
 
 def decimal_price(value):
@@ -117,50 +123,65 @@ def verify_opening(root, store, attempt):
     folder = attempt.parent.parent
     day = datetime.fromisoformat(result['day']).date()
     called, finished, ready = map(instant,(result['startedAt'],result['finishedAt'],receipt['archiveVerifiedAt']))
+    scheduled = scheduled_opening(result['trigger'],called)
+    missed = result.get('outcome')=='missed_opening_slot'
+    if missed and (folder!=root/LOG or scheduled or read(records/'requests.json')!=[]
+                   or not result['trigger'] or result['trigger']['unit']!=TIMER
+                   or result['trigger']['id']!=attempt.name):
+        raise ValueError('Unexpected opening timer failure packet')
+    rebuilt = missed_quotes() if missed else assess(records,day,called,finished)
     if (attempt.parent.name!=str(day) or folder not in (root/LOG,root/PROBES) or
             receipt['path']!=attempt.relative_to(root).as_posix() or receipt['manifestSha256']!=sha(records/'manifest.json') or
             not called<=finished<=instant(archive['created_at_utc'])<=ready<=now() or
-            result['quotes']!=assess(records,day,called,finished)):
+            result['quotes']!=rebuilt):
         raise ValueError('Opening capture and receipt do not reproduce')
     for path in records.iterdir():
         if archive['files'][path.relative_to(root).as_posix()]['sha256']!=sha(path):
             raise ValueError('Opening archive bytes differ')
-    live = folder==root/LOG and scheduled_opening(result['trigger'],called) and result['trigger']['id']==attempt.name
-    return dict(**receipt,quotes=result['quotes'],scheduled=live)
+    live = folder==root/LOG and scheduled and result['trigger']['id']==attempt.name
+    summary = dict(**receipt,quotes=result['quotes'],scheduled=live)
+    if missed:
+        summary['status'] = 'missed_opening_slot'
+    return summary
 
 
 def collect(root, store, *, probe):
     root,store=root.resolve(),store.resolve()
-    started=now()
-    local=started.astimezone(TZ)
-    day=local.date()
     trigger=None if probe else trigger_event(os.environ)
     if not probe and trigger is None:
         raise ValueError('Opening collection requires scheduled provenance')
+    if trigger is not None:
+        trigger=with_manager_clock(trigger)
+    started=now()
+    day=started.astimezone(TZ).date()
     calendar=calendar_at(root,started)
     if not sessions_between(calendar.ranges,day,day):
-        return dict(status='not_scheduled',day=str(day))
-    if not probe and not scheduled_opening(trigger,started):
-        return dict(status='missed_opening_slot',day=str(day),startedAt=started.isoformat())
+        return dict(status='not_scheduled',day=str(day),startedAt=started.isoformat(),trigger=trigger)
+    missed=not probe and not scheduled_opening(trigger,started)
     identity=started.strftime('%Y%m%dT%H%M%SZ')+'-'+uuid4().hex[:8] if probe else trigger['id']
     with lock(root/'.runtime/research-opening.lock'):
         attempt=root/(PROBES if probe else LOG)/str(day)/identity
         records=attempt/'records'
         records.mkdir(parents=True,exist_ok=False)
-        policy=dict(load_policy(root/'config/collection.json'),max_attempts=2,
-                    connect_timeout_seconds=5,total_timeout_seconds=12,
-                    backoff_seconds=[2],max_retry_after_seconds=8)
-        save_transport(records,policy)
-        with ThreadPoolExecutor(max_workers=2) as pool:
-            requests=list(pool.map(lambda symbol:fetch(records,symbol,request_url(symbol),policy),SYMBOLS))
+        requests = []
+        if not missed:
+            policy=dict(load_policy(root/'config/collection.json'),max_attempts=2,
+                        connect_timeout_seconds=5,total_timeout_seconds=12,
+                        backoff_seconds=[2],max_retry_after_seconds=8)
+            save_transport(records,policy)
+            with ThreadPoolExecutor(max_workers=2) as pool:
+                requests=list(pool.map(lambda symbol:fetch(records,symbol,request_url(symbol),policy),SYMBOLS))
         create(records/'requests.json',requests)
         finished=now()
-        quotes=assess(records,day,started,finished)
-        create(records/'capture.json',dict(day=str(day),startedAt=started.isoformat(),finishedAt=finished.isoformat(),
-                                           trigger=trigger,quotes=quotes))
+        quotes=missed_quotes() if missed else assess(records,day,started,finished)
+        packet=dict(day=str(day),startedAt=started.isoformat(),finishedAt=finished.isoformat(),
+                    trigger=trigger,quotes=quotes)
+        if missed:
+            packet['outcome'] = 'missed_opening_slot'
+        create(records/'capture.json',packet)
         seal(records)
         names=[p.relative_to(root).as_posix() for p in records.iterdir()]
-        names.extend(('scripts/observe_opening_quotes.py',CALENDAR,LOADER,'config/collection.json',*calendar.extensions))
+        names.extend(('scripts/observe_opening_quotes.py',CALENDAR,LOADER,'src/etf_research/observation_slots.py','config/collection.json',*calendar.extensions))
         archive=capture(root,store,names)
         verify_archive(store,archive['snapshot'])
         receipt=dict(path=attempt.relative_to(root).as_posix(),archiveSha256=archive['snapshot'],

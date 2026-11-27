@@ -1,4 +1,4 @@
-"""Bind policy source polls to the actual recurring systemd timer activation."""
+"""Bind research jobs to the actual recurring systemd timer activation."""
 from datetime import datetime, time, timedelta, timezone
 import re
 import shlex
@@ -45,29 +45,46 @@ def with_manager_clock(trigger):
                 managerTimerError=error)
 
 
+def timer_identity(env, expected):
+    unit, invocation = env.get('TRIGGER_UNIT'), env.get('INVOCATION_ID','')
+    raw = env.get('TRIGGER_TIMER_REALTIME_USEC','')
+    if unit!=expected or not re.fullmatch('[a-f0-9]{32}',invocation):
+        return None
+    value = int(raw) if re.fullmatch(r'\d{1,18}',raw) else None
+    return dict(unit=unit,invocationId=invocation,timerRealtimeUsec=value)
+
+
+def trigger_instant(microseconds):
+    if type(microseconds) is not int or not 0<microseconds<4_102_444_800_000_000:
+        return None
+    return datetime(1970,1,1,tzinfo=timezone.utc)+timedelta(microseconds=microseconds)
+
+
+def manager_activation(trigger, unit, slots, started):
+    if not trigger or trigger['unit']!=unit:
+        return None
+    evidence = trigger.get('managerTimer')
+    expected = sorted(f'*-*-* {clock.isoformat()} Asia/Shanghai' for clock in slots)
+    if (evidence is None or trigger.get('managerTimerError') is not None
+            or evidence.get('calendar')!=expected
+            or not re.fullmatch('[a-f0-9]{32}',trigger.get('invocationId',trigger.get('id','')))):
+        return None
+    checked = instant(trigger['managerTimerCheckedAt'])
+    activated = trigger_instant(evidence.get('lastTriggerUsec'))
+    return activated if activated is not None and activated<=checked<=started else None
+
+
 def scheduled_slot(attempt):
     trigger = attempt['trigger']
     if not trigger or trigger['unit']!=TIMER:
         return None
     started = instant(attempt['startedAt'])
-    if 'managerTimer' in trigger:
-        evidence = trigger['managerTimer']
-        if (evidence is None or trigger.get('managerTimerError') is not None
-                or evidence.get('calendar')!=sorted(CALENDAR)
-                or not re.fullmatch('[a-f0-9]{32}',trigger.get('invocationId',''))):
-            return None
-        checked = instant(trigger['managerTimerCheckedAt'])
-        if checked>started:
-            return None
-        stamp_value = evidence.get('lastTriggerUsec')
-    else:
-        stamp_value = trigger.get('timerRealtimeUsec')
-        checked = started
-    if type(stamp_value) is not int or not 0<stamp_value<4_102_444_800_000_000:
+    activated = (manager_activation(trigger,TIMER,POLL_TIMES,started) if 'managerTimer' in trigger
+                 else trigger_instant(trigger.get('timerRealtimeUsec')))
+    if activated is None:
         return None
-    stamp = datetime(1970,1,1,tzinfo=timezone.utc)+timedelta(microseconds=stamp_value)
-    local = stamp.astimezone(TZ)
+    local = activated.astimezone(TZ)
     planned = local.replace(second=0,microsecond=0)
-    if planned.time() in POLL_TIMES and planned<=local<=checked<=started<planned+timedelta(minutes=1):
+    if planned.time() in POLL_TIMES and planned<=local<=started<planned+timedelta(minutes=1):
         return planned
     return None

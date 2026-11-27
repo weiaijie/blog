@@ -67,7 +67,9 @@ class DecisionStatusTests(unittest.TestCase):
     def test_actual_receipt_verification_drives_both_api_views(self):
         start = instant('2026-11-30T08:52:05+08:00')
         environment = dict(TRIGGER_UNIT=seal.TIMER, INVOCATION_ID='2'*32,
-                           TRIGGER_TIMER_REALTIME_USEC=str(int((start-timedelta(seconds=2)).timestamp()*1_000_000)))
+                           TRIGGER_TIMER_REALTIME_USEC=str(int((start-timedelta(days=1)).timestamp()*1_000_000)))
+        actual = start-timedelta(seconds=2)
+        source = dict(lastTriggerUsec=int(actual.timestamp()*1_000_000),calendar=['*-*-* 08:52:00 Asia/Shanghai'])
         available = dict(value=0,verified=True,asOf='2026-11-27',
                          receivedAt=start.isoformat(),readyAt=start.isoformat(),
                          dependencyReadyAt=[start.isoformat()],
@@ -78,6 +80,8 @@ class DecisionStatusTests(unittest.TestCase):
         origin = dict(date='2026-11-27',archiveVerifiedAt='2026-11-27T19:40:25+08:00')
         with (patch.object(seal,'CODE',(seal.CALENDAR,)), patch.object(seal,'now',return_value=start),
               patch.object(seal,'assemble',return_value=payload), patch.object(seal,'first_archive',return_value=origin),
+              patch.object(seal,'with_manager_clock',side_effect=lambda trigger:dict(trigger,managerTimer=source,
+                        managerTimerCheckedAt=start.isoformat(),managerTimerError=None)),
               patch('etf_research.evidence_archive.datetime') as archive_clock,
               patch.dict(seal.os.environ,environment,clear=True)):
             archive_clock.now.return_value = start
