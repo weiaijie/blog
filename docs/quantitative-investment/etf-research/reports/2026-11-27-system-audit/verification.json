@@ -1,0 +1,228 @@
+{
+  "auditedCommit": "4a0930f11a082d685400d8ceee58639f97f04428",
+  "observedAtShanghai": "2026-11-27T14:45:11+08:00",
+  "api": {
+    "versions": {
+      "v1": "2026-10-30",
+      "v2": "2026-11-12",
+      "v3": "2026-11-20",
+      "v4": "2026-11-23",
+      "v5": "2026-11-26"
+    },
+    "forwardAsOf": "2026-11-26",
+    "forwardSessions": 16,
+    "marketCoverage": {
+      "510300": {
+        "quoteStart": "2018-09-14",
+        "quoteThrough": "2026-11-26",
+        "quotes": 1986,
+        "backtestWindows": [
+          [
+            "2018-09-14",
+            "2026-11-26"
+          ]
+        ]
+      },
+      "511010": {
+        "quoteStart": "2018-09-14",
+        "quoteThrough": "2026-11-26",
+        "quotes": 1986,
+        "backtestWindows": [
+          [
+            "2018-09-14",
+            "2026-11-26"
+          ]
+        ]
+      },
+      "513500": {
+        "quoteStart": "2018-09-17",
+        "quoteThrough": "2026-11-26",
+        "quotes": 1984,
+        "backtestWindows": [
+          [
+            "2019-01-02",
+            "2022-03-28"
+          ],
+          [
+            "2022-03-30",
+            "2026-11-26"
+          ]
+        ]
+      },
+      "159920": {
+        "quoteStart": "2018-09-18",
+        "quoteThrough": "2026-11-26",
+        "quotes": 1984,
+        "backtestWindows": [
+          [
+            "2019-01-02",
+            "2026-11-26"
+          ]
+        ]
+      }
+    },
+    "rejectedInputs": 4,
+    "replay": {
+      "allocation": {
+        "frames": 4,
+        "fills": 2,
+        "endingEquity": "98604.0400"
+      },
+      "installments": {
+        "frames": 4,
+        "fills": 2,
+        "endingEquity": "99537.6000"
+      },
+      "trend_120": {
+        "frames": 4,
+        "fills": 1,
+        "endingEquity": "99931.8000"
+      },
+      "multifactor_v1": {
+        "frames": 4,
+        "fills": 1,
+        "endingEquity": "99931.8000"
+      },
+      "multifactor_volume_v1": {
+        "frames": 4,
+        "fills": 1,
+        "endingEquity": "99931.8000"
+      },
+      "multifactor_kdj_v1": {
+        "frames": 4,
+        "fills": 1,
+        "endingEquity": "99931.8000"
+      },
+      "multifactor_adx_v1": {
+        "frames": 4,
+        "fills": 1,
+        "endingEquity": "99931.8000"
+      }
+    },
+    "openingOrders": {
+      "2026-11-24": {
+        "sp500": 0,
+        "treasury": 300,
+        "reason": "opening_halt"
+      },
+      "2026-11-25": {
+        "sp500": 0,
+        "treasury": 300,
+        "reason": "opening_halt"
+      },
+      "2026-11-26": {
+        "sp500": 20100,
+        "treasury": 300,
+        "reason": "filled"
+      }
+    },
+    "defaultWindowCounts": {
+      "method-windows": {
+        "1": 1624,
+        "2": 1381
+      },
+      "technical-factors": {
+        "1": 1624,
+        "2": 1381
+      }
+    },
+    "sameWindow": {
+      "start": "2021-10-29",
+      "end": "2022-10-31",
+      "days": 244,
+      "pnlGap": "15169.9100",
+      "parts": {
+        "price": "15915.2000",
+        "dividend": "-750.0000",
+        "commission": "-0.09",
+        "slippage": "4.8000",
+        "net": "15169.9100"
+      }
+    },
+    "catalog": {
+      "entries": 11,
+      "nodes": 25,
+      "edges": 40
+    },
+    "archiveEndpoints": [
+      "olderChange",
+      "newerChange",
+      "newWindowAttribution"
+    ]
+  },
+  "frontend": [
+    {
+      "viewportWidth": 1366,
+      "checks": [
+        "overview",
+        "fourCandles",
+        "saveRestoreExportImport",
+        "compareAttributionAndOrders",
+        "sharedPlanReplay",
+        "catalogGraph",
+        "archivedReports"
+      ]
+    },
+    {
+      "viewportWidth": 390,
+      "checks": [
+        "overview",
+        "fourCandles",
+        "saveRestoreExportImport",
+        "compareAttributionAndOrders",
+        "sharedPlanReplay",
+        "catalogGraph",
+        "archivedReports"
+      ]
+    }
+  ],
+  "publishedDailyBundles": {
+    "accounts": 18,
+    "sessions": 16,
+    "rows": 288,
+    "filledOrders": 21,
+    "modeledFillsOutsideDailyRange": 8,
+    "backfilledDates": [
+      "2026-11-24",
+      "2026-11-25",
+      "2026-11-26"
+    ],
+    "rowCounts": [
+      252,
+      270,
+      288
+    ],
+    "addedFilledOrders": [
+      0,
+      0,
+      0
+    ],
+    "riskPortfolios": 18,
+    "exposurePortfolios": 18,
+    "monthlyPortfolios": 18,
+    "checkpoint": "a4d2ae7e236fe5ec1d7248e94ed765e463cb35525e25629a21958aaad311e9d6"
+  },
+  "tests": {
+    "python": 365,
+    "frontend": 6,
+    "reproduction": "pass",
+    "viteBuild": "pass",
+    "cliHttpReplay": "equal"
+  },
+  "integrity": {
+    "sourceManifests": 305,
+    "sourceFiles": 5018,
+    "immutableEntries": 14493
+  },
+  "archive": {
+    "snapshot": "65b529d034c4a44ee27e461ad2bfb93f79ced834853a2d26beeaa9f5c79c5720",
+    "files": 14503,
+    "restored": 14503,
+    "conflicts": 0
+  },
+  "missingWorkbenchUrls": {
+    "/risk.html": 404,
+    "/operation_status.json": 404
+  },
+  "frontendArchiveAnchors": 6
+}
