@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "seed": {
+    "pack": "reports/2026-11-27-portable-observation/pack",
+    "manifestSha256": "a9a3076a7140b7b67bd1d0bf0a22f654cd27924b13d557b7d716cfeb42beb22d"
+  },
+  "batches": [
+    {
+      "batchId": "20261127T142000647868Z-2349c657",
+      "receipt": "reports/2026-11-27-automatic-portable-observation/batch-receipt.json",
+      "receiptSha256": "293af0014fa8f6515c2fe5eed3af0859946b8f1554f00b63dd54ffa6541c481a",
+      "pack": "reports/2026-11-27-automatic-portable-observation/pack"
+    }
+  ],
+  "head": {
+    "batchId": "20261127T142000647868Z-2349c657",
+    "manifestSha256": "ee10d5ab24523de5cf91380566b9ab431816c516fa1bc32ac606836b8ef27e33"
+  }
+}

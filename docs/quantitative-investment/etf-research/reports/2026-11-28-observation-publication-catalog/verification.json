@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-28T01:57:41.725130+08:00",
+  "audit": {
+    "schemaVersion": 1,
+    "publishedBatchCount": 1,
+    "publishedThrough": "2026-11-27T14:20:00.647868+00:00",
+    "publishedManifestSha256": "ee10d5ab24523de5cf91380566b9ab431816c516fa1bc32ac606836b8ef27e33",
+    "liveComparison": {
+      "sealedBatchCount": 1,
+      "sealedThrough": "2026-11-27T14:20:00.647868+00:00",
+      "unpublishedBatchIds": []
+    },
+    "restored": {
+      "asOf": "2026-11-27T14:20:00.647868+00:00",
+      "after": null,
+      "receipts": {
+        "evaluation": 1,
+        "observation": 11,
+        "policy_review": 2
+      },
+      "archives": 12,
+      "files": 273,
+      "restoredArchiveFiles": 683,
+      "activates_services": false
+    }
+  },
+  "replay": {
+    "day": "2026-11-27",
+    "asOf": "2026-11-27T14:20:00.647868+00:00",
+    "identical": true,
+    "archivedAttempts": 10,
+    "status": "partial"
+  }
+}

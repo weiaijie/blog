@@ -35,6 +35,22 @@ def verify_batch(pack, receipt):
         raise ValueError(f'Exported batch {batch} failed verification: {error}') from error
 
 
+def verify_export_link(pack, receipt, batch_id, previous, ceiling):
+    index = read(pack/'index.json')
+    after = instant(receipt['after'])
+    cutoff = instant(receipt['asOf'])
+    packed = sha(pack/'manifest.json')
+    trigger = receipt['trigger']
+    if (receipt['schemaVersion']!=1 or receipt['batchId']!=batch_id
+            or receipt['previousManifestSha256']!=previous or receipt['packManifestSha256']!=packed
+            or not after==instant(index['after'])==ceiling
+            or not after<cutoff==instant(index['asOf'])<=instant(receipt['sealedAt'])
+            or trigger['unit']!=TIMER or not re.fullmatch('[a-f0-9]{32}',trigger['invocationId'])
+            or batch_id!=identifier(cutoff,trigger)):
+        raise ValueError('Broken export chain: '+batch_id)
+    return packed, cutoff
+
+
 def published_receipts(spool):
     folder = spool/PUBLISHED
     if folder.is_symlink() or (folder.exists() and not folder.is_dir()):
@@ -91,18 +107,8 @@ def chain(seed, seed_sha, spool, *, full=False):
             raise ValueError('Published receipt changed: '+batch.name)
         receipt=read(receipt_path)
         started=read(batch/'started.json')
-        index=read(pack/'index.json')
-        after=instant(receipt['after'])
-        cutoff=instant(receipt['asOf'])
-        packed=sha(pack/'manifest.json')
-        trigger=receipt['trigger']
-        if (receipt['schemaVersion']!=1 or receipt['batchId']!=batch.name
-                or receipt['previousManifestSha256']!=previous or receipt['packManifestSha256']!=packed
-                or not after==instant(index['after'])==ceiling
-                or not after<cutoff==instant(index['asOf'])<=instant(receipt['sealedAt'])
-                or trigger['unit']!=TIMER or not re.fullmatch('[a-f0-9]{32}',trigger['invocationId'])
-                or batch.name!=identifier(cutoff,trigger)
-                or started!={key:receipt[key] for key in ('asOf','after','trigger')}):
+        packed,cutoff=verify_export_link(pack,receipt,batch.name,previous,ceiling)
+        if started!={key:receipt[key] for key in ('asOf','after','trigger')}:
             raise ValueError('Broken export chain: '+batch.name)
         if full:
             verify_batch(pack,receipt)

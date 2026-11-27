@@ -1,5 +1,7 @@
 # 项目计划与当前状态
 
+[GitHub 证据链核验与恢复](reports/2026-11-28-observation-publication-catalog/README.md)已核对基础包和首批定时增量，可逐批比较 Ubuntu 与公开发布，并从 GitHub 复算原时点报告。
+
 [政策事件去重复验](reports/2026-11-28-policy-event-identity/README.md)已核对原文修订、转载与审核时点。工作台和 Agent 同查事件原文。首批 11 个已审核版本归为 1 个独立事件与 1 条关联公告，政策覆盖仍为 0/5 个区间。
 
 [18 户到期检查点与回执](reports/2026-11-28-forward-milestone-publication/README.md)按首次正式发布的到期原件核算，并逐项核对后来账本的同一时期。工作台和 Agent 同查。
