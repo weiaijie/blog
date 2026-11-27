@@ -1,0 +1,5 @@
+{
+  "schemaVersion": 1,
+  "observationEarliestDate": "2026-11-27",
+  "maxRecoveriesPerTrigger": 2
+}

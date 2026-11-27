@@ -1,0 +1,13 @@
+[Unit]
+Description=Observe completed exchange sessions and retry late public inputs
+
+[Timer]
+OnActiveSec=45s
+OnCalendar=*-*-* 08:25:00 Asia/Shanghai
+OnCalendar=*-*-* 19:40:00 Asia/Shanghai
+Persistent=true
+AccuracySec=1s
+Unit=etf-research-observation.service
+
+[Install]
+WantedBy=timers.target

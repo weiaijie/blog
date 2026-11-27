@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "session": "2026-11-27",
+  "attempt": "reports/research-observation/runs/2026-11-27/20261127T090329Z-f6cbc152",
+  "phase": "partial",
+  "resultSha256": "1bc1a6c48e7fa0fba711595b289a8b2d2d84d9c5cf43aac8e68a7e17bc9a8e06",
+  "attemptManifestSha256": "f5f2048aab704ba44a820b3715189cf86b42d2e6c17ab491c994ecce4e588e0b",
+  "trigger": {
+    "unit": "etf-research-observation.timer",
+    "invocationId": "83793edf0d5d419197289b5b2e52b0ab",
+    "timerRealtimeUsec": 1795770209715549
+  },
+  "archive": "b7ba94df2e50df7348874b44bbb2b44cbb14a40a9584900a86a5a1cc90c0a18a",
+  "archiveCreatedAt": "2026-11-27T09:03:32.933073+00:00",
+  "archiveVerifiedAt": "2026-11-27T09:03:33.003911+00:00",
+  "files": 134,
+  "forwardEligible": false
+}

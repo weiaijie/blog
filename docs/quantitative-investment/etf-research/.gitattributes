@@ -74,3 +74,7 @@ reports/2026-11-27-decision-seal/*-archive.json -text
 # Opening probes and their archive proof keep received bytes.
 reports/research-opening-probes/** -text
 reports/2026-11-27-five-session-labels/opening-probe-archive.json -text
+
+# The portable independent research store contains content-addressed original bytes.
+reports/*-portable-observation/pack/** -text -whitespace
+reports/*-portable-observation/pack/archive/objects/** -diff

@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-27",
+  "startedAt": "2026-11-27T11:54:50.896659+00:00",
+  "trigger": {
+    "unit": "etf-research-observation.timer",
+    "invocationId": "3ed352900d4b4225ac6658624de9957f",
+    "timerRealtimeUsec": 1795780490715166
+  }
+}

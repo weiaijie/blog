@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-26",
+  "previousDate": "2026-11-25",
+  "scope": "SSE A-share and STAR turnover, SSE exchange-wide margin",
+  "status": "full_capture",
+  "historicalPointInTime": false,
+  "researchOnly": true,
+  "receivedAt": "2026-11-27T09:02:28.221833+00:00",
+  "featureReadyAt": "2026-11-27T09:02:28.225331+00:00",
+  "checkedAt": "2026-11-27T09:02:28.225331+00:00",
+  "publishedAt": null,
+  "turnoverCny": "613650000000.00",
+  "margin": {
+    "financingBalanceCny": 1101070420322,
+    "financingBuyCny": 53780740162,
+    "financingRepaymentCny": 61724016978,
+    "balanceIdentity": {
+      "status": "mismatch",
+      "expectedBalanceCny": "1101070420279",
+      "residualCny": "43"
+    },
+    "reconciledFinancingNetCny": null,
+    "stockFinancingBuyCny": 39181758291,
+    "financingBuyShare": "0.06385033535565876313859692007"
+  },
+  "relativeTurnover20": null,
+  "breadth": null,
+  "issues": {}
+}

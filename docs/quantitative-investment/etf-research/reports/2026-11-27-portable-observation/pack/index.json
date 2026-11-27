@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "asOf": "2026-11-27T21:10:38+08:00",
+  "after": null,
+  "receipts": [
+    {
+      "receipt": "reports/research-evaluation/2026-11-27/50942c432a3e424ba41cc7719cb95583/receipt.json",
+      "kind": "evaluation",
+      "sha256": "a7cfc907a8b526acef7eadd937a0c110ea47587ac210d458f408d7e8ae180e0a",
+      "verifiedAt": "2026-11-27T12:45:00.982512+00:00",
+      "archive": "dd8d234fc694bdc5e00ee20aa6b0c45ea46df75b650dbb381b94e986413d2c05"
+    },
+    {
+      "receipt": "reports/research-observation/archives/2026-11-26/20261127T090225Z-a951fbbd.json",
+      "kind": "observation",
+      "sha256": "871cecdb933b355cc36437e56e7d44533d0b19c4aa15cb142e573525581019db",
+      "verifiedAt": "2026-11-27T09:02:29.654016+00:00",
+      "archive": "087b1492e77ab8721b55bfbda631293729ca09b4595ef3a5c9c3a77bf8052936"
+    },
+    {
+      "receipt": "reports/research-observation/archives/2026-11-27/20261127T090329Z-f6cbc152.json",
+      "kind": "observation",
+      "sha256": "28a4612fcb935ae2fae3659d8eaa3642da512192eb74162b9fe37f12f180c787",
+      "verifiedAt": "2026-11-27T09:03:33.003911+00:00",
+      "archive": "b7ba94df2e50df7348874b44bbb2b44cbb14a40a9584900a86a5a1cc90c0a18a"
+    },
+    {
+      "receipt": "reports/research-observation/archives/2026-11-27/20261127T090437Z-549300f6.json",
+      "kind": "observation",
+      "sha256": "5dd6028f81d5a84209fcad1da12495e35077f11127b4c5f776c7e43794f4112e",
+      "verifiedAt": "2026-11-27T09:04:40.809820+00:00",
+      "archive": "753df205e22f425adf24b9ee58986432121500b46e8da72b14e6a69bfbff7afe"
+    },
+    {
+      "receipt": "reports/research-observation/archives/2026-11-27/20261127T092054Z-465a8da5.json",
+      "kind": "observation",
+      "sha256": "58d3af90fb6906d25516cc06023b642c1320f4bd192ef7ade73ecc4b3fab27b4",
+      "verifiedAt": "2026-11-27T09:20:59.334219+00:00",
+      "archive": "edfe0c5bcded6feefe0cb2b14b8907eec2ebba7e6929582cc1546e2e5963e495"
+    },
+    {
+      "receipt": "reports/research-observation/archives/2026-11-27/20261127T101550Z-256804c5.json",
+      "kind": "observation",
+      "sha256": "6425c6aa5042fb24d69e3bc857988d60cb66a26f084e04d5b6a2f68756664b82",
+      "verifiedAt": "2026-11-27T10:15:57.390969+00:00",
+      "archive": "017e0acc24e5fd79e9a99656f8c8d5c7625cac9aa9bfab2ae9982a033f915455"
+    },
+    {
+      "receipt": "reports/research-observation/archives/2026-11-27/20261127T104227Z-9666b266.json",
+      "kind": "observation",
+      "sha256": "7a71354437261b521ad03501bb43551ec4243378ea008cfeede4f4cd03e3ec4f",
+      "verifiedAt": "2026-11-27T10:42:31.751817+00:00",
+      "archive": "23675205778886ec1f1634e3fcfe6c853e989bb85dd7287b2e84b51efe6ed50d"
+    },
+    {
+      "receipt": "reports/research-observation/archives/2026-11-27/20261127T110404Z-2db2bafa.json",
+      "kind": "observation",
+      "sha256": "1b2e9a037325b6829b8417768df6f9f4fdddc2ed0066cea2ac6b6ba16a2a6d08",
+      "verifiedAt": "2026-11-27T11:04:07.990746+00:00",
+      "archive": "ddeb5c617ef5e7307030c19b77f66afd51dc300d2b435e66b75c5e476d6a9db5"
+    },
+    {
+      "receipt": "reports/research-observation/archives/2026-11-27/20261127T112424Z-6c1c8aab.json",
+      "kind": "observation",
+      "sha256": "0920290035e5e7600813eedfc2041ff9510bea1c253a784197eb7f63878656a7",
+      "verifiedAt": "2026-11-27T11:24:29.341397+00:00",
+      "archive": "0ae51d184a37aa56a590bbfa759e33d3b46d185f81ca30e3f121c21964045a84"
+    },
+    {
+      "receipt": "reports/research-observation/archives/2026-11-27/20261127T114000Z-18f4f01f.json",
+      "kind": "observation",
+      "sha256": "47f6367150025f643b39c4acf08cbb81209c0e3e4335c51a152736cc108d7978",
+      "verifiedAt": "2026-11-27T11:40:04.205928+00:00",
+      "archive": "5576362cd470d4c6f473ab2bd6270a551a529670d5994e29b7931f9284cb761b"
+    },
+    {
+      "receipt": "reports/research-observation/archives/2026-11-27/20261127T115450Z-c4c154d1.json",
+      "kind": "observation",
+      "sha256": "82f02e3fa7aa073b659995655d1ba8fb7a5adaf54fd114d0454f3c3ce6c37513",
+      "verifiedAt": "2026-11-27T11:54:54.077784+00:00",
+      "archive": "f1720ee003dbe33d7b6286245e5c0ecac3bd442eef31c946b9fca23660c6b746"
+    },
+    {
+      "receipt": "reports/research-policy-reviews/2026-11-27-capture-092054/receipt.json",
+      "kind": "policy_review",
+      "sha256": "12da3de8ac1978104967168f49f3dcf5044fdf786956f99542fdf6adbea628ed",
+      "verifiedAt": "2026-11-27T09:54:55.276535+00:00",
+      "archive": null
+    },
+    {
+      "receipt": "reports/research-policy-reviews/2026-11-27-evening-followup/receipt.json",
+      "kind": "policy_review",
+      "sha256": "04c6897b5b0f0c40591696d1094e1a5f5e0ad1f06607ed1e49f87d7a982fb4f4",
+      "verifiedAt": "2026-11-27T12:25:15.443387+00:00",
+      "archive": null
+    }
+  ]
+}

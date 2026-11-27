@@ -1,5 +1,7 @@
 # 项目计划与当前状态
 
+[独立前瞻证据包](reports/2026-11-27-portable-observation/README.md)已首批导出并通过离线恢复。后续按实际封存时点持续增补，至少覆盖采集、政策审核、决定、开盘取证、标签、训练、预测、评估和月度回执。
+
 独立前瞻的[单日原始响应与披露时点](reports/2026-11-27-source-availability/README.md)可从看板和 Agent 查看。同一时点的回执区分空表、少日期、未取得响应与归档对象不完整。继续核对交易所清算、管理人净值、两融的首次正式可用时点和第一份完整定时归档。
 
 [12 个月模型研究](docs/LONG_TERM_RESEARCH.md)已完成[真实归档特征回算](reports/2026-11-27-observation-inputs/README.md)和[首批政策审核及覆盖判定](reports/2026-11-27-policy-review/README.md)。[08:55 前自动封存](reports/2026-11-27-decision-seal/README.md)已通过真实证据的试跑和恢复。[看板和 Agent 同查决策进度](reports/2026-11-27-decision-coverage/README.md)。[开盘取证与五交易日标签](reports/2026-11-27-five-session-labels/README.md)已实测真实行情缺口和会计复算。[标签进度](reports/2026-11-27-label-coverage/README.md)已接到看板和 Agent。[训练与预测封存](reports/2026-11-27-model-forecast/README.md)已验证可按原时点重放。[训练和预测进度](reports/2026-11-27-forecast-coverage/README.md)已接到看板和 Agent。[样本外误差统计和经济对照](reports/2026-11-27-oos-evaluation/README.md)已核对时间和样本门槛。[样本外评估进度](reports/2026-11-27-evaluation-coverage/README.md)已接入看板与 Agent。[月度覆盖](reports/2026-11-27-monthly-coverage/README.md)增加连续缺口和月结归档。[跨年日历接续](reports/2026-11-27-calendar-handoff/README.md)已接到独立生产链路及原模拟账户数据准入。[晚间政策审核与定时证据](reports/2026-11-27-policy-runtime/README.md)覆盖关联事件和首批标签例行检查。[晚间审核生产回读](reports/2026-11-27-policy-followup-verified/README.md)已核对审核前后两个时点。[盘前和开盘时点](reports/2026-11-27-morning-clock/README.md)已通过双触发取证与错过窗口演练。[首次例行评估](reports/2026-11-27-first-live-evaluation/README.md)已实际封存并复算，观察起点仍为空。下一步核对合格日、生产窗口、月结及 2027 年交易所原文。正式观察起点等首个独立生产合格归档。
