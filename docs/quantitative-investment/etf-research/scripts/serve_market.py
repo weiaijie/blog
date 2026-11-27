@@ -213,6 +213,26 @@ class Handler(BaseHTTPRequestHandler):
             except (OSError,ValueError,KeyError,TypeError,ArithmeticError,ImportError) as exc:
                 self.log_error('Forward milestone report unavailable: %s',exc)
                 status,body = 503,interactive.encode({'error':'前瞻模拟账户的检查点暂无法核验。'})
+        elif path == '/api/v1/research/observation/continuity':
+            kind = 'application/json'
+            try:
+                from observation_continuity import audit
+                from observation_status import production_paths
+                from etf_research.policy_events import instant
+                params = interactive.request_params(url.query, (), ('asOf',))
+                now = datetime.now(timezone.utc)
+                try:
+                    observed = instant(params['asOf']) if 'asOf' in params else now
+                    if observed>now:
+                        raise ValueError('核查时点须早于或等于当前时间。')
+                except ValueError as exc:
+                    raise interactive.InputError(str(exc)) from exc
+                body = interactive.encode(audit(*production_paths(),observed))
+            except interactive.InputError as exc:
+                status,body = 400,interactive.encode({'error':str(exc)})
+            except (OSError,ValueError,KeyError,TypeError,ImportError) as exc:
+                self.log_error('Independent continuity audit unavailable: %s',exc)
+                status,body = 503,interactive.encode({'error':'独立采集连续性暂无法核验。'})
         elif path == '/api/v1/research/observation/policy-review':
             kind = 'application/json'
             try:

@@ -3,6 +3,7 @@ import { onBeforeUnmount, onMounted, ref } from 'vue';
 import { apiUrl } from '../domain';
 import { getJson } from '../state';
 import ObservationMonthly from './ObservationMonthly.vue';
+import ObservationContinuity from './ObservationContinuity.vue';
 
 type Issues = Record<string,string>;
 type Source = {status:string; readyAt?:string|null; featureReadyAt?:string|null; issues?:Issues};
@@ -371,6 +372,7 @@ onBeforeUnmount(()=>{lifecycle.abort();detailRequest?.abort();});
         </ul>
         <a :href="policyReviewEndpoint" target="_blank" rel="noopener">查看政策审核 JSON ↗</a>
       </details>
+      <ObservationContinuity />
       <ObservationMonthly />
       <el-alert v-if="overview.calendarUnknownYear" type="warning" :closable="false"
         :title="overview.calendarUnknownYear+' 年交易日历待核验'"/>

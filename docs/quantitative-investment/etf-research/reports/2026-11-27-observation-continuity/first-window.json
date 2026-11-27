@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "asOf": "2026-11-27T21:30:00+08:00",
+  "targetSessions": 20,
+  "trackedSessions": 1,
+  "completedWindows": 0,
+  "collecting": true,
+  "calendarUnknownYear": null,
+  "daysWithScheduledArchive": 1,
+  "daysWithVerifiedTimer": 0,
+  "qualifiedOnTime": 0,
+  "missedCutoffRuns": [],
+  "notOnTimeBySource": {
+    "policy": 0,
+    "510300": 0,
+    "511010": 0,
+    "turnover": 0,
+    "margin": 0
+  },
+  "days": [
+    {
+      "day": "2026-11-27",
+      "cutoffAt": "2026-11-30T08:55:00+08:00",
+      "cutoffPassed": false,
+      "qualification": "awaiting_cutoff",
+      "scheduledAttempts": 9,
+      "manualAttempts": 0,
+      "verifiedSlots": 0,
+      "slots": [
+        {
+          "at": "2026-11-27T19:40:00+08:00",
+          "state": "unconfirmed_clock",
+          "verified": [],
+          "unconfirmed": [
+            {
+              "id": "20261127T114000Z-18f4f01f",
+              "archiveSha256": "5576362cd470d4c6f473ab2bd6270a551a529670d5994e29b7931f9284cb761b",
+              "startedAt": "2026-11-27T11:40:00.749987+00:00",
+              "archiveVerifiedAt": "2026-11-27T11:40:04.205928+00:00",
+              "phase": "partial"
+            }
+          ]
+        },
+        {
+          "at": "2026-11-28T08:25:00+08:00",
+          "state": "upcoming",
+          "verified": [],
+          "unconfirmed": []
+        },
+        {
+          "at": "2026-11-28T19:40:00+08:00",
+          "state": "upcoming",
+          "verified": [],
+          "unconfirmed": []
+        },
+        {
+          "at": "2026-11-29T08:25:00+08:00",
+          "state": "upcoming",
+          "verified": [],
+          "unconfirmed": []
+        },
+        {
+          "at": "2026-11-29T19:40:00+08:00",
+          "state": "upcoming",
+          "verified": [],
+          "unconfirmed": []
+        },
+        {
+          "at": "2026-11-30T08:25:00+08:00",
+          "state": "upcoming",
+          "verified": [],
+          "unconfirmed": []
+        }
+      ],
+      "sources": {
+        "policy": {
+          "status": "on_time",
+          "readyAt": "2026-11-27T09:03:33.003911+00:00",
+          "archiveSha256": "b7ba94df2e50df7348874b44bbb2b44cbb14a40a9584900a86a5a1cc90c0a18a",
+          "issues": {}
+        },
+        "510300": {
+          "status": "missing",
+          "readyAt": null,
+          "archiveSha256": null,
+          "issues": {
+            "shares_20261127": "Cleared units absent or incomplete"
+          }
+        },
+        "511010": {
+          "status": "missing",
+          "readyAt": null,
+          "archiveSha256": null,
+          "issues": {
+            "shares_20261127": "Cleared units absent or incomplete",
+            "nav_2026-11-27": "Same-valuation-date manager NAV is absent or unverified"
+          }
+        },
+        "turnover": {
+          "status": "on_time",
+          "readyAt": "2026-11-27T09:03:33.003911+00:00",
+          "archiveSha256": "b7ba94df2e50df7348874b44bbb2b44cbb14a40a9584900a86a5a1cc90c0a18a",
+          "issues": {}
+        },
+        "margin": {
+          "status": "missing",
+          "readyAt": null,
+          "archiveSha256": null,
+          "issues": {
+            "margin": "Incomplete or inconsistent adjacent-session financing summary"
+          }
+        }
+      },
+      "archiveIssues": []
+    }
+  ]
+}
