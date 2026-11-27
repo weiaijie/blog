@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-28T02:07:10.741541+08:00",
+  "result": {
+    "schemaVersion": 1,
+    "decisionPath": "reports/research-decision-probes/2026-11-30/20261127T180702Z-4fc0c073",
+    "archiveSha256": "fe461b3755422099f5766651641462558667560818bbf23835dca4ea4a365eec",
+    "archiveVerifiedAt": "2026-11-27T18:07:07.239852+00:00",
+    "recordManifestSha256": "1301cbf56439747ae2cf9a01cc115128e886078ca077342eae5a8a60aed89cbd",
+    "status": "validation_only",
+    "entryDay": "2026-11-30",
+    "availableVariants": {
+      "baseline": true,
+      "policy": false,
+      "etf": true,
+      "margin": false,
+      "combined": false
+    },
+    "failure": null,
+    "studyOrigin": null,
+    "forecastProduced": false,
+    "reproducedAtCutoff": "2026-11-27T18:07:02.947263+00:00",
+    "reproducedFeatures": 9
+  },
+  "observedAt": "2026-11-27T18:07:02.947263+00:00",
+  "computedAt": "2026-11-27T18:07:06.751089+00:00",
+  "featureValues": {
+    "stockReturn5": 0.035838725734195886,
+    "stockReturn20": 0.023862238622386123,
+    "stockVol20": 0.014026597315312642,
+    "bondReturn5": -0.0007778744227818768,
+    "bondReturn20": 0.0012613110548953532,
+    "bondVol20": 0.0005106616005803657,
+    "turnover20": 1.2362978819615829,
+    "stockShareFlow": "0.02849126653002043548967104516",
+    "bondShareFlow": "-0.002500604534923172324934924993"
+  },
+  "gaps": [
+    "policyActiveCount",
+    "stockFinancingBuyShare"
+  ]
+}

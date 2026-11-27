@@ -133,6 +133,32 @@ def run(root, prices, store, *, probe=None):
         return verify_decision(root,store,attempt,observed=now())
 
 
+def reproduce_decision(root, prices, store, folder):
+    checked = verify_decision(root,store,folder)
+    record = read(folder/'records/decision.json')
+    if record['inputSha256'] is None:
+        raise ValueError('Decision attempt has no sealed inputs to reproduce')
+    saved = read(folder/'records/inputs.json')
+    kind = 'validation' if record['mode']=='probe' else 'decision_input'
+    recovery = saved.get('transportRecoveryVersion')
+    if (saved['runKind']!=kind or saved['entryDay']!=record['entryDay']
+            or instant(saved['observedAt'])!=instant(record['startedAt'])
+            or recovery not in (None,1)):
+        raise ValueError('Decision input identity or replay version differs from the receipt')
+    observed, computed = instant(saved['observedAt']), instant(saved['computedAt'])
+    if not observed<=computed<=instant(record['finishedAt']):
+        raise ValueError('Decision inputs were computed outside the sealed operation')
+    actual = assemble(prices,root,store,date.fromisoformat(record['entryDay']),observed,computed=computed,
+                      recover_transport=recovery==1)
+    if saved != dict(actual,runKind=kind):
+        raise ValueError('Sealed decision inputs do not reproduce at their original cutoff')
+    variants = feature_state(actual,dict(prices=prices,observations=root,archive=store))
+    if variants != checked['availableVariants']:
+        raise ValueError('Reproduced variants differ from the decision receipt')
+    return dict(checked,reproducedAtCutoff=actual['evidenceCutoff'],
+                reproducedFeatures=sum(value is not None for value in actual['cells'].values()))
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--observation-root',type=Path,default=ROOT)
@@ -142,6 +168,7 @@ def main():
     mode.add_argument('--run',action='store_true')
     mode.add_argument('--probe',type=date.fromisoformat)
     mode.add_argument('--verify',type=Path)
+    mode.add_argument('--reproduce',type=Path,help='Recompute sealed features using their original cutoff')
     args = parser.parse_args()
     root,store = args.observation_root.resolve(),args.archive_store.resolve()
     if args.verify:
@@ -149,7 +176,11 @@ def main():
     else:
         if args.price_project is None:
             parser.error('--price-project is required to assemble features')
-        result = run(root,args.price_project.resolve(),store,probe=args.probe)
+        prices = args.price_project.resolve()
+        if args.reproduce:
+            result = reproduce_decision(root,prices,store,args.reproduce)
+        else:
+            result = run(root,prices,store,probe=args.probe)
     print(json.dumps(result,ensure_ascii=False))
     return int(result['status']=='failed' or result.get('failure') is not None)
 

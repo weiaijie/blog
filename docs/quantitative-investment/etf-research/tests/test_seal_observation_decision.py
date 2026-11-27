@@ -56,9 +56,15 @@ class ObservationDecisionTests(unittest.TestCase):
                          evidence=[dict(root='prices',path=decision.CALENDAR,sha256=sha(calendar))])
             fields = {k:valid if k in BASE else None for k in FEATURES}
             fields['stockFinancingBuyShare'] = dict(valid,value='0.06385012')
-            inputs = dict(entryDay=str(DAY),anchorDay='2026-11-27',computedAt=now.isoformat(),
-                          evidenceCutoff=cutoff.isoformat(),cells=fields)
-            with patch.object(decision,'CODE',(decision.CALENDAR,)), patch.object(decision,'assemble',return_value=inputs):
+            inputs = dict(entryDay=str(DAY),anchorDay='2026-11-27',observedAt=now.isoformat(),computedAt=now.isoformat(),
+                          runKind='validation',evidenceCutoff=cutoff.isoformat(),cells=fields)
+            actual_clock = decision.now
+            clocks = iter([now])
+            with (
+                patch.object(decision,'CODE',(decision.CALENDAR,)),
+                patch.object(decision,'assemble',return_value=inputs),
+                patch.object(decision,'now',side_effect=lambda:next(clocks,None) or actual_clock()),
+            ):
                 result = decision.run(root,root,store,probe=DAY)
             self.assertEqual(result['status'],'validation_only')
             self.assertTrue(result['availableVariants']['baseline'])
@@ -73,6 +79,16 @@ class ObservationDecisionTests(unittest.TestCase):
             restored_folder = restored/result['decisionPath']
             shutil.copyfile(folder/'receipt.json',restored_folder/'receipt.json')
             self.assertEqual(decision.verify_decision(restored,store,restored_folder),result)
+
+            with patch.object(decision,'assemble',return_value=inputs) as assemble:
+                replay = decision.reproduce_decision(restored,restored,store,restored_folder)
+                self.assertEqual(replay['reproducedFeatures'],len(BASE)+1)
+                self.assertEqual(replay['reproducedAtCutoff'],cutoff.isoformat())
+                assemble.assert_called_once_with(restored,restored,store,DAY,now,computed=now,recover_transport=False)
+            different = dict(inputs,cells=dict(fields,stockFinancingBuyShare=dict(valid,value='0.05')))
+            with patch.object(decision,'assemble',return_value=different):
+                with self.assertRaisesRegex(ValueError,'do not reproduce'):
+                    decision.reproduce_decision(restored,restored,store,restored_folder)
 
             record = read(restored_folder/'records/decision.json')
             self.assertEqual(record['inputSha256'],sha(restored_folder/'records/inputs.json'))
