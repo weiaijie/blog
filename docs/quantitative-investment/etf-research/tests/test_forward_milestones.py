@@ -1,7 +1,9 @@
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from decimal import Decimal
 from pathlib import Path
+import shutil
 import sys
+import tempfile
 from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
@@ -12,7 +14,7 @@ sys.path.insert(0,str(ROOT/'scripts'))
 from etf_research.admission import sessions_between
 from etf_research.forward import START, digest
 from etf_research.publication import read
-from forward_milestones import metric, report
+from forward_milestones import metric, publication_report, report
 
 OBSERVED=datetime.fromisoformat('2026-11-27T21:20:00+08:00')
 CHECKPOINT=ROOT/'reports/daily/20261127T170315-58f85234/forward_checkpoint.json'
@@ -67,6 +69,43 @@ class ForwardMilestonesTests(unittest.TestCase):
         self.assertIsNone(six['accounts']['cash_base']['netAnnualized'])
         self.assertEqual(twelve['accounts']['cash_base']['netAnnualized'],0.0)
         self.assertIs(twenty_four['accounts']['cash_base']['atLeast4Pct'],False)
+
+    def test_timeline_uses_publication_time_instead_of_valuation_date(self):
+        snapshots = (
+            ('2026-11-26T22:00:00+08:00','2026-11-23'),
+            ('2026-11-27T14:35:11.340388+08:00','2026-11-23'),
+            ('2026-11-27T14:35:11.340389+08:00','2026-11-24'),
+            ('2026-11-27T17:03:26.900449+08:00','2026-11-26'),
+            ('2026-11-27T17:03:26.900450+08:00','2026-11-27'),
+        )
+        for clock,day in snapshots:
+            with self.subTest(clock=clock):
+                observed=datetime.fromisoformat(clock)
+                version=publication_report(ROOT,observed)
+                self.assertEqual(version['asOf'],day)
+                self.assertLessEqual(datetime.fromisoformat(version['publication']['availableAt']),observed)
+        exact=publication_report(ROOT,OBSERVED)
+        self.assertEqual(exact['checkpointSha256'],read(CHECKPOINT)['checkpoint_sha256'])
+        legacy=datetime.fromisoformat('2026-11-06T23:59:00+08:00')
+        self.assertIsNone(publication_report(ROOT,legacy))
+
+    def test_explicit_checkpoint_requires_actual_publication_and_untampered_receipt(self):
+        state=read(CHECKPOINT)
+        stamp=datetime.fromisoformat('2026-11-27T17:03:26.900450+08:00')
+        self.assertIsNone(publication_report(ROOT,stamp-timedelta(microseconds=1),checkpoint=state))
+        self.assertEqual(publication_report(ROOT,stamp,checkpoint=state)['checkpointSha256'],state['checkpoint_sha256'])
+        state['forward_sessions']+=1
+        with self.assertRaisesRegex(ValueError,'does not match the verified publication'):
+            publication_report(ROOT,stamp,checkpoint=state)
+
+        with tempfile.TemporaryDirectory() as work:
+            root=Path(work)
+            key='reports/operations/20261127T090314Z-5d902b22'
+            target=shutil.copytree(ROOT/key,root/key)
+            result=target/'result.json'
+            result.write_bytes(result.read_bytes()+b' ')
+            with self.assertRaisesRegex(ValueError,'Bundle hash mismatch'):
+                publication_report(root,stamp)
 
     def test_recovery_and_costs_stop_at_end_of_requested_window(self):
         days=[date(2026,11,i) for i in (5,6,9,10,11)]

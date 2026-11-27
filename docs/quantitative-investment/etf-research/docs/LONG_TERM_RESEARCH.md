@@ -20,6 +20,8 @@
 
 ## 当前接续
 
+[原 18 户历史查询](../reports/2026-11-27-forward-asof/README.md)已按真实发布时点绑定检查点。
+
 [结题证据分流](../reports/2026-11-27-final-evidence-gate/README.md)已区分评估证据异常、等待五日标签、样本不足与经济对照单项异常。
 
 [月度覆盖的夜间导出与恢复](../reports/2026-11-27-monthly-export/README.md)已完成隔离验收，生产月结与夜间导出按实际定时回执核查。

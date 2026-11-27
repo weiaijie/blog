@@ -1,5 +1,7 @@
 # 项目计划与当前状态
 
+[18 户按真实发布时点回看](reports/2026-11-27-forward-asof/README.md)已接入工作台和 Agent。晚到补发按原发布时间进入历史查询。
+
 [结题证据分流](reports/2026-11-27-final-evidence-gate/README.md)已接入工作台与 Agent，区分未就绪、校验失败与已核验的样本不足。
 
 [月结并入夜间归档](reports/2026-11-27-monthly-export/README.md)已完成隔离验收，首份生产月报及对应增量仍待按日历触发。

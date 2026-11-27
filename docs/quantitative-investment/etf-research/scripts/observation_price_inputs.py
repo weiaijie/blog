@@ -12,15 +12,17 @@ from etf_research.publication import encoded, inside, read, sha, verify_bundle
 SYMBOLS = ('510300','511010')
 
 
-def admitted_operation(root, anchor, ceiling):
-    """Use the last same-session publication known at the cutoff."""
+def admitted_operation(root, anchor, ceiling, *, require_account_binding=False):
+    """Find a publication known at the cutoff, optionally for one exact session."""
     candidates = []
     for path in (root/'reports/operations').glob('*/result.json'):
         try:
             recorded = read(path)
             output = recorded.get('result') or {}
             if (recorded['phase']=='success' and recorded['exit_code']==0
-                    and output.get('status')=='published' and output.get('as_of')==str(anchor)):
+                    and output.get('status')=='published'
+                    and (anchor is None or output.get('as_of')==str(anchor))
+                    and (not require_account_binding or recorded.get('account_after') is not None)):
                 finished = instant(recorded['finished_at_utc'])
                 if finished<=ceiling:
                     candidates.append((finished,path))
@@ -38,11 +40,7 @@ def admitted_operation(root, anchor, ceiling):
     return record,path.parent
 
 
-def admitted_prices(root, anchor, ceiling):
-    selected = admitted_operation(root,anchor,ceiling)
-    if selected is None:
-        return None
-    record, operation = selected
+def published_account_bundle(root, record, ceiling):
     publication = record['result']
     bundle = inside(root,publication['bundle'])
     verify_bundle(bundle)
@@ -53,12 +51,21 @@ def admitted_prices(root, anchor, ceiling):
     received = instant(record['finished_at_utc'])
     if (record.get('account_after')!=after or not record.get('account_before')
             or sha256(encoded(record['account_before'])).hexdigest()!=ready['previous_pointer_sha256']
-            or inside(root,pointer['bundle'])!=bundle or pointer['as_of']!=str(anchor)
-            or record['account_through']!=str(anchor)
+            or inside(root,pointer['bundle'])!=bundle
+            or inside(root,pointer['checkpoint'])!=bundle/'forward_checkpoint.json'
+            or pointer['as_of']!=publication['as_of'] or record['account_through']!=pointer['as_of']
             or record['checkpoint_sha256']!=pointer['checkpoint_sha256']
             or not instant(record['started_at_utc'])<=instant(started['created_at_shanghai'])<=received<=ceiling):
-        raise ValueError('Published price bundle identity or time mismatch')
+        raise ValueError('Published account bundle identity or time mismatch')
+    return after,bundle,received,ready['input_sha256']
 
+
+def admitted_prices(root, anchor, ceiling):
+    selected = admitted_operation(root,anchor,ceiling)
+    if selected is None:
+        return None
+    record, operation = selected
+    _,bundle,received,inputs = published_account_bundle(root,record,ceiling)
     snaps = root/'data/snapshots'
     intake = read(bundle/'admission.json')
     prices = inside(snaps,intake['snapshot'])
@@ -68,7 +75,7 @@ def admitted_prices(root, anchor, ceiling):
         raise ValueError('Missing or ambiguous price snapshots')
     official = matched[0]
     manifests = [folder/'manifest.json' for folder in (prices,official)]
-    if any(ready['input_sha256'].get(p.relative_to(root).as_posix())!=sha(p) for p in manifests):
+    if any(inputs.get(p.relative_to(root).as_posix())!=sha(p) for p in manifests):
         raise ValueError('Price snapshot differs from sealed publication')
     data, computed = load_incremental(snaps,prices.name)
     if computed!=intake or data.sessions[-1]!=anchor:

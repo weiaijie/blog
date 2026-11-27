@@ -212,9 +212,23 @@ class Handler(BaseHTTPRequestHandler):
         elif path == '/api/v1/research/forward-milestones':
             kind = 'application/json'
             try:
-                from forward_milestones import active_report
-                interactive.request_params(url.query, (), ())
-                body = interactive.encode(active_report(ROOT))
+                from forward_milestones import active_report, publication_report
+                from etf_research.policy_events import instant
+                params = interactive.request_params(url.query, (), ('asOf',))
+                if 'asOf' in params:
+                    try:
+                        observed = instant(params['asOf'])
+                        if observed>datetime.now(timezone.utc):
+                            raise ValueError('核查时点须早于或等于当前时间。')
+                    except ValueError as exc:
+                        raise interactive.InputError(str(exc)) from exc
+                    report = publication_report(ROOT,observed)
+                    if report is None:
+                        status = 404
+                        report = {'error':'该时点没有可核验的前瞻账户发布回执。'}
+                else:
+                    report = active_report(ROOT)
+                body = interactive.encode(report)
             except interactive.InputError as exc:
                 status,body = 400,interactive.encode({'error':str(exc)})
             except (OSError,ValueError,KeyError,TypeError,ArithmeticError,ImportError) as exc:

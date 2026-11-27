@@ -8,12 +8,13 @@ from functools import lru_cache
 import json
 from pathlib import Path
 
+from observation_price_inputs import admitted_operation, published_account_bundle
 from review_recovery import episodes
 from etf_research.admission import completed_date, sessions_between
 from etf_research.baselines import SCENARIOS, STRATEGIES
 from etf_research.exchange_calendar import calendar_at
 from etf_research.forward import PROTOCOL, START, digest, engine_digest
-from etf_research.policy_events import instant
+from etf_research.policy_events import TZ, instant
 from etf_research.publication import inside, read, sha, verify_bundle
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -149,14 +150,43 @@ def active_report(root=ROOT):
     return report(root,state,datetime.now(timezone.utc))
 
 
+def publication_report(root, observed, *, checkpoint=None):
+    anchor = date.fromisoformat(checkpoint['as_of']) if checkpoint is not None else None
+    selected = admitted_operation(root,anchor,observed,require_account_binding=True)
+    if selected is None:
+        return None
+    operation,folder = selected
+    pointer,bundle,available,_ = published_account_bundle(root,operation,observed)
+    state = read(bundle/'forward_checkpoint.json')
+    if (state['as_of']!=pointer['as_of'] or state['checkpoint_sha256']!=pointer['checkpoint_sha256']
+            or (checkpoint is not None and state!=checkpoint)):
+        raise ValueError('Checkpoint does not match the verified publication')
+    result = report(root,state,observed)
+    result['publication'] = dict(observedAt=observed.astimezone(TZ).isoformat(),
+                                 availableAt=available.astimezone(TZ).isoformat(),
+                                 mode=operation['mode'],operation=folder.relative_to(root).as_posix(),
+                                 operationManifestSha256=sha(folder/'manifest.json'),
+                                 bundleManifestSha256=pointer['bundle_manifest_sha256'])
+    return result
+
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--checkpoint',type=Path)
     parser.add_argument('--observed-at',type=instant)
     options=parser.parse_args()
-    state=read(options.checkpoint) if options.checkpoint else load_active(
-        ROOT,(ROOT/'config/active_run.json').read_bytes())
-    result=report(ROOT,state,options.observed_at or datetime.now(timezone.utc))
+    state=read(options.checkpoint) if options.checkpoint else None
+    now=datetime.now(timezone.utc)
+    if options.observed_at is not None:
+        if options.observed_at>now:
+            parser.error('Publication cutoff cannot be in the future')
+        result=publication_report(ROOT,options.observed_at,checkpoint=state)
+        if result is None:
+            parser.error('No verified account publication by the requested cutoff')
+    elif state is not None:
+        result=report(ROOT,state,now)
+    else:
+        result=active_report(ROOT)
     print(json.dumps(result,ensure_ascii=False,allow_nan=False))
 
 

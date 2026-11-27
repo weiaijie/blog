@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, ref, watch } from 'vue';
-import { money, pct } from '../domain';
+import { apiUrl, money, pct } from '../domain';
 import { getJson, market } from '../state';
 
 type Account = {
@@ -17,6 +17,7 @@ type Milestone = {
 type ForwardReport = {
   asOf:string; anchorOn:string; valuationSessions:number; returnIntervals:number;
   firstReturnSession:string|null; progress:Accounts; milestones:Milestone[];
+  publication?:{availableAt:string;mode:string};
 };
 
 const endpoint='/api/v1/research/forward-milestones';
@@ -29,6 +30,9 @@ const period=ref(0);
 const fees=ref('base');
 const error=ref('');
 const busy=ref(false);
+const timeInput=ref('');
+const selectedTime=ref('');
+const requestUrl=computed(()=>selectedTime.value?apiUrl(endpoint,{asOf:selectedTime.value}):endpoint);
 let pending:AbortController|undefined;
 
 async function load(){
@@ -37,11 +41,26 @@ async function load(){
   pending=request;
   busy.value=true;
   error.value='';
-  try { report.value=await getJson<ForwardReport>(endpoint,request.signal); }
+  report.value=undefined;
+  try {
+    const loaded=await getJson<ForwardReport>(requestUrl.value,request.signal);
+    if(!request.signal.aborted)report.value=loaded;
+  }
   catch(e){ if(!request.signal.aborted) error.value=(e as Error).message; }
   finally { if(!request.signal.aborted) busy.value=false; }
 }
-watch(()=>market.value?.asOf,()=>{void load();},{immediate:true});
+function showHistorical(){
+  const clock=timeInput.value;
+  if(!clock)return;
+  selectedTime.value=(clock.length===16?clock+':00':clock)+'+08:00';
+  void load();
+}
+function showLatest(){
+  timeInput.value='';
+  selectedTime.value='';
+  void load();
+}
+watch(()=>market.value?.asOf,()=>{if(!selectedTime.value)void load();},{immediate:true});
 onBeforeUnmount(()=>pending?.abort());
 const milestone=computed(()=>report.value?.milestones.find(row=>row.months===period.value));
 const selected=computed(()=>period.value===0?report.value?.progress:milestone.value?.accounts);
@@ -54,11 +73,20 @@ const rows=computed(()=>selected.value?labels.map(([key,label])=>({label,...sele
       <div><h2>18 户前瞻模拟</h2><p v-if="report">
         截至 {{report.asOf}} · {{report.valuationSessions}} 个收盘估值日 · {{report.returnIntervals}} 个收益区间
       </p></div>
-      <a :href="endpoint" target="_blank" rel="noopener">Agent 同源 JSON ↗</a>
+      <a :href="requestUrl" target="_blank" rel="noopener">Agent 同源 JSON ↗</a>
     </div>
+    <form class="forward-filters" @submit.prevent="showHistorical">
+      <label for="forward-observed-time">按时点回看（北京时间）</label>
+      <input id="forward-observed-time" v-model="timeInput" type="datetime-local" step="1" required>
+      <button type="submit" :disabled="busy">查看</button>
+      <button v-if="selectedTime" type="button" @click="showLatest">回到最新</button>
+    </form>
     <p v-if="error" role="alert">{{error}} <button type="button" @click="load">重试</button></p>
     <p v-else-if="busy && !report" role="status">正在核对账户检查点…</p>
     <template v-if="report && !error">
+      <p v-if="report.publication" class="muted">
+        检查点发布于 {{report.publication.availableAt.slice(0,19).replace('T',' ')}}（北京时间）。
+      </p>
       <p class="muted">{{report.anchorOn}} 为初始资金估值日。<template v-if="report.firstReturnSession">首个收益日是 {{report.firstReturnSession}}。</template></p>
       <dl class="forward-milestones">
         <div v-for="row in report.milestones" :key="row.months">
@@ -67,7 +95,7 @@ const rows=computed(()=>selected.value?labels.map(([key,label])=>({label,...sele
         </div>
       </dl>
       <div class="forward-filters">
-        <label>统计区间 <select v-model.number="period"><option :value="0">截至当前</option>
+        <label>统计区间 <select v-model.number="period"><option :value="0">累计</option>
           <option v-for="row in report.milestones" :key="row.months" :value="row.months">{{row.months}} 个月</option>
         </select></label>
         <label>费用情景 <select v-model="fees"><option value="base">基准</option><option value="low">低费用</option><option value="high">高费用</option></select></label>
@@ -101,7 +129,9 @@ const rows=computed(()=>selected.value?labels.map(([key,label])=>({label,...sele
 .forward-milestones div{background:#f2f6f7;padding:8px}
 .forward-milestones dd{margin:4px 0;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
 .forward-filters{margin:12px 0}
-.forward-filters select{margin-inline-start:5px;padding:4px;background:white;color:#23344a;border:1px solid #a4b6c1;border-radius:4px}
+.forward-filters select,.forward-filters input{padding:4px;background:white;color:#23344a;border:1px solid #a4b6c1;border-radius:4px}
+.forward-filters select{margin-inline-start:5px}
+.forward-filters input{max-width:100%}
 .forward-table{overflow-x:auto}
 table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
 td,th{padding:8px;text-align:left;white-space:nowrap;border-bottom:1px solid #d8e2e8}
