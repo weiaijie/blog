@@ -14,15 +14,22 @@ type Attempt = {
   id:string; phase:string; scheduled:boolean; startedAt:string; archivedAt:string;
   archiveSha256:string; qualified:boolean; sources:Sources|null; failedSources:string[];
 };
+type DecisionClock = {scheduledAt:string|null; deadline:string|null};
+type DecisionAttempt = {
+  id:string; status:string; startedAt?:string; archivedAt?:string; archiveSha256?:string;
+  availableVariants?:Record<string,boolean>; featureGaps?:Record<string,string|null>; forecastProduced?:boolean;
+};
+type Decision = DecisionClock & {status:string; latest?:DecisionAttempt|null; attempts?:DecisionAttempt[]};
 type Day = {
   day:string; expected:boolean; status:string; archivedAttempts:number; latest:Attempt|null;
-  issues:{id:string; status:string}[];
+  issues:{id:string; status:string}[]; decision:Decision;
 };
 type Overview = {
   reportedAt:string; calendarUnknownYear:number|null; nextBefore:string|null;
   counts:{expected:number; archived:number; qualified:number; missing:number};
   firstQualifiedArchive:{session:string; date:string; midtermOn:string; finalOn:string}|null;
-  sessions:Day[];
+  sessions:Day[]; nextDecision:DecisionClock|null;
+  decisionCounts:{expected:number; sealedOnTime:number; eligibleInputDays:number; gaps:number};
 };
 const endpoint = '/api/v1/research/observation';
 const overview = ref<Overview>();
@@ -38,6 +45,32 @@ const phases:Record<string,string> = {
   qualified:'合格归档', complete:'完整归档', partial:'部分可用', failed:'采集失败',
   interrupted:'采集中断', missing:'未见采集', unverified:'归档待核验',
   pending_archive:'等待归档', not_scheduled:'非计划日', calendar_unknown:'日历待核验',
+  awaiting_market_close:'等待收盘',
+};
+const decisionStates:Record<string,string> = {
+  prelaunch:'封存启动前', not_scheduled:'休市', calendar_unknown:'日历待核验',
+  pending:'待封存', pending_archive:'封存进行中', missing:'未见封存', incomplete:'封存未完成',
+  unverified:'封存校验失败', missed_deadline:'超过截止', failed:'封存失败',
+  missing_inputs:'基线缺输入', study_origin_pending:'已按时封存，待观察起点',
+  eligible_inputs:'已按时封存，可入样候选',
+};
+const variants:Record<string,string> = {
+  baseline:'量价基线', policy:'加入政策', etf:'加入 ETF 份额净值', margin:'加入两融', combined:'全量增量',
+};
+const featureNames:Record<string,string> = {
+  stockReturn5:'股票 ETF 五日收益', stockReturn20:'股票 ETF 二十日收益', stockVol20:'股票 ETF 波动',
+  bondReturn5:'国债 ETF 五日收益', bondReturn20:'国债 ETF 二十日收益', bondVol20:'国债 ETF 波动',
+  turnover20:'沪市成交强度', policyActiveCount:'政策事件数', stockShareFlow:'510300 份额净值',
+  bondShareFlow:'511010 份额净值', stockFinancingBuyShare:'沪市融资买入占比',
+};
+const gapReasons:Record<string,string> = {
+  archive_missing:'未找到来源归档', archive_not_ready:'来源归档晚于读取时点',
+  archive_proof_invalid:'来源归档校验失败', attempt_not_verified:'采集核验未完成',
+  price_publication_or_matching_closes_not_ready:'同日行情或复权证据待核验',
+  price_publication_proof_invalid:'行情凭证校验失败', required_turnover_not_ready:'成交额窗口缺日',
+  warmup_proof_invalid:'成交额历史凭证校验失败', same_valuation_day_basis_missing:'同估值日证据未齐',
+  matched_margin_basis_missing:'同口径两融证据未齐', five_decision_intervals_without_certified_review:'五个政策区间覆盖未齐',
+  policy_review_proof_invalid:'政策审核凭证校验失败',
 };
 const sourceStates:Record<string,string> = {
   archived:'已归档', verified:'已核验', verified_estimate:'可估算',
@@ -124,18 +157,35 @@ onBeforeUnmount(()=>{lifecycle.abort();detailRequest?.abort();});
         <div><dt>合格归档</dt><dd>{{overview.counts.qualified}}</dd></div>
         <div><dt>未见采集</dt><dd>{{overview.counts.missing}}</dd></div>
       </dl>
+      <section class="decision-summary" aria-labelledby="decision-title">
+        <div class="section-head coverage-head">
+          <div>
+            <h3 id="decision-title">08:55 决策封存</h3>
+            <p v-if="overview.nextDecision" class="muted">下次启动 {{time(overview.nextDecision.scheduledAt)}}（北京时间）</p>
+            <p v-else class="muted">下一次启动等待交易日历核验。</p>
+          </div>
+        </div>
+        <dl class="coverage-counts">
+          <div><dt>已到截止</dt><dd>{{overview.decisionCounts.expected}}</dd></div>
+          <div><dt>按时封存</dt><dd>{{overview.decisionCounts.sealedOnTime}}</dd></div>
+          <div><dt>可入样候选</dt><dd>{{overview.decisionCounts.eligibleInputDays}}</dd></div>
+          <div><dt>封存缺口</dt><dd>{{overview.decisionCounts.gaps}}</dd></div>
+        </dl>
+        <p class="muted">可入样候选需等待五交易日收益与回撤标签核验。</p>
+      </section>
       <el-alert v-if="overview.calendarUnknownYear" type="warning" :closable="false"
         :title="overview.calendarUnknownYear+' 年交易日历待核验'"/>
       <div v-if="overview.sessions.length" class="table-scroll" tabindex="0" aria-label="按交易日核对采集来源">
         <table class="coverage-table">
-          <thead><tr><th scope="col">交易日</th><th scope="col">归档状态</th>
+          <thead><tr><th scope="col">交易日</th><th scope="col">归档状态</th><th scope="col">决策封存</th>
             <th scope="col">政策</th><th scope="col">510300</th><th scope="col">511010</th>
             <th scope="col">沪市成交</th><th scope="col">沪市两融</th><th scope="col">归档次数</th></tr></thead>
           <tbody>
             <tr v-for="row in overview.sessions" :key="row.day" :class="{focused: row.day===selected}">
               <th scope="row"><button class="text-button date-button" :aria-pressed="row.day===selected"
                 @click="openDay(row.day)">{{row.day}}</button></th>
-              <td><strong>{{phases[row.status] ?? row.status}}</strong><small v-if="!row.expected">计划外</small></td>
+              <td><strong>{{phases[row.status] ?? row.status}}</strong></td>
+              <td>{{decisionStates[row.decision.status] ?? row.decision.status}}</td>
               <td>{{label(row.latest?.sources?.policy)}}</td>
               <td>{{label(row.latest?.sources?.etf['510300'])}}</td>
               <td>{{label(row.latest?.sources?.etf['511010'])}}</td>
@@ -153,9 +203,32 @@ onBeforeUnmount(()=>{lifecycle.abort();detailRequest?.abort();});
       <el-alert v-if="detailError" :title="detailError" type="error" :closable="false"/>
       <div v-if="detail" class="coverage-detail" aria-live="polite">
         <div class="section-head coverage-head">
-          <h3>{{detail.day}} · 采集与补采记录</h3>
+          <h3>{{detail.day}} · 决策与采集记录</h3>
           <a :href="apiUrl(endpoint,{day:detail.day})" target="_blank" rel="noopener">Agent 当日 JSON ↗</a>
         </div>
+        <section class="decision-detail" aria-label="当日决策封存">
+          <p><strong>决策封存 · {{decisionStates[detail.decision.status] ?? detail.decision.status}}</strong>
+            <span v-if="detail.decision.deadline" class="muted">截止 {{time(detail.decision.deadline)}}</span>
+          </p>
+          <ol v-if="detail.decision.attempts?.length" class="attempts">
+            <li v-for="attempt in detail.decision.attempts" :key="attempt.id">
+              <p class="attempt-title"><strong>{{decisionStates[attempt.status] ?? attempt.status}}</strong>
+                <span v-if="attempt.archivedAt">归档 {{time(attempt.archivedAt)}}</span></p>
+              <dl v-if="attempt.availableVariants" class="attempt-sources">
+                <div v-for="(available,name) in attempt.availableVariants" :key="name">
+                  <dt>{{variants[name] ?? name}}</dt><dd>{{available ? '输入齐备' : '输入缺失'}}</dd>
+                </div>
+              </dl>
+              <ul v-if="attempt.featureGaps && Object.keys(attempt.featureGaps).length" class="decision-gaps">
+                <li v-for="(gap,name) in attempt.featureGaps" :key="name">
+                  {{featureNames[name] ?? name}} · {{gap ? gapReasons[gap] ?? gap : '证据待核验'}}
+                </li>
+              </ul>
+              <details v-if="attempt.archiveSha256" class="receipt"><summary>决策归档校验值</summary>
+                <code>{{attempt.archiveSha256}}</code></details>
+            </li>
+          </ol>
+        </section>
         <p v-for="issue in detail.issues" :key="issue.id">{{phases[issue.status] ?? issue.status}} · {{issue.id}}</p>
         <p v-if="!detail.attempts.length">这一天没有通过哈希核验的归档。</p>
         <ol v-else class="attempts">
@@ -194,6 +267,10 @@ onBeforeUnmount(()=>{lifecycle.abort();detailRequest?.abort();});
 .coverage-head p{margin:6px 0 0}
 .coverage-actions{display:flex;align-items:center;flex-wrap:wrap;gap:12px}
 .milestone{padding:12px 14px;background:#edf5f4;border-left:3px solid #35776c;margin:14px 0}
+.decision-summary,.decision-detail{border-top:1px solid #d8e2e8;padding-top:12px;margin:14px 0}
+.decision-detail span{margin-inline-start:10px}
+.decision-gaps{padding-inline-start:18px;margin:8px 0}
+.attempts .decision-gaps li{border:0;padding:0;margin:4px 0}
 .coverage-counts{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}
 .coverage-counts dt,.attempt-sources dt{color:#526b7b;font-size:12px}
 .coverage-counts dd{font-size:22px;font-weight:650;margin:4px 0;font-variant-numeric:tabular-nums}

@@ -1,6 +1,6 @@
 """Freeze evidence for the independent ETF experiment at its actual decision time."""
 import argparse
-from datetime import date, datetime, time, timezone
+from datetime import date, datetime, timezone
 from math import isfinite
 import json
 from pathlib import Path
@@ -13,16 +13,15 @@ from observation_inputs import FEATURES, assemble
 from run_research_observation import check_receipt
 from etf_research.admission import sessions_between
 from etf_research.evidence_archive import capture, verify as verify_archive
-from etf_research.observation_experiment import DECISION_TIME, VARIANTS
+from etf_research.observation_experiment import VARIANTS
+from etf_research.observation_decision_receipt import (
+    TIMER, DECISIONS, PROBES, current_slot, deadline, decision_status, verify_decision,
+)
 from etf_research.policy_events import TZ, instant
-from etf_research.publication import create, inside, lock, read, seal, sha, sync_dir, verify_bundle
+from etf_research.publication import create, inside, lock, read, seal, sha, sync_dir
 
 ROOT = Path(__file__).resolve().parents[1]
-TIMER = 'etf-research-decision.timer'
-START = time(8, 52)
 CALENDAR = 'data/snapshots/2026-11-04-calendar-08/calendar.json'
-DECISIONS = 'reports/research-decisions'
-PROBES = 'reports/research-decision-probes'
 CODE = (
     'PROTOCOL_OBSERVATION_V1.md', 'config/research_observation.json', CALENDAR,
     'deploy/etf-research-decision.service', 'deploy/etf-research-decision.timer',
@@ -38,6 +37,7 @@ CODE = (
     'src/etf_research/accounting.py', 'src/etf_research/baselines.py',
     'src/etf_research/forward.py', 'src/etf_research/http_capture.py',
     'src/etf_research/catalog_changes.py', 'src/etf_research/policy_events.py',
+    'src/etf_research/observation_decision_receipt.py',
     'src/etf_research/evidence_archive.py', 'src/etf_research/publication.py',
 )
 
@@ -53,17 +53,6 @@ def trigger_from(env):
     if unit != TIMER or not re.fullmatch('[a-f0-9]{32}',invocation) or not raw.isdecimal():
         return None
     return dict(unit=unit,invocationId=invocation,timerRealtimeUsec=int(raw))
-
-
-def deadline(day):
-    return datetime.combine(day,DECISION_TIME,TZ)
-
-
-def current_slot(trigger, day, started):
-    if not trigger or trigger['unit']!=TIMER:
-        return False
-    activated = datetime.fromtimestamp(trigger['timerRealtimeUsec']/1_000_000,TZ)
-    return datetime.combine(day,START,TZ) <= activated <= started <= deadline(day)
 
 
 def first_archive(root, store, observed):
@@ -107,56 +96,6 @@ def feature_state(inputs, roots):
     return {variant: set(required)<=names for variant,required in VARIANTS.items()}
 
 
-def decision_status(record, ready_at):
-    if record['mode']=='probe':
-        return 'validation_only'
-    day = date.fromisoformat(record['entryDay'])
-    started = instant(record['startedAt'])
-    finished = instant(record['finishedAt'])
-    if not current_slot(record['trigger'],day,started) or not started<=finished<=ready_at<=deadline(day):
-        return 'missed_deadline'
-    if record['failure'] is not None:
-        return 'failed'
-    origin = record['studyOrigin']
-    if origin is None or not instant(origin['archiveVerifiedAt'])<=started or record['entryDay']<origin['date']:
-        return 'study_origin_pending'
-    if not record['availableVariants']['baseline']:
-        return 'missing_inputs'
-    return 'eligible_inputs'
-
-
-def verify_decision(root, store, folder):
-    root,store,folder = root.resolve(),store.resolve(),folder.resolve()
-    records = folder/'records'
-    verify_bundle(records)
-    receipt = read(folder/'receipt.json')
-    record = read(records/'decision.json')
-    archived = verify_archive(store, receipt['archiveSha256'])
-    sealed_at = instant(receipt['archiveVerifiedAt'])
-    relative = records.relative_to(root).as_posix()
-    manifest = sha(records/'manifest.json')
-    archive_entries = archived['files']
-    source_hashes = record['codeSha256']
-    files = {p.relative_to(root).as_posix():sha(p) for p in records.iterdir()}
-    expected_root = PROBES if record['mode']=='probe' else DECISIONS
-    day = date.fromisoformat(record['entryDay'])
-    if (folder.parent.parent!=root/expected_root or
-            record['deadline']!=deadline(day).isoformat() or
-            record['mode']=='scheduled' and (record['trigger'] or {}).get('invocationId')!=folder.name or
-            receipt['recordManifestSha256']!=manifest or
-            receipt['decisionPath']!=folder.relative_to(root).as_posix() or
-            record['entryDay']!=folder.parent.name or
-            not instant(record['startedAt'])<=instant(record['finishedAt'])
-                <=instant(archived['created_at_utc'])<=sealed_at<=now() or
-            receipt['status']!=decision_status(record,sealed_at) or
-            record['inputSha256']!=files.get(relative+'/inputs.json') or
-            set(archive_entries)!=set(files)|set(source_hashes) or
-            any(archive_entries[path]['sha256']!=digest for path,digest in {**files,**source_hashes}.items())):
-        raise ValueError('Decision receipt, record or archive does not match')
-    return dict(receipt,entryDay=record['entryDay'],availableVariants=record['availableVariants'],
-                failure=record['failure'],studyOrigin=record['studyOrigin'],forecastProduced=False)
-
-
 def run(root, prices, store, *, probe=None):
     started = now()
     trigger = None if probe else trigger_from(os.environ)
@@ -173,7 +112,7 @@ def run(root, prices, store, *, probe=None):
     with lock(root/'.runtime/research-decision.lock'):
         if probe is None:
             for receipt in sorted(log.glob('*/receipt.json')):
-                prior = verify_decision(root,store,receipt.parent)
+                prior = verify_decision(root,store,receipt.parent,observed=now())
                 if prior['status'] in ('eligible_inputs','missing_inputs','study_origin_pending'):
                     return prior
         attempt = log/((started.strftime('%Y%m%dT%H%M%SZ')+'-'+uuid4().hex[:8]) if probe else trigger['invocationId'])
@@ -210,7 +149,7 @@ def run(root, prices, store, *, probe=None):
         create(attempt/'receipt.json',receipt)
         for folder in (attempt,log,log.parent):
             sync_dir(folder)
-        return verify_decision(root,store,attempt)
+        return verify_decision(root,store,attempt,observed=now())
 
 
 def main():

@@ -1,7 +1,7 @@
 """Read-only coverage shared by the observation workbench and Agent."""
 from calendar import monthrange
 from collections import defaultdict
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 import json
 import os
 from pathlib import Path
@@ -9,6 +9,7 @@ import re
 
 from run_research_observation import check_receipt
 from collect_sse_research_day import CALENDAR_SHA
+from observation_decision_status import FIRST_DECISION, decision_counts, decision_row, schedule
 from etf_research.admission import completed_date, sessions_between
 from etf_research.policy_events import TZ, instant
 from etf_research.publication import read, sha
@@ -130,6 +131,24 @@ def report(root, store, *, day=None, before=None, observed=None):
     end = completed_date(observed)
     sessions, unknown_year = expected_days(root,start,end)
     expected = {str(d) for d in sessions}
+    today = observed.astimezone(TZ).date()
+    planned, decision_unknown_year = expected_days(root,FIRST_DECISION,today)
+    decisions = {day.isoformat(): decision_row(root,store,day,observed,planned=True) for day in planned}
+    upcoming, _ = expected_days(root,max(today,FIRST_DECISION),today+timedelta(days=30))
+    next_decision = next((row for day in upcoming if instant((row := schedule(day))['deadline'])>observed),None)
+
+    def with_decision(row):
+        day = date.fromisoformat(row['day'])
+        decision = decisions.get(row['day'])
+        if decision is None:
+            forecast_calendar, unknown = expected_days(root,max(FIRST_DECISION,day),day)
+            decision = decision_row(root,store,day,observed,planned=bool(forecast_calendar),calendar_unknown=bool(unknown))
+        if day==today and decision['scheduledAt'] and row['status']=='not_scheduled':
+            row['status'] = 'awaiting_market_close'
+        row['decision'] = decision if row['day']==requested_day else {k:v for k,v in decision.items() if k!='attempts'}
+        return row
+
+    requested_day = day
     entries,errors = archive_index(root,store,config,observed)
     qualified = [r for d in expected for r,_ in entries.get(d,()) if r['forwardEligible']]
     first = min(qualified,key=lambda row:instant(row['archiveVerifiedAt']),default=None)
@@ -145,15 +164,17 @@ def report(root, store, *, day=None, before=None, observed=None):
         if row['status']=='not_scheduled' and unknown_year and session.year>=unknown_year:
             row['status']='calendar_unknown'
         row['attempts'] = [view_attempt(*item) for item in reversed(entries.get(day,()))]
-        return dict(schemaVersion=1,reportedAt=observed.isoformat(),session=row)
+        return dict(schemaVersion=1,reportedAt=observed.isoformat(),session=with_decision(row))
     limit = parse_day(before) if before is not None else date.max
-    displayed = [d for d in sorted(expected | entries.keys() | errors.keys(),reverse=True)
+    displayed = [d for d in sorted(expected | entries.keys() | errors.keys() | decisions.keys(),reverse=True)
                  if date.fromisoformat(d)<=limit]
     visible = displayed[:MAX_ROWS]
     return dict(schemaVersion=1,reportedAt=observed.isoformat(),calendarThrough=str(sessions[-1]) if sessions else None,
-                calendarUnknownYear=unknown_year,firstQualifiedArchive=milestone,
+                calendarUnknownYear=unknown_year or decision_unknown_year,firstQualifiedArchive=milestone,
+                decisionCounts=decision_counts(decisions.values(),observed),
+                nextDecision=next_decision,
                 counts=dict(expected=len(expected),archived=sum(d in entries for d in expected),
                             qualified=len({row['session'] for row in qualified}),
                             missing=sum(d not in entries and d not in errors for d in expected)),
                 nextBefore=displayed[MAX_ROWS] if len(displayed)>MAX_ROWS else None,
-                sessions=[day_row(d,d in expected,entries,errors) for d in visible])
+                sessions=[with_decision(day_row(d,d in expected,entries,errors)) for d in visible])
