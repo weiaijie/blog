@@ -10,12 +10,13 @@ from tempfile import mkdtemp
 from pack_observation_evidence import export, verify
 from etf_research.observation_slots import timer_identity
 from etf_research.policy_events import instant
-from etf_research.publication import create, lock, read, sha, sync_dir
+from etf_research.publication import atomic, create, encoded, lock, read, sha, sync_dir
 
 ROOT=Path(__file__).resolve().parents[1]
 TIMER='etf-research-observation-export.timer'
 BATCH=re.compile(r'\d{8}T\d{12}Z-[0-9a-f]{8}')
 EVIDENCE_ERRORS = (OSError,ValueError,KeyError,TypeError)
+PUBLISHED = 'published-receipts'
 
 
 def check_spool(root,store,seed,spool):
@@ -34,6 +35,40 @@ def verify_batch(pack, receipt):
         raise ValueError(f'Exported batch {batch} failed verification: {error}') from error
 
 
+def published_receipts(spool):
+    folder = spool/PUBLISHED
+    if folder.is_symlink() or (folder.exists() and not folder.is_dir()):
+        raise ValueError('Invalid published receipt ledger')
+    receipts = {}
+    for path in folder.glob('*.json'):
+        if path.is_symlink() or not path.is_file() or not BATCH.fullmatch(path.stem):
+            raise ValueError('Unexpected published receipt path')
+        receipts[path.stem] = sha(path)
+    return receipts
+
+
+def register_receipt(spool, source):
+    path = spool/PUBLISHED/(source.parent.name+'.json')
+    if path.exists():
+        if sha(path) != sha(source):
+            raise ValueError('Published receipt changed: '+source.parent.name)
+        return
+    receipt = read(source)
+    if source.read_bytes() != encoded(receipt):
+        raise ValueError('Cannot register original receipt bytes: '+source.parent.name)
+    atomic(path,receipt)
+    sync_dir(spool)
+
+
+def register_existing(spool, status):
+    # Caller holds the export lock and has just verified the full chain.
+    if status['registeredBatchCount'] < status['batchCount']:
+        for batch in (spool/'batches').iterdir():
+            register_receipt(spool,batch/'receipt.json')
+        status['registeredBatchCount'] = status['batchCount']
+    return status
+
+
 def chain(seed, seed_sha, spool, *, full=False):
     if sha(seed/'manifest.json')!=seed_sha:
         raise ValueError('Pinned seed archive manifest changed')
@@ -42,6 +77,8 @@ def chain(seed, seed_sha, spool, *, full=False):
     previous=seed_sha
     latest=None
     count=0
+    receipts=published_receipts(spool)
+    protected=len(receipts)
     for batch in sorted((spool/'batches').iterdir()) if (spool/'batches').is_dir() else ():
         if not batch.is_dir() or batch.is_symlink() or not BATCH.fullmatch(batch.name):
             raise ValueError('Unexpected exported batch path')
@@ -49,7 +86,10 @@ def chain(seed, seed_sha, spool, *, full=False):
         if any(path.is_symlink() for path in (pack,batch/'receipt.json',batch/'started.json',
                     pack/'manifest.json',pack/'index.json')):
             raise ValueError('Unexpected archive link')
-        receipt=read(batch/'receipt.json')
+        receipt_path=batch/'receipt.json'
+        if batch.name in receipts and receipts.pop(batch.name)!=sha(receipt_path):
+            raise ValueError('Published receipt changed: '+batch.name)
+        receipt=read(receipt_path)
         started=read(batch/'started.json')
         index=read(pack/'index.json')
         after=instant(receipt['after'])
@@ -68,11 +108,13 @@ def chain(seed, seed_sha, spool, *, full=False):
             verify_batch(pack,receipt)
         previous,ceiling,latest=packed,cutoff,receipt
         count+=1
+    if receipts:
+        raise ValueError('Published export batch is missing: '+', '.join(sorted(receipts)))
     if latest is not None and not full:
         verify_batch(spool/'batches'/latest['batchId']/'pack',latest)
     return dict(schemaVersion=1,seedAsOf=base['asOf'],seedManifestSha256=seed_sha,
                 batchCount=count,verifiedBatchCount=count if full else min(count,1),
-                through=ceiling.isoformat(),manifestSha256=previous,latest=latest,
+                registeredBatchCount=protected,through=ceiling.isoformat(),manifestSha256=previous,latest=latest,
                 stagedAttempts=sum(1 for _ in (spool/'staging').glob('*')))
 
 
@@ -88,7 +130,7 @@ def seal_export(root, store, seed, seed_sha, spool, cutoff, trigger):
     batch=identifier(cutoff,trigger)
     with lock(spool/'export.lock'):
         try:
-            status=chain(seed,seed_sha,spool,full=True)
+            status=register_existing(spool,chain(seed,seed_sha,spool,full=True))
         except EVIDENCE_ERRORS as error:
             failure=spool/'audit-failures'/(batch+'.json')
             if not failure.exists():
@@ -126,6 +168,8 @@ def seal_export(root, store, seed, seed_sha, spool, cutoff, trigger):
         sync_dir(spool)
         # Prior batches were checked under the same lock. Recheck the newly published batch.
         published=chain(seed,seed_sha,spool)
+        register_receipt(spool,target/'receipt.json')
+        published['registeredBatchCount']+=1
         published['verifiedBatchCount']+=status['verifiedBatchCount']
         return dict(status='sealed',**published)
 
@@ -136,6 +180,7 @@ def main():
     action.add_argument('--run',action='store_true')
     action.add_argument('--status',action='store_true',help='Check the chain and latest package')
     action.add_argument('--audit',action='store_true',help='Read and verify every package')
+    action.add_argument('--register-published',action='store_true',help='Register fully verified existing batches')
     parser.add_argument('--archive-store',required=True,type=Path)
     parser.add_argument('--seed',required=True,type=Path)
     parser.add_argument('--seed-manifest-sha256',required=True)
@@ -151,6 +196,9 @@ def main():
         if trigger is None:
             parser.error('Scheduled export requires its own systemd timer')
         result=seal_export(ROOT,store,seed,args.seed_manifest_sha256,spool,cutoff,trigger)
+    elif args.register_published:
+        with lock(spool/'export.lock'):
+            result=register_existing(spool,chain(seed,args.seed_manifest_sha256,spool,full=True))
     else:
         result=chain(seed,args.seed_manifest_sha256,spool,full=args.audit)
     print(json.dumps(result,ensure_ascii=False,allow_nan=False))

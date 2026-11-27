@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-28T00:31:10.250829+08:00",
+  "batchId": "20261127T142000647868Z-2349c657",
+  "originalCutoff": "2026-11-27T14:20:00.647868+00:00",
+  "packManifestSha256": "ee10d5ab24523de5cf91380566b9ab431816c516fa1bc32ac606836b8ef27e33",
+  "batchReceiptSha256": "293af0014fa8f6515c2fe5eed3af0859946b8f1554f00b63dd54ffa6541c481a",
+  "publishedReceiptSha256": "293af0014fa8f6515c2fe5eed3af0859946b8f1554f00b63dd54ffa6541c481a",
+  "missingBatchError": "Published export batch is missing: 20261127T142000647868Z-2349c657",
+  "recoveredFromGitHubEvidence": true,
+  "restoredVerifiedBatches": 1,
+  "sameWatermark": true
+}

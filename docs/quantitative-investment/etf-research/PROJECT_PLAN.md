@@ -1,5 +1,7 @@
 # 项目计划与当前状态
 
+[夜间导出水位保护](reports/2026-11-28-observation-export-watermark/README.md)可识别最新批次目录整批丢失。已用首批生产数据和 GitHub 原件验证按原水位恢复。
+
 [夜间证据包全链核验](reports/2026-11-28-observation-export-audit/README.md)在每次增量前检查所有旧包对象，出现损坏时保留失败记录。首个生产包已隔离恢复，单日与来源响应按原时点复算一致。
 
 [沪市两融明细按实际分页采集](reports/2026-11-28-sse-margin-pagination/README.md)保留所有必需明细页及失败响应。11 月 28 日 00:16 复核，11 月 27 日两融仍缺，11 月 26 日完成两页及汇总核验。

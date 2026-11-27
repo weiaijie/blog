@@ -8,9 +8,9 @@ from unittest.mock import patch
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts'))
 
-from etf_research.publication import atomic, read, sha
+from etf_research.publication import atomic, lock, read, sha
 from pack_observation_evidence import merge_packs, restore_ledger, verify
-from run_observation_export import TIMER, chain, seal_export
+from run_observation_export import PUBLISHED, TIMER, chain, register_existing, seal_export
 
 SEED=ROOT/'reports/2026-11-27-portable-observation/pack'
 DELTA=ROOT/'reports/2026-11-27-after-filing/pack'
@@ -71,6 +71,9 @@ class ObservationExportTests(unittest.TestCase):
             path=spool/'batches'/result['latest']['batchId']/'receipt.json'
             payload=read(path)
             atomic(path,dict(payload,previousManifestSha256='0'*64))
+            with self.assertRaisesRegex(ValueError,'Published receipt changed'):
+                chain(SEED,self.seed_sha,spool)
+            (spool/PUBLISHED/(result['latest']['batchId']+'.json')).rename(Path(temporary)/'legacy-receipt.json')
             with self.assertRaisesRegex(ValueError,'Broken export chain'):
                 chain(SEED,self.seed_sha,spool)
             with self.assertRaisesRegex(ValueError,'Pinned seed'):
@@ -111,3 +114,42 @@ class ObservationExportTests(unittest.TestCase):
             self.assertEqual(repaired['verifiedBatchCount'],3)
             self.assertEqual(repaired['latest']['after'],second['through'])
             self.assertTrue(failure.is_file())
+
+    def test_published_suffix_cannot_disappear_or_start_over(self):
+        with TemporaryDirectory() as temporary:
+            base=Path(temporary)
+            spool=base/'export'
+            first=self.publish(spool)
+            later=CUTOFF+timedelta(seconds=2)
+            trigger=dict(TRIGGER,invocationId='1'*32)
+            second=seal_export(self.ledger,self.store,SEED,self.seed_sha,spool,later,trigger)
+            self.assertEqual(second['registeredBatchCount'],2)
+            tail=second['latest']['batchId']
+            path=spool/'batches'/tail
+            pinned=spool/PUBLISHED/(tail+'.json')
+            self.assertEqual(sha(pinned),sha(path/'receipt.json'))
+
+            # Existing valid exports can be registered again after an interrupted backfill.
+            elsewhere=base/pinned.name
+            pinned.rename(elsewhere)
+            legacy=chain(SEED,self.seed_sha,spool,full=True)
+            self.assertEqual(legacy['registeredBatchCount'],1)
+            with lock(spool/'export.lock'):
+                self.assertEqual(register_existing(spool,legacy)['registeredBatchCount'],2)
+            self.assertEqual(sha(pinned),sha(elsewhere))
+
+            relocated=base/'restored-from-backup'
+            path.rename(relocated)
+            with self.assertRaisesRegex(ValueError,'Published export batch is missing: '+tail):
+                chain(SEED,self.seed_sha,spool)
+            retry=later+timedelta(seconds=2)
+            third=dict(TRIGGER,invocationId='2'*32)
+            with self.assertRaisesRegex(ValueError,'Published export batch is missing: '+tail):
+                seal_export(self.ledger,self.store,SEED,self.seed_sha,spool,retry,third)
+            self.assertEqual([p.name for p in (spool/'batches').iterdir()],[first['latest']['batchId']])
+            self.assertIn(tail,read(next((spool/'audit-failures').glob('*.json')))['error'])
+
+            relocated.rename(path)
+            result=seal_export(self.ledger,self.store,SEED,self.seed_sha,spool,retry,third)
+            self.assertEqual(result['latest']['after'],second['through'])
+            self.assertEqual(result['registeredBatchCount'],3)
