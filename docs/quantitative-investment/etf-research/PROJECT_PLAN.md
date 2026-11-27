@@ -1,5 +1,7 @@
 # 项目计划与当前状态
 
+[18 户到期检查点与回执](reports/2026-11-28-forward-milestone-publication/README.md)按首次正式发布的到期原件核算，并逐项核对后来账本的同一时期。工作台和 Agent 同查。
+
 [工作台与 Agent 的跨年日历证据](reports/2026-11-28-exchange-calendar-evidence-view/README.md)展示定时归档、手工复核和正式登记状态。2027 年仍待两家交易所原文。
 
 [年度休市公告自动发现](reports/2026-11-28-exchange-calendar-discovery/README.md)接上沪深交易所两条正式渠道。2026 正对照复算一致，2027 保留待核验状态。

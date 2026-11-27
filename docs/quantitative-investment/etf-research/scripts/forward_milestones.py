@@ -2,7 +2,7 @@
 import argparse
 from bisect import bisect_left
 from calendar import monthrange
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from decimal import Decimal as D
 from functools import lru_cache
 import json
@@ -145,9 +145,75 @@ def report(root, state, observed):
                 milestones=windows,progress=screen(portfolios,days,reconcile=True))
 
 
+def reconcile_milestone(current, original):
+    end = original['as_of']
+    for name, portfolio in original['portfolios'].items():
+        later = current['portfolios'][name]
+        if (later['daily'][:len(portfolio['daily'])]!=portfolio['daily']
+                or [entry for entry in later['journal'] if entry['day']<=end]!=portfolio['journal']):
+            return False
+    return True
+
+
+def prove_milestones(root,state,observed,result):
+    """Attach each completed window to the first exact-day account publication."""
+    calendar = calendar_at(root,observed)
+    as_of = date.fromisoformat(state['as_of'])
+    local = observed.astimezone(TZ).date()
+    for milestone in result['milestones']:
+        due = date.fromisoformat(milestone['anniversary'])
+        if str(due.year) not in calendar.ranges:
+            if local>=due:
+                milestone['state'] = 'calendar_unverified'
+            continue
+        horizon = min(date(due.year,12,31),due+timedelta(days=31))
+        possible = sessions_between(calendar.ranges,due,horizon)
+        if not possible:
+            if local>=due:
+                milestone['state'] = 'calendar_unverified'
+            continue
+        session = possible[0]
+        milestone['expectedEndSession'] = session.isoformat()
+        if session>as_of:
+            if session<=completed_date(observed):
+                milestone['state'] = 'awaiting_valuation'
+            continue
+
+        prior, milestone['accounts'] = milestone['accounts'],None
+        milestone['state'] = 'publication_unverified'
+        try:
+            entry=admitted_operation(root,session,observed,require_account_binding=True,first=True)
+            if entry is None:
+                milestone['state'] = 'awaiting_publication'
+                continue
+            operation,folder = entry
+            pointer,bundle,available,_ = published_account_bundle(root,operation,observed)
+            original=read(bundle/'forward_checkpoint.json')
+            if (original['as_of']!=session.isoformat() or original['as_of']!=pointer['as_of']
+                    or original['checkpoint_sha256']!=pointer['checkpoint_sha256']):
+                continue
+            checked=report(root,original,available)
+            exact=next(row for row in checked['milestones'] if row['months']==milestone['months'])
+            if exact['state']!='complete' or exact['endSession']!=session.isoformat():
+                continue
+            milestone['publication'] = dict(availableAt=available.astimezone(TZ).isoformat(),
+                checkpointSha256=original['checkpoint_sha256'],
+                operation=folder.relative_to(root).as_posix(),operationManifestSha256=sha(folder/'manifest.json'),
+                bundleManifestSha256=pointer['bundle_manifest_sha256'],calendarSha256=checked['calendarSha256'])
+            if prior!=exact['accounts'] or not reconcile_milestone(state,original):
+                milestone['state'] = 'ledger_conflict'
+                continue
+            milestone['state'] = 'complete'
+            milestone['accounts'] = exact['accounts']
+        except (OSError,ValueError,KeyError,TypeError,ArithmeticError):
+            continue
+    return result
+
+
 def active_report(root=ROOT):
     state=load_active(root,(root/'config/active_run.json').read_bytes())
-    return report(root,state,datetime.now(timezone.utc))
+    observed=datetime.now(timezone.utc)
+    return prove_milestones(root,state,observed,report(root,state,observed))
 
 
 def publication_report(root, observed, *, checkpoint=None):
@@ -167,7 +233,7 @@ def publication_report(root, observed, *, checkpoint=None):
                                  mode=operation['mode'],operation=folder.relative_to(root).as_posix(),
                                  operationManifestSha256=sha(folder/'manifest.json'),
                                  bundleManifestSha256=pointer['bundle_manifest_sha256'])
-    return result
+    return prove_milestones(root,state,observed,result)
 
 
 def main():

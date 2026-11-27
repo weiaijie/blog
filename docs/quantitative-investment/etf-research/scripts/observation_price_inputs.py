@@ -12,7 +12,7 @@ from etf_research.publication import encoded, inside, read, sha, verify_bundle
 SYMBOLS = ('510300','511010')
 
 
-def admitted_operation(root, anchor, ceiling, *, require_account_binding=False):
+def admitted_operation(root, anchor, ceiling, *, require_account_binding=False, first=False):
     """Find a publication known at the cutoff, optionally for one exact session."""
     candidates = []
     for path in (root/'reports/operations').glob('*/result.json'):
@@ -30,7 +30,7 @@ def admitted_operation(root, anchor, ceiling, *, require_account_binding=False):
             continue
     if not candidates:
         return None
-    _finished,path = max(candidates)
+    _finished,path = min(candidates) if first else max(candidates)
     verify_bundle(path.parent)
     record = read(path)
     started = read(path.parent/'started.json')

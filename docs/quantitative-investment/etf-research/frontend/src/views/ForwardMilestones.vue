@@ -11,8 +11,9 @@ type Account = {
 };
 type Accounts = Record<string,Account>;
 type Milestone = {
-  months:number; anniversary:string; endSession:string|null;
-  state:'accumulating'|'complete'; accounts:Accounts|null;
+  months:number; anniversary:string; endSession:string|null; expectedEndSession?:string;
+  state:string; accounts:Accounts|null;
+  publication?:{availableAt:string;checkpointSha256:string;operation:string;operationManifestSha256:string};
 };
 type ForwardReport = {
   asOf:string; anchorOn:string; valuationSessions:number; returnIntervals:number;
@@ -21,6 +22,11 @@ type ForwardReport = {
 };
 
 const endpoint='/api/v1/research/forward-milestones';
+const milestoneStates:Record<string,string> = {
+  accumulating:'观察中',complete:'已核验',calendar_unverified:'日历待核验',
+  awaiting_valuation:'等待到期估值',awaiting_publication:'等待到期检查点发布',
+  publication_unverified:'到期回执待核验',ledger_conflict:'到期账本有冲突',
+};
 const labels=[
   ['cash','现金'],['bond_hold','仅持国债 ETF'],['equity_hold','仅持沪深300 ETF'],
   ['monthly_20_80','月度股债 20/80'],['monthly_50_50','月度股债 50/50'],['trend_120','120 日趋势'],
@@ -90,8 +96,8 @@ const rows=computed(()=>selected.value?labels.map(([key,label])=>({label,...sele
       <p class="muted">{{report.anchorOn}} 为初始资金估值日。<template v-if="report.firstReturnSession">首个收益日是 {{report.firstReturnSession}}。</template></p>
       <dl class="forward-milestones">
         <div v-for="row in report.milestones" :key="row.months">
-          <dt>{{row.months}} 个月</dt><dd>{{row.endSession ?? row.anniversary}}</dd>
-          <small>{{row.state==='complete'?'已到期':'观察中'}}</small>
+          <dt>{{row.months}} 个月</dt><dd>{{row.endSession ?? row.expectedEndSession ?? row.anniversary}}</dd>
+          <small>{{milestoneStates[row.state] ?? row.state}}</small>
         </div>
       </dl>
       <div class="forward-filters">
@@ -100,7 +106,9 @@ const rows=computed(()=>selected.value?labels.map(([key,label])=>({label,...sele
         </select></label>
         <label>费用情景 <select v-model="fees"><option value="base">基准</option><option value="low">低费用</option><option value="high">高费用</option></select></label>
       </div>
-      <p v-if="!rows.length" role="status">该观察期未到期。到期后按周年当日或之后首个已核验交易日结算。</p>
+      <p v-if="!rows.length" role="status">
+        {{milestone ? milestoneStates[milestone.state] ?? milestone.state : '账户数据待核验'}}
+      </p>
       <div v-else class="forward-table" tabindex="0" aria-label="模拟账户指标">
         <table>
           <thead><tr><th scope="col">账户</th><th scope="col">净盈亏（元）</th><th scope="col">净收益</th>
@@ -115,6 +123,12 @@ const rows=computed(()=>selected.value?labels.map(([key,label])=>({label,...sele
           </tr></tbody>
         </table>
       </div>
+      <details v-if="milestone?.publication" class="milestone-proof">
+        <summary>到期检查点与发布回执</summary>
+        <p>首次发布 {{milestone.publication.availableAt.slice(0,19).replace('T',' ')}}（北京时间）</p>
+        <p>检查点 <code>{{milestone.publication.checkpointSha256}}</code></p>
+        <p>回执 <code>{{milestone.publication.operationManifestSha256}}</code></p>
+      </details>
       <p class="muted">净年化仅在 12、24 个月期满时计算。期末权益按收盘估值，未计强制平仓成本。</p>
     </template>
   </section>
@@ -124,6 +138,7 @@ const rows=computed(()=>selected.value?labels.map(([key,label])=>({label,...sele
 .forward-head,.forward-filters{display:flex;flex-wrap:wrap;gap:10px 20px;align-items:center}
 .forward-head{justify-content:space-between}
 .forward-head h2,.forward-head p{margin:0}
+.milestone-proof code{overflow-wrap:anywhere}
 .forward-head p{margin-top:6px}
 .forward-milestones{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:14px 0}
 .forward-milestones div{background:#f2f6f7;padding:8px}

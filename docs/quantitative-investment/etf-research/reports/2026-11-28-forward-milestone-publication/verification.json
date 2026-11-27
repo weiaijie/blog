@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-28T01:29:19.601598+08:00",
+  "current": {
+    "asOf": "2026-11-27",
+    "accountCount": 18,
+    "returnIntervals": 16,
+    "milestones": [
+      {
+        "months": 6,
+        "anniversary": "2027-05-05",
+        "state": "accumulating",
+        "endSession": null,
+        "valuationSessions": null
+      },
+      {
+        "months": 12,
+        "anniversary": "2027-11-05",
+        "state": "accumulating",
+        "endSession": null,
+        "valuationSessions": null
+      },
+      {
+        "months": 24,
+        "anniversary": "2028-11-05",
+        "state": "accumulating",
+        "endSession": null,
+        "valuationSessions": null
+      }
+    ]
+  },
+  "verificationOnlyAdjustedAnniversary": true,
+  "control": {
+    "asOf": "2026-11-26",
+    "prePublicationState": "awaiting_valuation",
+    "publication": {
+      "availableAt": "2026-11-27T14:35:30.526877+08:00",
+      "checkpointSha256": "a4d2ae7e236fe5ec1d7248e94ed765e463cb35525e25629a21958aaad311e9d6",
+      "operation": "reports/operations/20261127T063522Z-b7e2484c",
+      "operationManifestSha256": "f4388e0e95ddc110378e6e06e596a338f741a1c5464771f8e629bd7ff3290f70",
+      "bundleManifestSha256": "2800d7db1266bf0bb2132ba04597ee94f28579245bda816362b46302bd8906e1",
+      "calendarSha256": "950a3bfe2bab7ad484abc03aa27207bc70a49a4a144f495899cf1bd2aa10c8c6"
+    },
+    "netPnlCny": "-1914.920",
+    "costCny": "84.420",
+    "recoveredOn": null,
+    "latestRecoveredOn": "2026-11-27"
+  }
+}

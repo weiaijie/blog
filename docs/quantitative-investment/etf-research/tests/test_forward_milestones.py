@@ -13,8 +13,9 @@ sys.path.insert(0,str(ROOT/'scripts'))
 
 from etf_research.admission import sessions_between
 from etf_research.forward import START, digest
-from etf_research.publication import read
-from forward_milestones import metric, publication_report, report
+from etf_research.publication import atomic, read, seal
+from forward_milestones import metric, prove_milestones, publication_report, report
+from observation_price_inputs import admitted_operation, published_account_bundle
 
 OBSERVED=datetime.fromisoformat('2026-11-27T21:20:00+08:00')
 CHECKPOINT=ROOT/'reports/daily/20261127T170315-58f85234/forward_checkpoint.json'
@@ -123,3 +124,49 @@ class ForwardMilestonesTests(unittest.TestCase):
         self.assertEqual(recovered['recovery']['peakToRecoverySessions'],3)
         self.assertEqual(recovered['recovery']['troughToRecoverySessions'],2)
         self.assertEqual(Decimal(recovered['totalCostCny']),Decimal('1.5'))
+
+
+    def test_milestone_uses_original_valuation_and_freezes_its_publication(self):
+        day=date(2026,11,26)
+        operation,folder=admitted_operation(ROOT,day,OBSERVED,require_account_binding=True,first=True)
+        pointer,bundle,seen,_=published_account_bundle(ROOT,operation,OBSERVED)
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory)
+            original_folder=shutil.copytree(folder,root/folder.relative_to(ROOT))
+            retry=shutil.copytree(original_folder,original_folder.parent/'later-publish')
+            relative=retry.relative_to(root).as_posix()
+            atomic(retry/'started.json',dict(read(retry/'started.json'),operation=relative))
+            atomic(retry/'result.json',dict(operation,operation=relative,
+                                           finished_at_utc=(seen+timedelta(minutes=1)).isoformat()))
+            (retry/'manifest.json').unlink()
+            seal(retry)
+            self.assertEqual(admitted_operation(root,day,OBSERVED)[1],retry)
+            self.assertEqual(admitted_operation(root,day,OBSERVED,first=True)[1],original_folder)
+        state=read(CHECKPOINT)
+        original=read(bundle/'forward_checkpoint.json')
+        with (patch('forward_milestones.WINDOWS',(6,)),
+              patch('forward_milestones.anniversary',return_value=day)):
+            early=publication_report(ROOT,seen-timedelta(microseconds=1))['milestones'][0]
+            actual=publication_report(ROOT,OBSERVED)['milestones'][0]
+            self.assertEqual(early['state'],'awaiting_valuation')
+            self.assertIsNone(early['accounts'])
+            self.assertEqual(actual['state'],'complete')
+            self.assertEqual(actual['endSession'],str(day))
+            self.assertEqual(actual['publication']['operation'],folder.relative_to(ROOT).as_posix())
+            self.assertEqual(actual['publication']['checkpointSha256'],pointer['checkpoint_sha256'])
+            old=report(ROOT,original,seen)
+            self.assertEqual(actual['accounts'],old['milestones'][0]['accounts'])
+            self.assertIsNone(actual['accounts']['monthly_50_50_base']['recovery']['recoveredOn'])
+            self.assertEqual(report(ROOT,state,OBSERVED)['progress']['monthly_50_50_base']['recovery']['recoveredOn'],
+                             '2026-11-27')
+
+            with patch('forward_milestones.admitted_operation',return_value=None):
+                missing=prove_milestones(ROOT,state,OBSERVED,report(ROOT,state,OBSERVED))['milestones'][0]
+            self.assertEqual(missing['state'],'awaiting_publication')
+            self.assertIsNone(missing['accounts'])
+
+            raw=report(ROOT,state,OBSERVED)
+            state['portfolios']['cash_base']['daily'][1]['equity']='100001'
+            inconsistent=prove_milestones(ROOT,state,OBSERVED,raw)['milestones'][0]
+            self.assertEqual(inconsistent['state'],'ledger_conflict')
+            self.assertIsNone(inconsistent['accounts'])
