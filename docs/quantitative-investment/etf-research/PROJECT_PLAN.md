@@ -1,5 +1,7 @@
 # 项目计划与当前状态
 
+[公开证据结题入口](reports/2026-11-28-observation-closeout/README.md)已可从 GitHub 恢复独立评估并按原时点复算，接上同期的原 18 户实际发布。正式结题随完整观察期推进。
+
 [独立研究中期复盘](reports/2026-11-28-midterm-review/README.md)已接入例行评估归档。满六个月后以周年日北京时间 00:00 为证据截止，工作台和 Agent 同查。
 
 [整库归档清单压缩](reports/2026-11-28-compressed-archive-manifest/README.md)已用 16,883 项的生产快照验证两种格式与相同快照 ID。新清单压缩约 80%，归档文件可按原命令核验与恢复。

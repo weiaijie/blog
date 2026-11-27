@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-28T02:48:48.870118+08:00",
+  "realGithubState": {
+    "schemaVersion": 1,
+    "publishedThrough": "2026-11-27T14:20:00.647868+00:00",
+    "publishedManifestSha256": "ee10d5ab24523de5cf91380566b9ab431816c516fa1bc32ac606836b8ef27e33",
+    "status": "observation_origin_pending"
+  },
+  "isolatedReadback": {
+    "diagnosticOrigin": {
+      "date": "2025-11-27",
+      "archiveVerifiedAt": "2025-11-27T19:40:12+08:00"
+    },
+    "reportedAt": "2026-11-28T02:48:48.245291+08:00",
+    "receipt": {
+      "path": "reports/research-evaluation/2026-11-28/cccccccccccccccccccccccccccccccc",
+      "archiveSha256": "3181ca2067970541e4860e87211bad5c51cd7ba9571e8a89fc0fee92147b6bdc",
+      "manifestSha256": "67c5f75008518e0b5db332f342f17db93b272c2c4b96321355dc1b1e2dcc2bcc",
+      "archiveVerifiedAt": "2026-11-27T18:48:48.589182+00:00",
+      "status": "evaluation_available"
+    },
+    "comparedGroups": {
+      "policy": "insufficient_samples",
+      "etf": "insufficient_samples",
+      "margin": "insufficient_samples",
+      "combined": "insufficient_samples"
+    },
+    "mainShortfall": {
+      "pairs": 120,
+      "folds": 2,
+      "policyEvents": 20
+    },
+    "archiveReplayMatches": true,
+    "usesRealForwardPublication": true,
+    "accounts": 18,
+    "forwardThrough": "2026-11-27",
+    "returnIntervals": 16,
+    "actualProductionResult": false
+  }
+}
