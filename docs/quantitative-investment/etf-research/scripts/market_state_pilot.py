@@ -114,8 +114,9 @@ def prior_ratio(values, current):
     return current/(sum(values[-20:])/20) if len(values)>=20 else None
 
 
-def build(ready_at=None):
-    snapshot=ROOT/'data/snapshots'/SNAPSHOT
+def build(ready_at=None, *, project=None):
+    root = ROOT if project is None else project
+    snapshot=root/'data/snapshots'/SNAPSHOT
     received=sources(snapshot)
     obj=result(snapshot,'margin','RZRQ_HZ_INFO')
     summary=obj['result']

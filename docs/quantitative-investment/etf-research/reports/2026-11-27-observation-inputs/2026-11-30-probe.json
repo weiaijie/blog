@@ -1,0 +1,309 @@
+{
+  "schemaVersion": 1,
+  "runKind": "validation",
+  "inputSealedForForecast": false,
+  "entryDay": "2026-11-30",
+  "anchorDay": "2026-11-27",
+  "observedAt": "2026-11-27T09:45:58.196699+00:00",
+  "computedAt": "2026-11-27T09:46:00.495470+00:00",
+  "deadline": "2026-11-30T08:55:00+08:00",
+  "evidenceCutoff": "2026-11-27T09:45:58.196699+00:00",
+  "lookbackSessions": [
+    "2026-10-30",
+    "2026-11-02",
+    "2026-11-03",
+    "2026-11-04",
+    "2026-11-05",
+    "2026-11-06",
+    "2026-11-09",
+    "2026-11-10",
+    "2026-11-11",
+    "2026-11-12",
+    "2026-11-13",
+    "2026-11-16",
+    "2026-11-17",
+    "2026-11-18",
+    "2026-11-19",
+    "2026-11-20",
+    "2026-11-23",
+    "2026-11-24",
+    "2026-11-25",
+    "2026-11-26",
+    "2026-11-27"
+  ],
+  "cells": {
+    "stockReturn5": {
+      "asOf": "2026-11-27",
+      "value": 0.035838725734195886,
+      "verified": true,
+      "receivedAt": "2026-11-27T09:03:26.900450+00:00",
+      "dependencyReadyAt": [
+        "2026-11-27T09:03:26.900450+00:00"
+      ],
+      "evidence": [
+        {
+          "root": "prices",
+          "path": "reports/operations/20261127T090314Z-5d902b22/manifest.json",
+          "sha256": "f5ee47d6d1550c5445ed71634e8cfb488fa96dc5caa565a6671eddddfe099f14"
+        },
+        {
+          "root": "prices",
+          "path": "reports/daily/20261127T170315-58f85234/manifest.json",
+          "sha256": "93a5ef78f1349ac62d13c965d919b801c8ae163bef9570d4aec77cbe98ab0443"
+        },
+        {
+          "root": "prices",
+          "path": "data/snapshots/20261127T170315-58f85234-prices/manifest.json",
+          "sha256": "0351719fe6ce15d4fec284cb6d180eae68e9a4c634ccccd896234f32d117dbaf"
+        },
+        {
+          "root": "prices",
+          "path": "data/snapshots/20261127T170315-58f85234-official/manifest.json",
+          "sha256": "a38f67bad96d20e9126d1268c79650ef158bd41ef26a4411df721ed7d8d22001"
+        }
+      ],
+      "readyAt": "2026-11-27T09:46:00.495470+00:00"
+    },
+    "stockReturn20": {
+      "asOf": "2026-11-27",
+      "value": 0.023862238622386123,
+      "verified": true,
+      "receivedAt": "2026-11-27T09:03:26.900450+00:00",
+      "dependencyReadyAt": [
+        "2026-11-27T09:03:26.900450+00:00"
+      ],
+      "evidence": [
+        {
+          "root": "prices",
+          "path": "reports/operations/20261127T090314Z-5d902b22/manifest.json",
+          "sha256": "f5ee47d6d1550c5445ed71634e8cfb488fa96dc5caa565a6671eddddfe099f14"
+        },
+        {
+          "root": "prices",
+          "path": "reports/daily/20261127T170315-58f85234/manifest.json",
+          "sha256": "93a5ef78f1349ac62d13c965d919b801c8ae163bef9570d4aec77cbe98ab0443"
+        },
+        {
+          "root": "prices",
+          "path": "data/snapshots/20261127T170315-58f85234-prices/manifest.json",
+          "sha256": "0351719fe6ce15d4fec284cb6d180eae68e9a4c634ccccd896234f32d117dbaf"
+        },
+        {
+          "root": "prices",
+          "path": "data/snapshots/20261127T170315-58f85234-official/manifest.json",
+          "sha256": "a38f67bad96d20e9126d1268c79650ef158bd41ef26a4411df721ed7d8d22001"
+        }
+      ],
+      "readyAt": "2026-11-27T09:46:00.495470+00:00"
+    },
+    "stockVol20": {
+      "asOf": "2026-11-27",
+      "value": 0.014026597315312642,
+      "verified": true,
+      "receivedAt": "2026-11-27T09:03:26.900450+00:00",
+      "dependencyReadyAt": [
+        "2026-11-27T09:03:26.900450+00:00"
+      ],
+      "evidence": [
+        {
+          "root": "prices",
+          "path": "reports/operations/20261127T090314Z-5d902b22/manifest.json",
+          "sha256": "f5ee47d6d1550c5445ed71634e8cfb488fa96dc5caa565a6671eddddfe099f14"
+        },
+        {
+          "root": "prices",
+          "path": "reports/daily/20261127T170315-58f85234/manifest.json",
+          "sha256": "93a5ef78f1349ac62d13c965d919b801c8ae163bef9570d4aec77cbe98ab0443"
+        },
+        {
+          "root": "prices",
+          "path": "data/snapshots/20261127T170315-58f85234-prices/manifest.json",
+          "sha256": "0351719fe6ce15d4fec284cb6d180eae68e9a4c634ccccd896234f32d117dbaf"
+        },
+        {
+          "root": "prices",
+          "path": "data/snapshots/20261127T170315-58f85234-official/manifest.json",
+          "sha256": "a38f67bad96d20e9126d1268c79650ef158bd41ef26a4411df721ed7d8d22001"
+        }
+      ],
+      "readyAt": "2026-11-27T09:46:00.495470+00:00"
+    },
+    "bondReturn5": {
+      "asOf": "2026-11-27",
+      "value": -0.0007778744227818768,
+      "verified": true,
+      "receivedAt": "2026-11-27T09:03:26.900450+00:00",
+      "dependencyReadyAt": [
+        "2026-11-27T09:03:26.900450+00:00"
+      ],
+      "evidence": [
+        {
+          "root": "prices",
+          "path": "reports/operations/20261127T090314Z-5d902b22/manifest.json",
+          "sha256": "f5ee47d6d1550c5445ed71634e8cfb488fa96dc5caa565a6671eddddfe099f14"
+        },
+        {
+          "root": "prices",
+          "path": "reports/daily/20261127T170315-58f85234/manifest.json",
+          "sha256": "93a5ef78f1349ac62d13c965d919b801c8ae163bef9570d4aec77cbe98ab0443"
+        },
+        {
+          "root": "prices",
+          "path": "data/snapshots/20261127T170315-58f85234-prices/manifest.json",
+          "sha256": "0351719fe6ce15d4fec284cb6d180eae68e9a4c634ccccd896234f32d117dbaf"
+        },
+        {
+          "root": "prices",
+          "path": "data/snapshots/20261127T170315-58f85234-official/manifest.json",
+          "sha256": "a38f67bad96d20e9126d1268c79650ef158bd41ef26a4411df721ed7d8d22001"
+        }
+      ],
+      "readyAt": "2026-11-27T09:46:00.495470+00:00"
+    },
+    "bondReturn20": {
+      "asOf": "2026-11-27",
+      "value": 0.0012613110548953532,
+      "verified": true,
+      "receivedAt": "2026-11-27T09:03:26.900450+00:00",
+      "dependencyReadyAt": [
+        "2026-11-27T09:03:26.900450+00:00"
+      ],
+      "evidence": [
+        {
+          "root": "prices",
+          "path": "reports/operations/20261127T090314Z-5d902b22/manifest.json",
+          "sha256": "f5ee47d6d1550c5445ed71634e8cfb488fa96dc5caa565a6671eddddfe099f14"
+        },
+        {
+          "root": "prices",
+          "path": "reports/daily/20261127T170315-58f85234/manifest.json",
+          "sha256": "93a5ef78f1349ac62d13c965d919b801c8ae163bef9570d4aec77cbe98ab0443"
+        },
+        {
+          "root": "prices",
+          "path": "data/snapshots/20261127T170315-58f85234-prices/manifest.json",
+          "sha256": "0351719fe6ce15d4fec284cb6d180eae68e9a4c634ccccd896234f32d117dbaf"
+        },
+        {
+          "root": "prices",
+          "path": "data/snapshots/20261127T170315-58f85234-official/manifest.json",
+          "sha256": "a38f67bad96d20e9126d1268c79650ef158bd41ef26a4411df721ed7d8d22001"
+        }
+      ],
+      "readyAt": "2026-11-27T09:46:00.495470+00:00"
+    },
+    "bondVol20": {
+      "asOf": "2026-11-27",
+      "value": 0.0005106616005803657,
+      "verified": true,
+      "receivedAt": "2026-11-27T09:03:26.900450+00:00",
+      "dependencyReadyAt": [
+        "2026-11-27T09:03:26.900450+00:00"
+      ],
+      "evidence": [
+        {
+          "root": "prices",
+          "path": "reports/operations/20261127T090314Z-5d902b22/manifest.json",
+          "sha256": "f5ee47d6d1550c5445ed71634e8cfb488fa96dc5caa565a6671eddddfe099f14"
+        },
+        {
+          "root": "prices",
+          "path": "reports/daily/20261127T170315-58f85234/manifest.json",
+          "sha256": "93a5ef78f1349ac62d13c965d919b801c8ae163bef9570d4aec77cbe98ab0443"
+        },
+        {
+          "root": "prices",
+          "path": "data/snapshots/20261127T170315-58f85234-prices/manifest.json",
+          "sha256": "0351719fe6ce15d4fec284cb6d180eae68e9a4c634ccccd896234f32d117dbaf"
+        },
+        {
+          "root": "prices",
+          "path": "data/snapshots/20261127T170315-58f85234-official/manifest.json",
+          "sha256": "a38f67bad96d20e9126d1268c79650ef158bd41ef26a4411df721ed7d8d22001"
+        }
+      ],
+      "readyAt": "2026-11-27T09:46:00.495470+00:00"
+    },
+    "turnover20": {
+      "asOf": "2026-11-27",
+      "value": 1.2362978819615829,
+      "verified": true,
+      "receivedAt": "2026-11-27T09:20:58.429121+00:00",
+      "dependencyReadyAt": [
+        "2026-11-27T08:09:50.595717+00:00",
+        "2026-11-27T09:02:29.654016+00:00",
+        "2026-11-27T09:20:59.334219+00:00"
+      ],
+      "evidence": [
+        {
+          "root": "prices",
+          "path": "data/snapshots/20261127T080707Z-sse-market-state/manifest.json",
+          "sha256": "6d495446303a0eb9eb71c9e86b76c840747d6de3f874e15a3583f07ca5d19c8c"
+        },
+        {
+          "root": "observations",
+          "path": "reports/research-observation/runs/2026-11-26/20261127T090225Z-a951fbbd/manifest.json",
+          "sha256": "2630e7163904f105d7011bbdd01539b96e82687d377c94e6f38e23af10a61356"
+        },
+        {
+          "root": "archive",
+          "path": "snapshots/087b1492e77ab8721b55bfbda631293729ca09b4595ef3a5c9c3a77bf8052936.json",
+          "sha256": "087b1492e77ab8721b55bfbda631293729ca09b4595ef3a5c9c3a77bf8052936"
+        },
+        {
+          "root": "observations",
+          "path": "reports/research-observation/runs/2026-11-27/20261127T092054Z-465a8da5/manifest.json",
+          "sha256": "cf95a0fc952a00f5b3b1c0881587ec88be3acca67e09d696c863d6d7e54aebcd"
+        },
+        {
+          "root": "archive",
+          "path": "snapshots/edfe0c5bcded6feefe0cb2b14b8907eec2ebba7e6929582cc1546e2e5963e495.json",
+          "sha256": "edfe0c5bcded6feefe0cb2b14b8907eec2ebba7e6929582cc1546e2e5963e495"
+        }
+      ],
+      "readyAt": "2026-11-27T09:46:00.495470+00:00"
+    },
+    "policyActiveCount": null,
+    "stockShareFlow": null,
+    "bondShareFlow": null,
+    "stockFinancingBuyShare": null
+  },
+  "gaps": {
+    "stockShareFlow": {
+      "reason": "same_valuation_day_basis_missing",
+      "sourceIssues": {
+        "shares_20261127": "Cleared units absent or incomplete",
+        "nav_2026-11-27": "Same-valuation-date manager NAV is absent or unverified"
+      }
+    },
+    "bondShareFlow": {
+      "reason": "same_valuation_day_basis_missing",
+      "sourceIssues": {
+        "shares_20261127": "Cleared units absent or incomplete",
+        "nav_2026-11-27": "Same-valuation-date manager NAV is absent or unverified"
+      }
+    },
+    "stockFinancingBuyShare": {
+      "reason": "matched_margin_basis_missing",
+      "sourceIssues": {
+        "margin": "Incomplete or inconsistent adjacent-session financing summary"
+      }
+    },
+    "policyActiveCount": {
+      "reason": "five_decision_intervals_without_certified_review",
+      "capturedCandidateCount": 10,
+      "evidence": [
+        {
+          "root": "observations",
+          "path": "reports/research-observation/runs/2026-11-27/20261127T092054Z-465a8da5/manifest.json",
+          "sha256": "cf95a0fc952a00f5b3b1c0881587ec88be3acca67e09d696c863d6d7e54aebcd"
+        },
+        {
+          "root": "archive",
+          "path": "snapshots/edfe0c5bcded6feefe0cb2b14b8907eec2ebba7e6929582cc1546e2e5963e495.json",
+          "sha256": "edfe0c5bcded6feefe0cb2b14b8907eec2ebba7e6929582cc1546e2e5963e495"
+        }
+      ]
+    }
+  }
+}

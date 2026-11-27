@@ -8,8 +8,8 @@ from etf_research.data import verify_manifest
 from etf_research.admission import load_incremental,completed_date
 from etf_research.official_history import parse_dayk
 ROOT=Path(__file__).resolve().parents[1]
-def audit(official_snapshot='2026-11-05-official-close-12',price_snapshot='2026-11-05-close-12b',day=date(2026,11,5)):
- root=ROOT/'data/snapshots';folder=root/official_snapshot
+def audit(official_snapshot='2026-11-05-official-close-12',price_snapshot='2026-11-05-close-12b',day=date(2026,11,5),*,snapshots=None):
+ root=ROOT/'data/snapshots' if snapshots is None else snapshots;folder=root/official_snapshot
  if not folder.resolve().is_relative_to(root.resolve()):raise ValueError('Unsafe official snapshot path')
  verify_manifest(folder);data,_=load_incremental(root,price_snapshot)
  if data.sessions[-1]!=day:raise ValueError('Admitted endpoint differs from requested official day')
