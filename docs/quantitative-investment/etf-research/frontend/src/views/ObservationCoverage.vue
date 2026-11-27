@@ -26,9 +26,16 @@ type LabelAttempt = {
   gaps?:Record<string,string|{reason:string}>; results?:Record<string,Record<string,LabelMetrics>>|null;
 };
 type OutcomeLabel = {status:string; sessions:string[]; notBefore:string|null; readyAt:string|null; attempts?:LabelAttempt[]};
+type FitProgress = {status:string; trainingDays:number};
+type ModelProgress = {status:string; firstFoldStart?:string; fold:{start:string;end:string}|null;
+  comparisons?:Record<string,FitProgress>; modelReceipt?:{modelSealedAt:string;archiveSha256:string}};
+type Prediction = {status:string; trainingDays?:number; eventIds?:string[]; baseline?:number[]; expanded?:number[]};
+type ForecastAttempt = {id:string; status:string; sealedAt?:string; reason?:string|null; archiveSha256?:string;
+  comparisons?:Record<string,Prediction>; modelArchiveSha256?:string|null};
+type Forecast = {status:string; deadline:string|null; readyAt:string|null; attempts?:ForecastAttempt[]};
 type Day = {
   day:string; expected:boolean; status:string; archivedAttempts:number; latest:Attempt|null;
-  issues:{id:string; status:string}[]; decision:Decision; label:OutcomeLabel;
+  issues:{id:string; status:string}[]; decision:Decision; label:OutcomeLabel; forecast:Forecast; modelProgress?:ModelProgress;
 };
 type Overview = {
   reportedAt:string; calendarUnknownYear:number|null; nextBefore:string|null;
@@ -37,6 +44,8 @@ type Overview = {
   sessions:Day[]; nextDecision:DecisionClock|null;
   decisionCounts:{expected:number; sealedOnTime:number; eligibleInputDays:number; gaps:number};
   labelCounts:{due:number; ready:number; gaps:number; holding:number; unknownCalendar:number};
+  modelProgress:ModelProgress;
+  forecastCounts:{due:number; sealedDays:number; gaps:number; sealedPairs:Record<string,number>;unknownCalendar:number};
 };
 const endpoint = '/api/v1/research/observation';
 const overview = ref<Overview>();
@@ -76,11 +85,28 @@ const labelGaps:Record<string,string> = {
   published_price_revision_or_missing_day:'已发布行情缺日或发生修订',
   published_dividend_version_conflict:'分红证据版本冲突',
 };
+const modelStates:Record<string,string> = {
+  observation_origin_pending:'等待首个合格归档', training_accumulation:'积累训练样本',
+  awaiting_model:'等待该折模型封存', model_verified:'该折模型已就绪',
+  model_unverified:'模型归档校验失败', insufficient_training:'训练样本不足',
+  observation_ended:'已至观察期末', fitted:'已拟合',
+};
+const forecastStates:Record<string,string> = {
+  ...modelStates, not_scheduled:'无预测安排', calendar_unverified:'预测日历待核验',
+  holding_window_crosses_fold:'持有期跨折', pending:'等待截止', pending_archive:'等待归档',
+  incomplete:'归档未完成', missing:'未见封存', unverified:'预测核验失败',
+  no_prediction:'未产出预测', sealed_predictions:'预测已按时封存', missed_deadline:'归档超过截止',
+  outside_scheduled_cutoff:'错过计划时点', model_not_ready:'当时模型未就绪',
+  evidence_unavailable:'证据待核验', decision_missing:'缺当日决策',
+  decision_missing_inputs:'决策输入不齐', decision_study_origin_pending:'当时观察期尚未起算',
+  inputs_missing:'扩展输入不齐', policy_event_previously_seen:'政策事件已在训练或先前折使用',
+  predicted:'已计算预测',
+};
 const labelGap = (code:string|{reason:string}) => {
   const key=typeof code==='string' ? code : code.reason;
   return labelGaps[key] ?? key;
 };
-const percent = (value:string) => Number(value).toLocaleString('zh-CN',{style:'percent',maximumFractionDigits:3});
+const percent = (value:string|number) => Number(value).toLocaleString('zh-CN',{style:'percent',maximumFractionDigits:3});
 const variants:Record<string,string> = {
   baseline:'量价基线', policy:'加入政策', etf:'加入 ETF 份额净值', margin:'加入两融', combined:'全量增量',
 };
@@ -210,11 +236,37 @@ onBeforeUnmount(()=>{lifecycle.abort();detailRequest?.abort();});
         </dl>
         <p v-if="overview.labelCounts.unknownCalendar" class="muted">另有 {{overview.labelCounts.unknownCalendar}} 个候选窗口待核验交易日历。</p>
       </section>
+      <section class="decision-summary" aria-labelledby="forecast-title">
+        <h3 id="forecast-title">训练与预测</h3>
+        <p>{{modelStates[overview.modelProgress.status] ?? overview.modelProgress.status}}
+          <span v-if="overview.modelProgress.firstFoldStart"> · 首折 {{overview.modelProgress.firstFoldStart}}</span>
+          <span v-if="overview.modelProgress.fold"> · {{overview.modelProgress.fold.start}} 至 {{overview.modelProgress.fold.end}} 前</span>
+          <span v-if="overview.modelProgress.modelReceipt"> · 模型封存 {{time(overview.modelProgress.modelReceipt.modelSealedAt)}}</span>
+        </p>
+        <dl class="coverage-counts">
+          <div><dt>应预测日</dt><dd>{{overview.forecastCounts.due}}</dd></div>
+          <div><dt>按时封存日</dt><dd>{{overview.forecastCounts.sealedDays}}</dd></div>
+          <div><dt>预测缺口</dt><dd>{{overview.forecastCounts.gaps}}</dd></div>
+        </dl>
+        <dl v-if="overview.modelProgress.comparisons || overview.forecastCounts.sealedDays" class="attempt-sources">
+          <div v-for="(pairs,name) in overview.forecastCounts.sealedPairs" :key="name">
+            <dt>{{variants[name] ?? name}}</dt>
+            <dd v-if="overview.modelProgress.comparisons?.[name]">
+              {{modelStates[overview.modelProgress.comparisons[name].status] ?? overview.modelProgress.comparisons[name].status}}
+              · 训练 {{overview.modelProgress.comparisons[name].trainingDays}} 行
+            </dd>
+            <dd>已封存 {{pairs}} 对</dd>
+          </div>
+        </dl>
+        <p v-if="overview.forecastCounts.unknownCalendar" class="muted">
+          {{overview.forecastCounts.unknownCalendar}} 个预测日期仍待核验交易日历。
+        </p>
+      </section>
       <el-alert v-if="overview.calendarUnknownYear" type="warning" :closable="false"
         :title="overview.calendarUnknownYear+' 年交易日历待核验'"/>
       <div v-if="overview.sessions.length" class="table-scroll" tabindex="0" aria-label="按交易日核对采集来源">
         <table class="coverage-table">
-          <thead><tr><th scope="col">交易日</th><th scope="col">归档状态</th><th scope="col">决策封存</th><th scope="col">五日标签</th>
+          <thead><tr><th scope="col">交易日</th><th scope="col">归档状态</th><th scope="col">决策封存</th><th scope="col">五日标签</th><th scope="col">预测</th>
             <th scope="col">政策</th><th scope="col">510300</th><th scope="col">511010</th>
             <th scope="col">沪市成交</th><th scope="col">沪市两融</th><th scope="col">归档次数</th></tr></thead>
           <tbody>
@@ -224,6 +276,7 @@ onBeforeUnmount(()=>{lifecycle.abort();detailRequest?.abort();});
               <td><strong>{{phases[row.status] ?? row.status}}</strong></td>
               <td>{{decisionStates[row.decision.status] ?? row.decision.status}}</td>
               <td>{{labelStates[row.label.status] ?? row.label.status}}</td>
+              <td>{{forecastStates[row.forecast.status] ?? row.forecast.status}}</td>
               <td>{{label(row.latest?.sources?.policy)}}</td>
               <td>{{label(row.latest?.sources?.etf['510300'])}}</td>
               <td>{{label(row.latest?.sources?.etf['511010'])}}</td>
@@ -285,6 +338,34 @@ onBeforeUnmount(()=>{lifecycle.abort();detailRequest?.abort();});
                 <li v-for="(gap,name) in attempt.gaps" :key="name">{{name}} · {{labelGap(gap)}}</li>
               </ul>
               <details v-if="attempt.archiveSha256" class="receipt"><summary>标签归档校验值</summary>
+                <code>{{attempt.archiveSha256}}</code></details>
+            </li>
+          </ol>
+        </section>
+        <section class="decision-detail" aria-label="当日训练与预测">
+          <p><strong>预测 · {{forecastStates[detail.forecast.status] ?? detail.forecast.status}}</strong>
+            <span v-if="detail.forecast.readyAt" class="muted">实际封存 {{time(detail.forecast.readyAt)}}</span>
+            <span v-else-if="detail.forecast.deadline" class="muted">截止 {{time(detail.forecast.deadline)}}</span>
+          </p>
+          <dl v-if="detail.modelProgress?.comparisons" class="attempt-sources">
+            <div v-for="(fit,name) in detail.modelProgress.comparisons" :key="name">
+              <dt>{{variants[name] ?? name}}</dt><dd>训练 {{fit.trainingDays}} 行 · {{modelStates[fit.status] ?? fit.status}}</dd>
+            </div>
+          </dl>
+          <ol v-if="detail.forecast.attempts?.length" class="attempts">
+            <li v-for="attempt in detail.forecast.attempts" :key="attempt.id">
+              <p class="attempt-title"><strong>{{forecastStates[attempt.status] ?? attempt.status}}</strong>
+                <span v-if="attempt.reason">{{forecastStates[attempt.reason] ?? attempt.reason}}</span>
+                <span v-if="attempt.sealedAt">归档 {{time(attempt.sealedAt)}}</span></p>
+              <dl v-if="attempt.comparisons" class="attempt-sources">
+                <div v-for="(item,name) in attempt.comparisons" :key="name">
+                  <dt>{{variants[name] ?? name}}</dt>
+                  <dd>{{forecastStates[item.status] ?? item.status}}</dd>
+                  <dd v-if="item.baseline">基线收益 {{percent(item.baseline[0])}} · 回撤 {{percent(item.baseline[1])}}</dd>
+                  <dd v-if="item.expanded">扩展收益 {{percent(item.expanded[0])}} · 回撤 {{percent(item.expanded[1])}}</dd>
+                </div>
+              </dl>
+              <details v-if="attempt.archiveSha256" class="receipt"><summary>预测归档校验值</summary>
                 <code>{{attempt.archiveSha256}}</code></details>
             </li>
           </ol>

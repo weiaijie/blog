@@ -1,7 +1,7 @@
 """Read-only coverage shared by the observation workbench and Agent."""
 from calendar import monthrange
 from collections import defaultdict
-from datetime import date, datetime, timedelta, timezone
+from datetime import date, datetime, time, timedelta, timezone
 import json
 import os
 from pathlib import Path
@@ -11,6 +11,8 @@ from run_research_observation import check_receipt
 from collect_sse_research_day import CALENDAR_SHA
 from observation_decision_status import FIRST_DECISION, decision_counts, decision_row, schedule
 from observation_label_status import label_counts, label_row
+from observation_forecast_status import forecast_counts, forecast_row, model_progress
+from seal_observation_decision import first_archive
 from etf_research.admission import completed_date, sessions_between
 from etf_research.policy_events import TZ, instant
 from etf_research.publication import read, sha
@@ -133,12 +135,17 @@ def report(root, store, *, day=None, before=None, observed=None):
     sessions, unknown_year = expected_days(root,start,end)
     expected = {str(d) for d in sessions}
     today = observed.astimezone(TZ).date()
+    origin = first_archive(root,store,observed)
     requested_day = day
     planned, decision_unknown_year = expected_days(root,FIRST_DECISION,today)
     decisions = {day.isoformat(): decision_row(root,store,day,observed,planned=True)
                  for day in planned if day.isoformat()==requested_day or requested_day is None}
     labels = {key: label_row(root,store,date.fromisoformat(key),observed,decision,details=key==requested_day)
               for key,decision in decisions.items() if decision['status']=='eligible_inputs'}
+    model_cache = {}
+    forecasts = {key: forecast_row(root,store,date.fromisoformat(key),observed,origin,decision,
+                                   details=key==requested_day,models=model_cache)
+                 for key,decision in decisions.items()} if origin is not None else {}
     upcoming, _ = expected_days(root,max(today,FIRST_DECISION),today+timedelta(days=30))
     next_decision = next((row for day in upcoming if instant((row := schedule(day))['deadline'])>observed),None)
 
@@ -155,6 +162,16 @@ def report(root, store, *, day=None, before=None, observed=None):
         if label is None:
             label = label_row(root,store,day,observed,decision,details=row['day']==requested_day)
         row['label'] = label if row['day']==requested_day else {k:v for k,v in label.items() if k!='attempts'}
+        forecast = forecasts.get(row['day'])
+        if forecast is None:
+            forecast = forecast_row(root,store,day,observed,origin,decision,
+                                    details=row['day']==requested_day,models=model_cache)
+        row['forecast'] = forecast if row['day']==requested_day else {k:v for k,v in forecast.items() if k!='attempts'}
+        if row['day']==requested_day:
+            end_of_day = instant(forecast['deadline']) if forecast['deadline'] else datetime.combine(day,time.max,TZ)
+            model_at = min(observed,end_of_day)
+            known_origin = origin if origin and instant(origin['archiveVerifiedAt'])<=model_at else None
+            row['modelProgress'] = model_progress(root,store,known_origin,model_at)
         return row
 
     entries,errors = archive_index(root,store,config,observed)
@@ -181,6 +198,8 @@ def report(root, store, *, day=None, before=None, observed=None):
                 calendarUnknownYear=unknown_year or decision_unknown_year,firstQualifiedArchive=milestone,
                 decisionCounts=decision_counts(decisions.values(),observed),
                 labelCounts=label_counts(labels.values(),observed),
+                modelProgress=model_progress(root,store,origin,observed),
+                forecastCounts=forecast_counts(forecasts.values(),observed),
                 nextDecision=next_decision,
                 counts=dict(expected=len(expected),archived=sum(d in entries for d in expected),
                             qualified=len({row['session'] for row in qualified}),

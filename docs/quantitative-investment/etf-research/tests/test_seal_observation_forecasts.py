@@ -7,10 +7,12 @@ import unittest
 from unittest.mock import patch
 
 from etf_research.policy_events import instant
-from etf_research.publication import read, sha
+from etf_research.publication import create, read, sha
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts'))
+from observation_forecast_status import forecast_row, forecast_counts
+import observation_status
 import seal_observation_decision as decision
 import seal_observation_forecasts as forecast
 import train_observation_models as trainer
@@ -81,6 +83,50 @@ class SealObservationForecastsTests(unittest.TestCase):
             self.assertEqual(saved['comparisons']['combined']['status'],'insufficient_training')
             self.assertEqual(forecast.reproduce_forecast(root,store,leaf),result)
             self.assertFalse((root/'reports/research-labels').exists())
+
+            create(root/'config/research_observation.json',{'observationEarliestDate':'2026-08-01'})
+            (root/'reports/research-observation').mkdir(parents=True)
+            observed=instant('2026-11-02T09:05:00+08:00')
+            with (patch.object(observation_status,'FIRST_DECISION',DAY),
+                  patch.object(observation_status,'first_archive',return_value=ORIGIN),
+                  patch.object(trainer,'first_archive',return_value=ORIGIN)):
+                overview=observation_status.report(root,store,observed=observed)
+                detail=observation_status.report(root,store,day=str(DAY),observed=observed)['session']
+                self.assertEqual(overview['forecastCounts']['due'],1)
+                self.assertEqual(overview['forecastCounts']['sealedPairs'],dict(policy=0,etf=1,margin=0,combined=0))
+                self.assertEqual(detail['modelProgress']['comparisons']['etf']['trainingDays'],42)
+                self.assertEqual(detail['forecast']['readyAt'],at.isoformat())
+                self.assertEqual(detail['forecast']['attempts'][0]['comparisons']['etf'],saved['comparisons']['etf'])
+                model=root/saved['model']['path']/'records/training.json'
+                model.write_bytes(b'{}')
+                damaged=observation_status.report(root,store,observed=observed)
+                self.assertEqual(damaged['modelProgress']['status'],'model_unverified')
+                self.assertEqual(damaged['forecastCounts']['sealedDays'],0)
+                self.assertEqual(damaged['sessions'][0]['forecast']['status'],'unverified')
+
+    def test_late_scores_are_hidden_and_do_not_count(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root,store=Path(directory)/'research',Path(directory)/'archive'
+            calendar=root/trainer.CALENDAR
+            calendar.parent.mkdir(parents=True)
+            shutil.copyfile(ROOT/trainer.CALENDAR,calendar)
+            cutoff=forecast.deadline(DAY)
+            start=cutoff-timedelta(minutes=1)
+            ready=cutoff+timedelta(seconds=1)
+            packet=dict(entryDay=str(DAY),startedAt=start.isoformat(),computedAt=cutoff.isoformat(),
+                studyOrigin=ORIGIN,fold=dict(start='2026-11-01',end='2027-02-01'),
+                trigger=forecast.trigger_from(env_for(forecast.TIMER,'1'*32,start)),sessions=[],
+                model=None,decision=None,reason=None,
+                comparisons=dict(etf=dict(status='predicted',baseline=[0.01,0.02],expanded=[0.02,0.01])))
+            with (patch.object(forecast,'now',return_value=ready),patch.object(forecast,'CODE',()),
+                  patch('etf_research.evidence_archive.datetime') as archive):
+                archive.now.return_value=ready
+                forecast.archive_forecast(root,store,packet)
+            decision_row=dict(status='pending',scheduledAt=start.isoformat(),latest=None)
+            view=forecast_row(root,store,DAY,ready,ORIGIN,decision_row,details=True)
+            self.assertEqual(view['status'],'missed_deadline')
+            self.assertNotIn('baseline',view['latest']['comparisons']['etf'])
+            self.assertEqual(forecast_counts([view],ready)['gaps'],1)
 
     def test_prior_fold_events_are_variant_specific(self):
         cohort=trainer.fit_comparisons(fixture_cohort())
