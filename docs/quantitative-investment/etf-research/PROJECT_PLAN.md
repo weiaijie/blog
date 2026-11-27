@@ -1,5 +1,7 @@
 # 项目计划与当前状态
 
+[两融报送截止前后取证](reports/2026-11-27-after-filing/README.md)记录国债 ETF 单位净值首次有效收报、官方申赎清单对照与按时点回看。
+
 [政策待审队列](reports/2026-11-27-policy-queue/README.md)按官方 URL 和原文 SHA256 识别重复与修订，保留审核前后的真实时点。
 
 [首 20 个应采交易日连续性](reports/2026-11-27-observation-continuity/README.md)已接入。区分实际归档、已核验定时时点和截止前完整数据。当前开始跟踪 1 日，首个截止待 11 月 30 日 08:55。

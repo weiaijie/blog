@@ -189,6 +189,44 @@ def verify(pack):
                 files=len(expected))
 
 
+def merge_packs(packs, output):
+    """Join contiguous immutable exports without overwriting a receipt or object."""
+    packs=[path.resolve() for path in packs]
+    output=output.resolve()
+    if len(packs)<2 or any(output.is_relative_to(pack) for pack in packs):
+        raise ValueError('Use consecutive packs and a separate destination')
+    rows=[]
+    inventories={}
+    previous=None
+    lower=None
+    for pack in packs:
+        verify(pack)
+        index=read(pack/'index.json')
+        after=instant(index['after']) if index['after'] else None
+        cutoff=instant(index['asOf'])
+        if previous is None:
+            lower=index['after']
+        elif after!=previous or cutoff<=previous:
+            raise ValueError('Evidence pack time intervals are not contiguous')
+        previous=cutoff
+        rows.extend(index['receipts'])
+        for name,digest in read(pack/'manifest.json').items():
+            if name=='index.json':
+                continue
+            existing=inventories.setdefault(name,(pack,digest))
+            if existing[1]!=digest:
+                raise ValueError('Portable evidence disagrees at path: '+name)
+    if len({row['receipt'] for row in rows})!=len(rows):
+        raise ValueError('A receipt occurs in more than one interval')
+    output.mkdir(parents=True,exist_ok=False)
+    for name,(pack,digest) in sorted(inventories.items()):
+        put(safe_path(pack,name),safe_path(output,name),digest)
+    create(output/'index.json',dict(schemaVersion=1,asOf=previous.isoformat(),after=lower,
+                                    receipts=sorted(rows,key=lambda row:row['receipt'])))
+    seal(output)
+    return verify(output)
+
+
 def separate_destination(pack, destination):
     if destination.resolve().is_relative_to(pack.resolve()):
         raise ValueError('Restore destination must be separate from the evidence package')
@@ -263,6 +301,9 @@ def main():
     ledger=commands.add_parser('restore-ledger')
     ledger.add_argument('--pack',type=Path,required=True)
     ledger.add_argument('--destination',type=Path,required=True)
+    merger=commands.add_parser('merge')
+    merger.add_argument('--pack',type=Path,action='append',required=True)
+    merger.add_argument('--output',type=Path,required=True)
     args=parser.parse_args()
     if args.action=='export':
         if args.as_of>datetime.now(timezone.utc):
@@ -272,8 +313,10 @@ def main():
         result=verify(args.pack)
     elif args.action=='restore':
         result=restore_receipt(args.pack,args.receipt,args.destination)
-    else:
+    elif args.action=='restore-ledger':
         result=restore_ledger(args.pack,args.destination)
+    else:
+        result=merge_packs(args.pack,args.output)
     print(json.dumps(result,ensure_ascii=False))
 
 

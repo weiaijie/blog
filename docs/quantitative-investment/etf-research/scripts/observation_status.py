@@ -63,20 +63,17 @@ def archive_index(root, store, config, observed, *, days=None):
             parse_day(day)
             if not folder.is_dir() or folder.resolve()!=folder.absolute():
                 continue
-            if days is not None:
-                started = folder/'started.json'
-                if started.is_file() and instant(read(started)['startedAt'])>observed:
-                    continue
+            started = folder/'started.json'
+            if started.is_file() and instant(read(started)['startedAt'])>observed:
+                continue
             receipt = log/'archives'/day/(folder.name+'.json')
-            if not receipt.is_file():
+            if not receipt.is_file() or instant(read(receipt)['archiveVerifiedAt'])>observed:
                 errors[day].append(dict(id=folder.name,status='pending_archive'))
                 continue
             verified = check_receipt(folder,store,config,root=root)
             if instant(verified['archiveVerifiedAt'])>observed:
-                if days is not None:
-                    errors[day].append(dict(id=folder.name,status='pending_archive'))
-                    continue
-                raise ValueError('Archive verified time after observation')
+                errors[day].append(dict(id=folder.name,status='pending_archive'))
+                continue
             entries[day].append((verified,read(folder/'result.json')))
         except (OSError,ValueError,TypeError,KeyError):
             errors[day].append(dict(id=folder.name,status='unverified'))

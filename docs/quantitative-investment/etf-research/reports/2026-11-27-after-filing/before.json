@@ -1,0 +1,698 @@
+{
+  "schemaVersion": 1,
+  "reportedAt": "2026-11-27T19:55:00+08:00",
+  "session": {
+    "day": "2026-11-27",
+    "expected": true,
+    "status": "partial",
+    "archivedAttempts": 9,
+    "latest": {
+      "id": "20261127T115450Z-c4c154d1",
+      "phase": "partial",
+      "scheduled": true,
+      "startedAt": "2026-11-27T11:54:50.896659+00:00",
+      "finishedAt": "2026-11-27T11:54:53.727831+00:00",
+      "archivedAt": "2026-11-27T11:54:54.077784+00:00",
+      "qualified": false,
+      "archiveSha256": "f1720ee003dbe33d7b6286245e5c0ecac3bd442eef31c946b9fca23660c6b746",
+      "resultSha256": "8370310f0290257ba5154bb88592b5a403fdb84e3437cfcb324c4ef19e0e2e32",
+      "sources": {
+        "policy": {
+          "status": "archived",
+          "candidateCount": 11,
+          "reviewedCount": 0,
+          "issues": {},
+          "readyAt": "2026-11-27T11:54:54.077784+00:00"
+        },
+        "etf": {
+          "510300": {
+            "status": "unknown",
+            "issues": {
+              "shares_20261127": "Cleared units absent or incomplete"
+            },
+            "estimatedNetSubscriptionCny": null,
+            "featureReadyAt": null
+          },
+          "511010": {
+            "status": "unknown",
+            "issues": {
+              "shares_20261127": "Cleared units absent or incomplete",
+              "nav_2026-11-27": "Same-valuation-date manager NAV is absent or unverified"
+            },
+            "estimatedNetSubscriptionCny": null,
+            "featureReadyAt": null
+          }
+        },
+        "market": {
+          "turnover": {
+            "status": "verified",
+            "cny": "930379000000.00",
+            "readyAt": "2026-11-27T11:54:53.191396+00:00"
+          },
+          "margin": {
+            "status": "unknown",
+            "balanceIdentity": null,
+            "readyAt": null,
+            "issues": {
+              "margin": "Incomplete or inconsistent adjacent-session financing summary"
+            }
+          }
+        }
+      },
+      "failedSources": []
+    },
+    "issues": [],
+    "attempts": [
+      {
+        "id": "20261127T115450Z-c4c154d1",
+        "phase": "partial",
+        "scheduled": true,
+        "startedAt": "2026-11-27T11:54:50.896659+00:00",
+        "finishedAt": "2026-11-27T11:54:53.727831+00:00",
+        "archivedAt": "2026-11-27T11:54:54.077784+00:00",
+        "qualified": false,
+        "archiveSha256": "f1720ee003dbe33d7b6286245e5c0ecac3bd442eef31c946b9fca23660c6b746",
+        "resultSha256": "8370310f0290257ba5154bb88592b5a403fdb84e3437cfcb324c4ef19e0e2e32",
+        "sources": {
+          "policy": {
+            "status": "archived",
+            "candidateCount": 11,
+            "reviewedCount": 0,
+            "issues": {},
+            "readyAt": "2026-11-27T11:54:54.077784+00:00"
+          },
+          "etf": {
+            "510300": {
+              "status": "unknown",
+              "issues": {
+                "shares_20261127": "Cleared units absent or incomplete"
+              },
+              "estimatedNetSubscriptionCny": null,
+              "featureReadyAt": null
+            },
+            "511010": {
+              "status": "unknown",
+              "issues": {
+                "shares_20261127": "Cleared units absent or incomplete",
+                "nav_2026-11-27": "Same-valuation-date manager NAV is absent or unverified"
+              },
+              "estimatedNetSubscriptionCny": null,
+              "featureReadyAt": null
+            }
+          },
+          "market": {
+            "turnover": {
+              "status": "verified",
+              "cny": "930379000000.00",
+              "readyAt": "2026-11-27T11:54:53.191396+00:00"
+            },
+            "margin": {
+              "status": "unknown",
+              "balanceIdentity": null,
+              "readyAt": null,
+              "issues": {
+                "margin": "Incomplete or inconsistent adjacent-session financing summary"
+              }
+            }
+          }
+        },
+        "failedSources": []
+      },
+      {
+        "id": "20261127T114000Z-18f4f01f",
+        "phase": "partial",
+        "scheduled": true,
+        "startedAt": "2026-11-27T11:40:00.749987+00:00",
+        "finishedAt": "2026-11-27T11:40:03.900148+00:00",
+        "archivedAt": "2026-11-27T11:40:04.205928+00:00",
+        "qualified": false,
+        "archiveSha256": "5576362cd470d4c6f473ab2bd6270a551a529670d5994e29b7931f9284cb761b",
+        "resultSha256": "6c44ee559cf26e7b10599b0e72c5f33d5811a26cf587ad2560f1087148995c69",
+        "sources": {
+          "policy": {
+            "status": "archived",
+            "candidateCount": 11,
+            "reviewedCount": 0,
+            "issues": {},
+            "readyAt": "2026-11-27T11:40:04.205928+00:00"
+          },
+          "etf": {
+            "510300": {
+              "status": "unknown",
+              "issues": {
+                "shares_20261127": "Cleared units absent or incomplete",
+                "nav_2026-11-27": "Same-valuation-date manager NAV is absent or unverified"
+              },
+              "estimatedNetSubscriptionCny": null,
+              "featureReadyAt": null
+            },
+            "511010": {
+              "status": "unknown",
+              "issues": {
+                "shares_20261127": "Cleared units absent or incomplete",
+                "nav_2026-11-27": "Same-valuation-date manager NAV is absent or unverified"
+              },
+              "estimatedNetSubscriptionCny": null,
+              "featureReadyAt": null
+            }
+          },
+          "market": {
+            "turnover": {
+              "status": "verified",
+              "cny": "930379000000.00",
+              "readyAt": "2026-11-27T11:40:03.401501+00:00"
+            },
+            "margin": {
+              "status": "unknown",
+              "balanceIdentity": null,
+              "readyAt": null,
+              "issues": {
+                "margin": "Incomplete or inconsistent adjacent-session financing summary"
+              }
+            }
+          }
+        },
+        "failedSources": []
+      },
+      {
+        "id": "20261127T112424Z-6c1c8aab",
+        "phase": "partial",
+        "scheduled": true,
+        "startedAt": "2026-11-27T11:24:24.883072+00:00",
+        "finishedAt": "2026-11-27T11:24:28.929057+00:00",
+        "archivedAt": "2026-11-27T11:24:29.341397+00:00",
+        "qualified": false,
+        "archiveSha256": "0ae51d184a37aa56a590bbfa759e33d3b46d185f81ca30e3f121c21964045a84",
+        "resultSha256": "b9da098bf5e54433348059f2bf59222223838b01d0d269f6cec54ac832ddf104",
+        "sources": {
+          "policy": {
+            "status": "archived",
+            "candidateCount": 11,
+            "reviewedCount": 0,
+            "issues": {},
+            "readyAt": "2026-11-27T11:24:29.341397+00:00"
+          },
+          "etf": {
+            "510300": {
+              "status": "unknown",
+              "issues": {
+                "shares_20261127": "Cleared units absent or incomplete",
+                "nav_2026-11-27": "Same-valuation-date manager NAV is absent or unverified"
+              },
+              "estimatedNetSubscriptionCny": null,
+              "featureReadyAt": null
+            },
+            "511010": {
+              "status": "unknown",
+              "issues": {
+                "shares_20261127": "Cleared units absent or incomplete",
+                "nav_2026-11-27": "Same-valuation-date manager NAV is absent or unverified"
+              },
+              "estimatedNetSubscriptionCny": null,
+              "featureReadyAt": null
+            }
+          },
+          "market": {
+            "turnover": {
+              "status": "verified",
+              "cny": "930379000000.00",
+              "readyAt": "2026-11-27T11:24:28.358741+00:00"
+            },
+            "margin": {
+              "status": "unknown",
+              "balanceIdentity": null,
+              "readyAt": null,
+              "issues": {
+                "margin": "Incomplete or inconsistent adjacent-session financing summary"
+              }
+            }
+          }
+        },
+        "failedSources": []
+      },
+      {
+        "id": "20261127T110404Z-2db2bafa",
+        "phase": "partial",
+        "scheduled": true,
+        "startedAt": "2026-11-27T11:04:04.879897+00:00",
+        "finishedAt": "2026-11-27T11:04:07.696165+00:00",
+        "archivedAt": "2026-11-27T11:04:07.990746+00:00",
+        "qualified": false,
+        "archiveSha256": "ddeb5c617ef5e7307030c19b77f66afd51dc300d2b435e66b75c5e476d6a9db5",
+        "resultSha256": "9c9eeae28a5ce5c758efeff7337862149efc1eeb7871787e42331529f240bdf6",
+        "sources": {
+          "policy": {
+            "status": "archived",
+            "candidateCount": 10,
+            "reviewedCount": 0,
+            "issues": {},
+            "readyAt": "2026-11-27T11:04:07.990746+00:00"
+          },
+          "etf": {
+            "510300": {
+              "status": "unknown",
+              "issues": {
+                "shares_20261127": "Cleared units absent or incomplete",
+                "nav_2026-11-27": "Same-valuation-date manager NAV is absent or unverified"
+              },
+              "estimatedNetSubscriptionCny": null,
+              "featureReadyAt": null
+            },
+            "511010": {
+              "status": "unknown",
+              "issues": {
+                "shares_20261127": "Cleared units absent or incomplete",
+                "nav_2026-11-27": "Same-valuation-date manager NAV is absent or unverified"
+              },
+              "estimatedNetSubscriptionCny": null,
+              "featureReadyAt": null
+            }
+          },
+          "market": {
+            "turnover": {
+              "status": "verified",
+              "cny": "930379000000.00",
+              "readyAt": "2026-11-27T11:04:07.194257+00:00"
+            },
+            "margin": {
+              "status": "unknown",
+              "balanceIdentity": null,
+              "readyAt": null,
+              "issues": {
+                "margin": "Incomplete or inconsistent adjacent-session financing summary"
+              }
+            }
+          }
+        },
+        "failedSources": []
+      },
+      {
+        "id": "20261127T104227Z-9666b266",
+        "phase": "partial",
+        "scheduled": true,
+        "startedAt": "2026-11-27T10:42:27.880666+00:00",
+        "finishedAt": "2026-11-27T10:42:31.412289+00:00",
+        "archivedAt": "2026-11-27T10:42:31.751817+00:00",
+        "qualified": false,
+        "archiveSha256": "23675205778886ec1f1634e3fcfe6c853e989bb85dd7287b2e84b51efe6ed50d",
+        "resultSha256": "0ddaf3e04cfcdd64a202af6c71aaf434ff01a3ec22d685105438a5e4ca4a425b",
+        "sources": {
+          "policy": {
+            "status": "archived",
+            "candidateCount": 10,
+            "reviewedCount": 0,
+            "issues": {},
+            "readyAt": "2026-11-27T10:42:31.751817+00:00"
+          },
+          "etf": {
+            "510300": {
+              "status": "unknown",
+              "issues": {
+                "shares_20261127": "Cleared units absent or incomplete",
+                "nav_2026-11-27": "Same-valuation-date manager NAV is absent or unverified"
+              },
+              "estimatedNetSubscriptionCny": null,
+              "featureReadyAt": null
+            },
+            "511010": {
+              "status": "unknown",
+              "issues": {
+                "shares_20261127": "Cleared units absent or incomplete",
+                "nav_2026-11-27": "Same-valuation-date manager NAV is absent or unverified"
+              },
+              "estimatedNetSubscriptionCny": null,
+              "featureReadyAt": null
+            }
+          },
+          "market": {
+            "turnover": {
+              "status": "verified",
+              "cny": "930379000000.00",
+              "readyAt": "2026-11-27T10:42:30.914647+00:00"
+            },
+            "margin": {
+              "status": "unknown",
+              "balanceIdentity": null,
+              "readyAt": null,
+              "issues": {
+                "margin": "Incomplete or inconsistent adjacent-session financing summary"
+              }
+            }
+          }
+        },
+        "failedSources": []
+      },
+      {
+        "id": "20261127T101550Z-256804c5",
+        "phase": "partial",
+        "scheduled": true,
+        "startedAt": "2026-11-27T10:15:50.890959+00:00",
+        "finishedAt": "2026-11-27T10:15:56.993529+00:00",
+        "archivedAt": "2026-11-27T10:15:57.390969+00:00",
+        "qualified": false,
+        "archiveSha256": "017e0acc24e5fd79e9a99656f8c8d5c7625cac9aa9bfab2ae9982a033f915455",
+        "resultSha256": "e833f77a07264672b124bfb510250121b8c8adbf4cfb29a667cc4ef2c04ed14e",
+        "sources": {
+          "policy": {
+            "status": "archived",
+            "candidateCount": 10,
+            "reviewedCount": 0,
+            "issues": {},
+            "readyAt": "2026-11-27T10:15:57.390969+00:00"
+          },
+          "etf": {
+            "510300": {
+              "status": "unknown",
+              "issues": {
+                "shares_20261127": "Cleared units absent or incomplete",
+                "nav_2026-11-27": "Same-valuation-date manager NAV is absent or unverified"
+              },
+              "estimatedNetSubscriptionCny": null,
+              "featureReadyAt": null
+            },
+            "511010": {
+              "status": "unknown",
+              "issues": {
+                "shares_20261127": "Cleared units absent or incomplete",
+                "nav_2026-11-27": "Same-valuation-date manager NAV is absent or unverified"
+              },
+              "estimatedNetSubscriptionCny": null,
+              "featureReadyAt": null
+            }
+          },
+          "market": {
+            "turnover": {
+              "status": "verified",
+              "cny": "930379000000.00",
+              "readyAt": "2026-11-27T10:15:56.511958+00:00"
+            },
+            "margin": {
+              "status": "unknown",
+              "balanceIdentity": null,
+              "readyAt": null,
+              "issues": {
+                "margin": "Incomplete or inconsistent adjacent-session financing summary"
+              }
+            }
+          }
+        },
+        "failedSources": []
+      },
+      {
+        "id": "20261127T092054Z-465a8da5",
+        "phase": "partial",
+        "scheduled": true,
+        "startedAt": "2026-11-27T09:20:54.881219+00:00",
+        "finishedAt": "2026-11-27T09:20:59.019537+00:00",
+        "archivedAt": "2026-11-27T09:20:59.334219+00:00",
+        "qualified": false,
+        "archiveSha256": "edfe0c5bcded6feefe0cb2b14b8907eec2ebba7e6929582cc1546e2e5963e495",
+        "resultSha256": "17330d616013a12b430a372d0eee17adb3aa7c6c45eb3a6530971e66e128269a",
+        "sources": {
+          "policy": {
+            "status": "archived",
+            "candidateCount": 10,
+            "reviewedCount": 0,
+            "issues": {},
+            "readyAt": "2026-11-27T09:20:59.334219+00:00"
+          },
+          "etf": {
+            "510300": {
+              "status": "unknown",
+              "issues": {
+                "shares_20261127": "Cleared units absent or incomplete",
+                "nav_2026-11-27": "Same-valuation-date manager NAV is absent or unverified"
+              },
+              "estimatedNetSubscriptionCny": null,
+              "featureReadyAt": null
+            },
+            "511010": {
+              "status": "unknown",
+              "issues": {
+                "shares_20261127": "Cleared units absent or incomplete",
+                "nav_2026-11-27": "Same-valuation-date manager NAV is absent or unverified"
+              },
+              "estimatedNetSubscriptionCny": null,
+              "featureReadyAt": null
+            }
+          },
+          "market": {
+            "turnover": {
+              "status": "verified",
+              "cny": "930379000000.00",
+              "readyAt": "2026-11-27T09:20:58.439113+00:00"
+            },
+            "margin": {
+              "status": "unknown",
+              "balanceIdentity": null,
+              "readyAt": null,
+              "issues": {
+                "margin": "Incomplete or inconsistent adjacent-session financing summary"
+              }
+            }
+          }
+        },
+        "failedSources": []
+      },
+      {
+        "id": "20261127T090437Z-549300f6",
+        "phase": "partial",
+        "scheduled": true,
+        "startedAt": "2026-11-27T09:04:37.883035+00:00",
+        "finishedAt": "2026-11-27T09:04:40.478056+00:00",
+        "archivedAt": "2026-11-27T09:04:40.809820+00:00",
+        "qualified": false,
+        "archiveSha256": "753df205e22f425adf24b9ee58986432121500b46e8da72b14e6a69bfbff7afe",
+        "resultSha256": "af4e9c59c673fb51896e114e04e429e35e6ce8f037daac9bf3ea2b860655007e",
+        "sources": {
+          "policy": {
+            "status": "archived",
+            "candidateCount": 10,
+            "reviewedCount": 0,
+            "issues": {},
+            "readyAt": "2026-11-27T09:04:40.809820+00:00"
+          },
+          "etf": {
+            "510300": {
+              "status": "unknown",
+              "issues": {
+                "shares_20261127": "Cleared units absent or incomplete",
+                "nav_2026-11-27": "Same-valuation-date manager NAV is absent or unverified"
+              },
+              "estimatedNetSubscriptionCny": null,
+              "featureReadyAt": null
+            },
+            "511010": {
+              "status": "unknown",
+              "issues": {
+                "shares_20261127": "Cleared units absent or incomplete",
+                "nav_2026-11-27": "Same-valuation-date manager NAV is absent or unverified"
+              },
+              "estimatedNetSubscriptionCny": null,
+              "featureReadyAt": null
+            }
+          },
+          "market": {
+            "turnover": {
+              "status": "verified",
+              "cny": "930379000000.00",
+              "readyAt": "2026-11-27T09:04:39.910809+00:00"
+            },
+            "margin": {
+              "status": "unknown",
+              "balanceIdentity": null,
+              "readyAt": null,
+              "issues": {
+                "margin": "Incomplete or inconsistent adjacent-session financing summary"
+              }
+            }
+          }
+        },
+        "failedSources": []
+      },
+      {
+        "id": "20261127T090329Z-f6cbc152",
+        "phase": "partial",
+        "scheduled": true,
+        "startedAt": "2026-11-27T09:03:29.877227+00:00",
+        "finishedAt": "2026-11-27T09:03:32.690773+00:00",
+        "archivedAt": "2026-11-27T09:03:33.003911+00:00",
+        "qualified": false,
+        "archiveSha256": "b7ba94df2e50df7348874b44bbb2b44cbb14a40a9584900a86a5a1cc90c0a18a",
+        "resultSha256": "1bc1a6c48e7fa0fba711595b289a8b2d2d84d9c5cf43aac8e68a7e17bc9a8e06",
+        "sources": {
+          "policy": {
+            "status": "archived",
+            "candidateCount": 10,
+            "reviewedCount": 0,
+            "issues": {},
+            "readyAt": "2026-11-27T09:03:33.003911+00:00"
+          },
+          "etf": {
+            "510300": {
+              "status": "unknown",
+              "issues": {
+                "shares_20261127": "Cleared units absent or incomplete",
+                "nav_2026-11-27": "Same-valuation-date manager NAV is absent or unverified"
+              },
+              "estimatedNetSubscriptionCny": null,
+              "featureReadyAt": null
+            },
+            "511010": {
+              "status": "unknown",
+              "issues": {
+                "shares_20261127": "Cleared units absent or incomplete",
+                "nav_2026-11-27": "Same-valuation-date manager NAV is absent or unverified"
+              },
+              "estimatedNetSubscriptionCny": null,
+              "featureReadyAt": null
+            }
+          },
+          "market": {
+            "turnover": {
+              "status": "verified",
+              "cny": "930379000000.00",
+              "readyAt": "2026-11-27T09:03:32.182076+00:00"
+            },
+            "margin": {
+              "status": "unknown",
+              "balanceIdentity": null,
+              "readyAt": null,
+              "issues": {
+                "margin": "Incomplete or inconsistent adjacent-session financing summary"
+              }
+            }
+          }
+        },
+        "failedSources": []
+      }
+    ],
+    "latestSourceEvidence": {
+      "archiveSha256": "f1720ee003dbe33d7b6286245e5c0ecac3bd442eef31c946b9fca23660c6b746",
+      "state": "available",
+      "requests": [
+        {
+          "source": "shares",
+          "request": "shares_20261127",
+          "expectedDates": [
+            "2026-11-27"
+          ],
+          "returnedDates": [],
+          "rowCount": 0,
+          "receivedAt": "2026-11-27T11:54:51.052405+00:00",
+          "url": "https://query.sse.com.cn/commonQuery.do?sqlId=COMMON_SSE_ZQPZ_ETFZL_XXPL_ETFGM_SEARCH_L&STAT_DATE=2026-11-27&isPagination=true&pageHelp.pageSize=1500&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.endPage=1&pageHelp.cacheSize=1",
+          "sha256": "16cef32ea2026cf12441c8d32d7ece571c87f837733a05a1234e18023c044543",
+          "httpStatus": 200,
+          "state": "empty_response"
+        },
+        {
+          "source": "huatai",
+          "request": "nav_510300",
+          "expectedDates": [
+            "2026-11-26",
+            "2026-11-27"
+          ],
+          "returnedDates": [
+            "2026-11-26",
+            "2026-11-27"
+          ],
+          "rowCount": 2,
+          "receivedAt": "2026-11-27T11:54:51.243854+00:00",
+          "url": "https://www.huatai-pb.com/common-web/chart/fundnettable/getFundNetTableJson?fundcode=510300&from=2026-11-26&to=2026-11-27&pages=1-10&siteId=9496d23c648f4a72a79150c3f2ac669b",
+          "sha256": "f8556e9af7e2f23703683df2dc661dbe3b74130f008c9939f5dda53d75ac34ca",
+          "httpStatus": 200,
+          "state": "dates_present"
+        },
+        {
+          "source": "guotai",
+          "request": "nav_511010_20261130",
+          "expectedDates": [
+            "2026-11-27"
+          ],
+          "returnedDates": [],
+          "rowCount": null,
+          "receivedAt": "2026-11-27T11:54:51.131343+00:00",
+          "url": "https://m.gtfund.com/cochin/etf/download/511010/20261130",
+          "sha256": "55c79e9067ac3bf48b919aa68a5866c4e886a81c2d0ed21cd1f2433e6408eded",
+          "httpStatus": 404,
+          "state": "response_unavailable"
+        },
+        {
+          "source": "margin",
+          "request": "margin",
+          "expectedDates": [
+            "2026-11-26",
+            "2026-11-27"
+          ],
+          "returnedDates": [
+            "2026-11-26"
+          ],
+          "rowCount": 1,
+          "receivedAt": "2026-11-27T11:54:52.822808+00:00",
+          "url": "https://query.sse.com.cn/commonSoaQuery.do?sqlId=RZRQ_HZ_INFO&beginDate=20261126&endDate=20261127&isPagination=true&pageHelp.pageSize=100&pageHelp.pageNo=1",
+          "sha256": "1d3752234778f91dc0e5865d08d25c36068c909f3fbd6c76ca16f6aa7017ed05",
+          "httpStatus": 200,
+          "state": "date_mismatch"
+        },
+        {
+          "source": "margin_detail",
+          "request": "detail_20261127_1",
+          "expectedDates": [
+            "2026-11-27"
+          ],
+          "returnedDates": [],
+          "rowCount": 0,
+          "receivedAt": "2026-11-27T11:54:53.032142+00:00",
+          "url": "https://query.sse.com.cn/commonSoaQuery.do?sqlId=RZRQ_MX_INFO&beginDate=20261127&endDate=20261127&isPagination=true&pageHelp.pageSize=1500&pageHelp.pageNo=1",
+          "sha256": "3258a392459610b62707df027800a1a5e233387af4937f42c7e4ec9712279036",
+          "httpStatus": 200,
+          "state": "empty_response"
+        },
+        {
+          "source": "margin_detail",
+          "request": "detail_20261127_2",
+          "expectedDates": [
+            "2026-11-27"
+          ],
+          "returnedDates": [],
+          "rowCount": 0,
+          "receivedAt": "2026-11-27T11:54:53.189100+00:00",
+          "url": "https://query.sse.com.cn/commonSoaQuery.do?sqlId=RZRQ_MX_INFO&beginDate=20261127&endDate=20261127&isPagination=true&pageHelp.pageSize=1500&pageHelp.pageNo=2",
+          "sha256": "c35fd89d2d95d4e43b35182afb7eb13176bef91d53084aa0a00bc32b797f0099",
+          "httpStatus": 200,
+          "state": "empty_response"
+        }
+      ]
+    },
+    "decision": {
+      "status": "prelaunch",
+      "scheduledAt": null,
+      "deadline": null,
+      "attempts": []
+    },
+    "label": {
+      "sessions": [],
+      "notBefore": null,
+      "readyAt": null,
+      "latest": null,
+      "attempts": [],
+      "status": "decision_ineligible"
+    },
+    "forecast": {
+      "status": "not_scheduled",
+      "fold": null,
+      "deadline": null,
+      "sessions": [],
+      "readyAt": null,
+      "latest": null,
+      "attempts": [],
+      "sealedVariants": []
+    },
+    "modelProgress": {
+      "status": "observation_origin_pending",
+      "studyOrigin": null,
+      "fold": null,
+      "observedAt": "2026-11-27T19:55:00+08:00"
+    }
+  }
+}

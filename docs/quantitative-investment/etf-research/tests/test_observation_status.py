@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 import sys
 import tempfile
@@ -10,6 +10,7 @@ sys.path.insert(0,str(ROOT/'scripts'))
 from observation_status import report
 from etf_research.evidence_archive import object_path
 from etf_research.publication import read
+from pack_observation_evidence import restore_ledger
 
 PROOF = ROOT/'reports/2026-11-27-observation-launch'
 OBSERVED = datetime.fromisoformat('2026-11-27T17:10:00+08:00')
@@ -71,6 +72,29 @@ class ObservationStatusTests(unittest.TestCase):
         self.assertEqual(rows['detail_20261127_2']['rowCount'],0)
         object_path(self.store,rows['margin']['sha256']).write_bytes(b'bad hash')
         self.assertEqual(evidence()['margin']['state'],'unverified')
+
+    def test_as_of_distinguishes_future_running_and_archived_attempts(self):
+        pack=ROOT/'reports/2026-11-27-portable-observation/pack'
+        day='2026-11-27'
+        latest='20261127T115450Z-c4c154d1'
+        ledger=self.store/'restored'
+        restore_ledger(pack,ledger)
+        folder=ledger/'reports/research-observation/runs'/day/latest
+        started=datetime.fromisoformat(read(folder/'started.json')['startedAt'])
+        archive=read(ledger/'reports/research-observation/archives'/day/(latest+'.json'))
+        ready=datetime.fromisoformat(archive['archiveVerifiedAt'])
+        before=report(ledger,pack/'archive',day=day,observed=started-timedelta(seconds=1))['session']
+        self.assertEqual(before['latest']['id'],'20261127T114000Z-18f4f01f')
+        self.assertEqual(before['archivedAttempts'],8)
+        self.assertEqual(before['issues'],[])
+        running=report(ledger,pack/'archive',day=day,observed=started)['session']
+        self.assertEqual(running['issues'],[dict(id=latest,status='pending_archive')])
+        self.assertEqual(running['latestSourceEvidence']['archiveSha256'],before['latest']['archiveSha256'])
+        verified=report(ledger,pack/'archive',day=day,observed=ready)['session']
+        self.assertEqual(verified['archivedAttempts'],9)
+        self.assertEqual(verified['latest']['id'],latest)
+        self.assertEqual(verified['latestSourceEvidence']['archiveSha256'],archive['archive'])
+        self.assertEqual(verified['issues'],[])
 
     def test_missing_record_separate_from_unverified_archive(self):
         path = ROOT/'reports/research-observation/archives/2026-11-27'

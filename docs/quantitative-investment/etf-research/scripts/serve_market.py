@@ -188,15 +188,22 @@ class Handler(BaseHTTPRequestHandler):
             kind = 'application/json'
             try:
                 import observation_status
-                params = interactive.request_params(url.query, (), ('day', 'before'))
-                if len(params) > 1:
+                from etf_research.policy_events import instant
+                params = interactive.request_params(url.query, (), ('day', 'before', 'asOf'))
+                if 'day' in params and 'before' in params:
                     raise interactive.InputError('请选择交易日查询或向前翻页。')
+                now = datetime.now(timezone.utc)
+                cutoff = params.pop('asOf',None)
                 try:
+                    observed = instant(cutoff) if cutoff is not None else now
+                    if observed>now:
+                        raise ValueError('核查时点须早于或等于当前时间。')
                     for value in params.values():
                         observation_status.parse_day(value)
                 except ValueError as exc:
                     raise interactive.InputError(str(exc)) from exc
-                body = interactive.encode(observation_status.report(*observation_status.production_paths(), **params))
+                body = interactive.encode(observation_status.report(
+                    *observation_status.production_paths(),observed=observed,**params))
             except interactive.InputError as exc:
                 status,body = 400,interactive.encode({'error':str(exc)})
             except (OSError,ValueError,KeyError,TypeError,ImportError) as exc:

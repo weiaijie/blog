@@ -1,0 +1,14 @@
+[Unit]
+Description=Archive independent public ETF research evidence
+After=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/projects/etf-research-observation
+ExecStart=%h/projects/etf-research-py312/bin/python scripts/run_research_observation.py --store %h/projects/etf-research-observation-archive
+Environment=PYTHONUTF8=1
+Environment=PYTHONDONTWRITEBYTECODE=1
+TimeoutStartSec=15min
+NoNewPrivileges=yes
+PrivateTmp=yes
+UMask=0022

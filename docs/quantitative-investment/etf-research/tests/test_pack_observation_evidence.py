@@ -12,7 +12,7 @@ from etf_research.publication import read
 from observation_status import report
 from observation_out_of_sample import evaluate
 from review_policy_observations import review_progress
-from pack_observation_evidence import export, restore_ledger, restore_receipt, verify
+from pack_observation_evidence import export, merge_packs, restore_ledger, restore_receipt, verify
 from seal_observation_evaluation import verify_evaluation
 
 PACK=ROOT/'reports/2026-11-27-portable-observation/pack'
@@ -59,6 +59,24 @@ class PortableObservationTests(unittest.TestCase):
             index=read(pack/'index.json')
             self.assertEqual([row['receipt'] for row in index['receipts']],[EVAL])
             self.assertEqual(verify(pack),summary)
+
+    def test_contiguous_packs_merge_and_restore_the_same_as_of_ledger(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            base=Path(temporary)
+            ledger=base/'ledger'
+            restore_ledger(PACK,ledger)
+            first,second,joined=base/'first',base/'second',base/'joined'
+            boundary=datetime.fromisoformat('2026-11-27T19:45:00+08:00')
+            export(ledger,PACK/'archive',first,boundary)
+            export(ledger,PACK/'archive',second,CUTOFF,after=boundary)
+            self.assertEqual(merge_packs([first,second],joined),verify(PACK))
+            restored=base/'new-ledger'
+            restore_ledger(joined,restored)
+            self.assertEqual(report(restored,joined/'archive',observed=CUTOFF),
+                             report(ledger,PACK/'archive',observed=CUTOFF))
+            with self.assertRaisesRegex(ValueError,'not contiguous'):
+                merge_packs([second,first],base/'bad')
+            self.assertFalse((base/'bad').exists())
 
     def test_restore_refuses_unsealed_bytes_and_existing_destination(self):
         with tempfile.TemporaryDirectory() as temporary:

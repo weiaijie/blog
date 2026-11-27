@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "researchOnly": true,
+  "valuationOn": "2026-11-27",
+  "effectiveOn": "2026-11-30",
+  "checkedAt": "2026-11-27T13:57:06.611709+00:00",
+  "exchange": {
+    "state": "different_dates",
+    "valuationOn": "2026-11-26",
+    "effectiveOn": "2026-11-27",
+    "navCny": "141.3710",
+    "httpStatus": 200,
+    "sha256": "c847ba39a5022620a4e645940bc0a364f5d853b90eb2e01afbb19acec2bda169",
+    "receivedAt": "2026-11-27T13:57:06.533645+00:00"
+  },
+  "manager": {
+    "state": "exact_dates",
+    "navCny": "141.339",
+    "httpStatus": 200,
+    "sha256": "1eff3a61044964cc1908b5b0e25f11606811279a4148e033837416cfbb8863ee",
+    "receivedAt": "2026-11-27T13:57:06.611429+00:00"
+  },
+  "matched": null
+}

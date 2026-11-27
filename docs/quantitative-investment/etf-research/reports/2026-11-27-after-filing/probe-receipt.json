@@ -1,0 +1,35 @@
+{
+  "timer": "etf-research-source-probe-20261127-2205.timer",
+  "timerState": {
+    "ActiveState": "inactive",
+    "NextElapseUSecRealtime": "",
+    "LastTriggerUSec": "",
+    "journalStartedAt": "2026-11-27T14:05:00.576497+00:00"
+  },
+  "journalInvocation": "44c3963d85ee48f985250b01de0de09e",
+  "manualProbe": true,
+  "receipt": {
+    "schemaVersion": 1,
+    "session": "2026-11-27",
+    "attempt": "reports/research-observation/runs/2026-11-27/20261127T140500Z-8f740eb6",
+    "phase": "partial",
+    "resultSha256": "f41b7bd9da651750970683b303a679989c8d22b7c326e0ceb6bb0bff3bd06334",
+    "attemptManifestSha256": "29f5b2fdb7d32309182784c51be7b0b4366ce2c8e60aad5137f29932b0c5b80a",
+    "trigger": null,
+    "archive": "b137196606639612ec674efcd3dde9853412af3b7319f7659fcfe174c1f68292",
+    "archiveCreatedAt": "2026-11-27T14:05:04.699033+00:00",
+    "archiveVerifiedAt": "2026-11-27T14:05:04.775344+00:00",
+    "files": 140,
+    "forwardEligible": false
+  },
+  "productionCounts": [],
+  "delta": {
+    "asOf": "2026-11-27T14:05:51.399080+00:00",
+    "after": "2026-11-27T21:10:38+08:00",
+    "receipts": {
+      "observation": 1
+    },
+    "archives": 1,
+    "files": 96
+  }
+}
