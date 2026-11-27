@@ -1,0 +1,232 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-11-26T21:00:00.657567+08:00",
+  "account_through": "2026-11-23",
+  "scheduler": {
+    "timer_enabled": "enabled",
+    "timer_active": "active",
+    "linger": "yes"
+  },
+  "issues": [
+    "run_failed",
+    "notice_review_required",
+    "notice_review_required",
+    "account_stale"
+  ],
+  "review_queue": [
+    {
+      "packet_folder": "reports/daily/20261124T161001-a4eb30d3/notice_review",
+      "packet_sha256": "cb1c80fdf1ea6c7d61809c69af549ecdff109059f479ac07ea19f3d51c59843a",
+      "changes": 1,
+      "pending_changes": 1,
+      "admission_still_blocked": true
+    },
+    {
+      "packet_folder": "reports/daily/20261124T161205-e3491bf0/notice_review",
+      "packet_sha256": "4b29fade7c418a80b5712e3b13edf9c4052c2142952f09b891b9e9de373c4e7b",
+      "changes": 1,
+      "pending_changes": 1,
+      "admission_still_blocked": true
+    },
+    {
+      "packet_folder": "reports/daily/20261124T161408-47c138d1/notice_review",
+      "packet_sha256": "e3a651c90f05f109852f55701d1fb18bb73975411e520d98f68e9dd939a0be90",
+      "changes": 1,
+      "pending_changes": 1,
+      "admission_still_blocked": true
+    },
+    {
+      "packet_folder": "reports/daily/20261124T161612-503982ec/notice_review",
+      "packet_sha256": "6eddbedd83fd41db3e530a9e8d9de2023dfafcd89861dbf3224c5522bceb4625",
+      "changes": 1,
+      "pending_changes": 1,
+      "admission_still_blocked": true
+    },
+    {
+      "packet_folder": "reports/daily/20261124T164001-a583ef02/notice_review",
+      "packet_sha256": "79996060f4e714c11578b037fb5921c7ebbf420504a55587d243901ab5c5e99f",
+      "changes": 1,
+      "pending_changes": 1,
+      "admission_still_blocked": true
+    },
+    {
+      "packet_folder": "reports/daily/20261124T164205-56ab3887/notice_review",
+      "packet_sha256": "59cbc51d63e7cfb65d71780bb42f5b242bccc5db80f3416b8bcdbc5539f057f4",
+      "changes": 1,
+      "pending_changes": 1,
+      "admission_still_blocked": true
+    },
+    {
+      "packet_folder": "reports/daily/20261124T164408-08a88b5a/notice_review",
+      "packet_sha256": "55f5f3a63a94ef67e64f34f00ae1fd574a267c551aa4eaf1f5c88382dbd278d7",
+      "changes": 1,
+      "pending_changes": 1,
+      "admission_still_blocked": true
+    },
+    {
+      "packet_folder": "reports/daily/20261124T171001-efafab30/notice_review",
+      "packet_sha256": "4dc932cab68a8fbe58297088204c8f52d3d9613a9ea6fe0b08212c13a113f5ed",
+      "changes": 1,
+      "pending_changes": 1,
+      "admission_still_blocked": true
+    },
+    {
+      "packet_folder": "reports/daily/20261124T171204-2e8ec748/notice_review",
+      "packet_sha256": "482ef9f47633a7b53b4f1b747bc03ad4f328195a8021a3f372bacceb125415eb",
+      "changes": 1,
+      "pending_changes": 1,
+      "admission_still_blocked": true
+    },
+    {
+      "packet_folder": "reports/daily/20261124T171408-7f824d0c/notice_review",
+      "packet_sha256": "8dac323fdd93588d130509187e55bb573ad5c0825e1ce903bb23defb82837c91",
+      "changes": 1,
+      "pending_changes": 1,
+      "admission_still_blocked": true
+    },
+    {
+      "packet_folder": "reports/daily/20261125T161001-4fd1aac2/notice_review",
+      "packet_sha256": "27779a0f55fec551e4ff2bc19512eb16b9aaf27a4c1b3e637bd7d5c910be0afa",
+      "changes": 1,
+      "pending_changes": 1,
+      "admission_still_blocked": true
+    },
+    {
+      "packet_folder": "reports/daily/20261125T161205-14d84f62/notice_review",
+      "packet_sha256": "3c97d66cfd97fd48718cf4a41b09f288e39491dccd74c4def73092d989a98ad5",
+      "changes": 1,
+      "pending_changes": 1,
+      "admission_still_blocked": true
+    },
+    {
+      "packet_folder": "reports/daily/20261125T161409-61b9a626/notice_review",
+      "packet_sha256": "90ba019100bcf48ec2e0bf3477e82882d669851b51d354618609d8efa88a0915",
+      "changes": 1,
+      "pending_changes": 1,
+      "admission_still_blocked": true
+    },
+    {
+      "packet_folder": "reports/daily/20261125T164001-eee3f693/notice_review",
+      "packet_sha256": "928895689a75a4833180cf2e16b5ee08cc89eb5351892e93bf93da262b6c0696",
+      "changes": 1,
+      "pending_changes": 1,
+      "admission_still_blocked": true
+    },
+    {
+      "packet_folder": "reports/daily/20261125T164205-b12fb8dd/notice_review",
+      "packet_sha256": "4cee93f2c259ab48f977e8e91d1498ecdfedde9d2366b6d03317dfc8234c9afa",
+      "changes": 1,
+      "pending_changes": 1,
+      "admission_still_blocked": true
+    },
+    {
+      "packet_folder": "reports/daily/20261125T164408-43952ddb/notice_review",
+      "packet_sha256": "45da39856f508c1a562a12c6f5050558fdb792fb94d99015a152020111f7fdd5",
+      "changes": 1,
+      "pending_changes": 1,
+      "admission_still_blocked": true
+    },
+    {
+      "packet_folder": "reports/daily/20261125T171001-ab75e3bf/notice_review",
+      "packet_sha256": "fb85a672319e4cd9b548f6cbaf7b4bf073f733b3fe9d26a906a6cbc5be7dbf74",
+      "changes": 1,
+      "pending_changes": 1,
+      "admission_still_blocked": true
+    },
+    {
+      "packet_folder": "reports/daily/20261125T171205-e0fe6632/notice_review",
+      "packet_sha256": "5193a0715494d5e9070eb729339191b864513a4f29ad2b42d1f401b70be32585",
+      "changes": 1,
+      "pending_changes": 1,
+      "admission_still_blocked": true
+    },
+    {
+      "packet_folder": "reports/daily/20261125T171409-c37ec299/notice_review",
+      "packet_sha256": "32248fa7d5d37bcca123dc6c35a379a73f1d3c121e855abec469ed780b2d8cbb",
+      "changes": 1,
+      "pending_changes": 1,
+      "admission_still_blocked": true
+    },
+    {
+      "packet_folder": "reports/daily/20261126T161001-2a746872/notice_review",
+      "packet_sha256": "eb492a219327a9f304d31a90b388e9c7ea12330113352349d8b31a2b22685334",
+      "changes": 2,
+      "pending_changes": 2,
+      "admission_still_blocked": true
+    },
+    {
+      "packet_folder": "reports/daily/20261126T161205-2aae45b6/notice_review",
+      "packet_sha256": "5fd2d367b63bb52b1f3d71d608743cbe6c3871ffb00c964eaaa001ed9fab9fa4",
+      "changes": 2,
+      "pending_changes": 2,
+      "admission_still_blocked": true
+    },
+    {
+      "packet_folder": "reports/daily/20261126T161409-f7d696ba/notice_review",
+      "packet_sha256": "d51c2ba58de6d7cf00515815310b33bf587b63c953d83aba058c8dc6d1afdfb7",
+      "changes": 2,
+      "pending_changes": 2,
+      "admission_still_blocked": true
+    },
+    {
+      "packet_folder": "reports/daily/20261126T164001-de714a6e/notice_review",
+      "packet_sha256": "4b2de3c59d46eebb65d9199feb5fab568cebf3aa28360ff6adf3361326d56175",
+      "changes": 2,
+      "pending_changes": 2,
+      "admission_still_blocked": true
+    },
+    {
+      "packet_folder": "reports/daily/20261126T164205-280a1a17/notice_review",
+      "packet_sha256": "e6329e28baa77a8fefc19b40ffc954de18490024acb6310704d5bfe529e826b6",
+      "changes": 2,
+      "pending_changes": 2,
+      "admission_still_blocked": true
+    },
+    {
+      "packet_folder": "reports/daily/20261126T164408-d9e935f6/notice_review",
+      "packet_sha256": "1e5af6ebeb80073026179e111645a9dbec9daafda7538d5e38b64166b5ce5703",
+      "changes": 2,
+      "pending_changes": 2,
+      "admission_still_blocked": true
+    },
+    {
+      "packet_folder": "reports/daily/20261126T171001-92f90d8b/notice_review",
+      "packet_sha256": "b75550b6d80e89622a0b385ed4b94e55c674d6bb9b646e36454550b3d172a941",
+      "changes": 2,
+      "pending_changes": 2,
+      "admission_still_blocked": true
+    },
+    {
+      "packet_folder": "reports/daily/20261126T171205-81b56252/notice_review",
+      "packet_sha256": "5e3719193cbe22079dd2f7cbb7d7ddd70bada6bc2afab874968dca21b67ecc08",
+      "changes": 2,
+      "pending_changes": 2,
+      "admission_still_blocked": true
+    },
+    {
+      "packet_folder": "reports/daily/20261126T171408-419cfdca/notice_review",
+      "packet_sha256": "91769883666155ceccb34c6c7979fa471db3aac1f06999028ceffdb868773c0b",
+      "changes": 2,
+      "pending_changes": 2,
+      "admission_still_blocked": true
+    }
+  ],
+  "report_only": true,
+  "expected_through": "2026-11-26",
+  "state": "run_failed",
+  "actionable": true,
+  "operation": "reports/operations/20261126T091408Z-6ed7ff1a",
+  "last_archive": {
+    "snapshot": "d004733830cf522f905eeb4ce41e7e669cc39abf0eac6eed6fa21cc46a216fd9",
+    "files": 13689,
+    "new_objects": 342,
+    "new_bytes": 1632763,
+    "finished_at_utc": "2026-11-26T09:45:30.107620+00:00"
+  },
+  "archive_scheduler": {
+    "ActiveState": "active",
+    "UnitFileState": "enabled",
+    "Result": "success"
+  },
+  "observation": "reports/health/20261126T210001-afbb8bc3"
+}

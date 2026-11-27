@@ -1,0 +1,59 @@
+[
+  {
+    "status": "replayed_extension",
+    "bundle": "20261127T143503-904c0f35",
+    "target": "2026-11-24",
+    "old_through": "2026-11-23",
+    "sessions_appended": [
+      "2026-11-24"
+    ],
+    "accounts": 18,
+    "prior_checkpoint": "be906c9262ccdec1c3f37645c543b9cb3975ed31f9d078f81e26ce2394f829d9",
+    "checkpoint": "2d61f8053283f2f4eb7ce1ca58cecea174236de00daa78a39f80d179d0fc45df",
+    "offline": true,
+    "prices": "20261124T171408-7f824d0c-prices",
+    "official": "20261124T171408-7f824d0c-official",
+    "prior_daily_rows": 234,
+    "new_daily_rows": 252,
+    "added_model_trades": 0,
+    "bundleManifestSha256": "b51582a78a648cc5112f47377b1b52adce2a71455aef63df7ebd5f8f80b477de"
+  },
+  {
+    "status": "replayed_extension",
+    "bundle": "20261127T143513-8e1de765",
+    "target": "2026-11-25",
+    "old_through": "2026-11-24",
+    "sessions_appended": [
+      "2026-11-25"
+    ],
+    "accounts": 18,
+    "prior_checkpoint": "2d61f8053283f2f4eb7ce1ca58cecea174236de00daa78a39f80d179d0fc45df",
+    "checkpoint": "532566f43315e9c5dd9e105e9af217552b6be107907e890955b506626572c155",
+    "offline": true,
+    "prices": "20261125T171409-c37ec299-prices",
+    "official": "20261125T171409-c37ec299-official",
+    "prior_daily_rows": 252,
+    "new_daily_rows": 270,
+    "added_model_trades": 0,
+    "bundleManifestSha256": "139d9796ff9f2e7703d00554fc7b8ff812dceb2aa4b075a7047146b6c63a55de"
+  },
+  {
+    "status": "replayed_extension",
+    "bundle": "20261127T143522-1b71c022",
+    "target": "2026-11-26",
+    "old_through": "2026-11-25",
+    "sessions_appended": [
+      "2026-11-26"
+    ],
+    "accounts": 18,
+    "prior_checkpoint": "532566f43315e9c5dd9e105e9af217552b6be107907e890955b506626572c155",
+    "checkpoint": "a4d2ae7e236fe5ec1d7248e94ed765e463cb35525e25629a21958aaad311e9d6",
+    "offline": true,
+    "prices": "20261126T171408-419cfdca-prices",
+    "official": "20261126T171408-419cfdca-official",
+    "prior_daily_rows": 270,
+    "new_daily_rows": 288,
+    "added_model_trades": 0,
+    "bundleManifestSha256": "2800d7db1266bf0bb2132ba04597ee94f28579245bda816362b46302bd8906e1"
+  }
+]

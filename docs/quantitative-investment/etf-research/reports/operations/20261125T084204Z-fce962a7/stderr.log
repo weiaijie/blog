@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/home/ubuntu/projects/etf-research-git-snapshot/docs/quantitative-investment/etf-research/scripts/run_daily.py", line 157, in <module>
+    print(json.dumps(run(a),ensure_ascii=False))
+                     ^^^^^^
+  File "/home/ubuntu/projects/etf-research-git-snapshot/docs/quantitative-investment/etf-research/scripts/run_daily.py", line 102, in run
+    data,admission=load_incremental(ROOT/'data/snapshots',candidate)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/projects/etf-research-git-snapshot/docs/quantitative-investment/etf-research/src/etf_research/admission.py", line 99, in load_incremental
+    catalog_counts[symbol]=check_catalog(json.loads(body),old,symbol)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/projects/etf-research-git-snapshot/docs/quantitative-investment/etf-research/src/etf_research/admission.py", line 43, in check_catalog
+    if current!=previous:raise CatalogChanged(diff_catalogs(current,previous))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+etf_research.catalog_changes.CatalogChanged: Official catalog changed: {"added":1,"modified":0,"removed":0}; full notice review required before price admission

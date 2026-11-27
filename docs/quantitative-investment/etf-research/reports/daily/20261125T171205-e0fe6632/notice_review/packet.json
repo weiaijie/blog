@@ -1,0 +1,56 @@
+{
+  "format": 1,
+  "candidate_snapshot": "20261125T171205-e0fe6632-prices",
+  "baseline_snapshot": "2026-11-03-official-02",
+  "snapshot_manifest_sha256": {
+    "candidate": "742a1326560a791ef9de76514dea0e85e586e1a1772eb42ec834110f414ee16b",
+    "baseline": "368c8bb592152e72acaf10ef0451cc9f1ef1d3e7c4ab5ca99babb683aa3b813f"
+  },
+  "symbols": {
+    "510300": {
+      "current_count": 260,
+      "baseline_count": 259,
+      "candidate_body_sha256": "d71dcba3d53a4c4305fc9d4b4d75d8ac8a3eedd174aa662a4bdc8ae153577ff4",
+      "baseline_body_sha256": "1fadf896aa649e34b03a7c671cdef072d1163d3dbff5414f7c1ae945e1e0d462",
+      "captured_at_utc": "2026-11-25T09:12:05.489550+00:00",
+      "changes": 1
+    },
+    "511010": {
+      "current_count": 230,
+      "baseline_count": 230,
+      "candidate_body_sha256": "0a6284491e607f6e20b8bbcb24247dcd7f2da94188f5f1f118445367d6149c07",
+      "baseline_body_sha256": "0a6284491e607f6e20b8bbcb24247dcd7f2da94188f5f1f118445367d6149c07",
+      "captured_at_utc": "2026-11-25T09:12:05.690380+00:00",
+      "changes": 0
+    }
+  },
+  "changes": [
+    {
+      "kind": "added",
+      "url": "/disclosure/fund/announcement/c/new/2026-11-24/510300_20261124_2XJH.pdf",
+      "before": null,
+      "after": {
+        "TITLE": "华泰柏瑞沪深300交易型开放式指数证券投资基金基金产品资料概要更新",
+        "SSEDATE": "2026-11-24",
+        "SECURITY_CODE": "510300"
+      },
+      "risk_hints": [
+        "unclassified_requires_full_text"
+      ],
+      "review_status": "pending",
+      "automatically_admissible": false,
+      "change_id": "a9b46d456168f5140d58e1bdc1254a831a8f8f630d2e9b6b804a5ca669f86155",
+      "symbol": "510300",
+      "official_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-11-24/510300_20261124_2XJH.pdf",
+      "required_checks": [
+        "Read full official text, not title alone",
+        "Check publication date and effective dates",
+        "Assess cash/share changes and trading restrictions",
+        "Preserve earlier events; removal is not automatic cancellation"
+      ]
+    }
+  ],
+  "approves_prices_or_events": false,
+  "status": "review_required",
+  "packet_sha256": "5193a0715494d5e9070eb729339191b864513a4f29ad2b42d1f401b70be32585"
+}

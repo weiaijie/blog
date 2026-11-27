@@ -8,8 +8,10 @@ FROZEN = 'frozen-2026-10-30'
 RECENT = 'verified-2026-11-12'
 LATEST = 'verified-2026-11-20'  # Pinned in the November 20 comparison.
 NOV23 = 'verified-2026-11-23'
-API_VERSIONS = {RECENT: 'v2', LATEST: 'v3', NOV23: 'v4'}
-DATA_MODULES = {RECENT: 'recent_market_data', LATEST: 'november_market_data', NOV23: 'nov23_market_data'}
+NOV26 = 'verified-2026-11-26'
+API_VERSIONS = {RECENT: 'v2', LATEST: 'v3', NOV23: 'v4', NOV26: 'v5'}
+DATA_MODULES = {RECENT: 'recent_market_data', LATEST: 'november_market_data', NOV23: 'nov23_market_data',
+                NOV26: 'nov26_market_data'}
 
 
 def data_module(profile):

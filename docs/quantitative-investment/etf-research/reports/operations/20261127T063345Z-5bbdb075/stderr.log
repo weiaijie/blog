@@ -1,0 +1,27 @@
+Traceback (most recent call last):
+  File "/home/ubuntu/projects/etf-research-git-snapshot/docs/quantitative-investment/etf-research/scripts/run_daily.py", line 160, in <module>
+    print(json.dumps(run(a),ensure_ascii=False))
+                     ^^^^^^
+  File "/home/ubuntu/projects/etf-research-git-snapshot/docs/quantitative-investment/etf-research/scripts/run_daily.py", line 105, in run
+    data,admission=load_incremental(ROOT/'data/snapshots',candidate)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/projects/etf-research-git-snapshot/docs/quantitative-investment/etf-research/src/etf_research/admission.py", line 104, in load_incremental
+    accepted=accepted_catalog_changes(root.parent.parent,changes)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/projects/etf-research-git-snapshot/docs/quantitative-investment/etf-research/src/etf_research/reviewed_catalog.py", line 56, in accepted_catalog_changes
+    reviewed_catalog_proof(Path(root))
+  File "/home/ubuntu/projects/etf-research-git-snapshot/docs/quantitative-investment/etf-research/src/etf_research/reviewed_catalog.py", line 20, in reviewed_catalog_proof
+    verify_bundle(decision_file.parent)
+  File "/home/ubuntu/projects/etf-research-git-snapshot/docs/quantitative-investment/etf-research/src/etf_research/publication.py", line 46, in verify_bundle
+    folder=Path(folder);manifest=read(folder/'manifest.json')
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/projects/etf-research-git-snapshot/docs/quantitative-investment/etf-research/src/etf_research/publication.py", line 6, in read
+    def read(path):return json.loads(Path(path).read_text(encoding='utf-8'))
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/pathlib.py", line 1027, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/home/ubuntu/projects/etf-research-git-snapshot/docs/quantitative-investment/etf-research/reports/notice-decisions/20261127T062240Z-3bb44a30/manifest.json'

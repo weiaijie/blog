@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/home/ubuntu/projects/etf-research-git-snapshot/docs/quantitative-investment/etf-research/scripts/run_daily.py", line 160, in <module>
+    print(json.dumps(run(a),ensure_ascii=False))
+                     ^^^^^^
+  File "/home/ubuntu/projects/etf-research-git-snapshot/docs/quantitative-investment/etf-research/scripts/run_daily.py", line 108, in run
+    create(folder/'official_close.json',official_audit(official,candidate,through))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/projects/etf-research-git-snapshot/docs/quantitative-investment/etf-research/scripts/audit_official_close.py", line 29, in audit
+    if snap['code']!=symbol or snap['date']!=int(day.strftime('%Y%m%d')) or snap['time']<150000 or len(snap['snap'])!=10:raise ValueError('Stale/invalid closing snapshot')
+                                                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Stale/invalid closing snapshot

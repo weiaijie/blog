@@ -89,6 +89,13 @@ def review_notices(records, start=date(2026, 10, 26), through=THROUGH):
                 raise ValueError('Unreviewed opening halt times')
             halts.add((day, '513500'))
             kind = 'opening_halt_until_10:30'
+        elif title == '博时标普500交易型开放式指数证券投资基金暂停赎回业务公告':
+            if (day != date(2026, 11, 25)
+                    or records[key][1]['sha256'] != '8683d80989ea005503bb0090d6300ab0af0dda6ce6897187f3bf78a88571c908'
+                    or '暂停赎回起始日2026年11月26日' not in text
+                    or '并自2026年11月27日起恢复本基金的上述业务' not in text):
+                raise ValueError('Unreviewed primary redemption restriction')
+            kind = 'primary_redemption_suspended_2026-11-26'
         elif '暂停申购业务公告' in title:
             if day != date(2026,11,4) or '暂停申购起始日2026年11月4日' not in text or '投资者仍可进行本基金的二级市场交易' not in text:
                 raise ValueError('Unreviewed subscription restriction')

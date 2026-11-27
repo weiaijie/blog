@@ -8,7 +8,7 @@ import interactive_backtest as work
 import model_replay
 import method_windows
 import factor_lab
-from research_profile import RECENT, LATEST, NOV23, API_VERSIONS, data_module, using
+from research_profile import RECENT, LATEST, NOV23, NOV26, API_VERSIONS, data_module, using
 
 REPORT = Path(__file__).resolve().parents[1]/'reports/2026-11-13-recent-data'
 DEFAULT_ARCHIVES = {
@@ -34,6 +34,13 @@ NOV23_REPORT = REPORT.parent/'2026-11-24-admission'
 NOV23_ARCHIVES = {
     'method-windows': ('default-methods.json', 'c2eeb580fdc045cea91096fd17d1322703b96d6b70553b608aaa54fbb94f3893'),
     'technical-factors': ('default-technical.json', '31a73e50960ca989562ad5c58a9af291b7858e088635ef4745a84a0c73d77e6e'),
+}
+
+
+NOV26_REPORT = REPORT.parent/'2026-11-27-admission'
+NOV26_ARCHIVES = {
+    'method-windows': ('default-methods.json', '9eb3d56ae3b679f6403103fb6f95da25c4ebfaafce2b0b5f8da008f1b193ebd1'),
+    'technical-factors': ('default-technical.json', 'd32143fc93ede6f2fe27bc70cb1cbf42ab9bda5d2f8e7448b7e2ea80d82e0658'),
 }
 
 
@@ -75,6 +82,7 @@ def calculate(operation, params, profile=RECENT):
         RECENT: (DEFAULT_ARCHIVES, REPORT),
         LATEST: (LATEST_ARCHIVES, LATEST_REPORT),
         NOV23: (NOV23_ARCHIVES, NOV23_REPORT),
+        NOV26: (NOV26_ARCHIVES, NOV26_REPORT),
     }[profile]
     if profile != RECENT:
         provider.admitted()

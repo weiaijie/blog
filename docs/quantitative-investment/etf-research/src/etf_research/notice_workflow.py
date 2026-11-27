@@ -73,10 +73,16 @@ def review_queue(root):
         packet = read(folder / 'packet.json'); validate_packet(root, packet); validate_decision(root, packet, record['decision'])
         for r in record['decision']['reviews']: decisions[(packet['packet_sha256'], r['change_id'])] = r['conclusion']
     paths = list((root / 'reports/notice-reviews').glob('*/packet.json')) + list((root / 'reports/daily').glob('*/notice_review/packet.json'))
+    from .reviewed_catalog import DECISION_FILE, REVIEWED_IDS, reviewed_catalog_proof
+    released = set()
+    if (root / DECISION_FILE).is_file():
+        reviewed_catalog_proof(root)
+        released = REVIEWED_IDS
     queue = []
     for path in sorted(paths):
         verify_bundle(path.parent); packet = read(path); validate_packet(root, packet)
-        if not packet['changes']: continue
-        pending = sum(decisions.get((packet['packet_sha256'], c['change_id']), 'unresolved') == 'unresolved' for c in packet['changes'])
+        outstanding = [c for c in packet['changes'] if c['change_id'] not in released]
+        if not outstanding: continue
+        pending = sum(decisions.get((packet['packet_sha256'], c['change_id']), 'unresolved') == 'unresolved' for c in outstanding)
         queue.append(dict(packet_folder=path.parent.relative_to(root).as_posix(), packet_sha256=packet['packet_sha256'], changes=len(packet['changes']), pending_changes=pending, admission_still_blocked=True))
     return queue

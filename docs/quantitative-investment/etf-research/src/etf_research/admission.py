@@ -88,7 +88,7 @@ def load_incremental(root,snapshot,*,now=None):
  calendar=json.loads((root/cfg['calendar_snapshot']/'calendar.json').read_text())
  added=sessions_between(calendar['holiday_ranges'],base.sessions[-1]+timedelta(days=1),through)
  if not added or added[-1]!=through:raise ValueError('Requested endpoint must be an exchange session')
- newbars={s:dict(v) for s,v in base.bars.items()};source_checks={};catalog_counts={}
+ newbars={s:dict(v) for s,v in base.bars.items()};source_checks={};catalog_counts={};reviewed_ids=[]
  for symbol in SYMBOLS:
   body,meta=response('catalog_'+symbol)
   url=urlparse(meta['url']);params=parse_qs(url.query)
@@ -96,7 +96,15 @@ def load_incremental(root,snapshot,*,now=None):
   capture=datetime.fromisoformat(meta['requested_at_utc']).astimezone(TZ)
   if params.get('SECURITY_CODE')!=[symbol] or params.get('START_DATE')!=['2012-01-01'] or params.get('END_DATE')!=[str(capture.date())]:raise ValueError('Official catalog scope/date is not current')
   old=json.loads((root/'2026-11-03-official-02'/f'{symbol}_all_index.body').read_text())
-  catalog_counts[symbol]=check_catalog(json.loads(body),old,symbol)
+  current=catalog_rows(json.loads(body),symbol)
+  baseline=catalog_rows(old,symbol)
+  changes=diff_catalogs(current,baseline)
+  if changes:
+   from .reviewed_catalog import accepted_catalog_changes
+   accepted=accepted_catalog_changes(root.parent.parent,changes)
+   if len(accepted)!=len(changes):raise CatalogChanged(changes)
+   reviewed_ids.extend(accepted)
+  catalog_counts[symbol]=len(current)
   prices={};overlap={}
   for provider in ['sina','sohu']:
    body,meta=response(cfg['prices'][symbol][provider])
@@ -115,5 +123,8 @@ def load_incremental(root,snapshot,*,now=None):
    newbars[symbol][day]=prices['sina'][day]
   source_checks[symbol]={'unchanged_overlap_days':overlap,'new_days':len(added),'exact_ohlc_fields':4*len(added)}
  audit={'admitted':True,'snapshot':snapshot,'through':str(through),'added_sessions':[str(d) for d in added],'total_sessions':len(base.sessions)+len(added),'source_checks':source_checks,'official_catalog_counts':catalog_counts,'new_or_changed_notices':0,'new_events_automatically_created':False,'scope_limit':'Catalog equality is not proof of upstream completeness; any notice change requires manual event/suspension review. Current sources are not proven operationally independent.'}
+ if reviewed_ids:
+  audit.update(new_or_changed_notices=len(reviewed_ids),reviewed_notice_ids=sorted(reviewed_ids),
+               scope_limit='Exact catalog additions were matched to sealed full-text decisions; unknown changes still block. No event is inferred from a review; all price checks still apply.')
  provenance=dict(base.provenance);provenance.update(end=str(through),session_count=len(base.sessions)+len(added),incremental_admission=audit,incremental_manifest_sha256=hashlib.sha256((folder/'manifest.json').read_bytes()).hexdigest())
  return replace(base,sessions=base.sessions+added,bars=newbars,provenance=provenance),audit

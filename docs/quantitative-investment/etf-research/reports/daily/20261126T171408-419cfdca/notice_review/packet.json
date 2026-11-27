@@ -1,0 +1,80 @@
+{
+  "format": 1,
+  "candidate_snapshot": "20261126T171408-419cfdca-prices",
+  "baseline_snapshot": "2026-11-03-official-02",
+  "snapshot_manifest_sha256": {
+    "candidate": "077ab185d2730873482ede411abb976be229910292f94291c10b67ffe383923e",
+    "baseline": "368c8bb592152e72acaf10ef0451cc9f1ef1d3e7c4ab5ca99babb683aa3b813f"
+  },
+  "symbols": {
+    "510300": {
+      "current_count": 261,
+      "baseline_count": 259,
+      "candidate_body_sha256": "9fce0729f1d183fcc9ea4d353040641d61592585ead492076e1641b1b9198d44",
+      "baseline_body_sha256": "1fadf896aa649e34b03a7c671cdef072d1163d3dbff5414f7c1ae945e1e0d462",
+      "captured_at_utc": "2026-11-26T09:14:08.980382+00:00",
+      "changes": 2
+    },
+    "511010": {
+      "current_count": 230,
+      "baseline_count": 230,
+      "candidate_body_sha256": "0a6284491e607f6e20b8bbcb24247dcd7f2da94188f5f1f118445367d6149c07",
+      "baseline_body_sha256": "0a6284491e607f6e20b8bbcb24247dcd7f2da94188f5f1f118445367d6149c07",
+      "captured_at_utc": "2026-11-26T09:14:09.091815+00:00",
+      "changes": 0
+    }
+  },
+  "changes": [
+    {
+      "kind": "added",
+      "url": "/disclosure/fund/announcement/c/new/2026-11-24/510300_20261124_2XJH.pdf",
+      "before": null,
+      "after": {
+        "TITLE": "华泰柏瑞沪深300交易型开放式指数证券投资基金基金产品资料概要更新",
+        "SSEDATE": "2026-11-24",
+        "SECURITY_CODE": "510300"
+      },
+      "risk_hints": [
+        "unclassified_requires_full_text"
+      ],
+      "review_status": "pending",
+      "automatically_admissible": false,
+      "change_id": "a9b46d456168f5140d58e1bdc1254a831a8f8f630d2e9b6b804a5ca669f86155",
+      "symbol": "510300",
+      "official_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-11-24/510300_20261124_2XJH.pdf",
+      "required_checks": [
+        "Read full official text, not title alone",
+        "Check publication date and effective dates",
+        "Assess cash/share changes and trading restrictions",
+        "Preserve earlier events; removal is not automatic cancellation"
+      ]
+    },
+    {
+      "kind": "added",
+      "url": "/disclosure/fund/announcement/c/new/2026-11-26/510300_20261126_DXNY.pdf",
+      "before": null,
+      "after": {
+        "TITLE": "华泰柏瑞基金管理有限公司关于旗下基金投资关联方承销期内承销证券的公告",
+        "SSEDATE": "2026-11-26",
+        "SECURITY_CODE": "510300"
+      },
+      "risk_hints": [
+        "unclassified_requires_full_text"
+      ],
+      "review_status": "pending",
+      "automatically_admissible": false,
+      "change_id": "8ed81a736d731796342e10f694f534b90dc2df81e38934996711552ef33aec36",
+      "symbol": "510300",
+      "official_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-11-26/510300_20261126_DXNY.pdf",
+      "required_checks": [
+        "Read full official text, not title alone",
+        "Check publication date and effective dates",
+        "Assess cash/share changes and trading restrictions",
+        "Preserve earlier events; removal is not automatic cancellation"
+      ]
+    }
+  ],
+  "approves_prices_or_events": false,
+  "status": "review_required",
+  "packet_sha256": "91769883666155ceccb34c6c7979fa471db3aac1f06999028ceffdb868773c0b"
+}

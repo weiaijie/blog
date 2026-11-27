@@ -15,6 +15,7 @@ from etf_research.forward import advance,digest,engine_digest
 from etf_research.first_session_plan import check_execution
 from etf_research.catalog_changes import CatalogChanged
 from etf_research.notice_workflow import write_packet
+from etf_research.reviewed_catalog import reviewed_catalog_proof
 from audit_official_close import audit as official_audit
 from collect_official_close import collect as collect_official
 from build_risk_report import build as risk_build
@@ -53,9 +54,11 @@ def reconcile(data,previous,state):
         counts['portfolios']+=1
     return dict(**counts,model_fills_outside_daily_range=outside,scope='Independent journal arithmetic; not broker fill evidence. Frozen engine validates previous history and dividend availability; this check does not independently verify all dividend entitlements or fee rules.')
 
-def dependencies(pointer):
+def dependencies(pointer, admission):
     names=[ROOT/'config/research.json',ROOT/'config/risk_extensions.json',inside(ROOT,pointer['checkpoint']),ROOT/'PROTOCOL_V1.md',ROOT/'requirements-lock.txt',ROOT/'config/collection.json']
     names.append(ROOT/'config/monthly_benchmark.json')
+    if admission.get('reviewed_notice_ids'):
+        names.extend(reviewed_catalog_proof(ROOT))
     names+=list((ROOT/'src/etf_research').glob('*.py'))+list((ROOT/'scripts').glob('*.py'))
     names+=list((ROOT/'data/snapshots').glob('*/manifest.json'))+list((ROOT/'data/reference').glob('*.json'))
     # Include all immutable source bytes, not only a possibly unchanged manifest.
@@ -103,7 +106,7 @@ def run(args):
             if data.sessions[-1]!=through:raise ValueError('Candidate horizon mismatch')
             create(folder/'admission.json',admission)
             create(folder/'official_close.json',official_audit(official,candidate,through))
-            inputs=dependencies(current)
+            inputs=dependencies(current,admission)
             for name in inputs:
                 if name.endswith('.py') and name.startswith(('src/','scripts/')):
                     saved=folder/'implementation'/name;saved.parent.mkdir(parents=True,exist_ok=True);saved.write_bytes((ROOT/name).read_bytes())

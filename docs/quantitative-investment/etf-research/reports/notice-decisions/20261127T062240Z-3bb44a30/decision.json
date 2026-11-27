@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "recorded_at_utc": "2026-11-27T06:22:40.958429+00:00",
+  "packet_folder": "reports/notice-reviews/2026-11-27-510300-evidence",
+  "packet_file_sha256": "e2cf8bfe761cdad603947e3747cea4c70d7d899aefc0cfa5924e992fa2162ba4",
+  "decision": {
+    "packet_sha256": "91769883666155ceccb34c6c7979fa471db3aac1f06999028ceffdb868773c0b",
+    "reviews": [
+      {
+        "change_id": "a9b46d456168f5140d58e1bdc1254a831a8f8f630d2e9b6b804a5ca669f86155",
+        "conclusion": "no_account_effect",
+        "evidence": [
+          {
+            "path": "reports/notice-reviews/2026-11-27-510300-evidence/notice_a9b46d456168f5140d58e1bdc1254a831a8f8f630d2e9b6b804a5ca669f86155.body",
+            "sha256": "75920ec2b7b297efa88962beec1e8f23ded5a9812c73e5a1fbe1d47c55b88bdf",
+            "locator": "第1–4页全文，尤其第1页产品概况、第2–3页费用、第4页说明"
+          },
+          {
+            "path": "data/snapshots/20261127-510300-previous-summary/previous_summary.body",
+            "sha256": "c00ceaf200a405a0e15459deff9d2ef5e1f12e8e0c88ba492169ca5f08f7b676",
+            "locator": "2025-11-24前版第1–4页，尤其第2–3页业绩与费用披露"
+          }
+        ],
+        "effective_dates": [],
+        "rationale": "2026-11-24编制并送出。对照2025-11-24版，业绩图更新至2025年末，申赎代理佣金措辞改为不超过0.5%，基金整体审计费预估15万元降至10万元，管理费0.15%、托管费0.05%和运作综合费率0.20%相同。正文未公布分红登记或发放、ETF份额折算或二级交易限制及其生效日。基金资产内费用反映在基金价值和场内价格，无账户现金分录，冻结的二级交易费用假设继续适用。",
+        "full_text_checked": true
+      },
+      {
+        "change_id": "8ed81a736d731796342e10f694f534b90dc2df81e38934996711552ef33aec36",
+        "conclusion": "no_account_effect",
+        "evidence": [
+          {
+            "path": "reports/notice-reviews/2026-11-27-510300-evidence/notice_8ed81a736d731796342e10f694f534b90dc2df81e38934996711552ef33aec36.body",
+            "sha256": "812cff5006e6355b6684f7305c559f9ea2b3a6fe3ece13680a12b422e0c2e393",
+            "locator": "第1页发行及本基金获配表、第2–4页其余基金、第5页发文日"
+          }
+        ],
+        "effective_dates": [],
+        "rationale": "2026-11-26披露基金投资相关事项。第1页引用2026-11-25傲拓科技初步配售公告，510300基金获配傲拓科技1681股、金额30560.58元，属于ETF基金资产内部变化。5页全文未公布对ETF持有人的分红、份额折算或ETF二级交易限制。研究账户按ETF自身场内价格计量，无该股票持仓或直接现金分录。",
+        "full_text_checked": true
+      }
+    ]
+  },
+  "approves_prices_or_events": false
+}

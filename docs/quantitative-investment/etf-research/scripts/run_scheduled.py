@@ -1,6 +1,6 @@
 """Supervise one scheduled run and retain success, failure and interrupted logs."""
 from pathlib import Path
-from datetime import datetime,timezone
+from datetime import date,datetime,timezone
 import argparse,json,os,re,signal,subprocess,sys,uuid
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'src'))
 from etf_research.publication import read,sha,create,atomic,lock,seal
@@ -16,9 +16,10 @@ def timer_context(env):
     return dict(daily_timer=unit == 'etf-research-daily.timer',
                 invocation_id=invocation if re.fullmatch('[0-9a-f]{32}', invocation) else None,
                 trigger_unix_usec=int(usec) if re.fullmatch('[0-9]{1,18}', usec) else None)
-def invoke(root,refresh,out,err):
+def invoke(root,refresh,out,err,*,offline_args=()):
     command=[sys.executable,str(root/'scripts/run_daily.py')]
     if refresh:command+=['--rebuild']
+    command.extend(offline_args)
     return subprocess.run(command,cwd=root,stdout=out,stderr=err,timeout=780,env=dict(os.environ,PYTHONUTF8='1',PYTHONDONTWRITEBYTECODE='1')).returncode
 
 def scheduler_state():
@@ -28,7 +29,7 @@ def scheduler_state():
         except (OSError,subprocess.TimeoutExpired):values[name]='unknown'
     return values
 
-def supervise(root=ROOT,refresh=False,*,runner=invoke):
+def supervise(root=ROOT,refresh=False,*,runner=invoke,offline_args=()):
     root=Path(root);status_path=root/'site/operation_status.json'
     # This lock also prevents two supervisors racing on the latest status file.
     with lock(root/'.runtime/scheduler.lock'):
@@ -36,7 +37,7 @@ def supervise(root=ROOT,refresh=False,*,runner=invoke):
         run_id=datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')+'-'+uuid.uuid4().hex[:8]
         folder=root/'reports/operations'/run_id;folder.mkdir(parents=True,exist_ok=False)
         relative=str(folder.relative_to(root));started=timestamp()
-        mode='validation_refresh' if refresh else 'scheduled'
+        mode='offline_recovery' if offline_args else 'validation_refresh' if refresh else 'scheduled'
         unfinished=[str(p.parent.relative_to(root)) for p in (root/'reports/operations').glob('*/started.json') if not (p.parent/'result.json').exists()]
         begin=dict(schema_version=1,started_at_utc=started,mode=mode,operation=relative,unfinished_prior_operations=unfinished)
         create(folder/'started.json',begin)
@@ -45,7 +46,8 @@ def supervise(root=ROOT,refresh=False,*,runner=invoke):
         try:
             before=read(root/'config/active_run.json');load_policy(root/'config/collection.json');transport=client_version()
             with (folder/'stdout.log').open('xb') as out,(folder/'stderr.log').open('xb') as err:
-                exit_code=runner(root,refresh,out,err)
+                exit_code=(runner(root,refresh,out,err,offline_args=offline_args)
+                           if offline_args else runner(root,refresh,out,err))
             if exit_code!=0:
                 try:
                     candidate=json.loads((folder/'stdout.log').read_text(encoding='utf-8').splitlines()[-1])
@@ -76,8 +78,18 @@ def supervise(root=ROOT,refresh=False,*,runner=invoke):
 
 def terminated(signum,frame):raise InterruptedError('Supervisor received termination signal')
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--refresh-current',action='store_true',help='Controlled live-source acceptance only; never used by the daily timer');a=p.parse_args()
+    p=argparse.ArgumentParser()
+    p.add_argument('--refresh-current',action='store_true',help='Controlled same-day rebuild')
+    p.add_argument('--through',type=date.fromisoformat)
+    p.add_argument('--candidate',help='Sealed price snapshot for offline recovery')
+    p.add_argument('--official',help='Sealed official close snapshot for offline recovery')
+    a=p.parse_args()
+    offline_args=()
+    if a.through or a.candidate or a.official:
+        if not (a.through and a.candidate and a.official) or a.refresh_current:
+            p.error('Offline recovery requires --through, --candidate and --official together')
+        offline_args=('--through',str(a.through),'--candidate',a.candidate,'--official',a.official)
     signal.signal(signal.SIGTERM,terminated)
     try:
-        result=supervise(refresh=a.refresh_current);print(json.dumps(result,ensure_ascii=False));raise SystemExit(result['exit_code'])
+        result=supervise(refresh=a.refresh_current,offline_args=offline_args);print(json.dumps(result,ensure_ascii=False));raise SystemExit(result['exit_code'])
     except BlockingIOError:print(json.dumps(dict(phase='busy',account_changed=False)));raise SystemExit(75)

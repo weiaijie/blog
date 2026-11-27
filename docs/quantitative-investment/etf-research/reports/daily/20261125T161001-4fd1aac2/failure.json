@@ -1,0 +1,6 @@
+{
+  "error_type": "CatalogChanged",
+  "error": "Official catalog changed: {\"added\":1,\"modified\":0,\"removed\":0}; full notice review required before price admission",
+  "account_published": false,
+  "review_packet": "reports/daily/20261125T161001-4fd1aac2/notice_review"
+}

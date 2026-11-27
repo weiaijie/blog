@@ -50,7 +50,15 @@ python scripts/review_catalog.py --packet reports/notice-reviews/<ID> --decision
 
 记录写入不可覆盖reports/notice-decisions；同一变更追加记录，按实际UTC记录时间取最新，旧结论保留。审核结果绑定包及变更指纹，不能套到新修订公告。公告撤下不自动取消分红；下载失败、缺原文、仅看标题不得标为已核验。
 
-**审核记录不是准入批准。** 当前admission仍比较既有官方基线，任何变化继续阻断；后续确需新分红/份额/停复牌规则时，另建证据版本、扩展事件加载器、验证旧账本前缀及协议一致性，审阅后提交。不得为恢复自动化而重签旧目录。
+每日准入仍以原官方目录为基线。11 月 27 日核准的两个无账户影响条目通过 `reviewed_catalog.py` 校验完整变更指纹、封存审阅决定和正式 PDF。目录出现未核准新增、修改或撤下时仍会阻断。发现新分红、份额或停复牌事件时，另建证据版本，审核事件及生效日后重新核对旧账本前缀。
+
+补跑已结束的交易日可使用原始行情和收盘快照。本次按 24、25、26 日逐日处理。每次使用上一日已发布的检查点，生成新日报后再用 `check_session_transition.py --bundle` 核对。运行记录以 `offline_recovery` 标识。
+
+```sh
+python scripts/run_scheduled.py --through 2026-11-24 \
+  --candidate 20261124T171408-7f824d0c-prices \
+  --official 20261124T171408-7f824d0c-official
+```
 
 ## 维护顺序
 

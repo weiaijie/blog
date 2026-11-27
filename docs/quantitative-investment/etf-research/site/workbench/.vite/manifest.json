@@ -1,20 +1,20 @@
 {
-  "_AttributionTable-CUE5SyDD.js": {
-    "file": "assets/AttributionTable-CUE5SyDD.js",
+  "_AttributionTable-BylaKqm0.js": {
+    "file": "assets/AttributionTable-BylaKqm0.js",
     "name": "AttributionTable",
     "imports": [
       "index.html"
     ]
   },
-  "_Chart-VYI0wQ_6.js": {
-    "file": "assets/Chart-VYI0wQ_6.js",
+  "_Chart-mXHZvRIB.js": {
+    "file": "assets/Chart-mXHZvRIB.js",
     "name": "Chart",
     "imports": [
       "index.html"
     ]
   },
-  "_DayDetail-C_4AKgzz.js": {
-    "file": "assets/DayDetail-C_4AKgzz.js",
+  "_DayDetail-Bt563Frj.js": {
+    "file": "assets/DayDetail-Bt563Frj.js",
     "name": "DayDetail",
     "imports": [
       "index.html"
@@ -25,7 +25,7 @@
     "name": "_plugin-vue_export-helper"
   },
   "index.html": {
-    "file": "assets/index-Bw13e-np.js",
+    "file": "assets/index-WFk-gEx2.js",
     "name": "index",
     "src": "index.html",
     "isEntry": true,
@@ -45,7 +45,7 @@
     ]
   },
   "src/views/Catalog.vue": {
-    "file": "assets/Catalog-CGt78BpA.js",
+    "file": "assets/Catalog-f66Z8SiW.js",
     "name": "Catalog",
     "src": "src/views/Catalog.vue",
     "isDynamicEntry": true,
@@ -58,63 +58,63 @@
     ]
   },
   "src/views/Compare.vue": {
-    "file": "assets/Compare-CwhMnsHP.js",
+    "file": "assets/Compare-CvWo-gY9.js",
     "name": "Compare",
     "src": "src/views/Compare.vue",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_Chart-VYI0wQ_6.js",
-      "_AttributionTable-CUE5SyDD.js",
-      "_DayDetail-C_4AKgzz.js"
+      "_Chart-mXHZvRIB.js",
+      "_AttributionTable-BylaKqm0.js",
+      "_DayDetail-Bt563Frj.js"
     ]
   },
   "src/views/DataChanges.vue": {
-    "file": "assets/DataChanges-Daq99pFm.js",
+    "file": "assets/DataChanges-g1KIXVYd.js",
     "name": "DataChanges",
     "src": "src/views/DataChanges.vue",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_Chart-VYI0wQ_6.js",
-      "_DayDetail-C_4AKgzz.js",
-      "_AttributionTable-CUE5SyDD.js"
+      "_Chart-mXHZvRIB.js",
+      "_DayDetail-Bt563Frj.js",
+      "_AttributionTable-BylaKqm0.js"
     ]
   },
   "src/views/Market.vue": {
-    "file": "assets/Market-DDQHWASJ.js",
+    "file": "assets/Market-CKcAnvQI.js",
     "name": "Market",
     "src": "src/views/Market.vue",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_Chart-VYI0wQ_6.js"
+      "_Chart-mXHZvRIB.js"
     ]
   },
   "src/views/NewWindows.vue": {
-    "file": "assets/NewWindows-DK8BKUFQ.js",
+    "file": "assets/NewWindows-CQYYrbZM.js",
     "name": "NewWindows",
     "src": "src/views/NewWindows.vue",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_Chart-VYI0wQ_6.js",
-      "_DayDetail-C_4AKgzz.js",
-      "_AttributionTable-CUE5SyDD.js"
+      "_Chart-mXHZvRIB.js",
+      "_DayDetail-Bt563Frj.js",
+      "_AttributionTable-BylaKqm0.js"
     ]
   },
   "src/views/Overview.vue": {
-    "file": "assets/Overview-CTwCdoyy.js",
+    "file": "assets/Overview-CdME1gQh.js",
     "name": "Overview",
     "src": "src/views/Overview.vue",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_Chart-VYI0wQ_6.js"
+      "_Chart-mXHZvRIB.js"
     ]
   },
   "src/views/Reports.vue": {
-    "file": "assets/Reports-CERH3BMr.js",
+    "file": "assets/Reports-U9vM8r2P.js",
     "name": "Reports",
     "src": "src/views/Reports.vue",
     "isDynamicEntry": true,
@@ -123,18 +123,18 @@
     ]
   },
   "src/views/Research.vue": {
-    "file": "assets/Research-CPX2n-EB.js",
+    "file": "assets/Research-wM2QOWes.js",
     "name": "Research",
     "src": "src/views/Research.vue",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_Chart-VYI0wQ_6.js",
-      "_DayDetail-C_4AKgzz.js"
+      "_Chart-mXHZvRIB.js",
+      "_DayDetail-Bt563Frj.js"
     ]
   },
   "src/views/StrategyGraph.vue": {
-    "file": "assets/StrategyGraph-CLLS0Bfc.js",
+    "file": "assets/StrategyGraph-B6DEWFwp.js",
     "name": "StrategyGraph",
     "src": "src/views/StrategyGraph.vue",
     "isDynamicEntry": true,

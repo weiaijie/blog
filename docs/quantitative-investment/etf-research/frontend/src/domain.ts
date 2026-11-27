@@ -4,13 +4,14 @@ export const models:Record<string,string>={allocation:'固定配比',installment
 export type Params=Record<string,string>;
 export type Decimal=string|number;
 export const datasets={
-  'verified-2026-11-23':{api:'/api/v4',label:'近期核验版'},
+  'verified-2026-11-26':{api:'/api/v5',label:'近期核验版'},
+  'verified-2026-11-23':{api:'/api/v4',label:'历史核验版'},
   'verified-2026-11-20':{api:'/api/v3',label:'历史核验版'},
   'verified-2026-11-12':{api:'/api/v2',label:'历史核验版'},
   'frozen-2026-10-30':{api:'/api/v1',label:'原冻结样本'},
 } as const;
 export type Dataset=keyof typeof datasets;
-export const latestDataset:Dataset='verified-2026-11-23';
+export const latestDataset:Dataset='verified-2026-11-26';
 export const latestApi=datasets[latestDataset].api;
 export interface Plan {version:2;dataset:Dataset;name:string;start:string;end:string;capital:string;fees:string;rebalance:string;model:string;installments:string;portfolios:string[]}
 export const defaultPlan:Plan={version:2,dataset:latestDataset,name:'沪深300与国债研究',start:'2019-03-20',end:latestDataset.slice(-10),capital:'100000',fees:'base',rebalance:'hold',model:'allocation',installments:'3',portfolios:['1,0,0,1','0,0,0,1']};
