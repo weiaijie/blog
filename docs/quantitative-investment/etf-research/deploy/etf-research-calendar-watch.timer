@@ -1,0 +1,12 @@
+[Unit]
+Description=Check mainland exchange calendars before the observation polls
+
+[Timer]
+OnCalendar=*-*-* 08:05:00 Asia/Shanghai
+OnCalendar=*-*-* 21:35:00 Asia/Shanghai
+AccuracySec=1s
+Persistent=true
+Unit=etf-research-calendar-watch.service
+
+[Install]
+WantedBy=timers.target

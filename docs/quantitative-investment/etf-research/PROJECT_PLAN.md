@@ -1,5 +1,7 @@
 # 项目计划与当前状态
 
+[年度休市公告自动发现](reports/2026-11-28-exchange-calendar-discovery/README.md)接上沪深交易所两条正式渠道。2026 正对照复算一致，2027 保留待核验状态。
+
 [五日标签统一绑定盘前决策](reports/2026-11-28-observation-label-decision-binding/README.md)按实际封存时间同步标签调度、覆盖接口和工作台。错版标签保留并等待正确的核验结果。
 
 [盘前输入对无响应重试的处理](reports/2026-11-28-observation-transport-recovery/README.md)按两次归档校验依据，展示可安全沿用的单项和失败来源。真实盘前探查当前有 9 项可核验。

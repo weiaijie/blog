@@ -14,7 +14,7 @@ from etf_research.policy_events import instant
 from etf_research.publication import create, read, seal, sha, verify_bundle
 
 REVIEW = 'reports/research-policy-reviews'
-STAGES = ('decisions', 'opening', 'labels', 'models', 'forecasts', 'evaluation')
+STAGES = ('decisions', 'opening', 'labels', 'models', 'forecasts', 'evaluation', 'calendar-watch')
 STAGE_PATHS = {f'reports/research-{stage}': stage for stage in STAGES}
 STAGE_PATHS['reports/research-monthly-coverage'] = 'monthly'
 OBSERVATION_RECEIPT = re.compile(fr'{OBSERVATION}/archives/(\d{{4}}-\d{{2}}-\d{{2}})/([a-zA-Z0-9-]+)\.json')

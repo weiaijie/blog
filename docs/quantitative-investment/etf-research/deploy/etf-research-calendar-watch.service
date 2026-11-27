@@ -1,0 +1,14 @@
+[Unit]
+Description=Archive official annual exchange calendar discovery
+After=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/projects/etf-research-observation
+ExecStart=%h/projects/etf-research-py312/bin/python scripts/discover_exchange_calendar.py --run --archive-store %h/projects/etf-research-observation-archive
+Environment=PYTHONPATH=src
+Environment=PYTHONDONTWRITEBYTECODE=1
+TimeoutStartSec=10min
+NoNewPrivileges=yes
+PrivateTmp=yes
+UMask=0022

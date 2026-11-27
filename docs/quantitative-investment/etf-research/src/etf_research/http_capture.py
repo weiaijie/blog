@@ -39,15 +39,17 @@ def retry_delay(row,policy,index):
         delay=max(delay,requested)
     return delay
 
-def capture_attempt(folder,name,url,policy):
+def capture_attempt(folder,name,url,policy,*,post_data=None,referer=None):
     body=folder/(name+'.body');body.open('xb').close()
     version=client_version();started=time.monotonic();requested=datetime.now(timezone.utc)
     with tempfile.TemporaryDirectory(prefix='etf-http-header-') as temp:
         headers=Path(temp)/'headers'
+        origin=referer or ('https://www.sse.com.cn/' if 'sse.com.cn' in url else 'https://finance.sina.com.cn/')
+        form=['--data-raw',post_data] if post_data is not None else []
         command=['curl','--disable','--silent','--show-error','--globoff','--ipv4','--noproxy','*',
             '--proto','=https','--connect-timeout',str(policy['connect_timeout_seconds']),
             '--max-time',str(policy['total_timeout_seconds']),'--max-filesize',str(policy['max_response_bytes']),
-            '--user-agent','Mozilla/5.0','--referer','https://www.sse.com.cn/' if 'sse.com.cn' in url else 'https://finance.sina.com.cn/',
+            '--user-agent','Mozilla/5.0','--referer',origin,*form,
             '--output',str(body),'--dump-header',str(headers),'--write-out','%{json}','--url',url]
         try:
             result=subprocess.run(command,capture_output=True,text=True,timeout=policy['total_timeout_seconds']+5)
@@ -60,6 +62,8 @@ def capture_attempt(folder,name,url,policy):
             final_url=metrics.get('url_effective',url),content_type=metrics.get('content_type'),
             address_family='ipv4',certificate_verification_enabled=True,client_version=version,
             metrics={k:metrics.get(k) for k in ('remote_ip','http_version','ssl_verify_result','time_connect','time_appconnect','time_starttransfer','time_total')})
+        if post_data is not None:
+            row.update(request_method='POST',request_body=post_data,request_referer=origin)
         if code or status!=200 or metrics.get('ssl_verify_result')!=0:row['error']=error or ('HTTP '+str(status) if status!=200 else 'Certificate verification metric missing/failed')
         if error and not code:row['diagnostic']=error
         if headers.exists():
@@ -71,15 +75,19 @@ def capture_attempt(folder,name,url,policy):
     row.update(bytes=body.stat().st_size,sha256=hashlib.sha256(body.read_bytes()).hexdigest(),elapsed_seconds=round(time.monotonic()-started,3))
     return row
 
-def fetch(folder,name,url,policy=None,*,attempt_fn=capture_attempt,sleep=time.sleep,additional_hosts=()):
+def fetch(folder,name,url,policy=None,*,attempt_fn=capture_attempt,sleep=time.sleep,additional_hosts=(),
+          post_data=None,referer=None):
     folder=Path(folder);policy=policy or load_policy();u=urlparse(url)
     if not re.fullmatch(r'[a-z0-9_]+',name):raise ValueError('Unsafe request name')
     if u.scheme!='https' or (u.hostname not in HOSTS and u.hostname not in additional_hosts) or u.username or u.password:raise ValueError('Unsupported public-source URL')
+    transport={}
+    if post_data is not None:
+        transport.update(post_data=post_data,referer=referer)
     # Reserve the canonical output before any request; never overwrite earlier evidence.
     with (folder/(name+'.body')).open('xb') as selected:
         attempts=[]
         for i in range(policy['max_attempts']):
-            row=attempt_fn(folder,name+'_attempt_'+str(i+1).zfill(2),url,policy);attempts.append(row)
+            row=attempt_fn(folder,name+'_attempt_'+str(i+1).zfill(2),url,policy,**transport);attempts.append(row)
             delay=retry_delay(row,policy,i)
             row['retry_delay_seconds']=delay
             if delay is None:break

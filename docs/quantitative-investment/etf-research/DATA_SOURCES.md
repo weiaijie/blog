@@ -1,5 +1,7 @@
 # 数据源与证据
 
+[年度休市公告自动发现](reports/2026-11-28-exchange-calendar-discovery/README.md)接上沪深交易所两条正式渠道。2026 正对照复算一致，2027 保留待核验状态。
+
 [沪市两融明细按实际分页采集](reports/2026-11-28-sse-margin-pagination/README.md)保留所有必需明细页及失败响应。11 月 28 日 00:16 复核，11 月 27 日两融仍缺，11 月 26 日完成两页及汇总核验。
 
 [23:06 上交所两融复查](reports/2026-11-27-retry-evidence/README.md)保存两页明细与联查汇总。11 月 27 日仍缺。

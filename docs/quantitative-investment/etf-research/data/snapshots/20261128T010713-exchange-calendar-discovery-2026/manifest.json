@@ -1,0 +1,20 @@
+{
+  "annual/calendar.json": "11d7fc349d0ddbb38a75dea354ce1601cb96190618828480813c564e61b748c1",
+  "annual/http_capture.py": "c2550a799aa3eae59166815420ef1a2822862b971817513db8d34b4623b30d8d",
+  "annual/manifest.json": "a268558462f4759aa7f47fae7157d698d622a71bfb9c0f64c26f202f89e0f35c",
+  "annual/requests.json": "484418171531c6dffb6a80868f258185f25d4839da2f4c552976941848d6ec74",
+  "annual/sse.body": "6414ab8f4316c318d816b68aefc4843a5ea87ec75d543f614e3e53aa7688f33c",
+  "annual/sse_attempt_01.body": "6414ab8f4316c318d816b68aefc4843a5ea87ec75d543f614e3e53aa7688f33c",
+  "annual/szse.body": "1656d8708d5faed33c7588538639d96128f39fdface02cfa6eb66d796c40f14e",
+  "annual/szse_attempt_01.body": "1656d8708d5faed33c7588538639d96128f39fdface02cfa6eb66d796c40f14e",
+  "annual/transport_policy.json": "3c8f68ffb1e664ea4562fb160e861c6e3ed2ad70dc1a5009d8fbc136c5ceb319",
+  "http_capture.py": "c2550a799aa3eae59166815420ef1a2822862b971817513db8d34b4623b30d8d",
+  "requests.json": "f3bc37e078eed332ec8c1ff5b4f1609f9308cd7f36737f9ffe7775aab3acda0f",
+  "result.json": "857264b8163d4e93057f53b23ffdfea7a1e64a9a6075190c1b3d1d78efb8c171",
+  "sse.body": "aaebb9d5f7b6642c98596eb8e4d2bd5785339c9f09c6f5bd63774bbe20969396",
+  "sse_attempt_01.body": "aaebb9d5f7b6642c98596eb8e4d2bd5785339c9f09c6f5bd63774bbe20969396",
+  "started.json": "248e6df0fc3c35404b3480c6361cc2b1f974db22630dfb761de77d5939bd2bff",
+  "szse.body": "06a0fb945ab0a7603fa6f6b7f08f927ef6004084b1fa8450344c1898e1ffd73e",
+  "szse_attempt_01.body": "06a0fb945ab0a7603fa6f6b7f08f927ef6004084b1fa8450344c1898e1ffd73e",
+  "transport_policy.json": "3c8f68ffb1e664ea4562fb160e861c6e3ed2ad70dc1a5009d8fbc136c5ceb319"
+}

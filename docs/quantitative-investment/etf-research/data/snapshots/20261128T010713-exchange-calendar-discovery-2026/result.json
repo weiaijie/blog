@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "checkedAt": "2026-11-27T17:07:14.355493+00:00",
+  "status": "annual_pair_verified",
+  "sources": {
+    "sse": {
+      "url": "https://www.sse.com.cn/disclosure/dealinstruc/closed/list/",
+      "receivedAt": "2026-11-27T17:07:13.716854+00:00",
+      "httpStatus": 200,
+      "sha256": "aaebb9d5f7b6642c98596eb8e4d2bd5785339c9f09c6f5bd63774bbe20969396",
+      "status": "candidate",
+      "candidates": [
+        {
+          "url": "https://www.sse.com.cn/disclosure/announcement/general/c/c_20251222_10802507.shtml",
+          "title": "关于上海证券交易所2026年部分节假日休市安排的通知"
+        }
+      ]
+    },
+    "szse": {
+      "url": "https://www.szse.cn/api/search/content",
+      "receivedAt": "2026-11-27T17:07:13.931254+00:00",
+      "httpStatus": 200,
+      "sha256": "06a0fb945ab0a7603fa6f6b7f08f927ef6004084b1fa8450344c1898e1ffd73e",
+      "status": "candidate",
+      "candidates": [
+        {
+          "url": "https://www.szse.cn/disclosure/notice/general/t20251222_618087.html",
+          "title": "关于2026年部分节假日休市安排的通知"
+        }
+      ]
+    }
+  },
+  "annualManifestSha256": "a268558462f4759aa7f47fae7157d698d622a71bfb9c0f64c26f202f89e0f35c"
+}
