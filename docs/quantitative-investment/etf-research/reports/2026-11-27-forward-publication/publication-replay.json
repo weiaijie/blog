@@ -1,0 +1,251 @@
+{
+  "session": "2026-11-27",
+  "accountPublication": {
+    "status": "timer_published_new_sessions",
+    "bundle": "20261127T170315-58f85234",
+    "target": "2026-11-27",
+    "old_through": "2026-11-26",
+    "sessions_appended": [
+      "2026-11-27"
+    ],
+    "accounts": 18,
+    "prior_checkpoint": "a4d2ae7e236fe5ec1d7248e94ed765e463cb35525e25629a21958aaad311e9d6",
+    "checkpoint": "cfb229188255d2cd87d8abf9d6a49565e0d121034433be3520d76f4ff0a0be2d",
+    "offline": false,
+    "prices": "20261127T170315-58f85234-prices",
+    "official": "20261127T170315-58f85234-official",
+    "prior_daily_rows": 288,
+    "new_daily_rows": 306,
+    "added_model_trades": 0,
+    "operation": "20261127T090314Z-5d902b22",
+    "mode": "scheduled",
+    "systemd_trigger": {
+      "daily_timer": true,
+      "invocation_id": "dc3f87a50eb046cb879b149745996414",
+      "trigger_unix_usec": 1795770194715402
+    }
+  },
+  "accountPointerSha256": "a00ee14220ada5ca1a000c432f016280a8b300910ec9fa808cfaeb94d014fc25",
+  "laterUnchangedRun": {
+    "status": "up_to_date",
+    "operation": "20261127T141704Z-8fda72fd",
+    "target": "2026-11-27",
+    "systemd_trigger": {
+      "daily_timer": true,
+      "invocation_id": "f1ce2d8fdcec47c986a0f1333c2cf0f7",
+      "trigger_unix_usec": 1795789024715144
+    }
+  },
+  "officialCloseCny": {
+    "510300": "4.162",
+    "511010": "141.301"
+  },
+  "availability": {
+    "unavailableAt": "2026-11-27T09:03:26.900449+00:00",
+    "availableAt": "2026-11-27T09:03:26.900450+00:00",
+    "evidence": [
+      {
+        "root": "prices",
+        "path": "reports/operations/20261127T090314Z-5d902b22/manifest.json",
+        "sha256": "f5ee47d6d1550c5445ed71634e8cfb488fa96dc5caa565a6671eddddfe099f14"
+      },
+      {
+        "root": "prices",
+        "path": "reports/daily/20261127T170315-58f85234/manifest.json",
+        "sha256": "93a5ef78f1349ac62d13c965d919b801c8ae163bef9570d4aec77cbe98ab0443"
+      },
+      {
+        "root": "prices",
+        "path": "data/snapshots/20261127T170315-58f85234-prices/manifest.json",
+        "sha256": "0351719fe6ce15d4fec284cb6d180eae68e9a4c634ccccd896234f32d117dbaf"
+      },
+      {
+        "root": "prices",
+        "path": "data/snapshots/20261127T170315-58f85234-official/manifest.json",
+        "sha256": "a38f67bad96d20e9126d1268c79650ef158bd41ef26a4411df721ed7d8d22001"
+      }
+    ]
+  },
+  "accountRows": {
+    "cash_low": {
+      "priorEquity": "100000",
+      "equity": "100000",
+      "dayPnl": "0.000",
+      "cash": "100000",
+      "available_cash": "100000",
+      "receivables": "0",
+      "units_510300": 0,
+      "units_511010": 0
+    },
+    "cash_base": {
+      "priorEquity": "100000",
+      "equity": "100000",
+      "dayPnl": "0.000",
+      "cash": "100000",
+      "available_cash": "100000",
+      "receivables": "0",
+      "units_510300": 0,
+      "units_511010": 0
+    },
+    "cash_high": {
+      "priorEquity": "100000",
+      "equity": "100000",
+      "dayPnl": "0.000",
+      "cash": "100000",
+      "available_cash": "100000",
+      "receivables": "0",
+      "units_510300": 0,
+      "units_511010": 0
+    },
+    "equity_hold_low": {
+      "priorEquity": "96301.210",
+      "equity": "101132.610",
+      "dayPnl": "4831.400",
+      "cash": "2077.010",
+      "available_cash": "2077.010",
+      "receivables": "0",
+      "units_510300": 23800,
+      "units_511010": 0
+    },
+    "equity_hold_base": {
+      "priorEquity": "96234.010",
+      "equity": "101065.410",
+      "dayPnl": "4831.400",
+      "cash": "2009.810",
+      "available_cash": "2009.810",
+      "receivables": "0",
+      "units_510300": 23800,
+      "units_511010": 0
+    },
+    "equity_hold_high": {
+      "priorEquity": "96117.790",
+      "equity": "100949.190",
+      "dayPnl": "4831.400",
+      "cash": "1893.590",
+      "available_cash": "1893.590",
+      "receivables": "0",
+      "units_510300": 23800,
+      "units_511010": 0
+    },
+    "bond_hold_low": {
+      "priorEquity": "99984.500",
+      "equity": "99925.000",
+      "dayPnl": "-59.500",
+      "cash": "1014.300",
+      "available_cash": "1014.300",
+      "receivables": "0",
+      "units_510300": 0,
+      "units_511010": 700
+    },
+    "bond_hold_base": {
+      "priorEquity": "99925.500",
+      "equity": "99866.000",
+      "dayPnl": "-59.500",
+      "cash": "955.300",
+      "available_cash": "955.300",
+      "receivables": "0",
+      "units_510300": 0,
+      "units_511010": 700
+    },
+    "bond_hold_high": {
+      "priorEquity": "99806.440",
+      "equity": "99746.940",
+      "dayPnl": "-59.500",
+      "cash": "836.240",
+      "available_cash": "836.240",
+      "receivables": "0",
+      "units_510300": 0,
+      "units_511010": 700
+    },
+    "monthly_20_80_low": {
+      "priorEquity": "99255.430",
+      "equity": "100167.030",
+      "dayPnl": "911.600",
+      "cash": "9955.130",
+      "available_cash": "9955.130",
+      "receivables": "0",
+      "units_510300": 4700,
+      "units_511010": 500
+    },
+    "monthly_20_80_base": {
+      "priorEquity": "99203.080",
+      "equity": "100114.680",
+      "dayPnl": "911.600",
+      "cash": "9902.780",
+      "available_cash": "9902.780",
+      "receivables": "0",
+      "units_510300": 4700,
+      "units_511010": 500
+    },
+    "monthly_20_80_high": {
+      "priorEquity": "99095.090",
+      "equity": "100006.690",
+      "dayPnl": "911.600",
+      "cash": "9794.790",
+      "available_cash": "9794.790",
+      "receivables": "0",
+      "units_510300": 4700,
+      "units_511010": 500
+    },
+    "monthly_50_50_low": {
+      "priorEquity": "98143.100",
+      "equity": "100533.300",
+      "dayPnl": "2390.200",
+      "cash": "8615.200",
+      "available_cash": "8615.200",
+      "receivables": "0",
+      "units_510300": 11900,
+      "units_511010": 300
+    },
+    "monthly_50_50_base": {
+      "priorEquity": "98085.080",
+      "equity": "100475.280",
+      "dayPnl": "2390.200",
+      "cash": "8557.180",
+      "available_cash": "8557.180",
+      "receivables": "0",
+      "units_510300": 11900,
+      "units_511010": 300
+    },
+    "monthly_50_50_high": {
+      "priorEquity": "97975.940",
+      "equity": "100366.140",
+      "dayPnl": "2390.200",
+      "cash": "8448.040",
+      "available_cash": "8448.040",
+      "receivables": "0",
+      "units_510300": 11900,
+      "units_511010": 300
+    },
+    "trend_120_low": {
+      "priorEquity": "99984.500",
+      "equity": "99925.000",
+      "dayPnl": "-59.500",
+      "cash": "1014.300",
+      "available_cash": "1014.300",
+      "receivables": "0",
+      "units_510300": 0,
+      "units_511010": 700
+    },
+    "trend_120_base": {
+      "priorEquity": "99925.500",
+      "equity": "99866.000",
+      "dayPnl": "-59.500",
+      "cash": "955.300",
+      "available_cash": "955.300",
+      "receivables": "0",
+      "units_510300": 0,
+      "units_511010": 700
+    },
+    "trend_120_high": {
+      "priorEquity": "99806.440",
+      "equity": "99746.940",
+      "dayPnl": "-59.500",
+      "cash": "836.240",
+      "available_cash": "836.240",
+      "receivables": "0",
+      "units_510300": 0,
+      "units_511010": 700
+    }
+  }
+}
