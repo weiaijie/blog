@@ -6,12 +6,24 @@ import subprocess
 
 from .policy_events import TZ, instant
 
+OBSERVATION_LOG = 'reports/research-observation'
+ORIGIN_RECEIPT = OBSERVATION_LOG+'/origin.json'
 TIMER = 'etf-research-observation.timer'
+
+
 POLL_TIMES = (time(8,25),time(19,40))
 CALENDAR = tuple(f'*-*-* {clock.isoformat()} Asia/Shanghai' for clock in POLL_TIMES)
 BUS = 'org.freedesktop.systemd1'
 MANAGER = '/org/freedesktop/systemd1'
 TIMER_INTERFACE = BUS+'.Timer'
+
+
+def origin_source(receipt):
+    match = re.fullmatch(OBSERVATION_LOG+r'/runs/(\d{4}-\d{2}-\d{2})/([a-zA-Z0-9-]+)', receipt['attempt'])
+    if (match is None or receipt['session'] != match[1] or receipt['forwardEligible'] is not True
+            or receipt.get('originReceiptSha256') is not None):
+        raise ValueError('Invalid observation origin receipt')
+    return f'{OBSERVATION_LOG}/archives/{match[1]}/{match[2]}.json'
 
 
 def query(args):

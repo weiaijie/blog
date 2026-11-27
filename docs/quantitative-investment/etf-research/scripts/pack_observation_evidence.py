@@ -9,10 +9,10 @@ import shutil
 
 from etf_research.evidence_archive import object_path, restore, safe_path, verify as verify_archive
 from etf_research.exchange_calendar import BASE_PATH, REGISTRY
+from etf_research.observation_slots import OBSERVATION_LOG as OBSERVATION, ORIGIN_RECEIPT, origin_source
 from etf_research.policy_events import instant
 from etf_research.publication import create, read, seal, sha, verify_bundle
 
-OBSERVATION = 'reports/research-observation'
 REVIEW = 'reports/research-policy-reviews'
 STAGES = ('decisions', 'opening', 'labels', 'models', 'forecasts', 'evaluation')
 STAGE_PATHS = {f'reports/research-{stage}': stage for stage in STAGES}
@@ -26,6 +26,8 @@ PUBLIC_FILES = {
 
 
 def receipt_kind(name):
+    if name == ORIGIN_RECEIPT:
+        return 'origin'
     if OBSERVATION_RECEIPT.fullmatch(name):
         return 'observation'
     parts = name.split('/')
@@ -57,8 +59,9 @@ def bound_snapshot(store, name, receipt, cutoff):
         raise ValueError('Receipt was published after the export cutoff')
     if kind == 'policy_review':
         return None, None
-    if kind == 'observation':
-        session,run = OBSERVATION_RECEIPT.fullmatch(name).groups()
+    if kind in ('observation','origin'):
+        source = origin_source(receipt) if kind == 'origin' else name
+        session,run = OBSERVATION_RECEIPT.fullmatch(source).groups()
         folder=f'{OBSERVATION}/runs/{session}/{run}'
         identity=receipt['archive']
         bindings={'manifest.json':receipt['attemptManifestSha256'],'result.json':receipt['resultSha256']}
@@ -119,6 +122,10 @@ def export(root, store, pack, cutoff, after=None):
         raise ValueError('Use a separate evidence destination and an increasing time interval')
     pack.mkdir(parents=True,exist_ok=False)
     paths=list((root/OBSERVATION/'archives').glob('*/*.json'))
+    origin = root/ORIGIN_RECEIPT
+    registered = origin.is_file()
+    if registered:
+        paths.append(origin)
     paths.extend((root/REVIEW).glob('*/receipt.json'))
     for stage in STAGE_PATHS:
         paths.extend((root/stage).glob('*/*/receipt.json'))
@@ -131,6 +138,8 @@ def export(root, store, pack, cutoff, after=None):
         ready=instant(receipt['sealedAt' if kind=='policy_review' else 'archiveVerifiedAt'])
         if ready>cutoff or (after is not None and ready<=after):
             continue
+        if kind == 'observation' and receipt['forwardEligible'] and not registered:
+            raise ValueError('Seal the observation origin before exporting qualified receipts')
         identity,snapshot=bound_snapshot(store,name,receipt,cutoff)
         receipt_digest=sha(source)
         if read(source)!=receipt:
@@ -162,6 +171,8 @@ def verify(pack):
     expected={'index.json'}
     archives=set()
     counts=Counter()
+    receipts={}
+    origin_links=set()
     for row in index['receipts']:
         name=row['receipt']
         relative='receipts/'+name
@@ -184,6 +195,16 @@ def verify(pack):
                             for entry in snapshot['files'].values())
         expected.add(relative)
         counts[kind]+=1
+        receipts[name]=row['sha256']
+        if kind == 'observation' and 'originReceiptSha256' in receipt:
+            origin_links.add(receipt['originReceiptSha256'])
+    if len(origin_links)>1:
+        raise ValueError('Evidence pack has conflicting observation origins')
+    if ORIGIN_RECEIPT in receipts:
+        marker=read(safe_path(pack/'receipts',ORIGIN_RECEIPT))
+        digest=receipts[ORIGIN_RECEIPT]
+        if receipts.get(origin_source(marker))!=digest or origin_links-{digest}:
+            raise ValueError('Evidence pack is missing the exact registered origin receipt')
     if set(read(pack/'manifest.json'))!=expected:
         raise ValueError('Export contains files outside its receipt inventory')
     return dict(asOf=index['asOf'],after=index['after'],receipts=dict(counts),archives=len(archives),

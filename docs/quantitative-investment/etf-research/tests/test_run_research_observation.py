@@ -14,6 +14,7 @@ from etf_research.publication import create, read, seal, sha
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts'))
 import run_research_observation as obs
+from pack_observation_evidence import export, restore_ledger
 from seal_observation_decision import first_archive
 
 
@@ -72,23 +73,60 @@ class ResearchObservationTests(unittest.TestCase):
             create(root/'config/research_observation.json',config)
 
             def files(folder):
-                return [p.relative_to(root).as_posix() for p in folder.iterdir()]
+                return ['config/research_observation.json',
+                        *(p.relative_to(root).as_posix() for p in folder.iterdir())]
 
+            source_folders = {}
             with patch.multiple(obs,ROOT=root,LOG=log,required_files=files):
-                for name,result in (('missed',missed),('scheduled',scheduled)):
+                for name,result in (('missed',missed),('scheduled',scheduled),('later',scheduled)):
                     folder = log/'runs'/day/name
                     folder.mkdir(parents=True)
                     create(folder/'result.json',result)
                     (folder/'source.body').write_bytes(b'official source evidence')
                     seal(folder)
                     receipt = obs.archive_run(folder,store,config)
-                    self.assertIs(receipt['forwardEligible'],name=='scheduled')
+                    self.assertIs(receipt['forwardEligible'],name!='missed')
                     self.assertEqual(obs.check_receipt(folder,store,config),receipt)
+                    source_folders[name] = folder
+
                 observed = datetime.now(timezone.utc)
                 origin = first_archive(root,store,observed)
-                self.assertEqual(origin['archiveSha256'],receipt['archive'])
-                self.assertEqual(origin['archiveVerifiedAt'],receipt['archiveVerifiedAt'])
+                source = obs.receipt_path(source_folders['scheduled'])
+                original = source.read_bytes()
+                marker = root/obs.ORIGIN_RECEIPT
+                self.assertEqual(marker.read_bytes(),original)
+                self.assertEqual(receipt['originReceiptSha256'],sha(marker))
+                self.assertNotEqual(origin['archiveSha256'],receipt['archive'])
+                self.assertEqual(origin['archiveSha256'],read(source)['archive'])
+                self.assertEqual(origin['archiveVerifiedAt'],read(source)['archiveVerifiedAt'])
                 self.assertIsNone(first_archive(root,store,slot))
+
+                pack, restored = base/'pack', base/'restored'
+                self.assertEqual(export(root,store,pack,observed)['receipts'],
+                                 {'observation':3,'origin':1})
+                restore_ledger(pack,restored)
+                self.assertEqual(first_archive(restored,pack/'archive',observed),origin)
+
+                incremental, partial = base/'incremental', base/'partial'
+                cutoff = datetime.fromisoformat(origin['archiveVerifiedAt'])
+                self.assertEqual(export(root,store,incremental,observed,after=cutoff)['receipts'],
+                                 {'observation':1})
+                restore_ledger(incremental,partial)
+                with self.assertRaisesRegex(ValueError,'registered observation origin is missing'):
+                    first_archive(partial,incremental/'archive',observed)
+
+                source.unlink()
+                with self.assertRaisesRegex(ValueError,'Registered observation origin receipt'):
+                    first_archive(root,store,observed)
+                issues = obs.ledger(store,config,repair=True)[1]
+                self.assertEqual(len(issues),1)
+                self.assertIn('Recover the original observation origin',issues[0]['error'])
+                self.assertFalse(source.exists())
+                with self.assertRaisesRegex(ValueError,'missing the exact registered origin receipt'):
+                    export(root,store,base/'incomplete',observed)
+                source.write_bytes((restored/source.relative_to(root)).read_bytes())
+                self.assertEqual(first_archive(root,store,observed),origin)
+
                 object_path(store,sha(folder/'source.body')).write_bytes(b'corrupt source')
                 with self.assertRaisesRegex(ValueError,'Archive content mismatch'):
                     first_archive(root,store,observed)

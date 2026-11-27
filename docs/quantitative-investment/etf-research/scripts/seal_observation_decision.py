@@ -8,7 +8,7 @@ import os
 from uuid import uuid4
 
 from observation_inputs import FEATURES, assemble
-from run_research_observation import check_receipt
+from run_research_observation import first_archive
 from etf_research.admission import sessions_between
 from etf_research.exchange_calendar import BASE_PATH as CALENDAR, LOADER, calendar_at
 from etf_research.evidence_archive import capture, verify as verify_archive
@@ -48,25 +48,6 @@ def now():
 
 def trigger_from(env):
     return timer_identity(env,TIMER)
-
-
-def first_archive(root, store, observed):
-    config = read(root/'config/research_observation.json')
-    base = root/'reports/research-observation'
-    candidates = []
-    for path in (base/'archives').glob('*/*.json'):
-        receipt = read(path)
-        if receipt['forwardEligible'] and instant(receipt['archiveVerifiedAt'])<=observed:
-            folder = base/'runs'/path.parent.name/path.stem
-            confirmed = check_receipt(folder,store,config,root=root)
-            candidates.append((instant(confirmed['archiveVerifiedAt']),path,confirmed))
-    if not candidates:
-        return None
-    verified, path, receipt = min(candidates,key=lambda row:(row[0],row[1]))
-    verify_archive(store,receipt['archive'])
-    return dict(date=verified.astimezone(TZ).date().isoformat(),archiveVerifiedAt=receipt['archiveVerifiedAt'],
-                receiptPath=path.relative_to(root).as_posix(),receiptSha256=sha(path),
-                archiveSha256=receipt['archive'])
 
 
 def feature_state(inputs, roots):

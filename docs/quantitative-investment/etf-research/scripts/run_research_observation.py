@@ -15,12 +15,14 @@ from research_day_coverage import cover
 from etf_research.admission import completed_date, sessions_between
 from etf_research.evidence_archive import capture, verify as verify_archive
 from etf_research.exchange_calendar import calendar_at
-from etf_research.observation_slots import TIMER, scheduled_slot, with_manager_clock
-from etf_research.policy_events import instant
-from etf_research.publication import create, inside, lock, read, seal, sha, verify_bundle
+from etf_research.observation_slots import (
+    OBSERVATION_LOG, ORIGIN_RECEIPT, TIMER, origin_source, scheduled_slot, with_manager_clock,
+)
+from etf_research.policy_events import TZ, instant
+from etf_research.publication import atomic, create, encoded, inside, lock, read, seal, sha, verify_bundle
 
 ROOT = policy_etf.ROOT
-LOG = ROOT/'reports/research-observation'
+LOG = ROOT/OBSERVATION_LOG
 CONFIG = ROOT/'config/research_observation.json'
 HEX_ID = re.compile('[0-9a-f]{32}')
 HASH = re.compile('[0-9a-f]{64}')
@@ -132,7 +134,12 @@ def archive_run(folder, store, config):
                    trigger=result['trigger'],archive=archived['snapshot'],
                    archiveCreatedAt=snapshot['created_at_utc'],archiveVerifiedAt=now().isoformat(),
                    files=archived['files'],forwardEligible=eligible)
+    marker = ROOT/ORIGIN_RECEIPT
+    if eligible and marker.is_file():
+        receipt['originReceiptSha256'] = sha(marker)
     create(receipt_path(folder),receipt)
+    if eligible:
+        pin_origin(store,config)
     return receipt
 
 
@@ -142,7 +149,7 @@ def receipt_path(folder):
 
 def check_receipt(folder, store, config, *, root=None):
     root = ROOT if root is None else root
-    path = root/'reports/research-observation/archives'/folder.parent.name/(folder.name+'.json')
+    path = root/OBSERVATION_LOG/'archives'/folder.parent.name/(folder.name+'.json')
     receipt = read(path)
     identity = receipt['archive']
     if not HASH.fullmatch(identity):
@@ -168,11 +175,67 @@ def check_receipt(folder, store, config, *, root=None):
     return receipt
 
 
+def origin_receipt(root, store, config, observed):
+    base = root/OBSERVATION_LOG
+    registered = root/ORIGIN_RECEIPT
+    if registered.exists():
+        marker = read(registered)
+        if instant(marker['archiveVerifiedAt']) > observed:
+            return None, None
+        path = inside(root,origin_source(marker))
+        if not path.is_file() or sha(path) != sha(registered):
+            raise ValueError('Registered observation origin receipt is missing or changed')
+        folder = base/'runs'/path.parent.name/path.stem
+        receipt = check_receipt(folder,store,config,root=root)
+    else:
+        candidates = []
+        for path in (base/'archives').glob('*/*.json'):
+            receipt = read(path)
+            if receipt['forwardEligible'] and instant(receipt['archiveVerifiedAt']) <= observed:
+                folder = base/'runs'/path.parent.name/path.stem
+                candidates.append((instant(receipt['archiveVerifiedAt']),path,
+                                   check_receipt(folder,store,config,root=root)))
+        if not candidates:
+            return None, None
+        _,path,receipt = min(candidates,key=lambda row:(row[0],row[1]))
+        if receipt.get('originReceiptSha256') is not None:
+            raise ValueError('The registered observation origin is missing from this ledger')
+    verify_archive(store,receipt['archive'])
+    return path,receipt
+
+
+def first_archive(root, store, observed):
+    config = read(root/'config/research_observation.json')
+    path,receipt = origin_receipt(root,store,config,observed)
+    if receipt is None:
+        return None
+    verified = instant(receipt['archiveVerifiedAt'])
+    return dict(date=verified.astimezone(TZ).date().isoformat(),archiveVerifiedAt=receipt['archiveVerifiedAt'],
+                receiptPath=path.relative_to(root).as_posix(),receiptSha256=sha(path),
+                archiveSha256=receipt['archive'])
+
+
+def pin_origin(store, config):
+    # The scheduled runner holds the observation lock. Reuse the first receipt after an interrupted seal.
+    destination = ROOT/ORIGIN_RECEIPT
+    if destination.exists():
+        return
+    path,receipt = origin_receipt(ROOT,store,config,now())
+    if receipt is not None:
+        if path.read_bytes() != encoded(receipt):
+            raise ValueError('Observation origin receipt cannot be copied exactly')
+        atomic(destination,receipt)
+
+
 def ledger(store, config, repair=False):
     receipts, issues = [], []
+    marker = ROOT/ORIGIN_RECEIPT
+    pinned = inside(ROOT,origin_source(read(marker))) if repair and marker.exists() else None
     for folder in sorted((LOG/'runs').glob('*/*')):
         try:
             if repair and not receipt_path(folder).exists():
+                if receipt_path(folder) == pinned:
+                    raise ValueError('Recover the original observation origin receipt from evidence')
                 if not (folder/'manifest.json').exists():
                     if not (folder/'result.json').exists():
                         started = read(folder/'started.json')
@@ -194,10 +257,8 @@ def schedule(start, end, observed=None):
 def progress(store, config):
     receipts,issues = ledger(store,config)
     qualified = [row for row in receipts if row['forwardEligible']]
-    first = min(qualified,key=lambda row:(instant(row['archiveVerifiedAt']),row['attempt']),default=None)
-    if first is not None:
-        verify_archive(store,first['archive'])
     current = now()
+    _,first = origin_receipt(ROOT,store,config,current)
     try:
         expected = schedule(date.fromisoformat(config['observationEarliestDate']),completed_date(current))
     except ValueError as error:
@@ -231,6 +292,7 @@ def run(store, config, explicit_day):
             qualified = {date.fromisoformat(r['session']) for r in receipts if r['forwardEligible']}
             days = plan_days(expected,counts,qualified,config['maxRecoveriesPerTrigger'])
         outcomes = [archive_run(attempt(day,trigger),store,config) for day in days]
+        pin_origin(store,config)
         return dict(trigger=trigger,attempts=outcomes,progress=progress(store,config))
 
 

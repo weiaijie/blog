@@ -7377,6 +7377,8 @@
     "reports/2026-11-27-system-audit/README.md",
     "reports/2026-11-27-system-audit/manifest.json",
     "reports/2026-11-27-system-audit/verification.json",
+    "reports/2026-11-28-observation-origin-pin/README.md",
+    "reports/2026-11-28-observation-origin-pin/manifest.json",
     "reports/daily/20261106T174810-2233e152/admission.json",
     "reports/daily/20261106T174810-2233e152/forward_checkpoint.json",
     "reports/daily/20261106T174810-2233e152/intent_check.json",
