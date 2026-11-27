@@ -1,0 +1,16 @@
+{
+  "day": "2026-11-27",
+  "startedAt": "2026-11-27T10:33:33.190480+00:00",
+  "finishedAt": "2026-11-27T10:33:33.356878+00:00",
+  "trigger": null,
+  "quotes": {
+    "510300": {
+      "status": "unknown",
+      "reason": "Wrong instrument, stale quote or quote outside opening auction window"
+    },
+    "511010": {
+      "status": "unknown",
+      "reason": "Wrong instrument, stale quote or quote outside opening auction window"
+    }
+  }
+}

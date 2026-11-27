@@ -70,3 +70,7 @@ reports/research-policy-reviews/** -text
 # Decision seals and verified archive manifests preserve exact bytes.
 reports/research-decision-probes/** -text
 reports/2026-11-27-decision-seal/*-archive.json -text
+
+# Opening probes and their archive proof keep received bytes.
+reports/research-opening-probes/** -text
+reports/2026-11-27-five-session-labels/opening-probe-archive.json -text

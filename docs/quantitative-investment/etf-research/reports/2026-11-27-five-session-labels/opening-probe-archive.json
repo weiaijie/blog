@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-11-27T10:33:33.367476+00:00",
+  "files": {
+    "config/collection.json": {
+      "sha256": "bfd38c5197c1cbd10cd5264a4499d43599c9a6546412d6ad896a65de12ccffe8",
+      "bytes": 376
+    },
+    "data/snapshots/2026-11-04-calendar-08/calendar.json": {
+      "sha256": "950a3bfe2bab7ad484abc03aa27207bc70a49a4a144f495899cf1bd2aa10c8c6",
+      "bytes": 42763
+    },
+    "reports/research-opening-probes/2026-11-27/20261127T103333Z-780ae021/records/510300.body": {
+      "sha256": "3506a06251804df5ef06480c29d1e288f11e86a35faedea0b903a1191eb20948",
+      "bytes": 128
+    },
+    "reports/research-opening-probes/2026-11-27/20261127T103333Z-780ae021/records/510300_attempt_01.body": {
+      "sha256": "3506a06251804df5ef06480c29d1e288f11e86a35faedea0b903a1191eb20948",
+      "bytes": 128
+    },
+    "reports/research-opening-probes/2026-11-27/20261127T103333Z-780ae021/records/511010.body": {
+      "sha256": "cd45626ff70e78e67a3cce9e1bd37ce98b1feb8a6e5dd6146075fc73fd637665",
+      "bytes": 145
+    },
+    "reports/research-opening-probes/2026-11-27/20261127T103333Z-780ae021/records/511010_attempt_01.body": {
+      "sha256": "cd45626ff70e78e67a3cce9e1bd37ce98b1feb8a6e5dd6146075fc73fd637665",
+      "bytes": 145
+    },
+    "reports/research-opening-probes/2026-11-27/20261127T103333Z-780ae021/records/capture.json": {
+      "sha256": "ad91a45e643ab9c54551e4b69eacd894171e8710e0de1ea3c6c94316ead2b50a",
+      "bytes": 442
+    },
+    "reports/research-opening-probes/2026-11-27/20261127T103333Z-780ae021/records/http_capture.py": {
+      "sha256": "e1554bb233d7ab7f6be89814f32c4fb46d85de162773eb52c33048b15e93eeee",
+      "bytes": 6319
+    },
+    "reports/research-opening-probes/2026-11-27/20261127T103333Z-780ae021/records/manifest.json": {
+      "sha256": "f1dfe4cc261df65156cc8c73d612f36b98a81471ab8c7e640512c96b1ec2a0e3",
+      "bytes": 722
+    },
+    "reports/research-opening-probes/2026-11-27/20261127T103333Z-780ae021/records/requests.json": {
+      "sha256": "b9b877a86eaf62234e037531323c8d2582aec7dcbd2d875ee7ff718e05df8429",
+      "bytes": 5195
+    },
+    "reports/research-opening-probes/2026-11-27/20261127T103333Z-780ae021/records/transport_policy.json": {
+      "sha256": "fea5d92c0ada9c9013cb9e59523d5c1919c8e6eafa81d58c093d7212ab7c78f3",
+      "bytes": 380
+    },
+    "scripts/observe_opening_quotes.py": {
+      "sha256": "0404abc4db0d12701384bcf7374885622104cff0e1b625cb763d5f4803947f41",
+      "bytes": 9246
+    }
+  },
+  "new_objects": 10,
+  "new_bytes": 65716,
+  "restores_only_to_new_directory": true
+}

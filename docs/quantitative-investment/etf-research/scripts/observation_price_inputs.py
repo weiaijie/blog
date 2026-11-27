@@ -38,7 +38,7 @@ def admitted_operation(root, anchor, ceiling):
     return record,path.parent
 
 
-def establish_price_source(root, anchor, dates, ceiling):
+def admitted_prices(root, anchor, ceiling):
     selected = admitted_operation(root,anchor,ceiling)
     if selected is None:
         return None
@@ -76,6 +76,16 @@ def establish_price_source(root, anchor, dates, ceiling):
     if audit(official.name,prices.name,anchor,snapshots=snaps)!=official_audit:
         raise ValueError('Exchange OHLC audit did not reproduce')
 
+    proofs = [operation/'manifest.json',bundle/'manifest.json',*manifests]
+    return dict(data=data, official=official, availableAt=received.isoformat(),
+                evidence=[dict(root='prices',path=p.relative_to(root).as_posix(),sha256=sha(p)) for p in proofs])
+
+
+def establish_price_source(root, anchor, dates, ceiling):
+    admitted = admitted_prices(root,anchor,ceiling)
+    if admitted is None:
+        return None
+    data,official = admitted['data'],admitted['official']
     values = {}
     for symbol in SYMBOLS:
         official_bars = parse_dayk((official/('sse_dayk_'+symbol+'.body')).read_text(),symbol)
@@ -86,6 +96,4 @@ def establish_price_source(root, anchor, dates, ceiling):
                      and e.announcement_date<=anchor),D(0)) for day in dates[1:]]
         series = total_return_levels(closes,cash)
         values[symbol] = sleeve_inputs(series)
-    proofs = [operation/'manifest.json',bundle/'manifest.json',*manifests]
-    return dict(values=values, availableAt=received.isoformat(),
-                evidence=[dict(root='prices',path=p.relative_to(root).as_posix(),sha256=sha(p)) for p in proofs])
+    return dict(values=values,availableAt=admitted['availableAt'],evidence=admitted['evidence'])
