@@ -1,0 +1,11 @@
+[Unit]
+Description=Freeze independent ETF inputs at 08:52 Beijing time
+
+[Timer]
+OnCalendar=*-*-* 08:52:00 Asia/Shanghai
+Persistent=true
+AccuracySec=1s
+Unit=etf-research-decision.service
+
+[Install]
+WantedBy=timers.target

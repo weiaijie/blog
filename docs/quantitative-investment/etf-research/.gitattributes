@@ -66,3 +66,7 @@ reports/research-observation/**/*.body -whitespace
 
 # Reviewed candidate bundles preserve the bytes sealed on Ubuntu.
 reports/research-policy-reviews/** -text
+
+# Decision seals and verified archive manifests preserve exact bytes.
+reports/research-decision-probes/** -text
+reports/2026-11-27-decision-seal/*-archive.json -text
