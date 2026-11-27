@@ -20,6 +20,8 @@
 
 ## 当前接续
 
+[后台健康记录](../reports/2026-11-27-independent-runtime-health/README.md)接入九个定时服务，区分漏跑、执行失败和等待下次触发。
+
 [原 18 户历史查询](../reports/2026-11-27-forward-asof/README.md)已按真实发布时点绑定检查点。
 
 [结题证据分流](../reports/2026-11-27-final-evidence-gate/README.md)已区分评估证据异常、等待五日标签、样本不足与经济对照单项异常。

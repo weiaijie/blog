@@ -1,5 +1,7 @@
 # 项目计划与当前状态
 
+[独立研究运行健康](reports/2026-11-27-independent-runtime-health/README.md)已接入九个定时服务的触发及退出记录，工作台和 Agent 同查。
+
 [18 户按真实发布时点回看](reports/2026-11-27-forward-asof/README.md)已接入工作台和 Agent。晚到补发按原发布时间进入历史查询。
 
 [结题证据分流](reports/2026-11-27-final-evidence-gate/README.md)已接入工作台与 Agent，区分未就绪、校验失败与已核验的样本不足。

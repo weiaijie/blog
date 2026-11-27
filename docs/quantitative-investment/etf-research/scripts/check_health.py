@@ -12,6 +12,7 @@ from etf_research.forward import digest, engine_digest
 from etf_research.publication import read, sha, inside, verify_bundle, lock, create, seal, atomic
 from etf_research.notice_workflow import review_queue
 from run_scheduled import scheduler_state
+from observation_runtime_health import observe as observe_independent
 
 
 def inspect(root=ROOT, now=None, scheduler=None):
@@ -65,6 +66,7 @@ def inspect(root=ROOT, now=None, scheduler=None):
 def record(root=ROOT):
     with lock(root / '.runtime/health.lock'):
         result = inspect(root)
+        result['independent_study'] = observe_independent(root,datetime.now(TZ))
         folder = root / 'reports/health' / (datetime.now(TZ).strftime('%Y%m%dT%H%M%S') + '-' + uuid.uuid4().hex[:8])
         result['observation'] = folder.relative_to(root).as_posix()
         create(folder / 'result.json', result); seal(folder)

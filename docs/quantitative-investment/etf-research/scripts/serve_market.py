@@ -234,6 +234,17 @@ class Handler(BaseHTTPRequestHandler):
             except (OSError,ValueError,KeyError,TypeError,ArithmeticError,ImportError) as exc:
                 self.log_error('Forward milestone report unavailable: %s',exc)
                 status,body = 503,interactive.encode({'error':'前瞻模拟账户的检查点暂无法核验。'})
+        elif path == '/api/v1/research/observation/runtime-health':
+            kind = 'application/json'
+            try:
+                from observation_runtime_health import health_view
+                interactive.request_params(url.query, (), ())
+                body = interactive.encode(health_view(ROOT,datetime.now(timezone.utc)))
+            except interactive.InputError as exc:
+                status,body = 400,interactive.encode({'error':str(exc)})
+            except (OSError,ValueError,KeyError,TypeError,ImportError) as exc:
+                self.log_error('Independent runtime health unavailable: %s',exc)
+                status,body = 503,interactive.encode({'error':'独立研究健康记录暂无法核验。'})
         elif path == '/api/v1/research/observation/continuity':
             kind = 'application/json'
             try:

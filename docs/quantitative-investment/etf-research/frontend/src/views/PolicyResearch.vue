@@ -3,6 +3,7 @@ import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import { getJson } from '../state';
 import { apiUrl } from '../domain';
 import ObservationCoverage from './ObservationCoverage.vue';
+import ObservationRuntimeHealth from './ObservationRuntimeHealth.vue';
 
 interface Source {
   url: string;
@@ -126,6 +127,7 @@ onBeforeUnmount(() => lifecycle.abort());
     </div>
     <a :href="endpoint" class="primary-link" target="_blank" rel="noopener">Agent 数据 JSON ↗</a>
   </div>
+  <ObservationRuntimeHealth />
   <ObservationCoverage />
   <el-alert v-if="loadError" type="error" :title="loadError" :closable="false"/>
   <el-button v-if="loadError" @click="load">重新加载</el-button>
