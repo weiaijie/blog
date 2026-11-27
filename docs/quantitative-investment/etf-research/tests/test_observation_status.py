@@ -8,6 +8,7 @@ from unittest.mock import patch
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts'))
 from observation_status import report
+from etf_research.evidence_archive import object_path
 from etf_research.publication import read
 
 PROOF = ROOT/'reports/2026-11-27-observation-launch'
@@ -36,6 +37,40 @@ class ObservationStatusTests(unittest.TestCase):
         self.assertEqual(fields['market']['turnover']['cny'],'930379000000.00')
         self.assertEqual(fields['market']['margin']['status'],'unknown')
         self.assertIsNone(fields['etf']['511010']['featureReadyAt'])
+
+    def test_source_gaps_are_classified_from_archived_objects(self):
+        day = '2026-11-27'
+        head = '20261127T115450Z-c4c154d1'
+        ledger = ROOT/'reports/research-observation'
+        identity = read(ledger/'archives'/day/(head+'.json'))['archive']
+        proof = ROOT/'reports/2026-11-27-policy-runtime/archive-proofs/snapshots'/(identity+'.json')
+        snapshot = self.store/'snapshots'/(identity+'.json')
+        snapshot.write_bytes(proof.read_bytes())
+        prefix = f'reports/research-observation/runs/{day}/{head}/inputs/'
+        for name,entry in read(snapshot)['files'].items():
+            if name.startswith(prefix):
+                obj = object_path(self.store,entry['sha256'])
+                obj.parent.mkdir(parents=True,exist_ok=True)
+                obj.write_bytes((ROOT/name).read_bytes())
+        def evidence():
+            row = report(ROOT,self.store,day=day,observed=datetime.fromisoformat(day+'T20:00:00+08:00'))['session']
+            self.assertEqual(row['status'],'partial')
+            self.assertEqual(row['latestSourceEvidence']['archiveSha256'],identity)
+            return {e['request']:e for e in row['latestSourceEvidence']['requests']}
+
+        rows = evidence()
+        self.assertEqual(rows['shares_20261127']['state'],'empty_response')
+        self.assertEqual(rows['shares_20261127']['httpStatus'],200)
+        self.assertEqual(rows['nav_510300']['returnedDates'],['2026-11-26',day])
+        self.assertEqual(rows['nav_511010_20261130']['httpStatus'],404)
+        self.assertEqual(rows['nav_511010_20261130']['state'],'response_unavailable')
+        self.assertEqual(rows['nav_511010_20261130']['expectedDates'],[day])
+        self.assertEqual(rows['margin']['state'],'date_mismatch')
+        self.assertEqual(rows['margin']['returnedDates'],['2026-11-26'])
+        self.assertEqual(rows['detail_20261127_1']['rowCount'],0)
+        self.assertEqual(rows['detail_20261127_2']['rowCount'],0)
+        object_path(self.store,rows['margin']['sha256']).write_bytes(b'bad hash')
+        self.assertEqual(evidence()['margin']['state'],'unverified')
 
     def test_missing_record_separate_from_unverified_archive(self):
         path = ROOT/'reports/research-observation/archives/2026-11-27'

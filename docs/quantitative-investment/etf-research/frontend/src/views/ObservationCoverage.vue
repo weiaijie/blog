@@ -34,9 +34,14 @@ type Prediction = {status:string; trainingDays?:number; eventIds?:string[]; base
 type ForecastAttempt = {id:string; status:string; sealedAt?:string; reason?:string|null; archiveSha256?:string;
   comparisons?:Record<string,Prediction>; modelArchiveSha256?:string|null};
 type Forecast = {status:string; deadline:string|null; readyAt:string|null; attempts?:ForecastAttempt[]};
+type EvidenceRequest = {
+  source:string; request:string|null; state:string; expectedDates:string[]; returnedDates:string[];
+  rowCount:number|null; receivedAt:string|null; httpStatus:number|null;
+};
+type SourceEvidence = {archiveSha256:string; state:string; requests:EvidenceRequest[]};
 type Day = {
   day:string; expected:boolean; status:string; archivedAttempts:number; latest:Attempt|null;
-  issues:{id:string; status:string}[]; decision:Decision; label:OutcomeLabel; forecast:Forecast; modelProgress?:ModelProgress;
+  issues:{id:string; status:string}[]; latestSourceEvidence?:SourceEvidence|null; decision:Decision; label:OutcomeLabel; forecast:Forecast; modelProgress?:ModelProgress;
 };
 type EvidenceGate = {pairs:number; folds:number;policyEvents:number};
 type AssessmentGroup = {status:string; completedPairs:number|null; folds:number|null; policyEvents:number|null;
@@ -77,6 +82,14 @@ const error = ref('');
 const detailError = ref('');
 const lifecycle = new AbortController();
 let detailRequest:AbortController|undefined;
+const evidenceNames:Record<string,string> = {
+  shares:'上交所 ETF 清算份额', huatai:'510300 管理人净值', guotai:'511010 管理人净值',
+  margin:'上交所两融汇总', margin_detail:'上交所两融明细',
+};
+const evidenceStates:Record<string,string> = {
+  not_requested:'未发出请求', response_unavailable:'未取得可用响应', empty_response:'返回零行',
+  date_mismatch:'返回日期不全或不符', dates_present:'响应包含所需日期', unverified:'响应待核验',
+};
 const phases:Record<string,string> = {
   qualified:'合格归档', complete:'完整归档', partial:'部分可用', failed:'采集失败',
   interrupted:'采集中断', missing:'未见采集', unverified:'归档待核验',
@@ -467,6 +480,24 @@ onBeforeUnmount(()=>{lifecycle.abort();detailRequest?.abort();});
             </li>
           </ol>
         </section>
+        <details v-if="detail.latestSourceEvidence" class="receipt source-evidence">
+          <summary>最近一次归档的原始响应</summary>
+          <p v-if="detail.latestSourceEvidence.state!=='available'">这次归档没有可核对的来源响应。</p>
+          <ul v-else>
+            <li v-for="request in detail.latestSourceEvidence.requests" :key="request.request ?? request.source">
+              <strong>{{evidenceNames[request.source] ?? request.source}}<template v-if="request.source==='margin_detail'">
+                第 {{request.request?.split('_').at(-1)}} 页</template></strong>
+              · {{evidenceStates[request.state] ?? request.state}}
+              <span v-if="request.httpStatus"> · HTTP {{request.httpStatus}}</span>
+              <span v-else-if="request.httpStatus===0"> · 无 HTTP 响应</span>
+              <span v-if="request.rowCount!==null"> · {{request.rowCount}} 行</span>
+              <small>需要 {{request.expectedDates.join('、')}}
+                <template v-if="request.returnedDates.length"> · 返回 {{request.returnedDates.join('、')}}</template>
+                <template v-if="request.receivedAt"> · 收报 {{time(request.receivedAt)}}</template>
+              </small>
+            </li>
+          </ul>
+        </details>
         <p v-for="issue in detail.issues" :key="issue.id">{{phases[issue.status] ?? issue.status}} · {{issue.id}}</p>
         <p v-if="!detail.attempts.length">这一天没有通过哈希核验的归档。</p>
         <ol v-else class="attempts">
@@ -517,6 +548,9 @@ onBeforeUnmount(()=>{lifecycle.abort();detailRequest?.abort();});
 .coverage-counts dd{font-size:22px;font-weight:650;margin:4px 0;font-variant-numeric:tabular-nums}
 .focused{background:#edf5f4}.coverage-table td small{display:block;color:#526b7b}.date-button{min-height:38px}
 .older{margin-top:12px}.coverage-detail{border-top:1px solid #d8e2e8;margin-top:18px;padding-top:16px}
+.source-evidence ul{margin:8px 0;padding-inline-start:20px}
+.source-evidence li{margin:7px 0}
+.source-evidence small{display:block;color:#526b7b}
 .attempts{list-style:none;padding:0}.attempts li{border:1px solid #d8e2e8;border-radius:5px;margin:10px 0;padding:12px}
 .attempt-title{display:flex;flex-wrap:wrap;gap:6px 14px}.attempt-title,.attempts p{margin:0 0 8px}
 .attempt-sources{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px 16px;margin:12px 0}

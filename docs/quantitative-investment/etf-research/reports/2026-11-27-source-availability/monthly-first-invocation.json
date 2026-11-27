@@ -1,0 +1,38 @@
+{
+  "timer": "etf-research-monthly-coverage.timer",
+  "timerState": {
+    "ActiveState": "active",
+    "NextElapseUSecRealtime": "Sat 2026-11-28 21:05:00 CST",
+    "LastTriggerUSec": "Fri 2026-11-27 21:05:00 CST"
+  },
+  "service": "etf-research-monthly-coverage.service",
+  "serviceState": {
+    "Result": "success",
+    "ExecMainStartTimestamp": "Fri 2026-11-27 21:05:00 CST",
+    "ExecMainExitTimestamp": "Fri 2026-11-27 21:05:00 CST",
+    "ExecMainStatus": "0"
+  },
+  "invocationId": "dbd874f942b94eec8bb05d677c9fc302",
+  "journalAt": "2026-11-27T21:05:00.811669+08:00",
+  "journalResult": {
+    "observedAt": "2026-11-27T13:05:00.811366+00:00",
+    "sealed": [],
+    "waiting": []
+  },
+  "monthlyView": {
+    "url": "http://10.1.1.120:18766/api/v1/research/observation/monthly?month=2026-11",
+    "archive": {
+      "state": "waiting",
+      "issues": {
+        "unverified": 0,
+        "pending": 0
+      },
+      "archiveSha256": null,
+      "verifiedAt": null
+    },
+    "state": "open",
+    "expected": 1,
+    "qualified": 0,
+    "sealAfter": "2026-12-01T08:55:00+08:00"
+  }
+}

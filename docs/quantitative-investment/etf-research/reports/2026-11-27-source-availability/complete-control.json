@@ -1,0 +1,111 @@
+{
+  "phase": "complete",
+  "qualified": false,
+  "scheduled": false,
+  "evidence": {
+    "archiveSha256": "087b1492e77ab8721b55bfbda631293729ca09b4595ef3a5c9c3a77bf8052936",
+    "state": "available",
+    "requests": [
+      {
+        "source": "shares",
+        "request": "shares_20261126",
+        "expectedDates": [
+          "2026-11-26"
+        ],
+        "returnedDates": [
+          "2026-11-26"
+        ],
+        "rowCount": 938,
+        "receivedAt": "2026-11-27T09:02:25.629554+00:00",
+        "url": "https://query.sse.com.cn/commonQuery.do?sqlId=COMMON_SSE_ZQPZ_ETFZL_XXPL_ETFGM_SEARCH_L&STAT_DATE=2026-11-26&isPagination=true&pageHelp.pageSize=1500&pageHelp.pageNo=1&pageHelp.beginPage=1&pageHelp.endPage=1&pageHelp.cacheSize=1",
+        "sha256": "af12630802dec153110a4c1a67afb0ae6cf216f6eaf2d684678a3560cec1a397",
+        "httpStatus": 200,
+        "state": "dates_present"
+      },
+      {
+        "source": "huatai",
+        "request": "nav_510300",
+        "expectedDates": [
+          "2026-11-25",
+          "2026-11-26"
+        ],
+        "returnedDates": [
+          "2026-11-25",
+          "2026-11-26"
+        ],
+        "rowCount": 2,
+        "receivedAt": "2026-11-27T09:02:25.698431+00:00",
+        "url": "https://www.huatai-pb.com/common-web/chart/fundnettable/getFundNetTableJson?fundcode=510300&from=2026-11-25&to=2026-11-26&pages=1-10&siteId=9496d23c648f4a72a79150c3f2ac669b",
+        "sha256": "47df4a9c262ee987bd8c23b74e65b1223ed3c4e6299d1342734904db70e2c034",
+        "httpStatus": 200,
+        "state": "dates_present"
+      },
+      {
+        "source": "guotai",
+        "request": "nav_511010_20261127",
+        "expectedDates": [
+          "2026-11-26"
+        ],
+        "returnedDates": [
+          "2026-11-26"
+        ],
+        "rowCount": 1,
+        "receivedAt": "2026-11-27T09:02:25.725959+00:00",
+        "url": "https://m.gtfund.com/cochin/etf/download/511010/20261127",
+        "sha256": "c131ab194adc07989aa1d09461811666026924c96c33578f522cf100779c7cb8",
+        "httpStatus": 200,
+        "state": "dates_present"
+      },
+      {
+        "source": "margin",
+        "request": "margin",
+        "expectedDates": [
+          "2026-11-25",
+          "2026-11-26"
+        ],
+        "returnedDates": [
+          "2026-11-25",
+          "2026-11-26"
+        ],
+        "rowCount": 2,
+        "receivedAt": "2026-11-27T09:02:27.371325+00:00",
+        "url": "https://query.sse.com.cn/commonSoaQuery.do?sqlId=RZRQ_HZ_INFO&beginDate=20261125&endDate=20261126&isPagination=true&pageHelp.pageSize=100&pageHelp.pageNo=1",
+        "sha256": "468dcc9165e63fb2d6dda6084a1ff28d7e7f62f5f2d4183da8be8c137506e2d3",
+        "httpStatus": 200,
+        "state": "dates_present"
+      },
+      {
+        "source": "margin_detail",
+        "request": "detail_20261126_1",
+        "expectedDates": [
+          "2026-11-26"
+        ],
+        "returnedDates": [
+          "2026-11-26"
+        ],
+        "rowCount": 1500,
+        "receivedAt": "2026-11-27T09:02:27.900399+00:00",
+        "url": "https://query.sse.com.cn/commonSoaQuery.do?sqlId=RZRQ_MX_INFO&beginDate=20261126&endDate=20261126&isPagination=true&pageHelp.pageSize=1500&pageHelp.pageNo=1",
+        "sha256": "3ffbac9dccf14c1b37f6e5ec4caf37016f11041a75921fb1b725a2b3e9ce6de4",
+        "httpStatus": 200,
+        "state": "dates_present"
+      },
+      {
+        "source": "margin_detail",
+        "request": "detail_20261126_2",
+        "expectedDates": [
+          "2026-11-26"
+        ],
+        "returnedDates": [
+          "2026-11-26"
+        ],
+        "rowCount": 519,
+        "receivedAt": "2026-11-27T09:02:28.221833+00:00",
+        "url": "https://query.sse.com.cn/commonSoaQuery.do?sqlId=RZRQ_MX_INFO&beginDate=20261126&endDate=20261126&isPagination=true&pageHelp.pageSize=1500&pageHelp.pageNo=2",
+        "sha256": "c17482c8a6383937e753f9528b7746338e9e0b46f0cee0b10450d8d1b9c7c769",
+        "httpStatus": 200,
+        "state": "dates_present"
+      }
+    ]
+  }
+}

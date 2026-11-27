@@ -2,10 +2,12 @@
 from calendar import monthrange
 from collections import defaultdict
 from datetime import date, datetime, time, timedelta, timezone
+from hashlib import sha256
 import json
 import os
 from pathlib import Path
 import re
+from xml.etree import ElementTree
 
 from run_research_observation import check_receipt
 from observation_decision_status import FIRST_DECISION, decision_counts, decision_row, schedule
@@ -14,6 +16,7 @@ from observation_forecast_status import forecast_counts, forecast_row, model_pro
 from observation_evaluation_status import evaluation_view
 from seal_observation_decision import first_archive
 from etf_research.admission import completed_date, sessions_between
+from etf_research.evidence_archive import object_path
 from etf_research.exchange_calendar import calendar_at
 from etf_research.policy_events import TZ, instant
 from etf_research.publication import read
@@ -110,6 +113,96 @@ def view_attempt(receipt, record):
                 failedSources=sorted(record['errors']))
 
 
+def archived_bytes(store, entry):
+    body = object_path(store, entry['sha256']).read_bytes()
+    if len(body)!=entry['bytes'] or sha256(body).hexdigest()!=entry['sha256']:
+        raise ValueError('Archive object hash mismatch')
+    return body
+
+
+def returned_dates(body, source):
+    if source=='guotai':
+        pcf = ElementTree.fromstring(body)
+        value = pcf.findtext('PreTradingDay','')
+        return [parse_day(f'{value[:4]}-{value[4:6]}-{value[6:]}').isoformat()],1
+    data = json.loads(body)
+    rows, key = (data['dataList'],'date') if source=='huatai' else (
+        data['result'],'STAT_DATE' if source=='shares' else 'opDate')
+    if not isinstance(rows,list):
+        raise ValueError('Source rows are not a list')
+    for field in ('actionErrors','actionMessages','fieldErrors'):
+        if data.get(field):
+            raise ValueError('Exchange rejected the query')
+    days = set()
+    for row in rows:
+        value = row[key]
+        normalized = value if '-' in value else f'{value[:4]}-{value[4:6]}-{value[6:]}'
+        days.add(parse_day(normalized).isoformat())
+    return sorted(days),len(rows)
+
+
+def request_evidence(store, files, prefix, record, source, name, expected):
+    row = dict(source=source, request=name, expectedDates=expected, returnedDates=[],
+               rowCount=None, receivedAt=None, url=None, sha256=None, httpStatus=None)
+    if name is None:
+        return dict(row,state='not_requested')
+    try:
+        entry = files[prefix+name+'.body']
+        body = archived_bytes(store,entry)
+        if (record['sha256']!=entry['sha256'] or record['bytes']!=entry['bytes']
+                or record['name']!=name):
+            raise ValueError('Request is not bound to the response')
+        row.update(receivedAt=instant(record['receivedAt']).isoformat(), url=record['url'],
+                   sha256=entry['sha256'], httpStatus=record['status'])
+        if (record['status']!=200 or record['curl_exit'] or record.get('error')
+                or record['final_url']!=record['url'] or record['metrics']['ssl_verify_result']!=0):
+            return dict(row,state='response_unavailable')
+        dates,count = returned_dates(body,source)
+        state = ('empty_response' if not count else
+                 'date_mismatch' if set(dates)!=set(expected) else 'dates_present')
+        return dict(row,state=state,returnedDates=dates,rowCount=count)
+    except (OSError,ValueError,TypeError,KeyError,AttributeError,ElementTree.ParseError):
+        return dict(row,state='unverified')
+
+
+def latest_source_evidence(store, receipt):
+    identity = receipt['archive']
+    attempt = receipt['attempt']
+    try:
+        raw = (store/'snapshots'/(identity+'.json')).read_bytes()
+        if sha256(raw).hexdigest()!=identity:
+            raise ValueError('Archive manifest changed')
+        files = json.loads(raw)['files']
+        rows = []
+        for part in ('policy-etf-day','sse-research-day'):
+            paths = [name for name in files if name.startswith(attempt+'/inputs/')
+                     and name.endswith('-'+part+'/requests.json')]
+            if not paths:
+                continue
+            request_path, = paths
+            prefix = request_path.removesuffix('requests.json')
+            run = json.loads(archived_bytes(store,files[prefix+'run.json']))
+            day,prior = run['date'],run['previousDate']
+            key = parse_day(day).strftime('%Y%m%d')
+            requests = json.loads(archived_bytes(store,files[request_path]))
+            records = {row['name']:row for row in requests}
+            if len(records)!=len(requests) or day!=receipt['session']:
+                raise ValueError('Invalid source request inventory')
+            if part=='policy-etf-day':
+                following = run['followingDate']
+                pcf = 'nav_511010_'+parse_day(following).strftime('%Y%m%d') if following else None
+                checks = [('shares','shares_'+key,[day]),('huatai','nav_510300',[prior,day]),
+                          ('guotai',pcf,[day])]
+            else:
+                checks = [('margin','margin',[prior,day]),('margin_detail','detail_'+key+'_1',[day]),
+                          ('margin_detail','detail_'+key+'_2',[day])]
+            rows.extend(request_evidence(store,files,prefix,records.get(name,{}),source,name,dates)
+                        for source,name,dates in checks)
+        return dict(archiveSha256=identity,state='available' if rows else 'no_responses',requests=rows)
+    except (OSError,ValueError,TypeError,KeyError,AttributeError):
+        return dict(archiveSha256=identity,state='unverified',requests=[])
+
+
 def day_row(day, planned, entries, errors):
     records = entries.get(day,())
     latest = view_attempt(*records[-1]) if records else None
@@ -196,6 +289,7 @@ def report(root, store, *, day=None, before=None, observed=None):
         if row['status']=='not_scheduled' and unknown_year and session.year>=unknown_year:
             row['status']='calendar_unknown'
         row['attempts'] = [view_attempt(*item) for item in reversed(entries.get(day,()))]
+        row['latestSourceEvidence'] = latest_source_evidence(store,entries[day][-1][0]) if entries.get(day) else None
         return dict(schemaVersion=1,reportedAt=observed.isoformat(),session=with_decision(row))
     limit = parse_day(before) if before is not None else date.max
     displayed = [d for d in sorted(expected | entries.keys() | errors.keys() | decisions.keys(),reverse=True)
