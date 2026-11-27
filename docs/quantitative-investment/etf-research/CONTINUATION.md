@@ -22,7 +22,7 @@
 
 ## 当前事实
 
-- [当前进度](docs/CURRENT_STATUS.md)集中维护完成与缺口；[前瞻已至 2026-11-27](reports/daily/20261127T170315-58f85234/forward_checkpoint.json)，18 户累计 17 个交易日。回测新增 11-26 版，四个先前版本可复现。
+- [当前进度](docs/CURRENT_STATUS.md)集中维护完成与缺口；[前瞻已至 2026-11-27](reports/daily/20261127T170315-58f85234/forward_checkpoint.json)，18 户共有 17 个收盘估值和 16 个收益区间。[6、12、24 个月复盘口径](reports/2026-11-27-forward-milestones/README.md)可在总览与 Agent 查看。回测新增 11-26 版，四个先前版本可复现。
 - [新版工作台](docs/WORKBENCH_PLAN.md)使用Vue/TypeScript/Vite，人工和Agent共用参数。服务根路径及/workbench/为新版，/market.html与/backtest.html保留旧入口。内网地址http://10.1.1.120:18766，未确认公网部署。
 - [321个ADX落后窗口](reports/2026-11-12-adx-shortfall/README.md)已逐窗对账。270个短空档窗口只覆盖两次实际事件；事后取消诊断不能作为可执行规则。
 - 多源行情、公告、日历、分红核验继续阻断不合格更新，不覆盖旧快照，不使用真实资金。
@@ -36,7 +36,7 @@
 ## 接手顺序
 
 1. 读取AGENTS、README、PROJECT_PLAN、DATA_SOURCES、docs/PLAN_ALIGNMENT、config/research.json、PROTOCOL_V1。核对远端和当前北京时间。
-2. 执行verify_snapshot.py与scripts/verify_project.py。最新静态清单为reports/2026-11-27-portable-observation/manifest.json；旧清单在相应提交验证。
+2. 执行verify_snapshot.py与scripts/verify_project.py。最新静态清单为reports/2026-11-27-forward-milestones/manifest.json；旧清单在相应提交验证。
 3. 核实三个用户定时器与site/health_status.json。静态Git文档不代表主机当前状态；未满252收益的风险指标留空，前瞻不借历史补齐。
 4. 前端改动先在隔离目录/端口验证，npm ci、npm test、npm run build；维护frontend源码与site/workbench构建产物、归档清单和静态清单。只构建不运行测试不能称验收完成。
 5. 研究下一步按PROJECT_PLAN执行：少量新规则先立协议、保留原版与失败区间。已观察历史不能重新标记成未见样本。

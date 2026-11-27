@@ -1,20 +1,20 @@
 {
-  "_AttributionTable-C0UNhDO4.js": {
-    "file": "assets/AttributionTable-C0UNhDO4.js",
+  "_AttributionTable-DpNXt3it.js": {
+    "file": "assets/AttributionTable-DpNXt3it.js",
     "name": "AttributionTable",
     "imports": [
       "index.html"
     ]
   },
-  "_Chart-DSVJDj6M.js": {
-    "file": "assets/Chart-DSVJDj6M.js",
+  "_Chart-DjBrQs-h.js": {
+    "file": "assets/Chart-DjBrQs-h.js",
     "name": "Chart",
     "imports": [
       "index.html"
     ]
   },
-  "_DayDetail-Dt59Z-AK.js": {
-    "file": "assets/DayDetail-Dt59Z-AK.js",
+  "_DayDetail-p7jBJJ1y.js": {
+    "file": "assets/DayDetail-p7jBJJ1y.js",
     "name": "DayDetail",
     "imports": [
       "index.html"
@@ -25,7 +25,7 @@
     "name": "_plugin-vue_export-helper"
   },
   "index.html": {
-    "file": "assets/index-EjMrz7jk.js",
+    "file": "assets/index-CafF58Ff.js",
     "name": "index",
     "src": "index.html",
     "isEntry": true,
@@ -46,7 +46,7 @@
     ]
   },
   "src/views/Catalog.vue": {
-    "file": "assets/Catalog-DXkf10ao.js",
+    "file": "assets/Catalog-Cp35cu8W.js",
     "name": "Catalog",
     "src": "src/views/Catalog.vue",
     "isDynamicEntry": true,
@@ -59,63 +59,67 @@
     ]
   },
   "src/views/Compare.vue": {
-    "file": "assets/Compare-CbLmDwm_.js",
+    "file": "assets/Compare-BcVU0SPo.js",
     "name": "Compare",
     "src": "src/views/Compare.vue",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_Chart-DSVJDj6M.js",
-      "_AttributionTable-C0UNhDO4.js",
-      "_DayDetail-Dt59Z-AK.js"
+      "_Chart-DjBrQs-h.js",
+      "_AttributionTable-DpNXt3it.js",
+      "_DayDetail-p7jBJJ1y.js"
     ]
   },
   "src/views/DataChanges.vue": {
-    "file": "assets/DataChanges-DEIvlpEu.js",
+    "file": "assets/DataChanges-9lCgiFdV.js",
     "name": "DataChanges",
     "src": "src/views/DataChanges.vue",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_Chart-DSVJDj6M.js",
-      "_DayDetail-Dt59Z-AK.js",
-      "_AttributionTable-C0UNhDO4.js"
+      "_Chart-DjBrQs-h.js",
+      "_DayDetail-p7jBJJ1y.js",
+      "_AttributionTable-DpNXt3it.js"
     ]
   },
   "src/views/Market.vue": {
-    "file": "assets/Market-DW4i09kv.js",
+    "file": "assets/Market-BKxkwRFb.js",
     "name": "Market",
     "src": "src/views/Market.vue",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_Chart-DSVJDj6M.js"
+      "_Chart-DjBrQs-h.js"
     ]
   },
   "src/views/NewWindows.vue": {
-    "file": "assets/NewWindows-CBVEIqdJ.js",
+    "file": "assets/NewWindows-DoHErFXU.js",
     "name": "NewWindows",
     "src": "src/views/NewWindows.vue",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_Chart-DSVJDj6M.js",
-      "_DayDetail-Dt59Z-AK.js",
-      "_AttributionTable-C0UNhDO4.js"
+      "_Chart-DjBrQs-h.js",
+      "_DayDetail-p7jBJJ1y.js",
+      "_AttributionTable-DpNXt3it.js"
     ]
   },
   "src/views/Overview.vue": {
-    "file": "assets/Overview-BweJ_EQz.js",
+    "file": "assets/Overview-D5EMttuM.js",
     "name": "Overview",
     "src": "src/views/Overview.vue",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_Chart-DSVJDj6M.js"
+      "_Chart-DjBrQs-h.js",
+      "__plugin-vue_export-helper-BDNMzG2s.js"
+    ],
+    "css": [
+      "assets/Overview-C72R-aur.css"
     ]
   },
   "src/views/PolicyResearch.vue": {
-    "file": "assets/PolicyResearch-no0JaBHW.js",
+    "file": "assets/PolicyResearch-iodsKefH.js",
     "name": "PolicyResearch",
     "src": "src/views/PolicyResearch.vue",
     "isDynamicEntry": true,
@@ -128,7 +132,7 @@
     ]
   },
   "src/views/Reports.vue": {
-    "file": "assets/Reports-BQ0-EDNB.js",
+    "file": "assets/Reports-DJ4wiGNw.js",
     "name": "Reports",
     "src": "src/views/Reports.vue",
     "isDynamicEntry": true,
@@ -137,18 +141,18 @@
     ]
   },
   "src/views/Research.vue": {
-    "file": "assets/Research-K7Wzsy2D.js",
+    "file": "assets/Research-DwSvVZ5Z.js",
     "name": "Research",
     "src": "src/views/Research.vue",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_Chart-DSVJDj6M.js",
-      "_DayDetail-Dt59Z-AK.js"
+      "_Chart-DjBrQs-h.js",
+      "_DayDetail-p7jBJJ1y.js"
     ]
   },
   "src/views/StrategyGraph.vue": {
-    "file": "assets/StrategyGraph-BJKRzV9a.js",
+    "file": "assets/StrategyGraph-HZ-dfA6x.js",
     "name": "StrategyGraph",
     "src": "src/views/StrategyGraph.vue",
     "isDynamicEntry": true,
