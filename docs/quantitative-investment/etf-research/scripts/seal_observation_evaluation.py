@@ -6,7 +6,7 @@ import os
 from pathlib import Path
 import re
 
-from observation_out_of_sample import CALENDAR, evaluate
+from observation_labels import CALENDAR
 from etf_research.evidence_archive import capture, verify as verify_archive
 from etf_research.policy_events import TZ, instant
 from etf_research.publication import create, lock, read, seal, sha, sync_dir, verify_bundle
@@ -74,6 +74,8 @@ def archive_evaluation(root,store,report,invocation):
 
 
 def run(root,store):
+    from observation_out_of_sample import evaluate
+
     invocation=os.environ.get('INVOCATION_ID','')
     if os.environ.get('TRIGGER_UNIT')!=TIMER or not re.fullmatch('[a-f0-9]{32}',invocation):
         raise ValueError('Production evaluation requires its systemd timer')

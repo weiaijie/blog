@@ -1,6 +1,6 @@
 """Serve the read-only research dashboard, or export its verified data for static viewing."""
 import argparse
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta, timezone
 from functools import lru_cache
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
@@ -199,6 +199,28 @@ class Handler(BaseHTTPRequestHandler):
             except (OSError,ValueError,KeyError,TypeError,ImportError) as exc:
                 self.log_error('Observation status unavailable: %s',exc)
                 status,body = 503,interactive.encode({'error':'独立采集状态暂无法核验。'})
+        elif path == '/api/v1/research/observation/evaluation':
+            kind = 'application/json'
+            try:
+                from observation_evaluation_status import ARCHIVE_ID, evaluation_view
+                from observation_status import production_paths
+                from seal_observation_decision import first_archive
+                params = interactive.request_params(url.query, (), ('archive',))
+                archive = params.get('archive')
+                if archive is not None and not ARCHIVE_ID.fullmatch(archive):
+                    raise interactive.InputError('评估归档校验值须为 64 位小写十六进制。')
+                root,store = (x.resolve() for x in production_paths())
+                observed = datetime.now(timezone.utc)
+                data = evaluation_view(root,store,observed,first_archive(root,store,observed),
+                                       details=True,archive=archive)
+                if archive is not None and data['report'] is None:
+                    status = 404
+                body = interactive.encode(data)
+            except interactive.InputError as exc:
+                status,body = 400,interactive.encode({'error':str(exc)})
+            except (OSError,ValueError,KeyError,TypeError,ImportError) as exc:
+                self.log_error('Evaluation unavailable: %s',exc)
+                status,body = 503,interactive.encode({'error':'评估归档暂无法核验。'})
         elif path in ('/api/v1/research/policy-pilot','/api/v1/research/policy-pilot/as-of'):
             kind = 'application/json'
             try:

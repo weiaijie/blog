@@ -12,6 +12,7 @@ from collect_sse_research_day import CALENDAR_SHA
 from observation_decision_status import FIRST_DECISION, decision_counts, decision_row, schedule
 from observation_label_status import label_counts, label_row
 from observation_forecast_status import forecast_counts, forecast_row, model_progress
+from observation_evaluation_status import evaluation_view
 from seal_observation_decision import first_archive
 from etf_research.admission import completed_date, sessions_between
 from etf_research.policy_events import TZ, instant
@@ -200,6 +201,7 @@ def report(root, store, *, day=None, before=None, observed=None):
                 labelCounts=label_counts(labels.values(),observed),
                 modelProgress=model_progress(root,store,origin,observed),
                 forecastCounts=forecast_counts(forecasts.values(),observed),
+                evaluation=evaluation_view(root,store,observed,origin),
                 nextDecision=next_decision,
                 counts=dict(expected=len(expected),archived=sum(d in entries for d in expected),
                             qualified=len({row['session'] for row in qualified}),

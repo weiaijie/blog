@@ -37,6 +37,14 @@ type Day = {
   day:string; expected:boolean; status:string; archivedAttempts:number; latest:Attempt|null;
   issues:{id:string; status:string}[]; decision:Decision; label:OutcomeLabel; forecast:Forecast; modelProgress?:ModelProgress;
 };
+type EvidenceGate = {pairs:number; folds:number;policyEvents:number};
+type AssessmentGroup = {status:string; completedPairs:number|null; folds:number|null; policyEvents:number|null;
+  shortfall:EvidenceGate|null; selectedWindows:number|null;matchedWindows:number|null};
+type EvaluationProgress = {
+  status:string; archiveState:string; assessedAt:string|null; verifiedAt:string|null; archiveSha256:string|null;
+  archiveIssues:{unverified:number;pending:number}; originSinceArchive:boolean;
+  thresholds:EvidenceGate; comparisons:Record<string,AssessmentGroup>;
+};
 type Overview = {
   reportedAt:string; calendarUnknownYear:number|null; nextBefore:string|null;
   counts:{expected:number; archived:number; qualified:number; missing:number};
@@ -45,9 +53,11 @@ type Overview = {
   decisionCounts:{expected:number; sealedOnTime:number; eligibleInputDays:number; gaps:number};
   labelCounts:{due:number; ready:number; gaps:number; holding:number; unknownCalendar:number};
   modelProgress:ModelProgress;
+  evaluation:EvaluationProgress;
   forecastCounts:{due:number; sealedDays:number; gaps:number; sealedPairs:Record<string,number>;unknownCalendar:number};
 };
 const endpoint = '/api/v1/research/observation';
+const evaluationEndpoint = endpoint+'/evaluation';
 const overview = ref<Overview>();
 const selected = ref('');
 const detail = ref<Day & {attempts:Attempt[]}>();
@@ -102,6 +112,14 @@ const forecastStates:Record<string,string> = {
   inputs_missing:'扩展输入不齐', policy_event_previously_seen:'政策事件已在训练或先前折使用',
   predicted:'已计算预测',
 };
+const evaluationStates:Record<string,string> = {
+  observation_origin_pending:'等待首个合格归档', awaiting_evaluation:'等待评估任务封存',
+  observation_in_progress:'观察期间，累计覆盖证据', evaluation_available:'已至评估阶段',
+  final_labels_pending:'等待最后一段标签', calendar_unverified:'交易日历待核验',
+  insufficient_samples:'样本不足', improved:'达到主要检验的改善标准', not_established:'尚未达到改善标准',
+  uncertain:'区间无法确定', exploratory:'探索性结果',
+};
+const metricProgress = (value:number|null, goal:number) => value===null ? '待核验' : value+' / '+goal;
 const labelGap = (code:string|{reason:string}) => {
   const key=typeof code==='string' ? code : code.reason;
   return labelGaps[key] ?? key;
@@ -261,6 +279,46 @@ onBeforeUnmount(()=>{lifecycle.abort();detailRequest?.abort();});
         <p v-if="overview.forecastCounts.unknownCalendar" class="muted">
           {{overview.forecastCounts.unknownCalendar}} 个预测日期仍待核验交易日历。
         </p>
+      </section>
+      <section class="decision-summary" aria-labelledby="evaluation-title">
+        <div class="section-head coverage-head">
+          <div>
+            <h3 id="evaluation-title">样本外评估</h3>
+            <p>{{evaluationStates[overview.evaluation.status] ?? overview.evaluation.status}}</p>
+          </div>
+          <a :href="apiUrl(evaluationEndpoint,overview.evaluation.archiveSha256 ? {archive:overview.evaluation.archiveSha256} : {})"
+            target="_blank" rel="noopener">查看评估 JSON ↗</a>
+        </div>
+        <p class="muted" v-if="overview.evaluation.assessedAt">
+          评估时点 {{time(overview.evaluation.assessedAt)}} · 归档核验 {{time(overview.evaluation.verifiedAt)}}
+        </p>
+        <p class="muted" v-else>{{overview.evaluation.archiveState==='unverified' ? '评估归档校验未通过' : '等待首份定时评估归档'}}</p>
+        <p v-if="overview.evaluation.originSinceArchive" class="muted">观察期已起算，表内保留上一次归档时的结果。</p>
+        <p v-if="overview.evaluation.archiveIssues.unverified || overview.evaluation.archiveIssues.pending" class="muted">
+          {{overview.evaluation.archiveIssues.unverified}} 份未通过核验 · {{overview.evaluation.archiveIssues.pending}} 份等待归档。
+        </p>
+        <div class="table-scroll" tabindex="0" aria-label="各组评估门槛">
+          <table class="coverage-table">
+            <thead><tr><th scope="col">比较</th><th scope="col">状态</th><th scope="col">已配对日期</th>
+              <th scope="col">覆盖折</th><th scope="col">独立政策事件</th><th scope="col">经济对照窗口</th></tr></thead>
+            <tbody>
+              <tr v-for="(group,name) in overview.evaluation.comparisons" :key="name">
+                <th scope="row">{{variants[name] ?? name}}</th>
+                <td>{{evaluationStates[group.status] ?? group.status}}</td>
+                <td>{{metricProgress(group.completedPairs,overview.evaluation.thresholds.pairs)}}
+                  <small v-if="group.shortfall?.pairs">还差 {{group.shortfall.pairs}} 日</small>
+                </td>
+                <td>{{metricProgress(group.folds,overview.evaluation.thresholds.folds)}}
+                  <small v-if="group.shortfall?.folds">还差 {{group.shortfall.folds}} 折</small>
+                </td>
+                <td>{{name==='policy' || name==='combined' ? metricProgress(group.policyEvents,overview.evaluation.thresholds.policyEvents) : '—'}}
+                  <small v-if="group.shortfall?.policyEvents">还差 {{group.shortfall.policyEvents}} 个</small>
+                </td>
+                <td>{{group.selectedWindows===null ? '待核验' : metricProgress(group.matchedWindows,group.selectedWindows)}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
       <el-alert v-if="overview.calendarUnknownYear" type="warning" :closable="false"
         :title="overview.calendarUnknownYear+' 年交易日历待核验'"/>
