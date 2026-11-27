@@ -1,5 +1,7 @@
 # 自主接续入口
 
+事件与资金数据先做独立的日频只读研究。优先复用公告证据留存与版本核验方式，按第 35–42 项逐一验收。[政策与市场数据验收补充](reports/2026-11-27-policy-data-plan/README.md)
+
 已核对模拟交易、前瞻、风控、回测与运维共 34 项。[功能清单与验收证据](reports/2026-11-27-system-audit/README.md)
 
 11 月 24–26 日的 18 户前瞻账户已逐日重放并恢复，四只 ETF 的回测数据核验至 11 月 26 日。[审核、日报与回测准入](reports/2026-11-27-admission/README.md)
@@ -32,7 +34,7 @@
 ## 接手顺序
 
 1. 读取AGENTS、README、PROJECT_PLAN、DATA_SOURCES、docs/PLAN_ALIGNMENT、config/research.json、PROTOCOL_V1。核对远端和当前北京时间。
-2. 执行verify_snapshot.py与scripts/verify_project.py。最新静态清单为reports/2026-11-27-system-audit/manifest.json；旧清单在相应提交验证。
+2. 执行verify_snapshot.py与scripts/verify_project.py。最新静态清单为reports/2026-11-27-policy-data-plan/manifest.json；旧清单在相应提交验证。
 3. 核实三个用户定时器与site/health_status.json。静态Git文档不代表主机当前状态；未满252收益的风险指标留空，前瞻不借历史补齐。
 4. 前端改动先在隔离目录/端口验证，npm ci、npm test、npm run build；维护frontend源码与site/workbench构建产物、归档清单和静态清单。只构建不运行测试不能称验收完成。
 5. 研究下一步按PROJECT_PLAN执行：少量新规则先立协议、保留原版与失败区间。已观察历史不能重新标记成未见样本。

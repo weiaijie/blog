@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "record_type": "source_verified_examples",
+  "verified_at": "2026-11-27T15:50:54+08:00",
+  "timezone": "Asia/Shanghai",
+  "time_note": "中文站点网页标时按北京时间归一，原页面未显式标注时区。事件时点保存原有精度。",
+  "scope": "政策来源核验与字段样例，不进入交易或回测输入。",
+  "events": [
+    {
+      "event_id": "state-council-2026-11-06-stabilization",
+      "theme_id": "capital-market-stabilization",
+      "event_time": "2026-11-06",
+      "event_time_precision": "date",
+      "issuing_body": "国务院常务会议",
+      "stage": "deployment",
+      "received_at": null,
+      "feature_ready_at": null,
+      "effective_at": null,
+      "disclosed_incremental_funding_cny": null,
+      "execution_amount_cny": null,
+      "expectation_surprise": null,
+      "signal_eligible": false,
+      "sources": [
+        {
+          "url": "https://www.mofcom.gov.cn/syxwfb/art/2026/art_12d65a0ba98a436b8c6b046863e591e7.html",
+          "publisher": "商务部",
+          "origin": "新华社",
+          "role": "government_reprint",
+          "published_at": "2026-11-07T11:14+08:00",
+          "published_at_precision": "minute",
+          "evidence_locator": "新华社北京11月6日电；会议第一段政策部署。"
+        }
+      ],
+      "observed_policy_directions": [
+        "完善资本市场稳市机制"
+      ],
+      "comparison_event_id": null,
+      "text_increment": null,
+      "availability_note": "核验网页的时间。历史系统到达、特征就绪及实施时间均无证据。"
+    },
+    {
+      "event_id": "state-council-2026-11-27-stabilization",
+      "theme_id": "capital-market-stabilization",
+      "event_time": "2026-11-27",
+      "event_time_precision": "date",
+      "issuing_body": "国务院常务会议",
+      "stage": "deployment",
+      "received_at": null,
+      "feature_ready_at": null,
+      "effective_at": null,
+      "disclosed_incremental_funding_cny": null,
+      "execution_amount_cny": null,
+      "expectation_surprise": null,
+      "signal_eligible": false,
+      "sources": [
+        {
+          "url": "https://www.news.cn/politics/leaders/20261127/a7c52bc55082444da343d42d738f28b8/c.html",
+          "publisher": "新华网",
+          "origin": "新华社",
+          "role": "original",
+          "published_at": "2026-11-27T12:24:37+08:00",
+          "published_at_precision": "second",
+          "evidence_locator": "页面标时与资本市场段落。"
+        },
+        {
+          "url": "https://www.csrc.gov.cn/csrc/c100028/c7673432/content.shtml",
+          "publisher": "中国证监会",
+          "origin": "新华社",
+          "role": "government_reprint",
+          "published_at": "2026-11-27",
+          "published_at_precision": "date",
+          "evidence_locator": "网页日期及资本市场段落。"
+        }
+      ],
+      "observed_policy_directions": [
+        "延续稳市机制部署",
+        "推进分红与回购",
+        "进一步明确中央汇金稳市功能",
+        "完善对长期资金入市的支持"
+      ],
+      "comparison_event_id": "state-council-2026-11-06-stabilization",
+      "text_increment": "在两篇通稿的比较中，27日对分红回购、汇金功能与长期资金来源的表述更具体。",
+      "availability_note": "核验网页的时间。历史系统到达、特征就绪及实施时间均无证据。"
+    }
+  ]
+}
