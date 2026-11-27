@@ -50,23 +50,32 @@ def expected_days(root, start, end):
     return sessions_between(ranges,start,end),None
 
 
-def archive_index(root, store, config, observed):
+def archive_index(root, store, config, observed, *, days=None):
     log = root/'reports/research-observation'
     entries, errors = defaultdict(list), defaultdict(list)
     if not log.is_dir() or not (store/'snapshots').is_dir():
         raise FileNotFoundError('Observation ledger or archive unavailable')
-    for folder in sorted((log/'runs').glob('*/*')):
+    folders = ((log/'runs').glob('*/*') if days is None else
+               (folder for day in days for folder in (log/'runs'/str(day)).glob('*')))
+    for folder in sorted(folders):
         day = folder.parent.name
         try:
             parse_day(day)
             if not folder.is_dir() or folder.resolve()!=folder.absolute():
                 continue
+            if days is not None:
+                started = folder/'started.json'
+                if started.is_file() and instant(read(started)['startedAt'])>observed:
+                    continue
             receipt = log/'archives'/day/(folder.name+'.json')
             if not receipt.is_file():
                 errors[day].append(dict(id=folder.name,status='pending_archive'))
                 continue
             verified = check_receipt(folder,store,config,root=root)
             if instant(verified['archiveVerifiedAt'])>observed:
+                if days is not None:
+                    errors[day].append(dict(id=folder.name,status='pending_archive'))
+                    continue
                 raise ValueError('Archive verified time after observation')
             entries[day].append((verified,read(folder/'result.json')))
         except (OSError,ValueError,TypeError,KeyError):

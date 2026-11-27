@@ -2,6 +2,7 @@
 import { onBeforeUnmount, onMounted, ref } from 'vue';
 import { apiUrl } from '../domain';
 import { getJson } from '../state';
+import ObservationMonthly from './ObservationMonthly.vue';
 
 type Issues = Record<string,string>;
 type Source = {status:string; readyAt?:string|null; featureReadyAt?:string|null; issues?:Issues};
@@ -320,6 +321,7 @@ onBeforeUnmount(()=>{lifecycle.abort();detailRequest?.abort();});
           </table>
         </div>
       </section>
+      <ObservationMonthly />
       <el-alert v-if="overview.calendarUnknownYear" type="warning" :closable="false"
         :title="overview.calendarUnknownYear+' 年交易日历待核验'"/>
       <div v-if="overview.sessions.length" class="table-scroll" tabindex="0" aria-label="按交易日核对采集来源">

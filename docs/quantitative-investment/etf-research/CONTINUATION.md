@@ -1,6 +1,6 @@
 # 自主接续入口
 
-[五交易日预登记](PROTOCOL_OBSERVATION_V1.md)已接上[真实归档特征组装](reports/2026-11-27-observation-inputs/README.md)和[政策候选审核与覆盖核验](reports/2026-11-27-policy-review/README.md)。首批 10 份中归并出 1 个独立事件，决策区间覆盖不足时政策输入留空。[08:55 前自动封存](reports/2026-11-27-decision-seal/README.md)已通过两次真实数据试跑和恢复。[看板与 Agent 决策覆盖](reports/2026-11-27-decision-coverage/README.md)已同源。[开盘取证与五交易日标签](reports/2026-11-27-five-session-labels/README.md)已接通定时任务。[标签覆盖](reports/2026-11-27-label-coverage/README.md)已接到看板和 Agent。[训练与预测封存](reports/2026-11-27-model-forecast/README.md)已接通并通过隔离演练。[训练和预测进度](reports/2026-11-27-forecast-coverage/README.md)已接到看板和 Agent。[样本外统计和经济对照](reports/2026-11-27-oos-evaluation/README.md)已接通。[评估覆盖](reports/2026-11-27-evaluation-coverage/README.md)可在看板和 Agent 同查。接续核对例行运行、首个独立合格归档及首个实际评估回执，积累月度覆盖和连续缺口。
+[五交易日预登记](PROTOCOL_OBSERVATION_V1.md)已接上[真实归档特征组装](reports/2026-11-27-observation-inputs/README.md)和[政策候选审核与覆盖核验](reports/2026-11-27-policy-review/README.md)。首批 10 份中归并出 1 个独立事件，决策区间覆盖不足时政策输入留空。[08:55 前自动封存](reports/2026-11-27-decision-seal/README.md)已通过两次真实数据试跑和恢复。[看板与 Agent 决策覆盖](reports/2026-11-27-decision-coverage/README.md)已同源。[开盘取证与五交易日标签](reports/2026-11-27-five-session-labels/README.md)已接通定时任务。[标签覆盖](reports/2026-11-27-label-coverage/README.md)已接到看板和 Agent。[训练与预测封存](reports/2026-11-27-model-forecast/README.md)已接通并通过隔离演练。[训练和预测进度](reports/2026-11-27-forecast-coverage/README.md)已接到看板和 Agent。[样本外统计和经济对照](reports/2026-11-27-oos-evaluation/README.md)已接通。[评估覆盖](reports/2026-11-27-evaluation-coverage/README.md)可在看板和 Agent 同查。[月度覆盖与连续缺口](reports/2026-11-27-monthly-coverage/README.md)已接入。接续验收首份例行评估、首个合格日及 12 月 1 日的首次月度封存。
 
 工作台 `/workbench/#/policy` 和 Agent `/api/v1/research/policy-pilot` 可核对政策事件与首批官方市场样本。两事件缺历史收报及处理时间，历史时点查询保留空结果。[首期验收、口径与后续](reports/2026-11-27-policy-pilot/README.md)
 
@@ -36,7 +36,7 @@
 ## 接手顺序
 
 1. 读取AGENTS、README、PROJECT_PLAN、DATA_SOURCES、docs/PLAN_ALIGNMENT、config/research.json、PROTOCOL_V1。核对远端和当前北京时间。
-2. 执行verify_snapshot.py与scripts/verify_project.py。最新静态清单为reports/2026-11-27-evaluation-coverage/manifest.json；旧清单在相应提交验证。
+2. 执行verify_snapshot.py与scripts/verify_project.py。最新静态清单为reports/2026-11-27-monthly-coverage/manifest.json；旧清单在相应提交验证。
 3. 核实三个用户定时器与site/health_status.json。静态Git文档不代表主机当前状态；未满252收益的风险指标留空，前瞻不借历史补齐。
 4. 前端改动先在隔离目录/端口验证，npm ci、npm test、npm run build；维护frontend源码与site/workbench构建产物、归档清单和静态清单。只构建不运行测试不能称验收完成。
 5. 研究下一步按PROJECT_PLAN执行：少量新规则先立协议、保留原版与失败区间。已观察历史不能重新标记成未见样本。

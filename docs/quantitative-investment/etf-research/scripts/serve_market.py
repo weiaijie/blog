@@ -199,6 +199,29 @@ class Handler(BaseHTTPRequestHandler):
             except (OSError,ValueError,KeyError,TypeError,ImportError) as exc:
                 self.log_error('Observation status unavailable: %s',exc)
                 status,body = 503,interactive.encode({'error':'独立采集状态暂无法核验。'})
+        elif path == '/api/v1/research/observation/monthly':
+            kind = 'application/json'
+            try:
+                from observation_monthly import parse_month
+                from observation_status import production_paths
+                from seal_observation_monthly import month_view
+                from etf_research.policy_events import TZ
+                observed = datetime.now(timezone.utc)
+                current = observed.astimezone(TZ).date().isoformat()[:7]
+                params = interactive.request_params(url.query, (), ('month',))
+                month = params.get('month',current)
+                try:
+                    parse_month(month)
+                    if month > current:
+                        raise ValueError('月份须在当前月或之前。')
+                except ValueError as exc:
+                    raise interactive.InputError(str(exc)) from exc
+                body = interactive.encode(month_view(*production_paths(),month,observed))
+            except interactive.InputError as exc:
+                status,body = 400,interactive.encode({'error':str(exc)})
+            except (OSError,ValueError,KeyError,TypeError,ImportError) as exc:
+                self.log_error('Monthly observation coverage unavailable: %s',exc)
+                status,body = 503,interactive.encode({'error':'月度覆盖暂无法核验。'})
         elif path == '/api/v1/research/observation/evaluation':
             kind = 'application/json'
             try:
