@@ -1,5 +1,7 @@
 # 自主接续入口
 
+[原 18 户凌晨归档恢复](reports/2026-11-28-forward-archive-readback/README.md)已实际恢复 11 月 28 日 01:16 生产快照，检查点与 Ubuntu 和 GitHub 一致。
+
 [盘前封存特征复算](reports/2026-11-28-decision-replay/README.md)补齐了按原始截止和计算时间核对输入、证据与各版准入状态的入口。已用生产隔离副本和公开证据分别复算 9 个已就绪字段。
 
 [GitHub 证据链核验与恢复](reports/2026-11-28-observation-publication-catalog/README.md)已核对基础包和首批定时增量，可逐批比较 Ubuntu 与公开发布，并从 GitHub 复算原时点报告。

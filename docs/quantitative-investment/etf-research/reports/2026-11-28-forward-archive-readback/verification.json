@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-28T02:22:15.561912+08:00",
+  "archive": {
+    "snapshot": "be2cccb310cdd2e96c588b4efb46279bc1611e99d7054f31ac92d37e8364a0f9",
+    "files": 16883,
+    "createdAt": "2026-11-28T01:16:39.519470+08:00",
+    "finishedAt": "2026-11-28T01:16:39.650900+08:00",
+    "invocationId": "038cdda54ffd402c93b1e40341572e26",
+    "newObjects": 220,
+    "newBytes": 44017662,
+    "activatesServices": false,
+    "recoveredIntegrity": "PASS integrity: 334 source manifests / 5641 source files; 16425 immutable entries; account 2026-11-27 operation phase success"
+  },
+  "daily": {
+    "operation": "reports/operations/20261127T171536Z-48e4c084",
+    "finishedAt": "2026-11-28T01:15:37.668824+08:00",
+    "status": "up_to_date",
+    "networkRequests": 0,
+    "accountChanges": 0
+  },
+  "forward": {
+    "asOf": "2026-11-27",
+    "valuationSessions": 17,
+    "returnIntervals": 16,
+    "accounts": 18,
+    "checkpoint": "reports/daily/20261127T170315-58f85234/forward_checkpoint.json",
+    "checkpointSha256": "cfb229188255d2cd87d8abf9d6a49565e0d121034433be3520d76f4ff0a0be2d",
+    "fileSha256": "0fc444731abaf3c2705c3ea7d4706084af55fdf1a38412fea1a8723afb85f0ce",
+    "pointerSha256": "a00ee14220ada5ca1a000c432f016280a8b300910ec9fa808cfaeb94d014fc25",
+    "publication": {
+      "observedAt": "2026-11-28T01:16:39.519470+08:00",
+      "availableAt": "2026-11-27T17:03:26.900450+08:00",
+      "mode": "scheduled",
+      "operation": "reports/operations/20261127T090314Z-5d902b22",
+      "operationManifestSha256": "f5ee47d6d1550c5445ed71634e8cfb488fa96dc5caa565a6671eddddfe099f14",
+      "bundleManifestSha256": "93a5ef78f1349ac62d13c965d919b801c8ae163bef9570d4aec77cbe98ab0443"
+    },
+    "milestones": [
+      {
+        "months": 6,
+        "anniversary": "2027-05-05",
+        "state": "accumulating"
+      },
+      {
+        "months": 12,
+        "anniversary": "2027-11-05",
+        "state": "accumulating"
+      },
+      {
+        "months": 24,
+        "anniversary": "2028-11-05",
+        "state": "accumulating"
+      }
+    ],
+    "equalProduction": true,
+    "githubReadback": {
+      "commit": "0c3481a926ea3955ce79932bc5044ce4a70dce7f",
+      "bytes": 103104,
+      "sha256": "0fc444731abaf3c2705c3ea7d4706084af55fdf1a38412fea1a8723afb85f0ce"
+    }
+  }
+}
