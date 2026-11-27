@@ -51,10 +51,18 @@ type Day = {
 type EvidenceGate = {pairs:number; folds:number;policyEvents:number};
 type AssessmentGroup = {status:string; completedPairs:number|null; folds:number|null; policyEvents:number|null;
   shortfall:EvidenceGate|null; selectedWindows:number|null;matchedWindows:number|null; economicStatus?:string};
+type MidtermReview = {
+  cutoffAt:string;
+  acquisition:{expected:number;qualified:number;missingCalendarYear:number|null};
+  decisions:{eligibleInputDays:number;expected:number};
+  labels:{ready:number;due:number};
+  policy:{independentEventIds:string[]|null};
+  comparisons:Record<string,{completedPairs:number;quarters:number;independentEvents:number}>;
+};
 type EvaluationProgress = {
   status:string; archiveState:string; assessedAt:string|null; verifiedAt:string|null; archiveSha256:string|null;
   archiveIssues:{unverified:number;pending:number}; originSinceArchive:boolean;
-  thresholds:EvidenceGate; comparisons:Record<string,AssessmentGroup>;
+  thresholds:EvidenceGate; comparisons:Record<string,AssessmentGroup>; midtermReview?:MidtermReview|null;
 };
 type Overview = {
   reportedAt:string; calendarUnknownYear:number|null; nextBefore:string|null;
@@ -364,6 +372,21 @@ onBeforeUnmount(()=>{lifecycle.abort();detailRequest?.abort();});
         <p v-if="overview.evaluation.archiveIssues.unverified || overview.evaluation.archiveIssues.pending" class="muted">
           {{overview.evaluation.archiveIssues.unverified}} 份未通过核验 · {{overview.evaluation.archiveIssues.pending}} 份等待归档。
         </p>
+        <details v-if="overview.evaluation.midtermReview" class="decision-summary">
+          <summary>6 个月中期复盘</summary>
+          <p>证据截止 {{time(overview.evaluation.midtermReview.cutoffAt)}}</p>
+          <p>合格归档 {{overview.evaluation.midtermReview.acquisition.qualified}} / {{overview.evaluation.midtermReview.acquisition.expected}} 日
+            · 决策入样 {{overview.evaluation.midtermReview.decisions.eligibleInputDays}} / {{overview.evaluation.midtermReview.decisions.expected}} 日
+            · 五日标签 {{overview.evaluation.midtermReview.labels.ready}} / {{overview.evaluation.midtermReview.labels.due}} 份</p>
+          <p>期间新增独立政策事件 {{overview.evaluation.midtermReview.policy.independentEventIds?.length ?? '待核验'}}</p>
+          <ul class="decision-gaps">
+            <li v-for="(group,name) in overview.evaluation.midtermReview.comparisons" :key="name">
+              {{variants[name] ?? name}} · {{group.completedPairs}} 个配对日 · {{group.quarters}} 个样本外季度
+            </li>
+          </ul>
+          <p v-if="overview.evaluation.midtermReview.acquisition.missingCalendarYear" class="muted">
+            {{overview.evaluation.midtermReview.acquisition.missingCalendarYear}} 年日历待核验，当前统计覆盖已确认日期。</p>
+        </details>
         <div class="table-scroll" tabindex="0" aria-label="各组评估门槛">
           <table class="coverage-table">
             <thead><tr><th scope="col">比较</th><th scope="col">状态</th><th scope="col">已配对日期</th>

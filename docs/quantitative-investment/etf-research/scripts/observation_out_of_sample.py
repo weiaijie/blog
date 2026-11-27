@@ -1,14 +1,16 @@
 """Evaluate sealed forecasts on the registered schedule and keep missing observations visible."""
 import argparse
-from datetime import date, datetime, timedelta, timezone
+from collections import Counter
+from datetime import date, datetime, time, timedelta, timezone
 from decimal import Decimal
 from pathlib import Path
 
-from observation_decision_status import decision_row
+from observation_decision_status import FIRST_DECISION, decision_counts, decision_row
 from observation_forecast_status import forecast_row
-from observation_label_status import label_row
+from observation_label_status import label_counts, label_row
 from observation_labels import EVIDENCE_ERRORS
-from observation_status import expected_days
+from observation_status import archive_index, expected_days
+from review_policy_observations import review_progress
 from seal_observation_decision import first_archive
 from etf_research.admission import sessions_between
 from etf_research.baselines import SCENARIOS
@@ -278,6 +280,70 @@ def evaluate(root,store,observed):
     return dict(stamp,status=status,midtermOn=str(shifted_month(start,6)),finalOn=str(end),folds=folds,comparisons=comparisons)
 
 
+def midterm_review(root, store, current, *, reuse_archive=False):
+    if current['studyOrigin'] is None:
+        return None
+    due = date.fromisoformat(current['midtermOn'])
+    cutoff = datetime.combine(due,time.min,TZ)
+    if instant(current['asOf']) < cutoff:
+        return None
+
+    origin = current['studyOrigin']
+    if reuse_archive:
+        from observation_evaluation_status import latest_evaluation
+        previous,_ = latest_evaluation(root,store,instant(current['asOf']))
+        checkpoint = previous[1].get('midtermReview') if previous else None
+        if checkpoint is not None:
+            if checkpoint['studyOrigin'] != origin or instant(checkpoint['cutoffAt']) != cutoff:
+                raise ValueError('Sealed midterm review is bound to a different origin or cutoff')
+            return checkpoint
+
+    origin_time = instant(origin['archiveVerifiedAt'])
+    start = date.fromisoformat(origin['date'])
+    frozen = evaluate(root,store,cutoff)
+    if frozen['studyOrigin'] != origin:
+        raise ValueError('Midterm cutoff is bound to a different observation origin')
+
+    sessions,missing_year = expected_days(root,start,due-timedelta(days=1),observed=cutoff)
+    config = read(root/'config/research_observation.json')
+    archives,issues = archive_index(root,store,config,cutoff,days=sessions)
+    states = Counter()
+    for day in sessions:
+        key = str(day)
+        attempts = [receipt for receipt,_ in archives.get(key,()) if instant(receipt['archiveVerifiedAt'])>=origin_time]
+        if any(row['forwardEligible'] for row in attempts):
+            states['qualified'] += 1
+        elif attempts:
+            states[attempts[-1]['phase']] += 1
+        elif issues.get(key):
+            states['unverified' if any(item['status']=='unverified' for item in issues[key]) else 'pending_archive'] += 1
+        else:
+            states['missing'] += 1
+
+    decisions = {day:decision_row(root,store,day,cutoff,planned=True) for day in sessions if day>=FIRST_DECISION}
+    labels = [label_row(root,store,day,cutoff,decision) for day,decision in decisions.items()
+              if decision['status']=='eligible_inputs']
+    comparisons = {}
+    for variant,group in frozen['comparisons'].items():
+        score = group['score']
+        reasons = Counter(row['reason'] for row in group['coverage'] if row['reason'] is not None)
+        comparisons[variant] = dict(completedPairs=score['completedPairs'],quarters=score['quarters'],
+                                    independentEvents=score['independentEvents'],exclusions=dict(reasons))
+    try:
+        before = review_progress(root,store,origin_time-timedelta(microseconds=1))
+        through = review_progress(root,store,cutoff)
+        events = sorted(set(through['independentEventIds'])-set(before['independentEventIds']))
+        policy = dict(status='verified',independentEventIds=events)
+    except EVIDENCE_ERRORS:
+        policy = dict(status='unverified',independentEventIds=None)
+    return dict(schemaVersion=1,cutoffAt=cutoff.isoformat(),studyOrigin=origin,
+                acquisition=dict(expected=len(sessions),qualified=states['qualified'],
+                                 statuses=dict(states),missingCalendarYear=missing_year),
+                decisions=decision_counts(decisions.values(),cutoff),
+                decisionStatuses=dict(Counter(row['status'] for row in decisions.values())),
+                labels=label_counts(labels,cutoff),policy=policy,comparisons=comparisons)
+
+
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--observation-root',type=Path,default=ROOT)
@@ -290,7 +356,12 @@ if __name__=='__main__':
     clock=instant(expected['asOf']) if expected else datetime.now(timezone.utc)
     if clock>datetime.now(timezone.utc):
         parser.error('Evaluation cannot use a future as-of time')
-    result=evaluate(args.observation_root.resolve(),args.archive_store.resolve(),clock)
+    root,store=args.observation_root.resolve(),args.archive_store.resolve()
+    result=evaluate(root,store,clock)
+    if expected is None or 'midtermReview' in expected:
+        checkpoint=midterm_review(root,store,result)
+        if checkpoint is not None:
+            result['midtermReview']=checkpoint
     if expected is not None:
         if result!=expected:
             raise ValueError('Evaluation as-of result does not reproduce')

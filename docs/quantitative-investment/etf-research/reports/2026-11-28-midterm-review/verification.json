@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-28T02:38:29.646692+08:00",
+  "diagnosticOrigin": {
+    "date": "2026-05-28",
+    "archiveVerifiedAt": "2026-05-28T08:25:08+08:00"
+  },
+  "productionQualification": false,
+  "beforeCutoffHasReview": false,
+  "sealedReceipt": {
+    "path": "reports/research-evaluation/2026-11-28/bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "archiveSha256": "16f23231e90f2d913362fa9b9a65ba8e8749047669f4a80c60455b71650b5712",
+    "manifestSha256": "500760d9a69621a2f21c778961d79fdafa9346546fca792e5736f82dc2a13082",
+    "archiveVerifiedAt": "2026-11-27T18:38:29.595202+00:00",
+    "status": "observation_in_progress"
+  },
+  "archiveAndApiAgree": true,
+  "laterReviewReused": true,
+  "midtermReview": {
+    "schemaVersion": 1,
+    "cutoffAt": "2026-11-28T00:00:00+08:00",
+    "studyOrigin": {
+      "date": "2026-05-28",
+      "archiveVerifiedAt": "2026-05-28T08:25:08+08:00"
+    },
+    "acquisition": {
+      "expected": 125,
+      "qualified": 0,
+      "statuses": {
+        "missing": 123,
+        "complete": 1,
+        "partial": 1
+      },
+      "missingCalendarYear": null
+    },
+    "decisions": {
+      "expected": 0,
+      "sealedOnTime": 0,
+      "eligibleInputDays": 0,
+      "gaps": 0
+    },
+    "decisionStatuses": {},
+    "labels": {
+      "due": 0,
+      "ready": 0,
+      "gaps": 0,
+      "holding": 0,
+      "unknownCalendar": 0
+    },
+    "policy": {
+      "status": "verified",
+      "independentEventIds": [
+        "state-council-2026-11-27-stabilization"
+      ]
+    },
+    "comparisons": {
+      "policy": {
+        "completedPairs": 0,
+        "quarters": 0,
+        "independentEvents": 0,
+        "exclusions": {
+          "forecast_missing": 56
+        }
+      },
+      "etf": {
+        "completedPairs": 0,
+        "quarters": 0,
+        "independentEvents": 0,
+        "exclusions": {
+          "forecast_missing": 56
+        }
+      },
+      "margin": {
+        "completedPairs": 0,
+        "quarters": 0,
+        "independentEvents": 0,
+        "exclusions": {
+          "forecast_missing": 56
+        }
+      },
+      "combined": {
+        "completedPairs": 0,
+        "quarters": 0,
+        "independentEvents": 0,
+        "exclusions": {
+          "forecast_missing": 56
+        }
+      }
+    }
+  }
+}

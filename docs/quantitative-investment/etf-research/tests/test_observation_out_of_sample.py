@@ -71,6 +71,44 @@ class ObservationEvaluationTests(unittest.TestCase):
         for row in phase.values():
             self.assertEqual(row['economic'],{w.entry for w in nonoverlap(row['windows'])})
 
+    def test_midterm_seals_exact_boundary_inputs_and_reuses_archived_review(self):
+        origin = dict(date='2026-05-28',archiveVerifiedAt='2026-05-28T08:25:09+08:00')
+        boundary = instant('2026-11-28T00:00:00+08:00')
+        day = date(2026,11,27)
+        current = dict(studyOrigin=origin,midtermOn='2026-11-28',asOf='2026-11-28T20:45:00+08:00')
+        early = dict(current,asOf='2026-11-27T23:59:59.999999+08:00')
+        self.assertIsNone(evaluation.midterm_review(ROOT,ROOT,early))
+        frozen = dict(studyOrigin=origin,comparisons={'combined':dict(
+            score=dict(completedPairs=37,quarters=1,independentEvents=2),
+            coverage=[dict(reason='model_not_ready'),dict(reason='label_evidence_missing'),dict(reason=None)])})
+        data = {str(day):[(dict(archiveVerifiedAt='2026-11-27T22:23:00+08:00',
+                               phase='partial',forwardEligible=False),{})]}
+        with (
+            patch.object(evaluation,'evaluate',return_value=frozen) as evaluate,
+            patch.object(evaluation,'expected_days',return_value=((day,),None)) as expected,
+            patch.object(evaluation,'archive_index',return_value=(data,{})) as indexed,
+            patch.object(evaluation,'review_progress',side_effect=[
+                dict(independentEventIds=['prior']),dict(independentEventIds=['prior','during'])]) as reviews,
+        ):
+            midpoint=evaluation.midterm_review(ROOT,ROOT,current)
+        evaluate.assert_called_once_with(ROOT,ROOT,boundary)
+        expected.assert_called_once_with(ROOT,date(2026,5,28),day,observed=boundary)
+        self.assertEqual(indexed.call_args.args[3],boundary)
+        self.assertEqual(reviews.call_args.args[2],boundary)
+        self.assertEqual(midpoint['cutoffAt'],boundary.isoformat())
+        self.assertEqual(midpoint['acquisition'],dict(expected=1,qualified=0,statuses={'partial':1},missingCalendarYear=None))
+        self.assertEqual(midpoint['policy']['independentEventIds'],['during'])
+        self.assertEqual(midpoint['comparisons']['combined']['exclusions'],{'model_not_ready':1,'label_evidence_missing':1})
+        self.assertNotIn('improvement',midpoint['comparisons']['combined'])
+
+        with (
+            patch('observation_evaluation_status.latest_evaluation',return_value=(({},dict(midtermReview=midpoint)),{})),
+            patch.object(evaluation,'evaluate') as recalculate,
+        ):
+            later = dict(current,asOf='2026-11-29T20:45:00+08:00')
+            self.assertEqual(evaluation.midterm_review(ROOT,ROOT,later,reuse_archive=True),midpoint)
+            recalculate.assert_not_called()
+
     def test_midterm_has_coverage_only_and_final_respects_gates(self):
         review=instant('2026-04-09T20:45:00+08:00')
         with patch.object(evaluation,'first_archive',return_value=ORIGIN), patch.object(

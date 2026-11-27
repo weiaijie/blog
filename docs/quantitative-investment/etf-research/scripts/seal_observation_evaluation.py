@@ -23,7 +23,8 @@ CODE=(
     'scripts/observation_status.py','scripts/observation_decision_status.py',
     'scripts/observation_forecast_status.py','scripts/observation_label_status.py',
     'scripts/seal_observation_forecasts.py','scripts/seal_observation_labels.py',
-    'scripts/train_observation_models.py','scripts/observation_labels.py',
+    'scripts/train_observation_models.py','scripts/observation_labels.py','scripts/review_policy_observations.py',
+    'scripts/observation_archive.py','scripts/run_research_observation.py','src/etf_research/policy_events.py',
     'src/etf_research/observation_experiment.py','src/etf_research/evidence_archive.py',
 )
 
@@ -77,13 +78,17 @@ def archive_evaluation(root,store,report,invocation):
 
 
 def run(root,store):
-    from observation_out_of_sample import evaluate
+    from observation_out_of_sample import evaluate, midterm_review
 
     invocation=os.environ.get('INVOCATION_ID','')
     if os.environ.get('TRIGGER_UNIT')!=TIMER or not re.fullmatch('[a-f0-9]{32}',invocation):
         raise ValueError('Production evaluation requires its systemd timer')
     with lock(root/'.runtime/research-evaluation.lock'):
-        return archive_evaluation(root,store,evaluate(root,store,now()),invocation)
+        result = evaluate(root,store,now())
+        checkpoint = midterm_review(root,store,result,reuse_archive=True)
+        if checkpoint is not None:
+            result['midtermReview'] = checkpoint
+        return archive_evaluation(root,store,result,invocation)
 
 
 if __name__=='__main__':

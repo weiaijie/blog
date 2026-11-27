@@ -83,6 +83,8 @@ def evaluation_view(root,store,observed,origin,*,details=False,archive=None):
               archiveSha256=receipt['archiveSha256'] if receipt else None,
               archiveIssues=issues,originSinceArchive=bool(report and report['studyOrigin'] is None and origin),
               thresholds=thresholds,comparisons=summary)
+    review = report.get('midtermReview') if report is not None else None
+    view['midtermReview'] = review if review is not None and review['studyOrigin']==origin else None
     if details:
         view['report']=report
     return view
