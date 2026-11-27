@@ -21,6 +21,7 @@
 - [新版量化工作台](http://10.1.1.120:18766/workbench/)：总览、行情、模型回测、比较与报告；仅在可访问该Ubuntu内网地址的网络使用，未声明公网部署。
 - [工作台操作与验收范围](docs/WORKBENCH_PLAN.md)：保存/恢复方案、逐日回放、最差期解释、Agent同参数请求。
 - [自主接续](CONTINUATION.md)、[项目计划](PROJECT_PLAN.md)、[原规划逐项对照](docs/PLAN_ALIGNMENT.md)。
+- [长期研究计划与 GitHub 结题复算](docs/LONG_TERM_RESEARCH.md)。
 - [数据来源](DATA_SOURCES.md)、[冻结协议](PROTOCOL_V1.md)、[运行与恢复](docs/OPERATIONS_CLOSURE.md)。
 
 18 个前瞻账户已核验至 2026-11-27，共 17 个收盘估值日、16 个收益区间。[11 月 27 日前瞻检查点与收盘输入复验](reports/2026-11-27-forward-publication/README.md)已确认 GitHub 默认检查点与生产发布一致。工作台可在研究设置中选择截至 10-30、11-12、11-20、11-23 或 11-26 的数据版本。最新运行状态见 Ubuntu 活动检查点及健康观察记录。

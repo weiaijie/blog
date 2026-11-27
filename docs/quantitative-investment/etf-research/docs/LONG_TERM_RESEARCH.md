@@ -22,6 +22,20 @@
 
 本计划跟踪两条研究线。现有 18 个模拟账户按原协议从 2026-11-05 连续观测，届满 6、12、24 个月分别报告净收益、回撤、费用和回到前高的时间，考察长期净年化 4%～5% 的可行性。[原账户复盘与报告](../reports/2026-11-27-forward-milestones/README.md)已按冻结账本接入工作台和 Agent。新增的官方政策、资金与市场状态另立 12 个月观察期，从首个完整核验并归档的独立生产采集日开始计时，满 6 个月复盘，满 12 个月结题。实际起点须有运行记录。首份合格回执登记到独立台账并随证据包导出。若原始回执缺失或变化，研究流程要求恢复原件，后续合格归档不会改动起点。2026-11-27 的定向抽样属于采集验收。
 
+## 结题复算
+
+检出要复算的 GitHub 提交，在该版本的 ETF 项目目录下运行。Ubuntu 需有 `uv`。以下命令创建独立的 Python 3.12 环境并安装两份锁文件。分析锁文件提供 NumPy 等计算依赖，证据锁文件提供 PDF 解析依赖。结题程序在复核公开归档时会调用证据模块。
+
+```bash
+etf_closeout_env="$(mktemp -d "$HOME/etf-closeout.XXXXXX")"
+uv venv --python 3.12 "$etf_closeout_env/venv"
+uv pip install --python "$etf_closeout_env/venv/bin/python" -r requirements-lock.txt -r requirements-evidence.txt
+uv pip check --python "$etf_closeout_env/venv/bin/python"
+PYTHONPATH=src "$etf_closeout_env/venv/bin/python" scripts/build_observation_closeout.py --output "$etf_closeout_env/closeout"
+```
+
+用指定评估归档复算时，追加 `--archive` 和该归档的 SHA256。结题就绪时生成 `closeout/README.md` 和 `closeout/result.json`。截至 2026-11-28 的公开证据，Ubuntu 新建环境安装了 19 个固定版本的依赖，复算返回 `observation_origin_pending`，结题目录尚未生成。 [结题证据与状态说明](../reports/2026-11-28-observation-closeout/README.md)
+
 ## 里程碑
 
 | 阶段 | 交付物与验收 | 进度 |
