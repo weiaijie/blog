@@ -76,6 +76,9 @@ def build_review(root, store, requested, *, completed_at=None):
             definition = (decision['themeId'],decision['stage'])
             if seen.setdefault(ids[0],definition)!=definition:
                 raise ValueError('Conflicting event theme or stage')
+        elif state=='related_followup':
+            if not IDENTITY.fullmatch(decision.get('parentEventId','')) or 'eventId' in decision:
+                raise ValueError('A related follow-up must identify its parent without creating an event')
         elif state=='historical_reference':
             posted = date.fromisoformat(candidate['published_at'][:10])
             if posted>=date.fromisoformat(config['observationEarliestDate']):
@@ -106,8 +109,17 @@ def verify_review(root, store, folder):
     return dict(**expected,sealedAt=proof['sealedAt'],manifestSha256=proof['manifestSha256'])
 
 
+def reviews_as_of(root,store,ceiling):
+    for receipt in sorted((root/'reports/research-policy-reviews').glob('*/receipt.json')):
+        if instant(read(receipt)['sealedAt'])<=ceiling:
+            yield receipt,verify_review(root,store,receipt.parent)
+
+
 def seal_review(root, store, requested, folder):
     result = build_review(root,store,requested)
+    audit_clock = datetime.now(timezone.utc)
+    history = [prior for _,prior in reviews_as_of(root,store,audit_clock)]
+    event_ledger([*history,dict(result,sealedAt=audit_clock.isoformat())])
     folder.mkdir(parents=True,exist_ok=False)
     records = folder/'records'
     create(records/'review.json',result)
@@ -118,17 +130,19 @@ def seal_review(root, store, requested, folder):
 
 
 def event_ledger(reviews):
-    events, dispositions = {},{}
+    events, dispositions, followups = {},{},{}
     for review in sorted(reviews,key=lambda record: instant(record['sealedAt'])):
-        grouped = {}
+        grouped, related = {},[]
         for item in review['entries']:
             decision = item['decision']
             key = decision['revisionKey']
-            identity = (decision['disposition'],decision.get('eventId'))
+            identity = (decision['disposition'],decision.get('eventId'),decision.get('parentEventId'))
             if dispositions.setdefault(key,identity)!=identity:
                 raise ValueError('One source revision received conflicting classifications')
             if decision['disposition']=='event':
                 grouped.setdefault(decision['eventId'],[]).append(item)
+            elif decision['disposition']=='related_followup':
+                related.append(item)
         for key, group in grouped.items():
             head = group[0]['decision']
             event = events.setdefault(key,dict(event_id=key,theme_id=head['themeId'],sources=[],versions=[]))
@@ -154,11 +168,29 @@ def event_ledger(reviews):
                     received_at=max((item['source']['receivedAt'] for item in group),key=instant),
                     feature_ready_at=completion,dependency_ready_at=[review['archiveVerifiedAt']],
                     fields=dict(stage=head['stage'])))
-    return dict(events=list(events.values()))
+        for item in related:
+            decision,source = item['decision'],item['source']
+            parent = decision['parentEventId']
+            if parent not in events:
+                raise ValueError('Follow-up parent is missing at the review cutoff')
+            followups.setdefault(decision['revisionKey'],dict(parentEventId=parent,url=source['url'],
+                    publishedAt=source['published_at'],sha256=source['sha256'],reviewedAt=review['sealedAt'],
+                    evidencePath=item['evidencePath']))
+    return dict(events=list(events.values()),followups=list(followups.values()))
 
 
 def policy_ids(ledger, cutoff):
     return {e['event_id'] for e in select_as_of(ledger,cutoff.isoformat())}
+
+
+def review_progress(root,store,observed):
+    reviews = [review for _,review in reviews_as_of(root,store,observed)]
+    ledger = event_ledger(reviews)
+    dispositions = {row['decision']['revisionKey']:row['decision']['disposition']
+                    for review in reviews for row in review['entries']}
+    return dict(schemaVersion=1,asOf=observed.isoformat(),reviewedRevisions=len(dispositions),
+                independentEventIds=sorted(policy_ids(ledger,observed)),followups=ledger['followups'],
+                lastReviewAt=max((review['sealedAt'] for review in reviews),key=instant,default=None))
 
 
 if __name__=='__main__':
@@ -177,5 +209,9 @@ if __name__=='__main__':
         if args.output is None:
             parser.error('--decisions requires a new --output directory')
         result=seal_review(root,store,read(args.decisions),args.output)
-    eligible=policy_ids(event_ledger([result]),instant(result['sealedAt']))
+    clock = instant(result['sealedAt'])
+    related = any(item['decision']['disposition']=='related_followup' for item in result['entries'])
+    history = [prior for _,prior in reviews_as_of(root,store,clock)
+               if prior != result] if related else []
+    eligible=policy_ids(event_ledger([*history,result]),clock)
     print('PASS',len(result['entries']),'reviewed documents;',len(eligible),'independent events; candidate inventory only')

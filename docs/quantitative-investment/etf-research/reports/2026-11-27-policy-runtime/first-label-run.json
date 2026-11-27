@@ -1,0 +1,11 @@
+{
+  "unit": "etf-research-label.service",
+  "journalTimestampUsec": 1795781700774375,
+  "invocationId": "69e48f2c9bd84919a72f314a9558398a",
+  "message": {
+    "observedAt": "2026-11-27T12:15:00.774092+00:00",
+    "due": 0,
+    "results": [],
+    "issues": []
+  }
+}

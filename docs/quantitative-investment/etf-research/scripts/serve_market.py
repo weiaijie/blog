@@ -202,6 +202,29 @@ class Handler(BaseHTTPRequestHandler):
             except (OSError,ValueError,KeyError,TypeError,ImportError) as exc:
                 self.log_error('Observation status unavailable: %s',exc)
                 status,body = 503,interactive.encode({'error':'独立采集状态暂无法核验。'})
+        elif path == '/api/v1/research/observation/policy-review':
+            kind = 'application/json'
+            try:
+                from observation_status import production_paths
+                from review_policy_observations import review_progress
+                from etf_research.policy_events import instant
+                params = interactive.request_params(url.query, (), ('asOf',))
+                now = datetime.now(timezone.utc)
+                try:
+                    observed = instant(params['asOf']) if 'asOf' in params else now
+                    if observed > now:
+                        raise ValueError('审核时点须早于或等于当前时间。')
+                except ValueError as exc:
+                    raise interactive.InputError(str(exc)) from exc
+                root,store = (path.resolve() for path in production_paths())
+                if not (root/'reports/research-observation').is_dir() or not (store/'snapshots').is_dir():
+                    raise FileNotFoundError('Observation review archive unavailable')
+                body = interactive.encode(review_progress(root,store,observed))
+            except interactive.InputError as exc:
+                status,body = 400,interactive.encode({'error':str(exc)})
+            except (OSError,ValueError,KeyError,TypeError,ImportError) as exc:
+                self.log_error('Observation policy audit unavailable: %s',exc)
+                status,body = 503,interactive.encode({'error':'政策审核证据暂无法核验。'})
         elif path == '/api/v1/research/observation/monthly':
             kind = 'application/json'
             try:

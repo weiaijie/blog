@@ -22,7 +22,7 @@ from etf_research.publication import create, inside, lock, read, seal, sha, sync
 
 ROOT = Path(__file__).resolve().parents[1]
 CODE = (
-    LOADER,
+    LOADER, 'src/etf_research/observation_slots.py',
     'PROTOCOL_OBSERVATION_V1.md', 'config/research_observation.json', CALENDAR,
     'deploy/etf-research-decision.service', 'deploy/etf-research-decision.timer',
     'scripts/seal_observation_decision.py', 'scripts/observation_inputs.py',

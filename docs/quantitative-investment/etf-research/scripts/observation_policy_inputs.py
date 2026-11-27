@@ -1,14 +1,11 @@
 """Build the registered policy input only from reviewed, as-of coverage."""
-from datetime import datetime, time, timedelta
+from datetime import datetime, timedelta
 from observation_archive import open_attempt
-from review_policy_observations import event_ledger, policy_ids, verify_review
+from review_policy_observations import event_ledger, policy_ids, reviews_as_of
 from etf_research.observation_experiment import DECISION_TIME
+from etf_research.observation_slots import POLL_TIMES, scheduled_slot
 from etf_research.policy_events import TZ, instant
 from etf_research.publication import read, sha
-
-# These are the recurring source polls in etf-research-observation.timer.
-POLL_TIMES = (time(8,25),time(19,40))
-
 
 def expected_slots(start, end):
     current = start.astimezone(TZ).date()
@@ -21,18 +18,6 @@ def expected_slots(start, end):
                 slots.append(slot)
         current += timedelta(days=1)
     return slots
-
-
-def scheduled_slot(attempt):
-    trigger = attempt['trigger']
-    if not trigger or trigger['unit']!='etf-research-observation.timer' or not trigger.get('timerRealtimeUsec'):
-        return None
-    stamp = datetime.fromtimestamp(trigger['timerRealtimeUsec']/1_000_000,TZ)
-    planned = stamp.replace(second=0,microsecond=0)
-    started = instant(attempt['startedAt'])
-    if planned.time() in POLL_TIMES and planned <= stamp <= started < planned+timedelta(minutes=1):
-        return planned
-    return None
 
 
 def assess(cutoffs, polls, reviews, ceiling):
@@ -86,6 +71,8 @@ def assess(cutoffs, polls, reviews, ceiling):
     events = sorted(policy_ids(ledger,min(cutoffs[-1],ceiling))-policy_ids(ledger,cutoffs[0]))
     known = dict(coveredIntervals=complete,expectedIntervals=5,intervals=intervals,
                  observedReviewedEventIds=events)
+    if ledger['followups']:
+        known['relatedFollowups'] = ledger['followups']
     if complete==5:
         known.update(count=len(events),eventIds=events,dependencyReadyAt=dependencies,pollEvidence=proofs)
     else:
@@ -94,12 +81,8 @@ def assess(cutoffs, polls, reviews, ceiling):
 
 
 def load_policy_context(root, store, dates, entry, ceiling):
-    folders = root/'reports/research-policy-reviews'
     reviews, proofs = [], []
-    for receipt in sorted(folders.glob('*/receipt.json')):
-        if instant(read(receipt)['sealedAt'])>ceiling:
-            continue
-        review = verify_review(root,store,receipt.parent)
+    for receipt,review in reviews_as_of(root,store,ceiling):
         reviews.append(review)
         proofs.extend([dict(root='observations',path=receipt.relative_to(root).as_posix(),sha256=sha(receipt)),
                        *review['attemptEvidence']])

@@ -31,6 +31,25 @@ class ObservationPolicyReviewTests(unittest.TestCase):
         self.assertEqual(policy_ids(ledger, sealed-timedelta(microseconds=1)), set())
         self.assertEqual(policy_ids(ledger, sealed), {EVENT})
 
+    def test_linked_later_disclosure_keeps_parent_event_count_and_first_ready_clock(self):
+        review = verify_review(ROOT, STORE, REVIEW)
+        follow_clock = instant(review['sealedAt'])+timedelta(minutes=10)
+        key = 'a'*64
+        child = dict(decision=dict(disposition='related_followup',revisionKey=key,parentEventId=EVENT),
+                     source=dict(url='https://www.csrc.gov.cn/public-note',sha256='b'*64,
+                                 published_at=follow_clock.isoformat()),evidencePath='archived-source.body')
+        update = dict(archiveVerifiedAt=follow_clock.isoformat(),sealedAt=follow_clock.isoformat(),entries=[child])
+        ledger = event_ledger([review,update])
+        self.assertEqual(policy_ids(ledger,follow_clock),{EVENT})
+        self.assertEqual(ledger['events'],event_ledger([review])['events'])
+        self.assertEqual(ledger['followups'][0]['parentEventId'],EVENT)
+        self.assertEqual(ledger['followups'][0]['reviewedAt'],follow_clock.isoformat())
+        with self.assertRaisesRegex(ValueError,'parent is missing'):
+            event_ledger([update])
+        revised = dict(child,decision=dict(child['decision'],parentEventId='another-parent'))
+        with self.assertRaisesRegex(ValueError,'conflicting classifications'):
+            event_ledger([review,update,dict(update,entries=[revised])])
+
     def test_incomplete_or_unbound_decisions_fail(self):
         request = read(REPORT/'decisions.json')
         partial = dict(request, decisions=request['decisions'][1:])

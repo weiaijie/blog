@@ -15,13 +15,13 @@ from research_day_coverage import cover
 from etf_research.admission import completed_date, sessions_between
 from etf_research.evidence_archive import capture, verify as verify_archive
 from etf_research.exchange_calendar import calendar_at
+from etf_research.observation_slots import TIMER, with_manager_clock
 from etf_research.policy_events import instant
 from etf_research.publication import create, inside, lock, read, seal, sha, verify_bundle
 
 ROOT = policy_etf.ROOT
 LOG = ROOT/'reports/research-observation'
 CONFIG = ROOT/'config/research_observation.json'
-TIMER = 'etf-research-observation.timer'
 HEX_ID = re.compile('[0-9a-f]{32}')
 HASH = re.compile('[0-9a-f]{64}')
 BASE = (CONFIG,ROOT/'config/collection.json',sse.CALENDAR)
@@ -210,6 +210,8 @@ def run(store, config, explicit_day):
     trigger = systemd_trigger(os.environ) if explicit_day is None else None
     if explicit_day is None and trigger is None:
         raise ValueError('Scheduled acquisition requires the independent systemd timer trigger')
+    if trigger is not None:
+        trigger = with_manager_clock(trigger)
     with lock(ROOT/'.runtime/research-observation.lock'):
         receipts,_ = ledger(store,config,repair=True)
         if explicit_day is not None:

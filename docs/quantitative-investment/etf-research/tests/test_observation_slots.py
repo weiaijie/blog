@@ -1,0 +1,61 @@
+from datetime import timedelta
+from pathlib import Path
+import unittest
+from unittest.mock import patch
+
+from etf_research.observation_slots import CALENDAR, TIMER, manager_clock, scheduled_slot, with_manager_clock
+from etf_research.policy_events import instant
+
+SLOT = instant('2026-11-27T19:40:00+08:00')
+
+
+class ObservationSlotTests(unittest.TestCase):
+    def test_live_timer_clock_overrides_stale_environment_without_relaxing_cutoff(self):
+        invocation = dict(unit=TIMER,invocationId='a'*32,
+                          timerRealtimeUsec=int((SLOT-timedelta(minutes=16)).timestamp()*1_000_000))
+        started = (SLOT+timedelta(seconds=1)).isoformat()
+        attempt = dict(trigger=invocation,startedAt=started)
+        self.assertIsNone(scheduled_slot(attempt))
+        evidence = dict(lastTriggerUsec=int(SLOT.timestamp()*1_000_000),calendar=sorted(CALENDAR))
+        with patch('etf_research.observation_slots.manager_clock',return_value=evidence), \
+             patch('etf_research.observation_slots.datetime') as clock:
+            clock.now.return_value = SLOT+timedelta(milliseconds=500)
+            trigger = with_manager_clock(invocation)
+        self.assertEqual(scheduled_slot(dict(attempt,trigger=trigger)),SLOT)
+        self.assertEqual(trigger['timerRealtimeUsec'],invocation['timerRealtimeUsec'])
+        late = (SLOT+timedelta(minutes=1)).isoformat()
+        self.assertIsNone(scheduled_slot(dict(attempt,trigger=trigger,startedAt=late)))
+        wrong_clock = dict(trigger,managerTimerCheckedAt=late)
+        self.assertIsNone(scheduled_slot(dict(attempt,trigger=wrong_clock)))
+        wrong_timer = dict(trigger,managerTimer=dict(evidence,calendar=['another timer']))
+        self.assertIsNone(scheduled_slot(dict(attempt,trigger=wrong_timer)))
+        no_current_proof = dict(trigger,timerRealtimeUsec=evidence['lastTriggerUsec'],
+                                 managerTimer=None,managerTimerError='ValueError')
+        self.assertIsNone(scheduled_slot(dict(attempt,trigger=no_current_proof)))
+
+    def test_manager_requires_pure_calendar_schedule_and_records_both_slots(self):
+        properties = {
+            'TimersMonotonic':['a(stt)','0'],
+            'TimersCalendar':['a(sst)','2','OnCalendar',CALENDAR[1],'1','OnCalendar',CALENDAR[0],'2'],
+            'LastTriggerUSec':['t','1795779600000000'],
+        }
+
+        def reply(args):
+            if args[0]=='call':
+                self.assertEqual(args[-1],TIMER)
+                return ['o','/org/freedesktop/systemd1/unit/registered_timer']
+            return properties[args[-1]]
+
+        self.assertEqual(manager_clock(TIMER,run_query=reply),
+                         dict(lastTriggerUsec=1795779600000000,calendar=sorted(CALENDAR)))
+        properties['TimersMonotonic'] = ['a(stt)','1','OnActiveUSec','45000000','10']
+        with self.assertRaisesRegex(ValueError,'exclusively calendar'):
+            manager_clock(TIMER,run_query=reply)
+
+    def test_released_timer_has_no_startup_relative_trigger(self):
+        source = Path(__file__).resolve().parents[1]/'deploy'/TIMER
+        settings = source.read_text().splitlines()
+        self.assertEqual(sorted(row.removeprefix('OnCalendar=') for row in settings if row.startswith('OnCalendar=')),
+                         sorted(CALENDAR))
+        self.assertIn('Persistent=true',settings)
+        self.assertFalse(any(row.startswith('OnActiveSec=') for row in settings))

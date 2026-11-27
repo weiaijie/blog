@@ -1,0 +1,17 @@
+{
+  "unit": "etf-policy-clock-audit-1127.service",
+  "journalTimestampUsec": 1795781971652223,
+  "invocationId": "93a6a1fa606b4f56b4ddaf26dba61e41",
+  "message": {
+    "unit": "etf-policy-clock-audit-1127.timer",
+    "invocation": "93a6a1fa606b4f56b4ddaf26dba61e41",
+    "envTriggerUsec": "1795781971573398",
+    "clock": {
+      "lastTriggerUsec": 1795781971573398,
+      "calendar": [
+        "2026-11-27 20:19:31 Asia/Shanghai"
+      ]
+    },
+    "checkedUsec": 1795781971652114
+  }
+}

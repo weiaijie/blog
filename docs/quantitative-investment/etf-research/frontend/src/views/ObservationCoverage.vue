@@ -59,6 +59,15 @@ type Overview = {
 };
 const endpoint = '/api/v1/research/observation';
 const evaluationEndpoint = endpoint+'/evaluation';
+const policyReviewEndpoint = endpoint+'/policy-review';
+type PolicyReview = {
+  reviewedRevisions:number; independentEventIds:string[]; lastReviewAt:string|null;
+  followups:{parentEventId:string;url:string;publishedAt:string;sha256:string;reviewedAt:string}[];
+};
+const policyReview = ref<PolicyReview>();
+const policyReviewBusy = ref(false);
+const policyReviewError = ref('');
+
 const overview = ref<Overview>();
 const selected = ref('');
 const detail = ref<Day & {attempts:Attempt[]}>();
@@ -163,6 +172,19 @@ const missing = (source?:Source) => [...new Set(Object.entries(source?.issues ??
 const turnover = (value:string|null) => value===null ? '' : (Number(value)/1e8).toLocaleString('zh-CN',{
   maximumFractionDigits:2,
 })+' 亿元';
+
+async function loadPolicyReview(event: Event) {
+  if (!(event.currentTarget as HTMLDetailsElement).open || policyReview.value || policyReviewBusy.value) return;
+  policyReviewBusy.value = true;
+  policyReviewError.value = '';
+  try {
+    policyReview.value = await getJson<PolicyReview>(policyReviewEndpoint,lifecycle.signal);
+  } catch (error) {
+    if (!lifecycle.signal.aborted) policyReviewError.value = (error as Error).message;
+  } finally {
+    policyReviewBusy.value = false;
+  }
+}
 
 async function load(before?:string) {
   loading.value = true;
@@ -321,6 +343,21 @@ onBeforeUnmount(()=>{lifecycle.abort();detailRequest?.abort();});
           </table>
         </div>
       </section>
+      <details class="decision-summary policy-review" @toggle="loadPolicyReview">
+        <summary>政策审核与关联公告</summary>
+        <p v-if="policyReviewBusy" role="status">核对政策审核记录…</p>
+        <p v-if="policyReviewError" role="alert">{{policyReviewError}}</p>
+        <p v-if="policyReview">已审核 {{policyReview.reviewedRevisions}} 个版本 ·
+          {{policyReview.independentEventIds.length}} 个独立事件 · {{policyReview.followups.length}} 条关联公告</p>
+        <p v-if="policyReview?.lastReviewAt" class="muted">最近审核 {{time(policyReview.lastReviewAt)}}</p>
+        <ul v-if="policyReview?.followups.length" class="decision-gaps">
+          <li v-for="item in policyReview.followups" :key="item.sha256">
+            关联 {{item.parentEventId}} · 发布 {{time(item.publishedAt)}}
+            <a :href="item.url" target="_blank" rel="noopener">公告原文 ↗</a>
+          </li>
+        </ul>
+        <a :href="policyReviewEndpoint" target="_blank" rel="noopener">查看政策审核 JSON ↗</a>
+      </details>
       <ObservationMonthly />
       <el-alert v-if="overview.calendarUnknownYear" type="warning" :closable="false"
         :title="overview.calendarUnknownYear+' 年交易日历待核验'"/>
@@ -466,6 +503,8 @@ onBeforeUnmount(()=>{lifecycle.abort();detailRequest?.abort();});
 .coverage-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px 16px}
 .coverage-head h2,.coverage-head h3{margin:0}
 .coverage-head p{margin:6px 0 0}
+.policy-review summary{cursor:pointer;font-weight:600}
+.policy-review li{overflow-wrap:anywhere}
 .coverage-actions{display:flex;align-items:center;flex-wrap:wrap;gap:12px}
 .milestone{padding:12px 14px;background:#edf5f4;border-left:3px solid #35776c;margin:14px 0}
 .decision-summary h3{margin:0}

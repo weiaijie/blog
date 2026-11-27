@@ -1,0 +1,80 @@
+{
+  "attempt": "reports/research-observation/runs/2026-11-27/20261127T115450Z-c4c154d1",
+  "decisions": [
+    {
+      "revisionKey": "8dd8a976175c15d0e0512e6486c59928aa7592ea6ca0c1859b0776e5ef8cdf5e",
+      "disposition": "event",
+      "locator": "持续完善资本市场稳市机制",
+      "reason": "中国政府网转载新华社会议通稿，资本市场段落与证监会摘录对应同日同一项会议部署。",
+      "eventId": "state-council-2026-11-27-stabilization",
+      "themeId": "capital-market-stabilization",
+      "stage": "deployment",
+      "role": "government_reprint"
+    },
+    {
+      "revisionKey": "8c7f46c8042cb2bcef4c8eb556d64d9efe0ab65bdf45b92c54ae8fea14febd3f",
+      "disposition": "related_followup",
+      "parentEventId": "state-council-2026-11-27-stabilization",
+      "locator": "传达学习上午国务院常务会议精神",
+      "reason": "证监会党委会议传达同日国常会的稳市部署并列出后续工作方向。原文未载新措施的正式生效安排，关联既有事件并保留单独证据。"
+    },
+    {
+      "revisionKey": "2631ff8dd8e9ab43751c1597783a304524e27b1fe1e92360f225c8ea2745b9aa",
+      "disposition": "event",
+      "locator": "持续完善资本市场稳市机制",
+      "reason": "证监会页面摘录同一次新华社通稿的资本市场段落，未发布另一项实施决定。",
+      "eventId": "state-council-2026-11-27-stabilization",
+      "themeId": "capital-market-stabilization",
+      "stage": "deployment",
+      "role": "government_reprint"
+    },
+    {
+      "revisionKey": "2f40401cbd0cd4b8ef3318b91e2f92e2c83a433a3ed13c32eb195d092ccfc978",
+      "disposition": "historical_reference",
+      "locator": "构建房地产发展新模式",
+      "reason": "原意见页面发表于监测启动之前，本次收录为历史参考。"
+    },
+    {
+      "revisionKey": "986a5f3621a19b3bde44367ed8bbf7567c2f0bdbdeb951e2af21b77f73e58b53",
+      "disposition": "historical_reference",
+      "locator": "公开征求意见",
+      "reason": "原征求意见稿在监测启动前发布，本次收录为历史参考。"
+    },
+    {
+      "revisionKey": "7dcd6194fc8bc0ae5505b1f7a19ffa30b96feaf72ea19c03fd842fa52d5ebc8f",
+      "disposition": "historical_reference",
+      "locator": "定期报告的内容与格式",
+      "reason": "原定期报告准则的征求意见反馈在监测启动前发布。"
+    },
+    {
+      "revisionKey": "0a82550147de886734dd1bd3353d21afd53fa39885ccbfc3e66257e66bafd675",
+      "disposition": "historical_reference",
+      "locator": "业绩比较基准指引",
+      "reason": "原业绩比较基准征求意见反馈在监测启动前发布。"
+    },
+    {
+      "revisionKey": "fc55e371391118189f9f9d5dc6b6379530609624ddca9aa0cc4a954fc85c26fa",
+      "disposition": "historical_reference",
+      "locator": "销售费用管理规定",
+      "reason": "原销售费规定征求意见反馈在监测启动前发布。"
+    },
+    {
+      "revisionKey": "39bf642c38907031839b80ce0426fa2d267b77a91c72b48a1a3af17bc6555f9a",
+      "disposition": "historical_reference",
+      "locator": "学术年会",
+      "reason": "归档为监测启动前的会议致辞。"
+    },
+    {
+      "revisionKey": "b9c825722eff1ee5d1c5e3663d8a0d814833b7201633affb4cb49412184dee04",
+      "disposition": "historical_reference",
+      "locator": "金融街论坛年会",
+      "reason": "归档为监测启动前的金融街论坛主题演讲。"
+    },
+    {
+      "revisionKey": "da58f9a8c4ba90d83c7439efee4734cbd31c3d306b30fde1dbe9fd14db3d7baa",
+      "disposition": "outside_scope",
+      "locator": "典型案例",
+      "reason": "页面汇总已查办的虚假信息案例与处置，未识别出新的监测范围内资本市场政策部署或实施规则。"
+    }
+  ]
+}
