@@ -18,9 +18,11 @@ type Attempt = {
   qualificationReason?:'scheduled_archive_not_eligible';
 };
 type DecisionClock = {scheduledAt:string|null; deadline:string|null};
+type TransportRecovery = {usedAttempt:string; retryAttempt:string; failedRequests:string[]; dependencyReadyAt:string[]};
 type DecisionAttempt = {
   id:string; status:string; startedAt?:string; archivedAt?:string; archiveSha256?:string;
   availableVariants?:Record<string,boolean>; featureGaps?:Record<string,string|null>; forecastProduced?:boolean;
+  transportRecoveries?:Record<string,Record<string,TransportRecovery>>;
 };
 type Decision = DecisionClock & {status:string; latest?:DecisionAttempt|null; attempts?:DecisionAttempt[]};
 type LabelMetrics = {terminalReturn:string; maxDrawdown:string};
@@ -161,6 +163,10 @@ const labelGap = (code:string|{reason:string}) => {
 const percent = (value:string|number) => Number(value).toLocaleString('zh-CN',{style:'percent',maximumFractionDigits:3});
 const variants:Record<string,string> = {
   baseline:'量价基线', policy:'加入政策', etf:'加入 ETF 份额净值', margin:'加入两融', combined:'全量增量',
+};
+const recoveryNames:Record<string,string> = {
+  '510300':'沪深300 ETF 份额净值','511010':'国债 ETF 份额净值',
+  turnover:'沪市成交额',margin:'沪市股票融资买入占比',
 };
 const featureNames:Record<string,string> = {
   stockReturn5:'股票 ETF 五日收益', stockReturn20:'股票 ETF 二十日收益', stockVol20:'股票 ETF 波动',
@@ -464,6 +470,17 @@ onBeforeUnmount(()=>{lifecycle.abort();detailRequest?.abort();});
                   {{featureNames[name] ?? name}} · {{gap ? gapReasons[gap] ?? gap : '证据待核验'}}
                 </li>
               </ul>
+              <details v-if="attempt.transportRecoveries" class="receipt">
+                <summary>重试无响应时沿用的已核验输入</summary>
+                <ul v-for="(recoveries,day) in attempt.transportRecoveries" :key="day" class="decision-gaps">
+                  <li v-for="(recovery,source) in recoveries" :key="source">
+                    <strong>{{day}} · {{recoveryNames[source] ?? source}}</strong>
+                    <span> · 无响应 {{recovery.failedRequests.join('、')}}</span>
+                    <p>原始归档 <code>{{recovery.usedAttempt.split('/').at(-1)}}</code> ·
+                      重试归档 <code>{{recovery.retryAttempt.split('/').at(-1)}}</code></p>
+                  </li>
+                </ul>
+              </details>
               <details v-if="attempt.archiveSha256" class="receipt"><summary>决策归档校验值</summary>
                 <code>{{attempt.archiveSha256}}</code></details>
             </li>

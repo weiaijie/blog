@@ -50,7 +50,7 @@ def feature(anchor, value, received, dependencies, proofs):
                 dependencyReadyAt=sorted(set(dependencies)),evidence=proofs)
 
 
-def assemble(project, observations, store, entry, observed, *, computed=None):
+def assemble(project, observations, store, entry, observed, *, computed=None, recover_transport=False):
     project,observations,store = (path.resolve() for path in (project,observations,store))
     deadline = datetime.combine(entry,DECISION_TIME,TZ)
     ceiling = min(deadline,observed)
@@ -76,7 +76,8 @@ def assemble(project, observations, store, entry, observed, *, computed=None):
     selected,issues = {},{}
     for day in dates:
         try:
-            result,issue = archive_for_day(observations,store,day,ceiling,config)
+            result,issue = archive_for_day(observations,store,day,ceiling,config,
+                                           recover_transport=recover_transport)
         except EVIDENCE_ERRORS:
             result,issue = None,'archive_proof_invalid'
         if result is not None:
@@ -90,11 +91,22 @@ def assemble(project, observations, store, entry, observed, *, computed=None):
         warm = {}
         warm_status = 'warmup_proof_invalid'
     amounts, amount_sources, missing = [], [], []
+    recovery_log = {}
+
+    def recovery(day,attempt,name):
+        recovered = attempt.get('transportRecoveries',{}).get(name) if attempt else None
+        if recovered:
+            recovery_log.setdefault(str(day),{})[name] = {
+                key:recovered[key] for key in ('usedAttempt','retryAttempt','failedRequests','dependencyReadyAt')}
+        return recovered
+
     for day in dates:
         current = selected.get(day)
         if current and current['sse']['turnoverCny'] is not None:
             source = dict(amount=current['sse']['turnoverCny'],receivedAt=current['sse']['receivedAt'],
                           readyAt=current['readyAt'],refs=current['refs'])
+        elif recovered := recovery(day,current,'turnover'):
+            source = dict(recovered,amount=recovered['value'])
         else:
             source = warm.get(str(day)) if day!=anchor and issues.get(str(day))!='archive_proof_invalid' else None
         if source is not None:
@@ -106,7 +118,8 @@ def assemble(project, observations, store, entry, observed, *, computed=None):
         refs = {tuple(ref.items()):ref for source in amount_sources for ref in source['refs']}
         cells['turnover20'] = feature(anchor,relative_turnover(amounts),
             max((p['receivedAt'] for p in amount_sources),key=instant),
-            [p['readyAt'] for p in amount_sources],list(refs.values()))
+            [time for p in amount_sources for time in p.get('dependencyReadyAt',[p['readyAt']])],
+            list(refs.values()))
     else:
         gaps['turnover20'] = dict(missingSessions=missing,reason=warm_status)
 
@@ -121,11 +134,17 @@ def assemble(project, observations, store, entry, observed, *, computed=None):
             if row['status']=='verified_estimate' and row['relativeIntensity'] is not None:
                 cells[name] = feature(anchor,row['relativeIntensity'],
                             fund_snapshot['receivedAt'],[ready,row['featureReadyAt']],refs)
+            elif recovered := recovery(anchor,current,symbol):
+                cells[name] = feature(anchor,recovered['value'],recovered['receivedAt'],
+                                      recovered['dependencyReadyAt'],recovered['refs'])
             else:
                 gaps[name] = dict(reason='same_valuation_day_basis_missing',sourceIssues=row['issues'])
         if market['margin'] is not None and market['margin']['financingBuyShare'] is not None:
             cells['stockFinancingBuyShare'] = feature(anchor,market['margin']['financingBuyShare'],
                 market['receivedAt'],[ready,market['featureReadyAt']],refs)
+        elif recovered := recovery(anchor,current,'margin'):
+            cells['stockFinancingBuyShare'] = feature(anchor,recovered['value'],recovered['receivedAt'],
+                                                     recovered['dependencyReadyAt'],recovered['refs'])
         else:
             gaps['stockFinancingBuyShare'] = dict(reason='matched_margin_basis_missing',sourceIssues=market['issues'])
     else:
@@ -162,6 +181,10 @@ def assemble(project, observations, store, entry, observed, *, computed=None):
                if 'ignoredEmptyAttempts' in attempt}
     if ignored:
         inputs['ignoredEmptyAttempts'] = ignored
+    if recover_transport:
+        inputs['transportRecoveryVersion'] = 1
+        if recovery_log:
+            inputs['transportRecoveries'] = recovery_log
     return inputs
 
 
@@ -174,19 +197,21 @@ if __name__=='__main__':
     parser.add_argument('--observation-root',type=Path,default=ROOT)
     parser.add_argument('--archive-store',type=Path,required=True)
     parser.add_argument('--output',type=Path)
+    parser.add_argument('--recover-transport',action='store_true')
     args = parser.parse_args()
     if args.verify:
         saved = read(args.verify)
         result = assemble(args.price_project,args.observation_root,args.archive_store,
                           date.fromisoformat(saved['entryDay']),instant(saved['observedAt']),
-                          computed=instant(saved['computedAt']))
+                          computed=instant(saved['computedAt']),
+                          recover_transport=saved.get('transportRecoveryVersion')==1)
         if saved != result:
             raise ValueError('Stored input probe does not reproduce')
     else:
         if args.output is None:
             parser.error('--entry requires --output')
         result = assemble(args.price_project,args.observation_root,args.archive_store,
-                          args.entry,datetime.now(timezone.utc))
+                          args.entry,datetime.now(timezone.utc),recover_transport=args.recover_transport)
         create(args.output,result)
     print('PASS',result['entryDay'],sum(value is not None for value in result['cells'].values()),
           'verified feature values; remaining',','.join(result['gaps']))

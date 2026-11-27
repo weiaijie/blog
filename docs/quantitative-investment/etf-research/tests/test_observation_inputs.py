@@ -10,10 +10,14 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts'))
 
 import run_research_observation as observation
+from collect_policy_etf_day import inspect as inspect_funds
+from collect_sse_research_day import inspect as inspect_market
+from pack_observation_evidence import restore_ledger
+from research_day_coverage import cover
 from observation_inputs import archive_for_day, assemble
 from etf_research.observation_experiment import BASE, Window, availability
 from etf_research.policy_events import instant
-from etf_research.publication import create, read, seal, sha
+from etf_research.publication import atomic, create, read, seal, sha
 
 PROOF = ROOT/'reports/2026-11-27-observation-inputs'
 STORE = PROOF/'archive-proofs'
@@ -127,3 +131,101 @@ class ObservationInputTests(unittest.TestCase):
             (folder/'result.json').write_text('{}',encoding='utf-8')
             with self.assertRaisesRegex(ValueError,'Archive receipt does not match'):
                 archive_for_day(root,store,day,later,config)
+
+
+    def test_transport_recovery_keeps_original_basis_and_rejects_new_semantics(self):
+        pack = ROOT/'reports/2026-11-27-cleared-shares/pack'
+        day = date(2026,11,27)
+        entry = date(2026,11,30)
+        ready = instant('2026-11-27T22:26:00+08:00')
+        for case in ('no_response','not_found','different_payload','damaged_archive'):
+            with self.subTest(case=case), tempfile.TemporaryDirectory() as directory:
+                base = Path(directory)
+                root,store = base/'observations',base/'archive'
+                restore_ledger(pack,root)
+                shutil.copytree(pack/'archive',store)
+                ledger = root/'reports/research-observation'
+                config = read(root/'config/research_observation.json')
+                prior,issue = archive_for_day(root,store,day,ready,config)
+                self.assertIsNone(issue)
+                old_fund = next(r for r in prior['policyEtf']['etf'] if r['symbol']=='510300')
+                self.assertIsNotNone(old_fund['relativeIntensity'])
+
+                attempt = ledger/'runs'/str(day)/'transport-contrast'
+                coverage_paths = read(root/prior['id']/'result.json')['coverage']['evidence']
+                inputs = {}
+                for label,inspect in (('policyEtf',inspect_funds),('sse',inspect_market)):
+                    source = root/coverage_paths[label]['path']
+                    path = attempt/'inputs'/source.name
+                    shutil.copytree(source,path)
+                    (path/'manifest.json').unlink()
+                    run = read(path/'run.json')
+                    atomic(path/'run.json',dict(run,startedAt=(ready-timedelta(seconds=4)).isoformat()))
+                    requests = read(path/'requests.json')
+                    for row in requests:
+                        row['requested_at_utc']=(ready-timedelta(seconds=3)).isoformat()
+                        row['receivedAt']=(ready-timedelta(seconds=2)).isoformat()
+                        name = row['name']
+                        body = path/(name+'.body')
+                        if name=='nav_510300':
+                            code,status = (0,404) if case=='not_found' else (52,0)
+                            selected = name+'_attempt_01'
+                            raw = path/(selected+'.body')
+                            raw.write_bytes(b'')
+                            body.write_bytes(b'')
+                            row.update(status=status,curl_exit=code,bytes=0,sha256=sha(body),
+                                       error='simulated response failure',selected_attempt=selected,actual_requests=1)
+                            row['attempts']=[dict(name=selected,url=row['url'],final_url=row['url'],
+                                                   status=status,curl_exit=code,bytes=0,sha256=sha(raw))]
+                        elif case=='different_payload' and name=='shares_20261127':
+                            body.write_bytes(body.read_bytes()+b'\n')
+                            row.update(sha256=sha(body),bytes=body.stat().st_size)
+                    atomic(path/'requests.json',requests)
+                    atomic(path/'result.json',inspect(path,ready-timedelta(seconds=1)))
+                    seal(path)
+                    inputs[label]=path
+
+                with patch('research_day_coverage.ROOT',root):
+                    packet = cover(inputs['policyEtf'],inputs['sse'],ready.isoformat())
+                begin = dict(schemaVersion=1,date=str(day),startedAt=(ready-timedelta(seconds=5)).isoformat(),
+                             trigger=None)
+                create(attempt/'started.json',begin)
+                create(attempt/'result.json',dict(begin,phase='partial',errors={},
+                                    finishedAt=(ready-timedelta(milliseconds=1)).isoformat(),coverage=packet))
+                seal(attempt)
+                files = [p.relative_to(root).as_posix() for p in attempt.rglob('*') if p.is_file()]
+                with (patch.multiple(observation,ROOT=root,LOG=ledger,required_files=lambda _:files),
+                      patch.object(observation,'now',return_value=ready),
+                      patch('etf_research.evidence_archive.datetime') as clock):
+                    clock.now.return_value=ready
+                    new_receipt=observation.archive_run(attempt,store,config)
+
+                if case=='damaged_archive':
+                    from etf_research.evidence_archive import object_path
+                    raw=read(store/'snapshots'/(new_receipt['archive']+'.json'))['files']
+                    selected=next(v for k,v in raw.items() if k.endswith('/nav_510300.body'))
+                    object_path(store,selected['sha256']).write_bytes(b'archive bytes changed')
+
+                original_mode = assemble(ROOT,root,store,entry,ready,computed=ready)
+                self.assertIsNone(original_mode['cells']['stockShareFlow'])
+                actual = assemble(ROOT,root,store,entry,ready,computed=ready,recover_transport=True)
+                self.assertEqual(actual['transportRecoveryVersion'],1)
+                self.assertIsNotNone(actual['cells']['bondShareFlow'])
+                self.assertIsNone(actual['cells']['stockFinancingBuyShare'])
+                if case=='no_response':
+                    earlier,error=archive_for_day(root,store,day,ready-timedelta(microseconds=1),config,
+                                                  recover_transport=True)
+                    self.assertIsNone(error)
+                    self.assertEqual(earlier['id'],prior['id'])
+                    self.assertNotIn('transportRecoveries',earlier)
+                    used=actual['transportRecoveries'][str(day)]['510300']
+                    self.assertEqual(used['usedAttempt'],prior['id'])
+                    self.assertEqual(used['retryAttempt'],new_receipt['attempt'])
+                    self.assertEqual(used['failedRequests'],['nav_510300'])
+                    value=actual['cells']['stockShareFlow']
+                    self.assertEqual(value['value'],old_fund['relativeIntensity'])
+                    self.assertIn(ready.isoformat(),value['dependencyReadyAt'])
+                    self.assertEqual(len(value['evidence']),6)
+                else:
+                    self.assertNotIn('transportRecoveries',actual)
+                    self.assertIsNone(actual['cells']['stockShareFlow'])

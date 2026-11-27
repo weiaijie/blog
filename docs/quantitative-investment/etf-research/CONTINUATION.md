@@ -1,5 +1,7 @@
 # 自主接续入口
 
+[盘前输入对无响应重试的处理](reports/2026-11-28-observation-transport-recovery/README.md)按两次归档校验依据，展示可安全沿用的单项和失败来源。真实盘前探查当前有 9 项可核验。
+
 [夜间导出水位保护](reports/2026-11-28-observation-export-watermark/README.md)可识别最新批次目录整批丢失。已用首批生产数据和 GitHub 原件验证按原水位恢复。
 
 [夜间证据包全链核验](reports/2026-11-28-observation-export-audit/README.md)在每次增量前检查所有旧包对象，出现损坏时保留失败记录。首个生产包已隔离恢复，单日与来源响应按原时点复算一致。

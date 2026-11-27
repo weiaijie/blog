@@ -36,13 +36,17 @@ def decision_row(root, store, day, observed, *, planned, calendar_unknown=False)
             inputs_file = folder/'records/inputs.json'
             if inputs_file.is_file() and sha(inputs_file)!=record['inputSha256']:
                 raise ValueError('Decision inputs differ from receipt')
-            gaps = read(inputs_file)['gaps'] if inputs_file.is_file() else {}
-            reasons = {key: value.get('reason') if isinstance(value,dict) else value for key,value in gaps.items()}
-            attempts.append(dict(id=folder.name,status=verified['status'],startedAt=record['startedAt'],
-                archivedAt=verified['archiveVerifiedAt'],archiveSha256=verified['archiveSha256'],
-                receiptSha256=sha(receipt),
-                availableVariants=verified['availableVariants'],featureGaps=reasons,
-                forecastProduced=verified['forecastProduced']))
+            inputs = read(inputs_file) if inputs_file.is_file() else {}
+            reasons = {key: value.get('reason') if isinstance(value,dict) else value
+                       for key,value in inputs.get('gaps',{}).items()}
+            row = dict(id=folder.name,status=verified['status'],startedAt=record['startedAt'],
+                       archivedAt=verified['archiveVerifiedAt'],archiveSha256=verified['archiveSha256'],
+                       receiptSha256=sha(receipt),
+                       availableVariants=verified['availableVariants'],featureGaps=reasons,
+                       forecastProduced=verified['forecastProduced'])
+            if 'transportRecoveries' in inputs:
+                row['transportRecoveries'] = inputs['transportRecoveries']
+            attempts.append(row)
         except (OSError, ValueError, KeyError, TypeError, ArithmeticError):
             attempts.append(dict(id=folder.name,status='unverified'))
     verified = [row for row in attempts if 'archivedAt' in row]

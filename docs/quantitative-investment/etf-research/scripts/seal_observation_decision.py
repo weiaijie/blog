@@ -102,7 +102,7 @@ def run(root, prices, store, *, probe=None):
         if probe or current_slot(trigger,day,started):
             try:
                 origin = first_archive(root,store,started)
-                inputs = assemble(prices,root,store,day,started)
+                inputs = assemble(prices,root,store,day,started,recover_transport=True)
                 available = feature_state(inputs,roots)
                 create(input_file,dict(inputs,runKind='validation' if probe else 'decision_input'))
             except (OSError,ValueError,KeyError,TypeError,ArithmeticError) as error:

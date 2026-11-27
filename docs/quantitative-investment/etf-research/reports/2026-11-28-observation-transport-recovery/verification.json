@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-28T00:44:22.146438+08:00",
+  "anchor": "2026-11-27",
+  "entry": "2026-11-30",
+  "cutoff": "2026-11-27T16:44:22.146438+00:00",
+  "recoveryVersion": 1,
+  "verifiedInputs": [
+    "stockReturn5",
+    "stockReturn20",
+    "stockVol20",
+    "bondReturn5",
+    "bondReturn20",
+    "bondVol20",
+    "turnover20",
+    "stockShareFlow",
+    "bondShareFlow"
+  ],
+  "gaps": [
+    "stockFinancingBuyShare",
+    "policyActiveCount"
+  ],
+  "sameInputValuesAsOriginal": true
+}

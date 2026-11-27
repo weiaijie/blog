@@ -74,8 +74,12 @@ class DecisionStatusTests(unittest.TestCase):
                          receivedAt=start.isoformat(),readyAt=start.isoformat(),
                          dependencyReadyAt=[start.isoformat()],
                          evidence=[dict(root='prices',path=seal.CALENDAR,sha256=sha(self.root/seal.CALENDAR))])
+        recovered = {'2026-11-27':{'turnover':dict(usedAttempt='original',retryAttempt='retry',
+                                                   failedRequests=['market_20261127'],
+                                                   dependencyReadyAt=[start.isoformat()])}}
         payload = dict(entryDay=str(DAY),anchorDay='2026-11-27',computedAt=start.isoformat(),
                        evidenceCutoff=start.isoformat(),cells={key:available if key in BASE else None for key in seal.FEATURES},
+                       transportRecoveries=recovered,
                        gaps={'stockFinancingBuyShare':dict(reason='matched_margin_basis_missing')})
         origin = dict(date='2026-11-27',archiveVerifiedAt='2026-11-27T19:40:25+08:00')
         with (patch.object(seal,'CODE',(seal.CALENDAR,)), patch.object(seal,'now',return_value=start),
@@ -98,6 +102,7 @@ class DecisionStatusTests(unittest.TestCase):
             self.assertEqual(overview['labelCounts']['due'],0)
             self.assertEqual(overview['decisionCounts'],dict(expected=1,sealedOnTime=1,eligibleInputDays=1,gaps=0))
             self.assertEqual(summary['latest'],detail['attempts'][0])
+            self.assertEqual(summary['latest']['transportRecoveries'],recovered)
             self.assertEqual(summary['status'],'eligible_inputs')
             self.assertEqual(summary['latest']['featureGaps'],{'stockFinancingBuyShare':'matched_margin_basis_missing'})
             (self.root/result['decisionPath']/'records/inputs.json').write_bytes(b'{}')
