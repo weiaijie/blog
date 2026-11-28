@@ -8,6 +8,7 @@ from datetime import datetime, timezone
 from pathlib import Path, PurePosixPath
 import gzip, hashlib, json, os, re, shutil, tempfile, zlib
 from .publication import read, encoded, create, lock, sha, sync_dir, atomic
+from .workbench_assets import WORKBENCH_MANIFEST, workbench_assets
 
 DYNAMIC = ('data/snapshots', 'reports/daily', 'reports/operations', 'reports/health',
            'reports/notice-reviews', 'reports/notice-decisions')
@@ -28,6 +29,10 @@ def safe_path(root, name):
 
 def inventory(root):
     root = Path(root); names = set(read(root / 'config/archive_inventory.json')['files'])
+    manifest = 'site/' + WORKBENCH_MANIFEST
+    if safe_path(root, manifest).exists():
+        names.add(manifest)
+        names.update('site/' + name for name, _ in workbench_assets(root / 'site').values())
     for prefix in DYNAMIC:
         folder = safe_path(root, prefix)
         if not folder.exists(): continue

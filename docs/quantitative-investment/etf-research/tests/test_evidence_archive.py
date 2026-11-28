@@ -74,6 +74,28 @@ class ArchiveTests(unittest.TestCase):
         files[0].write_bytes(b'changed')
         with self.assertRaises(ValueError): inventory(self.root)
 
+    def test_active_workbench_build_is_captured_from_its_manifest(self):
+        create(self.root/'config/archive_inventory.json', {'files': ['evidence.json']})
+        workbench = self.root/'site/workbench'
+        manifest = workbench/'.vite/manifest.json'
+        create(manifest, {'index.html': {'file': 'assets/main.js', 'css': ['assets/main.css']},
+                          'lazy.js': {'file': 'assets/lazy.js', 'assets': ['assets/font.woff2']}})
+        active = ('index.html', 'assets/main.js', 'assets/main.css', 'assets/lazy.js', 'assets/font.woff2')
+        (workbench/'assets').mkdir()
+        for name in (*active, 'assets/old.js'):
+            (workbench/name).write_bytes(name.encode())
+        first = capture(self.root, self.store)['snapshot']
+        destination = self.base/'workbench-recovery'
+        restore(self.store, first, destination)
+        for name in (*active, '.vite/manifest.json'):
+            self.assertEqual((destination/'site/workbench'/name).read_bytes(), (workbench/name).read_bytes())
+        self.assertFalse((destination/'site/workbench/assets/old.js').exists())
+
+        (workbench/'assets/lazy.js').unlink()
+        with self.assertRaisesRegex(ValueError, 'Invalid workbench asset'):
+            capture(self.root, self.store)
+        self.assertEqual(read(self.root/'.runtime/archive_status.json')['snapshot'], first)
+
     def test_malicious_paths_rejected(self):
         for name in ['../escape','/absolute','C:/secret','a\\b','a/../b','a//b']:
             with self.subTest(name=name),self.assertRaises(ValueError):safe_path(self.root,name)

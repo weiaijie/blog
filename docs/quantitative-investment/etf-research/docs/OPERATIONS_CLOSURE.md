@@ -74,6 +74,6 @@ python scripts/run_scheduled.py --through 2026-11-24 \
 
 「政策与市场研究 → 独立研究运行健康」和 `/api/v1/research/observation/runtime-health` 显示同一份容量观测。健康服务的 `--storage` 逐项指定需要探测的证据目录，按文件系统合并读数。整库归档所在磁盘的可用空间低于既有 100 MiB 保留量、可用 inode 为零或目录无法测量时，健康记录列为待核对。处理前先在主机核对受影响目录、实际挂载、回执和 GitHub 水位。
 
-发布新的工作台构建时，在维护窗口同步构建清单及其所有在用静态资源，并将这些文件加入运行副本的整库归档清单。重启看板服务以重新登记清单，核对页面入口、入口脚本和 Agent 接口均返回 HTTP 200，并验证桌面和手机能够加载对应功能。
+发布新的工作台构建时，在维护窗口同步构建清单及其所有在用静态资源。整库归档与看板共用 Vite 清单的文件校验，自动收录清单、入口和在用静态资源。重启看板服务以重新登记清单，核对页面入口、入口脚本和 Agent 接口均返回 HTTP 200，并验证桌面和手机能够加载对应功能。文件缺失时保留原成功归档，补齐文件后再恢复例行归档。
 
 技术参考：[systemd定时器](https://www.freedesktop.org/software/systemd/man/latest/systemd.timer.html)、[Python路径处理](https://docs.python.org/3.12/library/pathlib.html)。本轮以实际主机systemd-analyze和触发记录验收，不以配置文件存在冒称已运行。

@@ -14,6 +14,7 @@ sys.path.insert(0, str(ROOT/'src'))
 from etf_research.admission import load_incremental, sessions_between
 from etf_research.forward import digest, prefix_digest
 from etf_research.publication import inside, read, sha, verify_bundle
+from etf_research.workbench_assets import workbench_assets
 import interactive_backtest as interactive
 import recent_backtest
 import model_replay
@@ -48,30 +49,6 @@ ASSETS = {'/': ('market.html','text/html'), '/market.html': ('market.html','text
           '/entry-windows.json': ('entry-windows.json','application/json'),
           '/vendor-charts/LICENSE.txt': ('vendor-charts/LICENSE.txt','text/plain')}
 guard = Lock()
-
-
-def workbench_assets(site):
-    """Expose only files in the Vite build manifest, never arbitrary site paths."""
-    folder = site/'workbench'
-    manifest = folder/'.vite/manifest.json'
-    if not manifest.exists():
-        return {}
-    paths = {'index.html'}
-    for entry in read(manifest).values():
-        paths.add(entry['file'])
-        paths.update(entry.get('css', []))
-        paths.update(entry.get('assets', []))
-    types = {'.html':'text/html', '.js':'text/javascript', '.css':'text/css',
-             '.woff2':'font/woff2', '.svg':'image/svg+xml'}
-    registered = {}
-    for name in paths:
-        path = inside(folder, name)
-        if not path.is_file() or path.suffix not in types:
-            raise ValueError('Invalid workbench asset: '+name)
-        registered['/workbench/'+name] = ('workbench/'+name, types[path.suffix])
-    for route in ('/', '/workbench', '/workbench/'):
-        registered[route] = ('workbench/index.html', 'text/html')
-    return registered
 
 
 ASSETS['/strategy-catalog.json'] = ('strategy-catalog.json', 'application/json')
