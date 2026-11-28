@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "day": "2026-11-28",
+  "checkedAt": "2026-11-28T09:30:00.665466+08:00",
+  "isTradingDay": false,
+  "calendarSha256": "950a3bfe2bab7ad484abc03aa27207bc70a49a4a144f495899cf1bd2aa10c8c6",
+  "originReceiptSha256": "0ef20de15195cc8da1e8ab9e3dc42c7d29050fb54b4dbd7bc7ffae544d14ba79",
+  "checks": [
+    {
+      "job": "observation",
+      "printedAt": "2026-11-28T08:34:00.848323+08:00",
+      "trigger": {
+        "unit": "etf-research-observation.timer",
+        "invocationId": "f66f5cee0c904947bdb4c50b695cbfba",
+        "timerRealtimeUsec": 1795825500573230,
+        "managerTimer": {
+          "lastTriggerUsec": 1795826040573319,
+          "calendar": [
+            "*-*-* 08:25:00 Asia/Shanghai",
+            "*-*-* 08:34:00 Asia/Shanghai",
+            "*-*-* 19:40:00 Asia/Shanghai"
+          ]
+        },
+        "managerTimerCheckedAt": "2026-11-28T00:34:00.746319+00:00",
+        "managerTimerError": null
+      },
+      "status": "qualified_retry_skipped"
+    },
+    {
+      "job": "decision",
+      "printedAt": "2026-11-28T08:52:00.821276+08:00",
+      "trigger": {
+        "unit": "etf-research-decision.timer",
+        "invocationId": "64d6acecf188406e9d1debe7fcdf33a0",
+        "timerRealtimeUsec": 1795827120573928,
+        "managerTimer": {
+          "lastTriggerUsec": 1795827120573928,
+          "calendar": [
+            "*-*-* 08:52:00 Asia/Shanghai"
+          ]
+        },
+        "managerTimerCheckedAt": "2026-11-28T00:52:00.820524+00:00",
+        "managerTimerError": null
+      },
+      "status": "not_scheduled"
+    },
+    {
+      "job": "forecast",
+      "printedAt": "2026-11-28T08:53:00.837004+08:00",
+      "trigger": {
+        "unit": "etf-research-forecast.timer",
+        "id": "5737fafd98314f86a1512d90d6eea26b",
+        "timerRealtimeUsec": 1795827180573936,
+        "triggeredAt": "2026-11-28T00:53:00.573936+00:00",
+        "managerTimer": {
+          "lastTriggerUsec": 1795827180573936,
+          "calendar": [
+            "*-*-* 08:53:00 Asia/Shanghai"
+          ]
+        },
+        "managerTimerCheckedAt": "2026-11-28T00:53:00.836276+00:00",
+        "managerTimerError": null
+      },
+      "status": "not_scheduled"
+    },
+    {
+      "job": "opening",
+      "printedAt": "2026-11-28T09:26:00.686693+08:00",
+      "trigger": {
+        "unit": "etf-research-opening.timer",
+        "id": "013aacfcfec7443c8ec0304763d8acc0",
+        "realtimeUsec": 1795829160573360,
+        "managerTimer": {
+          "lastTriggerUsec": 1795829160573360,
+          "calendar": [
+            "*-*-* 09:26:00 Asia/Shanghai",
+            "*-*-* 09:28:00 Asia/Shanghai"
+          ]
+        },
+        "managerTimerCheckedAt": "2026-11-28T01:26:00.685797+00:00",
+        "managerTimerError": null
+      },
+      "status": "not_scheduled"
+    },
+    {
+      "job": "opening",
+      "printedAt": "2026-11-28T09:28:00.680403+08:00",
+      "trigger": {
+        "unit": "etf-research-opening.timer",
+        "id": "0784e06db6454dfd926f15474657cc49",
+        "realtimeUsec": 1795829160573360,
+        "managerTimer": {
+          "lastTriggerUsec": 1795829280573919,
+          "calendar": [
+            "*-*-* 09:26:00 Asia/Shanghai",
+            "*-*-* 09:28:00 Asia/Shanghai"
+          ]
+        },
+        "managerTimerCheckedAt": "2026-11-28T01:28:00.679499+00:00",
+        "managerTimerError": null
+      },
+      "status": "not_scheduled"
+    }
+  ],
+  "newTradingStages": [],
+  "health": {
+    "issues": [],
+    "jobs": {
+      "observation": {
+        "state": "completed",
+        "latestDueAt": "2026-11-28T08:34:00+08:00",
+        "lastTriggerAt": "2026-11-28T08:34:00+08:00",
+        "finishedAt": "2026-11-28T08:34:00+08:00",
+        "nextAt": "2026-11-28T19:40:00+08:00",
+        "result": "success",
+        "exitStatus": "0"
+      },
+      "decision": {
+        "state": "completed",
+        "latestDueAt": "2026-11-28T08:52:00+08:00",
+        "lastTriggerAt": "2026-11-28T08:52:00+08:00",
+        "finishedAt": "2026-11-28T08:52:00+08:00",
+        "nextAt": "2026-11-29T08:52:00+08:00",
+        "result": "success",
+        "exitStatus": "0"
+      },
+      "forecast": {
+        "state": "completed",
+        "latestDueAt": "2026-11-28T08:53:00+08:00",
+        "lastTriggerAt": "2026-11-28T08:53:00+08:00",
+        "finishedAt": "2026-11-28T08:53:00+08:00",
+        "nextAt": "2026-11-29T08:53:00+08:00",
+        "result": "success",
+        "exitStatus": "0"
+      },
+      "opening": {
+        "state": "completed",
+        "latestDueAt": "2026-11-28T09:28:00+08:00",
+        "lastTriggerAt": "2026-11-28T09:28:00+08:00",
+        "finishedAt": "2026-11-28T09:28:00+08:00",
+        "nextAt": "2026-11-29T09:26:00+08:00",
+        "result": "success",
+        "exitStatus": "0"
+      }
+    }
+  }
+}

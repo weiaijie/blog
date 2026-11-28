@@ -58,6 +58,8 @@
 
 [首个生产定时合格归档](reports/2026-11-28-first-qualified-observation/README.md)已核验并恢复。交易数据归属 11 月 27 日，观察起点为 11 月 28 日。接续核对首个交易日的盘前封存、实际五日标签和首份月结。
 
+[起算后的休市日回执](reports/2026-11-28-first-origin-runtime/README.md)已核对补采、决策、预测和两轮开盘任务，以及 09:28 从 systemd 管理器取得的本轮实际触发时间。
+
 [22:23 清算份额补齐与两融下载对照](reports/2026-11-27-cleared-shares/README.md)已封存。11 月 27 日份额与单位净值可核验，两融继续保留未知。
 
 [证据增量定时导出](reports/2026-11-27-observation-export/README.md)以已验的 GitHub 证据包为起点，逐次封存真实水位与新增回执。[首次自动执行](reports/2026-11-27-automatic-portable-observation/README.md)已在 22:20 产生生产证据包。
