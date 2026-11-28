@@ -1,0 +1,15 @@
+{
+  "maintenanceArchive": {
+    "invocationId": "051870caad8c434e8e2ba2bbc0a36fc7",
+    "finishedAt": "2026-11-28T13:19:58.166312+08:00",
+    "snapshotSha256": "dd7f323df340a2d7475cb9b342f5f29338e90caa782629d1359721d709d1c635",
+    "verifiedFiles": 17257,
+    "newBytes": 2302901
+  },
+  "restoration": {
+    "verifiedFiles": 25,
+    "workbenchFiles": 22,
+    "healthCheckedAt": "2026-11-28T13:15:01.872010+08:00",
+    "healthManifestSha256": "6c13a3ff18db8cdcf3003873721568ad56ad1afc698103dffdbb2f246c6090e1"
+  }
+}

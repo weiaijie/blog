@@ -6,6 +6,8 @@
 
 [证据存储容量巡检](reports/2026-11-28-observation-storage-health/README.md)跟随 15 分钟健康记录。工作台与 Agent 可查看实际剩余空间、inode 和同一磁盘承载的证据目录。
 
+[容量巡检归档恢复](reports/2026-11-28-storage-health-restore/README.md)已核对 13:19 的维护归档。新版工作台文件及 13:15 的巡检回执已隔离恢复，继续核对 17:45 的计划归档。
+
 工作台和 Agent 的运行健康已接入[交易日历巡检](reports/2026-11-28-calendar-watch-health/README.md)，可核对 08:05 与 21:35 的计划及实际退出。跨年准入以交易所原文为准。
 
 [采集尝试的时点和来源证据](reports/2026-11-28-attempt-qualification-evidence/README.md)已接入工作台与 Agent。最新手工复查的两融缺口和上一轮定时尝试的时钟缺证可追溯到原件。

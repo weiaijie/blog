@@ -6,6 +6,8 @@
 
 [证据存储容量巡检](reports/2026-11-28-observation-storage-health/README.md)随健康回执核对长期采集、归档和导出的磁盘空间与 inode。
 
+[容量巡检归档恢复](reports/2026-11-28-storage-health-restore/README.md)核对维护补归档的全部文件，并隔离恢复新版工作台与已封存的容量巡检。
+
 [采集尝试的时点和来源证据](reports/2026-11-28-attempt-qualification-evidence/README.md)已接入工作台与 Agent。最新手工复查的两融缺口和上一轮定时尝试的时钟缺证可追溯到原件。
 
 [GitHub 批次发布准备](reports/2026-11-28-publication-preparation/README.md)已接到独立夜间证据链，按真实回执生成缺少的增量和公开目录，已用首份生产批次完成读回复算。从 GitHub 接续时按[复核顺序](CONTINUATION.md#接手顺序)运行当前版本的校验脚本。
