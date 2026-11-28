@@ -63,10 +63,10 @@ def inspect(root=ROOT, now=None, scheduler=None):
                     actionable=True, issues=[type(exc).__name__ + ': ' + str(exc)], report_only=True)
 
 
-def record(root=ROOT):
+def record(root=ROOT, *, storage_paths=()):
     with lock(root / '.runtime/health.lock'):
         result = inspect(root)
-        result['independent_study'] = observe_independent(root,datetime.now(TZ))
+        result['independent_study'] = observe_independent(root, datetime.now(TZ), storage_paths=storage_paths)
         folder = root / 'reports/health' / (datetime.now(TZ).strftime('%Y%m%dT%H%M%S') + '-' + uuid.uuid4().hex[:8])
         result['observation'] = folder.relative_to(root).as_posix()
         create(folder / 'result.json', result); seal(folder)
@@ -75,8 +75,11 @@ def record(root=ROOT):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(); parser.add_argument('--record', action='store_true'); args = parser.parse_args()
-    result = record() if args.record else inspect()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--record', action='store_true')
+    parser.add_argument('--storage', nargs=2, action='append', default=[], metavar=('ROLE', 'DIRECTORY'))
+    args = parser.parse_args()
+    result = record(storage_paths=args.storage) if args.record else inspect()
     print(json.dumps(result, ensure_ascii=False))
     # An alert is a successful observation, not a reason for a restart storm.
     raise SystemExit(0 if args.record or not result['actionable'] else 2)

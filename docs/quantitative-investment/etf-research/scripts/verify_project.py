@@ -2,6 +2,7 @@
 from pathlib import Path
 import hashlib,json,sys
 ROOT=Path(__file__).resolve().parents[1]
+IMMUTABLE_MANIFEST='reports/2026-11-28-observation-storage-health/manifest.json'
 sys.path.insert(0,str(ROOT/'src'))
 from etf_research.publication import inside,read,sha,verify_bundle
 from etf_research.forward import digest,engine_digest
@@ -16,7 +17,7 @@ def main():
  count=0;snapshots=list((ROOT/'data/snapshots').glob('*/manifest.json'))
  if not snapshots:raise ValueError('No source manifests')
  for m in snapshots:count+=verify(m,m.parent)
- report=ROOT/'reports/2026-11-28-research-verification-handoff/manifest.json';n=verify(report,ROOT)
+ report=ROOT/IMMUTABLE_MANIFEST;n=verify(report,ROOT)
  # These two live pointers are validated against immutable records, not an obsolete Git hash.
  active=read(ROOT/'config/active_run.json');state=read(inside(ROOT,active['checkpoint']))
  if digest({k:v for k,v in state.items() if k!='checkpoint_sha256'})!=state['checkpoint_sha256'] or state['engine_sha256']!=engine_digest() or state['real_money'] is not False:raise ValueError('Active checkpoint integrity failed')

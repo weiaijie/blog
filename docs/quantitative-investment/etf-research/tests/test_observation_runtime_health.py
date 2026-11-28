@@ -3,12 +3,14 @@ from pathlib import Path
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts'))
 
 from etf_research.publication import create, seal
-from observation_runtime_health import JOBS, configuration, health_view, job_status, observe, parse_units
+from etf_research.evidence_archive import MIN_ARCHIVE_FREE_BYTES
+from observation_runtime_health import JOBS, configuration, health_view, job_status, observe, parse_units, storage_status
 
 NOW=datetime.fromisoformat('2026-11-28T09:00:00+08:00')
 UNIT='etf-research-observation'
@@ -110,3 +112,26 @@ class ObservationRuntimeHealthTests(unittest.TestCase):
             pointer.write_text('{"observation":"reports/health/example"}',encoding='utf-8')
             with self.assertRaisesRegex(ValueError,'differs from its seal'):
                 health_view(root,NOW)
+
+    def test_storage_uses_available_capacity_and_groups_directories_by_filesystem(self):
+        paths = [('observation', 'runtime'), ('full-archive', 'archive'),
+                 ('export-spool', 'spool'), ('project', 'project')]
+
+        def probe(path):
+            if path.name == 'project':
+                raise FileNotFoundError(path)
+            if path.name == 'spool':
+                return 2, dict(usedBytes=12, availableBytes=1000, availableInodes=0)
+            return 1, dict(usedBytes=12, availableBytes=MIN_ARCHIVE_FREE_BYTES-1, availableInodes=57)
+
+        storage = storage_status(paths, query=probe)
+        self.assertEqual(storage['unavailable'], ['project'])
+        self.assertEqual([row['state'] for row in storage['volumes']], ['low_capacity', 'low_capacity'])
+        self.assertEqual(storage['volumes'][0]['roles'], ['observation', 'full-archive'])
+        volumes = storage_status(paths[:1], query=probe)['volumes']
+        self.assertEqual(volumes[0]['state'], 'measured')
+        self.assertNotIn('storage', observe(ROOT, NOW, query=lambda:{})['issues'])
+        with patch('observation_runtime_health.storage_status', return_value=storage):
+            report = observe(ROOT, NOW, query=lambda:{}, storage_paths=paths)
+        self.assertIn('storage', report['issues'])
+        self.assertEqual(report['storage'], storage)

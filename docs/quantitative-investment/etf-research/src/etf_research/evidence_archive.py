@@ -13,6 +13,7 @@ DYNAMIC = ('data/snapshots', 'reports/daily', 'reports/operations', 'reports/hea
            'reports/notice-reviews', 'reports/notice-decisions')
 POINTERS = ('config/active_run.json', 'site/operation_status.json', 'site/health_status.json')
 EXTENSIONS = {'.json', '.body', '.py', '.txt', '.md', '.csv', '.html', '.css', '.js', '.log', '.pdf', '.png', '.svg', '.headers'}
+MIN_ARCHIVE_FREE_BYTES = 100 * 1024 * 1024
 
 def safe_path(root, name):
     p = PurePosixPath(name)
@@ -89,7 +90,7 @@ def capture(root, store, names=None, *, compress_manifest=False):
             if obj.exists():
                 if sha(obj) != value: raise ValueError('Existing archive object is corrupt')
             else:
-                if shutil.disk_usage(store).free < len(body) + 100 * 1024 * 1024: raise ValueError('Insufficient archive free space')
+                if shutil.disk_usage(store).free < len(body) + MIN_ARCHIVE_FREE_BYTES: raise ValueError('Insufficient archive free space')
                 fd, temporary = tempfile.mkstemp(prefix='.pending-', dir=obj.parent)
                 try:
                     with os.fdopen(fd,'wb') as f: f.write(body); f.flush(); os.fsync(f.fileno())

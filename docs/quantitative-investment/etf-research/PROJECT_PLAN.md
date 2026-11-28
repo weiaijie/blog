@@ -4,6 +4,8 @@
 
 工作台和 Agent 的运行健康已接入[交易日历巡检](reports/2026-11-28-calendar-watch-health/README.md)，可核对 08:05 与 21:35 的计划及实际退出。跨年准入以交易所原文为准。
 
+[证据存储容量巡检](reports/2026-11-28-observation-storage-health/README.md)随健康回执核对长期采集、归档和导出的磁盘空间与 inode。
+
 [采集尝试的时点和来源证据](reports/2026-11-28-attempt-qualification-evidence/README.md)已接入工作台与 Agent。最新手工复查的两融缺口和上一轮定时尝试的时钟缺证可追溯到原件。
 
 [GitHub 批次发布准备](reports/2026-11-28-publication-preparation/README.md)已接到独立夜间证据链，按真实回执生成缺少的增量和公开目录，已用首份生产批次完成读回复算。从 GitHub 接续时按[复核顺序](CONTINUATION.md#接手顺序)运行当前版本的校验脚本。

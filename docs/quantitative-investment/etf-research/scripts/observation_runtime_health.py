@@ -1,8 +1,11 @@
 """Observe independent research timers in the existing sealed health record."""
 from datetime import datetime, time, timedelta, timezone
+import os
+from pathlib import Path
 import re
 import subprocess
 
+from etf_research.evidence_archive import MIN_ARCHIVE_FREE_BYTES
 from etf_research.policy_events import TZ, instant
 from etf_research.publication import inside, read, verify_bundle
 
@@ -105,7 +108,38 @@ def job_status(timer,service,spec,observed):
                 nextAt=upcoming.isoformat() if upcoming else None,result=result,exitStatus=exit_code)
 
 
-def observe(root, observed, *, query=read_units):
+def read_filesystem(path):
+    if not hasattr(os, 'statvfs'):
+        raise NotImplementedError('Filesystem capacity is unavailable')
+    stats = os.statvfs(path)
+    block_size = stats.f_frsize or stats.f_bsize
+    return path.stat().st_dev, dict(
+        usedBytes=(stats.f_blocks - stats.f_bfree) * block_size,
+        availableBytes=stats.f_bavail * block_size,
+        availableInodes=stats.f_favail if stats.f_files else None,
+    )
+
+
+def storage_status(paths, *, query=read_filesystem):
+    volumes = {}
+    unavailable = []
+    for role, path in paths:
+        try:
+            device, counters = query(Path(path))
+        except (OSError, NotImplementedError):
+            unavailable.append(role)
+            continue
+        volume = volumes.setdefault(device, dict(roles=[], **counters))
+        volume['roles'].append(role)
+    for volume in volumes.values():
+        floor = MIN_ARCHIVE_FREE_BYTES if 'full-archive' in volume['roles'] else 1
+        volume['state'] = 'low_capacity' if (
+            volume['availableBytes'] < floor or volume['availableInodes'] == 0
+        ) else 'measured'
+    return dict(volumes=list(volumes.values()), unavailable=unavailable)
+
+
+def observe(root, observed, *, query=read_units, storage_paths=()):
     if observed.tzinfo is None:
         raise ValueError('Timezone-aware health time required')
     observed=observed.astimezone(TZ)
@@ -122,7 +156,12 @@ def observe(root, observed, *, query=read_units):
             jobs[name]=dict(state='unit_unavailable',latestDueAt=None,lastTriggerAt=None,
                             finishedAt=None,nextAt=None,result=None,exitStatus=None)
     issues=[name for name,row in jobs.items() if row['state'] not in ('completed','waiting','running')]
-    return dict(checkedAt=observed.isoformat(),state='attention' if issues else 'current',issues=issues,jobs=jobs)
+    report = dict(checkedAt=observed.isoformat(), issues=issues, jobs=jobs)
+    if storage_paths:
+        storage = report['storage'] = storage_status(storage_paths)
+        if storage['unavailable'] or any(row['state'] == 'low_capacity' for row in storage['volumes']):
+            issues.append('storage')
+    return dict(report, state='attention' if issues else 'current')
 
 
 def health_view(root, observed):
