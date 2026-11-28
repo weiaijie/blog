@@ -1,0 +1,14 @@
+{
+  "trigger": "timer_catchup_after_maintenance",
+  "triggeredAt": "2026-11-28T13:41:39+08:00",
+  "invocationId": "44322b64b4574570a611f5b29fbc8ab3",
+  "snapshot": "92064587155027efed7ccb571a66a2b5b1b0a26adee154bf1b8cbc766dd58079",
+  "files": 17267,
+  "restored": 28,
+  "workbench": 22,
+  "routes": 24,
+  "healthCheckedAt": "2026-11-28T13:41:11.017490+08:00",
+  "issues": [],
+  "finishedAt": "2026-11-28T05:42:06.870811+00:00",
+  "scheduledNext": "2026-11-28T17:45:00+08:00"
+}

@@ -2,7 +2,7 @@
 from pathlib import Path
 import hashlib,json,sys
 ROOT=Path(__file__).resolve().parents[1]
-IMMUTABLE_MANIFEST='reports/2026-11-28-workbench-archive-manifest/manifest.json'
+IMMUTABLE_MANIFEST='reports/2026-11-28-workbench-archive-runtime/manifest.json'
 sys.path.insert(0,str(ROOT/'src'))
 from etf_research.publication import inside,read,sha,verify_bundle
 from etf_research.forward import digest,engine_digest

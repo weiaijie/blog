@@ -10,6 +10,8 @@
 
 [自动收录在用工作台构建](reports/2026-11-28-workbench-archive-manifest/README.md)让整库归档和看板共用同一个 Vite 文件清单。归档会同时保存清单、入口和构建引用的文件。
 
+[新逻辑的自动补跑回执](reports/2026-11-28-workbench-archive-runtime/README.md)已恢复工作台文件、共享归档代码和容量巡检。继续核对 17:45 的正常计划批次。
+
 工作台和 Agent 的运行健康已接入[交易日历巡检](reports/2026-11-28-calendar-watch-health/README.md)，可核对 08:05 与 21:35 的计划及实际退出。跨年准入以交易所原文为准。
 
 [采集尝试的时点和来源证据](reports/2026-11-28-attempt-qualification-evidence/README.md)已接入工作台与 Agent。最新手工复查的两融缺口和上一轮定时尝试的时钟缺证可追溯到原件。
