@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-27",
+  "startedAt": "2026-11-28T00:25:00.764426+00:00",
+  "trigger": {
+    "unit": "etf-research-observation.timer",
+    "invocationId": "b2404b52c3c14058a8fd2eaa5fa0507d",
+    "timerRealtimeUsec": 1795825500573230,
+    "managerTimer": {
+      "lastTriggerUsec": 1795825500573230,
+      "calendar": [
+        "*-*-* 08:25:00 Asia/Shanghai",
+        "*-*-* 08:34:00 Asia/Shanghai",
+        "*-*-* 19:40:00 Asia/Shanghai"
+      ]
+    },
+    "managerTimerCheckedAt": "2026-11-28T00:25:00.753734+00:00",
+    "managerTimerError": null
+  }
+}

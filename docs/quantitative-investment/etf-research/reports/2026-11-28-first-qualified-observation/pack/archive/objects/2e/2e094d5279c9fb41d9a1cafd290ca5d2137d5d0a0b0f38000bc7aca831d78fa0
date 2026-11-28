@@ -1,0 +1,9 @@
+{
+  "year": 2027,
+  "startedAt": "2026-11-28T00:05:00.664137+00:00",
+  "trigger": {
+    "unit": "etf-research-calendar-watch.timer",
+    "invocationId": "d62008a6d6444b46bb578e9140ae8ae8",
+    "timerRealtimeUsec": 1795824300573865
+  }
+}

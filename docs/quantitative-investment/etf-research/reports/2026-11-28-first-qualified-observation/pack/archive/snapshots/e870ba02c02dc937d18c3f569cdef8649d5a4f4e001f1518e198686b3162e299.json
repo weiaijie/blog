@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-11-28T00:05:01.455642+00:00",
+  "files": {
+    "config/research_observation.json": {
+      "sha256": "c1784343ca447dff3e482656924d5bf8329e40d483b14d4709ec09a9182b8f6d",
+      "bytes": 100
+    },
+    "data/snapshots/2026-11-04-calendar-08/calendar.json": {
+      "sha256": "950a3bfe2bab7ad484abc03aa27207bc70a49a4a144f495899cf1bd2aa10c8c6",
+      "bytes": 42763
+    },
+    "deploy/etf-research-calendar-watch.service": {
+      "sha256": "7fba90f8e93a26787187d9c94f2df83ff4e937e4466de90c7c7647fbe7c1910a",
+      "bytes": 467
+    },
+    "deploy/etf-research-calendar-watch.timer": {
+      "sha256": "d607b05e906c805735f01bae928c7e8400fb1e348a84ee744e810861c0a9066f",
+      "bytes": 277
+    },
+    "reports/research-calendar-watch/2027/20261128T000500Z-f543f073/records/http_capture.py": {
+      "sha256": "d185aa1ea21d12a14d01fb1821b8804831564dbc2c182d8896b7c0ae4651d6d5",
+      "bytes": 6747
+    },
+    "reports/research-calendar-watch/2027/20261128T000500Z-f543f073/records/manifest.json": {
+      "sha256": "37dd33a871531d16c78d0515d73e590566bf2111ee631d2c52a05cf5745f7cd3",
+      "bytes": 797
+    },
+    "reports/research-calendar-watch/2027/20261128T000500Z-f543f073/records/requests.json": {
+      "sha256": "66da0eed1d150cd117fd8dfa5515437f8b3534a79ffbc80a1c7cdbddbf994702",
+      "bytes": 5274
+    },
+    "reports/research-calendar-watch/2027/20261128T000500Z-f543f073/records/result.json": {
+      "sha256": "aa364f39b6c0819e09b444ff03831a2e4e63c611d551a7f203d6193935dd8781",
+      "bytes": 792
+    },
+    "reports/research-calendar-watch/2027/20261128T000500Z-f543f073/records/sse.body": {
+      "sha256": "aaebb9d5f7b6642c98596eb8e4d2bd5785339c9f09c6f5bd63774bbe20969396",
+      "bytes": 31764
+    },
+    "reports/research-calendar-watch/2027/20261128T000500Z-f543f073/records/sse_attempt_01.body": {
+      "sha256": "aaebb9d5f7b6642c98596eb8e4d2bd5785339c9f09c6f5bd63774bbe20969396",
+      "bytes": 31764
+    },
+    "reports/research-calendar-watch/2027/20261128T000500Z-f543f073/records/started.json": {
+      "sha256": "2e094d5279c9fb41d9a1cafd290ca5d2137d5d0a0b0f38000bc7aca831d78fa0",
+      "bytes": 237
+    },
+    "reports/research-calendar-watch/2027/20261128T000500Z-f543f073/records/szse.body": {
+      "sha256": "f5abb12ea220c4226853409dc38b6ee9f335d8a77ae2e168095273e562b0d457",
+      "bytes": 55
+    },
+    "reports/research-calendar-watch/2027/20261128T000500Z-f543f073/records/szse_attempt_01.body": {
+      "sha256": "f5abb12ea220c4226853409dc38b6ee9f335d8a77ae2e168095273e562b0d457",
+      "bytes": 55
+    },
+    "reports/research-calendar-watch/2027/20261128T000500Z-f543f073/records/transport_policy.json": {
+      "sha256": "3c8f68ffb1e664ea4562fb160e861c6e3ed2ad70dc1a5009d8fbc136c5ceb319",
+      "bytes": 388
+    },
+    "scripts/capture_exchange_calendar.py": {
+      "sha256": "322e5adfc64f076b7b26a9e0a7076f59462f1c6ac2f8558405c78240f6f7ed84",
+      "bytes": 3432
+    },
+    "scripts/discover_exchange_calendar.py": {
+      "sha256": "a46ab16814f8f71099e442f8be541d95152cb762a45a62a9166ba472636b30bf",
+      "bytes": 10880
+    },
+    "src/etf_research/exchange_calendar.py": {
+      "sha256": "a35e8d583a8c8985abd9d3d9b518eaccf5f3c941b6ee73a7fa481acd28e1de7f",
+      "bytes": 8667
+    },
+    "src/etf_research/http_capture.py": {
+      "sha256": "d185aa1ea21d12a14d01fb1821b8804831564dbc2c182d8896b7c0ae4651d6d5",
+      "bytes": 6747
+    }
+  },
+  "new_objects": 10,
+  "new_bytes": 53975,
+  "restores_only_to_new_directory": true
+}

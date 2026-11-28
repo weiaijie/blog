@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "year": 2027,
+  "checkedAt": "2026-11-28T00:05:01.202030+00:00",
+  "status": "waiting_for_both_exchanges",
+  "sources": {
+    "sse": {
+      "url": "https://www.sse.com.cn/disclosure/dealinstruc/closed/list/",
+      "receivedAt": "2026-11-28T00:05:00.820102+00:00",
+      "httpStatus": 200,
+      "sha256": "aaebb9d5f7b6642c98596eb8e4d2bd5785339c9f09c6f5bd63774bbe20969396",
+      "status": "not_listed",
+      "candidates": []
+    },
+    "szse": {
+      "url": "https://www.szse.cn/api/search/content",
+      "receivedAt": "2026-11-28T00:05:01.177280+00:00",
+      "httpStatus": 200,
+      "sha256": "f5abb12ea220c4226853409dc38b6ee9f335d8a77ae2e168095273e562b0d457",
+      "status": "not_listed",
+      "candidates": []
+    }
+  },
+  "annualManifestSha256": null
+}

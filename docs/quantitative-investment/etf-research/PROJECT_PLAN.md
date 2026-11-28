@@ -56,7 +56,7 @@
 
 [11 月 27 日前瞻检查点与收盘输入复验](reports/2026-11-27-forward-publication/README.md)对齐了公开仓库的默认检查点，保留发布时点与 18 户逐日复算证据。
 
-[前瞻起算定时归档核验](reports/2026-11-27-observation-origin/README.md)已接入。资料完整、systemd 计划时点及归档对象均须通过核对后，才以实际归档日作为观察起点。
+[首个生产定时合格归档](reports/2026-11-28-first-qualified-observation/README.md)已核验并恢复。交易数据归属 11 月 27 日，观察起点为 11 月 28 日。接续核对首个交易日的盘前封存、实际五日标签和首份月结。
 
 [22:23 清算份额补齐与两融下载对照](reports/2026-11-27-cleared-shares/README.md)已封存。11 月 27 日份额与单位净值可核验，两融继续保留未知。
 

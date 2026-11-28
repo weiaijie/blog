@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "asOf": "2026-11-28T08:25:05+08:00",
+  "after": "2026-11-28T02:56:15.760359+08:00",
+  "receipts": [
+    {
+      "receipt": "reports/research-calendar-watch/2027/20261128T000500Z-f543f073/receipt.json",
+      "kind": "calendar-watch",
+      "sha256": "6e8828a3df2af355ac4716a49a4f8516b315668ecbaf0e010279b76effbad565",
+      "verifiedAt": "2026-11-28T00:05:01.489749+00:00",
+      "archive": "e870ba02c02dc937d18c3f569cdef8649d5a4f4e001f1518e198686b3162e299"
+    },
+    {
+      "receipt": "reports/research-observation/archives/2026-11-27/20261128T002500Z-0c6cf3d5.json",
+      "kind": "observation",
+      "sha256": "0ef20de15195cc8da1e8ab9e3dc42c7d29050fb54b4dbd7bc7ffae544d14ba79",
+      "verifiedAt": "2026-11-28T00:25:04.935958+00:00",
+      "archive": "79d5094393b2c2ab13b6d254fe38122d30f46be3cad789dcd02da75d3cdd9ad7"
+    },
+    {
+      "receipt": "reports/research-observation/origin.json",
+      "kind": "origin",
+      "sha256": "0ef20de15195cc8da1e8ab9e3dc42c7d29050fb54b4dbd7bc7ffae544d14ba79",
+      "verifiedAt": "2026-11-28T00:25:04.935958+00:00",
+      "archive": "79d5094393b2c2ab13b6d254fe38122d30f46be3cad789dcd02da75d3cdd9ad7"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "path": "reports/research-calendar-watch/2027/20261128T000500Z-f543f073",
+  "year": 2027,
+  "status": "waiting_for_both_exchanges",
+  "trigger": {
+    "unit": "etf-research-calendar-watch.timer",
+    "invocationId": "d62008a6d6444b46bb578e9140ae8ae8",
+    "timerRealtimeUsec": 1795824300573865
+  },
+  "archiveSha256": "e870ba02c02dc937d18c3f569cdef8649d5a4f4e001f1518e198686b3162e299",
+  "manifestSha256": "37dd33a871531d16c78d0515d73e590566bf2111ee631d2c52a05cf5745f7cd3",
+  "archiveVerifiedAt": "2026-11-28T00:05:01.489749+00:00"
+}

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "origin": {
+    "date": "2026-11-28",
+    "archiveVerifiedAt": "2026-11-28T00:25:04.935958+00:00",
+    "receiptPath": "reports/research-observation/archives/2026-11-27/20261128T002500Z-0c6cf3d5.json",
+    "receiptSha256": "0ef20de15195cc8da1e8ab9e3dc42c7d29050fb54b4dbd7bc7ffae544d14ba79",
+    "archiveSha256": "79d5094393b2c2ab13b6d254fe38122d30f46be3cad789dcd02da75d3cdd9ad7"
+  },
+  "receipt": {
+    "schemaVersion": 1,
+    "session": "2026-11-27",
+    "attempt": "reports/research-observation/runs/2026-11-27/20261128T002500Z-0c6cf3d5",
+    "phase": "complete",
+    "resultSha256": "c71112f6652049efb0bf0b9fb51dc730f3ae491b3157cae7a1244df3fcbec4ae",
+    "attemptManifestSha256": "a89272417aade987ace99c2f72219b1fca1309ac5db040e306c4d4583a7017c1",
+    "trigger": {
+      "unit": "etf-research-observation.timer",
+      "invocationId": "b2404b52c3c14058a8fd2eaa5fa0507d",
+      "timerRealtimeUsec": 1795825500573230,
+      "managerTimer": {
+        "lastTriggerUsec": 1795825500573230,
+        "calendar": [
+          "*-*-* 08:25:00 Asia/Shanghai",
+          "*-*-* 08:34:00 Asia/Shanghai",
+          "*-*-* 19:40:00 Asia/Shanghai"
+        ]
+      },
+      "managerTimerCheckedAt": "2026-11-28T00:25:00.753734+00:00",
+      "managerTimerError": null
+    },
+    "archive": "79d5094393b2c2ab13b6d254fe38122d30f46be3cad789dcd02da75d3cdd9ad7",
+    "archiveCreatedAt": "2026-11-28T00:25:04.861902+00:00",
+    "archiveVerifiedAt": "2026-11-28T00:25:04.935958+00:00",
+    "files": 140,
+    "forwardEligible": true
+  },
+  "market": {
+    "schemaVersion": 1,
+    "date": "2026-11-27",
+    "previousDate": "2026-11-26",
+    "scope": "SSE A-share and STAR turnover, SSE exchange-wide margin",
+    "status": "full_capture",
+    "historicalPointInTime": false,
+    "researchOnly": true,
+    "receivedAt": "2026-11-28T00:25:03.937950+00:00",
+    "featureReadyAt": "2026-11-28T00:25:03.944663+00:00",
+    "checkedAt": "2026-11-28T00:25:03.944663+00:00",
+    "publishedAt": null,
+    "turnoverCny": "930379000000.00",
+    "margin": {
+      "financingBalanceCny": 1106187770027,
+      "financingBuyCny": 100065891407,
+      "financingRepaymentCny": 94948541728,
+      "balanceIdentity": {
+        "status": "mismatch",
+        "expectedBalanceCny": "1106187770001",
+        "residualCny": "26"
+      },
+      "reconciledFinancingNetCny": null,
+      "stockFinancingBuyCny": 69852849086,
+      "financingBuyShare": "0.07507999329950482545285308460"
+    },
+    "relativeTurnover20": null,
+    "breadth": null,
+    "issues": {}
+  },
+  "calendarWatch": {
+    "schemaVersion": 1,
+    "year": 2027,
+    "checkedAt": "2026-11-28T00:05:01.202030+00:00",
+    "status": "waiting_for_both_exchanges",
+    "sources": {
+      "sse": {
+        "url": "https://www.sse.com.cn/disclosure/dealinstruc/closed/list/",
+        "receivedAt": "2026-11-28T00:05:00.820102+00:00",
+        "httpStatus": 200,
+        "sha256": "aaebb9d5f7b6642c98596eb8e4d2bd5785339c9f09c6f5bd63774bbe20969396",
+        "status": "not_listed",
+        "candidates": []
+      },
+      "szse": {
+        "url": "https://www.szse.cn/api/search/content",
+        "receivedAt": "2026-11-28T00:05:01.177280+00:00",
+        "httpStatus": 200,
+        "sha256": "f5abb12ea220c4226853409dc38b6ee9f335d8a77ae2e168095273e562b0d457",
+        "status": "not_listed",
+        "candidates": []
+      }
+    },
+    "annualManifestSha256": null,
+    "archiveVerifiedAt": "2026-11-28T00:05:01.489749+00:00",
+    "archiveSha256": "e870ba02c02dc937d18c3f569cdef8649d5a4f4e001f1518e198686b3162e299",
+    "attempt": "20261128T000500Z-f543f073"
+  },
+  "export": {
+    "asOf": "2026-11-28T08:25:05+08:00",
+    "after": "2026-11-28T02:56:15.760359+08:00",
+    "receipts": {
+      "calendar-watch": 1,
+      "observation": 1,
+      "origin": 1
+    },
+    "archives": 2,
+    "files": 110
+  },
+  "restored": {
+    "asOf": "2026-11-28T08:25:05+08:00",
+    "after": "2026-11-28T02:56:15.760359+08:00",
+    "receipts": {
+      "calendar-watch": 1,
+      "observation": 1,
+      "origin": 1
+    },
+    "archives": 2,
+    "files": 110,
+    "restoredArchiveFiles": 75,
+    "activates_services": false
+  },
+  "verifiedInvocation": "b2404b52c3c14058a8fd2eaa5fa0507d",
+  "originBeforeVerification": null,
+  "originAtVerification": {
+    "date": "2026-11-28",
+    "archiveVerifiedAt": "2026-11-28T00:25:04.935958+00:00",
+    "receiptPath": "reports/research-observation/archives/2026-11-27/20261128T002500Z-0c6cf3d5.json",
+    "receiptSha256": "0ef20de15195cc8da1e8ab9e3dc42c7d29050fb54b4dbd7bc7ffae544d14ba79",
+    "archiveSha256": "79d5094393b2c2ab13b6d254fe38122d30f46be3cad789dcd02da75d3cdd9ad7"
+  },
+  "originReceiptBytesMatch": true
+}
