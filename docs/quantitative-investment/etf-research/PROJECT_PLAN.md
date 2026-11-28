@@ -12,6 +12,8 @@
 
 [新逻辑的自动补跑回执](reports/2026-11-28-workbench-archive-runtime/README.md)已验收 Ubuntu 完成归档与隔离恢复。
 
+[17:45 计划归档验收](reports/2026-11-28-scheduled-archive-acceptance/README.md)核对正常计划触发、整库文件哈希、工作台与前瞻账户检查点恢复。
+
 [采集尝试的时点和来源证据](reports/2026-11-28-attempt-qualification-evidence/README.md)已接入工作台与 Agent。最新手工复查的两融缺口和上一轮定时尝试的时钟缺证可追溯到原件。
 
 [GitHub 批次发布准备](reports/2026-11-28-publication-preparation/README.md)已接到独立夜间证据链，按真实回执生成缺少的增量和公开目录，已用首份生产批次完成读回复算。从 GitHub 接续时按[复核顺序](CONTINUATION.md#接手顺序)运行当前版本的校验脚本。

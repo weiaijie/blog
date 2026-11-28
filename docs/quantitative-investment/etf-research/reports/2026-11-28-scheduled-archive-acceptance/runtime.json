@@ -1,0 +1,19 @@
+{
+  "trigger": "calendar_timer",
+  "triggeredAt": "2026-11-28T17:45:00+08:00",
+  "invocationId": "b9d1097307ae4dce8247c53f21de6f4b",
+  "snapshot": "e12311f79a87d3d051a1a706b536c773f236fa4c988a4e3eb15fd7db5ba4155d",
+  "verifiedFiles": 17299,
+  "newObjects": 32,
+  "newBytes": 75024,
+  "restoredFiles": 31,
+  "workbenchFiles": 22,
+  "routes": 24,
+  "healthCheckedAt": "2026-11-28T17:30:01.807152+08:00",
+  "healthManifestSha256": "3169d61f3e8ca899ace2319761434473df69baa3ab1364c1777b68ed8f24feff",
+  "issues": [],
+  "finishedAt": "2026-11-28T17:45:27.749313+08:00",
+  "accountAsOf": "2026-11-27",
+  "accountSha256": "0fc444731abaf3c2705c3ea7d4706084af55fdf1a38412fea1a8723afb85f0ce",
+  "accountCheckpointDigest": "cfb229188255d2cd87d8abf9d6a49565e0d121034433be3520d76f4ff0a0be2d"
+}
